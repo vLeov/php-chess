@@ -1,4 +1,5 @@
 <?php
+
 namespace PGNChess\Exception;
 
 use PGNChess\Exception;

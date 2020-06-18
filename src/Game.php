@@ -159,14 +159,4 @@ class Game
     {
         return $this->board->play(Convert::toObject($color, $pgn));
     }
-
-    /**
-     * Fetches from the database the metadata of the game being played.
-     *
-     * @return array|bool
-     */
-    public function metadata()
-    {
-        return $this->board->metadata();
-    }
 }

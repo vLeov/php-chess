@@ -16,12 +16,5 @@ cd $APP_PATH
 cd $APP_PATH
 docker-compose up -d
 
-# update the .env file with the containers' ips
-GATEWAY="$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' pgn_chess_mysql)"
-sed -i "s/DB_HOST=.*/DB_HOST=${GATEWAY}/g" .env
-
-# replace the default DB_HOST value in phpunit-docker.xml with the MySQL container's IP
-sed -i "s/<env name=\"DB_HOST\" value=\".*\"\/>/<env name=\"DB_HOST\" value=\"${GATEWAY}\"\/>/g" phpunit-docker.xml
-
 # install dependencies
 docker exec -it pgn_chess_php_fpm composer install
