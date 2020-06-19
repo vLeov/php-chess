@@ -4,7 +4,7 @@ namespace PGNChess\Piece;
 
 use PGNChess\Piece\Piece;
 use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate as PgnValidate;
+use PGNChess\PGN\Validate;
 
 /**
  * Class that represents a chess piece.
@@ -80,8 +80,8 @@ abstract class AbstractPiece implements Piece
      */
     public function __construct(string $color, string $square, string $identity)
     {
-        $this->color = PgnValidate::color($color);
-        $this->position = PgnValidate::square($square);
+        $this->color = Validate::color($color);
+        $this->position = Validate::square($square);
         $this->identity = $identity;
     }
 

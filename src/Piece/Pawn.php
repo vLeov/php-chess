@@ -4,7 +4,7 @@ namespace PGNChess\Piece;
 
 use PGNChess\Exception\UnknownNotationException;
 use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate as PgnValidate;
+use PGNChess\PGN\Validate;
 use PGNChess\Piece\AbstractPiece;
 
 /**
@@ -113,7 +113,7 @@ class Pawn extends AbstractPiece
     {
         // next rank
         try {
-            if (PgnValidate::square($this->file . $this->ranks->next, true)) {
+            if (Validate::square($this->file . $this->ranks->next, true)) {
                 $this->scope->up[] = $this->file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
@@ -131,7 +131,7 @@ class Pawn extends AbstractPiece
         // capture square
         try {
             $file = chr(ord($this->file) - 1);
-            if (PgnValidate::square($file.$this->ranks->next, true)) {
+            if (Validate::square($file.$this->ranks->next, true)) {
                 $this->captureSquares[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
@@ -141,7 +141,7 @@ class Pawn extends AbstractPiece
         // capture square
         try {
             $file = chr(ord($this->file) + 1);
-            if (PgnValidate::square($file.$this->ranks->next, true)) {
+            if (Validate::square($file.$this->ranks->next, true)) {
                 $this->captureSquares[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
