@@ -20,6 +20,9 @@ class Tag
 	const BLACK = 'Black';
 	const RESULT = 'Result';
 
+    // FICS database
+    const FICS_GAMES_DB_GAME_NO = 'FICSGamesDBGameNo';
+
 	// player related information
 	const WHITE_TITLE = 'WhiteTitle';
 	const BLACK_TITLE = 'BlackTitle';
@@ -48,11 +51,13 @@ class Tag
 
 	// time and date related information
 	const TIME = 'Time';
+    const TIME_CONTROL = 'TimeControl';
 	const UTC_TIME = 'UTCTime';
 	const UTC_DATE = 'UTCDate';
 
-	// time control
-	const TIME_CONTROL = 'TimeControl';
+    // clock
+    const WHITE_CLOCK = 'WhiteClock';
+    const BLACK_CLOCK = 'BlackClock';
 
 	// alternative starting positions
 	const SET_UP = 'SetUp';
@@ -65,21 +70,30 @@ class Tag
 	const ANNOTATOR = 'Annotator';
 	const MODE = 'Mode';
 	const PLY_COUNT = 'PlyCount';
+    const WHITE_RD = 'WhiteRD';
+    const BLACK_RD = 'BlackRD';
 
     public static function getConstants(): array
     {
         return (new \ReflectionClass(get_called_class()))->getConstants();
     }
 
-    public static function isStr(array $tags): bool
+    /**
+     * Basic tags expected to be found in a game.
+     *
+     * @param array $tags
+     * @return bool true if the tags were found; otherwise false
+     */
+    public static function mandatory(array $tags): bool
     {
-        return isset($tags[Tag::EVENT]) &&
-            isset($tags[Tag::SITE]) &&
-            isset($tags[Tag::DATE]) &&
-            isset($tags[Tag::ROUND]) &&
-            isset($tags[Tag::WHITE]) &&
-            isset($tags[Tag::BLACK]) &&
-            isset($tags[Tag::RESULT]);
+        return isset(
+            $tags[Tag::EVENT],
+            $tags[Tag::SITE],
+            $tags[Tag::DATE],
+            $tags[Tag::WHITE],
+            $tags[Tag::BLACK],
+            $tags[Tag::RESULT]
+        );
     }
 
     public static function reset(array &$tags)

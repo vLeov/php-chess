@@ -20,13 +20,15 @@ final class Movetext
             'notations' => [],
         ];
 
-        $moves = array_filter(explode(' ', $text));
+        $uncommented = preg_replace("/\{[^)]+\}/", '', $text);
+
+        $moves = array_filter(explode(' ', preg_replace("/\{[^)]+\}/", '', $uncommented)));
 
         foreach ($moves as $move) {
             if (preg_match('/^[1-9][0-9]*\.(.*)$/', $move)) {
-                $moveExploded = explode('.', $move);
-                self::$movetext->numbers[] = $moveExploded[0];
-                self::$movetext->notations[] = $moveExploded[1];
+                $exploded = explode('.', $move);
+                self::$movetext->numbers[] = $exploded[0];
+                self::$movetext->notations[] = $exploded[1];
             } else {
                 self::$movetext->notations[] = $move;
             }
