@@ -3,12 +3,11 @@
 namespace PGNChess\PGN;
 
 use PGNChess\Exception\UnknownNotationException;
-use PGNChess\PGN\Movetext;
 use PGNChess\PGN\Symbol;
 use PGNChess\PGN\Tag;
 
 /**
- * Validates PGN symbols.
+ * Validation class.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
@@ -124,14 +123,35 @@ class Validate
      * @return bool true if the movetext is valid; otherwise false
      * @throws \PGNChess\Exception\UnknownNotationException
      */
-    public static function movetext(string $movetext): bool
+    public static function movetext(string $text): bool
     {
-        $movetext = Movetext::init($movetext)->toArray();
+        $movetext = (object) [
+            'numbers' => [],
+            'notations' => [],
+        ];
+
+        $uncommented = preg_replace("/\{[^)]+\}/", '', $text);
+
+        $moves = array_filter(explode(' ', preg_replace("/\{[^)]+\}/", '', $uncommented)));
+
+        foreach ($moves as $move) {
+            if (preg_match('/^[1-9][0-9]*\.(.*)$/', $move)) {
+                $exploded = explode('.', $move);
+                $movetext->numbers[] = $exploded[0];
+                $movetext->notations[] = $exploded[1];
+            } else {
+                $movetext->notations[] = $move;
+            }
+        }
+
+        $movetext->notations = array_values(array_filter($movetext->notations));
 
         $areConsecutiveNumbers = 1;
+
         for ($i = 0; $i < count($movetext->numbers); $i++) {
             $areConsecutiveNumbers *= (int) $movetext->numbers[$i] == $i + 1;
         }
+
         if (!$areConsecutiveNumbers) {
             return false;
         }
