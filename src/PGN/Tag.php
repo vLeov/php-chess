@@ -73,7 +73,7 @@ class Tag
     const WHITE_RD = 'WhiteRD';
     const BLACK_RD = 'BlackRD';
 
-    public static function getConstants(): array
+    public static function all(): array
     {
         return (new \ReflectionClass(get_called_class()))->getConstants();
     }
@@ -99,7 +99,7 @@ class Tag
     public static function reset(array &$tags)
     {
         $tags = [];
-        foreach (Tag::getConstants() as $key => $value) {
+        foreach (Tag::all() as $key => $value) {
             $tags[$value] = null;
         }
     }

@@ -57,7 +57,7 @@ class Validate
     public static function tag(string $tag): \stdClass
     {
         $isValid = false;
-        foreach (Tag::getConstants() as $key => $val) {
+        foreach (Tag::all() as $key => $val) {
             if (preg_match('/^\[' . $val . ' \"(.*)\"\]$/', $tag)) {
                 $isValid = true;
             }
