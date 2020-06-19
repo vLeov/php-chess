@@ -95,12 +95,4 @@ class Tag
             $tags[Tag::RESULT]
         );
     }
-
-    public static function reset(array &$tags)
-    {
-        $tags = [];
-        foreach (Tag::all() as $key => $value) {
-            $tags[$value] = null;
-        }
-    }
 }
