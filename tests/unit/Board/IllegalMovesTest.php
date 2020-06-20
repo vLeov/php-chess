@@ -24,9 +24,9 @@ class IllegalMovesTest extends AbstractUnitTestCase
         $board = new Board;
 
         $this->assertEquals($board->getTurn(), Symbol::WHITE);
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'e4')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e4')));
         $this->assertEquals($board->getTurn(), Symbol::BLACK);
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'e5')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e5')));
         $this->assertEquals($board->getTurn(), Symbol::WHITE);
     }
 
@@ -38,21 +38,21 @@ class IllegalMovesTest extends AbstractUnitTestCase
         $board = new Board;
 
         $this->assertEquals($board->getTurn(), Symbol::WHITE);
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::BLACK, 'e4')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::BLACK, 'e4')));
         $this->assertEquals($board->getTurn(), Symbol::WHITE);
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
         $this->assertEquals($board->getTurn(), Symbol::WHITE);
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
         $this->assertEquals($board->getTurn(), Symbol::WHITE);
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'e4')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e4')));
         $this->assertEquals($board->getTurn(), Symbol::BLACK);
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'e5')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'e5')));
         $this->assertEquals($board->getTurn(), Symbol::BLACK);
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Nf3')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3')));
         $this->assertEquals($board->getTurn(), Symbol::BLACK);
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'e5')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e5')));
         $this->assertEquals($board->getTurn(), Symbol::WHITE);
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::BLACK, 'Nc6')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6')));
     }
 
     /**
@@ -61,7 +61,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function Qg5()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::BLACK, 'Qg5')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::BLACK, 'Qg5')));
     }
 
     /**
@@ -70,7 +70,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function Ra6()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra6')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra6')));
     }
 
     /**
@@ -79,7 +79,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function Rxa6()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::BLACK, 'Rxa6')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::BLACK, 'Rxa6')));
     }
 
     /**
@@ -88,7 +88,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function Bxe5()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Bxe5')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Bxe5')));
     }
 
     /**
@@ -97,7 +97,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function exd4()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'exd4')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'exd4')));
     }
 
     /**
@@ -106,7 +106,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function Nxd2()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Nxd2')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nxd2')));
     }
 
     /**
@@ -115,7 +115,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function Nxc3()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Nxc3')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nxc3')));
     }
 
     /**
@@ -124,7 +124,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function white_O_O()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
     }
 
     /**
@@ -133,7 +133,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function white_O_O_O()
     {
         $board = new Board;
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
     }
 
     /**
@@ -142,8 +142,8 @@ class IllegalMovesTest extends AbstractUnitTestCase
     public function black_O_O()
     {
         $board = new Board;
-        $board->play(Convert::toObject(Symbol::WHITE, 'e4'));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::BLACK, 'O-O')));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::BLACK, 'O-O')));
     }
 
     /**
@@ -181,7 +181,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Kf4')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Kf4')));
     }
 
     /**
@@ -219,7 +219,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Kf4')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Kf4')));
     }
 
     /**
@@ -257,7 +257,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Kf2')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Kf2')));
     }
 
     /**
@@ -295,7 +295,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Re7')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Re7')));
     }
 
     /**
@@ -333,7 +333,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'a4')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'a4')));
     }
 
     /**
@@ -371,7 +371,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Kxf2')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Kxf2')));
     }
 
     /**
@@ -381,12 +381,12 @@ class IllegalMovesTest extends AbstractUnitTestCase
     {
         $board = new Board;
 
-        $board->play(Convert::toObject(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'c5'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Nc6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
     }
 
     /**
@@ -396,14 +396,14 @@ class IllegalMovesTest extends AbstractUnitTestCase
     {
         $board = new Board;
 
-        $board->play(Convert::toObject(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'c5'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Nc6'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Bb5'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Nf6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
     }
 
     /**
@@ -446,7 +446,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
     }
 
     /**
@@ -489,7 +489,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
     }
 
     /**
@@ -531,7 +531,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
     }
 
     /**
@@ -573,7 +573,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
     }
 
     /**
@@ -615,8 +615,8 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
     }
 
     /**
@@ -658,8 +658,8 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
     }
 
     /**
@@ -701,7 +701,7 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
     }
 
     /**
@@ -743,11 +743,11 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'Kf1')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'Nf6')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'Ke1')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'Nd7')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Kf1')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ke1')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nd7')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
     }
 
     /**
@@ -789,11 +789,11 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'Rg1')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'Nf6')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'Rh1')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'Nd7')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Rg1')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Rh1')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nd7')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
     }
 
     /**
@@ -803,21 +803,21 @@ class IllegalMovesTest extends AbstractUnitTestCase
     {
         $board = new Board;
 
-        $board->play(Convert::toObject(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'e5'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Nc6'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Bb5'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Nf6'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Ke2'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Bb4'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Ke1'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Ke7'));
-        $board->play(Convert::toObject(Symbol::WHITE, 'Nc3'));
-        $board->play(Convert::toObject(Symbol::BLACK, 'Ke8'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Ke2'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Bb4'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Ke1'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Ke7'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Ke8'));
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::BLACK, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::BLACK, 'O-O')));
     }
 
     /**
@@ -869,8 +869,8 @@ class IllegalMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'Nf3')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::BLACK, 'O-O')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::BLACK, 'O-O')));
     }
 
     /**
@@ -880,22 +880,22 @@ class IllegalMovesTest extends AbstractUnitTestCase
     {
         $board = new Board;
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'O-O-O')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'e5')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O-O')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'e5')));
 
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'e4')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'e5')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e4')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e5')));
 
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'Nf3')));
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::BLACK, 'Nc6')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6')));
 
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra2')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra3')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra4')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra5')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra6')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra7')));
-        $this->assertEquals(false, $board->play(Convert::toObject(Symbol::WHITE, 'Ra8')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra2')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra3')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra4')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra5')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra6')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra7')));
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ra8')));
     }
 }

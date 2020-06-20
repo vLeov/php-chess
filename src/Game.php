@@ -157,6 +157,6 @@ class Game
      */
     public function play(string $color, string $pgn): bool
     {
-        return $this->board->play(Convert::toObject($color, $pgn));
+        return $this->board->play(Convert::toStdObj($color, $pgn));
     }
 }

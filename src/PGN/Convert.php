@@ -29,7 +29,7 @@ class Convert
      * @return \stdClass
      * @throws \PGNChess\Exception\UnknownNotationException
      */
-    public static function toObject(string $color, string $pgn): \stdClass
+    public static function toStdObj(string $color, string $pgn): \stdClass
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
 

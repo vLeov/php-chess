@@ -944,12 +944,12 @@ final class Board extends \SplObjectStorage
                         if (in_array($square, $this->getSquares()->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
-                                Convert::toObject($this->getTurn(), Symbol::KING."x$square")
+                                Convert::toStdObj($this->getTurn(), Symbol::KING."x$square")
                             ));
                         } elseif (!in_array($square, $this->getControl()->space->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
-                                Convert::toObject($this->getTurn(), Symbol::KING.$square)
+                                Convert::toStdObj($this->getTurn(), Symbol::KING.$square)
                             ));
                         }
                         break;
@@ -958,11 +958,11 @@ final class Board extends \SplObjectStorage
                         if (in_array($square, $this->getSquares()->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
-                                Convert::toObject($this->getTurn(), $piece->getFile()."x$square")
+                                Convert::toStdObj($this->getTurn(), $piece->getFile()."x$square")
                             ));
                         } else {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toObject($this->getTurn(), $square)
+                                $piece->setMove(Convert::toStdObj($this->getTurn(), $square)
                                                ));
                         }
                         break;
@@ -971,12 +971,12 @@ final class Board extends \SplObjectStorage
                         if (in_array($square, $this->getSquares()->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
-                                Convert::toObject($this->getTurn(), $piece->getIdentity()."x$square")
+                                Convert::toStdObj($this->getTurn(), $piece->getIdentity()."x$square")
                             ));
                         } else {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
-                                Convert::toObject($this->getTurn(), $piece->getIdentity().$square)
+                                Convert::toStdObj($this->getTurn(), $piece->getIdentity().$square)
                             ));
                         }
                         break;

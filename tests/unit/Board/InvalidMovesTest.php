@@ -25,7 +25,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
         $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 9)));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 9)));
     }
 
     /**
@@ -35,7 +35,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
         $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'foo')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'foo')));
     }
 
     /**
@@ -45,7 +45,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
         $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'bar')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'bar')));
     }
 
     /**
@@ -55,7 +55,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
         $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'e9')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e9')));
     }
 
     /**
@@ -65,7 +65,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
         $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'e10')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e10')));
     }
 
     /**
@@ -75,7 +75,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
         $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toObject(Symbol::WHITE, 'Nw3')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nw3')));
     }
 
     /**
@@ -115,6 +115,6 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
         $board = new Board($pieces, $castling);
 
-        $board->play(Convert::toObject(Symbol::WHITE, 'f4'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'f4'));
     }
 }
