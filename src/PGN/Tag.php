@@ -79,20 +79,19 @@ class Tag
     }
 
     /**
-     * Basic tags expected to be found in a game.
+     * Basic mandatory tags expected to be found in a game.
      *
-     * @param array $tags
-     * @return bool true if the tags were found; otherwise false
+     * @return array
      */
-    public static function mandatory(array $tags): bool
+    public static function mandatory(): array
     {
-        return isset(
-            $tags[Tag::EVENT],
-            $tags[Tag::SITE],
-            $tags[Tag::DATE],
-            $tags[Tag::WHITE],
-            $tags[Tag::BLACK],
-            $tags[Tag::RESULT]
-        );
+        return [
+            self::EVENT,
+            self::SITE,
+            self::DATE,
+            self::WHITE,
+            self::BLACK,
+            self::RESULT,
+        ];
     }
 }

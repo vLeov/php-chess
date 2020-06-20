@@ -172,4 +172,17 @@ class Validate
 
         return true;
     }
+
+    /**
+     * Validates a set of tags.
+     *
+     * @param array $tags
+     * @return bool true if the tags are valid; otherwise false
+     */
+    public static function tags(array $tags): bool
+    {
+        $keys = array_keys($tags);
+
+        return !array_diff(Tag::mandatory(), $keys);
+    }
 }
