@@ -128,7 +128,7 @@ class Knight extends AbstractPiece
         foreach ($this->scope->jumps as $square) {
 
             switch(true) {
-                case null != $this->getMove() && $this->getMove()->isCapture == false:
+                case null != $this->getMove() && !$this->getMove()->isCapture:
                     if (in_array($square, $this->getBoardStatus()->squares->free)) {
                         $moves[] = $square;
                     } elseif (in_array($square, $this->getBoardStatus()->squares->used->{$this->getOppositeColor()})) {
@@ -136,7 +136,7 @@ class Knight extends AbstractPiece
                     }
                     break;
 
-                case null != $this->getMove() && $this->getMove()->isCapture == true:
+                case null != $this->getMove() && $this->getMove()->isCapture:
                     if (in_array($square, $this->getBoardStatus()->squares->used->{$this->getOppositeColor()})) {
                         $moves[] = $square;
                     }

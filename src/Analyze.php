@@ -98,44 +98,44 @@ class Analyze
 
         // check white's castling info
 
-        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_LONG} === true &&
+        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_LONG} &&
             !(isset($wKing) && $wKing->getIdentity() === Symbol::KING && $wKing->getColor() === Symbol::WHITE)) {
                 throw new CastlingException("White's king was already moved.");
         }
 
-        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_SHORT} === true &&
+        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_SHORT} &&
             !(isset($wKing) && $wKing->getIdentity() === Symbol::KING && $wKing->getColor() === Symbol::WHITE)) {
                 throw new CastlingException("White's king was already moved.");
         }
 
-        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_LONG} === true &&
+        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_LONG} &&
             !(isset($wRookA1) && $wRookA1->getIdentity() === Symbol::ROOK && $wRookA1->getColor() === Symbol::WHITE)) {
                 throw new CastlingException("White's a1 rook was already moved.");
         }
 
-        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_SHORT} === true &&
+        if ($board->getCastling()->{Symbol::WHITE}->{Symbol::CASTLING_SHORT} &&
             !(isset($wRookH1) && $wRookH1->getIdentity() === Symbol::ROOK && $wRookH1->getColor() === Symbol::WHITE)) {
                 throw new CastlingException("White's h1 rook was already moved.");
         }
 
         // check black's castling info
 
-        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_LONG} === true &&
+        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_LONG} &&
             !(isset($bKing) && $bKing->getIdentity() === Symbol::KING && $bKing->getColor() === Symbol::BLACK)) {
                 throw new CastlingException("Black's king was already moved.");
         }
 
-        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_SHORT} === true &&
+        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_SHORT} &&
             !(isset($bKing) && $bKing->getIdentity() === Symbol::KING && $bKing->getColor() === Symbol::BLACK)) {
                 throw new CastlingException("Black's king was already moved.");
         }
 
-        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_LONG} === true &&
+        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_LONG} &&
             !(isset($bRookA8) && $bRookA8->getIdentity() === Symbol::ROOK && $bRookA8->getColor() === Symbol::BLACK)) {
                 throw new CastlingException("Black's a8 rook was already moved.");
         }
 
-        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_SHORT} === true &&
+        if ($board->getCastling()->{Symbol::BLACK}->{Symbol::CASTLING_SHORT} &&
             !(isset($bRookH8) && $bRookH8->getIdentity() === Symbol::ROOK && $bRookH8->getColor() === Symbol::BLACK)) {
                 throw new CastlingException("Black's h8 rook was already moved.");
         }
