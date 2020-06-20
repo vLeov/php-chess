@@ -121,7 +121,6 @@ class Validate
      *
      * @param string $movetext
      * @return bool true if the movetext is valid; otherwise false
-     * @throws \PGNChess\Exception\UnknownNotationException
      */
     public static function movetext(string $text): bool
     {
