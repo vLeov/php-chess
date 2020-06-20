@@ -242,7 +242,7 @@ class ValidateTest extends AbstractUnitTestCase
     {
         $this->assertEquals(
             '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5',
-            Validate::movetext('1.d4    Nf6 2.Nf3 e6 3.c4    Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5')
+            Validate::movetext('1  .  d4    Nf6 2.Nf3 e6 3.c4    Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5')
         );
 
         $this->assertEquals(
@@ -252,7 +252,7 @@ class ValidateTest extends AbstractUnitTestCase
 
         $this->assertEquals(
             '1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 e5 6.Ndb5 d6 7.Bg5 a6 8.Na3',
-            Validate::movetext('1.e4  c5   2.Nf3    Nc6 3.d4     cxd4 4.Nxd4 Nf6 5.Nc3 e5 6.Ndb5 d6 7.Bg5 a6 8.Na3')
+            Validate::movetext('1.e4  c5   2.Nf3   Nc6 3.d4     cxd4 4   .  Nxd4 Nf6 5.Nc3 e5 6.Ndb5 d6 7.Bg5 a6 8.Na3')
         );
 
         $this->assertEquals(

@@ -129,10 +129,12 @@ class Validate
             'notations' => [],
         ];
 
-        $uncommented = preg_replace("/\{[^)]+\}/", '', $text);
+        // remove comments
+        $text = preg_replace("/\{[^)]+\}/", '', $text);
+        // remove spaces between dots
+        $text = preg_replace('/\s+\./', '.', $text);
 
-        $moves = array_filter(explode(' ', preg_replace("/\{[^)]+\}/", '', $uncommented)));
-
+        $moves = array_filter(explode(' ', $text));
         foreach ($moves as $move) {
             if (preg_match('/^[1-9][0-9]*\.(.*)$/', $move)) {
                 $exploded = explode('.', $move);
