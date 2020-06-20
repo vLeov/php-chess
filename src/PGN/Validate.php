@@ -120,9 +120,9 @@ class Validate
      * Validates a PGN movetext.
      *
      * @param string $movetext
-     * @return bool true if the movetext is valid; otherwise false
+     * @return mixed bool|string true if the movetext is valid; otherwise the filtered movetext
      */
-    public static function movetext(string $text): bool
+    public static function movetext(string $text)
     {
         $movetext = (object) [
             'numbers' => [],
@@ -169,7 +169,26 @@ class Validate
             }
         }
 
-        return true;
+        /*
+         * Filters the movetext.
+         *
+         *      Example:
+         *
+         *          1.e4  e5 2.  f4 exf4 3. Bc4 d5 4.Bxd5 Qh4+
+         *
+         *      is filtered this way:
+         *
+         *          1.e4 e5 2.f4 exf4 3.Bc4 d5 4.Bxd5 Qh4+
+         */
+        $filtered = '';
+        for ($i = 0; $i < count($movetext->numbers); $i++) {
+            $filtered .= $movetext->numbers[$i] . '.' . $movetext->notations[$i*2] . ' ';
+            if (isset($movetext->notations[$i*2+1])) {
+                $filtered .= $movetext->notations[$i*2+1] . ' ';
+            }
+        }
+
+        return trim($filtered);
     }
 
     /**
