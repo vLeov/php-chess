@@ -244,6 +244,5 @@ Would you help make this library better? Contributions are welcome.
 - Feel free to send a pull request
 - Drop an email at info@programarivm.com with the subject "PGN Chess Contributions"
 - Leave me a comment on [Twitter](https://twitter.com/programarivm)
-- Say hello on [Google+](https://plus.google.com/+Programarivm)
 
 Many thanks.
