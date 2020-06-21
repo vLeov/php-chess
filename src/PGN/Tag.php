@@ -92,6 +92,9 @@ class Tag
             self::WHITE,
             self::BLACK,
             self::RESULT,
+            self::WHITE_ELO,
+            self::BLACK_ELO,
+            self::ECO,
         ];
     }
 }
