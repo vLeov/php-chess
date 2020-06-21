@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Tests\Unit\PGN;
+namespace PGNChess\Tests\Unit\PGN\Validate;
 
 use PGNChess\PGN\Symbol;
 use PGNChess\PGN\Validate;
