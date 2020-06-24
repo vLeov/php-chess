@@ -2,7 +2,7 @@
 
 namespace PGNChess\Stats;
 
-use PgnChess\Board;
+use PGNChess\AbstractStats;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -12,15 +12,8 @@ use PGNChess\PGN\Symbol;
  * @link https://programarivm.com
  * @license GPL
  */
-class Square
+class Square extends AbstractStats
 {
-    private $board;
-
-    public function __construct($board)
-    {
-        $this->board = $board;
-    }
-
     /**
      * Current free/used squares.
      *
