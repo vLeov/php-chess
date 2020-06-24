@@ -2,7 +2,7 @@
 
 namespace PGNChess\Castling;
 
-use PGNChess\Castling\Init as CastlingInit;
+use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -26,11 +26,11 @@ class Can
     {
         return $castling->{$color}->{Symbol::CASTLING_SHORT} &&
             !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->f,
+                CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->f,
                 $control->space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->g,
+                CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->g,
                 $control->space->{Symbol::oppositeColor($color)})
              );
     }
@@ -47,15 +47,15 @@ class Can
     {
         return $castling->{$color}->{Symbol::CASTLING_LONG} &&
             !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->b,
+                CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->b,
                 $control->space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->c,
+                CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->c,
                 $control->space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->d,
+                CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->d,
                 $control->space->{Symbol::oppositeColor($color)})
              );
     }
