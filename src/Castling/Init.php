@@ -110,68 +110,9 @@ class Init
      */
     public static function validate(Board $board): bool
     {
-        $castlingArr = (array)$board->getCastling();
+        self::properties($board->getCastling());
 
-        if (!empty($castlingArr)) {
-            !isset($castlingArr[Symbol::WHITE]) ?: $wCastlingArr = (array)$castlingArr[Symbol::WHITE];
-            !isset($castlingArr[Symbol::BLACK]) ?: $bCastlingArr = (array)$castlingArr[Symbol::BLACK];
-        }
-
-        // check castling object
-
-        if (empty($castlingArr)) {
-            throw new CastlingException("The castling object is empty.");
-        }
-
-        if (count($castlingArr) !== 2) {
-            throw new CastlingException("The castling object must have two properties.");
-        }
-
-        // check white's castling object
-
-        if (empty($wCastlingArr)) {
-            throw new CastlingException("White's castling object is not set.");
-        }
-
-        if (count($wCastlingArr) !== 3) {
-            throw new CastlingException("White's castling object must have three properties.");
-        }
-
-        if (!isset($wCastlingArr['castled'])) {
-            throw new CastlingException("The castled property is not set.");
-        }
-
-        if (!isset($wCastlingArr[Symbol::CASTLING_SHORT])) {
-            throw new CastlingException("White's castling short property is not set.");
-        }
-
-        if (!isset($wCastlingArr[Symbol::CASTLING_LONG])) {
-            throw new CastlingException("White's castling long property is not set.");
-        }
-
-        // check black's castling object
-
-        if (empty($bCastlingArr)) {
-            throw new CastlingException("Black's castling object is not set.");
-        }
-
-        if (count($bCastlingArr) !== 3) {
-            throw new CastlingException("Black's castling object must have three properties.");
-        }
-
-        if (!isset($bCastlingArr['castled'])) {
-            throw new CastlingException("Black's castled property is not set.");
-        }
-
-        if (!isset($bCastlingArr[Symbol::CASTLING_SHORT])) {
-            throw new CastlingException("Black's castling short property is not set.");
-        }
-
-        if (!isset($bCastlingArr[Symbol::CASTLING_LONG])) {
-            throw new CastlingException("Black's castling long property is not set.");
-        }
-
-        self::canCastle(
+        self::alreadyMoved(
             Symbol::WHITE,
             $board->getPieceByPosition('e1'),
             $board->getPieceByPosition('a1'),
@@ -179,7 +120,7 @@ class Init
             $board->getCastling()
         );
 
-        self::canCastle(
+        self::alreadyMoved(
             Symbol::BLACK,
             $board->getPieceByPosition('e8'),
             $board->getPieceByPosition('a8'),
@@ -190,29 +131,65 @@ class Init
         return true;
     }
 
-    private static function canCastle($color, $king, $rookA, $rookH, $castling)
+    private static function properties($castling)
     {
-        self::canCastleShort($color, $king, $rookA, $rookH, $castling);
-        self::canCastleLong($color, $king, $rookA, $rookH, $castling);
+        $castlingArr = (array)$castling;
+
+        if (!empty($castlingArr)) {
+            !isset($castlingArr[Symbol::WHITE]) ?: $w = (array)$castlingArr[Symbol::WHITE];
+            !isset($castlingArr[Symbol::BLACK]) ?: $b = (array)$castlingArr[Symbol::BLACK];
+        }
+
+        switch (true) {
+            case empty($castlingArr):
+                throw new CastlingException("The castling object is empty.");
+            case empty($w):
+                throw new CastlingException("White's castling object is not set.");
+            case count($w) !== 3:
+                throw new CastlingException("White's castling object must have three properties.");
+            case !isset($w['castled']):
+                throw new CastlingException("White's castled property is not set.");
+            case !isset($w[Symbol::CASTLING_SHORT]):
+                throw new CastlingException("White's castling short property is not set.");
+            case !isset($w[Symbol::CASTLING_LONG]):
+                throw new CastlingException("White's castling long property is not set.");
+            case empty($b):
+                throw new CastlingException("Black's castling object is not set.");
+            case count($b) !== 3:
+                throw new CastlingException("Black's castling object must have three properties.");
+            case !isset($b['castled']):
+                throw new CastlingException("Black's castled property is not set.");
+            case !isset($b[Symbol::CASTLING_SHORT]):
+                throw new CastlingException("Black's castling short property is not set.");
+            case !isset($b[Symbol::CASTLING_LONG]):
+                throw new CastlingException("Black's castling long property is not set.");
+
+        }
     }
 
-    private static function canCastleShort($color, $king, $rookA, $rookH, $castling)
+    private static function alreadyMoved($color, $e, $a, $h, $castling)
+    {
+        self::alreadyMovedShort($color, $e, $a, $h, $castling);
+        self::alreadyMovedLong($color, $e, $a, $h, $castling);
+    }
+
+    private static function alreadyMovedShort($color, $e, $a, $h, $castling)
     {
         if ($castling->{$color}->{Symbol::CASTLING_SHORT}) {
-            if (!(isset($king) && $king->getIdentity() === Symbol::KING && $king->getColor() === $color)) {
+            if (!(isset($e) && $e->getIdentity() === Symbol::KING && $e->getColor() === $color)) {
                 throw new CastlingException("{$color} king was already moved.");
-            } elseif (!(isset($rookH) && $rookH->getIdentity() === Symbol::ROOK && $rookH->getColor() === $color)) {
+            } elseif (!(isset($h) && $h->getIdentity() === Symbol::ROOK && $h->getColor() === $color)) {
                 throw new CastlingException("{$color} h rook was already moved.");
             }
         }
     }
 
-    private static function canCastleLong($color, $king, $rookA, $rookH, $castling)
+    private static function alreadyMovedLong($color, $e, $a, $h, $castling)
     {
         if ($castling->{$color}->{Symbol::CASTLING_LONG}) {
-            if (!(isset($king) && $king->getIdentity() === Symbol::KING && $king->getColor() === $color))  {
+            if (!(isset($e) && $e->getIdentity() === Symbol::KING && $e->getColor() === $color))  {
                 throw new CastlingException("{$color} king was already moved.");
-            } elseif (!(isset($rookA) && $rookA->getIdentity() === Symbol::ROOK && $rookA->getColor() === $color)) {
+            } elseif (!(isset($a) && $a->getIdentity() === Symbol::ROOK && $a->getColor() === $color)) {
                 throw new CastlingException("{$color} a rook was already moved.");
             }
         }
