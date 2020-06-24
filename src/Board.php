@@ -3,6 +3,7 @@
 namespace PGNChess;
 
 use PGNChess\Castling\Init as CastlingInit;
+use PGNChess\Castling\Can as CastlingCan;
 use PGNChess\Db\Pdo;
 use PGNChess\Exception\BoardException;
 use PGNChess\Square\Stats;
@@ -492,13 +493,16 @@ final class Board extends \SplObjectStorage
             }
         } elseif (current($pieces)->isMovable() && !$this->leavesInCheck(current($pieces))) {
             $piece = current($pieces);
-
             switch ($piece->getMove()->type) {
                 case Move::KING_CASTLING_SHORT:
-                    $this->canCastleShort($this->turn) ? $isLegalMove = $this->castle($piece) : $isLegalMove = false;
+                    CastlingCan::short($this->turn, $this->castling, $this->control)
+                        ? $isLegalMove = $this->castle($piece)
+                        : $isLegalMove = false;
                     break;
                 case Move::KING_CASTLING_LONG:
-                    $this->canCastleLong($this->turn) ? $isLegalMove = $this->castle($piece) : $isLegalMove = false;
+                    CastlingCan::long($this->turn, $this->castling, $this->control)
+                        ? $isLegalMove = $this->castle($piece)
+                        : $isLegalMove = false;
                     break;
                 default:
                     $isLegalMove = $this->move($piece);
@@ -507,48 +511,6 @@ final class Board extends \SplObjectStorage
         }
 
         return $isLegalMove;
-    }
-
-    /**
-     * Calculates whether the king can castle short.
-     *
-     * @param string $color
-     * @return bool
-     */
-    private function canCastleShort(string $color): bool
-    {
-        return $this->castling->{$color}->{Symbol::CASTLING_SHORT} &&
-            !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->f,
-                $this->control->space->{Symbol::oppositeColor($color)})
-             ) &&
-            !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->g,
-                $this->control->space->{Symbol::oppositeColor($color)})
-             );
-    }
-
-    /**
-     * Calculates whether the king can castle long.
-     *
-     * @param string $color
-     * @return bool
-     */
-    private function canCastleLong(string $color): bool
-    {
-        return $this->castling->{$color}->{Symbol::CASTLING_LONG} &&
-            !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->b,
-                $this->control->space->{Symbol::oppositeColor($color)})
-             ) &&
-            !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->c,
-                $this->control->space->{Symbol::oppositeColor($color)})
-             ) &&
-            !(in_array(
-                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->d,
-                $this->control->space->{Symbol::oppositeColor($color)})
-             );
     }
 
     /**
