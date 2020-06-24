@@ -7,7 +7,7 @@ use PGNChess\Castling\Initialization as CastlingInit;
 use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\Db\Pdo;
 use PGNChess\Exception\BoardException;
-use PGNChess\Square\Stats;
+use PGNChess\Stats\Square as SquareStats;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Move;
 use PGNChess\PGN\Symbol;
@@ -724,7 +724,7 @@ final class Board extends \SplObjectStorage
     private function refresh(): Board
     {
         $this->turn = Symbol::oppositeColor($this->turn);
-        $this->squares = Stats::calc(iterator_to_array($this, false));
+        $this->squares = SquareStats::current(iterator_to_array($this, false));
         $this->sendBoardStatus((object) [
             'squares' => $this->squares,
             'castling' => $this->castling,
