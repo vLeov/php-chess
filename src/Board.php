@@ -128,11 +128,7 @@ final class Board extends \SplObjectStorage
             ], ];
 
         } else {
-            foreach ($pieces as $piece) {
-                $this->attach($piece);
-            }
-            $this->castling = $castling;
-            CastlingInit::validate($this);
+            $this->init($pieces, $castling);
         }
 
         $this->captures = (object) [
@@ -313,6 +309,23 @@ final class Board extends \SplObjectStorage
         }
 
         return null;
+    }
+
+    /**
+     * Initializes the board.
+     *
+     * @param array $pieces
+     * @param \stdClass $castling
+     * @throws \PGNChess\Exception\CastlingException
+     */
+    private function init($pieces, $castling)
+    {
+        foreach ($pieces as $piece) {
+            $this->attach($piece);
+        }
+        $this->castling = $castling;
+
+        CastlingInit::validate($this);
     }
 
     /**
