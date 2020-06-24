@@ -1,7 +1,7 @@
 <?php
 namespace PGNChess\Piece;
 
-use PGNChess\Castling;
+use PGNChess\Castling\Init as CastlingInit;
 use PGNChess\PGN\Move;
 use PGNChess\PGN\Symbol;
 use PGNChess\Piece\AbstractPiece;
@@ -56,7 +56,7 @@ class King extends AbstractPiece
             if (
                 $piece->getIdentity() === Symbol::ROOK &&
                 $piece->getPosition() ===
-                Castling::info($this->getColor())->{Symbol::ROOK}->{$this->getMove()->pgn}->position->current
+                CastlingInit::info($this->getColor())->{Symbol::ROOK}->{$this->getMove()->pgn}->position->current
             ) {
                 return $piece;
             }
@@ -101,8 +101,8 @@ class King extends AbstractPiece
                 array_merge($this->getBoardStatus()->squares->used->{$this->getOppositeColor()})
         ));
 
-        $castlingShort = Castling::info($this->getColor())->{Symbol::KING}->{Symbol::CASTLING_SHORT};
-        $castlingLong = Castling::info($this->getColor())->{Symbol::KING}->{Symbol::CASTLING_LONG};
+        $castlingShort = CastlingInit::info($this->getColor())->{Symbol::KING}->{Symbol::CASTLING_SHORT};
+        $castlingLong = CastlingInit::info($this->getColor())->{Symbol::KING}->{Symbol::CASTLING_LONG};
 
         if (
             !$this->getBoardStatus()->castling->{$this->getColor()}->castled &&

@@ -2,7 +2,7 @@
 
 namespace PGNChess\Tests\Unit\PGN;
 
-use PGNChess\Castling;
+use PGNChess\Castling\Init as CastlingInit;
 use PGNChess\Exception\UnknownNotationException;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Move;
@@ -281,7 +281,7 @@ class ConvertTest extends AbstractUnitTestCase
             'type' => Move::KING_CASTLING_SHORT,
             'color' => Symbol::WHITE,
             'identity' => 'K',
-            'position' => Castling::info(Symbol::WHITE)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->position
+            'position' => CastlingInit::info(Symbol::WHITE)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->position
         ];
 
         $this->assertEquals(Convert::toStdObj(Symbol::WHITE, $move), $example);
@@ -300,7 +300,7 @@ class ConvertTest extends AbstractUnitTestCase
             'type' => Move::KING_CASTLING_LONG,
             'color' => Symbol::WHITE,
             'identity' => 'K',
-            'position' => Castling::info(Symbol::WHITE)->{Symbol::KING}->{Symbol::CASTLING_LONG}->position
+            'position' => CastlingInit::info(Symbol::WHITE)->{Symbol::KING}->{Symbol::CASTLING_LONG}->position
         ];
 
         $this->assertEquals(Convert::toStdObj(Symbol::WHITE, $move), $example);

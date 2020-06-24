@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess;
+namespace PGNChess\Castling;
 
 use PGNChess\Board;
 use PGNChess\Exception\CastlingException;
@@ -8,16 +8,16 @@ use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
 /**
- * Castling class.
+ * Castling initialization.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-class Castling
+class Init
 {
     /**
-     * Stores the board's castling information.
+     * Castling information.
      *
      * @param string $color
      * @return \stdClass
@@ -102,7 +102,7 @@ class Castling
     }
 
     /**
-     * Validates the board's castling objects.
+     * Validates the board's castling object during initialization.
      *
      * @param Board $board
      * @return boolean
@@ -192,24 +192,29 @@ class Castling
 
     private static function canCastle($color, $king, $rookA, $rookH, $castling)
     {
-        if ($castling->{$color}->{Symbol::CASTLING_LONG} &&
-            !(isset($king) && $king->getIdentity() === Symbol::KING && $king->getColor() === $color)) {
+        self::canCastleShort($color, $king, $rookA, $rookH, $castling);
+        self::canCastleLong($color, $king, $rookA, $rookH, $castling);
+    }
+
+    private static function canCastleShort($color, $king, $rookA, $rookH, $castling)
+    {
+        if ($castling->{$color}->{Symbol::CASTLING_SHORT}) {
+            if (!(isset($king) && $king->getIdentity() === Symbol::KING && $king->getColor() === $color)) {
                 throw new CastlingException("{$color} king was already moved.");
-        }
-
-        if ($castling->{$color}->{Symbol::CASTLING_SHORT} &&
-            !(isset($king) && $king->getIdentity() === Symbol::KING && $king->getColor() === $color)) {
-                throw new CastlingException("{$color} king was already moved.");
-        }
-
-        if ($castling->{$color}->{Symbol::CASTLING_LONG} &&
-            !(isset($rookA) && $rookA->getIdentity() === Symbol::ROOK && $rookA->getColor() === $color)) {
-                throw new CastlingException("{$color} a rook was already moved.");
-        }
-
-        if ($castling->{$color}->{Symbol::CASTLING_SHORT} &&
-            !(isset($rookH) && $rookH->getIdentity() === Symbol::ROOK && $rookH->getColor() === $color)) {
+            } elseif (!(isset($rookH) && $rookH->getIdentity() === Symbol::ROOK && $rookH->getColor() === $color)) {
                 throw new CastlingException("{$color} h rook was already moved.");
+            }
+        }
+    }
+
+    private static function canCastleLong($color, $king, $rookA, $rookH, $castling)
+    {
+        if ($castling->{$color}->{Symbol::CASTLING_LONG}) {
+            if (!(isset($king) && $king->getIdentity() === Symbol::KING && $king->getColor() === $color))  {
+                throw new CastlingException("{$color} king was already moved.");
+            } elseif (!(isset($rookA) && $rookA->getIdentity() === Symbol::ROOK && $rookA->getColor() === $color)) {
+                throw new CastlingException("{$color} a rook was already moved.");
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace PGNChess;
 
-use PGNChess\Castling;
+use PGNChess\Castling\Init as CastlingInit;
 use PGNChess\Db\Pdo;
 use PGNChess\Exception\BoardException;
 use PGNChess\Square\Stats;
@@ -130,7 +130,7 @@ final class Board extends \SplObjectStorage
                 $this->attach($piece);
             }
             $this->castling = $castling;
-            Castling::validate($this);
+            CastlingInit::validate($this);
         }
 
         $this->captures = (object) [
@@ -519,11 +519,11 @@ final class Board extends \SplObjectStorage
     {
         return $this->castling->{$color}->{Symbol::CASTLING_SHORT} &&
             !(in_array(
-                Castling::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->f,
+                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->f,
                 $this->control->space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
-                Castling::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->g,
+                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->g,
                 $this->control->space->{Symbol::oppositeColor($color)})
              );
     }
@@ -538,15 +538,15 @@ final class Board extends \SplObjectStorage
     {
         return $this->castling->{$color}->{Symbol::CASTLING_LONG} &&
             !(in_array(
-                Castling::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->b,
+                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->b,
                 $this->control->space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
-                Castling::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->c,
+                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->c,
                 $this->control->space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
-                Castling::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->d,
+                CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->d,
                 $this->control->space->{Symbol::oppositeColor($color)})
              );
     }
@@ -564,12 +564,12 @@ final class Board extends \SplObjectStorage
             $this->detach($this->getPieceByPosition($king->getPosition()));
             $this->attach(new King(
                 $king->getColor(),
-                Castling::info($king->getColor())->{Symbol::KING}->{$king->getMove()->pgn}->position->next)
+                CastlingInit::info($king->getColor())->{Symbol::KING}->{$king->getMove()->pgn}->position->next)
              );
             $this->detach($rook);
             $this->attach(new Rook(
                 $rook->getColor(),
-                Castling::info($king->getColor())->{Symbol::ROOK}->{$king->getMove()->pgn}->position->next,
+                CastlingInit::info($king->getColor())->{Symbol::ROOK}->{$king->getMove()->pgn}->position->next,
                 $rook->getIdentity() === Symbol::ROOK
             ));
             $this->trackCastling(true)->pushHistory($king)->refresh();
@@ -598,11 +598,11 @@ final class Board extends \SplObjectStorage
         switch ($previous->move->type) {
             case Move::KING_CASTLING_SHORT:
                 $rook = $this->getPieceByPosition(
-                    Castling::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_SHORT}->position->next
+                    CastlingInit::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_SHORT}->position->next
                 );
                 $rookUndone = new Rook(
                     $previous->move->color,
-                    Castling::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_SHORT}->position->current,
+                    CastlingInit::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_SHORT}->position->current,
                     $rook->getType()
                 );
                 $this->detach($rook);
@@ -611,11 +611,11 @@ final class Board extends \SplObjectStorage
 
             case Move::KING_CASTLING_LONG:
                 $rook = $this->getPieceByPosition(
-                    Castling::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_LONG}->position->next
+                    CastlingInit::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_LONG}->position->next
                 );
                 $rookUndone = new Rook(
                     $previous->move->color,
-                    Castling::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_LONG}->position->current,
+                    CastlingInit::info($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_LONG}->position->current,
                     $rook->getType()
                 );
                 $this->detach($rook);

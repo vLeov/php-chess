@@ -2,7 +2,7 @@
 
 namespace PGNChess\PGN;
 
-use PGNChess\Castling;
+use PGNChess\Castling\Init as CastlingInit;
 use PGNChess\Exception\UnknownNotationException;
 use PGNChess\PGN\Validate;
 use PGNChess\Piece\Bishop;
@@ -55,7 +55,7 @@ class Convert
                     'type' => Move::KING_CASTLING_SHORT,
                     'color' => Validate::color($color),
                     'identity' => Symbol::KING,
-                    'position' => Castling::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->position
+                    'position' => CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->position
                 ];
 
             case preg_match('/^' . Move::KING_CASTLING_LONG . '$/', $pgn):
@@ -66,7 +66,7 @@ class Convert
                     'type' => Move::KING_CASTLING_LONG,
                     'color' => Validate::color($color),
                     'identity' => Symbol::KING,
-                    'position' => Castling::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->position
+                    'position' => CastlingInit::info($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->position
                 ];
 
             case preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn):
