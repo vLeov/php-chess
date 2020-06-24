@@ -169,52 +169,6 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the free/used squares.
-     *
-     * @return \stdClass
-     */
-    public function getSquares(): \stdClass
-    {
-        return $this->squares;
-    }
-
-    /**
-     * Sets the free/used squares.
-     *
-     * @param \stdClass $squares
-     * @return \PGNChess\Board
-     */
-    private function setSquares(\stdClass $squares): Board
-    {
-        $this->squares = $squares;
-
-        return $this;
-    }
-
-    /**
-     * Gets the squares controlled by both players.
-     *
-     * @return \stdClass
-     */
-    public function getControl(): \stdClass
-    {
-        return $this->control;
-    }
-
-    /**
-     * Sets the squares controlled by both players.
-     *
-     * @param \stdClass $control
-     * @return \PGNChess\Board
-     */
-    private function setControl(\stdClass $control): Board
-    {
-        $this->control = $control;
-
-        return $this;
-    }
-
-    /**
      * Gets the castling status.
      *
      * @return \stdClass
@@ -724,101 +678,16 @@ final class Board extends \SplObjectStorage
     private function refresh(): Board
     {
         $this->turn = Symbol::oppositeColor($this->turn);
-        $this->squares = SquareStats::current(iterator_to_array($this, false));
+        $this->squares = SquareStats::squares($this);
         $this->sendBoardStatus((object) [
             'squares' => $this->squares,
             'castling' => $this->castling,
             'lastHistoryEntry' => !empty($this->history) ? end($this->history) : null,
         ]);
-        $this->control = $this->control();
+        $this->control = SquareStats::control($this);
         $this->sendBoardControl($this->control);
 
         return $this;
-    }
-
-    /**
-     * Builds an object containing the squares being controlled by both players.
-     *
-     * @return \stdClass
-     */
-    private function control(): \stdClass
-    {
-        $control = (object) [
-            'space' => (object) [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ],
-            'attack' => (object) [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ], ];
-
-        $this->rewind();
-        while ($this->valid()) {
-            $piece = $this->current();
-            switch ($piece->getIdentity()) {
-                case Symbol::KING:
-                    $control->space->{$piece->getColor()} = array_unique(
-                        array_merge(
-                        $control->space->{$piece->getColor()},
-                        array_values(
-                        array_intersect(
-                        array_values((array) $piece->getScope()),
-                        $this->squares->free
-                    ))));
-                    $control->attack->{$piece->getColor()} = array_unique(
-                        array_merge(
-                        $control->attack->{$piece->getColor()},
-                        array_values(
-                        array_intersect(
-                        array_values((array) $piece->getScope()),
-                        $this->squares->used->{$piece->getOppositeColor()}
-                    ))));
-                    break;
-
-                case Symbol::PAWN:
-                    $control->space->{$piece->getColor()} = array_unique(
-                        array_merge(
-                        $control->space->{$piece->getColor()},
-                        array_intersect(
-                        $piece->getCaptureSquares(),
-                        $this->squares->free
-                    )));
-                    $control->attack->{$piece->getColor()} = array_unique(
-                        array_merge(
-                        $control->attack->{$piece->getColor()},
-                        array_intersect(
-                        $piece->getCaptureSquares(),
-                        $this->squares->used->{$piece->getOppositeColor()}
-                    )));
-                    break;
-
-                default:
-                    $control->space->{$piece->getColor()} = array_unique(
-                        array_merge(
-                        $control->space->{$piece->getColor()},
-                        array_diff(
-                        $piece->getLegalMoves(),
-                        $this->squares->used->{$piece->getOppositeColor()}
-                    )));
-                    $control->attack->{$piece->getColor()} = array_unique(
-                        array_merge(
-                        $control->attack->{$piece->getColor()},
-                        array_intersect(
-                        $piece->getLegalMoves(),
-                        $this->squares->used->{$piece->getOppositeColor()}
-                    )));
-                    break;
-            }
-            $this->next();
-        }
-
-        sort($control->space->{Symbol::WHITE});
-        sort($control->space->{Symbol::BLACK});
-        sort($control->attack->{Symbol::WHITE});
-        sort($control->attack->{Symbol::BLACK});
-
-        return $control;
     }
 
     /**
@@ -862,12 +731,12 @@ final class Board extends \SplObjectStorage
             $piece->getMove()->type === Move::KING_CASTLING_LONG) {
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->getControl()->attack->{$king->getOppositeColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->control->attack->{$king->getOppositeColor()});
             $this->undoCastle($previousCastling);
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->getControl()->attack->{$king->getOppositeColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->control->attack->{$king->getOppositeColor()});
             $this->undoMove($previousCastling);
         }
 
@@ -904,12 +773,12 @@ final class Board extends \SplObjectStorage
             foreach ($legalMoves as $square) {
                 switch ($piece->getIdentity()) {
                     case Symbol::KING:
-                        if (in_array($square, $this->getSquares()->used->{$piece->getOppositeColor()})) {
+                        if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
                                 Convert::toStdObj($this->getTurn(), Symbol::KING."x$square")
                             ));
-                        } elseif (!in_array($square, $this->getControl()->space->{$piece->getOppositeColor()})) {
+                        } elseif (!in_array($square, $this->control->space->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
                                 Convert::toStdObj($this->getTurn(), Symbol::KING.$square)
@@ -918,7 +787,7 @@ final class Board extends \SplObjectStorage
                         break;
 
                     case Symbol::PAWN:
-                        if (in_array($square, $this->getSquares()->used->{$piece->getOppositeColor()})) {
+                        if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
                                 Convert::toStdObj($this->getTurn(), $piece->getFile()."x$square")
@@ -931,7 +800,7 @@ final class Board extends \SplObjectStorage
                         break;
 
                     default:
-                        if (in_array($square, $this->getSquares()->used->{$piece->getOppositeColor()})) {
+                        if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
                                 Convert::toStdObj($this->getTurn(), $piece->getIdentity()."x$square")

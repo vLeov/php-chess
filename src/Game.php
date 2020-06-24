@@ -4,6 +4,7 @@ namespace PGNChess;
 
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Validate;
+use PGNChess\Stats\Square as SquareStats;
 
 /**
  * Game class.
@@ -42,8 +43,8 @@ class Game
     {
         return (object) [
             'turn' => $this->board->getTurn(),
-            'squares' => $this->board->getSquares(),
-            'control' => $this->board->getControl(),
+            'squares' => SquareStats::squares($this->board),
+            'control' => SquareStats::control($this->board),
             'castling' => $this->board->getCastling(),
         ];
     }

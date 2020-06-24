@@ -19,53 +19,6 @@ class StatusTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function count_squares_in_new_board()
-    {
-        $board = new Board;
-
-        $this->assertEquals(count($board), 32);
-        $this->assertEquals(count($board->getSquares()->used->w), 16);
-        $this->assertEquals(count($board->getSquares()->used->b), 16);
-    }
-
-    /**
-     * @test
-     */
-    public function count_squares_in_custom_board()
-    {
-        $pieces = [
-            new Bishop(Symbol::WHITE, 'c1'),
-            new Queen(Symbol::WHITE, 'd1'),
-            new King(Symbol::WHITE, 'e1'),
-            new Pawn(Symbol::WHITE, 'e2'),
-            new King(Symbol::BLACK, 'e8'),
-            new Bishop(Symbol::BLACK, 'f8'),
-            new Knight(Symbol::BLACK, 'g8')
-        ];
-
-        $castling = (object) [
-            'w' => (object) [
-                'castled' => false,
-                'O-O' => false,
-                'O-O-O' => false
-            ],
-            'b' => (object) [
-                'castled' => false,
-                'O-O' => false,
-                'O-O-O' => false
-            ]
-        ];
-
-        $board = new Board($pieces, $castling);
-
-        $this->assertEquals(count($board), 7);
-        $this->assertEquals(count($board->getSquares()->used->w), 4);
-        $this->assertEquals(count($board->getSquares()->used->b), 3);
-    }
-
-    /**
-     * @test
-     */
     public function play_some_moves_and_check_castling()
     {
         $board = new Board;
@@ -93,78 +46,6 @@ class StatusTest extends AbstractUnitTestCase
         ];
 
         $this->assertEquals($castling, $board->getCastling());
-    }
-
-    /**
-     * @test
-     */
-    public function play_some_moves_and_check_space()
-    {
-        $game = [
-            'e4 e5',
-            'f4 exf4',
-            'd4 Nf6',
-            'Nc3 Bb4',
-            'Bxf4 Bxc3+'
-        ];
-
-        $board = new Board;
-
-        foreach ($game as $entry)
-        {
-            $moves = explode(' ', $entry);
-            $board->play(Convert::toStdObj(Symbol::WHITE, $moves[0]));
-            $board->play(Convert::toStdObj(Symbol::BLACK, $moves[1]));
-        }
-
-        $space = (object) [
-            'w' => [
-                'a3',
-                'a6',
-                'b1',
-                'b3',
-                'b5',
-                'c1',
-                'c4',
-                'c5',
-                'd2',
-                'd3',
-                'd5',
-                'd6',
-                'e2',
-                'e3',
-                'e5',
-                'f2',
-                'f3',
-                'f5',
-                'g3',
-                'g4',
-                'g5',
-                'h3',
-                'h5',
-                'h6'
-            ],
-            'b' => [
-                'a5',
-                'a6',
-                'b4',
-                'b6',
-                'c6',
-                'd2',
-                'd5',
-                'd6',
-                'e6',
-                'e7',
-                'f8',
-                'g4',
-                'g6',
-                'g8',
-                'h5',
-                'h6'
-            ]
-        ];
-
-        $this->assertEquals($space, $board->getControl()->space);
     }
 
     /**
