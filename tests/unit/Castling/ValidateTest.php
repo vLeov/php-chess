@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Tests;
+namespace PGNChess\Tests\Unit\Castling;
 
 use PGNChess\Board;
 use PGNChess\Exception\CastlingException;
@@ -16,7 +16,7 @@ use PGNChess\Piece\Rook;
 use PGNChess\Piece\Type\RookType;
 use PGNChess\Tests\AbstractUnitTestCase;
 
-class AnalyzeTest extends AbstractUnitTestCase
+class ValidateTest extends AbstractUnitTestCase
 {
     /**
      * @test

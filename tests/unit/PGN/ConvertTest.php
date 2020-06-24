@@ -2,8 +2,8 @@
 
 namespace PGNChess\Tests\Unit\PGN;
 
+use PGNChess\Castling;
 use PGNChess\Exception\UnknownNotationException;
-use PGNChess\Square\Castling;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Move;
 use PGNChess\PGN\Symbol;

@@ -2,8 +2,8 @@
 
 namespace PGNChess\PGN;
 
+use PGNChess\Castling;
 use PGNChess\Exception\UnknownNotationException;
-use PGNChess\Square\Castling;
 use PGNChess\PGN\Validate;
 use PGNChess\Piece\Bishop;
 use PGNChess\Piece\King;

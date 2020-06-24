@@ -2,9 +2,9 @@
 
 namespace PGNChess;
 
+use PGNChess\Castling;
 use PGNChess\Db\Pdo;
 use PGNChess\Exception\BoardException;
-use PGNChess\Square\Castling;
 use PGNChess\Square\Stats;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Move;
@@ -130,7 +130,7 @@ final class Board extends \SplObjectStorage
                 $this->attach($piece);
             }
             $this->castling = $castling;
-            Analyze::castling($this);
+            Castling::validate($this);
         }
 
         $this->captures = (object) [
