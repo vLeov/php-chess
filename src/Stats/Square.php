@@ -6,7 +6,7 @@ use PgnChess\Board;
 use PGNChess\PGN\Symbol;
 
 /**
- * Stats on the squares of the board.
+ * Square stats.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
@@ -14,19 +14,26 @@ use PGNChess\PGN\Symbol;
  */
 class Square
 {
+    private $board;
+
+    public function __construct($board)
+    {
+        $this->board = $board;
+    }
+
     /**
      * Current free/used squares.
      *
      * @param array $pieces
      * @return \stdClass
      */
-    public static function squares(Board $board): \stdClass
+    public function squares(): \stdClass
     {
-        $pieces = iterator_to_array($board, false);
+        $pieces = iterator_to_array($this->board, false);
 
         return (object) [
-            'used' => self::used($pieces),
-            'free' => self::free($pieces)
+            'used' => $this->used($pieces),
+            'free' => $this->free($pieces)
         ];
     }
 
@@ -35,7 +42,7 @@ class Square
      *
      * @return \stdClass
      */
-    public static function control(Board $board): \stdClass
+    public function control(): \stdClass
     {
         $control = (object) [
             'space' => (object) [
@@ -47,11 +54,11 @@ class Square
             Symbol::BLACK => [],
         ], ];
 
-        $squares = self::squares($board);
+        $squares = $this->squares();
 
-        $board->rewind();
-        while ($board->valid()) {
-            $piece = $board->current();
+        $this->board->rewind();
+        while ($this->board->valid()) {
+            $piece = $this->board->current();
             switch ($piece->getIdentity()) {
                 case Symbol::KING:
                     $control->space->{$piece->getColor()} = array_unique(
@@ -120,7 +127,7 @@ class Square
                     );
                     break;
             }
-            $board->next();
+            $this->board->next();
         }
 
         sort($control->space->{Symbol::WHITE});
@@ -136,10 +143,9 @@ class Square
      *
      * @return array
      */
-    private static function all(): array
+    private function all(): array
     {
         $all = [];
-
         for($i=0; $i<8; $i++) {
             for($j=1; $j<=8; $j++) {
                 $all[] = chr((ord('a') + $i)) . $j;
@@ -154,7 +160,7 @@ class Square
      *
      * @return array
      */
-    private static function used(array $pieces): \stdClass
+    private function used(array $pieces): \stdClass
     {
         $used = (object) [
             Symbol::WHITE => [],
@@ -173,13 +179,13 @@ class Square
      *
      * @return array
      */
-    private static function free(array $pieces): array
+    private function free(array $pieces): array
     {
-        $used = self::used($pieces);
+        $used = $this->used($pieces);
 
         return array_values(
             array_diff(
-                self::all(),
+                $this->all(),
                 array_merge($used->{Symbol::WHITE}, $used->{Symbol::BLACK})
         ));
     }

@@ -4,7 +4,7 @@ namespace PGNChess;
 
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Validate;
-use PGNChess\Stats\Square as SquareStats;
+use PGNChess\Stats\Square as StatsSquare;
 
 /**
  * Game class.
@@ -41,10 +41,12 @@ class Game
      */
     public function status(): \stdClass
     {
+        $statsSquare = new StatsSquare($this->board);
+
         return (object) [
             'turn' => $this->board->getTurn(),
-            'squares' => SquareStats::squares($this->board),
-            'control' => SquareStats::control($this->board),
+            'squares' => $statsSquare->squares(),
+            'control' => $statsSquare->control(),
             'castling' => $this->board->getCastling(),
         ];
     }

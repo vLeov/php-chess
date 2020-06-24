@@ -102,9 +102,11 @@ class SquareTest extends AbstractUnitTestCase
         sort($whiteSpace);
         $whiteAttack = [];
 
-        $this->assertEquals($whiteSquaresUsed, StatsSquare::squares($board)->used->w);
-        $this->assertEquals($whiteSpace, StatsSquare::control($board)->space->w);
-        $this->assertEquals($whiteAttack, StatsSquare::control($board)->attack->w);
+        $stats = new StatsSquare($board);
+
+        $this->assertEquals($whiteSquaresUsed, $stats->squares()->used->w);
+        $this->assertEquals($whiteSpace, $stats->control()->space->w);
+        $this->assertEquals($whiteAttack, $stats->control()->attack->w);
     }
 
     /**
@@ -113,10 +115,11 @@ class SquareTest extends AbstractUnitTestCase
     public function count_squares_in_new_board()
     {
         $board = new Board;
+        $stats = new StatsSquare($board);
 
         $this->assertEquals(count($board), 32);
-        $this->assertEquals(count(StatsSquare::squares($board)->used->w), 16);
-        $this->assertEquals(count(StatsSquare::squares($board)->used->b), 16);
+        $this->assertEquals(count($stats->squares()->used->w), 16);
+        $this->assertEquals(count($stats->squares()->used->b), 16);
     }
 
     /**
@@ -148,10 +151,11 @@ class SquareTest extends AbstractUnitTestCase
         ];
 
         $board = new Board($pieces, $castling);
+        $stats = new StatsSquare($board);
 
         $this->assertEquals(count($board), 7);
-        $this->assertEquals(count(StatsSquare::squares($board)->used->w), 4);
-        $this->assertEquals(count(StatsSquare::squares($board)->used->b), 3);
+        $this->assertEquals(count($stats->squares()->used->w), 4);
+        $this->assertEquals(count($stats->squares()->used->b), 3);
     }
 
     /**
@@ -223,6 +227,8 @@ class SquareTest extends AbstractUnitTestCase
             ]
         ];
 
-        $this->assertEquals($space, StatsSquare::control($board)->space);
+        $stats = new StatsSquare($board);
+
+        $this->assertEquals($space, $stats->control()->space);
     }
 }
