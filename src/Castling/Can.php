@@ -15,7 +15,7 @@ use PGNChess\PGN\Symbol;
 class Can
 {
     /*
-     * Calculates whether the king can castle short.
+     * Can castle short.
      *
      * @param string $color
      * @param \stdClass $castling
@@ -36,7 +36,7 @@ class Can
     }
 
     /*
-     * Calculates whether the king can castle long.
+     * Can castle long.
      *
      * @param string $color
      * @param \stdClass $castling
