@@ -5,18 +5,15 @@ namespace PGNChess\Tests\Unit\Castling;
 use PGNChess\Board;
 use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\Exception\CastlingException;
-use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\Piece\Bishop;
 use PGNChess\Piece\King;
 use PGNChess\Piece\Knight;
 use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Queen;
 use PGNChess\Piece\Rook;
 use PGNChess\Piece\Type\RookType;
 use PGNChess\Tests\AbstractUnitTestCase;
 
-class InitTest extends AbstractUnitTestCase
+class InitializationTest extends AbstractUnitTestCase
 {
     /**
      * @test

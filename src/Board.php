@@ -3,7 +3,7 @@
 namespace PGNChess;
 
 use PGNChess\Castling\Can as CastlingCan;
-use PGNChess\Castling\Init as CastlingInit;
+use PGNChess\Castling\Initialization as CastlingInit;
 use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\Db\Pdo;
 use PGNChess\Exception\BoardException;

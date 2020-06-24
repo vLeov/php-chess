@@ -14,10 +14,10 @@ use PGNChess\PGN\Symbol;
  * @link https://programarivm.com
  * @license GPL
  */
-class Init
+class Initialization
 {
     /**
-     * Validates the board's castling object during initialization.
+     * Validates a board's castling object during initialization.
      *
      * @param Board $board
      * @return boolean
