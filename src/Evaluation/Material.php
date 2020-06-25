@@ -24,8 +24,9 @@ class Material extends AbstractEvaluation
     const SYSTEM_PRATT          = 'SYSTEM_PRATT';
     const SYSTEM_SARRAT         = 'SYSTEM_SARRAT';
 
-    public function systems() {
-        return [
+    public function systems(string $name = null)
+    {
+        $all = [
             self::SYSTEM_BERLINER => [
                 Symbol::KNIGHT => 3.2,
                 Symbol::BISHOP => 3.33,
@@ -83,9 +84,16 @@ class Material extends AbstractEvaluation
                 Symbol::KING => 2.2,
             ],
         ];
+
+        $system = $all[$name];
+        if ($system) {
+            return $system;
+        }
+
+        return $all;
     }
 
-    public function evaluate(string $system)
+    public function evaluate(string $name)
     {
         $result = [
             Symbol::WHITE => 0,
@@ -95,20 +103,20 @@ class Material extends AbstractEvaluation
         foreach ($this->board->getPiecesByColor(Symbol::WHITE) as $piece) {
             switch ($piece->getIdentity()) {
                 case Symbol::KNIGHT:
-                    $result[Symbol::WHITE] += $this->systems()[$system][Symbol::KNIGHT];
+                    $result[Symbol::WHITE] += $this->systems($name)[Symbol::KNIGHT];
                     break;
                 case Symbol::BISHOP:
-                    $result[Symbol::WHITE] += $this->systems()[$system][Symbol::BISHOP];
+                    $result[Symbol::WHITE] += $this->systems($name)[Symbol::BISHOP];
                     break;
                 case Symbol::ROOK:
-                    $result[Symbol::WHITE] += $this->systems()[$system][Symbol::ROOK];
+                    $result[Symbol::WHITE] += $this->systems($name)[Symbol::ROOK];
                     break;
                 case Symbol::QUEEN:
-                    $result[Symbol::WHITE] += $this->systems()[$system][Symbol::QUEEN];
+                    $result[Symbol::WHITE] += $this->systems($name)[Symbol::QUEEN];
                     break;
                 case Symbol::KING:
-                    isset($this->systems()[$system][Symbol::KING])
-                        ? $result[Symbol::WHITE] += $this->systems()[$system][Symbol::KING]
+                    isset($this->systems($name)[Symbol::KING])
+                        ? $result[Symbol::WHITE] += $this->systems($name)[Symbol::KING]
                         : false;
                     break;
             }
@@ -117,20 +125,20 @@ class Material extends AbstractEvaluation
         foreach ($this->board->getPiecesByColor(Symbol::BLACK) as $piece) {
             switch ($piece->getIdentity()) {
                 case Symbol::KNIGHT:
-                    $result[Symbol::BLACK] += $this->systems()[$system][Symbol::KNIGHT];
+                    $result[Symbol::BLACK] += $this->systems($name)[Symbol::KNIGHT];
                     break;
                 case Symbol::BISHOP:
-                    $result[Symbol::BLACK] += $this->systems()[$system][Symbol::BISHOP];
+                    $result[Symbol::BLACK] += $this->systems($name)[Symbol::BISHOP];
                     break;
                 case Symbol::ROOK:
-                    $result[Symbol::BLACK] += $this->systems()[$system][Symbol::ROOK];
+                    $result[Symbol::BLACK] += $this->systems($name)[Symbol::ROOK];
                     break;
                 case Symbol::QUEEN:
-                    $result[Symbol::BLACK] += $this->systems()[$system][Symbol::QUEEN];
+                    $result[Symbol::BLACK] += $this->systems($name)[Symbol::QUEEN];
                     break;
                 case Symbol::KING:
-                    isset($this->systems()[$system][Symbol::KING])
-                        ? $result[Symbol::BLACK] += $this->systems()[$system][Symbol::KING]
+                    isset($this->systems($name)[Symbol::KING])
+                        ? $result[Symbol::BLACK] += $this->systems($name)[Symbol::KING]
                         : false;
                     break;
             }
