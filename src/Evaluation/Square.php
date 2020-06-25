@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Stats;
+namespace PGNChess\Evaluation;
 
-use PGNChess\AbstractStats;
+use PGNChess\AbstractEvaluation;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -12,7 +12,7 @@ use PGNChess\PGN\Symbol;
  * @link https://programarivm.com
  * @license GPL
  */
-class Square extends AbstractStats
+class Square extends AbstractEvaluation
 {
     /**
      * Current free/used squares.

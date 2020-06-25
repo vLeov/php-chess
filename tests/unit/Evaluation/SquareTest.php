@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Stats;
+namespace PGNChess\Tests\Unit\Evaluation;
 
 use PGNChess\Board;
 use PGNChess\PGN\Convert;
@@ -12,7 +12,7 @@ use PGNChess\Piece\Pawn;
 use PGNChess\Piece\Queen;
 use PGNChess\Piece\Rook;
 use PGNChess\Piece\Type\RookType;
-use PGNChess\Stats\Square as StatsSquare;
+use PGNChess\Evaluation\Square as SquareEvaluation;
 use PGNChess\Tests\AbstractUnitTestCase;
 
 class SquareTest extends AbstractUnitTestCase
@@ -102,11 +102,11 @@ class SquareTest extends AbstractUnitTestCase
         sort($whiteSpace);
         $whiteAttack = [];
 
-        $stats = new StatsSquare($board);
+        $eval = new SquareEvaluation($board);
 
-        $this->assertEquals($whiteSquaresUsed, $stats->squares()->used->w);
-        $this->assertEquals($whiteSpace, $stats->control()->space->w);
-        $this->assertEquals($whiteAttack, $stats->control()->attack->w);
+        $this->assertEquals($whiteSquaresUsed, $eval->squares()->used->w);
+        $this->assertEquals($whiteSpace, $eval->control()->space->w);
+        $this->assertEquals($whiteAttack, $eval->control()->attack->w);
     }
 
     /**
@@ -115,11 +115,11 @@ class SquareTest extends AbstractUnitTestCase
     public function count_squares_in_new_board()
     {
         $board = new Board;
-        $stats = new StatsSquare($board);
+        $eval = new SquareEvaluation($board);
 
         $this->assertEquals(count($board), 32);
-        $this->assertEquals(count($stats->squares()->used->w), 16);
-        $this->assertEquals(count($stats->squares()->used->b), 16);
+        $this->assertEquals(count($eval->squares()->used->w), 16);
+        $this->assertEquals(count($eval->squares()->used->b), 16);
     }
 
     /**
@@ -151,11 +151,11 @@ class SquareTest extends AbstractUnitTestCase
         ];
 
         $board = new Board($pieces, $castling);
-        $stats = new StatsSquare($board);
+        $eval = new SquareEvaluation($board);
 
         $this->assertEquals(count($board), 7);
-        $this->assertEquals(count($stats->squares()->used->w), 4);
-        $this->assertEquals(count($stats->squares()->used->b), 3);
+        $this->assertEquals(count($eval->squares()->used->w), 4);
+        $this->assertEquals(count($eval->squares()->used->b), 3);
     }
 
     /**
@@ -227,8 +227,8 @@ class SquareTest extends AbstractUnitTestCase
             ]
         ];
 
-        $stats = new StatsSquare($board);
+        $eval = new SquareEvaluation($board);
 
-        $this->assertEquals($space, $stats->control()->space);
+        $this->assertEquals($space, $eval->control()->space);
     }
 }

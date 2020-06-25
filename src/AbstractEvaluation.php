@@ -11,7 +11,7 @@ use PgnChess\Board;
  * @link https://programarivm.com
  * @license GPL
  */
-abstract class AbstractStats
+abstract class AbstractEvaluation
 {
     protected $board;
 
