@@ -6,7 +6,7 @@ use PGNChess\AbstractEvaluation;
 use PGNChess\PGN\Symbol;
 
 /**
- * Square stats.
+ * Square evaluation.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com

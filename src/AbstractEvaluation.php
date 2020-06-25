@@ -5,7 +5,7 @@ namespace PGNChess;
 use PgnChess\Board;
 
 /**
- * Abstract stats.
+ * Abstract evaluation.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
