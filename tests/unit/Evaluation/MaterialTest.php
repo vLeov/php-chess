@@ -3,14 +3,8 @@
 namespace PGNChess\Tests\Unit\Evaluation;
 
 use PGNChess\Board;
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\Bishop;
-use PGNChess\Piece\King;
-use PGNChess\Piece\Knight;
-use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Type\RookType;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
+use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
 class MaterialTest extends AbstractUnitTestCase
@@ -18,48 +12,152 @@ class MaterialTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function philidor()
+    public function berliner()
     {
-        $pieces = [
-            new Pawn(Symbol::WHITE, 'a2'),
-            new Pawn(Symbol::WHITE, 'd5'),
-            new Pawn(Symbol::WHITE, 'e4'),
-            new Pawn(Symbol::WHITE, 'f3'),
-            new Pawn(Symbol::WHITE, 'g2'),
-            new Pawn(Symbol::WHITE, 'h2'),
-            new Rook(Symbol::WHITE, 'a1', RookType::CASTLING_LONG),
-            new King(Symbol::WHITE, 'e1'),
-            new Rook(Symbol::WHITE, 'h1', RookType::CASTLING_SHORT),
-            new King(Symbol::BLACK, 'e8'),
-            new Bishop(Symbol::BLACK, 'f8'),
-            new Knight(Symbol::BLACK, 'g8'),
-            new Rook(Symbol::BLACK, 'h8', RookType::CASTLING_SHORT),
-            new Pawn(Symbol::BLACK, 'f7'),
-            new Pawn(Symbol::BLACK, 'g7'),
-            new Pawn(Symbol::BLACK, 'h7')
-        ];
-
-        $castling = (object) [
-            Symbol::WHITE => (object) [
-                'castled' => false,
-                Symbol::CASTLING_SHORT => true,
-                Symbol::CASTLING_LONG => true
-            ],
-            Symbol::BLACK => (object) [
-                'castled' => false,
-                Symbol::CASTLING_SHORT => true,
-                Symbol::CASTLING_LONG => false
-            ]
-        ];
-
-        $board = new Board($pieces, $castling);
+        $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 10.96,
-            Symbol::BLACK => 12.03,
+            Symbol::WHITE => 32.059999999999995,
+            Symbol::BLACK => 32.059999999999995,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_BERLINER);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function bilguer()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 35.7,
+            Symbol::BLACK => 35.7,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_BILGUER);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function fisher()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 31.5,
+            Symbol::BLACK => 31.5,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_FISHER);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function kasparov()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 30,
+            Symbol::BLACK => 30,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_KASPAROV);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function kaufman()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 32.75,
+            Symbol::BLACK => 32.75,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_KAUFMAN);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function lasker()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 35,
+            Symbol::BLACK => 35,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_LASKER);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function philidor()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 34,
+            Symbol::BLACK => 34,
         ];
 
         $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_PHILIDOR);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function pratt()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 32,
+            Symbol::BLACK => 32,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_PRATT);
+
+        $this->assertEquals($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function sarrat()
+    {
+        $board = new Board();
+
+        $expected = [
+            Symbol::WHITE => 32.9,
+            Symbol::BLACK => 32.9,
+        ];
+
+        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_SARRAT);
 
         $this->assertEquals($expected, $value);
     }
