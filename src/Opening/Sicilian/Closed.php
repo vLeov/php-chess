@@ -1,12 +1,12 @@
 <?php
 
-namespace PGNChess\Opening;
+namespace PGNChess\Opening\Sicilian;
 
 use PGNChess\AbstractOpening;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
-class ClosedSicilian extends AbstractOpening
+class Closed extends AbstractOpening
 {
     public function play()
     {

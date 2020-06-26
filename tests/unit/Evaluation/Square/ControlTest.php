@@ -3,8 +3,8 @@
 namespace PGNChess\Tests\Unit\Evaluation;
 
 use PGNChess\Board;
-use PGNChess\Opening\ClosedSicilian;
-use PGNChess\Opening\OpenSicilian;
+use PGNChess\Opening\Sicilian\Closed as ClosedSicilian;
+use PGNChess\Opening\Sicilian\Open as OpenSicilian;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Square as SquareEvaluation;
 use PGNChess\Tests\AbstractUnitTestCase;
