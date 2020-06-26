@@ -4,6 +4,7 @@ namespace PGNChess\Tests\Unit\Evaluation\Material;
 
 use PGNChess\Board;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
+use PGNChess\Evaluation\Values;
 use PGNChess\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
@@ -22,7 +23,7 @@ class OpeningTest extends AbstractUnitTestCase
             Symbol::BLACK => 32.06,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_BERLINER);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_BERLINER);
 
         $this->assertEquals($expected, $value);
     }

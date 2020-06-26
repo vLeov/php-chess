@@ -4,6 +4,7 @@ namespace PGNChess\Tests\Unit\Evaluation\Material;
 
 use PGNChess\Board;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
+use PGNChess\Evaluation\Values;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
@@ -21,7 +22,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 32.06,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_BERLINER);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_BERLINER);
 
         $this->assertEquals($expected, $value);
     }
@@ -38,7 +39,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 35.7,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_BILGUER);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_BILGUER);
 
         $this->assertEquals($expected, $value);
     }
@@ -55,7 +56,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 31.5,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_FISHER);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_FISHER);
 
         $this->assertEquals($expected, $value);
     }
@@ -72,7 +73,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 30,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_KASPAROV);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_KASPAROV);
 
         $this->assertEquals($expected, $value);
     }
@@ -89,7 +90,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 32.75,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_KAUFMAN);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_KAUFMAN);
 
         $this->assertEquals($expected, $value);
     }
@@ -106,7 +107,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 35,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_LASKER);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_LASKER);
 
         $this->assertEquals($expected, $value);
     }
@@ -123,7 +124,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 34,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_PHILIDOR);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_PHILIDOR);
 
         $this->assertEquals($expected, $value);
     }
@@ -140,7 +141,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 32,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_PRATT);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_PRATT);
 
         $this->assertEquals($expected, $value);
     }
@@ -157,7 +158,7 @@ class SystemTest extends AbstractUnitTestCase
             Symbol::BLACK => 32.9,
         ];
 
-        $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_SARRAT);
+        $value = (new MaterialEvaluation($board))->evaluate(Values::SYSTEM_SARRAT);
 
         $this->assertEquals($expected, $value);
     }
