@@ -4,7 +4,7 @@ namespace PGNChess\Evaluation;
 
 use PGNChess\AbstractEvaluation;
 use PgnChess\Board;
-use PGNChess\Evaluation\Values;
+use PGNChess\Evaluation\System\Values;
 use PGNChess\PGN\Symbol;
 
 /**

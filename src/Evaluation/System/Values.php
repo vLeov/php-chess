@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Evaluation;
+namespace PGNChess\Evaluation\System;
 
 use PGNChess\PGN\Symbol;
 
