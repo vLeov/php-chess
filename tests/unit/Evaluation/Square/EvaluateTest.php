@@ -3,7 +3,8 @@
 namespace PGNChess\Tests\Unit\Evaluation;
 
 use PGNChess\Board;
-use PGNChess\PGN\Convert;
+use PGNChess\Opening\ClosedSicilian;
+use PGNChess\Opening\OpenSicilian;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Square as SquareEvaluation;
 use PGNChess\Tests\AbstractUnitTestCase;
@@ -38,20 +39,6 @@ class EvaluateTest extends AbstractUnitTestCase
      */
     public function open_sicilian()
     {
-        $board = new Board;
-
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'd6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'cxd4'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nxd4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
-
-        $control = (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_CONTROL);
-
         $expected = [
             Symbol::WHITE => [
                 SquareEvaluation::TYPE_ATTACK => 0,
@@ -63,6 +50,7 @@ class EvaluateTest extends AbstractUnitTestCase
             ],
         ];
 
+        $board = (new OpenSicilian(new Board))->play();
         $control = (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_CONTROL);
 
         $this->assertEquals($expected, $control);
@@ -73,21 +61,6 @@ class EvaluateTest extends AbstractUnitTestCase
      */
     public function closed_sicilian()
     {
-        $board = new Board;
-
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'g3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'g6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bg2'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Bg7'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'd3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'd6'));
-
-        $control = (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_CONTROL);
-
         $expected = [
             Symbol::WHITE => [
                 SquareEvaluation::TYPE_ATTACK => 0,
@@ -99,6 +72,7 @@ class EvaluateTest extends AbstractUnitTestCase
             ],
         ];
 
+        $board = (new ClosedSicilian(new Board))->play();
         $control = (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_CONTROL);
 
         $this->assertEquals($expected, $control);
