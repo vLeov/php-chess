@@ -1,13 +1,13 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Evaluation;
+namespace PGNChess\Tests\Unit\Evaluation\Material;
 
 use PGNChess\Board;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
-class MaterialTest extends AbstractUnitTestCase
+class SystemTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -17,8 +17,8 @@ class MaterialTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 32.059999999999995,
-            Symbol::BLACK => 32.059999999999995,
+            Symbol::WHITE => 32.06,
+            Symbol::BLACK => 32.06,
         ];
 
         $value = (new MaterialEvaluation($board))->evaluate(MaterialEvaluation::SYSTEM_BERLINER);

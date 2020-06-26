@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Opening\Sicilian;
+namespace PGNChess\Opening\RuyLopez;
 
 use PGNChess\AbstractOpening;
 use PGNChess\PGN\Convert;
