@@ -14,6 +14,32 @@ use PGNChess\PGN\Symbol;
  */
 class Square extends AbstractEvaluation
 {
+    const TYPE_ATTACK           = 'attack';
+    const TYPE_FREE             = 'free';
+    const TYPE_SPACE            = 'space';
+    const TYPE_USED             = 'used';
+
+    const FEATURE_CONTROL       = 'FEATURE_CONTROL';
+
+    public function evaluate(string $name): array
+    {
+        $control = $this->control();
+
+        switch ($name) {
+            case self::FEATURE_CONTROL:
+                return [
+                    Symbol::WHITE => [
+                        self::TYPE_ATTACK => count($control->{self::TYPE_ATTACK}->{Symbol::WHITE}),
+                        self::TYPE_SPACE => count($control->{self::TYPE_SPACE}->{Symbol::WHITE}),
+                    ],
+                    Symbol::BLACK => [
+                        self::TYPE_ATTACK => count($control->{self::TYPE_ATTACK}->{Symbol::BLACK}),
+                        self::TYPE_SPACE => count($control->{self::TYPE_SPACE}->{Symbol::BLACK}),
+                    ],
+                ];
+        }
+    }
+
     /**
      * Current free/used squares.
      *
@@ -25,8 +51,8 @@ class Square extends AbstractEvaluation
         $pieces = iterator_to_array($this->board, false);
 
         return (object) [
-            'used' => $this->used($pieces),
-            'free' => $this->free($pieces)
+            self::TYPE_USED => $this->used($pieces),
+            self::TYPE_FREE => $this->free($pieces),
         ];
     }
 
@@ -38,14 +64,15 @@ class Square extends AbstractEvaluation
     public function control(): \stdClass
     {
         $control = (object) [
-            'space' => (object) [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ],
-            'attack' => (object) [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ], ];
+            self::TYPE_SPACE => (object) [
+                Symbol::WHITE => [],
+                Symbol::BLACK => [],
+            ],
+            self::TYPE_ATTACK => (object) [
+                Symbol::WHITE => [],
+                Symbol::BLACK => [],
+            ],
+        ];
 
         $squares = $this->squares();
 

@@ -19,4 +19,6 @@ abstract class AbstractEvaluation
     {
         $this->board = $board;
     }
+
+    abstract public function evaluate(string $name): array;
 }
