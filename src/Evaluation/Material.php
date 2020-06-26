@@ -6,7 +6,7 @@ use PGNChess\AbstractEvaluation;
 use PGNChess\PGN\Symbol;
 
 /**
- * TODO: Material evaluation.
+ * Material.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
