@@ -79,4 +79,48 @@ class ControlTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $control);
     }
+
+    /**
+     * @test
+     */
+    public function closed_sicilian()
+    {
+        $board = new Board;
+
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'g3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'g6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bg2'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Bg7'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'd3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'd6'));
+
+        $control = (new SquareEvaluation($board))->control();
+
+        $expected = (object) [
+            SquareEvaluation::TYPE_SPACE => (object) [
+                Symbol::WHITE => [
+                    'a3', 'a4', 'b1', 'b3', 'b5', 'c4', 'd2', 'd5',
+                    'e2', 'e3', 'f1', 'f3', 'f4', 'f5', 'g4', 'g5',
+                    'h3', 'h4', 'h5', 'h6',
+                ],
+                Symbol::BLACK => [
+                    'a5', 'a6', 'b4', 'b6', 'b8', 'c7', 'd4', 'd7',
+                    'e5', 'e6', 'f5', 'f6', 'f8', 'g4', 'h3', 'h5',
+                    'h6',
+                ],
+            ],
+            SquareEvaluation::TYPE_ATTACK => (object) [
+                Symbol::WHITE => [],
+                Symbol::BLACK => [
+                    'c3',
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $control);
+    }
 }
