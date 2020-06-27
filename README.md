@@ -9,7 +9,7 @@
 	<img src="https://github.com/programarivm/pgn-chess/blob/master/resources/chess-board.jpg" />
 </p>
 
-PGN Chess is a chess board representation to play and validate PGN games. See it in action at [PGN Chess Server](https://github.com/programarivm/pgn-chess-server), which is a WebSocket server listening to chess commands. Also, [PGN Chess Data](https://github.com/programarivm/pgn-chess-data) is another repo providing you with CLI tools to manage a database of PGN games.
+This is a chess board representation to play and validate PGN games. See it in action at [PGN Chess Server](https://github.com/programarivm/pgn-chess-server), which is a WebSocket server listening to chess commands. Also, [PGN Chess Data](https://github.com/programarivm/pgn-chess-data) is another repo providing you with CLI tools to manage a database of PGN games.
 
 ### Install
 
@@ -60,7 +60,8 @@ Gets the current game's status.
 |----------------|--------------------------------------------|
 | `turn`         | The current player's turn                  |
 | `squares`      | Free/used squares on the board             |
-| `control`      | Squares controlled by both players         |
+| `attack`       | Squares being attacked by both players     |
+| `space`        | Squares being controlled by both players   |
 | `castling`     | The castling status of the two kings       |
 
 The following sequence of moves:
@@ -90,23 +91,14 @@ $game->status()->turn;
 $game->status()->squares->used;
 $game->status()->squares->free;
 
-// white's control
-$game->status()->control->space->{'w'};
-$game->status()->control->attack->{'w'};
+// squares being attacked by color
+$game->status()->attack;
 
-// black's control
-$game->status()->control->space->{'b'};
-$game->status()->control->attack->{'b'};
+// squares being controlled by color
+$game->status()->space;
 
-// white's castling
-$game->status()->castling->{'w'}->castled;
-$game->status()->castling->{'w'}->{'O-O'};
-$game->status()->castling->{'w'}->{'O-O-O'};
-
-// black's castling
-$game->status()->castling->{'b'}->castled;
-$game->status()->castling->{'b'}->{'O-O'};
-$game->status()->castling->{'b'}->{'O-O-O'};
+// castling status of both players
+$game->status()->castling;
 ```
 
 #### `piece()`
