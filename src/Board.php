@@ -318,7 +318,7 @@ final class Board extends \SplObjectStorage
      * @param array $castling
      * @throws \PGNChess\Exception\CastlingException
      */
-    private function init($pieces, $castling)
+    private function init(array $pieces, $castling)
     {
         foreach ($pieces as $piece) {
             $this->attach($piece);
@@ -335,7 +335,7 @@ final class Board extends \SplObjectStorage
      * @return array The piece(s) matching the PGN move; otherwise null
      * @throws \PGNChess\Exception\BoardException
      */
-    private function pickPiece(\stdClass $move)
+    private function pickPiece(\stdClass $move): array
     {
         $found = [];
         foreach ($this->getPiecesByColor($move->color) as $piece) {
@@ -701,7 +701,7 @@ final class Board extends \SplObjectStorage
     /**
      * Sends the board's control information to all pieces.
      *
-     * @param \stdClass $boardStatus
+     * @param \stdClass $boardControl
      */
     private function sendBoardControl(\stdClass $boardControl): void
     {
@@ -753,7 +753,7 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Calculates whether the current player is in mate.
+     * Calculates whether the current player is checkmated.
      *
      * @return bool
      */
