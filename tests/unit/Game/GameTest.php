@@ -72,13 +72,13 @@ class GameTest extends AbstractUnitTestCase
                     'h5', 'h6',
                 ]
             ],
-            'castling' => (object) [
-                'w' => (object) [
+            'castling' => [
+                'w' => [
                     'castled' => false,
                     'O-O' => true,
                     'O-O-O' => true
                 ],
-                'b' => (object) [
+                'b' => [
                     'castled' => false,
                     'O-O' => true,
                     'O-O-O' => false
@@ -104,14 +104,14 @@ class GameTest extends AbstractUnitTestCase
         $this->assertEquals($status->attack->b, $this->game->status()->attack->{'b'});
 
         // white's castling
-        $this->assertEquals($status->castling->w->castled, $this->game->status()->castling->{'w'}->castled);
-        $this->assertEquals($status->castling->w->{'O-O'}, $this->game->status()->castling->{'w'}->{'O-O'});
-        $this->assertEquals($status->castling->w->{'O-O-O'}, $this->game->status()->castling->{'w'}->{'O-O-O'});
+        $this->assertEquals($status->castling['w']['castled'], $this->game->status()->castling['w']['castled']);
+        $this->assertEquals($status->castling['w']['O-O'], $this->game->status()->castling['w']['O-O']);
+        $this->assertEquals($status->castling['w']['O-O-O'], $this->game->status()->castling['w']['O-O-O']);
 
         // black's castling
-        $this->assertEquals($status->castling->b->castled, $this->game->status()->castling->{'b'}->castled);
-        $this->assertEquals($status->castling->b->{'O-O'}, $this->game->status()->castling->{'b'}->{'O-O'});
-        $this->assertEquals($status->castling->b->{'O-O-O'}, $this->game->status()->castling->{'b'}->{'O-O-O'});
+        $this->assertEquals($status->castling['b']['castled'], $this->game->status()->castling['b']['castled']);
+        $this->assertEquals($status->castling['b']['O-O'], $this->game->status()->castling['b']['O-O']);
+        $this->assertEquals($status->castling['b']['O-O-O'], $this->game->status()->castling['b']['O-O-O']);
     }
 
     /**

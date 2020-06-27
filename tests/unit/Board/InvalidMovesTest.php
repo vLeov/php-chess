@@ -100,13 +100,13 @@ class InvalidMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false

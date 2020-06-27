@@ -166,13 +166,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
@@ -204,13 +204,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
@@ -242,13 +242,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
@@ -280,13 +280,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
@@ -318,13 +318,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
@@ -356,13 +356,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
@@ -431,13 +431,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -474,13 +474,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -516,13 +516,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -558,13 +558,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -600,13 +600,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -643,13 +643,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -686,13 +686,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -728,13 +728,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -774,13 +774,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Pawn(Symbol::BLACK, 'h7')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
@@ -854,13 +854,13 @@ class IllegalMovesTest extends AbstractUnitTestCase
             new Knight(Symbol::BLACK, 'f6')
         ];
 
-        $castling = (object) [
-            Symbol::WHITE => (object) [
+        $castling = [
+            Symbol::WHITE => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => true
             ],
-            Symbol::BLACK => (object) [
+            Symbol::BLACK => [
                 'castled' => false,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false

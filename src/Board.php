@@ -62,13 +62,6 @@ final class Board extends \SplObjectStorage
     private $space;
 
     /**
-     * Castling status.
-     *
-     * @var \stdClass
-     */
-    private $castling;
-
-    /**
      * Captured pieces.
      *
      * @var array
@@ -86,12 +79,30 @@ final class Board extends \SplObjectStorage
     private $history = [];
 
     /**
+     * Castling status.
+     *
+     * @var array
+     */
+    private $castling = [
+        Symbol::WHITE => [
+            'castled' => false,
+            Symbol::CASTLING_SHORT => true,
+            Symbol::CASTLING_LONG => true,
+        ],
+        Symbol::BLACK => [
+            'castled' => false,
+            Symbol::CASTLING_SHORT => true,
+            Symbol::CASTLING_LONG => true,
+        ],
+    ];
+
+    /**
      * Constructor.
      *
      * @param array $pieces
-     * @param \stdClass $castling
+     * @param array $castling
      */
-    public function __construct(array $pieces = null, \stdClass $castling = null)
+    public function __construct(array $pieces = null, array $castling = null)
     {
         if (empty($pieces)) {
             $this->attach(new Rook(Symbol::WHITE, 'a1', RookType::CASTLING_LONG));
@@ -126,18 +137,6 @@ final class Board extends \SplObjectStorage
             $this->attach(new Pawn(Symbol::BLACK, 'f7'));
             $this->attach(new Pawn(Symbol::BLACK, 'g7'));
             $this->attach(new Pawn(Symbol::BLACK, 'h7'));
-            $this->castling = (object) [
-                Symbol::WHITE => (object) [
-                    'castled' => false,
-                    Symbol::CASTLING_SHORT => true,
-                    Symbol::CASTLING_LONG => true,
-                ],
-                Symbol::BLACK => (object) [
-                    'castled' => false,
-                    Symbol::CASTLING_SHORT => true,
-                    Symbol::CASTLING_LONG => true,
-                ],
-            ];
         } else {
             $this->init($pieces, $castling);
         }
@@ -171,9 +170,9 @@ final class Board extends \SplObjectStorage
     /**
      * Gets the castling status.
      *
-     * @return \stdClass
+     * @return array
      */
-    public function getCastling(): ?\stdClass
+    public function getCastling(): ?array
     {
         return $this->castling;
     }
@@ -316,7 +315,7 @@ final class Board extends \SplObjectStorage
      * Initializes the board.
      *
      * @param array $pieces
-     * @param \stdClass $castling
+     * @param array $castling
      * @throws \PGNChess\Exception\CastlingException
      */
     private function init($pieces, $castling)
@@ -345,7 +344,6 @@ final class Board extends \SplObjectStorage
                     case Symbol::KING:
                         return [$piece->setMove($move)];
                         break;
-
                     default:
                         if (preg_match("/{$move->position->current}/", $piece->getPosition())) {
                             $found[] = $piece->setMove($move);
@@ -483,16 +481,20 @@ final class Board extends \SplObjectStorage
         $rook = $king->getCastlingRook(iterator_to_array($this, false));
         if (!empty($rook)) {
             $this->detach($this->getPieceByPosition($king->getPosition()));
-            $this->attach(new King(
-                $king->getColor(),
-                CastlingRule::color($king->getColor())->{Symbol::KING}->{$king->getMove()->pgn}->position->next)
+            $this->attach(
+                new King(
+                    $king->getColor(),
+                    CastlingRule::color($king->getColor())[Symbol::KING][$king->getMove()->pgn]['position']['next']
+                )
              );
             $this->detach($rook);
-            $this->attach(new Rook(
-                $rook->getColor(),
-                CastlingRule::color($king->getColor())->{Symbol::ROOK}->{$king->getMove()->pgn}->position->next,
-                $rook->getIdentity() === Symbol::ROOK
-            ));
+            $this->attach(
+                new Rook(
+                    $rook->getColor(),
+                    CastlingRule::color($king->getColor())[Symbol::ROOK][$king->getMove()->pgn]['position']['next'],
+                    $rook->getIdentity() === Symbol::ROOK
+                )
+            );
             $this->trackCastling(true)->pushHistory($king)->refresh();
             return true;
         } else {
@@ -503,10 +505,10 @@ final class Board extends \SplObjectStorage
     /**
      * Undoes a castle move.
      *
-     * @param \stdClass $previousCastling
+     * @param array $previousCastling
      * @return \PGNChess\Board
      */
-    private function undoCastle(\stdClass $previousCastling): Board
+    private function undoCastle(array $previousCastling): Board
     {
         $previous = end($this->history);
         $king = $this->getPieceByPosition($previous->move->position->next);
@@ -516,11 +518,11 @@ final class Board extends \SplObjectStorage
         switch ($previous->move->type) {
             case Move::KING_CASTLING_SHORT:
                 $rook = $this->getPieceByPosition(
-                    CastlingRule::color($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_SHORT}->position->next
+                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['next']
                 );
                 $rookUndone = new Rook(
                     $previous->move->color,
-                    CastlingRule::color($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_SHORT}->position->current,
+                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['current'],
                     $rook->getType()
                 );
                 $this->detach($rook);
@@ -528,11 +530,11 @@ final class Board extends \SplObjectStorage
                 break;
             case Move::KING_CASTLING_LONG:
                 $rook = $this->getPieceByPosition(
-                    CastlingRule::color($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_LONG}->position->next
+                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['next']
                 );
                 $rookUndone = new Rook(
                     $previous->move->color,
-                    CastlingRule::color($previous->move->color)->{Symbol::ROOK}->{Symbol::CASTLING_LONG}->position->current,
+                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['current'],
                     $rook->getType()
                 );
                 $this->detach($rook);
@@ -560,21 +562,21 @@ final class Board extends \SplObjectStorage
         }
         // king castled successfully
         if ($castling) {
-            $this->castling->{$this->turn}->castled = true;
-            $this->castling->{$this->turn}->{Symbol::CASTLING_SHORT} = false;
-            $this->castling->{$this->turn}->{Symbol::CASTLING_LONG} = false;
+            $this->castling[$this->turn]['castled'] = true;
+            $this->castling[$this->turn][Symbol::CASTLING_SHORT] = false;
+            $this->castling[$this->turn][Symbol::CASTLING_LONG] = false;
         }
         // king/rook was moved
         if (isset($pieceMoved)) {
             if ($pieceMoved->getIdentity() === Symbol::KING) {
-                $this->castling->{$this->turn}->castled = false;
-                $this->castling->{$this->turn}->{Symbol::CASTLING_SHORT} = false;
-                $this->castling->{$this->turn}->{Symbol::CASTLING_LONG} = false;
+                $this->castling[$this->turn]['castled'] = false;
+                $this->castling[$this->turn][Symbol::CASTLING_SHORT] = false;
+                $this->castling[$this->turn][Symbol::CASTLING_LONG] = false;
             } elseif ($pieceMoved->getIdentity() === Symbol::ROOK) {
                 if ($pieceMoved->getType() === RookType::CASTLING_SHORT) {
-                    $this->castling->{$this->turn}->{Symbol::CASTLING_SHORT} = false;
+                    $this->castling[$this->turn][Symbol::CASTLING_SHORT] = false;
                 } elseif ($pieceMoved->getType() === RookType::CASTLING_LONG) {
-                    $this->castling->{$this->turn}->{Symbol::CASTLING_LONG} = false;
+                    $this->castling[$this->turn][Symbol::CASTLING_LONG] = false;
                 }
             }
         }
@@ -607,7 +609,7 @@ final class Board extends \SplObjectStorage
                 $this->promote($piece);
             }
         }
-        if (!$this->castling->{$piece->getColor()}->castled) {
+        if (!$this->castling[$piece->getColor()]['castled']) {
             $this->trackCastling(false, $piece);
         }
         $this->pushHistory($piece)->refresh();
@@ -618,10 +620,10 @@ final class Board extends \SplObjectStorage
     /**
      * Undoes the last move.
      *
-     * @param \stdClass $previousCastling
+     * @param array $previousCastling
      * @return \PGNChess\Board
      */
-    private function undoMove(\stdClass $previousCastling): Board
+    private function undoMove(array $previousCastling): Board
     {
         $previous = end($this->history);
         $piece = $this->getPieceByPosition($previous->move->position->next);

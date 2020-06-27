@@ -55,7 +55,7 @@ class Convert
                     'type' => Move::KING_CASTLING_SHORT,
                     'color' => Validate::color($color),
                     'identity' => Symbol::KING,
-                    'position' => CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->position
+                    'position' => (object) CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_SHORT]['position']
                 ];
 
             case preg_match('/^' . Move::KING_CASTLING_LONG . '$/', $pgn):
@@ -66,7 +66,7 @@ class Convert
                     'type' => Move::KING_CASTLING_LONG,
                     'color' => Validate::color($color),
                     'identity' => Symbol::KING,
-                    'position' => CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->position
+                    'position' => (object) CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['position']
                 ];
 
             case preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn):

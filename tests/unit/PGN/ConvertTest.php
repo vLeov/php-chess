@@ -281,7 +281,7 @@ class ConvertTest extends AbstractUnitTestCase
             'type' => Move::KING_CASTLING_SHORT,
             'color' => Symbol::WHITE,
             'identity' => 'K',
-            'position' => CastlingRule::color(Symbol::WHITE)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->position
+            'position' => (object) CastlingRule::color(Symbol::WHITE)[Symbol::KING][Symbol::CASTLING_SHORT]['position']
         ];
 
         $this->assertEquals(Convert::toStdObj(Symbol::WHITE, $move), $example);
@@ -300,7 +300,7 @@ class ConvertTest extends AbstractUnitTestCase
             'type' => Move::KING_CASTLING_LONG,
             'color' => Symbol::WHITE,
             'identity' => 'K',
-            'position' => CastlingRule::color(Symbol::WHITE)->{Symbol::KING}->{Symbol::CASTLING_LONG}->position
+            'position' => (object) CastlingRule::color(Symbol::WHITE)[Symbol::KING][Symbol::CASTLING_LONG]['position']
         ];
 
         $this->assertEquals(Convert::toStdObj(Symbol::WHITE, $move), $example);

@@ -48,15 +48,13 @@ class Initialization
 
     private static function properties($castling)
     {
-        $castlingArr = (array)$castling;
-
-        if (!empty($castlingArr)) {
-            !isset($castlingArr[Symbol::WHITE]) ?: $w = (array)$castlingArr[Symbol::WHITE];
-            !isset($castlingArr[Symbol::BLACK]) ?: $b = (array)$castlingArr[Symbol::BLACK];
+        if (!empty($castling)) {
+            !isset($castling[Symbol::WHITE]) ?: $w = $castling[Symbol::WHITE];
+            !isset($castling[Symbol::BLACK]) ?: $b = $castling[Symbol::BLACK];
         }
 
         switch (true) {
-            case empty($castlingArr):
+            case empty($castling):
                 throw new CastlingException("The castling object is empty.");
             case empty($w):
                 throw new CastlingException("White's castling object is not set.");
@@ -90,7 +88,7 @@ class Initialization
 
     private static function alreadyMovedShort($color, $e, $a, $h, $castling)
     {
-        if ($castling->{$color}->{Symbol::CASTLING_SHORT}) {
+        if ($castling[$color][Symbol::CASTLING_SHORT]) {
             if (!(isset($e) && $e->getIdentity() === Symbol::KING && $e->getColor() === $color)) {
                 throw new CastlingException("{$color} king was already moved.");
             } elseif (!(isset($h) && $h->getIdentity() === Symbol::ROOK && $h->getColor() === $color)) {
@@ -101,7 +99,7 @@ class Initialization
 
     private static function alreadyMovedLong($color, $e, $a, $h, $castling)
     {
-        if ($castling->{$color}->{Symbol::CASTLING_LONG}) {
+        if ($castling[$color][Symbol::CASTLING_LONG]) {
             if (!(isset($e) && $e->getIdentity() === Symbol::KING && $e->getColor() === $color))  {
                 throw new CastlingException("{$color} king was already moved.");
             } elseif (!(isset($a) && $a->getIdentity() === Symbol::ROOK && $a->getColor() === $color)) {

@@ -14,86 +14,94 @@ use PGNChess\PGN\Symbol;
 class Rule
 {
     /**
-     * Gets the castling rule.
+     * Castling rule by color.
      *
      * @param string $color
-     * @return \stdClass
+     * @return array
      */
-    public static function color(string $color): \stdClass
+    public static function color(string $color): array
     {
         switch ($color) {
             case Symbol::WHITE:
-                return (object) [
-                    Symbol::KING => (object) [
-                        Symbol::CASTLING_SHORT => (object) [
-                            'squares' => (object) [
+                return [
+                    Symbol::KING => [
+                        Symbol::CASTLING_SHORT => [
+                            'squares' => [
                                 'f' => 'f1',
-                                'g' => 'g1'
+                                'g' => 'g1',
                             ],
-                            'position' => (object) [
+                            'position' => [
                                 'current' => 'e1',
-                                'next' => 'g1'
-                        ]],
-                        Symbol::CASTLING_LONG => (object) [
-                            'squares' => (object) [
+                                'next' => 'g1',
+                            ],
+                        ],
+                        Symbol::CASTLING_LONG => [
+                            'squares' => [
                                 'b' => 'b1',
                                 'c' => 'c1',
-                                'd' => 'd1'
+                                'd' => 'd1',
                             ],
-                            'position' => (object) [
+                            'position' => [
                                 'current' => 'e1',
-                                'next' => 'c1'
-                        ]]
+                                'next' => 'c1',
+                            ],
+                        ],
                     ],
-                    Symbol::ROOK => (object) [
-                        Symbol::CASTLING_SHORT => (object) [
-                            'position' => (object) [
+                    Symbol::ROOK => [
+                        Symbol::CASTLING_SHORT => [
+                            'position' => [
                                 'current' => 'h1',
-                                'next' => 'f1'
-                        ]],
-                        Symbol::CASTLING_LONG => (object) [
-                            'position' => (object) [
+                                'next' => 'f1',
+                            ],
+                        ],
+                        Symbol::CASTLING_LONG => [
+                            'position' => [
                                 'current' => 'a1',
-                                'next' => 'd1'
-                        ]]
-                    ]
+                                'next' => 'd1',
+                            ],
+                        ],
+                    ],
                 ];
 
             case Symbol::BLACK:
-                return (object) [
-                    Symbol::KING => (object) [
-                        Symbol::CASTLING_SHORT => (object) [
-                            'squares' => (object) [
+                return [
+                    Symbol::KING => [
+                        Symbol::CASTLING_SHORT => [
+                            'squares' => [
                                 'f' => 'f8',
-                                'g' => 'g8'
+                                'g' => 'g8',
                             ],
-                            'position' => (object) [
+                            'position' => [
                                 'current' => 'e8',
-                                'next' => 'g8'
-                        ]],
-                        Symbol::CASTLING_LONG => (object) [
-                            'squares' => (object) [
+                                'next' => 'g8',
+                            ],
+                        ],
+                        Symbol::CASTLING_LONG => [
+                            'squares' => [
                                 'b' => 'b8',
                                 'c' => 'c8',
-                                'd' => 'd8'
+                                'd' => 'd8',
                             ],
-                            'position' => (object) [
+                            'position' => [
                                 'current' => 'e8',
-                                'next' => 'c8'
-                        ]]
+                                'next' => 'c8',
+                            ],
+                        ],
                     ],
-                    Symbol::ROOK => (object) [
-                        Symbol::CASTLING_SHORT => (object) [
-                            'position' => (object) [
+                    Symbol::ROOK => [
+                        Symbol::CASTLING_SHORT => [
+                            'position' => [
                                 'current' => 'h8',
-                                'next' => 'f8'
-                        ]],
-                        Symbol::CASTLING_LONG => (object) [
-                            'position' => (object) [
+                                'next' => 'f8',
+                            ],
+                        ],
+                        Symbol::CASTLING_LONG => [
+                            'position' => [
                                 'current' => 'a8',
-                                'next' => 'd8'
-                        ]]
-                    ]
+                                'next' => 'd8',
+                            ],
+                        ],
+                    ],
                 ];
         }
     }

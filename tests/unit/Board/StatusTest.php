@@ -32,13 +32,13 @@ class StatusTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'Bxb8'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Rxb8'));
 
-        $castling = (object) [
-            'w' => (object) [
+        $castling = [
+            'w' => [
                 'castled' => false,
                 'O-O' => true,
                 'O-O-O' => true
             ],
-            'b' => (object) [
+            'b' => [
                 'castled' => false,
                 'O-O' => true,
                 'O-O-O' => false

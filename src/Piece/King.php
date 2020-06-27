@@ -57,7 +57,7 @@ class King extends AbstractPiece
             if (
                 $piece->getIdentity() === Symbol::ROOK &&
                 $piece->getPosition() ===
-                CastlingRule::color($this->getColor())->{Symbol::ROOK}->{$this->getMove()->pgn}->position->current
+                CastlingRule::color($this->getColor())[Symbol::ROOK][$this->getMove()->pgn]['position']['current']
             ) {
                 return $piece;
             }
@@ -102,34 +102,34 @@ class King extends AbstractPiece
                 array_merge($this->getBoardStatus()->squares->used->{$this->getOppositeColor()})
         ));
 
-        $castlingShort = CastlingRule::color($this->getColor())->{Symbol::KING}->{Symbol::CASTLING_SHORT};
-        $castlingLong = CastlingRule::color($this->getColor())->{Symbol::KING}->{Symbol::CASTLING_LONG};
+        $castlingShort = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_SHORT];
+        $castlingLong = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_LONG];
 
         if (
-            !$this->getBoardStatus()->castling->{$this->getColor()}->castled &&
-            $this->getBoardStatus()->castling->{$this->getColor()}->{Symbol::CASTLING_SHORT} &&
-            in_array($castlingShort->squares->f, $this->getBoardStatus()->squares->free) &&
-            in_array($castlingShort->squares->g, $this->getBoardStatus()->squares->free) &&
-            !in_array($castlingShort->squares->f, $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingShort->squares->g, $this->getBoardControl()->space->{$this->getOppositeColor()})
+            !$this->getBoardStatus()->castling[$this->getColor()]['castled'] &&
+            $this->getBoardStatus()->castling[$this->getColor()][Symbol::CASTLING_SHORT] &&
+            in_array($castlingShort['squares']['f'], $this->getBoardStatus()->squares->free) &&
+            in_array($castlingShort['squares']['g'], $this->getBoardStatus()->squares->free) &&
+            !in_array($castlingShort['squares']['f'], $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
+            !in_array($castlingShort['squares']['g'], $this->getBoardControl()->space->{$this->getOppositeColor()})
         ) {
-            $movesCastlingShort = [$castlingShort->position->next];
+            $movesCastlingShort = [$castlingShort['position']['next']];
         }
         else {
             $movesCastlingShort = [];
         }
 
         if (
-            !$this->getBoardStatus()->castling->{$this->getColor()}->castled &&
-            $this->getBoardStatus()->castling->{$this->getColor()}->{Symbol::CASTLING_LONG} &&
-            in_array($castlingLong->squares->b, $this->getBoardStatus()->squares->free) &&
-            in_array($castlingLong->squares->c, $this->getBoardStatus()->squares->free) &&
-            in_array($castlingLong->squares->d, $this->getBoardStatus()->squares->free) &&
-            !in_array($castlingLong->squares->b, $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingLong->squares->c, $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingLong->squares->d, $this->getBoardControl()->space->{$this->getOppositeColor()})
+            !$this->getBoardStatus()->castling[$this->getColor()]['castled'] &&
+            $this->getBoardStatus()->castling[$this->getColor()][Symbol::CASTLING_LONG] &&
+            in_array($castlingLong['squares']['b'], $this->getBoardStatus()->squares->free) &&
+            in_array($castlingLong['squares']['c'], $this->getBoardStatus()->squares->free) &&
+            in_array($castlingLong['squares']['d'], $this->getBoardStatus()->squares->free) &&
+            !in_array($castlingLong['squares']['b'], $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
+            !in_array($castlingLong['squares']['c'], $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
+            !in_array($castlingLong['squares']['d'], $this->getBoardControl()->space->{$this->getOppositeColor()})
         ) {
-            $movesCastlingLong = [$castlingLong->position->next];
+            $movesCastlingLong = [$castlingLong['position']['next']];
         }
         else {
             $movesCastlingLong = [];
