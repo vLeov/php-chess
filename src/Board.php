@@ -71,7 +71,7 @@ final class Board extends \SplObjectStorage
     /**
      * Captured pieces.
      *
-     * @var \stdClass
+     * @var array
      */
     private $captures = [
         Symbol::WHITE => [],
@@ -141,10 +141,6 @@ final class Board extends \SplObjectStorage
         } else {
             $this->init($pieces, $castling);
         }
-        /* $this->captures = (object) [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ]; */
 
         $this->refresh();
     }
