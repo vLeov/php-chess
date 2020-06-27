@@ -53,52 +53,62 @@ class StatusTest extends AbstractUnitTestCase
      */
     public function captures()
     {
-        $captures= (object) [
+        $captures= [
             'w' => [
                 (object) [
-                'capturing' => (object) [
-                    'identity' => 'P',
-                    'position' => 'b2'],
-                'captured' => (object) [
-                    'identity' => 'B',
-                    'position' => 'c3']
+                    'capturing' => (object) [
+                        'identity' => 'P',
+                        'position' => 'b2',
+                    ],
+                    'captured' => (object) [
+                        'identity' => 'B',
+                        'position' => 'c3',
+                    ],
                 ],
                 (object) [
-                'capturing' => (object) [
-                    'identity' => 'P',
-                    'position' => 'e5'],
-                'captured' => (object) [
-                    'identity' => 'P',
-                    'position' => 'f5'],
+                    'capturing' => (object) [
+                        'identity' => 'P',
+                        'position' => 'e5',
+                    ],
+                    'captured' => (object) [
+                        'identity' => 'P',
+                        'position' => 'f5',
+                    ],
                 ],
                 (object) [
-                'capturing' => (object) [
-                    'identity' => 'P',
-                    'position' => 'd4'],
-                'captured' => (object) [
-                    'identity' => 'P',
-                    'position' => 'c5']
-                ]
+                    'capturing' => (object) [
+                        'identity' => 'P',
+                        'position' => 'd4',
+                    ],
+                    'captured' => (object) [
+                        'identity' => 'P',
+                        'position' => 'c5',
+                    ],
+                ],
             ],
             'b' => [
                 (object) [
-                'capturing' => (object) [
-                    'identity' => 'B',
-                    'position' => 'b4'],
-                'captured' => (object) [
-                    'identity' => 'N',
-                    'position' => 'c3']
+                    'capturing' => (object) [
+                        'identity' => 'B',
+                        'position' => 'b4',
+                    ],
+                    'captured' => (object) [
+                        'identity' => 'N',
+                        'position' => 'c3',
+                    ],
                 ],
                 (object) [
-                'capturing' => (object) [
-                    'identity' => 'R',
-                    'position' => 'f8',
-                    'type' => 1],
-                'captured' => (object) [
-                    'identity' => 'P',
-                    'position' => 'f6'],
-                ]
-            ]
+                    'capturing' => (object) [
+                        'identity' => 'R',
+                        'position' => 'f8',
+                        'type' => 1,
+                    ],
+                    'captured' => (object) [
+                        'identity' => 'P',
+                        'position' => 'f6',
+                    ],
+                ],
+            ],
         ];
 
         $board = new Board;

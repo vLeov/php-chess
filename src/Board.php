@@ -73,14 +73,17 @@ final class Board extends \SplObjectStorage
      *
      * @var \stdClass
      */
-    private $captures;
+    private $captures = [
+        Symbol::WHITE => [],
+        Symbol::BLACK => [],
+    ];
 
     /**
      * History.
      *
      * @var array
      */
-    private $history;
+    private $history = [];
 
     /**
      * Constructor.
@@ -123,7 +126,6 @@ final class Board extends \SplObjectStorage
             $this->attach(new Pawn(Symbol::BLACK, 'f7'));
             $this->attach(new Pawn(Symbol::BLACK, 'g7'));
             $this->attach(new Pawn(Symbol::BLACK, 'h7'));
-
             $this->castling = (object) [
                 Symbol::WHITE => (object) [
                     'castled' => false,
@@ -136,17 +138,13 @@ final class Board extends \SplObjectStorage
                     Symbol::CASTLING_LONG => true,
                 ],
             ];
-
         } else {
             $this->init($pieces, $castling);
         }
-
-        $this->captures = (object) [
+        /* $this->captures = (object) [
             Symbol::WHITE => [],
             Symbol::BLACK => [],
-        ];
-
-        $this->history = [];
+        ]; */
 
         $this->refresh();
     }
@@ -189,7 +187,7 @@ final class Board extends \SplObjectStorage
      *
      * @return \stdClass
      */
-    public function getCaptures(): \stdClass
+    public function getCaptures(): array
     {
         return $this->captures;
     }
@@ -203,7 +201,7 @@ final class Board extends \SplObjectStorage
      */
     private function pushCapture(string $color, \stdClass $capture): Board
     {
-        $this->captures->{$color}[] = $capture;
+        $this->captures[$color][] = $capture;
 
         return $this;
     }
@@ -215,7 +213,7 @@ final class Board extends \SplObjectStorage
      */
     private function popCapture(string $color): Board
     {
-        array_pop($this->captures->{$color});
+        array_pop($this->captures[$color]);
 
         return $this;
     }
@@ -238,12 +236,10 @@ final class Board extends \SplObjectStorage
      */
     private function pushHistory(Piece $piece): Board
     {
-        $entry = (object) [
+        $this->history[] = (object) [
             'position' => $piece->getPosition(),
             'move' => $piece->getMove(),
         ];
-        $piece->getIdentity() === Symbol::ROOK ? $entry->type = $piece->getType() : null;
-        $this->history[] = $entry;
 
         return $this;
     }
@@ -647,13 +643,14 @@ final class Board extends \SplObjectStorage
         }
         $this->attach($pieceUndone);
         if ($previous->move->isCapture) {
-            $capture = end($this->getCaptures()->{$previous->move->color});
+            $capture = end($this->captures[$previous->move->color]);
             $capturedClass = new \ReflectionClass(Convert::toClassName($capture->captured->identity));
             $this->attach($capturedClass->newInstanceArgs([
-                $previous->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
-                $capture->captured->position,
-                $capture->captured->identity === Symbol::ROOK ? $capture->captured->type : null,
-            ]));
+                    $previous->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
+                    $capture->captured->position,
+                    $capture->captured->identity === Symbol::ROOK ? $capture->captured->type : null,
+                ])
+            );
             $this->popCapture($previous->move->color);
         }
         isset($previousCastling) ? $this->castling = $previousCastling : null;

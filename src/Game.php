@@ -85,7 +85,7 @@ class Game
      *
      * @return \stdClass
      */
-    public function captures(): \stdClass
+    public function captures(): array
     {
         return $this->board->getCaptures();
     }
