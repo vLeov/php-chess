@@ -4,7 +4,6 @@ namespace PGNChess\Evaluation;
 
 use PGNChess\AbstractEvaluation;
 use PgnChess\Board;
-use PGNChess\Evaluation\System\Values;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -16,46 +15,42 @@ use PGNChess\PGN\Symbol;
  */
 class Center extends AbstractEvaluation
 {
-    private $values;
-
     private $center = ['d4', 'd5', 'e4', 'e5'];
 
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
-        $this->values = (new Values())->get();
-    }
-
-    public function evaluate(string $name): array
-    {
-        $result = [
+        $this->result = [
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
+    }
 
+    public function evaluate(string $feature): array
+    {
         foreach ($this->center as $square) {
             if ($piece = $this->board->getPieceByPosition($square)) {
                 switch ($piece->getIdentity()) {
                     case Symbol::KNIGHT:
-                        $result[$piece->getColor()] += $this->values[$name][Symbol::KNIGHT];
+                        $this->result[$piece->getColor()] += $this->system[$feature][Symbol::KNIGHT];
                         break;
                     case Symbol::BISHOP:
-                        $result[$piece->getColor()] += $this->values[$name][Symbol::BISHOP];
+                        $this->result[$piece->getColor()] += $this->system[$feature][Symbol::BISHOP];
                         break;
                     case Symbol::ROOK:
-                        $result[$piece->getColor()] += $this->values[$name][Symbol::ROOK];
+                        $this->result[$piece->getColor()] += $this->system[$feature][Symbol::ROOK];
                         break;
                     case Symbol::QUEEN:
-                        $result[$piece->getColor()] += $this->values[$name][Symbol::QUEEN];
+                        $this->result[$piece->getColor()] += $this->system[$feature][Symbol::QUEEN];
                         break;
                     case Symbol::PAWN:
-                        $result[$piece->getColor()] += 1;
+                        $this->result[$piece->getColor()] += 1;
                         break;
                 }
             }
         }
 
-        return $result;
+        return $this->result;
     }
 }

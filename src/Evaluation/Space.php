@@ -28,11 +28,16 @@ class Space extends AbstractEvaluation
             SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_FREE),
             SquareEvaluation::FEATURE_USED => (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_USED),
         ];
+
+        $this->result = [
+            Symbol::WHITE => [],
+            Symbol::BLACK => [],
+        ];
     }
 
-    public function evaluate(string $name): array
+    public function evaluate(string $feature): array
     {
-        $result = [
+        $this->result = [
             Symbol::WHITE => [],
             Symbol::BLACK => [],
         ];
@@ -42,9 +47,9 @@ class Space extends AbstractEvaluation
             $piece = $this->board->current();
             switch ($piece->getIdentity()) {
                 case Symbol::KING:
-                    $result[$piece->getColor()] = array_unique(
+                    $this->result[$piece->getColor()] = array_unique(
                         array_merge(
-                            $result[$piece->getColor()],
+                            $this->result[$piece->getColor()],
                             array_values(
                                 array_intersect(
                                     array_values((array) $piece->getScope()),
@@ -55,9 +60,9 @@ class Space extends AbstractEvaluation
                     );
                     break;
                 case Symbol::PAWN:
-                    $result[$piece->getColor()] = array_unique(
+                    $this->result[$piece->getColor()] = array_unique(
                         array_merge(
-                            $result[$piece->getColor()],
+                            $this->result[$piece->getColor()],
                             array_intersect(
                                 $piece->getCaptureSquares(),
                                 $this->sqEvald[SquareEvaluation::FEATURE_FREE]
@@ -66,9 +71,9 @@ class Space extends AbstractEvaluation
                     );
                     break;
                 default:
-                    $result[$piece->getColor()] = array_unique(
+                    $this->result[$piece->getColor()] = array_unique(
                         array_merge(
-                            $result[$piece->getColor()],
+                            $this->result[$piece->getColor()],
                             array_diff(
                                 $piece->getLegalMoves(),
                                 $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppositeColor()]
@@ -80,9 +85,9 @@ class Space extends AbstractEvaluation
             $this->board->next();
         }
 
-        sort($result[Symbol::WHITE]);
-        sort($result[Symbol::BLACK]);
+        sort($this->result[Symbol::WHITE]);
+        sort($this->result[Symbol::BLACK]);
 
-        return $result;
+        return $this->result;
     }
 }

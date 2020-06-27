@@ -4,7 +4,7 @@ namespace PGNChess\Tests\Unit\Evaluation\Center;
 
 use PGNChess\Board;
 use PGNChess\Evaluation\Center as CenterEvaluation;
-use PGNChess\Evaluation\System\Values;
+use PGNChess\Evaluation\Value\System;
 use PGNChess\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 use PGNChess\Opening\Sicilian\Closed as ClosedSicilian;
 use PGNChess\Opening\Sicilian\Open as OpenSicilian;
@@ -25,9 +25,9 @@ class OpeningTest extends AbstractUnitTestCase
             Symbol::BLACK => 1,
         ];
 
-        $value = (new CenterEvaluation($board))->evaluate(Values::SYSTEM_BERLINER);
+        $ctrEvald = (new CenterEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
-        $this->assertEquals($expected, $value);
+        $this->assertEquals($expected, $ctrEvald);
     }
 
     /**
@@ -42,9 +42,9 @@ class OpeningTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $value = (new CenterEvaluation($board))->evaluate(Values::SYSTEM_BERLINER);
+        $ctrEvald = (new CenterEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
-        $this->assertEquals($expected, $value);
+        $this->assertEquals($expected, $ctrEvald);
     }
 
     /**
@@ -59,8 +59,8 @@ class OpeningTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $value = (new CenterEvaluation($board))->evaluate(Values::SYSTEM_BERLINER);
+        $ctrEvald = (new CenterEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
-        $this->assertEquals($expected, $value);
+        $this->assertEquals($expected, $ctrEvald);
     }
 }

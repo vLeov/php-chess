@@ -3,6 +3,7 @@
 namespace PGNChess\Evaluation;
 
 use PGNChess\AbstractEvaluation;
+use PgnChess\Board;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -17,16 +18,29 @@ class Square extends AbstractEvaluation
     const FEATURE_FREE             = 'free';
     const FEATURE_USED             = 'used';
 
-    public function evaluate(string $name): array
+    public function __construct(Board $board)
+    {
+        parent::__construct($board);
+
+        $this->result = [
+            Symbol::WHITE => [],
+            Symbol::BLACK => [],
+        ];
+    }
+
+    public function evaluate(string $feature): array
     {
         $pieces = iterator_to_array($this->board, false);
-
-        switch ($name) {
+        switch ($feature) {
             case self::FEATURE_FREE:
-                return $this->free($pieces);
+                $this->result = $this->free($pieces);
+                break;
             case self::FEATURE_USED:
-                return $this->used($pieces);
+                $this->result = $this->used($pieces);
+                break;
         }
+
+        return $this->result;
     }
 
     /**

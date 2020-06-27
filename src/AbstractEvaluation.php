@@ -3,7 +3,7 @@
 namespace PGNChess;
 
 use PgnChess\Board;
-use PGNChess\PGN\Symbol;
+use PGNChess\Evaluation\Value\System;
 
 /**
  * Abstract evaluation.
@@ -15,11 +15,17 @@ use PGNChess\PGN\Symbol;
 abstract class AbstractEvaluation
 {
     protected $board;
-    
+
+    protected $system;
+
+    protected $result;
+
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->system = (new System())->get();
     }
 
-    abstract public function evaluate(string $name): array;
+    abstract public function evaluate(string $feature): array;
 }

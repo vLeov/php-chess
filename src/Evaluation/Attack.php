@@ -28,23 +28,23 @@ class Attack extends AbstractEvaluation
             SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_FREE),
             SquareEvaluation::FEATURE_USED => (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_USED),
         ];
-    }
 
-    public function evaluate(string $name): array
-    {
-        $result = [
+        $this->result = [
             Symbol::WHITE => [],
             Symbol::BLACK => [],
         ];
+    }
 
+    public function evaluate(string $feature): array
+    {
         $this->board->rewind();
         while ($this->board->valid()) {
             $piece = $this->board->current();
             switch ($piece->getIdentity()) {
                 case Symbol::KING:
-                    $result[$piece->getColor()] = array_unique(
+                    $this->result[$piece->getColor()] = array_unique(
                         array_merge(
-                            $result[$piece->getColor()],
+                            $this->result[$piece->getColor()],
                             array_values(
                                 array_intersect(
                                     array_values((array) $piece->getScope()),
@@ -55,9 +55,9 @@ class Attack extends AbstractEvaluation
                     );
                     break;
                 case Symbol::PAWN:
-                    $result[$piece->getColor()] = array_unique(
+                    $this->result[$piece->getColor()] = array_unique(
                         array_merge(
-                            $result[$piece->getColor()],
+                            $this->result[$piece->getColor()],
                             array_intersect(
                                 $piece->getCaptureSquares(),
                                 $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppositeColor()]
@@ -66,9 +66,9 @@ class Attack extends AbstractEvaluation
                     );
                     break;
                 default:
-                    $result[$piece->getColor()] = array_unique(
+                    $this->result[$piece->getColor()] = array_unique(
                         array_merge(
-                            $result[$piece->getColor()],
+                            $this->result[$piece->getColor()],
                             array_intersect(
                                 $piece->getLegalMoves(),
                                 $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppositeColor()]
@@ -80,9 +80,9 @@ class Attack extends AbstractEvaluation
             $this->board->next();
         }
 
-        sort($result[Symbol::WHITE]);
-        sort($result[Symbol::BLACK]);
+        sort($this->result[Symbol::WHITE]);
+        sort($this->result[Symbol::BLACK]);
 
-        return $result;
+        return $this->result;
     }
 }

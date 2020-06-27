@@ -1,17 +1,17 @@
 <?php
 
-namespace PGNChess\Evaluation\System;
+namespace PGNChess\Evaluation\Value;
 
 use PGNChess\PGN\Symbol;
 
 /**
- * Values.
+ * System.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-class Values
+class System
 {
     const SYSTEM_BERLINER       = 'SYSTEM_BERLINER';
     const SYSTEM_BILGUER        = 'SYSTEM_BILGUER';
@@ -23,11 +23,11 @@ class Values
     const SYSTEM_PRATT          = 'SYSTEM_PRATT';
     const SYSTEM_SARRAT         = 'SYSTEM_SARRAT';
 
-    private $values;
+    private $system;
 
     public function __construct()
     {
-        $this->values = [
+        $this->system = [
             self::SYSTEM_BERLINER => [
                 Symbol::KNIGHT => 3.2,
                 Symbol::BISHOP => 3.33,
@@ -89,6 +89,6 @@ class Values
 
     public function get()
     {
-        return $this->values;
+        return $this->system;
     }
 }
