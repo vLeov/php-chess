@@ -3,6 +3,7 @@
 namespace PGNChess;
 
 use PgnChess\Board;
+use PGNChess\PGN\Symbol;
 
 /**
  * Abstract evaluation.
@@ -14,7 +15,7 @@ use PgnChess\Board;
 abstract class AbstractEvaluation
 {
     protected $board;
-
+    
     public function __construct(Board $board)
     {
         $this->board = $board;

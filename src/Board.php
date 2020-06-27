@@ -7,6 +7,8 @@ use PGNChess\Castling\Initialization as CastlingInit;
 use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\Db\Pdo;
 use PGNChess\Exception\BoardException;
+use PGNChess\Evaluation\Attack as AttackEvaluation;
+use PGNChess\Evaluation\Space as SpaceEvaluation;
 use PGNChess\Evaluation\Square as SquareEvaluation;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Move;
@@ -690,15 +692,20 @@ final class Board extends \SplObjectStorage
      */
     private function refresh(): Board
     {
-        $squareEval = new SquareEvaluation($this);
         $this->turn = Symbol::oppositeColor($this->turn);
-        $this->squares = $squareEval->squares($this);
+        $this->squares = (object) [
+            SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_FREE),
+            SquareEvaluation::FEATURE_USED => (object) (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_USED),
+        ];
         $this->sendBoardStatus((object) [
             'squares' => $this->squares,
             'castling' => $this->castling,
             'lastHistoryEntry' => !empty($this->history) ? end($this->history) : null,
         ]);
-        $this->control = $squareEval->control($this);
+        $this->control = (object) [
+            AttackEvaluation::FEATURE_ATTACK => (object) (new AttackEvaluation($this))->evaluate(AttackEvaluation::FEATURE_ATTACK),
+            SpaceEvaluation::FEATURE_SPACE => (object) (new SpaceEvaluation($this))->evaluate(SpaceEvaluation::FEATURE_SPACE),
+        ];
         $this->sendBoardControl($this->control);
 
         return $this;
