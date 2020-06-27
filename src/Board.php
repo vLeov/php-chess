@@ -48,11 +48,18 @@ final class Board extends \SplObjectStorage
     private $squares;
 
     /**
-     * Squares controlled by both players.
+     * Squares being attacked.
      *
      * @var \stdClass
      */
-    private $control;
+    private $attack;
+
+    /**
+     * Squares being controlled.
+     *
+     * @var \stdClass
+     */
+    private $space;
 
     /**
      * Castling status.
@@ -465,12 +472,12 @@ final class Board extends \SplObjectStorage
             $piece = current($pieces);
             switch ($piece->getMove()->type) {
                 case Move::KING_CASTLING_SHORT:
-                    CastlingCan::short($this->turn, $this->castling, $this->control)
+                    CastlingCan::short($this->turn, $this->castling, $this->space)
                         ? $isLegalMove = $this->castle($piece)
                         : $isLegalMove = false;
                     break;
                 case Move::KING_CASTLING_LONG:
-                    CastlingCan::long($this->turn, $this->castling, $this->control)
+                    CastlingCan::long($this->turn, $this->castling, $this->space)
                         ? $isLegalMove = $this->castle($piece)
                         : $isLegalMove = false;
                     break;
@@ -702,11 +709,12 @@ final class Board extends \SplObjectStorage
             'castling' => $this->castling,
             'lastHistoryEntry' => !empty($this->history) ? end($this->history) : null,
         ]);
-        $this->control = (object) [
-            AttackEvaluation::FEATURE_ATTACK => (object) (new AttackEvaluation($this))->evaluate(AttackEvaluation::FEATURE_ATTACK),
-            SpaceEvaluation::FEATURE_SPACE => (object) (new SpaceEvaluation($this))->evaluate(SpaceEvaluation::FEATURE_SPACE),
-        ];
-        $this->sendBoardControl($this->control);
+        $this->attack = (object) (new AttackEvaluation($this))->evaluate(AttackEvaluation::FEATURE_ATTACK);
+        $this->space = (object) (new SpaceEvaluation($this))->evaluate(SpaceEvaluation::FEATURE_SPACE);
+        $this->sendBoardControl((object) [
+            AttackEvaluation::FEATURE_ATTACK => $this->attack,
+            SpaceEvaluation::FEATURE_SPACE => $this->space,
+        ]);
 
         return $this;
     }
@@ -752,12 +760,12 @@ final class Board extends \SplObjectStorage
             $piece->getMove()->type === Move::KING_CASTLING_LONG) {
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->control->attack->{$king->getOppositeColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppositeColor()});
             $this->undoCastle($previousCastling);
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->control->attack->{$king->getOppositeColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppositeColor()});
             $this->undoMove($previousCastling);
         }
 
@@ -775,7 +783,7 @@ final class Board extends \SplObjectStorage
 
         return in_array(
             $king->getPosition(),
-            $this->control->attack->{$king->getOppositeColor()}
+            $this->attack->{$king->getOppositeColor()}
         );
     }
 
@@ -799,7 +807,7 @@ final class Board extends \SplObjectStorage
                                 $piece->setMove(
                                 Convert::toStdObj($this->getTurn(), Symbol::KING."x$square")
                             ));
-                        } elseif (!in_array($square, $this->control->space->{$piece->getOppositeColor()})) {
+                        } elseif (!in_array($square, $this->space->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(
                                 Convert::toStdObj($this->getTurn(), Symbol::KING.$square)

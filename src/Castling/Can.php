@@ -19,19 +19,19 @@ class Can
      *
      * @param string $color
      * @param \stdClass $castling
-     * @param \stdClass $control
+     * @param \stdClass $space
      * @return bool
      */
-    public static function short(string $color, \stdClass $castling, \stdClass $control): bool
+    public static function short(string $color, \stdClass $castling, \stdClass $space): bool
     {
         return $castling->{$color}->{Symbol::CASTLING_SHORT} &&
             !(in_array(
                 CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->f,
-                $control->space->{Symbol::oppositeColor($color)})
+                $space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
                 CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_SHORT}->squares->g,
-                $control->space->{Symbol::oppositeColor($color)})
+                $space->{Symbol::oppositeColor($color)})
              );
     }
 
@@ -40,23 +40,23 @@ class Can
      *
      * @param string $color
      * @param \stdClass $castling
-     * @param \stdClass $control
+     * @param \stdClass $space
      * @return bool
      */
-    public static function long(string $color, \stdClass $castling, \stdClass $control): bool
+    public static function long(string $color, \stdClass $castling, \stdClass $space): bool
     {
         return $castling->{$color}->{Symbol::CASTLING_LONG} &&
             !(in_array(
                 CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->b,
-                $control->space->{Symbol::oppositeColor($color)})
+                $space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
                 CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->c,
-                $control->space->{Symbol::oppositeColor($color)})
+                $space->{Symbol::oppositeColor($color)})
              ) &&
             !(in_array(
                 CastlingRule::color($color)->{Symbol::KING}->{Symbol::CASTLING_LONG}->squares->d,
-                $control->space->{Symbol::oppositeColor($color)})
+                $space->{Symbol::oppositeColor($color)})
              );
     }
 }

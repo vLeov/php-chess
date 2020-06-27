@@ -49,10 +49,8 @@ class Game
                 SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($this->board))->evaluate(SquareEvaluation::FEATURE_FREE),
                 SquareEvaluation::FEATURE_USED => (object) (new SquareEvaluation($this->board))->evaluate(SquareEvaluation::FEATURE_USED),
             ],
-            'control' => (object) [
-                AttackEvaluation::FEATURE_ATTACK => (object) (new AttackEvaluation($this->board))->evaluate(AttackEvaluation::FEATURE_ATTACK),
-                SpaceEvaluation::FEATURE_SPACE => (object) (new SpaceEvaluation($this->board))->evaluate(SpaceEvaluation::FEATURE_SPACE),
-            ],
+            AttackEvaluation::FEATURE_ATTACK => (object) (new AttackEvaluation($this->board))->evaluate(AttackEvaluation::FEATURE_ATTACK),
+            SpaceEvaluation::FEATURE_SPACE => (object) (new SpaceEvaluation($this->board))->evaluate(SpaceEvaluation::FEATURE_SPACE),
             'castling' => $this->board->getCastling(),
         ];
     }
