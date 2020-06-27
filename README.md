@@ -91,10 +91,10 @@ $game->status()->turn;
 $game->status()->squares->used;
 $game->status()->squares->free;
 
-// squares being attacked by color
+// squares being attacked by both players
 $game->status()->attack;
 
-// squares being controlled by color
+// squares being controlled by both players
 $game->status()->space;
 
 // castling status of both players
