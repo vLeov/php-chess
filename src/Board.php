@@ -764,33 +764,33 @@ final class Board extends \SplObjectStorage
                     case Symbol::KING:
                         if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toStdObj($this->getTurn(), Symbol::KING."x$square"))
+                                $piece->setMove(Convert::toStdObj($this->turn, Symbol::KING."x$square"))
                             );
                         } elseif (!in_array($square, $this->space->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toStdObj($this->getTurn(), Symbol::KING.$square))
+                                $piece->setMove(Convert::toStdObj($this->turn, Symbol::KING.$square))
                             );
                         }
                         break;
                     case Symbol::PAWN:
                         if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toStdObj($this->getTurn(), $piece->getFile()."x$square"))
+                                $piece->setMove(Convert::toStdObj($this->turn, $piece->getFile()."x$square"))
                             );
                         } else {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toStdObj($this->getTurn(), $square))
+                                $piece->setMove(Convert::toStdObj($this->turn, $square))
                             );
                         }
                         break;
                     default:
                         if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toStdObj($this->getTurn(), $piece->getIdentity()."x$square"))
+                                $piece->setMove(Convert::toStdObj($this->turn, $piece->getIdentity()."x$square"))
                             );
                         } else {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toStdObj($this->getTurn(), $piece->getIdentity().$square))
+                                $piece->setMove(Convert::toStdObj($this->turn, $piece->getIdentity().$square))
                             );
                         }
                         break;
