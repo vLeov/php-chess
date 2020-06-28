@@ -670,7 +670,7 @@ final class Board extends \SplObjectStorage
             SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_FREE),
             SquareEvaluation::FEATURE_USED => (object) (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_USED),
         ];
-        $this->sendBoardStatus((object) [
+        $this->setBoardStatusToPieces((object) [
             'squares' => $this->squares,
             'castling' => $this->castling,
             'lastHistoryEntry' => !empty($this->history) ? end($this->history) : null,
@@ -683,11 +683,11 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Sends the board's status to all pieces.
+     * Sets the board's status to all pieces.
      *
      * @param \stdClass $boardStatus
      */
-    private function sendBoardStatus(\stdClass $boardStatus): void
+    private function setBoardStatusToPieces(\stdClass $boardStatus): void
     {
         $this->rewind();
         while ($this->valid()) {
