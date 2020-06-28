@@ -16,7 +16,7 @@ class AttackTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $attEvald = (new AttackEvaluation(new Board))->evaluate(AttackEvaluation::FEATURE_ATTACK);
+        $attEvald = (new AttackEvaluation(new Board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [],
@@ -33,7 +33,7 @@ class AttackTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board))->play();
 
-        $attEvald = (new AttackEvaluation($board))->evaluate(AttackEvaluation::FEATURE_ATTACK);
+        $attEvald = (new AttackEvaluation($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [],
@@ -50,7 +50,7 @@ class AttackTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board))->play();
 
-        $attEvald = (new AttackEvaluation($board))->evaluate(AttackEvaluation::FEATURE_ATTACK);
+        $attEvald = (new AttackEvaluation($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [],

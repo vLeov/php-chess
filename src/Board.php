@@ -705,8 +705,8 @@ final class Board extends \SplObjectStorage
             'castling' => $this->castling,
             'lastHistoryEntry' => !empty($this->history) ? end($this->history) : null,
         ]);
-        $this->attack = (object) (new AttackEvaluation($this))->evaluate(AttackEvaluation::FEATURE_ATTACK);
-        $this->space = (object) (new SpaceEvaluation($this))->evaluate(SpaceEvaluation::FEATURE_SPACE);
+        $this->attack = (object) (new AttackEvaluation($this))->evaluate();
+        $this->space = (object) (new SpaceEvaluation($this))->evaluate();
         $this->setSpaceToPieces($this->space);
 
         return $this;

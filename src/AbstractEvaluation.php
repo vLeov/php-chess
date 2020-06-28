@@ -27,5 +27,5 @@ abstract class AbstractEvaluation
         $this->system = (new System())->get();
     }
 
-    abstract public function evaluate(string $feature): array;
+    abstract public function evaluate($feature = null): array;
 }

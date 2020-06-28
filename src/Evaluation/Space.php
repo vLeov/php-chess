@@ -16,7 +16,7 @@ use PGNChess\PGN\Symbol;
  */
 class Space extends AbstractEvaluation
 {
-    const FEATURE_SPACE = 'space';
+    const NAME = 'space';
 
     private $sqEvald;
 
@@ -35,7 +35,7 @@ class Space extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(string $feature): array
+    public function evaluate($feature = null): array
     {
         $this->result = [
             Symbol::WHITE => [],

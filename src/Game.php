@@ -45,8 +45,8 @@ class Game
             'turn' => $this->board->getTurn(),
             'castling' => $this->board->getCastling(),
             'squares' => $this->board->getSquares(),
-            AttackEvaluation::FEATURE_ATTACK => $this->board->getAttack(),
-            SpaceEvaluation::FEATURE_SPACE => $this->board->getSpace(),
+            AttackEvaluation::NAME => $this->board->getAttack(),
+            SpaceEvaluation::NAME => $this->board->getSpace(),
         ];
     }
 

@@ -16,7 +16,7 @@ use PGNChess\PGN\Symbol;
  */
 class Attack extends AbstractEvaluation
 {
-    const FEATURE_ATTACK = 'attack';
+    const NAME = 'attack';
 
     private $sqEvald;
 
@@ -35,7 +35,7 @@ class Attack extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(string $feature): array
+    public function evaluate($feature = null): array
     {
         $this->board->rewind();
         while ($this->board->valid()) {

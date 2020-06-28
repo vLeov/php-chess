@@ -15,7 +15,7 @@ use PGNChess\PGN\Symbol;
  */
 class KingSafety extends AbstractEvaluation
 {
-    const FEATURE_DEFAULT = 'safety';
+    const NAME = 'safety';
 
     const SYSTEM_PRIME = [
         Symbol::PAWN => 2,
@@ -35,7 +35,7 @@ class KingSafety extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(string $feature): array
+    public function evaluate($feature = null): array
     {
         foreach ($this->board->getPiece(Symbol::WHITE, Symbol::KING)->getScope() as $key => $sq) {
             if ($piece = $this->board->getPieceByPosition($sq)) {

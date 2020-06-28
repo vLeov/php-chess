@@ -15,6 +15,8 @@ use PGNChess\PGN\Symbol;
  */
 class Material extends AbstractEvaluation
 {
+    const NAME = 'material';
+
     public function __construct(Board $board)
     {
         parent::__construct($board);
@@ -25,7 +27,7 @@ class Material extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(string $feature): array
+    public function evaluate($feature = null): array
     {
         foreach ($this->board->getPiecesByColor(Symbol::WHITE) as $piece) {
             if ($piece->getIdentity() !== Symbol::KING) {

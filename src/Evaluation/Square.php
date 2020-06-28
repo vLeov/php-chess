@@ -15,8 +15,10 @@ use PGNChess\PGN\Symbol;
  */
 class Square extends AbstractEvaluation
 {
-    const FEATURE_FREE             = 'free';
-    const FEATURE_USED             = 'used';
+    const NAME              = 'square';
+
+    const FEATURE_FREE      = 'free';
+    const FEATURE_USED      = 'used';
 
     public function __construct(Board $board)
     {
@@ -28,7 +30,7 @@ class Square extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(string $feature): array
+    public function evaluate($feature = null): array
     {
         $pieces = iterator_to_array($this->board, false);
         switch ($feature) {

@@ -15,6 +15,8 @@ use PGNChess\PGN\Symbol;
  */
 class Center extends AbstractEvaluation
 {
+    const NAME = 'center';
+
     private $center = ['d4', 'd5', 'e4', 'e5'];
 
     public function __construct(Board $board)
@@ -27,7 +29,7 @@ class Center extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(string $feature): array
+    public function evaluate($feature = null): array
     {
         foreach ($this->center as $square) {
             if ($piece = $this->board->getPieceByPosition($square)) {

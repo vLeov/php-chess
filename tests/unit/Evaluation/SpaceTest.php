@@ -16,7 +16,7 @@ class SpaceTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $spEvald = (new SpaceEvaluation(new Board))->evaluate(SpaceEvaluation::FEATURE_SPACE);
+        $spEvald = (new SpaceEvaluation(new Board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [
@@ -37,7 +37,7 @@ class SpaceTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board))->play();
 
-        $spEvald = (new SpaceEvaluation($board))->evaluate(SpaceEvaluation::FEATURE_SPACE);
+        $spEvald = (new SpaceEvaluation($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [
@@ -62,7 +62,7 @@ class SpaceTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board))->play();
 
-        $spEvald = (new SpaceEvaluation($board))->evaluate(SpaceEvaluation::FEATURE_SPACE);
+        $spEvald = (new SpaceEvaluation($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [
