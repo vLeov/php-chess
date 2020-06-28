@@ -183,11 +183,6 @@ abstract class AbstractPiece implements Piece
         $this->boardStatus = $boardStatus;
     }
 
-    public function getBoardStatus()
-    {
-        return $this->boardStatus;
-    }
-
     /**
      * Sets the board's space evaluation.
      *
