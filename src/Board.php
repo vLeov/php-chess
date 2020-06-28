@@ -505,24 +505,24 @@ final class Board extends \SplObjectStorage
     /**
      * Undoes a castle move.
      *
-     * @param array $previousCastling
+     * @param array $prevCastling
      * @return \PGNChess\Board
      */
-    private function undoCastle(array $previousCastling): Board
+    private function undoCastle(array $prevCastling): Board
     {
-        $previous = end($this->history);
-        $king = $this->getPieceByPosition($previous->move->position->next);
-        $kingUndone = new King($previous->move->color, $previous->position);
+        $prev = end($this->history);
+        $king = $this->getPieceByPosition($prev->move->position->next);
+        $kingUndone = new King($prev->move->color, $prev->position);
         $this->detach($king);
         $this->attach($kingUndone);
-        switch ($previous->move->type) {
+        switch ($prev->move->type) {
             case Move::KING_CASTLING_SHORT:
                 $rook = $this->getPieceByPosition(
-                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['next']
+                    CastlingRule::color($prev->move->color)[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['next']
                 );
                 $rookUndone = new Rook(
-                    $previous->move->color,
-                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['current'],
+                    $prev->move->color,
+                    CastlingRule::color($prev->move->color)[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['current'],
                     $rook->getType()
                 );
                 $this->detach($rook);
@@ -530,18 +530,18 @@ final class Board extends \SplObjectStorage
                 break;
             case Move::KING_CASTLING_LONG:
                 $rook = $this->getPieceByPosition(
-                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['next']
+                    CastlingRule::color($prev->move->color)[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['next']
                 );
                 $rookUndone = new Rook(
-                    $previous->move->color,
-                    CastlingRule::color($previous->move->color)[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['current'],
+                    $prev->move->color,
+                    CastlingRule::color($prev->move->color)[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['current'],
                     $rook->getType()
                 );
                 $this->detach($rook);
                 $this->attach($rookUndone);
                 break;
         }
-        $this->castling = $previousCastling;
+        $this->castling = $prevCastling;
         $this->popHistory()->refresh();
 
         return $this;
@@ -621,38 +621,38 @@ final class Board extends \SplObjectStorage
     /**
      * Undoes the last move.
      *
-     * @param array $previousCastling
+     * @param array $prevCastling
      * @return \PGNChess\Board
      */
-    private function undoMove(array $previousCastling): Board
+    private function undoMove(array $prevCastling): Board
     {
-        $previous = end($this->history);
-        $piece = $this->getPieceByPosition($previous->move->position->next);
+        $prev = end($this->history);
+        $piece = $this->getPieceByPosition($prev->move->position->next);
         $this->detach($piece);
-        if ($previous->move->type === Move::PAWN_PROMOTES ||
-            $previous->move->type === Move::PAWN_CAPTURES_AND_PROMOTES) {
-            $pieceUndone = new Pawn($previous->move->color, $previous->position);
+        if ($prev->move->type === Move::PAWN_PROMOTES ||
+            $prev->move->type === Move::PAWN_CAPTURES_AND_PROMOTES) {
+            $pieceUndone = new Pawn($prev->move->color, $prev->position);
         } else {
             $pieceUndoneClass = new \ReflectionClass(get_class($piece));
             $pieceUndone = $pieceUndoneClass->newInstanceArgs([
-                $previous->move->color,
-                $previous->position,
+                $prev->move->color,
+                $prev->position,
                 $piece->getIdentity() === Symbol::ROOK ? $piece->getType() : null, ]
             );
         }
         $this->attach($pieceUndone);
-        if ($previous->move->isCapture) {
-            $capture = end($this->captures[$previous->move->color]);
+        if ($prev->move->isCapture) {
+            $capture = end($this->captures[$prev->move->color]);
             $capturedClass = new \ReflectionClass(Convert::toClassName($capture->captured->identity));
             $this->attach($capturedClass->newInstanceArgs([
-                    $previous->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
+                    $prev->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
                     $capture->captured->position,
                     $capture->captured->identity === Symbol::ROOK ? $capture->captured->type : null,
                 ])
             );
-            $this->popCapture($previous->move->color);
+            $this->popCapture($prev->move->color);
         }
-        isset($previousCastling) ? $this->castling = $previousCastling : null;
+        isset($prevCastling) ? $this->castling = $prevCastling : null;
         $this->popHistory()->refresh();
 
         return $this;
@@ -718,18 +718,18 @@ final class Board extends \SplObjectStorage
      */
     private function leavesInCheck(Piece $piece): bool
     {
-        $previousCastling = unserialize(serialize($this->castling));
+        $prevCastling = unserialize(serialize($this->castling));
         if ($piece->getMove()->type === Move::KING_CASTLING_SHORT ||
             $piece->getMove()->type === Move::KING_CASTLING_LONG) {
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
             $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppColor()});
-            $this->undoCastle($previousCastling);
+            $this->undoCastle($prevCastling);
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
             $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppColor()});
-            $this->undoMove($previousCastling);
+            $this->undoMove($prevCastling);
         }
 
         return $leavesInCheck;
