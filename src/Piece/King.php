@@ -110,8 +110,8 @@ class King extends AbstractPiece
             $this->getBoardStatus()->castling[$this->getColor()][Symbol::CASTLING_SHORT] &&
             in_array($castlingShort['squares']['f'], $this->getBoardStatus()->squares->free) &&
             in_array($castlingShort['squares']['g'], $this->getBoardStatus()->squares->free) &&
-            !in_array($castlingShort['squares']['f'], $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingShort['squares']['g'], $this->getBoardControl()->space->{$this->getOppositeColor()})
+            !in_array($castlingShort['squares']['f'], $this->space->{$this->getOppositeColor()}) &&
+            !in_array($castlingShort['squares']['g'], $this->space->{$this->getOppositeColor()})
         ) {
             $movesCastlingShort = [$castlingShort['position']['next']];
         }
@@ -125,9 +125,9 @@ class King extends AbstractPiece
             in_array($castlingLong['squares']['b'], $this->getBoardStatus()->squares->free) &&
             in_array($castlingLong['squares']['c'], $this->getBoardStatus()->squares->free) &&
             in_array($castlingLong['squares']['d'], $this->getBoardStatus()->squares->free) &&
-            !in_array($castlingLong['squares']['b'], $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingLong['squares']['c'], $this->getBoardControl()->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingLong['squares']['d'], $this->getBoardControl()->space->{$this->getOppositeColor()})
+            !in_array($castlingLong['squares']['b'], $this->space->{$this->getOppositeColor()}) &&
+            !in_array($castlingLong['squares']['c'], $this->space->{$this->getOppositeColor()}) &&
+            !in_array($castlingLong['squares']['d'], $this->space->{$this->getOppositeColor()})
         ) {
             $movesCastlingLong = [$castlingLong['position']['next']];
         }

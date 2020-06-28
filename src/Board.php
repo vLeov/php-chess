@@ -677,10 +677,7 @@ final class Board extends \SplObjectStorage
         ]);
         $this->attack = (object) (new AttackEvaluation($this))->evaluate(AttackEvaluation::FEATURE_ATTACK);
         $this->space = (object) (new SpaceEvaluation($this))->evaluate(SpaceEvaluation::FEATURE_SPACE);
-        $this->sendBoardControl((object) [
-            AttackEvaluation::FEATURE_ATTACK => $this->attack,
-            SpaceEvaluation::FEATURE_SPACE => $this->space,
-        ]);
+        $this->setSpaceToPieces($this->space);
 
         return $this;
     }
@@ -700,15 +697,15 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Sends the board's control information to all pieces.
+     * Sets the board's space evaluation to all pieces.
      *
-     * @param \stdClass $boardControl
+     * @param \stdClass $space
      */
-    private function sendBoardControl(\stdClass $boardControl): void
+    private function setSpaceToPieces(\stdClass $space): void
     {
         $this->rewind();
         while ($this->valid()) {
-            $this->current()->setBoardControl($boardControl);
+            $this->current()->setSpace($space);
             $this->next();
         }
     }

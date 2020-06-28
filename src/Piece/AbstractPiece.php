@@ -65,11 +65,11 @@ abstract class AbstractPiece implements Piece
     protected $boardStatus;
 
     /**
-     * Chess board control.
+     * Space evaluation of the board.
      *
      * @var \stdClass
      */
-    protected $boardControl;
+    protected $space;
 
     /**
      * Constructor.
@@ -84,6 +84,13 @@ abstract class AbstractPiece implements Piece
         $this->position = Validate::square($square);
         $this->identity = $identity;
     }
+
+    /**
+     * Gets the legal moves that a piece can perform on the board.
+     *
+     * @return array The legal moves that the piece can perform.
+     */
+    abstract public function getLegalMoves(): array;
 
     /**
      * Calculates the piece's scope.
@@ -155,13 +162,6 @@ abstract class AbstractPiece implements Piece
     }
 
     /**
-     * Gets the legal moves that a piece can perform on the board.
-     *
-     * @return array The legal moves that the piece can perform.
-     */
-    abstract public function getLegalMoves(): array;
-
-    /**
      * Sets the piece's next move.
      *
      * @param \stdClass $move
@@ -189,18 +189,13 @@ abstract class AbstractPiece implements Piece
     }
 
     /**
-     * Sets the board control property.
+     * Sets the board's space evaluation.
      *
      * @param \stdClass $boardStatus
      */
-    public function setBoardControl(\stdClass $boardControl): void
+    public function setSpace(\stdClass $space): void
     {
-        $this->boardControl = $boardControl;
-    }
-
-    public function getBoardControl()
-    {
-        return $this->boardControl;
+        $this->space = $space;
     }
 
     /**
