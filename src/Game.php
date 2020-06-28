@@ -11,9 +11,7 @@ use PGNChess\Evaluation\Square as SquareEvaluation;
 /**
  * Game class.
  *
- * This is a wrapper of the Board class that makes available to the outside world
- * a few methods of it only. Additionally, it outputs the data managed internally
- * in a user-friendly way.
+ * A user-friendly wrapper of the Board class.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
@@ -45,13 +43,10 @@ class Game
     {
         return (object) [
             'turn' => $this->board->getTurn(),
-            'squares' =>  (object) [
-                SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($this->board))->evaluate(SquareEvaluation::FEATURE_FREE),
-                SquareEvaluation::FEATURE_USED => (object) (new SquareEvaluation($this->board))->evaluate(SquareEvaluation::FEATURE_USED),
-            ],
-            AttackEvaluation::FEATURE_ATTACK => (object) (new AttackEvaluation($this->board))->evaluate(AttackEvaluation::FEATURE_ATTACK),
-            SpaceEvaluation::FEATURE_SPACE => (object) (new SpaceEvaluation($this->board))->evaluate(SpaceEvaluation::FEATURE_SPACE),
             'castling' => $this->board->getCastling(),
+            'squares' => $this->board->getSquares(),
+            AttackEvaluation::FEATURE_ATTACK => $this->board->getAttack(),
+            SpaceEvaluation::FEATURE_SPACE => $this->board->getSpace(),
         ];
     }
 

@@ -168,6 +168,36 @@ final class Board extends \SplObjectStorage
     }
 
     /**
+     * Gets the board's square evaluation.
+     *
+     * @return \stdClass
+     */
+    public function getSquares(): \stdClass
+    {
+        return $this->squares;
+    }
+
+    /**
+     * Gets the board's attack evaluation.
+     *
+     * @return \stdClass
+     */
+    public function getAttack(): \stdClass
+    {
+        return $this->attack;
+    }
+
+    /**
+     * Gets the board's space evaluation.
+     *
+     * @return \stdClass
+     */
+    public function getSpace(): \stdClass
+    {
+        return $this->space;
+    }
+
+    /**
      * Gets the castling status.
      *
      * @return array
