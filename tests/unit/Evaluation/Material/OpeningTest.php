@@ -19,8 +19,8 @@ class OpeningTest extends AbstractUnitTestCase
         $board = (new RuyLopezLucenaDefense(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => 32.06,
-            Symbol::BLACK => 32.06,
+            Symbol::WHITE => 40.06,
+            Symbol::BLACK => 40.06,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_BERLINER);

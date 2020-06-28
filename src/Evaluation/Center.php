@@ -31,14 +31,7 @@ class Center extends AbstractEvaluation
     {
         foreach ($this->center as $square) {
             if ($piece = $this->board->getPieceByPosition($square)) {
-                switch ($piece->getIdentity()) {
-                    case Symbol::PAWN:
-                        $this->result[$piece->getColor()] += 1;
-                        break;
-                    default:
-                        $this->result[$piece->getColor()] += $this->system[$feature][$piece->getIdentity()];
-                        break;
-                }
+                $this->result[$piece->getColor()] += $this->system[$feature][$piece->getIdentity()];
             }
         }
 

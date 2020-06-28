@@ -18,8 +18,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 32.06,
-            Symbol::BLACK => 32.06,
+            Symbol::WHITE => 40.06,
+            Symbol::BLACK => 40.06,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
@@ -35,8 +35,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 35.7,
-            Symbol::BLACK => 35.7,
+            Symbol::WHITE => 43.7,
+            Symbol::BLACK => 43.7,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_BILGUER);
@@ -52,8 +52,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 31.5,
-            Symbol::BLACK => 31.5,
+            Symbol::WHITE => 39.5,
+            Symbol::BLACK => 39.5,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_FISHER);
@@ -69,8 +69,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 30,
-            Symbol::BLACK => 30,
+            Symbol::WHITE => 38,
+            Symbol::BLACK => 38,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_KASPAROV);
@@ -86,8 +86,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 32.75,
-            Symbol::BLACK => 32.75,
+            Symbol::WHITE => 40.75,
+            Symbol::BLACK => 40.75,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_KAUFMAN);
@@ -103,8 +103,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 35,
-            Symbol::BLACK => 35,
+            Symbol::WHITE => 39,
+            Symbol::BLACK => 39,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_LASKER);
@@ -120,8 +120,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 34,
-            Symbol::BLACK => 34,
+            Symbol::WHITE => 42,
+            Symbol::BLACK => 42,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_PHILIDOR);
@@ -137,8 +137,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 32,
-            Symbol::BLACK => 32,
+            Symbol::WHITE => 40,
+            Symbol::BLACK => 40,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_PRATT);
@@ -154,8 +154,8 @@ class SystemTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 32.9,
-            Symbol::BLACK => 32.9,
+            Symbol::WHITE => 38.7,
+            Symbol::BLACK => 38.7,
         ];
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate(System::SYSTEM_SARRAT);
