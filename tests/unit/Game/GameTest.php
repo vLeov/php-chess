@@ -3,6 +3,7 @@
 namespace PGNChess\Tests\Unit\Game;
 
 use PGNChess\Game;
+use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\PGN\Convert;
 use PGNChess\Tests\AbstractUnitTestCase;
 
@@ -74,12 +75,12 @@ class GameTest extends AbstractUnitTestCase
             ],
             'castling' => [
                 'w' => [
-                    'castled' => false,
+                    CastlingRule::IS_CASTLED => false,
                     'O-O' => true,
                     'O-O-O' => true
                 ],
                 'b' => [
-                    'castled' => false,
+                    CastlingRule::IS_CASTLED => false,
                     'O-O' => true,
                     'O-O-O' => false
                 ]
@@ -104,12 +105,12 @@ class GameTest extends AbstractUnitTestCase
         $this->assertEquals($status->attack->b, $this->game->status()->attack->{'b'});
 
         // white's castling
-        $this->assertEquals($status->castling['w']['castled'], $this->game->status()->castling['w']['castled']);
+        $this->assertEquals($status->castling['w'][CastlingRule::IS_CASTLED], $this->game->status()->castling['w'][CastlingRule::IS_CASTLED]);
         $this->assertEquals($status->castling['w']['O-O'], $this->game->status()->castling['w']['O-O']);
         $this->assertEquals($status->castling['w']['O-O-O'], $this->game->status()->castling['w']['O-O-O']);
 
         // black's castling
-        $this->assertEquals($status->castling['b']['castled'], $this->game->status()->castling['b']['castled']);
+        $this->assertEquals($status->castling['b'][CastlingRule::IS_CASTLED], $this->game->status()->castling['b'][CastlingRule::IS_CASTLED]);
         $this->assertEquals($status->castling['b']['O-O'], $this->game->status()->castling['b']['O-O']);
         $this->assertEquals($status->castling['b']['O-O-O'], $this->game->status()->castling['b']['O-O-O']);
     }

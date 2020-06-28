@@ -85,12 +85,12 @@ final class Board extends \SplObjectStorage
      */
     private $castling = [
         Symbol::WHITE => [
-            'castled' => false,
+            CastlingRule::IS_CASTLED => false,
             Symbol::CASTLING_SHORT => true,
             Symbol::CASTLING_LONG => true,
         ],
         Symbol::BLACK => [
-            'castled' => false,
+            CastlingRule::IS_CASTLED => false,
             Symbol::CASTLING_SHORT => true,
             Symbol::CASTLING_LONG => true,
         ],
@@ -560,18 +560,19 @@ final class Board extends \SplObjectStorage
         if ($castling && isset($pieceMoved)) {
             throw new BoardException("Error while tracking {$this->turn} king's ability to castle");
         }
-        // king castled successfully
         if ($castling) {
-            $this->castling[$this->turn]['castled'] = true;
-            $this->castling[$this->turn][Symbol::CASTLING_SHORT] = false;
-            $this->castling[$this->turn][Symbol::CASTLING_LONG] = false;
-        }
-        // king/rook was moved
-        if (isset($pieceMoved)) {
+            $this->castling[$this->turn] = [
+                CastlingRule::IS_CASTLED => true,
+                Symbol::CASTLING_SHORT => false,
+                Symbol::CASTLING_LONG => false,
+            ];
+        } elseif (isset($pieceMoved)) {
             if ($pieceMoved->getIdentity() === Symbol::KING) {
-                $this->castling[$this->turn]['castled'] = false;
-                $this->castling[$this->turn][Symbol::CASTLING_SHORT] = false;
-                $this->castling[$this->turn][Symbol::CASTLING_LONG] = false;
+                $this->castling[$this->turn] = [
+                    CastlingRule::IS_CASTLED => false,
+                    Symbol::CASTLING_SHORT => false,
+                    Symbol::CASTLING_LONG => false,
+                ];
             } elseif ($pieceMoved->getIdentity() === Symbol::ROOK) {
                 if ($pieceMoved->getType() === RookType::CASTLING_SHORT) {
                     $this->castling[$this->turn][Symbol::CASTLING_SHORT] = false;
@@ -609,7 +610,7 @@ final class Board extends \SplObjectStorage
                 $this->promote($piece);
             }
         }
-        if (!$this->castling[$piece->getColor()]['castled']) {
+        if (!$this->castling[$piece->getColor()][CastlingRule::IS_CASTLED]) {
             $this->trackCastling(false, $piece);
         }
         $this->pushHistory($piece)->refresh();

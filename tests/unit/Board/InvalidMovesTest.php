@@ -3,6 +3,7 @@
 namespace PGNChess\Tests\Unit\Board;
 
 use PGNChess\Board;
+use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\Exception\BoardException;
 use PGNChess\Exception\UnknownNotationException;
 use PGNChess\PGN\Convert;
@@ -102,12 +103,12 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ]

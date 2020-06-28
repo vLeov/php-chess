@@ -3,6 +3,7 @@
 namespace PGNChess\Tests\Unit\Board;
 
 use PGNChess\Board;
+use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Piece\Bishop;
@@ -34,12 +35,12 @@ class StatusTest extends AbstractUnitTestCase
 
         $castling = [
             'w' => [
-                'castled' => false,
+                CastlingRule::IS_CASTLED => false,
                 'O-O' => true,
                 'O-O-O' => true
             ],
             'b' => [
-                'castled' => false,
+                CastlingRule::IS_CASTLED => false,
                 'O-O' => true,
                 'O-O-O' => false
             ]

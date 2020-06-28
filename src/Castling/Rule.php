@@ -13,6 +13,8 @@ use PGNChess\PGN\Symbol;
  */
 class Rule
 {
+    const IS_CASTLED = 'castled';
+
     /**
      * Castling rule by color.
      *

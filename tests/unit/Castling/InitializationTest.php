@@ -101,12 +101,12 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ]
@@ -139,12 +139,12 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => true
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ]
@@ -177,12 +177,12 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => true,
                 Symbol::CASTLING_LONG => false
             ]
@@ -215,12 +215,12 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => true
             ]
@@ -278,7 +278,7 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => true
             ]
@@ -311,7 +311,7 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ]
@@ -348,7 +348,7 @@ class InitializationTest extends AbstractUnitTestCase
                 Symbol::CASTLING_LONG => false
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ]
@@ -381,11 +381,11 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_LONG => false
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ]
@@ -418,11 +418,11 @@ class InitializationTest extends AbstractUnitTestCase
 
         $castling = [
             Symbol::WHITE => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false
             ],
             Symbol::BLACK => [
-                'castled' => true,
+                CastlingRule::IS_CASTLED => true,
                 Symbol::CASTLING_SHORT => false,
                 Symbol::CASTLING_LONG => false
             ]
