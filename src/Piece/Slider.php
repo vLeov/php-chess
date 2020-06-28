@@ -38,10 +38,10 @@ abstract class Slider extends AbstractPiece
             foreach ($direction as $square) {
                 if (
                     !in_array($square, $this->boardStatus->squares->used->{$this->getColor()}) &&
-                    !in_array($square, $this->boardStatus->squares->used->{$this->getOppositeColor()})
+                    !in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})
                 ) {
                     $moves[] = $square;
-                } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getOppositeColor()})) {
+                } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})) {
                     $moves[] = $square;
                     break 1;
                 } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {

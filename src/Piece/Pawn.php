@@ -166,7 +166,7 @@ class Pawn extends AbstractPiece
         // add capture squares
 
         foreach($this->captureSquares as $square) {
-            if (in_array($square, $this->boardStatus->squares->used->{$this->getOppositeColor()})) {
+            if (in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})) {
                 $moves[] = $square;
             }
         }
@@ -175,7 +175,7 @@ class Pawn extends AbstractPiece
 
         if (isset($this->boardStatus->lastHistoryEntry) &&
             $this->boardStatus->lastHistoryEntry->move->identity === Symbol::PAWN &&
-            $this->boardStatus->lastHistoryEntry->move->color === $this->getOppositeColor()) {
+            $this->boardStatus->lastHistoryEntry->move->color === $this->getOppColor()) {
 
             switch ($this->getColor()) {
 

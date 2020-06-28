@@ -665,7 +665,7 @@ final class Board extends \SplObjectStorage
      */
     private function refresh(): Board
     {
-        $this->turn = Symbol::oppositeColor($this->turn);
+        $this->turn = Symbol::oppColor($this->turn);
         $this->squares = (object) [
             SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_FREE),
             SquareEvaluation::FEATURE_USED => (object) (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_USED),
@@ -723,12 +723,12 @@ final class Board extends \SplObjectStorage
             $piece->getMove()->type === Move::KING_CASTLING_LONG) {
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppositeColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppColor()});
             $this->undoCastle($previousCastling);
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppositeColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppColor()});
             $this->undoMove($previousCastling);
         }
 
@@ -746,7 +746,7 @@ final class Board extends \SplObjectStorage
 
         return in_array(
             $king->getPosition(),
-            $this->attack->{$king->getOppositeColor()}
+            $this->attack->{$king->getOppColor()}
         );
     }
 
@@ -762,18 +762,18 @@ final class Board extends \SplObjectStorage
             foreach ($piece->getLegalMoves() as $square) {
                 switch ($piece->getIdentity()) {
                     case Symbol::KING:
-                        if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
+                        if (in_array($square, $this->squares->used->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Convert::toStdObj($this->turn, Symbol::KING."x$square"))
                             );
-                        } elseif (!in_array($square, $this->space->{$piece->getOppositeColor()})) {
+                        } elseif (!in_array($square, $this->space->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Convert::toStdObj($this->turn, Symbol::KING.$square))
                             );
                         }
                         break;
                     case Symbol::PAWN:
-                        if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
+                        if (in_array($square, $this->squares->used->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Convert::toStdObj($this->turn, $piece->getFile()."x$square"))
                             );
@@ -784,7 +784,7 @@ final class Board extends \SplObjectStorage
                         }
                         break;
                     default:
-                        if (in_array($square, $this->squares->used->{$piece->getOppositeColor()})) {
+                        if (in_array($square, $this->squares->used->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Convert::toStdObj($this->turn, $piece->getIdentity()."x$square"))
                             );

@@ -99,7 +99,7 @@ class King extends AbstractPiece
         $movesKingCaptures = array_values(
             array_intersect(
                 array_values((array)$this->scope),
-                array_merge($this->boardStatus->squares->used->{$this->getOppositeColor()})
+                array_merge($this->boardStatus->squares->used->{$this->getOppColor()})
         ));
 
         $castlingShort = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_SHORT];
@@ -110,8 +110,8 @@ class King extends AbstractPiece
             $this->boardStatus->castling[$this->getColor()][Symbol::CASTLING_SHORT] &&
             in_array($castlingShort['squares']['f'], $this->boardStatus->squares->free) &&
             in_array($castlingShort['squares']['g'], $this->boardStatus->squares->free) &&
-            !in_array($castlingShort['squares']['f'], $this->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingShort['squares']['g'], $this->space->{$this->getOppositeColor()})
+            !in_array($castlingShort['squares']['f'], $this->space->{$this->getOppColor()}) &&
+            !in_array($castlingShort['squares']['g'], $this->space->{$this->getOppColor()})
         ) {
             $movesCastlingShort = [$castlingShort['position']['next']];
         }
@@ -125,9 +125,9 @@ class King extends AbstractPiece
             in_array($castlingLong['squares']['b'], $this->boardStatus->squares->free) &&
             in_array($castlingLong['squares']['c'], $this->boardStatus->squares->free) &&
             in_array($castlingLong['squares']['d'], $this->boardStatus->squares->free) &&
-            !in_array($castlingLong['squares']['b'], $this->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingLong['squares']['c'], $this->space->{$this->getOppositeColor()}) &&
-            !in_array($castlingLong['squares']['d'], $this->space->{$this->getOppositeColor()})
+            !in_array($castlingLong['squares']['b'], $this->space->{$this->getOppColor()}) &&
+            !in_array($castlingLong['squares']['c'], $this->space->{$this->getOppColor()}) &&
+            !in_array($castlingLong['squares']['d'], $this->space->{$this->getOppColor()})
         ) {
             $movesCastlingLong = [$castlingLong['position']['next']];
         }

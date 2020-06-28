@@ -112,7 +112,7 @@ abstract class AbstractPiece implements Piece
      *
      * @return string
      */
-    public function getOppositeColor(): string
+    public function getOppColor(): string
     {
         if ($this->color == Symbol::WHITE) {
             return Symbol::BLACK;

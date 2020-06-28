@@ -48,7 +48,7 @@ class Attack extends AbstractEvaluation
                             array_values(
                                 array_intersect(
                                     array_values((array) $piece->getScope()),
-                                    $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppositeColor()]
+                                    $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                                 )
                             )
                         )
@@ -60,7 +60,7 @@ class Attack extends AbstractEvaluation
                             $this->result[$piece->getColor()],
                             array_intersect(
                                 $piece->getCaptureSquares(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppositeColor()]
+                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                             )
                         )
                     );
@@ -71,7 +71,7 @@ class Attack extends AbstractEvaluation
                             $this->result[$piece->getColor()],
                             array_intersect(
                                 $piece->getLegalMoves(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppositeColor()]
+                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                             )
                         )
                     );

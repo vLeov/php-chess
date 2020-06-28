@@ -76,7 +76,7 @@ class Space extends AbstractEvaluation
                             $this->result[$piece->getColor()],
                             array_diff(
                                 $piece->getLegalMoves(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppositeColor()]
+                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                             )
                         )
                     );
