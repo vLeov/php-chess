@@ -36,13 +36,13 @@ class StatusTest extends AbstractUnitTestCase
         $castling = [
             'w' => [
                 CastlingRule::IS_CASTLED => false,
-                'O-O' => true,
-                'O-O-O' => true
+                Symbol::CASTLING_SHORT => true,
+                Symbol::CASTLING_LONG => true
             ],
             'b' => [
                 CastlingRule::IS_CASTLED => false,
-                'O-O' => true,
-                'O-O-O' => false
+                Symbol::CASTLING_SHORT => true,
+                Symbol::CASTLING_LONG => false
             ]
         ];
 

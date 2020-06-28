@@ -3,6 +3,7 @@
 namespace PGNChess\Tests\Unit\Game;
 
 use PGNChess\Game;
+use PGNChess\PGN\Symbol;
 use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\PGN\Convert;
 use PGNChess\Tests\AbstractUnitTestCase;
@@ -76,13 +77,13 @@ class GameTest extends AbstractUnitTestCase
             'castling' => [
                 'w' => [
                     CastlingRule::IS_CASTLED => false,
-                    'O-O' => true,
-                    'O-O-O' => true
+                    Symbol::CASTLING_SHORT => true,
+                    Symbol::CASTLING_LONG => true
                 ],
                 'b' => [
                     CastlingRule::IS_CASTLED => false,
-                    'O-O' => true,
-                    'O-O-O' => false
+                    Symbol::CASTLING_SHORT => true,
+                    Symbol::CASTLING_LONG => false
                 ]
             ]
         ];
@@ -106,13 +107,13 @@ class GameTest extends AbstractUnitTestCase
 
         // white's castling
         $this->assertEquals($status->castling['w'][CastlingRule::IS_CASTLED], $this->game->status()->castling['w'][CastlingRule::IS_CASTLED]);
-        $this->assertEquals($status->castling['w']['O-O'], $this->game->status()->castling['w']['O-O']);
-        $this->assertEquals($status->castling['w']['O-O-O'], $this->game->status()->castling['w']['O-O-O']);
+        $this->assertEquals($status->castling['w'][Symbol::CASTLING_SHORT], $this->game->status()->castling['w'][Symbol::CASTLING_SHORT]);
+        $this->assertEquals($status->castling['w'][Symbol::CASTLING_LONG], $this->game->status()->castling['w'][Symbol::CASTLING_LONG]);
 
         // black's castling
         $this->assertEquals($status->castling['b'][CastlingRule::IS_CASTLED], $this->game->status()->castling['b'][CastlingRule::IS_CASTLED]);
-        $this->assertEquals($status->castling['b']['O-O'], $this->game->status()->castling['b']['O-O']);
-        $this->assertEquals($status->castling['b']['O-O-O'], $this->game->status()->castling['b']['O-O-O']);
+        $this->assertEquals($status->castling['b'][Symbol::CASTLING_SHORT], $this->game->status()->castling['b'][Symbol::CASTLING_SHORT]);
+        $this->assertEquals($status->castling['b'][Symbol::CASTLING_LONG], $this->game->status()->castling['b'][Symbol::CASTLING_LONG]);
     }
 
     /**
