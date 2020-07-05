@@ -2,7 +2,9 @@
 
 namespace PGNChess\Tests\Unit\Heuristic;
 
+use PGNChess\Board;
 use PGNChess\Heuristic\MaterialSnapshot;
+use PGNChess\Opening\Benoni\BenkoGambit;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
@@ -13,6 +15,12 @@ class MaterialSnapshotTest extends AbstractUnitTestCase
      */
     public function take()
     {
+        $movetext = (new BenkoGambit(new Board))
+                        ->play()
+                        ->getMovetext();
+
+        $snapshot = (new MaterialSnapshot($movetext))->take();
+
         $expected = [
             [
                 Symbol::WHITE => 40.06,
@@ -28,29 +36,29 @@ class MaterialSnapshotTest extends AbstractUnitTestCase
             ],
             [
                 Symbol::WHITE => 40.06,
-                Symbol::BLACK => 40.06,
-            ],
-            [
-                Symbol::WHITE => 40.06,
-                Symbol::BLACK => 40.06,
-            ],
-            [
-                Symbol::WHITE => 40.06,
-                Symbol::BLACK => 40.06,
-            ],
-            [
-                Symbol::WHITE => 39.06,
-                Symbol::BLACK => 40.06,
-            ],
-            [
-                Symbol::WHITE => 39.06,
                 Symbol::BLACK => 39.06,
             ],
+            [
+                Symbol::WHITE => 39.06,
+                Symbol::BLACK => 38.06,
+            ],
+            [
+                Symbol::WHITE => 39.06,
+                Symbol::BLACK => 38.06,
+            ],
+            [
+                Symbol::WHITE => 35.73,
+                Symbol::BLACK => 38.06,
+            ],
+            [
+                Symbol::WHITE => 35.73,
+                Symbol::BLACK => 34.73,
+            ],
+            [
+                Symbol::WHITE => 35.73,
+                Symbol::BLACK => 34.73,
+            ],
         ];
-
-        $snapshot = (new MaterialSnapshot(
-            '1.Nf3 Nf6 2.c4 c5 3.g3 b6 4.Bg2 Bb7 5.O-O e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6'
-        ))->take();
 
         $this->assertEquals($expected, $snapshot);
     }
