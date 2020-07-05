@@ -6,7 +6,9 @@ use PGNChess\Board;
 use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\Opening\Benoni\BenkoGambit;
 use PGNChess\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
+use PGNChess\Opening\RuyLopez\LucenaDefense as LucenaDefense;
 use PGNChess\Opening\RuyLopez\Open as OpenRuyLopez;
+use PGNChess\PGN\Move;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
@@ -115,13 +117,116 @@ class StatusTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function history_in_lucena_defense()
+    {
+        $board = (new LucenaDefense(new Board))->play();
+
+        $expected = [
+            (object) [
+                'position' => 'e2',
+                'move' => (object) [
+                    'pgn' => 'e4',
+                    'isCapture' => false,
+                    'isCheck' => false,
+                    'type' => Move::PAWN,
+                    'color' => Symbol::WHITE,
+                    'identity' => Symbol::PAWN,
+                    'position' => (object) [
+                        'current' => 'e',
+                        'next' => 'e4',
+                    ],
+                ],
+            ],
+            (object) [
+                'position' => 'e7',
+                'move' =>  (object) [
+                    'pgn' => 'e5',
+                    'isCapture' => false,
+                    'isCheck' => false,
+                    'type' => Move::PAWN,
+                    'color' => Symbol::BLACK,
+                    'identity' => Symbol::PAWN,
+                    'position' => (object) [
+                        'current' => 'e',
+                        'next' => 'e5',
+                    ],
+                ],
+            ],
+            (object) [
+                'position' => 'g1',
+                'move' => (object) [
+                    'pgn' => 'Nf3',
+                    'isCapture' => false,
+                    'isCheck' => false,
+                    'type' => Move::KNIGHT,
+                    'color' => Symbol::WHITE,
+                    'identity' => Symbol::KNIGHT,
+                    'position' => (object) [
+                        'current' => null,
+                        'next' => 'f3',
+                    ],
+                ],
+            ],
+            (object) [
+                'position' => 'b8',
+                'move' => (object) [
+                    'pgn' => 'Nc6',
+                    'isCapture' => false,
+                    'isCheck' => false,
+                    'type' => Move::KNIGHT,
+                    'color' => Symbol::BLACK,
+                    'identity' => Symbol::KNIGHT,
+                    'position' => (object) [
+                        'current' => null,
+                        'next' => 'c6',
+                    ],
+                ],
+            ],
+            (object) [
+                'position' => 'f1',
+                'move' => (object) [
+                    'pgn' => 'Bb5',
+                    'isCapture' => false,
+                    'isCheck' => false,
+                    'type' => Move::PIECE,
+                    'color' => Symbol::WHITE,
+                    'identity' => Symbol::BISHOP,
+                    'position' => (object) [
+                        'current' => null,
+                        'next' => 'b5',
+                    ],
+                ],
+            ],
+            (object) [
+                'position' => 'f8',
+                'move' => (object) [
+                    'pgn' => 'Be7',
+                    'isCapture' => false,
+                    'isCheck' => false,
+                    'type' => Move::PIECE,
+                    'color' => Symbol::BLACK,
+                    'identity' => Symbol::BISHOP,
+                    'position' => (object) [
+                        'current' => null,
+                        'next' => 'e7',
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $board->getHistory());
+    }
+
+    /**
+     * @test
+     */
     public function kings_legal_moves_in_benko_gambit()
     {
-        $expected = [ 'e1', 'e2', 'g2' ];
-
         $board = (new BenkoGambit(new Board))->play();
 
         $king = $board->getPieceByPosition('f1');
+
+        $expected = [ 'e1', 'e2', 'g2' ];
 
         $this->assertEquals($expected, $king->getLegalMoves());
     }
