@@ -17,6 +17,8 @@ abstract class AbstractHeuristicSnapshot
 
     protected $moves;
 
+    protected $snapshot = [];
+
     public function __construct(string $movetext)
     {
         $this->board = new Board;
