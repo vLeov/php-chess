@@ -254,6 +254,26 @@ final class Board extends \SplObjectStorage
     }
 
     /**
+     * Gets the movetext.
+     *
+     * @return string
+     */
+    public function getMovetext(): string
+    {
+        $movetext = '';
+
+        foreach ($this->history as $key => $val) {
+            if ($key % 2 === 0) {
+                $movetext .= $key + 1 . ".{$val->move->pgn}";
+            } else {
+                $movetext .= " {$val->move->pgn} ";
+            }
+        }
+
+        return $movetext;
+    }
+
+    /**
      * Adds a new element to the history.
      *
      * @param \stdClass $piece The piece's previous position along with a move object

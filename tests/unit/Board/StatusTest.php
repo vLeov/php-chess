@@ -117,6 +117,18 @@ class StatusTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function movetext_in_exchange_ruy_lopez()
+    {
+        $board = (new ExchangeRuyLopez(new Board))->play();
+
+        $expected = '1.e4 e5 3.Nf3 Nc6 5.Bb5 a6 7.Bxc6 dxc6 9.d4 exd4 11.Qxd4 Qxd4 13.Nxd4';
+
+        $this->assertEquals($expected, $board->getMovetext());
+    }
+
+    /**
+     * @test
+     */
     public function history_in_lucena_defense()
     {
         $board = (new LucenaDefense(new Board))->play();
