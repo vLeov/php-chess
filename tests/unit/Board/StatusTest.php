@@ -4,15 +4,9 @@ namespace PGNChess\Tests\Unit\Board;
 
 use PGNChess\Board;
 use PGNChess\Castling\Rule as CastlingRule;
+use PGNChess\Opening\RuyLopez\Open as OpenRuyLopez;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\Piece\Bishop;
-use PGNChess\Piece\King;
-use PGNChess\Piece\Knight;
-use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Queen;
-use PGNChess\Piece\Rook;
-use PGNChess\Type\RookType;
 use PGNChess\Tests\AbstractUnitTestCase;
 
 class StatusTest extends AbstractUnitTestCase
@@ -20,33 +14,24 @@ class StatusTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_some_moves_and_check_castling()
+    public function castling_in_open_ruy_lopez()
     {
-        $board = new Board;
+        $board = (new OpenRuyLopez(new Board))->play();
 
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'c6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bf4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'd5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bxb8'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Rxb8'));
-
-        $castling = [
+        $expected = [
             'w' => [
-                CastlingRule::IS_CASTLED => false,
-                Symbol::CASTLING_SHORT => true,
-                Symbol::CASTLING_LONG => true
+                CastlingRule::IS_CASTLED => true,
+                Symbol::CASTLING_SHORT => false,
+                Symbol::CASTLING_LONG => false,
             ],
             'b' => [
                 CastlingRule::IS_CASTLED => false,
                 Symbol::CASTLING_SHORT => true,
-                Symbol::CASTLING_LONG => false
-            ]
+                Symbol::CASTLING_LONG => true,
+            ],
         ];
 
-        $this->assertEquals($castling, $board->getCastling());
+        $this->assertEquals($expected, $board->getCastling());
     }
 
     /**
