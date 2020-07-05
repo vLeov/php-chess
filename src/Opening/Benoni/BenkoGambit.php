@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Opening\RuyLopez;
+namespace PGNChess\Opening\Benoni;
 
 use PGNChess\AbstractOpening;
 use PGNChess\PGN\Convert;
