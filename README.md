@@ -162,56 +162,23 @@ $blackPieces[1]->identity;
 $blackPieces[1]->position;
 $blackPieces[1]->moves;
 ```
-
 #### `history()`
 
-Gets the game's history.
+Gets the game's history in the form of an array of `stdClass` objects.
 
     $history = $game->history();
 
-The following sequence of moves:
+#### `movetext()`
 
-```php
-$game = new Game;
+Gets the game's movetext in text format.
 
-$game->play('w', 'd4');
-$game->play('b', 'c6');
-$game->play('w', 'Bf4');
-$game->play('b', 'd5');
-$game->play('w', 'Nc3');
-$game->play('b', 'Nf6');
-$game->play('w', 'Bxb8');
-$game->play('b', 'Rxb8');
-
-$history = $game->history();
-```
-
-Will generate a `$history` array of objects.
+    $movetext = $game->movetext();
 
 #### `captures()`
 
-Gets the pieces captured by both players.
+Gets the pieces captured by both players as an array of `stdClass` objects.
 
     $captures = $game->captures();
-
-The following sequence of moves:
-
-```php
-$game = new Game;
-
-$game->play('w', 'd4');
-$game->play('b', 'c6');
-$game->play('w', 'Bf4');
-$game->play('b', 'd5');
-$game->play('w', 'Nc3');
-$game->play('b', 'Nf6');
-$game->play('w', 'Bxb8');
-$game->play('b', 'Rxb8');
-
-$captures = $game->captures();
-```
-
-Will generate a `$captures` array of objects.
 
 ### Development
 

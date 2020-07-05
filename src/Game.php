@@ -11,7 +11,7 @@ use PGNChess\Evaluation\Square as SquareEvaluation;
 /**
  * Game class.
  *
- * A user-friendly wrapper of the Board class.
+ * A wrapper of the Board class.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
@@ -51,7 +51,7 @@ class Game
     }
 
     /**
-     * Gets the board's history in a user-friendly way.
+     * Gets the history.
      *
      * @return array
      */
@@ -73,6 +73,16 @@ class Game
         }
 
         return $history;
+    }
+
+    /**
+     * Gets the movetext.
+     *
+     * @return string
+     */
+    public function movetext(): string
+    {
+        return $this->board->getMovetext();
     }
 
     /**
