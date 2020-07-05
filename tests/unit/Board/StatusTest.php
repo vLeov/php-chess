@@ -4,6 +4,7 @@ namespace PGNChess\Tests\Unit\Board;
 
 use PGNChess\Board;
 use PGNChess\Castling\Rule as CastlingRule;
+use PGNChess\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
 use PGNChess\Opening\RuyLopez\Open as OpenRuyLopez;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
@@ -37,18 +38,52 @@ class StatusTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function captures()
+    public function captures_in_exchange_ruy_lopez()
     {
-        $captures= [
+        $board = (new ExchangeRuyLopez(new Board))->play();
+
+        $expected = [
             'w' => [
                 (object) [
                     'capturing' => (object) [
+                        'identity' => 'B',
+                        'position' => 'b5',
+                    ],
+                    'captured' => (object) [
+                        'identity' => 'N',
+                        'position' => 'c6',
+                    ],
+                ],
+                (object) [
+                    'capturing' => (object) [
+                        'identity' => 'Q',
+                        'position' => 'd1',
+                    ],
+                    'captured' => (object) [
                         'identity' => 'P',
-                        'position' => 'b2',
+                        'position' => 'd4',
+                    ],
+                ],
+                (object) [
+                    'capturing' => (object) [
+                        'identity' => 'N',
+                        'position' => 'f3',
+                    ],
+                    'captured' => (object) [
+                        'identity' => 'Q',
+                        'position' => 'd4',
+                    ],
+                ],
+            ],
+            'b' => [
+                (object) [
+                    'capturing' => (object) [
+                        'identity' => 'P',
+                        'position' => 'd7',
                     ],
                     'captured' => (object) [
                         'identity' => 'B',
-                        'position' => 'c3',
+                        'position' => 'c6',
                     ],
                 ],
                 (object) [
@@ -58,96 +93,23 @@ class StatusTest extends AbstractUnitTestCase
                     ],
                     'captured' => (object) [
                         'identity' => 'P',
-                        'position' => 'f5',
-                    ],
-                ],
-                (object) [
-                    'capturing' => (object) [
-                        'identity' => 'P',
                         'position' => 'd4',
                     ],
-                    'captured' => (object) [
-                        'identity' => 'P',
-                        'position' => 'c5',
-                    ],
-                ],
-            ],
-            'b' => [
-                (object) [
-                    'capturing' => (object) [
-                        'identity' => 'B',
-                        'position' => 'b4',
-                    ],
-                    'captured' => (object) [
-                        'identity' => 'N',
-                        'position' => 'c3',
-                    ],
                 ],
                 (object) [
                     'capturing' => (object) [
-                        'identity' => 'R',
-                        'position' => 'f8',
-                        'type' => 1,
+                        'identity' => 'Q',
+                        'position' => 'd8',
                     ],
                     'captured' => (object) [
-                        'identity' => 'P',
-                        'position' => 'f6',
+                        'identity' => 'Q',
+                        'position' => 'd4',
                     ],
                 ],
             ],
         ];
 
-        $board = new Board;
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e4')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e6')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'd4')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'd5')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Bb4')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e5')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'c5')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Qg4')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Ne7')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nbc6')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'a3')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Bxc3')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'bxc3')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Qc7')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Rb1')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'O-O')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Bd3')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'f5')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'exf6')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Rxf6')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Qh3')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'g6')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Qh4')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Rf7')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Qg3')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Qa5')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Ng5')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Rg7')));
-
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'dxc5')));
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e5')));
-
-        $this->assertEquals($captures, $board->getCaptures());
+        $this->assertEquals($expected, $board->getCaptures());
     }
 
     /**
