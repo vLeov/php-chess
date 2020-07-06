@@ -3,6 +3,7 @@
 namespace PGNChess;
 
 use PGNChess\Board;
+use PGNChess\PGN\Symbol;
 
 /**
  * Abstract heuristic snapshot.
@@ -22,7 +23,7 @@ abstract class AbstractHeuristicSnapshot
     public function __construct(string $movetext)
     {
         $this->board = new Board;
-        $this->moves = $this->moves($movetext);
+        $this->moves = $this->moves($this->filter($movetext));
     }
 
     abstract public function take(): array;
@@ -36,5 +37,17 @@ abstract class AbstractHeuristicSnapshot
         }
 
         return $items;
+    }
+
+    protected function filter(string $movetext)
+    {
+        $movetext = str_replace([
+            Symbol::RESULT_WHITE_WINS,
+            Symbol::RESULT_BLACK_WINS,
+            Symbol::RESULT_DRAW,
+            Symbol::RESULT_UNKNOWN,
+        ], '', $movetext);
+
+        return $movetext;
     }
 }
