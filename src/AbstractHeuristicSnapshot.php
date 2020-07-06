@@ -2,7 +2,7 @@
 
 namespace PGNChess;
 
-use PgnChess\Board;
+use PGNChess\Board;
 
 /**
  * Abstract heuristic snapshot.
