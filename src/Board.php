@@ -534,14 +534,14 @@ final class Board extends \SplObjectStorage
             $this->attach(
                 new King(
                     $king->getColor(),
-                    CastlingRule::color($king->getColor())[Symbol::KING][$king->getMove()->pgn]['position']['next']
+                    CastlingRule::color($king->getColor())[Symbol::KING][rtrim($king->getMove()->pgn, '+')]['position']['next']
                 )
              );
             $this->detach($rook);
             $this->attach(
                 new Rook(
                     $rook->getColor(),
-                    CastlingRule::color($king->getColor())[Symbol::ROOK][$king->getMove()->pgn]['position']['next'],
+                    CastlingRule::color($king->getColor())[Symbol::ROOK][rtrim($king->getMove()->pgn, '+')]['position']['next'],
                     $rook->getIdentity() === Symbol::ROOK
                 )
             );

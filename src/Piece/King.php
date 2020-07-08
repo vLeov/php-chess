@@ -57,7 +57,7 @@ class King extends AbstractPiece
             if (
                 $piece->getIdentity() === Symbol::ROOK &&
                 $piece->getPosition() ===
-                CastlingRule::color($this->getColor())[Symbol::ROOK][$this->getMove()->pgn]['position']['current']
+                CastlingRule::color($this->getColor())[Symbol::ROOK][rtrim($this->getMove()->pgn, '+')]['position']['current']
             ) {
                 return $piece;
             }
