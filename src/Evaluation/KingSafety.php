@@ -17,14 +17,6 @@ class KingSafety extends AbstractEvaluation
 {
     const NAME = 'safety';
 
-    const SYSTEM_PRIME = [
-        Symbol::PAWN => 2,
-        Symbol::KNIGHT => 3,
-        Symbol::BISHOP => 3,
-        Symbol::ROOK => 5,
-        Symbol::QUEEN => 7,
-    ];
-
     public function __construct(Board $board)
     {
         parent::__construct($board);
@@ -39,13 +31,13 @@ class KingSafety extends AbstractEvaluation
     {
         foreach ($this->board->getPiece(Symbol::WHITE, Symbol::KING)->getScope() as $key => $sq) {
             if ($piece = $this->board->getPieceByPosition($sq)) {
-                $this->result[Symbol::WHITE] *= self::SYSTEM_PRIME[$piece->getIdentity()];
+                $this->result[Symbol::WHITE] += $this->system[$feature][$piece->getIdentity()];
             }
         }
 
         foreach ($this->board->getPiece(Symbol::BLACK, Symbol::KING)->getScope() as $key => $sq) {
             if ($piece = $this->board->getPieceByPosition($sq)) {
-                $this->result[Symbol::BLACK] *= self::SYSTEM_PRIME[$piece->getIdentity()];
+                $this->result[Symbol::BLACK] += $this->system[$feature][$piece->getIdentity()];
             }
         }
 

@@ -24,7 +24,7 @@ class KingSafetySnapshot extends AbstractHeuristicSnapshot
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
-            $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate();
+            $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
             $this->snapshot[] = [
                 Symbol::WHITE => $kSafetyEvald[Symbol::WHITE],
                 Symbol::BLACK => $kSafetyEvald[Symbol::BLACK],

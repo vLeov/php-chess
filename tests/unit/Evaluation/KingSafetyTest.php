@@ -7,6 +7,7 @@ use PGNChess\Opening\Sicilian\Closed as ClosedSicilian;
 use PGNChess\Opening\Sicilian\Open as OpenSicilian;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
+use PGNChess\Evaluation\Value\System;
 use PGNChess\Tests\AbstractUnitTestCase;
 
 class KingSafetyTest extends AbstractUnitTestCase
@@ -16,11 +17,11 @@ class KingSafetyTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $kSafetyEvald = (new KingSafetyEvaluation(new Board))->evaluate();
+        $kSafetyEvald = (new KingSafetyEvaluation(new Board))->evaluate(System::SYSTEM_BERLINER);
 
         $expected = [
-            Symbol::WHITE => 168,
-            Symbol::BLACK => 168,
+            Symbol::WHITE => 16.13,
+            Symbol::BLACK => 16.13,
         ];
 
         $this->assertEquals($expected, $kSafetyEvald);
@@ -33,11 +34,11 @@ class KingSafetyTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board))->play();
 
-        $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate();
+        $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
         $expected = [
-            Symbol::WHITE => 42,
-            Symbol::BLACK => 84,
+            Symbol::WHITE => 14.13,
+            Symbol::BLACK => 15.13,
         ];
 
         $this->assertEquals($expected, $kSafetyEvald);
@@ -50,11 +51,11 @@ class KingSafetyTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board))->play();
 
-        $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate();
+        $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
         $expected = [
-            Symbol::WHITE => 14,
-            Symbol::BLACK => 28,
+            Symbol::WHITE => 10.8,
+            Symbol::BLACK => 11.8,
         ];
 
         $this->assertEquals($expected, $kSafetyEvald);
