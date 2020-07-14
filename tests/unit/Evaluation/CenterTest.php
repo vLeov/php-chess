@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Evaluation\Center;
+namespace PGNChess\Tests\Unit\Evaluation;
 
 use PGNChess\Board;
 use PGNChess\Evaluation\Center as CenterEvaluation;
@@ -11,7 +11,7 @@ use PGNChess\Opening\Sicilian\Open as OpenSicilian;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
-class OpeningTest extends AbstractUnitTestCase
+class CenterTest extends AbstractUnitTestCase
 {
     /**
      * @test
