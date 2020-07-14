@@ -421,33 +421,40 @@ final class Board extends \SplObjectStorage
     private function capture(Piece $piece): Board
     {
         $piece->getLegalMoves(); // this creates the enPassantSquare property in the pawn's position object
+
         if ($piece->getIdentity() === Symbol::PAWN && !empty($piece->getEnPassantSquare()) &&
             empty($this->getPieceByPosition($piece->getMove()->position->next))
            ) {
-            $captured = $this->getPieceByPosition($piece->getEnPassantSquare());
-            $capturedData = (object) [
-                'identity' => $captured->getIdentity(),
-                'position' => $piece->getEnPassantSquare(),
-            ];
+            if ($captured = $this->getPieceByPosition($piece->getEnPassantSquare())) {
+                $capturedData = (object) [
+                    'identity' => $captured->getIdentity(),
+                    'position' => $piece->getEnPassantSquare(),
+                ];
+            }
         } else {
-            $captured = $this->getPieceByPosition($piece->getMove()->position->next);
-            $capturedData = (object) [
-                'identity' => $captured->getIdentity(),
-                'position' => $captured->getPosition(),
-            ];
+            if ($captured = $this->getPieceByPosition($piece->getMove()->position->next)) {
+                $capturedData = (object) [
+                    'identity' => $captured->getIdentity(),
+                    'position' => $captured->getPosition(),
+                ];
+            }
         }
-        $captured->getIdentity() === Symbol::ROOK ? $capturedData->type = $captured->getType() : null;
-        $this->detach($captured);
-        $capturingData = (object) [
-            'identity' => $piece->getIdentity(),
-            'position' => $piece->getPosition(),
-        ];
-        $piece->getIdentity() === Symbol::ROOK ? $capturingData->type = $piece->getType() : null;
-        $capture = (object) [
-            'capturing' => $capturingData,
-            'captured' => $capturedData,
-        ];
-        $this->pushCapture($piece->getColor(), $capture);
+
+        if ($captured) {
+            $capturingData = (object) [
+                'identity' => $piece->getIdentity(),
+                'position' => $piece->getPosition(),
+            ];
+            $piece->getIdentity() === Symbol::ROOK ? $capturingData->type = $piece->getType() : null;
+            $captured->getIdentity() === Symbol::ROOK ? $capturedData->type = $captured->getType() : null;
+            $capture = (object) [
+                'capturing' => $capturingData,
+                'captured' => $capturedData,
+            ];
+            $this->pushCapture($piece->getColor(), $capture);
+            $this->detach($captured);
+        }
+
 
         return $this;
     }
