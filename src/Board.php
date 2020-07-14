@@ -261,7 +261,6 @@ final class Board extends \SplObjectStorage
     public function getMovetext(): string
     {
         $movetext = '';
-
         foreach ($this->history as $key => $val) {
             if ($key % 2 === 0) {
                 $movetext .= $key + 1 . ".{$val->move->pgn}";
@@ -421,7 +420,6 @@ final class Board extends \SplObjectStorage
     private function capture(Piece $piece): Board
     {
         $piece->getLegalMoves(); // this creates the enPassantSquare property in the pawn's position object
-
         if ($piece->getIdentity() === Symbol::PAWN && !empty($piece->getEnPassantSquare()) &&
             empty($this->getPieceByPosition($piece->getMove()->position->next))
            ) {
@@ -439,7 +437,6 @@ final class Board extends \SplObjectStorage
                 ];
             }
         }
-
         if ($captured) {
             $capturingData = (object) [
                 'identity' => $piece->getIdentity(),
@@ -454,7 +451,6 @@ final class Board extends \SplObjectStorage
             $this->pushCapture($piece->getColor(), $capture);
             $this->detach($captured);
         }
-
 
         return $this;
     }
