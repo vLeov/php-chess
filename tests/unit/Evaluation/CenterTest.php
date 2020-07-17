@@ -21,8 +21,8 @@ class CenterTest extends AbstractUnitTestCase
         $board = (new RuyLopezLucenaDefense(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => 1,
-            Symbol::BLACK => 1,
+            Symbol::WHITE => 3,
+            Symbol::BLACK => 2,
         ];
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
@@ -38,8 +38,8 @@ class CenterTest extends AbstractUnitTestCase
         $board = (new OpenSicilian(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => 4.2,
-            Symbol::BLACK => 0,
+            Symbol::WHITE => 5.2,
+            Symbol::BLACK => 2,
         ];
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
@@ -55,8 +55,8 @@ class CenterTest extends AbstractUnitTestCase
         $board = (new ClosedSicilian(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => 1,
-            Symbol::BLACK => 0,
+            Symbol::WHITE => 2,
+            Symbol::BLACK => 2,
         ];
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate(System::SYSTEM_BERLINER);

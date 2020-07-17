@@ -23,40 +23,40 @@ class CenterSnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 0,
+                Symbol::WHITE => 2,
+                Symbol::BLACK => 2,
             ],
             [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 0,
-            ],
-            [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 0,
-            ],
-            [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 0,
-            ],
-            [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 0,
-            ],
-            [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 0,
+                Symbol::WHITE => 3,
+                Symbol::BLACK => 2,
             ],
             [
                 Symbol::WHITE => 2,
-                Symbol::BLACK => 0,
+                Symbol::BLACK => 2,
             ],
             [
                 Symbol::WHITE => 2,
-                Symbol::BLACK => 0,
+                Symbol::BLACK => 2,
             ],
             [
                 Symbol::WHITE => 2,
-                Symbol::BLACK => 0,
+                Symbol::BLACK => 2,
+            ],
+            [
+                Symbol::WHITE => 3,
+                Symbol::BLACK => 3,
+            ],
+            [
+                Symbol::WHITE => 3,
+                Symbol::BLACK => 2,
+            ],
+            [
+                Symbol::WHITE => 3,
+                Symbol::BLACK => 2,
+            ],
+            [
+                Symbol::WHITE => 3,
+                Symbol::BLACK => 2,
             ],
         ];
 

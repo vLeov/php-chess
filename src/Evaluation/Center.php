@@ -4,6 +4,7 @@ namespace PGNChess\Evaluation;
 
 use PGNChess\AbstractEvaluation;
 use PgnChess\Board;
+use PGNChess\Evaluation\Space as SpaceEvaluation;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -38,6 +39,11 @@ class Center extends AbstractEvaluation
                 }
             }
         }
+
+        $spEvald = (new SpaceEvaluation($this->board))->evaluate();
+
+        $this->result[Symbol::WHITE] += count(array_intersect($this->center, ($spEvald[Symbol::WHITE])));
+        $this->result[Symbol::BLACK] += count(array_intersect($this->center, ($spEvald[Symbol::BLACK])));
 
         return $this->result;
     }
