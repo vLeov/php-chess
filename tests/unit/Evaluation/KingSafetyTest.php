@@ -20,8 +20,8 @@ class KingSafetyTest extends AbstractUnitTestCase
         $kSafetyEvald = (new KingSafetyEvaluation(new Board))->evaluate(System::SYSTEM_BERLINER);
 
         $expected = [
-            Symbol::WHITE => 16.13,
-            Symbol::BLACK => 16.13,
+            Symbol::WHITE => 6,
+            Symbol::BLACK => 6,
         ];
 
         $this->assertEquals($expected, $kSafetyEvald);
@@ -37,8 +37,8 @@ class KingSafetyTest extends AbstractUnitTestCase
         $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
         $expected = [
-            Symbol::WHITE => 14.13,
-            Symbol::BLACK => 15.13,
+            Symbol::WHITE => 4,
+            Symbol::BLACK => 5,
         ];
 
         $this->assertEquals($expected, $kSafetyEvald);
@@ -54,8 +54,8 @@ class KingSafetyTest extends AbstractUnitTestCase
         $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
         $expected = [
-            Symbol::WHITE => 10.8,
-            Symbol::BLACK => 11.8,
+            Symbol::WHITE => 3,
+            Symbol::BLACK => 4,
         ];
 
         $this->assertEquals($expected, $kSafetyEvald);

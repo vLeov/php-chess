@@ -4,6 +4,9 @@ namespace PGNChess\Evaluation;
 
 use PGNChess\AbstractEvaluation;
 use PgnChess\Board;
+use PGNChess\Evaluation\Attack as AttackEvaluation;
+use PGNChess\Evaluation\Space as SpaceEvaluation;
+use PGNChess\Evaluation\Square as SquareEvaluation;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -29,18 +32,35 @@ class KingSafety extends AbstractEvaluation
 
     public function evaluate($feature = null): array
     {
-        foreach ($this->board->getPiece(Symbol::WHITE, Symbol::KING)->getScope() as $key => $sq) {
-            if ($piece = $this->board->getPieceByPosition($sq)) {
-                $this->result[Symbol::WHITE] += $this->system[$feature][$piece->getIdentity()];
-            }
-        }
+        $attEvald = (new AttackEvaluation($this->board))->evaluate();
+        $spEvald = (new SpaceEvaluation($this->board))->evaluate();
+        $sqEvald = (new SquareEvaluation($this->board))->evaluate(SquareEvaluation::FEATURE_USED);
 
-        foreach ($this->board->getPiece(Symbol::BLACK, Symbol::KING)->getScope() as $key => $sq) {
-            if ($piece = $this->board->getPieceByPosition($sq)) {
-                $this->result[Symbol::BLACK] += $this->system[$feature][$piece->getIdentity()];
-            }
-        }
+        $this->color(Symbol::WHITE, $feature, $attEvald, $spEvald, $sqEvald);
+        $this->color(Symbol::BLACK, $feature, $attEvald, $spEvald, $sqEvald);
 
         return $this->result;
+    }
+
+    private function color(string $color, string $feature, array $attEvald, array $spEvald, array $sqEvald)
+    {
+        $king = $this->board->getPiece($color, Symbol::KING);
+        foreach ($king->getScope() as $key => $sq) {
+            if ($piece = $this->board->getPieceByPosition($sq)) {
+                $this->result[$color] += 1;
+            }
+            if (in_array($sq, $attEvald[$king->getOppColor()])) {
+                $this->result[$color] -= 1;
+            }
+            if (in_array($sq, $spEvald[$king->getOppColor()])) {
+                $this->result[$color] -= 2;
+            }
+            if (in_array($sq, $sqEvald[$king->getOppColor()])) {
+                $this->result[$color] -= 3;
+            }
+            if ($this->board->isCheck()) {
+                $this->result[$color] -= 4;
+            }
+        }
     }
 }
