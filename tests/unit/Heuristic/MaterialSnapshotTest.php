@@ -23,40 +23,40 @@ class MaterialSnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 40.06,
-                Symbol::BLACK => 40.06,
+                Symbol::WHITE => 1,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 40.06,
-                Symbol::BLACK => 40.06,
+                Symbol::WHITE => 1,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 40.06,
-                Symbol::BLACK => 40.06,
+                Symbol::WHITE => 1,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 40.06,
-                Symbol::BLACK => 39.06,
+                Symbol::WHITE => 1,
+                Symbol::BLACK => 0.81,
             ],
             [
-                Symbol::WHITE => 39.06,
-                Symbol::BLACK => 38.06,
+                Symbol::WHITE => 0.81,
+                Symbol::BLACK => 0.62,
             ],
             [
-                Symbol::WHITE => 39.06,
-                Symbol::BLACK => 38.06,
+                Symbol::WHITE => 0.81,
+                Symbol::BLACK => 0.62,
             ],
             [
-                Symbol::WHITE => 35.73,
-                Symbol::BLACK => 38.06,
+                Symbol::WHITE => 0.19,
+                Symbol::BLACK => 0.62,
             ],
             [
-                Symbol::WHITE => 35.73,
-                Symbol::BLACK => 34.73,
+                Symbol::WHITE => 0.19,
+                Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 35.73,
-                Symbol::BLACK => 34.73,
+                Symbol::WHITE => 0.19,
+                Symbol::BLACK => 0,
             ],
         ];
 

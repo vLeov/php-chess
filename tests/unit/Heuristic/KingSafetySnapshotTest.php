@@ -23,40 +23,40 @@ class KingSafetySnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 5,
-                Symbol::BLACK => 6,
+                Symbol::WHITE => 0.86,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 5,
-                Symbol::BLACK => 6,
+                Symbol::WHITE => 0.86,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 5,
-                Symbol::BLACK => 6,
+                Symbol::WHITE => 0.86,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 5,
-                Symbol::BLACK => 6,
+                Symbol::WHITE => 0.86,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 4,
-                Symbol::BLACK => 6,
+                Symbol::WHITE => 0.71,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 4,
-                Symbol::BLACK => 5,
+                Symbol::WHITE => 0.71,
+                Symbol::BLACK => 0.86,
             ],
             [
-                Symbol::WHITE => -1,
-                Symbol::BLACK => 5,
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.86,
             ],
             [
-                Symbol::WHITE => 4,
-                Symbol::BLACK => 5,
+                Symbol::WHITE => 0.71,
+                Symbol::BLACK => 0.86,
             ],
             [
-                Symbol::WHITE => 3,
-                Symbol::BLACK => 5,
+                Symbol::WHITE => 0.57,
+                Symbol::BLACK => 0.86,
             ],
         ];
 

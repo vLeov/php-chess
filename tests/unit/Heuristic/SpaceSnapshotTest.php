@@ -23,40 +23,40 @@ class SpaceSnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 14,
-                Symbol::BLACK => 12,
+                Symbol::WHITE => 0.17,
+                Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 17,
-                Symbol::BLACK => 15,
+                Symbol::WHITE => 0.42,
+                Symbol::BLACK => 0.25,
             ],
             [
-                Symbol::WHITE => 17,
-                Symbol::BLACK => 17,
+                Symbol::WHITE => 0.42,
+                Symbol::BLACK => 0.42,
             ],
             [
-                Symbol::WHITE => 17,
-                Symbol::BLACK => 16,
+                Symbol::WHITE => 0.42,
+                Symbol::BLACK => 0.33,
             ],
             [
-                Symbol::WHITE => 17,
-                Symbol::BLACK => 20,
+                Symbol::WHITE => 0.42,
+                Symbol::BLACK => 0.67,
             ],
             [
-                Symbol::WHITE => 19,
-                Symbol::BLACK => 21,
+                Symbol::WHITE => 0.58,
+                Symbol::BLACK => 0.75,
             ],
             [
-                Symbol::WHITE => 22,
-                Symbol::BLACK => 23,
+                Symbol::WHITE => 0.83,
+                Symbol::BLACK => 0.92,
             ],
             [
-                Symbol::WHITE => 23,
-                Symbol::BLACK => 20,
+                Symbol::WHITE => 0.92,
+                Symbol::BLACK => 0.67,
             ],
             [
-                Symbol::WHITE => 24,
-                Symbol::BLACK => 20,
+                Symbol::WHITE => 1,
+                Symbol::BLACK => 0.67,
             ],
         ];
 

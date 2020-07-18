@@ -30,6 +30,7 @@ class AttackSnapshot extends AbstractHeuristicSnapshot
                 Symbol::BLACK => count($attEvald[Symbol::BLACK]),
             ];
         }
+        $this->normalize();
 
         return $this->snapshot;
     }

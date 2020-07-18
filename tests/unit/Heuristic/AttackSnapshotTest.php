@@ -27,36 +27,36 @@ class AttackSnapshotTest extends AbstractUnitTestCase
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 1,
+                Symbol::WHITE => 0.25,
+                Symbol::BLACK => 0.25,
+            ],
+            [
+                Symbol::WHITE => 0.25,
+                Symbol::BLACK => 0.5,
+            ],
+            [
+                Symbol::WHITE => 0.25,
+                Symbol::BLACK => 0.5,
+            ],
+            [
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.5,
+            ],
+            [
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.5,
+            ],
+            [
+                Symbol::WHITE => 0.25,
                 Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 2,
-            ],
-            [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 2,
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.75,
             ],
             [
                 Symbol::WHITE => 0,
-                Symbol::BLACK => 2,
-            ],
-            [
-                Symbol::WHITE => 0,
-                Symbol::BLACK => 2,
-            ],
-            [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 4,
-            ],
-            [
-                Symbol::WHITE => 0,
-                Symbol::BLACK => 3,
-            ],
-            [
-                Symbol::WHITE => 0,
-                Symbol::BLACK => 3,
+                Symbol::BLACK => 0.75,
             ],
         ];
 

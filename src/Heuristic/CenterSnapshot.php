@@ -30,6 +30,7 @@ class CenterSnapshot extends AbstractHeuristicSnapshot
                 Symbol::BLACK => $ctrEvald[Symbol::BLACK],
             ];
         }
+        $this->normalize();
 
         return $this->snapshot;
     }

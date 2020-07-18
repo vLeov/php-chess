@@ -50,4 +50,25 @@ abstract class AbstractHeuristicSnapshot
 
         return $movetext;
     }
+
+    protected function normalize()
+    {
+        $min = [
+            Symbol::WHITE => min(array_column($this->snapshot, Symbol::WHITE)),
+            Symbol::BLACK => min(array_column($this->snapshot, Symbol::BLACK)),
+        ];
+
+        $max = [
+            Symbol::WHITE => max(array_column($this->snapshot, Symbol::WHITE)),
+            Symbol::BLACK => max(array_column($this->snapshot, Symbol::BLACK)),
+        ];
+
+        $min = min([$min[Symbol::WHITE], $min[Symbol::BLACK]]);
+        $max = max([$max[Symbol::WHITE], $max[Symbol::BLACK]]);
+
+        foreach ($this->snapshot as $key => $val) {
+            $this->snapshot[$key][Symbol::WHITE] = round(($val[Symbol::WHITE] - $min) / ($max - $min), 2);
+            $this->snapshot[$key][Symbol::BLACK] = round(($val[Symbol::BLACK] - $min) / ($max - $min), 2);
+        }
+    }
 }

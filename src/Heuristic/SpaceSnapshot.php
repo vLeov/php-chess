@@ -29,6 +29,7 @@ class SpaceSnapshot extends AbstractHeuristicSnapshot
                 Symbol::BLACK => count($spEvald[Symbol::BLACK]),
             ];
         }
+        $this->normalize();
 
         return $this->snapshot;
     }

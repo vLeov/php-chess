@@ -29,6 +29,7 @@ class ConnectivitySnapshot extends AbstractHeuristicSnapshot
                 Symbol::BLACK => $connEvald[Symbol::BLACK],
             ];
         }
+        $this->normalize();
 
         return $this->snapshot;
     }

@@ -30,6 +30,7 @@ class MaterialSnapshot extends AbstractHeuristicSnapshot
                 Symbol::BLACK => $mtlEvald[Symbol::BLACK],
             ];
         }
+        $this->normalize();
 
         return $this->snapshot;
     }

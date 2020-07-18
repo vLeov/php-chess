@@ -30,6 +30,7 @@ class KingSafetySnapshot extends AbstractHeuristicSnapshot
                 Symbol::BLACK => $kSafetyEvald[Symbol::BLACK],
             ];
         }
+        $this->normalize();
 
         return $this->snapshot;
     }
