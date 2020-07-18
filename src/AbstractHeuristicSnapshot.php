@@ -53,18 +53,13 @@ abstract class AbstractHeuristicSnapshot
 
     protected function normalize()
     {
-        $min = [
-            Symbol::WHITE => min(array_column($this->snapshot, Symbol::WHITE)),
-            Symbol::BLACK => min(array_column($this->snapshot, Symbol::BLACK)),
-        ];
+        $values = array_merge(
+            array_column($this->snapshot, Symbol::WHITE),
+            array_column($this->snapshot, Symbol::BLACK)
+        );
 
-        $max = [
-            Symbol::WHITE => max(array_column($this->snapshot, Symbol::WHITE)),
-            Symbol::BLACK => max(array_column($this->snapshot, Symbol::BLACK)),
-        ];
-
-        $min = min([$min[Symbol::WHITE], $min[Symbol::BLACK]]);
-        $max = max([$max[Symbol::WHITE], $max[Symbol::BLACK]]);
+        $min = min($values);
+        $max = max($values);
 
         foreach ($this->snapshot as $key => $val) {
             $this->snapshot[$key][Symbol::WHITE] = round(($val[Symbol::WHITE] - $min) / ($max - $min), 2);
