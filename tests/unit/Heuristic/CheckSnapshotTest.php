@@ -82,8 +82,8 @@ class CheckSnapshotTest extends AbstractUnitTestCase
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 1,
-                Symbol::BLACK => 0,
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 1,
             ],
         ];
 
@@ -115,8 +115,8 @@ class CheckSnapshotTest extends AbstractUnitTestCase
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 0,
-                Symbol::BLACK => 1,
+                Symbol::WHITE => 1,
+                Symbol::BLACK => 0,
             ],
         ];
 
