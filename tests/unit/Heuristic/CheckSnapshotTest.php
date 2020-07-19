@@ -5,12 +5,12 @@ namespace PGNChess\Tests\Unit\Heuristic;
 use PGNChess\Board;
 use PGNChess\Checkmate\Fool as FoolCheckmate;
 use PGNChess\Checkmate\Scholar as ScholarCheckmate;
-use PGNChess\Heuristic\CheckmateSnapshot;
+use PGNChess\Heuristic\CheckSnapshot;
 use PGNChess\Opening\Benoni\BenkoGambit;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
-class CheckmateSnapshotTest extends AbstractUnitTestCase
+class CheckSnapshotTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -21,7 +21,7 @@ class CheckmateSnapshotTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $snapshot = (new CheckmateSnapshot($movetext))->take();
+        $snapshot = (new CheckSnapshot($movetext))->take();
 
         $expected = [
             [
@@ -74,7 +74,7 @@ class CheckmateSnapshotTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $snapshot = (new CheckmateSnapshot($movetext))->take();
+        $snapshot = (new CheckSnapshot($movetext))->take();
 
         $expected = [
             [
@@ -99,7 +99,7 @@ class CheckmateSnapshotTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $snapshot = (new CheckmateSnapshot($movetext))->take();
+        $snapshot = (new CheckSnapshot($movetext))->take();
 
         $expected = [
             [

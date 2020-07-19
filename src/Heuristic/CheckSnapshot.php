@@ -5,16 +5,16 @@ namespace PGNChess\Heuristic;
 use PGNChess\AbstractHeuristicSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\Evaluation\Checkmate as CheckmateEvaluation;
+use PGNChess\Evaluation\Check as CheckEvaluation;
 
 /**
- * Checkmate snapshot.
+ * Check snapshot.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-class CheckmateSnapshot extends AbstractHeuristicSnapshot
+class CheckSnapshot extends AbstractHeuristicSnapshot
 {
     public function take(): array
     {
