@@ -61,9 +61,11 @@ abstract class AbstractHeuristicSnapshot
         $min = min($values);
         $max = max($values);
 
-        foreach ($this->snapshot as $key => $val) {
-            $this->snapshot[$key][Symbol::WHITE] = round(($val[Symbol::WHITE] - $min) / ($max - $min), 2);
-            $this->snapshot[$key][Symbol::BLACK] = round(($val[Symbol::BLACK] - $min) / ($max - $min), 2);
+        if ($max - $min > 0) {
+            foreach ($this->snapshot as $key => $val) {
+                $this->snapshot[$key][Symbol::WHITE] = round(($val[Symbol::WHITE] - $min) / ($max - $min), 2);
+                $this->snapshot[$key][Symbol::BLACK] = round(($val[Symbol::BLACK] - $min) / ($max - $min), 2);
+            }
         }
     }
 }
