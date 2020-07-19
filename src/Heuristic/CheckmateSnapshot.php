@@ -28,7 +28,6 @@ class CheckmateSnapshot extends AbstractHeuristicSnapshot
                 Symbol::BLACK => (int) ($this->board->getTurn() === Symbol::BLACK && $this->board->isCheck()),
             ];
         }
-        // $this->normalize();
 
         return $this->snapshot;
     }
