@@ -2,7 +2,6 @@
 
 namespace PGNChess\Evaluation;
 
-use PGNChess\AbstractEvaluation;
 use PgnChess\Board;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Evaluation\Space as SpaceEvaluation;

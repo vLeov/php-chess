@@ -2,7 +2,7 @@
 
 namespace PGNChess\Heuristic;
 
-use PGNChess\AbstractHeuristicSnapshot;
+use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
@@ -14,7 +14,7 @@ use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
  * @link https://programarivm.com
  * @license GPL
  */
-class ConnectivitySnapshot extends AbstractHeuristicSnapshot
+class ConnectivitySnapshot extends AbstractSnapshot
 {
     public function take(): array
     {

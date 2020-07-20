@@ -2,7 +2,7 @@
 
 namespace PGNChess\Heuristic;
 
-use PGNChess\AbstractHeuristicSnapshot;
+use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Space as SpaceEvaluation;
@@ -14,7 +14,7 @@ use PGNChess\Evaluation\Space as SpaceEvaluation;
  * @link https://programarivm.com
  * @license GPL
  */
-class SpaceSnapshot extends AbstractHeuristicSnapshot
+class SpaceSnapshot extends AbstractSnapshot
 {
     public function take(): array
     {

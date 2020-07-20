@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess;
+namespace PGNChess\Evaluation;
 
 use PgnChess\Board;
 use PGNChess\Evaluation\Value\System;

@@ -2,7 +2,7 @@
 
 namespace PGNChess\Heuristic;
 
-use PGNChess\AbstractHeuristicSnapshot;
+use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Check as CheckEvaluation;
@@ -14,7 +14,7 @@ use PGNChess\Evaluation\Check as CheckEvaluation;
  * @link https://programarivm.com
  * @license GPL
  */
-class CheckSnapshot extends AbstractHeuristicSnapshot
+class CheckSnapshot extends AbstractSnapshot
 {
     public function take(): array
     {

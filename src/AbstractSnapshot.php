@@ -6,13 +6,13 @@ use PGNChess\Board;
 use PGNChess\PGN\Symbol;
 
 /**
- * Abstract heuristic snapshot.
+ * Abstract snapshot.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-abstract class AbstractHeuristicSnapshot
+abstract class AbstractSnapshot
 {
     protected $board;
 

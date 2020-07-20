@@ -2,7 +2,7 @@
 
 namespace PGNChess\Heuristic;
 
-use PGNChess\AbstractHeuristicSnapshot;
+use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
@@ -15,7 +15,7 @@ use PGNChess\Evaluation\Value\System;
  * @link https://programarivm.com
  * @license GPL
  */
-class KingSafetySnapshot extends AbstractHeuristicSnapshot
+class KingSafetySnapshot extends AbstractSnapshot
 {
     public function take(): array
     {

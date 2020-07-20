@@ -2,7 +2,6 @@
 
 namespace PGNChess\Evaluation;
 
-use PGNChess\AbstractEvaluation;
 use PgnChess\Board;
 use PGNChess\PGN\Symbol;
 
