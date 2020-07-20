@@ -21,24 +21,22 @@ use PGNChess\Evaluation\Value\System;
  */
 class Primes
 {
-    private $board;
+    const WEIGHT = [
+      AttackEvaluation::NAME => 2,
+      ConnectivityEvaluation::NAME => 3,
+      CenterEvaluation::NAME => 5,
+      KingSafetyEvaluation::NAME => 7,
+      MaterialEvaluation::NAME => 11,
+      CheckEvaluation::NAME => 13,
+    ];
 
-    private $weights;
+    private $board;
 
     private $label;
 
     public function __construct(Board $board)
     {
         $this->board = $board;
-
-        $this->weights = [
-          AttackEvaluation::NAME => 2,
-          ConnectivityEvaluation::NAME => 3,
-          CenterEvaluation::NAME => 5,
-          KingSafetyEvaluation::NAME => 7,
-          MaterialEvaluation::NAME => 11,
-          CheckEvaluation::NAME => 13,
-        ];
 
         $this->label = [
             Symbol::WHITE => 0,
@@ -70,8 +68,8 @@ class Primes
         ];
 
         foreach ($eval as $key => $val) {
-            $this->label[Symbol::WHITE] += $this->weights[$key] * $val[Symbol::WHITE];
-            $this->label[Symbol::BLACK] += $this->weights[$key] * $val[Symbol::BLACK];
+            $this->label[Symbol::WHITE] += self::WEIGHT[$key] * $val[Symbol::WHITE];
+            $this->label[Symbol::BLACK] += self::WEIGHT[$key] * $val[Symbol::BLACK];
         }
 
         return $this->label;
