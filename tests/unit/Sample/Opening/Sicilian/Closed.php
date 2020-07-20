@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Opening\Sicilian;
+namespace PGNChess\Tests\Unit\Sample\Opening\Sicilian;
 
-use PGNChess\AbstractOpening;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
+use PGNChess\Tests\Unit\Sample\AbstractOpening;
 
 class Closed extends AbstractOpening
 {

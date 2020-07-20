@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Opening\RuyLopez;
+namespace PGNChess\Tests\Unit\Sample\Opening\RuyLopez;
 
-use PGNChess\AbstractOpening;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
+use PGNChess\Tests\Unit\Sample\AbstractOpening;
 
 class Exchange extends AbstractOpening
 {

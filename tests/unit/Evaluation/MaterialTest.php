@@ -5,9 +5,9 @@ namespace PGNChess\Tests\Unit\Evaluation;
 use PGNChess\Board;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
 use PGNChess\Evaluation\Value\System;
-use PGNChess\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
+use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 
 class MaterialTest extends AbstractUnitTestCase
 {

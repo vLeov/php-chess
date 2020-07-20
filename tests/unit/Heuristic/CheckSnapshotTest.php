@@ -3,12 +3,12 @@
 namespace PGNChess\Tests\Unit\Heuristic;
 
 use PGNChess\Board;
-use PGNChess\Checkmate\Fool as FoolCheckmate;
-use PGNChess\Checkmate\Scholar as ScholarCheckmate;
 use PGNChess\Heuristic\CheckSnapshot;
-use PGNChess\Opening\Benoni\BenkoGambit;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
+use PGNChess\Tests\Unit\Sample\Checkmate\Fool as FoolCheckmate;
+use PGNChess\Tests\Unit\Sample\Checkmate\Scholar as ScholarCheckmate;
+use PGNChess\Tests\Unit\Sample\Opening\Benoni\BenkoGambit;
 
 class CheckSnapshotTest extends AbstractUnitTestCase
 {

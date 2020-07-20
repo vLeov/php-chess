@@ -4,9 +4,9 @@ namespace PGNChess\Tests\Unit\Heuristic;
 
 use PGNChess\Board;
 use PGNChess\Heuristic\CenterSnapshot;
-use PGNChess\Opening\Benoni\BenkoGambit;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
+use PGNChess\Tests\Unit\Sample\Opening\Benoni\BenkoGambit;
 
 class CenterSnapshotTest extends AbstractUnitTestCase
 {

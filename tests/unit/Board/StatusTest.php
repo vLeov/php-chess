@@ -4,13 +4,13 @@ namespace PGNChess\Tests\Unit\Board;
 
 use PGNChess\Board;
 use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\Opening\Benoni\BenkoGambit;
-use PGNChess\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
-use PGNChess\Opening\RuyLopez\LucenaDefense as LucenaDefense;
-use PGNChess\Opening\RuyLopez\Open as OpenRuyLopez;
 use PGNChess\PGN\Move;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
+use PGNChess\Tests\Unit\Sample\Opening\Benoni\BenkoGambit;
+use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
+use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
+use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
 
 class StatusTest extends AbstractUnitTestCase
 {

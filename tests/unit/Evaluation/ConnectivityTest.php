@@ -4,9 +4,9 @@ namespace PGNChess\Tests\Unit\Evaluation\Material;
 
 use PGNChess\Board;
 use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
-use PGNChess\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
+use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 
 class ConnectivityTest extends AbstractUnitTestCase
 {

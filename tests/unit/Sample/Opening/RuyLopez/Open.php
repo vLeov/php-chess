@@ -1,12 +1,12 @@
 <?php
 
-namespace PGNChess\Opening\RuyLopez;
+namespace PGNChess\Tests\Unit\Sample\Opening\RuyLopez;
 
-use PGNChess\AbstractOpening;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
+use PGNChess\Tests\Unit\Sample\AbstractOpening;
 
-class LucenaDefense extends AbstractOpening
+class Open extends AbstractOpening
 {
     public function play()
     {
@@ -15,7 +15,9 @@ class LucenaDefense extends AbstractOpening
         $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
         $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
         $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Be7'));
+        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'O-O'));
+        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nxe4'));
 
         return $this->board;
     }

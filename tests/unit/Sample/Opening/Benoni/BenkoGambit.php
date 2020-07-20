@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Opening\Benoni;
+namespace PGNChess\Tests\Unit\Sample\Opening\Benoni;
 
-use PGNChess\AbstractOpening;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
+use PGNChess\Tests\Unit\Sample\AbstractOpening;
 
 class BenkoGambit extends AbstractOpening
 {
