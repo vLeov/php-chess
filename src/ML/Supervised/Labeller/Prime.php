@@ -13,30 +13,30 @@ use PGNChess\Evaluation\Value\System;
 use PGNChess\PGN\Symbol;
 
 /**
- * Attacking.
+ * Prime.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-class Attacking extends AbstractEvaluationFunction
+class Prime extends AbstractEvaluationFunction
 {
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
         $this->weights = [
-          AttackEvaluation::NAME => 5,
-          ConnectivityEvaluation::NAME => 4,
-          CenterEvaluation::NAME => 3,
-          KingSafetyEvaluation::NAME => 2,
-          MaterialEvaluation::NAME => 1,
+          AttackEvaluation::NAME => 2,
+          ConnectivityEvaluation::NAME => 3,
+          CenterEvaluation::NAME => 5,
+          KingSafetyEvaluation::NAME => 7,
+          MaterialEvaluation::NAME => 11,
         ];
     }
 
-    public function calculate(): float
+    public function calc(): float
     {
-        // TODO 
+        // TODO
 
         return $this->result;
     }
