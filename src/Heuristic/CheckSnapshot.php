@@ -19,17 +19,15 @@ class CheckSnapshot extends AbstractHeuristicSnapshot
     public function take(): array
     {
         foreach ($this->moves as $move) {
-            $item = [
-                Symbol::WHITE => 0,
-                Symbol::BLACK => 0,
-            ];
             $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
-            $this->board->isCheck() ? $item[Symbol::WHITE] = 1 : $item[Symbol::WHITE] = 0;
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
-                $this->board->isCheck() ? $item[Symbol::BLACK] = 1 : $item[Symbol::BLACK] = 0;
             }
-            $this->snapshot[] = $item;
+            $checkEvald = (new CheckEvaluation($this->board))->evaluate();
+            $this->snapshot[] = [
+                Symbol::WHITE => $checkEvald[Symbol::WHITE],
+                Symbol::BLACK => $checkEvald[Symbol::BLACK],
+            ];
         }
 
         return $this->snapshot;

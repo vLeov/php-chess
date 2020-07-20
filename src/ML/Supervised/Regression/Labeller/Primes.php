@@ -1,25 +1,22 @@
 <?php
 
-namespace PGNChess\Evaluation\Func;
+namespace PGNChess\ML\Supervised\Regression\Labeller;
 
-use PGNChess\AbstractEvaluationFunction;
-use PgnChess\Board;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Evaluation\Center as CenterEvaluation;
+use PGNChess\Evaluation\Check as CheckEvaluation;
 use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
 use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
-use PGNChess\Evaluation\Value\System;
-use PGNChess\PGN\Symbol;
 
 /**
- * Prime.
+ * Primes.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-class Prime extends AbstractEvaluationFunction
+class Primes
 {
     public function __construct(Board $board)
     {
@@ -31,6 +28,7 @@ class Prime extends AbstractEvaluationFunction
           CenterEvaluation::NAME => 5,
           KingSafetyEvaluation::NAME => 7,
           MaterialEvaluation::NAME => 11,
+          CheckEvaluation::NAME => 13,
         ];
     }
 
@@ -38,6 +36,6 @@ class Prime extends AbstractEvaluationFunction
     {
         // TODO
 
-        return $this->result;
+        return $label;
     }
 }
