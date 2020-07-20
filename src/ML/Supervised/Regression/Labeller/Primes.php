@@ -46,7 +46,7 @@ class Primes
 
     public function calc(): array
     {
-        $attEvald = (new AttackEvaluation(new Board))->evaluate();
+        $attEvald = (new AttackEvaluation($this->board))->evaluate();
         $connEvald = (new ConnectivityEvaluation($this->board))->evaluate();
         $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
         $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate();

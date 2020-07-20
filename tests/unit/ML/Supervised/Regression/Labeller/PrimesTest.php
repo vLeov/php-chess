@@ -19,7 +19,7 @@ class PrimesTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => 549.66,
-            Symbol::BLACK => 554.66,
+            Symbol::BLACK => 556.66,
         ];
 
         $this->assertEquals($expected, (new PrimesLabeller($board))->calc());

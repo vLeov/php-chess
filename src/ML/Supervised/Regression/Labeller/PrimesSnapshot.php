@@ -1,20 +1,20 @@
 <?php
 
-namespace PGNChess\Heuristic;
+namespace PGNChess\ML\Supervised\Regression\Labeller;
 
 use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\Evaluation\Attack as AttackEvaluation;
+use PGNChess\ML\Supervised\Regression\Labeller\Primes as PrimesLabeller;
 
 /**
- * Attack snapshot.
+ * Primes snapshot.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-class AttackSnapshot extends AbstractSnapshot
+class PrimesSnapshot extends AbstractSnapshot
 {
     public function take(): array
     {
@@ -23,13 +23,8 @@ class AttackSnapshot extends AbstractSnapshot
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
-            $attEvald = (new AttackEvaluation($this->board))->evaluate();
-            $this->snapshot[] = [
-                Symbol::WHITE => count($attEvald[Symbol::WHITE]),
-                Symbol::BLACK => count($attEvald[Symbol::BLACK]),
-            ];
+            $this->snapshot[] = (new PrimesLabeller($this->board))->calc();
         }
-        $this->normalize();
 
         return $this->snapshot;
     }
