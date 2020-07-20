@@ -9,7 +9,9 @@
 	<img src="https://github.com/programarivm/pgn-chess/blob/master/resources/chess-board.jpg" />
 </p>
 
-This is a chess board representation to play and validate PGN games. See it in action at [PGN Chess Server](https://github.com/programarivm/pgn-chess-server), which is a WebSocket server listening to chess commands. Also, [PGN Chess Data](https://github.com/programarivm/pgn-chess-data) is another repo providing you with CLI tools to manage a database of PGN games.
+Chess board representation to play chess games.
+
+> See it in action at [PGN Chess Server](https://github.com/programarivm/pgn-chess-server), which is a WebSocket server listening to chess commands. Also, [PGN Chess Data](https://github.com/programarivm/pgn-chess-data) is another repo providing you with CLI tools to manage a database of PGN games as well as to train a supervised learning model with [Rubix ML](https://rubixml.com/).
 
 ### Install
 
