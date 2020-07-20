@@ -2,12 +2,15 @@
 
 namespace PGNChess\ML\Supervised\Regression\Labeller;
 
+use PGNChess\Board;
+use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Evaluation\Center as CenterEvaluation;
 use PGNChess\Evaluation\Check as CheckEvaluation;
 use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
 use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
+use PGNChess\Evaluation\Value\System;
 
 /**
  * Primes.
@@ -18,9 +21,15 @@ use PGNChess\Evaluation\Material as MaterialEvaluation;
  */
 class Primes
 {
+    private $board;
+
+    private $weights;
+
+    private $label;
+
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
         $this->weights = [
           AttackEvaluation::NAME => 2,
@@ -30,12 +39,41 @@ class Primes
           MaterialEvaluation::NAME => 11,
           CheckEvaluation::NAME => 13,
         ];
+
+        $this->label = [
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
+        ];
     }
 
-    public function calc(): float
+    public function calc(): array
     {
-        // TODO
+        $attEvald = (new AttackEvaluation(new Board))->evaluate();
+        $connEvald = (new ConnectivityEvaluation($this->board))->evaluate();
+        $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
+        $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate();
+        $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
+        $checkEvald = (new CheckEvaluation($this->board))->evaluate();
 
-        return $label;
+        $attEvald = [
+            Symbol::WHITE => count($attEvald[Symbol::WHITE]),
+            Symbol::BLACK => count($attEvald[Symbol::BLACK]),
+        ];
+
+        $eval = [
+          AttackEvaluation::NAME => $attEvald,
+          ConnectivityEvaluation::NAME => $connEvald,
+          CenterEvaluation::NAME => $ctrEvald,
+          KingSafetyEvaluation::NAME => $kSafetyEvald,
+          MaterialEvaluation::NAME => $mtlEvald,
+          CheckEvaluation::NAME => $checkEvald,
+        ];
+
+        foreach ($eval as $key => $val) {
+            $this->label[Symbol::WHITE] += $this->weights[$key] * $val[Symbol::WHITE];
+            $this->label[Symbol::BLACK] += $this->weights[$key] * $val[Symbol::BLACK];
+        }
+
+        return $this->label;
     }
 }
