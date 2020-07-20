@@ -7,7 +7,7 @@ use PGNChess\Evaluation\Material as MaterialEvaluation;
 use PGNChess\Evaluation\Value\System;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
+use PGNChess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 
 class MaterialTest extends AbstractUnitTestCase
 {

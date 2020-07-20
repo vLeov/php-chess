@@ -4,15 +4,11 @@ namespace PGNChess\Tests\Unit\Board;
 
 use PGNChess\Board;
 use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\Exception\BoardException;
-use PGNChess\Exception\UnknownNotationException;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\Piece\Bishop;
 use PGNChess\Piece\King;
 use PGNChess\Piece\Knight;
 use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Queen;
 use PGNChess\Piece\Rook;
 use PGNChess\Piece\Type\RookType;
 use PGNChess\Tests\AbstractUnitTestCase;
@@ -21,71 +17,64 @@ class InvalidMovesTest extends AbstractUnitTestCase
 {
     /**
      * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
      */
     public function numeric_value()
     {
-        $this->expectException(UnknownNotationException::class);
-        $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 9)));
+        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 9));
     }
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
      */
     public function foo()
     {
-        $this->expectException(UnknownNotationException::class);
-        $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'foo')));
+        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'foo'));
     }
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
      */
     public function bar()
     {
-        $this->expectException(UnknownNotationException::class);
-        $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'bar')));
+        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'bar'));
     }
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
      */
     public function e9()
     {
-        $this->expectException(UnknownNotationException::class);
-        $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e9')));
+        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'e9'));
     }
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
      */
     public function e10()
     {
-        $this->expectException(UnknownNotationException::class);
-        $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e10')));
+        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'e10'));
     }
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
      */
     public function Nw3()
     {
-        $this->expectException(UnknownNotationException::class);
-        $board = new Board;
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nw3')));
+        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'Nw3'));
     }
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\BoardException
      */
     public function piece_does_not_exist()
     {
-        $this->expectException(BoardException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -114,8 +103,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
             ]
         ];
 
-        $board = new Board($pieces, $castling);
-
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'f4'));
+        (new Board($pieces, $castling))
+            ->play(Convert::toStdObj(Symbol::WHITE, 'f4'));
     }
 }

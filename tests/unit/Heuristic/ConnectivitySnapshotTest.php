@@ -6,7 +6,7 @@ use PGNChess\Board;
 use PGNChess\Heuristic\ConnectivitySnapshot;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Opening\Benoni\BenkoGambit;
+use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class ConnectivitySnapshotTest extends AbstractUnitTestCase
 {

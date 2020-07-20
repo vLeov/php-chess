@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Sample\Checkmate;
+namespace PGNChess\Tests\Sample\Checkmate;
 
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\Tests\Unit\Sample\AbstractCheckmate;
+use PGNChess\Tests\Sample\AbstractCheckmate;
 
 class Scholar extends AbstractCheckmate
 {

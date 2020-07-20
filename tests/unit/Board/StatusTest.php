@@ -7,36 +7,13 @@ use PGNChess\Castling\Rule as CastlingRule;
 use PGNChess\PGN\Move;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Opening\Benoni\BenkoGambit;
-use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
-use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
-use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
+use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
+use PGNChess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
+use PGNChess\Tests\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
+use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class StatusTest extends AbstractUnitTestCase
 {
-    /**
-     * @test
-     */
-    public function castling_in_open_ruy_lopez()
-    {
-        $board = (new OpenRuyLopez(new Board))->play();
-
-        $expected = [
-            'w' => [
-                CastlingRule::IS_CASTLED => true,
-                Symbol::CASTLING_SHORT => false,
-                Symbol::CASTLING_LONG => false,
-            ],
-            'b' => [
-                CastlingRule::IS_CASTLED => false,
-                Symbol::CASTLING_SHORT => true,
-                Symbol::CASTLING_LONG => true,
-            ],
-        ];
-
-        $this->assertEquals($expected, $board->getCastling());
-    }
-
     /**
      * @test
      */
@@ -241,5 +218,27 @@ class StatusTest extends AbstractUnitTestCase
         $expected = [ 'e1', 'e2', 'g2' ];
 
         $this->assertEquals($expected, $king->getLegalMoves());
+    }
+
+    /**
+     * @test
+     */
+    public function count_pieces_in_benko_gambit()
+    {
+        $board = (new BenkoGambit(new Board))->play();
+
+        $this->assertEquals(14, count($board->getPiecesByColor(Symbol::WHITE)));
+        $this->assertEquals(13, count($board->getPiecesByColor(Symbol::BLACK)));
+    }
+
+    /**
+     * @test
+     */
+    public function count_pieces_in_open_sicilian()
+    {
+        $board = (new OpenSicilian(new Board))->play();
+
+        $this->assertEquals(15, count($board->getPiecesByColor(Symbol::WHITE)));
+        $this->assertEquals(15, count($board->getPiecesByColor(Symbol::BLACK)));
     }
 }

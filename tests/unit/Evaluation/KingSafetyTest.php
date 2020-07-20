@@ -7,8 +7,8 @@ use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
 use PGNChess\Evaluation\Value\System;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use PGNChess\Tests\Unit\Sample\Opening\Sicilian\Open as OpenSicilian;
+use PGNChess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
+use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class KingSafetyTest extends AbstractUnitTestCase
 {

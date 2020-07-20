@@ -6,8 +6,8 @@ use PGNChess\Board;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use PGNChess\Tests\Unit\Sample\Opening\Sicilian\Open as OpenSicilian;
+use PGNChess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
+use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class AttackTest extends AbstractUnitTestCase
 {

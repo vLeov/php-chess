@@ -39,7 +39,7 @@
   "autoload-dev": {
     "psr-4": {
       "PGNChess\\Tests\\": "tests/",
-      "PGNChess\\Tests\\Unit\\Sample\\": "tests/unit/Sample/"
+      "PGNChess\\Tests\\Sample\\": "tests/Sample/"
     }
   }
 }

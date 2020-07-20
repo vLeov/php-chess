@@ -1,10 +1,9 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Castling;
+namespace PGNChess\Tests\Unit;
 
 use PGNChess\Board;
 use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\Exception\CastlingException;
 use PGNChess\PGN\Symbol;
 use PGNChess\Piece\King;
 use PGNChess\Piece\Knight;
@@ -12,8 +11,9 @@ use PGNChess\Piece\Pawn;
 use PGNChess\Piece\Rook;
 use PGNChess\Piece\Type\RookType;
 use PGNChess\Tests\AbstractUnitTestCase;
+use PGNChess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
 
-class InitializationTest extends AbstractUnitTestCase
+class CastlingTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -79,11 +79,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function invalid_white_short_castling()
+    public function invalid_white_short()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -117,11 +116,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function invalid_white_long_castling()
+    public function invalid_white_long()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -155,11 +153,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function invalid_black_short_castling()
+    public function invalid_black_short()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -193,11 +190,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function invalid_black_long_castling()
+    public function invalid_black_long()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -231,11 +227,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function empty_castling_object()
+    public function empty()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -256,11 +251,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function empty_white_castling_object()
+    public function empty_white()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -289,11 +283,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function empty_black_castling_object()
+    public function empty_black()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -322,11 +315,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function invalid_white_castling_object_no_castled_property()
+    public function no_castled_property()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -359,11 +351,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function invalid_white_castling_object_no_castling_short_property()
+    public function no_castling_short_property()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -396,11 +387,10 @@ class InitializationTest extends AbstractUnitTestCase
 
     /**
      * @test
+     * @expectedException \PGNChess\Exception\CastlingException
      */
-    public function invalid_white_castling_object_no_castling_long_property()
+    public function no_castling_long_property()
     {
-        $this->expectException(CastlingException::class);
-
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -429,5 +419,28 @@ class InitializationTest extends AbstractUnitTestCase
         ];
 
         $board = new Board($pieces, $castling);
+    }
+
+    /**
+     * @test
+     */
+    public function open_ruy_lopez()
+    {
+        $board = (new OpenRuyLopez(new Board))->play();
+
+        $expected = [
+            Symbol::WHITE => [
+                CastlingRule::IS_CASTLED => true,
+                Symbol::CASTLING_SHORT => false,
+                Symbol::CASTLING_LONG => false,
+            ],
+            Symbol::BLACK => [
+                CastlingRule::IS_CASTLED => false,
+                Symbol::CASTLING_SHORT => true,
+                Symbol::CASTLING_LONG => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $board->getCastling());
     }
 }

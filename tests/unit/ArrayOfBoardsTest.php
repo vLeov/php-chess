@@ -1,13 +1,13 @@
 <?php
 
-namespace PGNChess\Tests\Unit\ArrayOfBoards;
+namespace PGNChess\Tests\Unit;
 
 use PGNChess\Board;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
-class LegalMovesTest extends AbstractUnitTestCase
+class ArrayOfBoardsTest extends AbstractUnitTestCase
 {
     /**
      * @test

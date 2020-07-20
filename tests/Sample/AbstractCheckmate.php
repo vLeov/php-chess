@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Sample;
+namespace PGNChess\Tests\Sample;
 
 use PGNChess\Board;
 

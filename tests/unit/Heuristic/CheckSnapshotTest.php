@@ -6,9 +6,9 @@ use PGNChess\Board;
 use PGNChess\Heuristic\CheckSnapshot;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Checkmate\Fool as FoolCheckmate;
-use PGNChess\Tests\Unit\Sample\Checkmate\Scholar as ScholarCheckmate;
-use PGNChess\Tests\Unit\Sample\Opening\Benoni\BenkoGambit;
+use PGNChess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
+use PGNChess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
+use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class CheckSnapshotTest extends AbstractUnitTestCase
 {

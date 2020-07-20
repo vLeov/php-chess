@@ -7,9 +7,9 @@ use PGNChess\Evaluation\Center as CenterEvaluation;
 use PGNChess\Evaluation\Value\System;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
-use PGNChess\Tests\Unit\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use PGNChess\Tests\Unit\Sample\Opening\Sicilian\Open as OpenSicilian;
+use PGNChess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
+use PGNChess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
+use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class CenterTest extends AbstractUnitTestCase
 {

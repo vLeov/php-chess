@@ -6,7 +6,7 @@ use PGNChess\Board;
 use PGNChess\Heuristic\AttackSnapshot;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Unit\Sample\Opening\Benoni\BenkoGambit;
+use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class AttackSnapshotTest extends AbstractUnitTestCase
 {

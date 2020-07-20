@@ -3,7 +3,6 @@
 namespace PGNChess\Tests\Unit\PGN;
 
 use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\Exception\UnknownNotationException;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Move;
 use PGNChess\PGN\Symbol;
@@ -13,82 +12,82 @@ class ConvertTest extends AbstractUnitTestCase
 {
     /**
      * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
      */
     public function Ua5_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::WHITE, 'Ua5');
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function foo5_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::BLACK, 'foo5');
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function cb3b7_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::WHITE, 'cb3b7');
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function O_O_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::BLACK, 'a-a');
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function O_O_O_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::WHITE, 'c-c-c');
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function a_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::BLACK, 'a');
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function three_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::WHITE, 3);
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function K3_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::BLACK, 'K3');
     }
 
     /**
-	 * @test
-	 */
+     * @test
+     * @expectedException \PGNChess\Exception\UnknownNotationException
+     */
     public function Fxa7_throws_exception()
     {
-        $this->expectException(UnknownNotationException::class);
         Convert::toStdObj(Symbol::WHITE, 'Fxa7');
     }
 

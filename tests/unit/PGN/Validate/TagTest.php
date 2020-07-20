@@ -11,11 +11,10 @@ class TagTest extends AbstractUnitTestCase
 {
     /**
      * @test
+     * @expectedException \InvalidArgumentException
      */
     public function Foo_throws_exception()
     {
-        $this->expectException(\InvalidArgumentException::class);
-
         Validate::tag('Foo');
     }
 
