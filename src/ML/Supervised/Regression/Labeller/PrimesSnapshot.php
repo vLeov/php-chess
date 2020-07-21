@@ -25,6 +25,7 @@ class PrimesSnapshot extends AbstractSnapshot
             }
             $this->snapshot[] = (new PrimesLabeller($this->board))->calc();
         }
+        $this->normalize();
 
         return $this->snapshot;
     }
