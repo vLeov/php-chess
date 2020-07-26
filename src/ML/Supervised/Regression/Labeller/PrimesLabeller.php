@@ -13,13 +13,13 @@ use PGNChess\Evaluation\Material as MaterialEvaluation;
 use PGNChess\Evaluation\Value\System;
 
 /**
- * Primes.
+ * Primes labeller.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com
  * @license GPL
  */
-class Primes
+class PrimesLabeller
 {
     const WEIGHT = [
       AttackEvaluation::NAME => 2,

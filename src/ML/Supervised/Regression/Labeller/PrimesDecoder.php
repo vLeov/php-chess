@@ -3,12 +3,12 @@
 namespace PGNChess\ML\Supervised\Regression\Labeller;
 
 use PGNChess\Board;
-use PGNChess\ML\Supervised\Regression\Labeller\Primes as PrimesLabeller;
+use PGNChess\ML\Supervised\Regression\Labeller\PrimesLabeller;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
 /**
- * Primes decodeer.
+ * Primes decoder.
  *
  * @author Jordi Bassagañas <info@programarivm.com>
  * @link https://programarivm.com

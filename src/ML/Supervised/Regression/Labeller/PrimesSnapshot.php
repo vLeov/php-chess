@@ -5,7 +5,7 @@ namespace PGNChess\ML\Supervised\Regression\Labeller;
 use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\ML\Supervised\Regression\Labeller\Primes as PrimesLabeller;
+use PGNChess\ML\Supervised\Regression\Labeller\PrimesLabeller;
 
 /**
  * Primes snapshot.

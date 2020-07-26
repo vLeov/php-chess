@@ -3,7 +3,7 @@
 namespace PGNChess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use PGNChess\Board;
-use PGNChess\ML\Supervised\Regression\Labeller\Primes as PrimesLabeller;
+use PGNChess\ML\Supervised\Regression\Labeller\PrimesLabeller;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
