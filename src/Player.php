@@ -4,7 +4,6 @@ namespace PGNChess;
 
 use PGNChess\Board;
 use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate;
 
 /**
  * Allows to play a chess game in the form of a PGN movetext.
@@ -48,7 +47,7 @@ class Player
 
     protected function filter(string $movetext)
     {
-        $movetext = str_replace(
+        return str_replace(
             [
                 Symbol::RESULT_WHITE_WINS,
                 Symbol::RESULT_BLACK_WINS,
@@ -56,9 +55,7 @@ class Player
                 Symbol::RESULT_UNKNOWN,
             ],
             '',
-            Validate::movetext($movetext)
+            $movetext
         );
-
-        return $movetext;
     }
 }
