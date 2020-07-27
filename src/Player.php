@@ -4,6 +4,7 @@ namespace PGNChess;
 
 use PGNChess\Board;
 use PGNChess\PGN\Symbol;
+use PGNChess\PGN\Validate;
 
 /**
  * Allows to play a chess game in the form of a PGN movetext.
@@ -21,28 +22,42 @@ class Player
     public function __construct(string $movetext)
     {
         $this->board = new Board;
-        $this->moves = $this->moves($this->filter($movetext));
+        $this->moves = $this->extract($this->filter($movetext));
     }
 
-    protected function moves(string $movetext)
+    public function getBoard()
     {
-        $items = [];
+        return $this->board;
+    }
+
+    public function getMoves()
+    {
+        return $this->moves;
+    }
+
+    protected function extract(string $movetext)
+    {
+        $moves = [];
         $pairs = array_filter(preg_split('/[0-9]+\./', $movetext));
         foreach ($pairs as $pair) {
-            $items[] = array_values(array_filter(explode(' ', $pair)));
+            $moves[] = array_values(array_filter(explode(' ', $pair)));
         }
 
-        return $items;
+        return $moves;
     }
 
     protected function filter(string $movetext)
     {
-        $movetext = str_replace([
-            Symbol::RESULT_WHITE_WINS,
-            Symbol::RESULT_BLACK_WINS,
-            Symbol::RESULT_DRAW,
-            Symbol::RESULT_UNKNOWN,
-        ], '', $movetext);
+        $movetext = str_replace(
+            [
+                Symbol::RESULT_WHITE_WINS,
+                Symbol::RESULT_BLACK_WINS,
+                Symbol::RESULT_DRAW,
+                Symbol::RESULT_UNKNOWN,
+            ],
+            '',
+            Validate::movetext($movetext)
+        );
 
         return $movetext;
     }
