@@ -2,22 +2,9 @@
 
 namespace PGNChess\Tests\Sample\Checkmate;
 
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\Sample\AbstractCheckmate;
+use PGNChess\Tests\Sample\AbstractSample;
 
-class Scholar extends AbstractCheckmate
+class Scholar extends AbstractSample
 {
-    public function play()
-    {
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Bc4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Qh5'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Qxf7'));
-
-        return $this->board;
-    }
+    protected $movetext = '1.e4 e5 2.Bc4 Nc6 3.Qh5 Nf6 4.Qxf7';
 }
