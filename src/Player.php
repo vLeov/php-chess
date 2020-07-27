@@ -3,6 +3,7 @@
 namespace PGNChess;
 
 use PGNChess\Board;
+use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -32,6 +33,18 @@ class Player
     public function getMoves()
     {
         return $this->moves;
+    }
+
+    public function play()
+    {
+        foreach ($this->getMoves() as $move) {
+            $this->getBoard()->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
+            if (isset($move[1])) {
+                $this->getBoard()->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
+            }
+        }
+
+        return $this;
     }
 
     protected function extract(string $movetext)
