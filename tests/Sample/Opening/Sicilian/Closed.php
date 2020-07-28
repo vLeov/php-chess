@@ -2,25 +2,19 @@
 
 namespace PGNChess\Tests\Sample\Opening\Sicilian;
 
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\Sample\AbstractOpening;
+use PGNChess\Player;
 
-class Closed extends AbstractOpening
+class Closed
 {
+    protected $movetext = '1.e4 c5 2.Nc3 Nc6 3.g3 g6 4.Bg2 Bg7 5.d3 d6';
+
+    public function __construct()
+    {
+        $this->player = new Player($this->movetext);
+    }
+
     public function play()
     {
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'g3'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'g6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Bg2'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Bg7'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'd3'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'd6'));
-
-        return $this->board;
+        return $this->player->play()->getBoard();
     }
 }

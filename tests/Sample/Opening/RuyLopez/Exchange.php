@@ -2,28 +2,19 @@
 
 namespace PGNChess\Tests\Sample\Opening\RuyLopez;
 
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\Sample\AbstractOpening;
+use PGNChess\Player;
 
-class Exchange extends AbstractOpening
+class Exchange
 {
+    protected $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6 dxc6 5.d4 exd4 6.Qxd4 Qxd4 7.Nxd4';
+
+    public function __construct()
+    {
+        $this->player = new Player($this->movetext);
+    }
+
     public function play()
     {
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'a6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Bxc6'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'dxc6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'exd4'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Qxd4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Qxd4'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Nxd4'));
-
-        return $this->board;
+        return $this->player->play()->getBoard();
     }
 }

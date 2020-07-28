@@ -2,21 +2,19 @@
 
 namespace PGNChess\Tests\Sample\Opening\RuyLopez;
 
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\Sample\AbstractOpening;
+use PGNChess\Player;
 
-class LucenaDefense extends AbstractOpening
+class LucenaDefense
 {
+    protected $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Be7';
+
+    public function __construct()
+    {
+        $this->player = new Player($this->movetext);
+    }
+
     public function play()
     {
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Be7'));
-
-        return $this->board;
+        return $this->player->play()->getBoard();
     }
 }

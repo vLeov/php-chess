@@ -2,32 +2,19 @@
 
 namespace PGNChess\Tests\Sample\Opening\Benoni;
 
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\Sample\AbstractOpening;
+use PGNChess\Player;
 
-class BenkoGambit extends AbstractOpening
+class BenkoGambit
 {
+    protected $movetext = '1.d4 Nf6 2.c4 c5 3.d5 b5 4.cxb5 a6 5.bxa6 Bxa6 6.Nc3 d6 7.e4 Bxf1 8.Kxf1 g6 9.g3';
+
+    public function __construct()
+    {
+        $this->player = new Player($this->movetext);
+    }
+
     public function play()
     {
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'c4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'd5'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'b5'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'cxb5'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'a6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'bxa6'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Bxa6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'd6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'Bxf1'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'Kxf1'));
-        $this->board->play(Convert::toStdObj(Symbol::BLACK, 'g6'));
-        $this->board->play(Convert::toStdObj(Symbol::WHITE, 'g3'));
-
-        return $this->board;
+        return $this->player->play()->getBoard();
     }
 }
