@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\ML\Supervised\Regression\Labeller;
+namespace PGNChess\Tests\Unit\ML\Supervised\Regression\Labeller\Primes;
 
 use PGNChess\Board;
-use PGNChess\ML\Supervised\Regression\Labeller\PrimesSnapshot as PrimesLabellerSnapshot;
+use PGNChess\ML\Supervised\Regression\Labeller\Primes\Snapshot as PrimesLabellerSnapshot;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class PrimesSnapshotTest extends AbstractUnitTestCase
+class SnapshotTest extends AbstractUnitTestCase
 {
     /**
      * @test

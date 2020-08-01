@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\ML\Supervised\Regression\Labeller;
+namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
 
 use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\ML\Supervised\Regression\Labeller\PrimesLabeller;
+use PGNChess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
 
 /**
  * Primes snapshot.
@@ -14,7 +14,7 @@ use PGNChess\ML\Supervised\Regression\Labeller\PrimesLabeller;
  * @link https://programarivm.com
  * @license GPL
  */
-class PrimesSnapshot extends AbstractSnapshot
+class Snapshot extends AbstractSnapshot
 {
     public function take(): array
     {

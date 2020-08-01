@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\ML\Supervised\Regression\Labeller;
+namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
 
 use PGNChess\Board;
 use PGNChess\PGN\Symbol;
@@ -19,7 +19,7 @@ use PGNChess\Evaluation\Value\System;
  * @link https://programarivm.com
  * @license GPL
  */
-class PrimesLabeller
+class Labeller
 {
     const WEIGHT = [
       AttackEvaluation::NAME => 2,

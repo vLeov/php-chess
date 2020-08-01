@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\ML\Supervised\Regression\Labeller;
+namespace PGNChess\Tests\Unit\ML\Supervised\Regression\Labeller\Primes;
 
 use PGNChess\Board;
-use PGNChess\ML\Supervised\Regression\Labeller\PrimesDecoder as PrimesDecoder;
+use PGNChess\ML\Supervised\Regression\Labeller\Primes\Decoder as PrimesLabelDecoder;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 
-class PrimesDecoderTest extends AbstractUnitTestCase
+class DecoderTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,6 +19,6 @@ class PrimesDecoderTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $expected = 'Nc6';
 
-        $this->assertEquals($expected, (new PrimesDecoder($board))->decode(Symbol::BLACK, 571));
+        $this->assertEquals($expected, (new PrimesLabelDecoder($board))->decode(Symbol::BLACK, 571));
     }
 }

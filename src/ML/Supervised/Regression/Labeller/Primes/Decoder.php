@@ -1,9 +1,9 @@
 <?php
 
-namespace PGNChess\ML\Supervised\Regression\Labeller;
+namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
 
 use PGNChess\Board;
-use PGNChess\ML\Supervised\Regression\Labeller\PrimesLabeller;
+use PGNChess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
@@ -14,7 +14,7 @@ use PGNChess\PGN\Symbol;
  * @link https://programarivm.com
  * @license GPL
  */
-class PrimesDecoder
+class Decoder
 {
     private $board;
 
