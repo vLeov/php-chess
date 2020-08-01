@@ -2,15 +2,7 @@
 
 namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
 
-use PGNChess\Board;
 use PGNChess\PGN\Symbol;
-use PGNChess\Evaluation\Attack as AttackEvaluation;
-use PGNChess\Evaluation\Center as CenterEvaluation;
-use PGNChess\Evaluation\Check as CheckEvaluation;
-use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
-use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
-use PGNChess\Evaluation\Material as MaterialEvaluation;
-use PGNChess\Evaluation\Value\System;
 
 /**
  * Primes labeller.
@@ -21,22 +13,18 @@ use PGNChess\Evaluation\Value\System;
  */
 class Labeller
 {
-    const WEIGHT = [
-      AttackEvaluation::NAME => 2,
-      ConnectivityEvaluation::NAME => 3,
-      CenterEvaluation::NAME => 5,
-      KingSafetyEvaluation::NAME => 7,
-      MaterialEvaluation::NAME => 11,
-      CheckEvaluation::NAME => 13,
-    ];
+    /**
+     * Order is: attack, connectivity, center, king safety, material and check.
+     */
+    const WEIGHTS = [ 2, 3, 5, 7, 11, 13 ];
 
-    private $board;
+    private $sample;
 
     private $label;
 
-    public function __construct(Board $board)
+    public function __construct($sample)
     {
-        $this->board = $board;
+        $this->sample = $sample;
 
         $this->label = [
             Symbol::WHITE => 0,
@@ -44,32 +32,12 @@ class Labeller
         ];
     }
 
-    public function calc(): array
+    public function label(): array
     {
-        $attEvald = (new AttackEvaluation($this->board))->evaluate();
-        $connEvald = (new ConnectivityEvaluation($this->board))->evaluate();
-        $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-        $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate();
-        $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-        $checkEvald = (new CheckEvaluation($this->board))->evaluate();
-
-        $attEvald = [
-            Symbol::WHITE => count($attEvald[Symbol::WHITE]),
-            Symbol::BLACK => count($attEvald[Symbol::BLACK]),
-        ];
-
-        $eval = [
-          AttackEvaluation::NAME => $attEvald,
-          ConnectivityEvaluation::NAME => $connEvald,
-          CenterEvaluation::NAME => $ctrEvald,
-          KingSafetyEvaluation::NAME => $kSafetyEvald,
-          MaterialEvaluation::NAME => $mtlEvald,
-          CheckEvaluation::NAME => $checkEvald,
-        ];
-
-        foreach ($eval as $key => $val) {
-            $this->label[Symbol::WHITE] += self::WEIGHT[$key] * $val[Symbol::WHITE];
-            $this->label[Symbol::BLACK] += self::WEIGHT[$key] * $val[Symbol::BLACK];
+        foreach ($this->sample as $color => $arr) {
+            foreach ($arr as $key => $val) {
+                $this->label[$color] += self::WEIGHTS[$key] * $val;
+            }
         }
 
         return $this->label;

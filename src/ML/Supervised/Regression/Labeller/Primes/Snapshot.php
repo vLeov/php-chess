@@ -6,6 +6,7 @@ use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
+use PGNChess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
 
 /**
  * Primes snapshot.
@@ -23,7 +24,9 @@ class Snapshot extends AbstractSnapshot
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
-            $this->snapshot[] = (new PrimesLabeller($this->board))->calc();
+            $this->snapshot[] = (new PrimesLabeller(
+                (new PrimesSampler($this->board))->sample())
+            )->label();
         }
         $this->normalize();
 

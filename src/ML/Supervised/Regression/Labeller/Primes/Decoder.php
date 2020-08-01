@@ -4,6 +4,7 @@ namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
 
 use PGNChess\Board;
 use PGNChess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
+use PGNChess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
@@ -40,23 +41,27 @@ class Decoder
                     // King with castling
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
-                            $this->result[] = [ $square => (new PrimesLabeller($clone))->calc()[$color] ];
+                            $sample = (new PrimesSampler($clone))->sample();
+                            $this->result[] = [ $square => (new PrimesLabeller($sample))->label()[$color] ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
-                            $this->result[] = [ $piece->getFile()."x$square" => (new PrimesLabeller($clone))->calc()[$color] ];
+                            $sample = (new PrimesSampler($clone))->sample();
+                            $this->result[] = [ $piece->getFile()."x$square" => (new PrimesLabeller($sample))->label()[$color] ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
-                            $this->result[] = [ $piece->getIdentity().$square => (new PrimesLabeller($clone))->calc()[$color] ];
+                            $sample = (new PrimesSampler($clone))->sample();
+                            $this->result[] = [ $piece->getIdentity().$square => (new PrimesLabeller($sample))->label()[$color] ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
-                            $this->result[] = [ "{$piece->getIdentity()}x$square" => (new PrimesLabeller($clone))->calc()[$color] ];
+                            $sample = (new PrimesSampler($clone))->sample();
+                            $this->result[] = [ "{$piece->getIdentity()}x$square" => (new PrimesLabeller($sample))->label()[$color] ];
                         }
                         break;
                 }
             }
         }
 
-        return $this->pgn($this->closest(571));
+        return $this->pgn($this->closest($float));
     }
 
     private function closest(float $search)
