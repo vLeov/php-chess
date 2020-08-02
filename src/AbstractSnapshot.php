@@ -5,11 +5,18 @@ namespace PGNChess;
 use PGNChess\PGN\Symbol;
 
 /**
- * Snapshot.
+ * Abstract snapshot.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
- * @link https://programarivm.com
+ * A so-called snapshot is intended to capture a particular feature of a chess game
+ * mainly for the purpose of being plotted on a chart for further visual study.
+ *
+ * So for example, heuristic snapshots such as attack, center or material, are
+ * helpful to plot charts and get insights on the efficiency of programmer-defined
+ * heuristic evaluation functions.
+ *
+ * @author Jordi Bassagañas
  * @license GPL
+ * @see https://github.com/programarivm/pgn-chess/tree/master/src/Heuristic
  */
 abstract class AbstractSnapshot extends Player
 {
@@ -17,6 +24,9 @@ abstract class AbstractSnapshot extends Player
 
     abstract public function take(): array;
 
+    /**
+     * Scales the snapshot to have a values between 0 and 1.
+     */
     protected function normalize()
     {
         $values = array_merge(

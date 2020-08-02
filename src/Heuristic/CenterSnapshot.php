@@ -11,9 +11,9 @@ use PGNChess\Evaluation\Value\System;
 /**
  * Center snapshot.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
- * @link https://programarivm.com
+ * @author Jordi Bassagañas
  * @license GPL
+ * @see https://github.com/programarivm/pgn-chess/blob/master/src/AbstractSnapshot.php
  */
 class CenterSnapshot extends AbstractSnapshot
 {

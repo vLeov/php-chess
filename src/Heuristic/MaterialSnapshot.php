@@ -11,9 +11,9 @@ use PGNChess\Evaluation\Value\System;
 /**
  * Material snapshot.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
- * @link https://programarivm.com
+ * @author Jordi Bassagañas
  * @license GPL
+ * @see https://github.com/programarivm/pgn-chess/blob/master/src/AbstractSnapshot.php
  */
 class MaterialSnapshot extends AbstractSnapshot
 {

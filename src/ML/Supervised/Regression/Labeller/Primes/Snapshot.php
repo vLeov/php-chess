@@ -9,11 +9,11 @@ use PGNChess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller
 use PGNChess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
 
 /**
- * Primes snapshot.
+ * Primes labeller snapshot.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
- * @link https://programarivm.com
+ * @author Jordi Bassagañas
  * @license GPL
+ * @see https://github.com/programarivm/pgn-chess/blob/master/src/AbstractSnapshot.php
  */
 class Snapshot extends AbstractSnapshot
 {

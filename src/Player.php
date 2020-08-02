@@ -7,10 +7,12 @@ use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
 /**
- * Allows to play a chess game in the form of a PGN movetext.
+ * Player.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
- * @link https://programarivm.com
+ * Allows to play a chess game in the form of a PGN movetext in order for the chess
+ * board to get to a paraticular status.
+ *
+ * @author Jordi Bassagañas
  * @license GPL
  */
 class Player
