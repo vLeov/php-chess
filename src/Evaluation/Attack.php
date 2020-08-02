@@ -10,7 +10,6 @@ use PGNChess\PGN\Symbol;
  * Attack evaluation.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Attack extends AbstractEvaluation

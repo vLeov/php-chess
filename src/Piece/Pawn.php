@@ -11,7 +11,6 @@ use PGNChess\Piece\AbstractPiece;
  * Pawn class.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Pawn extends AbstractPiece

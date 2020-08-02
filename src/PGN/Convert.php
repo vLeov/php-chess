@@ -16,7 +16,6 @@ use PGNChess\Piece\Rook;
  * Convert class.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Convert

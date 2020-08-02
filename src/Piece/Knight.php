@@ -11,7 +11,6 @@ use PGNChess\Piece\AbstractPiece;
  * Knight class.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Knight extends AbstractPiece

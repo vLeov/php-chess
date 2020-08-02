@@ -11,7 +11,6 @@ use PGNChess\PGN\Symbol;
  * Castling initialization.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Initialization

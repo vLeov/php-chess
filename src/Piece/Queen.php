@@ -11,7 +11,6 @@ use PGNChess\Piece\Type\RookType;
  * Queen class.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Queen extends Slider

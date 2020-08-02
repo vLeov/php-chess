@@ -6,7 +6,6 @@ namespace PGNChess\PGN;
  * Symbols in PGN format.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Symbol

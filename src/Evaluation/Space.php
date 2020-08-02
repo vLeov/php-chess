@@ -10,7 +10,6 @@ use PGNChess\PGN\Symbol;
  * Space evaluation.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Space extends AbstractEvaluation

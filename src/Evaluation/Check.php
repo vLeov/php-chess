@@ -9,7 +9,6 @@ use PGNChess\PGN\Symbol;
  * Check.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Check extends AbstractEvaluation

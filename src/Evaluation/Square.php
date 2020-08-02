@@ -9,7 +9,6 @@ use PGNChess\PGN\Symbol;
  * Square evaluation.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Square extends AbstractEvaluation

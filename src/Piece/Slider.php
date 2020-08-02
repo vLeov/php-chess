@@ -9,7 +9,6 @@ namespace PGNChess\Piece;
  * which means that their legal moves can be computed in the exact same way.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 abstract class Slider extends AbstractPiece

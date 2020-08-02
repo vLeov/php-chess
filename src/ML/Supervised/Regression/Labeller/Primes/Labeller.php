@@ -8,7 +8,6 @@ use PGNChess\PGN\Symbol;
  * Primes labeller.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Labeller

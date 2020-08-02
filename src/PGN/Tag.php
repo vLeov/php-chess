@@ -6,7 +6,6 @@ namespace PGNChess\PGN;
  * PGN tags.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Tag

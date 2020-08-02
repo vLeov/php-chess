@@ -10,7 +10,6 @@ use PGNChess\PGN\Tag;
  * Validation class.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Validate

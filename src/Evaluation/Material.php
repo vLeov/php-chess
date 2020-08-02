@@ -9,7 +9,6 @@ use PGNChess\PGN\Symbol;
  * Material.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Material extends AbstractEvaluation

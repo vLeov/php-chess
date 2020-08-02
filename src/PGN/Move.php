@@ -8,7 +8,6 @@ use PGNChess\PGN\Symbol;
  * Encodes chess moves in PGN format.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Move

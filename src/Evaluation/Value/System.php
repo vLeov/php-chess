@@ -8,7 +8,6 @@ use PGNChess\PGN\Symbol;
  * System.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class System

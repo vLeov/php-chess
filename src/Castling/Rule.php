@@ -8,7 +8,6 @@ use PGNChess\PGN\Symbol;
  * Castling rule.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Rule

@@ -13,7 +13,6 @@ use PGNChess\Piece\Type\RookType;
  * Rook class.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Rook extends Slider

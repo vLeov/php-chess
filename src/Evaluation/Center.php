@@ -10,7 +10,6 @@ use PGNChess\PGN\Symbol;
  * Center.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class Center extends AbstractEvaluation

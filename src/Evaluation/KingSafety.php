@@ -11,7 +11,6 @@ use PGNChess\PGN\Symbol;
  * King safety.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 class KingSafety extends AbstractEvaluation

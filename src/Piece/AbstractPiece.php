@@ -10,7 +10,6 @@ use PGNChess\PGN\Validate;
  * Class that represents a chess piece.
  *
  * @author Jordi Bassagañas
- * @link https://programarivm.com
  * @license GPL
  */
 abstract class AbstractPiece implements Piece
