@@ -8,7 +8,7 @@ use PGNChess\Evaluation\Value\System;
 /**
  * Abstract evaluation.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

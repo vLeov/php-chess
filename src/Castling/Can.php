@@ -8,7 +8,7 @@ use PGNChess\PGN\Symbol;
 /**
  * Can castle class.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

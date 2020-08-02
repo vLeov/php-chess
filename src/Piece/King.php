@@ -13,7 +13,7 @@ use PGNChess\Piece\Type\RookType;
 /**
  * King class.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

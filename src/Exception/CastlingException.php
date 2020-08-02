@@ -7,7 +7,7 @@ use PGNChess\Exception;
 /**
  * Thrown when instantiating a custom board with an invalid castling object.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

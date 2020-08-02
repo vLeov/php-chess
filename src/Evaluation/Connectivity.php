@@ -9,7 +9,7 @@ use PGNChess\PGN\Symbol;
 /**
  * Connectivity.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

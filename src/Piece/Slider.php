@@ -8,7 +8,7 @@ namespace PGNChess\Piece;
  * These three pieces are quite similar. They can slide on the board, so to speak,
  * which means that their legal moves can be computed in the exact same way.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

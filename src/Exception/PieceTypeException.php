@@ -7,7 +7,7 @@ use PGNChess\Exception;
 /**
  * Thrown when dealing with wrong piece types.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

@@ -7,7 +7,7 @@ use PGNChess\PGN\Symbol;
 /**
  * Castling rule.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

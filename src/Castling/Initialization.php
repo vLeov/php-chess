@@ -10,7 +10,7 @@ use PGNChess\PGN\Symbol;
 /**
  * Castling initialization.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */

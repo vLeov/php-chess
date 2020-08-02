@@ -13,7 +13,7 @@ use PGNChess\Evaluation\Square as SquareEvaluation;
  *
  * A wrapper of the Board class.
  *
- * @author Jordi Bassagañas <info@programarivm.com>
+ * @author Jordi Bassagañas
  * @link https://programarivm.com
  * @license GPL
  */
