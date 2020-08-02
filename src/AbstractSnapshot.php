@@ -25,7 +25,7 @@ abstract class AbstractSnapshot extends Player
     abstract public function take(): array;
 
     /**
-     * Scales the snapshot to have a values between 0 and 1.
+     * Scales the snapshot to have values between 0 and 1.
      */
     protected function normalize()
     {
