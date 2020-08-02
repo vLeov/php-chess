@@ -30,7 +30,7 @@ $game = new Game;
 
 $isLegalMove = $game->play('w', 'e4');
 ```
-All action takes place in the `$game` object. The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be run on the board.
+The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be run on the board.
 
 ### Game methods
 
@@ -181,6 +181,10 @@ Gets the game's movetext in text format.
 Gets the pieces captured by both players as an array of `stdClass` objects.
 
     $captures = $game->captures();
+
+### Usage
+
+For further details please look at the [unit tests](https://github.com/programarivm/pgn-chess/tree/master/tests).
 
 ### Development
 
