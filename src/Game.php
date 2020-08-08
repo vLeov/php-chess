@@ -3,10 +3,15 @@
 namespace PGNChess;
 
 use PGNChess\PGN\Convert;
+use PGNChess\PGN\Symbol;
 use PGNChess\PGN\Validate;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Evaluation\Space as SpaceEvaluation;
 use PGNChess\Evaluation\Square as SquareEvaluation;
+use PGNChess\ML\Supervised\Regression\Labeller\Primes\Decoder as PrimesLabelDecoder;
+use PGNChess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
+use Rubix\ML\PersistentModel;
+use Rubix\ML\Persisters\Filesystem;
 
 /**
  * Game class.
@@ -18,6 +23,14 @@ use PGNChess\Evaluation\Square as SquareEvaluation;
  */
 class Game
 {
+    /** player vs ai */
+    const MODE_PVA          =  'MODE_PVA';
+
+    /** player vs themselves */
+    const MODE_PVT          =  'MODE_PVT';
+
+    const MODEL_FOLDER      = __DIR__.'/../model';
+
     /**
      * Chess board.
      *
@@ -26,11 +39,27 @@ class Game
     private $board;
 
     /**
+     * Mode.
+     *
+     * @var string
+     */
+    private $mode;
+
+    /**
+     * Estimator.
+     *
+     * @var PersistentModel
+     */
+    private $estimator;
+
+    /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(string $mode = null)
     {
         $this->board = new Board();
+        $this->mode = $mode ?? self::MODE_PVT;
+        $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.'/beginner.model'));
     }
 
     /**
@@ -169,5 +198,19 @@ class Game
     public function play(string $color, string $pgn): bool
     {
         return $this->board->play(Convert::toStdObj($color, $pgn));
+    }
+
+    /**
+     * AI model response to the current position.
+     *
+     * @return string
+     */
+    public function response()
+    {
+        $sample = (new PrimesSampler($this->board))->sample();
+        $prediction = $this->estimator->predictSample($sample[Symbol::oppColor($this->board->getTurn())]);
+        $decoded = (new PrimesLabelDecoder($this->board))->decode($this->board->getTurn(), $prediction);
+
+        return $decoded;
     }
 }

@@ -261,14 +261,12 @@ final class Board extends \SplObjectStorage
     {
         $movetext = '';
         foreach ($this->history as $key => $val) {
-            if ($key % 2 === 0) {
-                $movetext .= $key + 1 . ".{$val->move->pgn}";
-            } else {
-                $movetext .= " {$val->move->pgn} ";
-            }
+            $key % 2 === 0
+                ? $movetext .= $key + 1 . ".{$val->move->pgn}"
+                : $movetext .= " {$val->move->pgn} ";            
         }
 
-        return $movetext;
+        return trim($movetext);
     }
 
     /**

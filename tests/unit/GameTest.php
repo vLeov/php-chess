@@ -7,16 +7,20 @@ use PGNChess\Tests\AbstractUnitTestCase;
 
 class GameTest extends AbstractUnitTestCase
 {
-    protected $game;
-
-    public function setUp()
+    /**
+     * @test
+     */
+    public function mode_pva()
     {
-        $this->game = new Game();
-    }
+        $game = new Game(Game::MODE_PVA);
+        $game->play('w', 'e4');
+        $game->play('b', $game->response());
+        $game->play('w', 'd4');
+        $game->play('b', $game->response());
 
-    public function tearDown()
-    {
-        $this->game = null;
+        $expected = '1.e4 c5 3.d4 b5';
+
+        $this->assertEquals($expected, $game->movetext());
     }
 
     /**
@@ -25,6 +29,7 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_sample_games($filename)
     {
+        $game = new Game();
         $contents = file_get_contents(self::DATA_FOLDER."/game/$filename");
         $pairs = array_filter(preg_split('/[0-9]+\./', $contents));
         $moves = [];
@@ -34,10 +39,10 @@ class GameTest extends AbstractUnitTestCase
         $moves = array_values(array_filter($moves));
         for ($i = 0; $i < count($moves); ++$i) {
             $whiteMove = str_replace("\r", '', str_replace("\n", '', $moves[$i][0]));
-            $this->assertEquals(true, $this->game->play('w', $whiteMove));
+            $this->assertEquals(true, $game->play('w', $whiteMove));
             if (isset($moves[$i][1])) {
                 $blackMove = str_replace("\r", '', str_replace("\n", '', $moves[$i][1]));
-                $this->assertEquals(true, $this->game->play('b', $blackMove));
+                $this->assertEquals(true, $game->play('b', $blackMove));
             }
         }
     }
