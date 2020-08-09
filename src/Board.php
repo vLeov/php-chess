@@ -263,7 +263,7 @@ final class Board extends \SplObjectStorage
         foreach ($this->history as $key => $val) {
             $key % 2 === 0
                 ? $movetext .= $key + 1 . ".{$val->move->pgn}"
-                : $movetext .= " {$val->move->pgn} ";            
+                : $movetext .= " {$val->move->pgn} ";
         }
 
         return trim($movetext);
@@ -691,8 +691,7 @@ final class Board extends \SplObjectStorage
             );
         }
         $this->attach($pieceUndone);
-        if ($prev->move->isCapture) {
-            $capture = end($this->captures[$prev->move->color]);
+        if ($prev->move->isCapture && $capture = end($this->captures[$prev->move->color])) {
             $capturedClass = new \ReflectionClass(Convert::toClassName($capture->captured->identity));
             $this->attach($capturedClass->newInstanceArgs([
                     $prev->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
