@@ -8,22 +8,6 @@ use PGNChess\Tests\AbstractUnitTestCase;
 class GameTest extends AbstractUnitTestCase
 {
     /**
-     * @test
-     */
-    /* public function mode_pva()
-    {
-        $game = new Game(Game::MODE_PVA);
-        $game->play('w', 'e4');
-        $game->play('b', $game->response());
-        $game->play('w', 'd4');
-        $game->play('b', $game->response());
-
-        $expected = '1.e4 c5 3.d4 b5';
-
-        $this->assertEquals($expected, $game->movetext());
-    } */
-
-    /**
      * @dataProvider filenameData
      * @test
      */
