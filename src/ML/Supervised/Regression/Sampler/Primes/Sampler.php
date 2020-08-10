@@ -42,11 +42,17 @@ class Sampler
             Symbol::BLACK => count($attEvald[Symbol::BLACK]),
         ];
 
+        $attdEvald = [
+            Symbol::WHITE => $attEvald[Symbol::BLACK],
+            Symbol::BLACK => $attEvald[Symbol::WHITE],
+        ];
+
         $this->sample = [
             Symbol::WHITE => [
                 $attEvald[Symbol::WHITE],
                 $connEvald[Symbol::WHITE],
                 $ctrEvald[Symbol::WHITE],
+                $attdEvald[Symbol::WHITE],
                 $kSafetyEvald[Symbol::WHITE],
                 $mtlEvald[Symbol::WHITE],
                 $checkEvald[Symbol::WHITE],
@@ -55,6 +61,7 @@ class Sampler
                 $attEvald[Symbol::BLACK],
                 $connEvald[Symbol::BLACK],
                 $ctrEvald[Symbol::BLACK],
+                $attdEvald[Symbol::BLACK],
                 $kSafetyEvald[Symbol::BLACK],
                 $mtlEvald[Symbol::BLACK],
                 $checkEvald[Symbol::BLACK],

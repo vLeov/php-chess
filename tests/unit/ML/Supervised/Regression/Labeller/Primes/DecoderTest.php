@@ -17,7 +17,7 @@ class DecoderTest extends AbstractUnitTestCase
     {
         $board = new Board;
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $expected = 'Nc6';
+        $expected = 'e5';
 
         $this->assertEquals($expected, (new PrimesLabelDecoder($board))->decode(Symbol::BLACK, 571));
     }
