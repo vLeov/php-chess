@@ -10,7 +10,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function mode_pva()
+    /* public function mode_pva()
     {
         $game = new Game(Game::MODE_PVA);
         $game->play('w', 'e4');
@@ -21,7 +21,7 @@ class GameTest extends AbstractUnitTestCase
         $expected = '1.e4 c5 3.d4 b5';
 
         $this->assertEquals($expected, $game->movetext());
-    }
+    } */
 
     /**
      * @dataProvider filenameData
