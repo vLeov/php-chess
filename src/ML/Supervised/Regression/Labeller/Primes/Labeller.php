@@ -12,10 +12,15 @@ use PGNChess\PGN\Symbol;
  */
 class Labeller
 {
-    /**
-     * Order is: attack, connectivity, center, king safety, material and check.
-     */
-    const WEIGHTS = [ 2, 3, 5, 7, 11, 13, 17 ];
+    const WEIGHTS = [
+        2,      // attack
+        3,      // connectivity
+        5,      // center
+        7,      // attacked
+        11,     // king safety
+        13,     // material
+        17      // check
+    ];
 
     private $sample;
 
