@@ -6,11 +6,12 @@ use PGNChess\Board;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Evaluation\Center as CenterEvaluation;
-use PGNChess\Event\Check as CheckEvent;
 use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
 use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
 use PGNChess\Evaluation\Value\System;
+use PGNChess\Event\Check as CheckEvent;
+use PGNChess\Event\PieceCapture as PieceCaptureEvent;
 
 class Sampler
 {
@@ -54,6 +55,7 @@ class Sampler
                 $attdEvald[Symbol::WHITE],
                 $kSafetyEvald[Symbol::WHITE],
                 $mtlEvald[Symbol::WHITE],
+                (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
                 (new CheckEvent($this->board))->capture(Symbol::WHITE),
             ],
             Symbol::BLACK => [
@@ -63,6 +65,7 @@ class Sampler
                 $attdEvald[Symbol::BLACK],
                 $kSafetyEvald[Symbol::BLACK],
                 $mtlEvald[Symbol::BLACK],
+                (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
                 (new CheckEvent($this->board))->capture(Symbol::BLACK),
             ],
         ];

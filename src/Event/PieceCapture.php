@@ -14,8 +14,10 @@ class PieceCapture extends AbstractEvent
 
     public function capture(string $color): int
     {
-        $last = array_slice($this->board->getHistory(), -1)[0];
-        $this->result = (int) ($last->move->isCapture && $last->move->color === $color);
+        if ($this->board->getHistory()) {
+            $last = array_slice($this->board->getHistory(), -1)[0];
+            $this->result = (int) ($last->move->isCapture && $last->move->color === $color);
+        }
 
         return $this->result;
     }

@@ -14,7 +14,7 @@ abstract class AbstractEvent
 {
     protected $board;
 
-    protected $result;
+    protected $result = 0;
 
     public function __construct(Board $board)
     {

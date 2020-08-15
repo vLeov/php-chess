@@ -19,7 +19,8 @@ class Labeller
         7,      // attacked
         11,     // king safety
         13,     // material
-        17      // check
+        17,     // piece capture event
+        19      // check event
     ];
 
     private $sample;
