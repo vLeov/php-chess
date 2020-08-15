@@ -6,7 +6,7 @@ use PGNChess\Board;
 use PGNChess\PGN\Symbol;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Evaluation\Center as CenterEvaluation;
-use PGNChess\Evaluation\Check as CheckEvaluation;
+use PGNChess\Event\Check as CheckEvent;
 use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
 use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
 use PGNChess\Evaluation\Material as MaterialEvaluation;
@@ -35,7 +35,6 @@ class Sampler
         $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
         $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate();
         $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-        $checkEvald = (new CheckEvaluation($this->board))->evaluate();
 
         $attEvald = [
             Symbol::WHITE => count($attEvald[Symbol::WHITE]),
@@ -55,7 +54,7 @@ class Sampler
                 $attdEvald[Symbol::WHITE],
                 $kSafetyEvald[Symbol::WHITE],
                 $mtlEvald[Symbol::WHITE],
-                $checkEvald[Symbol::WHITE],
+                (new CheckEvent($this->board))->capture(Symbol::WHITE),
             ],
             Symbol::BLACK => [
                 $attEvald[Symbol::BLACK],
@@ -64,7 +63,7 @@ class Sampler
                 $attdEvald[Symbol::BLACK],
                 $kSafetyEvald[Symbol::BLACK],
                 $mtlEvald[Symbol::BLACK],
-                $checkEvald[Symbol::BLACK],
+                (new CheckEvent($this->board))->capture(Symbol::BLACK),
             ],
         ];
 

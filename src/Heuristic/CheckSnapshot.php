@@ -5,7 +5,7 @@ namespace PGNChess\Heuristic;
 use PGNChess\AbstractSnapshot;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
-use PGNChess\Evaluation\Check as CheckEvaluation;
+use PGNChess\Event\Check as CheckEvent;
 
 /**
  * Check snapshot.
@@ -20,13 +20,16 @@ class CheckSnapshot extends AbstractSnapshot
     {
         foreach ($this->moves as $move) {
             $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
+            $w = (new CheckEvent($this->board))->capture(Symbol::WHITE);
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
+                $b = (new CheckEvent($this->board))->capture(Symbol::BLACK);
+            } else {
+                $b = 0;
             }
-            $checkEvald = (new CheckEvaluation($this->board))->evaluate();
             $this->snapshot[] = [
-                Symbol::WHITE => $checkEvald[Symbol::WHITE],
-                Symbol::BLACK => $checkEvald[Symbol::BLACK],
+                Symbol::WHITE => $w,
+                Symbol::BLACK => $b,
             ];
         }
 

@@ -3,7 +3,7 @@
 namespace PGNChess\Tests\Unit\Evaluation;
 
 use PGNChess\Board;
-use PGNChess\Evaluation\Check as CheckEvaluation;
+use PGNChess\Event\Check as CheckEvent;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 use PGNChess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
@@ -19,14 +19,8 @@ class CheckTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board))->play();
 
-        $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 1,
-        ];
-
-        $checkEvald = (new CheckEvaluation($board))->evaluate();
-
-        $this->assertEquals($expected, $checkEvald);
+        $this->assertEquals(0, (new CheckEvent($board))->capture(Symbol::WHITE));
+        $this->assertEquals(1, (new CheckEvent($board))->capture(Symbol::BLACK));
     }
 
     /**
@@ -36,14 +30,8 @@ class CheckTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board))->play();
 
-        $expected = [
-            Symbol::WHITE => 1,
-            Symbol::BLACK => 0,
-        ];
-
-        $checkEvald = (new CheckEvaluation($board))->evaluate();
-
-        $this->assertEquals($expected, $checkEvald);
+        $this->assertEquals(1, (new CheckEvent($board))->capture(Symbol::WHITE));
+        $this->assertEquals(0, (new CheckEvent($board))->capture(Symbol::BLACK));
     }
 
     /**
@@ -53,13 +41,7 @@ class CheckTest extends AbstractUnitTestCase
     {
         $board = (new RuyLopezLucenaDefense(new Board))->play();
 
-        $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
-        ];
-
-        $checkEvald = (new CheckEvaluation($board))->evaluate();
-
-        $this->assertEquals($expected, $checkEvald);
+        $this->assertEquals(0, (new CheckEvent($board))->capture(Symbol::WHITE));
+        $this->assertEquals(0, (new CheckEvent($board))->capture(Symbol::BLACK));
     }
 }
