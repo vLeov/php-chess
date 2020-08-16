@@ -23,8 +23,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = new Board;
 
         $expected = [
-            Symbol::WHITE => [null, null, null, null, null, null, 0, 0],
-            Symbol::BLACK => [null, null, null, null, null, null, 0, 0],
+            Symbol::WHITE => [],
+            Symbol::BLACK => [],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
