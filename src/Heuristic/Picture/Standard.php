@@ -16,6 +16,38 @@ class Standard extends Player
 {
     protected $picture = [];
 
+    /**
+     * Takes a normalized, heuristic picture.
+     *
+     * e.g.
+     *
+     *      Array
+     *      (
+     *          [w] => Array
+     *              (
+     *                  [0] => Array
+     *                      (
+     *                          [0] => 0
+     *                          [1] => 0.54
+     *                          [2] => 0
+     *                          [3] => 0
+     *                          [4] => 1
+     *                          [5] => 1
+     *                      )
+     *
+     *                  [1] => Array
+     *                      (
+     *                          [0] => 0.25
+     *                          [1] => 0.54
+     *                          [2] => 1
+     *                          [3] => 0.25
+     *                          [4] => 1
+     *                          [5] => 1
+     *                      )
+     *      ...
+     *
+     * @return array
+     */
     public function take(): array
     {
         foreach ($this->moves as $move) {
@@ -34,6 +66,7 @@ class Standard extends Player
                 count($attEvald[Symbol::WHITE]),
                 $connEvald[Symbol::WHITE],
                 $ctrEvald[Symbol::WHITE],
+                count($attEvald[Symbol::BLACK]),
                 $kSafetyEvald[Symbol::WHITE],
                 $mtlEvald[Symbol::WHITE],
             ];
@@ -42,6 +75,7 @@ class Standard extends Player
                 count($attEvald[Symbol::BLACK]),
                 $connEvald[Symbol::BLACK],
                 $ctrEvald[Symbol::BLACK],
+                count($attEvald[Symbol::WHITE]),
                 $kSafetyEvald[Symbol::BLACK],
                 $mtlEvald[Symbol::BLACK],
             ];
