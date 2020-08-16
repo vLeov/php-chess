@@ -16,11 +16,6 @@ class Standard extends Player
 {
     protected $picture = [];
 
-    public function __construct(string $movetext)
-    {
-        parent::__construct($movetext);
-    }
-
     public function take(): array
     {
         foreach ($this->moves as $move) {
@@ -59,22 +54,19 @@ class Standard extends Player
 
     protected function normalize()
     {
-        // TODO dehardcode 5
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < count($this->picture[Symbol::WHITE][0]); $i++) {
             $values = array_merge(
                 array_column($this->picture[Symbol::WHITE], $i),
                 array_column($this->picture[Symbol::BLACK], $i)
             );
-            if ($values) {
-                $min = min($values);
-                $max = max($values);
-                if ($max - $min > 0) {
-                    foreach ($this->picture[Symbol::WHITE] as $key => $val) {
-                        $this->picture[Symbol::WHITE][$key][$i] = round(($val[$i] - $min) / ($max - $min), 2);
-                    }
-                    foreach ($this->picture[Symbol::BLACK] as $key => $val) {
-                        $this->picture[Symbol::BLACK][$key][$i] = round(($val[$i] - $min) / ($max - $min), 2);
-                    }
+            $min = min($values);
+            $max = max($values);
+            if ($max - $min >= 0) {
+                foreach ($this->picture[Symbol::WHITE] as $key => $val) {
+                    $this->picture[Symbol::WHITE][$key][$i] = round(($val[$i] - $min) / ($max - $min), 2);
+                }
+                foreach ($this->picture[Symbol::BLACK] as $key => $val) {
+                    $this->picture[Symbol::BLACK][$key][$i] = round(($val[$i] - $min) / ($max - $min), 2);
                 }
             }
         }
