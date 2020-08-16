@@ -34,13 +34,14 @@ abstract class AbstractSnapshot extends Player
             array_column($this->snapshot, Symbol::BLACK)
         );
 
-        $min = min($values);
-        $max = max($values);
-
-        if ($max - $min > 0) {
-            foreach ($this->snapshot as $key => $val) {
-                $this->snapshot[$key][Symbol::WHITE] = round(($val[Symbol::WHITE] - $min) / ($max - $min), 2);
-                $this->snapshot[$key][Symbol::BLACK] = round(($val[Symbol::BLACK] - $min) / ($max - $min), 2);
+        if ($values) {
+            $min = min($values);
+            $max = max($values);
+            if ($max - $min > 0) {
+                foreach ($this->snapshot as $key => $val) {
+                    $this->snapshot[$key][Symbol::WHITE] = round(($val[Symbol::WHITE] - $min) / ($max - $min), 2);
+                    $this->snapshot[$key][Symbol::BLACK] = round(($val[Symbol::BLACK] - $min) / ($max - $min), 2);
+                }
             }
         }
     }
