@@ -2,7 +2,7 @@
 
 namespace PGNChess\Heuristic\Picture;
 
-use PGNChess\Player;
+use PGNChess\AbstractPicture;
 use PGNChess\Evaluation\Value\System;
 use PGNChess\Evaluation\Attack as AttackEvaluation;
 use PGNChess\Evaluation\Center as CenterEvaluation;
@@ -12,12 +12,8 @@ use PGNChess\Evaluation\Material as MaterialEvaluation;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 
-class Standard extends Player
+class Standard extends AbstractPicture
 {
-    protected $picture = [];
-
-    protected $normalization = [];
-
     /**
      * Takes a normalized, heuristic picture.
      *
@@ -86,33 +82,5 @@ class Standard extends Player
         $this->normalize();
 
         return $this->picture;
-    }
-
-    protected function normalize()
-    {
-        $normalization = [];
-        if (count($this->board->getHistory()) >= 2) {
-            for ($i = 0; $i < count($this->picture[Symbol::WHITE][0]); $i++) {
-                $values = array_merge(
-                    array_column($this->picture[Symbol::WHITE], $i),
-                    array_column($this->picture[Symbol::BLACK], $i)
-                );
-                $min = min($values);
-                $max = max($values);
-                if ($max - $min > 0) {
-                    for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
-                        $normalization[Symbol::WHITE][$j][$i] = round(($this->picture[Symbol::WHITE][$j][$i] - $min) / ($max - $min), 2);
-                        $normalization[Symbol::BLACK][$j][$i] = round(($this->picture[Symbol::BLACK][$j][$i] - $min) / ($max - $min), 2);
-                    }
-                } elseif ($max == $min) {
-                    for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
-                        $normalization[Symbol::WHITE][$j][$i] = round(1 / count($values), 2);
-                        $normalization[Symbol::BLACK][$j][$i] = round(1 / count($values), 2);
-                    }
-                }
-            }
-        }
-
-        $this->picture = $normalization;
     }
 }
