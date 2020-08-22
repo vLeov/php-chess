@@ -33,6 +33,44 @@ class SamplerTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function w_e4_b_e5()
+    {
+        $board = new Board;
+
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+
+        $expected = [
+            Symbol::WHITE => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0],
+            Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0],
+        ];
+
+        $this->assertEquals($expected, (new PrimesSampler($board))->sample());
+    }
+
+    /**
+     * @test
+     */
+    public function w_e4_b_e5_w_Nf3_Nc6()
+    {
+        $board = new Board;
+
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+
+        $expected = [
+            Symbol::WHITE => [1, 1, 1, 0, 0.25, 1, 0, 0],
+            Symbol::BLACK => [0, 0.5, 0, 1, 0.25, 1, 0, 0],
+        ];
+
+        $this->assertEquals($expected, (new PrimesSampler($board))->sample());
+    }
+
+    /**
+     * @test
+     */
     public function w_e4_b_Na6()
     {
         $board = new Board;
@@ -41,8 +79,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
         $expected = [
-            Symbol::WHITE => [1, 0, 1, 0, 1, 0, 0, 0],
-            Symbol::BLACK => [0, 1, 0, 1, 1, 1, 0, 0],
+            Symbol::WHITE => [1, 0, 1, 0, 0.5, 0, 0, 0],
+            Symbol::BLACK => [0, 1, 0, 1, 0.5, 1, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -101,8 +139,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = (new ClosedSicilian(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 0.11, 1, 1, 1, 0, 0, 0],
-            Symbol::BLACK => [1, 0.89, 0.24, 0, 1, 0, 0, 0],
+            Symbol::WHITE => [0, 0.11, 1, 1, 0.1, 0, 0, 0],
+            Symbol::BLACK => [1, 0.89, 0.24, 0, 0.1, 0, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -116,8 +154,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = (new OpenSicilian(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 0.11, 1, 1, 1, 0, 0, 0],
-            Symbol::BLACK => [1, 0.89, 0.24, 0, 1, 0, 0, 0],
+            Symbol::WHITE => [0, 0.11, 1, 1, 0.1, 0, 0, 0],
+            Symbol::BLACK => [1, 0.89, 0.24, 0, 0.1, 0, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());

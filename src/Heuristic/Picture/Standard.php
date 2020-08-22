@@ -16,6 +16,8 @@ class Standard extends Player
 {
     protected $picture = [];
 
+    protected $normalization = [];
+
     /**
      * Takes a normalized, heuristic picture.
      *
@@ -88,7 +90,8 @@ class Standard extends Player
 
     protected function normalize()
     {
-        if (isset($this->picture[Symbol::WHITE])) {
+        $normalization = [];
+        if (count($this->board->getHistory()) >= 2) {
             for ($i = 0; $i < count($this->picture[Symbol::WHITE][0]); $i++) {
                 $values = array_merge(
                     array_column($this->picture[Symbol::WHITE], $i),
@@ -97,14 +100,19 @@ class Standard extends Player
                 $min = min($values);
                 $max = max($values);
                 if ($max - $min > 0) {
-                    foreach ($this->picture[Symbol::WHITE] as $key => $val) {
-                        $this->picture[Symbol::WHITE][$key][$i] = round(($val[$i] - $min) / ($max - $min), 2);
+                    for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
+                        $normalization[Symbol::WHITE][$j][$i] = round(($this->picture[Symbol::WHITE][$j][$i] - $min) / ($max - $min), 2);
+                        $normalization[Symbol::BLACK][$j][$i] = round(($this->picture[Symbol::BLACK][$j][$i] - $min) / ($max - $min), 2);
                     }
-                    foreach ($this->picture[Symbol::BLACK] as $key => $val) {
-                        $this->picture[Symbol::BLACK][$key][$i] = round(($val[$i] - $min) / ($max - $min), 2);
+                } elseif ($max == $min) {
+                    for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
+                        $normalization[Symbol::WHITE][$j][$i] = round(1 / count($values), 2);
+                        $normalization[Symbol::BLACK][$j][$i] = round(1 / count($values), 2);
                     }
                 }
             }
         }
+
+        $this->picture = $normalization;
     }
 }

@@ -4,16 +4,42 @@ namespace PGNChess\Tests\Unit\Heuristic\Picture;
 
 use PGNChess\Board;
 use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;;
+use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class PictureTest extends AbstractUnitTestCase
+class StandardTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
-    public function take()
+    public function w_e4_b_e5()
+    {
+        $board = new Board;
+        
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+
+        $picture = (new StandardHeuristicPicture($board->getMovetext()))->take();
+
+        $expected = [
+            Symbol::WHITE => [
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+
+            ],
+            Symbol::BLACK => [
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+            ],
+        ];
+
+        $this->assertEquals($expected, $picture);
+    }
+
+    /**
+     * @test
+     */
+    public function benko_gambit()
     {
         $movetext = (new BenkoGambit(new Board))
                         ->play()
