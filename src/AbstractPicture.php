@@ -22,13 +22,11 @@ abstract class AbstractPicture extends Player
                 );
                 $min = min($values);
                 $max = max($values);
-                if ($max - $min > 0) {
-                    for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
+                for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
+                    if ($max - $min > 0) {
                         $normalization[Symbol::WHITE][$j][$i] = round(($this->picture[Symbol::WHITE][$j][$i] - $min) / ($max - $min), 2);
                         $normalization[Symbol::BLACK][$j][$i] = round(($this->picture[Symbol::BLACK][$j][$i] - $min) / ($max - $min), 2);
-                    }
-                } elseif ($max == $min) {
-                    for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
+                    } elseif ($max == $min) {
                         $normalization[Symbol::WHITE][$j][$i] = round(1 / count($values), 2);
                         $normalization[Symbol::BLACK][$j][$i] = round(1 / count($values), 2);
                     }
