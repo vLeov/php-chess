@@ -28,25 +28,23 @@ class Sampler
     {
         $picture = (new StandardHeuristicPicture($this->board->getMovetext()))->take();
 
-        if (!empty($picture)) {
-            $wEnd = end($picture[Symbol::WHITE]);
-            $bEnd = end($picture[Symbol::BLACK]);
+        $wEnd = end($picture[Symbol::WHITE]);
+        $bEnd = end($picture[Symbol::BLACK]);
 
-            $this->sample = [
-                Symbol::WHITE => array_merge(
-                    $wEnd, [
-                        (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
-                        (new CheckEvent($this->board))->capture(Symbol::WHITE),
-                    ]
-                ),
-                Symbol::BLACK => array_merge(
-                    $bEnd, [
-                        (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
-                        (new CheckEvent($this->board))->capture(Symbol::BLACK),
-                    ]
-                ),
-            ];
-        }
+        $this->sample = [
+            Symbol::WHITE => array_merge(
+                $wEnd, [
+                    (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
+                    (new CheckEvent($this->board))->capture(Symbol::WHITE),
+                ]
+            ),
+            Symbol::BLACK => array_merge(
+                $bEnd, [
+                    (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
+                    (new CheckEvent($this->board))->capture(Symbol::BLACK),
+                ]
+            ),
+        ];
 
         return $this->sample;
     }

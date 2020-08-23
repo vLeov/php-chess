@@ -14,6 +14,8 @@ use PGNChess\PGN\Symbol;
 
 class Standard extends AbstractPicture
 {
+    const N_DIMENSIONS = 6;
+
     /**
      * Takes a normalized, heuristic picture.
      *

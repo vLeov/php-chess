@@ -15,7 +15,7 @@ abstract class AbstractPicture extends Player
         $normalization = [];
 
         if (count($this->board->getHistory()) >= 2) {
-            for ($i = 0; $i < count($this->picture[Symbol::WHITE][0]); $i++) {
+            for ($i = 0; $i < static::N_DIMENSIONS; $i++) {
                 $values = array_merge(
                     array_column($this->picture[Symbol::WHITE], $i),
                     array_column($this->picture[Symbol::BLACK], $i)
@@ -34,6 +34,8 @@ abstract class AbstractPicture extends Player
                     }
                 }
             }
+        } else {
+            $normalization[Symbol::WHITE][] = $normalization[Symbol::BLACK][] = array_fill(0, static::N_DIMENSIONS, 0.5);
         }
 
         $this->picture = $normalization;

@@ -24,8 +24,8 @@ class LabellerTest extends AbstractUnitTestCase
         $sample = (new PrimesSampler(new Board))->sample();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Symbol::WHITE => 20.5,
+            Symbol::BLACK => 20.5,
         ];
 
         $this->assertEquals($expected, (new PrimesLabeller($sample))->label());
