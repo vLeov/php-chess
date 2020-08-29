@@ -19,22 +19,23 @@ class Standard extends AbstractPicture
      */
     public function take(): array
     {
-        foreach ($this->moves as $move) {
-            $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
-
-            $this->picture[Symbol::WHITE][] = [
-                (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
-                (new CheckEvent($this->board))->capture(Symbol::WHITE),
-            ];
-
-            if (isset($move[1])) {
-                $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
+        if ($this->moves) {
+            foreach ($this->moves as $move) {
+                $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
+                $this->picture[Symbol::WHITE][] = [
+                    (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
+                    (new CheckEvent($this->board))->capture(Symbol::WHITE),
+                ];
+                if (isset($move[1])) {
+                    $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
+                }
+                $this->picture[Symbol::BLACK][] = [
+                    (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
+                    (new CheckEvent($this->board))->capture(Symbol::BLACK),
+                ];
             }
-
-            $this->picture[Symbol::BLACK][] = [
-                (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
-                (new CheckEvent($this->board))->capture(Symbol::BLACK),
-            ];
+        } else {
+            $this->picture[Symbol::WHITE][] = $this->picture[Symbol::BLACK][] = array_fill(0, static::N_DIMENSIONS, 0);
         }
 
         return $this->picture;

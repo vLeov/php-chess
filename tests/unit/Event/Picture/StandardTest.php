@@ -15,6 +15,28 @@ class StandardTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function start()
+    {
+        $board = new Board;
+
+        $picture = (new StandardEventPicture($board->getMovetext()))->take();
+
+        $expected = [
+            Symbol::WHITE => [
+                [0, 0],
+
+            ],
+            Symbol::BLACK => [
+                [0, 0],
+            ],
+        ];
+
+        $this->assertEquals($expected, $picture);
+    }
+
+    /**
+     * @test
+     */
     public function w_e4_b_e5()
     {
         $board = new Board;

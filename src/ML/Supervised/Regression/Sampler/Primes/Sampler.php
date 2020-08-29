@@ -3,8 +3,7 @@
 namespace PGNChess\ML\Supervised\Regression\Sampler\Primes;
 
 use PGNChess\Board;
-use PGNChess\Event\Check as CheckEvent;
-use PGNChess\Event\PieceCapture as PieceCaptureEvent;
+use PGNChess\Event\Picture\Standard as StandardEventPicture;;
 use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;;
 use PGNChess\PGN\Symbol;
 
@@ -26,23 +25,17 @@ class Sampler
 
     public function sample(): array
     {
-        $picture = (new StandardHeuristicPicture($this->board->getMovetext()))->take();
-
-        $wEnd = end($picture[Symbol::WHITE]);
-        $bEnd = end($picture[Symbol::BLACK]);
+        $heuristicPicture = (new StandardHeuristicPicture($this->board->getMovetext()))->take();
+        $eventPicture = (new StandardEventPicture($this->board->getMovetext()))->take();
 
         $this->sample = [
             Symbol::WHITE => array_merge(
-                $wEnd, [
-                    (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
-                    (new CheckEvent($this->board))->capture(Symbol::WHITE),
-                ]
+                end($heuristicPicture[Symbol::WHITE]),
+                end($eventPicture[Symbol::WHITE]),
             ),
             Symbol::BLACK => array_merge(
-                $bEnd, [
-                    (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
-                    (new CheckEvent($this->board))->capture(Symbol::BLACK),
-                ]
+                end($heuristicPicture[Symbol::BLACK]),
+                end($eventPicture[Symbol::BLACK]),
             ),
         ];
 
