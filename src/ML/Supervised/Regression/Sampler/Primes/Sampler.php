@@ -31,11 +31,11 @@ class Sampler
         $this->sample = [
             Symbol::WHITE => array_merge(
                 end($heuristicPicture[Symbol::WHITE]),
-                end($eventPicture[Symbol::WHITE]),
+                end($eventPicture[Symbol::WHITE])
             ),
             Symbol::BLACK => array_merge(
                 end($heuristicPicture[Symbol::BLACK]),
-                end($eventPicture[Symbol::BLACK]),
+                end($eventPicture[Symbol::BLACK])
             ),
         ];
 
