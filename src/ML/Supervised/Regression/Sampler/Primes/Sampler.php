@@ -3,8 +3,8 @@
 namespace PGNChess\ML\Supervised\Regression\Sampler\Primes;
 
 use PGNChess\Board;
-use PGNChess\Event\Picture\Standard as StandardEventPicture;;
-use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;;
+use PGNChess\Event\Picture\Standard as StandardEventPicture;
+use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use PGNChess\PGN\Symbol;
 
 class Sampler
