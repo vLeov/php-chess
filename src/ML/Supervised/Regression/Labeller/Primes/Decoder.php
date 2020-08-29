@@ -60,6 +60,10 @@ class Decoder
             }
         }
 
+        usort($this->result, function ($a, $b) {
+            return current($b) <=> current($a);
+        });
+
         return $this->pgn($this->closest($float));
     }
 
