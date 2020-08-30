@@ -8,6 +8,7 @@ use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
 use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
+use PGNChess\Tests\Sample\Players\Adams;
 
 class StandardTest extends AbstractUnitTestCase
 {
@@ -95,5 +96,34 @@ class StandardTest extends AbstractUnitTestCase
         ];
 
         $this->assertEquals($expected, $picture);
+    }
+
+    /**
+     * @test
+     */
+    public function adams()
+    {
+        $movetext = (new Adams(new Board))
+                        ->play()
+                        ->getMovetext();
+
+        $picture = (new StandardHeuristicPicture($movetext))->take();
+
+        $expected = [
+            Symbol::WHITE => [
+                [0, 0.87, 0.08, 0, 1, 1],
+                [0.17, 0.77, 0.15, 0.17, 1, 1],
+                [0.17, 0.84, 0.15, 0.17, 1, 1],
+                [0, 0.84, 0.15, 0.17, 1, 1],
+                [0.17, 0.87, 0.15, 0.33, 1, 1],
+                [0.17, 0.9, 0.15, 0.33, 1, 1],
+                [0.17, 0.9, 0, 0.33, 1, 0.95],
+                [0.17, 0.97, 0.08, 0.33, 1, 0.95],
+                [0.33, 0.84, 0.15, 0.5, 0.67, 0.95],
+                [0.5, 0.84, 0.15, 0.5, 0.67, 0.95],
+            ],
+        ];
+
+        $this->assertEquals($expected[Symbol::WHITE], array_slice($picture[Symbol::WHITE], 0, 10));
     }
 }
