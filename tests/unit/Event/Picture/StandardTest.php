@@ -3,7 +3,7 @@
 namespace PGNChess\Tests\Unit\Event\Picture;
 
 use PGNChess\Board;
-use PGNChess\Event\Picture\Standard as StandardEventPicture;;
+use PGNChess\Event\Picture\Standard as StandardEventPicture;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;

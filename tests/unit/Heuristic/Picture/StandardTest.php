@@ -3,7 +3,7 @@
 namespace PGNChess\Tests\Unit\Heuristic\Picture;
 
 use PGNChess\Board;
-use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;;
+use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use PGNChess\PGN\Convert;
 use PGNChess\PGN\Symbol;
 use PGNChess\Tests\AbstractUnitTestCase;
