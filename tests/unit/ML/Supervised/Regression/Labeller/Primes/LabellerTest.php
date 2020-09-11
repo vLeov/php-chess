@@ -34,11 +34,49 @@ class LabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function w_e4_b_e5()
+    {
+        $board = new Board;
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+
+        $sample = (new PrimesSampler($board))->sample();
+
+        $expected = [
+            Symbol::WHITE => 20.5,
+            Symbol::BLACK => 20.5,
+        ];
+
+        $this->assertEquals($expected, (new PrimesLabeller($sample))->label());
+    }
+
+    /**
+     * @test
+     */
     public function w_e4_b_Na6()
     {
         $board = new Board;
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
+
+        $sample = (new PrimesSampler($board))->sample();
+
+        $expected = [
+            Symbol::WHITE => 12.5,
+            Symbol::BLACK => 28.5,
+        ];
+
+        $this->assertEquals($expected, (new PrimesLabeller($sample))->label());
+    }
+
+    /**
+     * @test
+     */
+    public function w_e4_b_Nc6()
+    {
+        $board = new Board;
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
         $sample = (new PrimesSampler($board))->sample();
 
