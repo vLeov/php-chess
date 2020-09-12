@@ -13,14 +13,14 @@ use PGNChess\PGN\Symbol;
 class Labeller
 {
     const WEIGHTS = [
+       -2,      // attacked       
         2,      // attack
         3,      // connectivity
         5,      // center
-        7,      // attacked
-        11,     // king safety
-        13,     // material
-        17,     // piece capture event
-        19      // check event
+        7,      // king safety
+        11,     // material
+        13,     // piece capture event
+        17      // check event
     ];
 
     private $sample;

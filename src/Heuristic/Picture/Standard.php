@@ -63,19 +63,19 @@ class Standard extends AbstractPicture
             $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
 
             $this->picture[Symbol::WHITE][] = [
+                count($attEvald[Symbol::BLACK]),
                 count($attEvald[Symbol::WHITE]),
                 $connEvald[Symbol::WHITE],
                 $ctrEvald[Symbol::WHITE],
-                count($attEvald[Symbol::BLACK]),
                 $kSafetyEvald[Symbol::WHITE],
                 $mtlEvald[Symbol::WHITE],
             ];
 
             $this->picture[Symbol::BLACK][] = [
+                count($attEvald[Symbol::WHITE]),
                 count($attEvald[Symbol::BLACK]),
                 $connEvald[Symbol::BLACK],
                 $ctrEvald[Symbol::BLACK],
-                count($attEvald[Symbol::WHITE]),
                 $kSafetyEvald[Symbol::BLACK],
                 $mtlEvald[Symbol::BLACK],
             ];

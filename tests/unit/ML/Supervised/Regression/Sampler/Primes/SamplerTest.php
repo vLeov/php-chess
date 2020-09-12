@@ -59,8 +59,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
         $expected = [
-            Symbol::WHITE => [1, 0, 1, 0, 0.5, 0, 0, 0],
-            Symbol::BLACK => [0, 1, 0, 1, 0.5, 1, 0, 0],
+            Symbol::WHITE => [0, 1, 0, 1, 0.5, 0, 0, 0],
+            Symbol::BLACK => [1, 0, 1, 0, 0.5, 1, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -77,8 +77,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
         $expected = [
-            Symbol::WHITE => [0.5, 0, 0.5, 0.5, 0.5, 0, 0, 0],
-            Symbol::BLACK => [0.5, 1, 0.5, 0.5, 0.5, 1, 0, 0],
+            Symbol::WHITE => [0.5, 0.5, 0, 0.5, 0.5, 0, 0, 0],
+            Symbol::BLACK => [0.5, 0.5, 1, 0.5, 0.5, 1, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -97,8 +97,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
         $expected = [
-            Symbol::WHITE => [1, 1, 1, 0, 0.25, 1, 0, 0],
-            Symbol::BLACK => [0, 0.5, 0, 1, 0.25, 1, 0, 0],
+            Symbol::WHITE => [0, 1, 1, 1, 0.25, 1, 0, 0],
+            Symbol::BLACK => [1, 0, 0.5, 0, 0.25, 1, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -112,8 +112,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = (new FoolCheckmate(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 1, 0, 1, 0, 0, 0, 0],
-            Symbol::BLACK => [1, 0, 1, 0, 1, 1, 0, 1],
+            Symbol::WHITE => [1, 0, 1, 0, 0, 0, 0, 0],
+            Symbol::BLACK => [0, 1, 0, 1, 1, 1, 0, 1],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -127,8 +127,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = (new ScholarCheckmate(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [1, 0.07, 0, 0.4, 1, 1, 1, 1],
-            Symbol::BLACK => [0.4, 0.93, 1, 1, 0, 0, 0, 0],
+            Symbol::WHITE => [0.4, 1, 0.07, 0, 1, 1, 1, 1],
+            Symbol::BLACK => [1, 0.4, 0.93, 1, 0, 0, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -142,8 +142,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = (new BenkoGambit(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 0.15, 1, 0.75, 1, 0.19, 0, 0],
-            Symbol::BLACK => [0.75, 0.46, 0, 0, 1, 0, 0, 0],
+            Symbol::WHITE => [0.75, 0, 0.15, 1, 1, 0.19, 0, 0],
+            Symbol::BLACK => [0, 0.75, 0.46, 0, 1, 0, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -157,8 +157,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = (new ClosedSicilian(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 0.11, 1, 1, 0.1, 0, 0, 0],
-            Symbol::BLACK => [1, 0.89, 0.24, 0, 0.1, 0, 0, 0],
+            Symbol::WHITE => [1, 0, 0.11, 1, 0.1, 0, 0, 0],
+            Symbol::BLACK => [0, 1, 0.89, 0.24, 0.1, 0, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -172,8 +172,8 @@ class SamplerTest extends AbstractUnitTestCase
         $board = (new OpenSicilian(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 0.11, 1, 1, 0.1, 0, 0, 0],
-            Symbol::BLACK => [1, 0.89, 0.24, 0, 0.1, 0, 0, 0],
+            Symbol::WHITE => [1, 0, 0.11, 1, 0.1, 0, 0, 0],
+            Symbol::BLACK => [0, 1, 0.89, 0.24, 0.1, 0, 0, 0],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
