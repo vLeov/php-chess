@@ -3,7 +3,7 @@
 namespace PGNChess\Event;
 
 /**
- * Piece capture.
+ * A piece is captured.
  *
  * @author Jordi Bassagañas
  * @license GPL

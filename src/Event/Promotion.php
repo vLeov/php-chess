@@ -5,7 +5,7 @@ namespace PGNChess\Event;
 use PGNChess\PGN\Move;
 
 /**
- * Promotion.
+ * A pawn is promoted.
  *
  * @author Jordi Bassagañas
  * @license GPL

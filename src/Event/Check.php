@@ -5,7 +5,7 @@ namespace PGNChess\Event;
 use PGNChess\PGN\Symbol;
 
 /**
- * Check.
+ * A player is in check.
  *
  * @author Jordi Bassagañas
  * @license GPL

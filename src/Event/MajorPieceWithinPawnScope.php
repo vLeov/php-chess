@@ -5,7 +5,7 @@ namespace PGNChess\Event;
 use PGNChess\PGN\Symbol;
 
 /**
- * Major piece within pawn scope.
+ * A major piece is within a pawn's scope.
  *
  * @author Jordi Bassagañas
  * @license GPL

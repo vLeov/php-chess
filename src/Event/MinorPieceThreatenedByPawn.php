@@ -5,12 +5,12 @@ namespace PGNChess\Event;
 use PGNChess\PGN\Symbol;
 
 /**
- * Pawn threatening minor piece.
+ * A minor piece is threatened by a pawn.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class PawnThreateningMinorPiece extends AbstractEvent
+class MinorPieceThreatenedByPawn extends AbstractEvent
 {
     public function capture(string $color): int
     {

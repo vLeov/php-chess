@@ -5,12 +5,12 @@ namespace PGNChess\Event;
 use PGNChess\PGN\Symbol;
 
 /**
- * Minor piece landing on pawn.
+ * A minor piece is within a pawn's scope.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class MinorPieceLandingOnPawn extends AbstractEvent
+class MinorPieceWithinPawnScope extends AbstractEvent
 {
     public function capture(string $color): int
     {
