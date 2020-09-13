@@ -22,6 +22,6 @@ class Move
     const KNIGHT_CAPTURES = 'N[a-h]{0,1}[1-8]{0,1}x' . Symbol::SQUARE . Symbol::CHECK;
     const PAWN = Symbol::SQUARE . Symbol::CHECK;
     const PAWN_CAPTURES = '[a-h]{1}x' . Symbol::SQUARE . Symbol::CHECK;
-    const PAWN_PROMOTES = Symbol::SQUARE . '=[NBRQ]{1}' . Symbol::CHECK;
-    const PAWN_CAPTURES_AND_PROMOTES = '[a-h]{1}x' . Symbol::SQUARE . '=[NBRQ]{1}' . Symbol::CHECK;
+    const PAWN_PROMOTES = '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Symbol::CHECK;
+    const PAWN_CAPTURES_AND_PROMOTES = '[a-h]{1}x' . '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Symbol::CHECK;
 }

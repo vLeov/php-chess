@@ -147,32 +147,6 @@ class Convert
                         'next' => !$isCheck ? mb_substr($pgn, -2) : mb_substr($pgn, -3, -1)
                 ]];
 
-            case preg_match('/^' . Move::PAWN . '$/', $pgn):
-                return (object) [
-                    'pgn' => $pgn,
-                    'isCapture' => false,
-                    'isCheck' => $isCheck,
-                    'type' => Move::PAWN,
-                    'color' => Validate::color($color),
-                    'identity' => Symbol::PAWN,
-                    'position' => (object) [
-                        'current' => mb_substr($pgn, 0, 1),
-                        'next' => !$isCheck ? $pgn : mb_substr($pgn, 0, -1)
-                ]];
-
-            case preg_match('/^' . Move::PAWN_CAPTURES . '$/', $pgn):
-                return (object) [
-                    'pgn' => $pgn,
-                    'isCapture' => true,
-                    'isCheck' => $isCheck,
-                    'type' => Move::PAWN_CAPTURES,
-                    'color' => Validate::color($color),
-                    'identity' => Symbol::PAWN,
-                    'position' => (object) [
-                        'current' => mb_substr($pgn, 0, 1),
-                        'next' => !$isCheck ? mb_substr($pgn, -2) : mb_substr($pgn, -3, -1)
-                ]];
-
             case preg_match('/^' . Move::PAWN_PROMOTES . '$/', $pgn):
                 return (object) [
                     'pgn' => $pgn,
@@ -199,6 +173,32 @@ class Convert
                     'position' => (object) [
                         'current' => null,
                         'next' => mb_substr($pgn, 2, 2)
+                ]];
+
+            case preg_match('/^' . Move::PAWN . '$/', $pgn):
+                return (object) [
+                    'pgn' => $pgn,
+                    'isCapture' => false,
+                    'isCheck' => $isCheck,
+                    'type' => Move::PAWN,
+                    'color' => Validate::color($color),
+                    'identity' => Symbol::PAWN,
+                    'position' => (object) [
+                        'current' => mb_substr($pgn, 0, 1),
+                        'next' => !$isCheck ? $pgn : mb_substr($pgn, 0, -1)
+                ]];
+
+            case preg_match('/^' . Move::PAWN_CAPTURES . '$/', $pgn):
+                return (object) [
+                    'pgn' => $pgn,
+                    'isCapture' => true,
+                    'isCheck' => $isCheck,
+                    'type' => Move::PAWN_CAPTURES,
+                    'color' => Validate::color($color),
+                    'identity' => Symbol::PAWN,
+                    'position' => (object) [
+                        'current' => mb_substr($pgn, 0, 1),
+                        'next' => !$isCheck ? mb_substr($pgn, -2) : mb_substr($pgn, -3, -1)
                 ]];
 
             default:
