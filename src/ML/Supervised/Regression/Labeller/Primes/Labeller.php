@@ -13,14 +13,18 @@ use PGNChess\PGN\Symbol;
 class Labeller
 {
     const WEIGHTS = [
-       -2,      // attacked       
-        2,      // attack
-        3,      // connectivity
-        5,      // center
-        7,      // king safety
-        11,     // material
-        13,     // piece capture event
-        17      // check event
+        1229,   // CheckEvent
+        1103,   // PieceCaptureEvent
+        1009,   // MajorPieceThreatenedByPawnEvent
+        907,    // MajorPieceWithinPawnScopeEvent
+        809,    // MinorPieceThreatenedByPawnEvent
+        701,    // MinorPieceWithinPawnScopeEvent
+        601,     // PromotionEvent
+        503,    // meterial
+        401,    // king safety
+        307,    // center
+        211,    // attack
+        101,    // connectivity
     ];
 
     private $sample;
@@ -41,7 +45,7 @@ class Labeller
     {
         foreach ($this->sample as $color => $arr) {
             foreach ($arr as $key => $val) {
-                $this->label[$color] += self::WEIGHTS[$key] * $val;
+                $this->label[$color] += self::WEIGHTS[$key] * $val * 100;
             }
         }
 

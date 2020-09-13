@@ -25,17 +25,17 @@ class Sampler
 
     public function sample(): array
     {
-        $heuristicPicture = (new StandardHeuristicPicture($this->board->getMovetext()))->take();
         $eventPicture = (new StandardEventPicture($this->board->getMovetext()))->take();
+        $heuristicPicture = (new StandardHeuristicPicture($this->board->getMovetext()))->take();
 
         $this->sample = [
             Symbol::WHITE => array_merge(
-                end($heuristicPicture[Symbol::WHITE]),
-                end($eventPicture[Symbol::WHITE])
+                end($eventPicture[Symbol::WHITE]),
+                end($heuristicPicture[Symbol::WHITE])
             ),
             Symbol::BLACK => array_merge(
-                end($heuristicPicture[Symbol::BLACK]),
-                end($eventPicture[Symbol::BLACK])
+                end($eventPicture[Symbol::BLACK]),
+                end($heuristicPicture[Symbol::BLACK])
             ),
         ];
 
