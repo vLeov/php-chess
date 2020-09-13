@@ -3,6 +3,7 @@
 namespace PGNChess\Event;
 
 use PGNChess\PGN\Symbol;
+use PGNChess\Piece\Pawn;
 
 /**
  * A minor piece is threatened by a pawn.
@@ -18,13 +19,15 @@ class MinorPieceThreatenedByPawn extends AbstractEvent
             $last = array_slice($this->board->getHistory(), -1)[0];
             if ($last->move->color === $color && $last->move->identity === Symbol::PAWN) {
                 $pawn = $this->board->getPieceByPosition($last->move->position->next);
-                foreach ($pawn->getCaptureSquares() as $square) {
-                    if ($piece = $this->board->getPieceByPosition($square)) {
-                        switch (true) {
-                            case Symbol::oppColor($piece->getColor()) && $piece->getIdentity() === Symbol::BISHOP:
-                                return 1;
-                            case Symbol::oppColor($piece->getColor()) && $piece->getIdentity() === Symbol::KNIGHT:
-                                return 1;
+                if (is_a($pawn, Pawn::class)) {
+                    foreach ($pawn->getCaptureSquares() as $square) {
+                        if ($piece = $this->board->getPieceByPosition($square)) {
+                            switch (true) {
+                                case Symbol::oppColor($piece->getColor()) && $piece->getIdentity() === Symbol::BISHOP:
+                                    return 1;
+                                case Symbol::oppColor($piece->getColor()) && $piece->getIdentity() === Symbol::KNIGHT:
+                                    return 1;
+                            }
                         }
                     }
                 }
