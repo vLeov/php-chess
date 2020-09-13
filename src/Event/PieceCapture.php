@@ -10,8 +10,6 @@ namespace PGNChess\Event;
  */
 class PieceCapture extends AbstractEvent
 {
-    const NAME = 'capture';
-
     public function capture(string $color): int
     {
         if ($this->board->getHistory()) {

@@ -12,8 +12,6 @@ use PGNChess\PGN\Symbol;
  */
 class MinorPieceLandingOnPawn extends AbstractEvent
 {
-    const NAME = 'minor_piece_landing_on_pawn';
-
     public function capture(string $color): int
     {
         if ($this->board->getHistory()) {
