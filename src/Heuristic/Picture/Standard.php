@@ -14,7 +14,7 @@ use PGNChess\PGN\Symbol;
 
 class Standard extends AbstractPicture
 {
-    const N_DIMENSIONS = 6;
+    const N_DIMENSIONS = 5;
 
     /**
      * Takes a normalized, heuristic picture.
@@ -32,7 +32,6 @@ class Standard extends AbstractPicture
      *                          [2] => 0
      *                          [3] => 0
      *                          [4] => 1
-     *                          [5] => 1
      *                      )
      *
      *                  [1] => Array
@@ -42,7 +41,6 @@ class Standard extends AbstractPicture
      *                          [2] => 1
      *                          [3] => 0.25
      *                          [4] => 1
-     *                          [5] => 1
      *                      )
      *      ...
      *
@@ -63,7 +61,6 @@ class Standard extends AbstractPicture
             $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
 
             $this->picture[Symbol::WHITE][] = [
-                count($attEvald[Symbol::BLACK]),
                 count($attEvald[Symbol::WHITE]),
                 $connEvald[Symbol::WHITE],
                 $ctrEvald[Symbol::WHITE],
@@ -72,7 +69,6 @@ class Standard extends AbstractPicture
             ];
 
             $this->picture[Symbol::BLACK][] = [
-                count($attEvald[Symbol::WHITE]),
                 count($attEvald[Symbol::BLACK]),
                 $connEvald[Symbol::BLACK],
                 $ctrEvald[Symbol::BLACK],
