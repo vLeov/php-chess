@@ -69,14 +69,13 @@ class Decoder
 
     private function closest(float $search)
     {
-        $closest = null;
+        $closest = [];
         foreach ($this->result as $key => $val) {
-            if ($closest === null || abs($search - $closest) > abs(current($val) - $search)) {
-                $closest = current($val);
-            }
+            $closest[$key] = abs(current($val) - $search);
         }
+        asort($closest);
 
-        return $closest;
+        return current($this->result[array_key_first($closest)]);
     }
 
     private function pgn(float $search)
