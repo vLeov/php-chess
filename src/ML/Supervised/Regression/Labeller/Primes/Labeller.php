@@ -13,13 +13,6 @@ use PGNChess\PGN\Symbol;
 class Labeller
 {
     const WEIGHTS = [
-        1229,   // CheckEvent
-        1103,   // PieceCaptureEvent
-        1009,   // MajorPieceThreatenedByPawnEvent
-        907,    // MajorPieceWithinPawnScopeEvent
-        809,    // MinorPieceThreatenedByPawnEvent
-        701,    // MinorPieceWithinPawnScopeEvent
-        601,     // PromotionEvent
         503,    // meterial
         401,    // king safety
         307,    // center
