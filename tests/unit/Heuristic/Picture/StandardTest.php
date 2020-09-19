@@ -95,35 +95,31 @@ class StandardTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $picture);
-    }
-
-    /**
-     * @test
-     */
-    public function adams()
-    {
-        $movetext = (new Adams(new Board))
-                        ->play()
-                        ->getMovetext();
-
-        $picture = (new StandardHeuristicPicture($movetext))->take();
-
         $expected = [
             Symbol::WHITE => [
-                [0, 0.87, 0.08, 1, 1],
-                [0.17, 0.77, 0.15, 1, 1],
-                [0.17, 0.84, 0.15, 1, 1],
-                [0, 0.84, 0.15, 1, 1],
-                [0.17, 0.87, 0.15, 1, 1],
-                [0.17, 0.9, 0.15, 1, 1],
-                [0.17, 0.9, 0, 1, 0.95],
-                [0.17, 0.97, 0.08, 1, 0.95],
-                [0.33, 0.84, 0.15, 0.67, 0.95],
-                [0.5, 0.84, 0.15, 0.67, 0.95],
+                [1, 1, 0, 0.54, 0],
+                [1, 1, 1, 0.54, 0.25],
+                [1, 1, 0, 0.62, 0.25],
+                [1, 1, 0, 0.54, 0.25],
+                [0.81, 0.5, 0, 0.46, 0],
+                [0.81, 0.5, 1, 0.62, 0],
+                [0.19, 0, 1, 0, 0.25],
+                [0.19, 1, 1, 0.08, 0],
+                [0.19, 1, 1, 0.15, 0],
+            ],
+            Symbol::BLACK => [
+                [1, 1, 0, 0.92, 0],
+                [1, 1, 0, 0.92, 0.25],
+                [1, 1, 0, 0.85, 0.5],
+                [0.81, 1, 0, 1, 0.5],
+                [0.62, 1, 0, 0.62, 0.5],
+                [0.62, 1, 1, 0.62, 0.5],
+                [0.62, 1, 0, 0.46, 1],
+                [0, 1, 0, 0.46, 0.75],
+                [0, 1, 0, 0.46, 0.75],
             ],
         ];
 
-        $this->assertEquals($expected[Symbol::WHITE], array_slice($picture[Symbol::WHITE], 0, 10));
+        $this->assertEquals($expected, $picture);
     }
 }

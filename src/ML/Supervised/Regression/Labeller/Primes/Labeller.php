@@ -34,8 +34,8 @@ class Labeller
                 503,    // meterial
                 401,    // king safety
                 307,    // center
-                211,    // attack
-                101,    // connectivity
+                211,    // connectivity
+                101,    // attack
             ]
         );
     }

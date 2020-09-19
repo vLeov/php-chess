@@ -54,26 +54,26 @@ class Standard extends AbstractPicture
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
 
-            $attEvald = (new AttackEvaluation($this->board))->evaluate();
-            $connEvald = (new ConnectivityEvaluation($this->board))->evaluate();
-            $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-            $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
             $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
+            $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
+            $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
+            $connEvald = (new ConnectivityEvaluation($this->board))->evaluate();
+            $attEvald = (new AttackEvaluation($this->board))->evaluate();
 
             $this->picture[Symbol::WHITE][] = [
-                count($attEvald[Symbol::WHITE]),
-                $connEvald[Symbol::WHITE],
-                $ctrEvald[Symbol::WHITE],
-                $kSafetyEvald[Symbol::WHITE],
                 $mtlEvald[Symbol::WHITE],
+                $kSafetyEvald[Symbol::WHITE],
+                $ctrEvald[Symbol::WHITE],
+                $connEvald[Symbol::WHITE],
+                count($attEvald[Symbol::WHITE]),
             ];
 
             $this->picture[Symbol::BLACK][] = [
-                count($attEvald[Symbol::BLACK]),
-                $connEvald[Symbol::BLACK],
-                $ctrEvald[Symbol::BLACK],
-                $kSafetyEvald[Symbol::BLACK],
                 $mtlEvald[Symbol::BLACK],
+                $kSafetyEvald[Symbol::BLACK],
+                $ctrEvald[Symbol::BLACK],
+                $connEvald[Symbol::BLACK],
+                count($attEvald[Symbol::BLACK]),
             ];
         }
 
