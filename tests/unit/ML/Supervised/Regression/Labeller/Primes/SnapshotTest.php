@@ -23,24 +23,24 @@ class SnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 0.66,
-                Symbol::BLACK => 0.52,
+                Symbol::WHITE => 0.64,
+                Symbol::BLACK => 0.29,
             ],
             [
                 Symbol::WHITE => 1,
-                Symbol::BLACK => 0.12,
-            ],
-            [
-                Symbol::WHITE => 0.02,
-                Symbol::BLACK => 0.73,
-            ],
-            [
-                Symbol::WHITE => 0,
                 Symbol::BLACK => 0.08,
             ],
             [
-                Symbol::WHITE => 0.02,
-                Symbol::BLACK => 0.06,
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.65,
+            ],
+            [
+                Symbol::WHITE => 0.37,
+                Symbol::BLACK => 0.31,
+            ],
+            [
+                Symbol::WHITE => 0.39,
+                Symbol::BLACK => 0.29,
             ],
         ];
 

@@ -3,6 +3,7 @@
 namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
 
 use PGNChess\Event\Picture\Standard as StandardEventPicture;
+use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use PGNChess\PGN\Symbol;
 
 /**
@@ -30,13 +31,7 @@ class Labeller
 
         $this->weights = array_merge(
             array_fill(0, StandardEventPicture::N_DIMENSIONS, 0),
-            [
-                503,    // meterial
-                401,    // king safety
-                307,    // center
-                211,    // connectivity
-                101,    // attack
-            ]
+            StandardHeuristicPicture::WEIGHTS
         );
     }
 
