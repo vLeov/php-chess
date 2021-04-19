@@ -2,7 +2,7 @@
 
 namespace PGNChess\Event;
 
-use PhpChess\Board;
+use PgnChess\Board;
 
 /**
  * Abstract event.

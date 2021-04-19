@@ -2,7 +2,7 @@
 
 namespace PGNChess\Evaluation;
 
-use PhpChess\Board;
+use PgnChess\Board;
 use PGNChess\Evaluation\Value\System;
 
 /**
