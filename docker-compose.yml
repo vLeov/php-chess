@@ -3,15 +3,15 @@ version: "3.5"
 services:
   php_fpm:
       build: .
-      container_name: pgn_chess_php_fpm
+      container_name: php_chess_php_fpm
       restart: always
-      working_dir: /usr/share/pgn-chess
+      working_dir: /usr/share/
       networks:
-          - pgn_chess
+          - php_chess
       volumes:
-          - ./:/usr/share/pgn-chess
+          - ./:/usr/share/
           - ./docker/php/php.ini:/usr/local/etc/php/php.ini
 
 networks:
-  pgn_chess:
+  php_chess:
     driver: bridge

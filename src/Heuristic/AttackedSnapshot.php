@@ -12,7 +12,7 @@ use Chess\Evaluation\Attack as AttackEvaluation;
  *
  * @author Jordi Bassagañas
  * @license GPL
- * @see https://github.com/programarivm/pgn-chess/blob/master/src/AbstractSnapshot.php
+ * @see https://github.com/programarivm//blob/master/src/AbstractSnapshot.php
  */
 class AttackedSnapshot extends AbstractSnapshot
 {

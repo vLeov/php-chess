@@ -12,7 +12,7 @@ use Chess\Evaluation\Space as SpaceEvaluation;
  *
  * @author Jordi Bassagañas
  * @license GPL
- * @see https://github.com/programarivm/pgn-chess/blob/master/src/AbstractSnapshot.php
+ * @see https://github.com/programarivm//blob/master/src/AbstractSnapshot.php
  */
 class SpaceSnapshot extends AbstractSnapshot
 {

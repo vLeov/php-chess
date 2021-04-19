@@ -1,6 +1,6 @@
 {
-  "name": "programarivm/pgn-chess",
-  "description": "PGN Chess is a chess board representation to play and validate PGN games. See it in action at PGN Chess Server, which is a WebSocket server listening to chess commands.",
+  "name": "programarivm/php-chess",
+  "description": "A chess library for PHP.",
   "type": "library",
   "license": "GPL-3.0-only",
   "keywords": [

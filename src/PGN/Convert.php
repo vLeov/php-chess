@@ -207,7 +207,7 @@ class Convert
     }
 
     /**
-     * Gets the piece's PGN Chess class name according to its PGN identity.
+     * Gets the piece's class name according to its PGN identity.
      *
      * @param string $identity
      * @return string

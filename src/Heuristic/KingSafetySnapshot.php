@@ -13,7 +13,7 @@ use Chess\Evaluation\Value\System;
  *
  * @author Jordi Bassagañas
  * @license GPL
- * @see https://github.com/programarivm/pgn-chess/blob/master/src/AbstractSnapshot.php
+ * @see https://github.com/programarivm//blob/master/src/AbstractSnapshot.php
  */
 class KingSafetySnapshot extends AbstractSnapshot
 {

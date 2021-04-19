@@ -17,4 +17,4 @@ cd $APP_PATH
 docker-compose up -d
 
 # install dependencies
-docker exec -it pgn_chess_php_fpm composer install
+docker exec -it php_chess_php_fpm composer install

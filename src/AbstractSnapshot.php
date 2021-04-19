@@ -16,7 +16,7 @@ use Chess\PGN\Symbol;
  *
  * @author Jordi Bassagañas
  * @license GPL
- * @see https://github.com/programarivm/pgn-chess/tree/master/src/Heuristic
+ * @see https://github.com/programarivm//tree/master/src/Heuristic
  */
 abstract class AbstractSnapshot extends Player
 {
