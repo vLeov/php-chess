@@ -1,8 +1,7 @@
 ## PHP Chess
 
-[![Latest Stable Version](https://poser.pugx.org/programarivm//v/stable)](https://packagist.org/packages/programarivm/)
-[![Build Status](https://travis-ci.org/programarivm/.svg?branch=master)](https://travis-ci.org/programarivm/)
-[![Total Downloads](https://poser.pugx.org/programarivm//downloads)](https://packagist.org/packages/programarivm/)
+[![Latest Stable Version](https://poser.pugx.org/programarivm/php-chess/v/stable)](https://packagist.org/packages/programarivm/php-chess)
+[![Build Status](https://travis-ci.org/programarivm/php-chess.svg?branch=master)](https://travis-ci.org/programarivm/php-chess)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 <p align="center">
