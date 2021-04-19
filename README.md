@@ -14,7 +14,7 @@ A chess library for PHP.
 
 Via composer:
 
-    $ composer require programarivm/
+    $ composer require programarivm/php-chess
 
 ### Instantiation
 
