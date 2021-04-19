@@ -2,7 +2,7 @@
 
 namespace PGNChess\Evaluation;
 
-use PgnChess\Board;
+use PhpChess\Board;
 use PGNChess\Evaluation\Square as SquareEvaluation;
 use PGNChess\PGN\Symbol;
 

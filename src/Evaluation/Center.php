@@ -2,7 +2,7 @@
 
 namespace PGNChess\Evaluation;
 
-use PgnChess\Board;
+use PhpChess\Board;
 use PGNChess\Evaluation\Space as SpaceEvaluation;
 use PGNChess\PGN\Symbol;
 
