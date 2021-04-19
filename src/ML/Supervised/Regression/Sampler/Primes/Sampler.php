@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\ML\Supervised\Regression\Sampler\Primes;
+namespace Chess\ML\Supervised\Regression\Sampler\Primes;
 
-use PGNChess\Board;
-use PGNChess\Event\Picture\Standard as StandardEventPicture;
-use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;
-use PGNChess\PGN\Symbol;
+use Chess\Board;
+use Chess\Event\Picture\Standard as StandardEventPicture;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\PGN\Symbol;
 
 class Sampler
 {

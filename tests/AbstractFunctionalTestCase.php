@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Tests;
+namespace Chess\Tests;
 
 class AbstractFunctionalTestCase extends AbstractTestCase
 {

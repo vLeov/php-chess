@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Tests\Unit;
+namespace Chess\Tests\Unit;
 
-use PGNChess\Board;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Board;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
 
 class ArrayOfBoardsTest extends AbstractUnitTestCase
 {

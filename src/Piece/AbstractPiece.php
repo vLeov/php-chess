@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Piece;
+namespace Chess\Piece;
 
-use PGNChess\Piece\Piece;
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate;
+use Chess\Piece\Piece;
+use Chess\PGN\Symbol;
+use Chess\PGN\Validate;
 
 /**
  * Class that represents a chess piece.

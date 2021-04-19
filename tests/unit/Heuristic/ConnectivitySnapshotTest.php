@@ -1,12 +1,12 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Heuristic;
+namespace Chess\Tests\Unit\Heuristic;
 
-use PGNChess\Board;
-use PGNChess\Heuristic\ConnectivitySnapshot;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
+use Chess\Board;
+use Chess\Heuristic\ConnectivitySnapshot;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class ConnectivitySnapshotTest extends AbstractUnitTestCase
 {

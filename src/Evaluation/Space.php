@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Evaluation;
+namespace Chess\Evaluation;
 
 use Chess\Board;
-use PGNChess\Evaluation\Square as SquareEvaluation;
-use PGNChess\PGN\Symbol;
+use Chess\Evaluation\Square as SquareEvaluation;
+use Chess\PGN\Symbol;
 
 /**
  * Space evaluation.

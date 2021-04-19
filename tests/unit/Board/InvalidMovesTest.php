@@ -1,23 +1,23 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Board;
+namespace Chess\Tests\Unit\Board;
 
-use PGNChess\Board;
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\King;
-use PGNChess\Piece\Knight;
-use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Type\RookType;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Board;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Piece\King;
+use Chess\Piece\Knight;
+use Chess\Piece\Pawn;
+use Chess\Piece\Rook;
+use Chess\Piece\Type\RookType;
+use Chess\Tests\AbstractUnitTestCase;
 
 class InvalidMovesTest extends AbstractUnitTestCase
 {
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function numeric_value()
     {
@@ -26,7 +26,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function foo()
     {
@@ -35,7 +35,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function bar()
     {
@@ -44,7 +44,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function e9()
     {
@@ -53,7 +53,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function e10()
     {
@@ -62,7 +62,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function Nw3()
     {
@@ -71,7 +71,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\BoardException
+     * @expectedException \Chess\Exception\BoardException
      */
     public function piece_does_not_exist()
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess;
+namespace Chess;
 
-use PGNChess\PGN\Symbol;
+use Chess\PGN\Symbol;
 
 /**
  * Abstract snapshot.

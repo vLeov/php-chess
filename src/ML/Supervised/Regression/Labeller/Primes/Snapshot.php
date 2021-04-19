@@ -1,12 +1,12 @@
 <?php
 
-namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\ML\Supervised\Regression\Labeller\Primes;
 
-use PGNChess\AbstractSnapshot;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
-use PGNChess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
+use Chess\AbstractSnapshot;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
+use Chess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
 
 /**
  * Primes labeller snapshot.

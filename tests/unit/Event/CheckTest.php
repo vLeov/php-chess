@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Evaluation;
+namespace Chess\Tests\Unit\Evaluation;
 
-use PGNChess\Board;
-use PGNChess\Event\Check as CheckEvent;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
-use PGNChess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
-use PGNChess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
+use Chess\Board;
+use Chess\Event\Check as CheckEvent;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
+use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
+use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 
 class CheckTest extends AbstractUnitTestCase
 {

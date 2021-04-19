@@ -24,7 +24,7 @@ Via composer:
 Just instantiate a game and play PGN moves:
 
 ```php
-use PGNChess\Game;
+use Chess\Game;
 
 $game = new Game;
 

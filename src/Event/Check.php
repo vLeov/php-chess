@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Event;
+namespace Chess\Event;
 
-use PGNChess\PGN\Symbol;
+use Chess\PGN\Symbol;
 
 /**
  * A player is in check.

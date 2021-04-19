@@ -1,9 +1,9 @@
 <?php
 
-namespace PGNChess\Evaluation;
+namespace Chess\Evaluation;
 
 use Chess\Board;
-use PGNChess\Evaluation\Value\System;
+use Chess\Evaluation\Value\System;
 
 /**
  * Abstract evaluation.

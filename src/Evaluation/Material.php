@@ -1,9 +1,9 @@
 <?php
 
-namespace PGNChess\Evaluation;
+namespace Chess\Evaluation;
 
 use Chess\Board;
-use PGNChess\PGN\Symbol;
+use Chess\PGN\Symbol;
 
 /**
  * Material.

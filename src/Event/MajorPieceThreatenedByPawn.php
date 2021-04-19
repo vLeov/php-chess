@@ -1,9 +1,9 @@
 <?php
 
-namespace PGNChess\Event;
+namespace Chess\Event;
 
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\Pawn;
+use Chess\PGN\Symbol;
+use Chess\Piece\Pawn;
 
 /**
  * A major piece is threatened by a pawn.

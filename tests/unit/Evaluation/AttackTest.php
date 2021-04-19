@@ -1,13 +1,13 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Evaluation;
+namespace Chess\Tests\Unit\Evaluation;
 
-use PGNChess\Board;
-use PGNChess\PGN\Symbol;
-use PGNChess\Evaluation\Attack as AttackEvaluation;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
+use Chess\Board;
+use Chess\PGN\Symbol;
+use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
+use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class AttackTest extends AbstractUnitTestCase
 {

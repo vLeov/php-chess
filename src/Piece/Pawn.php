@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Piece;
+namespace Chess\Piece;
 
-use PGNChess\Exception\UnknownNotationException;
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate;
-use PGNChess\Piece\AbstractPiece;
+use Chess\Exception\UnknownNotationException;
+use Chess\PGN\Symbol;
+use Chess\PGN\Validate;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Pawn class.

@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\ML\Supervised\Regression\Labeller\Primes;
 
-use PGNChess\Event\Picture\Standard as StandardEventPicture;
-use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;
-use PGNChess\PGN\Symbol;
+use Chess\Event\Picture\Standard as StandardEventPicture;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\PGN\Symbol;
 
 /**
  * Primes labeller.

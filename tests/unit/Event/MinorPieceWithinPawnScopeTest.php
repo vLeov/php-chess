@@ -1,12 +1,12 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Event;
+namespace Chess\Tests\Unit\Event;
 
-use PGNChess\Board;
-use PGNChess\Event\MinorPieceWithinPawnScope as MinorPieceWithinPawnScopeEvent;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Board;
+use Chess\Event\MinorPieceWithinPawnScope as MinorPieceWithinPawnScopeEvent;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
 
 class MinorPieceWithinPawnScopeTest extends AbstractUnitTestCase
 {

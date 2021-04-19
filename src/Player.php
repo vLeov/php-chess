@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess;
+namespace Chess;
 
-use PGNChess\Board;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
+use Chess\Board;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
 
 /**
  * Player.

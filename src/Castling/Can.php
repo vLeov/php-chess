@@ -1,9 +1,9 @@
 <?php
 
-namespace PGNChess\Castling;
+namespace Chess\Castling;
 
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\PGN\Symbol;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\PGN\Symbol;
 
 /**
  * Can castle class.

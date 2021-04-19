@@ -1,5 +1,5 @@
 <?php
-namespace PGNChess\Piece;
+namespace Chess\Piece;
 
 /**
  * Interface representing a piece.

@@ -1,5 +1,5 @@
 <?php
-namespace PGNChess\Piece\Type;
+namespace Chess\Piece\Type;
 
 /**
  * RookType class.

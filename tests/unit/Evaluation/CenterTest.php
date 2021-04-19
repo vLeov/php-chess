@@ -1,15 +1,15 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Evaluation;
+namespace Chess\Tests\Unit\Evaluation;
 
-use PGNChess\Board;
-use PGNChess\Evaluation\Center as CenterEvaluation;
-use PGNChess\Evaluation\Value\System;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
-use PGNChess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use PGNChess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
+use Chess\Board;
+use Chess\Evaluation\Center as CenterEvaluation;
+use Chess\Evaluation\Value\System;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
+use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
+use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class CenterTest extends AbstractUnitTestCase
 {

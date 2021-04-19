@@ -1,15 +1,15 @@
 <?php
 
-namespace PGNChess;
+namespace Chess;
 
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate;
-use PGNChess\Evaluation\Attack as AttackEvaluation;
-use PGNChess\Evaluation\Space as SpaceEvaluation;
-use PGNChess\Evaluation\Square as SquareEvaluation;
-use PGNChess\ML\Supervised\Regression\Labeller\Primes\Decoder as PrimesLabelDecoder;
-use PGNChess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\PGN\Validate;
+use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\Evaluation\Square as SquareEvaluation;
+use Chess\ML\Supervised\Regression\Labeller\Primes\Decoder as PrimesLabelDecoder;
+use Chess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 

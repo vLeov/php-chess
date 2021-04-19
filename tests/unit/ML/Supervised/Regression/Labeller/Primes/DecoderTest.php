@@ -1,12 +1,12 @@
 <?php
 
-namespace PGNChess\Tests\Unit\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller\Primes;
 
-use PGNChess\Board;
-use PGNChess\ML\Supervised\Regression\Labeller\Primes\Decoder as PrimesLabelDecoder;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Board;
+use Chess\ML\Supervised\Regression\Labeller\Primes\Decoder as PrimesLabelDecoder;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
 
 class DecoderTest extends AbstractUnitTestCase
 {

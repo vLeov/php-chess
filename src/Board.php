@@ -1,28 +1,28 @@
 <?php
 
-namespace PGNChess;
+namespace Chess;
 
-use PGNChess\Castling\Can as CastlingCan;
-use PGNChess\Castling\Initialization as CastlingInit;
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\Db\Pdo;
-use PGNChess\Exception\BoardException;
-use PGNChess\Evaluation\Attack as AttackEvaluation;
-use PGNChess\Evaluation\Space as SpaceEvaluation;
-use PGNChess\Evaluation\Square as SquareEvaluation;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Move;
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate;
-use PGNChess\Piece\AbstractPiece;
-use PGNChess\Piece\Bishop;
-use PGNChess\Piece\King;
-use PGNChess\Piece\Knight;
-use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Piece;
-use PGNChess\Piece\Queen;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Type\RookType;
+use Chess\Castling\Can as CastlingCan;
+use Chess\Castling\Initialization as CastlingInit;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\Db\Pdo;
+use Chess\Exception\BoardException;
+use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\Evaluation\Square as SquareEvaluation;
+use Chess\PGN\Convert;
+use Chess\PGN\Move;
+use Chess\PGN\Symbol;
+use Chess\PGN\Validate;
+use Chess\Piece\AbstractPiece;
+use Chess\Piece\Bishop;
+use Chess\Piece\King;
+use Chess\Piece\Knight;
+use Chess\Piece\Pawn;
+use Chess\Piece\Piece;
+use Chess\Piece\Queen;
+use Chess\Piece\Rook;
+use Chess\Piece\Type\RookType;
 
 /**
  * Chess board.
@@ -157,7 +157,7 @@ final class Board extends \SplObjectStorage
      * Sets the current turn.
      *
      * @param string $color
-     * @return \PGNChess\Board
+     * @return \Chess\Board
      */
     public function setTurn(string $color): Board
     {
@@ -221,7 +221,7 @@ final class Board extends \SplObjectStorage
      *
      * @param string    $color
      * @param \stdClass $capture
-     * @return \PGNChess\Board
+     * @return \Chess\Board
      */
     private function pushCapture(string $color, \stdClass $capture): Board
     {
@@ -273,7 +273,7 @@ final class Board extends \SplObjectStorage
      * Adds a new element to the history.
      *
      * @param \stdClass $piece The piece's previous position along with a move object
-     * @return \PGNChess\Board
+     * @return \Chess\Board
      */
     private function pushHistory(Piece $piece): Board
     {
@@ -302,7 +302,7 @@ final class Board extends \SplObjectStorage
      *
      * @param string $color
      * @param string $identity
-     * @return mixed \PGNChess\Piece\Piece|null
+     * @return mixed \Chess\Piece\Piece|null
      */
     public function getPiece(string $color, string $identity): ?Piece
     {
@@ -341,7 +341,7 @@ final class Board extends \SplObjectStorage
      * Gets a piece by its position on the board.
      *
      * @param string $square
-     * @return mixed \PGNChess\Piece\Piece|null
+     * @return mixed \Chess\Piece\Piece|null
      */
     public function getPieceByPosition(string $square): ?Piece
     {
@@ -362,7 +362,7 @@ final class Board extends \SplObjectStorage
      *
      * @param array $pieces
      * @param array $castling
-     * @throws \PGNChess\Exception\CastlingException
+     * @throws \Chess\Exception\CastlingException
      */
     private function init(array $pieces, $castling)
     {
@@ -379,7 +379,7 @@ final class Board extends \SplObjectStorage
      *
      * @param \stdClass $move
      * @return array The piece(s) matching the PGN move; otherwise null
-     * @throws \PGNChess\Exception\BoardException
+     * @throws \Chess\Exception\BoardException
      */
     private function pickPiece(\stdClass $move): array
     {
@@ -411,8 +411,8 @@ final class Board extends \SplObjectStorage
     /**
      * Captures a piece.
      *
-     * @param \PGNChess\Piece\Piece $piece
-     * @return \PGNChess\Board
+     * @param \Chess\Piece\Piece $piece
+     * @return \Chess\Board
      */
     private function capture(Piece $piece): Board
     {
@@ -455,8 +455,8 @@ final class Board extends \SplObjectStorage
     /**
      * Promotes a pawn.
      *
-     * @param \PGNChess\Piece\Pawn $pawn
-     * @return \PGNChess\Board
+     * @param \Chess\Piece\Pawn $pawn
+     * @return \Chess\Board
      */
     private function promote(Pawn $pawn): Board
     {
@@ -523,7 +523,7 @@ final class Board extends \SplObjectStorage
     /**
      * Castles the king.
      *
-     * @param \PGNChess\Piece\King $king
+     * @param \Chess\Piece\King $king
      * @return bool true if the castling is successfully run; otherwise false
      */
     private function castle(King $king): bool
@@ -556,7 +556,7 @@ final class Board extends \SplObjectStorage
      * Undoes a castle move.
      *
      * @param array $prevCastling
-     * @return \PGNChess\Board
+     * @return \Chess\Board
      */
     private function undoCastle(array $prevCastling): Board
     {
@@ -601,9 +601,9 @@ final class Board extends \SplObjectStorage
      * Updates the king's ability to castle.
      *
      * @param bool $castling
-     * @param \PGNChess\Piece\Piece $pieceMoved
-     * @return \PGNChess\Board
-     * @throws \PGNChess\Exception\BoardException
+     * @param \Chess\Piece\Piece $pieceMoved
+     * @return \Chess\Board
+     * @throws \Chess\Exception\BoardException
      */
     private function trackCastling(bool $castling = false, Piece $pieceMoved = null): Board
     {
@@ -638,7 +638,7 @@ final class Board extends \SplObjectStorage
     /**
      * Moves a piece.
      *
-     * @param \PGNChess\Piece\Piece $piece
+     * @param \Chess\Piece\Piece $piece
      * @return bool true if the move is successfully run; otherwise false
      */
     private function move(Piece $piece): bool
@@ -672,7 +672,7 @@ final class Board extends \SplObjectStorage
      * Undoes the last move.
      *
      * @param array $prevCastling
-     * @return \PGNChess\Board
+     * @return \Chess\Board
      */
     private function undoMove(array $prevCastling): Board
     {
@@ -710,7 +710,7 @@ final class Board extends \SplObjectStorage
     /**
      * Refreshes the board's status.
      *
-     * @return \PGNChess\Board
+     * @return \Chess\Board
      */
     private function refresh(): Board
     {
@@ -762,7 +762,7 @@ final class Board extends \SplObjectStorage
     /**
      * Calculates if the board is in check when a piece is moved.
      *
-     * @param \PGNChess\Piece\Piece $piece
+     * @param \Chess\Piece\Piece $piece
      * @return bool
      */
     private function leavesInCheck(Piece $piece): bool

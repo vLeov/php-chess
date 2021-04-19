@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Heuristic;
+namespace Chess\Heuristic;
 
-use PGNChess\AbstractSnapshot;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Event\Check as CheckEvent;
+use Chess\AbstractSnapshot;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Event\Check as CheckEvent;
 
 /**
  * Check snapshot.

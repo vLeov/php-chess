@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Heuristic\Picture;
+namespace Chess\Tests\Unit\Heuristic\Picture;
 
-use PGNChess\Board;
-use PGNChess\Heuristic\Picture\Standard as StandardHeuristicPicture;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
-use PGNChess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
+use Chess\Board;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
+use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
 
 class StandardTest extends AbstractUnitTestCase
 {

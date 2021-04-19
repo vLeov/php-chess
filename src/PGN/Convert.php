@@ -1,16 +1,16 @@
 <?php
 
-namespace PGNChess\PGN;
+namespace Chess\PGN;
 
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\Exception\UnknownNotationException;
-use PGNChess\PGN\Validate;
-use PGNChess\Piece\Bishop;
-use PGNChess\Piece\King;
-use PGNChess\Piece\Knight;
-use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Queen;
-use PGNChess\Piece\Rook;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\Exception\UnknownNotationException;
+use Chess\PGN\Validate;
+use Chess\Piece\Bishop;
+use Chess\Piece\King;
+use Chess\Piece\Knight;
+use Chess\Piece\Pawn;
+use Chess\Piece\Queen;
+use Chess\Piece\Rook;
 
 /**
  * Convert class.
@@ -26,7 +26,7 @@ class Convert
      * @param string $color
      * @param string $pgn
      * @return \stdClass
-     * @throws \PGNChess\Exception\UnknownNotationException
+     * @throws \Chess\Exception\UnknownNotationException
      */
     public static function toStdObj(string $color, string $pgn): \stdClass
     {
@@ -216,17 +216,17 @@ class Convert
     {
         switch($identity) {
             case Symbol::BISHOP:
-                return (new \ReflectionClass('\PGNChess\Piece\Bishop'))->getName();
+                return (new \ReflectionClass('\Chess\Piece\Bishop'))->getName();
             case Symbol::KING:
-                return (new \ReflectionClass('\PGNChess\Piece\King'))->getName();
+                return (new \ReflectionClass('\Chess\Piece\King'))->getName();
             case Symbol::KNIGHT:
-                return (new \ReflectionClass('\PGNChess\Piece\Knight'))->getName();
+                return (new \ReflectionClass('\Chess\Piece\Knight'))->getName();
             case Symbol::PAWN:
-                return (new \ReflectionClass('\PGNChess\Piece\Pawn'))->getName();
+                return (new \ReflectionClass('\Chess\Piece\Pawn'))->getName();
             case Symbol::QUEEN:
-                return (new \ReflectionClass('\PGNChess\Piece\Queen'))->getName();
+                return (new \ReflectionClass('\Chess\Piece\Queen'))->getName();
             case Symbol::ROOK:
-                return (new \ReflectionClass('\PGNChess\Piece\Rook'))->getName();
+                return (new \ReflectionClass('\Chess\Piece\Rook'))->getName();
         }
     }
 }

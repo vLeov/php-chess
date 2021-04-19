@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Tests\Sample\Opening\Benoni;
+namespace Chess\Tests\Sample\Opening\Benoni;
 
-use PGNChess\Player;
+use Chess\Player;
 
 class BenkoGambit
 {

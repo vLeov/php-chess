@@ -1,13 +1,13 @@
 <?php
 
-namespace PGNChess\Piece;
+namespace Chess\Piece;
 
-use PGNChess\Exception\PieceTypeException;
-use PGNChess\Exception\UnknownNotationException;
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate;
-use PGNChess\Piece\AbstractPiece;
-use PGNChess\Piece\Type\RookType;
+use Chess\Exception\PieceTypeException;
+use Chess\Exception\UnknownNotationException;
+use Chess\PGN\Symbol;
+use Chess\PGN\Validate;
+use Chess\Piece\AbstractPiece;
+use Chess\Piece\Type\RookType;
 
 /**
  * Rook class.
@@ -28,7 +28,7 @@ class Rook extends Slider
      * @param string $color
      * @param string $square
      * @param string $type
-     * @throws \PGNChess\Exception\PieceTypeException
+     * @throws \Chess\Exception\PieceTypeException
      */
     public function __construct(string $color, string $square, $type)
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Piece;
+namespace Chess\Tests\Unit\Piece;
 
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\King;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\PGN\Symbol;
+use Chess\Piece\King;
+use Chess\Tests\AbstractUnitTestCase;
 
 class KingTest extends AbstractUnitTestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\PGN;
+namespace Chess\PGN;
 
-use PGNChess\PGN\Symbol;
+use Chess\PGN\Symbol;
 
 /**
  * Encodes chess moves in PGN format.

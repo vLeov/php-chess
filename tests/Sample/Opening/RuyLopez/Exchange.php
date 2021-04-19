@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Tests\Sample\Opening\RuyLopez;
+namespace Chess\Tests\Sample\Opening\RuyLopez;
 
-use PGNChess\Player;
+use Chess\Player;
 
 class Exchange
 {

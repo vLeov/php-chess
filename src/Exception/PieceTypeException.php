@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Exception;
+namespace Chess\Exception;
 
-use PGNChess\Exception;
+use Chess\Exception;
 
 /**
  * Thrown when dealing with wrong piece types.

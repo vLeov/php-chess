@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Evaluation;
+namespace Chess\Evaluation;
 
 use Chess\Board;
-use PGNChess\Evaluation\Space as SpaceEvaluation;
-use PGNChess\PGN\Symbol;
+use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\PGN\Symbol;
 
 /**
  * Center.

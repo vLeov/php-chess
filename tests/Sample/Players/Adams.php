@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Tests\Sample\Players;
+namespace Chess\Tests\Sample\Players;
 
-use PGNChess\Player;
+use Chess\Player;
 
 class Adams
 {

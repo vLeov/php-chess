@@ -1,9 +1,9 @@
 <?php
 
-namespace PGNChess;
+namespace Chess;
 
 /**
- * PGNChess exceptions implement this interface.
+ * Chess exceptions implement this interface.
  *
  * @author Jordi Bassagañas
  * @license GPL

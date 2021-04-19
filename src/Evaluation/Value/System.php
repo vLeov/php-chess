@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Evaluation\Value;
+namespace Chess\Evaluation\Value;
 
-use PGNChess\PGN\Symbol;
+use Chess\PGN\Symbol;
 
 /**
  * System.

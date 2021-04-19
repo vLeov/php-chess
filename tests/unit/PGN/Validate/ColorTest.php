@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Tests\Unit\PGN\Validate;
+namespace Chess\Tests\Unit\PGN\Validate;
 
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Validate;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\PGN\Symbol;
+use Chess\PGN\Validate;
+use Chess\Tests\AbstractUnitTestCase;
 
 class ColorTest extends AbstractUnitTestCase
 {

@@ -1,17 +1,17 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Event;
+namespace Chess\Tests\Unit\Event;
 
-use PGNChess\Board;
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\Event\Promotion as PromotionEvent;
-use PGNChess\Piece\King;
-use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Type\RookType;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Board;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\Event\Promotion as PromotionEvent;
+use Chess\Piece\King;
+use Chess\Piece\Pawn;
+use Chess\Piece\Rook;
+use Chess\Piece\Type\RookType;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
 
 class PromotionTest extends AbstractUnitTestCase
 {

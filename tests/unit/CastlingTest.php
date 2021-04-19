@@ -1,17 +1,17 @@
 <?php
 
-namespace PGNChess\Tests\Unit;
+namespace Chess\Tests\Unit;
 
-use PGNChess\Board;
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\King;
-use PGNChess\Piece\Knight;
-use PGNChess\Piece\Pawn;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Type\RookType;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
+use Chess\Board;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\PGN\Symbol;
+use Chess\Piece\King;
+use Chess\Piece\Knight;
+use Chess\Piece\Pawn;
+use Chess\Piece\Rook;
+use Chess\Piece\Type\RookType;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
 
 class CastlingTest extends AbstractUnitTestCase
 {
@@ -79,7 +79,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_white_short()
     {
@@ -116,7 +116,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_white_long()
     {
@@ -153,7 +153,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_black_short()
     {
@@ -190,7 +190,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_black_long()
     {
@@ -227,7 +227,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function empty()
     {
@@ -251,7 +251,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function empty_white()
     {
@@ -283,7 +283,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function empty_black()
     {
@@ -315,7 +315,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function no_castled_property()
     {
@@ -351,7 +351,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function no_castling_short_property()
     {
@@ -387,7 +387,7 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\CastlingException
+     * @expectedException \Chess\Exception\CastlingException
      */
     public function no_castling_long_property()
     {

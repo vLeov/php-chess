@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Heuristic;
+namespace Chess\Heuristic;
 
-use PGNChess\AbstractSnapshot;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Event\PieceCapture as PieceCaptureEvent;
+use Chess\AbstractSnapshot;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Event\PieceCapture as PieceCaptureEvent;
 
 /**
  * Piece capture snapshot.

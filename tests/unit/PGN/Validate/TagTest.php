@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Tests\Unit\PGN\Validate;
+namespace Chess\Tests\Unit\PGN\Validate;
 
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Tag;
-use PGNChess\PGN\Validate;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\PGN\Symbol;
+use Chess\PGN\Tag;
+use Chess\PGN\Validate;
+use Chess\Tests\AbstractUnitTestCase;
 
 class TagTest extends AbstractUnitTestCase
 {

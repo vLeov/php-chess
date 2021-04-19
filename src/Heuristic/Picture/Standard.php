@@ -1,17 +1,17 @@
 <?php
 
-namespace PGNChess\Heuristic\Picture;
+namespace Chess\Heuristic\Picture;
 
-use PGNChess\AbstractPicture;
-use PGNChess\Evaluation\Value\System;
-use PGNChess\Evaluation\Attack as AttackEvaluation;
-use PGNChess\Evaluation\Center as CenterEvaluation;
-use PGNChess\Evaluation\Connectivity as ConnectivityEvaluation;
-use PGNChess\Evaluation\KingSafety as KingSafetyEvaluation;
-use PGNChess\Evaluation\Material as MaterialEvaluation;
-use PGNChess\Evaluation\Space as SpaceEvaluation;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
+use Chess\AbstractPicture;
+use Chess\Evaluation\Value\System;
+use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Center as CenterEvaluation;
+use Chess\Evaluation\Connectivity as ConnectivityEvaluation;
+use Chess\Evaluation\KingSafety as KingSafetyEvaluation;
+use Chess\Evaluation\Material as MaterialEvaluation;
+use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
 
 class Standard extends AbstractPicture
 {

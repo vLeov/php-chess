@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Evaluation;
+namespace Chess\Evaluation;
 
 use Chess\Board;
-use PGNChess\Evaluation\Attack as AttackEvaluation;
-use PGNChess\Evaluation\Space as SpaceEvaluation;
-use PGNChess\PGN\Symbol;
+use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\PGN\Symbol;
 
 /**
  * King safety.

@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\PGN;
+namespace Chess\PGN;
 
-use PGNChess\Exception\UnknownNotationException;
-use PGNChess\PGN\Symbol;
-use PGNChess\PGN\Tag;
+use Chess\Exception\UnknownNotationException;
+use Chess\PGN\Symbol;
+use Chess\PGN\Tag;
 
 /**
  * Validation class.

@@ -1,9 +1,9 @@
 <?php
 
-namespace PGNChess\Tests\Functional;
+namespace Chess\Tests\Functional;
 
-use PGNChess\Game;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Game;
+use Chess\Tests\AbstractUnitTestCase;
 
 class GameTest extends AbstractUnitTestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Evaluation;
+namespace Chess\Tests\Unit\Evaluation;
 
-use PGNChess\Board;
-use PGNChess\Evaluation\Square as SquareEvaluation;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Board;
+use Chess\Evaluation\Square as SquareEvaluation;
+use Chess\Tests\AbstractUnitTestCase;
 
 class SquareTest extends AbstractUnitTestCase
 {

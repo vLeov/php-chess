@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Heuristic;
+namespace Chess\Heuristic;
 
-use PGNChess\AbstractSnapshot;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Evaluation\Space as SpaceEvaluation;
+use Chess\AbstractSnapshot;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Evaluation\Space as SpaceEvaluation;
 
 /**
  * Space snapshot.

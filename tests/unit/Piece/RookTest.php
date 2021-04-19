@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Piece;
+namespace Chess\Tests\Unit\Piece;
 
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Type\RookType;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\PGN\Symbol;
+use Chess\Piece\Rook;
+use Chess\Piece\Type\RookType;
+use Chess\Tests\AbstractUnitTestCase;
 
 class RookTest extends AbstractUnitTestCase
 {

@@ -1,11 +1,11 @@
 <?php
-namespace PGNChess\Piece;
+namespace Chess\Piece;
 
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\AbstractPiece;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Bishop;
-use PGNChess\Piece\Type\RookType;
+use Chess\PGN\Symbol;
+use Chess\Piece\AbstractPiece;
+use Chess\Piece\Rook;
+use Chess\Piece\Bishop;
+use Chess\Piece\Type\RookType;
 
 /**
  * Queen class.
@@ -16,12 +16,12 @@ use PGNChess\Piece\Type\RookType;
 class Queen extends Slider
 {
     /**
-     * @var \PGNChess\Piece\Rook
+     * @var \Chess\Piece\Rook
      */
     private $rook;
 
     /**
-     * @var \PGNChess\Piece\Bishop
+     * @var \Chess\Piece\Bishop
      */
     private $bishop;
 

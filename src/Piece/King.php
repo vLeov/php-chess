@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Piece;
+namespace Chess\Piece;
 
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\PGN\Move;
-use PGNChess\PGN\Symbol;
-use PGNChess\Piece\AbstractPiece;
-use PGNChess\Piece\Rook;
-use PGNChess\Piece\Bishop;
-use PGNChess\Piece\Type\RookType;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\PGN\Move;
+use Chess\PGN\Symbol;
+use Chess\Piece\AbstractPiece;
+use Chess\Piece\Rook;
+use Chess\Piece\Bishop;
+use Chess\Piece\Type\RookType;
 
 /**
  * King class.
@@ -19,12 +19,12 @@ use PGNChess\Piece\Type\RookType;
 class King extends AbstractPiece
 {
     /**
-     * @var \PGNChess\Piece\Rook
+     * @var \Chess\Piece\Rook
      */
     private $rook;
 
     /**
-     * @var \PGNChess\Piece\Bishop
+     * @var \Chess\Piece\Bishop
      */
     private $bishop;
 
@@ -48,7 +48,7 @@ class King extends AbstractPiece
      * Gets the king's castling rook.
      *
      * @param array $pieces
-     * @return mixed \PGNChess\Piece\Rook|null
+     * @return mixed \Chess\Piece\Rook|null
      */
     public function getCastlingRook(array $pieces)
     {

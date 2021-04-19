@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Tests\Sample\Checkmate;
+namespace Chess\Tests\Sample\Checkmate;
 
-use PGNChess\Player;
+use Chess\Player;
 
 class Scholar
 {

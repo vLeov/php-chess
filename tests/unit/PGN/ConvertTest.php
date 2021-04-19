@@ -1,18 +1,18 @@
 <?php
 
-namespace PGNChess\Tests\Unit\PGN;
+namespace Chess\Tests\Unit\PGN;
 
-use PGNChess\Castling\Rule as CastlingRule;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Move;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
+use Chess\Castling\Rule as CastlingRule;
+use Chess\PGN\Convert;
+use Chess\PGN\Move;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
 
 class ConvertTest extends AbstractUnitTestCase
 {
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function Ua5_throws_exception()
     {
@@ -21,7 +21,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function foo5_throws_exception()
     {
@@ -30,7 +30,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function cb3b7_throws_exception()
     {
@@ -39,7 +39,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function O_O_throws_exception()
     {
@@ -48,7 +48,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function O_O_O_throws_exception()
     {
@@ -57,7 +57,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function a_throws_exception()
     {
@@ -66,7 +66,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function three_throws_exception()
     {
@@ -75,7 +75,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function K3_throws_exception()
     {
@@ -84,7 +84,7 @@ class ConvertTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \PGNChess\Exception\UnknownNotationException
+     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function Fxa7_throws_exception()
     {

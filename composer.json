@@ -34,13 +34,13 @@
   },
   "autoload": {
     "psr-4": {
-      "PGNChess\\": "src/"
+      "Chess\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "PGNChess\\Tests\\": "tests/",
-      "PGNChess\\Tests\\Sample\\": "tests/Sample/"
+      "Chess\\Tests\\": "tests/",
+      "Chess\\Tests\\Sample\\": "tests/Sample/"
     }
   }
 }

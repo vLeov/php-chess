@@ -1,17 +1,17 @@
 <?php
 
-namespace PGNChess\Event\Picture;
+namespace Chess\Event\Picture;
 
-use PGNChess\AbstractPicture;
-use PGNChess\Event\Check as CheckEvent;
-use PGNChess\Event\PieceCapture as PieceCaptureEvent;
-use PGNChess\Event\MajorPieceThreatenedByPawn as MajorPieceThreatenedByPawnEvent;
-use PGNChess\Event\MinorPieceThreatenedByPawn as MinorPieceThreatenedByPawnEvent;
-use PGNChess\Event\MajorPieceWithinPawnScope as MajorPieceWithinPawnScopeEvent;
-use PGNChess\Event\MinorPieceWithinPawnScope as MinorPieceWithinPawnScopeEvent;
-use PGNChess\Event\Promotion as PromotionEvent;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
+use Chess\AbstractPicture;
+use Chess\Event\Check as CheckEvent;
+use Chess\Event\PieceCapture as PieceCaptureEvent;
+use Chess\Event\MajorPieceThreatenedByPawn as MajorPieceThreatenedByPawnEvent;
+use Chess\Event\MinorPieceThreatenedByPawn as MinorPieceThreatenedByPawnEvent;
+use Chess\Event\MajorPieceWithinPawnScope as MajorPieceWithinPawnScopeEvent;
+use Chess\Event\MinorPieceWithinPawnScope as MinorPieceWithinPawnScopeEvent;
+use Chess\Event\Promotion as PromotionEvent;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
 
 class Standard extends AbstractPicture
 {

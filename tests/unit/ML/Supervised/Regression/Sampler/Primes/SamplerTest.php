@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\ML\Supervised\Regression\Sampler\Primes;
+namespace Chess\Tests\Unit\ML\Supervised\Regression\Sampler\Primes;
 
-use PGNChess\Board;
-use PGNChess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
-use PGNChess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
+use Chess\Board;
+use Chess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
+use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 
 class SamplerTest extends AbstractUnitTestCase
 {

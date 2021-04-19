@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Tests\Sample\Opening\Sicilian;
+namespace Chess\Tests\Sample\Opening\Sicilian;
 
-use PGNChess\Player;
+use Chess\Player;
 
 class Closed
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PGNChess\Castling;
+namespace Chess\Castling;
 
-use PGNChess\PGN\Symbol;
+use Chess\PGN\Symbol;
 
 /**
  * Castling rule.

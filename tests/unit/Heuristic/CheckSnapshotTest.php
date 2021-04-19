@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Heuristic;
+namespace Chess\Tests\Unit\Heuristic;
 
-use PGNChess\Board;
-use PGNChess\Heuristic\CheckSnapshot;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
-use PGNChess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
-use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
+use Chess\Board;
+use Chess\Heuristic\CheckSnapshot;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
+use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
+use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class CheckSnapshotTest extends AbstractUnitTestCase
 {

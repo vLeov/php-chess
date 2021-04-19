@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Event\Picture;
+namespace Chess\Tests\Unit\Event\Picture;
 
-use PGNChess\Board;
-use PGNChess\Event\Picture\Standard as StandardEventPicture;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
-use PGNChess\Tests\Sample\Opening\Benoni\BenkoGambit;
+use Chess\Board;
+use Chess\Event\Picture\Standard as StandardEventPicture;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
+use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class StandardTest extends AbstractUnitTestCase
 {

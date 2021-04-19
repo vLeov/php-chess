@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\PGN;
+namespace Chess\PGN;
 
 /**
  * PGN tags.

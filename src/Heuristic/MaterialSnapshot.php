@@ -1,12 +1,12 @@
 <?php
 
-namespace PGNChess\Heuristic;
+namespace Chess\Heuristic;
 
-use PGNChess\AbstractSnapshot;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
-use PGNChess\Evaluation\Material as MaterialEvaluation;
-use PGNChess\Evaluation\Value\System;
+use Chess\AbstractSnapshot;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
+use Chess\Evaluation\Material as MaterialEvaluation;
+use Chess\Evaluation\Value\System;
 
 /**
  * Material snapshot.

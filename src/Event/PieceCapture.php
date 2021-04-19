@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Event;
+namespace Chess\Event;
 
 /**
  * A piece is captured.

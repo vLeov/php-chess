@@ -1,11 +1,11 @@
 <?php
 
-namespace PGNChess\Castling;
+namespace Chess\Castling;
 
-use PGNChess\Board;
-use PGNChess\Exception\CastlingException;
-use PGNChess\PGN\Convert;
-use PGNChess\PGN\Symbol;
+use Chess\Board;
+use Chess\Exception\CastlingException;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
 
 /**
  * Castling initialization.

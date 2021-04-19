@@ -1,14 +1,14 @@
 <?php
 
-namespace PGNChess\Tests\Unit\Event;
+namespace Chess\Tests\Unit\Event;
 
-use PGNChess\Board;
-use PGNChess\Event\PieceCapture as PieceCaptureEvent;
-use PGNChess\PGN\Symbol;
-use PGNChess\Tests\AbstractUnitTestCase;
-use PGNChess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
-use PGNChess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
-use PGNChess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
+use Chess\Board;
+use Chess\Event\PieceCapture as PieceCaptureEvent;
+use Chess\PGN\Symbol;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
+use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
+use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 
 class PieceCaptureTest extends AbstractUnitTestCase
 {
