@@ -5,12 +5,10 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 <p align="center">
-	<img src="https://github.com/programarivm//blob/master/resources/chess-board.jpg" />
+	<img src="https://github.com/programarivm/php-chess/blob/master/resources/chess-board.jpg" />
 </p>
 
-Chess board representation to play chess games.
-
-> See it in action at [PHP Chess Server](https://github.com/programarivm/-server), which is a WebSocket server listening to chess commands. Also, [PHP Chess Data](https://github.com/programarivm/-data) is another repo providing you with CLI tools to manage a database of PGN games as well as to train a supervised learning model with [Rubix ML](https://rubixml.com/).
+A chess library for PHP.
 
 ### Install
 
@@ -183,19 +181,7 @@ Gets the pieces captured by both players as an array of `stdClass` objects.
 
 ### Usage
 
-For further details please look at the [unit tests](https://github.com/programarivm//tree/master/tests).
-
-### Development
-
-Should you want to play around with the development environment follow the steps below.
-
-Bootstrap the environment:
-
-	bash/dev/start.sh
-
-Run the tests:
-
-	docker exec -it php_chess_php_fpm vendor/bin/phpunit --configuration phpunit-docker.xml
+For further details please look at the [tests](https://github.com/programarivm//tree/master/tests).
 
 ### License
 
