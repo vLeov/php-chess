@@ -2,7 +2,7 @@
 
 namespace PGNChess\Evaluation;
 
-use PgnChess\Board;
+use Chess\Board;
 use PGNChess\Evaluation\Value\System;
 
 /**

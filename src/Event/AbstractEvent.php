@@ -2,7 +2,7 @@
 
 namespace PGNChess\Event;
 
-use PgnChess\Board;
+use Chess\Board;
 
 /**
  * Abstract event.
