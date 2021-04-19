@@ -1,6 +1,6 @@
 <?php
 
-namespace PGNChess\Tests\Unit;
+namespace PGNChess\Tests\Functional;
 
 use PGNChess\Game;
 use PGNChess\Tests\AbstractUnitTestCase;
