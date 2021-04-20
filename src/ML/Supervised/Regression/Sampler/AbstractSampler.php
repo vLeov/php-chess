@@ -3,8 +3,6 @@
 namespace Chess\ML\Supervised\Regression\Sampler;
 
 use Chess\Board;
-use Chess\Event\Picture\Standard as StandardEventPicture;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Symbol;
 
 abstract class AbstractSampler

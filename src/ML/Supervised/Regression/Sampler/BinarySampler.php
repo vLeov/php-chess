@@ -9,11 +9,6 @@ use Chess\PGN\Symbol;
 
 class BinarySampler extends AbstractSampler
 {
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-    }
-
     public function sample(): array
     {
         $eventPicture = (new StandardEventPicture($this->board->getMovetext()))->take();
