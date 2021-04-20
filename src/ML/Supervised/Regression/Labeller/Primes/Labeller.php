@@ -35,6 +35,13 @@ class Labeller
         );
     }
 
+    public function setSample($sample)
+    {
+        $this->sample = $sample;
+
+        return $this;
+    }
+
     public function label(): array
     {
         foreach ($this->sample as $color => $arr) {
