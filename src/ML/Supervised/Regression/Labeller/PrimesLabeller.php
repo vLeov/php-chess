@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\ML\Supervised\Regression\Labeller;
 
 use Chess\Event\Picture\Standard as StandardEventPicture;
 use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Labeller
+class PrimesLabeller
 {
     private $sample;
 

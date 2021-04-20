@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller\Binary;
+namespace Chess\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\AbstractDecoder;
-use Chess\ML\Supervised\Regression\Labeller\Binary\Labeller as BinaryLabeller;
+use Chess\ML\Supervised\Regression\Labeller\BinaryLabeller;
 use Chess\ML\Supervised\Regression\Sampler\BinarySampler;
 
 /**
@@ -13,7 +13,7 @@ use Chess\ML\Supervised\Regression\Sampler\BinarySampler;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Decoder extends AbstractDecoder
+class BinaryDecoder extends AbstractDecoder
 {
     public function __construct(Board $board)
     {

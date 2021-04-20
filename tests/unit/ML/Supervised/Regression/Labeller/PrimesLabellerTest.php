@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
+use Chess\ML\Supervised\Regression\Labeller\PrimesLabeller;
 use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -13,7 +13,7 @@ use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
 
-class LabellerTest extends AbstractUnitTestCase
+class PrimesLabellerTest extends AbstractUnitTestCase
 {
     /**
      * @test

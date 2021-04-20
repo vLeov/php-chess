@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller\Binary;
+namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Labeller\Binary\Labeller as BinaryLabeller;
+use Chess\ML\Supervised\Regression\Labeller\BinaryLabeller;
 use Chess\ML\Supervised\Regression\Sampler\BinarySampler;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -13,7 +13,7 @@ use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
 
-class LabellerTest extends AbstractUnitTestCase
+class BinaryLabellerTest extends AbstractUnitTestCase
 {
     /**
      * @test

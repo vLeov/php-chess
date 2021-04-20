@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller\Binary;
+namespace Chess\ML\Supervised\Regression\Labeller;
 
 use Chess\PGN\Symbol;
 
-class Labeller
+class BinaryLabeller
 {
     private $sample;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\AbstractDecoder;
-use Chess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
+use Chess\ML\Supervised\Regression\Labeller\PrimesLabeller;
 use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
 
 /**
@@ -13,7 +13,7 @@ use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Decoder extends AbstractDecoder
+class PrimesDecoder extends AbstractDecoder
 {
     public function __construct(Board $board)
     {

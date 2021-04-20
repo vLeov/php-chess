@@ -1,21 +1,21 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\ML\Supervised\Regression\Labeller;
 
 use Chess\AbstractSnapshot;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
-use Chess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
+use Chess\ML\Supervised\Regression\Labeller\PrimesLabeller;
 use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
 
 /**
- * Primes labeller snapshot.
+ * Primes snapshot.
  *
  * @author Jordi Bassagañas
  * @license GPL
  * @see https://github.com/programarivm//blob/master/src/AbstractSnapshot.php
  */
-class Snapshot extends AbstractSnapshot
+class PrimesSnapshot extends AbstractSnapshot
 {
     public function take(): array
     {

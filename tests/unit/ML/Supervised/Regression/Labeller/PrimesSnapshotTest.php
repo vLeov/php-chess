@@ -1,14 +1,14 @@
 <?php
 
-namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller\Primes;
+namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Labeller\Primes\Snapshot as PrimesLabellerSnapshot;
+use Chess\ML\Supervised\Regression\Labeller\PrimesSnapshot;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class SnapshotTest extends AbstractUnitTestCase
+class PrimesSnapshotTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,7 +19,7 @@ class SnapshotTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $snapshot = (new PrimesLabellerSnapshot($movetext))->take();
+        $snapshot = (new PrimesSnapshot($movetext))->take();
 
         $expected = [
             [
