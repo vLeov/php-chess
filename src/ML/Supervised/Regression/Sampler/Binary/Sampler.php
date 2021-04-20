@@ -23,6 +23,13 @@ class Sampler
         ];
     }
 
+    public function setBoard(Board $board)
+    {
+        $this->board = $board;
+
+        return $this;
+    }
+
     public function sample(): array
     {
         $eventPicture = (new StandardEventPicture($this->board->getMovetext()))->take();
