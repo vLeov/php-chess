@@ -11,6 +11,7 @@ use Chess\Evaluation\Square as SquareEvaluation;
 use Chess\ML\Supervised\Regression\Labeller\Primes\Decoder as PrimesLabelDecoder;
 use Chess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
 use Rubix\ML\PersistentModel;
+use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\Persisters\Filesystem;
 
 /**
@@ -208,7 +209,8 @@ class Game
     public function response()
     {
         $sample = (new PrimesSampler($this->board))->sample();
-        $prediction = $this->estimator->predictSample($sample[Symbol::oppColor($this->board->getTurn())]);
+        $dataset = new Unlabeled([$sample[Symbol::oppColor($this->board->getTurn())]]);
+        $prediction = current($this->estimator->predict($dataset));
         $decoded = (new PrimesLabelDecoder($this->board))->decode($this->board->getTurn(), $prediction);
 
         return $decoded;
