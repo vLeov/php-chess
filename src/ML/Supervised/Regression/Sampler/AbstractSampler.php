@@ -21,12 +21,5 @@ abstract class AbstractSampler
         ];
     }
 
-    public function setBoard(Board $board)
-    {
-        $this->board = $board;
-
-        return $this;
-    }
-
     abstract public function sample(): array;
 }

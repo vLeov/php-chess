@@ -19,7 +19,7 @@ class BinaryDecoder extends AbstractDecoder
     {
         parent::__construct($board);
 
-        $this->sampler = new BinarySampler($board);
-        $this->labeller = new BinaryLabeller($this->sampler->sample());
+        $this->sampler = BinarySampler::class;
+        $this->labeller = BinaryLabeller::class;
     }
 }

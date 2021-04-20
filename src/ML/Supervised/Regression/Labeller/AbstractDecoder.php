@@ -37,20 +37,20 @@ class AbstractDecoder
                     // King with castling
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
-                            $sample = $this->sampler->setBoard($clone)->sample();
-                            $this->result[] = [ $square => $this->labeller->setSample($sample)->label()[$color] ];
+                            $sample = (new $this->sampler($clone))->sample();
+                            $this->result[] = [ $square => (new $this->labeller($sample))->label()[$color] ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
-                            $sample = $this->sampler->setBoard($clone)->sample();
-                            $this->result[] = [ $piece->getFile()."x$square" => $this->labeller->setSample($sample)->label()[$color] ];
+                            $sample = (new $this->sampler($clone))->sample();
+                            $this->result[] = [ $piece->getFile()."x$square" => (new $this->labeller($sample))->label()[$color] ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
-                            $sample = $this->sampler->setBoard($clone)->sample();
-                            $this->result[] = [ $piece->getIdentity().$square => $this->labeller->setSample($sample)->label()[$color] ];
+                            $sample = (new $this->sampler($clone))->sample();
+                            $this->result[] = [ $piece->getIdentity().$square => (new $this->labeller($sample))->label()[$color] ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
-                            $sample = $this->sampler->setBoard($clone)->sample();
-                            $this->result[] = [ "{$piece->getIdentity()}x$square" => $this->labeller->setSample($sample)->label()[$color] ];
+                            $sample = (new $this->sampler($clone))->sample();
+                            $this->result[] = [ "{$piece->getIdentity()}x$square" => (new $this->labeller($sample))->label()[$color] ];
                         }
                         break;
                 }

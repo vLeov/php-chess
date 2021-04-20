@@ -19,7 +19,7 @@ class PrimesDecoder extends AbstractDecoder
     {
         parent::__construct($board);
 
-        $this->sampler = new PrimesSampler($board);
-        $this->labeller = new PrimesLabeller($this->sampler->sample());
+        $this->sampler = PrimesSampler::class;
+        $this->labeller = PrimesLabeller::class;
     }
 }

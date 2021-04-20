@@ -20,13 +20,6 @@ class BinaryLabeller
         ];
     }
 
-    public function setSample($sample)
-    {
-        $this->sample = $sample;
-
-        return $this;
-    }
-
     public function label(): array
     {
         $this->sample[Symbol::WHITE] = array_reverse($this->sample[Symbol::WHITE]);
