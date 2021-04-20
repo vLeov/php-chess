@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller\Primes;
 
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
-use Chess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
+use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;

@@ -6,7 +6,7 @@ use Chess\AbstractSnapshot;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\ML\Supervised\Regression\Labeller\Primes\Labeller as PrimesLabeller;
-use Chess\ML\Supervised\Regression\Sampler\Primes\Sampler as PrimesSampler;
+use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
 
 /**
  * Primes labeller snapshot.

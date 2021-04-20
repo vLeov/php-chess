@@ -5,7 +5,7 @@ namespace Chess\ML\Supervised\Regression\Labeller\Binary;
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\AbstractDecoder;
 use Chess\ML\Supervised\Regression\Labeller\Binary\Labeller as BinaryLabeller;
-use Chess\ML\Supervised\Regression\Sampler\Binary\Sampler as BinarySampler;
+use Chess\ML\Supervised\Regression\Sampler\BinarySampler;
 
 /**
  * Binary decoder.

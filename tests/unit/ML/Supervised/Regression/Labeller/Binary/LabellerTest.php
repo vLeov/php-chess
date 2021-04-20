@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller\Binary;
 
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\Binary\Labeller as BinaryLabeller;
-use Chess\ML\Supervised\Regression\Sampler\Binary\Sampler as BinarySampler;
+use Chess\ML\Supervised\Regression\Sampler\BinarySampler;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;

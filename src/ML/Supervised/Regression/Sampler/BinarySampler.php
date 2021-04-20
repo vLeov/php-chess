@@ -1,33 +1,17 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Sampler\Primes;
+namespace Chess\ML\Supervised\Regression\Sampler;
 
 use Chess\Board;
 use Chess\Event\Picture\Standard as StandardEventPicture;
 use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Symbol;
 
-class Sampler
+class BinarySampler extends AbstractSampler
 {
-    private $board;
-
-    private $sample;
-
     public function __construct(Board $board)
     {
-        $this->board = $board;
-
-        $this->sample = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ];
-    }
-
-    public function setBoard(Board $board)
-    {
-        $this->board = $board;
-
-        return $this;
+        parent::__construct($board);
     }
 
     public function sample(): array
@@ -38,14 +22,24 @@ class Sampler
         $this->sample = [
             Symbol::WHITE => array_merge(
                 end($eventPicture[Symbol::WHITE]),
-                end($heuristicPicture[Symbol::WHITE])
+                $this->round(end($heuristicPicture[Symbol::WHITE]))
             ),
             Symbol::BLACK => array_merge(
                 end($eventPicture[Symbol::BLACK]),
-                end($heuristicPicture[Symbol::BLACK])
+                $this->round(end($heuristicPicture[Symbol::BLACK]))
             ),
         ];
 
         return $this->sample;
+    }
+
+    protected function round(array $arr): array
+    {
+        $items = [];
+        foreach ($arr as $item) {
+            $items[] = round($item, 0, PHP_ROUND_HALF_DOWN);
+        }
+
+        return $items;
     }
 }
