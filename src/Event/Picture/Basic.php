@@ -13,12 +13,12 @@ use Chess\Event\Promotion as PromotionEvent;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
-class Standard extends AbstractPicture
+class Basic extends AbstractPicture
 {
     const N_DIMENSIONS = 7;
 
     /**
-     * Takes a picture of standard events.
+     * Takes a picture of events.
      *
      * @return array
      */

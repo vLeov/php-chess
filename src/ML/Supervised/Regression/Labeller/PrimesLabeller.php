@@ -2,7 +2,7 @@
 
 namespace Chess\ML\Supervised\Regression\Labeller;
 
-use Chess\Event\Picture\Standard as StandardEventPicture;
+use Chess\Event\Picture\Basic as BasicEventPicture;
 use Chess\Heuristic\Picture\Weighted as WeightedHeuristicPicture;
 use Chess\PGN\Symbol;
 
@@ -30,7 +30,7 @@ class PrimesLabeller
         ];
 
         $this->weights = array_merge(
-            array_fill(0, StandardEventPicture::N_DIMENSIONS, 0),
+            array_fill(0, BasicEventPicture::N_DIMENSIONS, 0),
             WeightedHeuristicPicture::WEIGHTS
         );
     }

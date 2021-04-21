@@ -3,14 +3,14 @@
 namespace Chess\Tests\Unit\Event\Picture;
 
 use Chess\Board;
-use Chess\Event\Picture\Standard as StandardEventPicture;
+use Chess\Event\Picture\Basic as BasicEventPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class StandardTest extends AbstractUnitTestCase
+class BasicTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,7 +19,7 @@ class StandardTest extends AbstractUnitTestCase
     {
         $board = new Board;
 
-        $picture = (new StandardEventPicture($board->getMovetext()))->take();
+        $picture = (new BasicEventPicture($board->getMovetext()))->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -44,7 +44,7 @@ class StandardTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $picture = (new StandardEventPicture($board->getMovetext()))->take();
+        $picture = (new BasicEventPicture($board->getMovetext()))->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -68,7 +68,7 @@ class StandardTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $picture = (new StandardEventPicture($movetext))->take();
+        $picture = (new BasicEventPicture($movetext))->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -107,7 +107,7 @@ class StandardTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $picture = (new StandardEventPicture($movetext))->take();
+        $picture = (new BasicEventPicture($movetext))->take();
 
         $expected = [
             Symbol::WHITE => [
