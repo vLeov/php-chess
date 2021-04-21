@@ -4,7 +4,7 @@ namespace Chess\ML\Supervised\Regression\Sampler;
 
 use Chess\Board;
 use Chess\Event\Picture\Standard as StandardEventPicture;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\Heuristic\Picture\Weighted as WeightedHeuristicPicture;
 use Chess\PGN\Symbol;
 
 class PrimesSampler extends AbstractSampler
@@ -12,7 +12,7 @@ class PrimesSampler extends AbstractSampler
     public function sample(): array
     {
         $eventPicture = (new StandardEventPicture($this->board->getMovetext()))->take();
-        $heuristicPicture = (new StandardHeuristicPicture($this->board->getMovetext()))->take();
+        $heuristicPicture = (new WeightedHeuristicPicture($this->board->getMovetext()))->take();
 
         $this->sample = [
             Symbol::WHITE => array_merge(

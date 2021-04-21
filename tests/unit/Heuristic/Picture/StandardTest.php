@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Heuristic\Picture;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\Heuristic\Picture\Weighted as WeightedHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -19,7 +19,7 @@ class StandardTest extends AbstractUnitTestCase
     {
         $board = new Board;
 
-        $picture = (new StandardHeuristicPicture($board->getMovetext()))->take();
+        $picture = (new WeightedHeuristicPicture($board->getMovetext()))->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -44,7 +44,7 @@ class StandardTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $picture = (new StandardHeuristicPicture($board->getMovetext()))->take();
+        $picture = (new WeightedHeuristicPicture($board->getMovetext()))->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -66,7 +66,7 @@ class StandardTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board))->play();
 
-        $evaluation = (new StandardHeuristicPicture($board->getMovetext()))->evaluate();
+        $evaluation = (new WeightedHeuristicPicture($board->getMovetext()))->evaluate();
 
         $expected = [
             Symbol::WHITE => 158776,

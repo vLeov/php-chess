@@ -13,7 +13,7 @@ use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
-class Standard extends AbstractPicture
+class Weighted extends AbstractPicture
 {
     const N_DIMENSIONS = 6;
 
