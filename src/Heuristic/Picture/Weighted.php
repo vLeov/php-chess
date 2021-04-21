@@ -2,21 +2,11 @@
 
 namespace Chess\Heuristic\Picture;
 
-use Chess\AbstractPicture;
-use Chess\Evaluation\Value\System;
-use Chess\Evaluation\Attack as AttackEvaluation;
-use Chess\Evaluation\Center as CenterEvaluation;
-use Chess\Evaluation\Connectivity as ConnectivityEvaluation;
-use Chess\Evaluation\KingSafety as KingSafetyEvaluation;
-use Chess\Evaluation\Material as MaterialEvaluation;
-use Chess\Evaluation\Space as SpaceEvaluation;
-use Chess\PGN\Convert;
+use Chess\Heuristic\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
-class Weighted extends AbstractPicture
+class Weighted extends AbstractHeuristicPicture
 {
-    const N_DIMENSIONS = 6;
-
     const WEIGHTS = [
         601,    // meterial
         503,    // king safety
@@ -26,51 +16,7 @@ class Weighted extends AbstractPicture
         101,    // attack
     ];
 
-    /**
-     * Takes a normalized, heuristic picture.
-     *
-     * @return array
-     */
-    public function take(): array
-    {
-        foreach ($this->moves as $move) {
-            $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
-            if (isset($move[1])) {
-                $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
-            }
-
-            $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-            $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-            $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-            $connEvald = (new ConnectivityEvaluation($this->board))->evaluate();
-            $spaceEvald = (new SpaceEvaluation($this->board))->evaluate();
-            $attEvald = (new AttackEvaluation($this->board))->evaluate();
-
-            $this->picture[Symbol::WHITE][] = [
-                $mtlEvald[Symbol::WHITE] - $mtlEvald[Symbol::BLACK],
-                $kSafetyEvald[Symbol::WHITE],
-                $ctrEvald[Symbol::WHITE],
-                $connEvald[Symbol::WHITE],
-                count($spaceEvald[Symbol::WHITE]),
-                count($attEvald[Symbol::WHITE]),
-            ];
-
-            $this->picture[Symbol::BLACK][] = [
-                $mtlEvald[Symbol::BLACK] - $mtlEvald[Symbol::WHITE],
-                $kSafetyEvald[Symbol::BLACK],
-                $ctrEvald[Symbol::BLACK],
-                $connEvald[Symbol::BLACK],
-                count($spaceEvald[Symbol::BLACK]),
-                count($attEvald[Symbol::BLACK]),
-            ];
-        }
-
-        $this->normalize();
-
-        return $this->picture;
-    }
-
-    public function evaluate()
+    public function evaluate(): array
     {
         $result = [
             Symbol::WHITE => 0,
@@ -80,8 +26,8 @@ class Weighted extends AbstractPicture
         $picture = $this->take();
 
         for ($i = 0; $i < self::N_DIMENSIONS; $i++) {
-            $result[Symbol::WHITE] += self::WEIGHTS[$i] * end($picture[Symbol::WHITE])[$i] * 100;
-            $result[Symbol::BLACK] += self::WEIGHTS[$i] * end($picture[Symbol::BLACK])[$i] * 100;
+            $result[Symbol::WHITE] += self::WEIGHTS[$i] * end($picture[Symbol::WHITE])[$i];
+            $result[Symbol::BLACK] += self::WEIGHTS[$i] * end($picture[Symbol::BLACK])[$i];
         }
 
         return $result;
