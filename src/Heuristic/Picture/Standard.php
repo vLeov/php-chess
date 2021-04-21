@@ -17,7 +17,7 @@ class Standard extends AbstractPicture
 {
     const N_DIMENSIONS = 6;
 
-    CONST WEIGHTS = [
+    const WEIGHTS = [
         601,    // meterial
         503,    // king safety
         401,    // center
