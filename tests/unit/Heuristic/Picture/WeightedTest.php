@@ -10,7 +10,7 @@ use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
 
-class StandardTest extends AbstractUnitTestCase
+class WeightedTest extends AbstractUnitTestCase
 {
     /**
      * @test
