@@ -51,7 +51,9 @@ $isMate = $game->isMate();
 
 Gets the current game's status.
 
-    $status = $game->status();
+```php
+$status = $game->status();
+```
 
 `$status` is a PHP object containing useful information about the game being played.
 
@@ -165,19 +167,38 @@ $blackPieces[1]->moves;
 
 Gets the game's history in the form of an array of `stdClass` objects.
 
-    $history = $game->history();
+```php
+$history = $game->history();
+```
 
 #### `movetext()`
 
 Gets the game's movetext in text format.
 
-    $movetext = $game->movetext();
+```php
+$movetext = $game->movetext();
+```
 
 #### `captures()`
 
 Gets the pieces captured by both players as an array of `stdClass` objects.
 
-    $captures = $game->captures();
+```php
+$captures = $game->captures();
+```
+
+#### `play()`
+
+Play chess with the AI.
+
+```php
+$game = new Game(Game::MODE_PVA);
+
+$game->play('w', 'e4');
+$game->play('b', $game->response());
+$game->play('w', 'e5');
+$game->play('b', $game->response());
+```
 
 ### Supervised Learning With Rubix ML
 
