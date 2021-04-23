@@ -52,9 +52,9 @@ class Player
     protected function extract(string $movetext)
     {
         $moves = [];
-        $pairs = array_filter(preg_split('/[0-9]+\./', $movetext));
+        $pairs = preg_split('/[0-9]+\./', $movetext, -1, PREG_SPLIT_NO_EMPTY);
         foreach ($pairs as $pair) {
-            $moves[] = array_values(array_filter(explode(' ', $pair)));
+            $moves[] = explode(' ', trim($pair));
         }
 
         return $moves;
