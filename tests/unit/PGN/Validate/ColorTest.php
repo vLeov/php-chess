@@ -10,10 +10,11 @@ class ColorTest extends AbstractUnitTestCase
 {
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function green_throws_exception()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         Validate::color('green');
     }
 

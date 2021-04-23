@@ -10,37 +10,41 @@ class SquareTest extends AbstractUnitTestCase
 {
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function integer_throws_exception()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         Validate::square(9);
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function float_throws_exception()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         Validate::square(9.75);
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function a9_throws_exception()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         Validate::square('a9');
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function foo_throws_exception()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         Validate::square('foo');
     }
 

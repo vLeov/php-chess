@@ -17,64 +17,71 @@ class InvalidMovesTest extends AbstractUnitTestCase
 {
     /**
      * @test
-     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function numeric_value()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
         (new Board)->play(Convert::toStdObj(Symbol::WHITE, 9));
     }
 
     /**
      * @test
-     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function foo()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
         (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'foo'));
     }
 
     /**
      * @test
-     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function bar()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
         (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'bar'));
     }
 
     /**
      * @test
-     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function e9()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
         (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'e9'));
     }
 
     /**
      * @test
-     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function e10()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
         (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'e10'));
     }
 
     /**
      * @test
-     * @expectedException \Chess\Exception\UnknownNotationException
      */
     public function Nw3()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
         (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'Nw3'));
     }
 
     /**
      * @test
-     * @expectedException \Chess\Exception\BoardException
      */
     public function piece_does_not_exist()
     {
+        $this->expectException(\Chess\Exception\BoardException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),

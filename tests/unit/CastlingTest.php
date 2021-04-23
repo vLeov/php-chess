@@ -79,10 +79,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_white_short()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -116,10 +117,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_white_long()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -153,10 +155,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_black_short()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -190,10 +193,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function invalid_black_long()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -227,10 +231,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function empty()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -251,10 +256,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function empty_white()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -283,10 +289,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function empty_black()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -315,10 +322,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function no_castled_property()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -351,10 +359,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function no_castling_short_property()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
@@ -387,10 +396,11 @@ class CastlingTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException \Chess\Exception\CastlingException
      */
     public function no_castling_long_property()
     {
+        $this->expectException(\Chess\Exception\CastlingException::class);
+
         $pieces = [
             new Pawn(Symbol::WHITE, 'a2'),
             new Pawn(Symbol::WHITE, 'a3'),
