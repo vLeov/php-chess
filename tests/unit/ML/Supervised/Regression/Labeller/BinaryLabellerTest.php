@@ -128,7 +128,7 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 186,
+            Symbol::WHITE => 154,
             Symbol::BLACK => 19,
         ];
 

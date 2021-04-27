@@ -38,7 +38,7 @@ abstract class AbstractHeuristicPicture extends AbstractPicture
             $attEvald = (new AttackEvaluation($this->board))->evaluate();
 
             $this->picture[Symbol::WHITE][] = [
-                $mtlEvald[Symbol::WHITE] - $mtlEvald[Symbol::BLACK],
+                $mtlEvald[Symbol::WHITE],
                 $kSafetyEvald[Symbol::WHITE],
                 $ctrEvald[Symbol::WHITE],
                 $connEvald[Symbol::WHITE],
@@ -47,7 +47,7 @@ abstract class AbstractHeuristicPicture extends AbstractPicture
             ];
 
             $this->picture[Symbol::BLACK][] = [
-                $mtlEvald[Symbol::BLACK] - $mtlEvald[Symbol::WHITE],
+                $mtlEvald[Symbol::BLACK],
                 $kSafetyEvald[Symbol::BLACK],
                 $ctrEvald[Symbol::BLACK],
                 $connEvald[Symbol::BLACK],

@@ -69,8 +69,8 @@ class BasicTest extends AbstractUnitTestCase
         $evaluation = (new BasicHeuristicPicture($board->getMovetext()))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 3.86,
-            Symbol::BLACK => 3.17,
+            Symbol::WHITE => 3.34,
+            Symbol::BLACK => 2.88,
         ];
 
         $this->assertEquals($expected, $evaluation);
