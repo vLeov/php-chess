@@ -23,40 +23,40 @@ class ConnectivitySnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 0.54,
-                Symbol::BLACK => 0.92,
-            ],
-            [
-                Symbol::WHITE => 0.54,
-                Symbol::BLACK => 0.92,
-            ],
-            [
-                Symbol::WHITE => 0.62,
-                Symbol::BLACK => 0.85,
-            ],
-            [
-                Symbol::WHITE => 0.54,
+                Symbol::WHITE => 0.13,
                 Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 0.46,
-                Symbol::BLACK => 0.62,
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.88,
             ],
             [
-                Symbol::WHITE => 0.62,
-                Symbol::BLACK => 0.62,
+                Symbol::WHITE => 0.13,
+                Symbol::BLACK => 0.75,
             ],
             [
                 Symbol::WHITE => 0,
-                Symbol::BLACK => 0.46,
+                Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 0.08,
-                Symbol::BLACK => 0.46,
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.75,
             ],
             [
-                Symbol::WHITE => 0.15,
-                Symbol::BLACK => 0.46,
+                Symbol::WHITE => 0.63,
+                Symbol::BLACK => 0.63,
+            ],
+            [
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0.38,
+            ],
+            [
+                Symbol::WHITE => 0.13,
+                Symbol::BLACK => 0.38,
+            ],
+            [
+                Symbol::WHITE => 0.25,
+                Symbol::BLACK => 0.38,
             ],
         ];
 

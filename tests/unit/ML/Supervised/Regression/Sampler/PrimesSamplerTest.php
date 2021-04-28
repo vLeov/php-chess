@@ -89,7 +89,7 @@ class PrimesSamplerTest extends AbstractUnitTestCase
         $board = (new FoolCheckmate(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0.2, 0],
+            Symbol::WHITE => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.2, 0],
             Symbol::BLACK => [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1],
         ];
 

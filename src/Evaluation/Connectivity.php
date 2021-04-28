@@ -66,12 +66,16 @@ class Connectivity extends AbstractEvaluation
                     );
                     break;
                 default:
-                    $this->result[$color] += count(
-                        array_intersect(
-                            array_merge(...array_values((array)$piece->getScope())),
-                            $this->sqEvald[SquareEvaluation::FEATURE_USED][$color]
-                        )
-                    );
+                    foreach ((array)$piece->getScope() as $key => $val) {
+                        foreach ($val as $sq) {
+                            if (in_array($sq, $this->sqEvald[SquareEvaluation::FEATURE_USED][$color])) {
+                                $this->result[$color] += 1;
+                                break;
+                            } elseif (in_array($sq, $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()])) {
+                                break;
+                            }
+                        }
+                    }
                     break;
             }
         }

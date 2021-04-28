@@ -96,7 +96,7 @@ class PrimesLabellerTest extends AbstractUnitTestCase
         $sample = (new PrimesSampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 34920,
+            Symbol::WHITE => 31850,
             Symbol::BLACK => 181700,
         ];
 
@@ -128,8 +128,8 @@ class PrimesLabellerTest extends AbstractUnitTestCase
         $sample = (new PrimesSampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 127524,
-            Symbol::BLACK => 86134,
+            Symbol::WHITE => 130594,
+            Symbol::BLACK => 83678,
         ];
 
         $this->assertEquals($expected, (new PrimesLabeller($sample))->label());
@@ -144,8 +144,8 @@ class PrimesLabellerTest extends AbstractUnitTestCase
         $sample = (new PrimesSampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 69607,
-            Symbol::BLACK => 60939,
+            Symbol::WHITE => 83729,
+            Symbol::BLACK => 60018,
         ];
 
         $this->assertEquals($expected, (new PrimesLabeller($sample))->label());
