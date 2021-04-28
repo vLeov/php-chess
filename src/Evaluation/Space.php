@@ -22,9 +22,11 @@ class Space extends AbstractEvaluation
     {
         parent::__construct($board);
 
+        $sqEval = new SquareEvaluation($board);
+
         $this->sqEvald = [
-            SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_FREE),
-            SquareEvaluation::FEATURE_USED => (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_USED),
+            SquareEvaluation::FEATURE_FREE => $sqEval->evaluate(SquareEvaluation::FEATURE_FREE),
+            SquareEvaluation::FEATURE_USED => $sqEval->evaluate(SquareEvaluation::FEATURE_USED),
         ];
 
         $this->result = [
