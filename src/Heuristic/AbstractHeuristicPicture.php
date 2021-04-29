@@ -15,8 +15,6 @@ use Chess\PGN\Symbol;
 
 abstract class AbstractHeuristicPicture extends AbstractPicture
 {
-    const N_DIMENSIONS = 6;
-
     const DIMENSIONS = [
         MaterialEvaluation::class,
         KingSafetyEvaluation::class,

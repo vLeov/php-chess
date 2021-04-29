@@ -25,7 +25,7 @@ class Weighted extends AbstractHeuristicPicture
 
         $picture = $this->take();
 
-        for ($i = 0; $i < self::N_DIMENSIONS; $i++) {
+        for ($i = 0; $i < count(self::DIMENSIONS); $i++) {
             $result[Symbol::WHITE] += self::WEIGHTS[$i] * end($picture[Symbol::WHITE])[$i];
             $result[Symbol::BLACK] += self::WEIGHTS[$i] * end($picture[Symbol::BLACK])[$i];
         }
