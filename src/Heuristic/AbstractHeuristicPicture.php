@@ -17,6 +17,15 @@ abstract class AbstractHeuristicPicture extends AbstractPicture
 {
     const N_DIMENSIONS = 6;
 
+    const DIMENSIONS = [
+        MaterialEvaluation::class,
+        KingSafetyEvaluation::class,
+        CenterEvaluation::class,
+        ConnectivityEvaluation::class,
+        SpaceEvaluation::class,
+        AttackEvaluation::class,
+    ];
+
     /**
      * Takes a normalized, heuristic picture.
      *
@@ -29,31 +38,17 @@ abstract class AbstractHeuristicPicture extends AbstractPicture
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
-
-            $mtlEvald = (new MaterialEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-            $kSafetyEvald = (new KingSafetyEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-            $ctrEvald = (new CenterEvaluation($this->board))->evaluate(System::SYSTEM_BERLINER);
-            $connEvald = (new ConnectivityEvaluation($this->board))->evaluate();
-            $spaceEvald = (new SpaceEvaluation($this->board))->evaluate();
-            $attEvald = (new AttackEvaluation($this->board))->evaluate();
-
-            $this->picture[Symbol::WHITE][] = [
-                $mtlEvald[Symbol::WHITE],
-                $kSafetyEvald[Symbol::WHITE],
-                $ctrEvald[Symbol::WHITE],
-                $connEvald[Symbol::WHITE],
-                count($spaceEvald[Symbol::WHITE]),
-                count($attEvald[Symbol::WHITE]),
-            ];
-
-            $this->picture[Symbol::BLACK][] = [
-                $mtlEvald[Symbol::BLACK],
-                $kSafetyEvald[Symbol::BLACK],
-                $ctrEvald[Symbol::BLACK],
-                $connEvald[Symbol::BLACK],
-                count($spaceEvald[Symbol::BLACK]),
-                count($attEvald[Symbol::BLACK]),
-            ];
+            $item = [];
+            foreach (self::DIMENSIONS as $dimension) {
+                $evald = (new $dimension($this->board))->evaluate(System::SYSTEM_BERLINER);
+                is_array($evald[Symbol::WHITE])
+                    ? $item[] = [
+                        Symbol::WHITE => count($evald[Symbol::WHITE]),
+                        Symbol::BLACK => count($evald[Symbol::BLACK])]
+                    : $item[] = $evald;
+            }
+            $this->picture[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
+            $this->picture[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
         }
 
         $this->normalize();
