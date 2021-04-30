@@ -189,7 +189,7 @@ $captures = $game->captures();
 
 #### `events()`
 
-Gets the events taking place.
+Gets the events taking place: threatened piece, pawn promotion, and so on.
 
 ```php
 $events = $game->events();
@@ -210,7 +210,7 @@ $game->play('b', $game->response());
 
 ### Supervised Learning With Rubix ML
 
-Currently, a machine learning model is being built at [programarivm/chess-data](https://github.com/programarivm/chess-data) with the help of [Rubix ML](https://github.com/RubixML/ML). The resulting model is meant to be stored in the `model` folder -- at this moment there's only a prototype available at [`model/a1.model`](https://github.com/programarivm/php-chess/tree/master/model).
+Currently, a few machine learning models are being built at [programarivm/chess-data](https://github.com/programarivm/chess-data) with the help of [Rubix ML](https://github.com/RubixML/ML). The AIs are stored in the `model` folder -- at this moment there's only one prototype available: [`model/a1.model`](https://github.com/programarivm/php-chess/tree/master/model).
 
 ### Usage
 
