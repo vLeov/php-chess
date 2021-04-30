@@ -12,9 +12,7 @@ use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\Evaluation\Square as SquareEvaluation;
 use Chess\Event\Check as CheckEvent;
 use Chess\Event\MajorPieceThreatenedByPawn as MajorPieceThreatenedByPawnEvent;
-use Chess\Event\MajorPieceWithinPawnScope as MajorPieceWithinPawnScopeEvent;
 use Chess\Event\MinorPieceThreatenedByPawn as MinorPieceThreatenedByPawnEvent;
-use Chess\Event\MinorPieceWithinPawnScope as MinorPieceWithinPawnScopeEvent;
 use Chess\Event\PieceCapture as PieceCaptureEvent;
 use Chess\Event\Promotion as PromotionEvent;
 use Chess\PGN\Convert;
@@ -869,18 +867,14 @@ final class Board extends \SplObjectStorage
                 CheckEvent::DESC => (new CheckEvent($this))->capture(Symbol::WHITE),
                 PieceCaptureEvent::DESC => (new PieceCaptureEvent($this))->capture(Symbol::WHITE),
                 MajorPieceThreatenedByPawnEvent::DESC => (new MajorPieceThreatenedByPawnEvent($this))->capture(Symbol::WHITE),
-                MajorPieceWithinPawnScopeEvent::DESC => (new MajorPieceWithinPawnScopeEvent($this))->capture(Symbol::BLACK),
                 MinorPieceThreatenedByPawnEvent::DESC => (new MinorPieceThreatenedByPawnEvent($this))->capture(Symbol::WHITE),
-                MinorPieceWithinPawnScopeEvent::DESC => (new MinorPieceWithinPawnScopeEvent($this))->capture(Symbol::BLACK),
                 PromotionEvent::DESC => (new PromotionEvent($this))->capture(Symbol::WHITE),
             ],
             Symbol::BLACK => [
                 CheckEvent::DESC => (new CheckEvent($this))->capture(Symbol::BLACK),
                 PieceCaptureEvent::DESC => (new PieceCaptureEvent($this))->capture(Symbol::BLACK),
                 MajorPieceThreatenedByPawnEvent::DESC => (new MajorPieceThreatenedByPawnEvent($this))->capture(Symbol::BLACK),
-                MajorPieceWithinPawnScopeEvent::DESC => (new MajorPieceWithinPawnScopeEvent($this))->capture(Symbol::WHITE),
                 MinorPieceThreatenedByPawnEvent::DESC => (new MinorPieceThreatenedByPawnEvent($this))->capture(Symbol::BLACK),
-                MinorPieceWithinPawnScopeEvent::DESC => (new MinorPieceWithinPawnScopeEvent($this))->capture(Symbol::WHITE),
                 PromotionEvent::DESC => (new PromotionEvent($this))->capture(Symbol::BLACK),
             ],
         ];

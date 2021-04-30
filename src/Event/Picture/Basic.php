@@ -7,15 +7,13 @@ use Chess\Event\Check as CheckEvent;
 use Chess\Event\PieceCapture as PieceCaptureEvent;
 use Chess\Event\MajorPieceThreatenedByPawn as MajorPieceThreatenedByPawnEvent;
 use Chess\Event\MinorPieceThreatenedByPawn as MinorPieceThreatenedByPawnEvent;
-use Chess\Event\MajorPieceWithinPawnScope as MajorPieceWithinPawnScopeEvent;
-use Chess\Event\MinorPieceWithinPawnScope as MinorPieceWithinPawnScopeEvent;
 use Chess\Event\Promotion as PromotionEvent;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 class Basic extends AbstractPicture
 {
-    const N_DIMENSIONS = 7;
+    const N_DIMENSIONS = 5;
 
     /**
      * Takes a picture of events.
@@ -31,9 +29,7 @@ class Basic extends AbstractPicture
                     (new CheckEvent($this->board))->capture(Symbol::WHITE),
                     (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
                     (new MajorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::WHITE),
-                    (new MajorPieceWithinPawnScopeEvent($this->board))->capture(Symbol::BLACK),
                     (new MinorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::WHITE),
-                    (new MinorPieceWithinPawnScopeEvent($this->board))->capture(Symbol::BLACK),
                     (new PromotionEvent($this->board))->capture(Symbol::WHITE),
                 ];
                 if (isset($move[1])) {
@@ -43,9 +39,7 @@ class Basic extends AbstractPicture
                     (new CheckEvent($this->board))->capture(Symbol::BLACK),
                     (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
                     (new MajorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::BLACK),
-                    (new MajorPieceWithinPawnScopeEvent($this->board))->capture(Symbol::WHITE),
                     (new MinorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::BLACK),
-                    (new MinorPieceWithinPawnScopeEvent($this->board))->capture(Symbol::WHITE),
                     (new PromotionEvent($this->board))->capture(Symbol::BLACK),
                 ];
             }

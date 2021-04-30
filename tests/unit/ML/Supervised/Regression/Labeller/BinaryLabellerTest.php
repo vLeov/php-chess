@@ -97,7 +97,7 @@ class BinaryLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => 4,
-            Symbol::BLACK => 4155,
+            Symbol::BLACK => 1083,
         ];
 
         $this->assertEquals($expected, (new BinaryLabeller($sample))->label());
@@ -112,7 +112,7 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 6323,
+            Symbol::WHITE => 1587,
             Symbol::BLACK => 12,
         ];
 
@@ -128,7 +128,7 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 154,
+            Symbol::WHITE => 26,
             Symbol::BLACK => 19,
         ];
 
@@ -144,7 +144,7 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 142,
+            Symbol::WHITE => 14,
             Symbol::BLACK => 5,
         ];
 

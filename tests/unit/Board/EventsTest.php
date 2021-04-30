@@ -5,9 +5,7 @@ namespace Chess\Tests\Unit\Board;
 use Chess\Board;
 use Chess\Event\Check as CheckEvent;
 use Chess\Event\MajorPieceThreatenedByPawn as MajorPieceThreatenedByPawnEvent;
-use Chess\Event\MajorPieceWithinPawnScope as MajorPieceWithinPawnScopeEvent;
 use Chess\Event\MinorPieceThreatenedByPawn as MinorPieceThreatenedByPawnEvent;
-use Chess\Event\MinorPieceWithinPawnScope as MinorPieceWithinPawnScopeEvent;
 use Chess\Event\PieceCapture as PieceCaptureEvent;
 use Chess\Event\Promotion as PromotionEvent;
 use Chess\PGN\Symbol;
@@ -30,18 +28,14 @@ class EventsTest extends AbstractUnitTestCase
                 CheckEvent::DESC => 0,
                 PieceCaptureEvent::DESC => 0,
                 MajorPieceThreatenedByPawnEvent::DESC => 0,
-                MajorPieceWithinPawnScopeEvent::DESC => 0,
                 MinorPieceThreatenedByPawnEvent::DESC => 0,
-                MinorPieceWithinPawnScopeEvent::DESC => 0,
                 PromotionEvent::DESC => 0,
             ],
             Symbol::BLACK => [
                 CheckEvent::DESC => 1,
                 PieceCaptureEvent::DESC => 0,
                 MajorPieceThreatenedByPawnEvent::DESC => 0,
-                MajorPieceWithinPawnScopeEvent::DESC => 0,
                 MinorPieceThreatenedByPawnEvent::DESC => 0,
-                MinorPieceWithinPawnScopeEvent::DESC => 0,
                 PromotionEvent::DESC => 0,
             ],
         ];
@@ -61,18 +55,14 @@ class EventsTest extends AbstractUnitTestCase
                 CheckEvent::DESC => 1,
                 PieceCaptureEvent::DESC => 1,
                 MajorPieceThreatenedByPawnEvent::DESC => 0,
-                MajorPieceWithinPawnScopeEvent::DESC => 0,
                 MinorPieceThreatenedByPawnEvent::DESC => 0,
-                MinorPieceWithinPawnScopeEvent::DESC => 0,
                 PromotionEvent::DESC => 0,
             ],
             Symbol::BLACK => [
                 CheckEvent::DESC => 0,
                 PieceCaptureEvent::DESC => 0,
                 MajorPieceThreatenedByPawnEvent::DESC => 0,
-                MajorPieceWithinPawnScopeEvent::DESC => 0,
                 MinorPieceThreatenedByPawnEvent::DESC => 0,
-                MinorPieceWithinPawnScopeEvent::DESC => 0,
                 PromotionEvent::DESC => 0,
             ],
         ];
@@ -92,18 +82,14 @@ class EventsTest extends AbstractUnitTestCase
                 CheckEvent::DESC => 0,
                 PieceCaptureEvent::DESC => 0,
                 MajorPieceThreatenedByPawnEvent::DESC => 0,
-                MajorPieceWithinPawnScopeEvent::DESC => 0,
                 MinorPieceThreatenedByPawnEvent::DESC => 0,
-                MinorPieceWithinPawnScopeEvent::DESC => 0,
                 PromotionEvent::DESC => 0,
             ],
             Symbol::BLACK => [
                 CheckEvent::DESC => 0,
                 PieceCaptureEvent::DESC => 0,
                 MajorPieceThreatenedByPawnEvent::DESC => 0,
-                MajorPieceWithinPawnScopeEvent::DESC => 0,
                 MinorPieceThreatenedByPawnEvent::DESC => 0,
-                MinorPieceWithinPawnScopeEvent::DESC => 0,
                 PromotionEvent::DESC => 0,
             ],
         ];
