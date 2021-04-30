@@ -13,7 +13,13 @@ use Chess\PGN\Symbol;
 
 class Basic extends AbstractPicture
 {
-    const N_DIMENSIONS = 5;
+    const DIMENSIONS = [
+        CheckEvent::class,
+        PieceCaptureEvent::class,
+        MajorPieceThreatenedByPawnEvent::class,
+        MinorPieceThreatenedByPawnEvent::class,
+        PromotionEvent::class,
+    ];
 
     /**
      * Takes a picture of events.
@@ -23,28 +29,20 @@ class Basic extends AbstractPicture
     public function take(): array
     {
         if ($this->moves) {
-            foreach ($this->moves as $move) {
+            foreach ($this->moves as $i => $move) {
                 $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
-                $this->picture[Symbol::WHITE][] = [
-                    (new CheckEvent($this->board))->capture(Symbol::WHITE),
-                    (new PieceCaptureEvent($this->board))->capture(Symbol::WHITE),
-                    (new MajorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::WHITE),
-                    (new MinorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::WHITE),
-                    (new PromotionEvent($this->board))->capture(Symbol::WHITE),
-                ];
+                foreach (self::DIMENSIONS as $d) {
+                    $this->picture[Symbol::WHITE][$i][] = (new $d($this->board))->capture(Symbol::WHITE);
+                }
                 if (isset($move[1])) {
                     $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
                 }
-                $this->picture[Symbol::BLACK][] = [
-                    (new CheckEvent($this->board))->capture(Symbol::BLACK),
-                    (new PieceCaptureEvent($this->board))->capture(Symbol::BLACK),
-                    (new MajorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::BLACK),
-                    (new MinorPieceThreatenedByPawnEvent($this->board))->capture(Symbol::BLACK),
-                    (new PromotionEvent($this->board))->capture(Symbol::BLACK),
-                ];
+                foreach (self::DIMENSIONS as $d) {
+                    $this->picture[Symbol::BLACK][$i][] = (new $d($this->board))->capture(Symbol::BLACK);
+                }
             }
         } else {
-            $this->picture[Symbol::WHITE][] = $this->picture[Symbol::BLACK][] = array_fill(0, static::N_DIMENSIONS, 0);
+            $this->picture[Symbol::WHITE][] = $this->picture[Symbol::BLACK][] = array_fill(0, count(static::DIMENSIONS), 0);
         }
 
         return $this->picture;
