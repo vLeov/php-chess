@@ -202,6 +202,16 @@ class Game
     }
 
     /**
+     * Gets the events taking place on the board.
+     *
+     * @return \stdClass
+     */
+    public function events(): \stdClass
+    {
+        return $this->board->events();
+    }
+
+    /**
      * AI model response to the current position.
      *
      * @return string

@@ -187,6 +187,14 @@ Gets the pieces captured by both players as an array of `stdClass` objects.
 $captures = $game->captures();
 ```
 
+#### `events()`
+
+Gets the events taking place.
+
+```php
+$events = $game->events();
+```
+
 #### `play()`
 
 Play chess with the AI.
