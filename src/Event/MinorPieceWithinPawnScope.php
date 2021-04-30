@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  */
 class MinorPieceWithinPawnScope extends AbstractEvent
 {
-    const DESCRIPTION = "A minor piece was placed within a pawn's scope";
+    const DESC = "A minor piece was placed within a pawn's scope";
 
     public function capture(string $color): int
     {

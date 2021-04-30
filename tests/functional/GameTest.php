@@ -3,9 +3,9 @@
 namespace Chess\Tests\Functional;
 
 use Chess\Game;
-use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\AbstractFunctionalTestCase;
 
-class GameTest extends AbstractUnitTestCase
+class GameTest extends AbstractFunctionalTestCase
 {
     /**
      * @dataProvider filenameData

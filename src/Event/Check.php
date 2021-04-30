@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  */
 class Check extends AbstractEvent
 {
-    const DESCRIPTION = 'Check!';
+    const DESC = 'Check!';
 
     public function capture(string $color): int
     {
