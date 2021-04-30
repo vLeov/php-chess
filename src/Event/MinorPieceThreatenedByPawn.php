@@ -13,6 +13,8 @@ use Chess\Piece\Pawn;
  */
 class MinorPieceThreatenedByPawn extends AbstractEvent
 {
+    const DESCRIPTION = 'A minor piece is now threatened by a pawn';
+
     public function capture(string $color): int
     {
         if ($this->board->getHistory()) {

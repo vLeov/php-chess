@@ -10,6 +10,8 @@ namespace Chess\Event;
  */
 class PieceCapture extends AbstractEvent
 {
+    const DESCRIPTION = "A piece was captured";
+
     public function capture(string $color): int
     {
         if ($this->board->getHistory()) {

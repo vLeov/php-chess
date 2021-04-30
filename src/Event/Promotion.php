@@ -12,6 +12,8 @@ use Chess\PGN\Move;
  */
 class Promotion extends AbstractEvent
 {
+    const DESCRIPTION = "A pawn was promoted";
+
     public function capture(string $color): int
     {
         if ($this->board->getHistory()) {

@@ -12,6 +12,8 @@ use Chess\PGN\Symbol;
  */
 class Check extends AbstractEvent
 {
+    const DESCRIPTION = 'Check!';
+
     public function capture(string $color): int
     {
         $this->result = (int) (Symbol::oppColor($this->board->getTurn()) === $color && $this->board->isCheck());
