@@ -60,7 +60,7 @@ class Game
     {
         $this->board = new Board();
         $this->mode = $mode ?? self::MODE_PVT;
-        $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.'/a.model'));
+        $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.'/a1.model'));
     }
 
     /**
