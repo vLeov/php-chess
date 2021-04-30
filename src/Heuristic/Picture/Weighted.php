@@ -8,12 +8,12 @@ use Chess\PGN\Symbol;
 class Weighted extends AbstractHeuristicPicture
 {
     const WEIGHTS = [
-        601,    // meterial
-        503,    // king safety
-        401,    // center
-        307,    // connectivity
-        211,    // space
-        101,    // attack
+        13,     // meterial
+        11,     // king safety
+         7,     // center
+         5,     // connectivity
+         3,     // space
+         2,     // attack
     ];
 
     public function evaluate(): array
