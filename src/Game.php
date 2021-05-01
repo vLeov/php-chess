@@ -30,7 +30,7 @@ class Game
     /** player vs themselves */
     const MODE_PVT          =  'MODE_PVT';
 
-    const MODEL_FOLDER      = __DIR__.'/../model';
+    const MODEL_FOLDER      = __DIR__.'/../model/';
 
     /**
      * Chess board.
@@ -56,11 +56,11 @@ class Game
     /**
      * Constructor.
      */
-    public function __construct(string $mode = null)
+    public function __construct(string $mode = null, string $model = 'a1.model')
     {
         $this->board = new Board();
         $this->mode = $mode ?? self::MODE_PVT;
-        $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.'/a1.model'));
+        $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.$model));
     }
 
     /**
