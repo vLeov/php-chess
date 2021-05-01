@@ -98,7 +98,7 @@ class StatusTest extends AbstractUnitTestCase
     {
         $board = (new ExchangeRuyLopez(new Board))->play();
 
-        $expected = '1.e4 e5 3.Nf3 Nc6 5.Bb5 a6 7.Bxc6 dxc6 9.d4 exd4 11.Qxd4 Qxd4 13.Nxd4';
+        $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6 dxc6 5.d4 exd4 6.Qxd4 Qxd4 7.Nxd4';
 
         $this->assertEquals($expected, $board->getMovetext());
     }
