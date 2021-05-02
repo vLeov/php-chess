@@ -398,7 +398,6 @@ final class Board extends \SplObjectStorage
                 switch ($piece->getIdentity()) {
                     case Symbol::KING:
                         return [$piece->setMove($move)];
-                        break;
                     default:
                         if (preg_match("/{$move->position->current}/", $piece->getPosition())) {
                             $found[] = $piece->setMove($move);
@@ -489,16 +488,36 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Runs a chess move on the board.
+     * Semantically validates a chess move.
+     *
+     * Examples of invalid moves:
+     *      - Bxb5 with b5 empty
+     *      - Bb5 with a piece on b5
      *
      * @param \stdClass $move
-     * @return bool true if the move is successfully run; otherwise false
+     * @return bool true if the move is semantically valid; otherwise false
      */
-    public function play(\stdClass $move): bool
+    private function isValidMove(\stdClass $move): bool
     {
         if ($move->color !== $this->turn) {
             return false;
+        } elseif ($move->isCapture && empty($this->getPieceByPosition($move->position->next)) && $move->identity !== Symbol::PAWN) {
+            return false;
+        } elseif (!$move->isCapture && !empty($this->getPieceByPosition($move->position->next))) {
+            return false;
         }
+
+        return true;
+    }
+
+    /**
+     * Calculates if a chess move is legal.
+     *
+     * @param \stdClass $move
+     * @return bool true if the move is legal; otherwise false
+     */
+    private function isLegalMove(\stdClass $move): bool
+    {
         $isLegalMove = false;
         $pieces = $this->pickPiece($move);
         if (count($pieces) > 1) {
@@ -527,6 +546,17 @@ final class Board extends \SplObjectStorage
         }
 
         return $isLegalMove;
+    }
+
+    /**
+     * Runs a chess move on the board.
+     *
+     * @param \stdClass $move
+     * @return bool true if the move is successfully run; otherwise false
+     */
+    public function play(\stdClass $move): bool
+    {
+        return $this->isValidMove($move) && $this->isLegalMove($move);
     }
 
     /**
