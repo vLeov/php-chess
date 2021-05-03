@@ -5,16 +5,16 @@ namespace Chess\Heuristic;
 use Chess\AbstractSnapshot;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Pressure as PressureEvaluation;
 
 /**
- * Attacked snapshot.
+ * Pressured snapshot.
  *
  * @author Jordi Bassagañas
  * @license GPL
  * @see https://github.com/programarivm//blob/master/src/AbstractSnapshot.php
  */
-class AttackedSnapshot extends AbstractSnapshot
+class PressuredSnapshot extends AbstractSnapshot
 {
     public function take(): array
     {
@@ -23,10 +23,10 @@ class AttackedSnapshot extends AbstractSnapshot
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
-            $attEvald = (new AttackEvaluation($this->board))->evaluate();
+            $pressEvald = (new PressureEvaluation($this->board))->evaluate();
             $this->snapshot[] = [
-                Symbol::WHITE => count($attEvald[Symbol::BLACK]),
-                Symbol::BLACK => count($attEvald[Symbol::WHITE]),
+                Symbol::WHITE => count($pressEvald[Symbol::BLACK]),
+                Symbol::BLACK => count($pressEvald[Symbol::WHITE]),
             ];
         }
         $this->normalize();

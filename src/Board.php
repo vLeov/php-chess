@@ -7,7 +7,7 @@ use Chess\Castling\Initialization as CastlingInit;
 use Chess\Castling\Rule as CastlingRule;
 use Chess\Db\Pdo;
 use Chess\Exception\BoardException;
-use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Pressure as PressureEvaluation;
 use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\Evaluation\Square as SquareEvaluation;
 use Chess\Event\Check as CheckEvent;
@@ -52,11 +52,11 @@ final class Board extends \SplObjectStorage
     private $squares;
 
     /**
-     * Squares being attacked.
+     * Squares being pressured.
      *
      * @var \stdClass
      */
-    private $attack;
+    private $pressure;
 
     /**
      * Squares being controlled.
@@ -182,13 +182,13 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the board's attack evaluation.
+     * Gets the board's pressure evaluation.
      *
      * @return \stdClass
      */
-    public function getAttack(): \stdClass
+    public function getPressure(): \stdClass
     {
-        return $this->attack;
+        return $this->pressure;
     }
 
     /**
@@ -763,7 +763,7 @@ final class Board extends \SplObjectStorage
             'castling' => $this->castling,
             'lastHistoryEntry' => !empty($this->history) ? end($this->history) : null,
         ]);
-        $this->attack = (object) (new AttackEvaluation($this))->evaluate();
+        $this->pressure = (object) (new PressureEvaluation($this))->evaluate();
         $this->space = (object) (new SpaceEvaluation($this))->evaluate();
         $this->setSpaceToPieces($this->space);
 
@@ -811,12 +811,12 @@ final class Board extends \SplObjectStorage
             $piece->getMove()->type === Move::KING_CASTLING_LONG) {
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->pressure->{$king->getOppColor()});
             $this->undoCastle($prevCastling);
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Symbol::KING);
-            $leavesInCheck = in_array($king->getPosition(), $this->attack->{$king->getOppColor()});
+            $leavesInCheck = in_array($king->getPosition(), $this->pressure->{$king->getOppColor()});
             $this->undoMove($prevCastling);
         }
 
@@ -834,7 +834,7 @@ final class Board extends \SplObjectStorage
 
         return in_array(
             $king->getPosition(),
-            $this->attack->{$king->getOppColor()}
+            $this->pressure->{$king->getOppColor()}
         );
     }
 

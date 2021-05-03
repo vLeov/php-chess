@@ -4,26 +4,26 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Pressured as PressuredEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class AttackTest extends AbstractUnitTestCase
+class PressuredTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
     public function start()
     {
-        $attEvald = (new AttackEvaluation(new Board))->evaluate();
+        $pressEvald = (new PressuredEvaluation(new Board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [],
             Symbol::BLACK => [],
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $pressEvald);
     }
 
     /**
@@ -33,14 +33,14 @@ class AttackTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board))->play();
 
-        $attEvald = (new AttackEvaluation($board))->evaluate();
+        $pressEvald = (new PressuredEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => ['e4'],
+            Symbol::WHITE => ['e4'],
+            Symbol::BLACK => [],
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $pressEvald);
     }
 
     /**
@@ -50,13 +50,13 @@ class AttackTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board))->play();
 
-        $attEvald = (new AttackEvaluation($board))->evaluate();
+        $pressEvald = (new PressuredEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => ['c3'],
+            Symbol::WHITE => ['c3'],
+            Symbol::BLACK => [],
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $pressEvald);
     }
 }

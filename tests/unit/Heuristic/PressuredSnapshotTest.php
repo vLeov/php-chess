@@ -3,12 +3,12 @@
 namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
-use Chess\Heuristic\AttackedSnapshot;
+use Chess\Heuristic\PressuredSnapshot;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class AttackedSnapshotTest extends AbstractUnitTestCase
+class PressuredSnapshotTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,7 +19,7 @@ class AttackedSnapshotTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $snapshot = (new AttackedSnapshot($movetext))->take();
+        $snapshot = (new PressuredSnapshot($movetext))->take();
 
         $expected = [
             [

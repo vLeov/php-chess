@@ -7,12 +7,12 @@ use Chess\Evaluation\Square as SquareEvaluation;
 use Chess\PGN\Symbol;
 
 /**
- * Attack evaluation.
+ * Pressure evaluation.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Attack extends AbstractEvaluation
+class Pressure extends AbstractEvaluation
 {
     const NAME = 'attack';
 

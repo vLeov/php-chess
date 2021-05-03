@@ -4,26 +4,26 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\Attacked as AttackedEvaluation;
+use Chess\Evaluation\Pressure as PressureEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class AttackedTest extends AbstractUnitTestCase
+class PressureTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
     public function start()
     {
-        $attEvald = (new AttackedEvaluation(new Board))->evaluate();
+        $pressEvald = (new PressureEvaluation(new Board))->evaluate();
 
         $expected = [
             Symbol::WHITE => [],
             Symbol::BLACK => [],
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $pressEvald);
     }
 
     /**
@@ -33,14 +33,14 @@ class AttackedTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board))->play();
 
-        $attEvald = (new AttackedEvaluation($board))->evaluate();
+        $pressEvald = (new PressureEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => ['e4'],
-            Symbol::BLACK => [],
+            Symbol::WHITE => [],
+            Symbol::BLACK => ['e4'],
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $pressEvald);
     }
 
     /**
@@ -50,13 +50,13 @@ class AttackedTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board))->play();
 
-        $attEvald = (new AttackedEvaluation($board))->evaluate();
+        $pressEvald = (new PressureEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => ['c3'],
-            Symbol::BLACK => [],
+            Symbol::WHITE => [],
+            Symbol::BLACK => ['c3'],
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $pressEvald);
     }
 }

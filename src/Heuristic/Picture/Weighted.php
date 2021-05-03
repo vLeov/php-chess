@@ -10,7 +10,7 @@ class Weighted extends AbstractHeuristicPicture
     const WEIGHTS = [
         17,     // material
         13,     // king safety
-        11,     // attacked
+        11,     // pressured
          7,     // center
          5,     // connectivity
          3,     // space

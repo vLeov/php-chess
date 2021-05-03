@@ -61,7 +61,7 @@ $status = $game->status();
 |----------------|--------------------------------------------|
 | `turn`         | The current player's turn                  |
 | `squares`      | Free/used squares on the board             |
-| `attack`       | Squares being attacked by both players     |
+| `pressure`       | Squares being pressured by both players     |
 | `space`        | Squares being controlled by both players   |
 | `castling`     | The castling status of the two kings       |
 
@@ -92,8 +92,8 @@ $game->status()->turn;
 $game->status()->squares->used;
 $game->status()->squares->free;
 
-// squares being attacked by both players
-$game->status()->attack;
+// squares being pressured by both players
+$game->status()->pressure;
 
 // squares being controlled by both players
 $game->status()->space;
@@ -219,7 +219,7 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-The supervised learning process is all about using suitable heuristics such as king safety, attack, material or connectivity, among others. But how can we measure the efficiency of a given chess heuristic? This is where plotting data on nice charts comes to the rescue!
+The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others. But how can we measure the efficiency of a given chess heuristic? This is where plotting data on nice charts comes to the rescue!
 
 A live demo is available at https://programarivm.github.io/heuristics-quest/.
 

@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Pressure as PressureEvaluation;
 use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\PGN\Symbol;
 
@@ -29,16 +29,16 @@ class KingSafety extends AbstractEvaluation
 
     public function evaluate($feature = null): array
     {
-        $attEvald = (new AttackEvaluation($this->board))->evaluate();
+        $pressEvald = (new PressureEvaluation($this->board))->evaluate();
         $spEvald = (new SpaceEvaluation($this->board))->evaluate();
 
-        $this->color(Symbol::WHITE, $attEvald, $spEvald);
-        $this->color(Symbol::BLACK, $attEvald, $spEvald);
+        $this->color(Symbol::WHITE, $pressEvald, $spEvald);
+        $this->color(Symbol::BLACK, $pressEvald, $spEvald);
 
         return $this->result;
     }
 
-    private function color(string $color, array $attEvald, array $spEvald)
+    private function color(string $color, array $pressEvald, array $spEvald)
     {
         $king = $this->board->getPiece($color, Symbol::KING);
         foreach ($king->getScope() as $key => $sq) {
@@ -47,7 +47,7 @@ class KingSafety extends AbstractEvaluation
                     $this->result[$color] -= 1;
                 }
             }
-            if (in_array($sq, $attEvald[$king->getOppColor()])) {
+            if (in_array($sq, $pressEvald[$king->getOppColor()])) {
                 $this->result[$color] -= 1;
             }
             if (in_array($sq, $spEvald[$king->getOppColor()])) {

@@ -4,8 +4,8 @@ namespace Chess\Heuristic;
 
 use Chess\AbstractPicture;
 use Chess\Evaluation\Value\System;
-use Chess\Evaluation\Attack as AttackEvaluation;
-use Chess\Evaluation\Attacked as AttackedEvaluation;
+use Chess\Evaluation\Pressure as PressureEvaluation;
+use Chess\Evaluation\Pressured as PressuredEvaluation;
 use Chess\Evaluation\Center as CenterEvaluation;
 use Chess\Evaluation\Connectivity as ConnectivityEvaluation;
 use Chess\Evaluation\KingSafety as KingSafetyEvaluation;
@@ -19,11 +19,11 @@ abstract class AbstractHeuristicPicture extends AbstractPicture
     const DIMENSIONS = [
         MaterialEvaluation::class,
         KingSafetyEvaluation::class,
-        AttackedEvaluation::class,
+        PressuredEvaluation::class,
         CenterEvaluation::class,
         ConnectivityEvaluation::class,
         SpaceEvaluation::class,
-        AttackEvaluation::class,
+        PressureEvaluation::class,
     ];
 
     /**

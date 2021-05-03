@@ -5,7 +5,7 @@ namespace Chess;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
-use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Pressure as PressureEvaluation;
 use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\Evaluation\Square as SquareEvaluation;
 use Chess\ML\Supervised\Regression\Labeller\PrimesDecoder;
@@ -74,7 +74,7 @@ class Game
             'turn' => $this->board->getTurn(),
             'castling' => $this->board->getCastling(),
             'squares' => $this->board->getSquares(),
-            AttackEvaluation::NAME => $this->board->getAttack(),
+            PressureEvaluation::NAME => $this->board->getPressure(),
             SpaceEvaluation::NAME => $this->board->getSpace(),
         ];
     }
