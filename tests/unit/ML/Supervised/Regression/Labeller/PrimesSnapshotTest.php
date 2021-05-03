@@ -23,24 +23,24 @@ class PrimesSnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 0.63,
-                Symbol::BLACK => 0.03,
+                Symbol::WHITE => 0.67,
+                Symbol::BLACK => 0.07,
             ],
             [
                 Symbol::WHITE => 1,
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 0.33,
-                Symbol::BLACK => 0.31,
+                Symbol::WHITE => 0.29,
+                Symbol::BLACK => 0.43,
             ],
             [
-                Symbol::WHITE => 0.12,
-                Symbol::BLACK => 0.08,
+                Symbol::WHITE => 0.24,
+                Symbol::BLACK => 0.04,
             ],
             [
-                Symbol::WHITE => 0.2,
-                Symbol::BLACK => 0.06,
+                Symbol::WHITE => 0.32,
+                Symbol::BLACK => 0.02,
             ],
         ];
 

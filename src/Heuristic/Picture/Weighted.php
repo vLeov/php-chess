@@ -13,10 +13,8 @@ class Weighted extends AbstractHeuristicPicture
         11, // center
          7, // king safety
          5, // connectivity
-         3, // attack
-         2, // pressure
-        -2, // pressured
-        -3  // attacked
+         3, // pressure
+         2, // attack
     ];
 
     public function evaluate(): array

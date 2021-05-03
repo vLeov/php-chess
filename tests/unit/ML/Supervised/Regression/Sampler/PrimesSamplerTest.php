@@ -20,8 +20,8 @@ class PrimesSamplerTest extends AbstractUnitTestCase
         $board = new Board;
 
         $expected = [
-            Symbol::WHITE => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-            Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+            Symbol::WHITE => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+            Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -38,8 +38,8 @@ class PrimesSamplerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
         $expected = [
-            Symbol::WHITE => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-            Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+            Symbol::WHITE => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+            Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -53,13 +53,8 @@ class PrimesSamplerTest extends AbstractUnitTestCase
         $board = (new FoolCheckmate(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [0, 0, 1, 0, 0.9, 0.2, 0],
-            Symbol::BLACK => [1, 1, 0, 1, 0, 1, 1],
-        ];
-
-        $expected = [
-            Symbol::WHITE => [0, 0.2, 0, 0, 0.9, 0, 0, 1, 1],
-            Symbol::BLACK => [1, 1, 1, 1, 0, 1, 1, 0, 0],
+            Symbol::WHITE => [0, 0.2, 0, 0, 0.9, 0, 0],
+            Symbol::BLACK => [1, 1, 1, 1, 0, 1, 1],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
@@ -73,8 +68,8 @@ class PrimesSamplerTest extends AbstractUnitTestCase
         $board = (new ScholarCheckmate(new Board))->play();
 
         $expected = [
-            Symbol::WHITE => [1, 0.8, 0, 1, 0.07, 0.87, 1, 0.4, 1],
-            Symbol::BLACK => [0, 0.4, 1, 0, 0.93, 1, 0.4, 1, 0.87],
+            Symbol::WHITE => [1, 0.8, 0, 1, 0.07, 1, 0.87],
+            Symbol::BLACK => [0, 0.4, 1, 0, 0.93, 0.4, 1],
         ];
 
         $this->assertEquals($expected, (new PrimesSampler($board))->sample());
