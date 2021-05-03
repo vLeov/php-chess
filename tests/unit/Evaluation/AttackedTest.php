@@ -4,26 +4,26 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\Attacked as AttackedEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class AttackTest extends AbstractUnitTestCase
+class AttackedTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
     public function start()
     {
-        $attEvald = (new AttackEvaluation(new Board))->evaluate();
+        $attdEvald = (new AttackedEvaluation(new Board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $attdEvald);
     }
 
     /**
@@ -33,14 +33,14 @@ class AttackTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board))->play();
 
-        $attEvald = (new AttackEvaluation($board))->evaluate();
+        $attdEvald = (new AttackedEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 1,
+            Symbol::WHITE => 1,
+            Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $attdEvald);
     }
 
     /**
@@ -50,13 +50,13 @@ class AttackTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board))->play();
 
-        $attEvald = (new AttackEvaluation($board))->evaluate();
+        $attdEvald = (new AttackedEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 3.2,
+            Symbol::WHITE => 3.2,
+            Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertEquals($expected, $attdEvald);
     }
 }
