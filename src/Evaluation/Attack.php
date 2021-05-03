@@ -34,13 +34,17 @@ class Attack extends AbstractEvaluation
     public function evaluate($feature = null): array
     {
         foreach ($this->pressEvald[Symbol::WHITE] as $sq) {
-            $piece = $this->board->getPieceByPosition($sq);
-            $this->result[Symbol::WHITE] += $this->system[System::SYSTEM_BERLINER][$piece->getIdentity()];
+            $identity = $this->board->getPieceByPosition($sq)->getIdentity();
+            if ($identity !== Symbol::KING) {
+                $this->result[Symbol::WHITE] += $this->system[System::SYSTEM_BERLINER][$identity];
+            }
         }
 
         foreach ($this->pressEvald[Symbol::BLACK] as $sq) {
-            $piece = $this->board->getPieceByPosition($sq);
-            $this->result[Symbol::BLACK] += $this->system[System::SYSTEM_BERLINER][$piece->getIdentity()];
+            $identity = $this->board->getPieceByPosition($sq)->getIdentity();
+            if ($identity !== Symbol::KING) {
+                $this->result[Symbol::BLACK] += $this->system[System::SYSTEM_BERLINER][$identity];
+            }
         }
 
         return $this->result;

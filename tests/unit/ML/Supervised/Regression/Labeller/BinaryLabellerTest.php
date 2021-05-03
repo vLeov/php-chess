@@ -61,8 +61,8 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 11,
-            Symbol::BLACK => 84,
+            Symbol::WHITE => 204,
+            Symbol::BLACK => 275,
         ];
 
         $this->assertEquals($expected, (new BinaryLabeller($sample))->label());
@@ -80,8 +80,8 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 2,
-            Symbol::BLACK => 68,
+            Symbol::WHITE => 128,
+            Symbol::BLACK => 272,
         ];
 
         $this->assertEquals($expected, (new BinaryLabeller($sample))->label());
@@ -96,8 +96,8 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 20,
-            Symbol::BLACK => 2155,
+            Symbol::WHITE => 19,
+            Symbol::BLACK => 8684,
         ];
 
         $this->assertEquals($expected, (new BinaryLabeller($sample))->label());
@@ -112,8 +112,8 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 3171,
-            Symbol::BLACK => 28,
+            Symbol::WHITE => 12717,
+            Symbol::BLACK => 91,
         ];
 
         $this->assertEquals($expected, (new BinaryLabeller($sample))->label());
@@ -128,8 +128,8 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 58,
-            Symbol::BLACK => 35,
+            Symbol::WHITE => 227,
+            Symbol::BLACK => 172,
         ];
 
         $this->assertEquals($expected, (new BinaryLabeller($sample))->label());
@@ -144,8 +144,8 @@ class BinaryLabellerTest extends AbstractUnitTestCase
         $sample = (new BinarySampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 30,
-            Symbol::BLACK => 5,
+            Symbol::WHITE => 211,
+            Symbol::BLACK => 28,
         ];
 
         $this->assertEquals($expected, (new BinaryLabeller($sample))->label());

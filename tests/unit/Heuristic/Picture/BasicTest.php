@@ -23,11 +23,11 @@ class BasicTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 
             ],
             Symbol::BLACK => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
             ],
         ];
 
@@ -48,11 +48,11 @@ class BasicTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 
             ],
             Symbol::BLACK => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
             ],
         ];
 
@@ -69,8 +69,8 @@ class BasicTest extends AbstractUnitTestCase
         $evaluation = (new BasicHeuristicPicture($board->getMovetext()))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 4.19,
-            Symbol::BLACK => 2.8,
+            Symbol::WHITE => 4.94,
+            Symbol::BLACK => 3.55,
         ];
 
         $this->assertEquals($expected, $evaluation);

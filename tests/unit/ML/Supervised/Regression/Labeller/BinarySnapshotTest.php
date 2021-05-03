@@ -23,23 +23,23 @@ class BinarySnapshotTest extends AbstractUnitTestCase
 
         $expected = [
             [
-                Symbol::WHITE => 0.01,
+                Symbol::WHITE => 0.04,
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 0.07,
-                Symbol::BLACK => 0,
+                Symbol::WHITE => 0.1,
+                Symbol::BLACK => 0.03,
             ],
             [
-                Symbol::WHITE => 0.01,
+                Symbol::WHITE => 0.04,
                 Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 0.95,
+                Symbol::WHITE => 0.96,
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 0.03,
+                Symbol::WHITE => 0.04,
                 Symbol::BLACK => 0,
             ],
         ];
