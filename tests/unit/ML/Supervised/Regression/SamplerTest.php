@@ -1,16 +1,16 @@
 <?php
 
-namespace Chess\Tests\Unit\ML\Supervised\Regression\Sampler;
+namespace Chess\Tests\Unit\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
+use Chess\ML\Supervised\Regression\Sampler;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 
-class LinearCombinationSamplerTest extends AbstractUnitTestCase
+class SamplerTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -24,7 +24,7 @@ class LinearCombinationSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
+        $this->assertEquals($expected, (new Sampler($board))->sample());
     }
 
     /**
@@ -42,7 +42,7 @@ class LinearCombinationSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
+        $this->assertEquals($expected, (new Sampler($board))->sample());
     }
 
     /**
@@ -57,7 +57,7 @@ class LinearCombinationSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [1, 1, 1, 1, 0, 1, 1],
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
+        $this->assertEquals($expected, (new Sampler($board))->sample());
     }
 
     /**
@@ -72,6 +72,6 @@ class LinearCombinationSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [0, 0.4, 1, 0, 0.93, 0.4, 1],
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
+        $this->assertEquals($expected, (new Sampler($board))->sample());
     }
 }

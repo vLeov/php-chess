@@ -2,10 +2,9 @@
 
 namespace Chess\Heuristic\Picture;
 
-use Chess\Heuristic\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
-class LinearCombination extends AbstractHeuristicPicture
+class LinearCombination extends HeuristicPicture
 {
     const WEIGHTS = [
         17, // material

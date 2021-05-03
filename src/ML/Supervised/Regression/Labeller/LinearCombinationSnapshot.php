@@ -6,7 +6,7 @@ use Chess\AbstractSnapshot;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\ML\Supervised\Regression\Labeller\LinearCombinationLabeller;
-use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
+use Chess\ML\Supervised\Regression\Sampler;
 
 /**
  * LinearCombination snapshot.
@@ -25,7 +25,7 @@ class LinearCombinationSnapshot extends AbstractSnapshot
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
             $this->snapshot[] = (new LinearCombinationLabeller(
-                (new LinearCombinationSampler($this->board))->sample())
+                (new Sampler($this->board))->sample())
             )->label();
         }
         $this->normalize();

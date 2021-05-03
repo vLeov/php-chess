@@ -6,7 +6,7 @@ use Chess\AbstractSnapshot;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\ML\Supervised\Regression\Labeller\AdditionLabeller;
-use Chess\ML\Supervised\Regression\Sampler\AdditionSampler;
+use Chess\ML\Supervised\Regression\Sampler;
 
 /**
  * Addition snapshot.
@@ -25,7 +25,7 @@ class AdditionSnapshot extends AbstractSnapshot
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
             $this->snapshot[] = (new AdditionLabeller(
-                (new AdditionSampler($this->board))->sample())
+                (new Sampler($this->board))->sample())
             )->label();
         }
         $this->normalize();

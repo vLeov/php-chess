@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\LinearCombinationLabeller;
-use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
+use Chess\ML\Supervised\Regression\Sampler;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -20,7 +20,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $sample = (new LinearCombinationSampler(new Board))->sample();
+        $sample = (new Sampler(new Board))->sample();
 
         $expected = [
             Symbol::WHITE => 2900,
@@ -39,7 +39,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $sample = (new LinearCombinationSampler($board))->sample();
+        $sample = (new Sampler($board))->sample();
 
         $expected = [
             Symbol::WHITE => 2900,
@@ -58,7 +58,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
-        $sample = (new LinearCombinationSampler($board))->sample();
+        $sample = (new Sampler($board))->sample();
 
         $expected = [
             Symbol::WHITE => 3250,
@@ -77,7 +77,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
-        $sample = (new LinearCombinationSampler($board))->sample();
+        $sample = (new Sampler($board))->sample();
 
         $expected = [
             Symbol::WHITE => 2450,
@@ -93,7 +93,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     public function fool_checkmate()
     {
         $board = (new FoolCheckmate(new Board))->play();
-        $sample = (new LinearCombinationSampler($board))->sample();
+        $sample = (new Sampler($board))->sample();
 
         $expected = [
             Symbol::WHITE => 710,
@@ -109,7 +109,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     public function scholar_checkmate()
     {
         $board = (new ScholarCheckmate(new Board))->play();
-        $sample = (new LinearCombinationSampler($board))->sample();
+        $sample = (new Sampler($board))->sample();
 
         $expected = [
             Symbol::WHITE => 3949,
@@ -125,7 +125,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     public function benko_gambit()
     {
         $board = (new BenkoGambit(new Board))->play();
-        $sample = (new LinearCombinationSampler($board))->sample();
+        $sample = (new Sampler($board))->sample();
 
         $expected = [
             Symbol::WHITE => 3548,
@@ -141,7 +141,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     public function closed_sicilian()
     {
         $board = (new ClosedSicilian(new Board))->play();
-        $sample = (new LinearCombinationSampler($board))->sample();
+        $sample = (new Sampler($board))->sample();
 
         $expected = [
             Symbol::WHITE => 2755,

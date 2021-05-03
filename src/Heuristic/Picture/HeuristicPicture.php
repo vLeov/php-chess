@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Heuristic;
+namespace Chess\Heuristic\Picture;
 
 use Chess\AbstractPicture;
 use Chess\Evaluation\Value\System;
@@ -14,7 +14,7 @@ use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
-abstract class AbstractHeuristicPicture extends AbstractPicture
+class HeuristicPicture extends AbstractPicture
 {
     const DIMENSIONS = [
         MaterialEvaluation::class,
@@ -55,6 +55,4 @@ abstract class AbstractHeuristicPicture extends AbstractPicture
 
         return $this->picture;
     }
-
-    abstract public function evaluate(): array;
 }
