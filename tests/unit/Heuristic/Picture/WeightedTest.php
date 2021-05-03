@@ -23,11 +23,11 @@ class WeightedTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 
             ],
             Symbol::BLACK => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
             ],
         ];
 
@@ -48,11 +48,11 @@ class WeightedTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 
             ],
             Symbol::BLACK => [
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
             ],
         ];
 
@@ -69,8 +69,8 @@ class WeightedTest extends AbstractUnitTestCase
         $evaluation = (new WeightedHeuristicPicture($board->getMovetext()))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 24.72,
-            Symbol::BLACK => 16.41,
+            Symbol::WHITE => 35.73,
+            Symbol::BLACK => 18.41,
         ];
 
         $this->assertEquals($expected, $evaluation);

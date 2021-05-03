@@ -27,20 +27,20 @@ class BinarySnapshotTest extends AbstractUnitTestCase
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 0.08,
+                Symbol::WHITE => 0.07,
                 Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 0.02,
+                Symbol::WHITE => 0.01,
                 Symbol::BLACK => 1,
             ],
             [
-                Symbol::WHITE => 0.96,
-                Symbol::BLACK => 0.01,
+                Symbol::WHITE => 0.95,
+                Symbol::BLACK => 0,
             ],
             [
-                Symbol::WHITE => 0.02,
-                Symbol::BLACK => 0.01,
+                Symbol::WHITE => 0.03,
+                Symbol::BLACK => 0,
             ],
         ];
 

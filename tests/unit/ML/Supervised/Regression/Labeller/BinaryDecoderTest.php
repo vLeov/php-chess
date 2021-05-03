@@ -17,7 +17,7 @@ class BinaryDecoderTest extends AbstractUnitTestCase
     {
         $board = new Board;
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $expected = 'Nf6';
+        $expected = 'Na6';
 
         $this->assertEquals($expected, (new BinaryDecoder($board))->decode(Symbol::BLACK, 181));
     }
