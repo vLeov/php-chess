@@ -10,7 +10,7 @@ use Chess\PGN\Symbol;
  * A so-called snapshot is intended to capture a particular feature of a chess game
  * mainly for the purpose of being plotted on a chart for further visual study.
  *
- * So for example, heuristic snapshots such as attack, center or material, are
+ * So for example, heuristic snapshots such as pressure, center or material, are
  * helpful to plot charts and get insights on the efficiency of programmer-defined
  * heuristic evaluation functions.
  *

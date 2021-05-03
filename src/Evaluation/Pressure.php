@@ -14,7 +14,7 @@ use Chess\PGN\Symbol;
  */
 class Pressure extends AbstractEvaluation
 {
-    const NAME = 'attack';
+    const NAME = 'pressure';
 
     private $sqEvald;
 
