@@ -6,12 +6,12 @@ use Chess\Heuristic\Picture\LinearCombination as LinearCombinationHeuristicPictu
 use Chess\PGN\Symbol;
 
 /**
- * Primes labeller.
+ * LinearCombination labeller.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class PrimesLabeller
+class LinearCombinationLabeller
 {
     private $sample;
 

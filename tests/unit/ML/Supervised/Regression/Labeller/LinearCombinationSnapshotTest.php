@@ -3,12 +3,12 @@
 namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Labeller\PrimesSnapshot;
+use Chess\ML\Supervised\Regression\Labeller\LinearCombinationSnapshot;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class PrimesSnapshotTest extends AbstractUnitTestCase
+class LinearCombinationSnapshotTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,7 +19,7 @@ class PrimesSnapshotTest extends AbstractUnitTestCase
                         ->play()
                         ->getMovetext();
 
-        $snapshot = (new PrimesSnapshot($movetext))->take();
+        $snapshot = (new LinearCombinationSnapshot($movetext))->take();
 
         $expected = [
             [

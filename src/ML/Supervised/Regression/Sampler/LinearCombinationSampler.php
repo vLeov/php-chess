@@ -6,7 +6,7 @@ use Chess\Board;
 use Chess\Heuristic\Picture\LinearCombination as LinearCombinationHeuristicPicture;
 use Chess\PGN\Symbol;
 
-class PrimesSampler extends AbstractSampler
+class LinearCombinationSampler extends AbstractSampler
 {
     public function sample(): array
     {

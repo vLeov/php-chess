@@ -3,14 +3,14 @@
 namespace Chess\Tests\Unit\ML\Supervised\Regression\Sampler;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
+use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 
-class PrimesSamplerTest extends AbstractUnitTestCase
+class LinearCombinationSamplerTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -24,7 +24,7 @@ class PrimesSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
         ];
 
-        $this->assertEquals($expected, (new PrimesSampler($board))->sample());
+        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
     }
 
     /**
@@ -42,7 +42,7 @@ class PrimesSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
         ];
 
-        $this->assertEquals($expected, (new PrimesSampler($board))->sample());
+        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
     }
 
     /**
@@ -57,7 +57,7 @@ class PrimesSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [1, 1, 1, 1, 0, 1, 1],
         ];
 
-        $this->assertEquals($expected, (new PrimesSampler($board))->sample());
+        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
     }
 
     /**
@@ -72,6 +72,6 @@ class PrimesSamplerTest extends AbstractUnitTestCase
             Symbol::BLACK => [0, 0.4, 1, 0, 0.93, 0.4, 1],
         ];
 
-        $this->assertEquals($expected, (new PrimesSampler($board))->sample());
+        $this->assertEquals($expected, (new LinearCombinationSampler($board))->sample());
     }
 }

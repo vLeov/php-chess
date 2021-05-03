@@ -5,17 +5,17 @@ namespace Chess\ML\Supervised\Regression\Labeller;
 use Chess\AbstractSnapshot;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
-use Chess\ML\Supervised\Regression\Labeller\PrimesLabeller;
-use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
+use Chess\ML\Supervised\Regression\Labeller\LinearCombinationLabeller;
+use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
 
 /**
- * Primes snapshot.
+ * LinearCombination snapshot.
  *
  * @author Jordi Bassagañas
  * @license GPL
  * @see https://github.com/programarivm//blob/master/src/AbstractSnapshot.php
  */
-class PrimesSnapshot extends AbstractSnapshot
+class LinearCombinationSnapshot extends AbstractSnapshot
 {
     public function take(): array
     {
@@ -24,8 +24,8 @@ class PrimesSnapshot extends AbstractSnapshot
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
-            $this->snapshot[] = (new PrimesLabeller(
-                (new PrimesSampler($this->board))->sample())
+            $this->snapshot[] = (new LinearCombinationLabeller(
+                (new LinearCombinationSampler($this->board))->sample())
             )->label();
         }
         $this->normalize();

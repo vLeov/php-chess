@@ -8,8 +8,8 @@ use Chess\PGN\Validate;
 use Chess\Evaluation\Pressure as PressureEvaluation;
 use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\Evaluation\Square as SquareEvaluation;
-use Chess\ML\Supervised\Regression\Labeller\PrimesDecoder;
-use Chess\ML\Supervised\Regression\Sampler\PrimesSampler;
+use Chess\ML\Supervised\Regression\Labeller\LinearCombinationDecoder;
+use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\Persisters\Filesystem;
@@ -218,10 +218,10 @@ class Game
      */
     public function response()
     {
-        $sample = (new PrimesSampler($this->board))->sample();
+        $sample = (new LinearCombinationSampler($this->board))->sample();
         $dataset = new Unlabeled([$sample[Symbol::oppColor($this->board->getTurn())]]);
         $prediction = current($this->estimator->predict($dataset));
-        $decoded = (new PrimesDecoder($this->board))->decode($this->board->getTurn(), $prediction);
+        $decoded = (new LinearCombinationDecoder($this->board))->decode($this->board->getTurn(), $prediction);
 
         return $decoded;
     }
