@@ -5,7 +5,7 @@ namespace Chess\Heuristic\Picture;
 use Chess\Heuristic\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
-class Basic extends AbstractHeuristicPicture
+class Addition extends AbstractHeuristicPicture
 {
     public function evaluate(): array
     {
