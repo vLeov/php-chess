@@ -9,7 +9,7 @@ use Chess\Evaluation\Pressure as PressureEvaluation;
 use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\Evaluation\Square as SquareEvaluation;
 use Chess\ML\Supervised\Regression\Labeller\LinearCombinationDecoder;
-use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
+use Chess\ML\Supervised\Regression\Sampler;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\Persisters\Filesystem;
@@ -218,7 +218,7 @@ class Game
      */
     public function response()
     {
-        $sample = (new LinearCombinationSampler($this->board))->sample();
+        $sample = (new Sampler($this->board))->sample();
         $dataset = new Unlabeled([$sample[Symbol::oppColor($this->board->getTurn())]]);
         $prediction = current($this->estimator->predict($dataset));
         $decoded = (new LinearCombinationDecoder($this->board))->decode($this->board->getTurn(), $prediction);
