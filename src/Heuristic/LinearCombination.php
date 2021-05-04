@@ -1,10 +1,11 @@
 <?php
 
-namespace Chess\Heuristic\Picture;
+namespace Chess\Heuristic;
 
+use Chess\AbstractPicture;
 use Chess\PGN\Symbol;
 
-class LinearCombination extends HeuristicPicture
+class LinearCombination
 {
     const WEIGHTS = [
         17, // material
@@ -16,6 +17,13 @@ class LinearCombination extends HeuristicPicture
          2, // attack
     ];
 
+    private $heuristicPic;
+
+    public function __construct(AbstractPicture $heuristicPic)
+    {
+        $this->heuristicPic = $heuristicPic;
+    }
+
     public function evaluate(): array
     {
         $result = [
@@ -23,9 +31,9 @@ class LinearCombination extends HeuristicPicture
             Symbol::BLACK => 0,
         ];
 
-        $picture = $this->take();
+        $picture = $this->heuristicPic->take();
 
-        for ($i = 0; $i < count(self::DIMENSIONS); $i++) {
+        for ($i = 0; $i < count($this->heuristicPic::DIMENSIONS); $i++) {
             $result[Symbol::WHITE] += self::WEIGHTS[$i] * end($picture[Symbol::WHITE])[$i];
             $result[Symbol::BLACK] += self::WEIGHTS[$i] * end($picture[Symbol::BLACK])[$i];
         }

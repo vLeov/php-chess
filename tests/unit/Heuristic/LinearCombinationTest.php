@@ -1,9 +1,10 @@
 <?php
 
-namespace Chess\Tests\Unit\Heuristic\Picture;
+namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\LinearCombination as LinearCombinationHeuristicPicture;
+use Chess\Heuristic\LinearCombination;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -19,7 +20,9 @@ class LinearCombinationTest extends AbstractUnitTestCase
     {
         $board = new Board;
 
-        $picture = (new LinearCombinationHeuristicPicture($board->getMovetext()))->take();
+        $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
+
+        $picture = $heuristicPic->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -44,7 +47,9 @@ class LinearCombinationTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $picture = (new LinearCombinationHeuristicPicture($board->getMovetext()))->take();
+        $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
+
+        $picture = $heuristicPic->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -66,7 +71,9 @@ class LinearCombinationTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board))->play();
 
-        $evaluation = (new LinearCombinationHeuristicPicture($board->getMovetext()))->evaluate();
+        $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
+
+        $evaluation = (new LinearCombination($heuristicPic))->evaluate();
 
         $expected = [
             Symbol::WHITE => 35.48,

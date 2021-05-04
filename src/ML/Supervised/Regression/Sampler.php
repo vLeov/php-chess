@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\HeuristicPicture;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Symbol;
 
 class Sampler
@@ -21,10 +21,10 @@ class Sampler
             Symbol::BLACK => [],
         ];
     }
-    
+
     public function sample(): array
     {
-        $heuristicPicture = (new HeuristicPicture($this->board->getMovetext()))->take();
+        $heuristicPicture = (new StandardHeuristicPicture($this->board->getMovetext()))->take();
 
         $this->sample = [
             Symbol::WHITE => end($heuristicPicture[Symbol::WHITE]),

@@ -1,11 +1,19 @@
 <?php
 
-namespace Chess\Heuristic\Picture;
+namespace Chess\Heuristic;
 
+use Chess\AbstractPicture;
 use Chess\PGN\Symbol;
 
-class Addition extends HeuristicPicture
+class Addition
 {
+    private $heuristicPic;
+
+    public function __construct(AbstractPicture $heuristicPic)
+    {
+        $this->heuristicPic = $heuristicPic;
+    }
+
     public function evaluate(): array
     {
         $result = [
@@ -13,9 +21,9 @@ class Addition extends HeuristicPicture
             Symbol::BLACK => 0,
         ];
 
-        $picture = $this->take();
+        $picture = $this->heuristicPic->take();
 
-        for ($i = 0; $i < count(self::DIMENSIONS); $i++) {
+        for ($i = 0; $i < count($this->heuristicPic::DIMENSIONS); $i++) {
             $result[Symbol::WHITE] += end($picture[Symbol::WHITE])[$i];
             $result[Symbol::BLACK] += end($picture[Symbol::BLACK])[$i];
         }

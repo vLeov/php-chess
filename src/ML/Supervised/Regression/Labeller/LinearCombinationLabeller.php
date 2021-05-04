@@ -2,7 +2,7 @@
 
 namespace Chess\ML\Supervised\Regression\Labeller;
 
-use Chess\Heuristic\Picture\LinearCombination as LinearCombinationHeuristicPicture;
+use Chess\Heuristic\LinearCombination;
 use Chess\PGN\Symbol;
 
 /**
@@ -28,7 +28,7 @@ class LinearCombinationLabeller
             Symbol::BLACK => 0,
         ];
 
-        $this->weights = LinearCombinationHeuristicPicture::WEIGHTS;
+        $this->weights = LinearCombination::WEIGHTS;
     }
 
     public function label(): array

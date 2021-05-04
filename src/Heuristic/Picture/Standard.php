@@ -14,7 +14,7 @@ use Chess\Evaluation\Space as SpaceEvaluation;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
-class HeuristicPicture extends AbstractPicture
+class Standard extends AbstractPicture
 {
     const DIMENSIONS = [
         MaterialEvaluation::class,

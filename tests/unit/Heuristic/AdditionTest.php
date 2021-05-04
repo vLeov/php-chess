@@ -1,9 +1,10 @@
 <?php
 
-namespace Chess\Tests\Unit\Heuristic\Picture;
+namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Addition as AdditionHeuristicPicture;
+use Chess\Heuristic\Addition;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -17,9 +18,11 @@ class AdditionTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $board = new Board;
+        $board = new Board();
 
-        $picture = (new AdditionHeuristicPicture($board->getMovetext()))->take();
+        $heuristicPic = (new StandardHeuristicPicture($board->getMovetext()));
+
+        $picture = $heuristicPic->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -44,7 +47,9 @@ class AdditionTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $picture = (new AdditionHeuristicPicture($board->getMovetext()))->take();
+        $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
+
+        $picture = $heuristicPic->take();
 
         $expected = [
             Symbol::WHITE => [
@@ -66,7 +71,9 @@ class AdditionTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board))->play();
 
-        $evaluation = (new AdditionHeuristicPicture($board->getMovetext()))->evaluate();
+        $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
+
+        $evaluation = (new Addition($heuristicPic))->evaluate();
 
         $expected = [
             Symbol::WHITE => 3.44,
