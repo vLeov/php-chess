@@ -5,7 +5,7 @@ namespace Chess\ML\Supervised\Regression\Labeller;
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\AbstractDecoder;
 use Chess\ML\Supervised\Regression\Labeller\LinearCombinationLabeller;
-use Chess\ML\Supervised\Regression\Sampler\LinearCombinationSampler;
+use Chess\ML\Supervised\Regression\Sampler;
 
 /**
  * LinearCombination decoder.
@@ -19,7 +19,7 @@ class LinearCombinationDecoder extends AbstractDecoder
     {
         parent::__construct($board);
 
-        $this->sampler = LinearCombinationSampler::class;
+        $this->sampler = Sampler::class;
         $this->labeller = LinearCombinationLabeller::class;
     }
 }
