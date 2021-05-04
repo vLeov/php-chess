@@ -28,7 +28,7 @@ class LinearCombinationLabeller
             Symbol::BLACK => 0,
         ];
 
-        $this->weights = LinearCombination::WEIGHTS;
+        $this->weights = (new LinearCombination())->getWeights();
     }
 
     public function label(): array
