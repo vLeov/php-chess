@@ -23,8 +23,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler(new Board))->sample();
 
         $expected = [
-            Symbol::WHITE => 2900,
-            Symbol::BLACK => 2900,
+            Symbol::WHITE => 29,
+            Symbol::BLACK => 29,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());
@@ -42,8 +42,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 2900,
-            Symbol::BLACK => 2900,
+            Symbol::WHITE => 29,
+            Symbol::BLACK => 29,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());
@@ -61,8 +61,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 3250,
-            Symbol::BLACK => 2550,
+            Symbol::WHITE => 32.5,
+            Symbol::BLACK => 25.5,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());
@@ -80,8 +80,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 2450,
-            Symbol::BLACK => 3350,
+            Symbol::WHITE => 24.5,
+            Symbol::BLACK => 33.5,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());
@@ -96,8 +96,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 710,
-            Symbol::BLACK => 5300,
+            Symbol::WHITE => 7.1,
+            Symbol::BLACK => 53,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());
@@ -112,8 +112,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 3949,
-            Symbol::BLACK => 2405,
+            Symbol::WHITE => 39.49,
+            Symbol::BLACK => 24.05,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());
@@ -128,8 +128,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 3548,
-            Symbol::BLACK => 2136,
+            Symbol::WHITE => 35.48,
+            Symbol::BLACK => 21.36,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());
@@ -144,8 +144,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = (new Sampler($board))->sample();
 
         $expected = [
-            Symbol::WHITE => 2755,
-            Symbol::BLACK => 1810,
+            Symbol::WHITE => 27.55,
+            Symbol::BLACK => 18.10,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample))->label());

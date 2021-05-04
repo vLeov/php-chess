@@ -35,7 +35,7 @@ class LinearCombinationLabeller
     {
         foreach ($this->sample as $color => $arr) {
             foreach ($arr as $key => $val) {
-                $this->label[$color] += $this->weights[$key] * $val * 100;
+                $this->label[$color] += $this->weights[$key] * $val;
             }
         }
 
