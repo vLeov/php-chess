@@ -7,10 +7,14 @@ use Chess\PGN\Symbol;
 
 class LinearCombinationEvaluation implements HeuristicEvaluationInterface
 {
+    private $heuristicPicture;
+
     protected $weights;
 
-    public function __construct()
+    public function __construct(AbstractPicture $heuristicPicture)
     {
+        $this->heuristicPicture = $heuristicPicture;
+
         $this->weights = [ 17, 13, 11, 7, 5, 3, 2 ];
     }
 
@@ -19,16 +23,16 @@ class LinearCombinationEvaluation implements HeuristicEvaluationInterface
         return $this->weights;
     }
 
-    public function evaluate(AbstractPicture $heuristicPic): array
+    public function evaluate(): array
     {
         $result = [
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
 
-        $picture = $heuristicPic->take();
+        $picture = $this->heuristicPicture->take();
 
-        for ($i = 0; $i < count($heuristicPic->getDimensions()); $i++) {
+        for ($i = 0; $i < count($this->heuristicPicture->getDimensions()); $i++) {
             $result[Symbol::WHITE] += $this->weights[$i] * end($picture[Symbol::WHITE])[$i];
             $result[Symbol::BLACK] += $this->weights[$i] * end($picture[Symbol::BLACK])[$i];
         }

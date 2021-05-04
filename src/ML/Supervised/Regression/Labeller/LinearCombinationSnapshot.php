@@ -3,10 +3,10 @@
 namespace Chess\ML\Supervised\Regression\Labeller;
 
 use Chess\AbstractSnapshot;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\ML\Supervised\Regression\Labeller\LinearCombinationLabeller;
-use Chess\ML\Supervised\Regression\Sampler;
 
 /**
  * LinearCombination snapshot.
@@ -24,9 +24,8 @@ class LinearCombinationSnapshot extends AbstractSnapshot
             if (isset($move[1])) {
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
-            $this->snapshot[] = (new LinearCombinationLabeller(
-                (new Sampler($this->board))->sample())
-            )->label();
+            $heuristicPicture = new StandardHeuristicPicture($this->board->getMovetext());
+            $this->snapshot[] = (new LinearCombinationLabeller($heuristicPicture))->label();
         }
         $this->normalize();
 

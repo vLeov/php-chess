@@ -45,4 +45,16 @@ abstract class AbstractPicture extends Player
 
         $this->picture = $normalization;
     }
+
+    public function sample(): array
+    {
+        $pic = $this->take();
+
+        $this->sample = [
+            Symbol::WHITE => end($pic[Symbol::WHITE]),
+            Symbol::BLACK => end($pic[Symbol::BLACK]),
+        ];
+
+        return $this->sample;
+    }
 }

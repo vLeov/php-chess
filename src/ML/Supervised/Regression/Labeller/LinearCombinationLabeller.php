@@ -2,6 +2,7 @@
 
 namespace Chess\ML\Supervised\Regression\Labeller;
 
+use Chess\AbstractPicture;
 use Chess\Heuristic\LinearCombinationEvaluation;
 use Chess\PGN\Symbol;
 
@@ -13,27 +14,27 @@ use Chess\PGN\Symbol;
  */
 class LinearCombinationLabeller
 {
-    private $sample;
+    private $heuristicPicture;
 
     private $label;
 
     private $weights;
 
-    public function __construct($sample)
+    public function __construct(AbstractPicture $heuristicPicture)
     {
-        $this->sample = $sample;
+        $this->heuristicPicture = $heuristicPicture;
 
         $this->label = [
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
 
-        $this->weights = (new LinearCombinationEvaluation())->getWeights();
+        $this->weights = (new LinearCombinationEvaluation($heuristicPicture))->getWeights();
     }
 
     public function label(): array
     {
-        foreach ($this->sample as $color => $arr) {
+        foreach ($this->heuristicPicture->sample() as $color => $arr) {
             foreach ($arr as $key => $val) {
                 $this->label[$color] += $this->weights[$key] * $val;
             }

@@ -8,5 +8,5 @@ interface HeuristicEvaluationInterface
 {
     public function getWeights(): array;
 
-    public function evaluate(AbstractPicture $heuristicPic): array;
+    public function evaluate(): array;
 }
