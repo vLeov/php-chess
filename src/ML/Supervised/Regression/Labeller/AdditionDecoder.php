@@ -5,7 +5,7 @@ namespace Chess\ML\Supervised\Regression\Labeller;
 use Chess\Board;
 use Chess\ML\Supervised\Regression\Labeller\AbstractDecoder;
 use Chess\ML\Supervised\Regression\Labeller\AdditionLabeller;
-use Chess\ML\Supervised\Regression\Sampler;
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 
 /**
  * Addition decoder.
@@ -19,7 +19,7 @@ class AdditionDecoder extends AbstractDecoder
     {
         parent::__construct($board);
 
-        $this->sampler = Sampler::class;
+        $this->heuristicPicture = StandardHeuristicPicture::class;
         $this->labeller = AdditionLabeller::class;
     }
 }

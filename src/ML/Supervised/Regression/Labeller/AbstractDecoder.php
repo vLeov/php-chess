@@ -18,7 +18,7 @@ class AbstractDecoder
 
     protected $labeller;
 
-    protected $sampler;
+    protected $heuristicPicture;
 
     protected $result = [];
 
@@ -37,20 +37,20 @@ class AbstractDecoder
                     // King with castling
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
-                            $sample = (new $this->sampler($clone))->sample();
-                            $this->result[] = [ $square => (new $this->labeller($sample))->label()[$color] ];
+                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
+                            $this->result[] = [ $square => (new $this->labeller($heuristicPicture))->label()[$color] ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
-                            $sample = (new $this->sampler($clone))->sample();
-                            $this->result[] = [ $piece->getFile()."x$square" => (new $this->labeller($sample))->label()[$color] ];
+                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
+                            $this->result[] = [ $piece->getFile()."x$square" => (new $this->labeller($heuristicPicture))->label()[$color] ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
-                            $sample = (new $this->sampler($clone))->sample();
-                            $this->result[] = [ $piece->getIdentity().$square => (new $this->labeller($sample))->label()[$color] ];
+                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
+                            $this->result[] = [ $piece->getIdentity().$square => (new $this->labeller($heuristicPicture))->label()[$color] ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
-                            $sample = (new $this->sampler($clone))->sample();
-                            $this->result[] = [ "{$piece->getIdentity()}x$square" => (new $this->labeller($sample))->label()[$color] ];
+                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
+                            $this->result[] = [ "{$piece->getIdentity()}x$square" => (new $this->labeller($heuristicPicture))->label()[$color] ];
                         }
                         break;
                 }
