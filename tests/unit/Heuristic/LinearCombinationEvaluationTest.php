@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
-use Chess\Heuristic\Addition;
+use Chess\Heuristic\LinearCombinationEvaluation;
 use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -11,16 +11,16 @@ use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
 
-class AdditionTest extends AbstractUnitTestCase
+class LinearCombinationEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
     public function start()
     {
-        $board = new Board();
+        $board = new Board;
 
-        $heuristicPic = (new StandardHeuristicPicture($board->getMovetext()));
+        $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
 
         $picture = $heuristicPic->take();
 
@@ -73,11 +73,11 @@ class AdditionTest extends AbstractUnitTestCase
 
         $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
 
-        $evaluation = (new Addition())->evaluate($heuristicPic);
+        $evaluation = (new LinearCombinationEvaluation())->evaluate($heuristicPic);
 
         $expected = [
-            Symbol::WHITE => 3.44,
-            Symbol::BLACK => 3.55,
+            Symbol::WHITE => 35.48,
+            Symbol::BLACK => 21.36,
         ];
 
         $this->assertEquals($expected, $evaluation);

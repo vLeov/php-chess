@@ -5,8 +5,20 @@ namespace Chess\Heuristic;
 use Chess\AbstractPicture;
 use Chess\PGN\Symbol;
 
-class Addition
+class AdditionEvaluation implements HeuristicEvaluationInterface
 {
+    private $weigths;
+
+    public function __construct()
+    {
+        $this->weights = [];
+    }
+
+    public function getWeights(): array
+    {
+        return $this->weigths;
+    }
+
     public function evaluate(AbstractPicture $heuristicPic): array
     {
         $result = [
