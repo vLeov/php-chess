@@ -16,7 +16,7 @@ use Chess\PGN\Symbol;
 
 class Standard extends AbstractPicture
 {
-    const DIMENSIONS = [
+    protected $dimensions = [
         MaterialEvaluation::class,
         SpaceEvaluation::class,
         CenterEvaluation::class,
@@ -39,7 +39,7 @@ class Standard extends AbstractPicture
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
             $item = [];
-            foreach (self::DIMENSIONS as $dimension) {
+            foreach ($this->dimensions as $dimension) {
                 $evald = (new $dimension($this->board))->evaluate(System::SYSTEM_BERLINER);
                 is_array($evald[Symbol::WHITE])
                     ? $item[] = [

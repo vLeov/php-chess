@@ -13,7 +13,7 @@ use Chess\PGN\Symbol;
 
 class Basic extends AbstractPicture
 {
-    const DIMENSIONS = [
+    protected $dimensions = [
         CheckEvent::class,
         PieceCaptureEvent::class,
         MajorPieceThreatenedByPawnEvent::class,
@@ -31,18 +31,18 @@ class Basic extends AbstractPicture
         if ($this->moves) {
             foreach ($this->moves as $i => $move) {
                 $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
-                foreach (self::DIMENSIONS as $d) {
+                foreach ($this->dimensions as $d) {
                     $this->picture[Symbol::WHITE][$i][] = (new $d($this->board))->capture(Symbol::WHITE);
                 }
                 if (isset($move[1])) {
                     $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
                 }
-                foreach (self::DIMENSIONS as $d) {
+                foreach ($this->dimensions as $d) {
                     $this->picture[Symbol::BLACK][$i][] = (new $d($this->board))->capture(Symbol::BLACK);
                 }
             }
         } else {
-            $this->picture[Symbol::WHITE][] = $this->picture[Symbol::BLACK][] = array_fill(0, count(static::DIMENSIONS), 0);
+            $this->picture[Symbol::WHITE][] = $this->picture[Symbol::BLACK][] = array_fill(0, count($this->dimensions), 0);
         }
 
         return $this->picture;

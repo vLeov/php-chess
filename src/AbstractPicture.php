@@ -6,16 +6,23 @@ use Chess\PGN\Symbol;
 
 abstract class AbstractPicture extends Player
 {
+    protected $dimensions;
+
     protected $picture = [];
 
     abstract public function take(): array;
+
+    public function getDimensions()
+    {
+        return $this->dimensions;
+    }
 
     protected function normalize()
     {
         $normalization = [];
 
         if (count($this->board->getHistory()) >= 2) {
-            for ($i = 0; $i < count(static::DIMENSIONS); $i++) {
+            for ($i = 0; $i < count($this->dimensions); $i++) {
                 $values = array_merge(
                     array_column($this->picture[Symbol::WHITE], $i),
                     array_column($this->picture[Symbol::BLACK], $i)
@@ -33,7 +40,7 @@ abstract class AbstractPicture extends Player
                 }
             }
         } else {
-            $normalization[Symbol::WHITE][] = $normalization[Symbol::BLACK][] = array_fill(0, count(static::DIMENSIONS), 0.5);
+            $normalization[Symbol::WHITE][] = $normalization[Symbol::BLACK][] = array_fill(0, count($this->dimensions), 0.5);
         }
 
         $this->picture = $normalization;

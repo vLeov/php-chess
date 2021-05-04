@@ -16,7 +16,7 @@ class Addition
 
         $picture = $heuristicPic->take();
 
-        for ($i = 0; $i < count($heuristicPic::DIMENSIONS); $i++) {
+        for ($i = 0; $i < count($heuristicPic->getDimensions()); $i++) {
             $result[Symbol::WHITE] += end($picture[Symbol::WHITE])[$i];
             $result[Symbol::BLACK] += end($picture[Symbol::BLACK])[$i];
         }
