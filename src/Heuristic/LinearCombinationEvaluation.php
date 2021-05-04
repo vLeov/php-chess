@@ -9,13 +9,19 @@ class LinearCombinationEvaluation implements HeuristicEvaluationInterface
 {
     private $heuristicPicture;
 
-    protected $weights;
+    protected $weights = [];
 
     public function __construct(AbstractPicture $heuristicPicture)
     {
         $this->heuristicPicture = $heuristicPicture;
 
-        $this->weights = [ 17, 13, 11, 7, 5, 3, 2 ];
+        $prime = 2;
+        foreach ($this->heuristicPicture->getDimensions() as $key => $val) {
+            $this->weights[] = $prime;
+            $prime = (int)gmp_nextprime($prime);
+        }
+
+        $this->weights = array_reverse($this->weights);
     }
 
     public function getWeights(): array
