@@ -17,7 +17,7 @@ class BasicTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $board = new Board;
+        $board = new Board();
 
         $picture = (new BasicEventPicture($board->getMovetext()))->take();
 
@@ -39,7 +39,7 @@ class BasicTest extends AbstractUnitTestCase
      */
     public function w_e4_b_e5()
     {
-        $board = new Board;
+        $board = new Board();
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
@@ -64,7 +64,7 @@ class BasicTest extends AbstractUnitTestCase
      */
     public function benko_gambit()
     {
-        $movetext = (new BenkoGambit(new Board))
+        $movetext = (new BenkoGambit(new Board()))
                         ->play()
                         ->getMovetext();
 
@@ -103,7 +103,7 @@ class BasicTest extends AbstractUnitTestCase
      */
     public function scholar_checkmate()
     {
-        $movetext = (new ScholarCheckmate(new Board))
+        $movetext = (new ScholarCheckmate(new Board()))
                         ->play()
                         ->getMovetext();
 

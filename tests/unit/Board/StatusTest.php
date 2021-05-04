@@ -19,7 +19,7 @@ class StatusTest extends AbstractUnitTestCase
      */
     public function captures_in_exchange_ruy_lopez()
     {
-        $board = (new ExchangeRuyLopez(new Board))->play();
+        $board = (new ExchangeRuyLopez(new Board()))->play();
 
         $expected = [
             'w' => [
@@ -96,7 +96,7 @@ class StatusTest extends AbstractUnitTestCase
      */
     public function movetext_in_exchange_ruy_lopez()
     {
-        $board = (new ExchangeRuyLopez(new Board))->play();
+        $board = (new ExchangeRuyLopez(new Board()))->play();
 
         $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6 dxc6 5.d4 exd4 6.Qxd4 Qxd4 7.Nxd4';
 
@@ -108,7 +108,7 @@ class StatusTest extends AbstractUnitTestCase
      */
     public function history_in_lucena_defense()
     {
-        $board = (new LucenaDefense(new Board))->play();
+        $board = (new LucenaDefense(new Board()))->play();
 
         $expected = [
             (object) [
@@ -211,7 +211,7 @@ class StatusTest extends AbstractUnitTestCase
      */
     public function kings_legal_moves_in_benko_gambit()
     {
-        $board = (new BenkoGambit(new Board))->play();
+        $board = (new BenkoGambit(new Board()))->play();
 
         $king = $board->getPieceByPosition('f1');
 
@@ -225,7 +225,7 @@ class StatusTest extends AbstractUnitTestCase
      */
     public function count_pieces_in_benko_gambit()
     {
-        $board = (new BenkoGambit(new Board))->play();
+        $board = (new BenkoGambit(new Board()))->play();
 
         $this->assertEquals(14, count($board->getPiecesByColor(Symbol::WHITE)));
         $this->assertEquals(13, count($board->getPiecesByColor(Symbol::BLACK)));
@@ -236,7 +236,7 @@ class StatusTest extends AbstractUnitTestCase
      */
     public function count_pieces_in_open_sicilian()
     {
-        $board = (new OpenSicilian(new Board))->play();
+        $board = (new OpenSicilian(new Board()))->play();
 
         $this->assertEquals(15, count($board->getPiecesByColor(Symbol::WHITE)));
         $this->assertEquals(15, count($board->getPiecesByColor(Symbol::BLACK)));

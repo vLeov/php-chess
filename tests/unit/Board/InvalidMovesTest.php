@@ -22,7 +22,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 9));
+        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 9));
     }
 
     /**
@@ -32,7 +32,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'foo'));
+        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'foo'));
     }
 
     /**
@@ -42,7 +42,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'bar'));
+        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'bar'));
     }
 
     /**
@@ -52,7 +52,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'e9'));
+        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'e9'));
     }
 
     /**
@@ -62,7 +62,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'e10'));
+        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'e10'));
     }
 
     /**
@@ -72,7 +72,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board)->play(Convert::toStdObj(Symbol::WHITE, 'Nw3'));
+        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'Nw3'));
     }
 
     /**

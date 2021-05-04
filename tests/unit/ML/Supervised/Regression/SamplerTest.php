@@ -17,7 +17,7 @@ class SamplerTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $board = new Board;
+        $board = new Board();
 
         $expected = [
             Symbol::WHITE => [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -32,7 +32,7 @@ class SamplerTest extends AbstractUnitTestCase
      */
     public function w_e4_b_e5()
     {
-        $board = new Board;
+        $board = new Board();
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
@@ -50,7 +50,7 @@ class SamplerTest extends AbstractUnitTestCase
      */
     public function fool_checkmate()
     {
-        $board = (new FoolCheckmate(new Board))->play();
+        $board = (new FoolCheckmate(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => [0, 0.2, 0, 0, 0.9, 0, 0],
@@ -65,7 +65,7 @@ class SamplerTest extends AbstractUnitTestCase
      */
     public function scholar_checkmate()
     {
-        $board = (new ScholarCheckmate(new Board))->play();
+        $board = (new ScholarCheckmate(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => [1, 0.8, 0, 1, 0.07, 1, 0.87],

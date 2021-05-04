@@ -20,7 +20,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $sample = (new Sampler(new Board))->sample();
+        $sample = (new Sampler(new Board()))->sample();
 
         $expected = [
             Symbol::WHITE => 29,
@@ -35,7 +35,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function w_e4_b_e5()
     {
-        $board = new Board;
+        $board = new Board();
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
@@ -54,7 +54,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function w_e4_b_Na6()
     {
-        $board = new Board;
+        $board = new Board();
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
@@ -73,7 +73,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function w_e4_b_Nc6()
     {
-        $board = new Board;
+        $board = new Board();
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
@@ -92,7 +92,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function fool_checkmate()
     {
-        $board = (new FoolCheckmate(new Board))->play();
+        $board = (new FoolCheckmate(new Board()))->play();
         $sample = (new Sampler($board))->sample();
 
         $expected = [
@@ -108,7 +108,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function scholar_checkmate()
     {
-        $board = (new ScholarCheckmate(new Board))->play();
+        $board = (new ScholarCheckmate(new Board()))->play();
         $sample = (new Sampler($board))->sample();
 
         $expected = [
@@ -124,7 +124,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function benko_gambit()
     {
-        $board = (new BenkoGambit(new Board))->play();
+        $board = (new BenkoGambit(new Board()))->play();
         $sample = (new Sampler($board))->sample();
 
         $expected = [
@@ -140,7 +140,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
      */
     public function closed_sicilian()
     {
-        $board = (new ClosedSicilian(new Board))->play();
+        $board = (new ClosedSicilian(new Board()))->play();
         $sample = (new Sampler($board))->sample();
 
         $expected = [

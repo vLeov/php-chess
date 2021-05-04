@@ -21,7 +21,7 @@ class EventsTest extends AbstractUnitTestCase
      */
     public function fool_checkmate()
     {
-        $board = (new FoolCheckmate(new Board))->play();
+        $board = (new FoolCheckmate(new Board()))->play();
 
         $expected = (object) [
             Symbol::WHITE => [
@@ -48,7 +48,7 @@ class EventsTest extends AbstractUnitTestCase
      */
     public function scholar_checkmate()
     {
-        $board = (new ScholarCheckmate(new Board))->play();
+        $board = (new ScholarCheckmate(new Board()))->play();
 
         $expected = (object) [
             Symbol::WHITE => [
@@ -75,7 +75,7 @@ class EventsTest extends AbstractUnitTestCase
      */
     public function benko_gambit()
     {
-        $board = (new BenkoGambit(new Board))->play();
+        $board = (new BenkoGambit(new Board()))->play();
 
         $expected = (object) [
             Symbol::WHITE => [

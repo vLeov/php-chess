@@ -17,7 +17,7 @@ class PieceCaptureTest extends AbstractUnitTestCase
      */
     public function fool_checkmate()
     {
-        $board = (new FoolCheckmate(new Board))->play();
+        $board = (new FoolCheckmate(new Board()))->play();
 
         $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
         $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
@@ -28,7 +28,7 @@ class PieceCaptureTest extends AbstractUnitTestCase
      */
     public function scholar_checkmate()
     {
-        $board = (new ScholarCheckmate(new Board))->play();
+        $board = (new ScholarCheckmate(new Board()))->play();
 
         $this->assertEquals(1, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
         $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
@@ -39,7 +39,7 @@ class PieceCaptureTest extends AbstractUnitTestCase
      */
     public function ruy_lopez_lucena_defense()
     {
-        $board = (new RuyLopezLucenaDefense(new Board))->play();
+        $board = (new RuyLopezLucenaDefense(new Board()))->play();
 
         $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
         $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));

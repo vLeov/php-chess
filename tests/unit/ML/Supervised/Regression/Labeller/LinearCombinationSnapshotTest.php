@@ -15,7 +15,7 @@ class LinearCombinationSnapshotTest extends AbstractUnitTestCase
      */
     public function open_sicilian()
     {
-        $movetext = (new OpenSicilian(new Board))
+        $movetext = (new OpenSicilian(new Board()))
                         ->play()
                         ->getMovetext();
 

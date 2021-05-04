@@ -176,7 +176,7 @@ class LegalMovesTest extends AbstractUnitTestCase
      */
     public function Nc3()
     {
-        $board = new Board;
+        $board = new Board();
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3')));
     }
 
@@ -185,7 +185,7 @@ class LegalMovesTest extends AbstractUnitTestCase
      */
     public function Nc6()
     {
-        $board = new Board;
+        $board = new Board();
         $board->setTurn(Symbol::BLACK);
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6')));
     }
@@ -195,7 +195,7 @@ class LegalMovesTest extends AbstractUnitTestCase
      */
     public function Nf6()
     {
-        $board = new Board;
+        $board = new Board();
         $board->setTurn(Symbol::BLACK);
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6')));
     }
@@ -598,7 +598,7 @@ class LegalMovesTest extends AbstractUnitTestCase
      */
     public function O_O_after_Nf6()
     {
-        $board = new Board;
+        $board = new Board();
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'c5'));
@@ -814,7 +814,7 @@ class LegalMovesTest extends AbstractUnitTestCase
      */
     public function another_en_passant_f6()
     {
-        $board = new Board;
+        $board = new Board();
 
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e4')));
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e6')));
@@ -995,7 +995,7 @@ class LegalMovesTest extends AbstractUnitTestCase
      */
     public function captures()
     {
-        $board = new Board;
+        $board = new Board();
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e4')));
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e5')));
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'd4')));

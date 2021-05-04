@@ -15,7 +15,7 @@ class MajorPieceThreatenedByPawnTest extends AbstractUnitTestCase
      */
     public function f4()
     {
-        $board = new Board;
+        $board = new Board();
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $this->assertEquals(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));

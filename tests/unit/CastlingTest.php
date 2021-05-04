@@ -436,7 +436,7 @@ class CastlingTest extends AbstractUnitTestCase
      */
     public function open_ruy_lopez()
     {
-        $board = (new OpenRuyLopez(new Board))->play();
+        $board = (new OpenRuyLopez(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => [

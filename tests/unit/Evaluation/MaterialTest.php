@@ -16,7 +16,7 @@ class MaterialTest extends AbstractUnitTestCase
      */
     public function ruy_lopez_lucena_defense()
     {
-        $board = (new RuyLopezLucenaDefense(new Board))->play();
+        $board = (new RuyLopezLucenaDefense(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => 40.06,

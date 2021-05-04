@@ -15,7 +15,7 @@ class MinorPieceThreatenedByPawnTest extends AbstractUnitTestCase
      */
     public function d4_e4()
     {
-        $board = new Board;
+        $board = new Board();
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
         $this->assertEquals(0, (new MinorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));

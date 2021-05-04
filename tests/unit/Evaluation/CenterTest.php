@@ -18,7 +18,7 @@ class CenterTest extends AbstractUnitTestCase
      */
     public function ruy_lopez_lucena_defense()
     {
-        $board = (new RuyLopezLucenaDefense(new Board))->play();
+        $board = (new RuyLopezLucenaDefense(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => 3,
@@ -35,7 +35,7 @@ class CenterTest extends AbstractUnitTestCase
      */
     public function sicilian_open()
     {
-        $board = (new OpenSicilian(new Board))->play();
+        $board = (new OpenSicilian(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => 5.2,
@@ -52,7 +52,7 @@ class CenterTest extends AbstractUnitTestCase
      */
     public function sicilian_closed()
     {
-        $board = (new ClosedSicilian(new Board))->play();
+        $board = (new ClosedSicilian(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => 2,

@@ -15,7 +15,7 @@ class ConnectivityTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $connEvald = (new ConnectivityEvaluation(new Board))->evaluate();
+        $connEvald = (new ConnectivityEvaluation(new Board()))->evaluate();
 
         $expected = [
             Symbol::WHITE => 20,
@@ -30,7 +30,7 @@ class ConnectivityTest extends AbstractUnitTestCase
      */
     public function ruy_lopez_lucena_defense()
     {
-        $board = (new RuyLopezLucenaDefense(new Board))->play();
+        $board = (new RuyLopezLucenaDefense(new Board()))->play();
 
         $expected = [
             Symbol::WHITE => 19,

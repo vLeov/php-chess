@@ -23,7 +23,7 @@ Just instantiate a game and play PGN moves:
 ```php
 use Chess\Game;
 
-$game = new Game;
+$game = new Game();
 
 $isLegalMove = $game->play('w', 'e4');
 ```
@@ -68,7 +68,7 @@ $status = $game->status();
 The following sequence of moves:
 
 ```php
-$game = new Game;
+$game = new Game();
 
 $game->play('w', 'd4');
 $game->play('b', 'c6');
@@ -120,7 +120,7 @@ Gets a piece by its position on the board.
 The following code:
 
 ```php
-$game = new Game;
+$game = new Game();
 
 $piece = $game->piece('b8');
 ```
@@ -151,7 +151,7 @@ Gets the pieces on the board by color.
 The following code:
 
 ```php
-$game = new Game;
+$game = new Game();
 
 $blackPieces = $game->pieces('b');
 ```

@@ -17,7 +17,7 @@ class KingSafetyTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $kSafetyEvald = (new KingSafetyEvaluation(new Board))->evaluate(System::SYSTEM_BERLINER);
+        $kSafetyEvald = (new KingSafetyEvaluation(new Board()))->evaluate(System::SYSTEM_BERLINER);
 
         $expected = [
             Symbol::WHITE => 1,
@@ -32,7 +32,7 @@ class KingSafetyTest extends AbstractUnitTestCase
      */
     public function open_sicilian()
     {
-        $board = (new OpenSicilian(new Board))->play();
+        $board = (new OpenSicilian(new Board()))->play();
 
         $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 
@@ -49,7 +49,7 @@ class KingSafetyTest extends AbstractUnitTestCase
      */
     public function closed_sicilian()
     {
-        $board = (new ClosedSicilian(new Board))->play();
+        $board = (new ClosedSicilian(new Board()))->play();
 
         $kSafetyEvald = (new KingSafetyEvaluation($board))->evaluate(System::SYSTEM_BERLINER);
 

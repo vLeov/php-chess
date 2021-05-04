@@ -13,7 +13,7 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $board = new Board;
+        $board = new Board();
 
         $sqEvald = (new SquareEvaluation($board))->evaluate(SquareEvaluation::FEATURE_FREE);
 

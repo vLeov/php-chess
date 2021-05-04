@@ -18,7 +18,7 @@ class LinearCombinationEvaluationTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $board = new Board;
+        $board = new Board();
 
         $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
 
@@ -42,7 +42,7 @@ class LinearCombinationEvaluationTest extends AbstractUnitTestCase
      */
     public function w_e4_b_e5()
     {
-        $board = new Board;
+        $board = new Board();
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
@@ -69,7 +69,7 @@ class LinearCombinationEvaluationTest extends AbstractUnitTestCase
      */
     public function evaluate_benko_gambit()
     {
-        $board = (new BenkoGambit(new Board))->play();
+        $board = (new BenkoGambit(new Board()))->play();
 
         $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
 
