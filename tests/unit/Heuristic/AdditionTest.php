@@ -73,7 +73,7 @@ class AdditionTest extends AbstractUnitTestCase
 
         $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
 
-        $evaluation = (new Addition($heuristicPic))->evaluate();
+        $evaluation = (new Addition())->evaluate($heuristicPic);
 
         $expected = [
             Symbol::WHITE => 3.44,

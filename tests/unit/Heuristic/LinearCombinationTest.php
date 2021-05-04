@@ -73,7 +73,7 @@ class LinearCombinationTest extends AbstractUnitTestCase
 
         $heuristicPic = new StandardHeuristicPicture($board->getMovetext());
 
-        $evaluation = (new LinearCombination($heuristicPic))->evaluate();
+        $evaluation = (new LinearCombination())->evaluate($heuristicPic);
 
         $expected = [
             Symbol::WHITE => 35.48,
