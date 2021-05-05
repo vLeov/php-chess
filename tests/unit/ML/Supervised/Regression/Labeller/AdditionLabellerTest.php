@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
 use Chess\ML\Supervised\Regression\AdditionLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -22,7 +22,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [
@@ -42,7 +42,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [
@@ -62,7 +62,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [
@@ -82,7 +82,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [
@@ -100,7 +100,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [
@@ -118,7 +118,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [
@@ -136,7 +136,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [
@@ -154,7 +154,7 @@ class AdditionLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
         $expected = [

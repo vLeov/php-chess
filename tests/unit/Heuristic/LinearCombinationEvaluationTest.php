@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
 use Chess\Heuristic\LinearCombinationEvaluation;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -19,7 +19,7 @@ class LinearCombinationEvaluationTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
 
         $evaluation = (new LinearCombinationEvaluation($heuristicPicture))->evaluate();
 

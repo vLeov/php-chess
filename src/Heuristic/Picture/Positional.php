@@ -10,7 +10,7 @@ use Chess\Evaluation\Material as MaterialEvaluation;
 use Chess\Evaluation\Pressure as PressureEvaluation;
 use Chess\Evaluation\Space as SpaceEvaluation;
 
-class Standard extends AbstractHeuristicPicture
+class Positional extends AbstractHeuristicPicture
 {
     protected $dimensions = [
         MaterialEvaluation::class,

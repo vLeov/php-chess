@@ -3,14 +3,14 @@
 namespace Chess\Tests\Unit\Heuristic\Picture;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 
-class StandardTakeTest extends AbstractUnitTestCase
+class PositionalTakeTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,7 +19,7 @@ class StandardTakeTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
 
         $picture = $heuristicPicture->take();
 
@@ -45,7 +45,7 @@ class StandardTakeTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
 
         $picture = $heuristicPicture->take();
 

@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
 
 /**
  * Addition decoder.
@@ -17,7 +17,7 @@ class AdditionDecoder extends AbstractDecoder
     {
         parent::__construct($board);
 
-        $this->heuristicPicture = StandardHeuristicPicture::class;
+        $this->heuristicPicture = PositionalHeuristicPicture::class;
         $this->labeller = AdditionLabeller::class;
     }
 }

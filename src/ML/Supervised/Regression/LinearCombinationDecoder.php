@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
+use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
@@ -19,7 +19,7 @@ class LinearCombinationDecoder extends AbstractDecoder
     {
         parent::__construct($board);
 
-        $this->heuristicPicture = StandardHeuristicPicture::class;
+        $this->heuristicPicture = PositionalHeuristicPicture::class;
         $this->labeller = LinearCombinationLabeller::class;
     }
 
