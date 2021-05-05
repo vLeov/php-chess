@@ -4,5 +4,5 @@ namespace Chess\ML\Supervised\Regression\Labeller;
 
 interface LabellerInterface
 {
-    public function label(): array;
+    public function label();
 }
