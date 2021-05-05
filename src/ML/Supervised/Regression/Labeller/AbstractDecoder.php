@@ -38,19 +38,31 @@ class AbstractDecoder
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $this->result[] = [ $square => (new $this->labeller($heuristicPicture))->label()[$color] ];
+                            $sample = $heuristicPicture->sample();
+                            $this->result[] = [
+                                $square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                            ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $this->result[] = [ $piece->getFile()."x$square" => (new $this->labeller($heuristicPicture))->label()[$color] ];
+                            $sample = $heuristicPicture->sample();
+                            $this->result[] = [
+                                $piece->getFile()."x$square" => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                            ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $this->result[] = [ $piece->getIdentity().$square => (new $this->labeller($heuristicPicture))->label()[$color] ];
+                            $sample = $heuristicPicture->sample();
+                            $this->result[] = [
+                                $piece->getIdentity().$square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                            ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $this->result[] = [ "{$piece->getIdentity()}x$square" => (new $this->labeller($heuristicPicture))->label()[$color] ];
+                            $sample = $heuristicPicture->sample();
+                            $this->result[] = [
+                                "{$piece->getIdentity()}x$square" => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                            ];
                         }
                         break;
                 }

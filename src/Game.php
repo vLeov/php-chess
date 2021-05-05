@@ -2,6 +2,7 @@
 
 namespace Chess;
 
+use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
@@ -218,7 +219,8 @@ class Game
      */
     public function response()
     {
-        $sample = (new Sampler($this->board))->sample();
+        $heuristicPicture = new StandardHeuristicPicture($this->board->getMovetext());
+        $sample = $heuristicPicture->sample();
         $dataset = new Unlabeled([$sample[Symbol::oppColor($this->board->getTurn())]]);
         $prediction = current($this->estimator->predict($dataset));
         $decoded = (new LinearCombinationDecoder($this->board))->decode($this->board->getTurn(), $prediction);
