@@ -43,6 +43,6 @@ class TwofoldLinearCombinationLabeller implements LabellerInterface
             }
         }
 
-        return $this->label;
+        return round($this->label, 2);
     }
 }
