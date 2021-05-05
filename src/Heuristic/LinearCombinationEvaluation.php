@@ -2,26 +2,20 @@
 
 namespace Chess\Heuristic;
 
-use Chess\AbstractPicture;
+use Chess\Heuristic\Picture\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
-class LinearCombinationEvaluation implements HeuristicEvaluationInterface
+final class LinearCombinationEvaluation implements HeuristicEvaluationInterface
 {
     private $heuristicPicture;
 
-    protected $weights = [];
+    private $weights;
 
-    public function __construct(AbstractPicture $heuristicPicture)
+    public function __construct(AbstractHeuristicPicture $heuristicPicture)
     {
         $this->heuristicPicture = $heuristicPicture;
 
-        $prime = 2;
-        foreach ($this->heuristicPicture->getDimensions() as $key => $val) {
-            $this->weights[] = $prime;
-            $prime = (int)gmp_nextprime($prime);
-        }
-
-        $this->weights = array_reverse($this->weights);
+        $this->weights = $this->weights();
     }
 
     public function getWeights(): array
@@ -44,5 +38,18 @@ class LinearCombinationEvaluation implements HeuristicEvaluationInterface
         }
 
         return $result;
+    }
+
+    private function weights()
+    {
+        $weights = [];
+        $prime = 2;
+        foreach ($this->heuristicPicture->getDimensions() as $key => $val) {
+            $weights[] = $prime;
+            $prime = (int)gmp_nextprime($prime);
+        }
+        $weights = array_reverse($weights);
+
+        return $weights;
     }
 }

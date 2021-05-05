@@ -2,16 +2,16 @@
 
 namespace Chess\Heuristic;
 
-use Chess\AbstractPicture;
+use Chess\Heuristic\Picture\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
-class AdditionEvaluation implements HeuristicEvaluationInterface
+final class AdditionEvaluation implements HeuristicEvaluationInterface
 {
     private $heuristicPicture;
 
-    private $weigths;
+    private $weights;
 
-    public function __construct(AbstractPicture $heuristicPicture)
+    public function __construct(AbstractHeuristicPicture $heuristicPicture)
     {
         $this->heuristicPicture = $heuristicPicture;
 
