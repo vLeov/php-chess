@@ -12,15 +12,19 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class AdditionLabeller
+class AdditionLabeller implements LabellerInterface
 {
     private $heuristicPicture;
 
+    private $sample;
+
     private $label;
 
-    public function __construct(AbstractPicture $heuristicPicture)
+    public function __construct(AbstractPicture $heuristicPicture, array $sample = [])
     {
         $this->heuristicPicture = $heuristicPicture;
+
+        $this->sample = $sample;
 
         $this->label = [
             Symbol::WHITE => 0,
@@ -30,7 +34,7 @@ class AdditionLabeller
 
     public function label(): array
     {
-        foreach ($this->heuristicPicture->sample() as $color => $arr) {
+        foreach ($this->sample as $color => $arr) {
             foreach ($arr as $key => $val) {
                 $this->label[$color] += $val;
             }

@@ -23,13 +23,14 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board = new Board();
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 3.5,
             Symbol::BLACK => 3.5,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 
     /**
@@ -42,13 +43,14 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 3.5,
             Symbol::BLACK => 3.5,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 
     /**
@@ -61,13 +63,14 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 4.5,
             Symbol::BLACK => 2.5,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 
     /**
@@ -80,13 +83,14 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 3,
             Symbol::BLACK => 4,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 
     /**
@@ -97,13 +101,14 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board = (new FoolCheckmate(new Board()))->play();
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 1.1,
             Symbol::BLACK => 6,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 
     /**
@@ -114,13 +119,14 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board = (new ScholarCheckmate(new Board()))->play();
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 4.74,
             Symbol::BLACK => 3.73,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 
     /**
@@ -131,13 +137,14 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board = (new BenkoGambit(new Board()))->play();
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 3.44,
             Symbol::BLACK => 3.55,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 
     /**
@@ -148,12 +155,13 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $board = (new ClosedSicilian(new Board()))->play();
 
         $heuristicPicture = new StandardHeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
 
         $expected = [
             Symbol::WHITE => 2.67,
             Symbol::BLACK => 3.62,
         ];
 
-        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture))->label());
+        $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
     }
 }

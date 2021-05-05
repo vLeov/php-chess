@@ -12,17 +12,21 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class LinearCombinationLabeller
+class LinearCombinationLabeller implements LabellerInterface
 {
     private $heuristicPicture;
+
+    private $sample;
 
     private $label;
 
     private $weights;
 
-    public function __construct(AbstractPicture $heuristicPicture)
+    public function __construct(AbstractPicture $heuristicPicture, array $sample = [])
     {
         $this->heuristicPicture = $heuristicPicture;
+
+        $this->sample = $sample;
 
         $this->label = [
             Symbol::WHITE => 0,
@@ -34,7 +38,7 @@ class LinearCombinationLabeller
 
     public function label(): array
     {
-        foreach ($this->heuristicPicture->sample() as $color => $arr) {
+        foreach ($this->sample as $color => $arr) {
             foreach ($arr as $key => $val) {
                 $this->label[$color] += $this->weights[$key] * $val;
             }
