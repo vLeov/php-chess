@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
 use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
-use Chess\ML\Supervised\Regression\Labeller\AdditionLabeller;
+use Chess\ML\Supervised\Regression\AdditionLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;

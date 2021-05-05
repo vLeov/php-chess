@@ -1,24 +1,26 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller;
+namespace Chess\ML\Supervised\Regression;
 
 use Chess\AbstractPicture;
-use Chess\Heuristic\Picture\Addition as AdditionHeuristicPicture;
+use Chess\Heuristic\LinearCombinationEvaluation;
 use Chess\PGN\Symbol;
 
 /**
- * Addition labeller.
+ * LinearCombination labeller.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class AdditionLabeller implements LabellerInterface
+class LinearCombinationLabeller implements LabellerInterface
 {
     private $heuristicPicture;
 
     private $sample;
 
     private $label;
+
+    private $weights;
 
     public function __construct(AbstractPicture $heuristicPicture, array $sample = [])
     {
@@ -30,13 +32,15 @@ class AdditionLabeller implements LabellerInterface
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
+
+        $this->weights = (new LinearCombinationEvaluation($heuristicPicture))->getWeights();
     }
 
     public function label(): array
     {
         foreach ($this->sample as $color => $arr) {
             foreach ($arr as $key => $val) {
-                $this->label[$color] += $val;
+                $this->label[$color] += $this->weights[$key] * $val;
             }
         }
 

@@ -1,28 +1,26 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller;
+namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Labeller\AbstractDecoder;
-use Chess\ML\Supervised\Regression\Labeller\TwofoldLinearCombinationLabeller;
 use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 /**
- * TwofoldLinearCombination decoder.
+ * LinearCombination decoder.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class TwofoldLinearCombinationDecoder extends AbstractDecoder
+class LinearCombinationDecoder extends AbstractDecoder
 {
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
         $this->heuristicPicture = StandardHeuristicPicture::class;
-        $this->labeller = TwofoldLinearCombinationLabeller::class;
+        $this->labeller = LinearCombinationLabeller::class;
     }
 
     public function decode(string $color, float $float): string
@@ -36,25 +34,25 @@ class TwofoldLinearCombinationDecoder extends AbstractDecoder
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                Symbol::CASTLING_SHORT => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                Symbol::CASTLING_SHORT => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                Symbol::CASTLING_LONG => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                Symbol::CASTLING_LONG => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                Symbol::KING.$square => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                Symbol::KING.$square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                Symbol::KING.'x'.$square => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                Symbol::KING.'x'.$square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         }
                         break;
@@ -63,13 +61,13 @@ class TwofoldLinearCombinationDecoder extends AbstractDecoder
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                $square => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                $square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                $piece->getFile()."x$square" => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                $piece->getFile()."x$square" => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         }
                         break;
@@ -78,13 +76,13 @@ class TwofoldLinearCombinationDecoder extends AbstractDecoder
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                $piece->getIdentity().$square => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                $piece->getIdentity().$square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
                             $this->result[] = [
-                                "{$piece->getIdentity()}x$square" => (new $this->labeller($heuristicPicture, $sample))->label(),
+                                "{$piece->getIdentity()}x$square" => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
                             ];
                         }
                         break;

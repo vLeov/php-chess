@@ -1,10 +1,8 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller;
+namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\ML\Supervised\Regression\Labeller\AbstractDecoder;
-use Chess\ML\Supervised\Regression\Labeller\AdditionLabeller;
 use Chess\Heuristic\Picture\Standard as StandardHeuristicPicture;
 
 /**

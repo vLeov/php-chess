@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression\Labeller;
+namespace Chess\ML\Supervised\Regression;
 
 interface LabellerInterface
 {
