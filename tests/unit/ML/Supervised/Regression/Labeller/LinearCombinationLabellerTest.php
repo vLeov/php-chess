@@ -31,7 +31,6 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
-
     }
 
     /**

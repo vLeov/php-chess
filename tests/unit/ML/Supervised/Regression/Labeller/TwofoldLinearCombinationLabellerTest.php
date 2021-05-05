@@ -28,7 +28,6 @@ class TwofoldLinearCombinationLabellerTest extends AbstractUnitTestCase
         $expected = 0;
 
         $this->assertEquals($expected, (new TwofoldLinearCombinationLabeller($heuristicPicture, $sample))->label());
-
     }
 
     /**
