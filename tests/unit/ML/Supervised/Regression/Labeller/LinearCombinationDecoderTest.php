@@ -17,7 +17,7 @@ class LinearCombinationDecoderTest extends AbstractUnitTestCase
     {
         $board = new Board;
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $expected = 'Na6';
+        $expected = 'a6';
 
         $this->assertEquals($expected, (new LinearCombinationDecoder($board))->decode(Symbol::BLACK, 30));
     }

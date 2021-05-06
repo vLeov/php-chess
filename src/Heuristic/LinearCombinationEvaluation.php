@@ -43,10 +43,10 @@ final class LinearCombinationEvaluation implements HeuristicEvaluationInterface
     private function weights()
     {
         $weights = [];
-        $prime = 2;
+        $n = 10;
         foreach ($this->heuristicPicture->getDimensions() as $key => $val) {
-            $weights[] = $prime;
-            $prime = (int)gmp_nextprime($prime);
+            $weights[] = $n;
+            $n = $n * 10;
         }
         $weights = array_reverse($weights);
 
