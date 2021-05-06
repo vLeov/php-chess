@@ -24,8 +24,8 @@ class AdditionEvaluationTest extends AbstractUnitTestCase
         $evaluation = (new AdditionEvaluation($heuristicPicture))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 3.44,
-            Symbol::BLACK => 3.55,
+            Symbol::WHITE => 3.94,
+            Symbol::BLACK => 5.55,
         ];
 
         $this->assertEquals($expected, $evaluation);
