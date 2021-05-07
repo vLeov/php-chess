@@ -42,6 +42,7 @@ class LinearCombinationLabeller implements LabellerInterface
             foreach ($arr as $key => $val) {
                 $this->label[$color] += $this->weights[$key] * $val;
             }
+            $this->label[$color] = round($this->label[$color], 2);
         }
 
         return $this->label;

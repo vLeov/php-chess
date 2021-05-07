@@ -26,8 +26,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 555555555,
-            Symbol::BLACK => 555555555,
+            Symbol::WHITE => 0.5,
+            Symbol::BLACK => 0.5,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
@@ -46,8 +46,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 555555555,
-            Symbol::BLACK => 555555555,
+            Symbol::WHITE => 0.5,
+            Symbol::BLACK => 0.5,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
@@ -66,8 +66,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 111105110,
-            Symbol::BLACK => 1000006000,
+            Symbol::WHITE => 0.7,
+            Symbol::BLACK => 0.3,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
@@ -86,8 +86,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 56055055,
-            Symbol::BLACK => 1055056055,
+            Symbol::WHITE => 0.44,
+            Symbol::BLACK => 0.56,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
@@ -104,8 +104,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 200900,
-            Symbol::BLACK => 1111110110,
+            Symbol::WHITE => 0.1,
+            Symbol::BLACK => 0.92,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
@@ -122,8 +122,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 1006810178.7,
-            Symbol::BLACK => 13500980,
+            Symbol::WHITE => 0.57,
+            Symbol::BLACK => 0.33,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
@@ -140,8 +140,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 218610250,
-            Symbol::BLACK => 110680462.5,
+            Symbol::WHITE => 0.47,
+            Symbol::BLACK => 0.6,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
@@ -158,8 +158,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 1101570,
-            Symbol::BLACK => 110445970.0,
+            Symbol::WHITE => 0.3,
+            Symbol::BLACK => 0.57,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
