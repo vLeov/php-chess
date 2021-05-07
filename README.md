@@ -28,7 +28,7 @@ The call to the `$game->play` method returns `true` or `false` depending on whet
 If you want to play with the AI pass the following parameter when creating a `$game`.
 
 ```php
-$game = new Game(Game::MODE_PVA);
+$game = new Game(Game::MODE_AI);
 
 $game->play('w', 'e4');
 $game->play('b', $game->response());
@@ -39,7 +39,7 @@ $game->play('b', $game->response());
 Currently a few machine learning models are being built at [programarivm/chess-data](https://github.com/programarivm/chess-data) with the help of [Rubix ML](https://github.com/RubixML/ML). The AIs are stored in the [`model`](https://github.com/programarivm/php-chess/tree/master/model) folder and the default is `a1.model`, however another AI can be used by passing a second parameter to the `Chess\Game` constructor:
 
 ```php
-$game = new Game(Game::MODE_PVA, 'a2.model');
+$game = new Game(Game::MODE_AI, 'a2.model');
 
 $game->play('w', 'e4');
 $game->play('b', $game->response());

@@ -24,11 +24,9 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
-    /** player vs ai */
-    const MODE_PVA          =  'MODE_PVA';
+    const MODE_AI          =  'MODE_AI';
 
-    /** player vs themselves */
-    const MODE_PVT          =  'MODE_PVT';
+    const MODE_YOURSELF          =  'MODE_YOURSELF';
 
     const MODEL_FOLDER      = __DIR__.'/../model/';
 
@@ -59,7 +57,7 @@ class Game
     public function __construct(string $mode = null, string $model = 'a1.model')
     {
         $this->board = new Board();
-        $this->mode = $mode ?? self::MODE_PVT;
+        $this->mode = $mode ?? self::MODE_YOURSELF;
         $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.$model));
     }
 
