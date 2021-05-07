@@ -15,7 +15,7 @@ final class LinearCombinationEvaluation implements HeuristicEvaluationInterface
     {
         $this->heuristicPicture = $heuristicPicture;
 
-        $this->weights = $this->weights();
+        $this->weights = array_values($this->heuristicPicture->getDimensions());
     }
 
     public function getWeights(): array
@@ -41,31 +41,5 @@ final class LinearCombinationEvaluation implements HeuristicEvaluationInterface
         $result[Symbol::BLACK] = round($result[Symbol::BLACK], 2);
 
         return $result;
-    }
-
-    /**
-     * Assigns weights using the ranking method.
-     *
-     * @return array
-     */
-    private function weights()
-    {
-        $weights = [];
-        foreach ($this->heuristicPicture->getDimensions() as $key => $val) {
-            $weight = (count($this->heuristicPicture->getDimensions()) - $key + 2) / $this->rankSum();
-            $weights[] = round($weight, 2);
-        }
-
-        return $weights;
-    }
-
-    private function rankSum()
-    {
-        $sum = 0;
-        foreach ($this->heuristicPicture->getDimensions() as $key => $val) {
-            $sum += count($this->heuristicPicture->getDimensions()) - $key + 2;
-        }
-
-        return $sum;
     }
 }

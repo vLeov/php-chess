@@ -15,14 +15,14 @@ use Chess\Evaluation\Space as SpaceEvaluation;
 class Positional extends AbstractHeuristicPicture
 {
     protected $dimensions = [
-        MaterialEvaluation::class,
-        GuardEvaluation::class,
-        EaseEvaluation::class,
-        SpaceEvaluation::class,
-        CenterEvaluation::class,
-        KingSafetyEvaluation::class,
-        ConnectivityEvaluation::class,
-        PressureEvaluation::class,
-        AttackEvaluation::class,
+        MaterialEvaluation::class => 25,
+        GuardEvaluation::class => 20,
+        CenterEvaluation::class => 15,
+        ConnectivityEvaluation::class => 10,
+        SpaceEvaluation::class => 10,
+        KingSafetyEvaluation::class => 5,
+        PressureEvaluation::class => 5,
+        AttackEvaluation::class => 5,
+        EaseEvaluation::class => 5,
     ];
 }

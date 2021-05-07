@@ -22,7 +22,7 @@ class AbstractHeuristicPicture extends AbstractPicture
                 $this->board->play(Convert::toStdObj(Symbol::BLACK, $move[1]));
             }
             $item = [];
-            foreach ($this->dimensions as $dimension) {
+            foreach ($this->dimensions as $dimension => $w) {
                 $evald = (new $dimension($this->board))->evaluate(System::SYSTEM_BERLINER);
                 is_array($evald[Symbol::WHITE])
                     ? $item[] = [
