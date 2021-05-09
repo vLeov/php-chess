@@ -14,7 +14,7 @@ Via composer:
 
 ### Play Chess
 
-This is how to create a new game to play chess with yourself:
+This is how to create a new game to play chess:
 
 ```php
 use Chess\Game;
