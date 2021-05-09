@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Evaluation\Value;
+namespace Chess\Evaluation;
 
 use Chess\PGN\Symbol;
 

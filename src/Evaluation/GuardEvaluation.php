@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Attack as AttackEvaluation;
+use Chess\Evaluation\AttackEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Guard extends AbstractEvaluation
+class GuardEvaluation extends AbstractEvaluation
 {
     const NAME = 'guard';
 

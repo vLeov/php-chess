@@ -4,12 +4,12 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\Evaluation\SpaceEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class SpaceTest extends AbstractUnitTestCase
+class SpaceEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test

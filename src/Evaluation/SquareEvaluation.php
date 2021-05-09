@@ -11,7 +11,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Square extends AbstractEvaluation
+class SquareEvaluation extends AbstractEvaluation
 {
     const NAME              = 'square';
 

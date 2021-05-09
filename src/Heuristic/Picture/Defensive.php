@@ -2,15 +2,15 @@
 
 namespace Chess\Heuristic\Picture;
 
-use Chess\Evaluation\Attack as AttackEvaluation;
-use Chess\Evaluation\Center as CenterEvaluation;
-use Chess\Evaluation\Connectivity as ConnectivityEvaluation;
-use Chess\Evaluation\Ease as EaseEvaluation;
-use Chess\Evaluation\Guard as GuardEvaluation;
-use Chess\Evaluation\KingSafety as KingSafetyEvaluation;
-use Chess\Evaluation\Material as MaterialEvaluation;
-use Chess\Evaluation\Pressure as PressureEvaluation;
-use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\Evaluation\AttackEvaluation;
+use Chess\Evaluation\CenterEvaluation;
+use Chess\Evaluation\ConnectivityEvaluation;
+use Chess\Evaluation\EaseEvaluation;
+use Chess\Evaluation\GuardEvaluation;
+use Chess\Evaluation\KingSafetyEvaluation;
+use Chess\Evaluation\MaterialEvaluation;
+use Chess\Evaluation\PressureEvaluation;
+use Chess\Evaluation\SpaceEvaluation;
 
 class Defensive extends AbstractHeuristicPicture
 {

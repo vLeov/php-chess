@@ -3,13 +3,13 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Material as MaterialEvaluation;
-use Chess\Evaluation\Value\System;
+use Chess\Evaluation\MaterialEvaluation;
+use Chess\Evaluation\System;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 
-class MaterialTest extends AbstractUnitTestCase
+class MaterialEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test

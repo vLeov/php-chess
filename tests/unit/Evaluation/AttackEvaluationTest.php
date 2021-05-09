@@ -4,26 +4,26 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\Ease as EaseEvaluation;
+use Chess\Evaluation\AttackEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class EaseTest extends AbstractUnitTestCase
+class AttackEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
     public function start()
     {
-        $easeEvald = (new EaseEvaluation(new Board()))->evaluate();
+        $attEvald = (new AttackEvaluation(new Board()))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 16,
-            Symbol::BLACK => 16,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $easeEvald);
+        $this->assertEquals($expected, $attEvald);
     }
 
     /**
@@ -33,14 +33,14 @@ class EaseTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board()))->play();
 
-        $easeEvald = (new EaseEvaluation($board))->evaluate();
+        $attEvald = (new AttackEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 15,
-            Symbol::BLACK => 16,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 1,
         ];
 
-        $this->assertEquals($expected, $easeEvald);
+        $this->assertEquals($expected, $attEvald);
     }
 
     /**
@@ -50,13 +50,13 @@ class EaseTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $easeEvald = (new EaseEvaluation($board))->evaluate();
+        $attEvald = (new AttackEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 15,
-            Symbol::BLACK => 16,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 3.2,
         ];
 
-        $this->assertEquals($expected, $easeEvald);
+        $this->assertEquals($expected, $attEvald);
     }
 }

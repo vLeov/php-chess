@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Square as SquareEvaluation;
+use Chess\Evaluation\SquareEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Connectivity extends AbstractEvaluation
+class ConnectivityEvaluation extends AbstractEvaluation
 {
     const NAME = 'connectivity';
 

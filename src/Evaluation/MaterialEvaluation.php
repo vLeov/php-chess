@@ -11,7 +11,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Material extends AbstractEvaluation
+class MaterialEvaluation extends AbstractEvaluation
 {
     const NAME = 'material';
 

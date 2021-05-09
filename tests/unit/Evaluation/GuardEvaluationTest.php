@@ -4,12 +4,12 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\Guard as GuardEvaluation;
+use Chess\Evaluation\GuardEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class GuardTest extends AbstractUnitTestCase
+class GuardEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test

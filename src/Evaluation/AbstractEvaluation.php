@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Value\System;
+use Chess\Evaluation\System;
 
 /**
  * Abstract evaluation.

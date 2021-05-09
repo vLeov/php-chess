@@ -3,7 +3,7 @@
 namespace Chess\Heuristic\Picture;
 
 use Chess\AbstractPicture;
-use Chess\Evaluation\Value\System;
+use Chess\Evaluation\System;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 

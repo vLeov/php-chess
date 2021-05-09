@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Pressure as PressureEvaluation;
+use Chess\Evaluation\PressureEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Ease extends AbstractEvaluation
+class EaseEvaluation extends AbstractEvaluation
 {
     const NAME = 'ease';
 

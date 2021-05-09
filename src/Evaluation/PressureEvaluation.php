@@ -3,18 +3,18 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Square as SquareEvaluation;
+use Chess\Evaluation\SquareEvaluation;
 use Chess\PGN\Symbol;
 
 /**
- * Space evaluation.
+ * Pressure evaluation.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Space extends AbstractEvaluation
+class PressureEvaluation extends AbstractEvaluation
 {
-    const NAME = 'space';
+    const NAME = 'pressure';
 
     private $sqEvald;
 
@@ -37,11 +37,6 @@ class Space extends AbstractEvaluation
 
     public function evaluate($feature = null): array
     {
-        $this->result = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ];
-
         $this->board->rewind();
         while ($this->board->valid()) {
             $piece = $this->board->current();
@@ -53,7 +48,7 @@ class Space extends AbstractEvaluation
                             array_values(
                                 array_intersect(
                                     array_values((array) $piece->getScope()),
-                                    $this->sqEvald[SquareEvaluation::FEATURE_FREE]
+                                    $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                                 )
                             )
                         )
@@ -65,7 +60,7 @@ class Space extends AbstractEvaluation
                             $this->result[$piece->getColor()],
                             array_intersect(
                                 $piece->getCaptureSquares(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_FREE]
+                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                             )
                         )
                     );
@@ -74,7 +69,7 @@ class Space extends AbstractEvaluation
                     $this->result[$piece->getColor()] = array_unique(
                         array_merge(
                             $this->result[$piece->getColor()],
-                            array_diff(
+                            array_intersect(
                                 $piece->getLegalMoves(),
                                 $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                             )

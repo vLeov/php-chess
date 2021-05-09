@@ -3,10 +3,10 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Square as SquareEvaluation;
+use Chess\Evaluation\SquareEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 
-class SquareTest extends AbstractUnitTestCase
+class SquareEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test

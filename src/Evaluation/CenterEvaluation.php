@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\Evaluation\SpaceEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Center extends AbstractEvaluation
+class CenterEvaluation extends AbstractEvaluation
 {
     const NAME = 'center';
 

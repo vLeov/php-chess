@@ -3,8 +3,8 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Pressure as PressureEvaluation;
-use Chess\Evaluation\Space as SpaceEvaluation;
+use Chess\Evaluation\PressureEvaluation;
+use Chess\Evaluation\SpaceEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -13,7 +13,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class KingSafety extends AbstractEvaluation
+class KingSafetyEvaluation extends AbstractEvaluation
 {
     const NAME = 'safety';
 

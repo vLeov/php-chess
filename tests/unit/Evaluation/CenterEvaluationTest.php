@@ -3,15 +3,15 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\Center as CenterEvaluation;
-use Chess\Evaluation\Value\System;
+use Chess\Evaluation\CenterEvaluation;
+use Chess\Evaluation\System;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class CenterTest extends AbstractUnitTestCase
+class CenterEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test

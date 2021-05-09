@@ -4,13 +4,13 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\PGN\Symbol;
-use Chess\Evaluation\KingSafety as KingSafetyEvaluation;
-use Chess\Evaluation\Value\System;
+use Chess\Evaluation\KingSafetyEvaluation;
+use Chess\Evaluation\System;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
-class KingSafetyTest extends AbstractUnitTestCase
+class KingSafetyEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test
