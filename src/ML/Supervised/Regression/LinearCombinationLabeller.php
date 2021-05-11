@@ -2,8 +2,8 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\AbstractPicture;
 use Chess\Heuristic\LinearCombinationEvaluation;
+use Chess\Heuristic\Picture\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
 /**
@@ -22,7 +22,7 @@ class LinearCombinationLabeller implements LabellerInterface
 
     private $weights;
 
-    public function __construct(AbstractPicture $heuristicPicture, array $sample = [])
+    public function __construct(AbstractHeuristicPicture $heuristicPicture, array $sample = [])
     {
         $this->heuristicPicture = $heuristicPicture;
 
