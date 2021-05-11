@@ -20,8 +20,6 @@ class LinearCombinationLabeller implements LabellerInterface
 
     private $label;
 
-    private $weights;
-
     public function __construct(AbstractHeuristicPicture $heuristicPicture, array $sample = [])
     {
         $this->heuristicPicture = $heuristicPicture;
@@ -32,15 +30,15 @@ class LinearCombinationLabeller implements LabellerInterface
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
-
-        $this->weights = (new LinearCombinationEvaluation($heuristicPicture))->getWeights();
     }
 
     public function label(): array
     {
+        $weights = array_values($this->heuristicPicture->getDimensions());
+
         foreach ($this->sample as $color => $arr) {
             foreach ($arr as $key => $val) {
-                $this->label[$color] += $this->weights[$key] * $val;
+                $this->label[$color] += $weights[$key] * $val;
             }
             $this->label[$color] = round($this->label[$color], 2);
         }

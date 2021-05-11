@@ -15,6 +15,20 @@ class PositionalSampleTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function weights()
+    {
+        $heuristicPicture = new PositionalHeuristicPicture('');
+
+        $weights = array_values($heuristicPicture->getDimensions());
+
+        $expected = 100;
+
+        $this->assertEquals($expected, array_sum($weights));
+    }
+
+    /**
+     * @test
+     */
     public function start()
     {
         $board = new Board();

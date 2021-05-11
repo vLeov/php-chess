@@ -15,20 +15,6 @@ class LinearCombinationEvaluationTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_weights()
-    {
-        $heuristicPicture = new PositionalHeuristicPicture('');
-
-        $weights = (new LinearCombinationEvaluation($heuristicPicture))->getWeights();
-
-        $expected = 100;
-
-        $this->assertEquals($expected, array_sum($weights));
-    }
-
-    /**
-     * @test
-     */
     public function evaluate_benko_gambit()
     {
         $board = (new BenkoGambit(new Board()))->play();

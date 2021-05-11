@@ -9,18 +9,9 @@ final class LinearCombinationEvaluation implements HeuristicEvaluationInterface
 {
     private $heuristicPicture;
 
-    private $weights;
-
     public function __construct(AbstractHeuristicPicture $heuristicPicture)
     {
         $this->heuristicPicture = $heuristicPicture;
-
-        $this->weights = array_values($this->heuristicPicture->getDimensions());
-    }
-
-    public function getWeights(): array
-    {
-        return $this->weights;
     }
 
     public function evaluate(): array
@@ -30,11 +21,13 @@ final class LinearCombinationEvaluation implements HeuristicEvaluationInterface
             Symbol::BLACK => 0,
         ];
 
+        $weights = array_values($this->heuristicPicture->getDimensions());
+
         $picture = $this->heuristicPicture->take();
 
         for ($i = 0; $i < count($this->heuristicPicture->getDimensions()); $i++) {
-            $result[Symbol::WHITE] += $this->weights[$i] * end($picture[Symbol::WHITE])[$i];
-            $result[Symbol::BLACK] += $this->weights[$i] * end($picture[Symbol::BLACK])[$i];
+            $result[Symbol::WHITE] += $weights[$i] * end($picture[Symbol::WHITE])[$i];
+            $result[Symbol::BLACK] += $weights[$i] * end($picture[Symbol::BLACK])[$i];
         }
 
         $result[Symbol::WHITE] = round($result[Symbol::WHITE], 2);
