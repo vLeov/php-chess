@@ -21,6 +21,4 @@ abstract class AbstractPermutation
 
         return $array;
     }
-
-    abstract public function get($values, $size): array;
 }
