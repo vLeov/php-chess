@@ -7,9 +7,9 @@ namespace Chess\Combinatorics;
  *
  * @link https://rosettacode.org/wiki/Permutations_with_repetitions#PHP
  */
-class PermutationWithRepetition
+class PermutationWithRepetition extends AbstractPermutation
 {
-    public function get($values, $size)
+    public function get($values, $size): array
     {
         $a = [];
         $c = pow(count($values), $size);
@@ -19,18 +19,5 @@ class PermutationWithRepetition
         }
 
         return $a;
-    }
-
-    private function permutate($values, $size, $offset)
-    {
-        $count = count($values);
-        $array = [];
-
-        for ($i = 0; $i < $size; $i++) {
-            $selector = ($offset / pow($count,$i)) % $count;
-            $array[$i] = $values[$selector];
-        }
-
-        return $array;
     }
 }
