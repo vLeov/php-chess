@@ -4,7 +4,7 @@ namespace Chess\Heuristic;
 
 use Chess\AbstractPicture;
 
-interface HeuristicEvaluationInterface
+interface EvaluationInterface
 {
     public function evaluate(): array;
 }

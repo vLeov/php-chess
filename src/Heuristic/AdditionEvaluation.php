@@ -5,7 +5,7 @@ namespace Chess\Heuristic;
 use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Symbol;
 
-final class AdditionEvaluation implements HeuristicEvaluationInterface
+final class AdditionEvaluation implements EvaluationInterface
 {
     private $heuristicPicture;
 
