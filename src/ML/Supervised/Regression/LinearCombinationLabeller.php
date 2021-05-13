@@ -2,7 +2,6 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\Heuristic\LinearCombinationEvaluation;
 use Chess\Heuristic\Picture\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
