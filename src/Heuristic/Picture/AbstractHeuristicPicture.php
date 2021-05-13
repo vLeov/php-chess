@@ -18,6 +18,13 @@ class AbstractHeuristicPicture extends Player
         return $this->dimensions;
     }
 
+    public function setDimensions(array $dimensions): AbstractHeuristicPicture
+    {
+        $this->dimensions = $dimensions;
+
+        return $this;
+    }
+
     /**
      * Takes a normalized, heuristic picture.
      *
@@ -48,6 +55,18 @@ class AbstractHeuristicPicture extends Player
         return $this->picture;
     }
 
+    public function sample(): array
+    {
+        $pic = $this->take();
+
+        $this->sample = [
+            Symbol::WHITE => end($pic[Symbol::WHITE]),
+            Symbol::BLACK => end($pic[Symbol::BLACK]),
+        ];
+
+        return $this->sample;
+    }
+
     protected function normalize()
     {
         $normalization = [];
@@ -75,17 +94,5 @@ class AbstractHeuristicPicture extends Player
         }
 
         $this->picture = $normalization;
-    }
-
-    public function sample(): array
-    {
-        $pic = $this->take();
-
-        $this->sample = [
-            Symbol::WHITE => end($pic[Symbol::WHITE]),
-            Symbol::BLACK => end($pic[Symbol::BLACK]),
-        ];
-
-        return $this->sample;
     }
 }
