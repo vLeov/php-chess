@@ -2,7 +2,6 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\Heuristic\Picture\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
 /**
@@ -13,22 +12,14 @@ use Chess\PGN\Symbol;
  */
 class OptimalLinearCombinationLabeller implements LabellerInterface
 {
-    private $heuristicPicture;
-
     private $sample;
 
     private $permutations;
 
     private $label;
 
-    public function __construct(
-        AbstractHeuristicPicture $heuristicPicture,
-        array $sample = [],
-        array $permutations = []
-    )
+    public function __construct(array $sample = [], array $permutations = [])
     {
-        $this->heuristicPicture = $heuristicPicture;
-
         $this->sample = $sample;
 
         $this->permutations = $permutations;

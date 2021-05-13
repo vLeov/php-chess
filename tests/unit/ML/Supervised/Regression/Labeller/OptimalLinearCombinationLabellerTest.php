@@ -46,7 +46,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 50,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
@@ -68,7 +68,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 50,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
@@ -90,7 +90,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 52.5,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
@@ -112,7 +112,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 69.5,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
@@ -132,7 +132,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 97,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
@@ -152,7 +152,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 70.58,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
@@ -172,7 +172,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 84,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
@@ -192,7 +192,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 86.48,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller($heuristicPicture, $sample, self::$permutations))->label();
+        $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
 
         $this->assertEquals($expected, $label);
     }
