@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\ML\Supervised\Regression\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -22,7 +22,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -43,7 +43,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -64,7 +64,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -85,7 +85,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -104,7 +104,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -123,7 +123,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -142,7 +142,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -161,7 +161,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
         $weights = array_values($heuristicPicture->getDimensions());
 

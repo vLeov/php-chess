@@ -1,15 +1,35 @@
 <?php
 
-namespace Chess\Heuristic\Picture;
+namespace Chess\Heuristic;
 
 use Chess\Player;
+use Chess\Evaluation\AttackEvaluation;
+use Chess\Evaluation\CenterEvaluation;
+use Chess\Evaluation\ConnectivityEvaluation;
+use Chess\Evaluation\EaseEvaluation;
+use Chess\Evaluation\GuardEvaluation;
+use Chess\Evaluation\KingSafetyEvaluation;
+use Chess\Evaluation\MaterialEvaluation;
+use Chess\Evaluation\PressureEvaluation;
+use Chess\Evaluation\SpaceEvaluation;
+use Chess\Evaluation\SquareEvaluation;
 use Chess\Evaluation\System;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
-class AbstractHeuristicPicture extends Player
+class HeuristicPicture extends Player
 {
-    protected $dimensions;
+    protected $dimensions = [
+        MaterialEvaluation::class => 25,
+        GuardEvaluation::class => 20,
+        CenterEvaluation::class => 15,
+        ConnectivityEvaluation::class => 10,
+        SpaceEvaluation::class => 10,
+        KingSafetyEvaluation::class => 5,
+        PressureEvaluation::class => 5,
+        AttackEvaluation::class => 5,
+        EaseEvaluation::class => 5,
+    ];
 
     protected $picture = [];
 
@@ -18,7 +38,7 @@ class AbstractHeuristicPicture extends Player
         return $this->dimensions;
     }
 
-    public function setDimensions(array $dimensions): AbstractHeuristicPicture
+    public function setDimensions(array $dimensions): HeuristicPicture
     {
         $this->dimensions = $dimensions;
 

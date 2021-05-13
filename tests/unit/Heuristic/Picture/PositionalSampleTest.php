@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Heuristic\Picture;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -17,7 +17,7 @@ class PositionalSampleTest extends AbstractUnitTestCase
      */
     public function weights()
     {
-        $heuristicPicture = new PositionalHeuristicPicture('');
+        $heuristicPicture = new HeuristicPicture('');
 
         $weights = array_values($heuristicPicture->getDimensions());
 
@@ -33,7 +33,7 @@ class PositionalSampleTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $sample = (new PositionalHeuristicPicture($board->getMovetext()))->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))->sample();
 
         $expected = [
             Symbol::WHITE => [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
@@ -52,7 +52,7 @@ class PositionalSampleTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $sample = (new PositionalHeuristicPicture($board->getMovetext()))->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))->sample();
 
         $expected = [
             Symbol::WHITE => [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
@@ -69,7 +69,7 @@ class PositionalSampleTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $sample = (new PositionalHeuristicPicture($board->getMovetext()))->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))->sample();
 
         $expected = [
             Symbol::WHITE => [ 0, 0, 0, 0.9, 0.2, 0, 0, 0, 0 ],
@@ -86,7 +86,7 @@ class PositionalSampleTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $sample = (new PositionalHeuristicPicture($board->getMovetext()))->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))->sample();
 
         $expected = [
             Symbol::WHITE => [ 1, 0, 0, 0.07, 0.8, 1, 1, 0.87, 0.6 ],

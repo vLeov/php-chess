@@ -2,14 +2,14 @@
 
 namespace Chess\Heuristic;
 
-use Chess\Heuristic\Picture\AbstractHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Symbol;
 
 final class LinearCombinationEvaluation implements HeuristicEvaluationInterface
 {
     private $heuristicPicture;
 
-    public function __construct(AbstractHeuristicPicture $heuristicPicture)
+    public function __construct(HeuristicPicture $heuristicPicture)
     {
         $this->heuristicPicture = $heuristicPicture;
     }

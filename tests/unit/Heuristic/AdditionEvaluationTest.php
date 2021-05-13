@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
 use Chess\Heuristic\AdditionEvaluation;
-use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -19,7 +19,7 @@ class AdditionEvaluationTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
 
         $evaluation = (new AdditionEvaluation($heuristicPicture))->evaluate();
 

@@ -2,7 +2,7 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\Heuristic\Picture\AbstractHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Symbol;
 
 /**
@@ -19,7 +19,7 @@ class AdditionLabeller implements LabellerInterface
 
     private $label;
 
-    public function __construct(AbstractHeuristicPicture $heuristicPicture, array $sample = [])
+    public function __construct(HeuristicPicture $heuristicPicture, array $sample = [])
     {
         $this->heuristicPicture = $heuristicPicture;
 

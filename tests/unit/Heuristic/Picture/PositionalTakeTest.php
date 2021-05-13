@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Heuristic\Picture;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -19,7 +19,7 @@ class PositionalTakeTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
 
         $picture = $heuristicPicture->take();
 
@@ -45,7 +45,7 @@ class PositionalTakeTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
 
         $picture = $heuristicPicture->take();
 
