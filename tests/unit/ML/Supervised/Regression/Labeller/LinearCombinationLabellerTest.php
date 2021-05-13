@@ -24,13 +24,14 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 50,
             Symbol::BLACK => 50,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 
     /**
@@ -44,13 +45,14 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 50,
             Symbol::BLACK => 50,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 
     /**
@@ -64,13 +66,14 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 62.5,
             Symbol::BLACK => 37.5,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 
     /**
@@ -84,13 +87,14 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 37.5,
             Symbol::BLACK => 62.5,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 
     /**
@@ -102,13 +106,14 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 11,
             Symbol::BLACK => 90,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 
     /**
@@ -120,13 +125,14 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 51.05,
             Symbol::BLACK => 37.9,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 
     /**
@@ -138,13 +144,14 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 43.5,
             Symbol::BLACK => 48,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 
     /**
@@ -156,12 +163,13 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $heuristicPicture = new PositionalHeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
             Symbol::WHITE => 31.2,
             Symbol::BLACK => 51.9,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($heuristicPicture, $sample))->label());
+        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
     }
 }

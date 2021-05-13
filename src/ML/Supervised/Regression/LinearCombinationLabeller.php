@@ -2,7 +2,6 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\Heuristic\Picture\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
 /**
@@ -13,17 +12,17 @@ use Chess\PGN\Symbol;
  */
 class LinearCombinationLabeller implements LabellerInterface
 {
-    private $heuristicPicture;
-
     private $sample;
+
+    private $weights;
 
     private $label;
 
-    public function __construct(AbstractHeuristicPicture $heuristicPicture, array $sample = [])
+    public function __construct(array $sample = [], array $weights = [])
     {
-        $this->heuristicPicture = $heuristicPicture;
-
         $this->sample = $sample;
+
+        $this->weights = $weights;
 
         $this->label = [
             Symbol::WHITE => 0,
@@ -33,11 +32,9 @@ class LinearCombinationLabeller implements LabellerInterface
 
     public function label(): array
     {
-        $weights = array_values($this->heuristicPicture->getDimensions());
-
         foreach ($this->sample as $color => $arr) {
             foreach ($arr as $key => $val) {
-                $this->label[$color] += $weights[$key] * $val;
+                $this->label[$color] += $this->weights[$key] * $val;
             }
             $this->label[$color] = round($this->label[$color], 2);
         }
