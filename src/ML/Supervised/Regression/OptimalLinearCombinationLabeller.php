@@ -2,7 +2,6 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\Heuristic\Picture\AbstractHeuristicPicture;
 use Chess\PGN\Symbol;
 
@@ -18,13 +17,21 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
 
     private $sample;
 
+    private $permutations;
+
     private $label;
 
-    public function __construct(AbstractHeuristicPicture $heuristicPicture, array $sample = [])
+    public function __construct(
+        AbstractHeuristicPicture $heuristicPicture,
+        array $sample = [],
+        array $permutations = []
+    )
     {
         $this->heuristicPicture = $heuristicPicture;
 
         $this->sample = $sample;
+
+        $this->permutations = $permutations;
 
         $this->label = [
             Symbol::WHITE => 0,
@@ -34,15 +41,8 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
 
     public function label(): array
     {
-        $permutations = (new RestrictedPermutationWithRepetition())
-            ->get(
-                [3, 5, 8, 13, 21],
-                count($this->heuristicPicture->getDimensions()),
-                100
-            );
-
         $labels = [];
-        foreach ($permutations as $weights) {
+        foreach ($this->permutations as $weights) {
             $label = $this->label;
             foreach ($this->sample as $color => $arr) {
                 foreach ($arr as $key => $val) {
