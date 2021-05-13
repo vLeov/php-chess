@@ -41,24 +41,17 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
 
     public function label(): array
     {
-        $labels = [];
         foreach ($this->permutations as $weights) {
-            $label = $this->label;
+            $label = [
+                Symbol::WHITE => 0,
+                Symbol::BLACK => 0,
+            ];
             foreach ($this->sample as $color => $arr) {
                 foreach ($arr as $key => $val) {
                     $label[$color] += $weights[$key] * $val;
                 }
                 $label[$color] = round($label[$color], 2);
-            }
-            $labels[] = $label;
-        }
-
-        foreach ($labels as $key => $label) {
-            if ($label[Symbol::WHITE] > $this->label[Symbol::WHITE]) {
-                $this->label[Symbol::WHITE] = $label[Symbol::WHITE];
-            }
-            if ($label[Symbol::BLACK] > $this->label[Symbol::BLACK]) {
-                $this->label[Symbol::BLACK] = $label[Symbol::BLACK];
+                $label[$color] > $this->label[$color] ? $this->label[$color] = $label[$color] : null;
             }
         }
 
