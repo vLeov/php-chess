@@ -8,7 +8,7 @@ use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 /**
- * LinearCombination decoder.
+ * LinearCombinationDecoder
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -31,67 +31,27 @@ class LinearCombinationDecoder extends AbstractDecoder
                 switch ($piece->getIdentity()) {
                     case Symbol::KING:
                         if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                Symbol::CASTLING_SHORT => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ Symbol::CASTLING_SHORT => $this->label($clone, $color) ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                Symbol::CASTLING_LONG => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ Symbol::CASTLING_LONG => $this->label($clone, $color) ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                Symbol::KING.$square => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ Symbol::KING.$square => $this->label($clone, $color) ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                Symbol::KING.'x'.$square => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ Symbol::KING.'x'.$square => $this->label($clone, $color) ];
                         }
                         break;
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                $square => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ $square => $this->label($clone, $color) ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                $piece->getFile()."x$square" => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ $piece->getFile()."x$square" => $this->label($clone, $color) ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                $piece->getIdentity().$square => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ $piece->getIdentity().$square => $this->label($clone, $color) ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
-                            $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
-                            $sample = $heuristicPicture->sample();
-                            $weights = array_values($heuristicPicture->getDimensions());
-                            $this->result[] = [
-                                "{$piece->getIdentity()}x$square" => (new $this->labeller($sample, $weights))->label()[$color],
-                            ];
+                            $this->result[] = [ "{$piece->getIdentity()}x$square" => $this->label($clone, $color) ];
                         }
                         break;
                 }

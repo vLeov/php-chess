@@ -5,7 +5,7 @@ namespace Chess\ML\Supervised\Regression;
 use Chess\Board;
 
 /**
- * Abstract decoder.
+ * AbstractDecoder
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -43,5 +43,15 @@ class AbstractDecoder
                 return key($val);
             }
         }
+    }
+
+    protected function label(Board $clone, string $color)
+    {
+        $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
+        $sample = $heuristicPicture->sample();
+        $weights = array_values($heuristicPicture->getDimensions());
+        $label = (new $this->labeller($sample, $weights))->label()[$color];
+
+        return $label;
     }
 }
