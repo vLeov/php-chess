@@ -2,7 +2,7 @@
 
 namespace Chess;
 
-use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
@@ -216,7 +216,7 @@ class Game
      */
     public function response()
     {
-        $heuristicPicture = new PositionalHeuristicPicture($this->board->getMovetext());
+        $heuristicPicture = new HeuristicPicture($this->board->getMovetext());
         $sample = $heuristicPicture->sample();
         $dataset = new Unlabeled([$sample[Symbol::oppColor($this->board->getTurn())]]);
         $prediction = current($this->estimator->predict($dataset));

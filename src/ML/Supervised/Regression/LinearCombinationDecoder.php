@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\Heuristic\Picture\Positional as PositionalHeuristicPicture;
+use Chess\Heuristic\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
@@ -19,7 +19,7 @@ class LinearCombinationDecoder extends AbstractDecoder
     {
         parent::__construct($board);
 
-        $this->heuristicPicture = PositionalHeuristicPicture::class;
+        $this->heuristicPicture = HeuristicPicture::class;
         $this->labeller = LinearCombinationLabeller::class;
     }
 
@@ -33,26 +33,30 @@ class LinearCombinationDecoder extends AbstractDecoder
                         if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                Symbol::CASTLING_SHORT => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                Symbol::CASTLING_SHORT => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                Symbol::CASTLING_LONG => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                Symbol::CASTLING_LONG => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                Symbol::KING.$square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                Symbol::KING.$square => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                Symbol::KING.'x'.$square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                Symbol::KING.'x'.$square => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         }
                         break;
@@ -60,14 +64,16 @@ class LinearCombinationDecoder extends AbstractDecoder
                         if ($clone->play(Convert::toStdObj($color, $square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                $square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                $square => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                $piece->getFile()."x$square" => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                $piece->getFile()."x$square" => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         }
                         break;
@@ -75,14 +81,16 @@ class LinearCombinationDecoder extends AbstractDecoder
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                $piece->getIdentity().$square => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                $piece->getIdentity().$square => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
                             $heuristicPicture = new $this->heuristicPicture($clone->getMovetext());
                             $sample = $heuristicPicture->sample();
+                            $weights = array_values($heuristicPicture->getDimensions());
                             $this->result[] = [
-                                "{$piece->getIdentity()}x$square" => (new $this->labeller($heuristicPicture, $sample))->label()[$color],
+                                "{$piece->getIdentity()}x$square" => (new $this->labeller($sample, $weights))->label()[$color],
                             ];
                         }
                         break;
