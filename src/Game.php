@@ -10,6 +10,7 @@ use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SquareEvaluation;
 use Chess\ML\Supervised\Regression\LinearCombinationDecoder;
+use Chess\ML\Supervised\Regression\OptimalLinearCombinationDecoder;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\Persisters\Filesystem;
@@ -220,7 +221,7 @@ class Game
         $sample = $heuristicPicture->sample();
         $dataset = new Unlabeled([$sample[Symbol::oppColor($this->board->getTurn())]]);
         $prediction = current($this->estimator->predict($dataset));
-        $decoded = (new LinearCombinationDecoder($this->board))->decode($this->board->getTurn(), $prediction);
+        $decoded = (new OptimalLinearCombinationDecoder($this->board))->decode($this->board->getTurn(), $prediction);
 
         return $decoded;
     }
