@@ -196,4 +196,22 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $label);
     }
+
+    /**
+     * @test
+     */
+    public function closed_sicilian_permutation()
+    {
+        $board = (new ClosedSicilian(new Board()))->play();
+
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
+        $sample = $heuristicPicture->sample();
+
+        $expected = [ 3, 21, 5, 8, 5, 3, 21, 21, 13];
+
+        $permutation = (new OptimalLinearCombinationLabeller($sample, self::$permutations))
+            ->permute(Symbol::BLACK, 86.48);
+
+        $this->assertEquals($expected, $permutation);
+    }
 }

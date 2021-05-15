@@ -48,4 +48,19 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
 
         return $this->label;
     }
+
+    public function permute(string $color, float $label): ?array
+    {
+        foreach ($this->permutations as $weights) {
+            $sum = 0;
+            foreach ($this->sample[$color] as $key => $val) {
+                $sum += $weights[$key] * $val;
+            }
+            if ($sum === $label) {
+                return $weights;
+            }
+        }
+
+        return null;
+    }
 }
