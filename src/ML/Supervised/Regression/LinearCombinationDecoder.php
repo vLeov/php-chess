@@ -50,6 +50,8 @@ class LinearCombinationDecoder extends AbstractDecoder
             }
         }
 
+        $this->result = array_map("unserialize", array_unique(array_map("serialize", $this->result)));
+
         usort($this->result, function ($a, $b) {
             return current($b) <=> current($a);
         });
