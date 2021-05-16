@@ -42,37 +42,31 @@ class PressureEvaluation extends AbstractEvaluation
             $piece = $this->board->current();
             switch ($piece->getIdentity()) {
                 case Symbol::KING:
-                    $this->result[$piece->getColor()] = array_unique(
-                        array_merge(
-                            $this->result[$piece->getColor()],
-                            array_values(
-                                array_intersect(
-                                    array_values((array) $piece->getScope()),
-                                    $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
-                                )
+                    $this->result[$piece->getColor()] = array_merge(
+                        $this->result[$piece->getColor()],
+                        array_values(
+                            array_intersect(
+                                array_values((array) $piece->getScope()),
+                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                             )
                         )
                     );
                     break;
                 case Symbol::PAWN:
-                    $this->result[$piece->getColor()] = array_unique(
-                        array_merge(
-                            $this->result[$piece->getColor()],
-                            array_intersect(
-                                $piece->getCaptureSquares(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
-                            )
+                    $this->result[$piece->getColor()] = array_merge(
+                        $this->result[$piece->getColor()],
+                        array_intersect(
+                            $piece->getCaptureSquares(),
+                            $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                         )
                     );
                     break;
                 default:
-                    $this->result[$piece->getColor()] = array_unique(
-                        array_merge(
-                            $this->result[$piece->getColor()],
-                            array_intersect(
-                                $piece->getLegalMoves(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
-                            )
+                    $this->result[$piece->getColor()] = array_merge(
+                        $this->result[$piece->getColor()],
+                        array_intersect(
+                            $piece->getLegalMoves(),
+                            $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
                         )
                     );
                     break;

@@ -166,8 +166,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
-            Symbol::WHITE => 31.2,
-            Symbol::BLACK => 51.9,
+            Symbol::WHITE => 43.7,
+            Symbol::BLACK => 46.9,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());

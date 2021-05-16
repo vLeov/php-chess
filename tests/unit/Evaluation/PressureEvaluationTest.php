@@ -3,6 +3,7 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
+use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
@@ -55,6 +56,30 @@ class PressureEvaluationTest extends AbstractUnitTestCase
         $expected = [
             Symbol::WHITE => [],
             Symbol::BLACK => ['c3'],
+        ];
+
+        $this->assertEquals($expected, $pressEvald);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'a6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nxe5'));
+
+        $pressEvald = (new PressureEvaluation($board))->evaluate();
+
+        $expected = [
+            Symbol::WHITE => ['a6', 'c6', 'c6', 'd7', 'f7'],
+            Symbol::BLACK => ['b5', 'e5'],
         ];
 
         $this->assertEquals($expected, $pressEvald);
