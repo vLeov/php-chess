@@ -153,7 +153,6 @@ class Pawn extends AbstractPiece
         $moves = [];
 
         // add up squares
-
         foreach($this->scope->up as $square) {
             if (in_array($square, $this->boardStatus->squares->free)) {
                 $moves[] = $square;
@@ -163,7 +162,6 @@ class Pawn extends AbstractPiece
         }
 
         // add capture squares
-
         foreach($this->captureSquares as $square) {
             if (in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})) {
                 $moves[] = $square;
@@ -171,49 +169,33 @@ class Pawn extends AbstractPiece
         }
 
         // en passant implementation
-
         if (isset($this->boardStatus->lastHistoryEntry) &&
             $this->boardStatus->lastHistoryEntry->move->identity === Symbol::PAWN &&
             $this->boardStatus->lastHistoryEntry->move->color === $this->getOppColor()) {
-
             switch ($this->getColor()) {
-
                 case Symbol::WHITE:
-
                     if ((int)$this->position[1] === 5) {
-
                         $captureSquare =
                             $this->boardStatus->lastHistoryEntry->move->position->next[0] .
                             ($this->boardStatus->lastHistoryEntry->move->position->next[1]+1);
-
                         if (in_array($captureSquare, $this->captureSquares)) {
                             $this->enPassantSquare = $this->boardStatus->lastHistoryEntry->move->position->next;
                             $moves[] = $captureSquare;
                         }
-
                     }
-
                     break;
-
                 case Symbol::BLACK:
-
                     if ((int)$this->position[1] === 4) {
-
                         $captureSquare =
                             $this->boardStatus->lastHistoryEntry->move->position->next[0] .
                             ($this->boardStatus->lastHistoryEntry->move->position->next[1]-1);
-
                         if (in_array($captureSquare, $this->captureSquares)) {
                             $this->enPassantSquare = $this->boardStatus->lastHistoryEntry->move->position->next;
                             $moves[] = $captureSquare;
                         }
-
                     }
-
                     break;
-
             }
-
         }
 
         return $moves;
