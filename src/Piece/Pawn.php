@@ -219,6 +219,18 @@ class Pawn extends AbstractPiece
         return $moves;
     }
 
+    public function getDefendedSquares(): array
+    {
+        $squares = [];
+        foreach($this->captureSquares as $square) {
+            if (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {
+                $squares[] = $square;
+            }
+        }
+
+        return $squares;
+    }
+
     /**
      * Checks whether the pawn is promoted.
      *

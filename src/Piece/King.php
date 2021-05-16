@@ -139,4 +139,16 @@ class King extends AbstractPiece
                 array_merge($movesKing, $movesKingCaptures, $movesCastlingShort, $movesCastlingLong)
         ));
     }
+
+    public function getDefendedSquares(): array
+    {
+        $squares = [];
+        foreach ($this->scope as $square) {
+            if (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {
+                $squares[] = $square;
+            }
+        }
+
+        return $squares;
+    }
 }

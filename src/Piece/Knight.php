@@ -153,4 +153,16 @@ class Knight extends AbstractPiece
 
         return $moves;
     }
+
+    public function getDefendedSquares(): array
+    {
+        $squares = [];
+        foreach ($this->scope->jumps as $square) {
+            if (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {
+                $squares[] = $square;
+            }
+        }
+
+        return $squares;
+    }
 }

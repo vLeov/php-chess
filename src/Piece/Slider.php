@@ -51,4 +51,26 @@ abstract class Slider extends AbstractPiece
 
         return $moves;
     }
+
+    /**
+     * Gets the defended squares by a slider piece.
+     *
+     * @return array The slider piece's (BRQ) defended squares.
+     */
+    public function getDefendedSquares(): array
+    {
+        $squares = [];
+        foreach ($this->scope as $direction) {
+            foreach ($direction as $square) {
+                if (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {
+                    $squares[] = $square;
+                    break 1;
+                } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})) {
+                    break 1;
+                }
+            }
+        }
+
+        return $squares;
+    }
 }
