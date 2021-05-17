@@ -13,6 +13,7 @@ use Chess\Evaluation\MaterialEvaluation;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SquareEvaluation;
+use Chess\Evaluation\TacticsEvaluation;
 use Chess\Evaluation\System;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -22,11 +23,12 @@ class HeuristicPicture extends Player
     protected $dimensions = [
         MaterialEvaluation::class => 25,
         GuardEvaluation::class => 20,
-        CenterEvaluation::class => 15,
+        CenterEvaluation::class => 10,
         ConnectivityEvaluation::class => 10,
         SpaceEvaluation::class => 10,
-        KingSafetyEvaluation::class => 5,
         PressureEvaluation::class => 5,
+        KingSafetyEvaluation::class => 5,
+        TacticsEvaluation::class => 5,
         AttackEvaluation::class => 5,
         EaseEvaluation::class => 5,
     ];

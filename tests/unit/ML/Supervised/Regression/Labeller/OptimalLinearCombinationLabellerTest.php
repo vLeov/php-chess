@@ -87,7 +87,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => 85,
-            Symbol::BLACK => 63,
+            Symbol::BLACK => 64,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -128,8 +128,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 32,
-            Symbol::BLACK => 91,
+            Symbol::WHITE => 33.65,
+            Symbol::BLACK => 88.75,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -148,8 +148,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 84.45,
-            Symbol::BLACK => 70.43,
+            Symbol::WHITE => 82.05,
+            Symbol::BLACK => 72.53,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -168,8 +168,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 80.2,
-            Symbol::BLACK => 80.01,
+            Symbol::WHITE => 79.45,
+            Symbol::BLACK => 78,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -188,8 +188,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 74.91,
-            Symbol::BLACK => 71.62,
+            Symbol::WHITE => 73.41,
+            Symbol::BLACK => 70.36,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -207,10 +207,10 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
-        $expected = [ 3, 21, 5, 21, 8, 5, 13, 3, 21];
+        $expected = [ 3, 21, 5, 21, 5, 13, 5, 3, 3, 21];
 
         $permutation = (new OptimalLinearCombinationLabeller($sample, self::$permutations))
-            ->permute(Symbol::BLACK, 71.62);
+            ->permute(Symbol::BLACK, 70.36);
 
         $this->assertEquals($expected, $permutation);
     }

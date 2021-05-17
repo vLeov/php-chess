@@ -69,8 +69,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
-            Symbol::WHITE => 50,
-            Symbol::BLACK => 50,
+            Symbol::WHITE => 47.5,
+            Symbol::BLACK => 52.5,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
@@ -109,8 +109,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
-            Symbol::WHITE => 17.25,
-            Symbol::BLACK => 71.25,
+            Symbol::WHITE => 18.5,
+            Symbol::BLACK => 67.5,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
@@ -129,7 +129,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             Symbol::WHITE => 64.7,
-            Symbol::BLACK => 50.8,
+            Symbol::BLACK => 48.3,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
@@ -147,7 +147,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
-            Symbol::WHITE => 58.5,
+            Symbol::WHITE => 53.5,
             Symbol::BLACK => 44.25,
         ];
 
@@ -166,8 +166,8 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $weights = array_values($heuristicPicture->getDimensions());
 
         $expected = [
-            Symbol::WHITE => 53.7,
-            Symbol::BLACK => 44.4,
+            Symbol::WHITE => 48.7,
+            Symbol::BLACK => 43.2,
         ];
 
         $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
