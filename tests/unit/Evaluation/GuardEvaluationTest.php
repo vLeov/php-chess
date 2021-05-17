@@ -36,7 +36,7 @@ class GuardEvaluationTest extends AbstractUnitTestCase
         $guardEvald = (new GuardEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 31,
+            Symbol::WHITE => 32,
             Symbol::BLACK => 32,
         ];
 
@@ -53,7 +53,7 @@ class GuardEvaluationTest extends AbstractUnitTestCase
         $guardEvald = (new GuardEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 28.8,
+            Symbol::WHITE => 32,
             Symbol::BLACK => 32,
         ];
 

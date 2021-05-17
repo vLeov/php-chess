@@ -72,8 +72,8 @@ class PositionalSampleTest extends AbstractUnitTestCase
         $sample = (new HeuristicPicture($board->getMovetext()))->sample();
 
         $expected = [
-            Symbol::WHITE => [ 0, 0, 0, 0.9, 0.2, 0, 0, 0, 0 ],
-            Symbol::BLACK => [ 1, 1, 1, 0, 1, 1, 1, 1, 1 ],
+            Symbol::WHITE => [ 0, 0.25, 0, 0.9, 0.2, 0, 0, 0.25, 0 ],
+            Symbol::BLACK => [ 1, 0.25, 1, 0, 1, 1, 1, 0.25, 1 ],
         ];
 
         $this->assertEquals($expected, $sample);
@@ -89,8 +89,8 @@ class PositionalSampleTest extends AbstractUnitTestCase
         $sample = (new HeuristicPicture($board->getMovetext()))->sample();
 
         $expected = [
-            Symbol::WHITE => [ 1, 0, 0, 0.07, 0.8, 1, 1, 0.87, 0.6 ],
-            Symbol::BLACK => [ 0, 0.13, 1, 0.93, 0.4, 0, 0.4, 1, 0 ],
+            Symbol::WHITE => [ 1, 0.9, 0, 0.07, 0.8, 1, 1, 0, 0.6 ],
+            Symbol::BLACK => [ 0, 1, 1, 0.93, 0.4, 0, 0.4, 0.1, 0 ],
         ];
 
         $this->assertEquals($expected, $sample);

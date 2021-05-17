@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\PressureEvaluation;
+use Chess\Evaluation\TacticsEvaluation;
 use Chess\Evaluation\System;
 use Chess\PGN\Symbol;
 
@@ -17,13 +17,13 @@ class AttackEvaluation extends AbstractEvaluation
 {
     const NAME = 'attack';
 
-    private $pressEvald;
+    private $tacticsEvald;
 
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
-        $this->pressEvald = (new PressureEvaluation($board))->evaluate();
+        $this->tacticsEvald = (new TacticsEvaluation($board))->evaluate();
 
         $this->result = [
             Symbol::WHITE => 0,
@@ -33,17 +33,12 @@ class AttackEvaluation extends AbstractEvaluation
 
     public function evaluate($feature = null): array
     {
-        foreach ($this->pressEvald[Symbol::WHITE] as $sq) {
-            $identity = $this->board->getPieceByPosition($sq)->getIdentity();
-            if ($identity !== Symbol::KING) {
-                $this->result[Symbol::WHITE] += $this->system[System::SYSTEM_BERLINER][$identity];
-            }
-        }
-
-        foreach ($this->pressEvald[Symbol::BLACK] as $sq) {
-            $identity = $this->board->getPieceByPosition($sq)->getIdentity();
-            if ($identity !== Symbol::KING) {
-                $this->result[Symbol::BLACK] += $this->system[System::SYSTEM_BERLINER][$identity];
+        foreach ($this->tacticsEvald as $color => $squares) {
+            foreach ($squares as $square) {
+                $identity = $this->board->getPieceByPosition($square)->getIdentity();
+                if ($identity !== Symbol::KING) {
+                    $this->result[$color] += $this->system[System::SYSTEM_BERLINER][$identity];
+                }
             }
         }
 

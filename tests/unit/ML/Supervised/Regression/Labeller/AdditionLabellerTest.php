@@ -66,8 +66,8 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 6.5,
-            Symbol::BLACK => 2.5,
+            Symbol::WHITE => 5.5,
+            Symbol::BLACK => 3.5,
         ];
 
         $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
@@ -104,8 +104,8 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 1.1,
-            Symbol::BLACK => 8,
+            Symbol::WHITE => 1.6,
+            Symbol::BLACK => 6.5,
         ];
 
         $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
@@ -122,8 +122,8 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 5.34,
-            Symbol::BLACK => 3.86,
+            Symbol::WHITE => 5.37,
+            Symbol::BLACK => 3.83,
         ];
 
         $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
@@ -140,8 +140,8 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 3.94,
-            Symbol::BLACK => 5.55,
+            Symbol::WHITE => 4.69,
+            Symbol::BLACK => 4.8,
         ];
 
         $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
@@ -158,8 +158,8 @@ class AdditionLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 3.67,
-            Symbol::BLACK => 4.62,
+            Symbol::WHITE => 4.17,
+            Symbol::BLACK => 4.12,
         ];
 
         $this->assertEquals($expected, (new AdditionLabeller($heuristicPicture, $sample))->label());
