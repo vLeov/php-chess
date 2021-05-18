@@ -31,7 +31,12 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 50,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 
     /**
@@ -52,7 +57,12 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 50,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 
     /**
@@ -73,7 +83,12 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 45,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 
     /**
@@ -94,7 +109,12 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 60,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 
     /**
@@ -113,7 +133,12 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 75,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 
     /**
@@ -132,7 +157,12 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 43.3,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 
     /**
@@ -151,7 +181,12 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 28,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 
     /**
@@ -170,6 +205,11 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 23.6,
         ];
 
-        $this->assertEquals($expected, (new LinearCombinationLabeller($sample, $weights))->label());
+        $label = (new LinearCombinationLabeller($sample, $weights))->label();
+
+        $this->assertEquals(
+            $expected[Symbol::WHITE] - $expected[Symbol::BLACK],
+            $label[Symbol::WHITE] - $label[Symbol::BLACK],
+        );
     }
 }
