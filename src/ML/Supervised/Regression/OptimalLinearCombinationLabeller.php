@@ -56,7 +56,7 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
             foreach ($this->sample[$color] as $key => $val) {
                 $sum += $weights[$key] * $val;
             }
-            if ($sum === $label) {
+            if (round($sum, 2) === $label) {
                 return $weights;
             }
         }
