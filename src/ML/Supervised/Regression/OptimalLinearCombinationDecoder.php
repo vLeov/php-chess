@@ -20,7 +20,7 @@ class OptimalLinearCombinationDecoder extends AbstractDecoder
     {
         $permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [3, 5, 8, 13, 21],
+                [ 3, 5, 8, 13 ],
                 count((new HeuristicPicture(''))->getDimensions()),
                 100
             );

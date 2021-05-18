@@ -24,8 +24,8 @@ class LinearCombinationEvaluationTest extends AbstractUnitTestCase
         $evaluation = (new LinearCombinationEvaluation($heuristicPicture))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 53.5,
-            Symbol::BLACK => 44.25,
+            Symbol::WHITE => 46.3,
+            Symbol::BLACK => 28,
         ];
 
         $this->assertEquals($expected, $evaluation);

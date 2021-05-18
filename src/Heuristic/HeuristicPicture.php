@@ -6,8 +6,6 @@ use Chess\Player;
 use Chess\Evaluation\AttackEvaluation;
 use Chess\Evaluation\CenterEvaluation;
 use Chess\Evaluation\ConnectivityEvaluation;
-use Chess\Evaluation\EaseEvaluation;
-use Chess\Evaluation\GuardEvaluation;
 use Chess\Evaluation\KingSafetyEvaluation;
 use Chess\Evaluation\MaterialEvaluation;
 use Chess\Evaluation\PressureEvaluation;
@@ -21,16 +19,14 @@ use Chess\PGN\Symbol;
 class HeuristicPicture extends Player
 {
     protected $dimensions = [
-        MaterialEvaluation::class => 25,
-        GuardEvaluation::class => 20,
-        CenterEvaluation::class => 10,
+        MaterialEvaluation::class => 20,
+        CenterEvaluation::class => 20,
         ConnectivityEvaluation::class => 10,
         SpaceEvaluation::class => 10,
-        PressureEvaluation::class => 5,
-        KingSafetyEvaluation::class => 5,
-        TacticsEvaluation::class => 5,
-        AttackEvaluation::class => 5,
-        EaseEvaluation::class => 5,
+        PressureEvaluation::class => 10,
+        KingSafetyEvaluation::class => 10,
+        TacticsEvaluation::class => 10,
+        AttackEvaluation::class => 10,
     ];
 
     protected $picture = [];

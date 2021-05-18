@@ -24,7 +24,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
 
         self::$permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [3, 5, 8, 13, 21],
+                [ 3, 5, 8, 13 ],
                 count($dimensions),
                 100
             );
@@ -42,8 +42,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 50,
-            Symbol::BLACK => 50,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -64,8 +64,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 50,
-            Symbol::BLACK => 50,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -86,8 +86,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 85,
-            Symbol::BLACK => 64,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -108,8 +108,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 57.5,
-            Symbol::BLACK => 69.5,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -128,8 +128,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 33.65,
-            Symbol::BLACK => 88.75,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -148,8 +148,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 82.05,
-            Symbol::BLACK => 72.53,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -168,8 +168,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 79.45,
-            Symbol::BLACK => 78,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -188,8 +188,8 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $sample = $heuristicPicture->sample();
 
         $expected = [
-            Symbol::WHITE => 73.41,
-            Symbol::BLACK => 70.36,
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
         ];
 
         $label = (new OptimalLinearCombinationLabeller($sample, self::$permutations))->label();
@@ -207,10 +207,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $heuristicPicture = new HeuristicPicture($board->getMovetext());
         $sample = $heuristicPicture->sample();
 
-        $expected = [ 3, 21, 5, 21, 5, 13, 5, 3, 3, 21];
+        // $expected = [ 3, 3, 5, 8, 5, 13, 5, 8 ];
+        $expected = null;
 
         $permutation = (new OptimalLinearCombinationLabeller($sample, self::$permutations))
-            ->permute(Symbol::BLACK, 70.36);
+            ->permute(Symbol::BLACK, 0);
 
         $this->assertEquals($expected, $permutation);
     }
