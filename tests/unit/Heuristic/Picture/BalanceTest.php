@@ -50,4 +50,23 @@ class BalanceTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $balance);
     }
+
+    /**
+     * @test
+     */
+    public function fool_checkmate()
+    {
+        $board = (new FoolCheckmate(new Board()))->play();
+
+        $heuristicPicture = new HeuristicPicture($board->getMovetext());
+
+        $balance = $heuristicPicture->balance($heuristicPicture->take());
+
+        $expected = [
+            [ 0, -1, 0.6, -0.6, 0, 0, 0, 0 ],
+            [ -1, -1, 0.9, -0.8, -1, -1, 0, 0 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
 }
