@@ -85,6 +85,18 @@ class HeuristicPicture extends Player
         return $this->sample;
     }
 
+    public function balance(array $picture)
+    {
+        $balance = [];
+        foreach ($picture[Symbol::WHITE] as $i => $color) {
+            foreach ($color as $j => $val) {
+                $balance[$i][$j] = $picture[Symbol::WHITE][$i][$j] - $picture[Symbol::BLACK][$i][$j];
+            }
+        }
+
+        return $balance;
+    }
+
     protected function normalize()
     {
         $normalization = [];
