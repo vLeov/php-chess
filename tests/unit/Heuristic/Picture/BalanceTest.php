@@ -19,9 +19,7 @@ class BalanceTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-
-        $balance = $heuristicPicture->balance($heuristicPicture->take());
+        $balance = (new HeuristicPicture($board->getMovetext()))->balance();
 
         $expected = [
             [ 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -40,9 +38,7 @@ class BalanceTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-
-        $balance = $heuristicPicture->balance($heuristicPicture->take());
+        $balance = (new HeuristicPicture($board->getMovetext()))->balance();
 
         $expected = [
             [ 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -58,9 +54,7 @@ class BalanceTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-
-        $balance = $heuristicPicture->balance($heuristicPicture->take());
+        $balance = (new HeuristicPicture($board->getMovetext()))->balance();
 
         $expected = [
             [ 0, -1, 0.6, -0.6, 0, 0, 0, 0 ],
