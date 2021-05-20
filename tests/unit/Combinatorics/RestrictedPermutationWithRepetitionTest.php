@@ -10,11 +10,23 @@ class RestrictedPermutationWithRepetitionTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fibonacci_100()
+    public function fibonacci_3_5_8_13_21()
     {
         $set = (new RestrictedPermutationWithRepetition())->get([3, 5, 8, 13, 21], 9, 100);
 
         $expected = 56448;
+
+        $this->assertEquals($expected, count($set));
+    }
+
+    /**
+     * @test
+     */
+    public function fibonacci_8_13_21_34()
+    {
+        $set = (new RestrictedPermutationWithRepetition())->get([8, 13, 21, 34], 8, 100);
+
+        $expected = 588;
 
         $this->assertEquals($expected, count($set));
     }
