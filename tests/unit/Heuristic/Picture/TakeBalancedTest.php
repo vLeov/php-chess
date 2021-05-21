@@ -19,7 +19,7 @@ class TakeBalancedTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $balance = (new HeuristicPicture($board->getMovetext()))
+        $pic = (new HeuristicPicture($board->getMovetext()))
             ->takeBalanced()
             ->getPicture();
 
@@ -27,7 +27,7 @@ class TakeBalancedTest extends AbstractUnitTestCase
             [ 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $pic);
     }
 
     /**
@@ -40,7 +40,7 @@ class TakeBalancedTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $balance = (new HeuristicPicture($board->getMovetext()))
+        $pic = (new HeuristicPicture($board->getMovetext()))
             ->takeBalanced()
             ->getPicture();
 
@@ -48,7 +48,7 @@ class TakeBalancedTest extends AbstractUnitTestCase
             [ 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $pic);
     }
 
     /**
@@ -58,7 +58,7 @@ class TakeBalancedTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $balance = (new HeuristicPicture($board->getMovetext()))
+        $pic = (new HeuristicPicture($board->getMovetext()))
             ->takeBalanced()
             ->getPicture();
 
@@ -67,7 +67,7 @@ class TakeBalancedTest extends AbstractUnitTestCase
             [ -1, -1, 0.9, -0.8, -1, -1, 0, 0 ],
         ];
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $pic);
     }
 
     /**
@@ -77,7 +77,7 @@ class TakeBalancedTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $balance = (new HeuristicPicture($board->getMovetext()))
+        $pic = (new HeuristicPicture($board->getMovetext()))
             ->takeBalanced()
             ->getPicture();
 
@@ -88,6 +88,6 @@ class TakeBalancedTest extends AbstractUnitTestCase
             [ 1, -1, -0.86, 0.4, 0.6, 1, -0.5, -0.1 ],
         ];
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $pic);
     }
 }
