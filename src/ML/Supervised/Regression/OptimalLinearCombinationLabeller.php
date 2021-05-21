@@ -18,6 +18,8 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
 
     private $label;
 
+    private $balance;
+
     public function __construct(array $sample = [], array $permutations = [])
     {
         $this->sample = $sample;
@@ -28,6 +30,8 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
+
+        $this->balance = 0;
     }
 
     public function label(): array
@@ -47,6 +51,24 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
         }
 
         return $this->label;
+    }
+
+    public function balance(): float
+    {
+        $base = [];
+        foreach ($this->sample[Symbol::WHITE] as $key => $val) {
+            $base[$key] = $this->sample[Symbol::WHITE][$key] - $this->sample[Symbol::BLACK][$key];
+        }
+        foreach ($this->permutations as $weights) {
+            $balance = 0;
+            foreach ($base as $key => $val) {
+                $balance += $weights[$key] * $val;
+            }
+            $balance = round($balance, 2);
+            $balance > $this->balance ? $this->balance = $balance : null;
+        }
+
+        return $this->balance;
     }
 
     public function permute(string $color, float $label): ?array
