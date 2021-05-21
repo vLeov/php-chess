@@ -26,12 +26,10 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
 
         $this->permutations = $permutations;
 
-        $this->label = [
+        $this->label = $this->balance = [
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
-
-        $this->balance = 0;
     }
 
     public function label(): array
@@ -53,7 +51,7 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
         return $this->label;
     }
 
-    public function balance(): float
+    public function balance(): array
     {
         $base = [];
         foreach ($this->sample[Symbol::WHITE] as $key => $val) {
@@ -65,7 +63,8 @@ class OptimalLinearCombinationLabeller implements LabellerInterface
                 $balance += $weights[$key] * $val;
             }
             $balance = round($balance, 2);
-            $balance > $this->balance ? $this->balance = $balance : null;
+            $balance > $this->balance[Symbol::WHITE] ? $this->balance[Symbol::WHITE] = $balance : null;
+            $balance < $this->balance[Symbol::BLACK] ? $this->balance[Symbol::BLACK] = $balance : null;
         }
 
         return $this->balance;
