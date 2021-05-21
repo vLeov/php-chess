@@ -23,7 +23,7 @@ final class LinearCombinationEvaluation implements EvaluationInterface
 
         $weights = array_values($this->heuristicPicture->getDimensions());
 
-        $picture = $this->heuristicPicture->take();
+        $picture = $this->heuristicPicture->take()->getPicture();
 
         for ($i = 0; $i < count($this->heuristicPicture->getDimensions()); $i++) {
             $result[Symbol::WHITE] += $weights[$i] * end($picture[Symbol::WHITE])[$i];

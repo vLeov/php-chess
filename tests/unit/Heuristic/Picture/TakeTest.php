@@ -19,9 +19,9 @@ class TakeTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-
-        $picture = $heuristicPicture->take();
+        $picture = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getPicture();
 
         $expected = [
             Symbol::WHITE => [
@@ -45,9 +45,9 @@ class TakeTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-
-        $picture = $heuristicPicture->take();
+        $picture = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getPicture();
 
         $expected = [
             Symbol::WHITE => [

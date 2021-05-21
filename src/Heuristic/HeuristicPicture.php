@@ -29,10 +29,7 @@ class HeuristicPicture extends Player
         AttackEvaluation::class => 10,
     ];
 
-    protected $picture = [
-        Symbol::WHITE => [],
-        Symbol::BLACK => [],
-    ];
+    protected $picture = [];
 
     public function getDimensions()
     {
@@ -46,12 +43,17 @@ class HeuristicPicture extends Player
         return $this;
     }
 
+    public function getPicture(): array
+    {
+        return $this->picture;
+    }
+
     /**
      * Takes a normalized, heuristic picture.
      *
-     * @return array
+     * @return \Chess\Heuristic\HeuristicPicture
      */
-    public function take(): array
+    public function take(): HeuristicPicture
     {
         foreach ($this->moves as $move) {
             $this->board->play(Convert::toStdObj(Symbol::WHITE, $move[0]));
@@ -73,13 +75,18 @@ class HeuristicPicture extends Player
 
         $this->normalize();
 
-        return $this->picture;
+        return $this;
     }
 
-    public function takeBalanced(): array
+    /**
+     * Takes a normalized, balanced heuristic picture.
+     *
+     * @return \Chess\Heuristic\HeuristicPicture
+     */
+    public function takeBalanced(): HeuristicPicture
     {
         $balanced = [];
-        $pic = $this->take();
+        $pic = $this->take()->getPicture();
         foreach ($pic[Symbol::WHITE] as $i => $color) {
             foreach ($color as $j => $val) {
                 $balanced[$i][$j] = $pic[Symbol::WHITE][$i][$j] - $pic[Symbol::BLACK][$i][$j];
@@ -87,17 +94,19 @@ class HeuristicPicture extends Player
         }
         $this->picture = $balanced;
 
-        return $this->picture;
+        return $this;
     }
 
-    public function sample(): array
+    public function end(): array
     {
-        $this->sample = [
-            Symbol::WHITE => end($this->picture[Symbol::WHITE]),
-            Symbol::BLACK => end($this->picture[Symbol::BLACK]),
-        ];
+        if (isset($this->picture[Symbol::WHITE]) && isset($this->picture[Symbol::BLACK])) {
+            return [
+                Symbol::WHITE => end($this->picture[Symbol::WHITE]),
+                Symbol::BLACK => end($this->picture[Symbol::BLACK]),
+            ];
+        }
 
-        return $this->sample;
+        return end($this->picture);
     }
 
     protected function normalize()

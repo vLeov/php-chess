@@ -37,8 +37,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $heuristicPicture->take();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 50,
@@ -46,7 +47,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         ];
 
         $label = (new OptimalLinearCombinationLabeller(self::$permutations))
-            ->label($heuristicPicture->sample());
+            ->label($sample);
 
         $this->assertEquals($expected, $label);
     }
@@ -58,9 +59,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 0,
@@ -81,8 +82,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $heuristicPicture->take();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 50,
@@ -90,7 +92,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         ];
 
         $label = (new OptimalLinearCombinationLabeller(self::$permutations))
-            ->label($heuristicPicture->sample());
+            ->label($sample);
 
         $this->assertEquals($expected, $label);
     }
@@ -104,9 +106,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 0,
@@ -127,8 +129,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $heuristicPicture->take();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 72,
@@ -136,7 +139,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         ];
 
         $label = (new OptimalLinearCombinationLabeller(self::$permutations))
-            ->label($heuristicPicture->sample());
+            ->label($sample);
 
         $this->assertEquals($expected, $label);
     }
@@ -150,9 +153,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 44,
@@ -173,9 +176,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 59,
@@ -196,9 +199,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 18,
@@ -217,9 +220,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 38.7,
@@ -238,9 +241,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 0,
@@ -259,9 +262,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 66.96,
@@ -280,9 +283,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 38.32,
@@ -301,9 +304,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 63.52,
@@ -322,9 +325,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 33.72,
@@ -343,9 +346,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 55.21,
@@ -364,9 +367,9 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->takeBalanced();
-        $sample = end($taken);
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
         $expected = [
             Symbol::WHITE => 27.06,
@@ -385,9 +388,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))->take()->end();
 
         $expected = [ 8, 8, 34, 13, 13, 8, 8, 8 ];
 

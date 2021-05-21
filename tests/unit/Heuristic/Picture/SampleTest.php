@@ -33,9 +33,9 @@ class SampleTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
@@ -54,9 +54,9 @@ class SampleTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
@@ -73,9 +73,9 @@ class SampleTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => [ 0, 0, 0.9, 0.2, 0, 0, 0.25, 0.25 ],
@@ -92,9 +92,9 @@ class SampleTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $heuristicPicture = new HeuristicPicture($board->getMovetext());
-        $taken = $heuristicPicture->take();
-        $sample = $heuristicPicture->sample();
+        $sample = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->end();
 
         $expected = [
             Symbol::WHITE => [ 1, 0, 0.07, 0.8, 1, 1, 0, 0 ],
