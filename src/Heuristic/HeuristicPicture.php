@@ -73,19 +73,7 @@ class HeuristicPicture extends Player
         return $this->picture;
     }
 
-    public function sample(): array
-    {
-        $pic = $this->take();
-
-        $this->sample = [
-            Symbol::WHITE => end($pic[Symbol::WHITE]),
-            Symbol::BLACK => end($pic[Symbol::BLACK]),
-        ];
-
-        return $this->sample;
-    }
-
-    public function balance(): array
+    public function takeBalanced(): array
     {
         $balance = [];
         $pic = $this->take();
@@ -96,6 +84,18 @@ class HeuristicPicture extends Player
         }
 
         return $balance;
+    }
+
+    public function sample(): array
+    {
+        $pic = $this->take();
+
+        $this->sample = [
+            Symbol::WHITE => end($pic[Symbol::WHITE]),
+            Symbol::BLACK => end($pic[Symbol::BLACK]),
+        ];
+
+        return $this->sample;
     }
 
     protected function normalize()
