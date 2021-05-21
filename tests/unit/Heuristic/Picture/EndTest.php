@@ -10,7 +10,7 @@ use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 
-class SampleTest extends AbstractUnitTestCase
+class EndTest extends AbstractUnitTestCase
 {
     /**
      * @test
