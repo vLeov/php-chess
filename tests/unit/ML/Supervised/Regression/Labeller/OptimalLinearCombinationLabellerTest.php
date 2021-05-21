@@ -33,7 +33,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function start()
+    public function start_labelled()
     {
         $board = new Board();
 
@@ -54,7 +54,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function w_e4_b_e5()
+    public function w_e4_b_e5_labelled()
     {
         $board = new Board();
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
@@ -76,7 +76,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function w_e4_b_Na6()
+    public function w_e4_b_Na6_labelled()
     {
         $board = new Board();
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
@@ -98,7 +98,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function w_e4_b_Nc6()
+    public function w_e4_b_Nc6_labelled()
     {
         $board = new Board();
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
@@ -120,7 +120,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fool_checkmate()
+    public function fool_checkmate_labelled()
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
@@ -140,7 +140,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function scholar_checkmate()
+    public function scholar_checkmate_labelled()
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
@@ -160,7 +160,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function benko_gambit()
+    public function benko_gambit_labelled()
     {
         $board = (new BenkoGambit(new Board()))->play();
 
@@ -180,7 +180,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian()
+    public function closed_sicilian_labelled()
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
@@ -200,7 +200,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian_permutation()
+    public function closed_sicilian_permuted()
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
