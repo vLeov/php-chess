@@ -29,7 +29,10 @@ class HeuristicPicture extends Player
         AttackEvaluation::class => 10,
     ];
 
-    protected $picture = [];
+    protected $picture = [
+        Symbol::WHITE => [],
+        Symbol::BLACK => [],
+    ];
 
     public function getDimensions()
     {
@@ -75,24 +78,23 @@ class HeuristicPicture extends Player
 
     public function takeBalanced(): array
     {
-        $balance = [];
+        $balanced = [];
         $pic = $this->take();
         foreach ($pic[Symbol::WHITE] as $i => $color) {
             foreach ($color as $j => $val) {
-                $balance[$i][$j] = $pic[Symbol::WHITE][$i][$j] - $pic[Symbol::BLACK][$i][$j];
+                $balanced[$i][$j] = $pic[Symbol::WHITE][$i][$j] - $pic[Symbol::BLACK][$i][$j];
             }
         }
+        $this->picture = $balanced;
 
-        return $balance;
+        return $this->picture;
     }
 
     public function sample(): array
     {
-        $pic = $this->take();
-
         $this->sample = [
-            Symbol::WHITE => end($pic[Symbol::WHITE]),
-            Symbol::BLACK => end($pic[Symbol::BLACK]),
+            Symbol::WHITE => end($this->picture[Symbol::WHITE]),
+            Symbol::BLACK => end($this->picture[Symbol::BLACK]),
         ];
 
         return $this->sample;
