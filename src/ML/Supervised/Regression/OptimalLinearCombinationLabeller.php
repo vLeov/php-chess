@@ -10,71 +10,58 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class OptimalLinearCombinationLabeller implements LabellerInterface
+class OptimalLinearCombinationLabeller
 {
-    private $sample;
+    const INIT = [
+        Symbol::WHITE => 0,
+        Symbol::BLACK => 0,
+    ];
 
     private $permutations;
 
-    private $label;
-
-    private $balance;
-
-    public function __construct(array $sample = [], array $permutations = [])
+    public function __construct(array $permutations = [])
     {
-        $this->sample = $sample;
-
         $this->permutations = $permutations;
-
-        $this->label = $this->balance = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
-        ];
     }
 
-    public function label(): array
+    public function label(array $sample): array
     {
+        $label = self::INIT;
         foreach ($this->permutations as $weights) {
-            $label = [
-                Symbol::WHITE => 0,
-                Symbol::BLACK => 0,
-            ];
-            foreach ($this->sample as $color => $arr) {
+            $current = self::INIT;
+            foreach ($sample as $color => $arr) {
                 foreach ($arr as $key => $val) {
-                    $label[$color] += $weights[$key] * $val;
+                    $current[$color] += $weights[$key] * $val;
                 }
-                $label[$color] = round($label[$color], 2);
-                $label[$color] > $this->label[$color] ? $this->label[$color] = $label[$color] : null;
+                $current[$color] = round($current[$color], 2);
+                $current[$color] > $label[$color] ? $label[$color] = $current[$color] : null;
             }
         }
 
-        return $this->label;
+        return $label;
     }
 
-    public function balance(): array
+    public function balance(array $base = []): array
     {
-        $base = [];
-        foreach ($this->sample[Symbol::WHITE] as $key => $val) {
-            $base[$key] = $this->sample[Symbol::WHITE][$key] - $this->sample[Symbol::BLACK][$key];
-        }
+        $balance = self::INIT;
         foreach ($this->permutations as $weights) {
-            $balance = 0;
+            $current = 0;
             foreach ($base as $key => $val) {
-                $balance += $weights[$key] * $val;
+                $current += $weights[$key] * $val;
             }
-            $balance = round($balance, 2);
-            $balance > $this->balance[Symbol::WHITE] ? $this->balance[Symbol::WHITE] = $balance : null;
-            $balance < $this->balance[Symbol::BLACK] ? $this->balance[Symbol::BLACK] = $balance : null;
+            $current = round($current, 2);
+            $current > $balance[Symbol::WHITE] ? $balance[Symbol::WHITE] = $current : null;
+            $current < $balance[Symbol::BLACK] ? $balance[Symbol::BLACK] = $current : null;
         }
 
-        return $this->balance;
+        return $balance;
     }
 
-    public function permute(string $color, float $label): ?array
+    public function permute(array $sample, string $color, float $label): ?array
     {
         foreach ($this->permutations as $weights) {
             $sum = 0;
-            foreach ($this->sample[$color] as $key => $val) {
+            foreach ($sample[$color] as $key => $val) {
                 $sum += $weights[$key] * $val;
             }
             if (round($sum, 2) === $label) {
