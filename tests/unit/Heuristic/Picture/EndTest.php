@@ -33,7 +33,7 @@ class EndTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $sample = (new HeuristicPicture($board->getMovetext()))
+        $end = (new HeuristicPicture($board->getMovetext()))
             ->take()
             ->end();
 
@@ -42,7 +42,7 @@ class EndTest extends AbstractUnitTestCase
             Symbol::BLACK => [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
         ];
 
-        $this->assertEquals($expected, $sample);
+        $this->assertEquals($expected, $end);
     }
 
     /**
@@ -54,7 +54,7 @@ class EndTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $sample = (new HeuristicPicture($board->getMovetext()))
+        $end = (new HeuristicPicture($board->getMovetext()))
             ->take()
             ->end();
 
@@ -63,7 +63,7 @@ class EndTest extends AbstractUnitTestCase
             Symbol::BLACK => [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
         ];
 
-        $this->assertEquals($expected, $sample);
+        $this->assertEquals($expected, $end);
     }
 
     /**
@@ -73,7 +73,7 @@ class EndTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $sample = (new HeuristicPicture($board->getMovetext()))
+        $end = (new HeuristicPicture($board->getMovetext()))
             ->take()
             ->end();
 
@@ -82,7 +82,7 @@ class EndTest extends AbstractUnitTestCase
             Symbol::BLACK => [ 1, 1, 0, 1, 1, 1, 0.25, 0.25 ],
         ];
 
-        $this->assertEquals($expected, $sample);
+        $this->assertEquals($expected, $end);
     }
 
     /**
@@ -92,7 +92,7 @@ class EndTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $sample = (new HeuristicPicture($board->getMovetext()))
+        $end = (new HeuristicPicture($board->getMovetext()))
             ->take()
             ->end();
 
@@ -101,6 +101,6 @@ class EndTest extends AbstractUnitTestCase
             Symbol::BLACK => [ 0, 1, 0.93, 0.4, 0.4, 0, 0.5, 0.1 ],
         ];
 
-        $this->assertEquals($expected, $sample);
+        $this->assertEquals($expected, $end);
     }
 }

@@ -24,12 +24,12 @@ class OptimalLinearCombinationLabeller
         $this->permutations = $permutations;
     }
 
-    public function label(array $sample): array
+    public function label(array $end): array
     {
         $label = self::INIT;
         foreach ($this->permutations as $weights) {
             $current = self::INIT;
-            foreach ($sample as $color => $arr) {
+            foreach ($end as $color => $arr) {
                 foreach ($arr as $key => $val) {
                     $current[$color] += $weights[$key] * $val;
                 }
@@ -57,11 +57,11 @@ class OptimalLinearCombinationLabeller
         return $balance;
     }
 
-    public function permute(array $sample, string $color, float $label): ?array
+    public function permute(array $end, string $color, float $label): ?array
     {
         foreach ($this->permutations as $weights) {
             $sum = 0;
-            foreach ($sample[$color] as $key => $val) {
+            foreach ($end[$color] as $key => $val) {
                 $sum += $weights[$key] * $val;
             }
             if (round($sum, 2) === $label) {
