@@ -5,6 +5,7 @@ namespace Chess\ML\Supervised\Regression;
 use Chess\Board;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\Heuristic\HeuristicPicture;
+use Chess\ML\Supervised\Regression\OptimalLinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
@@ -20,7 +21,7 @@ class OptimalLinearCombinationDecoder extends AbstractDecoder
     {
         $permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [ 3, 5, 8, 13 ],
+                [ 8, 13, 21, 34],
                 count((new HeuristicPicture(''))->getDimensions()),
                 100
             );
@@ -80,37 +81,17 @@ class OptimalLinearCombinationDecoder extends AbstractDecoder
             return current($a) <=> current($b);
         });
 
-        return key($this->result[0]);
+        return key(current($this->result));
     }
 
     protected function distance(Board $clone, string $color, float $prediction, $permutations)
     {
-        $heuristicPicture = new HeuristicPicture($clone->getMovetext());
-        $sample = $heuristicPicture->sample();
+        $end = (new HeuristicPicture($clone->getMovetext()))
+            ->takeBalanced()
+            ->end();
 
-        $labels = [];
-        foreach ($permutations as $weights) {
-            $label[$color] = 0;
-            foreach ($sample[$color] as $key => $val) {
-                $label[$color] += $weights[$key] * $val;
-            }
-            $labels[] = $label;
-        }
+        $balance = (new OptimalLinearCombinationLabeller($permutations))->balance($end);
 
-        $distances = [];
-        foreach ($labels as $key => $label) {
-            $distances[$key] = abs($label[$color] - $prediction);
-        }
-
-        asort($distances);
-
-        $closest = 0;
-        foreach ($distances as $distance) {
-           if (abs($prediction - $closest) > abs($distance - $prediction)) {
-              $closest = $distance;
-           }
-        }
-
-        return $closest;
+        return abs($prediction - $balance[$color]);
     }
 }

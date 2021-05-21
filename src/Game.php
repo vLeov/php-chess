@@ -25,9 +25,9 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
-    const MODE_AI          =  'MODE_AI';
+    const MODE_AI           =  'MODE_AI';
 
-    const MODE_YOURSELF          =  'MODE_YOURSELF';
+    const MODE_YOURSELF     =  'MODE_YOURSELF';
 
     const MODEL_FOLDER      = __DIR__.'/../model/';
 
@@ -217,11 +217,16 @@ class Game
      */
     public function response()
     {
-        $heuristicPicture = new HeuristicPicture($this->board->getMovetext());
-        $sample = $heuristicPicture->sample();
-        $dataset = new Unlabeled([$sample[Symbol::oppColor($this->board->getTurn())]]);
+        $end = (new HeuristicPicture($this->board->getMovetext()))
+            ->takeBalanced()
+            ->end();
+
+        $dataset = new Unlabeled([$end]);
+
         $prediction = current($this->estimator->predict($dataset));
-        $decoded = (new OptimalLinearCombinationDecoder($this->board))->decode($this->board->getTurn(), $prediction);
+
+        $decoded = (new OptimalLinearCombinationDecoder($this->board))
+            ->decode($this->board->getTurn(), $prediction);
 
         return $decoded;
     }
