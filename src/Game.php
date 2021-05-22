@@ -224,6 +224,7 @@ class Game
         $dataset = new Unlabeled([$end]);
 
         $prediction = current($this->estimator->predict($dataset));
+        $prediction = round($prediction, 2);
 
         $decoded = (new OptimalLinearCombinationDecoder($this->board))
             ->decode($this->board->getTurn(), $prediction);
