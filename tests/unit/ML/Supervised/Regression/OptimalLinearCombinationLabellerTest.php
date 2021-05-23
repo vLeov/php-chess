@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\ML\Supervised\Regression\Labeller;
+namespace Chess\Tests\Unit\ML\Supervised\Regression;
 
 use Chess\Board;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
