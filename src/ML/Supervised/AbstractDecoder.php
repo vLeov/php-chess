@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\ML\Supervised\Regression;
+namespace Chess\ML\Supervised;
 
 use Chess\Board;
 

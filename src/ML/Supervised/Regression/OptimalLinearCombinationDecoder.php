@@ -5,6 +5,7 @@ namespace Chess\ML\Supervised\Regression;
 use Chess\Board;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\Heuristic\HeuristicPicture;
+use Chess\ML\Supervised\AbstractDecoder;
 use Chess\ML\Supervised\Regression\OptimalLinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
