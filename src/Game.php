@@ -217,6 +217,13 @@ class Game
      */
     public function response()
     {
+        $response = (new Grandmaster(__DIR__.'/../model/grandmasters.csv'))
+            ->response($this->board->getMovetext());
+
+        if ($response) {
+            return $response;
+        }
+
         $end = (new HeuristicPicture($this->board->getMovetext()))
             ->takeBalanced()
             ->end();
@@ -226,9 +233,9 @@ class Game
         $prediction = current($this->estimator->predict($dataset));
         $prediction = round($prediction, 2);
 
-        $decoded = (new OptimalLinearCombinationDecoder($this->board))
+        $response = (new OptimalLinearCombinationDecoder($this->board))
             ->decode($this->board->getTurn(), $prediction);
 
-        return $decoded;
+        return $response;
     }
 }
