@@ -6,17 +6,17 @@ use Chess\Board;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\Heuristic\HeuristicPicture;
 use Chess\ML\Supervised\AbstractDecoder;
-use Chess\ML\Supervised\Regression\OptimalLinearCombinationLabeller;
+use Chess\ML\Supervised\Regression\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 /**
- * OptimalLinearCombinationDecoder
+ * LinearCombinationDecoder
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class OptimalLinearCombinationDecoder extends AbstractDecoder
+class LinearCombinationDecoder extends AbstractDecoder
 {
     public function decode(string $color, float $prediction): string
     {
@@ -91,7 +91,7 @@ class OptimalLinearCombinationDecoder extends AbstractDecoder
             ->takeBalanced()
             ->end();
 
-        $balance = (new OptimalLinearCombinationLabeller($permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller($permutations))->balance($end);
 
         return abs($prediction - $balance[$color]);
     }

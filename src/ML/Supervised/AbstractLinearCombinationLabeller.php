@@ -4,7 +4,7 @@ namespace Chess\ML\Supervised;
 
 use Chess\PGN\Symbol;
 
-abstract class AbstractOptimalLinearCombinationLabeller
+abstract class AbstractLinearCombinationLabeller
 {
     const INIT = [
         Symbol::WHITE => 0,

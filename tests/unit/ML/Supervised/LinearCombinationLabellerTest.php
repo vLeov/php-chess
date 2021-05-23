@@ -5,7 +5,7 @@ namespace Chess\Tests\Unit\ML\Supervised;
 use Chess\Board;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\Heuristic\HeuristicPicture;
-use Chess\ML\Supervised\Regression\OptimalLinearCombinationLabeller;
+use Chess\ML\Supervised\Regression\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -14,7 +14,7 @@ use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
 
-class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
+class LinearCombinationLabellerTest extends AbstractUnitTestCase
 {
     static $permutations;
 
@@ -46,7 +46,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -69,7 +69,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -92,7 +92,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => -23,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -115,7 +115,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => -39,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -136,7 +136,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => -67.2,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -157,7 +157,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => -28.48,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -178,7 +178,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => -15.03,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -199,7 +199,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             Symbol::BLACK => -10.05,
         ];
 
-        $balance = (new OptimalLinearCombinationLabeller(self::$permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
 
         $this->assertEquals($expected, $balance);
     }
@@ -215,7 +215,7 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $expected = [ 8, 8, 34, 13, 13, 8, 8, 8 ];
 
-        $permutation = (new OptimalLinearCombinationLabeller(self::$permutations))
+        $permutation = (new LinearCombinationLabeller(self::$permutations))
             ->permute($end, Symbol::BLACK, 43.92);
 
         $this->assertEquals($expected, $permutation);

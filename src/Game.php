@@ -10,7 +10,6 @@ use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SquareEvaluation;
 use Chess\ML\Supervised\Regression\LinearCombinationDecoder;
-use Chess\ML\Supervised\Regression\OptimalLinearCombinationDecoder;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\Persisters\Filesystem;
@@ -233,7 +232,7 @@ class Game
         $prediction = current($this->estimator->predict($dataset));
         $prediction = round($prediction, 2);
 
-        $response = (new OptimalLinearCombinationDecoder($this->board))
+        $response = (new LinearCombinationDecoder($this->board))
             ->decode($this->board->getTurn(), $prediction);
 
         return $response;

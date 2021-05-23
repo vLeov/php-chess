@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\Tests\Unit\ML\Supervised\Classification;
+namespace Chess\Tests\Unit\ML\Supervised\Regression;
 
 use Chess\Board;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\Heuristic\HeuristicPicture;
-use Chess\ML\Supervised\Classification\OptimalLinearCombinationLabeller;
+use Chess\ML\Supervised\Regression\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -14,7 +14,7 @@ use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
 
-class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
+class LinearCombinationLabellerTest extends AbstractUnitTestCase
 {
     static $permutations;
 
@@ -42,11 +42,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 53,
-            Symbol::BLACK => 53,
+            Symbol::WHITE => 50,
+            Symbol::BLACK => 50,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))
+        $label = (new LinearCombinationLabeller(self::$permutations))
             ->label($end);
 
         $this->assertEquals($expected, $label);
@@ -66,11 +66,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 53,
-            Symbol::BLACK => 53,
+            Symbol::WHITE => 50,
+            Symbol::BLACK => 50,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))
+        $label = (new LinearCombinationLabeller(self::$permutations))
             ->label($end);
 
         $this->assertEquals($expected, $label);
@@ -90,11 +90,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 77,
-            Symbol::BLACK => 71,
+            Symbol::WHITE => 72,
+            Symbol::BLACK => 61.5,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))
+        $label = (new LinearCombinationLabeller(self::$permutations))
             ->label($end);
 
         $this->assertEquals($expected, $label);
@@ -114,11 +114,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 197,
-            Symbol::BLACK => 71,
+            Symbol::WHITE => 59,
+            Symbol::BLACK => 69.5,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
 
         $this->assertEquals($expected, $label);
     }
@@ -135,11 +135,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 53,
-            Symbol::BLACK => 197,
+            Symbol::WHITE => 38.7,
+            Symbol::BLACK => 80,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
 
         $this->assertEquals($expected, $label);
     }
@@ -156,11 +156,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 71,
-            Symbol::BLACK => 77,
+            Symbol::WHITE => 66.96,
+            Symbol::BLACK => 59.79,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
 
         $this->assertEquals($expected, $label);
     }
@@ -177,11 +177,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 77,
-            Symbol::BLACK => 3152,
+            Symbol::WHITE => 63.52,
+            Symbol::BLACK => 55.5,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
 
         $this->assertEquals($expected, $label);
     }
@@ -198,11 +198,11 @@ class OptimalLinearCombinationLabellerTest extends AbstractUnitTestCase
             ->end();
 
         $expected = [
-            Symbol::WHITE => 92,
-            Symbol::BLACK => 53,
+            Symbol::WHITE => 55.21,
+            Symbol::BLACK => 43.92,
         ];
 
-        $label = (new OptimalLinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
 
         $this->assertEquals($expected, $label);
     }
