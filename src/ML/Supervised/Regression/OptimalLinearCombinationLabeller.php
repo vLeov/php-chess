@@ -2,7 +2,7 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\PGN\Symbol;
+use Chess\ML\Supervised\AbstractOptimalLinearCombinationLabeller;
 
 /**
  * OptimalLinearCombinationLabeller
@@ -10,20 +10,8 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class OptimalLinearCombinationLabeller
+class OptimalLinearCombinationLabeller extends AbstractOptimalLinearCombinationLabeller
 {
-    const INIT = [
-        Symbol::WHITE => 0,
-        Symbol::BLACK => 0,
-    ];
-
-    private $permutations;
-
-    public function __construct(array $permutations = [])
-    {
-        $this->permutations = $permutations;
-    }
-
     public function label(array $end): array
     {
         $label = self::INIT;
@@ -39,36 +27,5 @@ class OptimalLinearCombinationLabeller
         }
 
         return $label;
-    }
-
-    public function balance(array $base = []): array
-    {
-        $balance = self::INIT;
-        foreach ($this->permutations as $weights) {
-            $current = 0;
-            foreach ($base as $key => $val) {
-                $current += $weights[$key] * $val;
-            }
-            $current = round($current, 2);
-            $current > $balance[Symbol::WHITE] ? $balance[Symbol::WHITE] = $current : null;
-            $current < $balance[Symbol::BLACK] ? $balance[Symbol::BLACK] = $current : null;
-        }
-
-        return $balance;
-    }
-
-    public function permute(array $end, string $color, float $label): ?array
-    {
-        foreach ($this->permutations as $weights) {
-            $sum = 0;
-            foreach ($end[$color] as $key => $val) {
-                $sum += $weights[$key] * $val;
-            }
-            if (round($sum, 2) === $label) {
-                return $weights;
-            }
-        }
-
-        return null;
     }
 }
