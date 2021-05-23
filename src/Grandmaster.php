@@ -4,20 +4,18 @@ namespace Chess;
 
 class Grandmaster
 {
-    private $filepath;
+    const FILEPATH = __DIR__.'/../model/grandmaster.csv';
 
     private $movetexts;
 
-    public function __construct(string $filepath)
+    public function __construct()
     {
-        $this->filepath = $filepath;
-
         $this->movetexts = [];
     }
 
     public function response(string $movetext)
     {
-        $file = new \SplFileObject($this->filepath);
+        $file = new \SplFileObject(self::FILEPATH);
         while (!$file->eof()) {
             $line = str_replace('"', '', $file->fgets());
             if (str_starts_with($line, $movetext)) {

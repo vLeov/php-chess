@@ -217,7 +217,7 @@ class Game
      */
     public function response()
     {
-        $response = (new Grandmaster(__DIR__.'/../model/grandmasters.csv'))
+        $response = (new Grandmaster())
             ->response($this->board->getMovetext());
 
         if ($response) {
