@@ -33,41 +33,41 @@ class OptimalLinearCombinationDecoder extends AbstractDecoder
                     case Symbol::KING:
                         if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
                             $this->result[] = [
-                                Symbol::CASTLING_SHORT => $this->balance($clone, $color, $prediction, $permutations)
+                                Symbol::CASTLING_SHORT => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
                             $this->result[] = [
-                                Symbol::CASTLING_LONG => $this->balance($clone, $color, $prediction, $permutations)
+                                Symbol::CASTLING_LONG => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
                             $this->result[] = [
-                                Symbol::KING.$square => $this->balance($clone, $color, $prediction, $permutations)
+                                Symbol::KING.$square => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
                             $this->result[] = [
-                                Symbol::KING.'x'.$square => $this->balance($clone, $color, $prediction, $permutations)
+                                Symbol::KING.'x'.$square => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         }
                         break;
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
                             $this->result[] = [
-                                $square => $this->balance($clone, $color, $prediction, $permutations)
+                                $square => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
                             $this->result[] = [
-                                $piece->getFile()."x$square" => $this->balance($clone, $color, $prediction, $permutations)
+                                $piece->getFile()."x$square" => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
                             $this->result[] = [
-                                $piece->getIdentity().$square => $this->balance($clone, $color, $prediction, $permutations)
+                                $piece->getIdentity().$square => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
                             $this->result[] = [
-                                "{$piece->getIdentity()}x$square" => $this->balance($clone, $color, $prediction, $permutations)
+                                "{$piece->getIdentity()}x$square" => $this->distance($clone, $color, $prediction, $permutations)
                             ];
                         }
                         break;
@@ -81,10 +81,10 @@ class OptimalLinearCombinationDecoder extends AbstractDecoder
             return current($a) <=> current($b);
         });
 
-        return $this->closest($prediction);
+        return key($this->result[0]);
     }
 
-    protected function balance(Board $clone, string $color, float $prediction, $permutations)
+    protected function distance(Board $clone, string $color, float $prediction, $permutations)
     {
         $end = (new HeuristicPicture($clone->getMovetext()))
             ->takeBalanced()
@@ -92,17 +92,6 @@ class OptimalLinearCombinationDecoder extends AbstractDecoder
 
         $balance = (new OptimalLinearCombinationLabeller($permutations))->balance($end);
 
-        return $balance[$color];
-    }
-
-    protected function closest(float $search)
-    {
-        $closest = [];
-        foreach ($this->result as $key => $val) {
-            $closest[$key] = abs(current($val) - $search);
-        }
-        asort($closest);
-
-        return key($this->result[array_key_first($closest)]);
+        return abs($prediction - $balance[$color]);
     }
 }
