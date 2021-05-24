@@ -2,14 +2,14 @@
 
 namespace Chess;
 
-use Chess\Heuristic\HeuristicPicture;
+use Chess\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SquareEvaluation;
-use Chess\ML\Supervised\Regression\LinearCombinationDecoder;
+use Chess\ML\Supervised\Classification\LinearCombinationDecoder;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\Persisters\Filesystem;
@@ -223,14 +223,13 @@ class Game
             return $response;
         }
 
-        $end = (new HeuristicPicture($this->board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($this->board->getMovetext()))
+            ->take()
+            ->getBalance();
 
-        $dataset = new Unlabeled([$end]);
+        $dataset = new Unlabeled([end($balance)]);
 
         $prediction = current($this->estimator->predict($dataset));
-        $prediction = round($prediction, 2);
 
         $response = (new LinearCombinationDecoder($this->board))
             ->decode($this->board->getTurn(), $prediction);
