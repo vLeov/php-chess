@@ -1,14 +1,14 @@
 <?php
 
-namespace Chess\Tests\Unit\Heuristic\Picture;
+namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
-use Chess\Heuristic\HeuristicPicture;
+use Chess\HeuristicPicture;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class EvaluateTest extends AbstractUnitTestCase
+class HeuristicPictureEvaluateTest extends AbstractUnitTestCase
 {
     /**
      * @test

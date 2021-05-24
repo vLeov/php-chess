@@ -1,16 +1,16 @@
 <?php
 
-namespace Chess\Tests\Unit\Heuristic\Picture;
+namespace Chess\Tests\Unit\Heuristic;
 
 use Chess\Board;
-use Chess\Heuristic\HeuristicPicture;
+use Chess\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 
-class TakeTest extends AbstractUnitTestCase
+class HeuristicPictureTakeTest extends AbstractUnitTestCase
 {
     /**
      * @test

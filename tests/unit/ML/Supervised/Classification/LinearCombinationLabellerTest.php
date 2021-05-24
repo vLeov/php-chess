@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
 use Chess\Board;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
-use Chess\Heuristic\HeuristicPicture;
+use Chess\HeuristicPicture;
 use Chess\ML\Supervised\Classification\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
