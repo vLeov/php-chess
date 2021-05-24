@@ -31,6 +31,8 @@ class HeuristicPicture extends Player
 
     protected $picture = [];
 
+    protected $balance = [];
+
     public function getDimensions()
     {
         return $this->dimensions;
@@ -48,8 +50,21 @@ class HeuristicPicture extends Player
         return $this->picture;
     }
 
+    public function end(): array
+    {
+        return [
+            Symbol::WHITE => end($this->picture[Symbol::WHITE]),
+            Symbol::BLACK => end($this->picture[Symbol::BLACK]),
+        ];
+    }
+
+    public function getBalance(): array
+    {
+        return $this->balance;
+    }
+
     /**
-     * Takes a normalized, heuristic picture.
+     * Takes a normalized, balanced heuristic picture.
      *
      * @return \Chess\Heuristic\HeuristicPicture
      */
@@ -73,40 +88,9 @@ class HeuristicPicture extends Player
             $this->picture[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
         }
 
-        $this->normalize();
+        $this->normalize()->balance();
 
         return $this;
-    }
-
-    /**
-     * Takes a normalized, balanced heuristic picture.
-     *
-     * @return \Chess\Heuristic\HeuristicPicture
-     */
-    public function takeBalanced(): HeuristicPicture
-    {
-        $balanced = [];
-        $pic = $this->take()->getPicture();
-        foreach ($pic[Symbol::WHITE] as $i => $color) {
-            foreach ($color as $j => $val) {
-                $balanced[$i][$j] = $pic[Symbol::WHITE][$i][$j] - $pic[Symbol::BLACK][$i][$j];
-            }
-        }
-        $this->picture = $balanced;
-
-        return $this;
-    }
-
-    public function end(): array
-    {
-        if (isset($this->picture[Symbol::WHITE]) && isset($this->picture[Symbol::BLACK])) {
-            return [
-                Symbol::WHITE => end($this->picture[Symbol::WHITE]),
-                Symbol::BLACK => end($this->picture[Symbol::BLACK]),
-            ];
-        }
-
-        return end($this->picture);
     }
 
     public function evaluate(): array
@@ -158,5 +142,18 @@ class HeuristicPicture extends Player
         }
 
         $this->picture = $normalization;
+
+        return $this;
+    }
+
+    protected function balance()
+    {
+        foreach ($this->picture[Symbol::WHITE] as $i => $color) {
+            foreach ($color as $j => $val) {
+                $this->balance[$i][$j] = $this->picture[Symbol::WHITE][$i][$j] - $this->picture[Symbol::BLACK][$i][$j];
+            }
+        }
+
+        return $this;
     }
 }

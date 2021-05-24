@@ -37,18 +37,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
@@ -60,18 +60,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 0,
             Symbol::BLACK => 0,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
@@ -83,18 +83,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Na6'));
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 44,
             Symbol::BLACK => -23,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
@@ -106,18 +106,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 18,
             Symbol::BLACK => -39,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
@@ -127,18 +127,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 0,
             Symbol::BLACK => -67.2,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
@@ -148,18 +148,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 38.32,
             Symbol::BLACK => -28.48,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
@@ -169,18 +169,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 33.72,
             Symbol::BLACK => -15.03,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
@@ -190,18 +190,18 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $end = (new HeuristicPicture($board->getMovetext()))
-            ->takeBalanced()
-            ->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
         $expected = [
             Symbol::WHITE => 27.06,
             Symbol::BLACK => -10.05,
         ];
 
-        $balance = (new LinearCombinationLabeller(self::$permutations))->balance($end);
+        $label = (new LinearCombinationLabeller(self::$permutations))->balance(end($balance));
 
-        $this->assertEquals($expected, $balance);
+        $this->assertEquals($expected, $label);
     }
 
     /**
