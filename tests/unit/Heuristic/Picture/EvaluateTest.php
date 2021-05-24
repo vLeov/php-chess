@@ -1,16 +1,14 @@
 <?php
 
-namespace Chess\Tests\Unit\Heuristic;
+namespace Chess\Tests\Unit\Heuristic\Picture;
 
 use Chess\Board;
-use Chess\Heuristic\LinearCombinationEvaluation;
 use Chess\Heuristic\HeuristicPicture;
-use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class LinearCombinationEvaluationTest extends AbstractUnitTestCase
+class EvaluateTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -21,7 +19,7 @@ class LinearCombinationEvaluationTest extends AbstractUnitTestCase
 
         $heuristicPicture = new HeuristicPicture($board->getMovetext());
 
-        $evaluation = (new LinearCombinationEvaluation($heuristicPicture))->evaluate();
+        $evaluation = $heuristicPicture->evaluate();
 
         $expected = [
             Symbol::WHITE => 46.3,

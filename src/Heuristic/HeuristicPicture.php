@@ -109,6 +109,28 @@ class HeuristicPicture extends Player
         return end($this->picture);
     }
 
+    public function evaluate(): array
+    {
+        $result = [
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
+        ];
+
+        $weights = array_values($this->getDimensions());
+
+        $pic = $this->take()->getPicture();
+
+        for ($i = 0; $i < count($this->getDimensions()); $i++) {
+            $result[Symbol::WHITE] += $weights[$i] * end($pic[Symbol::WHITE])[$i];
+            $result[Symbol::BLACK] += $weights[$i] * end($pic[Symbol::BLACK])[$i];
+        }
+
+        $result[Symbol::WHITE] = round($result[Symbol::WHITE], 2);
+        $result[Symbol::BLACK] = round($result[Symbol::BLACK], 2);
+
+        return $result;
+    }
+
     protected function normalize()
     {
         $normalization = [];
