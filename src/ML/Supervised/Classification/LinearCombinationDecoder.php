@@ -86,8 +86,11 @@ class LinearCombinationDecoder extends AbstractDecoder
 
         $this->result = array_map("unserialize", array_unique(array_map("serialize", $this->result)));
 
-        usort($this->result, function ($a, $b) {
-            return current($b) <=> current($a);
+        usort($this->result, function ($a, $b) use ($color) {
+            $color === Symbol::WHITE
+                ? $current = current($b) <=> current($a)
+                : $current = current($a) <=> current($b);
+            return $current;;
         });
 
         return key($this->result[0]);
@@ -97,23 +100,27 @@ class LinearCombinationDecoder extends AbstractDecoder
     {
         $permutation = $permutations[$prediction];
 
-        $end = (new HeuristicPicture($clone->getMovetext()))
-            ->setDimensions([
-                MaterialEvaluation::class => $permutation[0],
-                CenterEvaluation::class => $permutation[1],
-                ConnectivityEvaluation::class => $permutation[2],
-                SpaceEvaluation::class => $permutation[3],
-                PressureEvaluation::class => $permutation[4],
-                KingSafetyEvaluation::class => $permutation[5],
-                TacticsEvaluation::class => $permutation[6],
-                AttackEvaluation::class => $permutation[7],
-            ])
+        $dimensions = [
+            MaterialEvaluation::class => $permutation[0],
+            CenterEvaluation::class => $permutation[1],
+            ConnectivityEvaluation::class => $permutation[2],
+            SpaceEvaluation::class => $permutation[3],
+            PressureEvaluation::class => $permutation[4],
+            KingSafetyEvaluation::class => $permutation[5],
+            TacticsEvaluation::class => $permutation[6],
+            AttackEvaluation::class => $permutation[7],
+        ];
+
+        $balance = (new HeuristicPicture($clone->getMovetext()))
+            ->setDimensions($dimensions)
             ->take()
-            ->end();
+            ->getBalance();
+
+        $end = end($balance);
 
         $evald = 0;
         foreach ($permutation as $key => $weight) {
-            $evald += $weight * $end[$color][$key];
+            $evald += $weight * $end[$key];
         }
 
         return $evald;
