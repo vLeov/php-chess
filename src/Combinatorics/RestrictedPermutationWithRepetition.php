@@ -21,6 +21,6 @@ class RestrictedPermutationWithRepetition extends AbstractPermutation
             }
         }
 
-        return $a;
+        return array_values($a);
     }
 }
