@@ -19,14 +19,14 @@ use Chess\PGN\Symbol;
 class HeuristicPicture extends Player
 {
     protected $dimensions = [
-        MaterialEvaluation::class => 20,
-        CenterEvaluation::class => 20,
-        ConnectivityEvaluation::class => 10,
-        SpaceEvaluation::class => 10,
-        PressureEvaluation::class => 10,
-        KingSafetyEvaluation::class => 10,
-        TacticsEvaluation::class => 10,
-        AttackEvaluation::class => 10,
+        MaterialEvaluation::class => 34,
+        CenterEvaluation::class => 13,
+        ConnectivityEvaluation::class => 13,
+        SpaceEvaluation::class => 8,
+        PressureEvaluation::class => 8,
+        KingSafetyEvaluation::class => 8,
+        TacticsEvaluation::class => 8,
+        AttackEvaluation::class => 8,
     ];
 
     protected $picture = [];
