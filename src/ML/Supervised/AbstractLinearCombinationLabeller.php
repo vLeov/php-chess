@@ -67,8 +67,8 @@ abstract class AbstractLinearCombinationLabeller
         }
         usort($guesses, function ($a, $b) use ($color) {
             $color === Symbol::WHITE
-                ? $ordered = $a['eval'] < $b['eval']
-                : $ordered = $a['eval'] > $b['eval'] ;
+                ? $ordered = $b['eval'] <=> $a['eval']
+                : $ordered = $a['eval'] <=> $b['eval'] ;
             return $ordered;
         });
 
