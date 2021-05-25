@@ -65,12 +65,11 @@ abstract class AbstractLinearCombinationLabeller
                 'weights' => $weights,
             ];
         }
-        usort($guesses, function ($a, $b) use ($color) {
-            $color === Symbol::WHITE
-                ? $ordered = $b['eval'] <=> $a['eval']
-                : $ordered = $a['eval'] <=> $b['eval'] ;
-            return $ordered;
-        });
+        if ($color === Symbol::WHITE) {
+            array_multisort(array_column($guesses, 'eval'), SORT_DESC, $guesses);
+        } else {
+            array_multisort(array_column($guesses, 'eval'), SORT_ASC, $guesses);
+        }
 
         return $guesses;
     }

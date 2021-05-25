@@ -235,9 +235,9 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'n' => 198,
+            'n' => 55,
             'eval' => -10.05,
-            'weights' => [ 8, 8, 13, 8, 34, 8, 13, 8 ],
+            'weights' => [ 13, 8, 13, 8, 34, 8, 8, 8 ],
         ];
 
         $guesses = (new LinearCombinationLabeller(self::$permutations))
