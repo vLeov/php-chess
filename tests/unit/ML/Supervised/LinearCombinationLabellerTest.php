@@ -211,12 +211,16 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
-        $end = (new HeuristicPicture($board->getMovetext()))->take()->end();
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
 
-        $expected = [ 8, 8, 34, 13, 13, 8, 8, 8 ];
+        $end = end($balance);
+
+        $expected = [ 21, 8, 13, 8, 21, 13, 8, 8 ];
 
         $permutation = (new LinearCombinationLabeller(self::$permutations))
-            ->extractPermutation($end, Symbol::BLACK, 43.92);
+            ->extractPermutation($end, -3.55);
 
         $this->assertEquals($expected, $permutation);
     }
