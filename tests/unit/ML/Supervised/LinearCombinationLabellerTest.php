@@ -216,7 +216,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $expected = [ 8, 8, 34, 13, 13, 8, 8, 8 ];
 
         $permutation = (new LinearCombinationLabeller(self::$permutations))
-            ->permute($end, Symbol::BLACK, 43.92);
+            ->extractPermutation($end, Symbol::BLACK, 43.92);
 
         $this->assertEquals($expected, $permutation);
     }

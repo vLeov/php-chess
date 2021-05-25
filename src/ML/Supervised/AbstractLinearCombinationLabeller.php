@@ -36,7 +36,7 @@ abstract class AbstractLinearCombinationLabeller
         return $balance;
     }
 
-    public function permute(array $end, string $color, float $label): ?array
+    public function extractPermutation(array $end, string $color, float $label): ?array
     {
         foreach ($this->permutations as $weights) {
             $sum = 0;
