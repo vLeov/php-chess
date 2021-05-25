@@ -224,7 +224,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian_guess_permutations()
+    public function closed_sicilian_calc_permutations()
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
@@ -240,9 +240,9 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             'weights' => [ 13, 8, 13, 8, 34, 8, 8, 8 ],
         ];
 
-        $guesses = (new LinearCombinationLabeller(self::$permutations))
+        $calc = (new LinearCombinationLabeller(self::$permutations))
             ->permute($end, Symbol::BLACK);
 
-        $this->assertEquals($expected, $guesses[0]);
+        $this->assertEquals($expected, $calc[0]);
     }
 }
