@@ -241,7 +241,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         ];
 
         $guesses = (new LinearCombinationLabeller(self::$permutations))
-            ->guessPermutations($end, Symbol::BLACK);
+            ->permute($end, Symbol::BLACK);
 
         $this->assertEquals($expected, $guesses[0]);
     }

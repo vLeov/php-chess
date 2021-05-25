@@ -15,6 +15,7 @@ use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SquareEvaluation;
 use Chess\Evaluation\TacticsEvaluation;
 use Chess\ML\Supervised\AbstractDecoder;
+use Chess\ML\Supervised\Classification\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
@@ -30,7 +31,7 @@ class LinearCombinationDecoder extends AbstractDecoder
     {
         $permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [ 8, 13, 21, 34],
+                [ 8, 13, 21, 34 ],
                 count((new HeuristicPicture(''))->getDimensions()),
                 100
             );
@@ -88,9 +89,9 @@ class LinearCombinationDecoder extends AbstractDecoder
 
         usort($this->result, function ($a, $b) use ($color) {
             $color === Symbol::WHITE
-                ? $current = current($b) <=> current($a)
-                : $current = current($a) <=> current($b);
-            return $current;;
+                ? $current = current($b)['eval'] <=> current($a)['eval']
+                : $current = current($a)['eval'] <=> current($b)['eval'];
+            return $current;
         });
 
         return key($this->result[0]);
@@ -100,29 +101,22 @@ class LinearCombinationDecoder extends AbstractDecoder
     {
         $permutation = $permutations[$prediction];
 
-        $dimensions = [
-            MaterialEvaluation::class => $permutation[0],
-            CenterEvaluation::class => $permutation[1],
-            ConnectivityEvaluation::class => $permutation[2],
-            SpaceEvaluation::class => $permutation[3],
-            PressureEvaluation::class => $permutation[4],
-            KingSafetyEvaluation::class => $permutation[5],
-            TacticsEvaluation::class => $permutation[6],
-            AttackEvaluation::class => $permutation[7],
-        ];
-
         $balance = (new HeuristicPicture($clone->getMovetext()))
-            ->setDimensions($dimensions)
             ->take()
             ->getBalance();
 
         $end = end($balance);
 
-        $evald = 0;
-        foreach ($permutation as $key => $weight) {
-            $evald += $weight * $end[$key];
-        }
+        $calc = (new LinearCombinationLabeller($permutations))
+            ->permute($end, Symbol::BLACK);
 
-        return $evald;
+        foreach ($calc as $key => $val) {
+            if ($prediction === $val['n']) {
+                return [
+                    'n' => $key,
+                    'eval' => $val['eval'],
+                ];
+            }
+        }
     }
 }

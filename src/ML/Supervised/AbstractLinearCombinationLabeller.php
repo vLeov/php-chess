@@ -51,26 +51,26 @@ abstract class AbstractLinearCombinationLabeller
         return null;
     }
 
-    public function guessPermutations(array $end, string $color): array
+    public function permute(array $end, string $color): array
     {
-        $guesses = [];
+        $result = [];
         foreach ($this->permutations as $i => $weights) {
             $sum = 0;
             foreach ($end as $j => $val) {
                 $sum += $weights[$j] * $val;
             }
-            $guesses[] = [
+            $result[] = [
                 'n' => $i,
                 'eval' => round($sum, 2),
                 'weights' => $weights,
             ];
         }
         if ($color === Symbol::WHITE) {
-            array_multisort(array_column($guesses, 'eval'), SORT_DESC, $guesses);
+            array_multisort(array_column($result, 'eval'), SORT_DESC, $result);
         } else {
-            array_multisort(array_column($guesses, 'eval'), SORT_ASC, $guesses);
+            array_multisort(array_column($result, 'eval'), SORT_ASC, $result);
         }
 
-        return $guesses;
+        return $result;
     }
 }
