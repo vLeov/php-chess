@@ -50,4 +50,28 @@ abstract class AbstractLinearCombinationLabeller
 
         return null;
     }
+
+    public function guessPermutations(array $end, string $color): array
+    {
+        $guesses = [];
+        foreach ($this->permutations as $i => $weights) {
+            $sum = 0;
+            foreach ($end as $j => $val) {
+                $sum += $weights[$j] * $val;
+            }
+            $guesses[] = [
+                'n' => $i,
+                'eval' => round($sum, 2),
+                'weights' => $weights,
+            ];
+        }
+        usort($guesses, function ($a, $b) use ($color) {
+            $color === Symbol::WHITE
+                ? $ordered = $a['eval'] < $b['eval']
+                : $ordered = $a['eval'] > $b['eval'] ;
+            return $ordered;
+        });
+
+        return $guesses;
+    }
 }

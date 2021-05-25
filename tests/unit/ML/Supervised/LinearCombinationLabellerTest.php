@@ -207,7 +207,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian_permuted()
+    public function closed_sicilian_extract_permutation()
     {
         $board = (new ClosedSicilian(new Board()))->play();
 
@@ -219,5 +219,30 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             ->extractPermutation($end, Symbol::BLACK, 43.92);
 
         $this->assertEquals($expected, $permutation);
+    }
+
+    /**
+     * @test
+     */
+    public function closed_sicilian_guess_permutations()
+    {
+        $board = (new ClosedSicilian(new Board()))->play();
+
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
+
+        $end = end($balance);
+
+        $expected = [
+            'n' => 198,
+            'eval' => -10.05,
+            'weights' => [ 8, 8, 13, 8, 34, 8, 13, 8 ],
+        ];
+
+        $guesses = (new LinearCombinationLabeller(self::$permutations))
+            ->guessPermutations($end, Symbol::BLACK);
+
+        $this->assertEquals($expected, $guesses[0]);
     }
 }
