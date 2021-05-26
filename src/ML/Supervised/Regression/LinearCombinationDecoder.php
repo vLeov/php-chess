@@ -3,8 +3,7 @@
 namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
-use Chess\Combinatorics\RestrictedPermutationWithRepetition;
-use Chess\Heuristic\HeuristicPicture;
+use Chess\HeuristicPicture;
 use Chess\ML\Supervised\AbstractDecoder;
 use Chess\ML\Supervised\Regression\LinearCombinationLabeller;
 use Chess\PGN\Convert;
@@ -18,58 +17,36 @@ use Chess\PGN\Symbol;
  */
 class LinearCombinationDecoder extends AbstractDecoder
 {
-    public function decode(string $color, float $prediction): string
+    public function decode(float $prediction): string
     {
-        $permutations = (new RestrictedPermutationWithRepetition())
-            ->get(
-                [ 8, 13, 21, 34],
-                count((new HeuristicPicture(''))->getDimensions()),
-                100
-            );
-
+        $color = $this->board->getTurn();
         foreach ($this->board->getPiecesByColor($color) as $piece) {
             foreach ($piece->getLegalMoves() as $square) {
                 $clone = unserialize(serialize($this->board));
                 switch ($piece->getIdentity()) {
                     case Symbol::KING:
                         if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
-                            $this->result[] = [
-                                Symbol::CASTLING_SHORT => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ Symbol::CASTLING_SHORT => $this->distance($clone, $prediction) ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
-                            $this->result[] = [
-                                Symbol::CASTLING_LONG => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ Symbol::CASTLING_LONG => $this->distance($clone, $prediction) ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
-                            $this->result[] = [
-                                Symbol::KING.$square => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ Symbol::KING.$square => $this->distance($clone, $prediction) ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
-                            $this->result[] = [
-                                Symbol::KING.'x'.$square => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ Symbol::KING.'x'.$square => $this->distance($clone, $prediction) ];
                         }
                         break;
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
-                            $this->result[] = [
-                                $square => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ $square => $this->distance($clone, $prediction) ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
-                            $this->result[] = [
-                                $piece->getFile()."x$square" => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ $piece->getFile()."x$square" => $this->distance($clone, $prediction) ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
-                            $this->result[] = [
-                                $piece->getIdentity().$square => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ $piece->getIdentity().$square => $this->distance($clone, $prediction) ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
-                            $this->result[] = [
-                                "{$piece->getIdentity()}x$square" => $this->distance($clone, $color, $prediction, $permutations)
-                            ];
+                            $this->result[] = [ "{$piece->getIdentity()}x$square" => $this->distance($clone, $prediction) ];
                         }
                         break;
                 }
@@ -85,13 +62,13 @@ class LinearCombinationDecoder extends AbstractDecoder
         return key($this->result[0]);
     }
 
-    protected function distance(Board $clone, string $color, float $prediction, $permutations)
+    protected function distance(Board $clone, float $prediction)
     {
         $end = (new HeuristicPicture($clone->getMovetext()))
             ->takeBalanced()
             ->end();
 
-        $balance = (new LinearCombinationLabeller($permutations))->balance($end);
+        $balance = (new LinearCombinationLabeller($this->permutations))->balance($end);
 
         return abs($prediction - $balance[$color]);
     }

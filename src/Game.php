@@ -8,10 +8,8 @@ use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\Evaluation\SquareEvaluation;
 use Chess\ML\Supervised\Classification\LinearCombinationDecoder;
 use Rubix\ML\PersistentModel;
-use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\Persisters\Filesystem;
 
 /**
@@ -223,16 +221,8 @@ class Game
             return $response;
         }
 
-        $balance = (new HeuristicPicture($this->board->getMovetext()))
-            ->take()
-            ->getBalance();
-
-        $dataset = new Unlabeled([end($balance)]);
-
-        $prediction = current($this->estimator->predict($dataset));
-
-        $response = (new LinearCombinationDecoder($this->board))
-            ->decode($this->board->getTurn(), $prediction);
+        $response = (new LinearCombinationDecoder($this->board, $this->estimator))
+            ->decode();
 
         return $response;
     }
