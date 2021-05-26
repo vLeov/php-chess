@@ -8,12 +8,12 @@ use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Rubix\ML\PersistentModel;
 
 /**
- * AbstractDecoder
+ * AbstractLinearCombinationPredictor
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-abstract class AbstractDecoder
+abstract class AbstractLinearCombinationPredictor
 {
     protected $board;
 

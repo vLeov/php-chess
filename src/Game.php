@@ -8,7 +8,7 @@ use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\ML\Supervised\Classification\LinearCombinationDecoder;
+use Chess\ML\Supervised\Classification\LinearCombinationPredictor;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 
@@ -221,8 +221,8 @@ class Game
             return $response;
         }
 
-        $response = (new LinearCombinationDecoder($this->board, $this->estimator))
-            ->decode();
+        $response = (new LinearCombinationPredictor($this->board, $this->estimator))
+            ->predict();
 
         return $response;
     }

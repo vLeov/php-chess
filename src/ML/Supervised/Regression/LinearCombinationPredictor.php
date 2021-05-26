@@ -4,20 +4,20 @@ namespace Chess\ML\Supervised\Regression;
 
 use Chess\Board;
 use Chess\HeuristicPicture;
-use Chess\ML\Supervised\AbstractDecoder;
+use Chess\ML\Supervised\AbstractLinearCombinationPredictor;
 use Chess\ML\Supervised\Regression\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 /**
- * LinearCombinationDecoder
+ * LinearCombinationPredictor
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class LinearCombinationDecoder extends AbstractDecoder
+class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
 {
-    public function decode(float $prediction): string
+    public function predict(float $prediction): string
     {
         $color = $this->board->getTurn();
         foreach ($this->board->getPiecesByColor($color) as $piece) {
