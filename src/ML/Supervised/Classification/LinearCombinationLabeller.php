@@ -3,6 +3,7 @@
 namespace Chess\ML\Supervised\Classification;
 
 use Chess\ML\Supervised\AbstractLinearCombinationLabeller;
+use Chess\PGN\Symbol;
 
 /**
  * LinearCombinationLabeller
@@ -14,18 +15,18 @@ class LinearCombinationLabeller extends AbstractLinearCombinationLabeller
 {
     public function label(array $end): array
     {
-        $label = self::INIT;
+        $sums = [];
         foreach ($this->permutations as $i => $weights) {
-            $current = self::INIT;
-            foreach ($end as $color => $arr) {
-                foreach ($arr as $key => $val) {
-                    $current[$color] += $weights[$key] * $val;
-                }
-                $current[$color] = round($current[$color], 2);
-                $current[$color] > $label[$color] ? $label[$color] = $i : null;
+            $current = 0;
+            foreach ($end as $j => $val) {
+                $current += $weights[$j] * $val;
             }
+            $sums[$i] = round($current, 2);
         }
 
-        return $label;
+        return [
+            Symbol::WHITE => array_search(max($sums), $sums),
+            Symbol::BLACK => array_search(min($sums), $sums),
+        ];
     }
 }
