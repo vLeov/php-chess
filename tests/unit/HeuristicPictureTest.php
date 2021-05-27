@@ -251,4 +251,102 @@ class HeuristicPictureTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $evaluation);
     }
+
+    /**
+     * @test
+     */
+    public function e4_e6_take_get_balance()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e6'));
+
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
+
+        $expected = [
+            [ 0, 1, -1, 1, 0, 0, 0, 0 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e6_d4_d5_take_get_balance()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'd5'));
+
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
+
+        $expected = [
+            [ 0, 0.5, -0.4, 0.17, 0, 0, 0, 0 ],
+            [ 0, 1, -0.6, 0.83, 0, 0, -1, -1 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e6_d4_d5_Nd2_Nf6_take_get_balance()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'd5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nd2'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
+
+        $expected = [
+            [ 0, 0.5, -0.25, 0.17, 0, 0, 0, 0 ],
+            [ 0, 1, -0.38, 0.83, 0, 0, -0.5, -0.5 ],
+            [ 0, 1, -0.5, 0.33, -0.5, 0, -1, -1 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e6_d4_d5_Nd2_Nf6_e5_Nfd7_take_get_balance()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'd5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nd2'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e5'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nfd7'));
+
+        $balance = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getBalance();
+
+        $expected = [
+            [ 0, 0.5, -0.25, 0.17, 0, 0, 0, 0 ],
+            [ 0, 1, -0.38, 0.83, 0, 0, -0.5, -0.5 ],
+            [ 0, 1, -0.5, 0.33, -0.5, 0, -1, -1 ],
+            [ 0, 0.5, -0.38, 0.34, -0.5, 0, 0, 0 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
 }
