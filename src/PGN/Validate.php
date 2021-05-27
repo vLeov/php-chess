@@ -3,6 +3,7 @@
 namespace Chess\PGN;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\PGN\Movetext;
 use Chess\PGN\Symbol;
 use Chess\PGN\Tag;
 
@@ -61,13 +62,10 @@ class Validate
                 $isValid = true;
             }
         }
-
         if (!$isValid) {
             throw new UnknownNotationException("This tag is not valid: $tag.");
         }
-
         $exploded = explode(' "', $tag);
-
         $result = (object) [
             'name' => substr($exploded[0], 1),
             'value' => substr($exploded[1], 0, -2),
@@ -123,73 +121,7 @@ class Validate
      */
     public static function movetext(string $text)
     {
-        $movetext = (object) [
-            'numbers' => [],
-            'notations' => [],
-        ];
-
-        // remove comments
-        $text = preg_replace("/\{[^)]+\}/", '', $text);
-        // remove spaces between dots
-        $text = preg_replace('/\s+\./', '.', $text);
-
-        $moves = array_filter(explode(' ', $text));
-        foreach ($moves as $move) {
-            if (preg_match('/^[1-9][0-9]*\.(.*)$/', $move)) {
-                $exploded = explode('.', $move);
-                $movetext->numbers[] = $exploded[0];
-                $movetext->notations[] = $exploded[1];
-            } else {
-                $movetext->notations[] = $move;
-            }
-        }
-
-        $movetext->notations = array_values(array_filter($movetext->notations));
-
-        $areConsecutiveNumbers = 1;
-
-        for ($i = 0; $i < count($movetext->numbers); $i++) {
-            $areConsecutiveNumbers *= (int) $movetext->numbers[$i] == $i + 1;
-        }
-
-        if (!$areConsecutiveNumbers) {
-            return false;
-        }
-
-        foreach ($movetext->notations as $move) {
-            if ($move !== Symbol::RESULT_WHITE_WINS &&
-                $move !== Symbol::RESULT_BLACK_WINS &&
-                $move !== Symbol::RESULT_DRAW &&
-                $move !== Symbol::RESULT_UNKNOWN
-               ) {
-                try {
-                    self::move($move);
-                } catch (UnknownNotationException $e) {
-                    return false;
-                }
-            }
-        }
-
-        /*
-         * Filters the movetext.
-         *
-         *      Example:
-         *
-         *          1.e4  e5 2.  f4 exf4 3. Bc4 d5 4.Bxd5 Qh4+
-         *
-         *      is filtered this way:
-         *
-         *          1.e4 e5 2.f4 exf4 3.Bc4 d5 4.Bxd5 Qh4+
-         */
-        $filtered = '';
-        for ($i = 0; $i < count($movetext->numbers); $i++) {
-            $filtered .= $movetext->numbers[$i] . '.' . $movetext->notations[$i*2] . ' ';
-            if (isset($movetext->notations[$i*2+1])) {
-                $filtered .= $movetext->notations[$i*2+1] . ' ';
-            }
-        }
-
-        return trim($filtered);
+        return (new Movetext($text))->validate();
     }
 
     /**
