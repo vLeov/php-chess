@@ -349,4 +349,58 @@ class HeuristicPictureTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $balance);
     }
+
+    /**
+     * @test
+     */
+    public function e4_e6_take_get_picture()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e6'));
+
+        $pic = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getPicture();
+
+        $expected = [
+            Symbol::WHITE => [
+                [ 0.5, 1, 0, 1, 0.5, 0.5, 0.5, 0.5 ],
+            ],
+            Symbol::BLACK => [
+                [ 0.5, 0, 1, 0, 0.5, 0.5, 0.5, 0.5 ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $pic);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e6_d4_d5_take_get_picture()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'd5'));
+
+        $pic = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getPicture();
+
+        $expected = [
+            Symbol::WHITE => [
+                [ 0.25, 0.5, 0.6, 0.17, 0, 0.25, 0, 0 ],
+                [ 0.25, 1, 0, 1, 1, 0.25, 0, 0 ],
+            ],
+            Symbol::BLACK => [
+                [ 0.25, 0, 1, 0, 0, 0.25, 0, 0 ],
+                [ 0.25, 0, 0.6, 0.17, 1, 0.25, 1, 1 ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $pic);
+    }
 }
