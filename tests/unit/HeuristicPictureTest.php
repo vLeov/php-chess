@@ -403,4 +403,37 @@ class HeuristicPictureTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $pic);
     }
+
+    /**
+     * @test
+     */
+    public function e4_e6_d4_d5_Nd2_Nf6_take_get_picture()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'd4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'd5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nd2'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+
+        $pic = (new HeuristicPicture($board->getMovetext()))
+            ->take()
+            ->getPicture();
+
+        $expected = [
+            Symbol::WHITE => [
+                [ 0, 0.5, 0.38, 0.17, 0, 0.17, 0, 0 ],
+                [ 0, 1, 0, 1, 0.5, 0.17, 0, 0 ],
+                [ 1, 1, 0.5, 0.5, 0.5, 0.17, 0, 0 ],
+            ],
+            Symbol::BLACK => [
+                [ 0, 0, 0.63, 0, 0, 0.17, 0, 0 ],
+                [ 0, 0, 0.38, 0.17, 0.5, 0.17, 0.5, 0.5 ],
+                [ 1, 0, 1, 0.17, 1, 0.17, 1, 1 ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $pic);
+    }
 }
