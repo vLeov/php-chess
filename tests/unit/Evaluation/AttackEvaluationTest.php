@@ -84,4 +84,28 @@ class AttackEvaluationTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $tacticsEvald);
     }
+
+    /**
+     * @test
+     */
+    public function e4_e5_Nf3_Nf6_a3_Nxe4_d3()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'a3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nxe4'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'd3'));
+
+        $tacticsEvald = (new AttackEvaluation($board))->evaluate();
+
+        $expected = [
+            Symbol::WHITE => 4.2,
+            Symbol::BLACK => 0,
+        ];
+
+        $this->assertEquals($expected, $tacticsEvald);
+    }
 }
