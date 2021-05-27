@@ -10,13 +10,13 @@ class Movetext
 {
     private $text;
 
-    private $movetext;
+    private $order;
 
     public function __construct(string $text)
     {
         $this->text = $text;
 
-        $this->movetext = (object) [
+        $this->order = (object) [
             'n' => [],
             'move' => [],
         ];
@@ -24,12 +24,17 @@ class Movetext
         $this->build();
     }
 
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
     public function validate()
     {
-        if (!$this->areConsecutiveNumbers()) {
+        if (!$this->areOrdered()) {
             return false;
         }
-        foreach ($this->movetext->move as $move) {
+        foreach ($this->order->move as $move) {
             if ($move !== Symbol::RESULT_WHITE_WINS &&
                 $move !== Symbol::RESULT_BLACK_WINS &&
                 $move !== Symbol::RESULT_DRAW &&
@@ -44,6 +49,18 @@ class Movetext
         }
 
         return $this->filter();
+    }
+
+    public function sequence(): array
+    {
+        $sequence = [];
+        for ($i = 0; $i < count($this->order->n); $i++) {
+            $j = 2 * $i;
+            $item = end($sequence) . " {$this->order->n[$i]}.{$this->order->move[$j]} {$this->order->move[$j+1]}";
+            $sequence[] = trim($item);
+        }
+
+        return $sequence;
     }
 
     /**
@@ -62,10 +79,10 @@ class Movetext
     protected function filter()
     {
         $filtered = '';
-        for ($i = 0; $i < count($this->movetext->n); $i++) {
-            $filtered .= $this->movetext->n[$i] . '.' . $this->movetext->move[$i*2] . ' ';
-            if (isset($this->movetext->move[$i*2+1])) {
-                $filtered .= $this->movetext->move[$i*2+1] . ' ';
+        for ($i = 0; $i < count($this->order->n); $i++) {
+            $filtered .= $this->order->n[$i] . '.' . $this->order->move[$i*2] . ' ';
+            if (isset($this->order->move[$i*2+1])) {
+                $filtered .= $this->order->move[$i*2+1] . ' ';
             }
         }
 
@@ -82,23 +99,23 @@ class Movetext
         foreach ($moves as $move) {
             if (preg_match('/^[1-9][0-9]*\.(.*)$/', $move)) {
                 $exploded = explode('.', $move);
-                $this->movetext->n[] = $exploded[0];
-                $this->movetext->move[] = $exploded[1];
+                $this->order->n[] = $exploded[0];
+                $this->order->move[] = $exploded[1];
             } else {
-                $this->movetext->move[] = $move;
+                $this->order->move[] = $move;
             }
         }
 
-        $this->movetext->move = array_values(array_filter($this->movetext->move));
+        $this->order->move = array_values(array_filter($this->order->move));
     }
 
-    protected function areConsecutiveNumbers(): bool
+    protected function areOrdered(): bool
     {
-        $areConsecutiveNumbers = 1;
-        for ($i = 0; $i < count($this->movetext->n); $i++) {
-            $areConsecutiveNumbers *= (int) $this->movetext->n[$i] == $i + 1;
+        $areOrdered = 1;
+        for ($i = 0; $i < count($this->order->n); $i++) {
+            $areOrdered *= (int) $this->order->n[$i] == $i + 1;
         }
 
-        return (bool) $areConsecutiveNumbers;
+        return (bool) $areOrdered;
     }
 }
