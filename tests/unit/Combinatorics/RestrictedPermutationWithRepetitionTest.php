@@ -10,7 +10,19 @@ class RestrictedPermutationWithRepetitionTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function first()
+    public function count_8_13_21_34()
+    {
+        $set = (new RestrictedPermutationWithRepetition())->get([8, 13, 21, 34], 8, 100);
+
+        $expected = 588;
+
+        $this->assertEquals($expected, count($set));
+    }
+
+    /**
+     * @test
+     */
+    public function first_8_13_21_34()
     {
         $set = (new RestrictedPermutationWithRepetition())->get([8, 13, 21, 34], 8, 100);
 
@@ -22,7 +34,19 @@ class RestrictedPermutationWithRepetitionTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fibonacci_3_5_8_13_21()
+    public function last_8_13_21_34()
+    {
+        $set = (new RestrictedPermutationWithRepetition())->get([8, 13, 21, 34], 8, 100);
+
+        $expected = [ 8, 8, 8, 8, 8, 13, 13, 34 ];
+
+        $this->assertEquals($expected, end($set));
+    }
+
+    /**
+     * @test
+     */
+    public function count_3_5_8_13_21()
     {
         $set = (new RestrictedPermutationWithRepetition())->get([3, 5, 8, 13, 21], 9, 100);
 
@@ -34,12 +58,24 @@ class RestrictedPermutationWithRepetitionTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fibonacci_8_13_21_34()
+    public function first_3_5_8_13_21()
     {
-        $set = (new RestrictedPermutationWithRepetition())->get([8, 13, 21, 34], 8, 100);
+        $set = (new RestrictedPermutationWithRepetition())->get([3, 5, 8, 13, 21], 9, 100);
 
-        $expected = 588;
+        $expected = [ 21, 21, 21, 13, 8, 5, 5, 3, 3 ];
 
-        $this->assertEquals($expected, count($set));
+        $this->assertEquals($expected, $set[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function last_3_5_8_13_21()
+    {
+        $set = (new RestrictedPermutationWithRepetition())->get([3, 5, 8, 13, 21], 9, 100);
+
+        $expected = [ 3, 3, 5, 5, 8, 13, 21, 21, 21 ];
+
+        $this->assertEquals($expected, end($set));
     }
 }
