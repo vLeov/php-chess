@@ -5,6 +5,7 @@ namespace Chess\ML\Supervised\Classification;
 use Chess\Board;
 use Chess\HeuristicPicture;
 use Chess\ML\Supervised\AbstractLinearCombinationPredictor;
+use Chess\ML\Supervised\Classification\LinearCombinationLabeller;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Rubix\ML\Datasets\Unlabeled;
@@ -57,8 +58,8 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
 
         usort($this->result, function ($a, $b) use ($color) {
             $color === Symbol::WHITE
-                ? $current = current($b)['eval'] <=> current($a)['eval']
-                : $current = current($a)['eval'] <=> current($b)['eval'];
+                ? $current = current($b)['prediction_eval'] <=> current($a)['prediction_eval']
+                : $current = current($a)['prediction_eval'] <=> current($b)['prediction_eval'];
             return $current;
         });
 
@@ -75,17 +76,26 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
 
         $dataset = new Unlabeled([$end]);
         $prediction = current($this->estimator->predict($dataset));
-        $permutation = $this->permutations[$prediction];
 
-        $sum = 0;
+        $predictionEval = 0;
         foreach ($end as $i => $val) {
-            $sum += $permutation[$i] * $val;
+            $predictionEval += $this->permutations[$prediction][$i] * $val;
+        }
+
+        $labelEval = 0;
+        $color = $this->board->getTurn();
+        $label = (new LinearCombinationLabeller($this->permutations))->label($end)[$color];
+        foreach ($end as $i => $val) {
+            $labelEval += $this->permutations[$label][$i] * $val;
         }
 
         return [
             'balance' => $end,
             'prediction' => $prediction,
-            'eval' => $sum,
+            'label' => $label,
+            'prediction_eval' => $predictionEval,
+            'label_eval' => $labelEval,
+            'heuristic_eval' => (new HeuristicPicture($clone->getMovetext()))->evaluate(),
         ];
     }
 }
