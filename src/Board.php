@@ -5,7 +5,6 @@ namespace Chess;
 use Chess\Castling\Can as CastlingCan;
 use Chess\Castling\Initialization as CastlingInit;
 use Chess\Castling\Rule as CastlingRule;
-use Chess\Db\Pdo;
 use Chess\Exception\BoardException;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
