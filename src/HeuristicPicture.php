@@ -33,7 +33,7 @@ class HeuristicPicture extends Player
 
     protected $balance = [];
 
-    public function getDimensions()
+    public function getDimensions(): array
     {
         return $this->dimensions;
     }
@@ -115,7 +115,7 @@ class HeuristicPicture extends Player
         return $result;
     }
 
-    protected function normalize()
+    protected function normalize(): HeuristicPicture
     {
         $normalization = [];
 
@@ -146,7 +146,7 @@ class HeuristicPicture extends Player
         return $this;
     }
 
-    protected function balance()
+    protected function balance(): HeuristicPicture
     {
         foreach ($this->picture[Symbol::WHITE] as $i => $color) {
             foreach ($color as $j => $val) {

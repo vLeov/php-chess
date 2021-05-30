@@ -12,7 +12,6 @@ use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\TacticsEvaluation;
 use Chess\Evaluation\System;
-use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 class HeuristicFenPicture
@@ -46,7 +45,7 @@ class HeuristicFenPicture
         $this->board = (new Board($pieces, $castling))->setTurn($turn);
     }
 
-    public function getDimensions()
+    public function getDimensions(): array
     {
         return $this->dimensions;
     }
@@ -114,7 +113,7 @@ class HeuristicFenPicture
         return $result;
     }
 
-    protected function normalize()
+    protected function normalize(): HeuristicFenPicture
     {
         $normalization = [];
 
@@ -141,10 +140,10 @@ class HeuristicFenPicture
         return $this;
     }
 
-    protected function balance()
+    protected function balance(): HeuristicFenPicture
     {
-        foreach ($this->picture[Symbol::WHITE] as $i => $color) {
-            $this->balance[$i] = $this->picture[Symbol::WHITE][$i] - $this->picture[Symbol::BLACK][$i];
+        foreach ($this->picture[Symbol::WHITE] as $key => $val) {
+            $this->balance[$key] = $this->picture[Symbol::WHITE][$key] - $this->picture[Symbol::BLACK][$key];
         }
 
         return $this;
