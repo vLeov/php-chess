@@ -1,0 +1,81 @@
+<?php
+
+namespace Chess;
+
+use Chess\Ascii;
+use Chess\Board;
+use Chess\PGN\Symbol;
+use Chess\Castling\Rule as CastlingRule;
+
+/**
+ * FEN string.
+ *
+ * @author Jordi Bassagañas
+ * @license GPL
+ */
+class FenString
+{
+    private $board;
+
+    public function __construct(Board $board)
+    {
+        $this->board = $board;
+    }
+
+    public function create(): string
+    {
+        $string = '';
+        $array = (new Ascii($this->board))->toArray();
+        for ($i = 7; $i >= 0; $i--) {
+            $string .= str_replace(' ', '', implode('', $array[$i]));
+            if ($i != 0) {
+                $string .= '/';
+            }
+        }
+
+        return "{$this->filter($string)} {$this->board->getTurn()} {$this->castlingRights()}";
+    }
+
+    private function filter(string $string)
+    {
+        $filtered = '';
+        $strSplit = str_split($string);
+        $n = 1;
+        for ($i = 0; $i < count($strSplit); $i++) {
+            if ($strSplit[$i] === '.' && $strSplit[$i+1] === '.') {
+                $n++;
+            } elseif ($strSplit[$i] === '.' && $strSplit[$i+1] !== '.') {
+                $filtered .= $n;
+                $n = 1;
+            } elseif ($strSplit[$i] !== '.') {
+                $filtered .= $strSplit[$i];
+                $n = 1;
+            }
+        }
+
+        return $filtered;
+    }
+
+    private function castlingRights()
+    {
+        $castlingRights = '';
+        $castling = $this->board->getCastling();
+        if ($castling[Symbol::WHITE][Symbol::CASTLING_SHORT]) {
+            $castlingRights .= 'K';
+        }
+        if ($castling[Symbol::WHITE][Symbol::CASTLING_LONG]) {
+            $castlingRights .= 'Q';
+        }
+        if ($castling[Symbol::BLACK][Symbol::CASTLING_SHORT]) {
+            $castlingRights .= 'k';
+        }
+        if ($castling[Symbol::BLACK][Symbol::CASTLING_LONG]) {
+            $castlingRights .= 'q';
+        }
+        if ($castlingRights === '') {
+            $castlingRights = '-';
+        }
+
+        return $castlingRights;
+    }
+}
