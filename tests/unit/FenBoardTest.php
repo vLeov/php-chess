@@ -5,7 +5,6 @@ namespace Chess\Tests\Unit\Fen;
 use Chess\Ascii;
 use Chess\FenBoard;;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class FenBoardTest extends AbstractUnitTestCase
 {
