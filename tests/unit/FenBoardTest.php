@@ -1,20 +1,20 @@
 <?php
 
-namespace Chess\Tests\Unit;
+namespace Chess\Tests\Unit\Fen;
 
 use Chess\Ascii;
-use Chess\Fen;
+use Chess\FenBoard;;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class FenTest extends AbstractUnitTestCase
+class FenBoardTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
     public function e4_e5()
     {
-        $board = (new Fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
+        $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->load();
 
         $array = (new Ascii($board))->getArray();
@@ -38,7 +38,7 @@ class FenTest extends AbstractUnitTestCase
      */
     public function benko_gambit()
     {
-        $board = (new Fen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
+        $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->load();
 
         $array = (new Ascii($board))->getArray();

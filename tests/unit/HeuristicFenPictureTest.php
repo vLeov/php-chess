@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\Fen;
+use Chess\FenBoard;
 use Chess\HeuristicFenPicture;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
@@ -15,7 +15,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function e4_e5_take_get_picture()
     {
-        $board = (new Fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
+        $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->load();
 
         $pic = (new HeuristicFenPicture($board))
@@ -35,7 +35,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function e4_e5_take_get_balance()
     {
-        $board = (new Fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
+        $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->load();
 
         $balance = (new HeuristicFenPicture($board))
@@ -52,7 +52,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function e4_e5_evaluate()
     {
-        $board = (new Fen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
+        $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->load();
 
         $evaluation = (new HeuristicFenPicture($board))->evaluate();
@@ -70,7 +70,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_take_get_picture()
     {
-        $board = (new Fen('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
+        $board = (new FenBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->load();
 
         $pic = (new HeuristicFenPicture($board))
@@ -90,7 +90,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_take_get_balance()
     {
-        $board = (new Fen('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
+        $board = (new FenBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->load();
 
         $balance = (new HeuristicFenPicture($board))
@@ -107,7 +107,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_evaluate()
     {
-        $board = (new Fen('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
+        $board = (new FenBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->load();
 
         $evaluation = (new HeuristicFenPicture($board))->evaluate();
@@ -125,7 +125,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function benko_gambit_take_get_picture()
     {
-        $board = (new Fen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
+        $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->load();
 
         $pic = (new HeuristicFenPicture($board))
@@ -145,7 +145,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function benko_gambit_take_get_balance()
     {
-        $board = (new Fen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
+        $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->load();
 
         $balance = (new HeuristicFenPicture($board))
@@ -162,7 +162,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
      */
     public function benko_gambit_evaluate()
     {
-        $board = (new Fen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
+        $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->load();
 
         $evaluation = (new HeuristicFenPicture($board))->evaluate();

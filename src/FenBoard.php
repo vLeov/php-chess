@@ -14,12 +14,12 @@ use Chess\Piece\Rook;
 use Chess\Piece\Type\RookType;
 
 /**
- * FEN.
+ * FEN Board.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Fen
+class FenBoard
 {
     private $string;
 
