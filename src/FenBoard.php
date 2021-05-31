@@ -42,7 +42,7 @@ class FenBoard
         $this->castling();
     }
 
-    public function load(): Board
+    public function create(): Board
     {
         $rows = array_filter(explode('/', $this->fields[0]));
         foreach ($rows as $key => $row) {
