@@ -33,7 +33,7 @@ class FenString
             }
         }
 
-        return "{$this->filter($string)} {$this->board->getTurn()} {$this->castlingRights()}";
+        return "{$this->filter($string)} {$this->board->getTurn()} {$this->castlingRights()} {$this->enPassant()}";
     }
 
     private function filter(string $string)
@@ -77,5 +77,27 @@ class FenString
         }
 
         return $castlingRights;
+    }
+
+    private function enPassant()
+    {
+        $last = array_slice($this->board->getHistory(), -1)[0];
+        if ($last->move->identity === Symbol::PAWN) {
+            $prev = $last->position;
+            $next = $last->move->position->next;
+            if ($last->move->color === Symbol::WHITE) {
+                if ($last->move->position->next[1] - $last->position[1] === 2) {
+                    $rank = $last->position[1] + 1;
+                    return $last->move->position->current.$rank;
+                }
+            } else {
+                if ($last->position[1] - $last->move->position->next[1] === 2) {
+                    $rank = $last->position[1] - 1;
+                    return $last->move->position->current.$rank;
+                }
+            }
+        }
+
+        return '-';
     }
 }
