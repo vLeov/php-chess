@@ -46,22 +46,21 @@ class FenBoard
     {
         $rows = array_filter(explode('/', $this->fields[0]));
         foreach ($rows as $key => $row) {
-            $rank = 'a';
-            $file = 8 - $key;
+            $file = 'a';
+            $rank = 8 - $key;
             foreach (str_split($row) as $char) {
                 if (ctype_lower($char)) {
                     $char = strtoupper($char);
-                    $this->pushPiece(Symbol::BLACK, $char, $rank.$file);
-                    $rank = chr(ord($rank) + 1);
+                    $this->pushPiece(Symbol::BLACK, $char, $file.$rank);
+                    $file = chr(ord($file) + 1);
                 } elseif (ctype_upper($char)) {
-                    $this->pushPiece(Symbol::WHITE, $char, $rank.$file);
-                    $rank = chr(ord($rank) + 1);
+                    $this->pushPiece(Symbol::WHITE, $char, $file.$rank);
+                    $file = chr(ord($file) + 1);
                 } elseif (is_numeric($char)) {
-                    $rank = chr(ord($rank) + $char);
+                    $file = chr(ord($file) + $char);
                 }
             }
         }
-
         $board = (new Board($this->pieces, $this->castling))
             ->setTurn($this->fields[1]);
 
