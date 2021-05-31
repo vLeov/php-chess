@@ -21,7 +21,7 @@ use Chess\Piece\Type\RookType;
  */
 class Fen
 {
-    private $fen;
+    private $string;
 
     private $fields;
 
@@ -29,11 +29,11 @@ class Fen
 
     private $pieces;
 
-    public function __construct(string $fen)
+    public function __construct(string $string)
     {
-        $this->fen = $fen;
+        $this->string = $string;
 
-        $this->fields = array_filter(explode(' ', $this->fen));
+        $this->fields = array_filter(explode(' ', $this->string));
 
         $this->castling = [
             Symbol::WHITE => [
@@ -68,13 +68,7 @@ class Fen
         return $this->pieces;
     }
 
-    /**
-     * Sets the current turn.
-     *
-     * @param string $fen
-     * @return array
-     */
-    public function load()
+    public function load(): Fen
     {
         $rows = array_filter(explode('/', $this->fields[0]));
         foreach ($rows as $key => $row) {
@@ -100,27 +94,27 @@ class Fen
     protected function castling()
     {
         switch (true) {
-            case !strpos($this->fen[2], 'K') && !strpos($this->fen[2], 'Q'):
+            case !strpos($this->string[2], 'K') && !strpos($this->string[2], 'Q'):
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
                 break;
-            case !strpos($this->fen[2], 'K'):
+            case !strpos($this->string[2], 'K'):
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
                 break;
-            case !strpos($this->fen[2], 'Q'):
+            case !strpos($this->string[2], 'Q'):
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
                 break;
-            case !strpos($this->fen[2], 'k') && !strpos($this->fen[2], 'q'):
+            case !strpos($this->string[2], 'k') && !strpos($this->string[2], 'q'):
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
                 break;
-            case !strpos($this->fen[2], 'k'):
+            case !strpos($this->string[2], 'k'):
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
                 break;
-            case !strpos($this->fen[2], 'q'):
+            case !strpos($this->string[2], 'q'):
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
                 break;
-            case $this->fen[2] === '-':
+            case $this->string[2] === '-':
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
