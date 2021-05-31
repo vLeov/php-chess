@@ -4,6 +4,8 @@ namespace Chess\Tests\Unit\Fen;
 
 use Chess\Ascii;
 use Chess\FenBoard;;
+use Chess\PGN\Convert;
+use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 
 class FenBoardTest extends AbstractUnitTestCase
@@ -102,5 +104,43 @@ class FenBoardTest extends AbstractUnitTestCase
         ];
 
         $this->assertEquals($expected, $array);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e5_play_Nf3_Nc6()
+    {
+        $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
+            ->create();
+
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+
+        $array = (new Ascii($board))->toArray();
+
+        $expected = [
+            7 => [ ' r ', ' . ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' . ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' n ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' N ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' . ', ' R ' ],
+        ];
+
+        $this->assertEquals($expected, $array);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e5_play_Nc6()
+    {
+        $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
+            ->create();
+
+        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc6')));
     }
 }
