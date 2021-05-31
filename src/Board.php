@@ -86,18 +86,7 @@ final class Board extends \SplObjectStorage
      *
      * @var array
      */
-    private $castling = [
-        Symbol::WHITE => [
-            CastlingRule::IS_CASTLED => false,
-            Symbol::CASTLING_SHORT => true,
-            Symbol::CASTLING_LONG => true,
-        ],
-        Symbol::BLACK => [
-            CastlingRule::IS_CASTLED => false,
-            Symbol::CASTLING_SHORT => true,
-            Symbol::CASTLING_LONG => true,
-        ],
-    ];
+    private $castling = [];
 
     /**
      * Constructor.
@@ -140,6 +129,7 @@ final class Board extends \SplObjectStorage
             $this->attach(new Pawn(Symbol::BLACK, 'f7'));
             $this->attach(new Pawn(Symbol::BLACK, 'g7'));
             $this->attach(new Pawn(Symbol::BLACK, 'h7'));
+            $this->castling = CastlingInit::$initialState;
         } else {
             $this->init($pieces, $castling);
         }

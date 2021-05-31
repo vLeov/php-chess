@@ -2,7 +2,7 @@
 
 namespace Chess;
 
-use Chess\Castling\Rule as CastlingRule;
+use Chess\Castling\Initialization as CastlingInit;
 use Chess\PGN\Symbol;
 use Chess\Piece\Bishop;
 use Chess\Piece\King;
@@ -35,18 +35,7 @@ class Fen
 
         $this->fields = array_filter(explode(' ', $this->string));
 
-        $this->castling = [
-            Symbol::WHITE => [
-                CastlingRule::IS_CASTLED => false,
-                Symbol::CASTLING_SHORT => true,
-                Symbol::CASTLING_LONG => true,
-            ],
-            Symbol::BLACK => [
-                CastlingRule::IS_CASTLED => false,
-                Symbol::CASTLING_SHORT => true,
-                Symbol::CASTLING_LONG => true,
-            ],
-        ];
+        $this->castling = CastlingInit::$initialState;
 
         $this->pieces = [];
 
