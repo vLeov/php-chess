@@ -3,12 +3,12 @@
 namespace Chess\Tests\Unit;
 
 use Chess\FenBoard;
-use Chess\HeuristicFenPicture;
+use Chess\HeuristicFenBoardPicture;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class HeuristicFenPictureTest extends AbstractUnitTestCase
+class HeuristicFenBoardPictureTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -18,7 +18,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $pic = (new HeuristicFenPicture($board))
+        $pic = (new HeuristicFenBoardPicture($board))
             ->take()
             ->getPicture();
 
@@ -38,7 +38,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $balance = (new HeuristicFenPicture($board))
+        $balance = (new HeuristicFenBoardPicture($board))
             ->take()
             ->getBalance();
 
@@ -55,7 +55,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $evaluation = (new HeuristicFenPicture($board))->evaluate();
+        $evaluation = (new HeuristicFenBoardPicture($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 43.21,
@@ -73,7 +73,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->create();
 
-        $pic = (new HeuristicFenPicture($board))
+        $pic = (new HeuristicFenBoardPicture($board))
             ->take()
             ->getPicture();
 
@@ -93,7 +93,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->create();
 
-        $balance = (new HeuristicFenPicture($board))
+        $balance = (new HeuristicFenBoardPicture($board))
             ->take()
             ->getBalance();
 
@@ -110,7 +110,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->create();
 
-        $evaluation = (new HeuristicFenPicture($board))->evaluate();
+        $evaluation = (new HeuristicFenBoardPicture($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 44.56,
@@ -128,7 +128,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->create();
 
-        $pic = (new HeuristicFenPicture($board))
+        $pic = (new HeuristicFenBoardPicture($board))
             ->take()
             ->getPicture();
 
@@ -148,7 +148,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->create();
 
-        $balance = (new HeuristicFenPicture($board))
+        $balance = (new HeuristicFenBoardPicture($board))
             ->take()
             ->getBalance();
 
@@ -165,7 +165,7 @@ class HeuristicFenPictureTest extends AbstractUnitTestCase
         $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->create();
 
-        $evaluation = (new HeuristicFenPicture($board))->evaluate();
+        $evaluation = (new HeuristicFenBoardPicture($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 47.14,
