@@ -12,13 +12,13 @@ use Chess\PGN\Symbol;
  */
 class Ascii
 {
-    private $fen;
+    private $board;
 
     private $array;
 
-    public function __construct(Fen $fen)
+    public function __construct(Board $board)
     {
-        $this->fen = $fen;
+        $this->board = $board;
 
         $this->array = [
             7 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
@@ -51,7 +51,7 @@ class Ascii
 
     protected function build()
     {
-        foreach ($this->fen->getPieces() as $piece) {
+        foreach ($this->board->getPieces() as $piece) {
             $position = $piece->getPosition();
             $rank = $position[0];
             $file = $position[1] - 1;

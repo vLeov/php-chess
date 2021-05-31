@@ -2,7 +2,7 @@
 
 namespace Chess;
 
-use Chess\Fen;
+use Chess\Board;
 use Chess\Evaluation\AttackEvaluation;
 use Chess\Evaluation\CenterEvaluation;
 use Chess\Evaluation\ConnectivityEvaluation;
@@ -36,13 +36,9 @@ class HeuristicFenPicture
 
     protected $balance = [];
 
-    public function __construct(Fen $fen)
+    public function __construct(Board $board)
     {
-        $pieces = $fen->getPieces();
-        $castling = $fen->getCastling();
-        $turn = $fen->getFields()[1];
-
-        $this->board = (new Board($pieces, $castling))->setTurn($turn);
+        $this->board = $board;
     }
 
     public function getDimensions(): array

@@ -57,7 +57,7 @@ class Fen
         return $this->pieces;
     }
 
-    public function load(): Fen
+    public function load(): Board
     {
         $rows = array_filter(explode('/', $this->fields[0]));
         foreach ($rows as $key => $row) {
@@ -77,7 +77,10 @@ class Fen
             }
         }
 
-        return $this;
+        $board = (new Board($this->pieces, $this->castling))
+            ->setTurn($this->getFields()[1]);
+
+        return $board;
     }
 
     protected function castling()

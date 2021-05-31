@@ -336,6 +336,23 @@ final class Board extends \SplObjectStorage
     }
 
     /**
+     * Gets all pieces.
+     *
+     * @return array
+     */
+    public function getPieces()
+    {
+        $pieces = [];
+        $this->rewind();
+        while ($this->valid()) {
+            $pieces[] = $this->current();
+            $this->next();
+        }
+
+        return $pieces;
+    }
+
+    /**
      * Gets a piece by its position on the board.
      *
      * @param string $square
