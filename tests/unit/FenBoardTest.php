@@ -16,7 +16,7 @@ class FenBoardTest extends AbstractUnitTestCase
         $board = (new FenBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $array = (new Ascii($board))->getArray();
+        $array = (new Ascii($board))->toArray();
 
         $expected = [
             7 => [ ' r ', ' n ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],
@@ -40,7 +40,7 @@ class FenBoardTest extends AbstractUnitTestCase
         $board = (new FenBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->create();
 
-        $array = (new Ascii($board))->getArray();
+        $array = (new Ascii($board))->toArray();
 
         $expected = [
             7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],

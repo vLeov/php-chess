@@ -34,7 +34,7 @@ class Ascii
         $this->build();
     }
 
-    public function getArray()
+    public function toArray()
     {
         return $this->array;
     }

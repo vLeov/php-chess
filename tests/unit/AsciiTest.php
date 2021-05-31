@@ -17,7 +17,7 @@ class AsciiTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $array = (new Ascii($board))->getArray();
+        $array = (new Ascii($board))->toArray();
 
         $expected = [
             7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
@@ -40,7 +40,7 @@ class AsciiTest extends AbstractUnitTestCase
     {
         $board = (new RuyLopezExchange(new Board()))->play();
 
-        $array = (new Ascii($board))->getArray();
+        $array = (new Ascii($board))->toArray();
 
         $expected = [
             7 => [ ' r ', ' . ', ' b ', ' . ', ' k ', ' b ', ' n ', ' r ' ],
