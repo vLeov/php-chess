@@ -42,21 +42,6 @@ class FenBoard
         $this->castling();
     }
 
-    public function getFields()
-    {
-        return $this->fields;
-    }
-
-    public function getCastling()
-    {
-        return $this->castling;
-    }
-
-    public function getPieces()
-    {
-        return $this->pieces;
-    }
-
     public function load(): Board
     {
         $rows = array_filter(explode('/', $this->fields[0]));
@@ -78,12 +63,12 @@ class FenBoard
         }
 
         $board = (new Board($this->pieces, $this->castling))
-            ->setTurn($this->getFields()[1]);
+            ->setTurn($this->fields[1]);
 
         return $board;
     }
 
-    protected function castling()
+    private function castling()
     {
         switch (true) {
             case !strpos($this->string[2], 'K') && !strpos($this->string[2], 'Q'):
@@ -118,7 +103,7 @@ class FenBoard
         }
     }
 
-    protected function pushPiece($color, $char, $square)
+    private function pushPiece($color, $char, $square)
     {
         switch ($char) {
             case Symbol::KING:
