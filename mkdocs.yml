@@ -1,0 +1,6 @@
+site_name: PHP Chess
+pages:
+  - Home: index.md
+  - Game Methods: game-methods.md
+  - Usage: usage.md
+theme: readthedocs

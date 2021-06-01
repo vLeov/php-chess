@@ -47,20 +47,4 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-### Documentation
-
-Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
-
-### License
-
-The GNU General Public License.
-
-### Contributions
-
-Would you help make this library better? Contributions are welcome.
-
-- Feel free to send a pull request
-- Drop an email at info@programarivm.com with the subject "PHP Chess Contributions"
-- Leave me a comment on [Twitter](https://twitter.com/programarivm)
-
-Many thanks.
+The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others. But how can we measure the efficiency of a given chess heuristic? This is where plotting data on nice charts comes to the rescue! A live demo is available at https://programarivm.github.io/heuristics-quest/.
