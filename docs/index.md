@@ -47,4 +47,6 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others. But how can we measure the efficiency of a given chess heuristic? This is where plotting data on nice charts comes to the rescue! A live demo is available at https://programarivm.github.io/heuristics-quest/.
+The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others. But how can we measure the efficiency of a given chess heuristic? This is where plotting data on nice charts comes to the rescue!
+
+A live demo is available at [Heuristics Quest](https://programarivm.github.io/heuristics-quest/).

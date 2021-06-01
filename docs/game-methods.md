@@ -1,5 +1,3 @@
-### Game methods
-
 #### `isCheck()`
 
 Finds out if the game is in check.
