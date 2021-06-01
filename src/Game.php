@@ -3,6 +3,7 @@
 namespace Chess;
 
 use Chess\Ascii;
+use Chess\FenString;
 use Chess\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -231,5 +232,10 @@ class Game
     public function ascii()
     {
         echo (new Ascii($this->board))->print();
+    }
+
+    public function fen()
+    {
+        echo (new FenString($this->board))->create() . PHP_EOL;
     }
 }
