@@ -41,12 +41,15 @@ class Ascii
 
     public function print()
     {
+        $ascii = '';
         foreach ($this->array as $i => $rank) {
             foreach ($rank as $j => $file) {
-                echo $this->array[$i][$j];
+                $ascii .= $this->array[$i][$j];
             }
-            echo PHP_EOL;
+            $ascii .= PHP_EOL;
         }
+
+        return $ascii;
     }
 
     protected function build()

@@ -2,6 +2,7 @@
 
 namespace Chess;
 
+use Chess\Ascii;
 use Chess\HeuristicPicture;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
@@ -225,5 +226,10 @@ class Game
             ->predict();
 
         return $response;
+    }
+
+    public function ascii()
+    {
+        echo (new Ascii($this->board))->print();
     }
 }
