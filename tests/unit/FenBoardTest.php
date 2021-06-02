@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Fen;
 
 use Chess\Ascii;
-use Chess\FenBoard;;
+use Chess\FenBoard;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;

@@ -3,6 +3,7 @@
 namespace Chess;
 
 use Chess\Ascii;
+use Chess\FenBoard;
 use Chess\FenString;
 use Chess\HeuristicPicture;
 use Chess\PGN\Convert;
@@ -237,5 +238,10 @@ class Game
     public function fen(): string
     {
         return (new FenString($this->board))->create();
+    }
+
+    public function loadFen(string $string)
+    {
+        $this->board = (new FenBoard($string))->create();
     }
 }
