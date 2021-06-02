@@ -39,7 +39,7 @@ class Ascii
         return $this->array;
     }
 
-    public function print()
+    public function print(): string
     {
         $ascii = '';
         foreach ($this->array as $i => $rank) {

@@ -229,13 +229,13 @@ class Game
         return $response;
     }
 
-    public function ascii()
+    public function ascii(): string
     {
-        echo (new Ascii($this->board))->print();
+        return (new Ascii($this->board))->print();
     }
 
-    public function fen()
+    public function fen(): string
     {
-        echo (new FenString($this->board))->create() . PHP_EOL;
+        return (new FenString($this->board))->create();
     }
 }

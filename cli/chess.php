@@ -25,7 +25,7 @@ class ModelPlayCli extends CLI
         do {
             $move = readline(self::PROMPT);
             if ($move === 'fen') {
-                echo $game->fen();
+                echo $game->fen() . PHP_EOL;
             } elseif ($move !== 'quit') {
                 $game->play('w', $move);
                 $response = $game->response();
