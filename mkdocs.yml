@@ -2,5 +2,6 @@ site_name: PHP Chess
 pages:
   - Home: index.md
   - Game Methods: game-methods.md
+  - Command Line Interface: cli.md
   - Usage: usage.md
 theme: readthedocs
