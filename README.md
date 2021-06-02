@@ -48,10 +48,6 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-Currently a few machine learning models are being built with the [Rubix ML](https://github.com/RubixML/ML) library at [programarivm/chess-data](https://github.com/programarivm/chess-data). The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others.
-
-But how can the efficiency of a chess heuristic be measured? This is where plotting data on nice charts comes to the rescue! A live demo is available at [Heuristics Quest](https://programarivm.github.io/heuristics-quest/).
-
 ### Documentation
 
 Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
