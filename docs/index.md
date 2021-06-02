@@ -19,11 +19,12 @@ use Chess\Game;
 
 $game = new Game();
 
-$isLegalMove = $game->play('w', 'e4');
+$game->play('w', 'e4');
+$game->play('b', 'e5');
 ```
 The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be run on the board.
 
-### Play Chess With the AI
+### Play Chess With an AI
 
 Pass the `Game::MODE_AI` parameter when instantiating a `$game`:
 
@@ -47,4 +48,6 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-Currently a few machine learning models are being built with the [Rubix ML](https://github.com/RubixML/ML) library at [programarivm/chess-data](https://github.com/programarivm/chess-data). The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others. But how can we measure the efficiency of a given chess heuristic? This is where plotting data on nice charts comes to the rescue! A live demo is available at [Heuristics Quest](https://programarivm.github.io/heuristics-quest/).
+Currently a few machine learning models are being built with the [Rubix ML](https://github.com/RubixML/ML) library at [programarivm/chess-data](https://github.com/programarivm/chess-data). The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others.
+
+But how can the efficiency of a chess heuristic be measured? This is where plotting data on nice charts comes to the rescue! A live demo is available at [Heuristics Quest](https://programarivm.github.io/heuristics-quest/).

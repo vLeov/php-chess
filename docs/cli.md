@@ -1,4 +1,4 @@
-To play chess in the command line with an AI:
+### Play Chess With an AI
 
     $ php cli/chess.php a1.model
 
