@@ -1,4 +1,4 @@
-A [`Chess\Game`](https://github.com/programarivm/php-chess/blob/master/src/Game.php) example:
+Let's look at the [`Chess\Game`](https://github.com/programarivm/php-chess/blob/master/src/Game.php) methods through the following example:
 
 ```php
 use Chess\Game;
