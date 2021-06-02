@@ -1,4 +1,4 @@
-Let's look at a `Chess\Game` through the following example:
+A [`Chess\Game`](https://github.com/programarivm/php-chess/blob/master/src/Game.php) example:
 
 ```php
 use Chess\Game;
@@ -10,6 +10,8 @@ $game->play('b', 'd5');
 $game->play('w', 'exd5');
 $game->play('b', 'Qxd5');
 ```
+
+---
 
 #### `ascii(): string`
 
@@ -31,6 +33,8 @@ Output:
  P  P  P  P  .  P  P  P
  R  N  B  Q  K  B  N  R
 ```
+
+---
 
 #### `captures(): array`
 
@@ -81,6 +85,8 @@ array (
 )
 ```
 
+---
+
 #### `events(): stdClass`
 
 Gets the events taking place on the game.
@@ -112,6 +118,8 @@ var_export($events);
 )
 ```
 
+---
+
 #### `fen(): string`
 
 Prints the FEN string representation of the game.
@@ -125,6 +133,8 @@ Output:
 ```text
 rnb1kbnr/ppp1pppp/8/3q4/8/8/PPPP1PPP/RNBQKBNR w KQkq -
 ```
+
+---
 
 #### `history(): array`
 
@@ -179,6 +189,8 @@ array (
 )
 ```
 
+---
+
 #### `isCheck(): bool`
 
 Finds out if the game is in check.
@@ -194,6 +206,8 @@ Output:
 ```text
 false
 ```
+
+---
 
 #### `isMate(): bool`
 
@@ -211,6 +225,8 @@ Output:
 false
 ```
 
+---
+
 #### `movetext(): string`
 
 Gets the game's movetext in text format.
@@ -226,6 +242,8 @@ Output:
 ```text
 '1.e4 d5 2.exd5 Qxd5'
 ```
+
+---
 
 #### `piece(string $square): ?stdClass`
 
@@ -279,6 +297,8 @@ Output:
   ),
 )
 ```
+
+---
 
 #### `pieces(string $color): array`
 
@@ -363,6 +383,8 @@ array (
   ),
 )
 ```
+
+---
 
 #### `status(): stdClass`
 
