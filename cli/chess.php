@@ -14,8 +14,8 @@ class ModelPlayCli extends CLI
 
     protected function setup(Options $options)
     {
-        $options->setHelp('Play with the AI.');
-        $options->registerArgument('model', 'AI model name.', true);
+        $options->setHelp('Play with an AI.');
+        $options->registerArgument('model', 'AI model name. The AIs are stored in the model folder.', true);
     }
 
     protected function main(Options $options)
