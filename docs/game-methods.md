@@ -389,6 +389,55 @@ array (
 )
 ```
 
+#### `play(string $color, string $pgn): bool`
+
+Plays a chess move.
+
+```php
+$game->play('w', 'Nc3');
+
+echo $game->ascii();
+```
+
+Output:
+
+```
+r  n  b  .  k  b  n  r
+p  p  p  .  p  p  p  p
+.  .  .  .  .  .  .  .
+.  .  .  q  .  .  .  .
+.  .  .  .  .  .  .  .
+.  .  N  .  .  .  .  .
+P  P  P  P  .  P  P  P
+R  .  B  Q  K  B  N  R
+```
+
+#### `playFen(string $fromFen, string $toFen): bool`
+
+Plays a chess move.
+
+```php
+$game->playFen(
+    'rnb1kbnr/ppp1pppp/8/3q4/8/8/PPPP1PPP/RNBQKBNR w KQkq -',
+    'rnb1kbnr/ppp1pppp/8/3q4/8/2N5/PPPP1PPP/R1BQKBNR b KQkq -'
+);
+
+echo $game->ascii();
+```
+
+Output:
+
+```
+r  n  b  .  k  b  n  r
+p  p  p  .  p  p  p  p
+.  .  .  .  .  .  .  .
+.  .  .  q  .  .  .  .
+.  .  .  .  .  .  .  .
+.  .  N  .  .  .  .  .
+P  P  P  P  .  P  P  P
+R  .  B  Q  K  B  N  R
+```
+
 #### `status(): stdClass`
 
 Gets the current game's status.
