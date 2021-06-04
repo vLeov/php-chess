@@ -10,7 +10,7 @@ class FenPgnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_e5()
+    public function e4()
     {
         $pgn = (new FenPgn(
             'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -',

@@ -15,6 +15,21 @@ class FenStringTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function e4()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+
+        $fenString = (new FenString($board))->create();
+
+        $expected = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3';
+
+        $this->assertEquals($expected, $fenString);
+    }
+
+    /**
+     * @test
+     */
     public function e4_e5()
     {
         $board = new Board();
