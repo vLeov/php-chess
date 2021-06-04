@@ -70,27 +70,27 @@ class FenBoard
     private function castling()
     {
         switch (true) {
-            case !strpos($this->string[2], 'K') && !strpos($this->string[2], 'Q'):
+            case !str_contains($this->fields[2], 'K') && !str_contains($this->fields[2], 'Q'):
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
                 break;
-            case !strpos($this->string[2], 'K'):
+            case !str_contains($this->fields[2], 'K'):
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
                 break;
-            case !strpos($this->string[2], 'Q'):
+            case !str_contains($this->fields[2], 'Q'):
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
                 break;
-            case !strpos($this->string[2], 'k') && !strpos($this->string[2], 'q'):
+            case !str_contains($this->fields[2], 'k') && !str_contains($this->fields[2], 'q'):
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
                 break;
-            case !strpos($this->string[2], 'k'):
+            case !str_contains($this->fields[2], 'k'):
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
                 break;
-            case !strpos($this->string[2], 'q'):
+            case !str_contains($this->fields[2], 'q'):
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
                 break;
-            case $this->string[2] === '-':
+            case $this->fields[2] === '-':
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;

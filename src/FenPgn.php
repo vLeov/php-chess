@@ -84,9 +84,9 @@ class FenPgn
 
     private function find(array $legal)
     {
-        foreach ($legal as $pgn => $fen) {
-            if ($this->toFen === $fen) {
-                return $pgn;
+        foreach ($legal as $key => $val) {
+            if ($this->toFen === current($val)) {
+                return key($val);
             }
         }
 
