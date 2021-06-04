@@ -247,8 +247,10 @@ class Game
 
     public function playFen(string $fromFen, string $toFen): bool
     {
-        $pgn = (new FenPgn($fromFen, $toFen))->create();
+        $fenPgn = (new FenPgn($fromFen, $toFen))->create();
+        $color = key($fenPgn);
+        $pgn = current($fenPgn);
 
-        return $this->board->play(Convert::toStdObj($pgn[0], $pgn[1]));
+        return $this->board->play(Convert::toStdObj($color, $pgn));
     }
 }
