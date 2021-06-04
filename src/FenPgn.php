@@ -77,9 +77,10 @@ class FenPgn
                 }
             }
         }
-        $pgn = $this->find($legal);
 
-        return $pgn;
+        return [
+            $color => $this->find($legal),
+        ];
     }
 
     private function find(array $legal)

@@ -3,6 +3,7 @@
 namespace Chess\Tests\Unit\Fen;
 
 use Chess\FenPgn;
+use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 
 class FenPgnTest extends AbstractUnitTestCase
@@ -17,7 +18,9 @@ class FenPgnTest extends AbstractUnitTestCase
             'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3'
         ))->create();
 
-        $expected = 'e4';
+        $expected = [
+            Symbol::WHITE => 'e4',
+        ];
 
         $this->assertEquals($expected, $pgn);
     }
@@ -32,7 +35,9 @@ class FenPgnTest extends AbstractUnitTestCase
             'rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq -'
         ))->create();
 
-        $expected = 'Nf3';
+        $expected = [
+            Symbol::WHITE => 'Nf3',
+        ];
 
         $this->assertEquals($expected, $pgn);
     }
