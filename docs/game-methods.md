@@ -39,7 +39,7 @@ Gets the pieces captured by both players as an array of `stdClass` objects.
 ```php
 $captures = $game->captures();
 
-print_r($captures);
+var_export($captures);
 ```
 
 Output:
