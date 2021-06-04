@@ -244,4 +244,11 @@ class Game
     {
         $this->board = (new FenBoard($string))->create();
     }
+
+    public function playFen(string $fromFen, string $toFen): bool
+    {
+        $pgn = (new FenPgn($fromFen, $toFen))->create();
+
+        return $this->board->play(Convert::toStdObj($pgn[0], $pgn[1]));
+    }
 }
