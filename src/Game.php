@@ -245,8 +245,9 @@ class Game
         $this->board = (new FenBoard($string))->create();
     }
 
-    public function playFen(string $fromFen, string $toFen): bool
+    public function playFen(string $toFen): bool
     {
+        $fromFen = (new FenString($this->board))->create();
         $fenPgn = (new FenPgn($fromFen, $toFen))->create();
         $color = key($fenPgn);
         $pgn = current($fenPgn);
