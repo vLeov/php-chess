@@ -42,9 +42,9 @@ class FenString
         $strSplit = str_split($string);
         $n = 1;
         for ($i = 0; $i < count($strSplit); $i++) {
-            if ($strSplit[$i] === '.' && $strSplit[$i+1] === '.') {
+            if ($strSplit[$i] === '.' && isset($strSplit[$i+1]) && $strSplit[$i+1] === '.') {
                 $n++;
-            } elseif ($strSplit[$i] === '.' && $strSplit[$i+1] !== '.') {
+            } elseif ($strSplit[$i] === '.' && isset($strSplit[$i+1]) && $strSplit[$i+1] !== '.') {
                 $filtered .= $n;
                 $n = 1;
             } elseif ($strSplit[$i] !== '.') {
