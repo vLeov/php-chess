@@ -81,19 +81,22 @@ class FenString
 
     private function enPassant()
     {
-        $last = array_slice($this->board->getHistory(), -1)[0];
-        if ($last->move->identity === Symbol::PAWN) {
-            $prev = $last->position;
-            $next = $last->move->position->next;
-            if ($last->move->color === Symbol::WHITE) {
-                if ($last->move->position->next[1] - $last->position[1] === 2) {
-                    $rank = $last->position[1] + 1;
-                    return $last->move->position->current.$rank;
-                }
-            } else {
-                if ($last->position[1] - $last->move->position->next[1] === 2) {
-                    $rank = $last->position[1] - 1;
-                    return $last->move->position->current.$rank;
+        $history = $this->board->getHistory();
+        if ($history) {
+            $last = array_slice($history, -1)[0];
+            if ($last->move->identity === Symbol::PAWN) {
+                $prev = $last->position;
+                $next = $last->move->position->next;
+                if ($last->move->color === Symbol::WHITE) {
+                    if ($last->move->position->next[1] - $last->position[1] === 2) {
+                        $rank = $last->position[1] + 1;
+                        return $last->move->position->current.$rank;
+                    }
+                } else {
+                    if ($last->position[1] - $last->move->position->next[1] === 2) {
+                        $rank = $last->position[1] - 1;
+                        return $last->move->position->current.$rank;
+                    }
                 }
             }
         }
