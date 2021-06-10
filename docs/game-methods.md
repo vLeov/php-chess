@@ -81,6 +81,33 @@ array (
 )
 ```
 
+#### `castling(): ?array`
+
+Gets the castling status.
+
+```php
+$castling = $game->castling();
+
+var_export($castling);
+```
+
+```text
+array (
+  'w' =>
+  array (
+    'castled' => false,
+    'O-O' => true,
+    'O-O-O' => true,
+  ),
+  'b' =>
+  array (
+    'castled' => false,
+    'O-O' => true,
+    'O-O-O' => true,
+  ),
+)
+```
+
 #### `events(): stdClass`
 
 Gets the events taking place on the game.

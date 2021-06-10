@@ -78,6 +78,11 @@ class Game
         ];
     }
 
+    public function castling(): ?array
+    {
+        return $this->board->getCastling();
+    }
+
     /**
      * Gets the history.
      *
