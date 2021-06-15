@@ -441,11 +441,11 @@ R  .  B  Q  K  B  N  R
 
 #### `playFen(string $toFen): bool`
 
-Plays a chess move.
+Plays a chess move in shortened FEN format; only the piece placement and the side to move are required.
 
 ```php
 $game->playFen(
-    'rnb1kbnr/ppp1pppp/8/3q4/8/2N5/PPPP1PPP/R1BQKBNR b KQkq -'
+    'rnb1kbnr/ppp1pppp/8/3q4/8/2N5/PPPP1PPP/R1BQKBNR b'
 );
 
 echo $game->ascii();
