@@ -8,7 +8,7 @@ use Chess\PGN\Symbol;
 use Chess\Castling\Rule as CastlingRule;
 
 /**
- * FEN string.
+ * Chess\Board to FEN string converter.
  *
  * @author Jordi Bassagañas
  * @license GPL

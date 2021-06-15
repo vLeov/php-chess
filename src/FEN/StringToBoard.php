@@ -15,7 +15,7 @@ use Chess\Piece\Rook;
 use Chess\Piece\Type\RookType;
 
 /**
- * FEN Board.
+ * FEN string to Chess\Board converter.
  *
  * @author Jordi Bassagañas
  * @license GPL

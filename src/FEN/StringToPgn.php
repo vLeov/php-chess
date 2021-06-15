@@ -8,7 +8,7 @@ use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 /**
- * FEN to PGN converter.
+ * FEN string to PGN converter.
  *
  * @author Jordi Bassagañas
  * @license GPL
