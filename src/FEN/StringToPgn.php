@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess;
+namespace Chess\FEN;
 
 use Chess\FEN\BoardToString;
 use Chess\FEN\StringToBoard;
@@ -13,7 +13,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class FenPgn
+class StringToPgn
 {
     private $fromFen;
 
