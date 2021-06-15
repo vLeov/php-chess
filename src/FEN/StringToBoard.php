@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess;
+namespace Chess\FEN;
 
 use Chess\Ascii;
 use Chess\Board;
@@ -13,7 +13,7 @@ use Chess\Castling\Rule as CastlingRule;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class FenString
+class StringToBoard
 {
     private $board;
 
