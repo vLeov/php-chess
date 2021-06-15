@@ -2,7 +2,7 @@
 
 namespace Chess;
 
-use Chess\FEN\StringToBoard;
+use Chess\FEN\BoardToString;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
@@ -37,41 +37,41 @@ class FenPgn
                     case Symbol::KING:
                         if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
                             $legal[] = [
-                                Symbol::CASTLING_SHORT => (new StringToBoard($clone))->create()
+                                Symbol::CASTLING_SHORT => (new BoardToString($clone))->create()
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
                             $legal[] = [
-                                Symbol::CASTLING_LONG => (new StringToBoard($clone))->create()
+                                Symbol::CASTLING_LONG => (new BoardToString($clone))->create()
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
                             $legal[] = [
-                                Symbol::KING.$square => (new StringToBoard($clone))->create()
+                                Symbol::KING.$square => (new BoardToString($clone))->create()
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
                             $legal[] = [
-                                Symbol::KING.'x'.$square => (new StringToBoard($clone))->create()
+                                Symbol::KING.'x'.$square => (new BoardToString($clone))->create()
                             ];
                         }
                         break;
                     case Symbol::PAWN:
                         if ($clone->play(Convert::toStdObj($color, $square))) {
                             $legal[] = [
-                                $square => (new StringToBoard($clone))->create()
+                                $square => (new BoardToString($clone))->create()
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
                             $legal[] = [
-                                $piece->getFile()."x$square" => (new StringToBoard($clone))->create()
+                                $piece->getFile()."x$square" => (new BoardToString($clone))->create()
                             ];
                         }
                         break;
                     default:
                         if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
                             $legal[] = [
-                                $piece->getIdentity().$square => (new StringToBoard($clone))->create()
+                                $piece->getIdentity().$square => (new BoardToString($clone))->create()
                             ];
                         } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
                             $legal[] = [
-                                "{$piece->getIdentity()}x$square" => (new StringToBoard($clone))->create()
+                                "{$piece->getIdentity()}x$square" => (new BoardToString($clone))->create()
                             ];
                         }
                         break;

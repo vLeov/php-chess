@@ -5,7 +5,7 @@ namespace Chess;
 use Chess\Ascii;
 use Chess\FenBoard;
 use Chess\HeuristicPicture;
-use Chess\FEN\StringToBoard;
+use Chess\FEN\BoardToString;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
@@ -242,7 +242,7 @@ class Game
 
     public function fen(): string
     {
-        return (new StringToBoard($this->board))->create();
+        return (new BoardToString($this->board))->create();
     }
 
     public function loadFen(string $string)
@@ -252,7 +252,7 @@ class Game
 
     public function playFen(string $toFen): bool
     {
-        $fromFen = (new StringToBoard($this->board))->create();
+        $fromFen = (new BoardToString($this->board))->create();
         $fenPgn = (new FenPgn($fromFen, $toFen))->create();
         $color = key($fenPgn);
         $pgn = current($fenPgn);

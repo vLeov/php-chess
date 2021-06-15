@@ -13,7 +13,7 @@ use Chess\Castling\Rule as CastlingRule;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class StringToBoard
+class BoardToString
 {
     private $board;
 
