@@ -1,7 +1,8 @@
 <?php
 
-namespace Chess;
+namespace Chess\FEN;
 
+use Chess\Board;
 use Chess\Castling\Initialization as CastlingInit;
 use Chess\PGN\Symbol;
 use Chess\Piece\Bishop;
@@ -19,7 +20,7 @@ use Chess\Piece\Type\RookType;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class FenBoard
+class StringToBoard
 {
     private $string;
 

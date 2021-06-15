@@ -3,7 +3,7 @@
 namespace Chess;
 
 use Chess\Ascii;
-use Chess\FenBoard;
+use Chess\StringToBoard;
 use Chess\HeuristicPicture;
 use Chess\FEN\BoardToString;
 use Chess\PGN\Convert;
@@ -247,7 +247,7 @@ class Game
 
     public function loadFen(string $string)
     {
-        $this->board = (new FenBoard($string))->create();
+        $this->board = (new StringToBoard($string))->create();
     }
 
     public function playFen(string $toFen): bool

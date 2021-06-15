@@ -3,6 +3,7 @@
 namespace Chess;
 
 use Chess\FEN\BoardToString;
+use Chess\FEN\StringToBoard;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
@@ -28,7 +29,7 @@ class FenPgn
     public function create()
     {
         $legal = [];
-        $board = (new FenBoard($this->fromFen))->create();
+        $board = (new StringToBoard($this->fromFen))->create();
         $color = $board->getTurn();
         foreach ($board->getPiecesByColor($color) as $piece) {
             foreach ($piece->getLegalMoves() as $square) {

@@ -14,7 +14,7 @@ use Chess\Evaluation\TacticsEvaluation;
 use Chess\Evaluation\System;
 use Chess\PGN\Symbol;
 
-class HeuristicFenBoardPicture
+class HeuristicStringToBoardPicture
 {
     protected $board;
 
@@ -46,7 +46,7 @@ class HeuristicFenBoardPicture
         return $this->dimensions;
     }
 
-    public function setDimensions(array $dimensions): HeuristicFenBoardPicture
+    public function setDimensions(array $dimensions): HeuristicStringToBoardPicture
     {
         $this->dimensions = $dimensions;
 
@@ -66,9 +66,9 @@ class HeuristicFenBoardPicture
     /**
      * Takes a normalized, balanced heuristic picture.
      *
-     * @return \Chess\Heuristic\HeuristicFenBoardPicture
+     * @return \Chess\Heuristic\HeuristicStringToBoardPicture
      */
-    public function take(): HeuristicFenBoardPicture
+    public function take(): HeuristicStringToBoardPicture
     {
         $item = [];
         foreach ($this->dimensions as $dimension => $w) {
@@ -109,7 +109,7 @@ class HeuristicFenBoardPicture
         return $result;
     }
 
-    protected function normalize(): HeuristicFenBoardPicture
+    protected function normalize(): HeuristicStringToBoardPicture
     {
         $normalization = [];
 
@@ -136,7 +136,7 @@ class HeuristicFenBoardPicture
         return $this;
     }
 
-    protected function balance(): HeuristicFenBoardPicture
+    protected function balance(): HeuristicStringToBoardPicture
     {
         foreach ($this->picture[Symbol::WHITE] as $key => $val) {
             $this->balance[$key] = $this->picture[Symbol::WHITE][$key] - $this->picture[Symbol::BLACK][$key];
