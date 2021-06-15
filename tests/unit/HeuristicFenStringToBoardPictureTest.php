@@ -2,13 +2,13 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\HeuristicStringToBoardPicture;
+use Chess\HeuristicFenStringToBoardPicture;
 use Chess\FEN\StringToBoard;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
+class HeuristicFenStringToBoardPictureTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -18,7 +18,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $pic = (new HeuristicStringToBoardPicture($board))
+        $pic = (new HeuristicFenStringToBoardPicture($board))
             ->take()
             ->getPicture();
 
@@ -38,7 +38,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $balance = (new HeuristicStringToBoardPicture($board))
+        $balance = (new HeuristicFenStringToBoardPicture($board))
             ->take()
             ->getBalance();
 
@@ -55,7 +55,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $evaluation = (new HeuristicStringToBoardPicture($board))->evaluate();
+        $evaluation = (new HeuristicFenStringToBoardPicture($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 43.21,
@@ -73,7 +73,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->create();
 
-        $pic = (new HeuristicStringToBoardPicture($board))
+        $pic = (new HeuristicFenStringToBoardPicture($board))
             ->take()
             ->getPicture();
 
@@ -93,7 +93,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->create();
 
-        $balance = (new HeuristicStringToBoardPicture($board))
+        $balance = (new HeuristicFenStringToBoardPicture($board))
             ->take()
             ->getBalance();
 
@@ -110,7 +110,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3'))
             ->create();
 
-        $evaluation = (new HeuristicStringToBoardPicture($board))->evaluate();
+        $evaluation = (new HeuristicFenStringToBoardPicture($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 44.56,
@@ -128,7 +128,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->create();
 
-        $pic = (new HeuristicStringToBoardPicture($board))
+        $pic = (new HeuristicFenStringToBoardPicture($board))
             ->take()
             ->getPicture();
 
@@ -148,7 +148,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->create();
 
-        $balance = (new HeuristicStringToBoardPicture($board))
+        $balance = (new HeuristicFenStringToBoardPicture($board))
             ->take()
             ->getBalance();
 
@@ -165,7 +165,7 @@ class HeuristicStringToBoardPictureTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9'))
             ->create();
 
-        $evaluation = (new HeuristicStringToBoardPicture($board))->evaluate();
+        $evaluation = (new HeuristicFenStringToBoardPicture($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 47.14,
