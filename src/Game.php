@@ -257,7 +257,10 @@ class Game
         $pgn = (new ShortenedStringToPgn($fromFen, $toShortenedFen))->create();
         $color = key($pgn);
         $result = current($pgn);
+        if ($result) {
+            return $this->board->play(Convert::toStdObj($color, $result));
+        }
 
-        return $this->board->play(Convert::toStdObj($color, $result));
+        return false;
     }
 }

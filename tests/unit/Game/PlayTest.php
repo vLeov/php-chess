@@ -35,6 +35,19 @@ class PlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function e4_Bg6_fen()
+    {
+        $game = new Game();
+        $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
+
+        $this->assertFalse(
+            $game->playFen('rnbqk1nr/pppppppp/6b1/8/4P3/8/PPPP1PPP/RNBQKBNR w')
+        );
+    }
+
+    /**
+     * @test
+     */
     public function e4_e5_Nf3_pgn_fen()
     {
         $game = new Game();
