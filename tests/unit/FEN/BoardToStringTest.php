@@ -70,4 +70,25 @@ class BoardToStringTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $BoardToString);
     }
+
+    /**
+     * @test
+     */
+    public function castling_short()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Be2'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Be7'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'O-O'));
+
+        $boardToString = (new BoardToString($board))->create();
+
+        $expected = 'r1bqk1nr/ppppbppp/2n5/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b kq -';
+
+        $this->assertEquals($expected, $boardToString);
+    }
 }
