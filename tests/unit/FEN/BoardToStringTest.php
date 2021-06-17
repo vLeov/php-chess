@@ -20,11 +20,11 @@ class BoardToStringTest extends AbstractUnitTestCase
         $board = new Board();
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
 
-        $BoardToString = (new BoardToString($board))->create();
+        $boardToString = (new BoardToString($board))->create();
 
         $expected = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3';
 
-        $this->assertEquals($expected, $BoardToString);
+        $this->assertEquals($expected, $boardToString);
     }
 
     /**
@@ -36,11 +36,11 @@ class BoardToStringTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
 
-        $BoardToString = (new BoardToString($board))->create();
+        $boardToString = (new BoardToString($board))->create();
 
         $expected = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6';
 
-        $this->assertEquals($expected, $BoardToString);
+        $this->assertEquals($expected, $boardToString);
     }
 
     /**
@@ -50,11 +50,11 @@ class BoardToStringTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $BoardToString = (new BoardToString($board))->create();
+        $boardToString = (new BoardToString($board))->create();
 
         $expected = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq -';
 
-        $this->assertEquals($expected, $BoardToString);
+        $this->assertEquals($expected, $boardToString);
     }
 
     /**
@@ -64,11 +64,11 @@ class BoardToStringTest extends AbstractUnitTestCase
     {
         $board = (new RuyLopezExchange(new Board()))->play();
 
-        $BoardToString = (new BoardToString($board))->create();
+        $boardToString = (new BoardToString($board))->create();
 
         $expected = 'r1b1kbnr/1pp2ppp/p1p5/8/3NP3/8/PPP2PPP/RNB1K2R b KQkq -';
 
-        $this->assertEquals($expected, $BoardToString);
+        $this->assertEquals($expected, $boardToString);
     }
 
     /**
