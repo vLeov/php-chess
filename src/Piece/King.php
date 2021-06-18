@@ -89,17 +89,15 @@ class King extends AbstractPiece
      */
     public function getLegalMoves(): array
     {
-        $movesKing = array_values(
-            array_intersect(
-                array_values((array)$this->scope),
-                $this->boardStatus->squares->free
-        ));
+        $movesKing = array_intersect(
+            array_values((array)$this->scope),
+            $this->boardStatus->squares->free
+        );
 
-        $movesKingCaptures = array_values(
-            array_intersect(
-                array_values((array)$this->scope),
-                array_merge($this->boardStatus->squares->used->{$this->getOppColor()})
-        ));
+        $movesKingCaptures =  array_intersect(
+            array_values((array)$this->scope),
+            $this->boardStatus->squares->used->{$this->getOppColor()}
+        );
 
         $castlingShort = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_SHORT];
         $castlingLong = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_LONG];
@@ -135,9 +133,8 @@ class King extends AbstractPiece
         }
 
         return array_unique(
-            array_values(
-                array_merge($movesKing, $movesKingCaptures, $movesCastlingShort, $movesCastlingLong)
-        ));
+            array_merge($movesKing, $movesKingCaptures, $movesCastlingShort, $movesCastlingLong)
+        );
     }
 
     public function getDefendedSquares(): array

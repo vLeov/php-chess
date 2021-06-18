@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\Game;
 
+use Chess\Ascii;
 use Chess\Game;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -99,5 +100,24 @@ class PlayTest extends AbstractUnitTestCase
         ];
 
         $this->assertEquals($expected, $game->playFen('rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b'));
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e5_Nf3_Nf6_Bc4_Bc5_Ke2()
+    {
+        $expected = [
+            'legal' => true,
+        ];
+
+        $game = new Game();
+        $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
+        $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w'));
+        $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b'));
+        $this->assertEquals($expected, $game->playFen('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w'));
+        $this->assertEquals($expected, $game->playFen('rnbqkb1r/pppp1ppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b'));
+        $this->assertEquals($expected, $game->playFen('rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w'));
+        // $this->assertEquals($expected, $game->playFen('rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/5N2/PPPPKPPP/RNBQ3R b'));
     }
 }
