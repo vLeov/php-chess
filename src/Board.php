@@ -377,7 +377,6 @@ final class Board extends \SplObjectStorage
      *
      * @param array $pieces
      * @param array $castling
-     * @throws \Chess\Exception\CastlingException
      */
     private function init(array $pieces, $castling)
     {
@@ -385,8 +384,6 @@ final class Board extends \SplObjectStorage
             $this->attach($piece);
         }
         $this->castling = $castling;
-
-        CastlingInit::validate($this);
     }
 
     /**
