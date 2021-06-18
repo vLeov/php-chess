@@ -26,11 +26,7 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
                 $clone = unserialize(serialize($this->board));
                 switch ($piece->getIdentity()) {
                     case Symbol::KING:
-                        if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
-                            $this->result[] = [ Symbol::CASTLING_SHORT => $this->evaluate($clone) ];
-                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
-                            $this->result[] = [ Symbol::CASTLING_LONG => $this->evaluate($clone) ];
-                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
+                        if ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
                             $this->result[] = [ Symbol::KING.$square => $this->evaluate($clone) ];
                         } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
                             $this->result[] = [ Symbol::KING.'x'.$square => $this->evaluate($clone) ];
@@ -52,6 +48,14 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
                         break;
                 }
             }
+        }
+
+        $clone = unserialize(serialize($this->board));
+
+        if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
+            $this->result[] = [ Symbol::CASTLING_SHORT => $this->evaluate($clone) ];
+        } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
+            $this->result[] = [ Symbol::CASTLING_LONG => $this->evaluate($clone) ];
         }
 
         $this->result = array_map("unserialize", array_unique(array_map("serialize", $this->result)));
