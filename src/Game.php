@@ -251,16 +251,49 @@ class Game
         $this->board = (new StringToBoard($string))->create();
     }
 
-    public function playFen(string $toShortenedFen): bool
+    public function playFen(string $toShortenedFen)
     {
         $fromFen = (new BoardToString($this->board))->create();
+
+        $fromPiecePlacement = explode(' ', $fromFen)[0];
+        $toPiecePlacement = explode(' ', $toShortenedFen)[0];
+        $fromRanks = explode('/', $fromPiecePlacement);
+        $toRanks = explode('/', $toPiecePlacement);
+
+        if ('K2R' === substr($fromRanks[7], -3) && '2KR' === substr($toRanks[7], -3)) {
+            return [
+                'legal' => $this->board->play(Convert::toStdObj(Symbol::WHITE, Symbol::CASTLING_SHORT)),
+                'castled' => Symbol::CASTLING_SHORT,
+            ];
+        } elseif ('R3K' === substr($fromRanks[7], 0, 3) && 'R1K' === substr($toRanks[7], 0, 3)) {
+            return [
+                'legal' => $this->board->play(Convert::toStdObj(Symbol::WHITE, Symbol::CASTLING_LONG)),
+                'castled' => Symbol::CASTLING_LONG,
+            ];
+        } elseif ('k2r' === substr($fromRanks[0], -3) && '2kr' === substr($toRanks[0], -3)) {
+            return [
+                'legal' => $this->board->play(Convert::toStdObj(Symbol::BLACK, Symbol::CASTLING_SHORT)),
+                'castled' => Symbol::CASTLING_SHORT,
+            ];
+        } elseif ('r3k' === substr($fromRanks[0], 0, 3) && 'r1k' === substr($toRanks[0], 0, 3)) {
+            return [
+                'legal' => $this->board->play(Convert::toStdObj(Symbol::BLACK, Symbol::CASTLING_LONG)),
+                'castled' => Symbol::CASTLING_LONG,
+            ];
+        }
+
         $pgn = (new ShortenedStringToPgn($fromFen, $toShortenedFen))->create();
         $color = key($pgn);
         $result = current($pgn);
+
         if ($result) {
-            return $this->board->play(Convert::toStdObj($color, $result));
+            return [
+                'legal' => $this->board->play(Convert::toStdObj($color, $result)),
+            ];
         }
 
-        return false;
+        return [
+            'legal' => false,
+        ];
     }
 }

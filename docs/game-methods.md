@@ -439,7 +439,7 @@ P  P  P  P  .  P  P  P
 R  .  B  Q  K  B  N  R
 ```
 
-#### `playFen(string $toFen): bool`
+#### `playFen(string $toFen)`
 
 Plays a chess move in shortened FEN format; only the piece placement and the side to move are required.
 

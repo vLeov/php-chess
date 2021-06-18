@@ -14,9 +14,11 @@ class PlayTest extends AbstractUnitTestCase
     {
         $game = new Game();
 
-        $this->assertTrue(
-            $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b')
-        );
+        $expected = [
+            'legal' => true,
+        ];
+
+        $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
     }
 
     /**
@@ -27,9 +29,11 @@ class PlayTest extends AbstractUnitTestCase
         $game = new Game();
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
-        $this->assertTrue(
-            $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w')
-        );
+        $expected = [
+            'legal' => true,
+        ];
+
+        $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w'));
     }
 
     /**
@@ -40,9 +44,11 @@ class PlayTest extends AbstractUnitTestCase
         $game = new Game();
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
-        $this->assertFalse(
-            $game->playFen('rnbqk1nr/pppppppp/6b1/8/4P3/8/PPPP1PPP/RNBQKBNR w')
-        );
+        $expected = [
+            'legal' => false,
+        ];
+
+        $this->assertEquals($expected, $game->playFen('rnbqk1nr/pppppppp/6b1/8/4P3/8/PPPP1PPP/RNBQKBNR w'));
     }
 
     /**
@@ -54,9 +60,11 @@ class PlayTest extends AbstractUnitTestCase
         $game->play('w', 'e4');
         $game->play('b', 'e5');
 
-        $this->assertTrue(
-            $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b')
-        );
+        $expected = [
+            'legal' => true,
+        ];
+
+        $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b'));
     }
 
     /**
@@ -86,8 +94,10 @@ class PlayTest extends AbstractUnitTestCase
         $game->playFen('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQK2R b');
         $game->playFen('rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQK2R w');
 
-        $this->assertTrue(
-            $game->playFen('rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b')
-        );
+        $expected = [
+            'legal' => true,
+        ];
+
+        $this->assertEquals($expected, $game->playFen('rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b'));
     }
 }
