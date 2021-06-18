@@ -32,15 +32,7 @@ abstract class AbstractStringToPgn
                 $clone = unserialize(serialize($board));
                 switch ($piece->getIdentity()) {
                     case Symbol::KING:
-                        if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
-                            $legal[] = [
-                                Symbol::CASTLING_SHORT => (new BoardToString($clone))->create()
-                            ];
-                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
-                            $legal[] = [
-                                Symbol::CASTLING_LONG => (new BoardToString($clone))->create()
-                            ];
-                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
+                        if ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
                             $legal[] = [
                                 Symbol::KING.$square => (new BoardToString($clone))->create()
                             ];
@@ -74,6 +66,18 @@ abstract class AbstractStringToPgn
                         break;
                 }
             }
+        }
+
+        $clone = unserialize(serialize($board));
+
+        if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
+            $legal[] = [
+                Symbol::CASTLING_SHORT => (new BoardToString($clone))->create()
+            ];
+        } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
+            $legal[] = [
+                Symbol::CASTLING_LONG => (new BoardToString($clone))->create()
+            ];
         }
 
         return [
