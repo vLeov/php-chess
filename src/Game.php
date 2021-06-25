@@ -260,26 +260,30 @@ class Game
         $fromRanks = explode('/', $fromPiecePlacement);
         $toRanks = explode('/', $toPiecePlacement);
 
-        if ('K2R' === substr($fromRanks[7], -3) && '2KR' === substr($toRanks[7], -3)) {
-            return [
-                'legal' => $this->board->play(Convert::toStdObj(Symbol::WHITE, Symbol::CASTLING_SHORT)),
-                'castled' => Symbol::CASTLING_SHORT,
-            ];
-        } elseif ('R3K' === substr($fromRanks[7], 0, 3) && 'R1K' === substr($toRanks[7], 0, 3)) {
-            return [
-                'legal' => $this->board->play(Convert::toStdObj(Symbol::WHITE, Symbol::CASTLING_LONG)),
-                'castled' => Symbol::CASTLING_LONG,
-            ];
-        } elseif ('k2r' === substr($fromRanks[0], -3) && '2kr' === substr($toRanks[0], -3)) {
-            return [
-                'legal' => $this->board->play(Convert::toStdObj(Symbol::BLACK, Symbol::CASTLING_SHORT)),
-                'castled' => Symbol::CASTLING_SHORT,
-            ];
-        } elseif ('r3k' === substr($fromRanks[0], 0, 3) && 'r1k' === substr($toRanks[0], 0, 3)) {
-            return [
-                'legal' => $this->board->play(Convert::toStdObj(Symbol::BLACK, Symbol::CASTLING_LONG)),
-                'castled' => Symbol::CASTLING_LONG,
-            ];
+        if (
+          'K2R' === substr($fromRanks[7], -3) &&
+          '2KR' === substr($toRanks[7], -3) &&
+          $this->board->play(Convert::toStdObj(Symbol::WHITE, Symbol::CASTLING_SHORT))
+        ) {
+            return Symbol::CASTLING_SHORT;
+        } elseif (
+          'R3K' === substr($fromRanks[7], 0, 3) &&
+          'R1K' === substr($toRanks[7], 0, 3) &&
+          $this->board->play(Convert::toStdObj(Symbol::WHITE, Symbol::CASTLING_LONG))
+        ) {
+            return Symbol::CASTLING_LONG;
+        } elseif (
+          'k2r' === substr($fromRanks[0], -3) &&
+          '2kr' === substr($toRanks[0], -3) &&
+          $this->board->play(Convert::toStdObj(Symbol::BLACK, Symbol::CASTLING_SHORT))
+        ) {
+            return Symbol::CASTLING_SHORT;
+        } elseif (
+          'r3k' === substr($fromRanks[0], 0, 3) &&
+          'r1k' === substr($toRanks[0], 0, 3) &&
+          $this->board->play(Convert::toStdObj(Symbol::BLACK, Symbol::CASTLING_LONG))
+        ) {
+            return Symbol::CASTLING_LONG;
         }
 
         $pgn = (new ShortenedStringToPgn($fromFen, $toShortenedFen))->create();
