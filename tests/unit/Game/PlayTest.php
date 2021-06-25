@@ -15,11 +15,9 @@ class PlayTest extends AbstractUnitTestCase
     {
         $game = new Game();
 
-        $expected = [
-            'legal' => true,
-        ];
+        $expected = true;
 
-        $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
+        $this->assertEquals(true, $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
     }
 
     /**
@@ -30,9 +28,7 @@ class PlayTest extends AbstractUnitTestCase
         $game = new Game();
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
-        $expected = [
-            'legal' => true,
-        ];
+        $expected = true;
 
         $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w'));
     }
@@ -45,9 +41,7 @@ class PlayTest extends AbstractUnitTestCase
         $game = new Game();
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
-        $expected = [
-            'legal' => false,
-        ];
+        $expected = false;
 
         $this->assertEquals($expected, $game->playFen('rnbqk1nr/pppppppp/6b1/8/4P3/8/PPPP1PPP/RNBQKBNR w'));
     }
@@ -61,9 +55,7 @@ class PlayTest extends AbstractUnitTestCase
         $game->play('w', 'e4');
         $game->play('b', 'e5');
 
-        $expected = [
-            'legal' => true,
-        ];
+        $expected = true;
 
         $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b'));
     }
@@ -95,9 +87,7 @@ class PlayTest extends AbstractUnitTestCase
         $game->playFen('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQK2R b');
         $game->playFen('rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQK2R w');
 
-        $expected = [
-            'legal' => true,
-        ];
+        $expected = true;
 
         $this->assertEquals($expected, $game->playFen('rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b'));
     }
@@ -107,9 +97,7 @@ class PlayTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_Bc4_Bc5_Ke2()
     {
-        $expected = [
-            'legal' => true,
-        ];
+        $expected = true;
 
         $game = new Game();
         $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
@@ -126,9 +114,7 @@ class PlayTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_Bc4_Bc5_Ke2_Ke7_Nc3()
     {
-        $expected = [
-            'legal' => true,
-        ];
+        $expected = true;
 
         $game = new Game();
         $this->assertEquals($expected, $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));

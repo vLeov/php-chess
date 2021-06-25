@@ -287,13 +287,9 @@ class Game
         $result = current($pgn);
 
         if ($result) {
-            return [
-                'legal' => $this->board->play(Convert::toStdObj($color, $result)),
-            ];
+            return $this->board->play(Convert::toStdObj($color, $result));
         }
 
-        return [
-            'legal' => false,
-        ];
+        return false;
     }
 }
