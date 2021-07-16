@@ -297,6 +297,7 @@ var_export($piece);
 | `identity`     | The piece's identity in PGN format         |
 | `position`     | The piece's position on the board          |
 | `moves`        | The piece's possible moves                 |
+| `enPassant`    | The en passant pawn, if any                |
 
 Output:
 
