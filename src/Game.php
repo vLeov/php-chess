@@ -28,7 +28,7 @@ class Game
 {
     const MODE_AI           =  'MODE_AI';
 
-    const MODE_YOURSELF     =  'MODE_YOURSELF';
+    const MODE_ANALYSIS     =  'MODE_ANALYSIS';
 
     const MODEL_FOLDER      = __DIR__.'/../model/';
 
@@ -59,7 +59,7 @@ class Game
     public function __construct(string $mode = null, string $model = 'a1.model')
     {
         $this->board = new Board();
-        $this->mode = $mode ?? self::MODE_YOURSELF;
+        $this->mode = $mode ?? self::MODE_ANALYSIS;
         $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.$model));
     }
 
