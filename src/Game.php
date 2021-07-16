@@ -162,16 +162,23 @@ class Game
     {
         $piece = $this->board->getPieceByPosition(Validate::square($square));
 
-        if ($piece === null) {
-            return null;
-        } else {
-            return (object) [
+        if ($piece) {
+            $result = [
                 'color' => $piece->getColor(),
                 'identity' => $piece->getIdentity(),
                 'position' => $piece->getPosition(),
                 'moves' => $piece->getLegalMoves(),
             ];
+            if ($piece->getIdentity() === Symbol::PAWN) {
+                if ($enPassant = $piece->getEnPassantSquare()) {
+                    $result['enPassant'] = $enPassant;
+                }
+            }
+
+            return (object) $result;
         }
+
+        return null;
     }
 
     /**
