@@ -9,8 +9,7 @@ use Chess\PGN\Symbol;
 /**
  * Player.
  *
- * Allows to play a chess game in the form of a PGN movetext in order for the chess
- * board to get to a paraticular status.
+ * Allows to play a chess game as a PGN movetext.
  *
  * @author Jordi Bassagañas
  * @license GPL
