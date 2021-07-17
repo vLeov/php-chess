@@ -845,6 +845,44 @@ class LegalMovesTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function en_passant_memory()
+    {
+        $pieces = [
+            new Pawn(Symbol::WHITE, 'a2'),
+            new Pawn(Symbol::WHITE, 'b2'),
+            new Pawn(Symbol::WHITE, 'c5'),
+            new Rook(Symbol::WHITE, 'd1', RookType::CASTLING_LONG),
+            new King(Symbol::WHITE, 'e4'),
+            new Pawn(Symbol::BLACK, 'a7'),
+            new Pawn(Symbol::BLACK, 'b7'),
+            new Pawn(Symbol::BLACK, 'c7'),
+            new King(Symbol::BLACK, 'g6'),
+            new Rook(Symbol::BLACK, 'h8', RookType::CASTLING_LONG),
+        ];
+
+        $castling = [
+            Symbol::WHITE => [
+                CastlingRule::IS_CASTLED => true,
+                Symbol::CASTLING_SHORT => false,
+                Symbol::CASTLING_LONG => false
+            ],
+            Symbol::BLACK => [
+                CastlingRule::IS_CASTLED => true,
+                Symbol::CASTLING_SHORT => false,
+                Symbol::CASTLING_LONG => false
+            ]
+        ];
+
+        $board = new Board($pieces, $castling);
+        $board->setTurn(Symbol::BLACK);
+
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'b5')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'cxb6')));
+    }
+
+    /**
+     * @test
+     */
     public function pawn_promotion()
     {
         $pieces = [
