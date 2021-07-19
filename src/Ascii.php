@@ -2,7 +2,16 @@
 
 namespace Chess;
 
+use Chess\Castling\Rule as CastlingRule;
 use Chess\PGN\Symbol;
+use Chess\Piece\Bishop;
+use Chess\Piece\King;
+use Chess\Piece\Knight;
+use Chess\Piece\Pawn;
+use Chess\Piece\Piece;
+use Chess\Piece\Queen;
+use Chess\Piece\Rook;
+use Chess\Piece\Type\RookType;
 
 /**
  * Ascii.
@@ -12,15 +21,9 @@ use Chess\PGN\Symbol;
  */
 class Ascii
 {
-    private $board;
-
-    private $array;
-
-    public function __construct(Board $board)
+    public function toArray(Board $board)
     {
-        $this->board = $board;
-
-        $this->array = [
+        $array = [
             7 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
             6 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
             5 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
@@ -31,20 +34,61 @@ class Ascii
             0 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
         ];
 
-        $this->build();
+        foreach ($board->getPieces() as $piece) {
+            $position = $piece->getPosition();
+            $rank = $position[0];
+            $file = $position[1] - 1;
+            Symbol::WHITE === $piece->getColor()
+                ? $array[$file][ord($rank)-97] = ' '.$piece->getIdentity().' '
+                : $array[$file][ord($rank)-97] = ' '.strtolower($piece->getIdentity()).' ';
+        }
+
+        return $array;
     }
 
-    public function toArray()
+    public function toBoard(array $array, string $turn, $castling = null)
     {
-        return $this->array;
+        if (!$castling) {
+            $castling = [
+                Symbol::WHITE => [
+                    CastlingRule::IS_CASTLED => false,
+                    Symbol::CASTLING_SHORT => false,
+                    Symbol::CASTLING_LONG => false,
+                ],
+                Symbol::BLACK => [
+                    CastlingRule::IS_CASTLED => false,
+                    Symbol::CASTLING_SHORT => false,
+                    Symbol::CASTLING_LONG => false,
+                ],
+            ];
+        }
+        $pieces = [];
+        foreach ($array as $i => $row) {
+            $file = 'a';
+            $rank = $i + 1;
+            foreach ($row as $j => $item) {
+                $char = trim($item);
+                if (ctype_lower($char)) {
+                    $char = strtoupper($char);
+                    $this->pushPiece(Symbol::BLACK, $char, $file.$rank, $castling, $pieces);
+                } elseif (ctype_upper($char)) {
+                    $this->pushPiece(Symbol::WHITE, $char, $file.$rank, $castling, $pieces);
+                }
+                $file = chr(ord($file) + 1);
+            }
+        }
+        $board = (new Board($pieces, $castling))->setTurn($turn);
+
+        return $board;
     }
 
-    public function print(): string
+    public function print(Board $board): string
     {
         $ascii = '';
-        foreach ($this->array as $i => $rank) {
+        $array = $this->toArray($board);
+        foreach ($array as $i => $rank) {
             foreach ($rank as $j => $file) {
-                $ascii .= $this->array[$i][$j];
+                $ascii .= $array[$i][$j];
             }
             $ascii .= PHP_EOL;
         }
@@ -52,17 +96,85 @@ class Ascii
         return $ascii;
     }
 
-    protected function build()
+    public function fromAlgebraicToIndex(string $square)
     {
-        foreach ($this->board->getPieces() as $piece) {
-            $position = $piece->getPosition();
-            $rank = $position[0];
-            $file = $position[1] - 1;
-            if (Symbol::WHITE === $piece->getColor()) {
-                $this->array[$file][ord($rank)-97] = ' '.$piece->getIdentity().' ';
-            } else {
-                $this->array[$file][ord($rank)-97] = ' '.strtolower($piece->getIdentity()).' ';
-            }
+        $i = $square[1] - 1;
+        $j = ord($square[0]) - 97;
+
+        return [
+            $i,
+            $j,
+        ];
+    }
+
+    public function fromIndexToAlgebraic(int $i, int $j)
+    {
+        $file = chr(97 + $j);
+        $rank = $i + 1;
+
+        return $file.$rank;
+    }
+
+    public function setArrayElem(string $piece, string $square, &$array)
+    {
+        $index = $this->fromAlgebraicToIndex($square);
+        $array[$index[0]][$index[1]] = $piece;
+
+        return $this;
+    }
+
+    private function pushPiece($color, $char, $square, $castling, &$pieces)
+    {
+        switch ($char) {
+            case Symbol::KING:
+                $pieces[] = new King($color, $square);
+                break;
+            case Symbol::QUEEN:
+                $pieces[] = new Queen($color, $square);
+                break;
+            case Symbol::ROOK:
+                if ($color === Symbol::BLACK &&
+                    $square === 'a8' &&
+                    $castling[$color][Symbol::CASTLING_LONG]
+                ) {
+                    $pieces[] = new Rook($color, $square, RookType::CASTLING_LONG);
+                } elseif (
+                    $color === Symbol::BLACK &&
+                    $square === 'h8' &&
+                    $castling[$color][Symbol::CASTLING_SHORT]
+                ) {
+                    $pieces[] = new Rook($color, $square, RookType::CASTLING_SHORT);
+                } elseif (
+                    $color === Symbol::WHITE &&
+                    $square === 'a1' &&
+                    $castling[$color][Symbol::CASTLING_LONG]
+                ) {
+                    $pieces[] = new Rook($color, $square, RookType::CASTLING_LONG);
+                } elseif (
+                    $color === Symbol::WHITE &&
+                    $square === 'h1' &&
+                    $castling[$color][Symbol::CASTLING_SHORT]
+                ) {
+                    $pieces[] = new Rook($color, $square, RookType::CASTLING_SHORT);
+                } else {
+                    // in this case it really doesn't matter which RookType is assigned to the rook
+                    $pieces[] = new Rook($color, $square, RookType::CASTLING_LONG);
+                }
+                break;
+            case Symbol::BISHOP:
+                $pieces[] = new Bishop($color, $square);
+                break;
+            case Symbol::KNIGHT:
+                $pieces[] = new Knight($color, $square);
+                break;
+            case Symbol::PAWN:
+                $pieces[] = new Pawn($color, $square);
+                break;
+            default:
+                // do nothing
+                break;
         }
+
+        return $pieces;
     }
 }
