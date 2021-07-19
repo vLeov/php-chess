@@ -183,7 +183,7 @@ class StringToBoard
         $toSquare = $file.$toRank;
         $ascii->setArrayElem($piece, $fromSquare, $array)
             ->setArrayElem(' . ', $toSquare, $array);
-        $board = $ascii->toBoard($array, $turn);
+        $board = $ascii->toBoard($array, $turn, $board->getCastling());
         $board->play(Convert::toStdObj($turn, $toSquare));
 
         return $board;
