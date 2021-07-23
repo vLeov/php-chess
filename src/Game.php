@@ -160,21 +160,46 @@ class Game
      */
     public function piece(string $square): ?\stdClass
     {
-        $piece = $this->board->getPieceByPosition(Validate::square($square));
-
-        if ($piece) {
+        if ($piece = $this->board->getPieceByPosition(Validate::square($square))) {
+            $moves = [];
+            $color = $piece->getColor();
+            foreach ($piece->getLegalMoves() as $square) {
+                $clone = unserialize(serialize($this->board));
+                switch ($piece->getIdentity()) {
+                    case Symbol::KING:
+                        if ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
+                            $moves[] = $square;
+                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
+                            $moves[] = $square;
+                        }
+                        break;
+                    case Symbol::PAWN:
+                        if ($clone->play(Convert::toStdObj($color, $square))) {
+                            $moves[] = $square;
+                        } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
+                            $moves[] = $square;
+                        }
+                        break;
+                    default:
+                        if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
+                            $moves[] = $square;
+                        } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
+                            $moves[] = $square;
+                        }
+                        break;
+                }
+            }
             $result = [
-                'color' => $piece->getColor(),
+                'color' => $color,
                 'identity' => $piece->getIdentity(),
                 'position' => $piece->getPosition(),
-                'moves' => $piece->getLegalMoves(),
+                'moves' => $moves,
             ];
             if ($piece->getIdentity() === Symbol::PAWN) {
                 if ($enPassant = $piece->getEnPassantSquare()) {
                     $result['enPassant'] = $enPassant;
                 }
             }
-
             return (object) $result;
         }
 
