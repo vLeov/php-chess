@@ -48,6 +48,10 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
+### Documentation
+
+Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
+
 For further information you're all invited to read my learning journey:
 
 - [Demystifying AI Through a Human-Like Chess Engine](https://medium.com/geekculture/demystifying-ai-through-a-human-like-chess-engine-5f71e3896cc9)
@@ -66,10 +70,6 @@ For further information you're all invited to read my learning journey:
 - [Creating a Local WebSocket Server With TLS/SSL Is Easy as Pie](https://medium.com/geekculture/creating-a-local-websocket-server-with-tls-ssl-is-easy-as-pie-de1a2ef058e0)
 - [A Simple Example of SSL/TLS WebSocket With ReactPHP and Ratchet](https://medium.com/geekculture/a-simple-example-of-ssl-tls-websocket-with-reactphp-and-ratchet-e03be973f521)
 - [Newbie Tutorial on How to Rate-Limit a WebSocket Server](https://medium.com/geekculture/newbie-tutorial-on-how-to-rate-limit-a-websocket-server-8e28642ad5ff)
-
-### Documentation
-
-Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
 
 ### License
 
