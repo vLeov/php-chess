@@ -1084,4 +1084,17 @@ class LegalMovesTest extends AbstractUnitTestCase
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'd6')));
         $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3d2')));
     }
+
+    /**
+     * @test
+     */
+    public function e4_d5_exd5_e5_dxe6()
+    {
+        $board = new Board();
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'e4')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'd5')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'exd5')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::BLACK, 'e5')));
+        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'dxe6')));
+    }
 }
