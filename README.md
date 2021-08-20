@@ -6,8 +6,6 @@
 
 A chess library for PHP.
 
-> PHP Chess is currently used on [Redux Chess](https://github.com/programarivm/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/programarivm/chess-server). Check out this [demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
-
 ### Install
 
 Via composer:
@@ -54,7 +52,7 @@ $game->play('b', $game->response());
 
 Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
 
-For further information you're all invited to read my learning journey:
+For further information you're invited to read my learning journey:
 
 - [Demystifying AI Through a Human-Like Chess Engine](https://medium.com/geekculture/demystifying-ai-through-a-human-like-chess-engine-5f71e3896cc9)
 - [Two Things That My AI Project Required](https://medium.com/geekculture/two-things-that-my-ai-project-required-50000297053b)
@@ -73,16 +71,23 @@ For further information you're all invited to read my learning journey:
 - [A Simple Example of SSL/TLS WebSocket With ReactPHP and Ratchet](https://medium.com/geekculture/a-simple-example-of-ssl-tls-websocket-with-reactphp-and-ratchet-e03be973f521)
 - [Newbie Tutorial on How to Rate-Limit a WebSocket Server](https://medium.com/geekculture/newbie-tutorial-on-how-to-rate-limit-a-websocket-server-8e28642ad5ff)
 
+### Demo
+
+PHP Chess is currently used on [Redux Chess](https://github.com/programarivm/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/programarivm/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
+
 ### License
 
 The GNU General Public License.
 
 ### Contributions
 
-Would you help make this library better? Contributions are welcome.
+Would you help make this app better?
 
-- Feel free to send a pull request
-- Drop an email at info@programarivm.com with the subject "PHP Chess Contributions"
+- Look at the open issues
+- Send a pull request
+- Drop [an email](https://programarivm.com/about)
 - Leave me a comment on [Twitter](https://twitter.com/programarivm)
 
-Many thanks.
+Happy learning!
+
+Thank you, and keep it up.
