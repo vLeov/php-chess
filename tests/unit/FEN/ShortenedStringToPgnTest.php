@@ -41,4 +41,21 @@ class ShortenedStringToPgnTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $pgn);
     }
+
+    /**
+     * @test
+     */
+    public function kaufman_01_play_Qg4()
+    {
+        $pgn = (new ShortenedStringToPgn(
+            '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - -',
+            '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN1Q1/P2B4/1P3PPP/2R2R1K b'
+        ))->create();
+
+        $expected = [
+            Symbol::WHITE => 'Qg4',
+        ];
+
+        $this->assertEquals($expected, $pgn);
+    }
 }
