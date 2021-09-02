@@ -249,4 +249,94 @@ class PlayTest extends AbstractUnitTestCase
         $this->assertEquals(true, $game->playFen('rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w'));
         $this->assertEquals(true, $game->playFen('rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b'));
     }
+
+    /**
+     * @test
+     */
+    public function kaufman_01()
+    {
+        $game = new Game();
+        $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
+
+        $ascii = $game->ascii();
+
+        $expected = " .  r  b  q  .  r  k  . \n" .
+                    " p  .  b  .  n  p  p  p \n" .
+                    " .  p  .  .  p  .  .  . \n" .
+                    " .  .  .  .  .  .  .  . \n" .
+                    " .  B  .  p  N  .  .  . \n" .
+                    " P  .  .  B  .  .  .  . \n" .
+                    " .  P  .  .  .  P  P  P \n" .
+                    " .  .  R  Q  .  R  .  K \n";
+
+        $this->assertEquals($expected, $ascii);
+    }
+
+    /**
+     * @test
+     */
+    public function kaufman_01_Qg4()
+    {
+        $game = new Game();
+        $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
+        $game->play('w', 'Qg4');
+
+        $ascii = $game->ascii();
+
+        $expected = " .  r  b  q  .  r  k  . \n" .
+                    " p  .  b  .  n  p  p  p \n" .
+                    " .  p  .  .  p  .  .  . \n" .
+                    " .  .  .  .  .  .  .  . \n" .
+                    " .  B  .  p  N  .  Q  . \n" .
+                    " P  .  .  B  .  .  .  . \n" .
+                    " .  P  .  .  .  P  P  P \n" .
+                    " .  .  R  .  .  R  .  K \n";
+
+        $this->assertEquals($expected, $ascii);
+    }
+
+    /**
+     * @test
+     */
+    public function kaufman_01_Qg4_a5()
+    {
+        $game = new Game();
+        $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
+        $game->play('w', 'Qg4');
+        $game->play('b', 'a5');
+
+        $ascii = $game->ascii();
+
+        $expected = " .  r  b  q  .  r  k  . \n" .
+                    " .  .  b  .  n  p  p  p \n" .
+                    " .  p  .  .  p  .  .  . \n" .
+                    " p  .  .  .  .  .  .  . \n" .
+                    " .  B  .  p  N  .  Q  . \n" .
+                    " P  .  .  B  .  .  .  . \n" .
+                    " .  P  .  .  .  P  P  P \n" .
+                    " .  .  R  .  .  R  .  K \n";
+
+        $this->assertEquals($expected, $ascii);
+    }
+
+    /**
+     * @test
+     */
+    public function kaufman_01_Qg4_then_get_piece()
+    {
+        $game = new Game();
+        $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
+        $game->play('w', 'Qg4');
+
+        $piece = $game->piece('a7');
+
+        $expected = (object) [
+            'color' => 'b',
+            'identity' => 'P',
+            'position' => 'a7',
+            'moves' => [ 'a6', 'a5' ],
+        ];
+
+        $this->assertEquals($expected, $piece);
+    }
 }
