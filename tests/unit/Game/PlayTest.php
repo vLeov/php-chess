@@ -321,7 +321,7 @@ class PlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function kaufman_01_Qg4_a5()
+    public function kaufman_01_play_Qg4_a5()
     {
         $game = new Game();
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
@@ -345,7 +345,7 @@ class PlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function kaufman_01_Qg4_then_get_piece()
+    public function kaufman_01_play_Qg4_get_piece_a7()
     {
         $game = new Game();
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
