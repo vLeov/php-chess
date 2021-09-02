@@ -77,6 +77,12 @@ class StringToBoard
     private function castling()
     {
         switch (true) {
+            case $this->fields[2] === '-':
+                $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
+                $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
+                $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
+                $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
+                break;
             case !str_contains($this->fields[2], 'K') && !str_contains($this->fields[2], 'Q'):
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
@@ -95,12 +101,6 @@ class StringToBoard
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
                 break;
             case !str_contains($this->fields[2], 'q'):
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
-                break;
-            case $this->fields[2] === '-':
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
                 $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
                 break;
             default:
