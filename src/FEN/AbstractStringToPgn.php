@@ -88,14 +88,18 @@ abstract class AbstractStringToPgn
 
         $clone = unserialize(serialize($this->board));
 
-        if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
-            $legal[] = [
-                Symbol::CASTLING_SHORT => (new BoardToString($clone))->create()
-            ];
-        } elseif ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
-            $legal[] = [
-                Symbol::CASTLING_LONG => (new BoardToString($clone))->create()
-            ];
+        if ($this->board->getCastling()[$color][Symbol::CASTLING_SHORT]) {
+            if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))) {
+                $legal[] = [
+                    Symbol::CASTLING_SHORT => (new BoardToString($clone))->create()
+                ];
+            }
+        } elseif ($this->board->getCastling()[$color][Symbol::CASTLING_LONG]) {
+            if ($clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))) {
+                $legal[] = [
+                    Symbol::CASTLING_LONG => (new BoardToString($clone))->create()
+                ];
+            }
         }
 
         return [
