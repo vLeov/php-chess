@@ -1,4 +1,4 @@
-Let's look at the [`Chess\Game`](https://github.com/programarivm/php-chess/blob/master/src/Game.php) methods available through the following example:
+Let's look at the [`Chess\Game`](https://github.com/chesslab/php-chess/blob/master/src/Game.php) methods available through the following example:
 
 ```php
 use Chess\Game;

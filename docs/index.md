@@ -1,18 +1,18 @@
 ## PHP Chess
 
-[![Latest Stable Version](https://poser.pugx.org/programarivm/php-chess/v/stable)](https://packagist.org/packages/programarivm/php-chess)
-[![Build Status](https://travis-ci.org/programarivm/php-chess.svg?branch=master)](https://travis-ci.org/programarivm/php-chess)
+[![Latest Stable Version](https://poser.pugx.org/chesslab/php-chess/v/stable)](https://packagist.org/packages/chesslab/php-chess)
+[![Build Status](https://travis-ci.org/chesslab/php-chess.svg?branch=master)](https://travis-ci.org/chesslab/php-chess)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 A chess library for PHP.
 
-> PHP Chess is currently used on [Redux Chess](https://github.com/programarivm/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/programarivm/chess-server). Check out this [demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
+> PHP Chess is currently used on [Redux Chess](https://github.com/chesslab/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/chesslab/chess-server). Check out this [demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
 
 ### Install
 
 Via composer:
 
-    $ composer require programarivm/php-chess
+    $ composer require chesslab/php-chess
 
 ### Play Chess
 
@@ -39,7 +39,7 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-The AIs are stored in the [`model`](https://github.com/programarivm/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as a second parameter to the `Chess\Game` constructor:
+The AIs are stored in the [`model`](https://github.com/chesslab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as a second parameter to the `Chess\Game` constructor:
 
 ```php
 $game = new Game(Game::MODE_AI, 'a2.model');
@@ -50,7 +50,7 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-Currently a few machine learning models are being built with the [Rubix ML](https://github.com/RubixML/ML) library at [programarivm/chess-data](https://github.com/programarivm/chess-data). The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others.
+Currently a few machine learning models are being built with the [Rubix ML](https://github.com/RubixML/ML) library at [chesslab/chess-data](https://github.com/chesslab/chess-data). The supervised learning process is all about using suitable heuristics such as king safety, pressure, material or connectivity, among others.
 
 But how can the efficiency of a chess heuristic be measured? This is where plotting data on nice charts comes to the rescue! A live demo is available at [Heuristics Quest](https://programarivm.github.io/heuristics-quest/).
 
@@ -68,7 +68,7 @@ For further information you're all invited to read my learning journey:
 - [How to Test a Local React NPM Package With Ease](https://javascript.plainenglish.io/testing-a-local-react-npm-package-with-ease-7d0668676ddb)
 - [TDDing a React App With Jest the Easy Way](https://medium.com/geekculture/tdding-a-react-app-with-jest-the-easy-way-8ddb64aeaba6)
 - [How to Test React Components With Joy](https://javascript.plainenglish.io/looking-forward-to-testing-react-components-with-joy-5bb3f86c21d7)
-- [My First Integration Test in a Redux Hooked App](https://programarivm.medium.com/my-first-integration-test-in-a-redux-hooked-app-3b189addd46e)
+- [My First Integration Test in a Redux Hooked App](https://javascript.plainenglish.io/my-first-integration-test-in-a-redux-hooked-app-3b189addd46e)
 - [Creating a Local WebSocket Server With TLS/SSL Is Easy as Pie](https://medium.com/geekculture/creating-a-local-websocket-server-with-tls-ssl-is-easy-as-pie-de1a2ef058e0)
 - [A Simple Example of SSL/TLS WebSocket With ReactPHP and Ratchet](https://medium.com/geekculture/a-simple-example-of-ssl-tls-websocket-with-reactphp-and-ratchet-e03be973f521)
 - [Newbie Tutorial on How to Rate-Limit a WebSocket Server](https://medium.com/geekculture/newbie-tutorial-on-how-to-rate-limit-a-websocket-server-8e28642ad5ff)
