@@ -1,5 +1,5 @@
 {
-  "name": "chesslab/php-chess",
+  "name": "chesslablab/php-chess",
   "description": "A chess library for PHP.",
   "type": "library",
   "license": "GPL-3.0-only",
@@ -22,7 +22,7 @@
     {
       "name": "Jordi Bassagañas",
       "email": "info@programarivm.com",
-      "homepage": "https://github.com/chesslab"
+      "homepage": "https://github.com/chesslablab"
     }
   ],
   "require": {

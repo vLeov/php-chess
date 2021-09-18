@@ -18,7 +18,7 @@ chess > 1.e4 e5
 chess >
 ```
 
-The AIs are stored in the [`model`](https://github.com/chesslab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as the first argument to the `cli/chess.php` script.
+The AIs are stored in the [`model`](https://github.com/chesslablab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as the first argument to the `cli/chess.php` script.
 
 ### Commands Available
 

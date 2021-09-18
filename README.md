@@ -1,7 +1,7 @@
 ## PHP Chess
 
-[![Latest Stable Version](https://poser.pugx.org/chesslab/php-chess/v/stable)](https://packagist.org/packages/chesslab/php-chess)
-[![Build Status](https://app.travis-ci.com/chesslab/php-chess.svg?branch=master)](https://app.travis-ci.com/github/chesslab/php-chess)
+[![Latest Stable Version](https://poser.pugx.org/chesslablab/php-chess/v/stable)](https://packagist.org/packages/chesslablab/php-chess)
+[![Build Status](https://app.travis-ci.com/chesslablab/php-chess.svg?branch=master)](https://app.travis-ci.com/github/chesslablab/php-chess)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 A chess library for PHP.
@@ -10,7 +10,7 @@ A chess library for PHP.
 
 Via composer:
 
-    $ composer require chesslab/php-chess
+    $ composer require chesslablab/php-chess
 
 ### Play Chess
 
@@ -37,7 +37,7 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
-The AIs are stored in the [`model`](https://github.com/chesslab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as a second parameter to the `Chess\Game` constructor:
+The AIs are stored in the [`model`](https://github.com/chesslablab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as a second parameter to the `Chess\Game` constructor:
 
 ```php
 $game = new Game(Game::MODE_AI, 'a2.model');
@@ -74,7 +74,7 @@ For further information you're invited to read my learning journey:
 
 ### Demo
 
-PHP Chess is currently used on [Redux Chess](https://github.com/chesslab/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/chesslab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
+PHP Chess is currently used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
 
 ### License
 
