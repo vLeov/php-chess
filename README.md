@@ -52,6 +52,22 @@ $game->play('b', $game->response());
 
 Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
 
+### Demo
+
+PHP Chess is currently used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
+
+### License
+
+The GNU General Public License.
+
+### Contributions
+
+See the [contributing guidelines](https://github.com/chesslablab/php-chess/blob/master/CONTRIBUTING.md).
+
+Happy learning and coding! Thank you, and keep it up.
+
+---
+
 For further information you're invited to read my learning journey:
 
 - [Demystifying AI Through a Human-Like Chess Engine](https://medium.com/geekculture/demystifying-ai-through-a-human-like-chess-engine-5f71e3896cc9)
@@ -71,19 +87,3 @@ For further information you're invited to read my learning journey:
 - [A Simple Example of SSL/TLS WebSocket With ReactPHP and Ratchet](https://medium.com/geekculture/a-simple-example-of-ssl-tls-websocket-with-reactphp-and-ratchet-e03be973f521)
 - [Newbie Tutorial on How to Rate-Limit a WebSocket Server](https://medium.com/geekculture/newbie-tutorial-on-how-to-rate-limit-a-websocket-server-8e28642ad5ff)
 - [Visualizing Chess Openings Before MLP Classification](https://medium.com/geekculture/visualizing-chess-openings-before-mlp-classification-fd2a3e8c266)
-
-### Demo
-
-PHP Chess is currently used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess) but please note the sandbox server might not be up and running all the time.
-
-### License
-
-The GNU General Public License.
-
-### Contributions
-
-- [How to Contribute to ChesslabLab](https://medium.com/geekculture/how-to-contribute-to-chesslab-cca73fefaf70)
-
-Happy learning and coding!
-
-Thank you, and keep it up.
