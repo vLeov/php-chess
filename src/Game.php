@@ -343,8 +343,13 @@ class Game
         return (new HeuristicPicture($movetext, $this->board))->take()->getPicture();
     }
 
-    public function undoMove()
+    public function undoMove(): bool
     {
-        $this->board->undoMove($this->board->getCastling());
+        if ($this->board->getHistory()) {
+            $this->board->undoMove($this->board->getCastling());
+            return true;
+        }
+
+        return false;
     }
 }

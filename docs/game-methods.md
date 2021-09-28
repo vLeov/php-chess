@@ -548,7 +548,7 @@ $game->status()->space;
 $game->status()->castling;
 ```
 
-#### `undoMove()`
+#### `undoMove(): bool`
 
 Undoes the last move.
 
