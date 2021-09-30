@@ -2,7 +2,7 @@ site_name: PHP Chess
 pages:
   - Home: index.md
   - Chess\Game: game.md
-  - Chess\Image: image.md
+  - Chess\Image\BoardToPng: image-board-to-png.md
   - Command Line Interface: cli.md
   - Usage: usage.md
 theme: readthedocs
