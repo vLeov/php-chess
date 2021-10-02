@@ -21,7 +21,7 @@ use Chess\Piece\Type\RookType;
  */
 class Ascii
 {
-    public function toArray(Board $board)
+    public function toArray(Board $board): array
     {
         $array = [
             7 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
@@ -46,7 +46,7 @@ class Ascii
         return $array;
     }
 
-    public function toBoard(array $array, string $turn, $castling = null)
+    public function toBoard(array $array, string $turn, $castling = null): Board
     {
         if (!$castling) {
             $castling = [
@@ -96,7 +96,7 @@ class Ascii
         return $ascii;
     }
 
-    public function fromAlgebraicToIndex(string $square)
+    public function fromAlgebraicToIndex(string $square): array
     {
         $i = $square[1] - 1;
         $j = ord($square[0]) - 97;
@@ -107,7 +107,7 @@ class Ascii
         ];
     }
 
-    public function fromIndexToAlgebraic(int $i, int $j)
+    public function fromIndexToAlgebraic(int $i, int $j): string
     {
         $file = chr(97 + $j);
         $rank = $i + 1;
@@ -115,7 +115,7 @@ class Ascii
         return $file.$rank;
     }
 
-    public function setArrayElem(string $piece, string $square, &$array)
+    public function setArrayElem(string $piece, string $square, &$array): Ascii
     {
         $index = $this->fromAlgebraicToIndex($square);
         $array[$index[0]][$index[1]] = $piece;
