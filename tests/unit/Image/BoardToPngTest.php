@@ -7,6 +7,7 @@ use Chess\FEN\StringToBoard;
 use Chess\Image\BoardToPng;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
+use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 
 class BoardToPngTest extends AbstractUnitTestCase
 {
@@ -76,6 +77,21 @@ class BoardToPngTest extends AbstractUnitTestCase
         $this->assertEquals(
             md5(file_get_contents(self::OUTPUT_FOLDER . '/tmp.png')),
             md5(file_get_contents(self::DATA_FOLDER . '/img/benoni_fianchetto_variation.png'))
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function output_closed_sicilian()
+    {
+        $board = (new ClosedSicilian(new Board()))->play();
+
+        (new BoardToPng($board))->output(self::OUTPUT_FOLDER . '/tmp.png');
+
+        $this->assertEquals(
+            md5(file_get_contents(self::OUTPUT_FOLDER . '/tmp.png')),
+            md5(file_get_contents(self::DATA_FOLDER . '/img/closed_sicilian.png'))
         );
     }
 }
