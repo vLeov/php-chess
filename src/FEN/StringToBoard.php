@@ -6,14 +6,12 @@ use Chess\Ascii;
 use Chess\Board;
 use Chess\Castling\Initialization as CastlingInit;
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\Validate;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Piece\Bishop;
 use Chess\Piece\King;
 use Chess\Piece\Knight;
 use Chess\Piece\Pawn;
-use Chess\Piece\Piece;
 use Chess\Piece\Queen;
 use Chess\Piece\Rook;
 use Chess\Piece\Type\RookType;
@@ -36,7 +34,7 @@ class StringToBoard
 
     public function __construct(string $string)
     {
-        $this->string = $string;
+        $this->string = Validate::fen($string);
 
         $this->fields = array_filter(explode(' ', $this->string));
 
@@ -49,7 +47,6 @@ class StringToBoard
 
     public function create(): Board
     {
-        Validate::fen("{$this->fields[0]} {$this->fields[1]} {$this->fields[2]} {$this->fields[3]}");
         try {
             $fields = array_filter(explode('/', $this->fields[0]));
             foreach ($fields as $key => $field) {
