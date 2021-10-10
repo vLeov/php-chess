@@ -8,6 +8,8 @@ use Chess\Image\BoardToPng;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
+use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense;
+use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as QueensGambitSymmetricalDefense;
 
@@ -94,6 +96,21 @@ class BoardToPngTest extends AbstractUnitTestCase
         $this->assertEquals(
             md5(file_get_contents(self::OUTPUT_FOLDER . '/tmp.png')),
             md5(file_get_contents(self::DATA_FOLDER . '/img/open_sicilian.png'))
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function output_lucena_defense()
+    {
+        $board = (new LucenaDefense())->play();
+
+        (new BoardToPng($board))->output(self::OUTPUT_FOLDER . '/tmp.png');
+
+        $this->assertEquals(
+            md5(file_get_contents(self::OUTPUT_FOLDER . '/tmp.png')),
+            md5(file_get_contents(self::DATA_FOLDER . '/img/lucena_defense.png'))
         );
     }
 
