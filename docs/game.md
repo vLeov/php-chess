@@ -523,35 +523,25 @@ $status = $game->status();
 
 | Property       | Description                                |
 |----------------|--------------------------------------------|
+| `castling`     | The castling status for both players       |
+| `isCheck`      | Whether a player is in check or not        |
+| `isMate`       | Whether the game is over or not            |
+| `movetext`     | The movetext                               |
 | `turn`         | The current player's turn                  |
-| `squares`      | Free/used squares on the board             |
-| `pressure`       | Squares being pressured by both players     |
-| `space`        | Squares being controlled by both players   |
-| `castling`     | The castling status of the two kings       |
 
 The properties of the  `$status` object are accessed this way:
 
 ```php
-// current turn
-$game->status()->turn;
-
-// used/free squares
-$game->status()->squares->used;
-$game->status()->squares->free;
-
-// squares being pressured by both players
-$game->status()->pressure;
-
-// squares being controlled by both players
-$game->status()->space;
-
-// castling status of both players
 $game->status()->castling;
+$game->status()->isCheck;
+$game->status()->isMate;
+$game->status()->movetext;
+$game->status()->turn;
 ```
 
-#### `undoMove(): bool`
+#### `undoMove(): ?\stdClass`
 
-Undoes the last move.
+Undoes the last move returning the status of the game.
 
 ```php
 $game->undoMove();

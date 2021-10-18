@@ -26,7 +26,7 @@ class PlayTest extends AbstractUnitTestCase
         $game = new Game();
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
-        $this->assertEquals(true, $game->undoMove());
+        $this->assertIsObject($game->undoMove());
     }
 
     /**
@@ -37,7 +37,7 @@ class PlayTest extends AbstractUnitTestCase
         $game = new Game();
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
-        $this->assertEquals(true, $game->undoMove());
+        $this->assertIsObject($game->undoMove());
         $this->assertEquals(false, $game->undoMove());
     }
 

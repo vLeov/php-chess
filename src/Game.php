@@ -71,11 +71,11 @@ class Game
     public function status(): \stdClass
     {
         return (object) [
-            'turn' => $this->board->getTurn(),
             'castling' => $this->board->getCastling(),
-            'squares' => $this->board->getSquares(),
-            PressureEvaluation::NAME => $this->board->getPressure(),
-            SpaceEvaluation::NAME => $this->board->getSpace(),
+            'isCheck' => $this->board->isCheck(),
+            'isMate' => $this->board->isMate(),
+            'movetext' => $this->board->getMovetext(),
+            'turn' => $this->board->getTurn(),
         ];
     }
 
@@ -343,13 +343,13 @@ class Game
         return (new HeuristicPicture($movetext, $this->board))->take()->getPicture();
     }
 
-    public function undoMove(): bool
+    public function undoMove(): ?\stdClass
     {
         if ($this->board->getHistory()) {
             $this->board->undoMove($this->board->getCastling());
-            return true;
+            return $this->status();
         }
 
-        return false;
+        return null;
     }
 }
