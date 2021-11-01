@@ -28,13 +28,34 @@ class TacticsEvaluation extends AbstractEvaluation
         $this->defenseEvald = (new DefenseEvaluation($board))->evaluate();
         $this->pressEvald = (new PressureEvaluation($board))->evaluate();
 
-        $this->result = [
+        $this->target = [
             Symbol::WHITE => [],
             Symbol::BLACK => [],
         ];
+
+        $this->result = [
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
+        ];
+
+        $this->target();
     }
 
     public function evaluate($feature = null): array
+    {
+        foreach ($this->target as $color => $squares) {
+            foreach ($squares as $square) {
+                $identity = $this->board->getPieceByPosition($square)->getIdentity();
+                if ($identity !== Symbol::KING) {
+                    $this->result[$color] += $this->value[$identity];
+                }
+            }
+        }
+
+        return $this->result;
+    }
+
+    protected function target()
     {
         foreach ($this->pressEvald as $color => $squares) {
             $countPress = array_count_values($squares);
@@ -42,14 +63,12 @@ class TacticsEvaluation extends AbstractEvaluation
             foreach ($squares as $square) {
                 if (in_array($square, $this->defenseEvald[Symbol::oppColor($color)])) {
                     if ($countPress[$square] > $countDefense[$square]) {
-                        $this->result[$color][] = $square;
+                        $this->target[$color][] = $square;
                     }
                 } else {
-                    $this->result[$color][] = $square;
+                    $this->target[$color][] = $square;
                 }
             }
         }
-
-        return $this->result;
     }
 }

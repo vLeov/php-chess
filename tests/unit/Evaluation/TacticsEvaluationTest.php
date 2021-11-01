@@ -7,9 +7,26 @@ use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Evaluation\TacticsEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
+use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class TacticsEvaluationTest extends AbstractUnitTestCase
 {
+    /**
+     * @test
+     */
+    public function start()
+    {
+        $attEvald = (new TacticsEvaluation(new Board()))->evaluate();
+
+        $expected = [
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
+        ];
+
+        $this->assertEquals($expected, $attEvald);
+    }
+
     /**
      * @test
      */
@@ -22,11 +39,45 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
         $tacticsEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => ['e4'],
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 1,
         ];
 
         $this->assertEquals($expected, $tacticsEvald);
+    }
+
+    /**
+     * @test
+     */
+    public function open_sicilian()
+    {
+        $board = (new OpenSicilian(new Board()))->play();
+
+        $attEvald = (new TacticsEvaluation($board))->evaluate();
+
+        $expected = [
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
+        ];
+
+        $this->assertEquals($expected, $attEvald);
+    }
+
+    /**
+     * @test
+     */
+    public function closed_sicilian()
+    {
+        $board = (new ClosedSicilian(new Board()))->play();
+
+        $attEvald = (new TacticsEvaluation($board))->evaluate();
+
+        $expected = [
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 0,
+        ];
+
+        $this->assertEquals($expected, $attEvald);
     }
 
     /**
@@ -46,8 +97,8 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
         $tacticsEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => ['b5', 'e5'],
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 6.53,
         ];
 
         $this->assertEquals($expected, $tacticsEvald);
@@ -70,8 +121,8 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
         $tacticsEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => ['e4', 'e5'],
-            Symbol::BLACK => [],
+            Symbol::WHITE => 4.2,
+            Symbol::BLACK => 0,
         ];
 
         $this->assertEquals($expected, $tacticsEvald);
