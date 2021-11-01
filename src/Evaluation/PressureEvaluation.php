@@ -9,6 +9,8 @@ use Chess\PGN\Symbol;
 /**
  * Pressure evaluation.
  *
+ * Squares containing the opponent's pieces currently being threatened.
+ *
  * @author Jordi Bassagañas
  * @license GPL
  */
@@ -16,8 +18,16 @@ class PressureEvaluation extends AbstractEvaluation
 {
     const NAME = 'pressure';
 
+    /**
+     * Square evaluation containing the free and used squares.
+     *
+     * @var array
+     */
     private $sqEvald;
 
+    /**
+     * @param \Chess\Board $board
+     */
     public function __construct(Board $board)
     {
         parent::__construct($board);
@@ -35,6 +45,11 @@ class PressureEvaluation extends AbstractEvaluation
         ];
     }
 
+    /**
+     * Returns the squares containing the opponent's pieces currently being threatened.
+     *
+     * @return array
+     */
     public function evaluate($feature = null): array
     {
         $this->board->rewind();
