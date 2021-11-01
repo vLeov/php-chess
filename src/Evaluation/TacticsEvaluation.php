@@ -10,6 +10,8 @@ use Chess\PGN\Symbol;
 /**
  * Tactics evaluation.
  *
+ * Total piece value obtained from those squares that are not being completely defended.
+ *
  * @author Jordi Bassagañas
  * @license GPL
  */
@@ -17,10 +19,23 @@ class TacticsEvaluation extends AbstractEvaluation
 {
     const NAME = 'tactics';
 
+    /**
+     * Defense evaluation containing the defended squares.
+     *
+     * @var array
+     */
     private $defenseEvald;
 
+    /**
+     * Pressure evaluation containing the squares being threatened.
+     *
+     * @var array
+     */
     private $pressEvald;
 
+    /**
+     * @param \Chess\Board $board
+     */
     public function __construct(Board $board)
     {
         parent::__construct($board);
@@ -41,6 +56,11 @@ class TacticsEvaluation extends AbstractEvaluation
         $this->target();
     }
 
+    /**
+     * Returns the value obtained from those squares that are not being completely defended.
+     *
+     * @return array
+     */
     public function evaluate($feature = null): array
     {
         foreach ($this->target as $color => $squares) {

@@ -9,7 +9,7 @@ use Chess\PGN\Symbol;
 /**
  * Pressure evaluation.
  *
- * Squares containing the opponent's pieces being threatened at the present moment.
+ * Squares being threatened at the present moment.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -46,7 +46,7 @@ class PressureEvaluation extends AbstractEvaluation
     }
 
     /**
-     * Returns the squares containing the opponent's pieces currently being threatened.
+     * Returns the squares being threatened at the present moment.
      *
      * @return array
      */
