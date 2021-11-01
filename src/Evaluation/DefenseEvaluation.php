@@ -8,6 +8,8 @@ use Chess\PGN\Symbol;
 /**
  * Defense evaluation.
  *
+ * Squares containing the pieces being defended at the present moment.
+ *
  * @author Jordi Bassagañas
  * @license GPL
  */
@@ -15,6 +17,9 @@ class DefenseEvaluation extends AbstractEvaluation
 {
     const NAME = 'defense';
 
+    /**
+     * @param \Chess\Board $board
+     */
     public function __construct(Board $board)
     {
         parent::__construct($board);
@@ -25,6 +30,11 @@ class DefenseEvaluation extends AbstractEvaluation
         ];
     }
 
+    /**
+     * Returns the squares containing the pieces being defended at the present moment.
+     *
+     * @return array
+     */
     public function evaluate($feature = null): array
     {
         $this->board->rewind();

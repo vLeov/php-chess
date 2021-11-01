@@ -9,7 +9,7 @@ use Chess\PGN\Symbol;
 /**
  * Pressure evaluation.
  *
- * Squares containing the opponent's pieces currently being threatened.
+ * Squares containing the opponent's pieces being threatened at the present moment.
  *
  * @author Jordi Bassagañas
  * @license GPL
