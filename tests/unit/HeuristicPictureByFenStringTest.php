@@ -66,8 +66,8 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $pic = (new HeuristicPictureByFenString($fen))->take()->getPicture();
 
         $expected = [
-            Symbol::WHITE => [ 1, 0.05, 0.51, 0.41, 0, 0, 0, 0 ],
-            Symbol::BLACK => [ 1, 0.05, 0.51, 0.41, 0, 0, 0, 0 ],
+            Symbol::WHITE => [ 1, 0.07, 0.52, 0.42, 0.02, 0.02, 0.02, 0 ],
+            Symbol::BLACK => [ 1, 0.07, 0.52, 0.42, 0.02, 0.02, 0.02, 0 ],
         ];
 
         $this->assertEquals($expected, $pic);
@@ -97,8 +97,8 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $evaluation = (new HeuristicPictureByFenString($fen))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 44.56,
-            Symbol::BLACK => 44.56,
+            Symbol::WHITE => 45.51,
+            Symbol::BLACK => 45.51,
         ];
 
         $this->assertEquals($expected, $evaluation);

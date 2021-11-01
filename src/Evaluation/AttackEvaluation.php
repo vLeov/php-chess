@@ -34,10 +34,10 @@ class AttackEvaluation extends AbstractEvaluation
                     break;
                 case Symbol::PAWN:
                     foreach ($piece->getCaptureSquares() as $square) {
-                        if ($pieceByPosition = $this->board->getPieceByPosition($square)) {
-                            if ($pieceByPosition->getColor() !== $piece->getColor()) {
-                                $identity = $pieceByPosition->getIdentity();
-                                if ($this->value[Symbol::PAWN] < $this->value[$identity]) {
+                        if ($item = $this->board->getPieceByPosition($square)) {
+                            if ($item->getColor() !== $piece->getColor()) {
+                                $identity = $item->getIdentity();
+                                if ($identity !== Symbol::KING && $this->value[Symbol::PAWN] < $this->value[$identity]) {
                                     $this->result[$piece->getColor()] += $this->value[$identity] - $this->value[Symbol::PAWN];
                                 }
                             }
@@ -46,10 +46,10 @@ class AttackEvaluation extends AbstractEvaluation
                     break;
                 default:
                     foreach ($piece->getLegalMoves() as $square) {
-                        if ($pieceByPosition = $this->board->getPieceByPosition($square)) {
-                            if ($pieceByPosition->getColor() !== $piece->getColor()) {
-                                $identity = $pieceByPosition->getIdentity();
-                                if ($this->value[$piece->getIdentity()] < $this->value[$identity]) {
+                        if ($item = $this->board->getPieceByPosition($square)) {
+                            if ($item->getColor() !== $piece->getColor()) {
+                                $identity = $item->getIdentity();
+                                if ($identity !== Symbol::KING && $this->value[$piece->getIdentity()] < $this->value[$identity]) {
                                     $this->result[$piece->getColor()] += $this->value[$identity] - $this->value[$piece->getIdentity()];
                                 }
                             }
