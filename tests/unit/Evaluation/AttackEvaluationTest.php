@@ -75,14 +75,14 @@ class AttackEvaluationTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'a6'));
         $board->play(Convert::toStdObj(Symbol::WHITE, 'Nxe5'));
 
-        $tacticsEvald = (new AttackEvaluation($board))->evaluate();
+        $attEvald = (new AttackEvaluation($board))->evaluate();
 
         $expected = [
             Symbol::WHITE => 0,
-            Symbol::BLACK => 6.53,
+            Symbol::BLACK => 2.33,
         ];
 
-        $this->assertEquals($expected, $tacticsEvald);
+        $this->assertEquals($expected, $attEvald);
     }
 
     /**
@@ -99,13 +99,33 @@ class AttackEvaluationTest extends AbstractUnitTestCase
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Nxe4'));
         $board->play(Convert::toStdObj(Symbol::WHITE, 'd3'));
 
-        $tacticsEvald = (new AttackEvaluation($board))->evaluate();
+        $attEvald = (new AttackEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 4.2,
+            Symbol::WHITE => 2.2,
             Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $tacticsEvald);
+        $this->assertEquals($expected, $attEvald);
+    }
+
+    /**
+     * @test
+     */
+    public function e4_Nf6_e5()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e5'));
+
+        $attEvald = (new AttackEvaluation($board))->evaluate();
+
+        $expected = [
+            Symbol::WHITE => 2.2,
+            Symbol::BLACK => 0,
+        ];
+
+        $this->assertEquals($expected, $attEvald);
     }
 }
