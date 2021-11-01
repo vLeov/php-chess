@@ -10,7 +10,7 @@ use Chess\PGN\Symbol;
 /**
  * Tactics evaluation.
  *
- * Total piece value obtained from those squares that are not being completely defended.
+ * Total piece value obtained from the squares that are not being defended.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -27,7 +27,7 @@ class TacticsEvaluation extends AbstractEvaluation
     private $defenseEvald;
 
     /**
-     * Pressure evaluation containing the squares being threatened.
+     * Pressure evaluation containing the squares being pressured.
      *
      * @var array
      */
@@ -57,7 +57,7 @@ class TacticsEvaluation extends AbstractEvaluation
     }
 
     /**
-     * Returns the value obtained from those squares that are not being completely defended.
+     * Returns the value obtained from the squares that are not being defended.
      *
      * @return array
      */
@@ -75,6 +75,11 @@ class TacticsEvaluation extends AbstractEvaluation
         return $this->result;
     }
 
+    /**
+     * Calculates the squares that are not being defended.
+     *
+     * @return array
+     */
     protected function target()
     {
         foreach ($this->pressEvald as $color => $squares) {
