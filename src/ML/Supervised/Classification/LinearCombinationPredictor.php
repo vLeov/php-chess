@@ -65,7 +65,9 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
             $this->result[] = [ Symbol::CASTLING_LONG => $this->evaluate($clone) ];
         }
 
-        return $this->sort($color)->find();
+        $prediction = $this->prediction();
+
+        return $this->sort($color)->find($prediction);
     }
 
     /**
@@ -83,6 +85,7 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
         return [
             'label' => $label,
             'linear_combination' => $this->combine($end, $label),
+            'heuristic_eval' => (new HeuristicPicture($clone->getMovetext()))->evaluate(),
         ];
     }
 
@@ -91,13 +94,18 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
      *
      * @return \Chess\ML\Supervised\Classification\LinearCombinationPredictor
      */
+
     protected function sort(string $color): LinearCombinationPredictor
     {
         usort($this->result, function ($a, $b) use ($color) {
             if ($color === Symbol::WHITE) {
-                $current = current($b)['linear_combination'] <=> current($a)['linear_combination'];
+                $current =
+                    (current($b)['heuristic_eval']['b'] - current($b)['heuristic_eval']['w'] <=> current($a)['heuristic_eval']['b'] - current($a)['heuristic_eval']['w']) * 10 +
+                    (current($b)['linear_combination'] <=> current($a)['linear_combination']);
             } else {
-                $current = current($a)['linear_combination'] <=> current($b)['linear_combination'];
+                $current =
+                    (current($a)['heuristic_eval']['w'] - current($a)['heuristic_eval']['b'] <=> current($b)['heuristic_eval']['w'] - current($b)['heuristic_eval']['b']) * 10 +
+                    (current($a)['linear_combination'] <=> current($b)['linear_combination']);
             }
 
             return $current;
@@ -111,11 +119,11 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
      *
      * @return string
      */
-    protected function find(): string
+    protected function find($prediction): string
     {
         foreach ($this->result as $key => $val) {
             $current = current($val);
-            if ($this->prediction() === $current['label']) {
+            if ($prediction === $current['linear_combination']) {
                 return key($this->result[$key]);
             }
         }
