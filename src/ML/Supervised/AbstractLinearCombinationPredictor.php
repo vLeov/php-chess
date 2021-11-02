@@ -31,9 +31,19 @@ abstract class AbstractLinearCombinationPredictor
 
         $this->permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [ 8, 13, 21, 34 ],
+                [ 5, 8, 13, 21 ],
                 count((new HeuristicPicture(''))->getDimensions()),
                 100
             );
+    }
+
+    protected function combine($end, $label)
+    {
+        $combination = 0;
+        foreach ($end as $i => $val) {
+            $combination += $this->permutations[$label][$i] * $val;
+        }
+
+        return $combination;
     }
 }

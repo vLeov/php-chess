@@ -58,48 +58,55 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
             $this->result[] = [ Symbol::CASTLING_LONG => $this->evaluate($clone) ];
         }
 
-        $this->result = array_map("unserialize", array_unique(array_map("serialize", $this->result)));
-
-        usort($this->result, function ($a, $b) use ($color) {
-            $color === Symbol::WHITE
-                ? $current = current($b)['prediction_eval'] <=> current($a)['prediction_eval']
-                : $current = current($a)['prediction_eval'] <=> current($b)['prediction_eval'];
-            return $current;
-        });
-
-        return key($this->result[0]);
+        return $this->sort($color)->find();
     }
 
     protected function evaluate(Board $clone)
     {
-        $balance = (new HeuristicPicture($clone->getMovetext()))
-            ->take()
-            ->getBalance();
-
+        $balance = (new HeuristicPicture($clone->getMovetext()))->take()->getBalance();
         $end = end($balance);
-
-        $dataset = new Unlabeled([$end]);
-        $prediction = current($this->estimator->predict($dataset));
-
-        $predictionEval = 0;
-        foreach ($end as $i => $val) {
-            $predictionEval += $this->permutations[$prediction][$i] * $val;
-        }
-
-        $labelEval = 0;
         $color = $this->board->getTurn();
         $label = (new LinearCombinationLabeller($this->permutations))->label($end)[$color];
-        foreach ($end as $i => $val) {
-            $labelEval += $this->permutations[$label][$i] * $val;
-        }
 
         return [
-            'balance' => $end,
-            'prediction' => $prediction,
             'label' => $label,
-            'prediction_eval' => $predictionEval,
-            'label_eval' => $labelEval,
-            'heuristic_eval' => (new HeuristicPicture($clone->getMovetext()))->evaluate(),
+            'linear_combination' => $this->combine($end, $label),
         ];
+    }
+
+    protected function sort(string $color)
+    {
+        usort($this->result, function ($a, $b) use ($color) {
+            if ($color === Symbol::WHITE) {
+                $current = current($b)['linear_combination'] <=> current($a)['linear_combination'];
+            } else {
+                $current = current($a)['linear_combination'] <=> current($b)['linear_combination'];
+            }
+
+            return $current;
+        });
+
+        return $this;
+    }
+
+    protected function find()
+    {
+        foreach ($this->result as $key => $val) {
+            $current = current($val);
+            if ($this->prediction() === $current['label']) {
+                return key($this->result[$key]);
+            }
+        }
+
+        return key($this->result[0]);
+    }
+
+    protected function prediction()
+    {
+        $balance = (new HeuristicPicture($this->board->getMovetext()))->take()->getBalance();
+        $end = end($balance);
+        $dataset = new Unlabeled([$end]);
+
+        return current($this->estimator->predict($dataset));
     }
 }
