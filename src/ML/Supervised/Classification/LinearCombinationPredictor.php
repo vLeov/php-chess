@@ -67,7 +67,9 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
 
         $prediction = $this->prediction();
 
-        return $this->sort($color)->find($prediction);
+        $found = $this->sort($color)->find($prediction);
+
+        return $found;
     }
 
     /**
@@ -100,11 +102,13 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
         usort($this->result, function ($a, $b) use ($color) {
             if ($color === Symbol::WHITE) {
                 $current =
-                    (current($b)['heuristic_eval']['b'] - current($b)['heuristic_eval']['w'] <=> current($a)['heuristic_eval']['b'] - current($a)['heuristic_eval']['w']) * 10 +
+                    (current($b)['heuristic_eval']['b'] - current($b)['heuristic_eval']['w'] <=>
+                        current($a)['heuristic_eval']['b'] - current($a)['heuristic_eval']['w']) * 10 +
                     (current($b)['linear_combination'] <=> current($a)['linear_combination']);
             } else {
                 $current =
-                    (current($a)['heuristic_eval']['w'] - current($a)['heuristic_eval']['b'] <=> current($b)['heuristic_eval']['w'] - current($b)['heuristic_eval']['b']) * 10 +
+                    (current($a)['heuristic_eval']['w'] - current($a)['heuristic_eval']['b'] <=>
+                        current($b)['heuristic_eval']['w'] - current($b)['heuristic_eval']['b']) * 10 +
                     (current($a)['linear_combination'] <=> current($b)['linear_combination']);
             }
 
@@ -123,7 +127,7 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
     {
         foreach ($this->result as $key => $val) {
             $current = current($val);
-            if ($prediction === $current['linear_combination']) {
+            if ($prediction === $current['label']) {
                 return key($this->result[$key]);
             }
         }
