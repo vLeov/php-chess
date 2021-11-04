@@ -3,12 +3,12 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\CheckmateEvaluation;
+use Chess\Evaluation\CheckmateInOneEvaluation;
 use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 
-class CheckmateEvaluationTest extends AbstractUnitTestCase
+class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -22,7 +22,7 @@ class CheckmateEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $checkmateEvald = (new CheckmateEvaluation($board))->evaluate();
+        $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
 
         $this->assertEquals($expected, $checkmateEvald);
     }
@@ -42,7 +42,7 @@ class CheckmateEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $checkmateEvald = (new CheckmateEvaluation($board))->evaluate();
+        $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
 
         $this->assertEquals($expected, $checkmateEvald);
     }

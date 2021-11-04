@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class CheckmateEvaluation extends AbstractEvaluation
+class CheckmateInOneEvaluation extends AbstractEvaluation
 {
     const NAME = 'checkmate';
 
