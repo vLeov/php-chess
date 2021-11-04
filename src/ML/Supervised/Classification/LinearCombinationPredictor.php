@@ -34,9 +34,7 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
             $this->result[] = [ $possibleMove => $this->evaluate($clone) ];
         }
 
-        $prediction = $this->prediction();
-
-        $found = $this->sort($color)->find($prediction);
+        $found = $this->sort($color)->find();
 
         return $found;
     }
@@ -48,20 +46,23 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
      */
     protected function evaluate(Board $clone): array
     {
+        $color = $this->board->getTurn();
         $balance = (new HeuristicPicture($clone->getMovetext()))->take()->getBalance();
         $end = end($balance);
-        $color = $this->board->getTurn();
+        $dataset = new Unlabeled([$end]);
         $label = (new LinearCombinationLabeller($this->permutations))->label($end)[$color];
+        $prediction = current($this->estimator->predict($dataset));
 
         return [
             'label' => $label,
+            'prediction' => $prediction,
             'linear_combination' => $this->combine($end, $label),
             'heuristic_eval' => (new HeuristicPicture($clone->getMovetext()))->evaluate(),
         ];
     }
 
     /**
-     * Sorts all possible moves by their linear combination value.
+     * Sorts all possible moves by their heuristic evaluation value along with their linear combination value.
      *
      * @return \Chess\ML\Supervised\Classification\LinearCombinationPredictor
      */
@@ -88,34 +89,19 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
     }
 
     /**
-     * Finds the move to be made by matching the best possible move with the predicted label.
+     * Finds the move to be made by matching the current label with the predicted label.
      *
      * @return string
      */
-    protected function find($prediction): string
+    protected function find(): string
     {
         foreach ($this->result as $key => $val) {
             $current = current($val);
-            if ($prediction === $current['label']) {
+            if ($current['label'] === $current['prediction']) {
                 return key($this->result[$key]);
             }
         }
 
         return key($this->result[0]);
-    }
-
-    /**
-     * Predicts the type of chess move (which is an interger label) that should be made
-     * after playing the current PGN movetext.
-     *
-     * @return int
-     */
-    protected function prediction(): int
-    {
-        $balance = (new HeuristicPicture($this->board->getMovetext()))->take()->getBalance();
-        $end = end($balance);
-        $dataset = new Unlabeled([$end]);
-
-        return current($this->estimator->predict($dataset));
     }
 }
