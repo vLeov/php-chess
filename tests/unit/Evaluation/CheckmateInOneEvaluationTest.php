@@ -46,4 +46,27 @@ class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $checkmateEvald);
     }
+
+    /**
+     * @test
+     */
+    public function e4_e5_Qh5_Nc6_Bc4_Nf6()
+    {
+        $board = new Board();
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Qh5'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
+        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bc4'));
+        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+
+        $expected = [
+            Symbol::WHITE => 0,
+            Symbol::BLACK => 1,
+        ];
+
+        $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
+
+        $this->assertEquals($expected, $checkmateEvald);
+    }
 }
