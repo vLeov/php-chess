@@ -716,32 +716,34 @@ final class Board extends \SplObjectStorage
     public function undoMove(array $prevCastling): Board
     {
         $prev = end($this->history);
-        $piece = $this->getPieceByPosition($prev->move->position->next);
-        $this->detach($piece);
-        if ($prev->move->type === Move::PAWN_PROMOTES ||
-            $prev->move->type === Move::PAWN_CAPTURES_AND_PROMOTES) {
-            $pieceUndone = new Pawn($prev->move->color, $prev->position);
-        } else {
-            $pieceUndoneClass = new \ReflectionClass(get_class($piece));
-            $pieceUndone = $pieceUndoneClass->newInstanceArgs([
-                $prev->move->color,
-                $prev->position,
-                $piece->getIdentity() === Symbol::ROOK ? $piece->getType() : null, ]
-            );
+        if ($prev) {
+            $piece = $this->getPieceByPosition($prev->move->position->next);
+            $this->detach($piece);
+            if ($prev->move->type === Move::PAWN_PROMOTES ||
+                $prev->move->type === Move::PAWN_CAPTURES_AND_PROMOTES) {
+                $pieceUndone = new Pawn($prev->move->color, $prev->position);
+            } else {
+                $pieceUndoneClass = new \ReflectionClass(get_class($piece));
+                $pieceUndone = $pieceUndoneClass->newInstanceArgs([
+                    $prev->move->color,
+                    $prev->position,
+                    $piece->getIdentity() === Symbol::ROOK ? $piece->getType() : null, ]
+                );
+            }
+            $this->attach($pieceUndone);
+            if ($prev->move->isCapture && $capture = end($this->captures[$prev->move->color])) {
+                $capturedClass = new \ReflectionClass(Convert::toClassName($capture->captured->identity));
+                $this->attach($capturedClass->newInstanceArgs([
+                        $prev->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
+                        $capture->captured->position,
+                        $capture->captured->identity === Symbol::ROOK ? $capture->captured->type : null,
+                    ])
+                );
+                $this->popCapture($prev->move->color);
+            }
+            isset($prevCastling) ? $this->castling = $prevCastling : null;
+            $this->popHistory()->refresh();
         }
-        $this->attach($pieceUndone);
-        if ($prev->move->isCapture && $capture = end($this->captures[$prev->move->color])) {
-            $capturedClass = new \ReflectionClass(Convert::toClassName($capture->captured->identity));
-            $this->attach($capturedClass->newInstanceArgs([
-                    $prev->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
-                    $capture->captured->position,
-                    $capture->captured->identity === Symbol::ROOK ? $capture->captured->type : null,
-                ])
-            );
-            $this->popCapture($prev->move->color);
-        }
-        isset($prevCastling) ? $this->castling = $prevCastling : null;
-        $this->popHistory()->refresh();
 
         return $this;
     }
@@ -912,5 +914,51 @@ final class Board extends \SplObjectStorage
                 PromotionEvent::DESC => (new PromotionEvent($this))->capture(Symbol::BLACK),
             ],
         ];
+    }
+
+    public function getPossibleMoves()
+    {
+        $possibleMoves = [];
+        $color = $this->getTurn();
+        foreach ($this->getPiecesByColor($color) as $piece) {
+            foreach ($piece->getLegalMoves() as $square) {
+                $clone = unserialize(serialize($this));
+                switch ($piece->getIdentity()) {
+                    case Symbol::KING:
+                        if (
+                            CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next'] === $square &&
+                            $clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))
+                        ) {
+                            $possibleMoves[] = Symbol::CASTLING_SHORT;
+                        } elseif (
+                            CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['position']['next'] === $square &&
+                            $clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))
+                        ) {
+                            $possibleMoves[] = Symbol::CASTLING_LONG;
+                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
+                            $possibleMoves[] = Symbol::KING.$square;
+                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
+                            $possibleMoves[] = Symbol::KING.'x'.$square;
+                        }
+                        break;
+                    case Symbol::PAWN:
+                        if ($clone->play(Convert::toStdObj($color, $square))) {
+                            $possibleMoves[] = $square;
+                        } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
+                            $possibleMoves[] = $piece->getFile()."x$square";
+                        }
+                        break;
+                    default:
+                        if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
+                            $possibleMoves[] = $piece->getIdentity().$square;
+                        } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
+                            $possibleMoves[] = "{$piece->getIdentity()}x$square";
+                        }
+                        break;
+                }
+            }
+        }
+
+        return $possibleMoves;
     }
 }
