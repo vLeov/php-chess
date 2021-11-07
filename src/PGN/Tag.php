@@ -91,6 +91,24 @@ class Tag
             self::WHITE,
             self::BLACK,
             self::RESULT,
+        ];
+    }
+
+    /**
+     * Tags to be loaded into the database.
+     *
+     * @return array
+     */
+    public static function loadable(): array
+    {
+        return [
+            self::EVENT,
+            self::SITE,
+            self::DATE,
+            self::FEN,
+            self::WHITE,
+            self::BLACK,
+            self::RESULT,
             self::WHITE_ELO,
             self::BLACK_ELO,
             self::ECO,
