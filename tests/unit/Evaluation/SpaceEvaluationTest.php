@@ -27,7 +27,7 @@ class SpaceEvaluationTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $spEvald);
+        $this->assertSame($expected, $spEvald);
     }
 
     /**
@@ -52,7 +52,7 @@ class SpaceEvaluationTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $spEvald);
+        $this->assertSame($expected, $spEvald);
     }
 
     /**
@@ -77,6 +77,6 @@ class SpaceEvaluationTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $spEvald);
+        $this->assertSame($expected, $spEvald);
     }
 }

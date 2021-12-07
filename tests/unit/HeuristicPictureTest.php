@@ -24,7 +24,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
 
         $expected = 100;
 
-        $this->assertEquals($expected, array_sum($weights));
+        $this->assertSame($expected, array_sum($weights));
     }
 
     /**
@@ -66,7 +66,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             Symbol::BLACK => [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertEquals($expected, $end);
+        $this->assertSame($expected, $end);
     }
 
     /**
@@ -84,7 +84,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertEquals($expected, $balance);
+        $this->assertSame($expected, $balance);
     }
 
     /**
@@ -107,7 +107,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $pic);
+        $this->assertSame($expected, $pic);
     }
 
     /**
@@ -126,7 +126,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             Symbol::BLACK => [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertEquals($expected, $end);
+        $this->assertSame($expected, $end);
     }
 
     /**
@@ -144,7 +144,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertEquals($expected, $balance);
+        $this->assertSame($expected, $balance);
     }
 
     /**
@@ -241,7 +241,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             Symbol::BLACK => 17.04,
         ];
 
-        $this->assertEquals($expected, $evaluation);
+        $this->assertSame($expected, $evaluation);
     }
 
     /**

@@ -22,7 +22,7 @@ class MovetextTest extends AbstractUnitTestCase
      */
     public function valid($movetext)
     {
-        $this->assertEquals($movetext, Validate::movetext($movetext));
+        $this->assertSame($movetext, Validate::movetext($movetext));
     }
 
     /**
@@ -31,7 +31,7 @@ class MovetextTest extends AbstractUnitTestCase
      */
     public function comments_removed($expected, $movetext)
     {
-        $this->assertEquals($expected, Validate::movetext($movetext));
+        $this->assertSame($expected, Validate::movetext($movetext));
     }
 
     /**
@@ -40,7 +40,7 @@ class MovetextTest extends AbstractUnitTestCase
      */
     public function too_many_spaces($expected, $movetext)
     {
-        $this->assertEquals($expected, Validate::movetext($movetext));
+        $this->assertSame($expected, Validate::movetext($movetext));
     }
 
     /**

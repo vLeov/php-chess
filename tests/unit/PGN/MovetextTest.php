@@ -29,7 +29,7 @@ class MovetextTest extends AbstractUnitTestCase
      */
     public function sequence($text, $expected)
     {
-        $this->assertEquals($expected, (new Movetext($text))->sequence());
+        $this->assertSame($expected, (new Movetext($text))->sequence());
     }
 
     public function orderData()

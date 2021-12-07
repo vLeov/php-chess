@@ -40,7 +40,7 @@ class PossibleMovesTest extends AbstractUnitTestCase
             'h4',
         ];
 
-        $this->assertEquals($expected, $possibleMoves);
+        $this->assertSame($expected, $possibleMoves);
     }
 
     /**
@@ -75,7 +75,7 @@ class PossibleMovesTest extends AbstractUnitTestCase
             'h5',
         ];
 
-        $this->assertEquals($expected, $possibleMoves);
+        $this->assertSame($expected, $possibleMoves);
     }
 
     /**
@@ -123,6 +123,6 @@ class PossibleMovesTest extends AbstractUnitTestCase
             'Bf1',
         ];
 
-        $this->assertEquals($expected, $possibleMoves);
+        $this->assertSame($expected, $possibleMoves);
     }
 }

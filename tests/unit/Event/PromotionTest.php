@@ -43,16 +43,16 @@ class PromotionTest extends AbstractUnitTestCase
         $board = new Board($pieces, $castling);
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'b7'));
-        $this->assertEquals(0, (new PromotionEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new PromotionEvent($board))->capture(Symbol::WHITE));
 
         $board->play(Convert::toStdObj(Symbol::BLACK, 'b2'));
-        $this->assertEquals(0, (new PromotionEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(0, (new PromotionEvent($board))->capture(Symbol::BLACK));
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'b8'));
-        $this->assertEquals(1, (new PromotionEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(1, (new PromotionEvent($board))->capture(Symbol::WHITE));
 
         $board->play(Convert::toStdObj(Symbol::BLACK, 'b1'));
-        $this->assertEquals(1, (new PromotionEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(1, (new PromotionEvent($board))->capture(Symbol::BLACK));
     }
 
     /**
@@ -85,21 +85,21 @@ class PromotionTest extends AbstractUnitTestCase
         $board = new Board($pieces, $castling);
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'b7'));
-        $this->assertEquals(0, (new PromotionEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new PromotionEvent($board))->capture(Symbol::WHITE));
 
         $board->play(Convert::toStdObj(Symbol::BLACK, 'g2'));
-        $this->assertEquals(0, (new PromotionEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(0, (new PromotionEvent($board))->capture(Symbol::BLACK));
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'bxa8'));
-        $this->assertEquals(1, (new PromotionEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(1, (new PromotionEvent($board))->capture(Symbol::WHITE));
 
         $board->play(Convert::toStdObj(Symbol::BLACK, 'gxh1'));
-        $this->assertEquals(1, (new PromotionEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(1, (new PromotionEvent($board))->capture(Symbol::BLACK));
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'Qxh1'));
-        $this->assertEquals(0, (new PromotionEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new PromotionEvent($board))->capture(Symbol::WHITE));
 
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Ke5'));
-        $this->assertEquals(0, (new PromotionEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(0, (new PromotionEvent($board))->capture(Symbol::BLACK));
     }
 }

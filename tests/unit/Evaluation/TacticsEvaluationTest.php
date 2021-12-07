@@ -24,7 +24,7 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertSame($expected, $attEvald);
     }
 
     /**
@@ -43,7 +43,7 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 1,
         ];
 
-        $this->assertEquals($expected, $tacticsEvald);
+        $this->assertSame($expected, $tacticsEvald);
     }
 
     /**
@@ -60,7 +60,7 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertSame($expected, $attEvald);
     }
 
     /**
@@ -77,7 +77,7 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $attEvald);
+        $this->assertSame($expected, $attEvald);
     }
 
     /**
@@ -101,7 +101,7 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 6.53,
         ];
 
-        $this->assertEquals($expected, $tacticsEvald);
+        $this->assertSame($expected, $tacticsEvald);
     }
 
     /**
@@ -125,6 +125,6 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 0,
         ];
 
-        $this->assertEquals($expected, $tacticsEvald);
+        $this->assertSame($expected, $tacticsEvald);
     }
 }

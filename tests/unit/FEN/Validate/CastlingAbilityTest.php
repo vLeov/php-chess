@@ -73,7 +73,7 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function start_w_KQkq()
     {
-        $this->assertEquals('KQkq', Validate::castling('KQkq'));
+        $this->assertSame('KQkq', Validate::castling('KQkq'));
     }
 
     /**
@@ -81,7 +81,7 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function w_k()
     {
-        $this->assertEquals('K', Validate::castling('K'));
+        $this->assertSame('K', Validate::castling('K'));
     }
 
     /**
@@ -89,7 +89,7 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function w_q()
     {
-        $this->assertEquals('Q', Validate::castling('Q'));
+        $this->assertSame('Q', Validate::castling('Q'));
     }
 
     /**
@@ -97,7 +97,7 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function b_k()
     {
-        $this->assertEquals('k', Validate::castling('k'));
+        $this->assertSame('k', Validate::castling('k'));
     }
 
     /**
@@ -105,7 +105,7 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function b_q()
     {
-        $this->assertEquals('q', Validate::castling('q'));
+        $this->assertSame('q', Validate::castling('q'));
     }
 
     /**
@@ -113,7 +113,7 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function w_kq()
     {
-        $this->assertEquals('KQ', Validate::castling('KQ'));
+        $this->assertSame('KQ', Validate::castling('KQ'));
     }
 
     /**
@@ -121,7 +121,7 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function b_kq()
     {
-        $this->assertEquals('kq', Validate::castling('kq'));
+        $this->assertSame('kq', Validate::castling('kq'));
     }
 
     /**
@@ -129,6 +129,6 @@ class CastlingAbilityTest extends AbstractUnitTestCase
      */
     public function hyphen()
     {
-        $this->assertEquals('-', Validate::castling('-'));
+        $this->assertSame('-', Validate::castling('-'));
     }
 }

@@ -103,7 +103,7 @@ class StatusTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Bxc6 dxc6 5.d4 exd4 6.Qxd4 Qxd4 7.Nxd4';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->getMovetext());
     }
 
     /**
@@ -293,7 +293,7 @@ class StatusTest extends AbstractUnitTestCase
 
         $expected = [ 'e1', 'e2', 'g2' ];
 
-        $this->assertEquals($expected, $king->getLegalMoves());
+        $this->assertSame($expected, $king->getLegalMoves());
     }
 
     /**
@@ -303,8 +303,8 @@ class StatusTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $this->assertEquals(14, count($board->getPiecesByColor(Symbol::WHITE)));
-        $this->assertEquals(13, count($board->getPiecesByColor(Symbol::BLACK)));
+        $this->assertSame(14, count($board->getPiecesByColor(Symbol::WHITE)));
+        $this->assertSame(13, count($board->getPiecesByColor(Symbol::BLACK)));
     }
 
     /**
@@ -318,7 +318,7 @@ class StatusTest extends AbstractUnitTestCase
 
         $expected = [ 'e1', 'c2', 'b3' ];
 
-        $this->assertEquals($expected, $queen->getLegalMoves());
+        $this->assertSame($expected, $queen->getLegalMoves());
     }
 
     /**
@@ -328,8 +328,8 @@ class StatusTest extends AbstractUnitTestCase
     {
         $board = (new BenoniFianchettoVariation(new Board()))->play();
 
-        $this->assertEquals(15, count($board->getPiecesByColor(Symbol::WHITE)));
-        $this->assertEquals(15, count($board->getPiecesByColor(Symbol::BLACK)));
+        $this->assertSame(15, count($board->getPiecesByColor(Symbol::WHITE)));
+        $this->assertSame(15, count($board->getPiecesByColor(Symbol::BLACK)));
     }
 
     /**
@@ -339,8 +339,8 @@ class StatusTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board()))->play();
 
-        $this->assertEquals(15, count($board->getPiecesByColor(Symbol::WHITE)));
-        $this->assertEquals(15, count($board->getPiecesByColor(Symbol::BLACK)));
+        $this->assertSame(15, count($board->getPiecesByColor(Symbol::WHITE)));
+        $this->assertSame(15, count($board->getPiecesByColor(Symbol::BLACK)));
     }
 
     /**

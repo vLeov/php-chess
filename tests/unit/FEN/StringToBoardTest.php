@@ -33,7 +33,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -57,7 +57,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -81,7 +81,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [' r ', ' n ', ' b ', ' k ', ' q ', ' b ', ' n ', ' r '],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -105,7 +105,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' R ', ' . ', ' B ', ' Q ', ' . ', ' K ', ' N ', ' R ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -129,7 +129,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' R ', ' N ', ' B ', ' . ', ' K ', ' . ', ' . ', ' R ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -153,7 +153,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' R ', ' . ', ' B ', ' Q ', ' K ', ' . ', ' N ', ' R ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -177,7 +177,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [' r ', ' n ', ' . ', ' k ', ' q ', ' b ', ' . ', ' r '],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -204,7 +204,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' . ', ' R ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -215,7 +215,7 @@ class StringToBoardTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'))
             ->create();
 
-        $this->assertEquals(false, $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc6')));
+        $this->assertFalse($board->play(Convert::toStdObj(Symbol::WHITE, 'Nc6')));
     }
 
     /**
@@ -241,8 +241,8 @@ class StringToBoardTest extends AbstractUnitTestCase
 
         $legalMoves = $board->getPieceByPosition('e5')->getLegalMoves();
 
-        $this->assertEquals($expected, $array);
-        $this->assertEquals($legalMoves, ['e6' , 'f6']);
+        $this->assertSame($expected, $array);
+        $this->assertSame($legalMoves, ['e6' , 'f6']);
     }
 
     /**
@@ -253,7 +253,7 @@ class StringToBoardTest extends AbstractUnitTestCase
         $board = (new StringToBoard('rnbqkbnr/pp1pp1pp/8/2p1Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3'))
             ->create();
 
-        $this->assertEquals(true, $board->play(Convert::toStdObj(Symbol::WHITE, 'exf6')));
+        $this->assertTrue($board->play(Convert::toStdObj(Symbol::WHITE, 'exf6')));
     }
 
     /**
@@ -277,7 +277,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' . ', ' . ', ' R ', ' Q ', ' . ', ' R ', ' . ', ' K ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -303,7 +303,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' . ', ' . ', ' R ', ' . ', ' . ', ' R ', ' . ', ' K ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -330,7 +330,7 @@ class StringToBoardTest extends AbstractUnitTestCase
             0 => [ ' . ', ' . ', ' R ', ' . ', ' . ', ' R ', ' . ', ' K ' ],
         ];
 
-        $this->assertEquals($expected, $array);
+        $this->assertSame($expected, $array);
     }
 
     /**
@@ -347,7 +347,7 @@ class StringToBoardTest extends AbstractUnitTestCase
 
         $expected = ['a6', 'a5'];
 
-        $this->assertEquals($expected, $legalMoves);
+        $this->assertSame($expected, $legalMoves);
     }
 
     /**
