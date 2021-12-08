@@ -23,10 +23,10 @@ class GameTest extends AbstractFunctionalTestCase
         $moves = array_values(array_filter($moves));
         for ($i = 0; $i < count($moves); ++$i) {
             $whiteMove = str_replace("\r", '', str_replace("\n", '', $moves[$i][0]));
-            $this->assertEquals(true, $game->play('w', $whiteMove));
+            $this->assertTrue($game->play('w', $whiteMove));
             if (isset($moves[$i][1])) {
                 $blackMove = str_replace("\r", '', str_replace("\n", '', $moves[$i][1]));
-                $this->assertEquals(true, $game->play('b', $blackMove));
+                $this->assertTrue($game->play('b', $blackMove));
             }
         }
     }

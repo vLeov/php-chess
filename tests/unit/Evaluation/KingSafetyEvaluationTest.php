@@ -23,7 +23,7 @@ class KingSafetyEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 1,
         ];
 
-        $this->assertEquals($expected, $kSafetyEvald);
+        $this->assertSame($expected, $kSafetyEvald);
     }
 
     /**
@@ -40,7 +40,7 @@ class KingSafetyEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 1,
         ];
 
-        $this->assertEquals($expected, $kSafetyEvald);
+        $this->assertSame($expected, $kSafetyEvald);
     }
 
     /**
@@ -57,6 +57,6 @@ class KingSafetyEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 1,
         ];
 
-        $this->assertEquals($expected, $kSafetyEvald);
+        $this->assertSame($expected, $kSafetyEvald);
     }
 }

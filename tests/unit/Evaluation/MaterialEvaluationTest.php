@@ -42,7 +42,7 @@ class MaterialEvaluationTest extends AbstractUnitTestCase
 
         $mtlEvald = (new MaterialEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $mtlEvald);
+        $this->assertSame($expected, $mtlEvald);
     }
 
     /**

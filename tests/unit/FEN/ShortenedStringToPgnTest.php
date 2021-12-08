@@ -22,7 +22,7 @@ class ShortenedStringToPgnTest extends AbstractUnitTestCase
             Symbol::WHITE => 'e4',
         ];
 
-        $this->assertEquals($expected, $pgn);
+        $this->assertSame($expected, $pgn);
     }
 
     /**
@@ -39,7 +39,7 @@ class ShortenedStringToPgnTest extends AbstractUnitTestCase
             Symbol::WHITE => 'Nf3',
         ];
 
-        $this->assertEquals($expected, $pgn);
+        $this->assertSame($expected, $pgn);
     }
 
     /**
@@ -56,6 +56,6 @@ class ShortenedStringToPgnTest extends AbstractUnitTestCase
             Symbol::WHITE => 'Qg4',
         ];
 
-        $this->assertEquals($expected, $pgn);
+        $this->assertSame($expected, $pgn);
     }
 }

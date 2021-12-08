@@ -19,8 +19,8 @@ class PieceCaptureTest extends AbstractUnitTestCase
     {
         $board = (new FoolCheckmate(new Board()))->play();
 
-        $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
-        $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(0, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
     }
 
     /**
@@ -30,8 +30,8 @@ class PieceCaptureTest extends AbstractUnitTestCase
     {
         $board = (new ScholarCheckmate(new Board()))->play();
 
-        $this->assertEquals(1, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
-        $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(1, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
     }
 
     /**
@@ -41,7 +41,7 @@ class PieceCaptureTest extends AbstractUnitTestCase
     {
         $board = (new RuyLopezLucenaDefense(new Board()))->play();
 
-        $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
-        $this->assertEquals(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(0, (new PieceCaptureEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new PieceCaptureEvent($board))->capture(Symbol::BLACK));
     }
 }

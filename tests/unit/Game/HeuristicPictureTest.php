@@ -28,7 +28,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
 
         $picture = $game->heuristicPicture();
 
-        $this->assertEquals($expected, $picture);
+        $this->assertSame($expected, $picture);
     }
 
     /**
@@ -46,7 +46,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
 
         $balance = $game->heuristicPicture(true);
 
-        $this->assertEquals($expected, $balance);
+        $this->assertSame($expected, $balance);
     }
 
     /**
@@ -82,6 +82,6 @@ class HeuristicPictureTest extends AbstractUnitTestCase
 
         $balance = $game->heuristicPicture(true);
 
-        $this->assertEquals($expected, $balance);
+        $this->assertSame($expected, $balance);
     }
 }

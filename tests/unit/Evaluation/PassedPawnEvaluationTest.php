@@ -34,7 +34,7 @@ class PassedPawnEvaluationTest extends AbstractUnitTestCase
 
         $passedPawnEvald = (new PassedPawnEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $passedPawnEvald);
+        $this->assertSame($expected, $passedPawnEvald);
     }
 
     /**
@@ -62,7 +62,7 @@ class PassedPawnEvaluationTest extends AbstractUnitTestCase
 
         $passedPawnEvald = (new PassedPawnEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $passedPawnEvald);
+        $this->assertSame($expected, $passedPawnEvald);
     }
 
     /**
@@ -90,6 +90,6 @@ class PassedPawnEvaluationTest extends AbstractUnitTestCase
 
         $passedPawnEvald = (new PassedPawnEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $passedPawnEvald);
+        $this->assertSame($expected, $passedPawnEvald);
     }
 }

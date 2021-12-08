@@ -24,7 +24,7 @@ class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
 
         $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $checkmateEvald);
+        $this->assertSame($expected, $checkmateEvald);
     }
 
     /**
@@ -44,7 +44,7 @@ class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
 
         $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $checkmateEvald);
+        $this->assertSame($expected, $checkmateEvald);
     }
 
     /**
@@ -67,6 +67,6 @@ class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
 
         $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $checkmateEvald);
+        $this->assertSame($expected, $checkmateEvald);
     }
 }

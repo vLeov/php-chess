@@ -24,7 +24,7 @@ class BoardToStringTest extends AbstractUnitTestCase
 
         $expected = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3';
 
-        $this->assertEquals($expected, $boardToString);
+        $this->assertSame($expected, $boardToString);
     }
 
     /**
@@ -40,7 +40,7 @@ class BoardToStringTest extends AbstractUnitTestCase
 
         $expected = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6';
 
-        $this->assertEquals($expected, $boardToString);
+        $this->assertSame($expected, $boardToString);
     }
 
     /**
@@ -54,7 +54,7 @@ class BoardToStringTest extends AbstractUnitTestCase
 
         $expected = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq -';
 
-        $this->assertEquals($expected, $boardToString);
+        $this->assertSame($expected, $boardToString);
     }
 
     /**
@@ -68,7 +68,7 @@ class BoardToStringTest extends AbstractUnitTestCase
 
         $expected = 'r1b1kbnr/1pp2ppp/p1p5/8/3NP3/8/PPP2PPP/RNB1K2R b KQkq -';
 
-        $this->assertEquals($expected, $boardToString);
+        $this->assertSame($expected, $boardToString);
     }
 
     /**
@@ -89,7 +89,7 @@ class BoardToStringTest extends AbstractUnitTestCase
 
         $expected = 'r1bqk1nr/ppppbppp/2n5/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b kq -';
 
-        $this->assertEquals($expected, $boardToString);
+        $this->assertSame($expected, $boardToString);
     }
 
     /**
@@ -114,6 +114,6 @@ class BoardToStringTest extends AbstractUnitTestCase
 
         $expected = 'r1bqkbnR/pppp1p2/2n5/4p1p1/2B1P3/5N2/PPPP1PP1/RNBQK3 b Qq -';
 
-        $this->assertEquals($expected, $boardToString);
+        $this->assertSame($expected, $boardToString);
     }
 }

@@ -22,13 +22,13 @@ class CastlingTest extends AbstractUnitTestCase
     {
         $rule = CastlingRule::color(Symbol::WHITE);
 
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['b'], 'b1');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['c'], 'c1');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['d'], 'd1');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['current'], 'e1');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['next'], 'c1');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['current'], 'a1');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['next'], 'd1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['b'], 'b1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['c'], 'c1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['d'], 'd1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['current'], 'e1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['next'], 'c1');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['current'], 'a1');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['next'], 'd1');
     }
 
     /**
@@ -38,13 +38,13 @@ class CastlingTest extends AbstractUnitTestCase
     {
         $rule = CastlingRule::color(Symbol::BLACK);
 
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['b'], 'b8');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['c'], 'c8');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['d'], 'd8');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['current'], 'e8');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['next'], 'c8');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['current'], 'a8');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['next'], 'd8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['b'], 'b8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['c'], 'c8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['squares']['d'], 'd8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['current'], 'e8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_LONG]['position']['next'], 'c8');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['current'], 'a8');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_LONG]['position']['next'], 'd8');
     }
 
     /**
@@ -54,12 +54,12 @@ class CastlingTest extends AbstractUnitTestCase
     {
         $rule = CastlingRule::color(Symbol::WHITE);
 
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['f'], 'f1');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['g'], 'g1');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['current'], 'e1');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next'], 'g1');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['current'], 'h1');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['next'], 'f1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['f'], 'f1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['g'], 'g1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['current'], 'e1');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next'], 'g1');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['current'], 'h1');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['next'], 'f1');
     }
 
     /**
@@ -69,12 +69,12 @@ class CastlingTest extends AbstractUnitTestCase
     {
         $rule = CastlingRule::color(Symbol::BLACK);
 
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['f'], 'f8');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['g'], 'g8');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['current'], 'e8');
-        $this->assertEquals($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next'], 'g8');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['current'], 'h8');
-        $this->assertEquals($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['next'], 'f8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['f'], 'f8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['squares']['g'], 'g8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['current'], 'e8');
+        $this->assertSame($rule[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next'], 'g8');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['current'], 'h8');
+        $this->assertSame($rule[Symbol::ROOK][Symbol::CASTLING_SHORT]['position']['next'], 'f8');
     }
 
     /**
@@ -97,6 +97,6 @@ class CastlingTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $board->getCastling());
+        $this->assertSame($expected, $board->getCastling());
     }
 }

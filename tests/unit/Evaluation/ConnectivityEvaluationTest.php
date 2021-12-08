@@ -22,7 +22,7 @@ class ConnectivityEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => 20,
         ];
 
-        $this->assertEquals($expected, $connEvald);
+        $this->assertSame($expected, $connEvald);
     }
 
     /**
@@ -39,6 +39,6 @@ class ConnectivityEvaluationTest extends AbstractUnitTestCase
 
         $connEvald = (new ConnectivityEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $connEvald);
+        $this->assertSame($expected, $connEvald);
     }
 }

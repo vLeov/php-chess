@@ -37,6 +37,6 @@ class DefenseEvaluationTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $defenseEvald);
+        $this->assertSame($expected, $defenseEvald);
     }
 }

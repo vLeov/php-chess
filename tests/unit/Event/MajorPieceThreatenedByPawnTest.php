@@ -18,18 +18,18 @@ class MajorPieceThreatenedByPawnTest extends AbstractUnitTestCase
         $board = new Board();
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $this->assertEquals(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));
 
         $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $this->assertEquals(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::BLACK));
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'Nc3'));
-        $this->assertEquals(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));
 
         $board->play(Convert::toStdObj(Symbol::BLACK, 'Qg5'));
-        $this->assertEquals(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::BLACK));
+        $this->assertSame(0, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::BLACK));
 
         $board->play(Convert::toStdObj(Symbol::WHITE, 'f4'));
-        $this->assertEquals(1, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));
+        $this->assertSame(1, (new MajorPieceThreatenedByPawnEvent($board))->capture(Symbol::WHITE));
     }
 }

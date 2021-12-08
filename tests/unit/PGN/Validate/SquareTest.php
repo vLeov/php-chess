@@ -53,6 +53,6 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function e4()
     {
-        $this->assertEquals(Validate::square('e4'), 'e4');
+        $this->assertSame(Validate::square('e4'), 'e4');
     }
 }

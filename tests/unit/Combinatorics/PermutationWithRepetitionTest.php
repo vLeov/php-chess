@@ -26,6 +26,6 @@ class PermutationWithRepetitionTest extends AbstractUnitTestCase
             ['c', 'c'],
         ];
 
-        $this->assertEquals($expected, $set);
+        $this->assertSame($expected, $set);
     }
 }

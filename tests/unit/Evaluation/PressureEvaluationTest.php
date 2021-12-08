@@ -24,7 +24,7 @@ class PressureEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => [],
         ];
 
-        $this->assertEquals($expected, $pressEvald);
+        $this->assertSame($expected, $pressEvald);
     }
 
     /**
@@ -41,7 +41,7 @@ class PressureEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => ['e4'],
         ];
 
-        $this->assertEquals($expected, $pressEvald);
+        $this->assertSame($expected, $pressEvald);
     }
 
     /**
@@ -58,7 +58,7 @@ class PressureEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => ['c3'],
         ];
 
-        $this->assertEquals($expected, $pressEvald);
+        $this->assertSame($expected, $pressEvald);
     }
 
     /**
@@ -82,6 +82,6 @@ class PressureEvaluationTest extends AbstractUnitTestCase
             Symbol::BLACK => ['b5', 'e5'],
         ];
 
-        $this->assertEquals($expected, $pressEvald);
+        $this->assertSame($expected, $pressEvald);
     }
 }

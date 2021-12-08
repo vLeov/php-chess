@@ -26,7 +26,7 @@ class CenterEvaluationTest extends AbstractUnitTestCase
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $ctrEvald);
+        $this->assertSame($expected, $ctrEvald);
     }
 
     /**
@@ -43,7 +43,7 @@ class CenterEvaluationTest extends AbstractUnitTestCase
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $ctrEvald);
+        $this->assertSame($expected, $ctrEvald);
     }
 
     /**
@@ -60,6 +60,6 @@ class CenterEvaluationTest extends AbstractUnitTestCase
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate();
 
-        $this->assertEquals($expected, $ctrEvald);
+        $this->assertSame($expected, $ctrEvald);
     }
 }

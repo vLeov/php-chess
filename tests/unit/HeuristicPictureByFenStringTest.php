@@ -53,7 +53,7 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
             Symbol::BLACK => 43.21,
         ];
 
-        $this->assertEquals($expected, $evaluation);
+        $this->assertSame($expected, $evaluation);
     }
 
     /**
@@ -101,7 +101,7 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
             Symbol::BLACK => 45.51,
         ];
 
-        $this->assertEquals($expected, $evaluation);
+        $this->assertSame($expected, $evaluation);
     }
 
     /**
@@ -149,6 +149,6 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
             Symbol::BLACK => 46.01,
         ];
 
-        $this->assertEquals($expected, $evaluation);
+        $this->assertSame($expected, $evaluation);
     }
 }
