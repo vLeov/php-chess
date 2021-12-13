@@ -4,8 +4,6 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\CheckmateInOneEvaluation;
-use Chess\PGN\Convert;
-use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 
 class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
@@ -18,8 +16,8 @@ class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
         $board = new Board();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            'w' => 0,
+            'b' => 0,
         ];
 
         $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
@@ -33,13 +31,13 @@ class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
     public function f3_e5_g4()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'f3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'g4'));
+        $board->play('w', 'f3');
+        $board->play('b', 'e5');
+        $board->play('w', 'g4');
 
         $expected = [
-            Symbol::WHITE => 1,
-            Symbol::BLACK => 0,
+            'w' => 1,
+            'b' => 0,
         ];
 
         $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();
@@ -53,16 +51,16 @@ class CheckmateInOneEvaluationTest extends AbstractUnitTestCase
     public function e4_e5_Qh5_Nc6_Bc4_Nf6()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Qh5'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bc4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Qh5');
+        $board->play('b', 'Nc6');
+        $board->play('w', 'Bc4');
+        $board->play('b', 'Nf6');
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 1,
+            'w' => 0,
+            'b' => 1,
         ];
 
         $checkmateEvald = (new CheckmateInOneEvaluation($board))->evaluate();

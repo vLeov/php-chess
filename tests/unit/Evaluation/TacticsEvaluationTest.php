@@ -3,8 +3,6 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Convert;
-use Chess\PGN\Symbol;
 use Chess\Evaluation\TacticsEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
@@ -20,8 +18,8 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
         $attEvald = (new TacticsEvaluation(new Board()))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            'w' => 0,
+            'b' => 0,
         ];
 
         $this->assertSame($expected, $attEvald);
@@ -33,14 +31,14 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
     public function e4_d5()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'd5'));
+        $board->play('w', 'e4');
+        $board->play('b', 'd5');
 
         $tacticsEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 1,
+            'w' => 0,
+            'b' => 1,
         ];
 
         $this->assertSame($expected, $tacticsEvald);
@@ -56,8 +54,8 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
         $attEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            'w' => 0,
+            'b' => 0,
         ];
 
         $this->assertSame($expected, $attEvald);
@@ -73,8 +71,8 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
         $attEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            'w' => 0,
+            'b' => 0,
         ];
 
         $this->assertSame($expected, $attEvald);
@@ -86,19 +84,19 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
     public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'a6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nxe5'));
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nc6');
+        $board->play('w', 'Bb5');
+        $board->play('b', 'a6');
+        $board->play('w', 'Nxe5');
 
         $tacticsEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 6.53,
+            'w' => 0,
+            'b' => 6.53,
         ];
 
         $this->assertSame($expected, $tacticsEvald);
@@ -110,19 +108,19 @@ class TacticsEvaluationTest extends AbstractUnitTestCase
     public function e4_e5_Nf3_Nf6_a3_Nxe4_d3()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'a3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nxe4'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'd3'));
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'a3');
+        $board->play('b', 'Nxe4');
+        $board->play('w', 'd3');
 
         $tacticsEvald = (new TacticsEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => 4.2,
-            Symbol::BLACK => 0,
+            'w' => 4.2,
+            'b' => 0,
         ];
 
         $this->assertSame($expected, $tacticsEvald);

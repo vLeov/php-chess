@@ -3,8 +3,6 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Convert;
-use Chess\PGN\Symbol;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
@@ -20,8 +18,8 @@ class PressureEvaluationTest extends AbstractUnitTestCase
         $pressEvald = (new PressureEvaluation(new Board()))->evaluate();
 
         $expected = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
+            'w' => [],
+            'b' => [],
         ];
 
         $this->assertSame($expected, $pressEvald);
@@ -37,8 +35,8 @@ class PressureEvaluationTest extends AbstractUnitTestCase
         $pressEvald = (new PressureEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => ['e4'],
+            'w' => [],
+            'b' => ['e4'],
         ];
 
         $this->assertSame($expected, $pressEvald);
@@ -54,8 +52,8 @@ class PressureEvaluationTest extends AbstractUnitTestCase
         $pressEvald = (new PressureEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => ['c3'],
+            'w' => [],
+            'b' => ['c3'],
         ];
 
         $this->assertSame($expected, $pressEvald);
@@ -67,19 +65,19 @@ class PressureEvaluationTest extends AbstractUnitTestCase
     public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nc6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Bb5'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'a6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nxe5'));
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nc6');
+        $board->play('w', 'Bb5');
+        $board->play('b', 'a6');
+        $board->play('w', 'Nxe5');
 
         $pressEvald = (new PressureEvaluation($board))->evaluate();
 
         $expected = [
-            Symbol::WHITE => ['a6', 'c6', 'c6', 'd7', 'f7'],
-            Symbol::BLACK => ['b5', 'e5'],
+            'w' => ['a6', 'c6', 'c6', 'd7', 'f7'],
+            'b' => ['b5', 'e5'],
         ];
 
         $this->assertSame($expected, $pressEvald);
