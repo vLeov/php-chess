@@ -9,11 +9,6 @@ use Chess\Exception\BoardException;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SquareEvaluation;
-use Chess\Event\Check as CheckEvent;
-use Chess\Event\MajorPieceThreatenedByPawn as MajorPieceThreatenedByPawnEvent;
-use Chess\Event\MinorPieceThreatenedByPawn as MinorPieceThreatenedByPawnEvent;
-use Chess\Event\PieceCapture as PieceCaptureEvent;
-use Chess\Event\Promotion as PromotionEvent;
 use Chess\PGN\Convert;
 use Chess\PGN\Move;
 use Chess\PGN\Symbol;
@@ -552,14 +547,16 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Runs a chess move on the board.
+     * Makes a move.
      *
-     * @param \stdClass $move
-     * @return bool true if the move is successfully run; otherwise false
+     * @param string $color
+     * @param string $pgn
      */
-    public function play(\stdClass $move): bool
+    public function play(string $color, string $pgn): bool
     {
-        return $this->isValidMove($move) && $this->isLegalMove($move);
+        $stdObj = Convert::toStdObj($color, $pgn);
+
+        return $this->isValidMove($stdObj) && $this->isLegalMove($stdObj);
     }
 
     /**
@@ -897,31 +894,6 @@ final class Board extends \SplObjectStorage
         return $escape === 0;
     }
 
-    /**
-     * Gets the events taking place on the board.
-     *
-     * @return \stdClass
-     */
-    public function events(): \stdClass
-    {
-        return (object) [
-            Symbol::WHITE => [
-                CheckEvent::DESC => (new CheckEvent($this))->capture(Symbol::WHITE),
-                PieceCaptureEvent::DESC => (new PieceCaptureEvent($this))->capture(Symbol::WHITE),
-                MajorPieceThreatenedByPawnEvent::DESC => (new MajorPieceThreatenedByPawnEvent($this))->capture(Symbol::WHITE),
-                MinorPieceThreatenedByPawnEvent::DESC => (new MinorPieceThreatenedByPawnEvent($this))->capture(Symbol::WHITE),
-                PromotionEvent::DESC => (new PromotionEvent($this))->capture(Symbol::WHITE),
-            ],
-            Symbol::BLACK => [
-                CheckEvent::DESC => (new CheckEvent($this))->capture(Symbol::BLACK),
-                PieceCaptureEvent::DESC => (new PieceCaptureEvent($this))->capture(Symbol::BLACK),
-                MajorPieceThreatenedByPawnEvent::DESC => (new MajorPieceThreatenedByPawnEvent($this))->capture(Symbol::BLACK),
-                MinorPieceThreatenedByPawnEvent::DESC => (new MinorPieceThreatenedByPawnEvent($this))->capture(Symbol::BLACK),
-                PromotionEvent::DESC => (new PromotionEvent($this))->capture(Symbol::BLACK),
-            ],
-        ];
-    }
-
     public function getPossibleMoves()
     {
         $possibleMoves = [];
@@ -933,31 +905,31 @@ final class Board extends \SplObjectStorage
                     case Symbol::KING:
                         if (
                             CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next'] === $square &&
-                            $clone->play(Convert::toStdObj($color, Symbol::CASTLING_SHORT))
+                            $clone->play($color, Symbol::CASTLING_SHORT)
                         ) {
                             $possibleMoves[] = Symbol::CASTLING_SHORT;
                         } elseif (
                             CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['position']['next'] === $square &&
-                            $clone->play(Convert::toStdObj($color, Symbol::CASTLING_LONG))
+                            $clone->play($color, Symbol::CASTLING_LONG)
                         ) {
                             $possibleMoves[] = Symbol::CASTLING_LONG;
-                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.$square))) {
+                        } elseif ($clone->play($color, Symbol::KING.$square)) {
                             $possibleMoves[] = Symbol::KING.$square;
-                        } elseif ($clone->play(Convert::toStdObj($color, Symbol::KING.'x'.$square))) {
+                        } elseif ($clone->play($color, Symbol::KING.'x'.$square)) {
                             $possibleMoves[] = Symbol::KING.'x'.$square;
                         }
                         break;
                     case Symbol::PAWN:
-                        if ($clone->play(Convert::toStdObj($color, $square))) {
+                        if ($clone->play($color, $square)) {
                             $possibleMoves[] = $square;
-                        } elseif ($clone->play(Convert::toStdObj($color, $piece->getFile()."x$square"))) {
+                        } elseif ($clone->play($color, $piece->getFile()."x$square")) {
                             $possibleMoves[] = $piece->getFile()."x$square";
                         }
                         break;
                     default:
-                        if ($clone->play(Convert::toStdObj($color, $piece->getIdentity().$square))) {
+                        if ($clone->play($color, $piece->getIdentity().$square)) {
                             $possibleMoves[] = $piece->getIdentity().$square;
-                        } elseif ($clone->play(Convert::toStdObj($color, "{$piece->getIdentity()}x$square"))) {
+                        } elseif ($clone->play($color, "{$piece->getIdentity()}x$square")) {
                             $possibleMoves[] = "{$piece->getIdentity()}x$square";
                         }
                         break;

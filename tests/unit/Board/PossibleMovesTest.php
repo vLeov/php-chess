@@ -3,8 +3,6 @@
 namespace Chess\Tests\Unit\Board;
 
 use Chess\Board;
-use Chess\PGN\Convert;
-use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 
 class PossibleMovesTest extends AbstractUnitTestCase
@@ -49,7 +47,7 @@ class PossibleMovesTest extends AbstractUnitTestCase
     public function e4()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
+        $board->play('w', 'e4');
         $possibleMoves = $board->getPossibleMoves();
 
         $expected = [
@@ -84,12 +82,12 @@ class PossibleMovesTest extends AbstractUnitTestCase
     public function e4_e5_Nf3_Nf6_Be2_Be7()
     {
         $board = new Board();
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'e4'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'e5'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Nf3'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Nf6'));
-        $board->play(Convert::toStdObj(Symbol::WHITE, 'Be2'));
-        $board->play(Convert::toStdObj(Symbol::BLACK, 'Be7'));
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Be2');
+        $board->play('b', 'Be7');
         $possibleMoves = $board->getPossibleMoves();
 
         $expected = [

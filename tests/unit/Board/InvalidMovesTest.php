@@ -3,9 +3,6 @@
 namespace Chess\Tests\Unit\Board;
 
 use Chess\Board;
-use Chess\Castling\Rule as CastlingRule;
-use Chess\PGN\Convert;
-use Chess\PGN\Symbol;
 use Chess\Piece\King;
 use Chess\Piece\Knight;
 use Chess\Piece\Pawn;
@@ -22,7 +19,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 9));
+        (new Board())->play('w', 9);
     }
 
     /**
@@ -32,7 +29,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'foo'));
+        (new Board())->play('w', 'foo');
     }
 
     /**
@@ -42,7 +39,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'bar'));
+        (new Board())->play('w', 'bar');
     }
 
     /**
@@ -52,7 +49,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'e9'));
+        (new Board())->play('w', 'e9');
     }
 
     /**
@@ -62,7 +59,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'e10'));
+        (new Board())->play('w', 'e10');
     }
 
     /**
@@ -72,7 +69,7 @@ class InvalidMovesTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Board())->play(Convert::toStdObj(Symbol::WHITE, 'Nw3'));
+        (new Board())->play('w', 'Nw3');
     }
 
     /**
@@ -83,34 +80,34 @@ class InvalidMovesTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\BoardException::class);
 
         $pieces = [
-            new Pawn(Symbol::WHITE, 'a2'),
-            new Pawn(Symbol::WHITE, 'a3'),
-            new Pawn(Symbol::WHITE, 'c3'),
-            new Rook(Symbol::WHITE, 'e6', RookType::CASTLING_LONG),
-            new King(Symbol::WHITE, 'g3'),
-            new Pawn(Symbol::BLACK, 'a6'),
-            new Pawn(Symbol::BLACK, 'b5'),
-            new Pawn(Symbol::BLACK, 'c4'),
-            new Knight(Symbol::BLACK, 'd3'),
-            new Rook(Symbol::BLACK, 'f5', RookType::CASTLING_SHORT),
-            new King(Symbol::BLACK, 'g5'),
-            new Pawn(Symbol::BLACK, 'h7')
+            new Pawn('w', 'a2'),
+            new Pawn('w', 'a3'),
+            new Pawn('w', 'c3'),
+            new Rook('w', 'e6', RookType::CASTLING_LONG),
+            new King('w', 'g3'),
+            new Pawn('b', 'a6'),
+            new Pawn('b', 'b5'),
+            new Pawn('b', 'c4'),
+            new Knight('b', 'd3'),
+            new Rook('b', 'f5', RookType::CASTLING_SHORT),
+            new King('b', 'g5'),
+            new Pawn('b', 'h7')
         ];
 
         $castling = [
-            Symbol::WHITE => [
-                CastlingRule::IS_CASTLED => true,
-                Symbol::CASTLING_SHORT => false,
-                Symbol::CASTLING_LONG => false
+            'w' => [
+                'castled' => true,
+                'O-O' => false,
+                'O-O-O' => false
             ],
-            Symbol::BLACK => [
-                CastlingRule::IS_CASTLED => true,
-                Symbol::CASTLING_SHORT => false,
-                Symbol::CASTLING_LONG => false
+            'b' => [
+                'castled' => true,
+                'O-O' => false,
+                'O-O-O' => false
             ]
         ];
 
         (new Board($pieces, $castling))
-            ->play(Convert::toStdObj(Symbol::WHITE, 'f4'));
+            ->play('w', 'f4');
     }
 }
