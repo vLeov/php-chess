@@ -291,6 +291,7 @@ Loads a FEN string allowing to continue a chess game from a particular position.
 ```php
 $game->loadFen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9');
 $game->play('b', 'Bg7');
+
 echo $game->ascii();
 echo $game->fen();
 ```
@@ -307,6 +308,33 @@ r  n  .  q  k  .  .  r
  P  P  .  .  .  P  .  P
  R  .  B  Q  .  K  N  R
 rn1qk2r/4ppbp/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR w kq -
+```
+
+#### `loadPgn(string $movetext)`
+
+Loads a PGN movetext allowing to continue a chess game from a particular position.
+
+```php
+$game = new Game(Game::MODE_LOAD_PGN);
+$game->loadPgn('1.e4 e6 2.d4 d5 3.Nc3 Nf6');
+$game->play('w', 'e5');
+
+echo $game->ascii();
+echo $game->movetext();
+```
+
+Output:
+
+```text
+r  n  b  q  k  b  .  r
+p  p  p  .  .  p  p  p
+.  .  .  .  p  n  .  .
+.  .  .  p  P  .  .  .
+.  .  .  P  .  .  .  .
+.  .  N  .  .  .  .  .
+P  P  P  .  .  P  P  P
+R  .  B  Q  K  B  N  R
+1.e4 e6 2.d4 d5 3.Nc3 Nf6 4.e5
 ```
 
 #### `movetext(): string`
