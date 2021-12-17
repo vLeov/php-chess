@@ -4,6 +4,7 @@ namespace Chess;
 
 use Chess\Ascii;
 use Chess\HeuristicPicture;
+use Chess\Player;
 use Chess\FEN\BoardToString;
 use Chess\FEN\ShortenedStringToPgn;
 use Chess\FEN\StringToBoard;
@@ -25,15 +26,17 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
-    const MODE_AI           =  'MODE_AI';
+    const MODE_AI             = 'MODE_AI';
 
-    const MODE_ANALYSIS     =  'MODE_ANALYSIS';
+    const MODE_ANALYSIS       = 'MODE_ANALYSIS';
 
-    const MODE_LOAD_FEN     =  'MODE_LOAD_FEN';
+    const MODE_LOAD_FEN       = 'MODE_LOAD_FEN';
 
-    const MODE_PLAY_FRIEND     =  'MODE_PLAY_FRIEND';
+    const MODE_LOAD_PGN       = 'MODE_LOAD_PGN';
 
-    const MODEL_FOLDER      = __DIR__.'/../model/';
+    const MODE_PLAY_FRIEND    = 'MODE_PLAY_FRIEND';
+
+    const MODEL_FOLDER        = __DIR__.'/../model/';
 
     /**
      * Chess board.
@@ -286,6 +289,11 @@ class Game
     public function loadFen(string $string)
     {
         $this->board = (new StringToBoard($string))->create();
+    }
+
+    public function loadPgn(string $movetext)
+    {
+        $this->board = (new Player($movetext))->play()->getBoard();
     }
 
     public function playFen(string $toShortenedFen)
