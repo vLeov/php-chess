@@ -109,38 +109,6 @@ array (
   ),
 )
 ```
-
-#### `events(): stdClass`
-
-Gets the events taking place on the game.
-
-```php
-$events = $game->events();
-
-var_export($events);
-```
-
-```text
-(object) array(
-   'w' =>
-  array (
-    'Check!' => 0,
-    'A piece was captured' => 0,
-    'A major piece is now threatened by a pawn' => 0,
-    'A minor piece is now threatened by a pawn' => 0,
-    'A pawn was promoted' => 0,
-  ),
-   'b' =>
-  array (
-    'Check!' => 0,
-    'A piece was captured' => 1,
-    'A major piece is now threatened by a pawn' => 0,
-    'A minor piece is now threatened by a pawn' => 0,
-    'A pawn was promoted' => 0,
-  ),
-)
-```
-
 #### `fen(): string`
 
 Prints the FEN string representation of the game.

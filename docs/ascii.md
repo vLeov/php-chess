@@ -125,8 +125,6 @@ Returns a `Chess\Board` object from an ASCII array.
 
 ```php
 use Chess\Ascii;
-use Chess\Castling\Rule as CastlingRule;
-use Chess\PGN\Symbol;
 
 $position = [
     7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
@@ -140,19 +138,19 @@ $position = [
 ];
 
 $castling = [
-    Symbol::WHITE => [
-        CastlingRule::IS_CASTLED => false,
-        Symbol::CASTLING_SHORT => false,
-        Symbol::CASTLING_LONG => false,
+    'w' => [
+        'castled' => false,
+        'O-O' => false,
+        'O-O-O' => false,
     ],
-    Symbol::BLACK => [
-        CastlingRule::IS_CASTLED => false,
-        Symbol::CASTLING_SHORT => true,
-        Symbol::CASTLING_LONG => true,
+    'b' => [
+        'castled' => false,
+        'O-O' => true,
+        'O-O-O' => true,
     ],
 ];
 
-$board = (new Ascii())->toBoard($position, Symbol::BLACK, $castling);
+$board = (new Ascii())->toBoard($position, 'b', $castling);
 ```
 
 #### `print(Board $board): string`
