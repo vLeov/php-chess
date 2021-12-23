@@ -81,13 +81,27 @@ class HeuristicPicture extends Player
                 $this->board->play(Symbol::BLACK, $move[1]);
             }
             $item = [];
-            foreach ($this->dimensions as $dimension => $w) {
-                $evald = (new $dimension($this->board))->evaluate();
-                is_array($evald[Symbol::WHITE])
-                    ? $item[] = [
-                        Symbol::WHITE => count($evald[Symbol::WHITE]),
-                        Symbol::BLACK => count($evald[Symbol::BLACK])]
-                    : $item[] = $evald;
+            foreach ($this->dimensions as $className => $weight) {
+                $dimension = new $className($this->board);
+                $evald = $dimension->evaluate();
+                if (is_array($evald[Symbol::WHITE])) {
+                    $dimension->isInverse()
+                        ? $item[] = [
+                            Symbol::WHITE => count($evald[Symbol::BLACK]),
+                            Symbol::BLACK => count($evald[Symbol::WHITE]),
+                        ]
+                        : $item[] = [
+                            Symbol::WHITE => count($evald[Symbol::WHITE]),
+                            Symbol::BLACK => count($evald[Symbol::BLACK]),
+                        ];
+                } else {
+                    $dimension->isInverse()
+                        ? $item[] = [
+                            Symbol::WHITE => $evald[Symbol::BLACK],
+                            Symbol::BLACK => $evald[Symbol::WHITE],
+                        ]
+                        : $item[] = $evald;
+                }
             }
             $this->picture[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
             $this->picture[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
