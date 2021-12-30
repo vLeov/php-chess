@@ -507,6 +507,24 @@ P  P  P  P  .  P  P  P
 R  .  B  Q  K  B  N  R
 ```
 
+#### `response()`
+
+Returns a computer response to the current position depending on the game mode in use. It is available only if initializing a chess game in either `Game::MODE_AI` or `Game::MODE_GRANDMASTER`, otherwise it returns `null`. Also this method returns `null` if a grandmaster response to the current position can't be found.
+
+```php
+$game = new Game(Game::MODE_GRANDMASTER);
+
+$game->play('w', 'e4');
+$response = $game->response();
+echo $response;
+```
+
+Output:
+
+```
+c6
+```
+
 #### `status(): stdClass`
 
 Gets the current game's status.
