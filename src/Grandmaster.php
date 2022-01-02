@@ -25,9 +25,11 @@ class Grandmaster
         shuffle($this->movetexts);
         if ($this->movetexts) {
             $moves = array_filter(
-                explode(' ', str_replace($movetext, '', $this->movetexts[0]))
+              explode(' ', str_replace($movetext, '', $this->movetexts[0]))
             );
-            return current($moves);
+            $current = explode('.', current($moves));
+            isset($current[1]) ? $response = $current[1] : $response = $current[0];
+            return $response;
         }
 
         return null;
