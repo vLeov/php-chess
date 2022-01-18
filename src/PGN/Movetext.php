@@ -93,7 +93,7 @@ class Movetext
             $end === Symbol::RESULT_DRAW ||
             $end === Symbol::RESULT_UNKNOWN
         ) {
-            $filtered .= $end;
+            $filtered = str_replace($end, '', $filtered);
         }
 
         return trim($filtered);

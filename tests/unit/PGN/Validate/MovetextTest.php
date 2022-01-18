@@ -13,11 +13,6 @@ class MovetextTest extends AbstractUnitTestCase
         '1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 e5 6.Ndb5 d6 7.Bg5 a6 8.Na3',
         '1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 O-O 5.a3 Bxc3+ 6.bxc3 b6 7.Bd3 Bb7 8.f3 c5',
         '1.Nf3 Nf6 2.c4 c5 3.g3 b6 4.Bg2 Bb7 5.O-O e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6',
-        // result appended at the end of the string
-        '1.Nf3 Nf6 2.c4 c5 3.g3 b6 4.Bg2 Bb7 5.O-O e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6 1-0',
-        '1.Nf3 Nf6 2.c4 c5 3.g3 b6 4.Bg2 Bb7 5.O-O e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6 0-1',
-        '1.Nf3 Nf6 2.c4 c5 3.g3 b6 4.Bg2 Bb7 5.O-O e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6 1/2-1/2',
-        '1.Nf3 Nf6 2.c4 c5 3.g3 b6 4.Bg2 Bb7 5.O-O e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6 *',
     ];
 
     /**
@@ -78,9 +73,18 @@ class MovetextTest extends AbstractUnitTestCase
      * @dataProvider fideFilteredData
      * @test
      */
-    public function fide_filtered($movetext)
+    public function fide_filtered($expected, $movetext)
     {
-        $this->assertSame($movetext, Validate::movetext($movetext));
+        $this->assertSame($expected, Validate::movetext($movetext));
+    }
+
+    /**
+     * @dataProvider withResultData
+     * @test
+     */
+    public function with_result_filtered($expected, $movetext)
+    {
+        $this->assertSame($expected, Validate::movetext($movetext));
     }
 
     public function validData()
@@ -91,11 +95,6 @@ class MovetextTest extends AbstractUnitTestCase
             [ self::$validData[2], self::$validData[2] ],
             [ self::$validData[3], self::$validData[3] ],
             [ self::$validData[4], self::$validData[4] ],
-            // result appended at the end of the string
-            [ self::$validData[5], self::$validData[5] ],
-            [ self::$validData[6], self::$validData[6] ],
-            [ self::$validData[7], self::$validData[7] ],
-            [ self::$validData[8], self::$validData[8] ],
         ];
     }
 
@@ -162,6 +161,17 @@ class MovetextTest extends AbstractUnitTestCase
             [ self::$validData[2], '1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 e5 6.Ndb5 d6 7.Bg5 a6 8.Na3' ],
             [ self::$validData[3], '1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 0-0 5.a3 Bxc3+ 6.bxc3 b6 7.Bd3 Bb7 8.f3 c5' ],
             [ self::$validData[4], '1.Nf3 Nf6 2.c4 c5 3.g3 b6 4.Bg2 Bb7 5.0-0 e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6' ],
+        ];
+    }
+
+    public function withResultData()
+    {
+        return [
+            [ self::$validData[0], self::$validData[0] . ' 1-0' ],
+            [ self::$validData[1], self::$validData[1] . ' 0-1' ],
+            [ self::$validData[2], self::$validData[2] . ' 1/2-1/2' ],
+            [ self::$validData[3], self::$validData[3] . ' *' ],
+            [ self::$validData[4], self::$validData[4] . ' 1-0' ],
         ];
     }
 }
