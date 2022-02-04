@@ -5,18 +5,17 @@ namespace Chess;
 use Chess\Evaluation\AttackEvaluation;
 use Chess\Evaluation\BackwardPawnEvaluation;
 use Chess\Evaluation\CenterEvaluation;
-use Chess\Evaluation\CheckEvaluation;
 use Chess\Evaluation\ConnectivityEvaluation;
 use Chess\Evaluation\IsolatedPawnEvaluation;
 use Chess\Evaluation\KingSafetyEvaluation;
 use Chess\Evaluation\MaterialEvaluation;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\Evaluation\SquareEvaluation;
 use Chess\Evaluation\TacticsEvaluation;
-use Chess\PGN\Symbol;
 use Chess\Evaluation\DoubledPawnEvaluation;
 use Chess\Evaluation\PassedPawnEvaluation;
+use Chess\Evaluation\InverseEvaluationInterface;
+use Chess\PGN\Symbol;
 
 /**
  * HeuristicPicture
@@ -55,7 +54,7 @@ class HeuristicPicture extends Player
         CenterEvaluation::class => 15,
         ConnectivityEvaluation::class => 15,
         SpaceEvaluation::class => 10,
-        PressureEvaluation::class => 5,
+        PressureEvaluation::class => 10,
         KingSafetyEvaluation::class => 5,
         TacticsEvaluation::class => 5,
         AttackEvaluation::class => 5,
@@ -63,7 +62,6 @@ class HeuristicPicture extends Player
         PassedPawnEvaluation::class => 5,
         IsolatedPawnEvaluation::class => 5,
         BackwardPawnEvaluation::class => 5,
-        CheckEvaluation::class => 5,
     ];
 
     /**
@@ -153,22 +151,26 @@ class HeuristicPicture extends Player
                 $dimension = new $className($this->board);
                 $evald = $dimension->evaluate();
                 if (is_array($evald[Symbol::WHITE])) {
-                    $dimension->isInverse()
-                        ? $item[] = [
+                    if ($dimension instanceof InverseEvaluationInterface) {
+                        $item[] = [
                             Symbol::WHITE => count($evald[Symbol::BLACK]),
                             Symbol::BLACK => count($evald[Symbol::WHITE]),
-                        ]
-                        : $item[] = [
+                        ];
+                    } else {
+                        $item[] = [
                             Symbol::WHITE => count($evald[Symbol::WHITE]),
                             Symbol::BLACK => count($evald[Symbol::BLACK]),
                         ];
+                    }
                 } else {
-                    $dimension->isInverse()
-                        ? $item[] = [
+                    if ($dimension instanceof InverseEvaluationInterface) {
+                        $item[] = [
                             Symbol::WHITE => $evald[Symbol::BLACK],
                             Symbol::BLACK => $evald[Symbol::WHITE],
-                        ]
-                        : $item[] = $evald;
+                        ];
+                    } else {
+                        $item[] = $evald;
+                    }
                 }
             }
             $this->picture[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
