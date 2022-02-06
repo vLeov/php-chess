@@ -8,7 +8,7 @@ use Chess\Piece\Pawn;
 
 class PassedPawnEvaluation extends AbstractEvaluation
 {
-    const NAME = 'doubled_pawn';
+    const NAME = 'passed_pawn';
 
     public function __construct(Board $board)
     {
