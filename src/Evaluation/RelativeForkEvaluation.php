@@ -5,9 +5,9 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\PGN\Symbol;
 
-class AbsoluteForkEvaluation extends AbstractForkEvaluation
+class RelativeForkEvaluation extends AbstractForkEvaluation
 {
-    const NAME = 'absolute_fork';
+    const NAME = 'relative_fork';
 
     public function __construct(Board $board)
     {
@@ -24,7 +24,7 @@ class AbsoluteForkEvaluation extends AbstractForkEvaluation
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getIdentity() !== Symbol::KING) {
                 $attackedPieces = $this->attackedPieces($piece);
-                if ($this->isKingAttacked($attackedPieces)) {
+                if (!$this->isKingAttacked($attackedPieces)) {
                     $this->result[$piece->getColor()] = $this->sumValues($piece, $attackedPieces);
                 }
             }
