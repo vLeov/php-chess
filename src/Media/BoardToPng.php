@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Image;
+namespace Chess\Media;
 
 use Chess\Ascii;
 use Chess\Board;
@@ -26,7 +26,14 @@ class BoardToPng
         $this->flip = $flip;
     }
 
-    public function output(string $filepath)
+    public function setBoard(Board $board)
+    {
+        $this->board = $board;
+
+        return $this;
+    }
+
+    public function output(string $filepath, string $salt = '')
     {
         $chessboard = $this->imagine->open(self::FILEPATH . '/chessboard.png');
         $array = (new Ascii())->toArray($this->board, $this->flip);
@@ -44,6 +51,14 @@ class BoardToPng
             $y += 90;
         }
 
-        $chessboard->save($filepath);
+        if ($salt) {
+            $filename = $salt.'_'.uniqid().'.png';
+        } else {
+            $filename = uniqid().'.png';
+        }
+
+        $chessboard->save("{$filepath}/{$filename}");
+
+        return $filename;
     }
 }
