@@ -3,14 +3,15 @@ pages:
   - Home: index.md
   - Chess\Ascii: ascii.md
   - Chess\Board: board.md
-  - Chess\Combinatorics\RestrictedPermutationWithRepetition: combinatorics-restricted-permutation-with-repetition.md
-  - Chess\HeuristicPicture: heuristic-picture.md
   - Chess\Game: game.md
+  - Chess\HeuristicPicture: heuristic-picture.md
   - Chess\Player: player.md
+  - Chess\Combinatorics\RestrictedPermutationWithRepetition: combinatorics-restricted-permutation-with-repetition.md
   - Chess\FEN\BoardToString: fen-board-to-string.md
   - Chess\FEN\StringToBoard: fen-string-to-board.md
   - Chess\FEN\Validate: fen-validate.md
-  - Chess\Image\BoardToPng: image-board-to-png.md
+  - Chess\Media\BoardToGif: media-board-to-gif.md
+  - Chess\Media\BoardToPng: media-board-to-png.md
   - Chess\PGN\Movetext: pgn-movetext.md
   - Command Line Interface: cli.md
   - Usage: usage.md

@@ -19,22 +19,22 @@ class BoardToGif
         $this->flip = $flip;
     }
 
-    public function output(string $foldername)
+    public function output(string $filepath)
     {
-        if (!file_exists($foldername)) {
+        if (!file_exists($filepath)) {
             throw new \InvalidArgumentException('The folder does not exist.');
         }
 
         $filename = uniqid();
 
-        $this->frames($foldername, $filename)
-            ->animate($foldername, $filename)
-            ->cleanup($foldername, $filename);
+        $this->frames($filepath, $filename)
+            ->animate($filepath, $filename)
+            ->cleanup($filepath, $filename);
 
         return $filename.'.gif';
     }
 
-    private function frames(string $foldername, string $filename)
+    private function frames(string $filepath, string $filename)
     {
         $salt = uniqid();
         $board = new Board();
@@ -42,23 +42,23 @@ class BoardToGif
         foreach ($this->board->getHistory() as $key => $item) {
             $n = sprintf("%02d", $key);
             $board->play($item->move->color, $item->move->pgn);
-            $this->frames[] = $boardToPng->setBoard($board)->output($foldername, $filename);
+            $this->frames[] = $boardToPng->setBoard($board)->output($filepath, $filename);
         }
 
         return $this;
     }
 
-    private function animate(string $foldername, string $filename)
+    private function animate(string $filepath, string $filename)
     {
-        exec("convert -delay 100 -loop 0 {$foldername}/{$filename}*.png {$foldername}/{$filename}.gif");
+        exec("convert -delay 100 -loop 0 {$filepath}/{$filename}*.png {$filepath}/{$filename}.gif");
 
         return $this;
     }
 
-    private function cleanup(string $foldername, string $filename)
+    private function cleanup(string $filepath, string $filename)
     {
-        if (file_exists("{$foldername}/$filename.gif")) {
-            array_map('unlink', glob($foldername . '/*.png'));
+        if (file_exists("{$filepath}/$filename.gif")) {
+            array_map('unlink', glob($filepath . '/*.png'));
         }
     }
 }
