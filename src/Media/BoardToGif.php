@@ -50,7 +50,9 @@ class BoardToGif
 
     private function animate(string $filepath, string $filename)
     {
-        exec("convert -delay 100 {$filepath}/{$filename}*.png {$filepath}/{$filename}.gif");
+        $cmd = "convert -delay 100 {$filepath}/{$filename}*.png {$filepath}/{$filename}.gif";
+        $escapedCmd = escapeshellcmd($cmd);
+        exec($escapedCmd);
 
         return $this;
     }
