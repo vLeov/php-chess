@@ -28,7 +28,7 @@ class BoardToGif
         $filename = uniqid();
 
         $this->frames($filepath, $filename)
-            ->animate($filepath, $filename)
+            ->animate(escapeshellarg($filepath), $filename)
             ->cleanup($filepath, $filename);
 
         return $filename.'.gif';
