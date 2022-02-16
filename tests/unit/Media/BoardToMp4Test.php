@@ -3,17 +3,17 @@
 namespace Chess\Tests\Unit\Media;
 
 use Chess\Board;
-use Chess\Media\BoardToGif;
+use Chess\Media\BoardToMp4;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
 
-class BoardToGifTest extends AbstractUnitTestCase
+class BoardToMp4Test extends AbstractUnitTestCase
 {
     const OUTPUT_FOLDER = __DIR__.'/../../output';
 
     public static function tearDownAfterClass(): void
     {
-        array_map('unlink', glob(self::OUTPUT_FOLDER . '/*.gif'));
+        array_map('unlink', glob(self::OUTPUT_FOLDER . '/*.mp4'));
     }
 
     /**
@@ -25,7 +25,7 @@ class BoardToGifTest extends AbstractUnitTestCase
 
         $board = (new BenoniFianchettoVariation(new Board()))->play();
 
-        $filename = (new BoardToGif($board))->output('foo');
+        $filename = (new BoardToMp4($board))->output('foo');
     }
 
     /**
@@ -35,11 +35,11 @@ class BoardToGifTest extends AbstractUnitTestCase
     {
         $board = (new BenoniFianchettoVariation(new Board()))->play();
 
-        $filename = (new BoardToGif($board))->output(self::OUTPUT_FOLDER);
+        $filename = (new BoardToMp4($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
             md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/gif/benoni_fianchetto_variation.gif')
+            md5_file(self::DATA_FOLDER.'/mp4/benoni_fianchetto_variation.mp4')
         );
     }
 
@@ -50,11 +50,11 @@ class BoardToGifTest extends AbstractUnitTestCase
     {
         $board = (new BenoniFianchettoVariation(new Board()))->play();
 
-        $filename = (new BoardToGif($board, $flip = true))->output(self::OUTPUT_FOLDER);
+        $filename = (new BoardToMp4($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
             md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER . '/gif/benoni_fianchetto_variation_flip.gif')
+            md5_file(self::DATA_FOLDER . '/mp4/benoni_fianchetto_variation_flip.mp4')
         );
     }
 }

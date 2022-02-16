@@ -4,7 +4,7 @@ namespace Chess\Media;
 
 use Chess\Board;
 
-class BoardToGif
+class BoardToMp4
 {
     protected $board;
 
@@ -31,7 +31,7 @@ class BoardToGif
             ->animate(escapeshellarg($filepath), $filename)
             ->cleanup($filepath, $filename);
 
-        return $filename.'.gif';
+        return $filename.'.mp4';
     }
 
     private function frames(string $filepath, string $filename)
@@ -50,7 +50,7 @@ class BoardToGif
 
     private function animate(string $filepath, string $filename)
     {
-        $cmd = "convert -delay 100 {$filepath}/{$filename}*.png {$filepath}/{$filename}.gif";
+        $cmd = "ffmpeg -r 1 -pattern_type glob -i {$filepath}/{$filename}*.png -pix_fmt yuv420p {$filepath}/{$filename}.mp4";
         $escapedCmd = escapeshellcmd($cmd);
         exec($escapedCmd);
 
@@ -59,7 +59,7 @@ class BoardToGif
 
     private function cleanup(string $filepath, string $filename)
     {
-        if (file_exists("{$filepath}/$filename.gif")) {
+        if (file_exists("{$filepath}/$filename.mp4")) {
             array_map('unlink', glob($filepath . '/*.png'));
         }
     }
