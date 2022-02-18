@@ -10,8 +10,6 @@ class BoardToMp4
 
     protected $flip;
 
-    protected $frames = [];
-
     public function __construct(Board $board, bool $flip = false)
     {
         $this->board = $board;
@@ -36,13 +34,12 @@ class BoardToMp4
 
     private function frames(string $filepath, string $filename)
     {
-        $salt = uniqid();
         $board = new Board();
         $boardToPng = new BoardToPng($board, $this->flip);
         foreach ($this->board->getHistory() as $key => $item) {
             $n = sprintf("%02d", $key);
             $board->play($item->move->color, $item->move->pgn);
-            $this->frames[] = $boardToPng->setBoard($board)->output($filepath, $filename);
+            $boardToPng->setBoard($board)->output($filepath, "{$filename}_{$n}");
         }
 
         return $this;
@@ -50,7 +47,7 @@ class BoardToMp4
 
     private function animate(string $filepath, string $filename)
     {
-        $cmd = "ffmpeg -r 1 -pattern_type glob -i {$filepath}/{$filename}*.png -pix_fmt yuv420p {$filepath}/{$filename}.mp4";
+        $cmd = "ffmpeg -r 1 -pattern_type glob -i {$filepath}/{$filename}*.png -vf fps=25 -pix_fmt yuv420p {$filepath}/{$filename}.mp4";
         $escapedCmd = escapeshellcmd($cmd);
         exec($escapedCmd);
 
