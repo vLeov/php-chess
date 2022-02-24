@@ -224,4 +224,58 @@ class RelativeForkEvaluationTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $absForkEvald);
     }
+
+    /**
+     * @test
+     */
+    public function a30_english_opening_symmetrical_hedgehog_flexible_formation()
+    {
+        $board = (new StringToBoard('rn1qk2r/pb1pbppp/1p2pn2/8/2Pp4/2N2NP1/PP2PPBP/R1BQ1RK1 w kq -'))
+            ->create();
+
+        $expected = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $absForkEvald = (new RelativeForkEvaluation($board))->evaluate();
+
+        $this->assertSame($expected, $absForkEvald);
+    }
+
+    /**
+     * @test
+     */
+    public function b17_caro_kann_defense_karpov_variation_modern_main_line()
+    {
+        $board = (new StringToBoard('r1bqk2r/pp1n1pp1/2pbpn1p/6N1/3P4/3B1N2/PPP1QPPP/R1B1K2R w KQkq -'))
+            ->create();
+
+        $expected = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $absForkEvald = (new RelativeForkEvaluation($board))->evaluate();
+
+        $this->assertSame($expected, $absForkEvald);
+    }
+
+    /**
+     * @test
+     */
+    public function d44_semi_slav_defense_botvinnik_variation_szabo_variation()
+    {
+        $board = (new StringToBoard('rnbqkb1r/p4p2/2p1pn1p/1p2P1p1/2pP3B/2N2N2/PP3PPP/R2QKB1R w KQkq g6'))
+            ->create();
+
+        $expected = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $absForkEvald = (new RelativeForkEvaluation($board))->evaluate();
+
+        $this->assertSame($expected, $absForkEvald);
+    }
 }
