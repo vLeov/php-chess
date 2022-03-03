@@ -136,4 +136,15 @@ class Validate
 
         return !array_diff(Tag::mandatory(), $keys);
     }
+
+    /**
+     * Validates a PGN file.
+     *
+     * @param string $file
+     * @return bool true if the file is valid; otherwise false
+     */
+    public static function file(string $file)
+    {
+        return $file >= 'a' && $file <= 'h';
+    }
 }

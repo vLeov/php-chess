@@ -5,6 +5,7 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\Piece\Pawn;
 use Chess\PGN\Symbol;
+use Chess\PGN\Validate;
 
 /**
  * SquareOutpostEvaluation
@@ -41,10 +42,10 @@ class SquareOutpostEvaluation extends AbstractEvaluation
                     rsort($captureSquares);
                 }
                 if (in_array($piece->getPosition()[1], $this->ranks)) {
-                    if ($this->isValidFile($lFile) && !$this->opposition($piece, $lFile)) {
+                    if (Validate::file($lFile) && !$this->opposition($piece, $lFile)) {
                         $this->result[$piece->getColor()][] = $captureSquares[0];
                     }
-                    if ($this->isValidFile($rFile) && !$this->opposition($piece, $rFile)) {
+                    if (Validate::file($rFile) && !$this->opposition($piece, $rFile)) {
                         $this->result[$piece->getColor()][] = $captureSquares[0];
                         empty($captureSquares[1]) ?: $this->result[$piece->getColor()][] = $captureSquares[1];
                     }
@@ -57,11 +58,6 @@ class SquareOutpostEvaluation extends AbstractEvaluation
         sort($this->result[Symbol::BLACK]);
 
         return $this->result;
-    }
-
-    protected function isValidFile(string $file): bool
-    {
-        return $file >= 'a' && $file <= 'h';
     }
 
     protected function opposition(Pawn $pawn, string $file): bool
