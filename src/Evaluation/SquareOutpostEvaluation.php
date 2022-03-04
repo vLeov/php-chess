@@ -42,12 +42,14 @@ class SquareOutpostEvaluation extends AbstractEvaluation
                     rsort($captureSquares);
                 }
                 if (in_array($piece->getPosition()[1], $this->ranks)) {
-                    if (Validate::file($lFile) && !$this->opposition($piece, $lFile)) {
-                        $this->result[$piece->getColor()][] = $captureSquares[0];
-                    }
-                    if (Validate::file($rFile) && !$this->opposition($piece, $rFile)) {
-                        $this->result[$piece->getColor()][] = $captureSquares[0];
-                        empty($captureSquares[1]) ?: $this->result[$piece->getColor()][] = $captureSquares[1];
+                    if (!$this->opposition($piece, $piece->getFile())) {
+                        if (Validate::file($lFile) && !$this->opposition($piece, $lFile)) {
+                            $this->result[$piece->getColor()][] = $captureSquares[0];
+                        }
+                        if (Validate::file($rFile) && !$this->opposition($piece, $rFile)) {
+                            $this->result[$piece->getColor()][] = $captureSquares[0];
+                            empty($captureSquares[1]) ?: $this->result[$piece->getColor()][] = $captureSquares[1];
+                        }
                     }
                 }
             }

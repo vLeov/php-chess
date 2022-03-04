@@ -346,4 +346,23 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
             ],
         ];
     }
+
+    /**
+     * @test
+     */
+    public function d17()
+    {
+        $fen = 'r3kb1r/ppq2ppp/2p2n2/4nb2/P1N5/2N3P1/1P2PP1P/R1BQKB1R w KQkq -';
+
+        $board = (new StringToBoard($fen))->create();
+
+        $expected = [
+            'w' => [],
+            'b' => [],
+        ];
+
+        $squareOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+
+        $this->assertSame($expected, $squareOutpostEvald);
+    }
 }
