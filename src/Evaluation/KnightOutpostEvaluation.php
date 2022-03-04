@@ -8,7 +8,7 @@ use Chess\PGN\Symbol;
 
 class KnightOutpostEvaluation extends AbstractEvaluation
 {
-    const NAME = 'knigt_outpost';
+    const NAME = 'knight_outpost';
 
     private $sqOutpostEvald;
 
