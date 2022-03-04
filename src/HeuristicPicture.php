@@ -19,6 +19,8 @@ use Chess\Evaluation\AbsolutePinEvaluation;
 use Chess\Evaluation\RelativePinEvaluation;
 use Chess\Evaluation\AbsoluteForkEvaluation;
 use Chess\Evaluation\RelativeForkEvaluation;
+use Chess\Evaluation\SquareOutpostEvaluation;
+use Chess\Evaluation\KnightOutpostEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -40,11 +42,8 @@ class HeuristicPicture extends Player
      * for further machine learning purposes.
      *
      * The order in which the different chess evaluation features are arranged as
-     * a dimension really doesn't matter.
-     *
-     * The first permutation e.g. [ 15, 10, 10, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ]
-     * is used to somehow highlight that a particular dimension is a restricted
-     * permutation actually.
+     * a dimension doesn't really matter. The first permutation is used to somehow
+     * highlight that a particular dimension is a restricted permutation actually.
      *
      * Let the grandmasters label chess positions. Once a particular position is
      * successfully transformed into an input vector of numbers, then it can be
@@ -55,8 +54,8 @@ class HeuristicPicture extends Player
      */
     protected $dimensions = [
         MaterialEvaluation::class => 15,
-        CenterEvaluation::class => 10,
-        ConnectivityEvaluation::class => 10,
+        CenterEvaluation::class => 5,
+        ConnectivityEvaluation::class => 5,
         SpaceEvaluation::class => 5,
         PressureEvaluation::class => 5,
         KingSafetyEvaluation::class => 5,
@@ -70,6 +69,8 @@ class HeuristicPicture extends Player
         RelativePinEvaluation::class => 5,
         AbsoluteForkEvaluation::class => 5,
         RelativeForkEvaluation::class => 5,
+        SquareOutpostEvaluation::class => 5,
+        KnightOutpostEvaluation::class => 5,
     ];
 
     /**
