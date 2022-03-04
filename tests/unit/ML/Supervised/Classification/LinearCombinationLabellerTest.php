@@ -209,7 +209,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 16,
+            'w' => 1,
             'b' => 4,
         ];
 
