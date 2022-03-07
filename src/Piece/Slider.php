@@ -5,9 +5,6 @@ namespace Chess\Piece;
 /**
  * Class that represents a bishop, a rook or a queen.
  *
- * These three pieces are quite similar. They can slide on the board, so to speak,
- * which means that their legal moves can be computed in the exact same way.
- *
  * @author Jordi Bassagañas
  * @license GPL
  */
@@ -36,14 +33,14 @@ abstract class Slider extends AbstractPiece
         foreach ($this->scope as $direction) {
             foreach ($direction as $square) {
                 if (
-                    !in_array($square, $this->boardStatus->squares->used->{$this->getColor()}) &&
-                    !in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})
+                    !in_array($square, $this->board->getSquares()->used->{$this->getColor()}) &&
+                    !in_array($square, $this->board->getSquares()->used->{$this->getOppColor()})
                 ) {
                     $moves[] = $square;
-                } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})) {
+                } elseif (in_array($square, $this->board->getSquares()->used->{$this->getOppColor()})) {
                     $moves[] = $square;
                     break 1;
-                } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {
+                } elseif (in_array($square, $this->board->getSquares()->used->{$this->getColor()})) {
                     break 1;
                 }
             }
@@ -62,10 +59,10 @@ abstract class Slider extends AbstractPiece
         $squares = [];
         foreach ($this->scope as $direction) {
             foreach ($direction as $square) {
-                if (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {
+                if (in_array($square, $this->board->getSquares()->used->{$this->getColor()})) {
                     $squares[] = $square;
                     break 1;
-                } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})) {
+                } elseif (in_array($square, $this->board->getSquares()->used->{$this->getOppColor()})) {
                     break 1;
                 }
             }

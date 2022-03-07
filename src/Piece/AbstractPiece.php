@@ -7,13 +7,15 @@ use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
 
 /**
- * Class that represents a chess piece.
+ * AbstractPiece
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 abstract class AbstractPiece implements Piece
 {
+    use ObserverObjectTrait;
+
     /**
      * The piece's color in PGN format.
      *
@@ -57,25 +59,11 @@ abstract class AbstractPiece implements Piece
     protected $legalMoves;
 
     /**
-     * Chess board status.
+     * The chessboard.
      *
-     * @var \stdClass
+     * @var \Chess\Board
      */
-    protected $boardStatus;
-
-    /**
-     * Space evaluation of the board.
-     *
-     * @var \stdClass
-     */
-    protected $space;
-
-    /**
-     * Defense evaluation of the board.
-     *
-     * @var \stdClass
-     */
-    protected $defense;
+    protected $board;
 
     /**
      * Constructor.
@@ -177,36 +165,6 @@ abstract class AbstractPiece implements Piece
         $this->move = $move;
 
         return $this;
-    }
-
-    /**
-     * Sets the board status property.
-     *
-     * @param \stdClass $boardStatus
-     */
-    public function setBoardStatus(\stdClass $boardStatus): void
-    {
-        $this->boardStatus = $boardStatus;
-    }
-
-    /**
-     * Sets the board's space evaluation.
-     *
-     * @param \stdClass $space
-     */
-    public function setSpace(\stdClass $space): void
-    {
-        $this->space = $space;
-    }
-
-    /**
-     * Sets the board's defense evaluation.
-     *
-     * @param \stdClass $defense
-     */
-    public function setDefense(\stdClass $defense): void
-    {
-        $this->defense = $defense;
     }
 
     /**

@@ -124,9 +124,9 @@ class Knight extends AbstractPiece
     {
         $moves = [];
         foreach ($this->scope->jumps as $square) {
-            if (in_array($square, $this->boardStatus->squares->free)) {
+            if (in_array($square, $this->board->getSquares()->free)) {
                 $moves[] = $square;
-            } elseif (in_array($square, $this->boardStatus->squares->used->{$this->getOppColor()})) {
+            } elseif (in_array($square, $this->board->getSquares()->used->{$this->getOppColor()})) {
                 $moves[] = $square;
             }
         }
@@ -138,7 +138,7 @@ class Knight extends AbstractPiece
     {
         $squares = [];
         foreach ($this->scope->jumps as $square) {
-            if (in_array($square, $this->boardStatus->squares->used->{$this->getColor()})) {
+            if (in_array($square, $this->board->getSquares()->used->{$this->getColor()})) {
                 $squares[] = $square;
             }
         }

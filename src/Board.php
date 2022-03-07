@@ -32,6 +32,8 @@ use Chess\Piece\Type\RookType;
  */
 final class Board extends \SplObjectStorage
 {
+    use ObserverSubjectTrait;
+
     /**
      * Current player's turn.
      *
@@ -90,6 +92,8 @@ final class Board extends \SplObjectStorage
      * @var array
      */
     private $castling = [];
+
+    private $observers = [];
 
     /**
      * Constructor.
@@ -184,6 +188,26 @@ final class Board extends \SplObjectStorage
     }
 
     /**
+     * Gets the board's space evaluation.
+     *
+     * @return \stdClass
+     */
+    public function getSpace(): \stdClass
+    {
+        return $this->space;
+    }
+
+    /**
+     * Gets the board's defense evaluation.
+     *
+     * @return \stdClass
+     */
+    public function getDefense(): \stdClass
+    {
+        return $this->defense;
+    }
+
+    /**
      * Gets the castling status.
      *
      * @return array
@@ -237,6 +261,20 @@ final class Board extends \SplObjectStorage
     public function getHistory(): array
     {
         return $this->history;
+    }
+
+    /**
+     * Gets the last history entry.
+     *
+     * @return mixed object|null
+     */
+    public function getLastHistory()
+    {
+        if (!empty($this->history)) {
+            return end($this->history);
+        }
+
+        return null;
     }
 
     /**
@@ -497,7 +535,11 @@ final class Board extends \SplObjectStorage
     {
         if ($move->color !== $this->turn) {
             return false;
-        } elseif ($move->isCapture && empty($this->getPieceByPosition($move->position->next)) && $move->identity !== Symbol::PAWN) {
+        } elseif (
+            $move->isCapture &&
+            empty($this->getPieceByPosition($move->position->next)) &&
+            $move->identity !== Symbol::PAWN
+        ) {
             return false;
         } elseif (!$move->isCapture && !empty($this->getPieceByPosition($move->position->next))) {
             return false;
@@ -751,70 +793,25 @@ final class Board extends \SplObjectStorage
 
     /**
      * Refreshes the board's status.
-     *
-     * @return \Chess\Board
      */
-    public function refresh(): Board
+    public function refresh(): void
     {
         $this->turn = Symbol::oppColor($this->turn);
+
         $this->squares = (object) [
             SquareEvaluation::FEATURE_FREE => (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_FREE),
             SquareEvaluation::FEATURE_USED => (object) (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_USED),
         ];
-        $this->setBoardStatusToPieces((object) [
-            'squares' => $this->squares,
-            'castling' => $this->castling,
-            'lastHistoryEntry' => !empty($this->history) ? end($this->history) : null,
-        ]);
-        $this->pressure = (object) (new PressureEvaluation($this))->evaluate();
+
+        $this->detachObservers()
+            ->attachObservers()
+            ->notifyObservers();
+
         $this->space = (object) (new SpaceEvaluation($this))->evaluate();
+        $this->pressure = (object) (new PressureEvaluation($this))->evaluate();
         $this->defense = (object) (new DefenseEvaluation($this))->evaluate();
-        $this->setSpaceToPieces($this->space);
-        $this->setDefenseToPieces($this->defense);
 
-        return $this;
-    }
-
-    /**
-     * Sets the board's status to all pieces.
-     *
-     * @param \stdClass $boardStatus
-     */
-    private function setBoardStatusToPieces(\stdClass $boardStatus): void
-    {
-        $this->rewind();
-        while ($this->valid()) {
-            $this->current()->setBoardStatus($boardStatus);
-            $this->next();
-        }
-    }
-
-    /**
-     * Sets the board's space evaluation to all pieces.
-     *
-     * @param \stdClass $space
-     */
-    private function setSpaceToPieces(\stdClass $space): void
-    {
-        $this->rewind();
-        while ($this->valid()) {
-            $this->current()->setSpace($space);
-            $this->next();
-        }
-    }
-
-    /**
-     * Sets the board's defense evaluation to all pieces.
-     *
-     * @param \stdClass $space
-     */
-    private function setDefenseToPieces(\stdClass $defense): void
-    {
-        $this->rewind();
-        while ($this->valid()) {
-            $this->current()->setDefense($defense);
-            $this->next();
-        }
+        $this->notifyObservers();
     }
 
     /**
