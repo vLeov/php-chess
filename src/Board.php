@@ -6,6 +6,7 @@ use Chess\Castling\Can as CastlingCan;
 use Chess\Castling\Initialization as CastlingInit;
 use Chess\Castling\Rule as CastlingRule;
 use Chess\Exception\BoardException;
+use Chess\Evaluation\DefenseEvaluation;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SquareEvaluation;
@@ -58,6 +59,13 @@ final class Board extends \SplObjectStorage
      * @var \stdClass
      */
     private $space;
+
+    /**
+     * Squares being defended.
+     *
+     * @var \stdClass
+     */
+    private $defense;
 
     /**
      * Captured pieces.
@@ -173,16 +181,6 @@ final class Board extends \SplObjectStorage
     public function getPressure(): \stdClass
     {
         return $this->pressure;
-    }
-
-    /**
-     * Gets the board's space evaluation.
-     *
-     * @return \stdClass
-     */
-    public function getSpace(): \stdClass
-    {
-        return $this->space;
     }
 
     /**
@@ -770,7 +768,9 @@ final class Board extends \SplObjectStorage
         ]);
         $this->pressure = (object) (new PressureEvaluation($this))->evaluate();
         $this->space = (object) (new SpaceEvaluation($this))->evaluate();
+        $this->defense = (object) (new DefenseEvaluation($this))->evaluate();
         $this->setSpaceToPieces($this->space);
+        $this->setDefenseToPieces($this->defense);
 
         return $this;
     }
@@ -799,6 +799,20 @@ final class Board extends \SplObjectStorage
         $this->rewind();
         while ($this->valid()) {
             $this->current()->setSpace($space);
+            $this->next();
+        }
+    }
+
+    /**
+     * Sets the board's defense evaluation to all pieces.
+     *
+     * @param \stdClass $space
+     */
+    private function setDefenseToPieces(\stdClass $defense): void
+    {
+        $this->rewind();
+        while ($this->valid()) {
+            $this->current()->setDefense($defense);
             $this->next();
         }
     }

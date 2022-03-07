@@ -44,6 +44,63 @@ class King extends AbstractPiece
         $this->scope();
     }
 
+    protected function moveCastlingLong()
+    {
+        $rule = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_LONG];
+        if (!$this->boardStatus->castling[$this->getColor()]['castled']) {
+            if ($this->boardStatus->castling[$this->getColor()][Symbol::CASTLING_LONG]) {
+                if (
+                    in_array($rule['squares']['b'], $this->boardStatus->squares->free) &&
+                    in_array($rule['squares']['c'], $this->boardStatus->squares->free) &&
+                    in_array($rule['squares']['d'], $this->boardStatus->squares->free) &&
+                    !in_array($rule['squares']['b'], $this->space->{$this->getOppColor()}) &&
+                    !in_array($rule['squares']['c'], $this->space->{$this->getOppColor()}) &&
+                    !in_array($rule['squares']['d'], $this->space->{$this->getOppColor()})
+                ) {
+                    return $rule['position']['next'];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    protected function moveCastlingShort()
+    {
+        $rule = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_SHORT];
+        if (!$this->boardStatus->castling[$this->getColor()]['castled']) {
+            if ($this->boardStatus->castling[$this->getColor()][Symbol::CASTLING_SHORT]) {
+                if (
+                    in_array($rule['squares']['f'], $this->boardStatus->squares->free) &&
+                    in_array($rule['squares']['g'], $this->boardStatus->squares->free) &&
+                    !in_array($rule['squares']['f'], $this->space->{$this->getOppColor()}) &&
+                    !in_array($rule['squares']['g'], $this->space->{$this->getOppColor()})
+                ) {
+                    return $rule['position']['next'];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    protected function movesCaptures()
+    {
+        $movesCaptures = array_intersect(
+            array_values((array)$this->scope),
+            $this->boardStatus->squares->used->{$this->getOppColor()}
+        );
+
+        return array_diff($movesCaptures, $this->defense->{$this->getOppColor()});
+    }
+
+    protected function movesKing()
+    {
+        $movesKing = array_intersect(array_values((array)$this->scope), $this->boardStatus->squares->free);
+
+        return array_diff($movesKing, $this->space->{$this->getOppColor()});
+    }
+
     /**
      * Gets the king's castling rook.
      *
@@ -52,11 +109,11 @@ class King extends AbstractPiece
      */
     public function getCastlingRook(array $pieces)
     {
+        $rule = CastlingRule::color($this->getColor())[Symbol::ROOK];
         foreach ($pieces as $piece) {
             if (
                 $piece->getIdentity() === Symbol::ROOK &&
-                $piece->getPosition() ===
-                CastlingRule::color($this->getColor())[Symbol::ROOK][rtrim($this->getMove()->pgn, '+')]['position']['current']
+                $piece->getPosition() === $rule[rtrim($this->getMove()->pgn, '+')]['position']['current']
             ) {
                 return $piece;
             }
@@ -89,52 +146,14 @@ class King extends AbstractPiece
      */
     public function getLegalMoves(): array
     {
-        $movesKing = array_intersect(
-            array_values((array)$this->scope),
-            $this->boardStatus->squares->free
+        $legalMoves = array_merge(
+            $this->movesKing(),
+            $this->movesCaptures(),
+            [$this->moveCastlingLong()],
+            [$this->moveCastlingShort()]
         );
 
-        $movesKingCaptures =  array_intersect(
-            array_values((array)$this->scope),
-            $this->boardStatus->squares->used->{$this->getOppColor()}
-        );
-
-        $castlingShort = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_SHORT];
-        $castlingLong = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_LONG];
-
-        if (
-            !$this->boardStatus->castling[$this->getColor()]['castled'] &&
-            $this->boardStatus->castling[$this->getColor()][Symbol::CASTLING_SHORT] &&
-            in_array($castlingShort['squares']['f'], $this->boardStatus->squares->free) &&
-            in_array($castlingShort['squares']['g'], $this->boardStatus->squares->free) &&
-            !in_array($castlingShort['squares']['f'], $this->space->{$this->getOppColor()}) &&
-            !in_array($castlingShort['squares']['g'], $this->space->{$this->getOppColor()})
-        ) {
-            $movesCastlingShort = [$castlingShort['position']['next']];
-        }
-        else {
-            $movesCastlingShort = [];
-        }
-
-        if (
-            !$this->boardStatus->castling[$this->getColor()]['castled'] &&
-            $this->boardStatus->castling[$this->getColor()][Symbol::CASTLING_LONG] &&
-            in_array($castlingLong['squares']['b'], $this->boardStatus->squares->free) &&
-            in_array($castlingLong['squares']['c'], $this->boardStatus->squares->free) &&
-            in_array($castlingLong['squares']['d'], $this->boardStatus->squares->free) &&
-            !in_array($castlingLong['squares']['b'], $this->space->{$this->getOppColor()}) &&
-            !in_array($castlingLong['squares']['c'], $this->space->{$this->getOppColor()}) &&
-            !in_array($castlingLong['squares']['d'], $this->space->{$this->getOppColor()})
-        ) {
-            $movesCastlingLong = [$castlingLong['position']['next']];
-        }
-        else {
-            $movesCastlingLong = [];
-        }
-
-        return array_unique(
-            array_merge($movesKing, $movesKingCaptures, $movesCastlingShort, $movesCastlingLong)
-        );
+        return array_filter($legalMoves);
     }
 
     public function getDefendedSquares(): array

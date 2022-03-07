@@ -350,6 +350,36 @@ class StringToBoardTest extends AbstractUnitTestCase
 
     /**
      * @test
+     */
+    public function endgame_king_and_rook_vs_king_cannot_capture()
+    {
+        $board = (new StringToBoard('8/5k2/8/8/2K1p3/3r4/8/8 w - - 0 1'))
+            ->create();
+
+        $legalMoves = $board->getPieceByPosition('c4')->getLegalMoves();
+
+        $expected = ['c5', 'b4', 'b5'];
+
+        $this->assertSame($expected, $legalMoves);
+    }
+
+    /**
+     * @test
+     */
+    public function endgame_king_and_rook_vs_king_can_capture()
+    {
+        $board = (new StringToBoard('8/5k2/8/8/2K5/3rp3/8/8 w - - 0 1'))
+            ->create();
+
+        $legalMoves = $board->getPieceByPosition('c4')->getLegalMoves();
+
+        $expected = ['c5', 'b4', 'b5', 'd3'];
+
+        $this->assertSame($expected, $legalMoves);
+    }
+
+    /**
+     * @test
      * @dataProvider provideInvalidFen
      */
     public function it_throws_for_invalid_fen(string $invalidFen): void

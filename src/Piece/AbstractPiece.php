@@ -71,6 +71,13 @@ abstract class AbstractPiece implements Piece
     protected $space;
 
     /**
+     * Defense evaluation of the board.
+     *
+     * @var \stdClass
+     */
+    protected $defense;
+
+    /**
      * Constructor.
      *
      * @param string $color
@@ -185,11 +192,21 @@ abstract class AbstractPiece implements Piece
     /**
      * Sets the board's space evaluation.
      *
-     * @param \stdClass $boardStatus
+     * @param \stdClass $space
      */
     public function setSpace(\stdClass $space): void
     {
         $this->space = $space;
+    }
+
+    /**
+     * Sets the board's defense evaluation.
+     *
+     * @param \stdClass $defense
+     */
+    public function setDefense(\stdClass $defense): void
+    {
+        $this->defense = $defense;
     }
 
     /**
