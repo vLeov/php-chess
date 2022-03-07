@@ -19,18 +19,6 @@ class BoardToMp4Test extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function folder_does_not_exist()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $board = (new BenoniFianchettoVariation(new Board()))->play();
-
-        $filename = (new BoardToMp4($board))->output('foo');
-    }
-
-    /**
-     * @test
-     */
     public function output_benoni_fianchetto_variation()
     {
         $board = (new BenoniFianchettoVariation(new Board()))->play();
@@ -46,15 +34,12 @@ class BoardToMp4Test extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function output_benoni_fianchetto_variation_flip()
+    public function folder_does_not_exist()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $board = (new BenoniFianchettoVariation(new Board()))->play();
 
-        $filename = (new BoardToMp4($board, $flip = true))->output(self::OUTPUT_FOLDER);
-
-        $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER . '/mp4/benoni_fianchetto_variation_flip.mp4')
-        );
+        $filename = (new BoardToMp4($board))->output('foo');
     }
 }

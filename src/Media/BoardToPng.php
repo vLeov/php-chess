@@ -35,7 +35,7 @@ class BoardToPng
 
     public function output(string $filepath, string $salt = '')
     {
-        $chessboard = $this->imagine->open(self::FILEPATH . '/chessboard.png');
+        $chessboard = $this->imagine->open(self::FILEPATH . '/chessboard_480.png');
         $array = (new Ascii())->toArray($this->board, $this->flip);
         $x = $y = 0;
         foreach ($array as $i => $rank) {
@@ -45,10 +45,10 @@ class BoardToPng
                     $image = $this->imagine->open(self::FILEPATH . "/pieces/$filename.png");
                     $chessboard->paste($image, new Point($x, $y));
                 }
-                $x += 90;
+                $x += 60;
             }
             $x = 0;
-            $y += 90;
+            $y += 60;
         }
 
         if ($salt) {
