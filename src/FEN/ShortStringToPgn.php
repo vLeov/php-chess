@@ -8,7 +8,7 @@ namespace Chess\FEN;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class ShortenedStringToPgn extends AbstractStringToPgn
+class ShortStringToPgn extends AbstractStringToPgn
 {
     protected function find(array $legal)
     {

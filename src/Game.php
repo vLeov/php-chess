@@ -6,7 +6,7 @@ use Chess\Ascii;
 use Chess\HeuristicPicture;
 use Chess\Player;
 use Chess\FEN\BoardToString;
-use Chess\FEN\ShortenedStringToPgn;
+use Chess\FEN\ShortStringToPgn;
 use Chess\FEN\StringToBoard;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
@@ -326,7 +326,7 @@ class Game
             return Symbol::CASTLING_LONG;
         }
 
-        $pgn = (new ShortenedStringToPgn($fromFen, $toShortenedFen))->create();
+        $pgn = (new ShortStringToPgn($fromFen, $toShortenedFen))->create();
         $color = key($pgn);
         $result = current($pgn);
 
