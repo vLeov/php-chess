@@ -3,7 +3,8 @@
 namespace Chess\ML\Supervised\Classification;
 
 use Chess\Board;
-use Chess\HeuristicPicture;
+use Chess\HeuristicPictureByFenString;
+use Chess\FEN\BoardToString;
 use Chess\ML\Supervised\AbstractLinearCombinationPredictor;
 use Chess\ML\Supervised\Classification\LinearCombinationLabeller;
 use Chess\PGN\Convert;
@@ -30,34 +31,33 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
         $color = $this->board->getTurn();
         foreach ($this->board->getPossibleMoves() as $possibleMove) {
             $clone = unserialize(serialize($this->board));
-            $clone->play(Convert::toStdObj($this->board->getTurn(), $possibleMove));
+            $clone->play($color, $possibleMove);
             $this->result[] = [ $possibleMove => $this->evaluate($clone) ];
         }
-
         $found = $this->sort($color)->find();
 
         return $found;
     }
 
     /**
-     * Evaluates the chess position which results from playing the current PGN movetext.
+     * Evaluates a chess position.
      *
      * @return array
      */
     protected function evaluate(Board $clone): array
     {
-        $color = $this->board->getTurn();
-        $balance = (new HeuristicPicture($clone->getMovetext()))->take()->getBalance();
-        $end = end($balance);
-        $dataset = new Unlabeled([$end]);
-        $label = (new LinearCombinationLabeller($this->permutations))->label($end)[$color];
+        $fen = (new BoardToString($clone))->create();
+        $balance = (new HeuristicPictureByFenString($fen))->take()->getBalance();
+        $dataset = new Unlabeled([$balance]);
+        $label = (new LinearCombinationLabeller($this->permutations))
+            ->label($balance)[$this->board->getTurn()];
         $prediction = current($this->estimator->predict($dataset));
 
         return [
             'label' => $label,
             'prediction' => $prediction,
-            'linear_combination' => $this->combine($end, $label),
-            'heuristic_eval' => (new HeuristicPicture($clone->getMovetext()))->evaluate(),
+            'linear_combination' => $this->combine($balance, $label),
+            'heuristic_eval' => (new HeuristicPictureByFenString($fen))->evaluate(),
         ];
     }
 
@@ -81,7 +81,6 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
                         current($b)['heuristic_eval']['w'] - current($b)['heuristic_eval']['b']) * 10 +
                     (current($a)['linear_combination'] <=> current($b)['linear_combination']);
             }
-
             return $current;
         });
 

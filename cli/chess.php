@@ -21,16 +21,17 @@ class ModelPlayCli extends CLI
 
     protected function main(Options $options)
     {
+        $game = new Game(Game::MODE_AI, $options->getArgs()[0]);
+
         if (isset($options->getArgs()[1])) {
-            $game = new Game(Game::MODE_LOAD_FEN, $options->getArgs()[0]);
             $game->loadFen($options->getArgs()[1]);
-        } else {
-            $game = new Game(Game::MODE_AI, $options->getArgs()[0]);
         }
 
         do {
             $move = readline(self::PROMPT);
-            if ($move === 'fen') {
+            if ($move === 'ascii') {
+                echo $game->ascii() . PHP_EOL;
+            } elseif ($move === 'fen') {
                 echo $game->fen() . PHP_EOL;
             } elseif ($move !== 'quit') {
                 $game->play('w', $move);
