@@ -14,7 +14,7 @@ use Chess\PGN\Validate;
  */
 abstract class AbstractPiece implements Piece
 {
-    use ObserverObjectTrait;
+    use PieceObserverBoardTrait;
 
     /**
      * The piece's color in PGN format.

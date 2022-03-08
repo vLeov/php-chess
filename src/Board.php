@@ -32,7 +32,7 @@ use Chess\Piece\Type\RookType;
  */
 final class Board extends \SplObjectStorage
 {
-    use ObserverSubjectTrait;
+    use BoardObserverPieceTrait;
 
     /**
      * Current player's turn.
@@ -803,15 +803,15 @@ final class Board extends \SplObjectStorage
             SquareEvaluation::FEATURE_USED => (object) (new SquareEvaluation($this))->evaluate(SquareEvaluation::FEATURE_USED),
         ];
 
-        $this->detachObservers()
-            ->attachObservers()
-            ->notifyObservers();
+        $this->detachPieces()
+            ->attachPieces()
+            ->notifyPieces();
 
         $this->space = (object) (new SpaceEvaluation($this))->evaluate();
         $this->pressure = (object) (new PressureEvaluation($this))->evaluate();
         $this->defense = (object) (new DefenseEvaluation($this))->evaluate();
 
-        $this->notifyObservers();
+        $this->notifyPieces();
     }
 
     /**
