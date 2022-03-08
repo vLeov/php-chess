@@ -17,8 +17,8 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $pic = (new HeuristicPictureByFenString($fen))->take()->getPicture();
 
         $expected = [
-            'w' => [ 1, 0.05, 0.4, 0.4, 0, 0.02, 0, 0 ],
-            'b' => [ 1, 0.05, 0.4, 0.4, 0, 0.02, 0, 0 ],
+            'w' => [ 1, 0.05, 0.4, 0.4, 0, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            'b' => [ 1, 0.05, 0.4, 0.4, 0, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
         $this->assertEquals($expected, $pic);
@@ -33,7 +33,7 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
 
         $balance = (new HeuristicPictureByFenString($fen))->take()->getBalance();
 
-        $expected = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
+        $expected = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
         $this->assertEquals($expected, $balance);
     }
@@ -48,8 +48,8 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $evaluation = (new HeuristicPictureByFenString($fen))->evaluate();
 
         $expected = [
-            'w' => 43.21,
-            'b' => 43.21,
+            'w' => 31.48,
+            'b' => 31.48,
         ];
 
         $this->assertSame($expected, $evaluation);
@@ -65,8 +65,8 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $pic = (new HeuristicPictureByFenString($fen))->take()->getPicture();
 
         $expected = [
-            'w' => [ 1, 0.07, 0.52, 0.42, 0.02, 0.02, 0.02, 0 ],
-            'b' => [ 1, 0.07, 0.52, 0.42, 0.02, 0.02, 0.02, 0 ],
+            'w' => [ 1, 0.07, 0.52, 0.42, 0.02, 0.02, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            'b' => [ 1, 0.07, 0.52, 0.42, 0.02, 0.02, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
         $this->assertEquals($expected, $pic);
@@ -81,7 +81,7 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
 
         $balance = (new HeuristicPictureByFenString($fen))->take()->getBalance();
 
-        $expected = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
+        $expected = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
         $this->assertEquals($expected, $balance);
     }
@@ -96,8 +96,8 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $evaluation = (new HeuristicPictureByFenString($fen))->evaluate();
 
         $expected = [
-            'w' => 45.51,
-            'b' => 45.51,
+            'w' => 32.28,
+            'b' => 32.28,
         ];
 
         $this->assertSame($expected, $evaluation);
@@ -113,8 +113,8 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $pic = (new HeuristicPictureByFenString($fen))->take()->getPicture();
 
         $expected = [
-            'w' => [ 1, 0.08, 0.5, 0.67, 0, 0.03, 0, 0 ],
-            'b' => [ 0.97, 0.06, 0.53, 0.56, 0.08, 0.03, 0, 0 ],
+            'w' => [ 1, 0.08, 0.5, 0.67, 0, 0.03, 0, 0, 0, 0.06, 0, 0.03, 0, 0, 0, 0, 0.03, 0, 0 ],
+            'b' => [ 0.97, 0.06, 0.53, 0.56, 0.08, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.03, 0, 0 ],
         ];
 
         $this->assertEquals($expected, $pic);
@@ -129,7 +129,7 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
 
         $balance = (new HeuristicPictureByFenString($fen))->take()->getBalance();
 
-        $expected = [ 0.03, 0.02, -0.03, 0.11, -0.08, 0, 0, 0 ];
+        $expected = [ 0.03, 0.02, -0.03, 0.11, -0.08, 0, 0, 0, 0, 0.06, 0, 0.03, 0, 0, 0, 0, 0, 0, 0 ];
 
         $this->assertEquals($expected, $balance);
     }
@@ -144,10 +144,24 @@ class HeuristicPictureByFenStringTest extends AbstractUnitTestCase
         $evaluation = (new HeuristicPictureByFenString($fen))->evaluate();
 
         $expected = [
-            'w' => 47.14,
-            'b' => 46.01,
+            'w' => 33.6,
+            'b' => 32.32,
         ];
 
         $this->assertSame($expected, $evaluation);
+    }
+
+    /**
+     * @test
+     */
+    public function scholar_checkmate_take_get_balance()
+    {
+        $fen = 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq -';
+
+        $balance = (new HeuristicPictureByFenString($fen))->take()->getBalance();
+
+        $expected = [ 0.02, -0.02, -0.28, 0.04, 0.07, 0.09, -0.02, 0, 0, 0, 0, 0, -0.91, 0, 0, 0, 0, 0, 0 ];
+
+        $this->assertEquals($expected, $balance);
     }
 }

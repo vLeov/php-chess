@@ -4,13 +4,25 @@ namespace Chess;
 
 use Chess\Board;
 use Chess\Evaluation\AttackEvaluation;
+use Chess\Evaluation\BackwardPawnEvaluation;
 use Chess\Evaluation\CenterEvaluation;
 use Chess\Evaluation\ConnectivityEvaluation;
+use Chess\Evaluation\IsolatedPawnEvaluation;
 use Chess\Evaluation\KingSafetyEvaluation;
 use Chess\Evaluation\MaterialEvaluation;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\TacticsEvaluation;
+use Chess\Evaluation\DoubledPawnEvaluation;
+use Chess\Evaluation\PassedPawnEvaluation;
+use Chess\Evaluation\InverseEvaluationInterface;
+use Chess\Evaluation\AbsolutePinEvaluation;
+use Chess\Evaluation\RelativePinEvaluation;
+use Chess\Evaluation\AbsoluteForkEvaluation;
+use Chess\Evaluation\RelativeForkEvaluation;
+use Chess\Evaluation\SquareOutpostEvaluation;
+use Chess\Evaluation\KnightOutpostEvaluation;
+use Chess\Evaluation\BishopOutpostEvaluation;
 use Chess\FEN\StringToBoard;
 use Chess\PGN\Symbol;
 
@@ -19,21 +31,39 @@ class HeuristicPictureByFenString
     protected $board;
 
     protected $dimensions = [
-        MaterialEvaluation::class => 34,
-        CenterEvaluation::class => 13,
-        ConnectivityEvaluation::class => 13,
-        SpaceEvaluation::class => 8,
-        PressureEvaluation::class => 8,
-        KingSafetyEvaluation::class => 8,
-        TacticsEvaluation::class => 8,
-        AttackEvaluation::class => 8,
+        MaterialEvaluation::class => 28,
+        CenterEvaluation::class => 4,
+        ConnectivityEvaluation::class => 4,
+        SpaceEvaluation::class => 4,
+        PressureEvaluation::class => 4,
+        KingSafetyEvaluation::class => 4,
+        TacticsEvaluation::class => 4,
+        AttackEvaluation::class => 4,
+        DoubledPawnEvaluation::class => 4,
+        PassedPawnEvaluation::class => 4,
+        IsolatedPawnEvaluation::class => 4,
+        BackwardPawnEvaluation::class => 4,
+        AbsolutePinEvaluation::class => 4,
+        RelativePinEvaluation::class => 4,
+        AbsoluteForkEvaluation::class => 4,
+        RelativeForkEvaluation::class => 4,
+        SquareOutpostEvaluation::class => 4,
+        KnightOutpostEvaluation::class => 4,
+        BishopOutpostEvaluation::class => 4,
     ];
 
-    protected $picture = [
-        Symbol::WHITE => [],
-        Symbol::BLACK => [],
-    ];
+    /**
+     * The heuristic picture of $this->board.
+     *
+     * @var array
+     */
+    protected $picture = [];
 
+    /**
+     * The balanced heuristic picture of $this->board.
+     *
+     * @var array
+     */
     protected $balance = [];
 
     public function __construct(string $fen)
@@ -73,11 +103,28 @@ class HeuristicPictureByFenString
         $item = [];
         foreach ($this->dimensions as $dimension => $w) {
             $evald = (new $dimension($this->board))->evaluate();
-            is_array($evald[Symbol::WHITE])
-                ? $item[] = [
-                    Symbol::WHITE => count($evald[Symbol::WHITE]),
-                    Symbol::BLACK => count($evald[Symbol::BLACK])]
-                : $item[] = $evald;
+            if (is_array($evald[Symbol::WHITE])) {
+                if ($dimension instanceof InverseEvaluationInterface) {
+                    $item[] = [
+                        Symbol::WHITE => count($evald[Symbol::BLACK]),
+                        Symbol::BLACK => count($evald[Symbol::WHITE]),
+                    ];
+                } else {
+                    $item[] = [
+                        Symbol::WHITE => count($evald[Symbol::WHITE]),
+                        Symbol::BLACK => count($evald[Symbol::BLACK]),
+                    ];
+                }
+            } else {
+                if ($dimension instanceof InverseEvaluationInterface) {
+                    $item[] = [
+                        Symbol::WHITE => $evald[Symbol::BLACK],
+                        Symbol::BLACK => $evald[Symbol::WHITE],
+                    ];
+                } else {
+                    $item[] = $evald;
+                }
+            }
         }
         $this->picture[Symbol::WHITE] = array_column($item, Symbol::WHITE);
         $this->picture[Symbol::BLACK] = array_column($item, Symbol::BLACK);
