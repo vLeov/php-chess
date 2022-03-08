@@ -31,7 +31,7 @@ abstract class AbstractLinearCombinationPredictor
 
         $this->permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [ 5, 10 ],
+                [ 4, 28 ],
                 count((new HeuristicPicture(''))->getDimensions()),
                 100
             );

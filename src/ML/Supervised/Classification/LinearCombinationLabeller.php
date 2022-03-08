@@ -17,16 +17,19 @@ class LinearCombinationLabeller extends AbstractLinearCombinationLabeller
     {
         $sums = [];
         foreach ($this->permutations as $i => $weights) {
-            $current = 0;
+            $sum = 0;
             foreach ($end as $j => $val) {
-                $current += $weights[$j] * $val;
+                $sum += $weights[$j] * $val;
             }
-            $sums[$i] = round($current, 2);
+            $sums[$i] = round($sum, 2);
         }
 
+        $max = array_search(max($sums), $sums);
+        $min = array_search(min($sums), $sums);
+
         return [
-            Symbol::WHITE => array_search(max($sums), $sums),
-            Symbol::BLACK => array_search(min($sums), $sums),
+            Symbol::WHITE => $max,
+            Symbol::BLACK => $min,
         ];
     }
 }
