@@ -38,7 +38,7 @@ abstract class AbstractStringToPgn
                         if ($square ===
                             CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next']
                         ) {
-                            if ($clone->play($color, $square)) {
+                            if ($clone->play($color, Symbol::KING.$square)) {
                                 $legal[] = [
                                     Symbol::CASTLING_SHORT => (new BoardToString($clone))->create()
                                 ];
@@ -46,7 +46,7 @@ abstract class AbstractStringToPgn
                         } elseif ($square ===
                             CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['position']['next']
                         ) {
-                            if ($clone->play($color, $square)) {
+                            if ($clone->play($color, Symbol::KING.$square)) {
                                 $legal[] = [
                                     Symbol::CASTLING_LONG => (new BoardToString($clone))->create()
                                 ];
