@@ -3,47 +3,39 @@
 namespace Chess\ML\Supervised;
 
 use Chess\Board;
-use Chess\HeuristicPicture;
-use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Rubix\ML\PersistentModel;
 
-/**
- * AbstractLinearCombinationPredictor
- *
- * @author Jordi Bassagañas
- * @license GPL
- */
 abstract class AbstractLinearCombinationPredictor
 {
     protected $board;
 
     protected $estimator;
 
-    protected $permutations;
-
     protected $result = [];
+
+    abstract protected function evaluate(Board $clone): array;
+
+    abstract protected function sort(string $color): AbstractLinearCombinationPredictor;
+
+    abstract protected function find(): string;
 
     public function __construct(Board $board, PersistentModel $estimator)
     {
         $this->board = $board;
 
         $this->estimator = $estimator;
-
-        $this->permutations = (new RestrictedPermutationWithRepetition())
-            ->get(
-                [ 4, 28 ],
-                count((new HeuristicPicture(''))->getDimensions()),
-                100
-            );
     }
 
-    protected function combine($end, $label)
+    public function predict(): string
     {
-        $combination = 0;
-        foreach ($end as $i => $val) {
-            $combination += $this->permutations[$label][$i] * $val;
+        $color = $this->board->getTurn();
+        foreach ($this->board->getPossibleMoves() as $possibleMove) {
+            $clone = unserialize(serialize($this->board));
+            $clone->play($color, $possibleMove);
+            $this->result[] = [ $possibleMove => $this->evaluate($clone) ];
         }
+        $found = $this->sort($color)->find();
 
-        return $combination;
+        return $found;
     }
 }

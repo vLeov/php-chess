@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\ML\Supervised\Classification\LinearCombinationPredictor;
+use Chess\ML\Supervised\Regression\LinearCombinationPredictor;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 
