@@ -22,7 +22,6 @@ abstract class AbstractLinearCombinationPredictor
     public function __construct(Board $board, PersistentModel $estimator)
     {
         $this->board = $board;
-
         $this->estimator = $estimator;
     }
 

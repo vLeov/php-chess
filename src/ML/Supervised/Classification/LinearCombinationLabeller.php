@@ -5,15 +5,16 @@ namespace Chess\ML\Supervised\Classification;
 use Chess\ML\Supervised\AbstractLinearCombinationLabeller;
 use Chess\PGN\Symbol;
 
-/**
- * LinearCombinationLabeller
- *
- * @author Jordi Bassagañas
- * @license GPL
- */
 class LinearCombinationLabeller extends AbstractLinearCombinationLabeller
 {
-    public function label(array $end): array
+    protected $permutations;
+
+    public function __construct(array $permutations = [])
+    {
+        $this->permutations = $permutations;
+    }
+    
+    public function label(array $end)
     {
         $sums = [];
         foreach ($this->permutations as $i => $weights) {

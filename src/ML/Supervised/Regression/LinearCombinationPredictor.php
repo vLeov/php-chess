@@ -15,12 +15,10 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
         $balance = (new HeuristicPicture($clone->getMovetext(), $clone))->take()->getBalance();
         $dataset = new Unlabeled($balance);
         $end = end($balance);
-        $label = array_sum($end);
-        $prediction = current($this->estimator->predict($dataset));
 
         return [
-            'label' => $label,
-            'prediction' => $prediction,
+            'label' => (new LinearCombinationLabeller())->label($end),
+            'prediction' => current($this->estimator->predict($dataset)),
         ];
     }
 

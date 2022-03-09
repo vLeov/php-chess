@@ -6,22 +6,19 @@ use Chess\Board;
 use Chess\HeuristicPicture;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\ML\Supervised\AbstractLinearCombinationPredictor;
-use Chess\ML\Supervised\Classification\LinearCombinationLabeller;
 use Chess\PGN\Symbol;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 
 class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
 {
-    protected $permutations;
-
     public function __construct(Board $board, PersistentModel $estimator)
     {
         parent::__construct($board, $estimator);
 
         $this->permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [ 4, 28 ],
+                [4, 28],
                 count((new HeuristicPicture(''))->getDimensions()),
                 100
             );
@@ -32,13 +29,11 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
         $balance = (new HeuristicPicture($clone->getMovetext(), $clone))->take()->getBalance();
         $dataset = new Unlabeled($balance);
         $end = end($balance);
-        $label = (new LinearCombinationLabeller($this->permutations))
-            ->label($end)[$this->board->getTurn()];
-        $prediction = current($this->estimator->predict($dataset));
+        $label = (new LinearCombinationLabeller($this->permutations))->label($end)[$this->board->getTurn()];
 
         return [
             'label' => $label,
-            'prediction' => $prediction,
+            'prediction' => current($this->estimator->predict($dataset)),
             'linear_combination' => $this->combine($end, $label),
             'heuristic_eval' => (new HeuristicPicture($clone->getMovetext(), $clone))->evaluate(),
         ];
