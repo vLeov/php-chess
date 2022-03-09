@@ -13,6 +13,26 @@ class StringToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function foo_throws_exception()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        (new StringToBoard('foo'))->create();
+    }
+
+    /**
+     * @test
+     */
+    public function foo_bar_throws_exception()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        (new StringToBoard('foo bar'))->create();
+    }
+
+    /**
+     * @test
+     */
     public function e4()
     {
         $board = (new StringToBoard('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1'))
@@ -380,20 +400,29 @@ class StringToBoardTest extends AbstractUnitTestCase
 
     /**
      * @test
-     * @dataProvider provideInvalidFen
      */
-    public function it_throws_for_invalid_fen(string $invalidFen): void
+    public function endgame_checkmate_king_and_rook_vs_king()
     {
-        $this->expectException(UnknownNotationException::class);
-        $this->expectExceptionMessage('The FEN string should contain a valid piece placement.');
-
-        (new StringToBoard($invalidFen))
+        $board = (new StringToBoard('7k/8/8/8/8/8/2K5/r7 w - - 0 1'))
             ->create();
+
+        $legalMoves = $board->getPieceByPosition('c2')->getLegalMoves();
+
+        $expected = ['c3', 'b2', 'd2', 'b3', 'd3'];
+
+        $this->assertSame($expected, $legalMoves);
     }
 
-    public function provideInvalidFen(): Generator
+    /**
+     * @test
+     */
+    public function endgame_checkmate_king_and_rook_vs_king_play()
     {
-        yield ['foo'];
-        yield ['foo bar dont panic'];
+        $board = (new StringToBoard('7k/8/8/8/8/8/2K5/r7 w - - 0 1'))
+            ->create();
+
+        $this->assertTrue($board->play('w', 'Kb2'));
+        $this->assertTrue($board->play('b', 'Kg7'));
+        $this->assertTrue($board->play('w', 'Kxa1'));
     }
 }
