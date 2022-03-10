@@ -359,7 +359,7 @@ final class Board extends \SplObjectStorage
         $this->rewind();
         while ($this->valid()) {
             $piece = $this->current();
-            $piece->getColor() === $color ? $pieces[] = $piece : false;
+            $piece->getColor() !== $color ?: $pieces[] = $piece;
             $this->next();
         }
 
@@ -481,8 +481,8 @@ final class Board extends \SplObjectStorage
                 'identity' => $piece->getIdentity(),
                 'position' => $piece->getPosition(),
             ];
-            $piece->getIdentity() === Symbol::ROOK ? $capturingData->type = $piece->getType() : null;
-            $captured->getIdentity() === Symbol::ROOK ? $capturedData->type = $captured->getType() : null;
+            $piece->getIdentity() !== Symbol::ROOK ?: $capturingData->type = $piece->getType();
+            $captured->getIdentity() !== Symbol::ROOK ?: $capturedData->type = $captured->getType();
             $capture = (object) [
                 'capturing' => $capturingData,
                 'captured' => $capturedData,
@@ -737,7 +737,7 @@ final class Board extends \SplObjectStorage
             $pieceClass->newInstanceArgs([
                 $piece->getColor(),
                 $piece->getMove()->position->next,
-                $piece->getIdentity() === Symbol::ROOK ? $piece->getType() : null,
+                $piece->getIdentity() !== Symbol::ROOK ?: $piece->getType(),
             ])
         );
         if ($piece->getIdentity() === Symbol::PAWN) {
@@ -770,21 +770,21 @@ final class Board extends \SplObjectStorage
                 $pieceUndone = $pieceUndoneClass->newInstanceArgs([
                     $prev->move->color,
                     $prev->position,
-                    $piece->getIdentity() === Symbol::ROOK ? $piece->getType() : null, ]
-                );
+                    $piece->getIdentity() !== Symbol::ROOK ?: $piece->getType(),
+                ]);
             }
             $this->attach($pieceUndone);
             if ($prev->move->isCapture && $capture = end($this->captures[$prev->move->color])) {
                 $capturedClass = new \ReflectionClass(Convert::toClassName($capture->captured->identity));
                 $this->attach($capturedClass->newInstanceArgs([
-                        $prev->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
-                        $capture->captured->position,
-                        $capture->captured->identity === Symbol::ROOK ? $capture->captured->type : null,
-                    ])
+                    $prev->move->color === Symbol::WHITE ? Symbol::BLACK : Symbol::WHITE,
+                    $capture->captured->position,
+                    $capture->captured->identity !== Symbol::ROOK ?: $capture->captured->type,
+                  ])
                 );
                 $this->popCapture($prev->move->color);
             }
-            isset($prevCastling) ? $this->castling = $prevCastling : null;
+            !isset($prevCastling) ?: $this->castling = $prevCastling;
             $this->popHistory()->refresh();
         }
 

@@ -132,7 +132,7 @@ class King extends AbstractPiece
         );
 
         foreach($scope as $key => $val) {
-            $scope[$key] = !empty($val[0]) ? $val[0] : null;
+            $scope[$key] = $val[0] ?? null;
         }
 
         $this->scope = (object) array_filter(array_unique($scope));
