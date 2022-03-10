@@ -35,16 +35,17 @@ abstract class AbstractStringToPgn
                 $position = $piece->getPosition();
                 switch ($identity) {
                     case Symbol::KING:
-                        if ($square ===
-                            CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_SHORT]['position']['next']
+                        $rule = CastlingRule::color($color)[Symbol::KING];
+                        if ($square === $rule[Symbol::CASTLING_SHORT]['position']['next'] &&
+                            $this->board->getCastling()[$color][Symbol::CASTLING_SHORT]
                         ) {
                             if ($clone->play($color, Symbol::KING.$square)) {
                                 $legal[] = [
                                     Symbol::CASTLING_SHORT => (new BoardToString($clone))->create()
                                 ];
                             }
-                        } elseif ($square ===
-                            CastlingRule::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['position']['next']
+                        } elseif ($square === $rule[Symbol::CASTLING_LONG]['position']['next'] &&
+                            $this->board->getCastling()[$color][Symbol::CASTLING_LONG]
                         ) {
                             if ($clone->play($color, Symbol::KING.$square)) {
                                 $legal[] = [

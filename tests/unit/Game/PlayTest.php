@@ -551,12 +551,24 @@ class PlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function endgame_checkmate_king_and_rook_vs_king_play()
+    public function endgame_checkmate_king_and_rook_vs_king_01()
     {
         $game = new Game(Game::MODE_LOAD_FEN);
         $game->loadFen('7k/8/8/8/8/8/2K5/r7 w - - 0 1');
 
         $this->assertTrue($game->playFen('7k/8/8/8/8/8/1K6/r7 b'));
         $this->assertTrue($game->playFen('8/6k1/8/8/8/8/1K6/r7 w'));
+    }
+
+    /**
+     * @test
+     */
+    public function endgame_checkmate_king_and_rook_vs_king_02()
+    {
+        $game = new Game(Game::MODE_LOAD_FEN);
+        $game->loadFen('7k/8/8/8/8/8/2K5/r7 w - - 0 1');
+
+        $this->assertTrue($game->playFen('7k/8/8/8/8/2K5/8/r7 b'));
+        $this->assertTrue($game->playFen('6k1/8/8/8/8/2K5/8/r7 w'));
     }
 }

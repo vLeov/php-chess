@@ -291,12 +291,12 @@ class Game
         $this->board = (new Player($movetext))->play()->getBoard();
     }
 
-    public function playFen(string $toShortenedFen)
+    public function playFen(string $toShortFen)
     {
         $fromFen = (new BoardToString($this->board))->create();
 
         $fromPiecePlacement = explode(' ', $fromFen)[0];
-        $toPiecePlacement = explode(' ', $toShortenedFen)[0];
+        $toPiecePlacement = explode(' ', $toShortFen)[0];
         $fromRanks = explode('/', $fromPiecePlacement);
         $toRanks = explode('/', $toPiecePlacement);
 
@@ -326,7 +326,7 @@ class Game
             return Symbol::CASTLING_LONG;
         }
 
-        $pgn = (new ShortStringToPgn($fromFen, $toShortenedFen))->create();
+        $pgn = (new ShortStringToPgn($fromFen, $toShortFen))->create();
         $color = key($pgn);
         $result = current($pgn);
 

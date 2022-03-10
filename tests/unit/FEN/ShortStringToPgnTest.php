@@ -57,4 +57,21 @@ class ShortStringToPgnTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $pgn);
     }
+
+    /**
+     * @test
+     */
+    public function endgame_king_and_rook_vs_king()
+    {
+        $pgn = (new ShortStringToPgn(
+            '7k/8/8/8/8/2K5/8/r7 b - -',
+            '6k1/8/8/8/8/2K5/8/r7 w'
+        ))->create();
+
+        $expected = [
+            'b' => 'Kg8',
+        ];
+
+        $this->assertSame($expected, $pgn);
+    }
 }
