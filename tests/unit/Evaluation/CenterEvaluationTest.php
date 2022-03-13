@@ -19,8 +19,8 @@ class CenterEvaluationTest extends AbstractUnitTestCase
         $board = (new RuyLopezLucenaDefense(new Board()))->play();
 
         $expected = [
-            'w' => 3,
-            'b' => 2,
+            'w' => 37.73,
+            'b' => 34.73,
         ];
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate();
@@ -36,8 +36,8 @@ class CenterEvaluationTest extends AbstractUnitTestCase
         $board = (new OpenSicilian(new Board()))->play();
 
         $expected = [
-            'w' => 5.2,
-            'b' => 2,
+            'w' => 49.0,
+            'b' => 31.4,
         ];
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate();
@@ -53,8 +53,8 @@ class CenterEvaluationTest extends AbstractUnitTestCase
         $board = (new ClosedSicilian(new Board()))->play();
 
         $expected = [
-            'w' => 2,
-            'b' => 2,
+            'w' => 37.73,
+            'b' => 34.73,
         ];
 
         $ctrEvald = (new CenterEvaluation($board))->evaluate();

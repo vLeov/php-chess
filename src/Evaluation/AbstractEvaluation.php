@@ -27,6 +27,7 @@ abstract class AbstractEvaluation
             Symbol::PAWN => 1,
             Symbol::KNIGHT => 3.2,
             Symbol::BISHOP => 3.33,
+            Symbol::KING => 4,
             Symbol::ROOK => 5.1,
             Symbol::QUEEN => 8.8,
         ];
