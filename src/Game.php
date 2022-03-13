@@ -345,7 +345,8 @@ class Game
         $movetext = $this->board->getMovetext();
 
         if ($this->mode === self::MODE_LOAD_FEN) {
-            $heuristicPicture = new HeuristicPicture($movetext, $this->board);
+            $clone = unserialize(serialize($this->board));
+            $heuristicPicture = new HeuristicPicture($movetext, $clone);
         } else {
             $heuristicPicture = new HeuristicPicture($movetext);
         }
