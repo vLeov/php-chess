@@ -340,13 +340,13 @@ class Game
         return false;
     }
 
-    public function heuristicPicture($balanced = false): array
+    public function heuristicPicture($balanced = false, $fen = ''): array
     {
         $movetext = $this->board->getMovetext();
 
         if ($this->mode === self::MODE_LOAD_FEN) {
-            $clone = unserialize(serialize($this->board));
-            $heuristicPicture = new HeuristicPicture($movetext, $clone);
+            $board = (new StringToBoard($fen))->create();
+            $heuristicPicture = new HeuristicPicture($movetext, $board);
         } else {
             $heuristicPicture = new HeuristicPicture($movetext);
         }
