@@ -53,19 +53,18 @@ class HeuristicPictureTest extends AbstractUnitTestCase
      */
     public function kaufman_01_play_Nf6_gxf6()
     {
+        $fen = '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+';
+
         $game = new Game(Game::MODE_LOAD_FEN);
-        $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
+        $game->loadFen($fen);
         $game->play('w', 'Nf6');
         $game->play('b', 'gxf6');
 
-        // in this configuration black has one isolated pawn in h7, white has no isolated pawns
-        // the heuristic picture has an advantage of white in terms of isolated pawns so second-last value
-        // of expected must be 1 instead of -1
         $expected = [
             [ -1, -1, -1, 1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 1, 0, 0, -1, 0, 0 ],
         ];
 
-        $balance = $game->heuristicPicture(true);
+        $balance = $game->heuristicPicture(true, $fen);
 
         $this->assertEquals($expected, $balance);
     }
@@ -75,14 +74,16 @@ class HeuristicPictureTest extends AbstractUnitTestCase
      */
     public function e4_e5_f4_f5_Nc3_Nc6()
     {
+        $fen = 'r1bqkbnr/pppp2pp/2n5/4pp2/4PP2/2N5/PPPP2PP/R1BQKBNR w KQkq - 2 4';
+
         $game = new Game(Game::MODE_LOAD_FEN);
-        $game->loadFen('r1bqkbnr/pppp2pp/2n5/4pp2/4PP2/2N5/PPPP2PP/R1BQKBNR w KQkq - 2 4');
+        $game->loadFen($fen);
 
         $expected = [
             [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $balance = $game->heuristicPicture(true);
+        $balance = $game->heuristicPicture(true, $fen);
 
         $this->assertSame($expected, $balance);
     }
