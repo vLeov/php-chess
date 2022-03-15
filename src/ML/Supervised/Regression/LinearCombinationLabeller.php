@@ -8,6 +8,11 @@ class LinearCombinationLabeller extends AbstractLinearCombinationLabeller
 {
     public function label(array $end)
     {
-        return array_sum($end);
+        $sum = 0;
+        foreach ($end as $key => $val) {
+            $sum += pow(2, $key) * $val;
+        }
+
+        return $sum;
     }
 }
