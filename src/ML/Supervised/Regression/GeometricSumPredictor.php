@@ -8,7 +8,7 @@ use Chess\ML\Supervised\AbstractLinearCombinationPredictor;
 use Chess\PGN\Symbol;
 use Rubix\ML\Datasets\Unlabeled;
 
-class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
+class PermutationPredictor extends AbstractLinearCombinationPredictor
 {
     protected function evaluate(Board $clone): array
     {

@@ -10,7 +10,7 @@ use Chess\PGN\Symbol;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 
-class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
+class PermutationPredictor extends AbstractLinearCombinationPredictor
 {
     public function __construct(Board $board, PersistentModel $estimator)
     {
