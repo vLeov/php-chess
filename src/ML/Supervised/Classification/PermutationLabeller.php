@@ -5,7 +5,7 @@ namespace Chess\ML\Supervised\Classification;
 use Chess\ML\Supervised\AbstractLinearCombinationLabeller;
 use Chess\PGN\Symbol;
 
-class RestrictedPermutationWithRepetitionLabeller extends AbstractLinearCombinationLabeller
+class PermutationLabeller extends AbstractLinearCombinationLabeller
 {
     protected $permutations;
 
