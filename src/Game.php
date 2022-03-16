@@ -12,7 +12,7 @@ use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\ML\Supervised\Regression\PermutationPredictor;
+use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 
@@ -261,7 +261,7 @@ class Game
             if ($response) {
                 return $response;
             } else {
-                $response = (new PermutationPredictor($this->board, $this->estimator))->predict();
+                $response = (new GeometricSumPredictor($this->board, $this->estimator))->predict();
                 return $response;
             }
         } elseif ($this->mode === Game::MODE_GRANDMASTER) {
