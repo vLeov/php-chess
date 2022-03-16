@@ -5,14 +5,14 @@ namespace Chess\Tests\Unit\ML\Supervised\Classification;
 use Chess\Board;
 use Chess\HeuristicPicture;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
-use Chess\ML\Supervised\Classification\LinearCombinationLabeller;
+use Chess\ML\Supervised\Classification\RestrictedPermutationWithRepetitionLabeller;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
 
-class LinearCombinationLabellerTest extends AbstractUnitTestCase
+class RestrictedPermutationWithRepetitionLabellerTest extends AbstractUnitTestCase
 {
     static $permutations;
 
@@ -41,7 +41,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $end = end($balance);
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $expected = [
             'w' => 0,
@@ -66,7 +66,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $end = end($balance);
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $expected = [
             'w' => 0,
@@ -96,7 +96,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             'b' => 2,
         ];
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $this->assertSame($expected, $label);
     }
@@ -121,7 +121,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             'b' => 2,
         ];
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $this->assertSame($expected, $label);
     }
@@ -144,7 +144,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             'b' => 4,
         ];
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $this->assertSame($expected, $label);
     }
@@ -167,7 +167,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             'b' => 2,
         ];
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $this->assertSame($expected, $label);
     }
@@ -190,7 +190,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             'b' => 11,
         ];
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $this->assertSame($expected, $label);
     }
@@ -213,7 +213,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
             'b' => 4,
         ];
 
-        $label = (new LinearCombinationLabeller(self::$permutations))->label($end);
+        $label = (new RestrictedPermutationWithRepetitionLabeller(self::$permutations))->label($end);
 
         $this->assertSame($expected, $label);
     }

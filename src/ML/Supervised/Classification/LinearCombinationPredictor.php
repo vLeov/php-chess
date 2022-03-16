@@ -29,7 +29,7 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
         $balance = (new HeuristicPicture($clone->getMovetext(), $clone))->take()->getBalance();
         $dataset = new Unlabeled($balance);
         $end = end($balance);
-        $label = (new LinearCombinationLabeller($this->permutations))->label($end)[$this->board->getTurn()];
+        $label = (new RestrictedPermutationWithRepetitionLabeller($this->permutations))->label($end)[$this->board->getTurn()];
 
         return [
             'label' => $label,
