@@ -17,7 +17,7 @@ class LinearCombinationPredictor extends AbstractLinearCombinationPredictor
         $end = end($balance);
 
         return [
-            'label' => (new LinearCombinationLabeller())->label($end),
+            'label' => (new GeometricSumLabeller())->label($end),
             'prediction' => current($this->estimator->predict($dataset)),
         ];
     }
