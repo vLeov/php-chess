@@ -25,6 +25,22 @@ abstract class AbstractPredictor
         $this->estimator = $estimator;
     }
 
+    protected function sort(string $color): AbstractPredictor
+    {
+        usort($this->result, function ($a, $b) use ($color) {
+            if ($color === Symbol::WHITE) {
+                $current = (current($b)['label'] <=> current($a)['label']) * 10 +
+                    (current($b)['prediction'] <=> current($a)['prediction']);
+            } else {
+                $current = (current($a)['label'] <=> current($b)['label']) * 10 +
+                    (current($a)['prediction'] <=> current($b)['prediction']);
+            }
+            return $current;
+        });
+
+        return $this;
+    }
+
     public function predict(): string
     {
         $color = $this->board->getTurn();
