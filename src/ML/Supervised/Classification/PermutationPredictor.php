@@ -5,12 +5,12 @@ namespace Chess\ML\Supervised\Classification;
 use Chess\Board;
 use Chess\HeuristicPicture;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
-use Chess\ML\Supervised\AbstractLinearCombinationPredictor;
+use Chess\ML\Supervised\AbstractPredictor;
 use Chess\PGN\Symbol;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Datasets\Unlabeled;
 
-class PermutationPredictor extends AbstractLinearCombinationPredictor
+class PermutationPredictor extends AbstractPredictor
 {
     public function __construct(Board $board, PersistentModel $estimator)
     {
@@ -39,7 +39,7 @@ class PermutationPredictor extends AbstractLinearCombinationPredictor
         ];
     }
 
-    protected function sort(string $color): AbstractLinearCombinationPredictor
+    protected function sort(string $color): AbstractPredictor
     {
         usort($this->result, function ($a, $b) use ($color) {
             if ($color === Symbol::WHITE) {

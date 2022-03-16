@@ -5,7 +5,7 @@ namespace Chess\ML\Supervised;
 use Chess\Board;
 use Rubix\ML\PersistentModel;
 
-abstract class AbstractLinearCombinationPredictor
+abstract class AbstractPredictor
 {
     protected $board;
 
@@ -15,7 +15,7 @@ abstract class AbstractLinearCombinationPredictor
 
     abstract protected function evaluate(Board $clone): array;
 
-    abstract protected function sort(string $color): AbstractLinearCombinationPredictor;
+    abstract protected function sort(string $color): AbstractPredictor;
 
     abstract protected function find(): string;
 
