@@ -4,14 +4,14 @@ namespace Chess\Tests\Unit\ML\Supervised\Regression;
 
 use Chess\Board;
 use Chess\HeuristicPicture;
-use Chess\ML\Supervised\Regression\LinearCombinationLabeller;
+use Chess\ML\Supervised\Regression\GeometricSumLabeller;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
 
-class LinearCombinationLabellerTest extends AbstractUnitTestCase
+class GeometricSumLabellerTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -26,7 +26,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $end = end($balance);
 
-        $label = (new LinearCombinationLabeller())->label($end);
+        $label = (new GeometricSumLabeller())->label($end);
 
         $expected = 0;
 
@@ -46,7 +46,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $end = end($balance);
 
-        $label = (new LinearCombinationLabeller())->label($end);
+        $label = (new GeometricSumLabeller())->label($end);
 
         $expected = -4148.4;
 
@@ -66,7 +66,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $end = end($balance);
 
-        $label = (new LinearCombinationLabeller())->label($end);
+        $label = (new GeometricSumLabeller())->label($end);
 
         $expected = 4132.64;
 
@@ -86,7 +86,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $end = end($balance);
 
-        $label = (new LinearCombinationLabeller())->label($end);
+        $label = (new GeometricSumLabeller())->label($end);
 
         $expected = -1544.35;
 
@@ -106,7 +106,7 @@ class LinearCombinationLabellerTest extends AbstractUnitTestCase
 
         $end = end($balance);
 
-        $label = (new LinearCombinationLabeller())->label($end);
+        $label = (new GeometricSumLabeller())->label($end);
 
         $expected = -3.22;
 

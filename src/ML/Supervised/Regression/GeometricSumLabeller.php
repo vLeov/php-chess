@@ -4,7 +4,7 @@ namespace Chess\ML\Supervised\Regression;
 
 use Chess\ML\Supervised\AbstractLinearCombinationLabeller;
 
-class LinearCombinationLabeller extends AbstractLinearCombinationLabeller
+class GeometricSumLabeller extends AbstractLinearCombinationLabeller
 {
     public function label(array $end)
     {
