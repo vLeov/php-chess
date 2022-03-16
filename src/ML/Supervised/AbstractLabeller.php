@@ -2,7 +2,7 @@
 
 namespace Chess\ML\Supervised;
 
-abstract class AbstractLinearCombinationLabeller
+abstract class AbstractLabeller
 {
     abstract public function label(array $end);
 }

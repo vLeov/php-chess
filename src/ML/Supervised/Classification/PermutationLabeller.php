@@ -2,10 +2,10 @@
 
 namespace Chess\ML\Supervised\Classification;
 
-use Chess\ML\Supervised\AbstractLinearCombinationLabeller;
+use Chess\ML\Supervised\AbstractLabeller;
 use Chess\PGN\Symbol;
 
-class PermutationLabeller extends AbstractLinearCombinationLabeller
+class PermutationLabeller extends AbstractLabeller
 {
     protected $permutations;
 
