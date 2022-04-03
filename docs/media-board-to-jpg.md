@@ -1,4 +1,4 @@
-#### `output(string $filepath)`
+#### `output(string $filepath, string $salt = '')`
 
 Creates a JPG image from a particular `Chess\Board` object.
 
