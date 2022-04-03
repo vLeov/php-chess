@@ -2,9 +2,9 @@
 
 namespace Chess\Media;
 
-class BoardToPng extends AbstractBoardToImg
+class BoardToJpg extends AbstractBoardToImg
 {
-    const EXT = '.png';
+    const EXT = '.jpg';
 
     public function output(string $filepath)
     {

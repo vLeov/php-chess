@@ -12,16 +12,6 @@ Via composer:
 
     $ composer require chesslablab/php-chess
 
-### Documentation
-
-Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
-
-### Demo
-
-PHP Chess is being used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess Server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess).
-
-> Please note the sandbox server might not be up and running all the time.
-
 ### Play Chess
 
 ```php
@@ -34,29 +24,15 @@ $game->play('b', 'e5');
 ```
 The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be run on the board.
 
-### Play Chess With an AI
+### Documentation
 
-Pass the `Game::MODE_AI` parameter when instantiating a `$game`:
+Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
 
-```php
-$game = new Game(Game::MODE_AI);
+### Demo
 
-$game->play('w', 'e4');
-$game->play('b', $game->response());
-$game->play('w', 'e5');
-$game->play('b', $game->response());
-```
+PHP Chess is being used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess Server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess).
 
-The AIs are stored in the [`model`](https://github.com/chesslablab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as a second parameter to the `Chess\Game` constructor:
-
-```php
-$game = new Game(Game::MODE_AI, 'a2.model');
-
-$game->play('w', 'e4');
-$game->play('b', $game->response());
-$game->play('w', 'e5');
-$game->play('b', $game->response());
-```
+> Please note the sandbox server might not be up and running all the time.
 
 ### License
 
