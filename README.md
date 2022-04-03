@@ -22,7 +22,7 @@ $game = new Game();
 $game->play('w', 'e4');
 $game->play('b', 'e5');
 ```
-The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be run on the board.
+The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be made.
 
 ### Documentation
 
