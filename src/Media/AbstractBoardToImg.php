@@ -42,6 +42,15 @@ class AbstractBoardToImg
         return $this;
     }
 
+    public function output(string $filepath, string $salt = '')
+    {
+        $salt ? $filename = $salt.$this->ext : $filename = uniqid().$this->ext;
+
+        $this->chessboard($filepath)->save("{$filepath}/{$filename}");
+
+        return $filename;
+    }
+
     protected function chessboard(string $filepath)
     {
         $chessboard = $this->imagine->open(self::FILEPATH.'/chessboard/'.$this->size.'.png');
