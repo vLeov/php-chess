@@ -31,7 +31,7 @@ class SquareOutpostEvaluation extends AbstractEvaluation
     public function evaluate(): array
     {
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getIdentity() === Symbol::PAWN) {
+            if ($piece->getId() === Symbol::PAWN) {
                 $captureSquares = $piece->getCaptureSquares();
                 if ($piece->getColor() === Symbol::WHITE) {
                     $lFile = chr(ord($piece->getFile()) - 2);
@@ -41,7 +41,7 @@ class SquareOutpostEvaluation extends AbstractEvaluation
                     $rFile = chr(ord($piece->getFile()) - 2);
                     rsort($captureSquares);
                 }
-                if (in_array($piece->getPosition()[1], $this->ranks)) {
+                if (in_array($piece->getSquare()[1], $this->ranks)) {
                     if (!$this->opposition($piece, $piece->getFile())) {
                         if (Validate::file($lFile) && !$this->opposition($piece, $lFile)) {
                             $this->result[$piece->getColor()][] = $captureSquares[0];
@@ -65,14 +65,14 @@ class SquareOutpostEvaluation extends AbstractEvaluation
     protected function opposition(Pawn $pawn, string $file): bool
     {
         for ($i = 2; $i < 8; $i++) {
-            if ($piece = $this->board->getPieceByPosition($file.$i)) {
-                if ($piece->getIdentity() === Symbol::PAWN) {
+            if ($piece = $this->board->getPieceBySq($file.$i)) {
+                if ($piece->getId() === Symbol::PAWN) {
                     if ($pawn->getColor() === Symbol::WHITE) {
-                        if ($pawn->getPosition()[1] + 2 <= $piece->getPosition()[1]) {
+                        if ($pawn->getSquare()[1] + 2 <= $piece->getSquare()[1]) {
                             return true;
                         }
                     } else {
-                        if ($pawn->getPosition()[1] - 2 >= $piece->getPosition()[1]) {
+                        if ($pawn->getSquare()[1] - 2 >= $piece->getSquare()[1]) {
                             return true;
                         }
                     }

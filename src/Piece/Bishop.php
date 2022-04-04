@@ -19,11 +19,11 @@ class Bishop extends Slider
      * Constructor.
      *
      * @param string $color
-     * @param string $square
+     * @param string $sq
      */
-    public function __construct(string $color, string $square)
+    public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $square, Symbol::BISHOP);
+        parent::__construct($color, $sq, Symbol::BISHOP);
 
         $this->scope = (object)[
             'upLeft' => [],
@@ -42,9 +42,9 @@ class Bishop extends Slider
     {
         // top left diagonal
         try {
-            $file = chr(ord($this->position[0]) - 1);
-            $rank = (int)$this->position[1] + 1;
-            while (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = (int)$this->sq[1] + 1;
+            while (Validate::sq($file.$rank)) {
                 $this->scope->upLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
                 $rank = (int)$rank + 1;
@@ -55,9 +55,9 @@ class Bishop extends Slider
 
         // top right diagonal
         try {
-            $file = chr(ord($this->position[0]) + 1);
-            $rank = (int)$this->position[1] + 1;
-            while (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = (int)$this->sq[1] + 1;
+            while (Validate::sq($file.$rank)) {
                 $this->scope->upRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);
                 $rank = (int)$rank + 1;
@@ -68,9 +68,9 @@ class Bishop extends Slider
 
         // bottom left diagonal
         try {
-            $file = chr(ord($this->position[0]) - 1);
-            $rank = (int)$this->position[1] - 1;
-            while (Validate::square($file.$rank))
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = (int)$this->sq[1] - 1;
+            while (Validate::sq($file.$rank))
             {
                 $this->scope->bottomLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
@@ -82,9 +82,9 @@ class Bishop extends Slider
 
         // bottom right diagonal
         try {
-            $file = chr(ord($this->position[0]) + 1);
-            $rank = (int)$this->position[1] - 1;
-            while (Validate::square($file.$rank))
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = (int)$this->sq[1] - 1;
+            while (Validate::sq($file.$rank))
             {
                 $this->scope->bottomRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);

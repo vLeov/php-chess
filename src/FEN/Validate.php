@@ -44,13 +44,13 @@ class Validate
         );
     }
 
-    public static function square(string $square): string
+    public static function sq(string $sq): string
     {
-        if ('-' === $square) {
-            return $square;
+        if ('-' === $sq) {
+            return $sq;
         }
 
-        return PgnValidate::square($square);
+        return PgnValidate::sq($sq);
     }
 
     public static function fen(string $string): string
@@ -60,7 +60,7 @@ class Validate
         self::pieces($fields[0]);
         self::color($fields[1]);
         self::castling($fields[2]);
-        self::square($fields[3]);
+        self::sq($fields[3]);
 
         return $string;
     }

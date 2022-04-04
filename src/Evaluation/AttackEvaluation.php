@@ -28,29 +28,29 @@ class AttackEvaluation extends AbstractEvaluation
     public function evaluate(): array
     {
         foreach ($this->board->getPieces() as $piece) {
-            switch ($piece->getIdentity()) {
+            switch ($piece->getId()) {
                 case Symbol::KING:
                     // TODO ...
                     break;
                 case Symbol::PAWN:
-                    foreach ($piece->getCaptureSquares() as $square) {
-                        if ($item = $this->board->getPieceByPosition($square)) {
+                    foreach ($piece->getCaptureSquares() as $sq) {
+                        if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
-                                $identity = $item->getIdentity();
-                                if ($identity !== Symbol::KING && $this->value[Symbol::PAWN] < $this->value[$identity]) {
-                                    $this->result[$piece->getColor()] += $this->value[$identity] - $this->value[Symbol::PAWN];
+                                $id = $item->getId();
+                                if ($id !== Symbol::KING && $this->value[Symbol::PAWN] < $this->value[$id]) {
+                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[Symbol::PAWN];
                                 }
                             }
                         }
                     }
                     break;
                 default:
-                    foreach ($piece->getLegalMoves() as $square) {
-                        if ($item = $this->board->getPieceByPosition($square)) {
+                    foreach ($piece->getSquares() as $sq) {
+                        if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
-                                $identity = $item->getIdentity();
-                                if ($identity !== Symbol::KING && $this->value[$piece->getIdentity()] < $this->value[$identity]) {
-                                    $this->result[$piece->getColor()] += $this->value[$identity] - $this->value[$piece->getIdentity()];
+                                $id = $item->getId();
+                                if ($id !== Symbol::KING && $this->value[$piece->getId()] < $this->value[$id]) {
+                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[$piece->getId()];
                                 }
                             }
                         }

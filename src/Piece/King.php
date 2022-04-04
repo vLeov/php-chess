@@ -2,7 +2,7 @@
 
 namespace Chess\Piece;
 
-use Chess\Castling\Rule as CastlingRule;
+use Chess\Castling;
 use Chess\PGN\Symbol;
 use Chess\Piece\AbstractPiece;
 use Chess\Piece\Rook;
@@ -31,32 +31,32 @@ class King extends AbstractPiece
      * Constructor.
      *
      * @param string $color
-     * @param string $square
+     * @param string $sq
      */
-    public function __construct(string $color, string $square)
+    public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $square, Symbol::KING);
+        parent::__construct($color, $sq, Symbol::KING);
 
-        $this->rook = new Rook($color, $square, RookType::FAKED);
-        $this->bishop = new Bishop($color, $square);
+        $this->rook = new Rook($color, $sq, RookType::FAKED);
+        $this->bishop = new Bishop($color, $sq);
 
         $this->scope();
     }
 
     protected function moveCastlingLong()
     {
-        $rule = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_LONG];
-        if (!$this->board->getCastling()[$this->getColor()]['castled']) {
+        $rule = Castling::color($this->getColor())[Symbol::KING][Symbol::CASTLING_LONG];
+        if (!$this->board->getCastling()[$this->getColor()]['isCastled']) {
             if ($this->board->getCastling()[$this->getColor()][Symbol::CASTLING_LONG]) {
                 if (
-                    in_array($rule['squares']['b'], $this->board->getSquares()->free) &&
-                    in_array($rule['squares']['c'], $this->board->getSquares()->free) &&
-                    in_array($rule['squares']['d'], $this->board->getSquares()->free) &&
-                    !in_array($rule['squares']['b'], $this->board->getSpace()->{$this->getOppColor()}) &&
-                    !in_array($rule['squares']['c'], $this->board->getSpace()->{$this->getOppColor()}) &&
-                    !in_array($rule['squares']['d'], $this->board->getSpace()->{$this->getOppColor()})
+                    in_array($rule['sqs']['b'], $this->board->getSquares()->free) &&
+                    in_array($rule['sqs']['c'], $this->board->getSquares()->free) &&
+                    in_array($rule['sqs']['d'], $this->board->getSquares()->free) &&
+                    !in_array($rule['sqs']['b'], $this->board->getSpace()->{$this->getOppColor()}) &&
+                    !in_array($rule['sqs']['c'], $this->board->getSpace()->{$this->getOppColor()}) &&
+                    !in_array($rule['sqs']['d'], $this->board->getSpace()->{$this->getOppColor()})
                 ) {
-                    return $rule['position']['next'];
+                    return $rule['sq']['next'];
                 }
             }
         }
@@ -66,16 +66,16 @@ class King extends AbstractPiece
 
     protected function moveCastlingShort()
     {
-        $rule = CastlingRule::color($this->getColor())[Symbol::KING][Symbol::CASTLING_SHORT];
-        if (!$this->board->getCastling()[$this->getColor()]['castled']) {
+        $rule = Castling::color($this->getColor())[Symbol::KING][Symbol::CASTLING_SHORT];
+        if (!$this->board->getCastling()[$this->getColor()]['isCastled']) {
             if ($this->board->getCastling()[$this->getColor()][Symbol::CASTLING_SHORT]) {
                 if (
-                    in_array($rule['squares']['f'], $this->board->getSquares()->free) &&
-                    in_array($rule['squares']['g'], $this->board->getSquares()->free) &&
-                    !in_array($rule['squares']['f'], $this->board->getSpace()->{$this->getOppColor()}) &&
-                    !in_array($rule['squares']['g'], $this->board->getSpace()->{$this->getOppColor()})
+                    in_array($rule['sqs']['f'], $this->board->getSquares()->free) &&
+                    in_array($rule['sqs']['g'], $this->board->getSquares()->free) &&
+                    !in_array($rule['sqs']['f'], $this->board->getSpace()->{$this->getOppColor()}) &&
+                    !in_array($rule['sqs']['g'], $this->board->getSpace()->{$this->getOppColor()})
                 ) {
-                    return $rule['position']['next'];
+                    return $rule['sq']['next'];
                 }
             }
         }
@@ -108,11 +108,11 @@ class King extends AbstractPiece
      */
     public function getCastlingRook(array $pieces)
     {
-        $rule = CastlingRule::color($this->getColor())[Symbol::ROOK];
+        $rule = Castling::color($this->getColor())[Symbol::ROOK];
         foreach ($pieces as $piece) {
             if (
-                $piece->getIdentity() === Symbol::ROOK &&
-                $piece->getPosition() === $rule[rtrim($this->getMove()->pgn, '+')]['position']['current']
+                $piece->getId() === Symbol::ROOK &&
+                $piece->getSquare() === $rule[rtrim($this->getMove()->pgn, '+')]['sq']['current']
             ) {
                 return $piece;
             }
@@ -143,27 +143,27 @@ class King extends AbstractPiece
      *
      * @return array
      */
-    public function getLegalMoves(): array
+    public function getSquares(): array
     {
-        $legalMoves = array_merge(
+        $sqs = array_merge(
             $this->movesKing(),
             $this->movesCaptures(),
             [$this->moveCastlingLong()],
             [$this->moveCastlingShort()]
         );
 
-        return array_filter($legalMoves);
+        return array_filter($sqs);
     }
 
     public function getDefendedSquares(): array
     {
-        $squares = [];
-        foreach ($this->scope as $square) {
-            if (in_array($square, $this->board->getSquares()->used->{$this->getColor()})) {
-                $squares[] = $square;
+        $sqs = [];
+        foreach ($this->scope as $sq) {
+            if (in_array($sq, $this->board->getSquares()->used->{$this->getColor()})) {
+                $sqs[] = $sq;
             }
         }
 
-        return $squares;
+        return $sqs;
     }
 }

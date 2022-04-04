@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\PGN;
 
-use Chess\Castling\Rule as CastlingRule;
+use Chess\Castling;
 use Chess\PGN\Convert;
 use Chess\PGN\Move;
 use Chess\PGN\Symbol;
@@ -17,7 +17,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('w', 'Ua5');
+        Convert::toStdClass('w', 'Ua5');
     }
 
     /**
@@ -27,7 +27,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('b', 'foo5');
+        Convert::toStdClass('b', 'foo5');
     }
 
     /**
@@ -37,7 +37,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('w', 'cb3b7');
+        Convert::toStdClass('w', 'cb3b7');
     }
 
     /**
@@ -47,7 +47,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('b', 'a-a');
+        Convert::toStdClass('b', 'a-a');
     }
 
     /**
@@ -57,7 +57,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('w', 'c-c-c');
+        Convert::toStdClass('w', 'c-c-c');
     }
 
     /**
@@ -67,7 +67,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('b', 'a');
+        Convert::toStdClass('b', 'a');
     }
 
     /**
@@ -77,7 +77,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('w', 3);
+        Convert::toStdClass('w', 3);
     }
 
     /**
@@ -87,7 +87,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('b', 'K3');
+        Convert::toStdClass('b', 'K3');
     }
 
     /**
@@ -97,7 +97,7 @@ class ConvertTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        Convert::toStdObj('w', 'Fxa7');
+        Convert::toStdClass('w', 'Fxa7');
     }
 
     /**
@@ -112,14 +112,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PIECE,
             'color' => 'w',
-            'identity' => Symbol::BISHOP,
-            'position' => (object) [
+            'id' => Symbol::BISHOP,
+            'sq' => (object) [
                 'current' => null,
                 'next' =>'g5'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('w', $move), $example);
+        $this->assertEquals(Convert::toStdClass('w', $move), $example);
     }
 
     /**
@@ -134,14 +134,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PIECE,
             'color' => 'b',
-            'identity' => Symbol::ROOK,
-            'position' => (object) [
+            'id' => Symbol::ROOK,
+            'sq' => (object) [
                 'current' => null,
                 'next' => 'a5'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('b', $move), $example);
+        $this->assertEquals(Convert::toStdClass('b', $move), $example);
     }
 
     /**
@@ -156,14 +156,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PIECE,
             'color' => 'b',
-            'identity' => Symbol::QUEEN,
-            'position' => (object) [
+            'id' => Symbol::QUEEN,
+            'sq' => (object) [
                 'current' => 'b',
                 'next' => 'b7'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('b', $move), $example);
+        $this->assertEquals(Convert::toStdClass('b', $move), $example);
     }
 
     /**
@@ -178,14 +178,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::KNIGHT,
             'color' => 'b',
-            'identity' => Symbol::KNIGHT,
-            'position' => (object) [
+            'id' => Symbol::KNIGHT,
+            'sq' => (object) [
                 'current' => 'd',
                 'next' => 'b4'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('b', $move), $example);
+        $this->assertEquals(Convert::toStdClass('b', $move), $example);
     }
 
     /**
@@ -200,14 +200,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::KING,
             'color' => 'w',
-            'identity' => Symbol::KING,
-            'position' => (object) [
+            'id' => Symbol::KING,
+            'sq' => (object) [
                 'current' => null,
                 'next' => 'g7'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('w', $move), $example);
+        $this->assertEquals(Convert::toStdClass('w', $move), $example);
     }
 
     /**
@@ -222,14 +222,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PIECE,
             'color' => 'b',
-            'identity' => Symbol::QUEEN,
-            'position' => (object) [
+            'id' => Symbol::QUEEN,
+            'sq' => (object) [
                 'current' => 'h8',
                 'next' => 'g7'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('b', $move), $example);
+        $this->assertEquals(Convert::toStdClass('b', $move), $example);
     }
 
     /**
@@ -244,14 +244,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PAWN,
             'color' => 'w',
-            'identity' => Symbol::PAWN,
-            'position' => (object) [
+            'id' => Symbol::PAWN,
+            'sq' => (object) [
                 'current' => 'c',
                 'next' => 'c3'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('w', $move), $example);
+        $this->assertEquals(Convert::toStdClass('w', $move), $example);
     }
 
     /**
@@ -266,14 +266,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PAWN,
             'color' => 'w',
-            'identity' => Symbol::PAWN,
-            'position' => (object) [
+            'id' => Symbol::PAWN,
+            'sq' => (object) [
                 'current' => 'h',
                 'next' => 'h3'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('w', $move), $example);
+        $this->assertEquals(Convert::toStdClass('w', $move), $example);
     }
 
     /**
@@ -288,11 +288,11 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::KING_CASTLING_SHORT,
             'color' => 'w',
-            'identity' => 'K',
-            'position' => (object) CastlingRule::color('w')[Symbol::KING][Symbol::CASTLING_SHORT]['position']
+            'id' => 'K',
+            'sq' => (object) Castling::color('w')[Symbol::KING][Symbol::CASTLING_SHORT]['sq']
         ];
 
-        $this->assertEquals(Convert::toStdObj('w', $move), $example);
+        $this->assertEquals(Convert::toStdClass('w', $move), $example);
     }
 
     /**
@@ -307,11 +307,11 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::KING_CASTLING_LONG,
             'color' => 'w',
-            'identity' => 'K',
-            'position' => (object) CastlingRule::color('w')[Symbol::KING][Symbol::CASTLING_LONG]['position']
+            'id' => 'K',
+            'sq' => (object) Castling::color('w')[Symbol::KING][Symbol::CASTLING_LONG]['sq']
         ];
 
-        $this->assertEquals(Convert::toStdObj('w', $move), $example);
+        $this->assertEquals(Convert::toStdClass('w', $move), $example);
     }
 
     /**
@@ -326,14 +326,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PAWN_CAPTURES,
             'color' => 'b',
-            'identity' => Symbol::PAWN,
-            'position' => (object) [
+            'id' => Symbol::PAWN,
+            'sq' => (object) [
                 'current' => 'f',
                 'next' => 'g5'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('b', $move), $example);
+        $this->assertEquals(Convert::toStdClass('b', $move), $example);
     }
 
     /**
@@ -348,14 +348,14 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::KNIGHT_CAPTURES,
             'color' => 'b',
-            'identity' => Symbol::KNIGHT,
-            'position' => (object) [
+            'id' => Symbol::KNIGHT,
+            'sq' => (object) [
                 'current' => null,
                 'next' => 'e4'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('b', $move), $example);
+        $this->assertEquals(Convert::toStdClass('b', $move), $example);
     }
 
     /**
@@ -370,13 +370,13 @@ class ConvertTest extends AbstractUnitTestCase
             'isCheck' => false,
             'type' => Move::PIECE_CAPTURES,
             'color' => 'b',
-            'identity' => Symbol::QUEEN,
-            'position' => (object) [
+            'id' => Symbol::QUEEN,
+            'sq' => (object) [
                 'current' => '7',
                 'next' => 'g7'
             ]
         ];
 
-        $this->assertEquals(Convert::toStdObj('b', $move), $example);
+        $this->assertEquals(Convert::toStdClass('b', $move), $example);
     }
 }

@@ -38,11 +38,11 @@ abstract class AbstractPiece implements Piece
     protected $scope = [];
 
     /**
-     * The piece's identity in PGN format.
+     * The piece's id in PGN format.
      *
      * @var string
      */
-    protected $identity;
+    protected $id;
 
     /**
      * The piece's next move to be performed on the board.
@@ -52,11 +52,11 @@ abstract class AbstractPiece implements Piece
     protected $move;
 
     /**
-     * The legal moves that the piece can carry out.
+     * The squares where the piece can be placed on.
      *
      * @var array
      */
-    protected $legalMoves;
+    protected $sqs;
 
     /**
      * The chessboard.
@@ -69,22 +69,22 @@ abstract class AbstractPiece implements Piece
      * Constructor.
      *
      * @param string $color
-     * @param string $square
-     * @param string $identity
+     * @param string $sq
+     * @param string $id
      */
-    public function __construct(string $color, string $square, string $identity)
+    public function __construct(string $color, string $sq, string $id)
     {
         $this->color = Validate::color($color);
-        $this->position = Validate::square($square);
-        $this->identity = $identity;
+        $this->sq = Validate::sq($sq);
+        $this->id = $id;
     }
 
     /**
-     * Gets the legal moves that a piece can perform on the board.
+     * Gets the squares where the piece can be placed on.
      *
-     * @return array The legal moves that the piece can perform.
+     * @return array The piece's legal squares.
      */
-    abstract public function getLegalMoves(): array;
+    abstract public function getSquares(): array;
 
     /**
      * Calculates the piece's scope.
@@ -108,11 +108,7 @@ abstract class AbstractPiece implements Piece
      */
     public function getOppColor(): string
     {
-        if ($this->color == Symbol::WHITE) {
-            return Symbol::BLACK;
-        } else {
-            return Symbol::WHITE;
-        }
+        return Symbol::oppColor($this->color);
     }
 
     /**
@@ -120,9 +116,9 @@ abstract class AbstractPiece implements Piece
      *
      * @return string
      */
-    public function getPosition(): string
+    public function getSquare(): string
     {
-        return $this->position;
+        return $this->sq;
     }
 
     /**
@@ -136,13 +132,13 @@ abstract class AbstractPiece implements Piece
     }
 
     /**
-     * Gets the piece's identity.
+     * Gets the piece's id.
      *
      * @return string
      */
-    public function getIdentity(): string
+    public function getId(): string
     {
-        return $this->identity;
+        return $this->id;
     }
 
     /**
@@ -175,9 +171,9 @@ abstract class AbstractPiece implements Piece
     public function isMovable(): bool
     {
         if (isset($this->move)) {
-            return in_array($this->move->position->next, $this->getLegalMoves());
-        } else {
-            return false;
+            return in_array($this->move->sq->next, $this->getSquares());
         }
+
+        return false;
     }
 }

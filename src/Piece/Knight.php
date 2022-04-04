@@ -19,11 +19,11 @@ class Knight extends AbstractPiece
      * Constructor.
      *
      * @param string $color
-     * @param string $square
+     * @param string $sq
      */
-    public function __construct(string $color, string $square)
+    public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $square, Symbol::KNIGHT);
+        parent::__construct($color, $sq, Symbol::KNIGHT);
 
         $this->scope = (object)[
             'jumps' => []
@@ -38,9 +38,9 @@ class Knight extends AbstractPiece
     protected function scope(): void
     {
         try {
-            $file = chr(ord($this->position[0]) - 1);
-            $rank = (int)$this->position[1] + 2;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = (int)$this->sq[1] + 2;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -48,9 +48,9 @@ class Knight extends AbstractPiece
         }
 
         try {
-            $file = chr(ord($this->position[0]) - 2);
-            $rank = (int)$this->position[1] + 1;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) - 2);
+            $rank = (int)$this->sq[1] + 1;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -58,9 +58,9 @@ class Knight extends AbstractPiece
         }
 
         try {
-            $file = chr(ord($this->position[0]) - 2);
-            $rank = (int)$this->position[1] - 1;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) - 2);
+            $rank = (int)$this->sq[1] - 1;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -68,9 +68,9 @@ class Knight extends AbstractPiece
         }
 
         try {
-            $file = chr(ord($this->position[0]) - 1);
-            $rank = (int)$this->position[1] - 2;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = (int)$this->sq[1] - 2;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -78,9 +78,9 @@ class Knight extends AbstractPiece
         }
 
         try {
-            $file = chr(ord($this->position[0]) + 1);
-            $rank = (int)$this->position[1] - 2;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = (int)$this->sq[1] - 2;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -89,9 +89,9 @@ class Knight extends AbstractPiece
 
         try {
 
-            $file = chr(ord($this->position[0]) + 2);
-            $rank = (int)$this->position[1] - 1;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) + 2);
+            $rank = (int)$this->sq[1] - 1;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -99,9 +99,9 @@ class Knight extends AbstractPiece
         }
 
         try {
-            $file = chr(ord($this->position[0]) + 2);
-            $rank = (int)$this->position[1] + 1;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) + 2);
+            $rank = (int)$this->sq[1] + 1;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -109,9 +109,9 @@ class Knight extends AbstractPiece
         }
 
         try {
-            $file = chr(ord($this->position[0]) + 1);
-            $rank = (int)$this->position[1] + 2;
-            if (Validate::square($file.$rank)) {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = (int)$this->sq[1] + 2;
+            if (Validate::sq($file.$rank)) {
                 $this->scope->jumps[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -120,14 +120,14 @@ class Knight extends AbstractPiece
 
     }
 
-    public function getLegalMoves(): array
+    public function getSquares(): array
     {
         $moves = [];
-        foreach ($this->scope->jumps as $square) {
-            if (in_array($square, $this->board->getSquares()->free)) {
-                $moves[] = $square;
-            } elseif (in_array($square, $this->board->getSquares()->used->{$this->getOppColor()})) {
-                $moves[] = $square;
+        foreach ($this->scope->jumps as $sq) {
+            if (in_array($sq, $this->board->getSquares()->free)) {
+                $moves[] = $sq;
+            } elseif (in_array($sq, $this->board->getSquares()->used->{$this->getOppColor()})) {
+                $moves[] = $sq;
             }
         }
 
@@ -136,13 +136,13 @@ class Knight extends AbstractPiece
 
     public function getDefendedSquares(): array
     {
-        $squares = [];
-        foreach ($this->scope->jumps as $square) {
-            if (in_array($square, $this->board->getSquares()->used->{$this->getColor()})) {
-                $squares[] = $square;
+        $sqs = [];
+        foreach ($this->scope->jumps as $sq) {
+            if (in_array($sq, $this->board->getSquares()->used->{$this->getColor()})) {
+                $sqs[] = $sq;
             }
         }
 
-        return $squares;
+        return $sqs;
     }
 }

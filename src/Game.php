@@ -109,8 +109,8 @@ class Game
             $history[] = (object) [
                 'pgn' => $entry->move->pgn,
                 'color' => $entry->move->color,
-                'identity' => $entry->move->identity,
-                'position' => $entry->position,
+                'id' => $entry->move->id,
+                'sq' => $entry->sq,
                 'isCapture' => $entry->move->isCapture,
                 'isCheck' => $entry->move->isCheck,
             ];
@@ -153,9 +153,9 @@ class Game
 
         foreach ($pieces as $piece) {
             $result[] = (object) [
-                'identity' => $piece->getIdentity(),
-                'position' => $piece->getPosition(),
-                'moves' => $piece->getLegalMoves(),
+                'id' => $piece->getId(),
+                'sq' => $piece->getSquare(),
+                'moves' => $piece->getSquares(),
             ];
         }
 
@@ -165,48 +165,48 @@ class Game
     /**
      * Gets a piece by its position on the board.
      *
-     * @param string $square
+     * @param string $sq
      * @return mixed null|\stdClass
      */
-    public function piece(string $square): ?\stdClass
+    public function piece(string $sq): ?\stdClass
     {
-        if ($piece = $this->board->getPieceByPosition(Validate::square($square))) {
+        if ($piece = $this->board->getPieceBySq(Validate::sq($sq))) {
             $moves = [];
             $color = $piece->getColor();
-            foreach ($piece->getLegalMoves() as $square) {
+            foreach ($piece->getSquares() as $sq) {
                 $clone = unserialize(serialize($this->board));
-                switch ($piece->getIdentity()) {
+                switch ($piece->getId()) {
                     case Symbol::KING:
-                        if ($clone->play($color, Symbol::KING.$square)) {
-                            $moves[] = $square;
-                        } elseif ($clone->play($color, Symbol::KING.'x'.$square)) {
-                            $moves[] = $square;
+                        if ($clone->play($color, Symbol::KING.$sq)) {
+                            $moves[] = $sq;
+                        } elseif ($clone->play($color, Symbol::KING.'x'.$sq)) {
+                            $moves[] = $sq;
                         }
                         break;
                     case Symbol::PAWN:
-                        if ($clone->play($color, $piece->getFile()."x$square")) {
-                            $moves[] = $square;
-                        } elseif ($clone->play($color, $square)) {
-                            $moves[] = $square;
+                        if ($clone->play($color, $piece->getFile()."x$sq")) {
+                            $moves[] = $sq;
+                        } elseif ($clone->play($color, $sq)) {
+                            $moves[] = $sq;
                         }
                         break;
                     default:
-                        if ($clone->play($color, $piece->getIdentity().$square)) {
-                            $moves[] = $square;
-                        } elseif ($clone->play($color, "{$piece->getIdentity()}x$square")) {
-                            $moves[] = $square;
+                        if ($clone->play($color, $piece->getId().$sq)) {
+                            $moves[] = $sq;
+                        } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
+                            $moves[] = $sq;
                         }
                         break;
                 }
             }
             $result = [
                 'color' => $color,
-                'identity' => $piece->getIdentity(),
-                'position' => $piece->getPosition(),
+                'id' => $piece->getId(),
+                'sq' => $piece->getSquare(),
                 'moves' => $moves,
             ];
-            if ($piece->getIdentity() === Symbol::PAWN) {
-                if ($enPassant = $piece->getEnPassantSquare()) {
+            if ($piece->getId() === Symbol::PAWN) {
+                if ($enPassant = $piece->getEnPassantSq()) {
                     $result['enPassant'] = $enPassant;
                 }
             }

@@ -25,7 +25,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
             /** @var Pawn $piece */
-            if ($piece->getIdentity() === Symbol::PAWN) {
+            if ($piece->getId() === Symbol::PAWN) {
                 $this->result[ $color ] += $this->getThreatPassedPawn($piece);
             }
         }
@@ -41,7 +41,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
         $prevFile = chr(ord($pawnFile) - 1);
         $nextFile = chr(ord($pawnFile) + 1);
 
-        $squares = [];
+        $sqs = [];
         foreach ([ $prevFile, $pawnFile, $nextFile ] as $file) {
             if ($file < 'a' || $file > 'h') {
                 continue;
@@ -51,22 +51,22 @@ class PassedPawnEvaluation extends AbstractEvaluation
             } else {
                 $listRanks = range($ranks->next, $ranks->promotion + 1);
             }
-            $squaresFile = array_map(function($rank) use ($file){
+            $sqsFile = array_map(function($rank) use ($file){
                 return $file . $rank;
             }, $listRanks);
-            $squares = array_merge($squares, $squaresFile);
+            $sqs = array_merge($sqs, $sqsFile);
         }
         $passedPawn = true;
-        foreach ($squares as $square) {
-            if ($nextPiece = $this->board->getPieceByPosition($square)) {
-                if ($nextPiece->getIdentity() === Symbol::PAWN && $nextPiece->getColor() !== $color) {
+        foreach ($sqs as $sq) {
+            if ($nextPiece = $this->board->getPieceBySq($sq)) {
+                if ($nextPiece->getId() === Symbol::PAWN && $nextPiece->getColor() !== $color) {
                     $passedPawn = false;
                     break;
                 }
             }
         }
         if ($passedPawn) {
-            $position = $pawn->getPosition();
+            $position = $pawn->getSquare();
             if ($color === Symbol::WHITE) {
                 return $position[ 1 ];
             } else {
