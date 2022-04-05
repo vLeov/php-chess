@@ -1,16 +1,18 @@
+`Chess\Board` object to FEN string.
+
 #### `create(): string`
 
-Creates a FEN string from a `Chess\Board`.
+Creates a FEN string.
 
 ```php
 use Chess\Board;
-use Chess\FEN\BoardToString;
+use Chess\FEN\BoardToStr;
 
 $board = new Board();
 $board->play('w', 'e4');
 $board->play('b', 'e5');
 
-$string = (new BoardToString($board))->create();
+$string = (new BoardToStr($board))->create();
 
 print_r($string);
 ```

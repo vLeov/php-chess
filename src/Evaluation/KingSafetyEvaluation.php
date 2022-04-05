@@ -27,30 +27,30 @@ class KingSafetyEvaluation extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(): array
+    public function eval(): array
     {
-        $pressEvald = (new PressureEvaluation($this->board))->evaluate();
-        $spEvald = (new SpaceEvaluation($this->board))->evaluate();
+        $pressEval = (new PressureEvaluation($this->board))->eval();
+        $spEval = (new SpaceEvaluation($this->board))->eval();
 
-        $this->color(Symbol::WHITE, $pressEvald, $spEvald);
-        $this->color(Symbol::BLACK, $pressEvald, $spEvald);
+        $this->color(Symbol::WHITE, $pressEval, $spEval);
+        $this->color(Symbol::BLACK, $pressEval, $spEval);
 
         return $this->result;
     }
 
-    private function color(string $color, array $pressEvald, array $spEvald)
+    private function color(string $color, array $pressEval, array $spEval)
     {
-        $king = $this->board->getPiece($color, Symbol::KING);
-        foreach ($king->getScope() as $key => $sq) {
+        $king = $this->board->getPiece($color, Symbol::K);
+        foreach ($king->getTravel() as $key => $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
                 if ($piece->getColor() === $king->getOppColor()) {
                     $this->result[$color] -= 1;
                 }
             }
-            if (in_array($sq, $pressEvald[$king->getOppColor()])) {
+            if (in_array($sq, $pressEval[$king->getOppColor()])) {
                 $this->result[$color] -= 1;
             }
-            if (in_array($sq, $spEvald[$king->getOppColor()])) {
+            if (in_array($sq, $spEval[$king->getOppColor()])) {
                 $this->result[$color] -= 1;
             }
         }

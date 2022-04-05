@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\SquareEvaluation;
+use Chess\Evaluation\SqEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -16,17 +16,17 @@ class SpaceEvaluation extends AbstractEvaluation
 {
     const NAME = 'space';
 
-    private $sqEvald;
+    private $sqEval;
 
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
-        $sqEval = new SquareEvaluation($board);
+        $sqEval = new SqEvaluation($board);
 
-        $this->sqEvald = [
-            SquareEvaluation::FEATURE_FREE => $sqEval->evaluate(SquareEvaluation::FEATURE_FREE),
-            SquareEvaluation::FEATURE_USED => $sqEval->evaluate(SquareEvaluation::FEATURE_USED),
+        $this->sqEval = [
+            SqEvaluation::TYPE_FREE => $sqEval->eval(SqEvaluation::TYPE_FREE),
+            SqEvaluation::TYPE_USED => $sqEval->eval(SqEvaluation::TYPE_USED),
         ];
 
         $this->result = [
@@ -35,7 +35,7 @@ class SpaceEvaluation extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(): array
+    public function eval(): array
     {
         $this->result = [
             Symbol::WHITE => [],
@@ -46,26 +46,26 @@ class SpaceEvaluation extends AbstractEvaluation
         while ($this->board->valid()) {
             $piece = $this->board->current();
             switch ($piece->getId()) {
-                case Symbol::KING:
+                case Symbol::K:
                     $this->result[$piece->getColor()] = array_unique(
                         array_merge(
                             $this->result[$piece->getColor()],
                             array_values(
                                 array_intersect(
-                                    array_values((array) $piece->getScope()),
-                                    $this->sqEvald[SquareEvaluation::FEATURE_FREE]
+                                    array_values((array) $piece->getTravel()),
+                                    $this->sqEval[SqEvaluation::TYPE_FREE]
                                 )
                             )
                         )
                     );
                     break;
-                case Symbol::PAWN:
+                case Symbol::P:
                     $this->result[$piece->getColor()] = array_unique(
                         array_merge(
                             $this->result[$piece->getColor()],
                             array_intersect(
                                 $piece->getCaptureSquares(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_FREE]
+                                $this->sqEval[SqEvaluation::TYPE_FREE]
                             )
                         )
                     );
@@ -75,8 +75,8 @@ class SpaceEvaluation extends AbstractEvaluation
                         array_merge(
                             $this->result[$piece->getColor()],
                             array_diff(
-                                $piece->getSquares(),
-                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
+                                $piece->getSqs(),
+                                $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                             )
                         )
                     );

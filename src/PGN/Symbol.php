@@ -3,7 +3,7 @@
 namespace Chess\PGN;
 
 /**
- * Symbols in PGN format.
+ * PGN symbols.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -13,15 +13,15 @@ class Symbol
     const WHITE = 'w';
     const BLACK = 'b';
 
-    const BISHOP = 'B';
-    const KING = 'K';
-    const KNIGHT = 'N';
-    const PAWN = 'P';
-    const QUEEN = 'Q';
-    const ROOK = 'R';
+    const B = 'B';
+    const K = 'K';
+    const N = 'N';
+    const P = 'P';
+    const Q = 'Q';
+    const R = 'R';
 
-    const CASTLING_SHORT = 'O-O';
-    const CASTLING_LONG = 'O-O-O';
+    const O_O = 'O-O';
+    const O_O_O = 'O-O-O';
     const SQUARE = '[a-h]{1}[1-8]{1}';
     const CHECK = '[\+\#]{0,1}';
 
@@ -29,19 +29,4 @@ class Symbol
     const RESULT_BLACK_WINS = '0-1';
     const RESULT_DRAW = '1/2-1/2';
     const RESULT_UNKNOWN = '*';
-
-    /**
-     * Gets the opposite color.
-     *
-     * @param string $color
-     * @return type
-     */
-    public static function oppColor(?string $color): string
-    {
-        if ($color == Symbol::WHITE) {
-            return Symbol::BLACK;
-        }
-
-        return Symbol::WHITE;
-    }
 }

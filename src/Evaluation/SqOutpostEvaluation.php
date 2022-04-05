@@ -8,11 +8,11 @@ use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
 
 /**
- * SquareOutpostEvaluation
+ * SqOutpostEvaluation
  *
  * @link https://en.wikipedia.org/wiki/Outpost_(chess)
  */
-class SquareOutpostEvaluation extends AbstractEvaluation
+class SqOutpostEvaluation extends AbstractEvaluation
 {
     const NAME = 'square_outpost';
 
@@ -28,10 +28,10 @@ class SquareOutpostEvaluation extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(): array
+    public function eval(): array
     {
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() === Symbol::PAWN) {
+            if ($piece->getId() === Symbol::P) {
                 $captureSquares = $piece->getCaptureSquares();
                 if ($piece->getColor() === Symbol::WHITE) {
                     $lFile = chr(ord($piece->getFile()) - 2);
@@ -66,7 +66,7 @@ class SquareOutpostEvaluation extends AbstractEvaluation
     {
         for ($i = 2; $i < 8; $i++) {
             if ($piece = $this->board->getPieceBySq($file.$i)) {
-                if ($piece->getId() === Symbol::PAWN) {
+                if ($piece->getId() === Symbol::P) {
                     if ($pawn->getColor() === Symbol::WHITE) {
                         if ($pawn->getSquare()[1] + 2 <= $piece->getSquare()[1]) {
                             return true;

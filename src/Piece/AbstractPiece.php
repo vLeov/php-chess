@@ -3,7 +3,7 @@
 namespace Chess\Piece;
 
 use Chess\Piece\Piece;
-use Chess\PGN\Symbol;
+use Chess\PGN\Convert;
 use Chess\PGN\Validate;
 
 /**
@@ -24,18 +24,11 @@ abstract class AbstractPiece implements Piece
     protected $color;
 
     /**
-     * The piece's position on the board.
+     * The piece's travel.
      *
-     * @var \stdClass
+     * @var mixed object|array
      */
-    protected $position;
-
-    /**
-     * The piece's scope.
-     *
-     * @var array
-     */
-    protected $scope = [];
+    protected $travel;
 
     /**
      * The piece's id in PGN format.
@@ -84,12 +77,12 @@ abstract class AbstractPiece implements Piece
      *
      * @return array The piece's legal squares.
      */
-    abstract public function getSquares(): array;
+    abstract public function getSqs(): array;
 
     /**
-     * Calculates the piece's scope.
+     * Calculates the squares the piece could travel to.
      */
-    abstract protected function scope(): void;
+    abstract protected function setTravel(): void;
 
     /**
      * Gets the piece's color.
@@ -108,7 +101,7 @@ abstract class AbstractPiece implements Piece
      */
     public function getOppColor(): string
     {
-        return Symbol::oppColor($this->color);
+        return Convert::toOpposite($this->color);
     }
 
     /**
@@ -122,13 +115,13 @@ abstract class AbstractPiece implements Piece
     }
 
     /**
-     * Gets the piece's scope.
+     * Gets the piece's travel.
      *
      * @return \stdClass
      */
-    public function getScope(): \stdClass
+    public function getTravel()
     {
-        return $this->scope;
+        return $this->travel;
     }
 
     /**
@@ -171,7 +164,7 @@ abstract class AbstractPiece implements Piece
     public function isMovable(): bool
     {
         if (isset($this->move)) {
-            return in_array($this->move->sq->next, $this->getSquares());
+            return in_array($this->move->sq->next, $this->getSqs());
         }
 
         return false;

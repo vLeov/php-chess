@@ -25,31 +25,31 @@ class AttackEvaluation extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(): array
+    public function eval(): array
     {
         foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
-                case Symbol::KING:
+                case Symbol::K:
                     // TODO ...
                     break;
-                case Symbol::PAWN:
+                case Symbol::P:
                     foreach ($piece->getCaptureSquares() as $sq) {
                         if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
                                 $id = $item->getId();
-                                if ($id !== Symbol::KING && $this->value[Symbol::PAWN] < $this->value[$id]) {
-                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[Symbol::PAWN];
+                                if ($id !== Symbol::K && $this->value[Symbol::P] < $this->value[$id]) {
+                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[Symbol::P];
                                 }
                             }
                         }
                     }
                     break;
                 default:
-                    foreach ($piece->getSquares() as $sq) {
+                    foreach ($piece->getSqs() as $sq) {
                         if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
                                 $id = $item->getId();
-                                if ($id !== Symbol::KING && $this->value[$piece->getId()] < $this->value[$id]) {
+                                if ($id !== Symbol::K && $this->value[$piece->getId()] < $this->value[$id]) {
                                     $this->result[$piece->getColor()] += $this->value[$id] - $this->value[$piece->getId()];
                                 }
                             }

@@ -3,20 +3,20 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\SquareOutpostEvaluation;
+use Chess\Evaluation\SqOutpostEvaluation;
 use Chess\PGN\Symbol;
 
 class KnightOutpostEvaluation extends AbstractEvaluation
 {
     const NAME = 'knight_outpost';
 
-    private $sqOutpostEvald;
+    private $sqOutpostEval;
 
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
-        $this->sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $this->sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
         $this->result = [
             Symbol::WHITE => 0,
@@ -24,12 +24,12 @@ class KnightOutpostEvaluation extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(): array
+    public function eval(): array
     {
-        foreach ($this->sqOutpostEvald as $key => $val) {
+        foreach ($this->sqOutpostEval as $key => $val) {
             foreach ($val as $sq) {
                 if ($piece = $this->board->getPieceBySq($sq)) {
-                    if ($piece->getColor() === $key && $piece->getId() === Symbol::KNIGHT) {
+                    if ($piece->getColor() === $key && $piece->getId() === Symbol::N) {
                         $this->result[$key] += 1;
                     }
                 }

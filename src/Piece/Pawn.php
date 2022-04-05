@@ -43,7 +43,7 @@ class Pawn extends AbstractPiece
      */
     public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $sq, Symbol::PAWN);
+        parent::__construct($color, $sq, Symbol::P);
 
         $this->file = $this->sq[0];
 
@@ -68,11 +68,11 @@ class Pawn extends AbstractPiece
 
         $this->captureSquares = [];
 
-        $this->scope = (object)[
+        $this->travel = (object)[
             'up' => []
         ];
 
-        $this->scope();
+        $this->setTravel();
     }
 
     /**
@@ -116,14 +116,14 @@ class Pawn extends AbstractPiece
     }
 
     /**
-     * Calculates the pawn's scope.
+     * Calculates the pawn's travel.
      */
-    protected function scope(): void
+    protected function setTravel(): void
     {
         // next rank
         try {
             if (Validate::sq($this->file . $this->ranks->next, true)) {
-                $this->scope->up[] = $this->file . $this->ranks->next;
+                $this->travel->up[] = $this->file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
 
@@ -131,10 +131,10 @@ class Pawn extends AbstractPiece
 
         // two square advance
         if ($this->sq[1] == 2 && $this->ranks->initial == 2) {
-            $this->scope->up[] = $this->file . ($this->ranks->initial + 2);
+            $this->travel->up[] = $this->file . ($this->ranks->initial + 2);
         }
         elseif ($this->sq[1] == 7 && $this->ranks->initial == 7) {
-            $this->scope->up[] = $this->file . ($this->ranks->initial - 2);
+            $this->travel->up[] = $this->file . ($this->ranks->initial - 2);
         }
 
         // capture square
@@ -158,13 +158,13 @@ class Pawn extends AbstractPiece
         }
     }
 
-    public function getSquares(): array
+    public function getSqs(): array
     {
         $moves = [];
 
         // add up squares
-        foreach($this->scope->up as $sq) {
-            if (in_array($sq, $this->board->getSquares()->free)) {
+        foreach($this->travel->up as $sq) {
+            if (in_array($sq, $this->board->getSqEval()->free)) {
                 $moves[] = $sq;
             } else {
                 break;
@@ -173,14 +173,14 @@ class Pawn extends AbstractPiece
 
         // add capture squares
         foreach($this->captureSquares as $sq) {
-            if (in_array($sq, $this->board->getSquares()->used->{$this->getOppColor()})) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
                 $moves[] = $sq;
             }
         }
 
         // en passant implementation
         if ($this->board->getLastHistory() &&
-            $this->board->getLastHistory()->move->id === Symbol::PAWN &&
+            $this->board->getLastHistory()->move->id === Symbol::P &&
             $this->board->getLastHistory()->move->color === $this->getOppColor()) {
             switch ($this->getColor()) {
                 case Symbol::WHITE:
@@ -211,11 +211,11 @@ class Pawn extends AbstractPiece
         return $moves;
     }
 
-    public function getDefendedSquares(): array
+    public function getDefendedSqs(): array
     {
         $sqs = [];
         foreach($this->captureSquares as $sq) {
-            if (in_array($sq, $this->board->getSquares()->used->{$this->getColor()})) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
                 $sqs[] = $sq;
             }
         }
@@ -230,7 +230,7 @@ class Pawn extends AbstractPiece
      */
     public function isPromoted(): bool
     {
-        return isset($this->move->newIdentity) &&
+        return isset($this->move->newId) &&
             (int)$this->getMove()->sq->next[1] === $this->ranks->promotion;
     }
 }

@@ -2,33 +2,34 @@
 
 namespace Chess;
 
+use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 /**
- * Castling.
+ * Castle.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Castling
+class Castle
 {
     const IS_CASTLED = 'isCastled';
 
     public static $initialState = [
         Symbol::WHITE => [
             self::IS_CASTLED => false,
-            Symbol::CASTLING_SHORT => true,
-            Symbol::CASTLING_LONG => true,
+            Symbol::O_O => true,
+            Symbol::O_O_O => true,
         ],
         Symbol::BLACK => [
             self::IS_CASTLED => false,
-            Symbol::CASTLING_SHORT => true,
-            Symbol::CASTLING_LONG => true,
+            Symbol::O_O => true,
+            Symbol::O_O_O => true,
         ],
     ];
 
     /**
-     * Castling rule by color.
+     * Castle rule by color.
      *
      * @param string $color
      * @return array
@@ -38,8 +39,8 @@ class Castling
         switch ($color) {
             case Symbol::WHITE:
                 return [
-                    Symbol::KING => [
-                        Symbol::CASTLING_SHORT => [
+                    Symbol::K => [
+                        Symbol::O_O => [
                             'sqs' => [
                                 'f' => 'f1',
                                 'g' => 'g1',
@@ -49,7 +50,7 @@ class Castling
                                 'next' => 'g1',
                             ],
                         ],
-                        Symbol::CASTLING_LONG => [
+                        Symbol::O_O_O => [
                             'sqs' => [
                                 'b' => 'b1',
                                 'c' => 'c1',
@@ -61,14 +62,14 @@ class Castling
                             ],
                         ],
                     ],
-                    Symbol::ROOK => [
-                        Symbol::CASTLING_SHORT => [
+                    Symbol::R => [
+                        Symbol::O_O => [
                             'sq' => [
                                 'current' => 'h1',
                                 'next' => 'f1',
                             ],
                         ],
-                        Symbol::CASTLING_LONG => [
+                        Symbol::O_O_O => [
                             'sq' => [
                                 'current' => 'a1',
                                 'next' => 'd1',
@@ -79,8 +80,8 @@ class Castling
 
             case Symbol::BLACK:
                 return [
-                    Symbol::KING => [
-                        Symbol::CASTLING_SHORT => [
+                    Symbol::K => [
+                        Symbol::O_O => [
                             'sqs' => [
                                 'f' => 'f8',
                                 'g' => 'g8',
@@ -90,7 +91,7 @@ class Castling
                                 'next' => 'g8',
                             ],
                         ],
-                        Symbol::CASTLING_LONG => [
+                        Symbol::O_O_O => [
                             'sqs' => [
                                 'b' => 'b8',
                                 'c' => 'c8',
@@ -102,14 +103,14 @@ class Castling
                             ],
                         ],
                     ],
-                    Symbol::ROOK => [
-                        Symbol::CASTLING_SHORT => [
+                    Symbol::R => [
+                        Symbol::O_O => [
                             'sq' => [
                                 'current' => 'h8',
                                 'next' => 'f8',
                             ],
                         ],
-                        Symbol::CASTLING_LONG => [
+                        Symbol::O_O_O => [
                             'sq' => [
                                 'current' => 'a8',
                                 'next' => 'd8',
@@ -124,20 +125,20 @@ class Castling
      * Can castle short.
      *
      * @param string $color
-     * @param array $castling
+     * @param array $castle
      * @param \stdClass $space
      * @return bool
      */
-    public static function short(string $color, array $castling, \stdClass $space): bool
+    public static function short(string $color, array $castle, \stdClass $space): bool
     {
-        return $castling[$color][Symbol::CASTLING_SHORT] &&
+        return $castle[$color][Symbol::O_O] &&
             !(in_array(
-                self::color($color)[Symbol::KING][Symbol::CASTLING_SHORT]['sqs']['f'],
-                $space->{Symbol::oppColor($color)})
+                self::color($color)[Symbol::K][Symbol::O_O]['sqs']['f'],
+                $space->{Convert::toOpposite($color)})
              ) &&
             !(in_array(
-                self::color($color)[Symbol::KING][Symbol::CASTLING_SHORT]['sqs']['g'],
-                $space->{Symbol::oppColor($color)})
+                self::color($color)[Symbol::K][Symbol::O_O]['sqs']['g'],
+                $space->{Convert::toOpposite($color)})
              );
     }
 
@@ -145,24 +146,24 @@ class Castling
      * Can castle long.
      *
      * @param string $color
-     * @param array $castling
+     * @param array $castle
      * @param \stdClass $space
      * @return bool
      */
-    public static function long(string $color, array $castling, \stdClass $space): bool
+    public static function long(string $color, array $castle, \stdClass $space): bool
     {
-        return $castling[$color][Symbol::CASTLING_LONG] &&
+        return $castle[$color][Symbol::O_O_O] &&
             !(in_array(
-                self::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['sqs']['b'],
-                $space->{Symbol::oppColor($color)})
+                self::color($color)[Symbol::K][Symbol::O_O_O]['sqs']['b'],
+                $space->{Convert::toOpposite($color)})
              ) &&
             !(in_array(
-                self::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['sqs']['c'],
-                $space->{Symbol::oppColor($color)})
+                self::color($color)[Symbol::K][Symbol::O_O_O]['sqs']['c'],
+                $space->{Convert::toOpposite($color)})
              ) &&
             !(in_array(
-                self::color($color)[Symbol::KING][Symbol::CASTLING_LONG]['sqs']['d'],
-                $space->{Symbol::oppColor($color)})
+                self::color($color)[Symbol::K][Symbol::O_O_O]['sqs']['d'],
+                $space->{Convert::toOpposite($color)})
              );
     }
 }

@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised\Classification;
 
 use Chess\Board;
-use Chess\HeuristicPicture;
+use Chess\Heuristics;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\ML\Supervised\AbstractPredictor;
 use Rubix\ML\PersistentModel;
@@ -18,16 +18,14 @@ class PermutationPredictor extends AbstractPredictor
         $this->permutations = (new RestrictedPermutationWithRepetition())
             ->get(
                 [4, 28],
-                count((new HeuristicPicture(''))->getDimensions()),
+                count((new Heuristics(''))->getDimensions()),
                 100
             );
     }
 
-    protected function evaluate(Board $clone): array
+    protected function eval(Board $clone): array
     {
-        $balance = (new HeuristicPicture($clone->getMovetext(), $clone))
-            ->take()
-            ->getBalance();
+        $balance = (new Heuristics($clone->getMovetext(), $clone))->getBalance();
 
         $dataset = new Unlabeled($balance);
 

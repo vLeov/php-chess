@@ -33,22 +33,22 @@ class Queen extends Slider
      */
     public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $sq, Symbol::QUEEN);
+        parent::__construct($color, $sq, Symbol::Q);
 
-        $this->rook = new Rook($color, $sq, RookType::FAKED);
+        $this->rook = new Rook($color, $sq, RookType::SLIDER);
         $this->bishop = new Bishop($color, $sq);
 
-        $this->scope();
+        $this->setTravel();
     }
 
     /**
-     * Calculates the piece's scope.
+     * Calculates the piece's travel.
      */
-    protected function scope(): void
+    protected function setTravel(): void
     {
-        $this->scope = (object) array_merge(
-            (array) $this->rook->getScope(),
-            (array) $this->bishop->getScope()
+        $this->travel = (object) array_merge(
+            (array) $this->rook->getTravel(),
+            (array) $this->bishop->getTravel()
         );
     }
 }

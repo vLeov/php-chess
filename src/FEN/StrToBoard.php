@@ -4,7 +4,7 @@ namespace Chess\FEN;
 
 use Chess\Ascii;
 use Chess\Board;
-use Chess\Castling;
+use Chess\Castle;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\Symbol;
 use Chess\Piece\Bishop;
@@ -16,18 +16,20 @@ use Chess\Piece\Rook;
 use Chess\Piece\Type\RookType;
 
 /**
- * FEN string to Chess\Board converter.
+ * StrToBoard
+ *
+ * Converts a FEN string to a Chess\Board object.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class StringToBoard
+class StrToBoard
 {
     private $string;
 
     private $fields;
 
-    private $castling;
+    private $castle;
 
     private $pieces;
 
@@ -37,11 +39,11 @@ class StringToBoard
 
         $this->fields = array_filter(explode(' ', $this->string));
 
-        $this->castling = Castling::$initialState;
+        $this->castle = Castle::$initialState;
 
         $this->pieces = [];
 
-        $this->castling();
+        $this->castle();
     }
 
     public function create(): Board
@@ -64,7 +66,7 @@ class StringToBoard
                     }
                 }
             }
-            $board = (new Board($this->pieces, $this->castling))
+            $board = (new Board($this->pieces, $this->castle))
                 ->setTurn($this->fields[1]);
 
             if ($this->fields[3] !== '-') {
@@ -79,34 +81,34 @@ class StringToBoard
         return $board;
     }
 
-    private function castling()
+    private function castle()
     {
         switch (true) {
             case $this->fields[2] === '-':
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
+                $this->castle[Symbol::WHITE][Symbol::O_O] = false;
+                $this->castle[Symbol::WHITE][Symbol::O_O_O] = false;
+                $this->castle[Symbol::BLACK][Symbol::O_O] = false;
+                $this->castle[Symbol::BLACK][Symbol::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'K') && !str_contains($this->fields[2], 'Q'):
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
+                $this->castle[Symbol::WHITE][Symbol::O_O] = false;
+                $this->castle[Symbol::WHITE][Symbol::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'K'):
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_SHORT] = false;
+                $this->castle[Symbol::WHITE][Symbol::O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'Q'):
-                $this->castling[Symbol::WHITE][Symbol::CASTLING_LONG] = false;
+                $this->castle[Symbol::WHITE][Symbol::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'k') && !str_contains($this->fields[2], 'q'):
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
+                $this->castle[Symbol::BLACK][Symbol::O_O] = false;
+                $this->castle[Symbol::BLACK][Symbol::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'k'):
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_SHORT] = false;
+                $this->castle[Symbol::BLACK][Symbol::O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'q'):
-                $this->castling[Symbol::BLACK][Symbol::CASTLING_LONG] = false;
+                $this->castle[Symbol::BLACK][Symbol::O_O_O] = false;
                 break;
             default:
                 // do nothing
@@ -117,48 +119,48 @@ class StringToBoard
     private function pushPiece($color, $char, $sq)
     {
         switch ($char) {
-            case Symbol::KING:
+            case Symbol::K:
                 $this->pieces[] = new King($color, $sq);
                 break;
-            case Symbol::QUEEN:
+            case Symbol::Q:
                 $this->pieces[] = new Queen($color, $sq);
                 break;
-            case Symbol::ROOK:
+            case Symbol::R:
                 if ($color === Symbol::BLACK &&
                     $sq === 'a8' &&
-                    $this->castling[$color][Symbol::CASTLING_LONG]
+                    $this->castle[$color][Symbol::O_O_O]
                 ) {
-                    $this->pieces[] = new Rook($color, $sq, RookType::CASTLING_LONG);
+                    $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
                     $color === Symbol::BLACK &&
                     $sq === 'h8' &&
-                    $this->castling[$color][Symbol::CASTLING_SHORT]
+                    $this->castle[$color][Symbol::O_O]
                 ) {
-                    $this->pieces[] = new Rook($color, $sq, RookType::CASTLING_SHORT);
+                    $this->pieces[] = new Rook($color, $sq, RookType::O_O);
                 } elseif (
                     $color === Symbol::WHITE &&
                     $sq === 'a1' &&
-                    $this->castling[$color][Symbol::CASTLING_LONG]
+                    $this->castle[$color][Symbol::O_O_O]
                 ) {
-                    $this->pieces[] = new Rook($color, $sq, RookType::CASTLING_LONG);
+                    $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
                     $color === Symbol::WHITE &&
                     $sq === 'h1' &&
-                    $this->castling[$color][Symbol::CASTLING_SHORT]
+                    $this->castle[$color][Symbol::O_O]
                 ) {
-                    $this->pieces[] = new Rook($color, $sq, RookType::CASTLING_SHORT);
+                    $this->pieces[] = new Rook($color, $sq, RookType::O_O);
                 } else {
                     // in this case it really doesn't matter which RookType is assigned to the rook
-                    $this->pieces[] = new Rook($color, $sq, RookType::CASTLING_LONG);
+                    $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 }
                 break;
-            case Symbol::BISHOP:
+            case Symbol::B:
                 $this->pieces[] = new Bishop($color, $sq);
                 break;
-            case Symbol::KNIGHT:
+            case Symbol::N:
                 $this->pieces[] = new Knight($color, $sq);
                 break;
-            case Symbol::PAWN:
+            case Symbol::P:
                 $this->pieces[] = new Pawn($color, $sq);
                 break;
             default:
@@ -188,7 +190,7 @@ class StringToBoard
         $toSquare = $file.$toRank;
         $ascii->setArrayElem($piece, $fromSquare, $array)
             ->setArrayElem(' . ', $toSquare, $array);
-        $board = $ascii->toBoard($array, $turn, $board->getCastling());
+        $board = $ascii->toBoard($array, $turn, $board->getCastle());
         $board->play($turn, $toSquare);
 
         return $board;

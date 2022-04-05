@@ -21,19 +21,19 @@ class RelativePinEvaluation extends AbstractEvaluation
         ];
     }
 
-    public function evaluate(): array
+    public function eval(): array
     {
-        $attackEvaldBoard = (new AttackEvaluation($this->board))->evaluate();
+        $attackEvalBoard = (new AttackEvaluation($this->board))->eval();
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() !== Symbol::KING && $piece->getId() !== Symbol::QUEEN) {
+            if ($piece->getId() !== Symbol::K && $piece->getId() !== Symbol::Q) {
                 $oppColor = $piece->getOppColor();
                 $composition = (new Composition($this->board))
                     ->deletePieceByPosition($piece->getSquare())
                     ->getBoard();
-                $attackEvaldComposition = (new AttackEvaluation($composition))->evaluate();
-                $attackEvaldDiff = $attackEvaldComposition[$oppColor] - $attackEvaldBoard[$oppColor];
-                if ($attackEvaldDiff > 0) {
-                    $this->result[$oppColor] += round($attackEvaldDiff, 2);
+                $attackEvalComposition = (new AttackEvaluation($composition))->eval();
+                $attackEvalDiff = $attackEvalComposition[$oppColor] - $attackEvalBoard[$oppColor];
+                if ($attackEvalDiff > 0) {
+                    $this->result[$oppColor] += round($attackEvalDiff, 2);
                 }
             }
         }

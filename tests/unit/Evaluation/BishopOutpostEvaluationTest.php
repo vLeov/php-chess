@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\BishopOutpostEvaluation;
-use Chess\FEN\StringToBoard;
+use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 
 class BishopOutpostEvaluationTest extends AbstractUnitTestCase
@@ -15,11 +15,11 @@ class BishopOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function w_advancing($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $bishopOutpostEvald = (new BishopOutpostEvaluation($board))->evaluate();
+        $bishopOutpostEval = (new BishopOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $bishopOutpostEvald);
+        $this->assertSame($expected, $bishopOutpostEval);
     }
 
     /**
@@ -28,11 +28,11 @@ class BishopOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function w_advancing_under_attack($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $bishopOutpostEvald = (new BishopOutpostEvaluation($board))->evaluate();
+        $bishopOutpostEval = (new BishopOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $bishopOutpostEvald);
+        $this->assertSame($expected, $bishopOutpostEval);
     }
 
     /**
@@ -41,11 +41,11 @@ class BishopOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function w_advancing_can_be_attacked($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $bishopOutpostEvald = (new BishopOutpostEvaluation($board))->evaluate();
+        $bishopOutpostEval = (new BishopOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $bishopOutpostEvald);
+        $this->assertSame($expected, $bishopOutpostEval);
     }
 
     /**
@@ -54,11 +54,11 @@ class BishopOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function b_advancing($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $bishopOutpostEvald = (new BishopOutpostEvaluation($board))->evaluate();
+        $bishopOutpostEval = (new BishopOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $bishopOutpostEvald);
+        $this->assertSame($expected, $bishopOutpostEval);
     }
 
     /**
@@ -67,11 +67,11 @@ class BishopOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function b_advancing_under_attack($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $bishopOutpostEvald = (new BishopOutpostEvaluation($board))->evaluate();
+        $bishopOutpostEval = (new BishopOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $bishopOutpostEvald);
+        $this->assertSame($expected, $bishopOutpostEval);
     }
 
     /**
@@ -80,11 +80,11 @@ class BishopOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function b_advancing_can_be_attacked($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $bishopOutpostEvald = (new BishopOutpostEvaluation($board))->evaluate();
+        $bishopOutpostEval = (new BishopOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $bishopOutpostEvald);
+        $this->assertSame($expected, $bishopOutpostEval);
     }
 
     public function wAdvancingData()

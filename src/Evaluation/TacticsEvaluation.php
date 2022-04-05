@@ -5,6 +5,7 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\Evaluation\DefenseEvaluation;
 use Chess\Evaluation\PressureEvaluation;
+use Chess\PGN\Convert;
 use Chess\PGN\Symbol;
 
 /**
@@ -24,14 +25,14 @@ class TacticsEvaluation extends AbstractEvaluation
      *
      * @var array
      */
-    private $defenseEvald;
+    private $defenseEval;
 
     /**
      * Pressure evaluation containing the squares being pressured.
      *
      * @var array
      */
-    private $pressEvald;
+    private $pressEval;
 
     /**
      * @param \Chess\Board $board
@@ -40,8 +41,8 @@ class TacticsEvaluation extends AbstractEvaluation
     {
         parent::__construct($board);
 
-        $this->defenseEvald = (new DefenseEvaluation($board))->evaluate();
-        $this->pressEvald = (new PressureEvaluation($board))->evaluate();
+        $this->defenseEval = (new DefenseEvaluation($board))->eval();
+        $this->pressEval = (new PressureEvaluation($board))->eval();
 
         $this->target = [
             Symbol::WHITE => [],
@@ -61,12 +62,12 @@ class TacticsEvaluation extends AbstractEvaluation
      *
      * @return array
      */
-    public function evaluate(): array
+    public function eval(): array
     {
         foreach ($this->target as $color => $sqs) {
             foreach ($sqs as $sq) {
                 $id = $this->board->getPieceBySq($sq)->getId();
-                if ($id !== Symbol::KING) {
+                if ($id !== Symbol::K) {
                     $this->result[$color] += $this->value[$id];
                 }
             }
@@ -82,11 +83,11 @@ class TacticsEvaluation extends AbstractEvaluation
      */
     protected function target()
     {
-        foreach ($this->pressEvald as $color => $sqs) {
+        foreach ($this->pressEval as $color => $sqs) {
             $countPress = array_count_values($sqs);
-            $countDefense = array_count_values($this->defenseEvald[Symbol::oppColor($color)]);
+            $countDefense = array_count_values($this->defenseEval[Convert::toOpposite($color)]);
             foreach ($sqs as $sq) {
-                if (in_array($sq, $this->defenseEvald[Symbol::oppColor($color)])) {
+                if (in_array($sq, $this->defenseEval[Convert::toOpposite($color)])) {
                     if ($countPress[$sq] > $countDefense[$sq]) {
                         $this->target[$color][] = $sq;
                     }

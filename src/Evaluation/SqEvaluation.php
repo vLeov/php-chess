@@ -11,12 +11,12 @@ use Chess\PGN\Symbol;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class SquareEvaluation extends AbstractEvaluation
+class SqEvaluation extends AbstractEvaluation
 {
-    const NAME              = 'square';
+    const NAME           = 'square';
 
-    const FEATURE_FREE      = 'free';
-    const FEATURE_USED      = 'used';
+    const TYPE_FREE      = 'free';
+    const TYPE_USED      = 'used';
 
     public function __construct(Board $board)
     {
@@ -28,14 +28,14 @@ class SquareEvaluation extends AbstractEvaluation
         ];
     }
 
-    public function evaluate($feature): array
+    public function eval($feature): array
     {
         $pieces = iterator_to_array($this->board, false);
         switch ($feature) {
-            case self::FEATURE_FREE:
+            case self::TYPE_FREE:
                 $this->result = $this->free($pieces);
                 break;
-            case self::FEATURE_USED:
+            case self::TYPE_USED:
                 $this->result = $this->used($pieces);
                 break;
         }

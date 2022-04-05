@@ -19,13 +19,13 @@ use Chess\Evaluation\AbsolutePinEvaluation;
 use Chess\Evaluation\RelativePinEvaluation;
 use Chess\Evaluation\AbsoluteForkEvaluation;
 use Chess\Evaluation\RelativeForkEvaluation;
-use Chess\Evaluation\SquareOutpostEvaluation;
+use Chess\Evaluation\SqOutpostEvaluation;
 use Chess\Evaluation\KnightOutpostEvaluation;
 use Chess\Evaluation\BishopOutpostEvaluation;
 use Chess\PGN\Symbol;
 
 /**
- * HeuristicPictureTrait
+ * HeuristicsTrait
  *
  * A chess game can be thought of in terms of snapshots describing what's going on
  * the board as reported by a number of evaluation features. Thus, it can be plotted
@@ -33,7 +33,7 @@ use Chess\PGN\Symbol;
  * best possible evaluation for Black. Both forces being set to 0 means they're
  * actually offset and, therefore, balanced.
  */
-trait HeuristicPictureTrait
+trait HeuristicsTrait
 {
     /**
      * The evaluation features that make up a heuristic picture.
@@ -70,17 +70,17 @@ trait HeuristicPictureTrait
         RelativePinEvaluation::class => 4,
         AbsoluteForkEvaluation::class => 4,
         RelativeForkEvaluation::class => 4,
-        SquareOutpostEvaluation::class => 4,
+        SqOutpostEvaluation::class => 4,
         KnightOutpostEvaluation::class => 4,
         BishopOutpostEvaluation::class => 4,
     ];
 
     /**
-     * The heuristic picture of $this->board.
+     * The heuristics of $this->board.
      *
      * @var array
      */
-    protected $picture = [];
+    protected $result = [];
 
     /**
      * The balanced heuristic picture of $this->board.
@@ -103,7 +103,7 @@ trait HeuristicPictureTrait
      * Sets the dimensions.
      *
      * @param array $dimensions
-     * @return \Chess\HeuristicPicture
+     * @return \Chess\Heuristics
      */
     public function setDimensions(array $dimensions)
     {
@@ -113,17 +113,21 @@ trait HeuristicPictureTrait
     }
 
     /**
-     * Returns the heuristic picture.
+     * Returns the heuristics.
      *
      * @return array
      */
-    public function getPicture(): array
+    public function getResult(): array
     {
-        return $this->picture;
+        return $this->result;
     }
 
     /**
-     * Returns the balanced heuristic picture.
+     * Returns the balanced heuristics.
+     *
+     * A chess game can be plotted in terms of balance. +1 is the best possible
+     * evaluation for White and -1 the best possible evaluation for Black. Both
+     * forces being set to 0 means they're actually offset and, therefore, balanced.
      *
      * @return array
      */

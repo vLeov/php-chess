@@ -33,23 +33,21 @@ class Rook extends Slider
     public function __construct(string $color, string $sq, $type)
     {
         if (!in_array($type, RookType::getChoices())) {
-            throw new PieceTypeException(
-                "A valid rook type needs to be provided in order to instantiate a rook."
-            );
-        } else {
-            $this->type = $type;
+            throw new PieceTypeException;
         }
 
-        parent::__construct($color, $sq, Symbol::ROOK);
+        parent::__construct($color, $sq, Symbol::R);
 
-        $this->scope = (object)[
+        $this->type = $type;
+
+        $this->travel = (object)[
             'up' => [],
             'bottom' => [],
             'left' => [],
             'right' => []
         ];
 
-        $this->scope();
+        $this->setTravel();
     }
 
     /**
@@ -63,16 +61,16 @@ class Rook extends Slider
     }
 
     /**
-     * Calculates the rook's scope.
+     * Calculates the rook's travel.
      */
-    protected function scope(): void
+    protected function setTravel(): void
     {
         // up
         try {
             $file = $this->sq[0];
             $rank = (int)$this->sq[1] + 1;
             while (Validate::sq($file.$rank)) {
-                $this->scope->up[] = $file . $rank;
+                $this->travel->up[] = $file . $rank;
                 $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
@@ -84,7 +82,7 @@ class Rook extends Slider
             $file = $this->sq[0];
             $rank = (int)$this->sq[1] - 1;
             while (Validate::sq($file.$rank)) {
-                $this->scope->bottom[] = $file . $rank;
+                $this->travel->bottom[] = $file . $rank;
                 $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
@@ -96,7 +94,7 @@ class Rook extends Slider
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1];
             while (Validate::sq($file.$rank)) {
-                $this->scope->left[] = $file . $rank;
+                $this->travel->left[] = $file . $rank;
                 $file = chr(ord($file) - 1);
             }
         } catch (UnknownNotationException $e) {
@@ -108,7 +106,7 @@ class Rook extends Slider
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1];
             while (Validate::sq($file.$rank)) {
-                $this->scope->right[] = $file . $rank;
+                $this->travel->right[] = $file . $rank;
                 $file = chr(ord($file) + 1);
             }
         } catch (UnknownNotationException $e) {

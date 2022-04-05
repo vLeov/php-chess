@@ -3,11 +3,11 @@
 namespace Chess\Tests\Unit\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\SquareOutpostEvaluation;
-use Chess\FEN\StringToBoard;
+use Chess\Evaluation\SqOutpostEvaluation;
+use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 
-class SquareOutpostEvaluationTest extends AbstractUnitTestCase
+class SqOutpostEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @dataProvider wAdvancingData
@@ -15,11 +15,11 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function w_advancing($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $sqOutpostEvald);
+        $this->assertSame($expected, $sqOutpostEval);
     }
 
     /**
@@ -28,11 +28,11 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function w_advancing_under_attack($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $sqOutpostEvald);
+        $this->assertSame($expected, $sqOutpostEval);
     }
 
     /**
@@ -41,11 +41,11 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function w_advancing_can_be_attacked($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $sqOutpostEvald);
+        $this->assertSame($expected, $sqOutpostEval);
     }
 
     /**
@@ -54,11 +54,11 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function b_advancing($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $sqOutpostEvald);
+        $this->assertSame($expected, $sqOutpostEval);
     }
 
     /**
@@ -67,11 +67,11 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function b_advancing_under_attack($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $sqOutpostEvald);
+        $this->assertSame($expected, $sqOutpostEval);
     }
 
     /**
@@ -80,11 +80,11 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
      */
     public function b_advancing_can_be_attacked($expected, $fen)
     {
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $sqOutpostEvald);
+        $this->assertSame($expected, $sqOutpostEval);
     }
 
     public function wAdvancingData()
@@ -354,15 +354,15 @@ class SquareOutpostEvaluationTest extends AbstractUnitTestCase
     {
         $fen = 'r3kb1r/ppq2ppp/2p2n2/4nb2/P1N5/2N3P1/1P2PP1P/R1BQKB1R w KQkq -';
 
-        $board = (new StringToBoard($fen))->create();
+        $board = (new StrToBoard($fen))->create();
 
         $expected = [
             'w' => [],
             'b' => [],
         ];
 
-        $sqOutpostEvald = (new SquareOutpostEvaluation($board))->evaluate();
+        $sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
-        $this->assertSame($expected, $sqOutpostEvald);
+        $this->assertSame($expected, $sqOutpostEval);
     }
 }

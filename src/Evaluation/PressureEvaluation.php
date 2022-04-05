@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\Evaluation\SquareEvaluation;
+use Chess\Evaluation\SqEvaluation;
 use Chess\PGN\Symbol;
 
 /**
@@ -23,7 +23,7 @@ class PressureEvaluation extends AbstractEvaluation
      *
      * @var array
      */
-    private $sqEvald;
+    private $sqEval;
 
     /**
      * @param \Chess\Board $board
@@ -32,11 +32,11 @@ class PressureEvaluation extends AbstractEvaluation
     {
         parent::__construct($board);
 
-        $sqEval = new SquareEvaluation($board);
+        $sqEval = new SqEvaluation($board);
 
-        $this->sqEvald = [
-            SquareEvaluation::FEATURE_FREE => $sqEval->evaluate(SquareEvaluation::FEATURE_FREE),
-            SquareEvaluation::FEATURE_USED => $sqEval->evaluate(SquareEvaluation::FEATURE_USED),
+        $this->sqEval = [
+            SqEvaluation::TYPE_FREE => $sqEval->eval(SqEvaluation::TYPE_FREE),
+            SqEvaluation::TYPE_USED => $sqEval->eval(SqEvaluation::TYPE_USED),
         ];
 
         $this->result = [
@@ -50,27 +50,27 @@ class PressureEvaluation extends AbstractEvaluation
      *
      * @return array
      */
-    public function evaluate(): array
+    public function eval(): array
     {
         foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
-                case Symbol::KING:
+                case Symbol::K:
                     $this->result[$piece->getColor()] = array_merge(
                         $this->result[$piece->getColor()],
                         array_values(
                             array_intersect(
-                                array_values((array) $piece->getScope()),
-                                $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
+                                array_values((array) $piece->getTravel()),
+                                $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                             )
                         )
                     );
                     break;
-                case Symbol::PAWN:
+                case Symbol::P:
                     $this->result[$piece->getColor()] = array_merge(
                         $this->result[$piece->getColor()],
                         array_intersect(
                             $piece->getCaptureSquares(),
-                            $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
+                            $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                         )
                     );
                     break;
@@ -78,8 +78,8 @@ class PressureEvaluation extends AbstractEvaluation
                     $this->result[$piece->getColor()] = array_merge(
                         $this->result[$piece->getColor()],
                         array_intersect(
-                            $piece->getSquares(),
-                            $this->sqEvald[SquareEvaluation::FEATURE_USED][$piece->getOppColor()]
+                            $piece->getSqs(),
+                            $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                         )
                     );
                     break;

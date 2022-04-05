@@ -5,7 +5,7 @@ namespace Chess\Tests\Unit\Game;
 use Chess\Game;
 use Chess\Tests\AbstractUnitTestCase;
 
-class HeuristicPictureTest extends AbstractUnitTestCase
+class HeuristicsTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -25,7 +25,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             ],
         ];
 
-        $picture = $game->heuristicPicture();
+        $picture = $game->heuristics();
 
         $this->assertSame($expected, $picture);
     }
@@ -43,7 +43,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $balance = $game->heuristicPicture(true);
+        $balance = $game->heuristics(true);
 
         $this->assertSame($expected, $balance);
     }
@@ -64,7 +64,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             [ -1, -1, -1, 1, 1, 0, 0, 0, 1, -1, 1, 0, 0, 1, 0, 0, -1, 0, 0 ],
         ];
 
-        $balance = $game->heuristicPicture(true, $fen);
+        $balance = $game->heuristics(true, $fen);
 
         $this->assertEquals($expected, $balance);
     }
@@ -83,7 +83,7 @@ class HeuristicPictureTest extends AbstractUnitTestCase
             [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $balance = $game->heuristicPicture(true, $fen);
+        $balance = $game->heuristics(true, $fen);
 
         $this->assertSame($expected, $balance);
     }

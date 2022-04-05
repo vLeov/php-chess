@@ -16,14 +16,11 @@ class Validate
     public static function pieces(string $placement): string
     {
         $fields = explode('/', $placement);
-
         if ($count = count($fields) === 8) {
             return $placement;
         }
 
-        throw new UnknownNotationException(
-            "The FEN string should contain a valid piece placement."
-        );
+        throw new UnknownNotationException;
     }
 
     public static function color(string $color): string
@@ -31,7 +28,7 @@ class Validate
         return PgnValidate::color($color);
     }
 
-    public static function castling(string $ability): string
+    public static function castle(string $ability): string
     {
         if ($ability) {
             if ('-' === $ability || preg_match('/^K?Q?k?q?$/', $ability)) {
@@ -39,9 +36,7 @@ class Validate
             }
         }
 
-        throw new UnknownNotationException(
-            "This FEN string does not contain a valid castling ability."
-        );
+        throw new UnknownNotationException;
     }
 
     public static function sq(string $sq): string
@@ -59,7 +54,7 @@ class Validate
 
         self::pieces($fields[0]);
         self::color($fields[1]);
-        self::castling($fields[2]);
+        self::castle($fields[2]);
         self::sq($fields[3]);
 
         return $string;

@@ -7,12 +7,14 @@ use Chess\Board;
 use Chess\PGN\Symbol;
 
 /**
- * Chess\Board to FEN string converter.
+ * BoardToStr
+ *
+ * Converts a Chess\Board object to a FEN string.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class BoardToString
+class BoardToStr
 {
     private $board;
 
@@ -32,7 +34,7 @@ class BoardToString
             }
         }
 
-        return "{$this->filter($string)} {$this->board->getTurn()} {$this->castlingRights()} {$this->enPassant()}";
+        return "{$this->filter($string)} {$this->board->getTurn()} {$this->castleRights()} {$this->enPassant()}";
     }
 
     private function filter(string $string)
@@ -57,27 +59,27 @@ class BoardToString
         return $filtered;
     }
 
-    private function castlingRights()
+    private function castleRights()
     {
-        $castlingRights = '';
-        $castling = $this->board->getCastling();
-        if ($castling[Symbol::WHITE][Symbol::CASTLING_SHORT]) {
-            $castlingRights .= 'K';
+        $castleRights = '';
+        $castle = $this->board->getCastle();
+        if ($castle[Symbol::WHITE][Symbol::O_O]) {
+            $castleRights .= 'K';
         }
-        if ($castling[Symbol::WHITE][Symbol::CASTLING_LONG]) {
-            $castlingRights .= 'Q';
+        if ($castle[Symbol::WHITE][Symbol::O_O_O]) {
+            $castleRights .= 'Q';
         }
-        if ($castling[Symbol::BLACK][Symbol::CASTLING_SHORT]) {
-            $castlingRights .= 'k';
+        if ($castle[Symbol::BLACK][Symbol::O_O]) {
+            $castleRights .= 'k';
         }
-        if ($castling[Symbol::BLACK][Symbol::CASTLING_LONG]) {
-            $castlingRights .= 'q';
+        if ($castle[Symbol::BLACK][Symbol::O_O_O]) {
+            $castleRights .= 'q';
         }
-        if ($castlingRights === '') {
-            $castlingRights = '-';
+        if ($castleRights === '') {
+            $castleRights = '-';
         }
 
-        return $castlingRights;
+        return $castleRights;
     }
 
     private function enPassant()
@@ -85,7 +87,7 @@ class BoardToString
         $history = $this->board->getHistory();
         if ($history) {
             $last = array_slice($history, -1)[0];
-            if ($last->move->id === Symbol::PAWN) {
+            if ($last->move->id === Symbol::P) {
                 $prev = $last->sq;
                 $next = $last->move->sq->next;
                 if ($last->move->color === Symbol::WHITE) {

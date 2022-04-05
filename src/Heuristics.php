@@ -5,18 +5,24 @@ namespace Chess;
 use Chess\Evaluation\InverseEvaluationInterface;
 use Chess\PGN\Symbol;
 
-class HeuristicPicture extends Player
+class Heuristics extends Player
 {
-    use HeuristicPictureTrait;
+    use HeuristicsTrait;
+
+    public function __construct(string $movetext, Board $board = null)
+    {
+        parent::__construct($movetext, $board);
+
+        $this->calc();
+    }
 
     /**
-     * Returns the current evaluation of $this->board.
-     *
-     * The result obtained suggests which player is probably better.
+     * Returns the current evaluation of $this->board. The result obtained suggests
+     * which player may be better.
      *
      * @return array
      */
-    public function evaluate(): array
+    public function eval(): array
     {
         $result = [
             Symbol::WHITE => 0,
@@ -25,7 +31,7 @@ class HeuristicPicture extends Player
 
         $weights = array_values($this->getDimensions());
 
-        $pic = $this->take()->getPicture();
+        $pic = $this->getResult();
 
         for ($i = 0; $i < count($this->getDimensions()); $i++) {
             $result[Symbol::WHITE] += $weights[$i] * end($pic[Symbol::WHITE])[$i];
@@ -39,11 +45,11 @@ class HeuristicPicture extends Player
     }
 
     /**
-     * Takes a normalized, balanced heuristic picture.
+     * Heuristics calc.
      *
-     * @return \Chess\HeuristicPicture
+     * @return \Chess\Heuristics
      */
-    public function take(): HeuristicPicture
+    protected function calc(): Heuristics
     {
         foreach ($this->moves as $move) {
             $this->board->play(Symbol::WHITE, $move[0]);
@@ -53,32 +59,32 @@ class HeuristicPicture extends Player
             $item = [];
             foreach ($this->dimensions as $className => $weight) {
                 $dimension = new $className($this->board);
-                $evald = $dimension->evaluate();
-                if (is_array($evald[Symbol::WHITE])) {
+                $eval = $dimension->eval();
+                if (is_array($eval[Symbol::WHITE])) {
                     if ($dimension instanceof InverseEvaluationInterface) {
                         $item[] = [
-                            Symbol::WHITE => count($evald[Symbol::BLACK]),
-                            Symbol::BLACK => count($evald[Symbol::WHITE]),
+                            Symbol::WHITE => count($eval[Symbol::BLACK]),
+                            Symbol::BLACK => count($eval[Symbol::WHITE]),
                         ];
                     } else {
                         $item[] = [
-                            Symbol::WHITE => count($evald[Symbol::WHITE]),
-                            Symbol::BLACK => count($evald[Symbol::BLACK]),
+                            Symbol::WHITE => count($eval[Symbol::WHITE]),
+                            Symbol::BLACK => count($eval[Symbol::BLACK]),
                         ];
                     }
                 } else {
                     if ($dimension instanceof InverseEvaluationInterface) {
                         $item[] = [
-                            Symbol::WHITE => $evald[Symbol::BLACK],
-                            Symbol::BLACK => $evald[Symbol::WHITE],
+                            Symbol::WHITE => $eval[Symbol::BLACK],
+                            Symbol::BLACK => $eval[Symbol::WHITE],
                         ];
                     } else {
-                        $item[] = $evald;
+                        $item[] = $eval;
                     }
                 }
             }
-            $this->picture[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
-            $this->picture[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
+            $this->result[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
+            $this->result[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
         }
 
         $this->normalize()->balance();
@@ -91,32 +97,32 @@ class HeuristicPicture extends Player
      *
      * The dimensions are normalized meaning that the chess features (Material,
      * Center, Connectivity, Space, Pressure, King safety, Tactics, and so on)
-     * are evaluated and scaled to have values between 0 and 1.
+     * are evald and scaled to have values between 0 and 1.
      *
      * It is worth noting that a normalized heuristic picture changes with every
      * chess move that is made because it is recalculated or zoomed out, if you like,
      * to fit within a 0–1 range.
      *
-     * @return \Chess\HeuristicPicture
+     * @return \Chess\Heuristics
      */
-    protected function normalize(): HeuristicPicture
+    protected function normalize(): Heuristics
     {
         $normalization = [];
 
         if (count($this->board->getHistory()) >= 2) {
             for ($i = 0; $i < count($this->dimensions); $i++) {
                 $values = array_merge(
-                    array_column($this->picture[Symbol::WHITE], $i),
-                    array_column($this->picture[Symbol::BLACK], $i)
+                    array_column($this->result[Symbol::WHITE], $i),
+                    array_column($this->result[Symbol::BLACK], $i)
                 );
                 $min = round(min($values), 2);
                 $max = round(max($values), 2);
-                for ($j = 0; $j < count($this->picture[Symbol::WHITE]); $j++) {
+                for ($j = 0; $j < count($this->result[Symbol::WHITE]); $j++) {
                     if ($max - $min > 0) {
                         $normalization[Symbol::WHITE][$j][$i] =
-                            round(($this->picture[Symbol::WHITE][$j][$i] - $min) / ($max - $min), 2);
+                            round(($this->result[Symbol::WHITE][$j][$i] - $min) / ($max - $min), 2);
                         $normalization[Symbol::BLACK][$j][$i] =
-                            round(($this->picture[Symbol::BLACK][$j][$i] - $min) / ($max - $min), 2);
+                            round(($this->result[Symbol::BLACK][$j][$i] - $min) / ($max - $min), 2);
                     } elseif ($max == $min) {
                         $normalization[Symbol::WHITE][$j][$i] = 0;
                         $normalization[Symbol::BLACK][$j][$i] = 0;
@@ -128,7 +134,7 @@ class HeuristicPicture extends Player
                 $normalization[Symbol::BLACK][] = array_fill(0, count($this->dimensions), 0);
         }
 
-        $this->picture = $normalization;
+        $this->result = $normalization;
 
         return $this;
     }
@@ -140,14 +146,14 @@ class HeuristicPicture extends Player
      * evaluation for White and -1 the best possible evaluation for Black. Both
      * forces being set to 0 means they're actually offset and, therefore, balanced.
      *
-     * @return \Chess\HeuristicPicture
+     * @return \Chess\Heuristics
      */
-    protected function balance(): HeuristicPicture
+    protected function balance(): Heuristics
     {
-        foreach ($this->picture[Symbol::WHITE] as $i => $color) {
+        foreach ($this->result[Symbol::WHITE] as $i => $color) {
             foreach ($color as $j => $val) {
                 $this->balance[$i][$j] =
-                    $this->picture[Symbol::WHITE][$i][$j] - $this->picture[Symbol::BLACK][$i][$j];
+                    $this->result[Symbol::WHITE][$i][$j] - $this->result[Symbol::BLACK][$i][$j];
             }
         }
 
@@ -162,8 +168,8 @@ class HeuristicPicture extends Player
     public function end(): array
     {
         return [
-            Symbol::WHITE => end($this->picture[Symbol::WHITE]),
-            Symbol::BLACK => end($this->picture[Symbol::BLACK]),
+            Symbol::WHITE => end($this->result[Symbol::WHITE]),
+            Symbol::BLACK => end($this->result[Symbol::BLACK]),
         ];
     }
 }
