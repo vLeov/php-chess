@@ -6,9 +6,9 @@ Creates a `Chess\Board` object.
 
 ```php
 use Chess\Ascii;
-use Chess\FEN\StringToBoard;
+use Chess\FEN\StrToBoard;
 
-$board = (new StringToBoard('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1'))
+$board = (new StrToBoard('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1'))
     ->create();
 
 $board->play('b', 'e5');

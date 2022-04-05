@@ -14,7 +14,7 @@ print_r($movetext);
 
 Output:
 
-```
+```text
 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5
 ```
 
