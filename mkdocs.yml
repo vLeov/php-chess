@@ -8,7 +8,7 @@ pages:
   - Chess\Player: player.md
   - Chess\Combinatorics\RestrictedPermutationWithRepetition: combinatorics-restricted-permutation-with-repetition.md
   - Chess\FEN\BoardToStr: fen-board-to-str.md
-  - Chess\FEN\StringToBoard: fen-str-to-board.md
+  - Chess\FEN\StrToBoard: fen-str-to-board.md
   - Chess\FEN\Validate: fen-validate.md
   - Chess\Media\BoardToJpg: media-board-to-jpg.md
   - Chess\Media\BoardToMp4: media-board-to-mp4.md
