@@ -6,10 +6,6 @@
 
 A chess library for PHP.
 
-Currently used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess).
-
-> Please note the sandbox server might not be up and running all the time.
-
 ### Install
 
 Via composer:
@@ -52,9 +48,15 @@ $game->play('w', 'e5');
 $game->play('b', $game->response());
 ```
 
+### Demo
+
+PHP Chess is being used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess Server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess).
+
+> Please note the sandbox server might not be up and running all the time.
+
 ---
 
-For further information you're invited to read my learning journey:
+For further information please read my learning journey:
 
 - [Demystifying AI Through a Human-Like Chess Engine](https://medium.com/geekculture/demystifying-ai-through-a-human-like-chess-engine-5f71e3896cc9)
 - [Two Things That My AI Project Required](https://medium.com/geekculture/two-things-that-my-ai-project-required-50000297053b)
