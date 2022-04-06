@@ -56,8 +56,10 @@ class Movetext
         $sequence = [];
         for ($i = 0; $i < count($this->order->n); $i++) {
             $j = 2 * $i;
-            $item = end($sequence) . " {$this->order->n[$i]}.{$this->order->move[$j]} {$this->order->move[$j+1]}";
-            $sequence[] = trim($item);
+            if (isset($this->order->move[$j+1])) {
+                $item = end($sequence) . " {$this->order->n[$i]}.{$this->order->move[$j]} {$this->order->move[$j+1]}";
+                $sequence[] = trim($item);
+            }
         }
 
         return $sequence;
