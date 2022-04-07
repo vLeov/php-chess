@@ -36,4 +36,4 @@ jobs:
       uses: php-actions/phpunit@v9
       with:
         bootstrap: vendor/autoload.php
-        configuration: tests/phpunit.xml
+        configuration: phpunit.xml
