@@ -3,6 +3,7 @@
 namespace Chess\Tests\Unit;
 
 use Chess\Game;
+use Chess\PGN\Movetext;
 use Chess\PGN\Validate;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -217,7 +218,7 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('7k/8/8/8/8/8/1K6/r7 b'));
         $this->assertTrue($game->playFen('8/6k1/8/8/8/8/1K6/r7 w'));
     }
-    
+
     /*
     |--------------------------------------------------------------------------
     | playFen()
@@ -417,44 +418,32 @@ class GameTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | undoMove()
+    | Play sample games.
     |--------------------------------------------------------------------------
     |
-    | Undoes the last move returning the status of the game.
+    | Plays the PGN games that are found in the tests/data/game folder.
     |
     */
 
     /**
      * @test
-     * @dataProvider filenameData
      */
-    public function play_games($filename)
+    public function play_games()
     {
-        $game = new Game();
-        $contents = file_get_contents(self::DATA_FOLDER."/game/$filename");
-        $pairs = array_filter(preg_split('/[0-9]+\./', $contents));
-        $moves = [];
-        foreach ($pairs as $pair) {
-            $moves[] = array_values(array_filter(explode(' ', $pair)));
-        }
-        $moves = array_values(array_filter($moves));
-        for ($i = 0; $i < count($moves); ++$i) {
-            $whiteMove = str_replace("\r", '', str_replace("\n", '', $moves[$i][0]));
-            $this->assertTrue($game->play('w', $whiteMove));
-            if (isset($moves[$i][1])) {
-                $blackMove = str_replace("\r", '', str_replace("\n", '', $moves[$i][1]));
-                $this->assertTrue($game->play('b', $blackMove));
+        foreach (new \DirectoryIterator(self::DATA_FOLDER."/game/") as $fileInfo) {
+            if ($fileInfo->isDot()) continue;
+            $filename = $fileInfo->getFilename();
+            $contents = file_get_contents(self::DATA_FOLDER."/game/$filename");
+            $movetext = Validate::movetext($contents);
+            $order = (new Movetext($movetext))->getOrder();
+            $game = new Game();
+            foreach ($order->move as $key => $val) {
+                if ($key % 2 === 0) {
+                    $this->assertTrue($game->play('w', $val));
+                } else {
+                    $this->assertTrue($game->play('b', $val));
+                }
             }
         }
-    }
-
-    public function filenameData()
-    {
-        $data = [];
-        for ($i = 1; $i <= 99; ++$i) {
-            $i <= 9 ? $data[] = ["0$i.pgn"] : $data[] = ["$i.pgn"];
-        }
-
-        return $data;
     }
 }
