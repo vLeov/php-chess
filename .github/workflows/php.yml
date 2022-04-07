@@ -29,11 +29,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: Install dependencies
-      uses: php-actions/composer@v2
+    - name: Setup PHP
       with:
-        php_version: "8.1"
-        php_extensions: gd
+        php-version: '8.1'
+        extensions: gd
+
+    - name: Install dependencies
+          run: composer install --prefer-dist --no-progress
 
     - name: PHPUnit tests
       uses: php-actions/phpunit@v9
