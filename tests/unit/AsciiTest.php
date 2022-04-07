@@ -6,12 +6,8 @@ use Chess\Ascii;
 use Chess\Board;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
-use Chess\Tests\Sample\Opening\RuyLopez\Exchange as RuyLopezExchange;
-use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
 use Chess\Tests\Sample\Opening\FrenchDefense\Classical as FrenchDefenseClassical;
-use Chess\Tests\Sample\Opening\FrenchDefense\Exchange as FrenchDefenseExchange;
-use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as QueensGambitSymmetricalDefense;
 
 class AsciiTest extends AbstractUnitTestCase
 {
