@@ -32,7 +32,7 @@ class Player
         return $this->board;
     }
 
-    public function getMoves()
+    public function getMoves(): array
     {
         return $this->moves;
     }
@@ -53,7 +53,7 @@ class Player
         return $this;
     }
 
-    protected function extract(string $movetext)
+    protected function extract(string $movetext): array
     {
         $moves = [];
         $pairs = preg_split('/[0-9]+\./', $movetext, -1, PREG_SPLIT_NO_EMPTY);
@@ -64,7 +64,7 @@ class Player
         return $moves;
     }
 
-    protected function filter(string $movetext)
+    protected function filter(string $movetext): string
     {
         return str_replace(
             [

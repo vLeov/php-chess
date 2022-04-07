@@ -171,7 +171,7 @@ class Ascii
         return $this;
     }
 
-    private function pushPiece($color, $char, $sq, $castle, &$pieces)
+    private function pushPiece($color, $char, $sq, $castle, &$pieces): void
     {
         switch ($char) {
             case Symbol::K:
@@ -222,7 +222,5 @@ class Ascii
                 // do nothing
                 break;
         }
-
-        return $pieces;
     }
 }

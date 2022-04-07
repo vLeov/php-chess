@@ -72,9 +72,9 @@ class Game
     /**
      * Gets the board's status.
      *
-     * @return \stdClass
+     * @return object
      */
-    public function status(): \stdClass
+    public function status(): object
     {
         return (object) [
             'castle' => $this->board->getCastle(),
@@ -85,6 +85,11 @@ class Game
         ];
     }
 
+    /**
+     * Gets the castle.
+     *
+     * @return mixed null|array
+     */
     public function castle(): ?array
     {
         return $this->board->getCastle();
@@ -162,9 +167,9 @@ class Game
      * Gets a piece by its position on the board.
      *
      * @param string $sq
-     * @return mixed null|\stdClass
+     * @return mixed null|object
      */
-    public function piece(string $sq): ?\stdClass
+    public function piece(string $sq): ?object
     {
         if ($piece = $this->board->getPieceBySq(Validate::sq($sq))) {
             $moves = [];
@@ -247,9 +252,9 @@ class Game
     /**
      * Computer response to the current position.
      *
-     * @return string
+     * @return mixed sring|null
      */
-    public function response()
+    public function response(): ?string
     {
         $response = (new Grandmaster())->response($this->board->getMovetext());
 
@@ -292,7 +297,7 @@ class Game
      *
      * @param string
      */
-    public function loadPgn(string $movetext)
+    public function loadPgn(string $movetext): void
     {
         $this->board = (new Player($movetext))->play()->getBoard();
     }
@@ -303,9 +308,9 @@ class Game
      * Only the piece placement and the side to move are required.
      *
      * @param string $toShortFen
-     * @return mixed
+     * @return mixed bool|string
      */
-    public function playFen(string $toShortFen)
+    public function playFen(string $toShortFen): bool|string
     {
         $fromFen = (new BoardToStr($this->board))->create();
 
@@ -372,7 +377,7 @@ class Game
         return $heuristics->getResult();
     }
 
-    public function undoMove(): ?\stdClass
+    public function undoMove(): ?object
     {
         if ($this->board->getHistory()) {
             $this->board->undoMove($this->board->getCastle());

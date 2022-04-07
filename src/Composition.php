@@ -13,12 +13,12 @@ class Composition
         $this->board = unserialize(serialize($board));
     }
 
-    public function getBoard()
+    public function getBoard(): Board
     {
         return $this->board;
     }
 
-    public function deletePieceByPosition(string $sq)
+    public function deletePieceByPosition(string $sq): Composition
     {
         $piece = $this->board->getPieceBySq($sq);
         $this->board->detach($piece);
@@ -27,7 +27,7 @@ class Composition
         return $this;
     }
 
-    public function setTurn(string $color)
+    public function setTurn(string $color): Composition
     {
         $this->board->setTurn($color);
 

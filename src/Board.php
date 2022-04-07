@@ -78,28 +78,28 @@ final class Board extends \SplObjectStorage
     /**
      * Defense evaluation.
      *
-     * @var \stdClass
+     * @var object
      */
     private $defenseEval;
 
     /**
      * Pressure evaluation.
      *
-     * @var \stdClass
+     * @var object
      */
     private $pressureEval;
 
     /**
      * Space evaluation.
      *
-     * @var \stdClass
+     * @var object
      */
     private $spaceEval;
 
     /**
      * Square evaluation.
      *
-     * @var \stdClass
+     * @var object
      */
     private $sqEval;
 
@@ -181,9 +181,9 @@ final class Board extends \SplObjectStorage
     /**
      * Gets the square evaluation.
      *
-     * @return \stdClass
+     * @return object
      */
-    public function getSqEval(): \stdClass
+    public function getSqEval(): object
     {
         return $this->sqEval;
     }
@@ -191,9 +191,9 @@ final class Board extends \SplObjectStorage
     /**
      * Gets the space evaluation.
      *
-     * @return \stdClass
+     * @return object
      */
-    public function getSpaceEval(): \stdClass
+    public function getSpaceEval(): object
     {
         return $this->spaceEval;
     }
@@ -201,9 +201,9 @@ final class Board extends \SplObjectStorage
     /**
      * Gets the defense evaluation.
      *
-     * @return \stdClass
+     * @return object
      */
-    public function getDefenseEval(): \stdClass
+    public function getDefenseEval(): object
     {
         return $this->defenseEval;
     }
@@ -232,10 +232,10 @@ final class Board extends \SplObjectStorage
      * Adds a new element to the captured pieces.
      *
      * @param string $color
-     * @param \stdClass $capture
+     * @param object $capture
      * @return \Chess\Board
      */
-    private function pushCapture(string $color, \stdClass $capture): Board
+    private function pushCapture(string $color, object $capture): Board
     {
         $this->captures[$color][] = $capture;
 
@@ -270,7 +270,7 @@ final class Board extends \SplObjectStorage
      *
      * @return mixed object|null
      */
-    public function getLastHistory(): ?\stdClass
+    public function getLastHistory(): ?object
     {
         if (!empty($this->history)) {
             return end($this->history);
@@ -303,7 +303,7 @@ final class Board extends \SplObjectStorage
     /**
      * Adds a new element to the history.
      *
-     * @param \stdClass $piece The piece's previous position along with a move object
+     * @param \Chess\Piece\Piece $piece
      * @return \Chess\Board
      */
     private function pushHistory(Piece $piece): Board
@@ -319,7 +319,7 @@ final class Board extends \SplObjectStorage
     /**
      * Removes an element from the history.
      *
-     * @param string $color
+     * @return \Chess\Board
      */
     private function popHistory(): Board
     {
@@ -408,11 +408,11 @@ final class Board extends \SplObjectStorage
     /**
      * Picks a piece to be moved.
      *
-     * @param \stdClass $move
-     * @return array The piece(s) matching the PGN move; otherwise null
+     * @param object $move
+     * @return mixed array|null
      * @throws \Chess\Exception\BoardException
      */
-    private function pickPiece(\stdClass $move): array
+    private function pickPiece(object $move): ?array
     {
         $found = [];
         foreach ($this->getPiecesByColor($move->color) as $piece) {
@@ -505,10 +505,10 @@ final class Board extends \SplObjectStorage
     /**
      * Checks out if a chess move is valid.
      *
-     * @param \stdClass $move
+     * @param object $move
      * @return bool true if the move is valid; otherwise false
      */
-    private function isValidMove(\stdClass $move): bool
+    private function isValidMove(object $move): bool
     {
         if ($move->color !== $this->turn) {
             return false;
@@ -528,10 +528,10 @@ final class Board extends \SplObjectStorage
     /**
      * Checks out if a chess move is legal.
      *
-     * @param \stdClass $move
+     * @param object $move
      * @return bool true if the move is legal; otherwise false
      */
-    private function isLegalMove(\stdClass $move): bool
+    private function isLegalMove(object $move): bool
     {
         $isLegalMove = false;
         $pieces = $this->pickPiece($move);

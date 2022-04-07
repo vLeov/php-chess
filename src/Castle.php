@@ -121,15 +121,15 @@ class Castle
         }
     }
 
-    /*
+    /**
      * Can castle short.
      *
      * @param string $color
      * @param array $castle
-     * @param \stdClass $space
+     * @param object $space
      * @return bool
      */
-    public static function short(string $color, array $castle, \stdClass $space): bool
+    public static function short(string $color, array $castle, object $space): bool
     {
         return $castle[$color][Symbol::O_O] &&
             !(in_array(
@@ -142,15 +142,15 @@ class Castle
              );
     }
 
-    /*
+    /**
      * Can castle long.
      *
      * @param string $color
      * @param array $castle
-     * @param \stdClass $space
+     * @param object $space
      * @return bool
      */
-    public static function long(string $color, array $castle, \stdClass $space): bool
+    public static function long(string $color, array $castle, object $space): bool
     {
         return $castle[$color][Symbol::O_O_O] &&
             !(in_array(
