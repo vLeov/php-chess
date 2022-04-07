@@ -17,15 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'
-        extensions: gd
-
-    - name: Install APT packages
-      run: sudo apt-get install php8.1-gd
-
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
@@ -45,4 +36,4 @@ jobs:
       uses: php-actions/phpunit@v9
       with:
         bootstrap: vendor/autoload.php
-        configuration: phpunit.xml
+        configuration: tests/phpunit.xml
