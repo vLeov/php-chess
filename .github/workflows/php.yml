@@ -24,7 +24,7 @@ jobs:
         extensions: gd
 
     - name: Install APT packages
-      run: apt-get install php8.1-gd
+      run: sudo apt-get install php8.1-gd
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
