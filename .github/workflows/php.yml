@@ -31,6 +31,9 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
+      with:
+        php_version: "8.1"
+        php_extensions: gd
 
     - name: PHPUnit tests
       uses: php-actions/phpunit@v9
