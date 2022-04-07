@@ -9,64 +9,65 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
 {
     /*
     |--------------------------------------------------------------------------
-    | getResult()
+    | eval()
     |--------------------------------------------------------------------------
     |
-    | Returns the heuristics.
+    | Returns the evaluation of the chess position in a human readable format.
+    | The result obtained suggests which player may be better.
     |
     */
 
     /**
      * @test
      */
-    public function get_result_e4_e5()
+    public function eval_e4_e5()
     {
         $fen = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2';
 
-        $result = (new HeuristicsByFenString($fen))->getResult();
+        $evaluation = (new HeuristicsByFenString($fen))->eval();
 
         $expected = [
-            'w' => [ 1, 0.7, 0.4, 0.4, 0, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-            'b' => [ 1, 0.7, 0.4, 0.4, 0, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            'w' => 34.08,
+            'b' => 34.08,
         ];
 
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $evaluation);
     }
 
     /**
      * @test
      */
-    public function get_result_e4_e5_Nf3_Nf6()
+    public function eval_e4_e5_Nf3_Nf6()
     {
         $fen = 'rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3';
 
-        $result = (new HeuristicsByFenString($fen))->getResult();
+        $evaluation = (new HeuristicsByFenString($fen))->eval();
 
         $expected = [
-            'w' => [ 1, 0.88, 0.52, 0.42, 0.02, 0.02, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-            'b' => [ 1, 0.88, 0.52, 0.42, 0.02, 0.02, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            'w' => 35.52,
+            'b' => 35.52,
         ];
 
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $evaluation);
     }
 
     /**
      * @test
      */
-    public function get_result_benko_gambit()
+    public function eval_benko_gambit()
     {
         $fen = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9';
 
-        $result = (new HeuristicsByFenString($fen))->getResult();
+        $evaluation = (new HeuristicsByFenString($fen))->eval();
 
         $expected = [
-            'w' => [ 0.88, 1, 0.45, 0.59, 0, 0.02, 0, 0, 0, 0.05, 0, 0.02, 0, 0, 0, 0, 0.02, 0, 0 ],
-            'b' => [ 0.86, 0.78, 0.47, 0.5, 0.07, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0, 0 ],
+            'w' => 33.24,
+            'b' => 31.52,
         ];
 
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $evaluation);
     }
-
+    
     /*
     |--------------------------------------------------------------------------
     | getBalance()
@@ -134,62 +135,61 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | eval()
+    | getResult()
     |--------------------------------------------------------------------------
     |
-    | Returns the evaluation of the chess position in a human readable format.
-    | The result obtained suggests which player may be better.
+    | Returns the heuristics.
     |
     */
 
     /**
      * @test
      */
-    public function eval_e4_e5()
+    public function get_result_e4_e5()
     {
         $fen = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2';
 
-        $evaluation = (new HeuristicsByFenString($fen))->eval();
+        $result = (new HeuristicsByFenString($fen))->getResult();
 
         $expected = [
-            'w' => 34.08,
-            'b' => 34.08,
+            'w' => [ 1, 0.7, 0.4, 0.4, 0, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            'b' => [ 1, 0.7, 0.4, 0.4, 0, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertSame($expected, $evaluation);
+        $this->assertEquals($expected, $result);
     }
 
     /**
      * @test
      */
-    public function eval_e4_e5_Nf3_Nf6()
+    public function get_result_e4_e5_Nf3_Nf6()
     {
         $fen = 'rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3';
 
-        $evaluation = (new HeuristicsByFenString($fen))->eval();
+        $result = (new HeuristicsByFenString($fen))->getResult();
 
         $expected = [
-            'w' => 35.52,
-            'b' => 35.52,
+            'w' => [ 1, 0.88, 0.52, 0.42, 0.02, 0.02, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            'b' => [ 1, 0.88, 0.52, 0.42, 0.02, 0.02, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
         ];
 
-        $this->assertSame($expected, $evaluation);
+        $this->assertEquals($expected, $result);
     }
 
     /**
      * @test
      */
-    public function eval_benko_gambit()
+    public function get_result_benko_gambit()
     {
         $fen = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9';
 
-        $evaluation = (new HeuristicsByFenString($fen))->eval();
+        $result = (new HeuristicsByFenString($fen))->getResult();
 
         $expected = [
-            'w' => 33.24,
-            'b' => 31.52,
+            'w' => [ 0.88, 1, 0.45, 0.59, 0, 0.02, 0, 0, 0, 0.05, 0, 0.02, 0, 0, 0, 0, 0.02, 0, 0 ],
+            'b' => [ 0.86, 0.78, 0.47, 0.5, 0.07, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.02, 0, 0 ],
         ];
 
-        $this->assertSame($expected, $evaluation);
+        $this->assertEquals($expected, $result);
     }
 }
