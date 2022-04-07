@@ -40,7 +40,6 @@ class Bishop extends Slider
      */
     protected function setTravel(): void
     {
-        // top left diagonal
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1] + 1;
@@ -53,7 +52,6 @@ class Bishop extends Slider
 
         }
 
-        // top right diagonal
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1] + 1;
@@ -66,7 +64,6 @@ class Bishop extends Slider
 
         }
 
-        // bottom left diagonal
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1] - 1;
@@ -80,7 +77,6 @@ class Bishop extends Slider
 
         }
 
-        // bottom right diagonal
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1] - 1;

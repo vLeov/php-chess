@@ -30,7 +30,7 @@ class Rook extends Slider
      * @param string $type
      * @throws \Chess\Exception\PieceTypeException
      */
-    public function __construct(string $color, string $sq, $type)
+    public function __construct(string $color, string $sq, string $type)
     {
         if (!in_array($type, RookType::getChoices())) {
             throw new PieceTypeException;
@@ -55,7 +55,7 @@ class Rook extends Slider
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }

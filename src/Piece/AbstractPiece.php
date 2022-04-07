@@ -40,7 +40,7 @@ abstract class AbstractPiece implements Piece
     /**
      * The piece's next move to be performed on the board.
      *
-     * @var \stdClass
+     * @var object
      */
     protected $move;
 
@@ -73,11 +73,18 @@ abstract class AbstractPiece implements Piece
     }
 
     /**
+     * Gets the defended squares.
+     *
+     * @return mixed array|null
+     */
+    abstract public function getDefendedSqs(): ?array;
+
+    /**
      * Gets the squares where the piece can be placed on.
      *
-     * @return array The piece's legal squares.
+     * @return mixed array|null
      */
-    abstract public function getSqs(): array;
+    abstract public function getSqs(): ?array;
 
     /**
      * Calculates the squares the piece could travel to.
@@ -117,9 +124,9 @@ abstract class AbstractPiece implements Piece
     /**
      * Gets the piece's travel.
      *
-     * @return \stdClass
+     * @return mixed array|object
      */
-    public function getTravel()
+    public function getTravel(): array|object
     {
         return $this->travel;
     }
@@ -137,9 +144,9 @@ abstract class AbstractPiece implements Piece
     /**
      * Gets the piece's move.
      *
-     * @return \stdClass
+     * @return object
      */
-    public function getMove()
+    public function getMove(): object
     {
         return $this->move;
     }
@@ -147,9 +154,9 @@ abstract class AbstractPiece implements Piece
     /**
      * Sets the piece's next move.
      *
-     * @param \stdClass $move
+     * @param object $move
      */
-    public function setMove(\stdClass $move): Piece
+    public function setMove(object $move): Piece
     {
         $this->move = $move;
 
@@ -159,7 +166,7 @@ abstract class AbstractPiece implements Piece
     /**
      * Checks whether or not the piece can be moved.
      *
-     * @return boolean true if the piece can be moved; otherwise false
+     * @return boolean
      */
     public function isMovable(): bool
     {

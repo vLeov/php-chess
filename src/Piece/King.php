@@ -43,7 +43,7 @@ class King extends AbstractPiece
         $this->setTravel();
     }
 
-    protected function moveCastleLong()
+    protected function moveCastleLong(): ?string
     {
         $rule = Castle::color($this->getColor())[Symbol::K][Symbol::O_O_O];
         if (!$this->board->getCastle()[$this->getColor()]['isCastled']) {
@@ -64,7 +64,7 @@ class King extends AbstractPiece
         return null;
     }
 
-    protected function moveCastleShort()
+    protected function moveCastleShort(): ?string
     {
         $rule = Castle::color($this->getColor())[Symbol::K][Symbol::O_O];
         if (!$this->board->getCastle()[$this->getColor()]['isCastled']) {
@@ -83,7 +83,7 @@ class King extends AbstractPiece
         return null;
     }
 
-    protected function movesCaptures()
+    protected function movesCaptures(): ?array
     {
         $movesCaptures = array_intersect(
             array_values((array)$this->travel),
@@ -93,7 +93,7 @@ class King extends AbstractPiece
         return array_diff($movesCaptures, $this->board->getDefenseEval()->{$this->getOppColor()});
     }
 
-    protected function movesKing()
+    protected function movesKing(): ?array
     {
         $movesKing = array_intersect(array_values((array)$this->travel), $this->board->getSqEval()->free);
 
@@ -106,7 +106,7 @@ class King extends AbstractPiece
      * @param array $pieces
      * @return mixed \Chess\Piece\Rook|null
      */
-    public function getCastleRook(array $pieces)
+    public function getCastleRook(array $pieces): ?Rook
     {
         $rule = Castle::color($this->getColor())[Symbol::R];
         foreach ($pieces as $piece) {
@@ -141,9 +141,9 @@ class King extends AbstractPiece
     /**
      * Gets the king's legal moves.
      *
-     * @return array
+     * @return mixed array|null
      */
-    public function getSqs(): array
+    public function getSqs(): ?array
     {
         $sqs = array_merge(
             $this->movesKing(),
@@ -155,7 +155,7 @@ class King extends AbstractPiece
         return array_filter($sqs);
     }
 
-    public function getDefendedSqs(): array
+    public function getDefendedSqs(): ?array
     {
         $sqs = [];
         foreach ($this->travel as $sq) {

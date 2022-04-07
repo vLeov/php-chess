@@ -14,7 +14,7 @@ class RookType
     const PROMOTED = 'promoted';
     const SLIDER = 'slider';
 
-    public static function getChoices()
+    public static function getChoices(): array
     {
         return [
             self::O_O,

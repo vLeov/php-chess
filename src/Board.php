@@ -572,9 +572,9 @@ final class Board extends \SplObjectStorage
      */
     public function play(string $color, string $pgn): bool
     {
-        $stdObj = Convert::toStdClass($color, $pgn);
+        $object = Convert::toStdClass($color, $pgn);
 
-        return $this->isValidMove($stdObj) && $this->isLegalMove($stdObj);
+        return $this->isValidMove($object) && $this->isLegalMove($object);
     }
 
     /**
@@ -599,7 +599,7 @@ final class Board extends \SplObjectStorage
                 new Rook(
                     $rook->getColor(),
                     Castle::color($king->getColor())[Symbol::R][rtrim($king->getMove()->pgn, '+')]['sq']['next'],
-                    $rook->getId() === Symbol::R
+                    $rook->getType()
                 )
             );
             $this->castle[$this->turn] = [

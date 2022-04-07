@@ -6,7 +6,7 @@ use Chess\Board;
 
 trait PieceObserverBoardTrait
 {
-    public function updateBoard(Board $board)
+    public function updateBoard(Board $board): void
     {
         $this->board = $board;
     }

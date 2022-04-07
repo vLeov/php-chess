@@ -29,6 +29,42 @@ class Knight extends AbstractPiece
     }
 
     /**
+     * Gets the defended squares.
+     *
+     * @return mixed array|null
+     */
+    public function getDefendedSqs(): ?array
+    {
+        $sqs = [];
+        foreach ($this->travel as $sq) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                $sqs[] = $sq;
+            }
+        }
+
+        return $sqs;
+    }
+
+    /**
+     * Gets the squares where the piece can be placed on.
+     *
+     * @return mixed array|null
+     */
+    public function getSqs(): ?array
+    {
+        $moves = [];
+        foreach ($this->travel as $sq) {
+            if (in_array($sq, $this->board->getSqEval()->free)) {
+                $moves[] = $sq;
+            } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
+                $moves[] = $sq;
+            }
+        }
+
+        return $moves;
+    }
+
+    /**
      * Calculates the knight's travel.
      */
     protected function setTravel(): void
@@ -113,32 +149,5 @@ class Knight extends AbstractPiece
         } catch (UnknownNotationException $e) {
 
         }
-
-    }
-
-    public function getSqs(): array
-    {
-        $moves = [];
-        foreach ($this->travel as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->free)) {
-                $moves[] = $sq;
-            } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
-                $moves[] = $sq;
-            }
-        }
-
-        return $moves;
-    }
-
-    public function getDefendedSqs(): array
-    {
-        $sqs = [];
-        foreach ($this->travel as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
-                $sqs[] = $sq;
-            }
-        }
-
-        return $sqs;
     }
 }

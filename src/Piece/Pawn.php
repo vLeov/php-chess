@@ -76,89 +76,28 @@ class Pawn extends AbstractPiece
     }
 
     /**
-     * Gets the pawn's file.
+     * Gets the defended squares.
      *
-     * @return string
+     * @return mixed array|null
      */
-    public function getFile(): string
+    public function getDefendedSqs(): ?array
     {
-        return $this->file;
-    }
-
-    /**
-     * Gets the pawn's rank info.
-     *
-     * @return stdClass
-     */
-    public function getRanks(): \stdClass
-    {
-        return $this->ranks;
-    }
-
-    /**
-     * Gets the capture squares.
-     *
-     * @return array
-     */
-    public function getCaptureSquares(): array
-    {
-        return $this->captureSquares;
-    }
-
-    /**
-     * Gets the en passant square.
-     *
-     * @return string
-     */
-    public function getEnPassantSq()
-    {
-        return $this->enPassantSquare;
-    }
-
-    /**
-     * Calculates the pawn's travel.
-     */
-    protected function setTravel(): void
-    {
-        // next rank
-        try {
-            if (Validate::sq($this->file . $this->ranks->next, true)) {
-                $this->travel->up[] = $this->file . $this->ranks->next;
+        $sqs = [];
+        foreach($this->captureSquares as $sq) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                $sqs[] = $sq;
             }
-        } catch (UnknownNotationException $e) {
-
         }
 
-        // two square advance
-        if ($this->sq[1] == 2 && $this->ranks->initial == 2) {
-            $this->travel->up[] = $this->file . ($this->ranks->initial + 2);
-        }
-        elseif ($this->sq[1] == 7 && $this->ranks->initial == 7) {
-            $this->travel->up[] = $this->file . ($this->ranks->initial - 2);
-        }
-
-        // capture square
-        try {
-            $file = chr(ord($this->file) - 1);
-            if (Validate::sq($file.$this->ranks->next, true)) {
-                $this->captureSquares[] = $file . $this->ranks->next;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        // capture square
-        try {
-            $file = chr(ord($this->file) + 1);
-            if (Validate::sq($file.$this->ranks->next, true)) {
-                $this->captureSquares[] = $file . $this->ranks->next;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
+        return $sqs;
     }
 
-    public function getSqs(): array
+    /**
+     * Gets the squares where the piece can be placed on.
+     *
+     * @return mixed array|null
+     */
+    public function getSqs(): ?array
     {
         $moves = [];
 
@@ -211,16 +150,87 @@ class Pawn extends AbstractPiece
         return $moves;
     }
 
-    public function getDefendedSqs(): array
+    /**
+     * Gets the pawn's file.
+     *
+     * @return string
+     */
+    public function getFile(): string
     {
-        $sqs = [];
-        foreach($this->captureSquares as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
-                $sqs[] = $sq;
+        return $this->file;
+    }
+
+    /**
+     * Gets the pawn's rank info.
+     *
+     * @return object
+     */
+    public function getRanks(): object
+    {
+        return $this->ranks;
+    }
+
+    /**
+     * Gets the capture squares.
+     *
+     * @return array
+     */
+    public function getCaptureSquares(): array
+    {
+        return $this->captureSquares;
+    }
+
+    /**
+     * Gets the en passant square.
+     *
+     * @return string
+     */
+    public function getEnPassantSq(): ?string
+    {
+        return $this->enPassantSquare;
+    }
+
+    /**
+     * Calculates the pawn's travel.
+     */
+    protected function setTravel(): void
+    {
+        // next rank
+        try {
+            if (Validate::sq($this->file . $this->ranks->next, true)) {
+                $this->travel->up[] = $this->file . $this->ranks->next;
             }
+        } catch (UnknownNotationException $e) {
+
         }
 
-        return $sqs;
+        // two square advance
+        if ($this->sq[1] == 2 && $this->ranks->initial == 2) {
+            $this->travel->up[] = $this->file . ($this->ranks->initial + 2);
+        }
+        elseif ($this->sq[1] == 7 && $this->ranks->initial == 7) {
+            $this->travel->up[] = $this->file . ($this->ranks->initial - 2);
+        }
+
+        // capture square
+        try {
+            $file = chr(ord($this->file) - 1);
+            if (Validate::sq($file.$this->ranks->next, true)) {
+                $this->captureSquares[] = $file . $this->ranks->next;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        // capture square
+        try {
+            $file = chr(ord($this->file) + 1);
+            if (Validate::sq($file.$this->ranks->next, true)) {
+                $this->captureSquares[] = $file . $this->ranks->next;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
     }
 
     /**

@@ -23,11 +23,33 @@ abstract class Slider extends AbstractPiece
     }
 
     /**
-     * Gets the legal moves of a slider piece.
+     * Gets the defended squares.
      *
-     * @return array The slider piece's (BRQ) legal moves.
+     * @return mixed array|null
      */
-    public function getSqs(): array
+    public function getDefendedSqs(): ?array
+    {
+        $sqs = [];
+        foreach ($this->travel as $direction) {
+            foreach ($direction as $sq) {
+                if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                    $sqs[] = $sq;
+                    break 1;
+                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
+                    break 1;
+                }
+            }
+        }
+
+        return $sqs;
+    }
+
+    /**
+     * Gets the squares where the piece can be placed on.
+     *
+     * @return mixed array|null
+     */
+    public function getSqs(): ?array
     {
         $moves = [];
         foreach ($this->travel as $direction) {
@@ -47,27 +69,5 @@ abstract class Slider extends AbstractPiece
         }
 
         return $moves;
-    }
-
-    /**
-     * Gets the defended squares by a slider piece.
-     *
-     * @return array The slider piece's (BRQ) defended squares.
-     */
-    public function getDefendedSqs(): array
-    {
-        $sqs = [];
-        foreach ($this->travel as $direction) {
-            foreach ($direction as $sq) {
-                if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
-                    $sqs[] = $sq;
-                    break 1;
-                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
-                    break 1;
-                }
-            }
-        }
-
-        return $sqs;
     }
 }
