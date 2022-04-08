@@ -17,8 +17,9 @@ class Heuristics extends Player
     }
 
     /**
-     * Returns the current evaluation of $this->board. The result obtained suggests
-     * which player may be better.
+     * Returns the current evaluation of $this->board.
+     *
+     * The result obtained suggests which player may be better.
      *
      * @return array
      */
@@ -53,41 +54,40 @@ class Heuristics extends Player
     {
         foreach ($this->moves as $key => $val) {
             if ($key % 2 === 0) {
-                $this->board->play(Symbol::WHITE, $val);
+                $item = [];
+                $this->board->play(Symbol::WHITE, $this->moves[$key]);
                 empty($this->moves[$key+1])
                     ?: $this->board->play(Symbol::BLACK, $this->moves[$key+1]);
-            }
-            $item = [];
-            foreach ($this->dimensions as $className => $weight) {
-                $dimension = new $className($this->board);
-                $eval = $dimension->eval();
-                if (is_array($eval[Symbol::WHITE])) {
-                    if ($dimension instanceof InverseEvaluationInterface) {
-                        $item[] = [
-                            Symbol::WHITE => count($eval[Symbol::BLACK]),
-                            Symbol::BLACK => count($eval[Symbol::WHITE]),
-                        ];
+                foreach ($this->dimensions as $className => $weight) {
+                    $dimension = new $className($this->board);
+                    $eval = $dimension->eval();
+                    if (is_array($eval[Symbol::WHITE])) {
+                        if ($dimension instanceof InverseEvaluationInterface) {
+                            $item[] = [
+                                Symbol::WHITE => count($eval[Symbol::BLACK]),
+                                Symbol::BLACK => count($eval[Symbol::WHITE]),
+                            ];
+                        } else {
+                            $item[] = [
+                                Symbol::WHITE => count($eval[Symbol::WHITE]),
+                                Symbol::BLACK => count($eval[Symbol::BLACK]),
+                            ];
+                        }
                     } else {
-                        $item[] = [
-                            Symbol::WHITE => count($eval[Symbol::WHITE]),
-                            Symbol::BLACK => count($eval[Symbol::BLACK]),
-                        ];
-                    }
-                } else {
-                    if ($dimension instanceof InverseEvaluationInterface) {
-                        $item[] = [
-                            Symbol::WHITE => $eval[Symbol::BLACK],
-                            Symbol::BLACK => $eval[Symbol::WHITE],
-                        ];
-                    } else {
-                        $item[] = $eval;
+                        if ($dimension instanceof InverseEvaluationInterface) {
+                            $item[] = [
+                                Symbol::WHITE => $eval[Symbol::BLACK],
+                                Symbol::BLACK => $eval[Symbol::WHITE],
+                            ];
+                        } else {
+                            $item[] = $eval;
+                        }
                     }
                 }
+                $this->result[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
+                $this->result[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
             }
-            $this->result[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
-            $this->result[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
         }
-
         $this->normalize()->balance();
 
         return $this;
