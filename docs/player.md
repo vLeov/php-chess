@@ -10,10 +10,14 @@ $player = new Player($movetext);
 $board = $player->play()->getBoard();
 ```
 
-#### `function getBoard(): Board`
-
-Returns a `Chess\Board` object after a sequence of chess moves has been played.
-
 #### `function play(): Player`
 
-Plays a chess game in PGN movetext format.
+Plays a chess game.
+
+#### `function getBoard(): Board`
+
+Returns the resulting `Chess\Board` object of playing a game.
+
+#### `function getMoves(): array`
+
+Returns the moves.

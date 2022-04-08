@@ -51,10 +51,11 @@ class Heuristics extends Player
      */
     protected function calc(): Heuristics
     {
-        foreach ($this->moves as $move) {
-            $this->board->play(Symbol::WHITE, $move[0]);
-            if (isset($move[1])) {
-                $this->board->play(Symbol::BLACK, $move[1]);
+        foreach ($this->moves as $key => $val) {
+            if ($key % 2 === 0) {
+                $this->board->play(Symbol::WHITE, $val);
+                empty($this->moves[$key+1])
+                    ?: $this->board->play(Symbol::BLACK, $this->moves[$key+1]);
             }
             $item = [];
             foreach ($this->dimensions as $className => $weight) {
