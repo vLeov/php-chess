@@ -4,7 +4,6 @@ namespace Chess;
 
 use Chess\Board;
 use Chess\Exception\PlayerException;
-use Chess\PGN\Symbol;
 use Chess\PGN\Movetext;
 
 /**
@@ -31,12 +30,13 @@ class Player
      */
     protected $moves;
 
-    public function __construct(string $movetext, Board $board = null)
+    public function __construct(string $text, Board $board = null)
     {
-        $movetext = (new Movetext($movetext))->validate();
+        $movetext = (new Movetext($text))->validate();
+
         $board ? $this->board = $board : $this->board = new Board();
-        $this->moves = (new Movetext($this->filter($movetext)))
-            ->getOrder()->move;
+
+        $this->moves = (new Movetext($movetext))->getMovetext()->moves;
     }
 
     /**
@@ -79,27 +79,5 @@ class Player
         }
 
         return $this;
-    }
-
-    /**
-     * Removes a bunch of tags from the given movetext.
-     *
-     * @param string $movetext
-     * @return string
-     */
-    protected function filter(string $movetext): string
-    {
-        $filter = str_replace(
-            [
-                Symbol::RESULT_WHITE_WINS,
-                Symbol::RESULT_BLACK_WINS,
-                Symbol::RESULT_DRAW,
-                Symbol::RESULT_UNKNOWN,
-            ],
-            '',
-            $movetext
-        );
-
-        return $filter;
     }
 }
