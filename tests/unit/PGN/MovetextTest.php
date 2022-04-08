@@ -13,14 +13,14 @@ class MovetextTest extends AbstractUnitTestCase
      */
     public function get_order(string $text)
     {
-        $order = (new Movetext($text))->getOrder();
+        $movetext = (new Movetext($text))->getMovetext();
 
         $expected = (object) [
             'n' => [ 1, 2, 3, 4, 5, 6, 7 ],
-            'move' => [ 'd4', 'Nf6', 'Nf3', 'e6', 'c4', 'Bb4+', 'Nbd2', 'O-O', 'a3', 'Be7', 'e4', 'd6', 'Bd3', 'c5' ],
+            'moves' => [ 'd4', 'Nf6', 'Nf3', 'e6', 'c4', 'Bb4+', 'Nbd2', 'O-O', 'a3', 'Be7', 'e4', 'd6', 'Bd3', 'c5' ],
         ];
 
-        $this->assertEquals($expected, $order);
+        $this->assertEquals($expected, $movetext);
     }
 
     /**

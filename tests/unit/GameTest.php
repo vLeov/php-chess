@@ -4,7 +4,6 @@ namespace Chess\Tests\Unit;
 
 use Chess\Game;
 use Chess\PGN\Movetext;
-use Chess\PGN\Validate;
 use Chess\Tests\AbstractUnitTestCase;
 
 class GameTest extends AbstractUnitTestCase
@@ -434,10 +433,10 @@ class GameTest extends AbstractUnitTestCase
             if ($fileInfo->isDot()) continue;
             $filename = $fileInfo->getFilename();
             $contents = file_get_contents(self::DATA_FOLDER."/game/$filename");
-            $movetext = Validate::movetext($contents);
-            $order = (new Movetext($movetext))->getOrder();
+            $contents = (new Movetext($contents))->validate();
+            $movetext = (new Movetext($contents))->getMovetext();
             $game = new Game();
-            foreach ($order->move as $key => $val) {
+            foreach ($movetext->moves as $key => $val) {
                 if ($key % 2 === 0) {
                     $this->assertTrue($game->play('w', $val));
                 } else {
