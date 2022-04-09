@@ -16,7 +16,7 @@ class SpaceEvaluation extends AbstractEvaluation
 {
     const NAME = 'space';
 
-    private $sqEval;
+    private array $sqEval;
 
     public function __construct(Board $board)
     {

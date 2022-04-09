@@ -4,9 +4,6 @@ namespace Chess\Piece;
 
 use Chess\Castle;
 use Chess\PGN\Symbol;
-use Chess\Piece\AbstractPiece;
-use Chess\Piece\Rook;
-use Chess\Piece\Bishop;
 use Chess\Piece\Type\RookType;
 
 /**
@@ -20,12 +17,12 @@ class King extends AbstractPiece
     /**
      * @var \Chess\Piece\Rook
      */
-    private $rook;
+    private Rook $rook;
 
     /**
      * @var \Chess\Piece\Bishop
      */
-    private $bishop;
+    private Bishop $bishop;
 
     /**
      * Constructor.

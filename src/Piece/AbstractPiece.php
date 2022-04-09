@@ -2,7 +2,7 @@
 
 namespace Chess\Piece;
 
-use Chess\Piece\Piece;
+use Chess\Board;
 use Chess\PGN\Convert;
 use Chess\PGN\Validate;
 
@@ -21,42 +21,42 @@ abstract class AbstractPiece implements Piece
      *
      * @var string
      */
-    protected $color;
+    protected string $color;
 
     /**
      * The piece's travel.
      *
      * @var mixed object|array
      */
-    protected $travel;
+    protected array|object $travel;
 
     /**
      * The piece's id in PGN format.
      *
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * The piece's next move to be performed on the board.
      *
      * @var object
      */
-    protected $move;
+    protected object $move;
 
     /**
      * The squares where the piece can be placed on.
      *
      * @var array
      */
-    protected $sqs;
+    protected array $sqs;
 
     /**
      * The chessboard.
      *
      * @var \Chess\Board
      */
-    protected $board;
+    protected Board $board;
 
     /**
      * Constructor.

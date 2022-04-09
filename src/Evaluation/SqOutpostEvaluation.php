@@ -16,7 +16,7 @@ class SqOutpostEvaluation extends AbstractEvaluation
 {
     const NAME = 'square_outpost';
 
-    private $ranks = [3, 4, 5, 6];
+    private array $ranks = [3, 4, 5, 6];
 
     public function __construct(Board $board)
     {

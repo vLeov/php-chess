@@ -7,13 +7,13 @@ use Chess\PGN\Symbol;
 
 class PermutationLabeller extends AbstractLabeller
 {
-    protected $permutations;
+    protected array $permutations;
 
     public function __construct(array $permutations = [])
     {
         $this->permutations = $permutations;
     }
-    
+
     public function label(array $end)
     {
         $sums = [];

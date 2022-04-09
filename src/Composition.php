@@ -2,11 +2,9 @@
 
 namespace Chess;
 
-use Chess\Board;
-
 class Composition
 {
-    protected $board;
+    protected Board $board;
 
     public function __construct(Board $board)
     {

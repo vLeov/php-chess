@@ -10,7 +10,7 @@ class KnightOutpostEvaluation extends AbstractEvaluation
 {
     const NAME = 'knight_outpost';
 
-    private $sqOutpostEval;
+    private array $sqOutpostEval;
 
     public function __construct(Board $board)
     {

@@ -23,7 +23,7 @@ class PressureEvaluation extends AbstractEvaluation
      *
      * @var array
      */
-    private $sqEval;
+    private array $sqEval;
 
     /**
      * @param \Chess\Board $board

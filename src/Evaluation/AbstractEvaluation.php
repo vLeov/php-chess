@@ -13,11 +13,11 @@ use Chess\PGN\Symbol;
  */
 abstract class AbstractEvaluation
 {
-    protected $board;
+    protected Board $board;
 
-    protected $value;
+    protected array $value;
 
-    protected $result;
+    protected array $result;
 
     public function __construct(Board $board)
     {

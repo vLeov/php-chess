@@ -6,14 +6,9 @@ class Grandmaster
 {
     const FILEPATH = __DIR__.'/../model/grandmaster.csv';
 
-    private $movetexts;
+    private array $movetexts;
 
-    public function __construct()
-    {
-        $this->movetexts = [];
-    }
-
-    public function response(string $movetext)
+    public function response(string $movetext): ?string
     {
         $file = new \SplFileObject(self::FILEPATH);
         while (!$file->eof()) {

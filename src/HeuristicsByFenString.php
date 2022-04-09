@@ -10,7 +10,7 @@ class HeuristicsByFenString
 {
     use HeuristicsTrait;
 
-    protected $board;
+    protected Board $board;
 
     public function __construct(string $fen)
     {

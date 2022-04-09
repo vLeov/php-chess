@@ -2,6 +2,7 @@
 
 namespace Chess\FEN;
 
+use Chess\Board;
 use Chess\Castle;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\StrToBoard;
@@ -9,11 +10,11 @@ use Chess\PGN\Symbol;
 
 abstract class AbstractStrToPgn
 {
-    protected $fromFen;
+    protected string $fromFen;
 
-    protected $toFen;
+    protected string $toFen;
 
-    protected $board;
+    protected Board $board;
 
     public function __construct(string $fromFen, string $toFen)
     {
@@ -22,9 +23,9 @@ abstract class AbstractStrToPgn
         $this->board = (new StrToBoard($fromFen))->create();
     }
 
-    abstract protected function find(array $legal);
+    abstract protected function find(array $legal): ?string;
 
-    public function create()
+    public function create(): array
     {
         $legal = [];
         $color = $this->board->getTurn();
@@ -108,7 +109,7 @@ abstract class AbstractStrToPgn
         ];
     }
 
-    protected function disambiguation(string $color, string $id)
+    protected function disambiguation(string $color, string $id): array
     {
         $identities = [];
         $clone = unserialize(serialize($this->board));

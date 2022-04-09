@@ -18,10 +18,10 @@ class Convert
      *
      * @param string $color
      * @param string $pgn
-     * @return \stdClass
+     * @return object
      * @throws \Chess\Exception\UnknownNotationException
      */
-    public static function toStdClass(string $color, string $pgn): \stdClass
+    public static function toStdClass(string $color, string $pgn): object
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
         if (preg_match('/^' . Move::KING . '$/', $pgn)) {

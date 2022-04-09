@@ -7,11 +7,11 @@ use Rubix\ML\PersistentModel;
 
 abstract class AbstractPredictor
 {
-    protected $board;
+    protected Board $board;
 
-    protected $estimator;
+    protected PersistentModel $estimator;
 
-    protected $result = [];
+    protected array $result = [];
 
     abstract protected function eval(Board $clone): array;
 

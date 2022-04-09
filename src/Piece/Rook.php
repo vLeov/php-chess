@@ -6,7 +6,6 @@ use Chess\Exception\PieceTypeException;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
-use Chess\Piece\AbstractPiece;
 use Chess\Piece\Type\RookType;
 
 /**
@@ -20,7 +19,7 @@ class Rook extends Slider
     /**
      * @var string
      */
-    private $type;
+    private string $type;
 
     /**
      * Constructor.

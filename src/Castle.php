@@ -15,7 +15,7 @@ class Castle
 {
     const IS_CASTLED = 'isCastled';
 
-    public static $initialState = [
+    public static array $initialState = [
         Symbol::WHITE => [
             self::IS_CASTLED => false,
             Symbol::O_O => true,

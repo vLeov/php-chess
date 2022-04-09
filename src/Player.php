@@ -2,7 +2,6 @@
 
 namespace Chess;
 
-use Chess\Board;
 use Chess\Exception\PlayerException;
 use Chess\PGN\Movetext;
 
@@ -21,14 +20,14 @@ class Player
      *
      * @var \Chess\Board
      */
-    protected $board;
+    protected Board $board;
 
     /**
      * Moves.
      *
      * @var array
      */
-    protected $moves;
+    protected array $moves;
 
     public function __construct(string $text, Board $board = null)
     {

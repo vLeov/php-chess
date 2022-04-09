@@ -2,7 +2,6 @@
 
 namespace Chess;
 
-use Chess\Castle;
 use Chess\Exception\BoardException;
 use Chess\Evaluation\DefenseEvaluation;
 use Chess\Evaluation\PressureEvaluation;
@@ -42,14 +41,14 @@ final class Board extends \SplObjectStorage
      *
      * @var string
      */
-    private $turn;
+    private string $turn = '';
 
     /**
      * Captured pieces.
      *
      * @var array
      */
-    private $captures = [
+    private array $captures = [
         Symbol::WHITE => [],
         Symbol::BLACK => [],
     ];
@@ -59,49 +58,49 @@ final class Board extends \SplObjectStorage
      *
      * @var array
      */
-    private $history = [];
+    private array $history = [];
 
     /**
      * Castle status.
      *
      * @var array
      */
-    private $castle = [];
+    private array $castle;
 
     /**
      * Observers.
      *
      * @var array
      */
-    private $observers = [];
+    private array $observers;
 
     /**
      * Defense evaluation.
      *
      * @var object
      */
-    private $defenseEval;
+    private object $defenseEval;
 
     /**
      * Pressure evaluation.
      *
      * @var object
      */
-    private $pressureEval;
+    private object $pressureEval;
 
     /**
      * Space evaluation.
      *
      * @var object
      */
-    private $spaceEval;
+    private object $spaceEval;
 
     /**
      * Square evaluation.
      *
      * @var object
      */
-    private $sqEval;
+    private object $sqEval;
 
     /**
      * Constructor.

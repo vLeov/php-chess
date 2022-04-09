@@ -51,10 +51,10 @@ class Validate
      * Validates a tag.
      *
      * @param string $tag
-     * @return \stdClass if the tag is valid
+     * @return object if the tag is valid
      * @throws UnknownNotationException
      */
-    public static function tag(string $tag): \stdClass
+    public static function tag(string $tag): object
     {
         $isValid = false;
         foreach (Tag::all() as $key => $val) {

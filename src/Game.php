@@ -41,21 +41,21 @@ class Game
      *
      * @var Board
      */
-    private $board;
+    private Board $board;
 
     /**
      * Mode.
      *
      * @var string
      */
-    private $mode;
+    private string $mode;
 
     /**
      * Estimator.
      *
      * @var PersistentModel
      */
-    private $estimator;
+    private PersistentModel $estimator;
 
     /**
      * Constructor.

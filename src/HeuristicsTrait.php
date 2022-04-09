@@ -80,14 +80,14 @@ trait HeuristicsTrait
      *
      * @var array
      */
-    protected $result = [];
+    protected array $result;
 
     /**
      * The balanced heuristic picture of $this->board.
      *
      * @var array
      */
-    protected $balance = [];
+    protected array $balance;
 
     /**
      * Returns the weighted dimensions.

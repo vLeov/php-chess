@@ -25,14 +25,14 @@ class TacticsEvaluation extends AbstractEvaluation
      *
      * @var array
      */
-    private $defenseEval;
+    private array $defenseEval;
 
     /**
      * Pressure evaluation containing the squares being pressured.
      *
      * @var array
      */
-    private $pressEval;
+    private array $pressEval;
 
     /**
      * @param \Chess\Board $board
@@ -81,7 +81,7 @@ class TacticsEvaluation extends AbstractEvaluation
      *
      * @return array
      */
-    protected function target()
+    protected function target(): void
     {
         foreach ($this->pressEval as $color => $sqs) {
             $countPress = array_count_values($sqs);

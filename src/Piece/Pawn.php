@@ -5,7 +5,6 @@ namespace Chess\Piece;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
-use Chess\Piece\AbstractPiece;
 
 /**
  * Pawn class.
@@ -18,22 +17,22 @@ class Pawn extends AbstractPiece
     /**
      * @var string
      */
-    private $file;
+    private string $file;
+
+    /**
+     * @var object
+     */
+    private object $ranks;
 
     /**
      * @var array
      */
-    private $ranks;
-
-    /**
-     * @var array
-     */
-    private $captureSquares;
+    private array $captureSquares;
 
     /**
      * @var string
      */
-    private $enPassantSquare;
+    private string $enPassantSquare = '';
 
     /**
      * Constructor.

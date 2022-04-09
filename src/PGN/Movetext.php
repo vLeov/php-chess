@@ -33,7 +33,7 @@ class Movetext
      *
      * @var object
      */
-    private $movetext;
+    private object $movetext;
 
     public function __construct(string $text)
     {
@@ -102,7 +102,7 @@ class Movetext
      *
      * @param string
      */
-    protected function filter(string $text)
+    protected function filter(string $text): void
     {
         // remove the PGN symbols found in the filter
         $text = str_replace(self::FILTER, '', $text);

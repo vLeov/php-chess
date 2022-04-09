@@ -2,8 +2,8 @@
 
 namespace Chess\Evaluation;
 
-use Chess\Composition;
 use Chess\Board;
+use Chess\Composition;
 use Chess\PGN\Symbol;
 
 class AbsolutePinEvaluation extends AbstractEvaluation implements InverseEvaluationInterface

@@ -16,7 +16,7 @@ class ConnectivityEvaluation extends AbstractEvaluation
 {
     const NAME = 'connectivity';
 
-    private $sqEval;
+    private array $sqEval;
 
     public function __construct(Board $board)
     {
@@ -43,7 +43,7 @@ class ConnectivityEvaluation extends AbstractEvaluation
         return $this->result;
     }
 
-    private function color(string $color)
+    private function color(string $color): void
     {
         foreach ($this->board->getPiecesByColor($color) as $piece) {
             switch ($piece->getId()) {

@@ -10,7 +10,7 @@ class BishopOutpostEvaluation extends AbstractEvaluation
 {
     const NAME = 'bishop_outpost';
 
-    private $sqOutpostEval;
+    private array $sqOutpostEval;
 
     public function __construct(Board $board)
     {

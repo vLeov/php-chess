@@ -7,7 +7,7 @@ use Chess\Piece\Piece;
 
 abstract class AbstractForkEvaluation extends AbstractEvaluation
 {
-    protected function attackedPieces(Piece $piece)
+    protected function attackedPieces(Piece $piece): array
     {
         $attackedPieces = [];
         foreach ($sqs = $piece->getSqs() as $sq) {
@@ -21,7 +21,7 @@ abstract class AbstractForkEvaluation extends AbstractEvaluation
         return $attackedPieces;
     }
 
-    protected function isKingAttacked(array $attackedPieces)
+    protected function isKingAttacked(array $attackedPieces): bool
     {
         foreach ($attackedPieces as $attackedPiece) {
             if ($attackedPiece->getId() === Symbol::K) {

@@ -5,7 +5,6 @@ namespace Chess\Piece;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\Symbol;
 use Chess\PGN\Validate;
-use Chess\Piece\AbstractPiece;
 
 /**
  * Knight class.

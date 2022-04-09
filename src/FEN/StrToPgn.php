@@ -10,7 +10,7 @@ namespace Chess\FEN;
  */
 class StrToPgn extends AbstractStrToPgn
 {
-    protected function find(array $legal)
+    protected function find(array $legal): ?string
     {
         foreach ($legal as $key => $val) {
             if ($this->toFen === current($val)) {

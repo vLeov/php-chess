@@ -16,13 +16,13 @@ class AbstractBoardToImg
         3000 => 375,
     ];
 
-    protected $board;
+    protected Board $board;
 
-    protected $imagine;
+    protected Imagine $imagine;
 
-    protected $flip;
+    protected bool $flip;
 
-    protected $size;
+    protected int $size;
 
     public function __construct(Board $board, bool $flip = false, $size = 480)
     {
@@ -35,14 +35,14 @@ class AbstractBoardToImg
         $this->size = $size;
     }
 
-    public function setBoard(Board $board)
+    public function setBoard(Board $board): AbstractBoardToImg
     {
         $this->board = $board;
 
         return $this;
     }
 
-    public function output(string $filepath, string $salt = '')
+    public function output(string $filepath, string $salt = ''): string
     {
         $salt ? $filename = $salt.$this->ext : $filename = uniqid().$this->ext;
 
