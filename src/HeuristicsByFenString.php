@@ -94,10 +94,10 @@ class HeuristicsByFenString
     {
         $normalization = [];
 
-        $values = array_merge(
-            $this->result[Symbol::WHITE],
-            $this->result[Symbol::BLACK]
-        );
+        $values = [
+            ...$this->result[Symbol::WHITE],
+            ...$this->result[Symbol::BLACK]
+        ];
 
         $min = min($values);
         $max = max($values);

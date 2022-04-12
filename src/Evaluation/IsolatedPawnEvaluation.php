@@ -49,7 +49,7 @@ class IsolatedPawnEvaluation extends AbstractEvaluation implements InverseEvalua
             $sqsFile = array_map(function($rank) use ($file){
                 return $file . $rank;
             }, $ranks);
-            $sqs = array_merge($sqs, $sqsFile);
+            $sqs = [...$sqs, ...$sqsFile];
         }
 
         foreach ($sqs as $sq) {

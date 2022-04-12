@@ -112,10 +112,10 @@ class Heuristics extends Player
 
         if (count($this->board->getHistory()) >= 2) {
             for ($i = 0; $i < count($this->dimensions); $i++) {
-                $values = array_merge(
-                    array_column($this->result[Symbol::WHITE], $i),
-                    array_column($this->result[Symbol::BLACK], $i)
-                );
+                $values = [
+                    ...array_column($this->result[Symbol::WHITE], $i),
+                    ...array_column($this->result[Symbol::BLACK], $i)
+                ];
                 $min = round(min($values), 2);
                 $max = round(max($values), 2);
                 for ($j = 0; $j < count($this->result[Symbol::WHITE]); $j++) {

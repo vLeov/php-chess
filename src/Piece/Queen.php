@@ -44,9 +44,9 @@ class Queen extends Slider
      */
     protected function setTravel(): void
     {
-        $this->travel = (object) array_merge(
-            (array) $this->rook->getTravel(),
-            (array) $this->bishop->getTravel()
-        );
+        $this->travel = (object) [
+            ... (array) $this->rook->getTravel(),
+            ... (array) $this->bishop->getTravel()
+        ];
     }
 }

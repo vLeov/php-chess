@@ -123,10 +123,10 @@ class King extends AbstractPiece
      */
     protected function setTravel(): void
     {
-        $travel =  array_merge(
-            (array) $this->rook->getTravel(),
-            (array) $this->bishop->getTravel()
-        );
+        $travel =  [
+            ... (array) $this->rook->getTravel(),
+            ... (array) $this->bishop->getTravel()
+        ];
 
         foreach($travel as $key => $val) {
             $travel[$key] = $val[0] ?? null;
@@ -142,12 +142,12 @@ class King extends AbstractPiece
      */
     public function getSqs(): ?array
     {
-        $sqs = array_merge(
-            $this->movesKing(),
-            $this->movesCaptures(),
-            [$this->moveCastleLong()],
-            [$this->moveCastleShort()]
-        );
+        $sqs = [
+            ...$this->movesKing(),
+            ...$this->movesCaptures(),
+            ...[$this->moveCastleLong()],
+            ...[$this->moveCastleShort()]
+        ];
 
         return array_filter($sqs);
     }

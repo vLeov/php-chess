@@ -55,33 +55,33 @@ class PressureEvaluation extends AbstractEvaluation
         foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
                 case Symbol::K:
-                    $this->result[$piece->getColor()] = array_merge(
-                        $this->result[$piece->getColor()],
-                        array_values(
+                    $this->result[$piece->getColor()] = [
+                        ...$this->result[$piece->getColor()],
+                        ...array_values(
                             array_intersect(
                                 array_values((array) $piece->getTravel()),
                                 $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                             )
                         )
-                    );
+                    ];
                     break;
                 case Symbol::P:
-                    $this->result[$piece->getColor()] = array_merge(
-                        $this->result[$piece->getColor()],
-                        array_intersect(
+                    $this->result[$piece->getColor()] = [
+                        ...$this->result[$piece->getColor()],
+                        ...array_intersect(
                             $piece->getCaptureSquares(),
                             $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                         )
-                    );
+                    ];
                     break;
                 default:
-                    $this->result[$piece->getColor()] = array_merge(
-                        $this->result[$piece->getColor()],
-                        array_intersect(
+                    $this->result[$piece->getColor()] = [
+                        ...$this->result[$piece->getColor()],
+                        ...array_intersect(
                             $piece->getSqs(),
                             $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                         )
-                    );
+                    ];
                     break;
             }
         }

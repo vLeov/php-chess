@@ -54,7 +54,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
             $sqsFile = array_map(function($rank) use ($file){
                 return $file . $rank;
             }, $listRanks);
-            $sqs = array_merge($sqs, $sqsFile);
+            $sqs = [...$sqs, ...$sqsFile];
         }
         $passedPawn = true;
         foreach ($sqs as $sq) {

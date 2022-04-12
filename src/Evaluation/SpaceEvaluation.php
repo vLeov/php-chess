@@ -48,37 +48,37 @@ class SpaceEvaluation extends AbstractEvaluation
             switch ($piece->getId()) {
                 case Symbol::K:
                     $this->result[$piece->getColor()] = array_unique(
-                        array_merge(
-                            $this->result[$piece->getColor()],
-                            array_values(
+                        [
+                            ...$this->result[$piece->getColor()],
+                            ...array_values(
                                 array_intersect(
                                     array_values((array) $piece->getTravel()),
                                     $this->sqEval[SqEvaluation::TYPE_FREE]
                                 )
                             )
-                        )
+                        ]
                     );
                     break;
                 case Symbol::P:
                     $this->result[$piece->getColor()] = array_unique(
-                        array_merge(
-                            $this->result[$piece->getColor()],
-                            array_intersect(
+                        [
+                            ...$this->result[$piece->getColor()],
+                            ...array_intersect(
                                 $piece->getCaptureSquares(),
                                 $this->sqEval[SqEvaluation::TYPE_FREE]
                             )
-                        )
+                        ]
                     );
                     break;
                 default:
                     $this->result[$piece->getColor()] = array_unique(
-                        array_merge(
-                            $this->result[$piece->getColor()],
-                            array_diff(
+                        [
+                            ...$this->result[$piece->getColor()],
+                            ...array_diff(
                                 $piece->getSqs(),
                                 $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
                             )
-                        )
+                        ]
                     );
                     break;
             }

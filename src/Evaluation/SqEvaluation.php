@@ -72,7 +72,7 @@ class SqEvaluation extends AbstractEvaluation
         return array_values(
             array_diff(
                 $this->all(),
-                array_merge($used[Symbol::WHITE], $used[Symbol::BLACK])
+                [...$used[Symbol::WHITE], ...$used[Symbol::BLACK]]
         ));
     }
 
