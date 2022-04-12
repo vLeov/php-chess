@@ -4,7 +4,8 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SqEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Pressure evaluation.
@@ -38,11 +39,6 @@ class PressureEvaluation extends AbstractEvaluation
             SqEvaluation::TYPE_FREE => $sqEval->eval(SqEvaluation::TYPE_FREE),
             SqEvaluation::TYPE_USED => $sqEval->eval(SqEvaluation::TYPE_USED),
         ];
-
-        $this->result = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ];
     }
 
     /**
@@ -54,7 +50,7 @@ class PressureEvaluation extends AbstractEvaluation
     {
         foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
-                case Symbol::K:
+                case Piece::K:
                     $this->result[$piece->getColor()] = [
                         ...$this->result[$piece->getColor()],
                         ...array_values(
@@ -65,7 +61,7 @@ class PressureEvaluation extends AbstractEvaluation
                         )
                     ];
                     break;
-                case Symbol::P:
+                case Piece::P:
                     $this->result[$piece->getColor()] = [
                         ...$this->result[$piece->getColor()],
                         ...array_intersect(
@@ -86,8 +82,8 @@ class PressureEvaluation extends AbstractEvaluation
             }
         }
 
-        sort($this->result[Symbol::WHITE]);
-        sort($this->result[Symbol::BLACK]);
+        sort($this->result[Color::W]);
+        sort($this->result[Color::B]);
 
         return $this->result;
     }

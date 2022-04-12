@@ -3,7 +3,7 @@
 namespace Chess;
 
 use Chess\Evaluation\InverseEvaluationInterface;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
 
 class Heuristics extends Player
 {
@@ -26,8 +26,8 @@ class Heuristics extends Player
     public function eval(): array
     {
         $result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
 
         $weights = array_values($this->getDimensions());
@@ -35,12 +35,12 @@ class Heuristics extends Player
         $pic = $this->getResult();
 
         for ($i = 0; $i < count($this->getDimensions()); $i++) {
-            $result[Symbol::WHITE] += $weights[$i] * end($pic[Symbol::WHITE])[$i];
-            $result[Symbol::BLACK] += $weights[$i] * end($pic[Symbol::BLACK])[$i];
+            $result[Color::W] += $weights[$i] * end($pic[Color::W])[$i];
+            $result[Color::B] += $weights[$i] * end($pic[Color::B])[$i];
         }
 
-        $result[Symbol::WHITE] = round($result[Symbol::WHITE], 2);
-        $result[Symbol::BLACK] = round($result[Symbol::BLACK], 2);
+        $result[Color::W] = round($result[Color::W], 2);
+        $result[Color::B] = round($result[Color::B], 2);
 
         return $result;
     }
@@ -55,37 +55,37 @@ class Heuristics extends Player
         foreach ($this->moves as $key => $val) {
             if ($key % 2 === 0) {
                 $item = [];
-                $this->board->play(Symbol::WHITE, $this->moves[$key]);
+                $this->board->play(Color::W, $this->moves[$key]);
                 empty($this->moves[$key+1])
-                    ?: $this->board->play(Symbol::BLACK, $this->moves[$key+1]);
+                    ?: $this->board->play(Color::B, $this->moves[$key+1]);
                 foreach ($this->dimensions as $className => $weight) {
                     $dimension = new $className($this->board);
                     $eval = $dimension->eval();
-                    if (is_array($eval[Symbol::WHITE])) {
+                    if (is_array($eval[Color::W])) {
                         if ($dimension instanceof InverseEvaluationInterface) {
                             $item[] = [
-                                Symbol::WHITE => count($eval[Symbol::BLACK]),
-                                Symbol::BLACK => count($eval[Symbol::WHITE]),
+                                Color::W => count($eval[Color::B]),
+                                Color::B => count($eval[Color::W]),
                             ];
                         } else {
                             $item[] = [
-                                Symbol::WHITE => count($eval[Symbol::WHITE]),
-                                Symbol::BLACK => count($eval[Symbol::BLACK]),
+                                Color::W => count($eval[Color::W]),
+                                Color::B => count($eval[Color::B]),
                             ];
                         }
                     } else {
                         if ($dimension instanceof InverseEvaluationInterface) {
                             $item[] = [
-                                Symbol::WHITE => $eval[Symbol::BLACK],
-                                Symbol::BLACK => $eval[Symbol::WHITE],
+                                Color::W => $eval[Color::B],
+                                Color::B => $eval[Color::W],
                             ];
                         } else {
                             $item[] = $eval;
                         }
                     }
                 }
-                $this->result[Symbol::WHITE][] = array_column($item, Symbol::WHITE);
-                $this->result[Symbol::BLACK][] = array_column($item, Symbol::BLACK);
+                $this->result[Color::W][] = array_column($item, Color::W);
+                $this->result[Color::B][] = array_column($item, Color::B);
             }
         }
         $this->normalize()->balance();
@@ -113,26 +113,26 @@ class Heuristics extends Player
         if (count($this->board->getHistory()) >= 2) {
             for ($i = 0; $i < count($this->dimensions); $i++) {
                 $values = [
-                    ...array_column($this->result[Symbol::WHITE], $i),
-                    ...array_column($this->result[Symbol::BLACK], $i)
+                    ...array_column($this->result[Color::W], $i),
+                    ...array_column($this->result[Color::B], $i)
                 ];
                 $min = round(min($values), 2);
                 $max = round(max($values), 2);
-                for ($j = 0; $j < count($this->result[Symbol::WHITE]); $j++) {
+                for ($j = 0; $j < count($this->result[Color::W]); $j++) {
                     if ($max - $min > 0) {
-                        $normalization[Symbol::WHITE][$j][$i] =
-                            round(($this->result[Symbol::WHITE][$j][$i] - $min) / ($max - $min), 2);
-                        $normalization[Symbol::BLACK][$j][$i] =
-                            round(($this->result[Symbol::BLACK][$j][$i] - $min) / ($max - $min), 2);
+                        $normalization[Color::W][$j][$i] =
+                            round(($this->result[Color::W][$j][$i] - $min) / ($max - $min), 2);
+                        $normalization[Color::B][$j][$i] =
+                            round(($this->result[Color::B][$j][$i] - $min) / ($max - $min), 2);
                     } elseif ($max == $min) {
-                        $normalization[Symbol::WHITE][$j][$i] = 0;
-                        $normalization[Symbol::BLACK][$j][$i] = 0;
+                        $normalization[Color::W][$j][$i] = 0;
+                        $normalization[Color::B][$j][$i] = 0;
                     }
                 }
             }
         } else {
-            $normalization[Symbol::WHITE][] =
-                $normalization[Symbol::BLACK][] = array_fill(0, count($this->dimensions), 0);
+            $normalization[Color::W][] =
+                $normalization[Color::B][] = array_fill(0, count($this->dimensions), 0);
         }
 
         $this->result = $normalization;
@@ -151,10 +151,10 @@ class Heuristics extends Player
      */
     protected function balance(): Heuristics
     {
-        foreach ($this->result[Symbol::WHITE] as $i => $color) {
+        foreach ($this->result[Color::W] as $i => $color) {
             foreach ($color as $j => $val) {
                 $this->balance[$i][$j] =
-                    $this->result[Symbol::WHITE][$i][$j] - $this->result[Symbol::BLACK][$i][$j];
+                    $this->result[Color::W][$i][$j] - $this->result[Color::B][$i][$j];
             }
         }
 
@@ -169,8 +169,8 @@ class Heuristics extends Player
     public function end(): array
     {
         return [
-            Symbol::WHITE => end($this->result[Symbol::WHITE]),
-            Symbol::BLACK => end($this->result[Symbol::BLACK]),
+            Color::W => end($this->result[Color::W]),
+            Color::B => end($this->result[Color::B]),
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace Chess;
 
 use Chess\Evaluation\InverseEvaluationInterface;
 use Chess\FEN\StrToBoard;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
 
 class HeuristicsByFenString
 {
@@ -29,8 +29,8 @@ class HeuristicsByFenString
     public function eval(): array
     {
         $result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
 
         $weights = array_values($this->getDimensions());
@@ -38,12 +38,12 @@ class HeuristicsByFenString
         $pic = $this->getResult();
 
         for ($i = 0; $i < count($this->getDimensions()); $i++) {
-            $result[Symbol::WHITE] += $weights[$i] * $pic[Symbol::WHITE][$i];
-            $result[Symbol::BLACK] += $weights[$i] * $pic[Symbol::BLACK][$i];
+            $result[Color::W] += $weights[$i] * $pic[Color::W][$i];
+            $result[Color::B] += $weights[$i] * $pic[Color::B][$i];
         }
 
-        $result[Symbol::WHITE] = round($result[Symbol::WHITE], 2);
-        $result[Symbol::BLACK] = round($result[Symbol::BLACK], 2);
+        $result[Color::W] = round($result[Color::W], 2);
+        $result[Color::B] = round($result[Color::B], 2);
 
         return $result;
     }
@@ -58,23 +58,23 @@ class HeuristicsByFenString
         $item = [];
         foreach ($this->dimensions as $dimension => $w) {
             $eval = (new $dimension($this->board))->eval();
-            if (is_array($eval[Symbol::WHITE])) {
+            if (is_array($eval[Color::W])) {
                 if ($dimension instanceof InverseEvaluationInterface) {
                     $item[] = [
-                        Symbol::WHITE => count($eval[Symbol::BLACK]),
-                        Symbol::BLACK => count($eval[Symbol::WHITE]),
+                        Color::W => count($eval[Color::B]),
+                        Color::B => count($eval[Color::W]),
                     ];
                 } else {
                     $item[] = [
-                        Symbol::WHITE => count($eval[Symbol::WHITE]),
-                        Symbol::BLACK => count($eval[Symbol::BLACK]),
+                        Color::W => count($eval[Color::W]),
+                        Color::B => count($eval[Color::B]),
                     ];
                 }
             } else {
                 if ($dimension instanceof InverseEvaluationInterface) {
                     $item[] = [
-                        Symbol::WHITE => $eval[Symbol::BLACK],
-                        Symbol::BLACK => $eval[Symbol::WHITE],
+                        Color::W => $eval[Color::B],
+                        Color::B => $eval[Color::W],
                     ];
                 } else {
                     $item[] = $eval;
@@ -82,8 +82,8 @@ class HeuristicsByFenString
             }
         }
 
-        $this->result[Symbol::WHITE] = array_column($item, Symbol::WHITE);
-        $this->result[Symbol::BLACK] = array_column($item, Symbol::BLACK);
+        $this->result[Color::W] = array_column($item, Color::W);
+        $this->result[Color::B] = array_column($item, Color::B);
 
         $this->normalize()->balance();
 
@@ -95,8 +95,8 @@ class HeuristicsByFenString
         $normalization = [];
 
         $values = [
-            ...$this->result[Symbol::WHITE],
-            ...$this->result[Symbol::BLACK]
+            ...$this->result[Color::W],
+            ...$this->result[Color::B]
         ];
 
         $min = min($values);
@@ -104,13 +104,13 @@ class HeuristicsByFenString
 
         for ($i = 0; $i < count($this->dimensions); $i++) {
             if ($max - $min > 0) {
-                $normalization[Symbol::WHITE][$i] =
-                    round(($this->result[Symbol::WHITE][$i] - $min) / ($max - $min), 2);
-                $normalization[Symbol::BLACK][$i] =
-                    round(($this->result[Symbol::BLACK][$i] - $min) / ($max - $min), 2);
+                $normalization[Color::W][$i] =
+                    round(($this->result[Color::W][$i] - $min) / ($max - $min), 2);
+                $normalization[Color::B][$i] =
+                    round(($this->result[Color::B][$i] - $min) / ($max - $min), 2);
             } elseif ($max == $min) {
-                $normalization[Symbol::WHITE][$i] = round(1 / count($values), 2);
-                $normalization[Symbol::BLACK][$i] = round(1 / count($values), 2);
+                $normalization[Color::W][$i] = round(1 / count($values), 2);
+                $normalization[Color::B][$i] = round(1 / count($values), 2);
             }
         }
 
@@ -121,8 +121,8 @@ class HeuristicsByFenString
 
     protected function balance(): HeuristicsByFenString
     {
-        foreach ($this->result[Symbol::WHITE] as $key => $val) {
-            $this->balance[$key] = $this->result[Symbol::WHITE][$key] - $this->result[Symbol::BLACK][$key];
+        foreach ($this->result[Color::W] as $key => $val) {
+            $this->balance[$key] = $this->result[Color::W][$key] - $this->result[Color::B][$key];
         }
 
         return $this;

@@ -9,9 +9,11 @@ use Chess\Piece\Knight;
 use Chess\Piece\Pawn;
 use Chess\Piece\Queen;
 use Chess\Piece\Rook;
-use Chess\Piece\Type\RookType;
+use Chess\Piece\RookType;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
+use Chess\PGN\Convert;
 use Chess\PGN\Move;
-use Chess\PGN\Symbol;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
@@ -166,8 +168,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::P,
+                    'color' => Color::W,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'd',
                         'next' => 'd4',
@@ -181,8 +183,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::P,
+                    'color' => Color::B,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'd',
                         'next' => 'd5',
@@ -196,8 +198,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::P,
+                    'color' => Color::W,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'c',
                         'next' => 'c4',
@@ -211,8 +213,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::P,
+                    'color' => Color::B,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'c',
                         'next' => 'c5',
@@ -239,8 +241,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::P,
+                    'color' => Color::W,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'e',
                         'next' => 'e4',
@@ -254,8 +256,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::P,
+                    'color' => Color::B,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'e',
                         'next' => 'e5',
@@ -269,8 +271,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::KNIGHT,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::N,
+                    'color' => Color::W,
+                    'id' => Piece::N,
                     'sq' => (object) [
                         'current' => null,
                         'next' => 'f3',
@@ -284,8 +286,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::KNIGHT,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::N,
+                    'color' => Color::B,
+                    'id' => Piece::N,
                     'sq' => (object) [
                         'current' => null,
                         'next' => 'c6',
@@ -299,8 +301,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PIECE,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::B,
+                    'color' => Color::W,
+                    'id' => Piece::B,
                     'sq' => (object) [
                         'current' => null,
                         'next' => 'b5',
@@ -314,8 +316,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PIECE,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::B,
+                    'color' => Color::B,
+                    'id' => Piece::B,
                     'sq' => (object) [
                         'current' => null,
                         'next' => 'e7',
@@ -342,8 +344,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::P,
+                    'color' => Color::W,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'e',
                         'next' => 'e4',
@@ -357,8 +359,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::P,
+                    'color' => Color::B,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'e',
                         'next' => 'e6',
@@ -372,8 +374,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::P,
+                    'color' => Color::W,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'd',
                         'next' => 'd4',
@@ -387,8 +389,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::PAWN,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::P,
+                    'color' => Color::B,
+                    'id' => Piece::P,
                     'sq' => (object) [
                         'current' => 'd',
                         'next' => 'd5',
@@ -402,8 +404,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::KNIGHT,
-                    'color' => Symbol::WHITE,
-                    'id' => Symbol::N,
+                    'color' => Color::W,
+                    'id' => Piece::N,
                     'sq' => (object) [
                         'current' => null,
                         'next' => 'c3',
@@ -417,8 +419,8 @@ class BoardTest extends AbstractUnitTestCase
                     'isCapture' => false,
                     'isCheck' => false,
                     'type' => Move::KNIGHT,
-                    'color' => Symbol::BLACK,
-                    'id' => Symbol::N,
+                    'color' => Color::B,
+                    'id' => Piece::N,
                     'sq' => (object) [
                         'current' => null,
                         'next' => 'f6',
@@ -446,8 +448,8 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $this->assertSame(14, count($board->getPiecesByColor(Symbol::WHITE)));
-        $this->assertSame(13, count($board->getPiecesByColor(Symbol::BLACK)));
+        $this->assertSame(14, count($board->getPiecesByColor(Color::W)));
+        $this->assertSame(13, count($board->getPiecesByColor(Color::B)));
     }
 
     /**
@@ -457,8 +459,8 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = (new BenoniFianchettoVariation(new Board()))->play();
 
-        $this->assertSame(15, count($board->getPiecesByColor(Symbol::WHITE)));
-        $this->assertSame(15, count($board->getPiecesByColor(Symbol::BLACK)));
+        $this->assertSame(15, count($board->getPiecesByColor(Color::W)));
+        $this->assertSame(15, count($board->getPiecesByColor(Color::B)));
     }
 
     /**
@@ -468,8 +470,8 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = (new OpenSicilian(new Board()))->play();
 
-        $this->assertSame(15, count($board->getPiecesByColor(Symbol::WHITE)));
-        $this->assertSame(15, count($board->getPiecesByColor(Symbol::BLACK)));
+        $this->assertSame(15, count($board->getPiecesByColor(Color::W)));
+        $this->assertSame(15, count($board->getPiecesByColor(Color::B)));
     }
 
     /*

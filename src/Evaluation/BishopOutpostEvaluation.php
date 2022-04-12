@@ -4,7 +4,8 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SqOutpostEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 class BishopOutpostEvaluation extends AbstractEvaluation
 {
@@ -19,8 +20,8 @@ class BishopOutpostEvaluation extends AbstractEvaluation
         $this->sqOutpostEval = (new SqOutpostEvaluation($board))->eval();
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -29,7 +30,7 @@ class BishopOutpostEvaluation extends AbstractEvaluation
         foreach ($this->sqOutpostEval as $key => $val) {
             foreach ($val as $sq) {
                 if ($piece = $this->board->getPieceBySq($sq)) {
-                    if ($piece->getColor() === $key && $piece->getId() === Symbol::B) {
+                    if ($piece->getColor() === $key && $piece->getId() === Piece::B) {
                         $this->result[$key] += 1;
                     }
                 }

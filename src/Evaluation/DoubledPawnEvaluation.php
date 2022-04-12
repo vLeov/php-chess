@@ -3,7 +3,8 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 class DoubledPawnEvaluation extends AbstractEvaluation implements InverseEvaluationInterface
 {
@@ -14,8 +15,8 @@ class DoubledPawnEvaluation extends AbstractEvaluation implements InverseEvaluat
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -23,11 +24,11 @@ class DoubledPawnEvaluation extends AbstractEvaluation implements InverseEvaluat
     {
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
-            if ($piece->getId() === Symbol::P) {
+            if ($piece->getId() === Piece::P) {
                 $file = $piece->getFile();
                 $ranks = $piece->getRanks();
                 if ($nextPiece = $this->board->getPieceBySq($file.$ranks->next)) {
-                    if ($nextPiece->getId() === Symbol::P && $nextPiece->getColor() === $color) {
+                    if ($nextPiece->getId() === Piece::P && $nextPiece->getColor() === $color) {
                         $this->result[$color] += 1;
                     }
                 }

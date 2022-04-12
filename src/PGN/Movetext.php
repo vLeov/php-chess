@@ -4,30 +4,16 @@ namespace Chess\PGN;
 
 use Chess\Exception\MovetextException;
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\Symbol;
-use Chess\PGN\Validate;
+use Chess\PGN\SAN\Termination;
+use Chess\PGN\Move;
 
 /**
  * Movetext.
- *
- * Provides with functionality to parse and process a PGN movetext.
  *
  * @license GPL
  */
 class Movetext
 {
-    /**
-     * PGN symbols to be filtered.
-     *
-     * @var array
-     */
-    const FILTER  = [
-        Symbol::RESULT_WHITE_WINS,
-        Symbol::RESULT_BLACK_WINS,
-        Symbol::RESULT_DRAW,
-        Symbol::RESULT_UNKNOWN,
-    ];
-
     /**
      * The movetext.
      *
@@ -56,7 +42,7 @@ class Movetext
     }
 
     /**
-     * Validates the movetext.
+     * Validation.
      *
      * @return string
      */
@@ -67,7 +53,7 @@ class Movetext
         }
 
         foreach ($this->movetext->moves as $move) {
-            Validate::move($move);
+            Move::validate($move);
         }
 
         return $this->join();
@@ -105,7 +91,7 @@ class Movetext
     protected function filter(string $text): void
     {
         // remove the PGN symbols found in the filter
-        $text = str_replace(self::FILTER, '', $text);
+        $text = str_replace(Termination::all(), '', $text);
 
         // remove comments
         $text = preg_replace("/\{[^)]+\}/", '', $text);

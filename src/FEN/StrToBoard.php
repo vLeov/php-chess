@@ -4,16 +4,18 @@ namespace Chess\FEN;
 
 use Chess\Ascii;
 use Chess\Board;
-use Chess\Castle;
+use Chess\CastleRule;
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Castle;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 use Chess\Piece\Bishop;
 use Chess\Piece\King;
 use Chess\Piece\Knight;
 use Chess\Piece\Pawn;
 use Chess\Piece\Queen;
 use Chess\Piece\Rook;
-use Chess\Piece\Type\RookType;
+use Chess\Piece\RookType;
 
 /**
  * StrToBoard
@@ -35,11 +37,11 @@ class StrToBoard
 
     public function __construct(string $string)
     {
-        $this->string = Validate::fen($string);
+        $this->string = Str::validate($string);
 
         $this->fields = array_filter(explode(' ', $this->string));
 
-        $this->castle = Castle::$initialState;
+        $this->castle = CastleRule::$initialState;
 
         $this->pieces = [];
 
@@ -56,10 +58,10 @@ class StrToBoard
                 foreach (str_split($field) as $char) {
                     if (ctype_lower($char)) {
                         $char = strtoupper($char);
-                        $this->pushPiece(Symbol::BLACK, $char, $file.$rank);
+                        $this->pushPiece(Color::B, $char, $file.$rank);
                         $file = chr(ord($file) + 1);
                     } elseif (ctype_upper($char)) {
-                        $this->pushPiece(Symbol::WHITE, $char, $file.$rank);
+                        $this->pushPiece(Color::W, $char, $file.$rank);
                         $file = chr(ord($file) + 1);
                     } elseif (is_numeric($char)) {
                         $file = chr(ord($file) + $char);
@@ -73,9 +75,7 @@ class StrToBoard
                 $board = $this->doublePawnPush($board);
             }
         } catch (\Throwable $e) {
-            throw new UnknownNotationException(
-                "A chessboard cannot be created from this FEN string."
-            );
+            throw new UnknownNotationException;
         }
 
         return $board;
@@ -85,30 +85,30 @@ class StrToBoard
     {
         switch (true) {
             case $this->fields[2] === '-':
-                $this->castle[Symbol::WHITE][Symbol::O_O] = false;
-                $this->castle[Symbol::WHITE][Symbol::O_O_O] = false;
-                $this->castle[Symbol::BLACK][Symbol::O_O] = false;
-                $this->castle[Symbol::BLACK][Symbol::O_O_O] = false;
+                $this->castle[Color::W][Castle::O_O] = false;
+                $this->castle[Color::W][Castle::O_O_O] = false;
+                $this->castle[Color::B][Castle::O_O] = false;
+                $this->castle[Color::B][Castle::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'K') && !str_contains($this->fields[2], 'Q'):
-                $this->castle[Symbol::WHITE][Symbol::O_O] = false;
-                $this->castle[Symbol::WHITE][Symbol::O_O_O] = false;
+                $this->castle[Color::W][Castle::O_O] = false;
+                $this->castle[Color::W][Castle::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'K'):
-                $this->castle[Symbol::WHITE][Symbol::O_O] = false;
+                $this->castle[Color::W][Castle::O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'Q'):
-                $this->castle[Symbol::WHITE][Symbol::O_O_O] = false;
+                $this->castle[Color::W][Castle::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'k') && !str_contains($this->fields[2], 'q'):
-                $this->castle[Symbol::BLACK][Symbol::O_O] = false;
-                $this->castle[Symbol::BLACK][Symbol::O_O_O] = false;
+                $this->castle[Color::B][Castle::O_O] = false;
+                $this->castle[Color::B][Castle::O_O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'k'):
-                $this->castle[Symbol::BLACK][Symbol::O_O] = false;
+                $this->castle[Color::B][Castle::O_O] = false;
                 break;
             case !str_contains($this->fields[2], 'q'):
-                $this->castle[Symbol::BLACK][Symbol::O_O_O] = false;
+                $this->castle[Color::B][Castle::O_O_O] = false;
                 break;
             default:
                 // do nothing
@@ -119,34 +119,34 @@ class StrToBoard
     private function pushPiece($color, $char, $sq)
     {
         switch ($char) {
-            case Symbol::K:
+            case Piece::K:
                 $this->pieces[] = new King($color, $sq);
                 break;
-            case Symbol::Q:
+            case Piece::Q:
                 $this->pieces[] = new Queen($color, $sq);
                 break;
-            case Symbol::R:
-                if ($color === Symbol::BLACK &&
+            case Piece::R:
+                if ($color === Color::B &&
                     $sq === 'a8' &&
-                    $this->castle[$color][Symbol::O_O_O]
+                    $this->castle[$color][Castle::O_O_O]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
-                    $color === Symbol::BLACK &&
+                    $color === Color::B &&
                     $sq === 'h8' &&
-                    $this->castle[$color][Symbol::O_O]
+                    $this->castle[$color][Castle::O_O]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O);
                 } elseif (
-                    $color === Symbol::WHITE &&
+                    $color === Color::W &&
                     $sq === 'a1' &&
-                    $this->castle[$color][Symbol::O_O_O]
+                    $this->castle[$color][Castle::O_O_O]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
-                    $color === Symbol::WHITE &&
+                    $color === Color::W &&
                     $sq === 'h1' &&
-                    $this->castle[$color][Symbol::O_O]
+                    $this->castle[$color][Castle::O_O]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O);
                 } else {
@@ -154,13 +154,13 @@ class StrToBoard
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 }
                 break;
-            case Symbol::B:
+            case Piece::B:
                 $this->pieces[] = new Bishop($color, $sq);
                 break;
-            case Symbol::N:
+            case Piece::N:
                 $this->pieces[] = new Knight($color, $sq);
                 break;
-            case Symbol::P:
+            case Piece::P:
                 $this->pieces[] = new Pawn($color, $sq);
                 break;
             default:
@@ -175,16 +175,16 @@ class StrToBoard
         $array = $ascii->toArray($board);
         $file = $this->fields[3][0];
         $rank = $this->fields[3][1];
-        if ($this->fields[1] === Symbol::WHITE) {
+        if ($this->fields[1] === Color::W) {
             $piece = ' p ';
             $fromRank = $rank + 1;
             $toRank = $rank - 1;
-            $turn = Symbol::BLACK;
+            $turn = Color::B;
         } else {
             $piece = ' P ';
             $fromRank = $rank - 1;
             $toRank = $rank + 1;
-            $turn = Symbol::WHITE;
+            $turn = Color::W;
         }
         $fromSquare = $file.$fromRank;
         $toSquare = $file.$toRank;

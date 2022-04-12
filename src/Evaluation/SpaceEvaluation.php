@@ -4,7 +4,8 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SqEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Space evaluation.
@@ -28,25 +29,20 @@ class SpaceEvaluation extends AbstractEvaluation
             SqEvaluation::TYPE_FREE => $sqEval->eval(SqEvaluation::TYPE_FREE),
             SqEvaluation::TYPE_USED => $sqEval->eval(SqEvaluation::TYPE_USED),
         ];
-
-        $this->result = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ];
     }
 
     public function eval(): array
     {
         $this->result = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
+            Color::W => [],
+            Color::B => [],
         ];
 
         $this->board->rewind();
         while ($this->board->valid()) {
             $piece = $this->board->current();
             switch ($piece->getId()) {
-                case Symbol::K:
+                case Piece::K:
                     $this->result[$piece->getColor()] = array_unique(
                         [
                             ...$this->result[$piece->getColor()],
@@ -59,7 +55,7 @@ class SpaceEvaluation extends AbstractEvaluation
                         ]
                     );
                     break;
-                case Symbol::P:
+                case Piece::P:
                     $this->result[$piece->getColor()] = array_unique(
                         [
                             ...$this->result[$piece->getColor()],
@@ -85,8 +81,8 @@ class SpaceEvaluation extends AbstractEvaluation
             $this->board->next();
         }
 
-        sort($this->result[Symbol::WHITE]);
-        sort($this->result[Symbol::BLACK]);
+        sort($this->result[Color::W]);
+        sort($this->result[Color::B]);
 
         return $this->result;
     }

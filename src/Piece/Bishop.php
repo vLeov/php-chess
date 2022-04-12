@@ -3,8 +3,8 @@
 namespace Chess\Piece;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\Symbol;
-use Chess\PGN\Validate;
+use Chess\PGN\SAN\Square;
+use Chess\PGN\SAN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**
@@ -23,7 +23,7 @@ class Bishop extends Slider
      */
     public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $sq, Symbol::B);
+        parent::__construct($color, $sq, Piece::B);
 
         $this->travel = (object)[
             'upLeft' => [],
@@ -43,7 +43,7 @@ class Bishop extends Slider
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1] + 1;
-            while (Validate::sq($file.$rank)) {
+            while (Square::validate($file.$rank)) {
                 $this->travel->upLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
                 $rank = (int)$rank + 1;
@@ -55,7 +55,7 @@ class Bishop extends Slider
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1] + 1;
-            while (Validate::sq($file.$rank)) {
+            while (Square::validate($file.$rank)) {
                 $this->travel->upRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);
                 $rank = (int)$rank + 1;
@@ -67,7 +67,7 @@ class Bishop extends Slider
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1] - 1;
-            while (Validate::sq($file.$rank))
+            while (Square::validate($file.$rank))
             {
                 $this->travel->bottomLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
@@ -80,7 +80,7 @@ class Bishop extends Slider
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1] - 1;
-            while (Validate::sq($file.$rank))
+            while (Square::validate($file.$rank))
             {
                 $this->travel->bottomRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);

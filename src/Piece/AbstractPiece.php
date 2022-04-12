@@ -3,8 +3,8 @@
 namespace Chess\Piece;
 
 use Chess\Board;
-use Chess\PGN\Convert;
-use Chess\PGN\Validate;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Square;
 
 /**
  * AbstractPiece
@@ -12,7 +12,7 @@ use Chess\PGN\Validate;
  * @author Jordi Bassagañas
  * @license GPL
  */
-abstract class AbstractPiece implements Piece
+abstract class AbstractPiece
 {
     use PieceObserverBoardTrait;
 
@@ -67,8 +67,8 @@ abstract class AbstractPiece implements Piece
      */
     public function __construct(string $color, string $sq, string $id)
     {
-        $this->color = Validate::color($color);
-        $this->sq = Validate::sq($sq);
+        $this->color = Color::validate($color);
+        $this->sq = Square::validate($sq);
         $this->id = $id;
     }
 
@@ -108,7 +108,7 @@ abstract class AbstractPiece implements Piece
      */
     public function getOppColor(): string
     {
-        return Convert::toOpposite($this->color);
+        return Color::opp($this->color);
     }
 
     /**
@@ -156,7 +156,7 @@ abstract class AbstractPiece implements Piece
      *
      * @param object $move
      */
-    public function setMove(object $move): Piece
+    public function setMove(object $move): AbstractPiece
     {
         $this->move = $move;
 

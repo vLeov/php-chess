@@ -1,12 +1,12 @@
 <?php
 
-namespace Chess\Tests\Unit\FEN\Validate;
+namespace Chess\Tests\Unit\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\Validate;
+use Chess\FEN\Field\CastlingAbility;
 use Chess\Tests\AbstractUnitTestCase;
 
-class CastleAbilityTest extends AbstractUnitTestCase
+class CastlingAbilityTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::castle('foobar');
+        CastlingAbility::validate('foobar');
     }
 
     /**
@@ -25,7 +25,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::castle('kqKQ');
+        CastlingAbility::validate('kqKQ');
     }
 
     /**
@@ -35,7 +35,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::castle('KkQq');
+        CastlingAbility::validate('KkQq');
     }
 
     /**
@@ -45,7 +45,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::castle('--');
+        CastlingAbility::validate('--');
     }
 
     /**
@@ -55,7 +55,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::castle('k-');
+        CastlingAbility::validate('k-');
     }
 
     /**
@@ -65,7 +65,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::castle('');
+        CastlingAbility::validate('');
     }
 
     /**
@@ -73,7 +73,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function start_w_KQkq()
     {
-        $this->assertSame('KQkq', Validate::castle('KQkq'));
+        $this->assertSame('KQkq', CastlingAbility::validate('KQkq'));
     }
 
     /**
@@ -81,7 +81,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function w_k()
     {
-        $this->assertSame('K', Validate::castle('K'));
+        $this->assertSame('K', CastlingAbility::validate('K'));
     }
 
     /**
@@ -89,7 +89,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function w_q()
     {
-        $this->assertSame('Q', Validate::castle('Q'));
+        $this->assertSame('Q', CastlingAbility::validate('Q'));
     }
 
     /**
@@ -97,7 +97,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function b_k()
     {
-        $this->assertSame('k', Validate::castle('k'));
+        $this->assertSame('k', CastlingAbility::validate('k'));
     }
 
     /**
@@ -105,7 +105,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function b_q()
     {
-        $this->assertSame('q', Validate::castle('q'));
+        $this->assertSame('q', CastlingAbility::validate('q'));
     }
 
     /**
@@ -113,7 +113,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function w_kq()
     {
-        $this->assertSame('KQ', Validate::castle('KQ'));
+        $this->assertSame('KQ', CastlingAbility::validate('KQ'));
     }
 
     /**
@@ -121,7 +121,7 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function b_kq()
     {
-        $this->assertSame('kq', Validate::castle('kq'));
+        $this->assertSame('kq', CastlingAbility::validate('kq'));
     }
 
     /**
@@ -129,6 +129,6 @@ class CastleAbilityTest extends AbstractUnitTestCase
      */
     public function hyphen()
     {
-        $this->assertSame('-', Validate::castle('-'));
+        $this->assertSame('-', CastlingAbility::validate('-'));
     }
 }

@@ -3,7 +3,8 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Abstract evaluation.
@@ -24,12 +25,17 @@ abstract class AbstractEvaluation
         $this->board = $board;
 
         $this->value = [
-            Symbol::P => 1,
-            Symbol::N => 3.2,
-            Symbol::B => 3.33,
-            Symbol::K => 4,
-            Symbol::R => 5.1,
-            Symbol::Q => 8.8,
+            Piece::P => 1,
+            Piece::N => 3.2,
+            Piece::B => 3.33,
+            Piece::K => 4,
+            Piece::R => 5.1,
+            Piece::Q => 8.8,
+        ];
+
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
         ];
     }
 }

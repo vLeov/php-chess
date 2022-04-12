@@ -2,16 +2,17 @@
 
 namespace Chess;
 
-use Chess\Castle;
-use Chess\PGN\Symbol;
+use Chess\CastleRule;
+use Chess\PGN\SAN\Castle;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 use Chess\Piece\Bishop;
 use Chess\Piece\King;
 use Chess\Piece\Knight;
 use Chess\Piece\Pawn;
-use Chess\Piece\Piece;
 use Chess\Piece\Queen;
 use Chess\Piece\Rook;
-use Chess\Piece\Type\RookType;
+use Chess\Piece\RookType;
 
 /**
  * Ascii
@@ -51,7 +52,7 @@ class Ascii
                 $file = 7 - $file;
                 $rank = 7 - $rank;
             }
-            Symbol::WHITE === $piece->getColor()
+            Color::W === $piece->getColor()
                 ? $array[$file][$rank] = ' ' . $piece->getId() . ' '
                 : $array[$file][$rank] = ' ' . strtolower($piece->getId()) . ' ';
         }
@@ -71,15 +72,15 @@ class Ascii
     {
         if (!$castle) {
             $castle = [
-                Symbol::WHITE => [
-                    Castle::IS_CASTLED => false,
-                    Symbol::O_O => false,
-                    Symbol::O_O_O => false,
+                Color::W => [
+                    CastleRule::IS_CASTLED => false,
+                    Castle::O_O => false,
+                    Castle::O_O_O => false,
                 ],
-                Symbol::BLACK => [
-                    Castle::IS_CASTLED => false,
-                    Symbol::O_O => false,
-                    Symbol::O_O_O => false,
+                Color::B => [
+                    CastleRule::IS_CASTLED => false,
+                    Castle::O_O => false,
+                    Castle::O_O_O => false,
                 ],
             ];
         }
@@ -91,9 +92,9 @@ class Ascii
                 $char = trim($item);
                 if (ctype_lower($char)) {
                     $char = strtoupper($char);
-                    $this->pushPiece(Symbol::BLACK, $char, $file.$rank, $castle, $pieces);
+                    $this->pushPiece(Color::B, $char, $file.$rank, $castle, $pieces);
                 } elseif (ctype_upper($char)) {
-                    $this->pushPiece(Symbol::WHITE, $char, $file.$rank, $castle, $pieces);
+                    $this->pushPiece(Color::W, $char, $file.$rank, $castle, $pieces);
                 }
                 $file = chr(ord($file) + 1);
             }
@@ -174,34 +175,34 @@ class Ascii
     private function pushPiece($color, $char, $sq, $castle, &$pieces): void
     {
         switch ($char) {
-            case Symbol::K:
+            case Piece::K:
                 $pieces[] = new King($color, $sq);
                 break;
-            case Symbol::Q:
+            case Piece::Q:
                 $pieces[] = new Queen($color, $sq);
                 break;
-            case Symbol::R:
-                if ($color === Symbol::BLACK &&
+            case Piece::R:
+                if ($color === Color::B &&
                     $sq === 'a8' &&
-                    $castle[$color][Symbol::O_O_O]
+                    $castle[$color][Castle::O_O_O]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
-                    $color === Symbol::BLACK &&
+                    $color === Color::B &&
                     $sq === 'h8' &&
-                    $castle[$color][Symbol::O_O]
+                    $castle[$color][Castle::O_O]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O);
                 } elseif (
-                    $color === Symbol::WHITE &&
+                    $color === Color::W &&
                     $sq === 'a1' &&
-                    $castle[$color][Symbol::O_O_O]
+                    $castle[$color][Castle::O_O_O]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
-                    $color === Symbol::WHITE &&
+                    $color === Color::W &&
                     $sq === 'h1' &&
-                    $castle[$color][Symbol::O_O]
+                    $castle[$color][Castle::O_O]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O);
                 } else {
@@ -209,13 +210,13 @@ class Ascii
                     $pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 }
                 break;
-            case Symbol::B:
+            case Piece::B:
                 $pieces[] = new Bishop($color, $sq);
                 break;
-            case Symbol::N:
+            case Piece::N:
                 $pieces[] = new Knight($color, $sq);
                 break;
-            case Symbol::P:
+            case Piece::P:
                 $pieces[] = new Pawn($color, $sq);
                 break;
             default:

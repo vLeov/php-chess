@@ -3,8 +3,10 @@
 namespace Chess\Piece;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\Symbol;
-use Chess\PGN\Validate;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Square;
+use Chess\PGN\SAN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Pawn class.
@@ -42,21 +44,19 @@ class Pawn extends AbstractPiece
      */
     public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $sq, Symbol::P);
+        parent::__construct($color, $sq, Piece::P);
 
         $this->file = $this->sq[0];
 
         switch ($this->color) {
-
-            case Symbol::WHITE:
+            case Color::W:
                 $this->ranks = (object) [
                     'initial' => 2,
                     'next' => (int)$this->sq[1] + 1,
                     'promotion' => 8
                 ];
                 break;
-
-            case Symbol::BLACK:
+            case Color::B:
                 $this->ranks = (object) [
                     'initial' => 7,
                     'next' => (int)$this->sq[1] - 1,
@@ -118,10 +118,10 @@ class Pawn extends AbstractPiece
 
         // en passant implementation
         if ($this->board->getLastHistory() &&
-            $this->board->getLastHistory()->move->id === Symbol::P &&
+            $this->board->getLastHistory()->move->id === Piece::P &&
             $this->board->getLastHistory()->move->color === $this->getOppColor()) {
             switch ($this->getColor()) {
-                case Symbol::WHITE:
+                case Color::W:
                     if ((int)$this->sq[1] === 5) {
                         $captureSquare =
                             $this->board->getLastHistory()->move->sq->next[0] .
@@ -132,7 +132,7 @@ class Pawn extends AbstractPiece
                         }
                     }
                     break;
-                case Symbol::BLACK:
+                case Color::B:
                     if ((int)$this->sq[1] === 4) {
                         $captureSquare =
                             $this->board->getLastHistory()->move->sq->next[0] .
@@ -196,7 +196,7 @@ class Pawn extends AbstractPiece
     {
         // next rank
         try {
-            if (Validate::sq($this->file . $this->ranks->next, true)) {
+            if (Square::validate($this->file . $this->ranks->next, true)) {
                 $this->travel->up[] = $this->file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
@@ -214,7 +214,7 @@ class Pawn extends AbstractPiece
         // capture square
         try {
             $file = chr(ord($this->file) - 1);
-            if (Validate::sq($file.$this->ranks->next, true)) {
+            if (Square::validate($file.$this->ranks->next, true)) {
                 $this->captureSquares[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
@@ -224,7 +224,7 @@ class Pawn extends AbstractPiece
         // capture square
         try {
             $file = chr(ord($this->file) + 1);
-            if (Validate::sq($file.$this->ranks->next, true)) {
+            if (Square::validate($file.$this->ranks->next, true)) {
                 $this->captureSquares[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {

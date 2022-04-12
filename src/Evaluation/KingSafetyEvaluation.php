@@ -5,7 +5,8 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * King safety.
@@ -22,8 +23,8 @@ class KingSafetyEvaluation extends AbstractEvaluation
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 1,
-            Symbol::BLACK => 1,
+            Color::W => 1,
+            Color::B => 1,
         ];
     }
 
@@ -32,15 +33,15 @@ class KingSafetyEvaluation extends AbstractEvaluation
         $pressEval = (new PressureEvaluation($this->board))->eval();
         $spEval = (new SpaceEvaluation($this->board))->eval();
 
-        $this->color(Symbol::WHITE, $pressEval, $spEval);
-        $this->color(Symbol::BLACK, $pressEval, $spEval);
+        $this->color(Color::W, $pressEval, $spEval);
+        $this->color(Color::B, $pressEval, $spEval);
 
         return $this->result;
     }
 
     private function color(string $color, array $pressEval, array $spEval): void
     {
-        $king = $this->board->getPiece($color, Symbol::K);
+        $king = $this->board->getPiece($color, Piece::K);
         foreach ($king->getTravel() as $key => $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
                 if ($piece->getColor() === $king->getOppColor()) {

@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
 
 /**
  * Checkmate in one.
@@ -20,8 +20,8 @@ class CheckmateInOneEvaluation extends AbstractEvaluation
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 

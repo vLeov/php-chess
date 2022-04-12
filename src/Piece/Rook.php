@@ -4,9 +4,9 @@ namespace Chess\Piece;
 
 use Chess\Exception\PieceTypeException;
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\Symbol;
-use Chess\PGN\Validate;
-use Chess\Piece\Type\RookType;
+use Chess\PGN\SAN\Square;
+use Chess\PGN\SAN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Rook class.
@@ -31,11 +31,11 @@ class Rook extends Slider
      */
     public function __construct(string $color, string $sq, string $type)
     {
-        if (!in_array($type, RookType::getChoices())) {
+        if (!in_array($type, RookType::all())) {
             throw new PieceTypeException;
         }
 
-        parent::__construct($color, $sq, Symbol::R);
+        parent::__construct($color, $sq, Piece::R);
 
         $this->type = $type;
 
@@ -68,7 +68,7 @@ class Rook extends Slider
         try {
             $file = $this->sq[0];
             $rank = (int)$this->sq[1] + 1;
-            while (Validate::sq($file.$rank)) {
+            while (Square::validate($file.$rank)) {
                 $this->travel->up[] = $file . $rank;
                 $rank = (int)$rank + 1;
             }
@@ -80,7 +80,7 @@ class Rook extends Slider
         try {
             $file = $this->sq[0];
             $rank = (int)$this->sq[1] - 1;
-            while (Validate::sq($file.$rank)) {
+            while (Square::validate($file.$rank)) {
                 $this->travel->bottom[] = $file . $rank;
                 $rank = (int)$rank - 1;
             }
@@ -92,7 +92,7 @@ class Rook extends Slider
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1];
-            while (Validate::sq($file.$rank)) {
+            while (Square::validate($file.$rank)) {
                 $this->travel->left[] = $file . $rank;
                 $file = chr(ord($file) - 1);
             }
@@ -104,7 +104,7 @@ class Rook extends Slider
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1];
-            while (Validate::sq($file.$rank)) {
+            while (Square::validate($file.$rank)) {
                 $this->travel->right[] = $file . $rank;
                 $file = chr(ord($file) + 1);
             }

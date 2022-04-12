@@ -5,7 +5,8 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\Composition;
 use Chess\Evaluation\AttackEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 class RelativePinEvaluation extends AbstractEvaluation
 {
@@ -16,8 +17,8 @@ class RelativePinEvaluation extends AbstractEvaluation
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -25,7 +26,7 @@ class RelativePinEvaluation extends AbstractEvaluation
     {
         $attackEvalBoard = (new AttackEvaluation($this->board))->eval();
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() !== Symbol::K && $piece->getId() !== Symbol::Q) {
+            if ($piece->getId() !== Piece::K && $piece->getId() !== Piece::Q) {
                 $oppColor = $piece->getOppColor();
                 $composition = (new Composition($this->board))
                     ->deletePieceByPosition($piece->getSquare())

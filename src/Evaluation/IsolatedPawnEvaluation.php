@@ -3,7 +3,8 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 use Chess\Piece\Pawn;
 
 class IsolatedPawnEvaluation extends AbstractEvaluation implements InverseEvaluationInterface
@@ -15,8 +16,8 @@ class IsolatedPawnEvaluation extends AbstractEvaluation implements InverseEvalua
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -24,8 +25,7 @@ class IsolatedPawnEvaluation extends AbstractEvaluation implements InverseEvalua
     {
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
-            /** @var Pawn $piece */
-            if ($piece->getId() === Symbol::P) {
+            if ($piece->getId() === Piece::P) {
                 $this->result[ $color ] += $this->checkIsolatedPawn($piece);
             }
         }
@@ -54,7 +54,7 @@ class IsolatedPawnEvaluation extends AbstractEvaluation implements InverseEvalua
 
         foreach ($sqs as $sq) {
             if ($nextPiece = $this->board->getPieceBySq($sq)) {
-                if ($nextPiece->getId() === Symbol::P && $nextPiece->getColor() === $color) {
+                if ($nextPiece->getId() === Piece::P && $nextPiece->getColor() === $color) {
                     return 0;
                 }
             }

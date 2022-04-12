@@ -4,7 +4,8 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Backward Pawn
@@ -21,8 +22,8 @@ class BackwardPawnEvaluation extends AbstractEvaluation implements InverseEvalua
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -31,7 +32,7 @@ class BackwardPawnEvaluation extends AbstractEvaluation implements InverseEvalua
         $captureSquares = [];
         $nextMoves = [];
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() === Symbol::P) {
+            if ($piece->getId() === Piece::P) {
                 $captureSquares[] = [
                     'color' => $piece->getColor(),
                     'captureSquares' => $piece->getCaptureSquares(),

@@ -3,7 +3,8 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Attack evaluation.
@@ -20,8 +21,8 @@ class AttackEvaluation extends AbstractEvaluation
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -29,16 +30,16 @@ class AttackEvaluation extends AbstractEvaluation
     {
         foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
-                case Symbol::K:
+                case Piece::K:
                     // TODO ...
                     break;
-                case Symbol::P:
+                case Piece::P:
                     foreach ($piece->getCaptureSquares() as $sq) {
                         if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
                                 $id = $item->getId();
-                                if ($id !== Symbol::K && $this->value[Symbol::P] < $this->value[$id]) {
-                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[Symbol::P];
+                                if ($id !== Piece::K && $this->value[Piece::P] < $this->value[$id]) {
+                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[Piece::P];
                                 }
                             }
                         }
@@ -49,7 +50,7 @@ class AttackEvaluation extends AbstractEvaluation
                         if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
                                 $id = $item->getId();
-                                if ($id !== Symbol::K && $this->value[$piece->getId()] < $this->value[$id]) {
+                                if ($id !== Piece::K && $this->value[$piece->getId()] < $this->value[$id]) {
                                     $this->result[$piece->getColor()] += $this->value[$id] - $this->value[$piece->getId()];
                                 }
                             }

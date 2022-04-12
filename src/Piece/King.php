@@ -2,9 +2,10 @@
 
 namespace Chess\Piece;
 
-use Chess\Castle;
-use Chess\PGN\Symbol;
-use Chess\Piece\Type\RookType;
+use Chess\CastleRule;
+use Chess\PGN\SAN\Castle;
+use Chess\PGN\SAN\Piece;
+use Chess\Piece\RookType;
 
 /**
  * King class.
@@ -32,7 +33,7 @@ class King extends AbstractPiece
      */
     public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $sq, Symbol::K);
+        parent::__construct($color, $sq, Piece::K);
 
         $this->rook = new Rook($color, $sq, RookType::SLIDER);
         $this->bishop = new Bishop($color, $sq);
@@ -42,9 +43,9 @@ class King extends AbstractPiece
 
     protected function moveCastleLong(): ?string
     {
-        $rule = Castle::color($this->getColor())[Symbol::K][Symbol::O_O_O];
+        $rule = CastleRule::color($this->getColor())[Piece::K][Castle::O_O_O];
         if (!$this->board->getCastle()[$this->getColor()]['isCastled']) {
-            if ($this->board->getCastle()[$this->getColor()][Symbol::O_O_O]) {
+            if ($this->board->getCastle()[$this->getColor()][Castle::O_O_O]) {
                 if (
                     in_array($rule['sqs']['b'], $this->board->getSqEval()->free) &&
                     in_array($rule['sqs']['c'], $this->board->getSqEval()->free) &&
@@ -63,9 +64,9 @@ class King extends AbstractPiece
 
     protected function moveCastleShort(): ?string
     {
-        $rule = Castle::color($this->getColor())[Symbol::K][Symbol::O_O];
+        $rule = CastleRule::color($this->getColor())[Piece::K][Castle::O_O];
         if (!$this->board->getCastle()[$this->getColor()]['isCastled']) {
-            if ($this->board->getCastle()[$this->getColor()][Symbol::O_O]) {
+            if ($this->board->getCastle()[$this->getColor()][Castle::O_O]) {
                 if (
                     in_array($rule['sqs']['f'], $this->board->getSqEval()->free) &&
                     in_array($rule['sqs']['g'], $this->board->getSqEval()->free) &&
@@ -105,10 +106,10 @@ class King extends AbstractPiece
      */
     public function getCastleRook(array $pieces): ?Rook
     {
-        $rule = Castle::color($this->getColor())[Symbol::R];
+        $rule = CastleRule::color($this->getColor())[Piece::R];
         foreach ($pieces as $piece) {
             if (
-                $piece->getId() === Symbol::R &&
+                $piece->getId() === Piece::R &&
                 $piece->getSquare() === $rule[rtrim($this->getMove()->pgn, '+')]['sq']['current']
             ) {
                 return $piece;

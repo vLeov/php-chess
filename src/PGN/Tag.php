@@ -2,8 +2,10 @@
 
 namespace Chess\PGN;
 
+use Chess\Exception\UnknownNotationException;
+
 /**
- * PGN tags.
+ * Tag.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -71,6 +73,36 @@ class Tag
 	const PLY_COUNT = 'PlyCount';
     const WHITE_RD = 'WhiteRD';
     const BLACK_RD = 'BlackRD';
+
+    /**
+     * Validation.
+     *
+     * @param string $tag
+     * @return object if the tag is valid
+     * @throws UnknownNotationException
+     */
+    public static function validate(string $tag): object
+    {
+        $isValid = false;
+        foreach (self::all() as $key => $val) {
+            if (preg_match('/^\[' . $val . ' \"(.*)\"\]$/', $tag)) {
+                $isValid = true;
+            }
+        }
+
+        if (!$isValid) {
+            throw new UnknownNotationException;
+        }
+
+        $exploded = explode(' "', $tag);
+
+        $result = (object) [
+            'name' => substr($exploded[0], 1),
+            'value' => substr($exploded[1], 0, -2),
+        ];
+
+        return $result;
+    }
 
     public static function all(): array
     {

@@ -3,7 +3,8 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Material.
@@ -20,21 +21,21 @@ class MaterialEvaluation extends AbstractEvaluation
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
     public function eval(): array
     {
-        foreach ($this->board->getPiecesByColor(Symbol::WHITE) as $piece) {
-            if ($piece->getId() !== Symbol::K) {
-                $this->result[Symbol::WHITE] += $this->value[$piece->getId()];
+        foreach ($this->board->getPiecesByColor(Color::W) as $piece) {
+            if ($piece->getId() !== Piece::K) {
+                $this->result[Color::W] += $this->value[$piece->getId()];
             }
         }
-        foreach ($this->board->getPiecesByColor(Symbol::BLACK) as $piece) {
-            if ($piece->getId() !== Symbol::K) {
-                $this->result[Symbol::BLACK] += $this->value[$piece->getId()];
+        foreach ($this->board->getPiecesByColor(Color::B) as $piece) {
+            if ($piece->getId() !== Piece::K) {
+                $this->result[Color::B] += $this->value[$piece->getId()];
             }
         }
 

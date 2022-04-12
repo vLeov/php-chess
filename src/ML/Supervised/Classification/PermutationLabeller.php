@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised\Classification;
 
 use Chess\ML\Supervised\AbstractLabeller;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
 
 class PermutationLabeller extends AbstractLabeller
 {
@@ -29,8 +29,8 @@ class PermutationLabeller extends AbstractLabeller
         $min = array_search(min($sums), $sums);
 
         return [
-            Symbol::WHITE => $max,
-            Symbol::BLACK => $min,
+            Color::W => $max,
+            Color::B => $min,
         ];
     }
 }

@@ -8,7 +8,10 @@ use Chess\Player;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\ShortStrToPgn;
 use Chess\FEN\StrToBoard;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Castle;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
+use Chess\PGN\SAN\Square;
 use Chess\PGN\Validate;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Rubix\ML\PersistentModel;
@@ -150,7 +153,7 @@ class Game
     {
         $result = [];
 
-        $pieces = $this->board->getPiecesByColor(Validate::color($color));
+        $pieces = $this->board->getPiecesByColor(Color::validate($color));
 
         foreach ($pieces as $piece) {
             $result[] = (object) [
@@ -171,20 +174,20 @@ class Game
      */
     public function piece(string $sq): ?object
     {
-        if ($piece = $this->board->getPieceBySq(Validate::sq($sq))) {
+        if ($piece = $this->board->getPieceBySq(Square::validate($sq))) {
             $moves = [];
             $color = $piece->getColor();
             foreach ($piece->getSqs() as $sq) {
                 $clone = unserialize(serialize($this->board));
                 switch ($piece->getId()) {
-                    case Symbol::K:
-                        if ($clone->play($color, Symbol::K.$sq)) {
+                    case Piece::K:
+                        if ($clone->play($color, Piece::K.$sq)) {
                             $moves[] = $sq;
-                        } elseif ($clone->play($color, Symbol::K.'x'.$sq)) {
+                        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
                             $moves[] = $sq;
                         }
                         break;
-                    case Symbol::P:
+                    case Piece::P:
                         if ($clone->play($color, $piece->getFile()."x$sq")) {
                             $moves[] = $sq;
                         } elseif ($clone->play($color, $sq)) {
@@ -206,7 +209,7 @@ class Game
                 'sq' => $piece->getSquare(),
                 'moves' => $moves,
             ];
-            if ($piece->getId() === Symbol::P) {
+            if ($piece->getId() === Piece::P) {
                 if ($enPassant = $piece->getEnPassantSq()) {
                     $result['enPassant'] = $enPassant;
                 }
@@ -322,27 +325,27 @@ class Game
         if (
           'K2R' === substr($fromRanks[7], -3) &&
           'KR' === substr($toRanks[7], -2) &&
-          $this->board->play(Symbol::WHITE, Symbol::O_O)
+          $this->board->play(Color::W, Castle::O_O)
         ) {
-            return Symbol::O_O;
+            return Castle::O_O;
         } elseif (
           'R3K' === substr($fromRanks[7], 0, 3) &&
           'R1K' === substr($toRanks[7], 0, 3) &&
-          $this->board->play(Symbol::WHITE, Symbol::O_O_O)
+          $this->board->play(Color::W, Castle::O_O_O)
         ) {
-            return Symbol::O_O_O;
+            return Castle::O_O_O;
         } elseif (
           'k2r' === substr($fromRanks[0], -3) &&
           'kr' === substr($toRanks[0], -2) &&
-          $this->board->play(Symbol::BLACK, Symbol::O_O)
+          $this->board->play(Color::B, Castle::O_O)
         ) {
-            return Symbol::O_O;
+            return Castle::O_O;
         } elseif (
           'r3k' === substr($fromRanks[0], 0, 3) &&
           'r1k' === substr($toRanks[0], 0, 3) &&
-          $this->board->play(Symbol::BLACK, Symbol::O_O_O)
+          $this->board->play(Color::B, Castle::O_O_O)
         ) {
-            return Symbol::O_O_O;
+            return Castle::O_O_O;
         }
 
         $pgn = (new ShortStrToPgn($fromFen, $toShortFen))->create();

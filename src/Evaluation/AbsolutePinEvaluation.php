@@ -4,7 +4,8 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Composition;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 class AbsolutePinEvaluation extends AbstractEvaluation implements InverseEvaluationInterface
 {
@@ -15,15 +16,15 @@ class AbsolutePinEvaluation extends AbstractEvaluation implements InverseEvaluat
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
     public function eval(): array
     {
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() !== Symbol::K) {
+            if ($piece->getId() !== Piece::K) {
                 $composition = (new Composition($this->board))
                     ->setTurn($piece->getOppColor())
                     ->deletePieceByPosition($piece->getSquare())

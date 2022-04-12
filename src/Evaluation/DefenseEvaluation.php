@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
 
 /**
  * Defense evaluation.
@@ -16,19 +16,6 @@ use Chess\PGN\Symbol;
 class DefenseEvaluation extends AbstractEvaluation
 {
     const NAME = 'defense';
-
-    /**
-     * @param \Chess\Board $board
-     */
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ];
-    }
 
     /**
      * Returns the squares containing the pieces being defended at the present moment.
@@ -47,8 +34,8 @@ class DefenseEvaluation extends AbstractEvaluation
             $this->board->next();
         }
 
-        sort($this->result[Symbol::WHITE]);
-        sort($this->result[Symbol::BLACK]);
+        sort($this->result[Color::W]);
+        sort($this->result[Color::B]);
 
         return $this->result;
     }

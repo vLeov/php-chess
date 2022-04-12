@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
 
 /**
  * Square evaluation.
@@ -17,16 +17,6 @@ class SqEvaluation extends AbstractEvaluation
 
     const TYPE_FREE      = 'free';
     const TYPE_USED      = 'used';
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
-        ];
-    }
 
     public function eval($feature): array
     {
@@ -72,7 +62,7 @@ class SqEvaluation extends AbstractEvaluation
         return array_values(
             array_diff(
                 $this->all(),
-                [...$used[Symbol::WHITE], ...$used[Symbol::BLACK]]
+                [...$used[Color::W], ...$used[Color::B]]
         ));
     }
 
@@ -84,8 +74,8 @@ class SqEvaluation extends AbstractEvaluation
     private function used(array $pieces): array
     {
         $used = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => []
+            Color::W => [],
+            Color::B => []
         ];
 
         foreach ($pieces as $piece) {

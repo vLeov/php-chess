@@ -1,11 +1,12 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN\Validate;
+namespace Chess\Tests\Unit\FEN\Field;
 
-use Chess\PGN\Validate;
+use Chess\Exception\UnknownNotationException;
+use Chess\FEN\Field\EnPassantTargetSquare;
 use Chess\Tests\AbstractUnitTestCase;
 
-class SquareTest extends AbstractUnitTestCase
+class EnPassantTargetSquareTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -14,7 +15,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq(9);
+        EnPassantTargetSquare::validate(9);
     }
 
     /**
@@ -24,7 +25,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq(9.75);
+        EnPassantTargetSquare::validate(9.75);
     }
 
     /**
@@ -34,7 +35,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq('a9');
+        EnPassantTargetSquare::validate('a9');
     }
 
     /**
@@ -44,7 +45,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq('foo');
+        EnPassantTargetSquare::validate('foo');
     }
 
     /**
@@ -52,6 +53,6 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function e4()
     {
-        $this->assertSame(Validate::sq('e4'), 'e4');
+        $this->assertSame(EnPassantTargetSquare::validate('e4'), 'e4');
     }
 }

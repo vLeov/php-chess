@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\FEN\Validate;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\Validate;
+use Chess\FEN\Str;
 use Chess\Tests\AbstractUnitTestCase;
 
 class StrTest extends AbstractUnitTestCase
@@ -15,7 +15,7 @@ class StrTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::fen('foo');
+        Str::validate('foo');
     }
 
     /**
@@ -25,7 +25,7 @@ class StrTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Validate::fen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP w - - bm Nf6+');
+        Str::validate('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP w - - bm Nf6+');
     }
 
     /**
@@ -35,7 +35,7 @@ class StrTest extends AbstractUnitTestCase
     {
         $string = '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+; id "position 01";';
 
-        $this->assertSame($string, Validate::fen($string));
+        $this->assertSame($string, Str::validate($string));
     }
 
     /**
@@ -45,6 +45,6 @@ class StrTest extends AbstractUnitTestCase
     {
         $string = '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+';
 
-        $this->assertSame($string, Validate::fen($string));
+        $this->assertSame($string, Str::validate($string));
     }
 }

@@ -2,29 +2,30 @@
 
 namespace Chess;
 
-use Chess\PGN\Convert;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Castle;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
- * Castle.
+ * Castle rule.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Castle
+class CastleRule
 {
     const IS_CASTLED = 'isCastled';
 
     public static array $initialState = [
-        Symbol::WHITE => [
+        Color::W => [
             self::IS_CASTLED => false,
-            Symbol::O_O => true,
-            Symbol::O_O_O => true,
+            Castle::O_O => true,
+            Castle::O_O_O => true,
         ],
-        Symbol::BLACK => [
+        Color::B => [
             self::IS_CASTLED => false,
-            Symbol::O_O => true,
-            Symbol::O_O_O => true,
+            Castle::O_O => true,
+            Castle::O_O_O => true,
         ],
     ];
 
@@ -37,10 +38,10 @@ class Castle
     public static function color(string $color): array
     {
         switch ($color) {
-            case Symbol::WHITE:
+            case Color::W:
                 return [
-                    Symbol::K => [
-                        Symbol::O_O => [
+                    Piece::K => [
+                        Castle::O_O => [
                             'sqs' => [
                                 'f' => 'f1',
                                 'g' => 'g1',
@@ -50,7 +51,7 @@ class Castle
                                 'next' => 'g1',
                             ],
                         ],
-                        Symbol::O_O_O => [
+                        Castle::O_O_O => [
                             'sqs' => [
                                 'b' => 'b1',
                                 'c' => 'c1',
@@ -62,14 +63,14 @@ class Castle
                             ],
                         ],
                     ],
-                    Symbol::R => [
-                        Symbol::O_O => [
+                    Piece::R => [
+                        Castle::O_O => [
                             'sq' => [
                                 'current' => 'h1',
                                 'next' => 'f1',
                             ],
                         ],
-                        Symbol::O_O_O => [
+                        Castle::O_O_O => [
                             'sq' => [
                                 'current' => 'a1',
                                 'next' => 'd1',
@@ -78,10 +79,10 @@ class Castle
                     ],
                 ];
 
-            case Symbol::BLACK:
+            case Color::B:
                 return [
-                    Symbol::K => [
-                        Symbol::O_O => [
+                    Piece::K => [
+                        Castle::O_O => [
                             'sqs' => [
                                 'f' => 'f8',
                                 'g' => 'g8',
@@ -91,7 +92,7 @@ class Castle
                                 'next' => 'g8',
                             ],
                         ],
-                        Symbol::O_O_O => [
+                        Castle::O_O_O => [
                             'sqs' => [
                                 'b' => 'b8',
                                 'c' => 'c8',
@@ -103,14 +104,14 @@ class Castle
                             ],
                         ],
                     ],
-                    Symbol::R => [
-                        Symbol::O_O => [
+                    Piece::R => [
+                        Castle::O_O => [
                             'sq' => [
                                 'current' => 'h8',
                                 'next' => 'f8',
                             ],
                         ],
-                        Symbol::O_O_O => [
+                        Castle::O_O_O => [
                             'sq' => [
                                 'current' => 'a8',
                                 'next' => 'd8',
@@ -131,14 +132,14 @@ class Castle
      */
     public static function short(string $color, array $castle, object $space): bool
     {
-        return $castle[$color][Symbol::O_O] &&
+        return $castle[$color][Castle::O_O] &&
             !(in_array(
-                self::color($color)[Symbol::K][Symbol::O_O]['sqs']['f'],
-                $space->{Convert::toOpposite($color)})
+                self::color($color)[Piece::K][Castle::O_O]['sqs']['f'],
+                $space->{Color::opp($color)})
              ) &&
             !(in_array(
-                self::color($color)[Symbol::K][Symbol::O_O]['sqs']['g'],
-                $space->{Convert::toOpposite($color)})
+                self::color($color)[Piece::K][Castle::O_O]['sqs']['g'],
+                $space->{Color::opp($color)})
              );
     }
 
@@ -152,18 +153,18 @@ class Castle
      */
     public static function long(string $color, array $castle, object $space): bool
     {
-        return $castle[$color][Symbol::O_O_O] &&
+        return $castle[$color][Castle::O_O_O] &&
             !(in_array(
-                self::color($color)[Symbol::K][Symbol::O_O_O]['sqs']['b'],
-                $space->{Convert::toOpposite($color)})
+                self::color($color)[Piece::K][Castle::O_O_O]['sqs']['b'],
+                $space->{Color::opp($color)})
              ) &&
             !(in_array(
-                self::color($color)[Symbol::K][Symbol::O_O_O]['sqs']['c'],
-                $space->{Convert::toOpposite($color)})
+                self::color($color)[Piece::K][Castle::O_O_O]['sqs']['c'],
+                $space->{Color::opp($color)})
              ) &&
             !(in_array(
-                self::color($color)[Symbol::K][Symbol::O_O_O]['sqs']['d'],
-                $space->{Convert::toOpposite($color)})
+                self::color($color)[Piece::K][Castle::O_O_O]['sqs']['d'],
+                $space->{Color::opp($color)})
              );
     }
 }

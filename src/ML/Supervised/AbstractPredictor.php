@@ -3,6 +3,7 @@
 namespace Chess\ML\Supervised;
 
 use Chess\Board;
+use Chess\PGN\SAN\Color;
 use Rubix\ML\PersistentModel;
 
 abstract class AbstractPredictor
@@ -28,7 +29,7 @@ abstract class AbstractPredictor
     protected function sort(string $color): AbstractPredictor
     {
         usort($this->result, function ($a, $b) use ($color) {
-            if ($color === Symbol::WHITE) {
+            if ($color === Color::W) {
                 $current = (current($b)['label'] <=> current($a)['label']) * 10 +
                     (current($b)['prediction'] <=> current($a)['prediction']);
             } else {

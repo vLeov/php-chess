@@ -3,7 +3,8 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 use Chess\Piece\Pawn;
 
 class PassedPawnEvaluation extends AbstractEvaluation
@@ -15,8 +16,8 @@ class PassedPawnEvaluation extends AbstractEvaluation
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -24,8 +25,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
     {
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
-            /** @var Pawn $piece */
-            if ($piece->getId() === Symbol::P) {
+            if ($piece->getId() === Piece::P) {
                 $this->result[ $color ] += $this->getThreatPassedPawn($piece);
             }
         }
@@ -46,7 +46,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
             if ($file < 'a' || $file > 'h') {
                 continue;
             }
-            if ($color === Symbol::WHITE) {
+            if ($color === Color::W) {
                 $listRanks = range($ranks->next, $ranks->promotion - 1);
             } else {
                 $listRanks = range($ranks->next, $ranks->promotion + 1);
@@ -59,7 +59,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
         $passedPawn = true;
         foreach ($sqs as $sq) {
             if ($nextPiece = $this->board->getPieceBySq($sq)) {
-                if ($nextPiece->getId() === Symbol::P && $nextPiece->getColor() !== $color) {
+                if ($nextPiece->getId() === Piece::P && $nextPiece->getColor() !== $color) {
                     $passedPawn = false;
                     break;
                 }
@@ -67,7 +67,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
         }
         if ($passedPawn) {
             $position = $pawn->getSquare();
-            if ($color === Symbol::WHITE) {
+            if ($color === Color::W) {
                 return $position[ 1 ];
             } else {
                 return 9 - $position[ 1 ];

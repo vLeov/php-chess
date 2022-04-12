@@ -4,7 +4,7 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
 
 /**
  * Center.
@@ -32,8 +32,8 @@ class CenterEvaluation extends AbstractEvaluation
         parent::__construct($board);
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
@@ -44,15 +44,15 @@ class CenterEvaluation extends AbstractEvaluation
             if ($piece = $this->board->getPieceBySq($sq)) {
                 $this->result[$piece->getColor()] += $this->value[$piece->getId()] * $val;
             }
-            if (in_array($sq, $spEval[Symbol::WHITE])) {
-                $this->result[Symbol::WHITE] += $val;
+            if (in_array($sq, $spEval[Color::W])) {
+                $this->result[Color::W] += $val;
             }
-            if (in_array($sq, $spEval[Symbol::BLACK])) {
-                $this->result[Symbol::BLACK] += $val;
+            if (in_array($sq, $spEval[Color::B])) {
+                $this->result[Color::B] += $val;
             }
         }
-        $this->result[Symbol::WHITE] = round($this->result[Symbol::WHITE], 2);
-        $this->result[Symbol::BLACK] = round($this->result[Symbol::BLACK], 2);
+        $this->result[Color::W] = round($this->result[Color::W], 2);
+        $this->result[Color::B] = round($this->result[Color::B], 2);
 
         return $this->result;
     }

@@ -22,7 +22,6 @@ use Chess\Evaluation\RelativeForkEvaluation;
 use Chess\Evaluation\SqOutpostEvaluation;
 use Chess\Evaluation\KnightOutpostEvaluation;
 use Chess\Evaluation\BishopOutpostEvaluation;
-use Chess\PGN\Symbol;
 
 /**
  * HeuristicsTrait

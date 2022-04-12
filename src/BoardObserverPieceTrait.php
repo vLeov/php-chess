@@ -2,11 +2,11 @@
 
 namespace Chess;
 
-use Chess\Piece\Piece;
+use Chess\Piece\AbstractPiece;
 
 trait BoardObserverPieceTrait
 {
-    public function attachPiece(Piece $piece): void
+    public function attachPiece(AbstractPiece $piece): void
     {
         $key = spl_object_hash($piece);
         $this->observers[$key] = $piece;

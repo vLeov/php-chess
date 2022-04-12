@@ -4,7 +4,9 @@ namespace Chess\FEN;
 
 use Chess\Ascii;
 use Chess\Board;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Castle;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * BoardToStr
@@ -63,16 +65,16 @@ class BoardToStr
     {
         $castleRights = '';
         $castle = $this->board->getCastle();
-        if ($castle[Symbol::WHITE][Symbol::O_O]) {
+        if ($castle[Color::W][Castle::O_O]) {
             $castleRights .= 'K';
         }
-        if ($castle[Symbol::WHITE][Symbol::O_O_O]) {
+        if ($castle[Color::W][Castle::O_O_O]) {
             $castleRights .= 'Q';
         }
-        if ($castle[Symbol::BLACK][Symbol::O_O]) {
+        if ($castle[Color::B][Castle::O_O]) {
             $castleRights .= 'k';
         }
-        if ($castle[Symbol::BLACK][Symbol::O_O_O]) {
+        if ($castle[Color::B][Castle::O_O_O]) {
             $castleRights .= 'q';
         }
         if ($castleRights === '') {
@@ -87,10 +89,10 @@ class BoardToStr
         $history = $this->board->getHistory();
         if ($history) {
             $last = array_slice($history, -1)[0];
-            if ($last->move->id === Symbol::P) {
+            if ($last->move->id === Piece::P) {
                 $prev = $last->sq;
                 $next = $last->move->sq->next;
-                if ($last->move->color === Symbol::WHITE) {
+                if ($last->move->color === Color::W) {
                     if ($last->move->sq->next[1] - $last->sq[1] === 2) {
                         $rank = $last->sq[1] + 1;
                         return $last->move->sq->current.$rank;

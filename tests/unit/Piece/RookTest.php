@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Piece;
 
 use Chess\Piece\Rook;
-use Chess\Piece\Type\RookType;
+use Chess\Piece\RookType;
 use Chess\Tests\AbstractUnitTestCase;
 
 class RookTest extends AbstractUnitTestCase

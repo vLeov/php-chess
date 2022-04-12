@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Tests\Unit\FEN\Validate;
+namespace Chess\Tests\Unit\PGN\SAN;
 
-use Chess\FEN\Validate;
+use Chess\PGN\SAN\Square;
 use Chess\Tests\AbstractUnitTestCase;
 
 class SquareTest extends AbstractUnitTestCase
@@ -14,7 +14,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq(9);
+        Square::validate(9);
     }
 
     /**
@@ -24,7 +24,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq(9.75);
+        Square::validate(9.75);
     }
 
     /**
@@ -34,7 +34,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq('a9');
+        Square::validate('a9');
     }
 
     /**
@@ -44,7 +44,7 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::sq('foo');
+        Square::validate('foo');
     }
 
     /**
@@ -52,6 +52,6 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function e4()
     {
-        $this->assertSame(Validate::sq('e4'), 'e4');
+        $this->assertSame(Square::validate('e4'), 'e4');
     }
 }

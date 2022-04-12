@@ -2,26 +2,68 @@
 
 namespace Chess\PGN;
 
-use Chess\PGN\Symbol;
+use Chess\Exception\UnknownNotationException;
+use Chess\PGN\SAN\Castle;
+use Chess\PGN\SAN\Check;
+use Chess\PGN\SAN\Square;
 
 /**
- * Encodes chess moves in PGN format.
+ * Move.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class Move
 {
-    const O_O = Symbol::O_O . Symbol::CHECK;
-    const O_O_O = Symbol::O_O_O . Symbol::CHECK;
-    const KING = 'K' . Symbol::SQUARE . Symbol::CHECK;
-    const KING_CAPTURES = 'Kx' . Symbol::SQUARE . Symbol::CHECK;
-    const PIECE = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}' . Symbol::SQUARE . Symbol::CHECK;
-    const PIECE_CAPTURES = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}x' . Symbol::SQUARE . Symbol::CHECK;
-    const KNIGHT = 'N[a-h]{0,1}[1-8]{0,1}' . Symbol::SQUARE . Symbol::CHECK;
-    const KNIGHT_CAPTURES = 'N[a-h]{0,1}[1-8]{0,1}x' . Symbol::SQUARE . Symbol::CHECK;
-    const PAWN = Symbol::SQUARE . Symbol::CHECK;
-    const PAWN_CAPTURES = '[a-h]{1}x' . Symbol::SQUARE . Symbol::CHECK;
-    const PAWN_PROMOTES = '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Symbol::CHECK;
-    const PAWN_CAPTURES_AND_PROMOTES = '[a-h]{1}x' . '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Symbol::CHECK;
+    const O_O = Castle::O_O . Check::REGEX;
+    const O_O_O = Castle::O_O_O . Check::REGEX;
+    const KING = 'K' . Square::REGEX . Check::REGEX;
+    const KING_CAPTURES = 'Kx' . Square::REGEX . Check::REGEX;
+    const PIECE = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;
+    const PIECE_CAPTURES = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}x' . Square::REGEX . Check::REGEX;
+    const KNIGHT = 'N[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;
+    const KNIGHT_CAPTURES = 'N[a-h]{0,1}[1-8]{0,1}x' . Square::REGEX . Check::REGEX;
+    const PAWN = Square::REGEX . Check::REGEX;
+    const PAWN_CAPTURES = '[a-h]{1}x' . Square::REGEX . Check::REGEX;
+    const PAWN_PROMOTES = '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Check::REGEX;
+    const PAWN_CAPTURES_AND_PROMOTES = '[a-h]{1}x' . '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Check::REGEX;
+
+    /**
+     * Validation.
+     *
+     * @param string $color
+     * @return bool
+     * @throws UnknownNotationException
+     */
+    public static function validate(string $move): bool
+    {
+        switch (true) {
+            case preg_match('/^' . self::KING . '$/', $move):
+                return true;
+            case preg_match('/^' . self::O_O . '$/', $move):
+                return true;
+            case preg_match('/^' . self::O_O_O . '$/', $move):
+                return true;
+            case preg_match('/^' . self::KING_CAPTURES . '$/', $move):
+                return true;
+            case preg_match('/^' . self::PIECE . '$/', $move):
+                return true;
+            case preg_match('/^' . self::PIECE_CAPTURES . '$/', $move):
+                return true;
+            case preg_match('/^' . self::KNIGHT . '$/', $move):
+                return true;
+            case preg_match('/^' . self::KNIGHT_CAPTURES . '$/', $move):
+                return true;
+            case preg_match('/^' . self::PAWN . '$/', $move):
+                return true;
+            case preg_match('/^' . self::PAWN_CAPTURES . '$/', $move):
+                return true;
+            case preg_match('/^' . self::PAWN_PROMOTES . '$/', $move):
+                return true;
+            case preg_match('/^' . self::PAWN_CAPTURES_AND_PROMOTES . '$/', $move):
+                return true;
+            default:
+                throw new UnknownNotationException;
+        }
+    }
 }

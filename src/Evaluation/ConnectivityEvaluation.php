@@ -4,7 +4,8 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SqEvaluation;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Connectivity.
@@ -30,15 +31,15 @@ class ConnectivityEvaluation extends AbstractEvaluation
         ];
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 
     public function eval(): array
     {
-        $this->color(Symbol::WHITE);
-        $this->color(Symbol::BLACK);
+        $this->color(Color::W);
+        $this->color(Color::B);
 
         return $this->result;
     }
@@ -47,19 +48,19 @@ class ConnectivityEvaluation extends AbstractEvaluation
     {
         foreach ($this->board->getPiecesByColor($color) as $piece) {
             switch ($piece->getId()) {
-                case Symbol::K:
+                case Piece::K:
                     $this->result[$color] += count(
                         array_intersect(array_values((array)$piece->getTravel()),
                         $this->sqEval[SqEvaluation::TYPE_USED][$color])
                     );
                     break;
-                case Symbol::N:
+                case Piece::N:
                     $this->result[$color] += count(
                         array_intersect($piece->getTravel(),
                         $this->sqEval[SqEvaluation::TYPE_USED][$color])
                     );
                     break;
-                case Symbol::P:
+                case Piece::P:
                     $this->result[$color] += count(
                         array_intersect($piece->getCaptureSquares(),
                         $this->sqEval[SqEvaluation::TYPE_USED][$color])

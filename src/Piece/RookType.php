@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Piece\Type;
+namespace Chess\Piece;
 
 /**
- * RookType class.
+ * RookType.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -15,7 +15,7 @@ class RookType
     const PROMOTED = 'promoted';
     const SLIDER = 'slider';
 
-    public static function getChoices(): array
+    public static function all(): array
     {
         return [
             self::O_O,

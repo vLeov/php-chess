@@ -5,8 +5,8 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\Evaluation\DefenseEvaluation;
 use Chess\Evaluation\PressureEvaluation;
-use Chess\PGN\Convert;
-use Chess\PGN\Symbol;
+use Chess\PGN\SAN\Color;
+use Chess\PGN\SAN\Piece;
 
 /**
  * Tactics evaluation.
@@ -45,13 +45,13 @@ class TacticsEvaluation extends AbstractEvaluation
         $this->pressEval = (new PressureEvaluation($board))->eval();
 
         $this->target = [
-            Symbol::WHITE => [],
-            Symbol::BLACK => [],
+            Color::W => [],
+            Color::B => [],
         ];
 
         $this->result = [
-            Symbol::WHITE => 0,
-            Symbol::BLACK => 0,
+            Color::W => 0,
+            Color::B => 0,
         ];
 
         $this->target();
@@ -67,7 +67,7 @@ class TacticsEvaluation extends AbstractEvaluation
         foreach ($this->target as $color => $sqs) {
             foreach ($sqs as $sq) {
                 $id = $this->board->getPieceBySq($sq)->getId();
-                if ($id !== Symbol::K) {
+                if ($id !== Piece::K) {
                     $this->result[$color] += $this->value[$id];
                 }
             }
@@ -85,9 +85,9 @@ class TacticsEvaluation extends AbstractEvaluation
     {
         foreach ($this->pressEval as $color => $sqs) {
             $countPress = array_count_values($sqs);
-            $countDefense = array_count_values($this->defenseEval[Convert::toOpposite($color)]);
+            $countDefense = array_count_values($this->defenseEval[Color::opp($color)]);
             foreach ($sqs as $sq) {
-                if (in_array($sq, $this->defenseEval[Convert::toOpposite($color)])) {
+                if (in_array($sq, $this->defenseEval[Color::opp($color)])) {
                     if ($countPress[$sq] > $countDefense[$sq]) {
                         $this->target[$color][] = $sq;
                     }

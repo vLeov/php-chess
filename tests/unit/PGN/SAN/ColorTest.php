@@ -1,9 +1,8 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN\Validate;
+namespace Chess\Tests\Unit\PGN\SAN;
 
-use Chess\PGN\Symbol;
-use Chess\PGN\Validate;
+use Chess\PGN\SAN\Color;
 use Chess\Tests\AbstractUnitTestCase;
 
 class ColorTest extends AbstractUnitTestCase
@@ -15,7 +14,7 @@ class ColorTest extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Validate::color('green');
+        Color::validate('green');
     }
 
     /**
@@ -23,7 +22,7 @@ class ColorTest extends AbstractUnitTestCase
      */
     public function white()
     {
-        $this->assertSame(Symbol::WHITE, Validate::color('w'));
+        $this->assertSame(Color::W, Color::validate('w'));
     }
 
     /**
@@ -31,6 +30,6 @@ class ColorTest extends AbstractUnitTestCase
      */
     public function black()
     {
-        $this->assertSame(Symbol::BLACK, Validate::color('b'));
+        $this->assertSame(Color::B, Color::validate('b'));
     }
 }
