@@ -18,6 +18,16 @@ class SqEvaluation extends AbstractEvaluation
     const TYPE_FREE      = 'free';
     const TYPE_USED      = 'used';
 
+    public function __construct(Board $board)
+    {
+        parent::__construct($board);
+
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
+        ];
+    }
+
     public function eval($feature): array
     {
         $pieces = iterator_to_array($this->board, false);

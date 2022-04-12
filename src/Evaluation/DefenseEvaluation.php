@@ -17,6 +17,16 @@ class DefenseEvaluation extends AbstractEvaluation
 {
     const NAME = 'defense';
 
+    public function __construct(Board $board)
+    {
+        parent::__construct($board);
+
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
+        ];
+    }
+
     /**
      * Returns the squares containing the pieces being defended at the present moment.
      *

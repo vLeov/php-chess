@@ -18,6 +18,16 @@ class SqOutpostEvaluation extends AbstractEvaluation
 
     private array $ranks = [3, 4, 5, 6];
 
+    public function __construct(Board $board)
+    {
+        parent::__construct($board);
+
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
+        ];
+    }
+
     public function eval(): array
     {
         foreach ($this->board->getPieces() as $piece) {

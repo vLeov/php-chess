@@ -32,10 +32,5 @@ abstract class AbstractEvaluation
             Piece::R => 5.1,
             Piece::Q => 8.8,
         ];
-
-        $this->result = [
-            Color::W => [],
-            Color::B => [],
-        ];
     }
 }

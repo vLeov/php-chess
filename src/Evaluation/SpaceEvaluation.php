@@ -29,6 +29,11 @@ class SpaceEvaluation extends AbstractEvaluation
             SqEvaluation::TYPE_FREE => $sqEval->eval(SqEvaluation::TYPE_FREE),
             SqEvaluation::TYPE_USED => $sqEval->eval(SqEvaluation::TYPE_USED),
         ];
+
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
+        ];
     }
 
     public function eval(): array
