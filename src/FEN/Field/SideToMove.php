@@ -13,6 +13,13 @@ use Chess\PGN\SAN\Color;
  */
 class SideToMove implements ValidationInterface
 {
+    /**
+     * Validation.
+     *
+     * @param string $value
+     * @return string if the value is valid
+     * @throws UnknownNotationException
+     */
      public static function validate(string $value): string
      {
          return Color::validate($value);
