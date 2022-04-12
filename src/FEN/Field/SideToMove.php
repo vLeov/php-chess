@@ -3,6 +3,7 @@
 namespace Chess\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\FEN\ValidationInterface;
 use Chess\PGN\SAN\Color;
 
 /**
@@ -14,7 +15,7 @@ use Chess\PGN\SAN\Color;
 class SideToMove implements ValidationInterface
 {
     /**
-     * Validation.
+     * String validation.
      *
      * @param string $value
      * @return string if the value is valid

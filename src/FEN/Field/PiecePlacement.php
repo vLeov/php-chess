@@ -3,6 +3,7 @@
 namespace Chess\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\FEN\ValidationInterface;
 
 /**
  * Piece placement.
@@ -13,7 +14,7 @@ use Chess\Exception\UnknownNotationException;
 class PiecePlacement implements ValidationInterface
 {
     /**
-     * Validation.
+     * String validation.
      *
      * @param string $value
      * @return string if the value is valid

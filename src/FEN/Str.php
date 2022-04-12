@@ -3,19 +3,27 @@
 namespace Chess\FEN;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\FEN\ValidationInterface;
 use Chess\FEN\Field\CastlingAbility;
 use Chess\FEN\Field\EnPassantTargetSquare;
 use Chess\FEN\Field\PiecePlacement;
 use Chess\FEN\Field\SideToMove;
 
 /**
- * Validation class.
+ * FEN string.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Str
+class Str implements ValidationInterface
 {
+    /**
+     * String validation.
+     *
+     * @param string $value
+     * @return string if the value is valid
+     * @throws UnknownNotationException
+     */
     public static function validate(string $string): string
     {
         $fields = explode(' ', $string);

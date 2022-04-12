@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\FEN\Field;
+namespace Chess\FEN;
 
 interface ValidationInterface
 {
     /**
-     * Validation.
+     * String validation.
      *
      * @param string $value
      * @return string if the value is valid
