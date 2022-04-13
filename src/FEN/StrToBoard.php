@@ -116,7 +116,7 @@ class StrToBoard
         }
     }
 
-    private function pushPiece($color, $char, $sq)
+    private function pushPiece(string $color, string $char, string $sq)
     {
         switch ($char) {
             case Piece::K:

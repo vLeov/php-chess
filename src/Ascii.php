@@ -26,7 +26,7 @@ use Chess\Piece\RookType;
 class Ascii
 {
     /**
-     * Returns an ASCII array from a Chess\Board object.
+     * Returns an ASCII array given a Chess\Board object.
      *
      * @param \Chess\Board $board
      * @param bool $flip
@@ -61,7 +61,7 @@ class Ascii
     }
 
     /**
-     * Returns a Chess\Board object from an ASCII array.
+     * Returns a Chess\Board object given an ASCII array.
      *
      * @param array $array
      * @param string $turn
@@ -105,12 +105,12 @@ class Ascii
     }
 
     /**
-     * Returns an ASCII string from a Chess\Board object.
+     * Returns an ASCII string given a Chess\Board object.
      *
      * @param \Chess\Board $board
      * @return string
      */
-    public function print(Board $board): string
+    public function toString(Board $board): string
     {
         $ascii = '';
         $array = $this->toArray($board);
@@ -125,12 +125,28 @@ class Ascii
     }
 
     /**
+     * Sets a piece in a specific square given an ASCII array.
+     *
+     * @param string $piece
+     * @param string $sq
+     * @param array $array
+     * @return \Chess\Ascii
+     */
+    public function setArrayElem(string $piece, string $sq, &$array): Ascii
+    {
+        $index = $this->fromAlgebraicToIndex($sq);
+        $array[$index[0]][$index[1]] = $piece;
+
+        return $this;
+    }
+
+    /**
      * Returns the ASCII array indexes of a square described in algebraic notation.
      *
      * @param string $sq
      * @return array
      */
-    public function fromAlgebraicToIndex(string $sq): array
+    private function fromAlgebraicToIndex(string $sq): array
     {
         $i = $sq[1] - 1;
         $j = ord($sq[0]) - 97;
@@ -148,28 +164,12 @@ class Ascii
      * @param int $j
      * @return string
      */
-    public function fromIndexToAlgebraic(int $i, int $j): string
+    private function fromIndexToAlgebraic(int $i, int $j): string
     {
         $file = chr(97 + $j);
         $rank = $i + 1;
 
         return $file.$rank;
-    }
-
-    /**
-     * Sets a piece in a specific square given an ASCII array.
-     *
-     * @param string $piece
-     * @param string $sq
-     * @param array $array
-     * @return \Chess\Ascii
-     */
-    public function setArrayElem(string $piece, string $sq, &$array): Ascii
-    {
-        $index = $this->fromAlgebraicToIndex($sq);
-        $array[$index[0]][$index[1]] = $piece;
-
-        return $this;
     }
 
     private function pushPiece($color, $char, $sq, $castle, &$pieces): void

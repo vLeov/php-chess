@@ -5,6 +5,7 @@ pages:
   - Chess\Board: board.md
   - Chess\Game: game.md
   - Chess\Heuristics: heuristics.md
+  - Chess\Movetext: movetext.md
   - Chess\Player: player.md
   - Chess\Combinatorics\RestrictedPermutationWithRepetition: combinatorics-restricted-permutation-with-repetition.md
   - Chess\FEN\BoardToStr: fen-board-to-str.md
@@ -13,7 +14,6 @@ pages:
   - Chess\Media\BoardToJpg: media-board-to-jpg.md
   - Chess\Media\BoardToMp4: media-board-to-mp4.md
   - Chess\Media\BoardToPng: media-board-to-png.md
-  - Chess\PGN\Movetext: pgn-movetext.md
   - Command Line Interface: cli.md
   - Usage: usage.md
 theme: readthedocs

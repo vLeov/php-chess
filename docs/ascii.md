@@ -1,8 +1,8 @@
-The methods in the `Chess\Ascii` class can be used to convert `Chess\Board` objects into character-based representations such as strings or arrays, and vice versa.
+The methods in the [`Chess\Ascii`](https://php-chess.readthedocs.io/en/latest/ascii/) class can be used to convert [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) objects into character-based representations such as strings or arrays, and vice versa.
 
 #### `toArray(Board $board, bool $flip = false): array`
 
-Returns an ASCII array from a `Chess\Board` object.
+Returns an ASCII array given a `Chess\Board` object.
 
 ```php
 use Chess\Ascii;
@@ -123,12 +123,12 @@ Array
 
 #### `toBoard(array $array, string $turn, $castle = null): Board`
 
-Returns a `Chess\Board` object from an ASCII array.
+Returns a `Chess\Board` object given an ASCII array.
 
 ```php
 use Chess\Ascii;
 
-$sq = [
+$array = [
     7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
     6 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' p ', ' . ', ' p ' ],
     5 => [ ' . ', ' . ', ' . ', ' p ', ' . ', ' n ', ' p ', ' . ' ],
@@ -152,12 +152,12 @@ $castle = [
     ],
 ];
 
-$board = (new Ascii())->toBoard($sq, 'b', $castle);
+$board = (new Ascii())->toBoard($array, 'b', $castle);
 ```
 
-#### `print(Board $board): string`
+#### `toString(Board $board): string`
 
-Returns an ASCII string from a `Chess\Board` object.
+Returns an ASCII string given a `Chess\Board` object.
 
 ```php
 use Chess\Ascii;
@@ -167,7 +167,7 @@ $board = new Board();
 $board->play('w', 'e4');
 $board->play('b', 'e5');
 
-$string = (new Ascii())->print($board);
+$string = (new Ascii())->toString($board);
 
 print_r($string);
 ```
@@ -185,46 +185,6 @@ P  P  P  P  .  P  P  P
 R  N  B  Q  K  B  N  R
 ```
 
-#### `fromAlgebraicToIndex(string $sq): array`
-
-Returns the ASCII array indexes of a square described in algebraic notation.
-
-```php
-use Chess\Ascii;
-
-$array = (new Ascii())->fromAlgebraicToIndex('a1');
-
-print_r($array);
-```
-
-Output:
-
-```
-Array
-(
-    [0] => 0
-    [1] => 0
-)
-```
-
-#### `fromIndexToAlgebraic(int $i, int $j): string`
-
-Returns the square in algebraic notation corresponding to the given ASCII array indexes.
-
-```php
-use Chess\Ascii;
-
-$string = (new Ascii())->fromIndexToAlgebraic(7, 7);
-
-print_r($string);
-```
-
-Output:
-
-```
-h8
-```
-
 #### `setArrayElem(string $piece, string $sq, &$array): Ascii`
 
 Sets a piece in a specific square in the given ASCII array.
@@ -232,7 +192,7 @@ Sets a piece in a specific square in the given ASCII array.
 ```php
 use Chess\Ascii;
 
-$sq = [
+$array = [
     7 => [ ' r ', ' n ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],
     6 => [ ' p ', ' p ', ' p ', ' p ', ' . ', ' p ', ' p ', ' p ' ],
     5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
@@ -243,15 +203,14 @@ $sq = [
     0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
 ];
 
-$ascii = new Ascii();
-
-$board = $ascii->setArrayElem(' . ', 'g1', $sq)
-            ->setArrayElem(' N ', 'f3', $sq)
-            ->toBoard($sq, 'b');
+$board = (new Ascii())
+            ->setArrayElem(' . ', 'g1', $array)
+            ->setArrayElem(' N ', 'f3', $array)
+            ->toBoard($array, 'b');
 
 $board->play('b', 'Nc6');
 
-$string = (new Ascii())->print($board);
+$string = (new Ascii())->toString($board);
 
 print_r($string);
 ```
