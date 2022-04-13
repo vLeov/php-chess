@@ -10,25 +10,25 @@ use Chess\Exception\UnknownNotationException;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Color
+class Color implements ValidationInterface
 {
     const W = 'w';
     const B = 'b';
 
     /**
-     * Validation.
+     * Validate.
      *
-     * @param string $color
-     * @return string if the color is valid
+     * @param string $value
+     * @return string if the value is valid
      * @throws UnknownNotationException
      */
-    public static function validate(string $color): string
+    public static function validate(string $value): string
     {
-        if ($color !== self::W && $color !== self::B) {
+        if ($value !== self::W && $value !== self::B) {
             throw new UnknownNotationException;
         }
 
-        return $color;
+        return $value;
     }
 
     /**

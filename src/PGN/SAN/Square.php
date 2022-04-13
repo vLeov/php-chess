@@ -10,23 +10,23 @@ use Chess\Exception\UnknownNotationException;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Square
+class Square implements ValidationInterface
 {
     const REGEX = '[a-h]{1}[1-8]{1}';
 
     /**
-     * Validation.
+     * Validate.
      *
-     * @param string $sq
-     * @return string if the square is valid
+     * @param string $value
+     * @return string if the value is valid
      * @throws UnknownNotationException
      */
-    public static function validate(string $sq): string
+    public static function validate(string $value): string
     {
-        if (!preg_match('/^' . self::REGEX . '$/', $sq)) {
+        if (!preg_match('/^' . self::REGEX . '$/', $value)) {
             throw new UnknownNotationException;
         }
 
-        return $sq;
+        return $value;
     }
 }
