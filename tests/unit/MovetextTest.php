@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\PGN;
 
-use Chess\PGN\Movetext;
+use Chess\Movetext;
 use Chess\Tests\AbstractUnitTestCase;
 
 class MovetextTest extends AbstractUnitTestCase

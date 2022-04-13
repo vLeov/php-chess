@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit;
 
 use Chess\Game;
-use Chess\PGN\Movetext;
+use Chess\Movetext;
 use Chess\Tests\AbstractUnitTestCase;
 
 class GameTest extends AbstractUnitTestCase

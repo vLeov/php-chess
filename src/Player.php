@@ -3,7 +3,6 @@
 namespace Chess;
 
 use Chess\Exception\PlayerException;
-use Chess\PGN\Movetext;
 
 /**
  * Player.

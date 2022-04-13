@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\PGN;
+namespace Chess;
 
 use Chess\Exception\MovetextException;
 use Chess\Exception\UnknownNotationException;
