@@ -285,15 +285,11 @@ final class Board extends \SplObjectStorage
      */
     public function getMovetext(): string
     {
-        $i = 1;
         $movetext = '';
         foreach ($this->history as $key => $val) {
-            if ($key % 2 === 0) {
-                $movetext .= $i . ".{$val->move->pgn}";
-                $i++;
-            } else {
-                $movetext .= " {$val->move->pgn} ";
-            }
+            $key % 2 === 0
+                ? $movetext .= (($key / 2) + 1) . ".{$val->move->pgn}"
+                : $movetext .= " {$val->move->pgn} ";
         }
 
         return trim($movetext);

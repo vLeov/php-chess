@@ -15,7 +15,7 @@ use Chess\PGN\Move;
 class Movetext
 {
     /**
-     * The movetext.
+     * Movetext.
      *
      * @var object
      */
@@ -68,16 +68,9 @@ class Movetext
     {
         $text = '';
         foreach ($this->movetext->moves as $key => $val) {
-            if ($key === 0) {
-                $text .= "1.{$this->movetext->moves[0]} ";
-            } else if ($key === 1) {
-                $text .= "{$this->movetext->moves[1]} ";
-            } elseif ($key % 2 === 0) {
-                $n = $key - ($key / 2) + 1;
-                $text .= "$n.{$this->movetext->moves[$key]} ";
-            } else {
-                $text .= "{$this->movetext->moves[$key]} ";
-            }
+            $key % 2 === 0
+                ? $text .= (($key / 2) + 1) . ".{$this->movetext->moves[$key]}"
+                : $text .= " {$this->movetext->moves[$key]} ";
         }
 
         return trim($text);
