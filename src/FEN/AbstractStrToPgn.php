@@ -6,8 +6,8 @@ use Chess\Board;
 use Chess\CastleRule;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\StrToBoard;
-use Chess\PGN\SAN\Castle;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Piece;
 
 abstract class AbstractStrToPgn
 {

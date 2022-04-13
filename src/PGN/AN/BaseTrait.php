@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\PGN\SAN;
+namespace Chess\PGN\AN;
 
 /**
  * Base trait.

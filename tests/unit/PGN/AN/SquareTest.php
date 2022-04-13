@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN\SAN;
+namespace Chess\Tests\Unit\PGN\AN;
 
-use Chess\PGN\SAN\Square;
+use Chess\PGN\AN\Square;
 use Chess\Tests\AbstractUnitTestCase;
 
 class SquareTest extends AbstractUnitTestCase

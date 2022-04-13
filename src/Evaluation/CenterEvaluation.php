@@ -4,7 +4,7 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SpaceEvaluation;
-use Chess\PGN\SAN\Color;
+use Chess\PGN\AN\Color;
 
 /**
  * Center.

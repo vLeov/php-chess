@@ -4,7 +4,7 @@ namespace Chess\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\FEN\ValidationInterface;
-use Chess\PGN\SAN\Color;
+use Chess\PGN\AN\Color;
 
 /**
  * Side to move.

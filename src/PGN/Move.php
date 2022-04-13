@@ -3,9 +3,9 @@
 namespace Chess\PGN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\SAN\Castle;
-use Chess\PGN\SAN\Check;
-use Chess\PGN\SAN\Square;
+use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Check;
+use Chess\PGN\AN\Square;
 
 /**
  * Move.

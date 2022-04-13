@@ -4,8 +4,8 @@ namespace Chess\Evaluation;
 
 use Chess\Board;
 use Chess\Evaluation\SqEvaluation;
-use Chess\PGN\SAN\Color;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Piece;
 
 /**
  * Space evaluation.

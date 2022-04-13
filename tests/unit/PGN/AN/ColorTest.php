@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN\SAN;
+namespace Chess\Tests\Unit\PGN\AN;
 
-use Chess\PGN\SAN\Color;
+use Chess\PGN\AN\Color;
 use Chess\Tests\AbstractUnitTestCase;
 
 class ColorTest extends AbstractUnitTestCase

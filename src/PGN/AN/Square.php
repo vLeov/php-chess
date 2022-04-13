@@ -1,21 +1,20 @@
 <?php
 
-namespace Chess\PGN\SAN;
+namespace Chess\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
 
 /**
- * Color.
+ * Square.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Color implements ValidationInterface
+class Square implements ValidationInterface
 {
     use BaseTrait;
     
-    const W = 'w';
-    const B = 'b';
+    const REGEX = '[a-h]{1}[1-8]{1}';
 
     /**
      * Validate.
@@ -26,25 +25,10 @@ class Color implements ValidationInterface
      */
     public static function validate(string $value): string
     {
-        if ($value !== self::W && $value !== self::B) {
+        if (!preg_match('/^' . self::REGEX . '$/', $value)) {
             throw new UnknownNotationException;
         }
 
         return $value;
-    }
-
-    /**
-     * Returns the opposite color.
-     *
-     * @param string $color
-     * @return string
-     */
-    public static function opp(?string $color): string
-    {
-        if ($color == self::W) {
-            return self::B;
-        }
-
-        return self::W;
     }
 }

@@ -4,7 +4,7 @@ namespace Chess\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\FEN\ValidationInterface;
-use Chess\PGN\SAN\Square;
+use Chess\PGN\AN\Square;
 
 /**
  * En passant target square.

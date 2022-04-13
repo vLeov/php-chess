@@ -3,8 +3,8 @@
 namespace Chess\Piece;
 
 use Chess\CastleRule;
-use Chess\PGN\SAN\Castle;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Piece;
 use Chess\Piece\RookType;
 
 /**

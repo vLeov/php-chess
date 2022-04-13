@@ -3,8 +3,8 @@
 namespace Chess\Piece;
 
 use Chess\Board;
-use Chess\PGN\SAN\Color;
-use Chess\PGN\SAN\Square;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Square;
 
 /**
  * AbstractPiece

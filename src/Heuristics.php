@@ -3,7 +3,7 @@
 namespace Chess;
 
 use Chess\Evaluation\InverseEvaluationInterface;
-use Chess\PGN\SAN\Color;
+use Chess\PGN\AN\Color;
 
 class Heuristics extends Player
 {

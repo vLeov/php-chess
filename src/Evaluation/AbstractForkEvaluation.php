@@ -2,7 +2,7 @@
 
 namespace Chess\Evaluation;
 
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 abstract class AbstractForkEvaluation extends AbstractEvaluation

@@ -3,9 +3,9 @@
 namespace Chess\Piece;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\SAN\Color;
-use Chess\PGN\SAN\Square;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Square;
+use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**

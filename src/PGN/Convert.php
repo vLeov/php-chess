@@ -4,9 +4,9 @@ namespace Chess\PGN;
 
 use Chess\CastleRule;
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\SAN\Castle;
-use Chess\PGN\SAN\Color;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Piece;
 
 /**
  * Convert class.

@@ -3,7 +3,7 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\SAN\Color;
+use Chess\PGN\AN\Color;
 
 /**
  * Checkmate in one.

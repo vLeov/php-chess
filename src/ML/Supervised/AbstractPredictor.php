@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised;
 
 use Chess\Board;
-use Chess\PGN\SAN\Color;
+use Chess\PGN\AN\Color;
 use Rubix\ML\PersistentModel;
 
 abstract class AbstractPredictor

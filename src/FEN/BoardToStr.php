@@ -4,9 +4,9 @@ namespace Chess\FEN;
 
 use Chess\Ascii;
 use Chess\Board;
-use Chess\PGN\SAN\Castle;
-use Chess\PGN\SAN\Color;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Piece;
 
 /**
  * BoardToStr

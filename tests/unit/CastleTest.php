@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit;
 
 use Chess\CastleRule;
-use Chess\PGN\SAN\Castle;
-use Chess\PGN\SAN\Color;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 
 class CastleTest extends AbstractUnitTestCase

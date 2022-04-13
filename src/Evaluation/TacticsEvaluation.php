@@ -5,8 +5,8 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\Evaluation\DefenseEvaluation;
 use Chess\Evaluation\PressureEvaluation;
-use Chess\PGN\SAN\Color;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Piece;
 
 /**
  * Tactics evaluation.

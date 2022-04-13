@@ -5,8 +5,8 @@ namespace Chess\Tests\Unit\PGN;
 use Chess\CastleRule;
 use Chess\PGN\Convert;
 use Chess\PGN\Move;
-use Chess\PGN\SAN\Castle;
-use Chess\PGN\SAN\Piece;
+use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 
 class ConvertTest extends AbstractUnitTestCase
