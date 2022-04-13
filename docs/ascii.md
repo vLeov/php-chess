@@ -1,8 +1,6 @@
-The methods in the [`Chess\Ascii`](https://php-chess.readthedocs.io/en/latest/ascii/) class can be used to convert [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) objects into character-based representations such as strings or arrays, and vice versa.
+The methods in the `Chess\Ascii` class can be used to convert [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) objects into character-based representations such as strings or arrays, and vice versa.
 
-Let's look at the methods available through the following examples.
-
-> For further details please check out the tests in [unit/tests/AsciiTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/AsciiTest.php).
+Let's look at the methods available through the following examples; for further details you may want to check out the tests in [unit/tests/AsciiTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/AsciiTest.php).
 
 ---
 
@@ -20,9 +18,6 @@ $array = Ascii::toArray($board);
 
 print_r($array);
 ```
-
-Output:
-
 ```
 Array
 (
@@ -125,8 +120,6 @@ Array
 )
 ```
 
----
-
 Create a `Chess\Board` object given an ASCII array.
 
 ```php
@@ -159,8 +152,6 @@ $castle = [
 $board = Ascii::toBoard($array, 'b', $castle);
 ```
 
----
-
 Create an ASCII string given a `Chess\Board` object.
 
 ```php
@@ -175,9 +166,6 @@ $string = Ascii::toString($board);
 
 print_r($string);
 ```
-
-Output:
-
 ```
 r  n  b  q  k  b  n  r
 p  p  p  p  .  p  p  p
@@ -188,8 +176,6 @@ p  p  p  p  .  p  p  p
 P  P  P  P  .  P  P  P
 R  N  B  Q  K  B  N  R
 ```
-
----
 
 Set elements in the given ASCII array and then create a `Chess\Board` object.
 
@@ -217,9 +203,6 @@ $string = Ascii::toString($board);
 
 print_r($string);
 ```
-
-Output:
-
 ```
 r  .  b  q  k  b  n  r
 p  p  p  p  .  p  p  p

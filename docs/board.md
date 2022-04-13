@@ -1,6 +1,6 @@
 This is a chess board representation that allows to play chess in Portable Game Notation (PGN) format. It is a cornerstone allowing to build multiple features on top of it: FEN string generation, ASCII representation, PNG image creation, position evaluation, etc.
 
-Let's look at some relevant [`Chess\Board`](https://github.com/chesslablab/php-chess/blob/master/src/Board.php) methods available through the following example:
+Let's look at the methods available through the following example.
 
 ```php
 use Chess\Board;
@@ -13,18 +13,17 @@ $board->play('w', 'exd5');
 $board->play('b', 'Qxd5');
 ```
 
-#### `getCaptures(): ?array`
+For further details you may want to check out the tests in [unit/tests/BoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/BoardTest.php).
 
-Gets the pieces captured by both players as an array of `stdClass` objects.
+---
+
+Get the pieces captured by both players.
 
 ```php
 $captures = $board->getCaptures();
 
 var_export($captures);
 ```
-
-Output:
-
 ```text
 array (
   'w' =>
@@ -62,16 +61,13 @@ array (
 )
 ```
 
-#### `getCastle(): array`
-
-Gets the castle status.
+Get the castle status.
 
 ```php
 $castle = $board->getCastle();
 
 var_export($castle);
 ```
-
 ```text
 array (
   'w' =>
@@ -89,18 +85,13 @@ array (
 )
 ```
 
-#### `getHistory(): ?array`
-
-Gets the history as an array of `stdClass` objects.
+Get the history.
 
 ```php
 $history = $board->getHistory();
 
 var_export($history);
 ```
-
-Output:
-
 ```text
 array (
   0 =>
@@ -142,102 +133,68 @@ array (
 )
 ```
 
-#### `getMovetext(): string`
-
-Gets the movetext.
+Get the movetext.
 
 ```php
 $movetext = $board->getMovetext();
 
 var_export($movetext);
 ```
-
-Output:
-
 ```text
 '1.e4 d5 2.exd5 Qxd5'
 ```
 
-#### `getTurn(): string`
-
-Gets the current turn.
+Get the current turn.
 
 ```php
 $turn = $board->getTurn();
 
 var_export($turn);
 ```
-
-Output:
-
 ```text
 'w'
 ```
 
-#### `isCheck(): bool`
-
-Checks out whether the current player is in check.
+Check out whether the current player is in check.
 
 ```php
 $isCheck = $board->isCheck();
 
 var_export($isCheck);
 ```
-
-Output:
-
 ```text
 false
 ```
 
-#### `isMate(): bool`
-
-Checks out whether the current player is checkmated.
+Check out whether the current player is checkmated.
 
 ```php
 $isMate = $board->isMate();
 
 var_export($isMate);
 ```
-
-Output:
-
 ```text
 false
 ```
 
-#### `isStalemate(): bool`
-
-Checks out whether the current player is stalemated.
+Check out whether the current player is stalemated.
 
 ```php
 $isStalemate = $board->isStalemate();
 
 var_export($isStalemate);
 ```
-
-Output:
-
 ```text
 false
 ```
 
-#### `play(string $color, string $pgn): bool`
-
-Makes a move.
+Make a move.
 
 ```php
 $board->play('w', 'Nc3');
 
 var_export($board->getMovetext());
 ```
-
-Output:
-
 ```text
 '1.e4 d5 2.exd5 Qxd5 3.Nc3'
 ```
-
-#### `possibleMoves(): ?array`
-
-Returns all possible moves.
