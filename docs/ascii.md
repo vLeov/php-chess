@@ -1,8 +1,12 @@
 The methods in the [`Chess\Ascii`](https://php-chess.readthedocs.io/en/latest/ascii/) class can be used to convert [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) objects into character-based representations such as strings or arrays, and vice versa.
 
-#### `toArray(Board $board, bool $flip = false): array`
+Let's look at the methods available through the following examples.
 
-Returns an ASCII array given a `Chess\Board` object.
+> For further details please check out the tests in [unit/tests/AsciiTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/AsciiTest.php).
+
+---
+
+Create an ASCII array given a `Chess\Board` object.
 
 ```php
 use Chess\Ascii;
@@ -12,7 +16,7 @@ $board = new Board();
 $board->play('w', 'e4');
 $board->play('b', 'e5');
 
-$array = (new Ascii())->toArray($board);
+$array = Ascii::toArray($board);
 
 print_r($array);
 ```
@@ -121,9 +125,9 @@ Array
 )
 ```
 
-#### `toBoard(array $array, string $turn, $castle = null): Board`
+---
 
-Returns a `Chess\Board` object given an ASCII array.
+Create a `Chess\Board` object given an ASCII array.
 
 ```php
 use Chess\Ascii;
@@ -152,12 +156,12 @@ $castle = [
     ],
 ];
 
-$board = (new Ascii())->toBoard($array, 'b', $castle);
+$board = Ascii::toBoard($array, 'b', $castle);
 ```
 
-#### `toString(Board $board): string`
+---
 
-Returns an ASCII string given a `Chess\Board` object.
+Create an ASCII string given a `Chess\Board` object.
 
 ```php
 use Chess\Ascii;
@@ -167,7 +171,7 @@ $board = new Board();
 $board->play('w', 'e4');
 $board->play('b', 'e5');
 
-$string = (new Ascii())->toString($board);
+$string = Ascii::toString($board);
 
 print_r($string);
 ```
@@ -185,9 +189,9 @@ P  P  P  P  .  P  P  P
 R  N  B  Q  K  B  N  R
 ```
 
-#### `setArrayElem(string $piece, string $sq, &$array): Ascii`
+---
 
-Sets a piece in a specific square in the given ASCII array.
+Set elements in the given ASCII array and then create a `Chess\Board` object.
 
 ```php
 use Chess\Ascii;
@@ -203,14 +207,13 @@ $array = [
     0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
 ];
 
-$board = (new Ascii())
-            ->setArrayElem(' . ', 'g1', $array)
+$board = Ascii::setArrayElem(' . ', 'g1', $array)
             ->setArrayElem(' N ', 'f3', $array)
             ->toBoard($array, 'b');
 
 $board->play('b', 'Nc6');
 
-$string = (new Ascii())->toString($board);
+$string = Ascii::toString($board);
 
 print_r($string);
 ```

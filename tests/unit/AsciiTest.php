@@ -47,8 +47,7 @@ class AsciiTest extends AbstractUnitTestCase
             0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' . ', ' R ' ],
         ];
 
-        (new Ascii())
-            ->setArrayElem(' . ', 'g1', $array)
+        Ascii::setArrayElem(' . ', 'g1', $array)
             ->setArrayElem(' N ', 'f3', $array);
 
         $this->assertSame($expected, $array);
@@ -72,7 +71,7 @@ class AsciiTest extends AbstractUnitTestCase
         $board->play('w', 'e4');
         $board->play('b', 'e5');
 
-        $array = (new Ascii())->toArray($board);
+        $array = Ascii::toArray($board);
 
         $expected = [
             7 => [ ' r ', ' n ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],
@@ -95,7 +94,7 @@ class AsciiTest extends AbstractUnitTestCase
     {
         $board = (new BenkoGambit(new Board()))->play();
 
-        $array = (new Ascii())->toArray($board);
+        $array = Ascii::toArray($board);
 
         $expected = [
             7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
@@ -118,7 +117,7 @@ class AsciiTest extends AbstractUnitTestCase
     {
         $board = (new BenoniFianchettoVariation(new Board()))->play();
 
-        $array = (new Ascii())->toArray($board);
+        $array = Ascii::toArray($board);
 
         $expected = [
             7 => [ ' r ', ' . ', ' b ', ' q ', ' r ', ' . ', ' k ', ' . ' ],
@@ -141,7 +140,7 @@ class AsciiTest extends AbstractUnitTestCase
     {
         $board = (new FrenchDefenseClassical(new Board()))->play();
 
-        $array = (new Ascii())->toArray($board);
+        $array = Ascii::toArray($board);
 
         $expected = [
             7 => [ ' r ', ' n ', ' b ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
@@ -195,8 +194,8 @@ class AsciiTest extends AbstractUnitTestCase
             ],
         ];
 
-        $board = (new Ascii())->toBoard($expected, 'w', $castle);
-        $array = (new Ascii())->toArray($board);
+        $board = Ascii::toBoard($expected, 'w', $castle);
+        $array = Ascii::toArray($board);
 
         $this->assertSame($expected, $array);
     }
@@ -230,8 +229,8 @@ class AsciiTest extends AbstractUnitTestCase
             ],
         ];
 
-        $board = (new Ascii())->toBoard($expected, 'b', $castle);
-        $array = (new Ascii())->toArray($board);
+        $board = Ascii::toBoard($expected, 'b', $castle);
+        $array = Ascii::toArray($board);
 
         $this->assertSame($expected, $array);
     }
@@ -265,8 +264,8 @@ class AsciiTest extends AbstractUnitTestCase
             ],
         ];
 
-        $board = (new Ascii())->toBoard($expected, 'b', $castle);
-        $array = (new Ascii())->toArray($board);
+        $board = Ascii::toBoard($expected, 'b', $castle);
+        $array = Ascii::toArray($board);
 
         $this->assertSame($expected, $array);
     }
@@ -287,8 +286,8 @@ class AsciiTest extends AbstractUnitTestCase
             0 => [ ' R ', ' . ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
         ];
 
-        $board = (new Ascii())->toBoard($expected, 'w');
-        $array = (new Ascii())->toArray($board);
+        $board = Ascii::toBoard($expected, 'w');
+        $array = Ascii::toArray($board);
 
         $this->assertSame($expected, $array);
     }

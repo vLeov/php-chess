@@ -32,7 +32,7 @@ class Ascii
      * @param bool $flip
      * @return array
      */
-    public function toArray(Board $board, bool $flip = false): array
+    public static function toArray(Board $board, bool $flip = false): array
     {
         $array = [
             7 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
@@ -47,7 +47,7 @@ class Ascii
 
         foreach ($board->getPieces() as $piece) {
             $position = $piece->getSquare();
-            list($file, $rank) = $this->fromAlgebraicToIndex($position);
+            list($file, $rank) = self::fromAlgebraicToIndex($position);
             if ($flip) {
                 $file = 7 - $file;
                 $rank = 7 - $rank;
@@ -68,7 +68,7 @@ class Ascii
      * @param \stdClass $castle
      * @return \Chess\Board
      */
-    public function toBoard(array $array, string $turn, $castle = null): Board
+    public static function toBoard(array $array, string $turn, $castle = null): Board
     {
         if (!$castle) {
             $castle = [
@@ -92,9 +92,9 @@ class Ascii
                 $char = trim($item);
                 if (ctype_lower($char)) {
                     $char = strtoupper($char);
-                    $this->pushPiece(Color::B, $char, $file.$rank, $castle, $pieces);
+                    self::pushPiece(Color::B, $char, $file.$rank, $castle, $pieces);
                 } elseif (ctype_upper($char)) {
-                    $this->pushPiece(Color::W, $char, $file.$rank, $castle, $pieces);
+                    self::pushPiece(Color::W, $char, $file.$rank, $castle, $pieces);
                 }
                 $file = chr(ord($file) + 1);
             }
@@ -110,10 +110,10 @@ class Ascii
      * @param \Chess\Board $board
      * @return string
      */
-    public function toString(Board $board): string
+    public static function toString(Board $board): string
     {
         $ascii = '';
-        $array = $this->toArray($board);
+        $array = self::toArray($board);
         foreach ($array as $i => $rank) {
             foreach ($rank as $j => $file) {
                 $ascii .= $array[$i][$j];
@@ -132,12 +132,12 @@ class Ascii
      * @param array $array
      * @return \Chess\Ascii
      */
-    public function setArrayElem(string $piece, string $sq, &$array): Ascii
+    public static function setArrayElem(string $piece, string $sq, &$array): Ascii
     {
-        $index = $this->fromAlgebraicToIndex($sq);
+        $index = self::fromAlgebraicToIndex($sq);
         $array[$index[0]][$index[1]] = $piece;
 
-        return $this;
+        return new static();
     }
 
     /**
@@ -146,7 +146,7 @@ class Ascii
      * @param string $sq
      * @return array
      */
-    private function fromAlgebraicToIndex(string $sq): array
+    private static function fromAlgebraicToIndex(string $sq): array
     {
         $i = $sq[1] - 1;
         $j = ord($sq[0]) - 97;
@@ -164,7 +164,7 @@ class Ascii
      * @param int $j
      * @return string
      */
-    private function fromIndexToAlgebraic(int $i, int $j): string
+    private static function fromIndexToAlgebraic(int $i, int $j): string
     {
         $file = chr(97 + $j);
         $rank = $i + 1;
@@ -172,7 +172,7 @@ class Ascii
         return $file.$rank;
     }
 
-    private function pushPiece($color, $char, $sq, $castle, &$pieces): void
+    private static function pushPiece($color, $char, $sq, $castle, &$pieces): void
     {
         switch ($char) {
             case Piece::K:
