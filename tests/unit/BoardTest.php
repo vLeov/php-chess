@@ -12,7 +12,6 @@ use Chess\Piece\Rook;
 use Chess\Piece\RookType;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
-use Chess\PGN\Convert;
 use Chess\PGN\Move;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;

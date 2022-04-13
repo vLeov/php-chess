@@ -9,7 +9,6 @@ use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SqEvaluation;
 use Chess\Exception\BoardException;
 use Chess\PGN\Move;
-use Chess\PGN\Validate;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;

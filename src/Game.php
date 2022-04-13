@@ -12,7 +12,6 @@ use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\AN\Square;
-use Chess\PGN\Validate;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
