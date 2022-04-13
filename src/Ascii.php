@@ -74,13 +74,13 @@ class Ascii
             $castle = [
                 Color::W => [
                     CastleRule::IS_CASTLED => false,
-                    Castle::O_O => false,
-                    Castle::O_O_O => false,
+                    Castle::SHORT => false,
+                    Castle::LONG => false,
                 ],
                 Color::B => [
                     CastleRule::IS_CASTLED => false,
-                    Castle::O_O => false,
-                    Castle::O_O_O => false,
+                    Castle::SHORT => false,
+                    Castle::LONG => false,
                 ],
             ];
         }
@@ -184,25 +184,25 @@ class Ascii
             case Piece::R:
                 if ($color === Color::B &&
                     $sq === 'a8' &&
-                    $castle[$color][Castle::O_O_O]
+                    $castle[$color][Castle::LONG]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
                     $color === Color::B &&
                     $sq === 'h8' &&
-                    $castle[$color][Castle::O_O]
+                    $castle[$color][Castle::SHORT]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O);
                 } elseif (
                     $color === Color::W &&
                     $sq === 'a1' &&
-                    $castle[$color][Castle::O_O_O]
+                    $castle[$color][Castle::LONG]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
                     $color === Color::W &&
                     $sq === 'h1' &&
-                    $castle[$color][Castle::O_O]
+                    $castle[$color][Castle::SHORT]
                 ) {
                     $pieces[] = new Rook($color, $sq, RookType::O_O);
                 } else {

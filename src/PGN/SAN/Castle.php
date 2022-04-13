@@ -10,6 +10,6 @@ namespace Chess\PGN\SAN;
  */
 class Castle
 {
-    const O_O = 'O-O';
-    const O_O_O = 'O-O-O';
+    const SHORT = 'O-O';
+    const LONG = 'O-O-O';
 }

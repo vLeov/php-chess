@@ -19,13 +19,13 @@ class CastleRule
     public static array $initialState = [
         Color::W => [
             self::IS_CASTLED => false,
-            Castle::O_O => true,
-            Castle::O_O_O => true,
+            Castle::SHORT => true,
+            Castle::LONG => true,
         ],
         Color::B => [
             self::IS_CASTLED => false,
-            Castle::O_O => true,
-            Castle::O_O_O => true,
+            Castle::SHORT => true,
+            Castle::LONG => true,
         ],
     ];
 
@@ -41,7 +41,7 @@ class CastleRule
             case Color::W:
                 return [
                     Piece::K => [
-                        Castle::O_O => [
+                        Castle::SHORT => [
                             'sqs' => [
                                 'f' => 'f1',
                                 'g' => 'g1',
@@ -51,7 +51,7 @@ class CastleRule
                                 'next' => 'g1',
                             ],
                         ],
-                        Castle::O_O_O => [
+                        Castle::LONG => [
                             'sqs' => [
                                 'b' => 'b1',
                                 'c' => 'c1',
@@ -64,13 +64,13 @@ class CastleRule
                         ],
                     ],
                     Piece::R => [
-                        Castle::O_O => [
+                        Castle::SHORT => [
                             'sq' => [
                                 'current' => 'h1',
                                 'next' => 'f1',
                             ],
                         ],
-                        Castle::O_O_O => [
+                        Castle::LONG => [
                             'sq' => [
                                 'current' => 'a1',
                                 'next' => 'd1',
@@ -82,7 +82,7 @@ class CastleRule
             case Color::B:
                 return [
                     Piece::K => [
-                        Castle::O_O => [
+                        Castle::SHORT => [
                             'sqs' => [
                                 'f' => 'f8',
                                 'g' => 'g8',
@@ -92,7 +92,7 @@ class CastleRule
                                 'next' => 'g8',
                             ],
                         ],
-                        Castle::O_O_O => [
+                        Castle::LONG => [
                             'sqs' => [
                                 'b' => 'b8',
                                 'c' => 'c8',
@@ -105,13 +105,13 @@ class CastleRule
                         ],
                     ],
                     Piece::R => [
-                        Castle::O_O => [
+                        Castle::SHORT => [
                             'sq' => [
                                 'current' => 'h8',
                                 'next' => 'f8',
                             ],
                         ],
-                        Castle::O_O_O => [
+                        Castle::LONG => [
                             'sq' => [
                                 'current' => 'a8',
                                 'next' => 'd8',
@@ -132,13 +132,13 @@ class CastleRule
      */
     public static function short(string $color, array $castle, object $space): bool
     {
-        return $castle[$color][Castle::O_O] &&
+        return $castle[$color][Castle::SHORT] &&
             !(in_array(
-                self::color($color)[Piece::K][Castle::O_O]['sqs']['f'],
+                self::color($color)[Piece::K][Castle::SHORT]['sqs']['f'],
                 $space->{Color::opp($color)})
              ) &&
             !(in_array(
-                self::color($color)[Piece::K][Castle::O_O]['sqs']['g'],
+                self::color($color)[Piece::K][Castle::SHORT]['sqs']['g'],
                 $space->{Color::opp($color)})
              );
     }
@@ -153,17 +153,17 @@ class CastleRule
      */
     public static function long(string $color, array $castle, object $space): bool
     {
-        return $castle[$color][Castle::O_O_O] &&
+        return $castle[$color][Castle::LONG] &&
             !(in_array(
-                self::color($color)[Piece::K][Castle::O_O_O]['sqs']['b'],
+                self::color($color)[Piece::K][Castle::LONG]['sqs']['b'],
                 $space->{Color::opp($color)})
              ) &&
             !(in_array(
-                self::color($color)[Piece::K][Castle::O_O_O]['sqs']['c'],
+                self::color($color)[Piece::K][Castle::LONG]['sqs']['c'],
                 $space->{Color::opp($color)})
              ) &&
             !(in_array(
-                self::color($color)[Piece::K][Castle::O_O_O]['sqs']['d'],
+                self::color($color)[Piece::K][Castle::LONG]['sqs']['d'],
                 $space->{Color::opp($color)})
              );
     }

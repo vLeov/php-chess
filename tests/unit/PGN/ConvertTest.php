@@ -290,7 +290,7 @@ class ConvertTest extends AbstractUnitTestCase
             'type' => Move::O_O,
             'color' => 'w',
             'id' => 'K',
-            'sq' => (object) CastleRule::color('w')[Piece::K][Castle::O_O]['sq']
+            'sq' => (object) CastleRule::color('w')[Piece::K][Castle::SHORT]['sq']
         ];
 
         $this->assertEquals(Convert::toObj('w', $move), $example);
@@ -309,7 +309,7 @@ class ConvertTest extends AbstractUnitTestCase
             'type' => Move::O_O_O,
             'color' => 'w',
             'id' => 'K',
-            'sq' => (object) CastleRule::color('w')[Piece::K][Castle::O_O_O]['sq']
+            'sq' => (object) CastleRule::color('w')[Piece::K][Castle::LONG]['sq']
         ];
 
         $this->assertEquals(Convert::toObj('w', $move), $example);

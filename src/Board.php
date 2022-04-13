@@ -605,8 +605,8 @@ final class Board extends \SplObjectStorage
             );
             $this->castle[$this->turn] = [
                 CastleRule::IS_CASTLED => true,
-                Castle::O_O => false,
-                Castle::O_O_O => false,
+                Castle::SHORT => false,
+                Castle::LONG => false,
             ];
             $this->pushHistory($king)->refresh();
             return true;
@@ -630,22 +630,22 @@ final class Board extends \SplObjectStorage
         $this->attach($kingUndone);
         if (Move::O_O === $prev->move->type) {
             $rook = $this->getPieceBySq(
-                CastleRule::color($prev->move->color)[Piece::R][Castle::O_O]['sq']['next']
+                CastleRule::color($prev->move->color)[Piece::R][Castle::SHORT]['sq']['next']
             );
             $rookUndone = new Rook(
                 $prev->move->color,
-                CastleRule::color($prev->move->color)[Piece::R][Castle::O_O]['sq']['current'],
+                CastleRule::color($prev->move->color)[Piece::R][Castle::SHORT]['sq']['current'],
                 $rook->getType()
             );
             $this->detach($rook);
             $this->attach($rookUndone);
         } elseif (Move::O_O_O === $prev->move->type) {
             $rook = $this->getPieceBySq(
-                CastleRule::color($prev->move->color)[Piece::R][Castle::O_O_O]['sq']['next']
+                CastleRule::color($prev->move->color)[Piece::R][Castle::LONG]['sq']['next']
             );
             $rookUndone = new Rook(
                 $prev->move->color,
-                CastleRule::color($prev->move->color)[Piece::R][Castle::O_O_O]['sq']['current'],
+                CastleRule::color($prev->move->color)[Piece::R][Castle::LONG]['sq']['current'],
                 $rook->getType()
             );
             $this->detach($rook);
@@ -669,14 +669,14 @@ final class Board extends \SplObjectStorage
             if ($pieceMoved->getId() === Piece::K) {
                 $this->castle[$this->turn] = [
                     CastleRule::IS_CASTLED => false,
-                    Castle::O_O => false,
-                    Castle::O_O_O => false,
+                    Castle::SHORT => false,
+                    Castle::LONG => false,
                 ];
             } elseif ($pieceMoved->getId() === Piece::R) {
                 if ($pieceMoved->getType() === RookType::O_O) {
-                    $this->castle[$this->turn][Castle::O_O] = false;
+                    $this->castle[$this->turn][Castle::SHORT] = false;
                 } elseif ($pieceMoved->getType() === RookType::O_O_O) {
-                    $this->castle[$this->turn][Castle::O_O_O] = false;
+                    $this->castle[$this->turn][Castle::LONG] = false;
                 }
             }
         }
@@ -684,14 +684,14 @@ final class Board extends \SplObjectStorage
         if (!$this->castle[$oppColor][CastleRule::IS_CASTLED]) {
             if ($pieceMoved->getMove()->isCapture) {
                 if ($pieceMoved->getMove()->sq->next ===
-                    CastleRule::color($oppColor)[Piece::R][Castle::O_O]['sq']['current']
+                    CastleRule::color($oppColor)[Piece::R][Castle::SHORT]['sq']['current']
                 ) {
-                    $this->castle[$oppColor][Castle::O_O] = false;
+                    $this->castle[$oppColor][Castle::SHORT] = false;
                 } elseif (
                     $pieceMoved->getMove()->sq->next ===
-                    CastleRule::color($oppColor)[Piece::R][Castle::O_O_O]['sq']['current']
+                    CastleRule::color($oppColor)[Piece::R][Castle::LONG]['sq']['current']
                 ) {
-                    $this->castle[$oppColor][Castle::O_O_O] = false;
+                    $this->castle[$oppColor][Castle::LONG] = false;
                 }
             }
         }
@@ -919,15 +919,15 @@ final class Board extends \SplObjectStorage
                 switch ($piece->getId()) {
                     case Piece::K:
                         if (
-                            CastleRule::color($color)[Piece::K][Castle::O_O]['sq']['next'] === $sq &&
-                            $clone->play($color, Castle::O_O)
+                            CastleRule::color($color)[Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
+                            $clone->play($color, Castle::SHORT)
                         ) {
-                            $moves[] = Castle::O_O;
+                            $moves[] = Castle::SHORT;
                         } elseif (
-                            CastleRule::color($color)[Piece::K][Castle::O_O_O]['sq']['next'] === $sq &&
-                            $clone->play($color, Castle::O_O_O)
+                            CastleRule::color($color)[Piece::K][Castle::LONG]['sq']['next'] === $sq &&
+                            $clone->play($color, Castle::LONG)
                         ) {
-                            $moves[] = Castle::O_O_O;
+                            $moves[] = Castle::LONG;
                         } elseif ($clone->play($color, Piece::K.$sq)) {
                             $moves[] = Piece::K.$sq;
                         } elseif ($clone->play($color, Piece::K.'x'.$sq)) {

@@ -48,7 +48,7 @@ class Convert
                 'type' => Move::O_O,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::O_O]['sq'],
+                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::SHORT]['sq'],
             ];
         } elseif (preg_match('/^' . Move::O_O_O . '$/', $pgn)) {
             return (object) [
@@ -58,7 +58,7 @@ class Convert
                 'type' => Move::O_O_O,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::O_O_O]['sq'],
+                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::LONG]['sq'],
             ];
         } elseif (preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn)) {
             return (object) [

@@ -15,8 +15,8 @@ use Chess\PGN\SAN\Square;
  */
 class Move
 {
-    const O_O = Castle::O_O . Check::REGEX;
-    const O_O_O = Castle::O_O_O . Check::REGEX;
+    const O_O = Castle::SHORT . Check::REGEX;
+    const O_O_O = Castle::LONG . Check::REGEX;
     const KING = 'K' . Square::REGEX . Check::REGEX;
     const KING_CAPTURES = 'Kx' . Square::REGEX . Check::REGEX;
     const PIECE = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;

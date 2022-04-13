@@ -38,20 +38,20 @@ abstract class AbstractStrToPgn
                 switch ($id) {
                     case Piece::K:
                         $rule = CastleRule::color($color)[Piece::K];
-                        if ($sq === $rule[Castle::O_O]['sq']['next'] &&
-                            $this->board->getCastle()[$color][Castle::O_O]
+                        if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
+                            $this->board->getCastle()[$color][Castle::SHORT]
                         ) {
                             if ($clone->play($color, Piece::K.$sq)) {
                                 $legal[] = [
-                                    Castle::O_O => (new BoardToStr($clone))->create()
+                                    Castle::SHORT => (new BoardToStr($clone))->create()
                                 ];
                             }
-                        } elseif ($sq === $rule[Castle::O_O_O]['sq']['next'] &&
-                            $this->board->getCastle()[$color][Castle::O_O_O]
+                        } elseif ($sq === $rule[Castle::LONG]['sq']['next'] &&
+                            $this->board->getCastle()[$color][Castle::LONG]
                         ) {
                             if ($clone->play($color, Piece::K.$sq)) {
                                 $legal[] = [
-                                    Castle::O_O_O => (new BoardToStr($clone))->create()
+                                    Castle::LONG => (new BoardToStr($clone))->create()
                                 ];
                             }
                         } elseif ($clone->play($color, Piece::K.$sq)) {

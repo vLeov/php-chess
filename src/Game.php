@@ -325,27 +325,27 @@ class Game
         if (
           'K2R' === substr($fromRanks[7], -3) &&
           'KR' === substr($toRanks[7], -2) &&
-          $this->board->play(Color::W, Castle::O_O)
+          $this->board->play(Color::W, Castle::SHORT)
         ) {
-            return Castle::O_O;
+            return Castle::SHORT;
         } elseif (
           'R3K' === substr($fromRanks[7], 0, 3) &&
           'R1K' === substr($toRanks[7], 0, 3) &&
-          $this->board->play(Color::W, Castle::O_O_O)
+          $this->board->play(Color::W, Castle::LONG)
         ) {
-            return Castle::O_O_O;
+            return Castle::LONG;
         } elseif (
           'k2r' === substr($fromRanks[0], -3) &&
           'kr' === substr($toRanks[0], -2) &&
-          $this->board->play(Color::B, Castle::O_O)
+          $this->board->play(Color::B, Castle::SHORT)
         ) {
-            return Castle::O_O;
+            return Castle::SHORT;
         } elseif (
           'r3k' === substr($fromRanks[0], 0, 3) &&
           'r1k' === substr($toRanks[0], 0, 3) &&
-          $this->board->play(Color::B, Castle::O_O_O)
+          $this->board->play(Color::B, Castle::LONG)
         ) {
-            return Castle::O_O_O;
+            return Castle::LONG;
         }
 
         $pgn = (new ShortStrToPgn($fromFen, $toShortFen))->create();

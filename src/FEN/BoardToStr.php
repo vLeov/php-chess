@@ -65,16 +65,16 @@ class BoardToStr
     {
         $castleRights = '';
         $castle = $this->board->getCastle();
-        if ($castle[Color::W][Castle::O_O]) {
+        if ($castle[Color::W][Castle::SHORT]) {
             $castleRights .= 'K';
         }
-        if ($castle[Color::W][Castle::O_O_O]) {
+        if ($castle[Color::W][Castle::LONG]) {
             $castleRights .= 'Q';
         }
-        if ($castle[Color::B][Castle::O_O]) {
+        if ($castle[Color::B][Castle::SHORT]) {
             $castleRights .= 'k';
         }
-        if ($castle[Color::B][Castle::O_O_O]) {
+        if ($castle[Color::B][Castle::LONG]) {
             $castleRights .= 'q';
         }
         if ($castleRights === '') {

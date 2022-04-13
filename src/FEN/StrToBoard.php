@@ -85,30 +85,30 @@ class StrToBoard
     {
         switch (true) {
             case $this->fields[2] === '-':
-                $this->castle[Color::W][Castle::O_O] = false;
-                $this->castle[Color::W][Castle::O_O_O] = false;
-                $this->castle[Color::B][Castle::O_O] = false;
-                $this->castle[Color::B][Castle::O_O_O] = false;
+                $this->castle[Color::W][Castle::SHORT] = false;
+                $this->castle[Color::W][Castle::LONG] = false;
+                $this->castle[Color::B][Castle::SHORT] = false;
+                $this->castle[Color::B][Castle::LONG] = false;
                 break;
             case !str_contains($this->fields[2], 'K') && !str_contains($this->fields[2], 'Q'):
-                $this->castle[Color::W][Castle::O_O] = false;
-                $this->castle[Color::W][Castle::O_O_O] = false;
+                $this->castle[Color::W][Castle::SHORT] = false;
+                $this->castle[Color::W][Castle::LONG] = false;
                 break;
             case !str_contains($this->fields[2], 'K'):
-                $this->castle[Color::W][Castle::O_O] = false;
+                $this->castle[Color::W][Castle::SHORT] = false;
                 break;
             case !str_contains($this->fields[2], 'Q'):
-                $this->castle[Color::W][Castle::O_O_O] = false;
+                $this->castle[Color::W][Castle::LONG] = false;
                 break;
             case !str_contains($this->fields[2], 'k') && !str_contains($this->fields[2], 'q'):
-                $this->castle[Color::B][Castle::O_O] = false;
-                $this->castle[Color::B][Castle::O_O_O] = false;
+                $this->castle[Color::B][Castle::SHORT] = false;
+                $this->castle[Color::B][Castle::LONG] = false;
                 break;
             case !str_contains($this->fields[2], 'k'):
-                $this->castle[Color::B][Castle::O_O] = false;
+                $this->castle[Color::B][Castle::SHORT] = false;
                 break;
             case !str_contains($this->fields[2], 'q'):
-                $this->castle[Color::B][Castle::O_O_O] = false;
+                $this->castle[Color::B][Castle::LONG] = false;
                 break;
             default:
                 // do nothing
@@ -128,25 +128,25 @@ class StrToBoard
             case Piece::R:
                 if ($color === Color::B &&
                     $sq === 'a8' &&
-                    $this->castle[$color][Castle::O_O_O]
+                    $this->castle[$color][Castle::LONG]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
                     $color === Color::B &&
                     $sq === 'h8' &&
-                    $this->castle[$color][Castle::O_O]
+                    $this->castle[$color][Castle::SHORT]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O);
                 } elseif (
                     $color === Color::W &&
                     $sq === 'a1' &&
-                    $this->castle[$color][Castle::O_O_O]
+                    $this->castle[$color][Castle::LONG]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O_O);
                 } elseif (
                     $color === Color::W &&
                     $sq === 'h1' &&
-                    $this->castle[$color][Castle::O_O]
+                    $this->castle[$color][Castle::SHORT]
                 ) {
                     $this->pieces[] = new Rook($color, $sq, RookType::O_O);
                 } else {
