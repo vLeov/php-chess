@@ -5,13 +5,15 @@ namespace Chess\PGN\SAN;
 use Chess\Exception\UnknownNotationException;
 
 /**
- * Algebraic notation for colors.
+ * Color.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class Color implements ValidationInterface
 {
+    use BaseTrait;
+    
     const W = 'w';
     const B = 'b';
 

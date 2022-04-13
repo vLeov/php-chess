@@ -91,7 +91,7 @@ class Movetext
     protected function filter(string $text): void
     {
         // remove the PGN symbols found in the filter
-        $text = str_replace(Termination::all(), '', $text);
+        $text = str_replace(Termination::values(), '', $text);
 
         // remove comments
         $text = preg_replace("/\{[^)]+\}/", '', $text);

@@ -3,13 +3,15 @@
 namespace Chess\PGN\SAN;
 
 /**
- * Algebraic notation for castling.
+ * Castle.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class Castle
 {
+    use BaseTrait;
+    
     const SHORT = 'O-O';
     const LONG = 'O-O-O';
 }

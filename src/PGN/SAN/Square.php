@@ -5,13 +5,15 @@ namespace Chess\PGN\SAN;
 use Chess\Exception\UnknownNotationException;
 
 /**
- * Algebraic notation for squares.
+ * Square.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class Square implements ValidationInterface
 {
+    use BaseTrait;
+    
     const REGEX = '[a-h]{1}[1-8]{1}';
 
     /**

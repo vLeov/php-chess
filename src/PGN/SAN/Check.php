@@ -3,12 +3,14 @@
 namespace Chess\PGN\SAN;
 
 /**
- * Algebraic notation for check and checkmate.
+ * Check.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class Check
 {
+    use BaseTrait;
+    
     const REGEX = '[\+\#]{0,1}';
 }

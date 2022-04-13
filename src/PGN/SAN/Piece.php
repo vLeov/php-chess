@@ -3,13 +3,15 @@
 namespace Chess\PGN\SAN;
 
 /**
- * Algebraic notation for pieces.
+ * Piece.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class Piece
 {
+    use BaseTrait;
+    
     const B = 'B';
     const K = 'K';
     const N = 'N';
