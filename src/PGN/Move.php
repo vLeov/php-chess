@@ -3,8 +3,11 @@
 namespace Chess\PGN;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\CastleRule;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Check;
+use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Piece;
 use Chess\PGN\AN\Square;
 
 /**
@@ -62,6 +65,194 @@ class Move extends AbstractNotation implements ValidationInterface
                 return $value;
             case preg_match('/^' . self::PAWN_CAPTURES_AND_PROMOTES . '$/', $value):
                 return $value;
+        }
+
+        throw new UnknownNotationException;
+    }
+
+    /**
+     * Returns an object for further processing.
+     *
+     * @param string $color
+     * @param string $pgn
+     * @return object
+     * @throws \Chess\Exception\UnknownNotationException
+     */
+    public static function toObj(string $color, string $pgn): object
+    {
+        $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
+        if (preg_match('/^' . Move::KING . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => false,
+                'isCheck' => $isCheck,
+                'type' => Move::KING,
+                'color' => Color::validate($color),
+                'id' => Piece::K,
+                'sq' => (object) [
+                    'current' => null,
+                    'next' => mb_substr($pgn, -2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::O_O . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => false,
+                'isCheck' => $isCheck,
+                'type' => Move::O_O,
+                'color' => Color::validate($color),
+                'id' => Piece::K,
+                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::SHORT]['sq'],
+            ];
+        } elseif (preg_match('/^' . Move::O_O_O . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => false,
+                'isCheck' => $isCheck,
+                'type' => Move::O_O_O,
+                'color' => Color::validate($color),
+                'id' => Piece::K,
+                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::LONG]['sq'],
+            ];
+        } elseif (preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => true,
+                'isCheck' => $isCheck,
+                'type' => Move::KING_CAPTURES,
+                'color' => Color::validate($color),
+                'id' => Piece::K,
+                'sq' => (object) [
+                    'current' => null,
+                    'next' => mb_substr($pgn, -2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::PIECE . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => false,
+                'isCheck' => $isCheck,
+                'type' => Move::PIECE,
+                'color' => Color::validate($color),
+                'id' => mb_substr($pgn, 0, 1),
+                'sq' => (object) [
+                    'current' => $isCheck
+                        ? mb_substr(mb_substr($pgn, 0, -3), 1)
+                        : mb_substr(mb_substr($pgn, 0, -2), 1),
+                    'next' => $isCheck
+                        ? mb_substr(mb_substr($pgn, 0, -1), -2)
+                        : mb_substr($pgn, -2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::PIECE_CAPTURES . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => true,
+                'isCheck' => $isCheck,
+                'type' => Move::PIECE_CAPTURES,
+                'color' => Color::validate($color),
+                'id' => mb_substr($pgn, 0, 1),
+                'sq' => (object) [
+                    'current' => $isCheck
+                        ? mb_substr(mb_substr($pgn, 0, -4), 1)
+                        : mb_substr(mb_substr($pgn, 0, -3), 1),
+                    'next' => $isCheck
+                        ? mb_substr($pgn, -3, -1)
+                        : mb_substr($pgn, -2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::KNIGHT . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => false,
+                'isCheck' => $isCheck,
+                'type' => Move::KNIGHT,
+                'color' => Color::validate($color),
+                'id' => Piece::N,
+                'sq' => (object) [
+                    'current' => $isCheck
+                        ? mb_substr(mb_substr($pgn, 0, -3), 1)
+                        : mb_substr(mb_substr($pgn, 0, -2), 1),
+                    'next' => $isCheck
+                        ? mb_substr(mb_substr($pgn, 0, -1), -2)
+                        : mb_substr($pgn, -2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::KNIGHT_CAPTURES . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => true,
+                'isCheck' => $isCheck,
+                'type' => Move::KNIGHT_CAPTURES,
+                'color' => Color::validate($color),
+                'id' => Piece::N,
+                'sq' => (object) [
+                    'current' => $isCheck
+                        ? mb_substr(mb_substr($pgn, 0, -4), 1)
+                        : mb_substr(mb_substr($pgn, 0, -3), 1),
+                    'next' => $isCheck
+                        ? mb_substr($pgn, -3, -1)
+                        : mb_substr($pgn, -2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::PAWN_PROMOTES . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => false,
+                'isCheck' => $isCheck,
+                'type' => Move::PAWN_PROMOTES,
+                'color' => Color::validate($color),
+                'id' => Piece::P,
+                'newId' => $isCheck ? mb_substr($pgn, -2, -1) : mb_substr($pgn, -1),
+                'sq' => (object) [
+                    'current' => null,
+                    'next' => mb_substr($pgn, 0, 2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => true,
+                'isCheck' => $isCheck,
+                'type' => Move::PAWN_CAPTURES_AND_PROMOTES,
+                'color' => Color::validate($color),
+                'id' => Piece::P,
+                'newId' => $isCheck
+                    ? mb_substr($pgn, -2, -1)
+                    : mb_substr($pgn, -1),
+                'sq' => (object) [
+                    'current' => null,
+                    'next' => mb_substr($pgn, 2, 2)
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::PAWN . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => false,
+                'isCheck' => $isCheck,
+                'type' => Move::PAWN,
+                'color' => Color::validate($color),
+                'id' => Piece::P,
+                'sq' => (object) [
+                    'current' => mb_substr($pgn, 0, 1),
+                    'next' => $isCheck ? mb_substr($pgn, 0, -1) : $pgn
+                ],
+            ];
+        } elseif (preg_match('/^' . Move::PAWN_CAPTURES . '$/', $pgn)) {
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => true,
+                'isCheck' => $isCheck,
+                'type' => Move::PAWN_CAPTURES,
+                'color' => Color::validate($color),
+                'id' => Piece::P,
+                'sq' => (object) [
+                    'current' => mb_substr($pgn, 0, 1),
+                    'next' => $isCheck
+                        ? mb_substr($pgn, -3, -1)
+                        : mb_substr($pgn, -2)
+                ],
+            ];
         }
 
         throw new UnknownNotationException;

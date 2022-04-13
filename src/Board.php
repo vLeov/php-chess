@@ -8,7 +8,6 @@ use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SqEvaluation;
 use Chess\Exception\BoardException;
-use Chess\PGN\Convert;
 use Chess\PGN\Move;
 use Chess\PGN\Validate;
 use Chess\PGN\AN\Castle;
@@ -573,7 +572,7 @@ final class Board extends \SplObjectStorage
      */
     public function play(string $color, string $pgn): bool
     {
-        $object = Convert::toObj($color, $pgn);
+        $object = Move::toObj($color, $pgn);
 
         return $this->isValidMove($object) && $this->isLegalMove($object);
     }
@@ -754,7 +753,9 @@ final class Board extends \SplObjectStorage
             }
             $this->attach($pieceUndone);
             if ($prev->move->isCapture && $capture = end($this->captures[$prev->move->color])) {
-                $capturedClass = new \ReflectionClass(Convert::toClassName($capture->captured->id));
+                $capturedClass = new \ReflectionClass(
+                    AbstractPiece::toClassName($capture->captured->id)
+                );
                 $this->attach($capturedClass->newInstanceArgs([
                     $prev->move->color === Color::W ? Color::B : Color::W,
                     $capture->captured->sq,
@@ -832,33 +833,33 @@ final class Board extends \SplObjectStorage
                     case Piece::K:
                         if (in_array($sq, $this->sqEval->used->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toObj($this->turn, Piece::K."x$sq"))
+                                $piece->setMove(Move::toObj($this->turn, Piece::K."x$sq"))
                             );
                         } elseif (!in_array($sq, $this->spaceEval->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toObj($this->turn, Piece::K.$sq))
+                                $piece->setMove(Move::toObj($this->turn, Piece::K.$sq))
                             );
                         }
                         break;
                     case Piece::P:
                         if (in_array($sq, $this->sqEval->used->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toObj($this->turn, $piece->getFile()."x$sq"))
+                                $piece->setMove(Move::toObj($this->turn, $piece->getFile()."x$sq"))
                             );
                         } else {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toObj($this->turn, $sq))
+                                $piece->setMove(Move::toObj($this->turn, $sq))
                             );
                         }
                         break;
                     default:
                         if (in_array($sq, $this->sqEval->used->{$piece->getOppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toObj($this->turn, $piece->getId()."x$sq"))
+                                $piece->setMove(Move::toObj($this->turn, $piece->getId()."x$sq"))
                             );
                         } else {
                             $escape += (int) !$this->leavesInCheck(
-                                $piece->setMove(Convert::toObj($this->turn, $piece->getId().$sq))
+                                $piece->setMove(Move::toObj($this->turn, $piece->getId().$sq))
                             );
                         }
                         break;
