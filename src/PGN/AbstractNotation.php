@@ -1,14 +1,14 @@
 <?php
 
-namespace Chess\PGN\AN;
+namespace Chess\PGN;
 
 /**
- * Base trait.
+ * Abstract notation.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-trait BaseTrait
+abstract class AbstractNotation
 {
     public static function values(): array
     {

@@ -13,7 +13,7 @@ use Chess\PGN\AN\Square;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Move
+class Move extends AbstractNotation implements ValidationInterface
 {
     const O_O = Castle::SHORT . Check::REGEX;
     const O_O_O = Castle::LONG . Check::REGEX;
@@ -29,41 +29,41 @@ class Move
     const PAWN_CAPTURES_AND_PROMOTES = '[a-h]{1}x' . '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Check::REGEX;
 
     /**
-     * Validation.
+     * Validate.
      *
-     * @param string $color
-     * @return bool
+     * @param string $value
+     * @return string if the value is valid
      * @throws UnknownNotationException
      */
-    public static function validate(string $move): bool
+    public static function validate(string $value): string
     {
         switch (true) {
-            case preg_match('/^' . self::KING . '$/', $move):
-                return true;
-            case preg_match('/^' . self::O_O . '$/', $move):
-                return true;
-            case preg_match('/^' . self::O_O_O . '$/', $move):
-                return true;
-            case preg_match('/^' . self::KING_CAPTURES . '$/', $move):
-                return true;
-            case preg_match('/^' . self::PIECE . '$/', $move):
-                return true;
-            case preg_match('/^' . self::PIECE_CAPTURES . '$/', $move):
-                return true;
-            case preg_match('/^' . self::KNIGHT . '$/', $move):
-                return true;
-            case preg_match('/^' . self::KNIGHT_CAPTURES . '$/', $move):
-                return true;
-            case preg_match('/^' . self::PAWN . '$/', $move):
-                return true;
-            case preg_match('/^' . self::PAWN_CAPTURES . '$/', $move):
-                return true;
-            case preg_match('/^' . self::PAWN_PROMOTES . '$/', $move):
-                return true;
-            case preg_match('/^' . self::PAWN_CAPTURES_AND_PROMOTES . '$/', $move):
-                return true;
-            default:
-                throw new UnknownNotationException;
+            case preg_match('/^' . self::KING . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::O_O . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::O_O_O . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::KING_CAPTURES . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::PIECE . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::PIECE_CAPTURES . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::KNIGHT . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::KNIGHT_CAPTURES . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::PAWN . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::PAWN_CAPTURES . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::PAWN_PROMOTES . '$/', $value):
+                return $value;
+            case preg_match('/^' . self::PAWN_CAPTURES_AND_PROMOTES . '$/', $value):
+                return $value;
         }
+
+        throw new UnknownNotationException;
     }
 }

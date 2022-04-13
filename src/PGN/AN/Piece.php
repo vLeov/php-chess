@@ -2,16 +2,16 @@
 
 namespace Chess\PGN\AN;
 
+use Chess\PGN\AbstractNotation;
+
 /**
  * Piece.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Piece
+class Piece extends AbstractNotation
 {
-    use BaseTrait;
-    
     const B = 'B';
     const K = 'K';
     const N = 'N';

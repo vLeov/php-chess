@@ -3,6 +3,8 @@
 namespace Chess\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\PGN\AbstractNotation;
+use Chess\PGN\ValidationInterface;
 
 /**
  * Square.
@@ -10,10 +12,8 @@ use Chess\Exception\UnknownNotationException;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Square implements ValidationInterface
+class Square extends AbstractNotation implements ValidationInterface
 {
-    use BaseTrait;
-    
     const REGEX = '[a-h]{1}[1-8]{1}';
 
     /**

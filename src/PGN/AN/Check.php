@@ -2,15 +2,15 @@
 
 namespace Chess\PGN\AN;
 
+use Chess\PGN\AbstractNotation;
+
 /**
  * Check.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Check
+class Check extends AbstractNotation
 {
-    use BaseTrait;
-    
     const REGEX = '[\+\#]{0,1}';
 }

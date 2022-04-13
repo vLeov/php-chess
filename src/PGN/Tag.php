@@ -10,7 +10,7 @@ use Chess\Exception\UnknownNotationException;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Tag
+class Tag extends AbstractNotation
 {
 	// STR (Seven Tag Roster)
     const EVENT = 'Event';
@@ -84,7 +84,8 @@ class Tag
     public static function validate(string $tag): object
     {
         $isValid = false;
-        foreach (self::all() as $key => $val) {
+        
+        foreach (self::values() as $val) {
             if (preg_match('/^\[' . $val . ' \"(.*)\"\]$/', $tag)) {
                 $isValid = true;
             }
@@ -102,11 +103,6 @@ class Tag
         ];
 
         return $result;
-    }
-
-    public static function all(): array
-    {
-        return (new \ReflectionClass(get_called_class()))->getConstants();
     }
 
     /**

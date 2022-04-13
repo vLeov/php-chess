@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\PGN\AN;
+namespace Chess\PGN\FIDE;
 
 use Chess\PGN\AbstractNotation;
 
@@ -12,6 +12,6 @@ use Chess\PGN\AbstractNotation;
  */
 class Castle extends AbstractNotation
 {
-    const SHORT = 'O-O';
-    const LONG = 'O-O-O';
+    const SHORT = '0-0';
+    const LONG = '0-0-0';
 }
