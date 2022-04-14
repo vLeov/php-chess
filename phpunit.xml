@@ -9,6 +9,7 @@
     </php>
     <testsuites>
         <testsuite name="unit">
+            <directory>tests/unit/Array</directory>
             <directory>tests/unit/Combinatorics</directory>
             <directory>tests/unit/Evaluation</directory>
             <directory>tests/unit/FEN</directory>
@@ -16,13 +17,13 @@
             <directory>tests/unit/PGN</directory>
             <directory>tests/unit/Piece</directory>
             <file>tests/unit/ArrayOfBoardsTest.php</file>
-            <file>tests/unit/AsciiTest.php</file>
             <file>tests/unit/BoardTest.php</file>
-            <file>tests/unit/CastleTest.php</file>
+            <file>tests/unit/CastlingRuleTest.php</file>
             <file>tests/unit/GameTest.php</file>
             <file>tests/unit/GrandmasterTest.php</file>
             <file>tests/unit/HeuristicsByFenStringTest.php</file>
             <file>tests/unit/HeuristicsTest.php</file>
+            <file>tests/unit/MovetextTest.php</file>
             <file>tests/unit/PlayerTest.php</file>
         </testsuite>
     </testsuites>
