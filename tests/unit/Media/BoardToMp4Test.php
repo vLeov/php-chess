@@ -9,7 +9,7 @@ use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVar
 
 class BoardToMp4Test extends AbstractUnitTestCase
 {
-    const OUTPUT_FOLDER = __DIR__.'/../../output';
+    const OUTPUT_FOLDER = __DIR__.'/../../tmp';
 
     public static function tearDownAfterClass(): void
     {

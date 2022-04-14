@@ -1,6 +1,6 @@
 /composer.lock
 /vendor/
 .env
-/tests/output/*.png
+/tests/tmp/*.png
 
 .phpunit.result.cache

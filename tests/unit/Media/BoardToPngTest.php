@@ -11,7 +11,7 @@ use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as QueensGambitSy
 
 class BoardToPngTest extends AbstractUnitTestCase
 {
-    const OUTPUT_FOLDER = __DIR__.'/../../output';
+    const OUTPUT_FOLDER = __DIR__.'/../../tmp';
 
     public static function tearDownAfterClass(): void
     {
