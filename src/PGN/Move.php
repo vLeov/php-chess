@@ -3,7 +3,7 @@
 namespace Chess\PGN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\CastleRule;
+use Chess\CastlingRule;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Check;
 use Chess\PGN\AN\Color;
@@ -18,8 +18,8 @@ use Chess\PGN\AN\Square;
  */
 class Move extends AbstractNotation implements ValidationInterface
 {
-    const O_O = Castle::SHORT . Check::REGEX;
-    const O_O_O = Castle::LONG . Check::REGEX;
+    const CASTLE_SHORT = Castle::SHORT . Check::REGEX;
+    const CASTLE_LONG = Castle::LONG . Check::REGEX;
     const KING = 'K' . Square::REGEX . Check::REGEX;
     const KING_CAPTURES = 'Kx' . Square::REGEX . Check::REGEX;
     const PIECE = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;
@@ -43,9 +43,9 @@ class Move extends AbstractNotation implements ValidationInterface
         switch (true) {
             case preg_match('/^' . self::KING . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::O_O . '$/', $value):
+            case preg_match('/^' . self::CASTLE_SHORT . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::O_O_O . '$/', $value):
+            case preg_match('/^' . self::CASTLE_LONG . '$/', $value):
                 return $value;
             case preg_match('/^' . self::KING_CAPTURES . '$/', $value):
                 return $value;
@@ -94,25 +94,25 @@ class Move extends AbstractNotation implements ValidationInterface
                     'next' => mb_substr($pgn, -2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::O_O . '$/', $pgn)) {
+        } elseif (preg_match('/^' . Move::CASTLE_SHORT . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::O_O,
+                'type' => Move::CASTLE_SHORT,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::SHORT]['sq'],
+                'sq' => (object) CastlingRule::color($color)[Piece::K][Castle::SHORT]['sq'],
             ];
-        } elseif (preg_match('/^' . Move::O_O_O . '$/', $pgn)) {
+        } elseif (preg_match('/^' . Move::CASTLE_LONG . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::O_O_O,
+                'type' => Move::CASTLE_LONG,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) CastleRule::color($color)[Piece::K][Castle::LONG]['sq'],
+                'sq' => (object) CastlingRule::color($color)[Piece::K][Castle::LONG]['sq'],
             ];
         } elseif (preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn)) {
             return (object) [

@@ -2,20 +2,20 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\CastleRule;
+use Chess\CastlingRule;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 
-class CastleTest extends AbstractUnitTestCase
+class CastlingRuleTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
-    public function w_O_O_O()
+    public function w_CASTLE_LONG()
     {
-        $rule = CastleRule::color(Color::W);
+        $rule = CastlingRule::color(Color::W);
 
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs']['b'], 'b1');
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs']['c'], 'c1');
@@ -29,9 +29,9 @@ class CastleTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function b_O_O_O()
+    public function b_CASTLE_LONG()
     {
-        $rule = CastleRule::color(Color::B);
+        $rule = CastlingRule::color(Color::B);
 
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs']['b'], 'b8');
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs']['c'], 'c8');
@@ -45,9 +45,9 @@ class CastleTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function w_O_O()
+    public function w_CASTLE_SHORT()
     {
-        $rule = CastleRule::color(Color::W);
+        $rule = CastlingRule::color(Color::W);
 
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs']['f'], 'f1');
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs']['g'], 'g1');
@@ -60,9 +60,9 @@ class CastleTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function b_O_O()
+    public function b_CASTLE_SHORT()
     {
-        $rule = CastleRule::color(Color::B);
+        $rule = CastlingRule::color(Color::B);
 
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs']['f'], 'f8');
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs']['g'], 'g8');

@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\PGN;
 
-use Chess\CastleRule;
+use Chess\CastlingRule;
 use Chess\PGN\Move;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Piece;
@@ -43,7 +43,7 @@ class MoveTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function O_O_throws_exception()
+    public function CASTLE_SHORT_throws_exception()
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
@@ -53,7 +53,7 @@ class MoveTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function O_O_O_throws_exception()
+    public function CASTLE_LONG_throws_exception()
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
@@ -279,17 +279,17 @@ class MoveTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function O_O()
+    public function CASTLE_SHORT()
     {
         $move = 'O-O';
         $example = (object) [
             'pgn' => 'O-O',
             'isCapture' => false,
             'isCheck' => false,
-            'type' => Move::O_O,
+            'type' => Move::CASTLE_SHORT,
             'color' => 'w',
             'id' => 'K',
-            'sq' => (object) CastleRule::color('w')[Piece::K][Castle::SHORT]['sq']
+            'sq' => (object) CastlingRule::color('w')[Piece::K][Castle::SHORT]['sq']
         ];
 
         $this->assertEquals(Move::toObj('w', $move), $example);
@@ -298,17 +298,17 @@ class MoveTest extends AbstractUnitTestCase
     /**
 	 * @test
 	 */
-    public function O_O_O()
+    public function CASTLE_LONG()
     {
         $move = 'O-O-O';
         $example = (object) [
             'pgn' => 'O-O-O',
             'isCapture' => false,
             'isCheck' => false,
-            'type' => Move::O_O_O,
+            'type' => Move::CASTLE_LONG,
             'color' => 'w',
             'id' => 'K',
-            'sq' => (object) CastleRule::color('w')[Piece::K][Castle::LONG]['sq']
+            'sq' => (object) CastlingRule::color('w')[Piece::K][Castle::LONG]['sq']
         ];
 
         $this->assertEquals(Move::toObj('w', $move), $example);

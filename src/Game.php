@@ -2,9 +2,6 @@
 
 namespace Chess;
 
-use Chess\Ascii;
-use Chess\Heuristics;
-use Chess\Player;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\ShortStrToPgn;
 use Chess\FEN\StrToBoard;
@@ -79,7 +76,7 @@ class Game
     public function status(): object
     {
         return (object) [
-            'castle' => $this->board->getCastle(),
+            'castle' => $this->board->getCastlingAbility(),
             'isCheck' => $this->board->isCheck(),
             'isMate' => $this->board->isMate(),
             'movetext' => $this->board->getMovetext(),
@@ -94,7 +91,7 @@ class Game
      */
     public function castle(): ?array
     {
-        return $this->board->getCastle();
+        return $this->board->getCastlingAbility();
     }
 
     /**
@@ -276,7 +273,7 @@ class Game
 
     public function ascii(): string
     {
-        return (new Ascii())->toString($this->board);
+        return $this->board->toAsciiString();
     }
 
     public function fen(): string
@@ -382,7 +379,7 @@ class Game
     public function undoMove(): ?object
     {
         if ($this->board->getHistory()) {
-            $this->board->undoMove($this->board->getCastle());
+            $this->board->undoMove($this->board->getCastlingAbility());
             return $this->status();
         }
 

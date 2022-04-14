@@ -2,7 +2,6 @@
 
 namespace Chess\FEN;
 
-use Chess\Ascii;
 use Chess\Board;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
@@ -28,7 +27,7 @@ class BoardToStr
     public function create(): string
     {
         $string = '';
-        $array = (new Ascii())->toArray($this->board);
+        $array = $this->board->toAsciiArray();
         for ($i = 7; $i >= 0; $i--) {
             $string .= str_replace(' ', '', implode('', $array[$i]));
             if ($i != 0) {
@@ -36,7 +35,7 @@ class BoardToStr
             }
         }
 
-        return "{$this->filter($string)} {$this->board->getTurn()} {$this->castleRights()} {$this->enPassant()}";
+        return "{$this->filter($string)} {$this->board->getTurn()} {$this->board->getCastlingAbility()} {$this->enPassant()}";
     }
 
     private function filter(string $string)
@@ -59,29 +58,6 @@ class BoardToStr
         }
 
         return $filtered;
-    }
-
-    private function castleRights()
-    {
-        $castleRights = '';
-        $castle = $this->board->getCastle();
-        if ($castle[Color::W][Castle::SHORT]) {
-            $castleRights .= 'K';
-        }
-        if ($castle[Color::W][Castle::LONG]) {
-            $castleRights .= 'Q';
-        }
-        if ($castle[Color::B][Castle::SHORT]) {
-            $castleRights .= 'k';
-        }
-        if ($castle[Color::B][Castle::LONG]) {
-            $castleRights .= 'q';
-        }
-        if ($castleRights === '') {
-            $castleRights = '-';
-        }
-
-        return $castleRights;
     }
 
     private function enPassant()
