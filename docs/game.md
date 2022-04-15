@@ -1,4 +1,4 @@
-`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server). There is a one-to-one correspondence between the methods in this class and the commands available in the [`ChessServer\Command`](https://github.com/chesslablab/chess-server/tree/master/src/Command) namespace.
+`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server).
 
 Let's look at the methods available through some examples. For further information you may want to check out the tests in [tests/unit/GameTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GameTest.php).
 

@@ -16,9 +16,7 @@ use Rubix\ML\Persisters\Filesystem;
 /**
  * Game
  *
- * Game is the main component of the PHP Chess Server. There is a one-to-one
- * correspondence between the methods in this class and the commands available
- * in the ChessServer\Command namespace.
+ * Game is the main component of the PHP Chess Server.
  *
  * @author Jordi Bassagañas
  * @license GPL
