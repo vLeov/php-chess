@@ -3,7 +3,6 @@
 namespace Chess\FEN;
 
 use Chess\Board;
-use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 
@@ -35,7 +34,10 @@ class BoardToStr
             }
         }
 
-        return "{$this->filter($string)} {$this->board->getTurn()} {$this->board->getCastlingAbility()} {$this->enPassant()}";
+        return $this->filter($string).' '.
+            $this->board->getTurn().' '.
+            $this->board->getCastlingAbility().' '.
+            $this->enPassant();
     }
 
     private function filter(string $string)
