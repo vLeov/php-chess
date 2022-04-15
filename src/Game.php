@@ -16,7 +16,8 @@ use Rubix\ML\Persisters\Filesystem;
 /**
  * Game
  *
- * Game is the main component of the PHP Chess Server.
+ * Game is the main component of the PHP Chess Server, a wrapper for the 
+ * Chess\Board especially suited for playing chess online.
  *
  * @author Jordi Bassagañas
  * @license GPL

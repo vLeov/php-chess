@@ -1,4 +1,4 @@
-`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server).
+`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server), a wrapper for the [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) especially suited for playing chess online.
 
 Let's look at the methods available through some examples. For further information you may want to check out the tests in [tests/unit/GameTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GameTest.php).
 
