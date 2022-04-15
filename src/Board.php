@@ -8,6 +8,7 @@ use Chess\Evaluation\PressureEvaluation;
 use Chess\Evaluation\SpaceEvaluation;
 use Chess\Evaluation\SqEvaluation;
 use Chess\Exception\BoardException;
+use Chess\FEN\BoardToStr;
 use Chess\FEN\Field\CastlingAbility;
 use Chess\PGN\Move;
 use Chess\PGN\AN\Castle;
@@ -775,7 +776,7 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Refreshes the board's status.
+     * Refreshes the state of the board.
      */
     public function refresh(): void
     {
@@ -1010,5 +1011,15 @@ final class Board extends \SplObjectStorage
         }
 
         return $ascii;
+    }
+
+    /**
+     * Returns a FEN representing this Chess\Board object.
+     *
+     * @return string
+     */
+    public function getFen(): string
+    {
+        return (new BoardToStr($this))->create();
     }
 }

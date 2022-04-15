@@ -25,7 +25,7 @@ class GameTest extends AbstractUnitTestCase
         $game = new Game(Game::MODE_LOAD_FEN);
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
 
-        $ascii = $game->ascii();
+        $ascii = $game->getBoard()->toAsciiString();
 
         $expected = " .  r  b  q  .  r  k  . \n" .
                     " p  .  b  .  n  p  p  p \n" .
@@ -48,7 +48,7 @@ class GameTest extends AbstractUnitTestCase
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
         $game->play('w', 'Qg4');
 
-        $ascii = $game->ascii();
+        $ascii = $game->getBoard()->toAsciiString();
 
         $expected = " .  r  b  q  .  r  k  . \n" .
                     " p  .  b  .  n  p  p  p \n" .
@@ -91,7 +91,7 @@ class GameTest extends AbstractUnitTestCase
         $this->assertSame('O-O-O', $game->playFen('r3k2r/1bpqbp1p/p1np1np1/1p2p1B1/P3P3/1BNP1N2/1PP1QPPP/R1K4R b'));
         $this->assertSame('O-O', $game->playFen('r5kr/1bpqbp1p/p1np1np1/1p2p1B1/P3P3/1BNP1N2/1PP1QPPP/2KR3R w'));
 
-        $ascii = $game->ascii();
+        $ascii = $game->getBoard()->toAsciiString();
 
         $expected = " r  .  .  .  .  r  k  . \n" .
                     " .  b  p  q  b  p  .  p \n" .
@@ -375,7 +375,7 @@ class GameTest extends AbstractUnitTestCase
 
         $expected = '1.e4 d5 2.Bb5+';
 
-        $this->assertSame($expected, $game->movetext());
+        $this->assertSame($expected, $game->getBoard()->getMovetext());
     }
 
     /**
@@ -391,7 +391,7 @@ class GameTest extends AbstractUnitTestCase
 
         $expected = '1.f4 e5 2.g4 Qh4#';
 
-        $this->assertSame($expected, $game->movetext());
+        $this->assertSame($expected, $game->getBoard()->getMovetext());
     }
 
     /*

@@ -16,9 +16,9 @@ use Rubix\ML\Persisters\Filesystem;
 /**
  * Game
  *
- * Wrapper for the Chess\Board class. It is the main component of the PHP Chess Server.
- * There is a one-to-one correspondence between the Chess\Game methods and
- * the commands available in the ChessServer\Command namespace.
+ * Game is the main component of the PHP Chess Server. There is a one-to-one
+ * correspondence between the methods in this class and the commands available
+ * in the ChessServer\Command namespace.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -38,7 +38,7 @@ class Game
     /**
      * Chess board.
      *
-     * @var Board
+     * @var \Chess\Board
      */
     private Board $board;
 
@@ -58,8 +58,11 @@ class Game
 
     /**
      * Constructor.
+     *
+     * @param mixed $mode
+     * @param mixed $model
      */
-    public function __construct(string $mode = null, string $model = null)
+    public function __construct(null|string $mode = null, null|string $model = null)
     {
         $this->board = new Board();
         $this->mode = $mode ?? self::MODE_ANALYSIS;
@@ -69,101 +72,35 @@ class Game
     }
 
     /**
-     * Gets the board's status.
+     * Returns the Chess\Board object.
+     *
+     * @return \Chess\Board
+     */
+    public function getBoard(): Board
+    {
+        return $this->board;
+    }
+
+    /**
+     * Returns the state of the board.
      *
      * @return object
      */
-    public function status(): object
+    public function state(): object
     {
         return (object) [
-            'castle' => $this->board->getCastlingAbility(),
+            'turn' => $this->board->getTurn(),
+            'castlingAbility' => $this->board->getCastlingAbility(),
+            'movetext' => $this->board->getMovetext(),
+            'fen' => $this->board->getFen(),
             'isCheck' => $this->board->isCheck(),
             'isMate' => $this->board->isMate(),
-            'movetext' => $this->board->getMovetext(),
-            'turn' => $this->board->getTurn(),
+            'isStalemate' => $this->board->isStalemate(),
         ];
     }
 
     /**
-     * Gets the castle.
-     *
-     * @return mixed null|array
-     */
-    public function castle(): ?array
-    {
-        return $this->board->getCastlingAbility();
-    }
-
-    /**
-     * Gets the history.
-     *
-     * @return mixed null|array
-     */
-    public function history(): ?array
-    {
-        $history = [];
-
-        $boardHistory = $this->board->getHistory();
-
-        foreach ($boardHistory as $entry) {
-            $history[] = (object) [
-                'pgn' => $entry->move->pgn,
-                'color' => $entry->move->color,
-                'id' => $entry->move->id,
-                'sq' => $entry->sq,
-                'isCapture' => $entry->move->isCapture,
-                'isCheck' => $entry->move->isCheck,
-            ];
-        }
-
-        return $history;
-    }
-
-    /**
-     * Gets the movetext.
-     *
-     * @return string
-     */
-    public function movetext(): string
-    {
-        return $this->board->getMovetext();
-    }
-
-    /**
-     * Gets the pieces captured by both players.
-     *
-     * @return mixed null|array
-     */
-    public function captures(): ?array
-    {
-        return $this->board->getCaptures();
-    }
-
-    /**
-     * Gets the pieces by color.
-     *
-     * @param string $color
-     * @return array
-     */
-    public function pieces(string $color): array
-    {
-        $result = [];
-
-        $pieces = $this->board->getPiecesByColor(Color::validate($color));
-
-        foreach ($pieces as $piece) {
-            $result[] = (object) [
-                'id' => $piece->getId(),
-                'sq' => $piece->getSquare(),
-                'moves' => $piece->getSqs(),
-            ];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Gets a piece by its position on the board.
+     * Returns information about a piece by its position on the board.
      *
      * @param string $sq
      * @return mixed null|object
@@ -217,26 +154,6 @@ class Game
     }
 
     /**
-     * Calculates whether the current player is checked.
-     *
-     * @return bool
-     */
-    public function isCheck(): bool
-    {
-        return $this->board->isCheck();
-    }
-
-    /**
-     * Calculates whether the current player is mated.
-     *
-     * @return bool
-     */
-    public function isMate(): bool
-    {
-        return $this->board->isMate();
-    }
-
-    /**
      * Makes a move.
      *
      * @param string $color
@@ -249,7 +166,9 @@ class Game
     }
 
     /**
-     * Computer response to the current position.
+     * Returns a computer response to the current position. This method is to be
+     * used in either Game::MODE_AI or Game::MODE_GRANDMASTER otherwise it
+     * returns null.
      *
      * @return mixed sring|null
      */
@@ -269,16 +188,6 @@ class Game
         }
 
         return null;
-    }
-
-    public function ascii(): string
-    {
-        return $this->board->toAsciiString();
-    }
-
-    public function fen(): string
-    {
-        return (new BoardToStr($this->board))->create();
     }
 
     /**
@@ -302,9 +211,8 @@ class Game
     }
 
     /**
-     * Makes a move in short FEN format.
-     *
-     * Only the piece placement and the side to move are required.
+     * Makes a move in short FEN format. Only the piece placement and the side
+     * to move are required.
      *
      * @param string $toShortFen
      * @return mixed bool|string
@@ -358,6 +266,11 @@ class Game
         return false;
     }
 
+    /**
+     * Returns the game's heuristics.
+     *
+     * @return mixed null|object
+     */
     public function heuristics($balanced = false, $fen = ''): array
     {
         $movetext = $this->board->getMovetext();
@@ -376,11 +289,16 @@ class Game
         return $heuristics->getResult();
     }
 
+    /**
+     * Undoes the last move returning the resulting state.
+     *
+     * @return mixed null|object
+     */
     public function undoMove(): ?object
     {
         if ($this->board->getHistory()) {
             $this->board->undoMove($this->board->getCastlingAbility());
-            return $this->status();
+            return $this->state();
         }
 
         return null;
