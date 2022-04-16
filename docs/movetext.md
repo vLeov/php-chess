@@ -1,37 +1,39 @@
-The `Chess\PGN\Movetext` class provides with functionality to parse and process a PGN movetext.
+`Chess\PGN\Movetext` provides with functionality to parse and process a PGN movetext.
 
-#### `function validate()`
+Let's look at the methods available through some examples. For further information you may want to check out the tests in [tests/unit/MovetextTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/MovetextTest.php).
 
-Validates a movetext returning a string if valid.
+---
+
+#### `public function validate(): string`
+
+Validates a movetext returning a string if valid; otherwise  throws a `Chess\Exception\MovetextException`.
 
 ```php
 use Chess\PGN\Movetext;
 
-$movetext = (new Movetext('1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5'))->validate();
+$movetext = '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5';
+
+$movetext = (new Movetext($movetext))->validate();
 
 print_r($movetext);
 ```
-
-Output:
-
 ```text
 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5
 ```
 
-#### `function sequence(): array`
+#### `public function sequence(): array`
 
-Splits a movetext into multiple movetexts representing the chess game move by move for further processing.
+Returns an array representing the movetext as a sequence of moves.
 
 ```php
 use Chess\PGN\Movetext;
 
-$sequence = (new Movetext('1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5'))->sequence();
+$movetext = '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5';
+
+$sequence = (new Movetext($movetext))->sequence();
 
 print_r($sequence);
 ```
-
-Output:
-
 ```
 Array
 (

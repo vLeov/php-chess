@@ -10,6 +10,8 @@ use Chess\PGN\Move;
 /**
  * Movetext.
  *
+ * Movetext provides with functionality to parse and process a PGN movetext.
+ *
  * @license GPL
  */
 class Movetext
