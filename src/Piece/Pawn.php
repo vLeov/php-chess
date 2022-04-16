@@ -47,28 +47,23 @@ class Pawn extends AbstractPiece
 
         $this->file = $this->sq[0];
 
-        switch ($this->color) {
-            case Color::W:
-                $this->ranks = (object) [
-                    'initial' => 2,
-                    'next' => (int)$this->sq[1] + 1,
-                    'promotion' => 8
-                ];
-                break;
-            case Color::B:
-                $this->ranks = (object) [
-                    'initial' => 7,
-                    'next' => (int)$this->sq[1] - 1,
-                    'promotion' => 1
-                ];
-                break;
+        if ($this->color === Color::W) {
+            $this->ranks = (object) [
+                'initial' => 2,
+                'next' => (int)$this->sq[1] + 1,
+                'promotion' => 8
+            ];
+        } elseif ($this->color === Color::B) {
+            $this->ranks = (object) [
+                'initial' => 7,
+                'next' => (int)$this->sq[1] - 1,
+                'promotion' => 1
+            ];
         }
 
         $this->captureSquares = [];
 
-        $this->travel = (object)[
-            'up' => []
-        ];
+        $this->travel = [];
 
         $this->setTravel();
     }
@@ -98,50 +93,45 @@ class Pawn extends AbstractPiece
     public function getSqs(): ?array
     {
         $moves = [];
-
         // add up squares
-        foreach($this->travel->up as $sq) {
+        foreach($this->travel as $sq) {
             if (in_array($sq, $this->board->getSqEval()->free)) {
                 $moves[] = $sq;
             } else {
                 break;
             }
         }
-
         // add capture squares
         foreach($this->captureSquares as $sq) {
             if (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
                 $moves[] = $sq;
             }
         }
-
         // en passant implementation
         if ($this->board->getLastHistory() &&
             $this->board->getLastHistory()->move->id === Piece::P &&
-            $this->board->getLastHistory()->move->color === $this->getOppColor()) {
-            switch ($this->getColor()) {
-                case Color::W:
-                    if ((int)$this->sq[1] === 5) {
-                        $captureSquare =
-                            $this->board->getLastHistory()->move->sq->next[0] .
-                            ($this->board->getLastHistory()->move->sq->next[1]+1);
-                        if (in_array($captureSquare, $this->captureSquares)) {
-                            $this->enPassantSquare = $this->board->getLastHistory()->move->sq->next;
-                            $moves[] = $captureSquare;
-                        }
+            $this->board->getLastHistory()->move->color === $this->getOppColor()
+        ) {
+            if ($this->color === Color::W) {
+                if ((int)$this->sq[1] === 5) {
+                    $captureSquare =
+                        $this->board->getLastHistory()->move->sq->next[0] .
+                        ($this->board->getLastHistory()->move->sq->next[1]+1);
+                    if (in_array($captureSquare, $this->captureSquares)) {
+                        $this->enPassantSquare = $this->board->getLastHistory()->move->sq->next;
+                        $moves[] = $captureSquare;
                     }
-                    break;
-                case Color::B:
-                    if ((int)$this->sq[1] === 4) {
-                        $captureSquare =
-                            $this->board->getLastHistory()->move->sq->next[0] .
-                            ($this->board->getLastHistory()->move->sq->next[1]-1);
-                        if (in_array($captureSquare, $this->captureSquares)) {
-                            $this->enPassantSquare = $this->board->getLastHistory()->move->sq->next;
-                            $moves[] = $captureSquare;
-                        }
+                }
+            } elseif ($this->color === Color::B) {
+                if ((int)$this->sq[1] === 4) {
+                    $captureSquare =
+                        $this->board->getLastHistory()->move->sq->next[0] .
+                        ($this->board->getLastHistory()->move->sq->next[1]-1);
+                    if (in_array($captureSquare, $this->captureSquares)) {
+                        $this->enPassantSquare = $this->board->getLastHistory()->move->sq->next;
+                        $moves[] = $captureSquare;
                     }
-                    break;
+                }
             }
         }
 
@@ -196,7 +186,7 @@ class Pawn extends AbstractPiece
         // next rank
         try {
             if (Square::validate($this->file . $this->ranks->next, true)) {
-                $this->travel->up[] = $this->file . $this->ranks->next;
+                $this->travel[] = $this->file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
 
@@ -204,10 +194,10 @@ class Pawn extends AbstractPiece
 
         // two square advance
         if ($this->sq[1] == 2 && $this->ranks->initial == 2) {
-            $this->travel->up[] = $this->file . ($this->ranks->initial + 2);
+            $this->travel[] = $this->file . ($this->ranks->initial + 2);
         }
         elseif ($this->sq[1] == 7 && $this->ranks->initial == 7) {
-            $this->travel->up[] = $this->file . ($this->ranks->initial - 2);
+            $this->travel[] = $this->file . ($this->ranks->initial - 2);
         }
 
         // capture square
