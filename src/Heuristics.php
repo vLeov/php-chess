@@ -9,7 +9,7 @@ class Heuristics extends Player
 {
     use HeuristicsTrait;
 
-    public function __construct(string $movetext, Board $board = null)
+    public function __construct(string $movetext = '', Board $board = null)
     {
         parent::__construct($movetext, $board);
 

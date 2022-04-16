@@ -1,4 +1,4 @@
-A chess game can be thought of in terms of snapshots describing what's going on the board as reported by a number of evaluation features, thus, chess positions can be evaluated by considering the heuristics of the game.
+A chess game can be thought of in terms of snapshots describing what's going on the board as reported by a number of evaluation features, thus, chess games in the form of a PGN movetext can be evaluated by considering those.
 
 Let's look at the `Chess\Heuristics` methods available through the following example:
 
@@ -12,35 +12,45 @@ $game->play('w', 'e4');
 $game->play('b', 'e6');
 $game->play('w', 'd4');
 $game->play('b', 'd5');
+
+$movetext = $game->getBoard()->getMovetext();
 ```
 
-#### `function getDimensions(): array`
+For further information you may want to check out the tests in [tests/unit/HeuristicsTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php).
+
+---
+
+#### `public function getDimensions(): array`
 
 Returns the evaluation features also known as dimensions.
 
 ```php
-$dimensions = (new Heuristics($game->movetext()))->getDimensions();
+$dimensions = (new Heuristics())->getDimensions();
 
 print_r($dimensions);
 ```
-
-Output:
-
 ```text
 Array
 (
-    [Chess\Evaluation\MaterialEvaluation] => 21
-    [Chess\Evaluation\CenterEvaluation] => 21
-    [Chess\Evaluation\ConnectivityEvaluation] => 13
-    [Chess\Evaluation\SpaceEvaluation] => 5
-    [Chess\Evaluation\PressureEvaluation] => 5
-    [Chess\Evaluation\KingSafetyEvaluation] => 5
-    [Chess\Evaluation\TacticsEvaluation] => 5
-    [Chess\Evaluation\AttackEvaluation] => 5
-    [Chess\Evaluation\DoubledPawnEvaluation] => 5
-    [Chess\Evaluation\PassedPawnEvaluation] => 5
-    [Chess\Evaluation\IsolatedPawnEvaluation] => 5
-    [Chess\Evaluation\BackwardPawnEvaluation] => 5
+    [Chess\Evaluation\MaterialEvaluation] => 28
+    [Chess\Evaluation\CenterEvaluation] => 4
+    [Chess\Evaluation\ConnectivityEvaluation] => 4
+    [Chess\Evaluation\SpaceEvaluation] => 4
+    [Chess\Evaluation\PressureEvaluation] => 4
+    [Chess\Evaluation\KingSafetyEvaluation] => 4
+    [Chess\Evaluation\TacticsEvaluation] => 4
+    [Chess\Evaluation\AttackEvaluation] => 4
+    [Chess\Evaluation\DoubledPawnEvaluation] => 4
+    [Chess\Evaluation\PassedPawnEvaluation] => 4
+    [Chess\Evaluation\IsolatedPawnEvaluation] => 4
+    [Chess\Evaluation\BackwardPawnEvaluation] => 4
+    [Chess\Evaluation\AbsolutePinEvaluation] => 4
+    [Chess\Evaluation\RelativePinEvaluation] => 4
+    [Chess\Evaluation\AbsoluteForkEvaluation] => 4
+    [Chess\Evaluation\RelativeForkEvaluation] => 4
+    [Chess\Evaluation\SqOutpostEvaluation] => 4
+    [Chess\Evaluation\KnightOutpostEvaluation] => 4
+    [Chess\Evaluation\BishopOutpostEvaluation] => 4
 )
 ```
 
@@ -48,18 +58,15 @@ The sum of the weights equals to 100 as per a multiple-criteria decision analysi
 
 Let the grandmasters label the chess positions. Once a particular position is successfully transformed into an input vector of numbers, then it can be labeled on the assumption that the best possible move that could be made was made — by a chess grandmaster.
 
-#### `getResult(): array`
+#### `public function getResult(): array`
 
 Returns the heuristics.
 
 ```php
-$result = (new Heuristics($game->movetext()))->getResult();
+$result = (new Heuristics($movetext))->getResult();
 
 print_r($result);
 ```
-
-Output:
-
 ```text
 Array
 (
@@ -68,7 +75,7 @@ Array
             [0] => Array
                 (
                     [0] => 0
-                    [1] => 0.5
+                    [1] => 0.27
                     [2] => 0.6
                     [3] => 0.17
                     [4] => 0
@@ -79,6 +86,13 @@ Array
                     [9] => 0
                     [10] => 0
                     [11] => 0
+                    [12] => 0
+                    [13] => 0
+                    [14] => 0
+                    [15] => 0
+                    [16] => 0
+                    [17] => 0
+                    [18] => 0
                 )
 
             [1] => Array
@@ -95,6 +109,13 @@ Array
                     [9] => 0
                     [10] => 0
                     [11] => 1
+                    [12] => 0
+                    [13] => 0
+                    [14] => 0
+                    [15] => 0
+                    [16] => 0
+                    [17] => 0
+                    [18] => 0
                 )
 
         )
@@ -115,12 +136,19 @@ Array
                     [9] => 0
                     [10] => 0
                     [11] => 0
+                    [12] => 0
+                    [13] => 0
+                    [14] => 0
+                    [15] => 0
+                    [16] => 0
+                    [17] => 0
+                    [18] => 0
                 )
 
             [1] => Array
                 (
                     [0] => 0
-                    [1] => 0
+                    [1] => 0.18
                     [2] => 0.6
                     [3] => 0.17
                     [4] => 1
@@ -131,6 +159,13 @@ Array
                     [9] => 0
                     [10] => 0
                     [11] => 0
+                    [12] => 0
+                    [13] => 0
+                    [14] => 0
+                    [15] => 0
+                    [16] => 0
+                    [17] => 0
+                    [18] => 0
                 )
 
         )
@@ -138,25 +173,22 @@ Array
 )
 ```
 
-#### `function getBalance(): array`
+#### `public function getBalance(): array`
 
 Returns the balanced heuristics. A chess game can be plotted in terms of balance. +1 is the best possible evaluation for White and -1 the best possible evaluation for Black. Both forces being set to 0 means they're actually offset and, therefore, balanced.
 
 ```php
-$balance = (new Heuristics($game->movetext()))->getBalance();
+$balance = (new Heuristics($movetext))->getBalance();
 
 print_r($balance);
 ```
-
-Output:
-
 ```text
 Array
 (
     [0] => Array
         (
             [0] => 0
-            [1] => 0.5
+            [1] => 0.27
             [2] => -0.4
             [3] => 0.17
             [4] => 0
@@ -167,12 +199,19 @@ Array
             [9] => 0
             [10] => 0
             [11] => 0
+            [12] => 0
+            [13] => 0
+            [14] => 0
+            [15] => 0
+            [16] => 0
+            [17] => 0
+            [18] => 0
         )
 
     [1] => Array
         (
             [0] => 0
-            [1] => 1
+            [1] => 0.82
             [2] => -0.6
             [3] => 0.83
             [4] => 0
@@ -183,17 +222,24 @@ Array
             [9] => 0
             [10] => 0
             [11] => 1
+            [12] => 0
+            [13] => 0
+            [14] => 0
+            [15] => 0
+            [16] => 0
+            [17] => 0
+            [18] => 0
         )
 
 )
 ```
 
-#### `function eval(): array`
+#### `public function eval(): array`
 
 Returns the evaluation of the chess position in a human readable format. The result obtained suggests which player may be better.
 
 ```php
-$eval = (new Heuristics($game->movetext()))->eval();
+$eval = (new Heuristics($movetext))->eval();
 
 print_r($eval);
 ```
