@@ -41,7 +41,7 @@ class King extends AbstractPiece
         $this->setTravel();
     }
 
-    protected function moveCastleLong(): ?string
+    protected function sqCastleLong(): ?string
     {
         $rule = CastlingRule::color($this->getColor())[Piece::K][Castle::LONG];
         if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
@@ -60,7 +60,7 @@ class King extends AbstractPiece
         return null;
     }
 
-    protected function moveCastleShort(): ?string
+    protected function sqCastleShort(): ?string
     {
         $rule = CastlingRule::color($this->getColor())[Piece::K][Castle::SHORT];
         if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {
@@ -77,21 +77,21 @@ class King extends AbstractPiece
         return null;
     }
 
-    protected function movesCaptures(): ?array
+    protected function sqsCaptures(): ?array
     {
-        $movesCaptures = array_intersect(
+        $sqsCaptures = array_intersect(
             array_values((array)$this->travel),
             $this->board->getSqEval()->used->{$this->getOppColor()}
         );
 
-        return array_diff($movesCaptures, $this->board->getDefenseEval()->{$this->getOppColor()});
+        return array_diff($sqsCaptures, $this->board->getDefenseEval()->{$this->getOppColor()});
     }
 
-    protected function movesKing(): ?array
+    protected function sqsKing(): ?array
     {
-        $movesKing = array_intersect(array_values((array)$this->travel), $this->board->getSqEval()->free);
+        $sqsKing = array_intersect(array_values((array)$this->travel), $this->board->getSqEval()->free);
 
-        return array_diff($movesKing, $this->board->getSpaceEval()->{$this->getOppColor()});
+        return array_diff($sqsKing, $this->board->getSpaceEval()->{$this->getOppColor()});
     }
 
     /**
@@ -140,10 +140,10 @@ class King extends AbstractPiece
     public function getSqs(): ?array
     {
         $sqs = [
-            ...$this->movesKing(),
-            ...$this->movesCaptures(),
-            ...[$this->moveCastleLong()],
-            ...[$this->moveCastleShort()]
+            ...$this->sqsKing(),
+            ...$this->sqsCaptures(),
+            ...[$this->sqCastleLong()],
+            ...[$this->sqCastleShort()]
         ];
 
         return array_filter($sqs);
