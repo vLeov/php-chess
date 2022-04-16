@@ -20,4 +20,3 @@ $filename = (new BoardToJpg($board, $flip = true))->output();
 ```
 
 ![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/tests/data/img/01_kaufman_flip.png)
-Figure 1. Position 1 of the Kaufman test
