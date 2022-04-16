@@ -1,4 +1,4 @@
-A chess game can be thought of in terms of snapshots describing what's going on the board as reported by a number of evaluation features, thus, chess games in the form of a PGN movetext can be evaluated by considering those.
+A [`Chess\Game`](https://php-chess.readthedocs.io/en/latest/game/) object can be thought of in terms of snapshots describing what's going on its [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) as reported by a number of evaluation features, thus, PGN movetexts can be evaluated by considering those.
 
 Let's look at the `Chess\Heuristics` methods available through the following example:
 

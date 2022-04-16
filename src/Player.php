@@ -38,7 +38,7 @@ class Player
     }
 
     /**
-     * Returns the resulting `Chess\Board` object of playing a game.
+     * Returns the resulting Chess\Board object of playing a game.
      *
      * @return \Chess\Board
      */
@@ -48,7 +48,7 @@ class Player
     }
 
     /**
-     * Returns the moves.
+     * Returns the moves as an array.
      *
      * @return array
      */

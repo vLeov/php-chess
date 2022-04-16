@@ -1,10 +1,14 @@
-The `Chess\Combinatorics\RestrictedPermutationWithRepetition` class allows to generate a set of [restricted permutations](https://rosettacode.org/wiki/Permutations_with_repetitions) with repetition considering the parameters provided, which is especially useful to classify chess position for supervised learning.
+`Chess\Combinatorics\RestrictedPermutationWithRepetition` allows to generate a set of [restricted permutations](https://rosettacode.org/wiki/Permutations_with_repetitions) with repetition considering the parameters provided, which is especially useful to classify chess position for supervised learning.
 
 For further information, please visit:
 
 - [Using Restricted Permutations to Classify Chess Positions for Further Supervised Learning](https://medium.com/geekculture/using-restricted-permutations-to-classify-chess-positions-for-further-supervised-learning-27eeb3f71d82)
 
-#### `get($values, $size, $sum): array`
+Also you may want to check out the tests in [tests/unit/Combinatorics/RestrictedPermutationWithRepetitionTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Combinatorics/RestrictedPermutationWithRepetitionTest.php).
+
+---
+
+#### `public function get($values, $size, $sum): array`
 
 Returns a set of permutations considering the parameters provided. For example, the following code snippet will create all possible permutations of 8 elements each with the peculiarity — or restriction — that the sum of all elements equals to 100.
 
@@ -15,9 +19,6 @@ $set = (new RestrictedPermutationWithRepetition())->get([8, 13, 21, 34], 8, 100)
 
 print_r($set);
 ```
-
-Output:
-
 ```
 Array
 (
@@ -157,5 +158,3 @@ Array
 
     )
 ```
-
-For further information on how to use the `RestrictedPermutationWithRepetition` class you can always go look at the [PHP Chess tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Combinatorics/RestrictedPermutationWithRepetitionTest.php) and copy code from there.

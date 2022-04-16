@@ -1,4 +1,8 @@
-The `Chess\Player` class allows to play a [PGN movetext](https://en.wikipedia.org/wiki/Portable_Game_Notation#Movetext) returning the corresponding [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object as it is described in the following example.
+`Chess\Player` allows to play a PGN movetext returning a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object as it is described in the following example.
+
+For further information you may want to check out the tests in [tests/unit/PlayerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/PlayerTest.php).
+
+---
 
 ```php
 use Chess\Player;
@@ -10,14 +14,14 @@ $player = new Player($movetext);
 $board = $player->play()->getBoard();
 ```
 
-#### `function play(): Player`
+#### `public function play(): Player`
 
 Plays a chess game.
 
-#### `function getBoard(): Board`
+#### `public function getBoard(): Board`
 
 Returns the resulting `Chess\Board` object of playing a game.
 
-#### `function getMoves(): array`
+#### `public function getMoves(): array`
 
-Returns the moves.
+Returns the PGN moves as an array.
