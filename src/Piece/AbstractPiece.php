@@ -26,13 +26,6 @@ abstract class AbstractPiece
     protected string $color;
 
     /**
-     * The piece's travel.
-     *
-     * @var mixed object|array
-     */
-    protected array|object $travel;
-
-    /**
      * The piece's id in PGN format.
      *
      * @var string
@@ -40,7 +33,14 @@ abstract class AbstractPiece
     protected string $id;
 
     /**
-     * The piece's next move to be performed on the board.
+     * The piece's travel.
+     *
+     * @var mixed object|array
+     */
+    protected array|object $travel;
+
+    /**
+     * The piece's next move.
      *
      * @var object
      */
@@ -114,13 +114,13 @@ abstract class AbstractPiece
     }
 
     /**
-     * Gets the piece's position on the board.
+     * Gets the piece's id.
      *
      * @return string
      */
-    public function getSquare(): string
+    public function getId(): string
     {
-        return $this->sq;
+        return $this->id;
     }
 
     /**
@@ -131,16 +131,6 @@ abstract class AbstractPiece
     public function getTravel(): array|object
     {
         return $this->travel;
-    }
-
-    /**
-     * Gets the piece's id.
-     *
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     /**
@@ -163,6 +153,16 @@ abstract class AbstractPiece
         $this->move = $move;
 
         return $this;
+    }
+
+    /**
+     * Gets the piece's position on the board.
+     *
+     * @return string
+     */
+    public function getSquare(): string
+    {
+        return $this->sq;
     }
 
     /**
