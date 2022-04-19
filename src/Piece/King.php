@@ -41,7 +41,7 @@ class King extends AbstractPiece
         $this->setTravel();
     }
 
-    protected function sqCastleLong(): ?string
+    public function sqCastleLong(): ?string
     {
         $rule = CastlingRule::color($this->getColor())[Piece::K][Castle::LONG];
         if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
@@ -60,7 +60,7 @@ class King extends AbstractPiece
         return null;
     }
 
-    protected function sqCastleShort(): ?string
+    public function sqCastleShort(): ?string
     {
         $rule = CastlingRule::color($this->getColor())[Piece::K][Castle::SHORT];
         if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {

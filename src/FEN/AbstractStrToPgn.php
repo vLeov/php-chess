@@ -37,8 +37,8 @@ abstract class AbstractStrToPgn
                 switch ($id) {
                     case Piece::K:
                         $rule = CastlingRule::color($color)[Piece::K];
-                        if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
-                            CastlingAbility::short($this->board->getCastlingAbility(), $color)
+                        if ($sq === $rule[Castle::SHORT]['sq']['next'] && 
+                            $piece->sqCastleShort()
                         ) {
                             if ($clone->play($color, Piece::K.$sq)) {
                                 $legal[] = [
@@ -46,7 +46,7 @@ abstract class AbstractStrToPgn
                                 ];
                             }
                         } elseif ($sq === $rule[Castle::LONG]['sq']['next'] &&
-                            CastlingAbility::long($this->board->getCastlingAbility(), $color)
+                            $piece->sqCastleLong()
                         ) {
                             if ($clone->play($color, Piece::K.$sq)) {
                                 $legal[] = [
