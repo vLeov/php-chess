@@ -19,21 +19,14 @@ class King extends AbstractPiece
         Color::W => [
             Piece::K => [
                 Castle::SHORT => [
-                    'sqs' => [
-                        'f' => 'f1',
-                        'g' => 'g1',
-                    ],
+                    'sqs' => [ 'f1', 'g1' ],
                     'sq' => [
                         'current' => 'e1',
                         'next' => 'g1',
                     ],
                 ],
                 Castle::LONG => [
-                    'sqs' => [
-                        'b' => 'b1',
-                        'c' => 'c1',
-                        'd' => 'd1',
-                    ],
+                    'sqs' => [ 'b1', 'c1', 'd1' ],
                     'sq' => [
                         'current' => 'e1',
                         'next' => 'c1',
@@ -58,21 +51,14 @@ class King extends AbstractPiece
         Color::B => [
             Piece::K => [
                 Castle::SHORT => [
-                    'sqs' => [
-                        'f' => 'f8',
-                        'g' => 'g8',
-                    ],
+                    'sqs' => [ 'f8', 'g8' ],
                     'sq' => [
                         'current' => 'e8',
                         'next' => 'g8',
                     ],
                 ],
                 Castle::LONG => [
-                    'sqs' => [
-                        'b' => 'b8',
-                        'c' => 'c8',
-                        'd' => 'd8',
-                    ],
+                    'sqs' => [ 'b8', 'c8', 'd8' ],
                     'sq' => [
                         'current' => 'e8',
                         'next' => 'c8',
@@ -128,12 +114,8 @@ class King extends AbstractPiece
 
         if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
             if (
-                in_array($rule['sqs']['b'], $this->board->getSqEval()->free) &&
-                in_array($rule['sqs']['c'], $this->board->getSqEval()->free) &&
-                in_array($rule['sqs']['d'], $this->board->getSqEval()->free) &&
-                !in_array($rule['sqs']['b'], $this->board->getSpaceEval()->{$this->getOppColor()}) &&
-                !in_array($rule['sqs']['c'], $this->board->getSpaceEval()->{$this->getOppColor()}) &&
-                !in_array($rule['sqs']['d'], $this->board->getSpaceEval()->{$this->getOppColor()})
+                !array_diff($rule['sqs'], $this->board->getSqEval()->free) &&
+                empty(array_intersect($rule['sqs'], $this->board->getSpaceEval()->{$this->getOppColor()}))
             ) {
                 return $rule['sq']['next'];
             }
@@ -148,10 +130,8 @@ class King extends AbstractPiece
 
         if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {
             if (
-                in_array($rule['sqs']['f'], $this->board->getSqEval()->free) &&
-                in_array($rule['sqs']['g'], $this->board->getSqEval()->free) &&
-                !in_array($rule['sqs']['f'], $this->board->getSpaceEval()->{$this->getOppColor()}) &&
-                !in_array($rule['sqs']['g'], $this->board->getSpaceEval()->{$this->getOppColor()})
+                !array_diff($rule['sqs'], $this->board->getSqEval()->free) &&
+                empty(array_intersect($rule['sqs'], $this->board->getSpaceEval()->{$this->getOppColor()}))
             ) {
                 return $rule['sq']['next'];
             }
