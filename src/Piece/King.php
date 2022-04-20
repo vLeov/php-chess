@@ -2,9 +2,9 @@
 
 namespace Chess\Piece;
 
-use Chess\CastlingRule;
 use Chess\FEN\Field\CastlingAbility;
 use Chess\PGN\AN\Castle;
+use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 
 /**
@@ -15,6 +15,87 @@ use Chess\PGN\AN\Piece;
  */
 class King extends AbstractPiece
 {
+    public static $castlingRule = [
+        Color::W => [
+            Piece::K => [
+                Castle::SHORT => [
+                    'sqs' => [
+                        'f' => 'f1',
+                        'g' => 'g1',
+                    ],
+                    'sq' => [
+                        'current' => 'e1',
+                        'next' => 'g1',
+                    ],
+                ],
+                Castle::LONG => [
+                    'sqs' => [
+                        'b' => 'b1',
+                        'c' => 'c1',
+                        'd' => 'd1',
+                    ],
+                    'sq' => [
+                        'current' => 'e1',
+                        'next' => 'c1',
+                    ],
+                ],
+            ],
+            Piece::R => [
+                Castle::SHORT => [
+                    'sq' => [
+                        'current' => 'h1',
+                        'next' => 'f1',
+                    ],
+                ],
+                Castle::LONG => [
+                    'sq' => [
+                        'current' => 'a1',
+                        'next' => 'd1',
+                    ],
+                ],
+            ],
+        ],
+        Color::B => [
+            Piece::K => [
+                Castle::SHORT => [
+                    'sqs' => [
+                        'f' => 'f8',
+                        'g' => 'g8',
+                    ],
+                    'sq' => [
+                        'current' => 'e8',
+                        'next' => 'g8',
+                    ],
+                ],
+                Castle::LONG => [
+                    'sqs' => [
+                        'b' => 'b8',
+                        'c' => 'c8',
+                        'd' => 'd8',
+                    ],
+                    'sq' => [
+                        'current' => 'e8',
+                        'next' => 'c8',
+                    ],
+                ],
+            ],
+            Piece::R => [
+                Castle::SHORT => [
+                    'sq' => [
+                        'current' => 'h8',
+                        'next' => 'f8',
+                    ],
+                ],
+                Castle::LONG => [
+                    'sq' => [
+                        'current' => 'a8',
+                        'next' => 'd8',
+                    ],
+                ],
+            ],
+        ],
+    ];
+
     /**
      * @var \Chess\Piece\Rook
      */
@@ -43,7 +124,8 @@ class King extends AbstractPiece
 
     public function sqCastleLong(): ?string
     {
-        $rule = CastlingRule::color($this->getColor())[Piece::K][Castle::LONG];
+        $rule = self::$castlingRule[$this->getColor()][Piece::K][Castle::LONG];
+
         if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
             if (
                 in_array($rule['sqs']['b'], $this->board->getSqEval()->free) &&
@@ -62,7 +144,8 @@ class King extends AbstractPiece
 
     public function sqCastleShort(): ?string
     {
-        $rule = CastlingRule::color($this->getColor())[Piece::K][Castle::SHORT];
+        $rule = self::$castlingRule[$this->getColor()][Piece::K][Castle::SHORT];
+
         if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {
             if (
                 in_array($rule['sqs']['f'], $this->board->getSqEval()->free) &&
@@ -95,14 +178,15 @@ class King extends AbstractPiece
     }
 
     /**
-     * Gets the king's castle rook.
+     * Gets the castle rook.
      *
      * @param array $pieces
      * @return mixed \Chess\Piece\Rook|null
      */
     public function getCastleRook(array $pieces): ?Rook
     {
-        $rule = CastlingRule::color($this->getColor())[Piece::R];
+        $rule = self::$castlingRule[$this->getColor()][Piece::R];
+
         foreach ($pieces as $piece) {
             if (
                 $piece->getId() === Piece::R &&

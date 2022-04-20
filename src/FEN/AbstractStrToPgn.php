@@ -3,10 +3,10 @@
 namespace Chess\FEN;
 
 use Chess\Board;
-use Chess\CastlingRule;
 use Chess\FEN\Field\CastlingAbility;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Piece;
+use Chess\Piece\King;
 
 abstract class AbstractStrToPgn
 {
@@ -36,8 +36,8 @@ abstract class AbstractStrToPgn
                 $position = $piece->getSquare();
                 switch ($id) {
                     case Piece::K:
-                        $rule = CastlingRule::color($color)[Piece::K];
-                        if ($sq === $rule[Castle::SHORT]['sq']['next'] && 
+                        $rule = King::$castlingRule[$color][Piece::K];
+                        if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
                             $piece->sqCastleShort()
                         ) {
                             if ($clone->play($color, Piece::K.$sq)) {

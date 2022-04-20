@@ -3,12 +3,12 @@
 namespace Chess\PGN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\CastlingRule;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Check;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\AN\Square;
+use Chess\Piece\King;
 
 /**
  * Move.
@@ -102,7 +102,7 @@ class Move extends AbstractNotation implements ValidationInterface
                 'type' => Move::CASTLE_SHORT,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) CastlingRule::color($color)[Piece::K][Castle::SHORT]['sq'],
+                'sq' => (object) King::$castlingRule[$color][Piece::K][Castle::SHORT]['sq'],
             ];
         } elseif (preg_match('/^' . Move::CASTLE_LONG . '$/', $pgn)) {
             return (object) [
@@ -112,7 +112,7 @@ class Move extends AbstractNotation implements ValidationInterface
                 'type' => Move::CASTLE_LONG,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) CastlingRule::color($color)[Piece::K][Castle::LONG]['sq'],
+                'sq' => (object) King::$castlingRule[$color][Piece::K][Castle::LONG]['sq'],
             ];
         } elseif (preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn)) {
             return (object) [
