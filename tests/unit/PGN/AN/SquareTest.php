@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\PGN\AN;
 
+use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Square;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -12,7 +13,7 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function integer_throws_exception()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(UnknownNotationException::class);
 
         Square::validate(9);
     }
@@ -22,7 +23,7 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function float_throws_exception()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(UnknownNotationException::class);
 
         Square::validate(9.75);
     }
@@ -32,7 +33,7 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function a9_throws_exception()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(UnknownNotationException::class);
 
         Square::validate('a9');
     }
@@ -42,7 +43,7 @@ class SquareTest extends AbstractUnitTestCase
      */
     public function foo_throws_exception()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(UnknownNotationException::class);
 
         Square::validate('foo');
     }
