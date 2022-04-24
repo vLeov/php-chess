@@ -18,7 +18,6 @@
             <directory>tests/unit/Piece</directory>
             <file>tests/unit/ArrayOfBoardsTest.php</file>
             <file>tests/unit/BoardTest.php</file>
-            <file>tests/unit/CastlingRuleTest.php</file>
             <file>tests/unit/GameTest.php</file>
             <file>tests/unit/GrandmasterTest.php</file>
             <file>tests/unit/HeuristicsByFenStringTest.php</file>
