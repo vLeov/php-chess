@@ -39,9 +39,9 @@ class Color extends AbstractNotation implements ValidationInterface
      * @param string $color
      * @return string
      */
-    public static function opp(?string $color): string
+    public static function opp(string $color): string
     {
-        if ($color == self::W) {
+        if ($color === self::W) {
             return self::B;
         }
 

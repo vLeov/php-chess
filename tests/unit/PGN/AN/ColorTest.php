@@ -20,7 +20,7 @@ class ColorTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function white()
+    public function validate_w()
     {
         $this->assertSame(Color::W, Color::validate('w'));
     }
@@ -28,8 +28,16 @@ class ColorTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function black()
+    public function validate_b()
     {
         $this->assertSame(Color::B, Color::validate('b'));
+    }
+
+    /**
+     * @test
+     */
+    public function opp_w()
+    {
+        $this->assertSame(Color::B, Color::opp('w'));
     }
 }
