@@ -40,4 +40,17 @@ class ColorTest extends AbstractUnitTestCase
     {
         $this->assertSame(Color::B, Color::opp('w'));
     }
+
+    /**
+     * @test
+     */
+    public function values()
+    {
+        $expected = [
+            'W' => 'w', 
+            'B' => 'b',
+        ];
+
+        $this->assertSame($expected, Color::values());
+    }
 }
