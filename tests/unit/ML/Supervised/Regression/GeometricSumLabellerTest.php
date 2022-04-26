@@ -9,7 +9,7 @@ use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
 use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
-use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
+use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class GeometricSumLabellerTest extends AbstractUnitTestCase
 {
@@ -90,7 +90,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
      */
     public function closed_sicilian_labelled()
     {
-        $board = (new ClosedSicilian(new Board()))->play();
+        $board = (new OpenSicilian(new Board()))->play();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
