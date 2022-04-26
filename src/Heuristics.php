@@ -46,6 +46,29 @@ class Heuristics extends Player
     }
 
     /**
+     * Returns the resized balanced heuristics given a new range of values.
+     *
+     * @param float $newMin
+     * @param float $newMax
+     * @return array
+     */
+    public function getResizedBalance(float $newMin, float $newMax): array
+    {
+        $oldMin = -1;
+        $oldMax = 1;
+        $resize = [];
+        foreach ($this->balance as $key => $val) {
+            foreach ($val as $v) {
+                $resized = (($v - $oldMin) / ($oldMax - $oldMin)) *
+                    ($newMax - $newMin) + $newMin;
+                $resize[$key][] = round($resized, 2);
+            }
+        }
+
+        return $resize;
+    }
+
+    /**
      * Heuristics calc.
      *
      * @return \Chess\Heuristics

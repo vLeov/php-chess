@@ -143,21 +143,9 @@ trait HeuristicsTrait
      * situations; for example, when using a geometric sum. That way the sum
      * won't be neutralized because of subtractions taking place.
      *
+     * @param float $newMin
+     * @param float $newMax
      * @return array
      */
-    public function getResizedBalance(float $newMin, float $newMax): array
-    {
-        $oldMin = -1;
-        $oldMax = 1;
-        $resize = [];
-        foreach ($this->balance as $key => $val) {
-            foreach ($val as $val) {
-                $resized = (($val - $oldMin) / ($oldMax - $oldMin)) *
-                    ($newMax - $newMin) + $newMin;
-                $resize[$key][] = round($resized, 2);
-            }
-        }
-
-        return $resize;
-    }
+    abstract public function getResizedBalance(float $newMin, float $newMax): array;
 }
