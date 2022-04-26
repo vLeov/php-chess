@@ -134,4 +134,30 @@ trait HeuristicsTrait
     {
         return $this->balance;
     }
+
+    /**
+     * Returns the resized balanced heuristics given a new range of values.
+     *
+     * A balanced, chess heuristic is within a range between -1 and 1 by default;
+     * however, [0, 1] may be more convenient to label input vectors in certain
+     * situations; for example, when using a geometric sum. That way the sum
+     * won't be neutralized because of subtractions taking place.
+     *
+     * @return array
+     */
+    public function getResizedBalance(float $newMin, float $newMax): array
+    {
+        $oldMin = -1;
+        $oldMax = 1;
+        $resize = [];
+        foreach ($this->balance as $key => $val) {
+            foreach ($val as $val) {
+                $resized = (($val - $oldMin) / ($oldMax - $oldMin)) *
+                    ($newMax - $newMin) + $newMin;
+                $resize[$key][] = round($resized, 2);
+            }
+        }
+
+        return $resize;
+    }
 }

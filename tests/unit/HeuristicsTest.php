@@ -265,6 +265,98 @@ class HeuristicsTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
+    | getResizedBalance()
+    |--------------------------------------------------------------------------
+    |
+    | Returns the resized, balanced heuristics.
+    |
+    */
+
+    /**
+     * @test
+     */
+    public function get_resized_balance_start()
+    {
+        $board = new Board();
+
+        $balance = (new Heuristics($board->getMovetext()))->getResizedBalance(0, 1);
+
+        $expected = [
+            [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+        ];
+
+        $this->assertSame($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function get_resized_balance_e4_e5()
+    {
+        $movetext = '1.e4 e5';
+
+        $balance = (new Heuristics($movetext))->getResizedBalance(0, 1);
+
+        $expected = [
+            [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+        ];
+
+        $this->assertSame($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function get_resized_balance_e4_e6()
+    {
+        $movetext = '1.e4 e6';
+
+        $balance = (new Heuristics($movetext))->getResizedBalance(0, 1);
+
+        $expected = [
+            [ 0.5, 1, 0, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function get_resized_balance_e4_e6_d4_d5()
+    {
+        $movetext = '1.e4 e6 2.d4 d5';
+
+        $balance = (new Heuristics($movetext))->getResizedBalance(0, 1);
+
+        $expected = [
+            [ 0.5, 0.64, 0.3, 0.59, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+            [ 0.5, 0.91, 0.2, 0.92, 0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function get_resized_balance_e4_e6_d4_d5_Nd2_Nf6()
+    {
+        $movetext = '1.e4 e6 2.d4 d5 3.Nd2 Nf6';
+
+        $balance = (new Heuristics($movetext))->getResizedBalance(0, 1);
+
+        $expected = [
+            [ 0.5, 0.64, 0.38, 0.59, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+            [ 0.5, 0.91, 0.31, 0.92, 0.5, 0.5, 0.25, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+            [ 0.5, 0.68, 0.25, 0.67, 0.25, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | getDimensions()
     |--------------------------------------------------------------------------
     |
