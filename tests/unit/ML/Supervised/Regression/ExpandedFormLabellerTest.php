@@ -26,7 +26,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = 855.0;
+        $expected = '5555555555555555555';
 
         $this->assertSame($expected, $label);
     }
@@ -44,7 +44,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = 743.0;
+        $expected = '5555550555555001915';
 
         $this->assertSame($expected, $label);
     }
@@ -62,7 +62,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = 948.1;
+        $expected = '5555560555555087070';
 
         $this->assertSame($expected, $label);
     }
@@ -80,7 +80,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = 837.5;
+        $expected = '5555555060555516486';
 
         $this->assertSame($expected, $label);
     }
@@ -88,7 +88,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian_labelled()
+    public function open_sicilian_labelled()
     {
         $board = (new OpenSicilian(new Board()))->play();
 
@@ -98,7 +98,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = 854.2;
+        $expected = '5555555555555527385';
 
         $this->assertSame($expected, $label);
     }
