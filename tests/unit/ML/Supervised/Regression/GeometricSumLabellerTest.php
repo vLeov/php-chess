@@ -88,7 +88,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian_labelled()
+    public function open_sicilian_labelled()
     {
         $board = (new OpenSicilian(new Board()))->play();
 
