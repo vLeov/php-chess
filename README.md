@@ -29,7 +29,7 @@ Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
 
 ### Demo
 
-PHP Chess is being used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess Server](https://github.com/chesslablab/chess-server). Check out [this demo](https://programarivm.github.io/demo-redux-chess).
+PHP Chess is being used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess Server](https://github.com/chesslablab/chess-server). Check out [this demo](https://www.chesslablab.com).
 
 > Please note the sandbox server might not be up and running all the time.
 
