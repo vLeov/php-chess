@@ -225,7 +225,7 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppp2ppp/8/3Pp3/8/8/PPPP1PPP/RNBQKBNR w'));
 
-        $this->assertSame('P', $game->getBoard()->legalMoves('d5')->id);
+        $this->assertSame('P', $game->getBoard()->legalMovesBySq('d5')->id);
     }
 
     /**
@@ -243,7 +243,7 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnbqkbnr/pp2pppp/3p4/8/3NP3/8/PPP2PPP/RNBQKB1R b'));
         $this->assertTrue($game->playFen('rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w'));
 
-        $this->assertNotEmpty($game->getBoard()->legalMoves('b1')->moves);
+        $this->assertNotEmpty($game->getBoard()->legalMovesBySq('b1')->moves);
     }
 
     /**

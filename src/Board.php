@@ -1027,7 +1027,7 @@ final class Board extends \SplObjectStorage
      * @param string $sq
      * @return mixed null|object
      */
-    public function legalMoves(string $sq): ?object
+    public function legalMovesBySq(string $sq): ?object
     {
         if ($piece = $this->getPieceBySq($sq)) {
             $moves = [];
