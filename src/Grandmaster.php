@@ -6,7 +6,7 @@ class Grandmaster
 {
     const FILEPATH = __DIR__.'/../model/grandmaster.csv';
 
-    private array $movetexts;
+    private array $movetexts = [];
 
     public function response(string $movetext): ?string
     {

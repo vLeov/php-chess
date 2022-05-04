@@ -105,8 +105,11 @@ class Game
      */
     public function state(): object
     {
+        $history = $this->board->getHistory();
+        $end = end($history);
         return (object) [
             'turn' => $this->board->getTurn(),
+            'pgn' => $end ? $end->move->pgn : null,
             'castlingAbility' => $this->board->getCastlingAbility(),
             'movetext' => $this->board->getMovetext(),
             'fen' => $this->board->getFen(),
@@ -194,25 +197,25 @@ class Game
           'KR' === substr($toRanks[7], -2) &&
           $this->board->play(Color::W, Castle::SHORT)
         ) {
-            return Castle::SHORT;
+            return true;
         } elseif (
           'R3K' === substr($fromRanks[7], 0, 3) &&
           'R1K' === substr($toRanks[7], 0, 3) &&
           $this->board->play(Color::W, Castle::LONG)
         ) {
-            return Castle::LONG;
+            return true;
         } elseif (
           'k2r' === substr($fromRanks[0], -3) &&
           'kr' === substr($toRanks[0], -2) &&
           $this->board->play(Color::B, Castle::SHORT)
         ) {
-            return Castle::SHORT;
+            return true;
         } elseif (
           'r3k' === substr($fromRanks[0], 0, 3) &&
           'r1k' === substr($toRanks[0], 0, 3) &&
           $this->board->play(Color::B, Castle::LONG)
         ) {
-            return Castle::LONG;
+            return true;
         }
 
         $pgn = (new ShortStrToPgn($fromFen, $toShortFen))->create();
