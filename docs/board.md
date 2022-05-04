@@ -298,6 +298,60 @@ P  P  P  P  .  P  P  P
 R  N  B  Q  K  B  N  R
 ```
 
+#### `public function legalSqs(string $sq): ?object`
+
+Returns the legal squares of a piece.
+
+```php
+$sqs = $board->legalSqs('d5');
+
+var_export($sqs);
+```
+
+`$sqs` is a PHP object with the information described below.
+
+| Property    | Description                          |
+|-------------|--------------------------------------|
+| `color`     | The piece's color in PGN format      |
+| `id`        | The piece's id in PGN format         |
+| `sq`        | The piece's position on the board    |
+| `moves`     | The piece's possible moves           |
+| `enPassant` | The en passant pawn, if any          |
+
+Output:
+
+```text
+(object) array(
+   'color' => 'b',
+   'id' => 'Q',
+   'sq' => 'd5',
+   'moves' =>
+  array (
+    0 => 'd6',
+    1 => 'd7',
+    2 => 'd8',
+    3 => 'd4',
+    4 => 'd3',
+    5 => 'd2',
+    6 => 'c5',
+    7 => 'b5',
+    8 => 'a5',
+    9 => 'e5',
+    10 => 'f5',
+    11 => 'g5',
+    12 => 'h5',
+    13 => 'c6',
+    14 => 'e6',
+    15 => 'c4',
+    16 => 'b3',
+    17 => 'a2',
+    18 => 'e4',
+    19 => 'f3',
+    20 => 'g2',
+  ),
+)
+```
+
 #### `public function isCheck(): bool`
 
 Check out whether the current player is in check.

@@ -959,7 +959,7 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns the legal squares.
+     * Returns the legal squares of a piece.
      *
      * @param string $sq
      * @return mixed null|object
