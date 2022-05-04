@@ -1912,7 +1912,7 @@ class BoardTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | possibleMoves()
+    | legalMoves()
     |--------------------------------------------------------------------------
     |
     | Possible moves.
@@ -1949,7 +1949,7 @@ class BoardTest extends AbstractUnitTestCase
             'h4',
         ];
 
-        $this->assertSame($expected, $board->possibleMoves());
+        $this->assertSame($expected, $board->legalMoves());
     }
 
     /**
@@ -1983,7 +1983,7 @@ class BoardTest extends AbstractUnitTestCase
             'h5',
         ];
 
-        $this->assertSame($expected, $board->possibleMoves());
+        $this->assertSame($expected, $board->legalMoves());
     }
 
     /**
@@ -2030,7 +2030,7 @@ class BoardTest extends AbstractUnitTestCase
             'Bf1',
         ];
 
-        $this->assertSame($expected, $board->possibleMoves());
+        $this->assertSame($expected, $board->legalMoves());
     }
 
     /*

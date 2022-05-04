@@ -908,11 +908,11 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns all possible moves.
+     * Returns the legal moves.
      *
      * @return array
      */
-    public function possibleMoves(): ?array
+    public function legalMoves(): ?array
     {
         $moves = [];
         $color = $this->getTurn();
@@ -956,6 +956,59 @@ final class Board extends \SplObjectStorage
         }
 
         return $moves;
+    }
+
+    /**
+     * Returns the legal moves of a piece.
+     *
+     * @param string $sq
+     * @return mixed null|object
+     */
+    public function legalMovesBySq(string $sq): ?object
+    {
+        if ($piece = $this->getPieceBySq($sq)) {
+            $moves = [];
+            $color = $piece->getColor();
+            foreach ($piece->getSqs() as $sq) {
+                $clone = unserialize(serialize($this));
+                switch ($piece->getId()) {
+                    case Piece::K:
+                        if ($clone->play($color, Piece::K.$sq)) {
+                            $moves[] = $sq;
+                        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
+                            $moves[] = $sq;
+                        }
+                        break;
+                    case Piece::P:
+                        if ($clone->play($color, $piece->getFile()."x$sq")) {
+                            $moves[] = $sq;
+                        } elseif ($clone->play($color, $sq)) {
+                            $moves[] = $sq;
+                        }
+                        break;
+                    default:
+                        if ($clone->play($color, $piece->getId().$sq)) {
+                            $moves[] = $sq;
+                        } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
+                            $moves[] = $sq;
+                        }
+                        break;
+                }
+            }
+            $result = [
+                'color' => $color,
+                'id' => $piece->getId(),
+                'moves' => $moves,
+            ];
+            if ($piece->getId() === Piece::P) {
+                if ($enPassant = $piece->getEnPassantSq()) {
+                    $result['enPassant'] = $enPassant;
+                }
+            }
+            return (object) $result;
+        }
+
+        return null;
     }
 
     /**
@@ -1019,58 +1072,5 @@ final class Board extends \SplObjectStorage
     public function getFen(): string
     {
         return (new BoardToStr($this))->create();
-    }
-
-    /**
-     * Returns the legal moves of a piece.
-     *
-     * @param string $sq
-     * @return mixed null|object
-     */
-    public function legalMovesBySq(string $sq): ?object
-    {
-        if ($piece = $this->getPieceBySq($sq)) {
-            $moves = [];
-            $color = $piece->getColor();
-            foreach ($piece->getSqs() as $sq) {
-                $clone = unserialize(serialize($this));
-                switch ($piece->getId()) {
-                    case Piece::K:
-                        if ($clone->play($color, Piece::K.$sq)) {
-                            $moves[] = $sq;
-                        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                            $moves[] = $sq;
-                        }
-                        break;
-                    case Piece::P:
-                        if ($clone->play($color, $piece->getFile()."x$sq")) {
-                            $moves[] = $sq;
-                        } elseif ($clone->play($color, $sq)) {
-                            $moves[] = $sq;
-                        }
-                        break;
-                    default:
-                        if ($clone->play($color, $piece->getId().$sq)) {
-                            $moves[] = $sq;
-                        } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
-                            $moves[] = $sq;
-                        }
-                        break;
-                }
-            }
-            $result = [
-                'color' => $color,
-                'id' => $piece->getId(),
-                'moves' => $moves,
-            ];
-            if ($piece->getId() === Piece::P) {
-                if ($enPassant = $piece->getEnPassantSq()) {
-                    $result['enPassant'] = $enPassant;
-                }
-            }
-            return (object) $result;
-        }
-
-        return null;
     }
 }

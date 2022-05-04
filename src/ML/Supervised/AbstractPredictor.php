@@ -45,7 +45,7 @@ abstract class AbstractPredictor
     public function predict(): string
     {
         $color = $this->board->getTurn();
-        foreach ($this->board->possibleMoves() as $possibleMove) {
+        foreach ($this->board->legalMoves() as $possibleMove) {
             $clone = unserialize(serialize($this->board));
             $clone->play($color, $possibleMove);
             $this->result[] = [ $possibleMove => $this->eval($clone) ];
