@@ -8,7 +8,6 @@ use Chess\FEN\StrToBoard;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
-use Chess\PGN\AN\Square;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
@@ -16,7 +15,7 @@ use Rubix\ML\Persisters\Filesystem;
 /**
  * Game
  *
- * Game is the main component of the PHP Chess Server, a wrapper for the 
+ * Game is the main component of the PHP Chess Server, a wrapper for the
  * Chess\Board especially suited for playing chess online.
  *
  * @author Jordi Bassagañas
@@ -96,60 +95,6 @@ class Game
             'isMate' => $this->board->isMate(),
             'isStalemate' => $this->board->isStalemate(),
         ];
-    }
-
-    /**
-     * Returns information about a piece by its position on the board.
-     *
-     * @param string $sq
-     * @return mixed null|object
-     */
-    public function piece(string $sq): ?object
-    {
-        if ($piece = $this->board->getPieceBySq(Square::validate($sq))) {
-            $moves = [];
-            $color = $piece->getColor();
-            foreach ($piece->getSqs() as $sq) {
-                $clone = unserialize(serialize($this->board));
-                switch ($piece->getId()) {
-                    case Piece::K:
-                        if ($clone->play($color, Piece::K.$sq)) {
-                            $moves[] = $sq;
-                        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                            $moves[] = $sq;
-                        }
-                        break;
-                    case Piece::P:
-                        if ($clone->play($color, $piece->getFile()."x$sq")) {
-                            $moves[] = $sq;
-                        } elseif ($clone->play($color, $sq)) {
-                            $moves[] = $sq;
-                        }
-                        break;
-                    default:
-                        if ($clone->play($color, $piece->getId().$sq)) {
-                            $moves[] = $sq;
-                        } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
-                            $moves[] = $sq;
-                        }
-                        break;
-                }
-            }
-            $result = [
-                'color' => $color,
-                'id' => $piece->getId(),
-                'sq' => $piece->getSquare(),
-                'moves' => $moves,
-            ];
-            if ($piece->getId() === Piece::P) {
-                if ($enPassant = $piece->getEnPassantSq()) {
-                    $result['enPassant'] = $enPassant;
-                }
-            }
-            return (object) $result;
-        }
-
-        return null;
     }
 
     /**
