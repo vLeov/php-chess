@@ -396,27 +396,6 @@ class GameTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | undoMove()
-    |--------------------------------------------------------------------------
-    |
-    | Undoes the last move returning the status of the game.
-    |
-    */
-
-    /**
-     * @test
-     */
-    public function undo_move_e4()
-    {
-        $game = new Game();
-        $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
-
-        $this->assertIsObject($game->undoMove());
-        $this->assertNull($game->undoMove());
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     | Play sample games.
     |--------------------------------------------------------------------------
     |

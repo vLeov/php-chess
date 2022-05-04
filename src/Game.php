@@ -80,6 +80,16 @@ class Game
     }
 
     /**
+     * Sets the Chess\Board object.
+     *
+     * @return \Chess\Game
+     */
+    public function setBoard(Board $board): Game
+    {
+        return $this;
+    }
+
+    /**
      * Returns the state of the board.
      *
      * @return object
@@ -231,20 +241,5 @@ class Game
         }
 
         return $heuristics->getResult();
-    }
-
-    /**
-     * Undoes the last move returning the resulting state.
-     *
-     * @return mixed null|object
-     */
-    public function undoMove(): ?object
-    {
-        if ($this->board->getHistory()) {
-            $this->board->undoMove($this->board->getCastlingAbility());
-            return $this->state();
-        }
-
-        return null;
     }
 }
