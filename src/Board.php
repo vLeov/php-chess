@@ -959,38 +959,38 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns the legal moves of a piece.
+     * Returns the legal squares.
      *
      * @param string $sq
      * @return mixed null|object
      */
-    public function legalMovesBySq(string $sq): ?object
+    public function legalSqs(string $sq): ?object
     {
         if ($piece = $this->getPieceBySq($sq)) {
-            $moves = [];
+            $sqs = [];
             $color = $piece->getColor();
             foreach ($piece->getSqs() as $sq) {
                 $clone = unserialize(serialize($this));
                 switch ($piece->getId()) {
                     case Piece::K:
                         if ($clone->play($color, Piece::K.$sq)) {
-                            $moves[] = $sq;
+                            $sqs[] = $sq;
                         } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                            $moves[] = $sq;
+                            $sqs[] = $sq;
                         }
                         break;
                     case Piece::P:
                         if ($clone->play($color, $piece->getFile()."x$sq")) {
-                            $moves[] = $sq;
+                            $sqs[] = $sq;
                         } elseif ($clone->play($color, $sq)) {
-                            $moves[] = $sq;
+                            $sqs[] = $sq;
                         }
                         break;
                     default:
                         if ($clone->play($color, $piece->getId().$sq)) {
-                            $moves[] = $sq;
+                            $sqs[] = $sq;
                         } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
-                            $moves[] = $sq;
+                            $sqs[] = $sq;
                         }
                         break;
                 }
@@ -998,7 +998,7 @@ final class Board extends \SplObjectStorage
             $result = [
                 'color' => $color,
                 'id' => $piece->getId(),
-                'moves' => $moves,
+                'sqs' => $sqs,
             ];
             if ($piece->getId() === Piece::P) {
                 if ($enPassant = $piece->getEnPassantSq()) {
