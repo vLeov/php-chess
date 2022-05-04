@@ -7,7 +7,6 @@ use Chess\FEN\ShortStrToPgn;
 use Chess\FEN\StrToBoard;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
@@ -77,6 +76,16 @@ class Game
     public function getBoard(): Board
     {
         return $this->board;
+    }
+
+    /**
+     * Returns the game mode.
+     *
+     * @return string
+     */
+    public function getMode(): string
+    {
+        return $this->mode;
     }
 
     /**
@@ -218,28 +227,5 @@ class Game
         }
 
         return false;
-    }
-
-    /**
-     * Returns the game's heuristics.
-     *
-     * @return mixed null|object
-     */
-    public function heuristics($balanced = false, $fen = ''): array
-    {
-        $movetext = $this->board->getMovetext();
-
-        if ($this->mode === self::MODE_LOAD_FEN) {
-            $board = (new StrToBoard($fen))->create();
-            $heuristics = new Heuristics($movetext, $board);
-        } else {
-            $heuristics = new Heuristics($movetext);
-        }
-
-        if ($balanced) {
-            return $heuristics->getBalance();
-        }
-
-        return $heuristics->getResult();
     }
 }
