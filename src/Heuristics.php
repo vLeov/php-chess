@@ -177,7 +177,10 @@ class Heuristics extends Player
         foreach ($this->result[Color::W] as $i => $color) {
             foreach ($color as $j => $val) {
                 $this->balance[$i][$j] =
-                    $this->result[Color::W][$i][$j] - $this->result[Color::B][$i][$j];
+                    round(
+                      $this->result[Color::W][$i][$j] - $this->result[Color::B][$i][$j],
+                      2
+                    );
             }
         }
 

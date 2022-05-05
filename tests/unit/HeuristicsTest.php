@@ -135,7 +135,7 @@ class HeuristicsTest extends AbstractUnitTestCase
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
         $expected = [
-            [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
         ];
 
         $this->assertSame($expected, $balance);
@@ -151,7 +151,7 @@ class HeuristicsTest extends AbstractUnitTestCase
         $balance = (new Heuristics($movetext))->getBalance();
 
         $expected = [
-            [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
         ];
 
         $this->assertSame($expected, $balance);
