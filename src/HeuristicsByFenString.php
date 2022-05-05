@@ -77,8 +77,9 @@ class HeuristicsByFenString
     protected function calc(): HeuristicsByFenString
     {
         $item = [];
-        foreach ($this->dimensions as $dimension => $w) {
-            $eval = (new $dimension($this->board))->eval();
+        foreach ($this->dimensions as $className => $weight) {
+            $dimension = new $className($this->board);
+            $eval = $dimension->eval();
             if (is_array($eval[Color::W])) {
                 if ($dimension instanceof InverseEvaluationInterface) {
                     $item[] = [
@@ -143,7 +144,8 @@ class HeuristicsByFenString
     protected function balance(): HeuristicsByFenString
     {
         foreach ($this->result[Color::W] as $key => $val) {
-            $this->balance[$key] = $this->result[Color::W][$key] - $this->result[Color::B][$key];
+            $this->balance[$key] =
+                round($this->result[Color::W][$key] - $this->result[Color::B][$key], 2);
         }
 
         return $this;
