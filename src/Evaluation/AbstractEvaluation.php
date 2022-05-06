@@ -5,6 +5,7 @@ namespace Chess\Evaluation;
 use Chess\Board;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Abstract evaluation.
@@ -32,5 +33,30 @@ abstract class AbstractEvaluation
             Piece::R => 5.1,
             Piece::Q => 8.8,
         ];
+    }
+
+    protected function attackedPieces(AbstractPiece $piece): array
+    {
+        $attackedPieces = [];
+        foreach ($sqs = $piece->getSqs() as $sq) {
+            if ($attackedPiece = $this->board->getPieceBySq($sq)) {
+                if ($attackedPiece->getId() !== Piece::P) {
+                    $attackedPieces[] = $attackedPiece;
+                }
+            }
+        }
+
+        return $attackedPieces;
+    }
+
+    protected function isKingAttacked(array $attackedPieces): bool
+    {
+        foreach ($attackedPieces as $attackedPiece) {
+            if ($attackedPiece->getId() === Piece::K) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

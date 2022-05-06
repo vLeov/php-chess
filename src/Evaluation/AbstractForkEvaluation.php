@@ -7,31 +7,6 @@ use Chess\Piece\AbstractPiece;
 
 abstract class AbstractForkEvaluation extends AbstractEvaluation
 {
-    protected function attackedPieces(AbstractPiece $piece): array
-    {
-        $attackedPieces = [];
-        foreach ($sqs = $piece->getSqs() as $sq) {
-            if ($attackedPiece = $this->board->getPieceBySq($sq)) {
-                if ($attackedPiece->getId() !== Piece::P) {
-                    $attackedPieces[] = $attackedPiece;
-                }
-            }
-        }
-
-        return $attackedPieces;
-    }
-
-    protected function isKingAttacked(array $attackedPieces): bool
-    {
-        foreach ($attackedPieces as $attackedPiece) {
-            if ($attackedPiece->getId() === Piece::K) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     protected function sumValues(AbstractPiece $piece, array $attackedPieces)
     {
         $values = 0;
