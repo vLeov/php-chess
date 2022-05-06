@@ -22,7 +22,7 @@ class RelativeForkEvaluation extends AbstractForkEvaluation
     public function eval(): array
     {
         foreach ($this->board->getPieces() as $piece) {
-            if (!$piece->isKingAttacked()) {
+            if (!$piece->isAttackingKing()) {
                 $attackedPieces = $piece->attackedPieces();
                 if (count($attackedPieces) >= 2) {
                     $this->result[$piece->getColor()] =

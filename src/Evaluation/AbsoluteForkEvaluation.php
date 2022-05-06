@@ -22,7 +22,7 @@ class AbsoluteForkEvaluation extends AbstractForkEvaluation
     public function eval(): array
     {
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->isKingAttacked()) {
+            if ($piece->isAttackingKing()) {
                 $this->result[$piece->getColor()] =
                     $this->sumValues($piece, $piece->attackedPieces());
             }

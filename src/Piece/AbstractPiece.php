@@ -117,7 +117,7 @@ abstract class AbstractPiece
      *
      * @return bool
      */
-    public function isKingAttacked(): bool
+    public function isAttackingKing(): bool
     {
         foreach ($this->attackedPieces() as $piece) {
             if ($piece->getId() === Piece::K) {
