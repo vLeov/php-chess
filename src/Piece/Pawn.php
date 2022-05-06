@@ -123,11 +123,11 @@ class Pawn extends AbstractPiece
      */
     public function sqs(): ?array
     {
-        $moves = [];
+        $sqs = [];
         // add up squares
         foreach($this->mobility as $sq) {
             if (in_array($sq, $this->board->getSqEval()->free)) {
-                $moves[] = $sq;
+                $sqs[] = $sq;
             } else {
                 break;
             }
@@ -135,7 +135,7 @@ class Pawn extends AbstractPiece
         // add capture squares
         foreach($this->captureSqs as $sq) {
             if (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
-                $moves[] = $sq;
+                $sqs[] = $sq;
             }
         }
         // en passant implementation
@@ -150,7 +150,7 @@ class Pawn extends AbstractPiece
                         ($this->board->getLastHistory()->move->sq->next[1]+1);
                     if (in_array($captureSquare, $this->captureSqs)) {
                         $this->enPassantSq = $this->board->getLastHistory()->move->sq->next;
-                        $moves[] = $captureSquare;
+                        $sqs[] = $captureSquare;
                     }
                 }
             } elseif ($this->color === Color::B) {
@@ -160,13 +160,13 @@ class Pawn extends AbstractPiece
                         ($this->board->getLastHistory()->move->sq->next[1]-1);
                     if (in_array($captureSquare, $this->captureSqs)) {
                         $this->enPassantSq = $this->board->getLastHistory()->move->sq->next;
-                        $moves[] = $captureSquare;
+                        $sqs[] = $captureSquare;
                     }
                 }
             }
         }
 
-        return $moves;
+        return $sqs;
     }
 
     /**

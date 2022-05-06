@@ -126,16 +126,16 @@ class Knight extends AbstractPiece
      */
     public function sqs(): ?array
     {
-        $moves = [];
+        $sqs = [];
         foreach ($this->mobility as $sq) {
             if (in_array($sq, $this->board->getSqEval()->free)) {
-                $moves[] = $sq;
+                $sqs[] = $sq;
             } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
-                $moves[] = $sq;
+                $sqs[] = $sq;
             }
         }
 
-        return $moves;
+        return $sqs;
     }
 
     /**
