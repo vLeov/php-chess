@@ -170,7 +170,7 @@ class King extends AbstractPiece
         foreach ($pieces as $piece) {
             if (
                 $piece->getId() === Piece::R &&
-                $piece->getSquare() === $rule[rtrim($this->getMove()->pgn, '+')]['sq']['current']
+                $piece->getSq() === $rule[rtrim($this->getMove()->pgn, '+')]['sq']['current']
             ) {
                 return $piece;
             }

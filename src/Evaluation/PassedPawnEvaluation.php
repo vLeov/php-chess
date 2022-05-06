@@ -66,7 +66,7 @@ class PassedPawnEvaluation extends AbstractEvaluation
             }
         }
         if ($passedPawn) {
-            $position = $pawn->getSquare();
+            $position = $pawn->getSq();
             if ($color === Color::W) {
                 return $position[ 1 ];
             } else {

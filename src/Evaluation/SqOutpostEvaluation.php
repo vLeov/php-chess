@@ -41,7 +41,7 @@ class SqOutpostEvaluation extends AbstractEvaluation
                     $rFile = chr(ord($piece->getFile()) - 2);
                     rsort($captureSquares);
                 }
-                if (in_array($piece->getSquare()[1], $this->ranks)) {
+                if (in_array($piece->getSq()[1], $this->ranks)) {
                     if (!$this->opposition($piece, $piece->getFile())) {
                         if ($lFile >= 'a' && $lFile <= 'h' &&
                             !$this->opposition($piece, $lFile)
@@ -73,11 +73,11 @@ class SqOutpostEvaluation extends AbstractEvaluation
             if ($piece = $this->board->getPieceBySq($file.$i)) {
                 if ($piece->getId() === Piece::P) {
                     if ($pawn->getColor() === Color::W) {
-                        if ($pawn->getSquare()[1] + 2 <= $piece->getSquare()[1]) {
+                        if ($pawn->getSq()[1] + 2 <= $piece->getSq()[1]) {
                             return true;
                         }
                     } else {
-                        if ($pawn->getSquare()[1] - 2 >= $piece->getSquare()[1]) {
+                        if ($pawn->getSq()[1] - 2 >= $piece->getSq()[1]) {
                             return true;
                         }
                     }

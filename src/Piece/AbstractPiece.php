@@ -153,7 +153,7 @@ abstract class AbstractPiece
      *
      * @return string
      */
-    public function getSquare(): string
+    public function getSq(): string
     {
         return $this->sq;
     }

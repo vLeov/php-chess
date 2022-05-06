@@ -306,7 +306,7 @@ final class Board extends \SplObjectStorage
     private function pushHistory(AbstractPiece $piece): Board
     {
         $this->history[] = (object) [
-            'sq' => $piece->getSquare(),
+            'sq' => $piece->getSq(),
             'move' => $piece->getMove(),
         ];
 
@@ -393,7 +393,7 @@ final class Board extends \SplObjectStorage
         $this->rewind();
         while ($this->valid()) {
             $piece = $this->current();
-            if ($piece->getSquare() === $sq) {
+            if ($piece->getSq() === $sq) {
                 return $piece;
             }
             $this->next();
@@ -416,7 +416,7 @@ final class Board extends \SplObjectStorage
             if ($piece->getId() === $move->id) {
                 if ($piece->getId() === Piece::K) {
                     return [$piece->setMove($move)];
-                } elseif (preg_match("/{$move->sq->current}/", $piece->getSquare())) {
+                } elseif (preg_match("/{$move->sq->current}/", $piece->getSq())) {
                     $found[] = $piece->setMove($move);
                 }
             }
@@ -450,14 +450,14 @@ final class Board extends \SplObjectStorage
             if ($captured = $this->getPieceBySq($piece->getMove()->sq->next)) {
                 $capturedData = (object) [
                     'id' => $captured->getId(),
-                    'sq' => $captured->getSquare(),
+                    'sq' => $captured->getSq(),
                 ];
             }
         }
         if ($captured) {
             $capturingData = (object) [
                 'id' => $piece->getId(),
-                'sq' => $piece->getSquare(),
+                'sq' => $piece->getSq(),
             ];
             $piece->getId() !== Piece::R ?: $capturingData->type = $piece->getType();
             $captured->getId() !== Piece::R ?: $capturedData->type = $captured->getType();
@@ -577,7 +577,7 @@ final class Board extends \SplObjectStorage
     {
         $rook = $king->getCastleRook(iterator_to_array($this, false));
         if (!empty($rook)) {
-            $this->detach($this->getPieceBySq($king->getSquare()));
+            $this->detach($this->getPieceBySq($king->getSq()));
             $this->attach(
                 new King(
                     $king->getColor(),
@@ -711,7 +711,7 @@ final class Board extends \SplObjectStorage
         if ($piece->getMove()->isCapture) {
             $this->capture($piece);
         }
-        $this->detach($this->getPieceBySq($piece->getSquare()));
+        $this->detach($this->getPieceBySq($piece->getSq()));
         $pieceClass = new \ReflectionClass(get_class($piece));
         $this->attach(
             $pieceClass->newInstanceArgs([
@@ -809,12 +809,12 @@ final class Board extends \SplObjectStorage
             $piece->getMove()->type === Move::CASTLE_LONG) {
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSquare(), $this->pressureEval->{$king->oppColor()});
+            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
             $this->undoCastle($prevCastlingAbility);
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSquare(), $this->pressureEval->{$king->oppColor()});
+            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
             $this->undoMove($prevCastlingAbility);
         }
 
@@ -882,7 +882,7 @@ final class Board extends \SplObjectStorage
         $king = $this->getPiece($this->turn, Piece::K);
 
         return in_array(
-            $king->getSquare(),
+            $king->getSq(),
             $this->pressureEval->{$king->oppColor()}
         );
     }
@@ -1030,7 +1030,7 @@ final class Board extends \SplObjectStorage
             0 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
         ];
         foreach ($this->getPieces() as $piece) {
-            $sq = $piece->getSquare();
+            $sq = $piece->getSq();
             list($file, $rank) = AsciiArray::fromAlgebraicToIndex($sq);
             if ($flip) {
                 $file = 7 - $file;

@@ -33,7 +33,7 @@ abstract class AbstractStrToPgn
             foreach ($piece->sqs() as $sq) {
                 $clone = unserialize(serialize($this->board));
                 $id = $piece->getId();
-                $position = $piece->getSquare();
+                $position = $piece->getSq();
                 switch ($id) {
                     case Piece::K:
                         $rule = King::$castlingRule[$color][Piece::K];
@@ -121,7 +121,7 @@ abstract class AbstractStrToPgn
                     case Piece::P:
                         break;
                     default:
-                        $identities[$piece->getId()][$piece->getSquare()][] = $sq;
+                        $identities[$piece->getId()][$piece->getSq()][] = $sq;
                         break;
                 }
             }

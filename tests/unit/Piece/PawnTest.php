@@ -18,7 +18,7 @@ class PawnTest extends AbstractUnitTestCase
         $travel = ['a3', 'a4'];
         $captureSquares = ['b3'];
 
-        $this->assertSame($position, $pawn->getSquare());
+        $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getTravel());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
@@ -34,7 +34,7 @@ class PawnTest extends AbstractUnitTestCase
         $travel = ['d6'];
         $captureSquares = ['c6', 'e6'];
 
-        $this->assertSame($position, $pawn->getSquare());
+        $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getTravel());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
@@ -50,7 +50,7 @@ class PawnTest extends AbstractUnitTestCase
         $travel = ['f8'];
         $captureSquares = ['e8', 'g8'];
 
-        $this->assertSame($position, $pawn->getSquare());
+        $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getTravel());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
@@ -66,7 +66,7 @@ class PawnTest extends AbstractUnitTestCase
         $travel = [];
         $captureSquares = [];
 
-        $this->assertSame($position, $pawn->getSquare());
+        $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getTravel());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
@@ -82,7 +82,7 @@ class PawnTest extends AbstractUnitTestCase
         $travel = ['a1'];
         $captureSquares = ['b1'];
 
-        $this->assertSame($position, $pawn->getSquare());
+        $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getTravel());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
@@ -98,7 +98,7 @@ class PawnTest extends AbstractUnitTestCase
         $travel = ['d4'];
         $captureSquares = ['c4', 'e4'];
 
-        $this->assertSame($position, $pawn->getSquare());
+        $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getTravel());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }

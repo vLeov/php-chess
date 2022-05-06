@@ -89,7 +89,7 @@ class SqEvaluation extends AbstractEvaluation
         ];
 
         foreach ($pieces as $piece) {
-            $used[$piece->getColor()][] = $piece->getSquare();
+            $used[$piece->getColor()][] = $piece->getSq();
         }
 
         return $used;
