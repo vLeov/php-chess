@@ -112,7 +112,7 @@ class Game
             'pgn' => $end ? $end->move->pgn : null,
             'castlingAbility' => $this->board->getCastlingAbility(),
             'movetext' => $this->board->getMovetext(),
-            'fen' => $this->board->getFen(),
+            'fen' => $this->board->toFen(),
             'isCheck' => $this->board->isCheck(),
             'isMate' => $this->board->isMate(),
             'isStalemate' => $this->board->isStalemate(),

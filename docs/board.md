@@ -169,7 +169,7 @@ var_export($movetext);
 
 #### `public function toAsciiArray(bool $flip = false): array`
 
-Create an ASCII array.
+Returns an ASCII array.
 
 ```php
 $array = $board->toAsciiArray();
@@ -280,7 +280,7 @@ Array
 
 #### `public function toAsciiString(bool $flip = false): string`
 
-Create an ASCII string.
+Returns an ASCII string.
 
 ```php
 $string = $board->toAsciiString();
@@ -296,6 +296,19 @@ p  p  p  .  p  p  p  p
 .  .  .  .  .  .  .  .
 P  P  P  P  .  P  P  P
 R  N  B  Q  K  B  N  R
+```
+
+#### `public function toFen(): string`
+
+Returns a FEN string.
+
+```php
+$string = $board->toFen();
+
+print_r($string);
+```
+```text
+rnb1kbnr/ppp1pppp/8/3q4/8/8/PPPP1PPP/RNBQKBNR w KQkq -
 ```
 
 #### `public function legalSqs(string $sq): ?object`

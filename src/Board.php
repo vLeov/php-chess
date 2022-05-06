@@ -1069,7 +1069,7 @@ final class Board extends \SplObjectStorage
      *
      * @return string
      */
-    public function getFen(): string
+    public function toFen(): string
     {
         return (new BoardToStr($this))->create();
     }
