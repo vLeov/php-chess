@@ -105,7 +105,7 @@ class King extends AbstractPiece
         $this->rook = new Rook($color, $sq, RookType::SLIDER);
         $this->bishop = new Bishop($color, $sq);
 
-        $this->setTravel();
+        $this->travel();
     }
 
     public function sqCastleLong(): ?string
@@ -182,7 +182,7 @@ class King extends AbstractPiece
     /**
      * Calculates the king's travel.
      */
-    protected function setTravel(): void
+    protected function travel(): void
     {
         $travel =  [
             ... (array) $this->rook->getTravel(),

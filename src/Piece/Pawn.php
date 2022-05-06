@@ -65,7 +65,7 @@ class Pawn extends AbstractPiece
 
         $this->travel = [];
 
-        $this->setTravel();
+        $this->travel();
     }
 
     /**
@@ -181,7 +181,7 @@ class Pawn extends AbstractPiece
     /**
      * Calculates the pawn's travel.
      */
-    protected function setTravel(): void
+    protected function travel(): void
     {
         // next rank
         try {

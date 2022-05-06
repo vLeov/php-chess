@@ -31,13 +31,13 @@ class Bishop extends Slider
             'bottomRight' => []
         ];
 
-        $this->setTravel();
+        $this->travel();
     }
 
     /**
      * Calculates the bishop's travel.
      */
-    protected function setTravel(): void
+    protected function travel(): void
     {
         try {
             $file = chr(ord($this->sq[0]) - 1);

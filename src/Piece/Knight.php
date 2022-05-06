@@ -24,7 +24,7 @@ class Knight extends AbstractPiece
     {
         parent::__construct($color, $sq, Piece::N);
 
-        $this->setTravel();
+        $this->travel();
     }
 
     /**
@@ -66,7 +66,7 @@ class Knight extends AbstractPiece
     /**
      * Calculates the knight's travel.
      */
-    protected function setTravel(): void
+    protected function travel(): void
     {
         try {
             $file = chr(ord($this->sq[0]) - 1);

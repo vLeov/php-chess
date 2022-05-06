@@ -35,13 +35,13 @@ class Queen extends Slider
         $this->rook = new Rook($color, $sq, RookType::SLIDER);
         $this->bishop = new Bishop($color, $sq);
 
-        $this->setTravel();
+        $this->travel();
     }
 
     /**
      * Calculates the piece's travel.
      */
-    protected function setTravel(): void
+    protected function travel(): void
     {
         $this->travel = (object) [
             ... (array) $this->rook->getTravel(),

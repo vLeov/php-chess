@@ -45,7 +45,7 @@ class Rook extends Slider
             'right' => []
         ];
 
-        $this->setTravel();
+        $this->travel();
     }
 
     /**
@@ -61,7 +61,7 @@ class Rook extends Slider
     /**
      * Calculates the rook's travel.
      */
-    protected function setTravel(): void
+    protected function travel(): void
     {
         // up
         try {
