@@ -35,7 +35,7 @@ class BackwardPawnEvaluation extends AbstractEvaluation implements InverseEvalua
             if ($piece->getId() === Piece::P) {
                 $captureSquares[] = [
                     'color' => $piece->getColor(),
-                    'captureSquares' => $piece->getCaptureSquares(),
+                    'captureSquares' => $piece->getCaptureSqs(),
                 ];
 
                 //Only check for movable pawns and their next possible square

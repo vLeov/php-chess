@@ -34,7 +34,7 @@ class AttackEvaluation extends AbstractEvaluation
                     // TODO ...
                     break;
                 case Piece::P:
-                    foreach ($piece->getCaptureSquares() as $sq) {
+                    foreach ($piece->getCaptureSqs() as $sq) {
                         if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
                                 $id = $item->getId();

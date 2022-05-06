@@ -32,7 +32,7 @@ class SqOutpostEvaluation extends AbstractEvaluation
     {
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::P) {
-                $captureSquares = $piece->getCaptureSquares();
+                $captureSquares = $piece->getCaptureSqs();
                 if ($piece->getColor() === Color::W) {
                     $lFile = chr(ord($piece->getFile()) - 2);
                     $rFile = chr(ord($piece->getFile()) + 2);

@@ -62,7 +62,7 @@ class ConnectivityEvaluation extends AbstractEvaluation
                     break;
                 case Piece::P:
                     $this->result[$color] += count(
-                        array_intersect($piece->getCaptureSquares(),
+                        array_intersect($piece->getCaptureSqs(),
                         $this->sqEval[SqEvaluation::TYPE_USED][$color])
                     );
                     break;

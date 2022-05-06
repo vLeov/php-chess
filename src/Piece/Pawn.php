@@ -29,12 +29,12 @@ class Pawn extends AbstractPiece
     /**
      * @var array
      */
-    private array $captureSquares;
+    private array $captureSqs;
 
     /**
      * @var string
      */
-    private string $enPassantSquare = '';
+    private string $enPassantSq = '';
 
     /**
      * Constructor.
@@ -62,7 +62,7 @@ class Pawn extends AbstractPiece
             ];
         }
 
-        $this->captureSquares = [];
+        $this->captureSqs = [];
 
         $this->mobility = [];
 
@@ -97,7 +97,7 @@ class Pawn extends AbstractPiece
         try {
             $file = chr(ord($this->file) - 1);
             if (Square::validate($file.$this->ranks->next, true)) {
-                $this->captureSquares[] = $file . $this->ranks->next;
+                $this->captureSqs[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
 
@@ -107,7 +107,7 @@ class Pawn extends AbstractPiece
         try {
             $file = chr(ord($this->file) + 1);
             if (Square::validate($file.$this->ranks->next, true)) {
-                $this->captureSquares[] = $file . $this->ranks->next;
+                $this->captureSqs[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
 
@@ -133,7 +133,7 @@ class Pawn extends AbstractPiece
             }
         }
         // add capture squares
-        foreach($this->captureSquares as $sq) {
+        foreach($this->captureSqs as $sq) {
             if (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
                 $moves[] = $sq;
             }
@@ -148,8 +148,8 @@ class Pawn extends AbstractPiece
                     $captureSquare =
                         $this->board->getLastHistory()->move->sq->next[0] .
                         ($this->board->getLastHistory()->move->sq->next[1]+1);
-                    if (in_array($captureSquare, $this->captureSquares)) {
-                        $this->enPassantSquare = $this->board->getLastHistory()->move->sq->next;
+                    if (in_array($captureSquare, $this->captureSqs)) {
+                        $this->enPassantSq = $this->board->getLastHistory()->move->sq->next;
                         $moves[] = $captureSquare;
                     }
                 }
@@ -158,8 +158,8 @@ class Pawn extends AbstractPiece
                     $captureSquare =
                         $this->board->getLastHistory()->move->sq->next[0] .
                         ($this->board->getLastHistory()->move->sq->next[1]-1);
-                    if (in_array($captureSquare, $this->captureSquares)) {
-                        $this->enPassantSquare = $this->board->getLastHistory()->move->sq->next;
+                    if (in_array($captureSquare, $this->captureSqs)) {
+                        $this->enPassantSq = $this->board->getLastHistory()->move->sq->next;
                         $moves[] = $captureSquare;
                     }
                 }
@@ -177,7 +177,7 @@ class Pawn extends AbstractPiece
     public function defendedSqs(): ?array
     {
         $sqs = [];
-        foreach($this->captureSquares as $sq) {
+        foreach($this->captureSqs as $sq) {
             if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
                 $sqs[] = $sq;
             }
@@ -211,9 +211,9 @@ class Pawn extends AbstractPiece
      *
      * @return array
      */
-    public function getCaptureSquares(): array
+    public function getCaptureSqs(): array
     {
-        return $this->captureSquares;
+        return $this->captureSqs;
     }
 
     /**
@@ -223,7 +223,7 @@ class Pawn extends AbstractPiece
      */
     public function getEnPassantSq(): ?string
     {
-        return $this->enPassantSquare;
+        return $this->enPassantSq;
     }
 
     /**

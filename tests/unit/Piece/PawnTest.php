@@ -20,7 +20,7 @@ class PawnTest extends AbstractUnitTestCase
 
         $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getMobility());
-        $this->assertSame($captureSquares, $pawn->getCaptureSquares());
+        $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
     /**
@@ -36,7 +36,7 @@ class PawnTest extends AbstractUnitTestCase
 
         $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getMobility());
-        $this->assertSame($captureSquares, $pawn->getCaptureSquares());
+        $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
     /**
@@ -52,7 +52,7 @@ class PawnTest extends AbstractUnitTestCase
 
         $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getMobility());
-        $this->assertSame($captureSquares, $pawn->getCaptureSquares());
+        $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
     /**
@@ -68,7 +68,7 @@ class PawnTest extends AbstractUnitTestCase
 
         $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getMobility());
-        $this->assertSame($captureSquares, $pawn->getCaptureSquares());
+        $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
     /**
@@ -84,7 +84,7 @@ class PawnTest extends AbstractUnitTestCase
 
         $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getMobility());
-        $this->assertSame($captureSquares, $pawn->getCaptureSquares());
+        $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
     /**
@@ -100,6 +100,6 @@ class PawnTest extends AbstractUnitTestCase
 
         $this->assertSame($position, $pawn->getSq());
         $this->assertEquals($travel, $pawn->getMobility());
-        $this->assertSame($captureSquares, $pawn->getCaptureSquares());
+        $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 }
