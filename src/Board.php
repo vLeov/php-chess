@@ -436,7 +436,7 @@ final class Board extends \SplObjectStorage
      */
     private function capture(AbstractPiece $piece): Board
     {
-        $piece->getSqs(); // creates the enPassantSquare property if the piece is a pawn
+        $piece->sqs(); // creates the enPassantSquare property if the piece is a pawn
         if ($piece->getId() === Piece::P && !empty($piece->getEnPassantSq()) &&
             empty($this->getPieceBySq($piece->getMove()->sq->next))
            ) {
@@ -830,7 +830,7 @@ final class Board extends \SplObjectStorage
     {
         $escape = 0;
         foreach ($this->getPiecesByColor($this->turn) as $piece) {
-            foreach ($piece->getSqs() as $sq) {
+            foreach ($piece->sqs() as $sq) {
                 switch ($piece->getId()) {
                     case Piece::K:
                         if (in_array($sq, $this->sqEval->used->{$piece->getOppColor()})) {
@@ -917,7 +917,7 @@ final class Board extends \SplObjectStorage
         $moves = [];
         $color = $this->getTurn();
         foreach ($this->getPiecesByColor($color) as $piece) {
-            foreach ($piece->getSqs() as $sq) {
+            foreach ($piece->sqs() as $sq) {
                 $clone = unserialize(serialize($this));
                 switch ($piece->getId()) {
                     case Piece::K:
@@ -969,7 +969,7 @@ final class Board extends \SplObjectStorage
         if ($piece = $this->getPieceBySq($sq)) {
             $sqs = [];
             $color = $piece->getColor();
-            foreach ($piece->getSqs() as $sq) {
+            foreach ($piece->sqs() as $sq) {
                 $clone = unserialize(serialize($this));
                 switch ($piece->getId()) {
                     case Piece::K:

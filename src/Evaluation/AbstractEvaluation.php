@@ -37,7 +37,7 @@ abstract class AbstractEvaluation
     protected function attackedPieces(AbstractPiece $piece): array
     {
         $attackedPieces = [];
-        foreach ($sqs = $piece->getSqs() as $sq) {
+        foreach ($sqs = $piece->sqs() as $sq) {
             if ($attackedPiece = $this->board->getPieceBySq($sq)) {
                 $attackedPieces[] = $attackedPiece;
             }

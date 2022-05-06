@@ -49,7 +49,7 @@ abstract class Slider extends AbstractPiece
      *
      * @return mixed array|null
      */
-    public function getSqs(): ?array
+    public function sqs(): ?array
     {
         $moves = [];
         foreach ($this->travel as $direction) {

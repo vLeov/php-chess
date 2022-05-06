@@ -47,13 +47,6 @@ abstract class AbstractPiece
     protected object $move;
 
     /**
-     * The squares where the piece can be placed on.
-     *
-     * @var array
-     */
-    protected array $sqs;
-
-    /**
      * The chessboard.
      *
      * @var \Chess\Board
@@ -86,7 +79,7 @@ abstract class AbstractPiece
      *
      * @return mixed array|null
      */
-    abstract public function getSqs(): ?array;
+    abstract public function sqs(): ?array;
 
     /**
      * Calculates the squares the piece could travel to.
@@ -173,7 +166,7 @@ abstract class AbstractPiece
     public function isMovable(): bool
     {
         if (isset($this->move)) {
-            return in_array($this->move->sq->next, $this->getSqs());
+            return in_array($this->move->sq->next, $this->sqs());
         }
 
         return false;

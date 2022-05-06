@@ -114,6 +114,6 @@ class KingTest extends AbstractUnitTestCase
 
         $expected = [ 'e1', 'e2', 'g2' ];
 
-        $this->assertSame($expected, $king->getSqs());
+        $this->assertSame($expected, $king->sqs());
     }
 }

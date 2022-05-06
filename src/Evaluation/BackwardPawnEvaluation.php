@@ -39,12 +39,12 @@ class BackwardPawnEvaluation extends AbstractEvaluation implements InverseEvalua
                 ];
 
                 //Only check for movable pawns and their next possible square
-                if (0 === count($piece->getSqs()) || !str_contains($piece->getSqs()[0], $piece->getFile())) {
+                if (0 === count($piece->sqs()) || !str_contains($piece->sqs()[0], $piece->getFile())) {
                     continue;
                 }
                 $nextMoves[] = [
                     'color' => $piece->getColor(),
-                    'nextSquare' => $piece->getSqs()[0],
+                    'nextSquare' => $piece->sqs()[0],
                     'nextSquareDefendedByPawn' => false,
                 ];
             }

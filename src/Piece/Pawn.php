@@ -90,7 +90,7 @@ class Pawn extends AbstractPiece
      *
      * @return mixed array|null
      */
-    public function getSqs(): ?array
+    public function sqs(): ?array
     {
         $moves = [];
         // add up squares

@@ -60,6 +60,6 @@ class QueenTest extends AbstractUnitTestCase
 
         $expected = [ 'e1', 'c2', 'b3' ];
 
-        $this->assertSame($expected, $queen->getSqs());
+        $this->assertSame($expected, $queen->sqs());
     }
 }

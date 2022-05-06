@@ -1723,7 +1723,7 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('w', 'Bd3'));
         $this->assertTrue($board->play('b', 'f5'));
         $pawn_e5 = $board->getPieceBySq('e5');
-        $pawn_e5->getSqs(); // this creates the en passant property
+        $pawn_e5->sqs(); // this creates the en passant property
         $this->assertSame('f5', $pawn_e5->getEnPassantSq());
         $this->assertTrue($board->play('w', 'exf6'));
     }
