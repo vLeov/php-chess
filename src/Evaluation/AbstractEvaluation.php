@@ -3,7 +3,6 @@
 namespace Chess\Evaluation;
 
 use Chess\Board;
-use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
@@ -40,9 +39,7 @@ abstract class AbstractEvaluation
         $attackedPieces = [];
         foreach ($sqs = $piece->getSqs() as $sq) {
             if ($attackedPiece = $this->board->getPieceBySq($sq)) {
-                if ($attackedPiece->getId() !== Piece::P) {
-                    $attackedPieces[] = $attackedPiece;
-                }
+                $attackedPieces[] = $attackedPiece;
             }
         }
 
