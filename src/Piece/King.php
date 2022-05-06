@@ -6,6 +6,7 @@ use Chess\FEN\Field\CastlingAbility;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * King class.
@@ -108,6 +109,61 @@ class King extends AbstractPiece
         $this->travel();
     }
 
+    /**
+     * Calculates the squares the piece can travel to.
+     *
+     * @return \Chess\Piece\AbstractPiece
+     */
+    protected function travel(): AbstractPiece
+    {
+        $travel =  [
+            ... (array) $this->rook->getTravel(),
+            ... (array) $this->bishop->getTravel()
+        ];
+
+        foreach($travel as $key => $val) {
+            $travel[$key] = $val[0] ?? null;
+        }
+
+        $this->travel = (object) array_filter(array_unique($travel));
+
+        return $this;
+    }
+
+    /**
+     * Gets the piece's legal moves.
+     *
+     * @return mixed array|null
+     */
+    public function sqs(): ?array
+    {
+        $sqs = [
+            ...$this->sqsKing(),
+            ...$this->sqsCaptures(),
+            ...[$this->sqCastleLong()],
+            ...[$this->sqCastleShort()]
+        ];
+
+        return array_filter($sqs);
+    }
+
+    /**
+     * Gets the squares defended by the piece.
+     *
+     * @return mixed array|null
+     */
+    public function defendedSqs(): ?array
+    {
+        $sqs = [];
+        foreach ($this->travel as $sq) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                $sqs[] = $sq;
+            }
+        }
+
+        return $sqs;
+    }
+
     public function sqCastleLong(): ?string
     {
         $rule = self::$castlingRule[$this->getColor()][Piece::K][Castle::LONG];
@@ -177,51 +233,5 @@ class King extends AbstractPiece
         }
 
         return null;
-    }
-
-    /**
-     * Calculates the king's travel.
-     */
-    protected function travel(): void
-    {
-        $travel =  [
-            ... (array) $this->rook->getTravel(),
-            ... (array) $this->bishop->getTravel()
-        ];
-
-        foreach($travel as $key => $val) {
-            $travel[$key] = $val[0] ?? null;
-        }
-
-        $this->travel = (object) array_filter(array_unique($travel));
-    }
-
-    /**
-     * Gets the king's legal moves.
-     *
-     * @return mixed array|null
-     */
-    public function sqs(): ?array
-    {
-        $sqs = [
-            ...$this->sqsKing(),
-            ...$this->sqsCaptures(),
-            ...[$this->sqCastleLong()],
-            ...[$this->sqCastleShort()]
-        ];
-
-        return array_filter($sqs);
-    }
-
-    public function getDefendedSqs(): ?array
-    {
-        $sqs = [];
-        foreach ($this->travel as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
-                $sqs[] = $sq;
-            }
-        }
-
-        return $sqs;
     }
 }

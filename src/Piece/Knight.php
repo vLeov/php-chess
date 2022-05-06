@@ -5,6 +5,7 @@ namespace Chess\Piece;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Square;
 use Chess\PGN\AN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Knight class.
@@ -28,24 +29,98 @@ class Knight extends AbstractPiece
     }
 
     /**
-     * Gets the defended squares.
+     * Calculates the squares the piece can travel to.
      *
-     * @return mixed array|null
+     * @return \Chess\Piece\AbstractPiece
      */
-    public function getDefendedSqs(): ?array
+    protected function travel(): AbstractPiece
     {
-        $sqs = [];
-        foreach ($this->travel as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
-                $sqs[] = $sq;
+        try {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = (int)$this->sq[1] + 2;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
             }
+        } catch (UnknownNotationException $e) {
+
         }
 
-        return $sqs;
+        try {
+            $file = chr(ord($this->sq[0]) - 2);
+            $rank = (int)$this->sq[1] + 1;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) - 2);
+            $rank = (int)$this->sq[1] - 1;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = (int)$this->sq[1] - 2;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = (int)$this->sq[1] - 2;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        try {
+
+            $file = chr(ord($this->sq[0]) + 2);
+            $rank = (int)$this->sq[1] - 1;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) + 2);
+            $rank = (int)$this->sq[1] + 1;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = (int)$this->sq[1] + 2;
+            if (Square::validate($file.$rank)) {
+                $this->travel[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        return $this;
     }
 
     /**
-     * Gets the squares where the piece can be placed on.
+     * Gets the piece's legal moves.
      *
      * @return mixed array|null
      */
@@ -64,89 +139,19 @@ class Knight extends AbstractPiece
     }
 
     /**
-     * Calculates the knight's travel.
+     * Gets the squares defended by the piece.
+     *
+     * @return mixed array|null
      */
-    protected function travel(): void
+    public function defendedSqs(): ?array
     {
-        try {
-            $file = chr(ord($this->sq[0]) - 1);
-            $rank = (int)$this->sq[1] + 2;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
+        $sqs = [];
+        foreach ($this->travel as $sq) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                $sqs[] = $sq;
             }
-        } catch (UnknownNotationException $e) {
-
         }
 
-        try {
-            $file = chr(ord($this->sq[0]) - 2);
-            $rank = (int)$this->sq[1] + 1;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        try {
-            $file = chr(ord($this->sq[0]) - 2);
-            $rank = (int)$this->sq[1] - 1;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        try {
-            $file = chr(ord($this->sq[0]) - 1);
-            $rank = (int)$this->sq[1] - 2;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        try {
-            $file = chr(ord($this->sq[0]) + 1);
-            $rank = (int)$this->sq[1] - 2;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        try {
-
-            $file = chr(ord($this->sq[0]) + 2);
-            $rank = (int)$this->sq[1] - 1;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        try {
-            $file = chr(ord($this->sq[0]) + 2);
-            $rank = (int)$this->sq[1] + 1;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        try {
-            $file = chr(ord($this->sq[0]) + 1);
-            $rank = (int)$this->sq[1] + 2;
-            if (Square::validate($file.$rank)) {
-                $this->travel[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
+        return $sqs;
     }
 }

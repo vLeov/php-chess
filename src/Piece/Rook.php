@@ -6,6 +6,7 @@ use Chess\Exception\PieceTypeException;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Square;
 use Chess\PGN\AN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Rook class.
@@ -59,9 +60,11 @@ class Rook extends Slider
     }
 
     /**
-     * Calculates the rook's travel.
+     * Calculates the squares the piece can travel to.
+     *
+     * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): void
+    protected function travel(): AbstractPiece
     {
         // up
         try {
@@ -110,5 +113,7 @@ class Rook extends Slider
         } catch (UnknownNotationException $e) {
 
         }
+
+        return $this;
     }
 }

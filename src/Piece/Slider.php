@@ -23,29 +23,7 @@ abstract class Slider extends AbstractPiece
     }
 
     /**
-     * Gets the defended squares.
-     *
-     * @return mixed array|null
-     */
-    public function getDefendedSqs(): ?array
-    {
-        $sqs = [];
-        foreach ($this->travel as $direction) {
-            foreach ($direction as $sq) {
-                if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
-                    $sqs[] = $sq;
-                    break 1;
-                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
-                    break 1;
-                }
-            }
-        }
-
-        return $sqs;
-    }
-
-    /**
-     * Gets the squares where the piece can be placed on.
+     * Gets the piece's legal moves.
      *
      * @return mixed array|null
      */
@@ -69,5 +47,27 @@ abstract class Slider extends AbstractPiece
         }
 
         return $moves;
+    }
+
+    /**
+     * Gets the squares defended by the piece.
+     *
+     * @return mixed array|null
+     */
+    public function defendedSqs(): ?array
+    {
+        $sqs = [];
+        foreach ($this->travel as $direction) {
+            foreach ($direction as $sq) {
+                if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                    $sqs[] = $sq;
+                    break 1;
+                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
+                    break 1;
+                }
+            }
+        }
+
+        return $sqs;
     }
 }

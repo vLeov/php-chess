@@ -5,6 +5,7 @@ namespace Chess\Piece;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Square;
 use Chess\PGN\AN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Bishop class.
@@ -35,9 +36,11 @@ class Bishop extends Slider
     }
 
     /**
-     * Calculates the bishop's travel.
+     * Calculates the squares the piece can travel to.
+     *
+     * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): void
+    protected function travel(): AbstractPiece
     {
         try {
             $file = chr(ord($this->sq[0]) - 1);
@@ -88,5 +91,7 @@ class Bishop extends Slider
         } catch (UnknownNotationException $e) {
 
         }
+
+        return $this;
     }
 }

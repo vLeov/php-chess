@@ -39,7 +39,7 @@ class DefenseEvaluation extends AbstractEvaluation
             $piece = $this->board->current();
             $this->result[$piece->getColor()] = [
                 ...$this->result[$piece->getColor()],
-                ...$piece->getDefendedSqs()
+                ...$piece->defendedSqs()
             ];
             $this->board->next();
         }

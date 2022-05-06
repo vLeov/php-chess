@@ -3,6 +3,7 @@
 namespace Chess\Piece;
 
 use Chess\PGN\AN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Queen class.
@@ -39,13 +40,17 @@ class Queen extends Slider
     }
 
     /**
-     * Calculates the piece's travel.
+     * Calculates the squares the piece can travel to.
+     *
+     * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): void
+    protected function travel(): AbstractPiece
     {
         $this->travel = (object) [
             ... (array) $this->rook->getTravel(),
             ... (array) $this->bishop->getTravel()
         ];
+
+        return $this;
     }
 }

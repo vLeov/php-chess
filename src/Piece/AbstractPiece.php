@@ -33,6 +33,13 @@ abstract class AbstractPiece
     protected string $id;
 
     /**
+     * The piece's square.
+     *
+     * @var string
+     */
+    protected string $sq;
+
+    /**
      * The piece's travel.
      *
      * @var mixed object|array
@@ -68,23 +75,25 @@ abstract class AbstractPiece
     }
 
     /**
-     * Gets the defended squares.
+     * Calculates the squares the piece can travel to.
      *
-     * @return mixed array|null
+     * @return \Chess\Piece\AbstractPiece
      */
-    abstract public function getDefendedSqs(): ?array;
+    abstract protected function travel(): AbstractPiece;
 
     /**
-     * Gets the squares where the piece can be placed on.
+     * Gets the piece's legal moves.
      *
      * @return mixed array|null
      */
     abstract public function sqs(): ?array;
 
     /**
-     * Calculates the squares the piece could travel to.
+     * Gets the squares defended by the piece.
+     *
+     * @return mixed array|null
      */
-    abstract protected function travel(): void;
+    abstract public function defendedSqs(): ?array;
 
     /**
      * Gets the piece's color.
@@ -97,16 +106,6 @@ abstract class AbstractPiece
     }
 
     /**
-     * Gets the piece's opposite color.
-     *
-     * @return string
-     */
-    public function oppColor(): string
-    {
-        return Color::opp($this->color);
-    }
-
-    /**
      * Gets the piece's id.
      *
      * @return string
@@ -114,6 +113,16 @@ abstract class AbstractPiece
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * Gets the piece's position on the board.
+     *
+     * @return string
+     */
+    public function getSq(): string
+    {
+        return $this->sq;
     }
 
     /**
@@ -149,13 +158,13 @@ abstract class AbstractPiece
     }
 
     /**
-     * Gets the piece's position on the board.
+     * Gets the piece's opposite color.
      *
      * @return string
      */
-    public function getSq(): string
+    public function oppColor(): string
     {
-        return $this->sq;
+        return Color::opp($this->color);
     }
 
     /**

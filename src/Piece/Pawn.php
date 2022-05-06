@@ -6,6 +6,7 @@ use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Square;
 use Chess\PGN\AN\Piece;
+use Chess\Piece\AbstractPiece;
 
 /**
  * Pawn class.
@@ -69,24 +70,54 @@ class Pawn extends AbstractPiece
     }
 
     /**
-     * Gets the defended squares.
+     * Calculates the squares the piece can travel to.
      *
-     * @return mixed array|null
+     * @return \Chess\Piece\AbstractPiece
      */
-    public function getDefendedSqs(): ?array
+    protected function travel(): AbstractPiece
     {
-        $sqs = [];
-        foreach($this->captureSquares as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
-                $sqs[] = $sq;
+        // next rank
+        try {
+            if (Square::validate($this->file . $this->ranks->next, true)) {
+                $this->travel[] = $this->file . $this->ranks->next;
             }
+        } catch (UnknownNotationException $e) {
+
         }
 
-        return $sqs;
+        // two square advance
+        if ($this->sq[1] == 2 && $this->ranks->initial == 2) {
+            $this->travel[] = $this->file . ($this->ranks->initial + 2);
+        }
+        elseif ($this->sq[1] == 7 && $this->ranks->initial == 7) {
+            $this->travel[] = $this->file . ($this->ranks->initial - 2);
+        }
+
+        // capture square
+        try {
+            $file = chr(ord($this->file) - 1);
+            if (Square::validate($file.$this->ranks->next, true)) {
+                $this->captureSquares[] = $file . $this->ranks->next;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        // capture square
+        try {
+            $file = chr(ord($this->file) + 1);
+            if (Square::validate($file.$this->ranks->next, true)) {
+                $this->captureSquares[] = $file . $this->ranks->next;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        return $this;
     }
 
     /**
-     * Gets the squares where the piece can be placed on.
+     * Gets the piece's legal moves.
      *
      * @return mixed array|null
      */
@@ -139,6 +170,23 @@ class Pawn extends AbstractPiece
     }
 
     /**
+     * Gets the squares defended by the piece.
+     *
+     * @return mixed array|null
+     */
+    public function defendedSqs(): ?array
+    {
+        $sqs = [];
+        foreach($this->captureSquares as $sq) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                $sqs[] = $sq;
+            }
+        }
+
+        return $sqs;
+    }
+
+    /**
      * Gets the pawn's file.
      *
      * @return string
@@ -176,49 +224,6 @@ class Pawn extends AbstractPiece
     public function getEnPassantSq(): ?string
     {
         return $this->enPassantSquare;
-    }
-
-    /**
-     * Calculates the pawn's travel.
-     */
-    protected function travel(): void
-    {
-        // next rank
-        try {
-            if (Square::validate($this->file . $this->ranks->next, true)) {
-                $this->travel[] = $this->file . $this->ranks->next;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        // two square advance
-        if ($this->sq[1] == 2 && $this->ranks->initial == 2) {
-            $this->travel[] = $this->file . ($this->ranks->initial + 2);
-        }
-        elseif ($this->sq[1] == 7 && $this->ranks->initial == 7) {
-            $this->travel[] = $this->file . ($this->ranks->initial - 2);
-        }
-
-        // capture square
-        try {
-            $file = chr(ord($this->file) - 1);
-            if (Square::validate($file.$this->ranks->next, true)) {
-                $this->captureSquares[] = $file . $this->ranks->next;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        // capture square
-        try {
-            $file = chr(ord($this->file) + 1);
-            if (Square::validate($file.$this->ranks->next, true)) {
-                $this->captureSquares[] = $file . $this->ranks->next;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
     }
 
     /**
