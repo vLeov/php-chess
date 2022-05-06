@@ -89,11 +89,44 @@ abstract class AbstractPiece
     abstract public function sqs(): ?array;
 
     /**
-     * Gets the squares defended by the piece.
+     * Returns the squares defended by the piece.
      *
      * @return mixed array|null
      */
     abstract public function defendedSqs(): ?array;
+
+    /**
+     * Returns the pieces attacked by the piece.
+     *
+     * @return mixed array|null
+     */
+    public function attackedPieces(): ?array
+    {
+        $pieces = [];
+        foreach ($sqs = $this->sqs() as $sq) {
+            if ($piece = $this->board->getPieceBySq($sq)) {
+                $pieces[] = $piece;
+            }
+        }
+
+        return $pieces;
+    }
+
+    /**
+     * Checks out if the opponent's king is attacked by the piece.
+     *
+     * @return bool
+     */
+    public function isKingAttacked(): bool
+    {
+        foreach ($this->attackedPieces() as $piece) {
+            if ($piece->getId() === Piece::K) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Gets the piece's color.

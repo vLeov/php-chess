@@ -33,27 +33,4 @@ abstract class AbstractEvaluation
             Piece::Q => 8.8,
         ];
     }
-
-    protected function attackedPieces(AbstractPiece $piece): array
-    {
-        $attackedPieces = [];
-        foreach ($sqs = $piece->sqs() as $sq) {
-            if ($attackedPiece = $this->board->getPieceBySq($sq)) {
-                $attackedPieces[] = $attackedPiece;
-            }
-        }
-
-        return $attackedPieces;
-    }
-
-    protected function isKingAttacked(array $attackedPieces): bool
-    {
-        foreach ($attackedPieces as $attackedPiece) {
-            if ($attackedPiece->getId() === Piece::K) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }
