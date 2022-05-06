@@ -1073,4 +1073,21 @@ final class Board extends \SplObjectStorage
     {
         return (new BoardToStr($this))->create();
     }
+
+    /**
+     * Returns the checking pieces.
+     *
+     * @return array
+     */
+    public function checkingPieces(): array
+    {
+        $pieces = [];
+        foreach ($this->getPieces() as $piece) {
+            if ($piece->isAttackingKing()) {
+                $pieces[] = $piece;
+            }
+        }
+
+        return $pieces;
+    }
 }

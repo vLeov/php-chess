@@ -23,13 +23,14 @@ class AbsolutePinEvaluation extends AbstractEvaluation implements InverseEvaluat
 
     public function eval(): array
     {
+        $checkingPieces = $this->board->checkingPieces();
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() !== Piece::K) {
                 $composition = (new Composition($this->board))
                     ->setTurn($piece->oppColor())
                     ->deletePieceByPosition($piece->getSq())
                     ->getBoard();
-                if ($composition->isCheck()) {
+                if (count($composition->checkingPieces()) > count($checkingPieces)) {
                     $this->result[$piece->getColor()] += $this->value[$piece->getId()];
                 }
             }
