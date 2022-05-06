@@ -809,12 +809,12 @@ final class Board extends \SplObjectStorage
             $piece->getMove()->type === Move::CASTLE_LONG) {
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSquare(), $this->pressureEval->{$king->getOppColor()});
+            $leavesInCheck = in_array($king->getSquare(), $this->pressureEval->{$king->oppColor()});
             $this->undoCastle($prevCastlingAbility);
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSquare(), $this->pressureEval->{$king->getOppColor()});
+            $leavesInCheck = in_array($king->getSquare(), $this->pressureEval->{$king->oppColor()});
             $this->undoMove($prevCastlingAbility);
         }
 
@@ -833,18 +833,18 @@ final class Board extends \SplObjectStorage
             foreach ($piece->sqs() as $sq) {
                 switch ($piece->getId()) {
                     case Piece::K:
-                        if (in_array($sq, $this->sqEval->used->{$piece->getOppColor()})) {
+                        if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Move::toObj($this->turn, Piece::K."x$sq"))
                             );
-                        } elseif (!in_array($sq, $this->spaceEval->{$piece->getOppColor()})) {
+                        } elseif (!in_array($sq, $this->spaceEval->{$piece->oppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Move::toObj($this->turn, Piece::K.$sq))
                             );
                         }
                         break;
                     case Piece::P:
-                        if (in_array($sq, $this->sqEval->used->{$piece->getOppColor()})) {
+                        if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Move::toObj($this->turn, $piece->getFile()."x$sq"))
                             );
@@ -855,7 +855,7 @@ final class Board extends \SplObjectStorage
                         }
                         break;
                     default:
-                        if (in_array($sq, $this->sqEval->used->{$piece->getOppColor()})) {
+                        if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
                             $escape += (int) !$this->leavesInCheck(
                                 $piece->setMove(Move::toObj($this->turn, $piece->getId()."x$sq"))
                             );
@@ -883,7 +883,7 @@ final class Board extends \SplObjectStorage
 
         return in_array(
             $king->getSquare(),
-            $this->pressureEval->{$king->getOppColor()}
+            $this->pressureEval->{$king->oppColor()}
         );
     }
 

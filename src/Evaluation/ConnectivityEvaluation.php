@@ -72,7 +72,7 @@ class ConnectivityEvaluation extends AbstractEvaluation
                             if (in_array($sq, $this->sqEval[SqEvaluation::TYPE_USED][$color])) {
                                 $this->result[$color] += 1;
                                 break;
-                            } elseif (in_array($sq, $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()])) {
+                            } elseif (in_array($sq, $this->sqEval[SqEvaluation::TYPE_USED][$piece->oppColor()])) {
                                 break;
                             }
                         }

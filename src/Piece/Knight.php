@@ -55,7 +55,7 @@ class Knight extends AbstractPiece
         foreach ($this->travel as $sq) {
             if (in_array($sq, $this->board->getSqEval()->free)) {
                 $moves[] = $sq;
-            } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
+            } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
                 $moves[] = $sq;
             }
         }

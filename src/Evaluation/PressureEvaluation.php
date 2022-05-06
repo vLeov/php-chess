@@ -61,7 +61,7 @@ class PressureEvaluation extends AbstractEvaluation
                         ...array_values(
                             array_intersect(
                                 array_values((array) $piece->getTravel()),
-                                $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
+                                $this->sqEval[SqEvaluation::TYPE_USED][$piece->oppColor()]
                             )
                         )
                     ];
@@ -71,7 +71,7 @@ class PressureEvaluation extends AbstractEvaluation
                         ...$this->result[$piece->getColor()],
                         ...array_intersect(
                             $piece->getCaptureSquares(),
-                            $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
+                            $this->sqEval[SqEvaluation::TYPE_USED][$piece->oppColor()]
                         )
                     ];
                     break;
@@ -80,7 +80,7 @@ class PressureEvaluation extends AbstractEvaluation
                         ...$this->result[$piece->getColor()],
                         ...array_intersect(
                             $piece->sqs(),
-                            $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
+                            $this->sqEval[SqEvaluation::TYPE_USED][$piece->oppColor()]
                         )
                     ];
                     break;

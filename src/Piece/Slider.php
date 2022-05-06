@@ -35,7 +35,7 @@ abstract class Slider extends AbstractPiece
                 if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
                     $sqs[] = $sq;
                     break 1;
-                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
+                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
                     break 1;
                 }
             }
@@ -56,10 +56,10 @@ abstract class Slider extends AbstractPiece
             foreach ($direction as $sq) {
                 if (
                     !in_array($sq, $this->board->getSqEval()->used->{$this->getColor()}) &&
-                    !in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})
+                    !in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})
                 ) {
                     $moves[] = $sq;
-                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
+                } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
                     $moves[] = $sq;
                     break 1;
                 } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {

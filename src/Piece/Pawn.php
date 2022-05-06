@@ -103,14 +103,14 @@ class Pawn extends AbstractPiece
         }
         // add capture squares
         foreach($this->captureSquares as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getOppColor()})) {
+            if (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
                 $moves[] = $sq;
             }
         }
         // en passant implementation
         if ($this->board->getLastHistory() &&
             $this->board->getLastHistory()->move->id === Piece::P &&
-            $this->board->getLastHistory()->move->color === $this->getOppColor()
+            $this->board->getLastHistory()->move->color === $this->oppColor()
         ) {
             if ($this->color === Color::W) {
                 if ((int)$this->sq[1] === 5) {

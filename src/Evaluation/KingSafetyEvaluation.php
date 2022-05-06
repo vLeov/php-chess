@@ -44,14 +44,14 @@ class KingSafetyEvaluation extends AbstractEvaluation
         $king = $this->board->getPiece($color, Piece::K);
         foreach ($king->getTravel() as $key => $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
-                if ($piece->getColor() === $king->getOppColor()) {
+                if ($piece->getColor() === $king->oppColor()) {
                     $this->result[$color] -= 1;
                 }
             }
-            if (in_array($sq, $pressEval[$king->getOppColor()])) {
+            if (in_array($sq, $pressEval[$king->oppColor()])) {
                 $this->result[$color] -= 1;
             }
-            if (in_array($sq, $spEval[$king->getOppColor()])) {
+            if (in_array($sq, $spEval[$king->oppColor()])) {
                 $this->result[$color] -= 1;
             }
         }

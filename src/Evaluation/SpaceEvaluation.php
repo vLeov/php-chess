@@ -77,7 +77,7 @@ class SpaceEvaluation extends AbstractEvaluation
                             ...$this->result[$piece->getColor()],
                             ...array_diff(
                                 $piece->sqs(),
-                                $this->sqEval[SqEvaluation::TYPE_USED][$piece->getOppColor()]
+                                $this->sqEval[SqEvaluation::TYPE_USED][$piece->oppColor()]
                             )
                         ]
                     );
