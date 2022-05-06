@@ -106,26 +106,26 @@ class King extends AbstractPiece
         $this->rook = new Rook($color, $sq, RookType::SLIDER);
         $this->bishop = new Bishop($color, $sq);
 
-        $this->travel();
+        $this->mobility();
     }
 
     /**
-     * Calculates the squares the piece can travel to.
+     * Calculates the piece's mobility.
      *
      * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): AbstractPiece
+    protected function mobility(): AbstractPiece
     {
-        $travel =  [
-            ... (array) $this->rook->getTravel(),
-            ... (array) $this->bishop->getTravel()
+        $mobility =  [
+            ... (array) $this->rook->getMobility(),
+            ... (array) $this->bishop->getMobility()
         ];
 
-        foreach($travel as $key => $val) {
-            $travel[$key] = $val[0] ?? null;
+        foreach($mobility as $key => $val) {
+            $mobility[$key] = $val[0] ?? null;
         }
 
-        $this->travel = (object) array_filter(array_unique($travel));
+        $this->mobility = (object) array_filter(array_unique($mobility));
 
         return $this;
     }
@@ -155,7 +155,7 @@ class King extends AbstractPiece
     public function defendedSqs(): ?array
     {
         $sqs = [];
-        foreach ($this->travel as $sq) {
+        foreach ($this->mobility as $sq) {
             if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
                 $sqs[] = $sq;
             }
@@ -199,7 +199,7 @@ class King extends AbstractPiece
     protected function sqsCaptures(): ?array
     {
         $sqsCaptures = array_intersect(
-            array_values((array)$this->travel),
+            array_values((array)$this->mobility),
             $this->board->getSqEval()->used->{$this->oppColor()}
         );
 
@@ -208,7 +208,7 @@ class King extends AbstractPiece
 
     protected function sqsKing(): ?array
     {
-        $sqsKing = array_intersect(array_values((array)$this->travel), $this->board->getSqEval()->free);
+        $sqsKing = array_intersect(array_values((array)$this->mobility), $this->board->getSqEval()->free);
 
         return array_diff($sqsKing, $this->board->getSpaceEval()->{$this->oppColor()});
     }

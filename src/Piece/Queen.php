@@ -36,19 +36,19 @@ class Queen extends Slider
         $this->rook = new Rook($color, $sq, RookType::SLIDER);
         $this->bishop = new Bishop($color, $sq);
 
-        $this->travel();
+        $this->mobility();
     }
 
     /**
-     * Calculates the squares the piece can travel to.
+     * Calculates the piece's mobility.
      *
      * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): AbstractPiece
+    protected function mobility(): AbstractPiece
     {
-        $this->travel = (object) [
-            ... (array) $this->rook->getTravel(),
-            ... (array) $this->bishop->getTravel()
+        $this->mobility = (object) [
+            ... (array) $this->rook->getMobility(),
+            ... (array) $this->bishop->getMobility()
         ];
 
         return $this;

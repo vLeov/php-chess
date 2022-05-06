@@ -25,28 +25,28 @@ class Bishop extends Slider
     {
         parent::__construct($color, $sq, Piece::B);
 
-        $this->travel = (object)[
+        $this->mobility = (object)[
             'upLeft' => [],
             'upRight' => [],
             'bottomLeft' => [],
             'bottomRight' => []
         ];
 
-        $this->travel();
+        $this->mobility();
     }
 
     /**
-     * Calculates the squares the piece can travel to.
+     * Calculates the piece's mobility.
      *
      * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): AbstractPiece
+    protected function mobility(): AbstractPiece
     {
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1] + 1;
             while (Square::validate($file.$rank)) {
-                $this->travel->upLeft[] = $file . $rank;
+                $this->mobility->upLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
                 $rank = (int)$rank + 1;
             }
@@ -58,7 +58,7 @@ class Bishop extends Slider
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1] + 1;
             while (Square::validate($file.$rank)) {
-                $this->travel->upRight[] = $file . $rank;
+                $this->mobility->upRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);
                 $rank = (int)$rank + 1;
             }
@@ -71,7 +71,7 @@ class Bishop extends Slider
             $rank = (int)$this->sq[1] - 1;
             while (Square::validate($file.$rank))
             {
-                $this->travel->bottomLeft[] = $file . $rank;
+                $this->mobility->bottomLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
                 $rank = (int)$rank - 1;
             }
@@ -84,7 +84,7 @@ class Bishop extends Slider
             $rank = (int)$this->sq[1] - 1;
             while (Square::validate($file.$rank))
             {
-                $this->travel->bottomRight[] = $file . $rank;
+                $this->mobility->bottomRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);
                 $rank = (int)$rank - 1;
             }

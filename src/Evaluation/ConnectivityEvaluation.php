@@ -50,13 +50,13 @@ class ConnectivityEvaluation extends AbstractEvaluation
             switch ($piece->getId()) {
                 case Piece::K:
                     $this->result[$color] += count(
-                        array_intersect(array_values((array)$piece->getTravel()),
+                        array_intersect(array_values((array)$piece->getMobility()),
                         $this->sqEval[SqEvaluation::TYPE_USED][$color])
                     );
                     break;
                 case Piece::N:
                     $this->result[$color] += count(
-                        array_intersect($piece->getTravel(),
+                        array_intersect($piece->getMobility(),
                         $this->sqEval[SqEvaluation::TYPE_USED][$color])
                     );
                     break;
@@ -67,7 +67,7 @@ class ConnectivityEvaluation extends AbstractEvaluation
                     );
                     break;
                 default:
-                    foreach ((array)$piece->getTravel() as $key => $val) {
+                    foreach ((array)$piece->getMobility() as $key => $val) {
                         foreach ($val as $sq) {
                             if (in_array($sq, $this->sqEval[SqEvaluation::TYPE_USED][$color])) {
                                 $this->result[$color] += 1;

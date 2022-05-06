@@ -19,7 +19,7 @@ class PawnTest extends AbstractUnitTestCase
         $captureSquares = ['b3'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getTravel());
+        $this->assertEquals($travel, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
 
@@ -35,7 +35,7 @@ class PawnTest extends AbstractUnitTestCase
         $captureSquares = ['c6', 'e6'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getTravel());
+        $this->assertEquals($travel, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
 
@@ -51,7 +51,7 @@ class PawnTest extends AbstractUnitTestCase
         $captureSquares = ['e8', 'g8'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getTravel());
+        $this->assertEquals($travel, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
 
@@ -67,7 +67,7 @@ class PawnTest extends AbstractUnitTestCase
         $captureSquares = [];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getTravel());
+        $this->assertEquals($travel, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
 
@@ -83,7 +83,7 @@ class PawnTest extends AbstractUnitTestCase
         $captureSquares = ['b1'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getTravel());
+        $this->assertEquals($travel, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
 
@@ -99,7 +99,7 @@ class PawnTest extends AbstractUnitTestCase
         $captureSquares = ['c4', 'e4'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getTravel());
+        $this->assertEquals($travel, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSquares());
     }
 }

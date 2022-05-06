@@ -26,7 +26,7 @@ class QueenTest extends AbstractUnitTestCase
             'bottomRight' => ['b1']
         ];
 
-        $this->assertEquals($travel, $queen->getTravel());
+        $this->assertEquals($travel, $queen->getMobility());
     }
 
     /**
@@ -46,7 +46,7 @@ class QueenTest extends AbstractUnitTestCase
             'bottomRight' => ['e4', 'f3', 'g2', 'h1']
         ];
 
-        $this->assertEquals($travel, $queen->getTravel());
+        $this->assertEquals($travel, $queen->getMobility());
     }
 
     /**

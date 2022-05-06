@@ -39,14 +39,14 @@ class Rook extends Slider
 
         $this->type = $type;
 
-        $this->travel = (object)[
+        $this->mobility = (object)[
             'up' => [],
             'bottom' => [],
             'left' => [],
             'right' => []
         ];
 
-        $this->travel();
+        $this->mobility();
     }
 
     /**
@@ -60,18 +60,18 @@ class Rook extends Slider
     }
 
     /**
-     * Calculates the squares the piece can travel to.
+     * Calculates the piece's mobility.
      *
      * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): AbstractPiece
+    protected function mobility(): AbstractPiece
     {
         // up
         try {
             $file = $this->sq[0];
             $rank = (int)$this->sq[1] + 1;
             while (Square::validate($file.$rank)) {
-                $this->travel->up[] = $file . $rank;
+                $this->mobility->up[] = $file . $rank;
                 $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
@@ -83,7 +83,7 @@ class Rook extends Slider
             $file = $this->sq[0];
             $rank = (int)$this->sq[1] - 1;
             while (Square::validate($file.$rank)) {
-                $this->travel->bottom[] = $file . $rank;
+                $this->mobility->bottom[] = $file . $rank;
                 $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
@@ -95,7 +95,7 @@ class Rook extends Slider
             $file = chr(ord($this->sq[0]) - 1);
             $rank = (int)$this->sq[1];
             while (Square::validate($file.$rank)) {
-                $this->travel->left[] = $file . $rank;
+                $this->mobility->left[] = $file . $rank;
                 $file = chr(ord($file) - 1);
             }
         } catch (UnknownNotationException $e) {
@@ -107,7 +107,7 @@ class Rook extends Slider
             $file = chr(ord($this->sq[0]) + 1);
             $rank = (int)$this->sq[1];
             while (Square::validate($file.$rank)) {
-                $this->travel->right[] = $file . $rank;
+                $this->mobility->right[] = $file . $rank;
                 $file = chr(ord($file) + 1);
             }
         } catch (UnknownNotationException $e) {

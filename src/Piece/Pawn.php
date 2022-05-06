@@ -64,22 +64,22 @@ class Pawn extends AbstractPiece
 
         $this->captureSquares = [];
 
-        $this->travel = [];
+        $this->mobility = [];
 
-        $this->travel();
+        $this->mobility();
     }
 
     /**
-     * Calculates the squares the piece can travel to.
+     * Calculates the piece's mobility.
      *
      * @return \Chess\Piece\AbstractPiece
      */
-    protected function travel(): AbstractPiece
+    protected function mobility(): AbstractPiece
     {
         // next rank
         try {
             if (Square::validate($this->file . $this->ranks->next, true)) {
-                $this->travel[] = $this->file . $this->ranks->next;
+                $this->mobility[] = $this->file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
 
@@ -87,10 +87,10 @@ class Pawn extends AbstractPiece
 
         // two square advance
         if ($this->sq[1] == 2 && $this->ranks->initial == 2) {
-            $this->travel[] = $this->file . ($this->ranks->initial + 2);
+            $this->mobility[] = $this->file . ($this->ranks->initial + 2);
         }
         elseif ($this->sq[1] == 7 && $this->ranks->initial == 7) {
-            $this->travel[] = $this->file . ($this->ranks->initial - 2);
+            $this->mobility[] = $this->file . ($this->ranks->initial - 2);
         }
 
         // capture square
@@ -125,7 +125,7 @@ class Pawn extends AbstractPiece
     {
         $moves = [];
         // add up squares
-        foreach($this->travel as $sq) {
+        foreach($this->mobility as $sq) {
             if (in_array($sq, $this->board->getSqEval()->free)) {
                 $moves[] = $sq;
             } else {

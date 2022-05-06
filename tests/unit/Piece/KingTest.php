@@ -81,7 +81,7 @@ class KingTest extends AbstractUnitTestCase
             'upRight' => 'b3',
             'bottomRight' => 'b1'
         ];
-        $this->assertEquals($travel, $king->getTravel());
+        $this->assertEquals($travel, $king->getMobility());
     }
 
     /**
@@ -100,7 +100,7 @@ class KingTest extends AbstractUnitTestCase
             'bottomLeft' => 'c4',
             'bottomRight' => 'e4'
         ];
-        $this->assertEquals($travel, $king->getTravel());
+        $this->assertEquals($travel, $king->getMobility());
     }
 
     /**

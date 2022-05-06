@@ -40,11 +40,11 @@ abstract class AbstractPiece
     protected string $sq;
 
     /**
-     * The piece's travel.
+     * The piece's mobility.
      *
      * @var mixed object|array
      */
-    protected array|object $travel;
+    protected array|object $mobility;
 
     /**
      * The piece's next move.
@@ -75,11 +75,11 @@ abstract class AbstractPiece
     }
 
     /**
-     * Calculates the squares the piece can travel to.
+     * Calculates the piece's mobility.
      *
      * @return \Chess\Piece\AbstractPiece
      */
-    abstract protected function travel(): AbstractPiece;
+    abstract protected function mobility(): AbstractPiece;
 
     /**
      * Gets the piece's legal moves.
@@ -126,13 +126,13 @@ abstract class AbstractPiece
     }
 
     /**
-     * Gets the piece's travel.
+     * Gets the piece's mobility.
      *
      * @return mixed array|object
      */
-    public function getTravel(): array|object
+    public function getMobility(): array|object
     {
-        return $this->travel;
+        return $this->mobility;
     }
 
     /**

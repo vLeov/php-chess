@@ -20,7 +20,7 @@ class BishopTest extends AbstractUnitTestCase
             'bottomRight' => ['b1']
         ];
 
-        $this->assertEquals($travel, $bishop->getTravel());
+        $this->assertEquals($travel, $bishop->getMobility());
     }
 
     /**
@@ -36,7 +36,7 @@ class BishopTest extends AbstractUnitTestCase
             'bottomRight' => ['e4', 'f3', 'g2', 'h1']
         ];
 
-        $this->assertEquals($travel, $bishop->getTravel());
+        $this->assertEquals($travel, $bishop->getMobility());
     }
 
     /**
@@ -52,6 +52,6 @@ class BishopTest extends AbstractUnitTestCase
             'bottomRight' => ['b7', 'c6', 'd5', 'e4', 'f3', 'g2', 'h1']
         ];
 
-        $this->assertEquals($travel, $bishop->getTravel());
+        $this->assertEquals($travel, $bishop->getMobility());
     }
 }
