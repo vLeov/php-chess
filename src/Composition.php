@@ -16,7 +16,7 @@ class Composition
         return $this->board;
     }
 
-    public function deletePieceByPosition(string $sq): Composition
+    public function deletePieceBySq(string $sq): Composition
     {
         $piece = $this->board->getPieceBySq($sq);
         $this->board->detach($piece);
