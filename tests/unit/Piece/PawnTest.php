@@ -15,11 +15,11 @@ class PawnTest extends AbstractUnitTestCase
         $pawn = new Pawn('w', 'a2');
 
         $position = 'a2';
-        $travel = ['a3', 'a4'];
+        $mobility = ['a3', 'a4'];
         $captureSquares = ['b3'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getMobility());
+        $this->assertEquals($mobility, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
@@ -31,11 +31,11 @@ class PawnTest extends AbstractUnitTestCase
         $pawn = new Pawn('w', 'd5');
 
         $position = 'd5';
-        $travel = ['d6'];
+        $mobility = ['d6'];
         $captureSquares = ['c6', 'e6'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getMobility());
+        $this->assertEquals($mobility, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
@@ -47,11 +47,11 @@ class PawnTest extends AbstractUnitTestCase
         $pawn = new Pawn('w', 'f7');
 
         $position = 'f7';
-        $travel = ['f8'];
+        $mobility = ['f8'];
         $captureSquares = ['e8', 'g8'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getMobility());
+        $this->assertEquals($mobility, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
@@ -63,11 +63,11 @@ class PawnTest extends AbstractUnitTestCase
         $pawn = new Pawn('w', 'f8');
 
         $position = 'f8';
-        $travel = [];
+        $mobility = [];
         $captureSquares = [];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getMobility());
+        $this->assertEquals($mobility, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
@@ -79,11 +79,11 @@ class PawnTest extends AbstractUnitTestCase
         $pawn = new Pawn('b', 'a2');
 
         $position = 'a2';
-        $travel = ['a1'];
+        $mobility = ['a1'];
         $captureSquares = ['b1'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getMobility());
+        $this->assertEquals($mobility, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 
@@ -95,11 +95,11 @@ class PawnTest extends AbstractUnitTestCase
         $pawn = new Pawn('b', 'd5');
 
         $position = 'd5';
-        $travel = ['d4'];
+        $mobility = ['d4'];
         $captureSquares = ['c4', 'e4'];
 
         $this->assertSame($position, $pawn->getSq());
-        $this->assertEquals($travel, $pawn->getMobility());
+        $this->assertEquals($mobility, $pawn->getMobility());
         $this->assertSame($captureSquares, $pawn->getCaptureSqs());
     }
 }
