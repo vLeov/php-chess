@@ -114,7 +114,7 @@ class MoveTest extends AbstractUnitTestCase
             'color' => 'w',
             'id' => Piece::B,
             'sq' => (object) [
-                'current' => null,
+                'current' => '',
                 'next' =>'g5'
             ]
         ];
@@ -136,7 +136,7 @@ class MoveTest extends AbstractUnitTestCase
             'color' => 'b',
             'id' => Piece::R,
             'sq' => (object) [
-                'current' => null,
+                'current' => '',
                 'next' => 'a5'
             ]
         ];
@@ -202,7 +202,7 @@ class MoveTest extends AbstractUnitTestCase
             'color' => 'w',
             'id' => Piece::K,
             'sq' => (object) [
-                'current' => null,
+                'current' => '',
                 'next' => 'g7'
             ]
         ];
@@ -350,7 +350,7 @@ class MoveTest extends AbstractUnitTestCase
             'color' => 'b',
             'id' => Piece::N,
             'sq' => (object) [
-                'current' => null,
+                'current' => '',
                 'next' => 'e4'
             ]
         ];
