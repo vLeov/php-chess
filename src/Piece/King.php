@@ -131,7 +131,7 @@ class King extends AbstractPiece
     }
 
     /**
-     * Gets the piece's legal moves.
+     * Returns the piece's legal moves.
      *
      * @return mixed array|null
      */
@@ -148,7 +148,7 @@ class King extends AbstractPiece
     }
 
     /**
-     * Gets the squares defended by the piece.
+     * Returns the squares defended by the piece.
      *
      * @return mixed array|null
      */
