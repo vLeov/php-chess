@@ -90,7 +90,7 @@ class Move extends AbstractNotation implements ValidationInterface
                 'color' => Color::validate($color),
                 'id' => Piece::K,
                 'sq' => (object) [
-                    'current' => null,
+                    'current' => '',
                     'next' => mb_substr($pgn, -2)
                 ],
             ];
@@ -123,7 +123,7 @@ class Move extends AbstractNotation implements ValidationInterface
                 'color' => Color::validate($color),
                 'id' => Piece::K,
                 'sq' => (object) [
-                    'current' => null,
+                    'current' => '',
                     'next' => mb_substr($pgn, -2)
                 ],
             ];
@@ -205,7 +205,7 @@ class Move extends AbstractNotation implements ValidationInterface
                 'id' => Piece::P,
                 'newId' => $isCheck ? mb_substr($pgn, -2, -1) : mb_substr($pgn, -1),
                 'sq' => (object) [
-                    'current' => null,
+                    'current' => '',
                     'next' => mb_substr($pgn, 0, 2)
                 ],
             ];
@@ -221,7 +221,7 @@ class Move extends AbstractNotation implements ValidationInterface
                     ? mb_substr($pgn, -2, -1)
                     : mb_substr($pgn, -1),
                 'sq' => (object) [
-                    'current' => null,
+                    'current' => '',
                     'next' => mb_substr($pgn, 2, 2)
                 ],
             ];
