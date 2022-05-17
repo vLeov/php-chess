@@ -8,7 +8,7 @@ use Chess\PGN\AN\Piece;
 
 class BishopPairEvaluation extends AbstractEvaluation
 {
-    const NAME = 'bishop_pair';
+    const NAME = 'Bishop pair';
 
     public function __construct(Board $board)
     {

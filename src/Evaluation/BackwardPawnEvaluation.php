@@ -15,7 +15,7 @@ use Chess\PGN\AN\Piece;
  */
 class BackwardPawnEvaluation extends AbstractEvaluation implements InverseEvaluationInterface
 {
-    const NAME = 'backward_pawn';
+    const NAME = 'Backward pawn';
 
     public function __construct(Board $board)
     {

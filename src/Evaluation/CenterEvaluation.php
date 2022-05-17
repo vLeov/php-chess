@@ -14,7 +14,7 @@ use Chess\PGN\AN\Color;
  */
 class CenterEvaluation extends AbstractEvaluation
 {
-    const NAME = 'center';
+    const NAME = 'Center';
 
     private array $center = [
         'a8' => 0, 'b8' => 0, 'c8' => 0, 'd8' => 0, 'e8' => 0, 'f8' => 0, 'g8' => 0, 'h8' => 0,

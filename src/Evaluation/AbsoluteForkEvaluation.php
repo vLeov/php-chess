@@ -7,7 +7,7 @@ use Chess\PGN\AN\Color;
 
 class AbsoluteForkEvaluation extends AbstractForkEvaluation
 {
-    const NAME = 'absolute_fork';
+    const NAME = 'Absolute fork';
 
     public function __construct(Board $board)
     {

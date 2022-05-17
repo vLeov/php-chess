@@ -15,7 +15,7 @@ use Chess\PGN\AN\Piece;
  */
 class ConnectivityEvaluation extends AbstractEvaluation
 {
-    const NAME = 'connectivity';
+    const NAME = 'Connectivity';
 
     private array $sqEval;
 

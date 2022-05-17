@@ -15,7 +15,7 @@ use Chess\PGN\AN\Color;
  */
 class DefenseEvaluation extends AbstractEvaluation
 {
-    const NAME = 'defense';
+    const NAME = 'Defense';
 
     public function __construct(Board $board)
     {

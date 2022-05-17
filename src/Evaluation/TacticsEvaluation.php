@@ -18,7 +18,7 @@ use Chess\PGN\AN\Piece;
  */
 class TacticsEvaluation extends AbstractEvaluation
 {
-    const NAME = 'tactics';
+    const NAME = 'Tactics';
 
     /**
      * Defense evaluation containing the defended squares.

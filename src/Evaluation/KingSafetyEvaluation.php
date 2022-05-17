@@ -16,7 +16,7 @@ use Chess\PGN\AN\Piece;
  */
 class KingSafetyEvaluation extends AbstractEvaluation
 {
-    const NAME = 'safety';
+    const NAME = 'King safety';
 
     public function __construct(Board $board)
     {

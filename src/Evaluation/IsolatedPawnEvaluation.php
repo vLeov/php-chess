@@ -9,7 +9,7 @@ use Chess\Piece\Pawn;
 
 class IsolatedPawnEvaluation extends AbstractEvaluation implements InverseEvaluationInterface
 {
-    const NAME = 'isolated_pawn';
+    const NAME = 'Isolated pawn';
 
     public function __construct(Board $board)
     {

@@ -10,7 +10,7 @@ use Chess\PGN\AN\Piece;
 
 class RelativePinEvaluation extends AbstractEvaluation
 {
-    const NAME = 'relative_pin';
+    const NAME = 'Relative pin';
 
     public function __construct(Board $board)
     {

@@ -17,7 +17,7 @@ use Chess\PGN\AN\Piece;
  */
 class PressureEvaluation extends AbstractEvaluation
 {
-    const NAME = 'pressure';
+    const NAME = 'Pressure';
 
     /**
      * Square evaluation containing the free and used squares.

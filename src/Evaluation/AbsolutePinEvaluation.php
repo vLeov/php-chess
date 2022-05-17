@@ -9,7 +9,7 @@ use Chess\PGN\AN\Piece;
 
 class AbsolutePinEvaluation extends AbstractEvaluation implements InverseEvaluationInterface
 {
-    const NAME = 'absolute_pin';
+    const NAME = 'Absolute pin';
 
     public function __construct(Board $board)
     {

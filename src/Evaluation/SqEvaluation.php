@@ -13,7 +13,7 @@ use Chess\PGN\AN\Color;
  */
 class SqEvaluation extends AbstractEvaluation
 {
-    const NAME           = 'square';
+    const NAME           = 'Square';
 
     const TYPE_FREE      = 'free';
     const TYPE_USED      = 'used';

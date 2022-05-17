@@ -8,7 +8,7 @@ use Chess\PGN\AN\Piece;
 
 class DoubledPawnEvaluation extends AbstractEvaluation implements InverseEvaluationInterface
 {
-    const NAME = 'doubled_pawn';
+    const NAME = 'Doubled pawn';
 
     public function __construct(Board $board)
     {

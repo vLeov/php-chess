@@ -7,7 +7,7 @@ use Chess\PGN\AN\Color;
 
 class RelativeForkEvaluation extends AbstractForkEvaluation
 {
-    const NAME = 'relative_fork';
+    const NAME = 'Relative fork';
 
     public function __construct(Board $board)
     {

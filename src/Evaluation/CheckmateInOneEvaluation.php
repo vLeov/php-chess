@@ -13,7 +13,7 @@ use Chess\PGN\AN\Color;
  */
 class CheckmateInOneEvaluation extends AbstractEvaluation
 {
-    const NAME = 'checkmate';
+    const NAME = 'Checkmate';
 
     public function __construct(Board $board)
     {

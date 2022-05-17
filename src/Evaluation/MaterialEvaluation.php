@@ -14,7 +14,7 @@ use Chess\PGN\AN\Piece;
  */
 class MaterialEvaluation extends AbstractEvaluation
 {
-    const NAME = 'material';
+    const NAME = 'Material';
 
     public function __construct(Board $board)
     {

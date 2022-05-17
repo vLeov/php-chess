@@ -15,7 +15,7 @@ use Chess\PGN\AN\Piece;
  */
 class SpaceEvaluation extends AbstractEvaluation
 {
-    const NAME = 'space';
+    const NAME = 'Space';
 
     private array $sqEval;
 

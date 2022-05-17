@@ -9,7 +9,7 @@ use Chess\PGN\AN\Piece;
 
 class KnightOutpostEvaluation extends AbstractEvaluation
 {
-    const NAME = 'knight_outpost';
+    const NAME = 'Knight outpost';
 
     private array $sqOutpostEval;
 

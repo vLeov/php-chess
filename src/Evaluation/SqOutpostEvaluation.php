@@ -14,7 +14,7 @@ use Chess\PGN\AN\Piece;
  */
 class SqOutpostEvaluation extends AbstractEvaluation
 {
-    const NAME = 'square_outpost';
+    const NAME = 'Square outpost';
 
     private array $ranks = [3, 4, 5, 6];
 
