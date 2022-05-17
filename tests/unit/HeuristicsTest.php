@@ -13,6 +13,48 @@ class HeuristicsTest extends AbstractUnitTestCase
 {
     /*
     |--------------------------------------------------------------------------
+    | getDimensionsNames()
+    |--------------------------------------------------------------------------
+    |
+    | Returns the dimensions names.
+    |
+    */
+
+    /**
+     * @test
+     */
+    public function get_dimensions_names()
+    {
+        $dimensionsNames = (new Heuristics())->getDimensionsNames();
+
+        $expected = [
+            'Material',
+            'Center',
+            'Connectivity',
+            'Space',
+            'Pressure',
+            'King safety',
+            'Tactics',
+            'Attack',
+            'Doubled pawn',
+            'Passed pawn',
+            'Isolated pawn',
+            'Backward pawn',
+            'Absolute pin',
+            'Relative pin',
+            'Absolute fork',
+            'Relative fork',
+            'Square outpost',
+            'Knight outpost',
+            'Bishop outpost',
+            'Bishop pair',
+        ];
+
+        $this->assertSame($expected, $dimensionsNames);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | end()
     |--------------------------------------------------------------------------
     |

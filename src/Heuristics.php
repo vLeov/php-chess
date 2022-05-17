@@ -17,6 +17,22 @@ class Heuristics extends Player
     }
 
     /**
+     * Returns the dimensions names.
+     *
+     * @return array
+     */
+    public function getDimensionsNames(): array
+    {
+        $dimensionsNames = [];
+        foreach ($this->dimensions as $key => $val) {
+            $dimensionsNames[] = (new \ReflectionClass($key))
+                ->getConstant('NAME');
+        }
+
+        return $dimensionsNames;
+    }
+
+    /**
      * Returns the current evaluation of $this->board.
      *
      * The result obtained suggests which player may be better.
