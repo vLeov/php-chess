@@ -28,7 +28,7 @@ class Game
     const MODE_GRANDMASTER  = 'MODE_GRANDMASTER';
     const MODE_LOAD_FEN     = 'MODE_LOAD_FEN';
     const MODE_LOAD_PGN     = 'MODE_LOAD_PGN';
-    const MODE_PLAY_FRIEND  = 'MODE_PLAY_FRIEND';
+    const MODE_PLAY  = 'MODE_PLAY';
 
     const MODEL_FOLDER = __DIR__.'/../model/';
 
