@@ -41,7 +41,7 @@ class Rook extends Slider
 
         $this->mobility = (object)[
             'up' => [],
-            'bottom' => [],
+            'down' => [],
             'left' => [],
             'right' => []
         ];
@@ -83,7 +83,7 @@ class Rook extends Slider
             $file = $this->sq[0];
             $rank = (int)$this->sq[1] - 1;
             while (Square::validate($file.$rank)) {
-                $this->mobility->bottom[] = $file . $rank;
+                $this->mobility->down[] = $file . $rank;
                 $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {

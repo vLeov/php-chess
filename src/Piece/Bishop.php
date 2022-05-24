@@ -28,8 +28,8 @@ class Bishop extends Slider
         $this->mobility = (object)[
             'upLeft' => [],
             'upRight' => [],
-            'bottomLeft' => [],
-            'bottomRight' => []
+            'downLeft' => [],
+            'downRight' => []
         ];
 
         $this->mobility();
@@ -71,7 +71,7 @@ class Bishop extends Slider
             $rank = (int)$this->sq[1] - 1;
             while (Square::validate($file.$rank))
             {
-                $this->mobility->bottomLeft[] = $file . $rank;
+                $this->mobility->downLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
                 $rank = (int)$rank - 1;
             }
@@ -84,7 +84,7 @@ class Bishop extends Slider
             $rank = (int)$this->sq[1] - 1;
             while (Square::validate($file.$rank))
             {
-                $this->mobility->bottomRight[] = $file . $rank;
+                $this->mobility->downRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);
                 $rank = (int)$rank - 1;
             }

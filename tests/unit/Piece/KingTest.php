@@ -76,10 +76,10 @@ class KingTest extends AbstractUnitTestCase
         $king = new King('w', 'a2');
         $mobility = (object) [
             'up' => 'a3',
-            'bottom' => 'a1',
+            'down' => 'a1',
             'right' => 'b2',
             'upRight' => 'b3',
-            'bottomRight' => 'b1'
+            'downRight' => 'b1'
         ];
         $this->assertEquals($mobility, $king->getMobility());
     }
@@ -92,13 +92,13 @@ class KingTest extends AbstractUnitTestCase
         $king = new King('w', 'd5');
         $mobility = (object) [
             'up' => 'd6',
-            'bottom' => 'd4',
+            'down' => 'd4',
             'left' => 'c5',
             'right' => 'e5',
             'upLeft' => 'c6',
             'upRight' => 'e6',
-            'bottomLeft' => 'c4',
-            'bottomRight' => 'e4'
+            'downLeft' => 'c4',
+            'downRight' => 'e4'
         ];
         $this->assertEquals($mobility, $king->getMobility());
     }
