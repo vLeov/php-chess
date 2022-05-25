@@ -12,7 +12,7 @@ class QueenTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_a2()
+    public function mobility_a2()
     {
         $queen = new Queen('w', 'a2');
         $mobility = (object) [
@@ -32,7 +32,7 @@ class QueenTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_d5()
+    public function mobility_d5()
     {
         $queen = new Queen('w', 'd5');
         $mobility = (object) [

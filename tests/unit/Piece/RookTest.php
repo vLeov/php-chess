@@ -11,7 +11,7 @@ class RookTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_a2()
+    public function mobility_a2()
     {
         $rook = new Rook('w', 'a2', RookType::PROMOTED);
         $mobility = (object) [
@@ -27,7 +27,7 @@ class RookTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_d5()
+    public function mobility_d5()
     {
         $rook = new Rook('w', 'd5', RookType::PROMOTED);
         $mobility = (object) [

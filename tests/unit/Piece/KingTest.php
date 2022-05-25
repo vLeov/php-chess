@@ -71,7 +71,7 @@ class KingTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_a2()
+    public function mobility_a2()
     {
         $king = new King('w', 'a2');
         $mobility = (object) [
@@ -87,7 +87,7 @@ class KingTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_d5()
+    public function mobility_d5()
     {
         $king = new King('w', 'd5');
         $mobility = (object) [

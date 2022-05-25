@@ -10,7 +10,7 @@ class BishopTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_a2()
+    public function mobility_a2()
     {
         $bishop = new Bishop('w', 'a2');
         $mobility = (object) [
@@ -26,7 +26,7 @@ class BishopTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_d5()
+    public function mobility_d5()
     {
         $bishop = new Bishop('w', 'd5');
         $mobility = (object) [
@@ -42,7 +42,7 @@ class BishopTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function travel_a8()
+    public function mobility_a8()
     {
         $bishop = new Bishop('w', 'a8');
         $mobility = (object) [
