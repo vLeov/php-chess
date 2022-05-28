@@ -307,7 +307,7 @@ class GameTest extends AbstractUnitTestCase
     | Play sample games.
     |--------------------------------------------------------------------------
     |
-    | Plays the PGN games that are found in the tests/data/game folder.
+    | Plays the PGN games that are found in the tests/data/png folder.
     |
     */
 
@@ -316,10 +316,10 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_games()
     {
-        foreach (new \DirectoryIterator(self::DATA_FOLDER."/game/") as $fileInfo) {
+        foreach (new \DirectoryIterator(self::DATA_FOLDER."/png/") as $fileInfo) {
             if ($fileInfo->isDot()) continue;
             $filename = $fileInfo->getFilename();
-            $contents = file_get_contents(self::DATA_FOLDER."/game/$filename");
+            $contents = file_get_contents(self::DATA_FOLDER."/png/$filename");
             $contents = (new Movetext($contents))->validate();
             $movetext = (new Movetext($contents))->getMovetext();
             $game = new Game();
