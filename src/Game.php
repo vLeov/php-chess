@@ -47,6 +47,13 @@ class Game
     private string $mode;
 
     /**
+     * Grandmaster.
+     *
+     * @var Grandmaster
+     */
+    private Grandmaster $grandmaster;
+
+    /**
      * Estimator.
      *
      * @var PersistentModel
@@ -57,12 +64,21 @@ class Game
      * Constructor.
      *
      * @param mixed $mode
+     * @param mixed $json
      * @param mixed $model
      */
-    public function __construct(null|string $mode = null, null|string $model = null)
-    {
+    public function __construct(
+        null|string $mode = null,
+        null|string $json = null,
+        null|string $model = null
+    ) {
         $this->board = new Board();
         $this->mode = $mode ?? self::MODE_ANALYSIS;
+
+        if ($json) {
+            $this->grandmaster = new Grandmaster($json);
+        }
+
         if ($model) {
             $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.$model));
         }
@@ -141,7 +157,7 @@ class Game
      */
     public function response(string $filepath): ?string
     {
-        $response = (new Grandmaster($filepath))->response($this->board->getMovetext());
+        $response = $this->grandmaster->response($this->board->getMovetext());
         if ($this->mode === Game::MODE_AI) {
             if ($response) {
                 return $response;
