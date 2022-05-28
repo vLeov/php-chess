@@ -28,9 +28,9 @@ class Game
     const MODE_GRANDMASTER  = 'MODE_GRANDMASTER';
     const MODE_LOAD_FEN     = 'MODE_LOAD_FEN';
     const MODE_LOAD_PGN     = 'MODE_LOAD_PGN';
-    const MODE_PLAY  = 'MODE_PLAY';
+    const MODE_PLAY         = 'MODE_PLAY';
 
-    const MODEL_FOLDER = __DIR__.'/../model/';
+    const MODEL_FOLDER      = __DIR__.'/../model/';
 
     /**
      * Chess board.
@@ -64,19 +64,19 @@ class Game
      * Constructor.
      *
      * @param mixed $mode
-     * @param mixed $json
+     * @param mixed $grandmasterFilepath
      * @param mixed $model
      */
     public function __construct(
         null|string $mode = null,
-        null|string $json = null,
+        null|string $grandmasterFilepath = null,
         null|string $model = null
     ) {
         $this->board = new Board();
         $this->mode = $mode ?? self::MODE_ANALYSIS;
 
-        if ($json) {
-            $this->grandmaster = new Grandmaster($json);
+        if ($grandmasterFilepath) {
+            $this->grandmaster = new Grandmaster($grandmasterFilepath);
         }
 
         if ($model) {
