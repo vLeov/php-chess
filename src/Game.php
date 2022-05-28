@@ -162,8 +162,11 @@ class Game
             if ($response) {
                 return $response;
             } else {
-                $response = (new GeometricSumPredictor($this->board, $this->estimator))->predict();
-                return $response;
+                $move = (new GeometricSumPredictor($this->board, $this->estimator))
+                    ->predict();
+                return [
+                    'move' => $move,
+                ];
             }
         } elseif ($this->mode === Game::MODE_GRANDMASTER) {
             return $response;
