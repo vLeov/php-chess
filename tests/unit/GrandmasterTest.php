@@ -12,7 +12,8 @@ class GrandmasterTest extends AbstractUnitTestCase
      */
     public function w_repsonse()
     {
-        $response = (new Grandmaster())->response('');
+        $filepath = __DIR__.'/../data/csv/grandmaster.csv';
+        $response = (new Grandmaster($filepath))->response('');
 
         $this->assertNotEmpty($response);
     }
@@ -22,7 +23,8 @@ class GrandmasterTest extends AbstractUnitTestCase
      */
     public function b_repsonse()
     {
-        $response = (new Grandmaster())->response('1.e4');
+        $filepath = __DIR__.'/../data/csv/grandmaster.csv';
+        $response = (new Grandmaster($filepath))->response('1.e4');
 
         $this->assertNotEmpty($response);
     }
