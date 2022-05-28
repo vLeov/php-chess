@@ -13,7 +13,7 @@ class Grandmaster
         $this->filepath = $filepath;
     }
 
-    public function response(string $movetext): ?array
+    public function response(string $movetext): ?object
     {
         $contents = file_get_contents($this->filepath);
 
@@ -32,7 +32,7 @@ class Grandmaster
         shuffle($this->found);
 
         if ($this->found) {
-            return [
+            return (object) [
                 'move' => $this->move($this->found[0]['movetext'], $movetext),
                 'game' => $this->found[0],
             ];

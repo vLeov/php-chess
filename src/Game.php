@@ -152,12 +152,12 @@ class Game
      * used in either Game::MODE_AI or Game::MODE_GRANDMASTER otherwise it
      * returns null.
      *
-     * @param string $filepath
      * @return mixed sring|null
      */
-    public function response(string $filepath): ?string
+    public function response(): ?object
     {
         $response = $this->grandmaster->response($this->board->getMovetext());
+
         if ($this->mode === Game::MODE_AI) {
             if ($response) {
                 return $response;
