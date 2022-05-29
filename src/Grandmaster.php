@@ -21,6 +21,8 @@ class Grandmaster
             new \RecursiveArrayIterator(json_decode($contents, true)),
             \RecursiveIteratorIterator::SELF_FIRST);
 
+        $this->found = [];
+
         foreach ($items as $item) {
             if (isset($item['movetext'])) {
                 if (str_starts_with($item['movetext'], $movetext)) {
