@@ -2,6 +2,7 @@
 
 namespace Chess;
 
+use Chess\Grandmaster;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\ShortStrToPgn;
 use Chess\FEN\StrToBoard;
@@ -51,7 +52,7 @@ class Game
      *
      * @var Grandmaster
      */
-    private Grandmaster $grandmaster;
+    private null|Grandmaster $grandmaster;
 
     /**
      * Estimator.
@@ -64,21 +65,17 @@ class Game
      * Constructor.
      *
      * @param mixed $mode
-     * @param mixed $grandmasterFilepath
+     * @param mixed $grandmaster
      * @param mixed $model
      */
     public function __construct(
         null|string $mode = null,
-        null|string $grandmasterFilepath = null,
+        null|Grandmaster $grandmaster = null,
         null|string $model = null
     ) {
         $this->board = new Board();
+        $this->grandmaster = $grandmaster;
         $this->mode = $mode ?? self::MODE_ANALYSIS;
-
-        if ($grandmasterFilepath) {
-            $this->grandmaster = new Grandmaster($grandmasterFilepath);
-        }
-
         if ($model) {
             $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.$model));
         }
