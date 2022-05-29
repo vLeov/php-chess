@@ -156,7 +156,7 @@ class Game
      */
     public function response(): ?object
     {
-        $response = $this->grandmaster->response($this->board->getMovetext());
+        $response = $this->grandmaster->response($this);
 
         if ($this->mode === Game::MODE_AI) {
             if ($response) {
