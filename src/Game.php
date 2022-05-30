@@ -24,12 +24,12 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
-    const MODE_AI           = 'MODE_AI';
-    const MODE_ANALYSIS     = 'MODE_ANALYSIS';
-    const MODE_GRANDMASTER  = 'MODE_GRANDMASTER';
-    const MODE_LOAD_FEN     = 'MODE_LOAD_FEN';
-    const MODE_LOAD_PGN     = 'MODE_LOAD_PGN';
-    const MODE_PLAY         = 'MODE_PLAY';
+    const MODE_AI           = 'ai';
+    const MODE_ANALYSIS     = 'analysis';
+    const MODE_GRANDMASTER  = 'grandmaster';
+    const MODE_LOAD_FEN     = 'loadfen';
+    const MODE_LOAD_PGN     = 'loadpgn';
+    const MODE_PLAY         = 'play';
 
     const MODEL_FOLDER      = __DIR__.'/../model/';
 
@@ -129,6 +129,7 @@ class Game
             'isCheck' => $this->board->isCheck(),
             'isMate' => $this->board->isMate(),
             'isStalemate' => $this->board->isStalemate(),
+            'mode' => $this->getMode(),
         ];
     }
 
