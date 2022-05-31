@@ -306,6 +306,7 @@ final class Board extends \SplObjectStorage
     private function pushHistory(AbstractPiece $piece): Board
     {
         $this->history[] = (object) [
+            'castlingAbility' => $this->castlingAbility,
             'sq' => $piece->getSq(),
             'move' => $piece->getMove(),
         ];
@@ -607,7 +608,6 @@ final class Board extends \SplObjectStorage
      */
     private function undoCastle(): Board
     {
-        $prevCastlingAbility = $this->castlingAbility;
         $prev = end($this->history);
         $king = $this->getPieceBySq($prev->move->sq->next);
         $kingUndone = new King($prev->move->color, $prev->sq);
@@ -636,7 +636,6 @@ final class Board extends \SplObjectStorage
             $this->detach($rook);
             $this->attach($rookUndone);
         }
-        $this->castlingAbility = $prevCastlingAbility;
         $this->popHistory()->refresh();
 
         return $this;
@@ -738,7 +737,6 @@ final class Board extends \SplObjectStorage
     private function undoMove(): Board
     {
         if ($prev = end($this->history)) {
-            $prevCastlingAbility = $this->castlingAbility;
             $piece = $this->getPieceBySq($prev->move->sq->next);
             $this->detach($piece);
             if ($prev->move->type === Move::PAWN_PROMOTES ||
@@ -765,7 +763,6 @@ final class Board extends \SplObjectStorage
                 );
                 $this->popCapture($prev->move->color);
             }
-            $this->castlingAbility = $prevCastlingAbility;
             $this->popHistory()->refresh();
         }
 
@@ -779,8 +776,11 @@ final class Board extends \SplObjectStorage
                 $prev->move->type === Move::CASTLE_LONG
             ) {
                 $this->undoCastle();
+                $nextToPrev = end($this->history);
+                $this->castlingAbility = $nextToPrev->castlingAbility;
             } else {
                 $this->undoMove();
+                $this->castlingAbility = $prev->castlingAbility;
             }
         }
 

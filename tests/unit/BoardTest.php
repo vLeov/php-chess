@@ -152,6 +152,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $expected = [
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'd2',
                 'move' => (object) [
                     'pgn' => 'd4',
@@ -167,6 +168,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'd7',
                 'move' => (object) [
                     'pgn' => 'd5',
@@ -182,6 +184,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'c2',
                 'move' => (object) [
                     'pgn' => 'c4',
@@ -197,6 +200,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'c7',
                 'move' => (object) [
                     'pgn' => 'c5',
@@ -225,6 +229,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $expected = [
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'e2',
                 'move' => (object) [
                     'pgn' => 'e4',
@@ -240,6 +245,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'e7',
                 'move' => (object) [
                     'pgn' => 'e5',
@@ -255,6 +261,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'g1',
                 'move' => (object) [
                     'pgn' => 'Nf3',
@@ -270,6 +277,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'b8',
                 'move' => (object) [
                     'pgn' => 'Nc6',
@@ -285,6 +293,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'f1',
                 'move' => (object) [
                     'pgn' => 'Bb5',
@@ -300,6 +309,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'f8',
                 'move' => (object) [
                     'pgn' => 'Be7',
@@ -328,6 +338,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $expected = [
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'e2',
                 'move' => (object) [
                     'pgn' => 'e4',
@@ -343,6 +354,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'e7',
                 'move' => (object) [
                     'pgn' => 'e6',
@@ -358,6 +370,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'd2',
                 'move' => (object) [
                     'pgn' => 'd4',
@@ -373,6 +386,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'd7',
                 'move' => (object) [
                     'pgn' => 'd5',
@@ -388,6 +402,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'b1',
                 'move' => (object) [
                     'pgn' => 'Nc3',
@@ -403,6 +418,7 @@ class BoardTest extends AbstractUnitTestCase
                 ],
             ],
             (object) [
+                'castlingAbility' => 'KQkq',
                 'sq' => 'g8',
                 'move' => (object) [
                     'pgn' => 'Nf6',
