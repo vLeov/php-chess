@@ -146,19 +146,19 @@ class Game
     }
 
     /**
-     * Returns a computer response to the current position. This method is to be
-     * used in either Game::MODE_AI or Game::MODE_GRANDMASTER otherwise it
-     * returns null.
+     * Returns a computer generated response to the current position.
+     *
+     * This method is to be used in either Game::MODE_AI or Game::MODE_GRANDMASTER
+     * otherwise it returns null.
      *
      * @return mixed sring|null
      */
-    public function response(): ?object
+    public function ai(): ?object
     {
-        $response = $this->grandmaster->response($this);
-
+        $move = $this->grandmaster->move($this);
         if ($this->mode === Game::MODE_AI) {
-            if ($response) {
-                return $response;
+            if ($move) {
+                return $move;
             } else {
                 $move = (new GeometricSumPredictor($this->board, $this->estimator))
                     ->predict();
@@ -167,7 +167,7 @@ class Game
                 ];
             }
         } elseif ($this->mode === Game::MODE_GRANDMASTER) {
-            return $response;
+            return $move;
         }
 
         return null;
