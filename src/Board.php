@@ -603,11 +603,11 @@ final class Board extends \SplObjectStorage
     /**
      * Undoes a castle move.
      *
-     * @param string $prevCastlingAbility
      * @return \Chess\Board
      */
-    private function undoCastle(string $prevCastlingAbility): Board
+    private function undoCastle(): Board
     {
+        $prevCastlingAbility = $this->castlingAbility;
         $prev = end($this->history);
         $king = $this->getPieceBySq($prev->move->sq->next);
         $kingUndone = new King($prev->move->color, $prev->sq);
@@ -733,12 +733,12 @@ final class Board extends \SplObjectStorage
     /**
      * Undoes the last move.
      *
-     * @param string $prevCastlingAbility
      * @return \Chess\Board
      */
-    private function undoMove(string $prevCastlingAbility): Board
+    private function undoMove(): Board
     {
         if ($prev = end($this->history)) {
+            $prevCastlingAbility = $this->castlingAbility;
             $piece = $this->getPieceBySq($prev->move->sq->next);
             $this->detach($piece);
             if ($prev->move->type === Move::PAWN_PROMOTES ||
@@ -765,22 +765,22 @@ final class Board extends \SplObjectStorage
                 );
                 $this->popCapture($prev->move->color);
             }
-            !isset($prevCastlingAbility) ?: $this->castlingAbility = $prevCastlingAbility;
+            $this->castlingAbility = $prevCastlingAbility;
             $this->popHistory()->refresh();
         }
 
         return $this;
     }
 
-    public function undo(string $prevCastlingAbility)
+    public function undo()
     {
         if ($prev = end($this->history)) {
             if ($prev->move->type === Move::CASTLE_SHORT ||
                 $prev->move->type === Move::CASTLE_LONG
             ) {
-                $this->undoCastle($prevCastlingAbility);
+                $this->undoCastle();
             } else {
-                $this->undoMove($prevCastlingAbility);
+                $this->undoMove();
             }
         }
 
@@ -824,13 +824,14 @@ final class Board extends \SplObjectStorage
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
             $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoCastle($prevCastlingAbility);
+            $this->undoCastle();
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
             $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoMove($prevCastlingAbility);
+            $this->undoMove();
         }
+        $this->castlingAbility = $prevCastlingAbility;
 
         return $leavesInCheck;
     }
