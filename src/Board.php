@@ -736,10 +736,9 @@ final class Board extends \SplObjectStorage
      * @param string $prevCastlingAbility
      * @return \Chess\Board
      */
-    public function undoMove(string $prevCastlingAbility): Board
+    private function undoMove(string $prevCastlingAbility): Board
     {
-        $prev = end($this->history);
-        if ($prev) {
+        if ($prev = end($this->history)) {
             $piece = $this->getPieceBySq($prev->move->sq->next);
             $this->detach($piece);
             if ($prev->move->type === Move::PAWN_PROMOTES ||
@@ -768,6 +767,21 @@ final class Board extends \SplObjectStorage
             }
             !isset($prevCastlingAbility) ?: $this->castlingAbility = $prevCastlingAbility;
             $this->popHistory()->refresh();
+        }
+
+        return $this;
+    }
+
+    public function undo(string $prevCastlingAbility)
+    {
+        if ($prev = end($this->history)) {
+            if ($prev->move->type === Move::CASTLE_SHORT ||
+                $prev->move->type === Move::CASTLE_LONG
+            ) {
+                $this->undoCastle($prevCastlingAbility);
+            } else {
+                $this->undoMove($prevCastlingAbility);
+            }
         }
 
         return $this;
