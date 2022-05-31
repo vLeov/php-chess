@@ -769,7 +769,12 @@ final class Board extends \SplObjectStorage
         return $this;
     }
 
-    public function undo()
+    /**
+     * Undoes the last move.
+     *
+     * @return \Chess\Board
+     */
+    public function undo(): Board
     {
         if ($last = end($this->history)) {
             if ($last->move->type === Move::CASTLE_SHORT ||

@@ -403,3 +403,16 @@ var_export($isStalemate);
 ```text
 false
 ```
+
+#### `public function undo(): Board`
+
+Undoes the last move.
+
+```php
+$movetext = $board->undo()->getMovetext();
+
+var_export($movetext);
+```
+```text
+'1.e4 d5 2.exd5'
+```
