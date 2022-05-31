@@ -3,6 +3,7 @@
 namespace Chess\Tests\Unit;
 
 use Chess\Board;
+use Chess\FEN\BoardToStr;
 use Chess\FEN\StrToBoard;
 use Chess\Piece\Bishop;
 use Chess\Piece\King;
@@ -2172,5 +2173,32 @@ class BoardTest extends AbstractUnitTestCase
         $count = count($board->checkingPieces());
 
         $this->assertSame($expected, $count);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | undoMove()
+    |--------------------------------------------------------------------------
+    |
+    | Undoes the last move.
+    |
+    */
+
+    /**
+     * @test
+     */
+    public function undo_move_e4_e5()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+
+        $board->undoMove($board->getCastlingAbility());
+
+        $expected = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3';
+        $string = (new BoardToStr($board))->create();
+
+        $this->assertSame($expected, $string);
     }
 }
