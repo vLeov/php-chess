@@ -17,13 +17,13 @@ class Grandmaster
             \RecursiveIteratorIterator::SELF_FIRST);
     }
 
-    public function response(Game $game): ?object
+    public function move(Game $game): ?object
     {
         $movetext = $game->getBoard()->getMovetext();
         $found = $this->find($movetext);
         if ($found) {
             return (object) [
-                'move' => $this->move($found[0]['movetext'], $movetext),
+                'move' => $this->next($found[0]['movetext'], $movetext),
                 'game' => $found[0],
             ];
         }
@@ -46,7 +46,7 @@ class Grandmaster
         return $found;
     }
 
-    protected function move(string $haystack, string $needle): string
+    protected function next(string $haystack, string $needle): string
     {
         $moves = array_filter(explode(' ', str_replace($needle, '', $haystack)));
         $current = explode('.', current($moves));

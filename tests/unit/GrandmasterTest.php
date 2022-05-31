@@ -13,23 +13,23 @@ class GrandmasterTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function w_response()
+    public function w_move()
     {
         $game = new Game(Game::MODE_GRANDMASTER);
-        $response = (new Grandmaster(self::FILEPATH))->response($game);
+        $move = (new Grandmaster(self::FILEPATH))->move($game);
 
-        $this->assertNotEmpty($response);
+        $this->assertNotEmpty($move);
     }
 
     /**
      * @test
      */
-    public function b_response()
+    public function b_move()
     {
         $game = new Game(Game::MODE_GRANDMASTER);
         $game->play('w', 'e4');
-        $response = (new Grandmaster(self::FILEPATH))->response($game);
+        $move = (new Grandmaster(self::FILEPATH))->move($game);
 
-        $this->assertNotEmpty($response);
+        $this->assertNotEmpty($move);
     }
 }
