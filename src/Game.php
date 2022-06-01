@@ -104,6 +104,7 @@ class Game
     /**
      * Sets the Chess\Board object.
      *
+     * @param \Chess\Board
      * @return \Chess\Game
      */
     public function setBoard(Board $board): Game

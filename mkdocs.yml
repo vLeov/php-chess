@@ -3,6 +3,7 @@ pages:
   - Home: index.md
   - Chess\Board: board.md
   - Chess\Game: game.md
+  - Chess\Grandmaster: grandmaster.md
   - Chess\Heuristics: heuristics.md
   - Chess\Movetext: movetext.md
   - Chess\Player: player.md
