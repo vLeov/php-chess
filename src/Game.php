@@ -27,7 +27,7 @@ class Game
     const MODE_AI           = 'ai';
     const MODE_ANALYSIS     = 'analysis';
     const MODE_GRANDMASTER  = 'grandmaster';
-    const MODE_LOAD_FEN     = 'loadfen';
+    const MODE_FEN     = 'loadfen';
     const MODE_LOAD_PGN     = 'loadpgn';
     const MODE_PLAY         = 'play';
 
