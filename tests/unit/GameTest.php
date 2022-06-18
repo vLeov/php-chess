@@ -22,7 +22,7 @@ class GameTest extends AbstractUnitTestCase
      */
     public function ascii_kaufman_01()
     {
-        $game = new Game(Game::MODE_LOAD_FEN);
+        $game = new Game(Game::MODE_FEN);
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
 
         $ascii = $game->getBoard()->toAsciiString();
@@ -44,7 +44,7 @@ class GameTest extends AbstractUnitTestCase
      */
     public function ascii_kaufman_01_Qg4()
     {
-        $game = new Game(Game::MODE_LOAD_FEN);
+        $game = new Game(Game::MODE_FEN);
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
         $game->play('w', 'Qg4');
 
@@ -119,7 +119,7 @@ class GameTest extends AbstractUnitTestCase
      */
     public function load_fen_checkmate_king_and_rook_vs_king()
     {
-        $game = new Game(Game::MODE_LOAD_FEN);
+        $game = new Game(Game::MODE_FEN);
         $game->loadFen('7k/8/8/8/8/8/2K5/r7 w - - 0 1');
 
         $this->assertTrue($game->playFen('7k/8/8/8/8/8/1K6/r7 b'));

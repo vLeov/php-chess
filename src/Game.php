@@ -26,7 +26,7 @@ class Game
 {
     const MODE_AI           = 'ai';
     const MODE_ANALYSIS     = 'analysis';
-    const MODE_GRANDMASTER  = 'grandmaster';
+    const MODE_GM           = 'gm';
     const MODE_FEN          = 'fen';
     const MODE_PGN          = 'pgn';
     const MODE_PLAY         = 'play';
@@ -149,7 +149,7 @@ class Game
     /**
      * Returns a computer generated response to the current position.
      *
-     * This method is to be used in either Game::MODE_AI or Game::MODE_GRANDMASTER
+     * This method is to be used in either Game::MODE_AI or Game::MODE_GM
      * otherwise it returns null.
      *
      * @return mixed sring|null
@@ -167,7 +167,7 @@ class Game
                     'move' => $move,
                 ];
             }
-        } elseif ($this->mode === Game::MODE_GRANDMASTER) {
+        } elseif ($this->mode === Game::MODE_GM) {
             return $move;
         }
 

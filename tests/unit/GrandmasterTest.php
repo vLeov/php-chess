@@ -15,7 +15,7 @@ class GrandmasterTest extends AbstractUnitTestCase
      */
     public function w_move()
     {
-        $game = new Game(Game::MODE_GRANDMASTER);
+        $game = new Game(Game::MODE_GM);
         $move = (new Grandmaster(self::FILEPATH))->move($game);
 
         $this->assertNotEmpty($move);
@@ -26,7 +26,7 @@ class GrandmasterTest extends AbstractUnitTestCase
      */
     public function b_move()
     {
-        $game = new Game(Game::MODE_GRANDMASTER);
+        $game = new Game(Game::MODE_GM);
         $game->play('w', 'e4');
         $move = (new Grandmaster(self::FILEPATH))->move($game);
 
