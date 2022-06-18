@@ -28,7 +28,7 @@ class Game
     const MODE_ANALYSIS     = 'analysis';
     const MODE_GRANDMASTER  = 'grandmaster';
     const MODE_FEN          = 'fen';
-    const MODE_PGN     = 'loadpgn';
+    const MODE_PGN          = 'pgn';
     const MODE_PLAY         = 'play';
 
     const MODEL_FOLDER      = __DIR__.'/../model/';
