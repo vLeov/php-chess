@@ -3,10 +3,10 @@
 namespace Chess;
 
 use Chess\Array\AsciiArray;
-use Chess\Evaluation\DefenseEvaluation;
-use Chess\Evaluation\PressureEvaluation;
-use Chess\Evaluation\SpaceEvaluation;
-use Chess\Evaluation\SqEvaluation;
+use Chess\Eval\DefenseEval;
+use Chess\Eval\PressureEval;
+use Chess\Eval\SpaceEval;
+use Chess\Eval\SqEval;
 use Chess\Exception\BoardException;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\Field\CastlingAbility;
@@ -800,17 +800,17 @@ final class Board extends \SplObjectStorage
         $this->turn = Color::opp($this->turn);
 
         $this->sqEval = (object) [
-            SqEvaluation::TYPE_FREE => (new SqEvaluation($this))->eval(SqEvaluation::TYPE_FREE),
-            SqEvaluation::TYPE_USED => (object) (new SqEvaluation($this))->eval(SqEvaluation::TYPE_USED),
+            SqEval::TYPE_FREE => (new SqEval($this))->eval(SqEval::TYPE_FREE),
+            SqEval::TYPE_USED => (object) (new SqEval($this))->eval(SqEval::TYPE_USED),
         ];
 
         $this->detachPieces()
             ->attachPieces()
             ->notifyPieces();
 
-        $this->spaceEval = (object) (new SpaceEvaluation($this))->eval();
-        $this->pressureEval = (object) (new PressureEvaluation($this))->eval();
-        $this->defenseEval = (object) (new DefenseEvaluation($this))->eval();
+        $this->spaceEval = (object) (new SpaceEval($this))->eval();
+        $this->pressureEval = (object) (new PressureEval($this))->eval();
+        $this->defenseEval = (object) (new DefenseEval($this))->eval();
 
         $this->notifyPieces();
     }

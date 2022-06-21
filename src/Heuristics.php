@@ -2,7 +2,7 @@
 
 namespace Chess;
 
-use Chess\Evaluation\InverseEvaluationInterface;
+use Chess\Eval\InverseEvalInterface;
 use Chess\PGN\AN\Color;
 
 class Heuristics extends Player
@@ -101,7 +101,7 @@ class Heuristics extends Player
                     $dimension = new $className($this->board);
                     $eval = $dimension->eval();
                     if (is_array($eval[Color::W])) {
-                        if ($dimension instanceof InverseEvaluationInterface) {
+                        if ($dimension instanceof InverseEvalInterface) {
                             $item[] = [
                                 Color::W => count($eval[Color::B]),
                                 Color::B => count($eval[Color::W]),
@@ -113,7 +113,7 @@ class Heuristics extends Player
                             ];
                         }
                     } else {
-                        if ($dimension instanceof InverseEvaluationInterface) {
+                        if ($dimension instanceof InverseEvalInterface) {
                             $item[] = [
                                 Color::W => $eval[Color::B],
                                 Color::B => $eval[Color::W],

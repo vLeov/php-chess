@@ -2,27 +2,27 @@
 
 namespace Chess;
 
-use Chess\Evaluation\AttackEvaluation;
-use Chess\Evaluation\BackwardPawnEvaluation;
-use Chess\Evaluation\CenterEvaluation;
-use Chess\Evaluation\ConnectivityEvaluation;
-use Chess\Evaluation\IsolatedPawnEvaluation;
-use Chess\Evaluation\KingSafetyEvaluation;
-use Chess\Evaluation\MaterialEvaluation;
-use Chess\Evaluation\PressureEvaluation;
-use Chess\Evaluation\SpaceEvaluation;
-use Chess\Evaluation\TacticsEvaluation;
-use Chess\Evaluation\DoubledPawnEvaluation;
-use Chess\Evaluation\PassedPawnEvaluation;
-use Chess\Evaluation\InverseEvaluationInterface;
-use Chess\Evaluation\AbsolutePinEvaluation;
-use Chess\Evaluation\RelativePinEvaluation;
-use Chess\Evaluation\AbsoluteForkEvaluation;
-use Chess\Evaluation\RelativeForkEvaluation;
-use Chess\Evaluation\SqOutpostEvaluation;
-use Chess\Evaluation\KnightOutpostEvaluation;
-use Chess\Evaluation\BishopOutpostEvaluation;
-use Chess\Evaluation\BishopPairEvaluation;
+use Chess\Eval\AttackEval;
+use Chess\Eval\BackwardPawnEval;
+use Chess\Eval\CenterEval;
+use Chess\Eval\ConnectivityEval;
+use Chess\Eval\IsolatedPawnEval;
+use Chess\Eval\KingSafetyEval;
+use Chess\Eval\MaterialEval;
+use Chess\Eval\PressureEval;
+use Chess\Eval\SpaceEval;
+use Chess\Eval\TacticsEval;
+use Chess\Eval\DoubledPawnEval;
+use Chess\Eval\PassedPawnEval;
+use Chess\Eval\InverseEvalInterface;
+use Chess\Eval\AbsolutePinEval;
+use Chess\Eval\RelativePinEval;
+use Chess\Eval\AbsoluteForkEval;
+use Chess\Eval\RelativeForkEval;
+use Chess\Eval\SqOutpostEval;
+use Chess\Eval\KnightOutpostEval;
+use Chess\Eval\BishopOutpostEval;
+use Chess\Eval\BishopPairEval;
 
 /**
  * HeuristicsTrait
@@ -54,26 +54,26 @@ trait HeuristicsTrait
      * @var array
      */
     protected $dimensions = [
-        MaterialEvaluation::class => 24,
-        CenterEvaluation::class => 4,
-        ConnectivityEvaluation::class => 4,
-        SpaceEvaluation::class => 4,
-        PressureEvaluation::class => 4,
-        KingSafetyEvaluation::class => 4,
-        TacticsEvaluation::class => 4,
-        AttackEvaluation::class => 4,
-        DoubledPawnEvaluation::class => 4,
-        PassedPawnEvaluation::class => 4,
-        IsolatedPawnEvaluation::class => 4,
-        BackwardPawnEvaluation::class => 4,
-        AbsolutePinEvaluation::class => 4,
-        RelativePinEvaluation::class => 4,
-        AbsoluteForkEvaluation::class => 4,
-        RelativeForkEvaluation::class => 4,
-        SqOutpostEvaluation::class => 4,
-        KnightOutpostEvaluation::class => 4,
-        BishopOutpostEvaluation::class => 4,
-        BishopPairEvaluation::class => 4,
+        MaterialEval::class => 24,
+        CenterEval::class => 4,
+        ConnectivityEval::class => 4,
+        SpaceEval::class => 4,
+        PressureEval::class => 4,
+        KingSafetyEval::class => 4,
+        TacticsEval::class => 4,
+        AttackEval::class => 4,
+        DoubledPawnEval::class => 4,
+        PassedPawnEval::class => 4,
+        IsolatedPawnEval::class => 4,
+        BackwardPawnEval::class => 4,
+        AbsolutePinEval::class => 4,
+        RelativePinEval::class => 4,
+        AbsoluteForkEval::class => 4,
+        RelativeForkEval::class => 4,
+        SqOutpostEval::class => 4,
+        KnightOutpostEval::class => 4,
+        BishopOutpostEval::class => 4,
+        BishopPairEval::class => 4,
     ];
 
     /**
