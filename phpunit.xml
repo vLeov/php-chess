@@ -11,7 +11,7 @@
         <testsuite name="unit">
             <directory>tests/unit/Array</directory>
             <directory>tests/unit/Combinatorics</directory>
-            <directory>tests/unit/Evaluation</directory>
+            <directory>tests/unit/Eval</directory>
             <directory>tests/unit/FEN</directory>
             <directory>tests/unit/Media</directory>
             <directory>tests/unit/ML</directory>
