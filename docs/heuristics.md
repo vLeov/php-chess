@@ -32,25 +32,25 @@ print_r($dimensions);
 ```text
 Array
 (
-    [Chess\Evaluation\MaterialEvaluation] => 28
-    [Chess\Evaluation\CenterEvaluation] => 4
-    [Chess\Evaluation\ConnectivityEvaluation] => 4
-    [Chess\Evaluation\SpaceEvaluation] => 4
-    [Chess\Evaluation\PressureEvaluation] => 4
-    [Chess\Evaluation\KingSafetyEvaluation] => 4
-    [Chess\Evaluation\TacticsEvaluation] => 4
-    [Chess\Evaluation\AttackEvaluation] => 4
-    [Chess\Evaluation\DoubledPawnEvaluation] => 4
-    [Chess\Evaluation\PassedPawnEvaluation] => 4
-    [Chess\Evaluation\IsolatedPawnEvaluation] => 4
-    [Chess\Evaluation\BackwardPawnEvaluation] => 4
-    [Chess\Evaluation\AbsolutePinEvaluation] => 4
-    [Chess\Evaluation\RelativePinEvaluation] => 4
-    [Chess\Evaluation\AbsoluteForkEvaluation] => 4
-    [Chess\Evaluation\RelativeForkEvaluation] => 4
-    [Chess\Evaluation\SqOutpostEvaluation] => 4
-    [Chess\Evaluation\KnightOutpostEvaluation] => 4
-    [Chess\Evaluation\BishopOutpostEvaluation] => 4
+    [Chess\Eval\MaterialEval] => 28
+    [Chess\Eval\CenterEval] => 4
+    [Chess\Eval\ConnectivityEval] => 4
+    [Chess\Eval\SpaceEval] => 4
+    [Chess\Eval\PressureEval] => 4
+    [Chess\Eval\KingSafetyEval] => 4
+    [Chess\Eval\TacticsEval] => 4
+    [Chess\Eval\AttackEval] => 4
+    [Chess\Eval\DoubledPawnEval] => 4
+    [Chess\Eval\PassedPawnEval] => 4
+    [Chess\Eval\IsolatedPawnEval] => 4
+    [Chess\Eval\BackwardPawnEval] => 4
+    [Chess\Eval\AbsolutePinEval] => 4
+    [Chess\Eval\RelativePinEval] => 4
+    [Chess\Eval\AbsoluteForkEval] => 4
+    [Chess\Eval\RelativeForkEval] => 4
+    [Chess\Eval\SqOutpostEval] => 4
+    [Chess\Eval\KnightOutpostEval] => 4
+    [Chess\Eval\BishopOutpostEval] => 4
 )
 ```
 
