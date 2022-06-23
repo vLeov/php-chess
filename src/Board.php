@@ -576,8 +576,7 @@ final class Board extends \SplObjectStorage
      */
     private function castle(King $king): bool
     {
-        $rook = $king->getCastleRook(iterator_to_array($this, false));
-        if (!empty($rook)) {
+        if ($rook = $king->getCastleRook(iterator_to_array($this, false))) {
             $this->detach($this->getPieceBySq($king->getSq()));
             $this->attach(
                 new King(
