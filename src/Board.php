@@ -407,10 +407,10 @@ final class Board extends \SplObjectStorage
      * Picks a piece to be moved.
      *
      * @param object $move
-     * @return mixed array|null
+     * @return array
      * @throws \Chess\Exception\BoardException
      */
-    private function pickPiece(object $move): ?array
+    private function pickPiece(object $move): array
     {
         $found = [];
         foreach ($this->getPiecesByColor($move->color) as $piece) {
