@@ -512,11 +512,11 @@ final class Board extends \SplObjectStorage
             return false;
         } elseif (
             $move->isCapture &&
-            empty($this->getPieceBySq($move->sq->next)) &&
-            $move->id !== Piece::P
+            $move->id !== Piece::P &&
+            !$this->getPieceBySq($move->sq->next)
         ) {
             return false;
-        } elseif (!$move->isCapture && !empty($this->getPieceBySq($move->sq->next))) {
+        } elseif (!$move->isCapture && $this->getPieceBySq($move->sq->next)) {
             return false;
         }
 
