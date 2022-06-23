@@ -539,7 +539,7 @@ final class Board extends \SplObjectStorage
                     return $this->move($piece);
                 }
             }
-        } elseif ($piece = current($pieces)) {
+        } elseif ($piece = $pieces[0]) {
             if ($piece->isMovable() && !$this->leavesInCheck($piece)) {
                 if ($piece->getMove()->type === Move::CASTLE_SHORT) {
                     !$piece->sqCastleShort() ?: $isLegalMove = $this->castle($piece);
