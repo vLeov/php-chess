@@ -541,10 +541,16 @@ final class Board extends \SplObjectStorage
             }
         } elseif ($piece = $pieces[0]) {
             if ($piece->isMovable() && !$this->leavesInCheck($piece)) {
-                if ($piece->getMove()->type === Move::CASTLE_SHORT) {
-                    !$piece->sqCastleShort() ?: $isLegalMove = $this->castle($piece);
-                } elseif ($piece->getMove()->type === Move::CASTLE_LONG) {
-                    !$piece->sqCastleLong() ?: $isLegalMove = $this->castle($piece);
+                if (
+                  $piece->getMove()->type === Move::CASTLE_SHORT &&
+                  $piece->sqCastleShort()
+                ) {
+                    $isLegalMove = $this->castle($piece);
+                } elseif (
+                  $piece->getMove()->type === Move::CASTLE_LONG &&
+                  $piece->sqCastleLong()
+                ) {
+                    $isLegalMove = $this->castle($piece);
                 } else {
                     $isLegalMove = $this->move($piece);
                 }
