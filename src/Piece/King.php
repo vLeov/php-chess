@@ -133,9 +133,9 @@ class King extends AbstractPiece
     /**
      * Returns the piece's legal moves.
      *
-     * @return mixed array|null
+     * @return array
      */
-    public function sqs(): ?array
+    public function sqs(): array
     {
         $sqs = [
             ...$this->sqsKing(),

@@ -84,9 +84,9 @@ abstract class AbstractPiece
     /**
      * Returns the piece's legal moves.
      *
-     * @return mixed array|null
+     * @return array
      */
-    abstract public function sqs(): ?array;
+    abstract public function sqs(): array;
 
     /**
      * Returns the squares defended by the piece.

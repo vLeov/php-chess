@@ -122,9 +122,9 @@ class Knight extends AbstractPiece
     /**
      * Returns the piece's legal moves.
      *
-     * @return mixed array|null
+     * @return array
      */
-    public function sqs(): ?array
+    public function sqs(): array
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {

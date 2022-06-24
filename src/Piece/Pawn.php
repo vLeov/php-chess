@@ -119,9 +119,9 @@ class Pawn extends AbstractPiece
     /**
      * Returns the piece's legal moves.
      *
-     * @return mixed array|null
+     * @return array
      */
-    public function sqs(): ?array
+    public function sqs(): array
     {
         $sqs = [];
         // add up squares
