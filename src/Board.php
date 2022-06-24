@@ -422,7 +422,7 @@ final class Board extends \SplObjectStorage
                 }
             }
         }
-        if (empty($found)) {
+        if (!$found) {
             throw new BoardException("{$move->color} {$move->id} on {$move->sq->current}.");
         }
 
