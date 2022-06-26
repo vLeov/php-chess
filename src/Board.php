@@ -112,7 +112,7 @@ final class Board extends \SplObjectStorage
      */
     public function __construct(array $pieces = null, string $castlingAbility = '-')
     {
-        if (empty($pieces)) {
+        if (!$pieces) {
             $this->attach(new Rook(Color::W, 'a1', RookType::CASTLE_LONG));
             $this->attach(new Knight(Color::W, 'b1'));
             $this->attach(new Bishop(Color::W, 'c1'));
@@ -273,7 +273,7 @@ final class Board extends \SplObjectStorage
      */
     public function getLastHistory(): ?object
     {
-        if (!empty($this->history)) {
+        if ($this->history) {
             return end($this->history);
         }
 
@@ -438,8 +438,8 @@ final class Board extends \SplObjectStorage
     private function capture(AbstractPiece $piece): Board
     {
         $piece->sqs(); // creates the enPassantSquare property if the piece is a pawn
-        if ($piece->getId() === Piece::P && !empty($piece->getEnPassantSq()) &&
-            empty($this->getPieceBySq($piece->getMove()->sq->next))
+        if ($piece->getId() === Piece::P && $piece->getEnPassantSq() &&
+            !$this->getPieceBySq($piece->getMove()->sq->next)
            ) {
             if ($captured = $this->getPieceBySq($piece->getEnPassantSq())) {
                 $capturedData = (object) [
