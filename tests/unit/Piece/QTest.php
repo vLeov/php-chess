@@ -7,7 +7,7 @@ use Chess\Piece\Q;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
 
-class QueenTest extends AbstractUnitTestCase
+class QTest extends AbstractUnitTestCase
 {
     /**
      * @test

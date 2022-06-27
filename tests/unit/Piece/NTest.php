@@ -5,7 +5,7 @@ namespace Chess\Tests\Unit\Piece;
 use Chess\Piece\N;
 use Chess\Tests\AbstractUnitTestCase;
 
-class KnightTest extends AbstractUnitTestCase
+class NTest extends AbstractUnitTestCase
 {
     /**
      * @test

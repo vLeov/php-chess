@@ -6,7 +6,7 @@ use Chess\Piece\R;
 use Chess\Piece\RookType;
 use Chess\Tests\AbstractUnitTestCase;
 
-class RookTest extends AbstractUnitTestCase
+class RTest extends AbstractUnitTestCase
 {
     /**
      * @test

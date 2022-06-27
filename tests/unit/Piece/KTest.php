@@ -10,7 +10,7 @@ use Chess\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
-class KingTest extends AbstractUnitTestCase
+class KTest extends AbstractUnitTestCase
 {
     /**
      * @test
