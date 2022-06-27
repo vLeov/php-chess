@@ -11,7 +11,7 @@ use Chess\Piece\N;
 use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
-use Chess\Piece\RookType;
+use Chess\Piece\RType;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\Move;
@@ -540,13 +540,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'g3'),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -681,13 +681,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'g3'),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -708,13 +708,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -735,13 +735,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -762,13 +762,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -789,13 +789,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -816,13 +816,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'g3'),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f2', RookType::CASTLE_SHORT), // rook defended by knight
+            new R('b', 'f2', RType::CASTLE_SHORT), // rook defended by knight
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -878,14 +878,14 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new B('b', 'a6'), // bishop threatening f1
             new K('b', 'e8'),
             new B('b', 'f8'),
             new N('b', 'g8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -910,14 +910,14 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new B('b', 'a6'), // bishop threatening f1
             new K('b', 'e8'),
             new B('b', 'c5'), // bishop threatening g1
             new N('b', 'g8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -942,13 +942,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new K('b', 'e8'),
             new B('b', 'c5'), // bishop threatening g1
             new N('b', 'g8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -973,13 +973,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new K('b', 'e8'),
             new B('b', 'f4'), // bishop threatening c1
             new N('b', 'g8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1004,13 +1004,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new K('b', 'e8'),
             new B('b', 'f8'),
             new N('b', 'e3'), // knight threatening d1 and f1
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1036,13 +1036,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new K('b', 'e8'),
             new B('b', 'f8'),
             new N('b', 'd2'), // knight threatening b1 and f1
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1068,13 +1068,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new K('b', 'e8'),
             new B('b', 'f8'),
             new N('b', 'c3'), // knight threatening b1 and d1
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1099,13 +1099,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new K('b', 'e8'),
             new B('b', 'f8'),
             new N('b', 'g8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1134,13 +1134,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f3'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new K('b', 'e8'),
             new B('b', 'f8'),
             new N('b', 'g8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1170,10 +1170,10 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
             new N('w', 'g1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new B('w', 'a3'),
             new B('w', 'd3'),
             new P('b', 'a7'),
@@ -1182,11 +1182,11 @@ class BoardTest extends AbstractUnitTestCase
             new P('b', 'e6'),
             new P('b', 'g7'),
             new P('b', 'h6'),
-            new R('b', 'a8', RookType::CASTLE_LONG),
+            new R('b', 'a8', RType::CASTLE_LONG),
             new B('b', 'c8'),
             new Q('b', 'd8'),
             new K('b', 'e8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new N('b', 'd7'),
             new N('b', 'f6')
         ];
@@ -1214,12 +1214,12 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Ra6()
     {
         $pieces = [
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new Q('w', 'd1'),
             new K('w', 'e1'),
             new B('w', 'f1'),
             new N('w', 'g1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new P('w', 'b2'),
             new P('w', 'c2'),
             new P('w', 'd2'),
@@ -1227,14 +1227,14 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('b', 'a8', RookType::CASTLE_LONG),
+            new R('b', 'a8', RType::CASTLE_LONG),
             new N('b', 'b8'),
             new B('b', 'c8'),
             new Q('b', 'd8'),
             new K('b', 'e8'),
             new B('b', 'f8'),
             new N('b', 'g8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'a7'),
             new P('b', 'b7'),
             new P('b', 'c7'),
@@ -1258,7 +1258,7 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Rxa6()
     {
         $pieces = [
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
             new K('b', 'e8'),
             new B('b', 'a6'),
@@ -1279,7 +1279,7 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_h6()
     {
         $pieces = [
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
             new K('b', 'e8'),
             new B('b', 'a6'),
@@ -1301,7 +1301,7 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_hxg6()
     {
         $pieces = [
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new K('w', 'e1'),
             new P('w', 'g6'),
             new K('b', 'e8'),
@@ -1346,14 +1346,14 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_CASTLE_SHORT()
     {
         $pieces = [
-            new R('w', 'a1', RookType::CASTLE_LONG),
+            new R('w', 'a1', RType::CASTLE_LONG),
             new N('w', 'b1'),
             new B('w', 'c1'),
             new Q('w', 'd1'),
             new K('w', 'e1'),
             new B('w', 'f1'),
             new N('w', 'g1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new P('w', 'a2'),
             new P('w', 'b2'),
             new P('w', 'c2'),
@@ -1362,12 +1362,12 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new R('b', 'a8', RookType::CASTLE_LONG),
+            new R('b', 'a8', RType::CASTLE_LONG),
             new N('b', 'b8'),
             new B('b', 'c8'),
             new Q('b', 'd8'),
             new K('b', 'e8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'a7'),
             new P('b', 'b7'),
             new P('b', 'c7'),
@@ -1394,13 +1394,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1421,13 +1421,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1448,13 +1448,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1475,13 +1475,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1502,13 +1502,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'f3'), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1529,13 +1529,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'g3'),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new R('b', 'f5', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1556,13 +1556,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'g3'),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'h2', RookType::CASTLE_SHORT),
+            new R('b', 'h2', RType::CASTLE_SHORT),
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1583,13 +1583,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'a3'),
             new P('w', 'c3'),
-            new R('w', 'e6', RookType::CASTLE_LONG),
+            new R('w', 'e6', RType::CASTLE_LONG),
             new K('w', 'g3'),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
-            new R('b', 'f3', RookType::CASTLE_SHORT), // rook not defended
+            new R('b', 'f3', RType::CASTLE_SHORT), // rook not defended
             new K('b', 'g5'),
             new P('b', 'h7')
         ];
@@ -1612,13 +1612,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e4'),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7'),
             new K('b', 'e8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT)
+            new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1640,13 +1640,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e7'),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7'),
             new K('b', 'e8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT)
+            new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1669,13 +1669,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e7'),
             new P('b', 'f7'),
             new P('b', 'g4'),
             new P('b', 'h7'),
             new K('b', 'e8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT)
+            new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1697,13 +1697,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e7'),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h4'),
             new K('b', 'e8'),
-            new R('b', 'h8', RookType::CASTLE_SHORT)
+            new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1755,13 +1755,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a2'),
             new P('w', 'b2'),
             new P('w', 'c5'),
-            new R('w', 'd1', RookType::CASTLE_LONG),
+            new R('w', 'd1', RType::CASTLE_LONG),
             new K('w', 'e4'),
             new P('b', 'a7'),
             new P('b', 'b7'),
             new P('b', 'c7'),
             new K('b', 'g6'),
-            new R('b', 'h8', RookType::CASTLE_LONG),
+            new R('b', 'h8', RType::CASTLE_LONG),
         ];
 
         $castlingAbility = '-';
@@ -1782,7 +1782,7 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h7'),
             new K('w', 'e1'),
-            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'c7'),
             new P('b', 'd7'),
             new P('b', 'e7'),
@@ -1807,7 +1807,7 @@ class BoardTest extends AbstractUnitTestCase
             new Q('w', 'f5'),
             new K('w', 'g2'),
             new P('w', 'h2'),
-            new R('w', 'h8', RookType::CASTLE_LONG),
+            new R('w', 'h8', RType::CASTLE_LONG),
             new K('b', 'e7'),
             new P('b', 'f7'),
             new P('b', 'g7'),
@@ -1892,7 +1892,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $pieces = [
             new K('w', 'b6'),
-            new R('w', 'h8', RookType::CASTLE_LONG),
+            new R('w', 'h8', RType::CASTLE_LONG),
             new K('b', 'a8'),
             new B('b', 'b8'),
         ];
@@ -1913,8 +1913,8 @@ class BoardTest extends AbstractUnitTestCase
         $pieces = [
             new K('w', 'g1'),
             new Q('w', 'd1'),
-            new R('w', 'a5', RookType::CASTLE_SHORT),
-            new R('w', 'b7', RookType::CASTLE_LONG),
+            new R('w', 'a5', RType::CASTLE_SHORT),
+            new R('w', 'b7', RType::CASTLE_LONG),
             new P('w', 'f6'),
             new P('w', 'g5'),
             new K('b', 'e6'),

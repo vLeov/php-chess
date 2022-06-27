@@ -31,7 +31,7 @@ class R extends Slider
      */
     public function __construct(string $color, string $sq, string $type)
     {
-        if (!in_array($type, RookType::all())) {
+        if (!in_array($type, RType::all())) {
             throw new PieceTypeException;
         }
 

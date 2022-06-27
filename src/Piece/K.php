@@ -103,7 +103,7 @@ class K extends AbstractPiece
     {
         parent::__construct($color, $sq, Piece::K);
 
-        $this->rook = new R($color, $sq, RookType::SLIDER);
+        $this->rook = new R($color, $sq, RType::SLIDER);
         $this->bishop = new B($color, $sq);
 
         $this->mobility();

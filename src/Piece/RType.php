@@ -3,12 +3,12 @@
 namespace Chess\Piece;
 
 /**
- * RookType.
+ * Rook type.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class RookType
+class RType
 {
     const CASTLE_SHORT = 'castle short';
     const CASTLE_LONG = 'castle long';

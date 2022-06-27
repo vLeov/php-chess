@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Piece;
 
 use Chess\Piece\R;
-use Chess\Piece\RookType;
+use Chess\Piece\RType;
 use Chess\Tests\AbstractUnitTestCase;
 
 class RTest extends AbstractUnitTestCase
@@ -13,7 +13,7 @@ class RTest extends AbstractUnitTestCase
      */
     public function mobility_a2()
     {
-        $rook = new R('w', 'a2', RookType::PROMOTED);
+        $rook = new R('w', 'a2', RType::PROMOTED);
         $mobility = (object) [
             'up' => ['a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => ['a1'],
@@ -29,7 +29,7 @@ class RTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $rook = new R('w', 'd5', RookType::PROMOTED);
+        $rook = new R('w', 'd5', RType::PROMOTED);
         $mobility = (object) [
             'up' => ['d6', 'd7', 'd8'],
             'down' => ['d4', 'd3', 'd2', 'd1'],

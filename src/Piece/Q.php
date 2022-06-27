@@ -33,7 +33,7 @@ class Q extends Slider
     {
         parent::__construct($color, $sq, Piece::Q);
 
-        $this->rook = new R($color, $sq, RookType::SLIDER);
+        $this->rook = new R($color, $sq, RType::SLIDER);
         $this->bishop = new B($color, $sq);
 
         $this->mobility();

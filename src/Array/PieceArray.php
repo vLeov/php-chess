@@ -10,7 +10,7 @@ use Chess\Piece\N;
 use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
-use Chess\Piece\RookType;
+use Chess\Piece\RType;
 
 /**
  * Piece array.
@@ -60,15 +60,15 @@ class PieceArray extends AbstractArray
             $this->array[] = new Q($color, $sq);
         } elseif ($id === Piece::R) {
             if ($color === Color::B && $sq === 'a8') {
-                $this->array[] = new R($color, $sq, RookType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, RType::CASTLE_LONG);
             } elseif ($color === Color::B && $sq === 'h8') {
-                $this->array[] = new R($color, $sq, RookType::CASTLE_SHORT);
+                $this->array[] = new R($color, $sq, RType::CASTLE_SHORT);
             } elseif ($color === Color::W && $sq === 'a1') {
-                $this->array[] = new R($color, $sq, RookType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, RType::CASTLE_LONG);
             } elseif ($color === Color::W && $sq === 'h1') {
-                $this->array[] = new R($color, $sq, RookType::CASTLE_SHORT);
-            } else { // it doesn't matter which RookType is assigned
-                $this->array[] = new R($color, $sq, RookType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, RType::CASTLE_SHORT);
+            } else { // it doesn't matter which RType is assigned
+                $this->array[] = new R($color, $sq, RType::CASTLE_LONG);
             }
         } elseif ($id === Piece::B) {
             $this->array[] = new B($color, $sq);
