@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Piece;
 
 use Chess\Board;
-use Chess\Piece\King;
+use Chess\Piece\K;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
@@ -17,7 +17,7 @@ class KingTest extends AbstractUnitTestCase
      */
     public function w_CASTLE_LONG()
     {
-        $rule = King::$castlingRule[Color::W];
+        $rule = K::$castlingRule[Color::W];
 
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs'], [ 'b1', 'c1', 'd1' ]);
         $this->assertSame($rule[Piece::K][Castle::LONG]['sq']['current'], 'e1');
@@ -31,7 +31,7 @@ class KingTest extends AbstractUnitTestCase
      */
     public function b_CASTLE_LONG()
     {
-        $rule = King::$castlingRule[Color::B];
+        $rule = K::$castlingRule[Color::B];
 
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs'], [ 'b8', 'c8', 'd8' ]);
         $this->assertSame($rule[Piece::K][Castle::LONG]['sq']['current'], 'e8');
@@ -45,7 +45,7 @@ class KingTest extends AbstractUnitTestCase
      */
     public function w_CASTLE_SHORT()
     {
-        $rule = King::$castlingRule[Color::W];
+        $rule = K::$castlingRule[Color::W];
 
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs'], [ 'f1', 'g1' ]);
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sq']['current'], 'e1');
@@ -59,7 +59,7 @@ class KingTest extends AbstractUnitTestCase
      */
     public function b_CASTLE_SHORT()
     {
-        $rule = King::$castlingRule[Color::B];
+        $rule = K::$castlingRule[Color::B];
 
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs'], [ 'f8', 'g8' ]);
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sq']['current'], 'e8');
@@ -73,7 +73,7 @@ class KingTest extends AbstractUnitTestCase
      */
     public function mobility_a2()
     {
-        $king = new King('w', 'a2');
+        $king = new K('w', 'a2');
         $mobility = (object) [
             'up' => 'a3',
             'down' => 'a1',
@@ -89,7 +89,7 @@ class KingTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $king = new King('w', 'd5');
+        $king = new K('w', 'd5');
         $mobility = (object) [
             'up' => 'd6',
             'down' => 'd4',

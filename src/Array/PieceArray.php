@@ -4,12 +4,12 @@ namespace Chess\Array;
 
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
-use Chess\Piece\Bishop;
-use Chess\Piece\King;
-use Chess\Piece\Knight;
-use Chess\Piece\Pawn;
-use Chess\Piece\Queen;
-use Chess\Piece\Rook;
+use Chess\Piece\B;
+use Chess\Piece\K;
+use Chess\Piece\N;
+use Chess\Piece\P;
+use Chess\Piece\Q;
+use Chess\Piece\R;
 use Chess\Piece\RookType;
 
 /**
@@ -55,27 +55,27 @@ class PieceArray extends AbstractArray
     private function push(string $color, string $id, string $sq): void
     {
         if ($id === Piece::K) {
-            $this->array[] = new King($color, $sq);
+            $this->array[] = new K($color, $sq);
         } elseif ($id === Piece::Q) {
-            $this->array[] = new Queen($color, $sq);
+            $this->array[] = new Q($color, $sq);
         } elseif ($id === Piece::R) {
             if ($color === Color::B && $sq === 'a8') {
-                $this->array[] = new Rook($color, $sq, RookType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, RookType::CASTLE_LONG);
             } elseif ($color === Color::B && $sq === 'h8') {
-                $this->array[] = new Rook($color, $sq, RookType::CASTLE_SHORT);
+                $this->array[] = new R($color, $sq, RookType::CASTLE_SHORT);
             } elseif ($color === Color::W && $sq === 'a1') {
-                $this->array[] = new Rook($color, $sq, RookType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, RookType::CASTLE_LONG);
             } elseif ($color === Color::W && $sq === 'h1') {
-                $this->array[] = new Rook($color, $sq, RookType::CASTLE_SHORT);
+                $this->array[] = new R($color, $sq, RookType::CASTLE_SHORT);
             } else { // it doesn't matter which RookType is assigned
-                $this->array[] = new Rook($color, $sq, RookType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, RookType::CASTLE_LONG);
             }
         } elseif ($id === Piece::B) {
-            $this->array[] = new Bishop($color, $sq);
+            $this->array[] = new B($color, $sq);
         } elseif ($id === Piece::N) {
-            $this->array[] = new Knight($color, $sq);
+            $this->array[] = new N($color, $sq);
         } elseif ($id === Piece::P) {
-            $this->array[] = new Pawn($color, $sq);
+            $this->array[] = new P($color, $sq);
         }
     }
 }

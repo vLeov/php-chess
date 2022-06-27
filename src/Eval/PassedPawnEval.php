@@ -5,7 +5,7 @@ namespace Chess\Eval;
 use Chess\Board;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
-use Chess\Piece\Pawn;
+use Chess\Piece\P;
 
 class PassedPawnEval extends AbstractEval
 {
@@ -32,7 +32,7 @@ class PassedPawnEval extends AbstractEval
         return $this->result;
     }
 
-    private function getThreatPassedPawn(Pawn $pawn): int
+    private function getThreatPassedPawn(P $pawn): int
     {
         $color = $pawn->getColor();
         $pawnFile = $pawn->getFile();

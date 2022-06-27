@@ -15,12 +15,12 @@ use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
-use Chess\Piece\Bishop;
-use Chess\Piece\King;
-use Chess\Piece\Knight;
-use Chess\Piece\Pawn;
-use Chess\Piece\Queen;
-use Chess\Piece\Rook;
+use Chess\Piece\B;
+use Chess\Piece\K;
+use Chess\Piece\N;
+use Chess\Piece\P;
+use Chess\Piece\Q;
+use Chess\Piece\R;
 use Chess\Piece\RookType;
 
 /**
@@ -113,38 +113,38 @@ final class Board extends \SplObjectStorage
     public function __construct(array $pieces = null, string $castlingAbility = '-')
     {
         if (!$pieces) {
-            $this->attach(new Rook(Color::W, 'a1', RookType::CASTLE_LONG));
-            $this->attach(new Knight(Color::W, 'b1'));
-            $this->attach(new Bishop(Color::W, 'c1'));
-            $this->attach(new Queen(Color::W, 'd1'));
-            $this->attach(new King(Color::W, 'e1'));
-            $this->attach(new Bishop(Color::W, 'f1'));
-            $this->attach(new Knight(Color::W, 'g1'));
-            $this->attach(new Rook(Color::W, 'h1', RookType::CASTLE_SHORT));
-            $this->attach(new Pawn(Color::W, 'a2'));
-            $this->attach(new Pawn(Color::W, 'b2'));
-            $this->attach(new Pawn(Color::W, 'c2'));
-            $this->attach(new Pawn(Color::W, 'd2'));
-            $this->attach(new Pawn(Color::W, 'e2'));
-            $this->attach(new Pawn(Color::W, 'f2'));
-            $this->attach(new Pawn(Color::W, 'g2'));
-            $this->attach(new Pawn(Color::W, 'h2'));
-            $this->attach(new Rook(Color::B, 'a8', RookType::CASTLE_LONG));
-            $this->attach(new Knight(Color::B, 'b8'));
-            $this->attach(new Bishop(Color::B, 'c8'));
-            $this->attach(new Queen(Color::B, 'd8'));
-            $this->attach(new King(Color::B, 'e8'));
-            $this->attach(new Bishop(Color::B, 'f8'));
-            $this->attach(new Knight(Color::B, 'g8'));
-            $this->attach(new Rook(Color::B, 'h8', RookType::CASTLE_SHORT));
-            $this->attach(new Pawn(Color::B, 'a7'));
-            $this->attach(new Pawn(Color::B, 'b7'));
-            $this->attach(new Pawn(Color::B, 'c7'));
-            $this->attach(new Pawn(Color::B, 'd7'));
-            $this->attach(new Pawn(Color::B, 'e7'));
-            $this->attach(new Pawn(Color::B, 'f7'));
-            $this->attach(new Pawn(Color::B, 'g7'));
-            $this->attach(new Pawn(Color::B, 'h7'));
+            $this->attach(new R(Color::W, 'a1', RookType::CASTLE_LONG));
+            $this->attach(new N(Color::W, 'b1'));
+            $this->attach(new B(Color::W, 'c1'));
+            $this->attach(new Q(Color::W, 'd1'));
+            $this->attach(new K(Color::W, 'e1'));
+            $this->attach(new B(Color::W, 'f1'));
+            $this->attach(new N(Color::W, 'g1'));
+            $this->attach(new R(Color::W, 'h1', RookType::CASTLE_SHORT));
+            $this->attach(new P(Color::W, 'a2'));
+            $this->attach(new P(Color::W, 'b2'));
+            $this->attach(new P(Color::W, 'c2'));
+            $this->attach(new P(Color::W, 'd2'));
+            $this->attach(new P(Color::W, 'e2'));
+            $this->attach(new P(Color::W, 'f2'));
+            $this->attach(new P(Color::W, 'g2'));
+            $this->attach(new P(Color::W, 'h2'));
+            $this->attach(new R(Color::B, 'a8', RookType::CASTLE_LONG));
+            $this->attach(new N(Color::B, 'b8'));
+            $this->attach(new B(Color::B, 'c8'));
+            $this->attach(new Q(Color::B, 'd8'));
+            $this->attach(new K(Color::B, 'e8'));
+            $this->attach(new B(Color::B, 'f8'));
+            $this->attach(new N(Color::B, 'g8'));
+            $this->attach(new R(Color::B, 'h8', RookType::CASTLE_SHORT));
+            $this->attach(new P(Color::B, 'a7'));
+            $this->attach(new P(Color::B, 'b7'));
+            $this->attach(new P(Color::B, 'c7'));
+            $this->attach(new P(Color::B, 'd7'));
+            $this->attach(new P(Color::B, 'e7'));
+            $this->attach(new P(Color::B, 'f7'));
+            $this->attach(new P(Color::B, 'g7'));
+            $this->attach(new P(Color::B, 'h7'));
             $this->castlingAbility = CastlingAbility::START;
         } else {
             foreach ($pieces as $piece) {
@@ -476,24 +476,24 @@ final class Board extends \SplObjectStorage
     /**
      * Promotes a pawn.
      *
-     * @param \Chess\Piece\Pawn $pawn
+     * @param \Chess\Piece\P $pawn
      * @return \Chess\Board
      */
-    private function promote(Pawn $pawn): Board
+    private function promote(P $pawn): Board
     {
         $this->detach($this->getPieceBySq($pawn->getMove()->sq->next));
         switch ($pawn->getMove()->newId) {
             case Piece::N:
-                $this->attach(new Knight($pawn->getColor(), $pawn->getMove()->sq->next));
+                $this->attach(new N($pawn->getColor(), $pawn->getMove()->sq->next));
                 break;
             case Piece::B:
-                $this->attach(new Bishop($pawn->getColor(), $pawn->getMove()->sq->next));
+                $this->attach(new B($pawn->getColor(), $pawn->getMove()->sq->next));
                 break;
             case Piece::R:
-                $this->attach(new Rook($pawn->getColor(), $pawn->getMove()->sq->next, RookType::PROMOTED));
+                $this->attach(new R($pawn->getColor(), $pawn->getMove()->sq->next, RookType::PROMOTED));
                 break;
             default:
-                $this->attach(new Queen($pawn->getColor(), $pawn->getMove()->sq->next));
+                $this->attach(new Q($pawn->getColor(), $pawn->getMove()->sq->next));
                 break;
         }
 
@@ -577,24 +577,24 @@ final class Board extends \SplObjectStorage
     /**
      * Castles the king.
      *
-     * @param \Chess\Piece\King $king
+     * @param \Chess\Piece\K $king
      * @return bool true if the castle move can be made; otherwise false
      */
-    private function castle(King $king): bool
+    private function castle(K $king): bool
     {
         if ($rook = $king->getCastleRook(iterator_to_array($this, false))) {
             $this->detach($this->getPieceBySq($king->getSq()));
             $this->attach(
-                new King(
+                new K(
                     $king->getColor(),
-                    King::$castlingRule[$king->getColor()][Piece::K][rtrim($king->getMove()->pgn, '+')]['sq']['next']
+                    K::$castlingRule[$king->getColor()][Piece::K][rtrim($king->getMove()->pgn, '+')]['sq']['next']
                 )
              );
             $this->detach($rook);
             $this->attach(
-                new Rook(
+                new R(
                     $rook->getColor(),
-                    King::$castlingRule[$king->getColor()][Piece::R][rtrim($king->getMove()->pgn, '+')]['sq']['next'],
+                    K::$castlingRule[$king->getColor()][Piece::R][rtrim($king->getMove()->pgn, '+')]['sq']['next'],
                     $rook->getType()
                 )
             );
@@ -615,27 +615,27 @@ final class Board extends \SplObjectStorage
     {
         $last = end($this->history);
         $king = $this->getPieceBySq($last->move->sq->next);
-        $kingUndone = new King($last->move->color, $last->sq);
+        $kingUndone = new K($last->move->color, $last->sq);
         $this->detach($king);
         $this->attach($kingUndone);
         if (Move::CASTLE_SHORT === $last->move->type) {
             $rook = $this->getPieceBySq(
-                King::$castlingRule[$last->move->color][Piece::R][Castle::SHORT]['sq']['next']
+                K::$castlingRule[$last->move->color][Piece::R][Castle::SHORT]['sq']['next']
             );
-            $rookUndone = new Rook(
+            $rookUndone = new R(
                 $last->move->color,
-                King::$castlingRule[$last->move->color][Piece::R][Castle::SHORT]['sq']['current'],
+                K::$castlingRule[$last->move->color][Piece::R][Castle::SHORT]['sq']['current'],
                 $rook->getType()
             );
             $this->detach($rook);
             $this->attach($rookUndone);
         } elseif (Move::CASTLE_LONG === $last->move->type) {
             $rook = $this->getPieceBySq(
-                King::$castlingRule[$last->move->color][Piece::R][Castle::LONG]['sq']['next']
+                K::$castlingRule[$last->move->color][Piece::R][Castle::LONG]['sq']['next']
             );
-            $rookUndone = new Rook(
+            $rookUndone = new R(
                 $last->move->color,
-                King::$castlingRule[$last->move->color][Piece::R][Castle::LONG]['sq']['current'],
+                K::$castlingRule[$last->move->color][Piece::R][Castle::LONG]['sq']['current'],
                 $rook->getType()
             );
             $this->detach($rook);
@@ -681,7 +681,7 @@ final class Board extends \SplObjectStorage
         if (CastlingAbility::can($this->castlingAbility, $oppColor)) {
             if ($pieceMoved->getMove()->isCapture) {
                 if ($pieceMoved->getMove()->sq->next ===
-                    King::$castlingRule[$oppColor][Piece::R][Castle::SHORT]['sq']['current']
+                    K::$castlingRule[$oppColor][Piece::R][Castle::SHORT]['sq']['current']
                 ) {
                     $this->castlingAbility = CastlingAbility::remove(
                         $this->castlingAbility,
@@ -690,7 +690,7 @@ final class Board extends \SplObjectStorage
                     );
                 } elseif (
                     $pieceMoved->getMove()->sq->next ===
-                    King::$castlingRule[$oppColor][Piece::R][Castle::LONG]['sq']['current']
+                    K::$castlingRule[$oppColor][Piece::R][Castle::LONG]['sq']['current']
                 ) {
                     $this->castlingAbility = CastlingAbility::remove(
                         $this->castlingAbility,
@@ -746,26 +746,25 @@ final class Board extends \SplObjectStorage
             $this->detach($piece);
             if ($last->move->type === Move::PAWN_PROMOTES ||
                 $last->move->type === Move::PAWN_CAPTURES_AND_PROMOTES) {
-                $pieceUndone = new Pawn($last->move->color, $last->sq);
+                $pieceUndone = new P($last->move->color, $last->sq);
             } else {
-                $pieceUndoneClass = new \ReflectionClass(get_class($piece));
-                $pieceUndone = $pieceUndoneClass->newInstanceArgs([
+                $className = "\\Chess\\Piece\\{$piece->getId()}";
+                $pieceUndone = new $className(
                     $last->move->color,
                     $last->sq,
-                    $piece->getId() !== Piece::R ?: $piece->getType(),
-                ]);
+                    $piece->getId() !== Piece::R ?: $piece->getType()
+                );
             }
             $this->attach($pieceUndone);
-            if ($last->move->isCapture && $capture = end($this->captures[$last->move->color])) {
-                $capturedClass = new \ReflectionClass(
-                    AbstractPiece::toClassName($capture->captured->id)
-                );
-                $this->attach($capturedClass->newInstanceArgs([
+            if ($last->move->isCapture &&
+                $capture = end($this->captures[$last->move->color])
+            ) {
+                $className = "\\Chess\\Piece\\{$capture->captured->id}";
+                $this->attach(new $className(
                     $last->move->color === Color::W ? Color::B : Color::W,
                     $capture->captured->sq,
-                    $capture->captured->id !== Piece::R ?: $capture->captured->type,
-                  ])
-                );
+                    $capture->captured->id !== Piece::R ?: $capture->captured->type
+                ));
                 $this->popCapture($last->move->color);
             }
             $this->popHistory()->refresh();
@@ -947,12 +946,12 @@ final class Board extends \SplObjectStorage
                 switch ($piece->getId()) {
                     case Piece::K:
                         if (
-                            King::$castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
+                            K::$castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
                             $clone->play($color, Castle::SHORT)
                         ) {
                             $moves[] = Castle::SHORT;
                         } elseif (
-                            King::$castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
+                            K::$castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
                             $clone->play($color, Castle::LONG)
                         ) {
                             $moves[] = Castle::LONG;

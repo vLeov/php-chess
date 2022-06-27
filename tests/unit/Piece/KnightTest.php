@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Piece;
 
-use Chess\Piece\Knight;
+use Chess\Piece\N;
 use Chess\Tests\AbstractUnitTestCase;
 
 class KnightTest extends AbstractUnitTestCase
@@ -12,7 +12,7 @@ class KnightTest extends AbstractUnitTestCase
      */
     public function mobility_d4()
     {
-        $knight = new Knight('w', 'd4');
+        $knight = new N('w', 'd4');
         $mobility = [
             'c6',
             'b5',
@@ -32,7 +32,7 @@ class KnightTest extends AbstractUnitTestCase
      */
     public function mobility_h1()
     {
-        $knight = new Knight('w', 'h1');
+        $knight = new N('w', 'h1');
         $mobility = [
             'g3',
             'f2'
@@ -46,7 +46,7 @@ class KnightTest extends AbstractUnitTestCase
      */
     public function mobility_b1()
     {
-        $knight = new Knight('w', 'b1');
+        $knight = new N('w', 'b1');
         $mobility = [
             'a3',
             'd2',

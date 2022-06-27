@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Piece;
 
 use Chess\Board;
-use Chess\Piece\Queen;
+use Chess\Piece\Q;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
 
@@ -14,7 +14,7 @@ class QueenTest extends AbstractUnitTestCase
      */
     public function mobility_a2()
     {
-        $queen = new Queen('w', 'a2');
+        $queen = new Q('w', 'a2');
         $mobility = (object) [
             'up' => ['a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => ['a1'],
@@ -34,7 +34,7 @@ class QueenTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $queen = new Queen('w', 'd5');
+        $queen = new Q('w', 'd5');
         $mobility = (object) [
             'up' => ['d6', 'd7', 'd8'],
             'down' => ['d4', 'd3', 'd2', 'd1'],

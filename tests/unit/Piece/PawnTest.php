@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Piece;
 
-use Chess\Piece\Pawn;
+use Chess\Piece\P;
 use Chess\Tests\AbstractUnitTestCase;
 
 class PawnTest extends AbstractUnitTestCase
@@ -12,7 +12,7 @@ class PawnTest extends AbstractUnitTestCase
      */
     public function white_a2()
     {
-        $pawn = new Pawn('w', 'a2');
+        $pawn = new P('w', 'a2');
 
         $position = 'a2';
         $mobility = ['a3', 'a4'];
@@ -28,7 +28,7 @@ class PawnTest extends AbstractUnitTestCase
      */
     public function white_d5()
     {
-        $pawn = new Pawn('w', 'd5');
+        $pawn = new P('w', 'd5');
 
         $position = 'd5';
         $mobility = ['d6'];
@@ -44,7 +44,7 @@ class PawnTest extends AbstractUnitTestCase
      */
     public function white_f7()
     {
-        $pawn = new Pawn('w', 'f7');
+        $pawn = new P('w', 'f7');
 
         $position = 'f7';
         $mobility = ['f8'];
@@ -60,7 +60,7 @@ class PawnTest extends AbstractUnitTestCase
      */
     public function white_f8()
     {
-        $pawn = new Pawn('w', 'f8');
+        $pawn = new P('w', 'f8');
 
         $position = 'f8';
         $mobility = [];
@@ -76,7 +76,7 @@ class PawnTest extends AbstractUnitTestCase
      */
     public function black_a2()
     {
-        $pawn = new Pawn('b', 'a2');
+        $pawn = new P('b', 'a2');
 
         $position = 'a2';
         $mobility = ['a1'];
@@ -92,7 +92,7 @@ class PawnTest extends AbstractUnitTestCase
      */
     public function black_d5()
     {
-        $pawn = new Pawn('b', 'd5');
+        $pawn = new P('b', 'd5');
 
         $position = 'd5';
         $mobility = ['d4'];

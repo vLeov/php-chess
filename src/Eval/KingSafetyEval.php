@@ -9,14 +9,14 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 
 /**
- * King safety.
+ * K safety.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class KingSafetyEval extends AbstractEval
 {
-    const NAME = 'King safety';
+    const NAME = 'K safety';
 
     public function __construct(Board $board)
     {

@@ -6,7 +6,7 @@ use Chess\Board;
 use Chess\FEN\Field\CastlingAbility;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Piece;
-use Chess\Piece\King;
+use Chess\Piece\K;
 
 abstract class AbstractStrToPgn
 {
@@ -36,7 +36,7 @@ abstract class AbstractStrToPgn
                 $position = $piece->getSq();
                 switch ($id) {
                     case Piece::K:
-                        $rule = King::$castlingRule[$color][Piece::K];
+                        $rule = K::$castlingRule[$color][Piece::K];
                         if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
                             $piece->sqCastleShort()
                         ) {

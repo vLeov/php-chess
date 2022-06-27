@@ -8,12 +8,12 @@ use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**
- * Bishop class.
+ * Bishop.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Bishop extends Slider
+class B extends Slider
 {
     /**
      * Constructor.

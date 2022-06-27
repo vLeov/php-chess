@@ -6,22 +6,22 @@ use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**
- * Queen class.
+ * Queen.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Queen extends Slider
+class Q extends Slider
 {
     /**
-     * @var \Chess\Piece\Rook
+     * @var \Chess\Piece\R
      */
-    private Rook $rook;
+    private R $rook;
 
     /**
-     * @var \Chess\Piece\Bishop
+     * @var \Chess\Piece\B
      */
-    private Bishop $bishop;
+    private B $bishop;
 
     /**
      * Constructor.
@@ -33,8 +33,8 @@ class Queen extends Slider
     {
         parent::__construct($color, $sq, Piece::Q);
 
-        $this->rook = new Rook($color, $sq, RookType::SLIDER);
-        $this->bishop = new Bishop($color, $sq);
+        $this->rook = new R($color, $sq, RookType::SLIDER);
+        $this->bishop = new B($color, $sq);
 
         $this->mobility();
     }

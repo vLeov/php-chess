@@ -9,12 +9,12 @@ use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**
- * Pawn class.
+ * Pawn.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Pawn extends AbstractPiece
+class P extends AbstractPiece
 {
     /**
      * @var string

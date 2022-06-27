@@ -136,7 +136,7 @@ class Heuristics extends Player
      * Normalizes the heuristic picture of $this->board.
      *
      * The dimensions are normalized meaning that the chess features (Material,
-     * Center, Connectivity, Space, Pressure, King safety, Tactics, and so on)
+     * Center, Connectivity, Space, Pressure, K safety, Tactics, and so on)
      * are evald and scaled to have values between 0 and 1.
      *
      * It is worth noting that a normalized heuristic picture changes with every

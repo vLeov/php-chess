@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Piece;
 
-use Chess\Piece\Bishop;
+use Chess\Piece\B;
 use Chess\Tests\AbstractUnitTestCase;
 
 class BishopTest extends AbstractUnitTestCase
@@ -12,7 +12,7 @@ class BishopTest extends AbstractUnitTestCase
      */
     public function mobility_a2()
     {
-        $bishop = new Bishop('w', 'a2');
+        $bishop = new B('w', 'a2');
         $mobility = (object) [
             'upLeft' => [],
             'upRight' => ['b3', 'c4', 'd5', 'e6', 'f7', 'g8'],
@@ -28,7 +28,7 @@ class BishopTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $bishop = new Bishop('w', 'd5');
+        $bishop = new B('w', 'd5');
         $mobility = (object) [
             'upLeft' => ['c6', 'b7', 'a8'],
             'upRight' => ['e6', 'f7', 'g8'],
@@ -44,7 +44,7 @@ class BishopTest extends AbstractUnitTestCase
      */
     public function mobility_a8()
     {
-        $bishop = new Bishop('w', 'a8');
+        $bishop = new B('w', 'a8');
         $mobility = (object) [
             'upLeft' => [],
             'upRight' => [],

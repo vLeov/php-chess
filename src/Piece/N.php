@@ -8,12 +8,12 @@ use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**
- * Knight class.
+ * Knight.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Knight extends AbstractPiece
+class N extends AbstractPiece
 {
     /**
      * Constructor.

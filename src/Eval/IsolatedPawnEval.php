@@ -5,7 +5,7 @@ namespace Chess\Eval;
 use Chess\Board;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
-use Chess\Piece\Pawn;
+use Chess\Piece\P;
 
 class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
 {
@@ -32,7 +32,7 @@ class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
         return $this->result;
     }
 
-    private function checkIsolatedPawn(Pawn $pawn): int
+    private function checkIsolatedPawn(P $pawn): int
     {
         $color = $pawn->getColor();
         $pawnFile = $pawn->getFile();

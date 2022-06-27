@@ -9,12 +9,12 @@ use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**
- * Rook class.
+ * Rook.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Rook extends Slider
+class R extends Slider
 {
     /**
      * @var string

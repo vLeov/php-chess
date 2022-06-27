@@ -9,12 +9,12 @@ use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
 
 /**
- * King class.
+ * King.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class King extends AbstractPiece
+class K extends AbstractPiece
 {
     public static $castlingRule = [
         Color::W => [
@@ -84,14 +84,14 @@ class King extends AbstractPiece
     ];
 
     /**
-     * @var \Chess\Piece\Rook
+     * @var \Chess\Piece\R
      */
-    private Rook $rook;
+    private R $rook;
 
     /**
-     * @var \Chess\Piece\Bishop
+     * @var \Chess\Piece\B
      */
-    private Bishop $bishop;
+    private B $bishop;
 
     /**
      * Constructor.
@@ -103,8 +103,8 @@ class King extends AbstractPiece
     {
         parent::__construct($color, $sq, Piece::K);
 
-        $this->rook = new Rook($color, $sq, RookType::SLIDER);
-        $this->bishop = new Bishop($color, $sq);
+        $this->rook = new R($color, $sq, RookType::SLIDER);
+        $this->bishop = new B($color, $sq);
 
         $this->mobility();
     }
@@ -217,9 +217,9 @@ class King extends AbstractPiece
      * Gets the castle rook.
      *
      * @param array $pieces
-     * @return mixed \Chess\Piece\Rook|null
+     * @return mixed \Chess\Piece\R|null
      */
-    public function getCastleRook(array $pieces): ?Rook
+    public function getCastleRook(array $pieces): ?R
     {
         $rule = self::$castlingRule[$this->getColor()][Piece::R];
 

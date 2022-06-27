@@ -5,12 +5,12 @@ namespace Chess\Tests\Unit;
 use Chess\Board;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\StrToBoard;
-use Chess\Piece\Bishop;
-use Chess\Piece\King;
-use Chess\Piece\Knight;
-use Chess\Piece\Pawn;
-use Chess\Piece\Queen;
-use Chess\Piece\Rook;
+use Chess\Piece\B;
+use Chess\Piece\K;
+use Chess\Piece\N;
+use Chess\Piece\P;
+use Chess\Piece\Q;
+use Chess\Piece\R;
 use Chess\Piece\RookType;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
@@ -537,18 +537,18 @@ class BoardTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\BoardException::class);
 
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'g3'),
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'g3'),
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -678,18 +678,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kf4()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'g3'),
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'g3'),
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -705,18 +705,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kf4_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -732,18 +732,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kf2_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -759,18 +759,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Re7_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -786,18 +786,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_a4_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -813,18 +813,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kxf2()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'g3'),
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f2', RookType::CASTLE_SHORT), // rook defended by knight
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'g3'),
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f2', RookType::CASTLE_SHORT), // rook defended by knight
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -872,23 +872,23 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_CASTLE_SHORT_with_threats_on_f1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd4'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Bishop('b', 'a6'), // bishop threatening f1
-            new King('b', 'e8'),
-            new Bishop('b', 'f8'),
-            new Knight('b', 'g8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd4'),
+            new P('w', 'e4'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new B('b', 'a6'), // bishop threatening f1
+            new K('b', 'e8'),
+            new B('b', 'f8'),
+            new N('b', 'g8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -904,23 +904,23 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_CASTLE_SHORT_with_threats_on_f1_g1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Bishop('b', 'a6'), // bishop threatening f1
-            new King('b', 'e8'),
-            new Bishop('b', 'c5'), // bishop threatening g1
-            new Knight('b', 'g8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new B('b', 'a6'), // bishop threatening f1
+            new K('b', 'e8'),
+            new B('b', 'c5'), // bishop threatening g1
+            new N('b', 'g8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -936,22 +936,22 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_CASTLE_SHORT_with_threats_on_g1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new King('b', 'e8'),
-            new Bishop('b', 'c5'), // bishop threatening g1
-            new Knight('b', 'g8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new K('b', 'e8'),
+            new B('b', 'c5'), // bishop threatening g1
+            new N('b', 'g8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -967,22 +967,22 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_CASTLE_LONG_with_threats_on_c1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new King('b', 'e8'),
-            new Bishop('b', 'f4'), // bishop threatening c1
-            new Knight('b', 'g8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new K('b', 'e8'),
+            new B('b', 'f4'), // bishop threatening c1
+            new N('b', 'g8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -998,22 +998,22 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_castle_with_threats_on_d1_f1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new King('b', 'e8'),
-            new Bishop('b', 'f8'),
-            new Knight('b', 'e3'), // knight threatening d1 and f1
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new K('b', 'e8'),
+            new B('b', 'f8'),
+            new N('b', 'e3'), // knight threatening d1 and f1
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -1030,22 +1030,22 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_castle_with_threats_on_b1_f1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new King('b', 'e8'),
-            new Bishop('b', 'f8'),
-            new Knight('b', 'd2'), // knight threatening b1 and f1
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new K('b', 'e8'),
+            new B('b', 'f8'),
+            new N('b', 'd2'), // knight threatening b1 and f1
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -1062,22 +1062,22 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_CASTLE_LONG_with_threats_on_b1_d1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new King('b', 'e8'),
-            new Bishop('b', 'f8'),
-            new Knight('b', 'c3'), // knight threatening b1 and d1
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new K('b', 'e8'),
+            new B('b', 'f8'),
+            new N('b', 'c3'), // knight threatening b1 and d1
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -1093,22 +1093,22 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_CASTLE_SHORT_after_Kf1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new King('b', 'e8'),
-            new Bishop('b', 'f8'),
-            new Knight('b', 'g8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new K('b', 'e8'),
+            new B('b', 'f8'),
+            new N('b', 'g8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -1128,22 +1128,22 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_CASTLE_SHORT_after_Rg1()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'd5'),
-            new Pawn('w', 'e4'),
-            new Pawn('w', 'f3'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new King('b', 'e8'),
-            new Bishop('b', 'f8'),
-            new Knight('b', 'g8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'd5'),
+            new P('w', 'e4'),
+            new P('w', 'f3'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new K('b', 'e8'),
+            new B('b', 'f8'),
+            new N('b', 'g8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQk';
@@ -1163,32 +1163,32 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_CASTLE_SHORT_with_threats()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'c2'),
-            new Pawn('w', 'c3'),
-            new Pawn('w', 'd4'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Knight('w', 'g1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Bishop('w', 'a3'),
-            new Bishop('w', 'd3'),
-            new Pawn('b', 'a7'),
-            new Pawn('b', 'b6'),
-            new Pawn('b', 'c7'),
-            new Pawn('b', 'e6'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h6'),
-            new Rook('b', 'a8', RookType::CASTLE_LONG),
-            new Bishop('b', 'c8'),
-            new Queen('b', 'd8'),
-            new King('b', 'e8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Knight('b', 'd7'),
-            new Knight('b', 'f6')
+            new P('w', 'a2'),
+            new P('w', 'c2'),
+            new P('w', 'c3'),
+            new P('w', 'd4'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new N('w', 'g1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new B('w', 'a3'),
+            new B('w', 'd3'),
+            new P('b', 'a7'),
+            new P('b', 'b6'),
+            new P('b', 'c7'),
+            new P('b', 'e6'),
+            new P('b', 'g7'),
+            new P('b', 'h6'),
+            new R('b', 'a8', RookType::CASTLE_LONG),
+            new B('b', 'c8'),
+            new Q('b', 'd8'),
+            new K('b', 'e8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new N('b', 'd7'),
+            new N('b', 'f6')
         ];
 
         $castlingAbility = 'KQk';
@@ -1214,35 +1214,35 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Ra6()
     {
         $pieces = [
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new Queen('w', 'd1'),
-            new King('w', 'e1'),
-            new Bishop('w', 'f1'),
-            new Knight('w', 'g1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Pawn('w', 'b2'),
-            new Pawn('w', 'c2'),
-            new Pawn('w', 'd2'),
-            new Pawn('w', 'e2'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('b', 'a8', RookType::CASTLE_LONG),
-            new Knight('b', 'b8'),
-            new Bishop('b', 'c8'),
-            new Queen('b', 'd8'),
-            new King('b', 'e8'),
-            new Bishop('b', 'f8'),
-            new Knight('b', 'g8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'a7'),
-            new Pawn('b', 'b7'),
-            new Pawn('b', 'c7'),
-            new Pawn('b', 'd7'),
-            new Pawn('b', 'e7'),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new Q('w', 'd1'),
+            new K('w', 'e1'),
+            new B('w', 'f1'),
+            new N('w', 'g1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new P('w', 'b2'),
+            new P('w', 'c2'),
+            new P('w', 'd2'),
+            new P('w', 'e2'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('b', 'a8', RookType::CASTLE_LONG),
+            new N('b', 'b8'),
+            new B('b', 'c8'),
+            new Q('b', 'd8'),
+            new K('b', 'e8'),
+            new B('b', 'f8'),
+            new N('b', 'g8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'a7'),
+            new P('b', 'b7'),
+            new P('b', 'c7'),
+            new P('b', 'd7'),
+            new P('b', 'e7'),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQkq';
@@ -1258,12 +1258,12 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Rxa6()
     {
         $pieces = [
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new King('b', 'e8'),
-            new Bishop('b', 'a6'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new K('b', 'e8'),
+            new B('b', 'a6'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'Q';
@@ -1279,12 +1279,12 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_h6()
     {
         $pieces = [
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new King('b', 'e8'),
-            new Bishop('b', 'a6'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new K('b', 'e8'),
+            new B('b', 'a6'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'Q';
@@ -1301,13 +1301,13 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_hxg6()
     {
         $pieces = [
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new King('w', 'e1'),
-            new Pawn('w', 'g6'),
-            new King('b', 'e8'),
-            new Bishop('b', 'a6'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new K('w', 'e1'),
+            new P('w', 'g6'),
+            new K('b', 'e8'),
+            new B('b', 'a6'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'Q';
@@ -1324,13 +1324,13 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Nxc3()
     {
         $pieces = [
-            new Knight('w', 'b1'),
-            new King('w', 'e1'),
-            new Pawn('w', 'g6'),
-            new King('b', 'e8'),
-            new Bishop('b', 'a6'),
-            new Pawn('b', 'c3'),
-            new Pawn('b', 'h7')
+            new N('w', 'b1'),
+            new K('w', 'e1'),
+            new P('w', 'g6'),
+            new K('b', 'e8'),
+            new B('b', 'a6'),
+            new P('b', 'c3'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1346,35 +1346,35 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_CASTLE_SHORT()
     {
         $pieces = [
-            new Rook('w', 'a1', RookType::CASTLE_LONG),
-            new Knight('w', 'b1'),
-            new Bishop('w', 'c1'),
-            new Queen('w', 'd1'),
-            new King('w', 'e1'),
-            new Bishop('w', 'f1'),
-            new Knight('w', 'g1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'b2'),
-            new Pawn('w', 'c2'),
-            new Pawn('w', 'd2'),
-            new Pawn('w', 'e2'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('b', 'a8', RookType::CASTLE_LONG),
-            new Knight('b', 'b8'),
-            new Bishop('b', 'c8'),
-            new Queen('b', 'd8'),
-            new King('b', 'e8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT),
-            new Pawn('b', 'a7'),
-            new Pawn('b', 'b7'),
-            new Pawn('b', 'c7'),
-            new Pawn('b', 'd7'),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new R('w', 'a1', RookType::CASTLE_LONG),
+            new N('w', 'b1'),
+            new B('w', 'c1'),
+            new Q('w', 'd1'),
+            new K('w', 'e1'),
+            new B('w', 'f1'),
+            new N('w', 'g1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new P('w', 'a2'),
+            new P('w', 'b2'),
+            new P('w', 'c2'),
+            new P('w', 'd2'),
+            new P('w', 'e2'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new R('b', 'a8', RookType::CASTLE_LONG),
+            new N('b', 'b8'),
+            new B('b', 'c8'),
+            new Q('b', 'd8'),
+            new K('b', 'e8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT),
+            new P('b', 'a7'),
+            new P('b', 'b7'),
+            new P('b', 'c7'),
+            new P('b', 'd7'),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = 'KQkq';
@@ -1391,18 +1391,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Ke4_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1418,18 +1418,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kg3_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1445,18 +1445,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kg2_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1472,18 +1472,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Ke2_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1499,18 +1499,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Ke3_in_check()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'f3'), // in check!
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'f3'), // in check!
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1526,18 +1526,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kg2()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'g3'),
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f5', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'g3'),
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f5', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1553,18 +1553,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kxh2()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'g3'),
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'h2', RookType::CASTLE_SHORT),
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'g3'),
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'h2', RookType::CASTLE_SHORT),
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1580,18 +1580,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_Kxf3()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'a3'),
-            new Pawn('w', 'c3'),
-            new Rook('w', 'e6', RookType::CASTLE_LONG),
-            new King('w', 'g3'),
-            new Pawn('b', 'a6'),
-            new Pawn('b', 'b5'),
-            new Pawn('b', 'c4'),
-            new Knight('b', 'd3'),
-            new Rook('b', 'f3', RookType::CASTLE_SHORT), // rook not defended
-            new King('b', 'g5'),
-            new Pawn('b', 'h7')
+            new P('w', 'a2'),
+            new P('w', 'a3'),
+            new P('w', 'c3'),
+            new R('w', 'e6', RookType::CASTLE_LONG),
+            new K('w', 'g3'),
+            new P('b', 'a6'),
+            new P('b', 'b5'),
+            new P('b', 'c4'),
+            new N('b', 'd3'),
+            new R('b', 'f3', RookType::CASTLE_SHORT), // rook not defended
+            new K('b', 'g5'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1607,18 +1607,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_exf3()
     {
         $pieces = [
-            new Pawn('w', 'e2'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Pawn('b', 'e4'),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7'),
-            new King('b', 'e8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT)
+            new P('w', 'e2'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new P('b', 'e4'),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7'),
+            new K('b', 'e8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1635,18 +1635,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_exf6()
     {
         $pieces = [
-            new Pawn('w', 'e5'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Pawn('b', 'e7'),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7'),
-            new King('b', 'e8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT)
+            new P('w', 'e5'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new P('b', 'e7'),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7'),
+            new K('b', 'e8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1664,18 +1664,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_gxh3()
     {
         $pieces = [
-            new Pawn('w', 'e2'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Pawn('b', 'e7'),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g4'),
-            new Pawn('b', 'h7'),
-            new King('b', 'e8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT)
+            new P('w', 'e2'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new P('b', 'e7'),
+            new P('b', 'f7'),
+            new P('b', 'g4'),
+            new P('b', 'h7'),
+            new K('b', 'e8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1692,18 +1692,18 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_b_hxg3()
     {
         $pieces = [
-            new Pawn('w', 'e2'),
-            new Pawn('w', 'f2'),
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Pawn('b', 'e7'),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h4'),
-            new King('b', 'e8'),
-            new Rook('b', 'h8', RookType::CASTLE_SHORT)
+            new P('w', 'e2'),
+            new P('w', 'f2'),
+            new P('w', 'g2'),
+            new P('w', 'h2'),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new P('b', 'e7'),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h4'),
+            new K('b', 'e8'),
+            new R('b', 'h8', RookType::CASTLE_SHORT)
         ];
 
         $castlingAbility = 'Kk';
@@ -1752,16 +1752,16 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_w_cxb6()
     {
         $pieces = [
-            new Pawn('w', 'a2'),
-            new Pawn('w', 'b2'),
-            new Pawn('w', 'c5'),
-            new Rook('w', 'd1', RookType::CASTLE_LONG),
-            new King('w', 'e4'),
-            new Pawn('b', 'a7'),
-            new Pawn('b', 'b7'),
-            new Pawn('b', 'c7'),
-            new King('b', 'g6'),
-            new Rook('b', 'h8', RookType::CASTLE_LONG),
+            new P('w', 'a2'),
+            new P('w', 'b2'),
+            new P('w', 'c5'),
+            new R('w', 'd1', RookType::CASTLE_LONG),
+            new K('w', 'e4'),
+            new P('b', 'a7'),
+            new P('b', 'b7'),
+            new P('b', 'c7'),
+            new K('b', 'g6'),
+            new R('b', 'h8', RookType::CASTLE_LONG),
         ];
 
         $castlingAbility = '-';
@@ -1779,15 +1779,15 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_promote_w_h8()
     {
         $pieces = [
-            new Pawn('w', 'g2'),
-            new Pawn('w', 'h7'),
-            new King('w', 'e1'),
-            new Rook('w', 'h1', RookType::CASTLE_SHORT),
-            new Pawn('b', 'c7'),
-            new Pawn('b', 'd7'),
-            new Pawn('b', 'e7'),
-            new Bishop('b', 'd6'),
-            new King('b', 'e8')
+            new P('w', 'g2'),
+            new P('w', 'h7'),
+            new K('w', 'e1'),
+            new R('w', 'h1', RookType::CASTLE_SHORT),
+            new P('b', 'c7'),
+            new P('b', 'd7'),
+            new P('b', 'e7'),
+            new B('b', 'd6'),
+            new K('b', 'e8')
         ];
 
         $castlingAbility = 'K';
@@ -1803,15 +1803,15 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_checkmate_w_Qd7()
     {
         $pieces = [
-            new Pawn('w', 'd5'),
-            new Queen('w', 'f5'),
-            new King('w', 'g2'),
-            new Pawn('w', 'h2'),
-            new Rook('w', 'h8', RookType::CASTLE_LONG),
-            new King('b', 'e7'),
-            new Pawn('b', 'f7'),
-            new Pawn('b', 'g7'),
-            new Pawn('b', 'h7')
+            new P('w', 'd5'),
+            new Q('w', 'f5'),
+            new K('w', 'g2'),
+            new P('w', 'h2'),
+            new R('w', 'h8', RookType::CASTLE_LONG),
+            new K('b', 'e7'),
+            new P('b', 'f7'),
+            new P('b', 'g7'),
+            new P('b', 'h7')
         ];
 
         $castlingAbility = '-';
@@ -1853,9 +1853,9 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_king_and_queen_vs_king()
     {
         $pieces = [
-            new King('b', 'h1'),
-            new King('w', 'a8'),
-            new Queen('w', 'f2'),
+            new K('b', 'h1'),
+            new K('w', 'a8'),
+            new Q('w', 'f2'),
         ];
 
         $castlingAbility = '-';
@@ -1872,9 +1872,9 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_king_and_pawn_vs_king()
     {
         $pieces = [
-            new King('w', 'f6'),
-            new Pawn('w', 'f7'),
-            new King('b', 'f8'),
+            new K('w', 'f6'),
+            new P('w', 'f7'),
+            new K('b', 'f8'),
         ];
 
         $castlingAbility = '-';
@@ -1891,10 +1891,10 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_king_and_rook_vs_king_and_bishop()
     {
         $pieces = [
-            new King('w', 'b6'),
-            new Rook('w', 'h8', RookType::CASTLE_LONG),
-            new King('b', 'a8'),
-            new Bishop('b', 'b8'),
+            new K('w', 'b6'),
+            new R('w', 'h8', RookType::CASTLE_LONG),
+            new K('b', 'a8'),
+            new B('b', 'b8'),
         ];
 
         $castlingAbility = '-';
@@ -1911,13 +1911,13 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_endgame()
     {
         $pieces = [
-            new King('w', 'g1'),
-            new Queen('w', 'd1'),
-            new Rook('w', 'a5', RookType::CASTLE_SHORT),
-            new Rook('w', 'b7', RookType::CASTLE_LONG),
-            new Pawn('w', 'f6'),
-            new Pawn('w', 'g5'),
-            new King('b', 'e6'),
+            new K('w', 'g1'),
+            new Q('w', 'd1'),
+            new R('w', 'a5', RookType::CASTLE_SHORT),
+            new R('w', 'b7', RookType::CASTLE_LONG),
+            new P('w', 'f6'),
+            new P('w', 'g5'),
+            new K('b', 'e6'),
         ];
 
         $castlingAbility = '-';

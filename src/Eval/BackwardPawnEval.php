@@ -8,7 +8,7 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 
 /**
- * Backward Pawn
+ * Backward P
  *
  * @author Boas Falke
  * @license GPL

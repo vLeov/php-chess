@@ -3,7 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Board;
-use Chess\Piece\Pawn;
+use Chess\Piece\P;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 
@@ -67,7 +67,7 @@ class SqOutpostEval extends AbstractEval
         return $this->result;
     }
 
-    protected function opposition(Pawn $pawn, string $file): bool
+    protected function opposition(P $pawn, string $file): bool
     {
         for ($i = 2; $i < 8; $i++) {
             if ($piece = $this->board->getPieceBySq($file.$i)) {

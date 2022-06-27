@@ -213,30 +213,4 @@ abstract class AbstractPiece
 
         return false;
     }
-
-    /**
-     * Returns the class name given a piece identifier.
-     *
-     * @param string $id
-     * @return string
-     * @throws \Chess\Exception\UnknownNotationException
-     */
-    public static function toClassName(string $id): string
-    {
-        if ($id === Piece::B) {
-            return (new \ReflectionClass('\Chess\Piece\Bishop'))->getName();
-        } elseif ($id === Piece::K) {
-            return (new \ReflectionClass('\Chess\Piece\King'))->getName();
-        } elseif ($id === Piece::N) {
-            return (new \ReflectionClass('\Chess\Piece\Knight'))->getName();
-        } elseif ($id === Piece::P) {
-            return (new \ReflectionClass('\Chess\Piece\Pawn'))->getName();
-        } elseif ($id === Piece::Q) {
-            return (new \ReflectionClass('\Chess\Piece\Queen'))->getName();
-        } elseif ($id === Piece::R) {
-            return (new \ReflectionClass('\Chess\Piece\Rook'))->getName();
-        }
-
-        throw new UnknownNotationException;
-    }
 }
