@@ -716,14 +716,12 @@ final class Board extends \SplObjectStorage
             $this->capture($piece);
         }
         $this->detach($this->getPieceBySq($piece->getSq()));
-        $pieceClass = new \ReflectionClass(get_class($piece));
-        $this->attach(
-            $pieceClass->newInstanceArgs([
-                $piece->getColor(),
-                $piece->getMove()->sq->next,
-                $piece->getId() !== Piece::R ?: $piece->getType(),
-            ])
-        );
+        $className = "\\Chess\\Piece\\{$piece->getId()}";
+        $this->attach(new $className(
+            $piece->getColor(),
+            $piece->getMove()->sq->next,
+            $piece->getId() !== Piece::R ?: $piece->getType()
+        ));
         if ($piece->getId() === Piece::P) {
             if ($piece->isPromoted()) {
                 $this->promote($piece);
