@@ -33,7 +33,7 @@ class HeuristicsTest extends AbstractUnitTestCase
             'Connectivity',
             'Space',
             'Pressure',
-            'K safety',
+            'King safety',
             'Tactics',
             'Attack',
             'Doubled pawn',
