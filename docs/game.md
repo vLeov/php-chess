@@ -40,7 +40,7 @@ $game->loadPgn('1.e4 e6 2.d4 d5 3.Nc3 Nf6');
 $game->play('w', 'e5');
 ```
 
-#### `public function response(): ?string`
+#### `public function ai(): ?string`
 
 Returns a computer response to the current position. This method is to be used in either `Game::MODE_AI` or `Game::MODE_GRANDMASTER` otherwise it returns null.
 
@@ -48,7 +48,7 @@ Returns a computer response to the current position. This method is to be used i
 $game = new Game(Game::MODE_GRANDMASTER);
 
 $game->play('w', 'e4');
-$response = $game->response();
+$response = $game->ai();
 echo $response;
 ```
 
