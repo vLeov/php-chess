@@ -33,9 +33,9 @@ Pass the `Game::MODE_AI` parameter when instantiating a `$game`:
 $game = new Game(Game::MODE_AI);
 
 $game->play('w', 'e4');
-$game->play('b', $game->response());
+$game->play('b', $game->ai());
 $game->play('w', 'e5');
-$game->play('b', $game->response());
+$game->play('b', $game->ai());
 ```
 
 The AIs are stored in the [`model`](https://github.com/chesslablab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as a second parameter to the `Chess\Game` constructor:
@@ -44,9 +44,9 @@ The AIs are stored in the [`model`](https://github.com/chesslablab/php-chess/tre
 $game = new Game(Game::MODE_AI, 'a2.model');
 
 $game->play('w', 'e4');
-$game->play('b', $game->response());
+$game->play('b', $game->ai());
 $game->play('w', 'e5');
-$game->play('b', $game->response());
+$game->play('b', $game->ai());
 ```
 
 ### Demo
