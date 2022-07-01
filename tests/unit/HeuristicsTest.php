@@ -4,9 +4,8 @@ namespace Chess\Tests\Unit;
 
 use Chess\Board;
 use Chess\Heuristics;
+use Chess\Player;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
-use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class HeuristicsTest extends AbstractUnitTestCase
@@ -100,7 +99,9 @@ class HeuristicsTest extends AbstractUnitTestCase
      */
     public function end_fool_checkmate()
     {
-        $board = (new FoolCheckmate(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/fool_checkmate.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $end = (new Heuristics($board->getMovetext()))->end();
 
@@ -117,7 +118,9 @@ class HeuristicsTest extends AbstractUnitTestCase
      */
     public function end_scholar_checkmate()
     {
-        $board = (new ScholarCheckmate(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/scholar_checkmate.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $end = (new Heuristics($board->getMovetext()))->end();
 
@@ -274,7 +277,9 @@ class HeuristicsTest extends AbstractUnitTestCase
      */
     public function get_balance_fool_checkmate()
     {
-        $board = (new FoolCheckmate(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/fool_checkmate.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
@@ -291,7 +296,9 @@ class HeuristicsTest extends AbstractUnitTestCase
      */
     public function get_balance_scholar_checkmate()
     {
-        $board = (new ScholarCheckmate(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/scholar_checkmate.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 

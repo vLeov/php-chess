@@ -4,10 +4,9 @@ namespace Chess\Tests\Unit\ML\Supervised\Regression;
 
 use Chess\Board;
 use Chess\Heuristics;
+use Chess\Player;
 use Chess\ML\Supervised\Regression\ExpandedFormLabeller;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Checkmate\Fool as FoolCheckmate;
-use Chess\Tests\Sample\Checkmate\Scholar as ScholarCheckmate;
 use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
@@ -36,7 +35,9 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
      */
     public function fool_checkmate_labelled()
     {
-        $board = (new FoolCheckmate(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/fool_checkmate.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getResizedBalance(0, 1);
 
@@ -54,7 +55,9 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
      */
     public function scholar_checkmate_labelled()
     {
-        $board = (new ScholarCheckmate(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/scholar_checkmate.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getResizedBalance(0, 1);
 
