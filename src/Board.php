@@ -742,9 +742,12 @@ final class Board extends \SplObjectStorage
         if ($last = end($this->history)) {
             $piece = $this->getPieceBySq($last->move->sq->next);
             $this->detach($piece);
-            if ($last->move->type === Move::PAWN_PROMOTES ||
-                $last->move->type === Move::PAWN_CAPTURES_AND_PROMOTES) {
+            if (
+                $last->move->type === Move::PAWN_PROMOTES ||
+                $last->move->type === Move::PAWN_CAPTURES_AND_PROMOTES
+            ) {
                 $pieceUndone = new P($last->move->color, $last->sq);
+                $this->attach($pieceUndone);
             } else {
                 $className = "\\Chess\\Piece\\{$piece->getId()}";
                 $pieceUndone = new $className(
@@ -752,9 +755,10 @@ final class Board extends \SplObjectStorage
                     $last->sq,
                     $piece->getId() !== Piece::R ?: $piece->getType()
                 );
+                $this->attach($pieceUndone);
             }
-            $this->attach($pieceUndone);
-            if ($last->move->isCapture &&
+            if (
+                $last->move->isCapture &&
                 $capture = end($this->captures[$last->move->color])
             ) {
                 $className = "\\Chess\\Piece\\{$capture->captured->id}";
