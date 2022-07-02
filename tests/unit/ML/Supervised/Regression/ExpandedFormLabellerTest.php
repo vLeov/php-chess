@@ -7,7 +7,6 @@ use Chess\Heuristics;
 use Chess\Player;
 use Chess\ML\Supervised\Regression\ExpandedFormLabeller;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class ExpandedFormLabellerTest extends AbstractUnitTestCase
 {
@@ -94,7 +93,9 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
      */
     public function open_sicilian_labelled()
     {
-        $board = (new OpenSicilian(new Board()))->play();
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new Player($B56))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getResizedBalance(0, 1);
 
@@ -102,7 +103,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = '5555555555555527385';
+        $expected = '5555555555555527275';
 
         $this->assertSame($expected, $label);
     }

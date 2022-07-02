@@ -7,7 +7,6 @@ use Chess\Player;
 use Chess\Eval\BishopPairEval;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
 
 class BishopPairEvalTest extends AbstractUnitTestCase
 {
@@ -16,7 +15,9 @@ class BishopPairEvalTest extends AbstractUnitTestCase
      */
     public function closed_sicilian()
     {
-        $board = (new ClosedSicilian(new Board()))->play();
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+
+        $board = (new Player($B25))->play()->getBoard();
 
         $bishopPairEval = (new BishopPairEval($board))->eval();
 

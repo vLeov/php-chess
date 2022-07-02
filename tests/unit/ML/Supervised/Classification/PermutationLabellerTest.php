@@ -8,7 +8,6 @@ use Chess\Player;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\ML\Supervised\Classification\PermutationLabeller;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Sicilian\Open as ClosedSicilian;
 
 class PermutationLabellerTest extends AbstractUnitTestCase
 {
@@ -190,14 +189,16 @@ class PermutationLabellerTest extends AbstractUnitTestCase
      */
     public function closed_sicilian_labelled()
     {
-        $board = (new ClosedSicilian(new Board()))->play();
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+
+        $board = (new Player($B25))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 
         $expected = [
-            'w' => 1,
+            'w' => 3,
             'b' => 4,
         ];
 

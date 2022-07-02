@@ -3,10 +3,9 @@
 namespace Chess\Tests\Unit\Eval;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\Eval\AttackEval;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class AttackEvalTest extends AbstractUnitTestCase
 {
@@ -30,7 +29,9 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function open_sicilian()
     {
-        $board = (new OpenSicilian(new Board()))->play();
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new Player($B56))->play()->getBoard();
 
         $attEval = (new AttackEval($board))->eval();
 
@@ -47,7 +48,9 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function closed_sicilian()
     {
-        $board = (new ClosedSicilian(new Board()))->play();
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+
+        $board = (new Player($B25))->play()->getBoard();
 
         $attEval = (new AttackEval($board))->eval();
 

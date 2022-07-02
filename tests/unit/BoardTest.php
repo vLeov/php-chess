@@ -17,7 +17,6 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\Move;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class BoardTest extends AbstractUnitTestCase
 {
@@ -482,7 +481,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_pieces_in_open_sicilian()
     {
-        $board = (new OpenSicilian(new Board()))->play();
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new Player($B56))->play()->getBoard();
 
         $this->assertSame(15, count($board->getPiecesByColor(Color::W)));
         $this->assertSame(15, count($board->getPiecesByColor(Color::B)));

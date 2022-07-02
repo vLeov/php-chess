@@ -7,7 +7,6 @@ use Chess\Heuristics;
 use Chess\Player;
 use Chess\ML\Supervised\Regression\GeometricSumLabeller;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class GeometricSumLabellerTest extends AbstractUnitTestCase
 {
@@ -94,7 +93,9 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
      */
     public function open_sicilian_labelled()
     {
-        $board = (new OpenSicilian(new Board()))->play();
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new Player($B56))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
@@ -102,7 +103,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $label = (new GeometricSumLabeller())->label($end);
 
-        $expected = -3.22;
+        $expected = -5.98;
 
         $this->assertSame($expected, $label);
     }

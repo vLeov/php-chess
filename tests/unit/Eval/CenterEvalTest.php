@@ -6,8 +6,6 @@ use Chess\Board;
 use Chess\Player;
 use Chess\Eval\CenterEval;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class CenterEvalTest extends AbstractUnitTestCase
 {
@@ -33,13 +31,15 @@ class CenterEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function sicilian_open()
+    public function B56()
     {
-        $board = (new OpenSicilian(new Board()))->play();
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new Player($B56))->play()->getBoard();
 
         $expected = [
-            'w' => 49.0,
-            'b' => 31.4,
+            'w' => 47.0,
+            'b' => 36.8,
         ];
 
         $ctrEval = (new CenterEval($board))->eval();
@@ -52,7 +52,9 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function sicilian_closed()
     {
-        $board = (new ClosedSicilian(new Board()))->play();
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+
+        $board = (new Player($B25))->play()->getBoard();
 
         $expected = [
             'w' => 37.73,
