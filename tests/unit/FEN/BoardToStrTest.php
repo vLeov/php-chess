@@ -42,11 +42,11 @@ class BoardToStrTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function benko_gambit()
+    public function A59()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $expected = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq -';
         $string = (new BoardToStr($board))->create();

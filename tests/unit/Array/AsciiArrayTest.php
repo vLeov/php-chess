@@ -85,7 +85,7 @@ class AsciiArrayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_board_benko_gambit()
+    public function to_board_A59()
     {
         $expected = [
             7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],

@@ -72,11 +72,11 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function benko_gambit_labelled()
+    public function A59_labelled()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getResizedBalance(0, 1);
 

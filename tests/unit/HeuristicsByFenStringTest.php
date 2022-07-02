@@ -54,7 +54,7 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function eval_benko_gambit()
+    public function eval_A59()
     {
         $fen = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9';
 
@@ -108,7 +108,7 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_balance_benko_gambit()
+    public function get_balance_A59()
     {
         $fen = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9';
 
@@ -173,7 +173,7 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_resized_balance_benko_gambit()
+    public function get_resized_balance_A59()
     {
         $fen = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9';
 
@@ -244,7 +244,7 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_result_benko_gambit()
+    public function get_result_A59()
     {
         $fen = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9';
 

@@ -84,34 +84,34 @@ class BoardToPngTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function output_benko_gambit_flip()
+    public function output_A59_flip()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $filename = (new BoardToPng($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
             md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/benko_gambit_flip.png')
+            md5_file(self::DATA_FOLDER.'/img/A59_flip.png')
         );
     }
 
     /**
      * @test
      */
-    public function output_benko_gambit()
+    public function output_A59()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
             md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/benko_gambit.png')
+            md5_file(self::DATA_FOLDER.'/img/A59.png')
         );
     }
 

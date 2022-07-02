@@ -106,11 +106,11 @@ class KTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_sqs_benko_gambit()
+    public function get_sqs_A59()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $king = $board->getPieceBySq('f1');
 

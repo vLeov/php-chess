@@ -144,11 +144,11 @@ class HeuristicsTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function eval_benko_gambit()
+    public function eval_A59()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $heuristics = new Heuristics($board->getMovetext());
 

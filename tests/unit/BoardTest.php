@@ -450,11 +450,11 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_pieces_in_benko_gambit()
+    public function get_pieces_in_A59()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $this->assertSame(14, count($board->getPiecesByColor(Color::W)));
         $this->assertSame(13, count($board->getPiecesByColor(Color::B)));
@@ -2088,11 +2088,11 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_array_benko_gambit()
+    public function to_array_A59()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A59))->play()->getBoard();
 
         $expected = [
             7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
