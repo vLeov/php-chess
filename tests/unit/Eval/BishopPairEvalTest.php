@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\Eval\BishopPairEval;
 use Chess\FEN\StrToBoard;

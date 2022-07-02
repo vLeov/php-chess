@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Board;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\Eval\DefenseEval;
 use Chess\Tests\AbstractUnitTestCase;

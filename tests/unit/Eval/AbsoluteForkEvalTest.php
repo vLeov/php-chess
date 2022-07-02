@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Board;
 use Chess\Eval\AbsoluteForkEval;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;

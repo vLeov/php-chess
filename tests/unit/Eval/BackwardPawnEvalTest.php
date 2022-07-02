@@ -4,7 +4,6 @@ namespace Chess\Tests\Unit\Eval;
 
 use Chess\Array\AsciiArray;
 use Chess\Eval\BackwardPawnEval;
-use Chess\Eval\DoubledPawnEval;
 use Chess\Tests\AbstractUnitTestCase;
 
 class BackwardPawnEvalTest extends AbstractUnitTestCase
