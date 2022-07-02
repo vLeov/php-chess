@@ -6,7 +6,6 @@ use Chess\Board;
 use Chess\Heuristics;
 use Chess\Player;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class HeuristicsTest extends AbstractUnitTestCase
 {
@@ -147,7 +146,9 @@ class HeuristicsTest extends AbstractUnitTestCase
      */
     public function eval_benko_gambit()
     {
-        $board = (new BenkoGambit(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $heuristics = new Heuristics($board->getMovetext());
 

@@ -3,6 +3,7 @@
 namespace Chess\Tests\Unit;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\StrToBoard;
 use Chess\Piece\B;
@@ -16,7 +17,6 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\Move;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
 use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
 use Chess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
@@ -452,7 +452,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_pieces_in_benko_gambit()
     {
-        $board = (new BenkoGambit(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $this->assertSame(14, count($board->getPiecesByColor(Color::W)));
         $this->assertSame(13, count($board->getPiecesByColor(Color::B)));
@@ -2088,7 +2090,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function to_array_benko_gambit()
     {
-        $board = (new BenkoGambit(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $expected = [
             7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],

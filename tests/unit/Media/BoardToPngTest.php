@@ -3,10 +3,10 @@
 namespace Chess\Tests\Unit\Media;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\FEN\StrToBoard;
 use Chess\Media\BoardToPng;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as QueensGambitSymmetricalDefense;
 
 class BoardToPngTest extends AbstractUnitTestCase
@@ -86,7 +86,9 @@ class BoardToPngTest extends AbstractUnitTestCase
      */
     public function output_benko_gambit_flip()
     {
-        $board = (new BenkoGambit())->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $filename = (new BoardToPng($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
@@ -101,7 +103,9 @@ class BoardToPngTest extends AbstractUnitTestCase
      */
     public function output_benko_gambit()
     {
-        $board = (new BenkoGambit())->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
 

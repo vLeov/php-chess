@@ -3,12 +3,12 @@
 namespace Chess\Tests\Unit\Piece;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\Piece\K;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 
 class KTest extends AbstractUnitTestCase
 {
@@ -108,7 +108,9 @@ class KTest extends AbstractUnitTestCase
      */
     public function get_sqs_benko_gambit()
     {
-        $board = (new BenkoGambit(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $king = $board->getPieceBySq('f1');
 

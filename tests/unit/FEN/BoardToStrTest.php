@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit\FEN;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\FEN\BoardToStr;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\BenkoGambit;
 use Chess\Tests\Sample\Opening\RuyLopez\Exchange as RuyLopezExchange;
 
 class BoardToStrTest extends AbstractUnitTestCase
@@ -44,7 +44,9 @@ class BoardToStrTest extends AbstractUnitTestCase
      */
     public function benko_gambit()
     {
-        $board = (new BenkoGambit(new Board()))->play();
+        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($movetext))->play()->getBoard();
 
         $expected = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq -';
         $string = (new BoardToStr($board))->create();
