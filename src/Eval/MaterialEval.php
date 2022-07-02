@@ -38,6 +38,8 @@ class MaterialEval extends AbstractEval
                 $this->result[Color::B] += $this->value[$piece->getId()];
             }
         }
+        $this->result[Color::W] = round($this->result[Color::W], 2);
+        $this->result[Color::B] = round($this->result[Color::B], 2);
 
         return $this->result;
     }

@@ -3,6 +3,7 @@
 namespace Chess\Tests\Unit\Board;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\Eval\DefenseEval;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -11,29 +12,24 @@ class DefenseEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
+    public function D06()
     {
-        $board = new Board();
-        $board->play('w', 'e4');
-        $board->play('b', 'e5');
-        $board->play('w', 'Nf3');
-        $board->play('b', 'Nc6');
-        $board->play('w', 'Bb5');
-        $board->play('b', 'a6');
-        $board->play('w', 'Nxe5');
+        $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 
-        $defenseEval = (new DefenseEval($board))->eval();
+        $board = (new Player($D06))->play()->getBoard();
 
         $expected = [
             'w' => [
-                'a2', 'b1', 'b2', 'c1', 'c2', 'd1', 'd2', 'd2', 'd2', 'd2',
-                'e1', 'e1', 'f2', 'h2',
+                'a2', 'b1', 'b2', 'c1', 'd1', 'd4', 'e1', 'e2', 'e2', 'e2',
+                'e2', 'f1', 'f2', 'g1', 'g2', 'h2',
             ],
             'b' => [
-                'a6', 'a6', 'b7', 'c6', 'c6', 'c7', 'c8', 'c8', 'd7', 'd7',
-                'd7', 'd8', 'd8', 'e8', 'f7', 'f8', 'g7', 'g8', 'h7',
+                'a7', 'b7', 'b8', 'c8', 'd5', 'd8', 'e7', 'e7', 'e7', 'e7',
+                'e8', 'f7', 'f8', 'g7', 'g8', 'h7',
             ],
         ];
+
+        $defenseEval = (new DefenseEval($board))->eval();
 
         $this->assertSame($expected, $defenseEval);
     }

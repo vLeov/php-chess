@@ -29,6 +29,25 @@ class MaterialEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function A59()
+    {
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+
+        $board = (new Player($A59))->play()->getBoard();
+
+        $expected = [
+            'w' => 35.73,
+            'b' => 34.73,
+        ];
+
+        $mtlEval = (new MaterialEval($board))->eval();
+
+        $this->assertSame($expected, $mtlEval);
+    }
+
+    /**
+     * @test
+     */
     public function C60()
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
@@ -43,24 +62,5 @@ class MaterialEvalTest extends AbstractUnitTestCase
         $mtlEval = (new MaterialEval($board))->eval();
 
         $this->assertSame($expected, $mtlEval);
-    }
-
-    /**
-     * @test
-     */
-    public function w_e4_b_Nf6()
-    {
-        $board = new Board();
-        $board->play('w', 'e4');
-        $board->play('b', 'Nf6');
-
-        $expected = [
-            'w' => 40.06,
-            'b' => 40.06,
-        ];
-
-        $mtlEval = (new MaterialEval($board))->eval();
-
-        $this->assertEquals($expected, $mtlEval);
     }
 }
