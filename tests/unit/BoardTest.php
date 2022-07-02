@@ -21,7 +21,6 @@ use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
 use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
 use Chess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
-use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as SymmetricalDefense;
 
 class BoardTest extends AbstractUnitTestCase
 {
@@ -146,7 +145,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_history_in_symmetrical_defense()
     {
-        $board = (new SymmetricalDefense(new Board()))->play();
+        $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
+
+        $board = (new Player($D06))->play()->getBoard();
 
         $expected = [
             (object) [

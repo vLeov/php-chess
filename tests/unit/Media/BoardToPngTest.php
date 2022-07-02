@@ -7,7 +7,6 @@ use Chess\Player;
 use Chess\FEN\StrToBoard;
 use Chess\Media\BoardToPng;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as QueensGambitSymmetricalDefense;
 
 class BoardToPngTest extends AbstractUnitTestCase
 {
@@ -120,7 +119,9 @@ class BoardToPngTest extends AbstractUnitTestCase
      */
     public function output_symmetrical_defense_to_the_queens_gambit_flip()
     {
-        $board = (new QueensGambitSymmetricalDefense())->play();
+        $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
+
+        $board = (new Player($D06))->play()->getBoard();
 
         $filename = (new BoardToPng($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
@@ -135,7 +136,9 @@ class BoardToPngTest extends AbstractUnitTestCase
      */
     public function output_symmetrical_defense_to_the_queens_gambit()
     {
-        $board = (new QueensGambitSymmetricalDefense())->play();
+        $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
+
+        $board = (new Player($D06))->play()->getBoard();
 
         $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
 
