@@ -91,7 +91,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function open_sicilian_labelled()
+    public function B56_labelled()
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 

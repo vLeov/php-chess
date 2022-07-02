@@ -117,7 +117,7 @@ class BoardToPngTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function output_symmetrical_defense_to_the_queens_gambit_flip()
+    public function output_D06_flip()
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 
@@ -134,7 +134,7 @@ class BoardToPngTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function output_symmetrical_defense_to_the_queens_gambit()
+    public function output_D06()
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 

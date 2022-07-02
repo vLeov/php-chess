@@ -56,7 +56,7 @@ class BoardToStrTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function ruy_lopez_exchange()
+    public function C68()
     {
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
 

@@ -27,7 +27,7 @@ class AttackEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function open_sicilian()
+    public function B56()
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
@@ -46,7 +46,7 @@ class AttackEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian()
+    public function B25()
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 

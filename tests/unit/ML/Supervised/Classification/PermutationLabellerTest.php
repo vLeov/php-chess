@@ -187,7 +187,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian_labelled()
+    public function B25_labelled()
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 

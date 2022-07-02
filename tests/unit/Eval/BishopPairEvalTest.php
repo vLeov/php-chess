@@ -13,7 +13,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function closed_sicilian()
+    public function B25()
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
@@ -32,7 +32,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function ruy_lopez_exchange()
+    public function C68()
     {
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
 

@@ -32,7 +32,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_captures_in_exchange_ruy_lopez()
+    public function get_captures_in_C68()
     {
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
 
@@ -120,7 +120,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_castle_in_open_ruy_lopez()
+    public function get_castle_in_C67()
     {
         $C67 = file_get_contents(self::DATA_FOLDER.'/sample/C67.pgn');
 
@@ -143,7 +143,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_history_in_symmetrical_defense()
+    public function get_history_in_D06()
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 
@@ -222,7 +222,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_history_in_lucena_defense()
+    public function get_history_in_C60()
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
 
@@ -333,7 +333,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_history_in_classical_french_defense()
+    public function get_history_in_C11()
     {
         $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
 
@@ -479,7 +479,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_pieces_in_open_sicilian()
+    public function get_pieces_in_B56()
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
@@ -2141,7 +2141,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_array_french_defense_classical()
+    public function to_array_C11()
     {
         $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
 

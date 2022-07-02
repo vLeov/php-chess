@@ -27,7 +27,7 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function ruy_lopez_lucena_defense()
+    public function C60()
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
 
