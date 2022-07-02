@@ -119,11 +119,11 @@ class PermutationLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fool_checkmate_labelled()
+    public function A00_labelled()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/fool_checkmate.pgn');
+        $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A00))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 

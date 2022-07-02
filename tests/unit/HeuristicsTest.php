@@ -96,11 +96,11 @@ class HeuristicsTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function end_fool_checkmate()
+    public function end_A00()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/fool_checkmate.pgn');
+        $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A00))->play()->getBoard();
 
         $end = (new Heuristics($board->getMovetext()))->end();
 
@@ -276,11 +276,11 @@ class HeuristicsTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_balance_fool_checkmate()
+    public function get_balance_A00()
     {
-        $movetext = file_get_contents(self::DATA_FOLDER.'/sample/fool_checkmate.pgn');
+        $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new Player($A00))->play()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
