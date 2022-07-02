@@ -22,7 +22,6 @@ use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
 use Chess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as SymmetricalDefense;
-use Chess\Tests\Sample\Opening\FrenchDefense\Classical as ClassicalFrenchDefense;
 
 class BoardTest extends AbstractUnitTestCase
 {
@@ -333,7 +332,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_history_in_classical_french_defense()
     {
-        $board = (new ClassicalFrenchDefense(new Board()))->play();
+        $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
+
+        $board = (new Player($C11))->play()->getBoard();
 
         $expected = [
             (object) [
@@ -2137,7 +2138,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function to_array_french_defense_classical()
     {
-        $board = (new ClassicalFrenchDefense(new Board()))->play();
+        $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
+
+        $board = (new Player($C11))->play()->getBoard();
 
         $expected = [
             7 => [ ' r ', ' n ', ' b ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
