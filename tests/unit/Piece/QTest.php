@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit\Piece;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\Piece\Q;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
 
 class QTest extends AbstractUnitTestCase
 {
@@ -52,13 +52,15 @@ class QTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_sqs_fianchetto_variation()
+    public function get_sqs_A74()
     {
-        $board = (new BenoniFianchettoVariation(new Board()))->play();
+        $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
+
+        $board = (new Player($A74))->play()->getBoard();
 
         $queen = $board->getPieceBySq('d1');
 
-        $expected = [ 'e1', 'c2', 'b3' ];
+        $expected = [ 'd2', 'd3', 'd4', 'e1', 'c2', 'b3' ];
 
         $this->assertSame($expected, $queen->sqs());
     }

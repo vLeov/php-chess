@@ -21,7 +21,6 @@ use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
 use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
 use Chess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
-use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
 use Chess\Tests\Sample\Opening\QueensGambit\SymmetricalDefense as SymmetricalDefense;
 use Chess\Tests\Sample\Opening\FrenchDefense\Classical as ClassicalFrenchDefense;
 
@@ -463,9 +462,11 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_pieces_in_fianchetto_variation()
+    public function get_pieces_in_A74()
     {
-        $board = (new BenoniFianchettoVariation(new Board()))->play();
+        $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
+
+        $board = (new Player($A74))->play()->getBoard();
 
         $this->assertSame(15, count($board->getPiecesByColor(Color::W)));
         $this->assertSame(15, count($board->getPiecesByColor(Color::B)));
@@ -2111,18 +2112,20 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_array_benoni_fianchetto_variation()
+    public function to_array_A74()
     {
-        $board = (new BenoniFianchettoVariation(new Board()))->play();
+        $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
+
+        $board = (new Player($A74))->play()->getBoard();
 
         $expected = [
-            7 => [ ' r ', ' . ', ' b ', ' q ', ' r ', ' . ', ' k ', ' . ' ],
-            6 => [ ' . ', ' p ', ' . ', ' n ', ' . ', ' p ', ' b ', ' p ' ],
+            7 => [ ' r ', ' n ', ' b ', ' q ', ' . ', ' r ', ' k ', ' . ' ],
+            6 => [ ' . ', ' p ', ' . ', ' . ', ' . ', ' p ', ' b ', ' p ' ],
             5 => [ ' p ', ' . ', ' . ', ' p ', ' . ', ' n ', ' p ', ' . ' ],
             4 => [ ' . ', ' . ', ' p ', ' P ', ' . ', ' . ', ' . ', ' . ' ],
-            3 => [ ' P ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            2 => [ ' . ', ' . ', ' N ', ' . ', ' . ', ' . ', ' P ', ' . ' ],
-            1 => [ ' . ', ' P ', ' . ', ' N ', ' P ', ' P ', ' B ', ' P ' ],
+            3 => [ ' P ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' N ', ' . ', ' . ', ' N ', ' . ', ' . ' ],
+            1 => [ ' . ', ' P ', ' . ', ' . ', ' B ', ' P ', ' P ', ' P ' ],
             0 => [ ' R ', ' . ', ' B ', ' Q ', ' . ', ' R ', ' K ', ' . ' ],
         ];
 

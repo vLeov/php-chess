@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit\Media;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\Media\BoardToMp4;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\Benoni\FianchettoVariation as BenoniFianchettoVariation;
 
 class BoardToMp4Test extends AbstractUnitTestCase
 {
@@ -19,15 +19,17 @@ class BoardToMp4Test extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function output_benoni_fianchetto_variation()
+    public function output_A74()
     {
-        $board = (new BenoniFianchettoVariation(new Board()))->play();
+        $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
+
+        $board = (new Player($A74))->play()->getBoard();
 
         $filename = (new BoardToMp4($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
             md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/mp4/benoni_fianchetto_variation.mp4')
+            md5_file(self::DATA_FOLDER.'/mp4/A74.mp4')
         );
     }
 
@@ -38,7 +40,9 @@ class BoardToMp4Test extends AbstractUnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $board = (new BenoniFianchettoVariation(new Board()))->play();
+        $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
+
+        $board = (new Player($A74))->play()->getBoard();
 
         $filename = (new BoardToMp4($board))->output('foo');
     }

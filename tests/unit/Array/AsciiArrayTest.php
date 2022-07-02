@@ -106,7 +106,7 @@ class AsciiArrayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_board_benoni_fianchetto_variation()
+    public function to_board_A74()
     {
         $expected = [
             7 => [ ' r ', ' . ', ' b ', ' q ', ' r ', ' . ', ' k ', ' . ' ],
