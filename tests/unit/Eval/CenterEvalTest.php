@@ -11,11 +11,11 @@ class CenterEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function C60()
+    public function B25()
     {
-        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new Player($C60))->play()->getBoard();
+        $board = (new Player($B25))->play()->getBoard();
 
         $expected = [
             'w' => 37.73,
@@ -49,11 +49,11 @@ class CenterEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function B25()
+    public function C60()
     {
-        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
 
-        $board = (new Player($B25))->play()->getBoard();
+        $board = (new Player($C60))->play()->getBoard();
 
         $expected = [
             'w' => 37.73,

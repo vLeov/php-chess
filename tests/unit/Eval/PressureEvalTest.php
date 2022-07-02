@@ -27,25 +27,6 @@ class PressureEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function B56()
-    {
-        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-
-        $board = (new Player($B56))->play()->getBoard();
-
-        $pressEval = (new PressureEval($board))->eval();
-
-        $expected = [
-            'w' => ['c6'],
-            'b' => ['d4', 'e4'],
-        ];
-
-        $this->assertSame($expected, $pressEval);
-    }
-
-    /**
-     * @test
-     */
     public function B25()
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
@@ -65,22 +46,36 @@ class PressureEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
+    public function B56()
     {
-        $board = new Board();
-        $board->play('w', 'e4');
-        $board->play('b', 'e5');
-        $board->play('w', 'Nf3');
-        $board->play('b', 'Nc6');
-        $board->play('w', 'Bb5');
-        $board->play('b', 'a6');
-        $board->play('w', 'Nxe5');
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new Player($B56))->play()->getBoard();
 
         $pressEval = (new PressureEval($board))->eval();
 
         $expected = [
-            'w' => ['a6', 'c6', 'c6', 'd7', 'f7'],
-            'b' => ['b5', 'e5'],
+            'w' => ['c6'],
+            'b' => ['d4', 'e4'],
+        ];
+
+        $this->assertSame($expected, $pressEval);
+    }
+
+    /**
+     * @test
+     */
+    public function C67()
+    {
+        $C67 = file_get_contents(self::DATA_FOLDER.'/sample/C67.pgn');
+
+        $board = (new Player($C67))->play()->getBoard();
+
+        $pressEval = (new PressureEval($board))->eval();
+
+        $expected = [
+            'w' => ['c6', 'e5'],
+            'b' => ['d2', 'f2'],
         ];
 
         $this->assertSame($expected, $pressEval);

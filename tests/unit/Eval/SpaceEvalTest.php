@@ -31,33 +31,6 @@ class SpaceEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function B56()
-    {
-        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-
-        $board = (new Player($B56))->play()->getBoard();
-
-        $spEval = (new SpaceEval($board))->eval();
-
-        $expected = [
-            'w' => [
-                'a3', 'a4', 'a6', 'b1', 'b3', 'b5', 'c4', 'd2',
-                'd3', 'd5', 'e2', 'e3', 'e6', 'f3', 'f4', 'f5',
-                'g1', 'g3', 'g4', 'g5', 'h3', 'h5', 'h6',
-            ],
-            'b' => [
-                'a5', 'a6', 'b4', 'b6', 'b8', 'c5', 'c7', 'd5',
-                'd7', 'e5', 'e6', 'f5', 'g4', 'g6', 'g8', 'h3',
-                'h5', 'h6',
-            ],
-        ];
-
-        $this->assertSame($expected, $spEval);
-    }
-
-    /**
-     * @test
-     */
     public function B25()
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
@@ -76,6 +49,33 @@ class SpaceEvalTest extends AbstractUnitTestCase
                 'a5', 'a6', 'b4', 'b6', 'b8', 'c7', 'd4', 'd7',
                 'e5', 'e6', 'f5', 'f6', 'f8', 'g4', 'h3', 'h5',
                 'h6',
+            ],
+        ];
+
+        $this->assertSame($expected, $spEval);
+    }
+
+    /**
+     * @test
+     */
+    public function B56()
+    {
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new Player($B56))->play()->getBoard();
+
+        $spEval = (new SpaceEval($board))->eval();
+
+        $expected = [
+            'w' => [
+                'a3', 'a4', 'a6', 'b1', 'b3', 'b5', 'c4', 'd2',
+                'd3', 'd5', 'e2', 'e3', 'e6', 'f3', 'f4', 'f5',
+                'g1', 'g3', 'g4', 'g5', 'h3', 'h5', 'h6',
+            ],
+            'b' => [
+                'a5', 'a6', 'b4', 'b6', 'b8', 'c5', 'c7', 'd5',
+                'd7', 'e5', 'e6', 'f5', 'g4', 'g6', 'g8', 'h3',
+                'h5', 'h6',
             ],
         ];
 

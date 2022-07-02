@@ -27,16 +27,16 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function B56()
+    public function A00()
     {
-        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+        $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new Player($B56))->play()->getBoard();
+        $board = (new Player($A00))->play()->getBoard();
 
         $kSafetyEval = (new KingSafetyEval($board))->eval();
 
         $expected = [
-            'w' => 1,
+            'w' => 0,
             'b' => 1,
         ];
 

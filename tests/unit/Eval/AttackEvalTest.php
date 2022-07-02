@@ -27,11 +27,11 @@ class AttackEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function B56()
+    public function B25()
     {
-        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new Player($B56))->play()->getBoard();
+        $board = (new Player($B25))->play()->getBoard();
 
         $attEval = (new AttackEval($board))->eval();
 
@@ -46,11 +46,11 @@ class AttackEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function B25()
+    public function B56()
     {
-        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
-        $board = (new Player($B25))->play()->getBoard();
+        $board = (new Player($B56))->play()->getBoard();
 
         $attEval = (new AttackEval($board))->eval();
 
