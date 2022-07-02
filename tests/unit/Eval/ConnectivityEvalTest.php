@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit\Eval\Material;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\Eval\ConnectivityEval;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as RuyLopezLucenaDefense;
 
 class ConnectivityEvalTest extends AbstractUnitTestCase
 {
@@ -29,7 +29,9 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
      */
     public function ruy_lopez_lucena_defense()
     {
-        $board = (new RuyLopezLucenaDefense(new Board()))->play();
+        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
+
+        $board = (new Player($C60))->play()->getBoard();
 
         $expected = [
             'w' => 19,

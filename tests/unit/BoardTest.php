@@ -17,9 +17,6 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\Move;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\RuyLopez\Exchange as ExchangeRuyLopez;
-use Chess\Tests\Sample\Opening\RuyLopez\LucenaDefense as LucenaDefense;
-use Chess\Tests\Sample\Opening\RuyLopez\Open as OpenRuyLopez;
 use Chess\Tests\Sample\Opening\Sicilian\Open as OpenSicilian;
 
 class BoardTest extends AbstractUnitTestCase
@@ -38,7 +35,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_captures_in_exchange_ruy_lopez()
     {
-        $board = (new ExchangeRuyLopez(new Board()))->play();
+        $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
+
+        $board = (new Player($C68))->play()->getBoard();
 
         $expected = [
             'w' => [
@@ -124,7 +123,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_castle_in_open_ruy_lopez()
     {
-        $board = (new OpenRuyLopez(new Board()))->play();
+        $C67 = file_get_contents(self::DATA_FOLDER.'/sample/C67.pgn');
+
+        $board = (new Player($C67))->play()->getBoard();
 
         $expected = 'kq';
 
@@ -224,7 +225,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_history_in_lucena_defense()
     {
-        $board = (new LucenaDefense(new Board()))->play();
+        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
+
+        $board = (new Player($C60))->play()->getBoard();
 
         $expected = [
             (object) [

@@ -6,7 +6,6 @@ use Chess\Board;
 use Chess\Player;
 use Chess\FEN\BoardToStr;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Tests\Sample\Opening\RuyLopez\Exchange as RuyLopezExchange;
 
 class BoardToStrTest extends AbstractUnitTestCase
 {
@@ -59,7 +58,9 @@ class BoardToStrTest extends AbstractUnitTestCase
      */
     public function ruy_lopez_exchange()
     {
-        $board = (new RuyLopezExchange(new Board()))->play();
+        $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
+
+        $board = (new Player($C68))->play()->getBoard();
 
         $expected = 'r1b1kbnr/1pp2ppp/p1p5/8/3NP3/8/PPP2PPP/RNB1K2R b KQkq -';
         $string = (new BoardToStr($board))->create();

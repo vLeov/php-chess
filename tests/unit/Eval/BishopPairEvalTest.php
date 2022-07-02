@@ -3,11 +3,11 @@
 namespace Chess\Tests\Unit\Eval;
 
 use Chess\Board;
+use Chess\Player;
 use Chess\Eval\BishopPairEval;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tests\Sample\Opening\Sicilian\Closed as ClosedSicilian;
-use Chess\Tests\Sample\Opening\RuyLopez\Exchange as RuyLopezExchange;
 
 class BishopPairEvalTest extends AbstractUnitTestCase
 {
@@ -33,7 +33,9 @@ class BishopPairEvalTest extends AbstractUnitTestCase
      */
     public function ruy_lopez_exchange()
     {
-        $board = (new RuyLopezExchange(new Board()))->play();
+        $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
+
+        $board = (new Player($C68))->play()->getBoard();
 
         $bishopPairEval = (new BishopPairEval($board))->eval();
 
