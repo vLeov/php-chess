@@ -144,16 +144,10 @@ class P extends AbstractPiece
         }
 
         // en passant squares
-        if (
-            $end &&
-            $end->move->id === Piece::P &&
-            $end->move->color === $this->oppColor()
-        ) {
+        if ($end && $end->move->id === Piece::P && $end->move->color === $this->oppColor()) {
             if ($this->color === Color::W) {
                 if ((int)$this->sq[1] === 5) {
-                    $captureSquare =
-                        $end->move->sq->next[0] .
-                        ($end->move->sq->next[1]+1);
+                    $captureSquare = $end->move->sq->next[0].($end->move->sq->next[1]+1);
                     if (in_array($captureSquare, $this->captureSqs)) {
                         $this->enPassantSq = $end->move->sq->next;
                         $sqs[] = $captureSquare;
@@ -161,9 +155,7 @@ class P extends AbstractPiece
                 }
             } elseif ($this->color === Color::B) {
                 if ((int)$this->sq[1] === 4) {
-                    $captureSquare =
-                        $end->move->sq->next[0] .
-                        ($end->move->sq->next[1]-1);
+                    $captureSquare = $end->move->sq->next[0].($end->move->sq->next[1]-1);
                     if (in_array($captureSquare, $this->captureSqs)) {
                         $this->enPassantSq = $end->move->sq->next;
                         $sqs[] = $captureSquare;
