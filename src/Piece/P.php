@@ -124,42 +124,48 @@ class P extends AbstractPiece
     public function sqs(): array
     {
         $sqs = [];
-        // add up squares
-        foreach($this->mobility as $sq) {
+        $history = $this->board->getHistory();
+        $end = end($history);
+
+        // mobility squares
+        foreach ($this->mobility as $sq) {
             if (in_array($sq, $this->board->getSqEval()->free)) {
                 $sqs[] = $sq;
             } else {
                 break;
             }
         }
-        // add capture squares
-        foreach($this->captureSqs as $sq) {
+
+        // capture squares
+        foreach ($this->captureSqs as $sq) {
             if (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
                 $sqs[] = $sq;
             }
         }
-        // en passant implementation
-        if ($this->board->getLastHistory() &&
-            $this->board->getLastHistory()->move->id === Piece::P &&
-            $this->board->getLastHistory()->move->color === $this->oppColor()
+
+        // en passant squares
+        if (
+            $end &&
+            $end->move->id === Piece::P &&
+            $end->move->color === $this->oppColor()
         ) {
             if ($this->color === Color::W) {
                 if ((int)$this->sq[1] === 5) {
                     $captureSquare =
-                        $this->board->getLastHistory()->move->sq->next[0] .
-                        ($this->board->getLastHistory()->move->sq->next[1]+1);
+                        $end->move->sq->next[0] .
+                        ($end->move->sq->next[1]+1);
                     if (in_array($captureSquare, $this->captureSqs)) {
-                        $this->enPassantSq = $this->board->getLastHistory()->move->sq->next;
+                        $this->enPassantSq = $end->move->sq->next;
                         $sqs[] = $captureSquare;
                     }
                 }
             } elseif ($this->color === Color::B) {
                 if ((int)$this->sq[1] === 4) {
                     $captureSquare =
-                        $this->board->getLastHistory()->move->sq->next[0] .
-                        ($this->board->getLastHistory()->move->sq->next[1]-1);
+                        $end->move->sq->next[0] .
+                        ($end->move->sq->next[1]-1);
                     if (in_array($captureSquare, $this->captureSqs)) {
-                        $this->enPassantSq = $this->board->getLastHistory()->move->sq->next;
+                        $this->enPassantSq = $end->move->sq->next;
                         $sqs[] = $captureSquare;
                     }
                 }

@@ -267,20 +267,6 @@ final class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the last history entry.
-     *
-     * @return mixed object|null
-     */
-    public function getLastHistory(): ?object
-    {
-        if ($this->history) {
-            return end($this->history);
-        }
-
-        return null;
-    }
-
-    /**
      * Gets the movetext.
      *
      * @return string
