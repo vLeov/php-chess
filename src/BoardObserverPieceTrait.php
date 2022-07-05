@@ -17,8 +17,7 @@ trait BoardObserverPieceTrait
     {
         $this->rewind();
         while ($this->valid()) {
-            $key = spl_object_hash($this->current());
-            $this->observers[$key] = $this->current();
+            $this->observers[] = $this->current();
             $this->next();
         }
 
