@@ -595,33 +595,34 @@ final class Board extends \SplObjectStorage
     /**
      * Undoes a castle move.
      *
+     * @param string $sq
+     * @param object $move
      * @return \Chess\Board
      */
-    private function undoCastle(): Board
+    private function undoCastle(string $sq, object $move): Board
     {
-        $last = end($this->history);
-        $king = $this->getPieceBySq($last->move->sq->next);
-        $kingUndone = new K($last->move->color, $last->sq);
+        $king = $this->getPieceBySq($move->sq->next);
+        $kingUndone = new K($move->color, $sq);
         $this->detach($king);
         $this->attach($kingUndone);
-        if (Move::CASTLE_SHORT === $last->move->type) {
+        if (Move::CASTLE_SHORT === $move->type) {
             $rook = $this->getPieceBySq(
-                K::$castlingRule[$last->move->color][Piece::R][Castle::SHORT]['sq']['next']
+                K::$castlingRule[$move->color][Piece::R][Castle::SHORT]['sq']['next']
             );
             $rookUndone = new R(
-                $last->move->color,
-                K::$castlingRule[$last->move->color][Piece::R][Castle::SHORT]['sq']['current'],
+                $move->color,
+                K::$castlingRule[$move->color][Piece::R][Castle::SHORT]['sq']['current'],
                 $rook->getType()
             );
             $this->detach($rook);
             $this->attach($rookUndone);
-        } elseif (Move::CASTLE_LONG === $last->move->type) {
+        } elseif (Move::CASTLE_LONG === $move->type) {
             $rook = $this->getPieceBySq(
-                K::$castlingRule[$last->move->color][Piece::R][Castle::LONG]['sq']['next']
+                K::$castlingRule[$move->color][Piece::R][Castle::LONG]['sq']['next']
             );
             $rookUndone = new R(
-                $last->move->color,
-                K::$castlingRule[$last->move->color][Piece::R][Castle::LONG]['sq']['current'],
+                $move->color,
+                K::$castlingRule[$move->color][Piece::R][Castle::LONG]['sq']['current'],
                 $rook->getType()
             );
             $this->detach($rook);
@@ -767,7 +768,7 @@ final class Board extends \SplObjectStorage
     {
         if ($last = end($this->history)) {
             if ($last->move->type === Move::CASTLE_SHORT || $last->move->type === Move::CASTLE_LONG) {
-                $this->undoCastle();
+                $this->undoCastle($last->sq, $last->move);
                 $nextToLast = end($this->history);
                 $this->castlingAbility = $nextToLast->castlingAbility;
             } else {
@@ -818,7 +819,7 @@ final class Board extends \SplObjectStorage
             $this->castle($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
             $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoCastle();
+            $this->undoCastle($piece->getSq(), $piece->getMove());
         } else {
             $this->move($piece);
             $king = $this->getPiece($piece->getColor(), Piece::K);
