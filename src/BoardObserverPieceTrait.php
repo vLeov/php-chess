@@ -9,7 +9,7 @@ trait BoardObserverPieceTrait
     public function notifyPieces(): void
     {
         foreach ($this->observers as $piece) {
-            $piece->updateBoard($this);
+            $piece->setBoard($this);
         }
     }
 
