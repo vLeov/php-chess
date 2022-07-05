@@ -748,7 +748,7 @@ final class Board extends \SplObjectStorage
         if ($move->isCapture && $capture = end($this->captures[$move->color])) {
             $className = "\\Chess\\Piece\\{$capture->captured->id}";
             $this->attach(new $className(
-                $move->color === Color::W ? Color::B : Color::W,
+                Color::opp($move->color),
                 $capture->captured->sq,
                 $capture->captured->id !== Piece::R ?: $capture->captured->type
             ));
