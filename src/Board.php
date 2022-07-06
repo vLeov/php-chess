@@ -517,7 +517,6 @@ final class Board extends \SplObjectStorage
      */
     private function isLegalMove(object $move): bool
     {
-        $isLegalMove = false;
         $pieces = $this->pickPiece($move);
         if (count($pieces) > 1) {
             foreach ($pieces as $piece) {
@@ -531,19 +530,19 @@ final class Board extends \SplObjectStorage
                   $piece->getMove()->type === Move::CASTLE_SHORT &&
                   $piece->sqCastleShort()
                 ) {
-                    $isLegalMove = $this->castle($piece);
+                    return $this->castle($piece);
                 } elseif (
                   $piece->getMove()->type === Move::CASTLE_LONG &&
                   $piece->sqCastleLong()
                 ) {
-                    $isLegalMove = $this->castle($piece);
+                    return $this->castle($piece);
                 } else {
-                    $isLegalMove = $this->move($piece);
+                    return $this->move($piece);
                 }
             }
          }
 
-        return $isLegalMove;
+        return false;
     }
 
     /**

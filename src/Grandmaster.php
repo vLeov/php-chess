@@ -26,8 +26,7 @@ class Grandmaster
     public function move(Game $game): ?object
     {
         $movetext = $game->getBoard()->getMovetext();
-        $found = $this->find($movetext);
-        if ($found) {
+        if ($found = $this->find($movetext)) {
             return (object) [
                 'move' => $this->next($found[0]['movetext'], $movetext),
                 'game' => $found[0],
