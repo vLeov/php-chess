@@ -21,7 +21,7 @@ class ModelPlayCli extends CLI
 
     protected function main(Options $options)
     {
-        $game = new Game(Game::MODE_AI, $options->getArgs()[0]);
+        $game = new Game(Game::MODE_AI, null, $options->getArgs()[0]);
 
         if (isset($options->getArgs()[1])) {
             $game->loadFen($options->getArgs()[1]);
@@ -30,19 +30,19 @@ class ModelPlayCli extends CLI
         do {
             $move = readline(self::PROMPT);
             if ($move === 'ascii') {
-                echo $game->ascii() . PHP_EOL;
+                echo $game->getBoard()->toAsciiString() . PHP_EOL;
             } elseif ($move === 'fen') {
                 echo $game->fen() . PHP_EOL;
             } elseif ($move !== 'quit') {
                 $game->play('w', $move);
-                $response = $game->response();
+                $response = $game->ai();
                 $game->play('b', $response);
                 echo self::PROMPT . $game->movetext() . PHP_EOL;
                 echo $game->ascii();
             } else {
                 break;
             }
-        } while (!$game->isMate());
+        } while (!$game->getBoard()->isMate());
     }
 }
 
