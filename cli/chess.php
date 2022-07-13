@@ -5,11 +5,14 @@ namespace ChessData\Cli;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Chess\Game;
+use Chess\Grandmaster;
 use splitbrain\phpcli\CLI;
 use splitbrain\phpcli\Options;
 
 class ModelPlayCli extends CLI
 {
+    const FILEPATH = __DIR__.'/../data/json/players.json';
+
     const PROMPT = 'chess > ';
 
     protected function setup(Options $options)
@@ -21,7 +24,11 @@ class ModelPlayCli extends CLI
 
     protected function main(Options $options)
     {
-        $game = new Game(Game::MODE_AI, null, $options->getArgs()[0]);
+        $game = new Game(
+            Game::MODE_AI,
+            new Grandmaster(self::FILEPATH),
+            $options->getArgs()[0]
+        );
 
         if (isset($options->getArgs()[1])) {
             $game->loadFen($options->getArgs()[1]);

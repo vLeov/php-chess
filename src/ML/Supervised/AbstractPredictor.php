@@ -16,8 +16,6 @@ abstract class AbstractPredictor
 
     abstract protected function eval(Board $clone): array;
 
-    abstract protected function sort(string $color): AbstractPredictor;
-
     abstract protected function find(): string;
 
     public function __construct(Board $board, PersistentModel $estimator)
