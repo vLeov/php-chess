@@ -932,11 +932,13 @@ final class Board extends \SplObjectStorage
                     case Piece::K:
                         if (
                             K::$castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
+                            $piece->sqCastleShort() &&
                             $clone->play($color, Castle::SHORT)
                         ) {
                             $moves[] = Castle::SHORT;
                         } elseif (
                             K::$castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
+                            $piece->sqCastleLong() &&
                             $clone->play($color, Castle::LONG)
                         ) {
                             $moves[] = Castle::LONG;

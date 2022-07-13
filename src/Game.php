@@ -120,7 +120,7 @@ class Game
     public function state(): object
     {
         $end = end($this->board->getHistory());
-        
+
         return (object) [
             'turn' => $this->board->getTurn(),
             'pgn' => $end ? $end->move->pgn : null,
@@ -152,7 +152,7 @@ class Game
      * This method is to be used in either Game::MODE_AI or Game::MODE_GM
      * otherwise it returns null.
      *
-     * @return mixed sring|null
+     * @return mixed object|null
      */
     public function ai(): ?object
     {
@@ -161,9 +161,11 @@ class Game
             if ($move) {
                 return $move;
             } else {
-                $move = (new GeometricSumPredictor($this->board, $this->estimator))
-                    ->predict();
-                return [
+                $move = (new GeometricSumPredictor(
+                    $this->board,
+                    $this->estimator
+                ))->predict();
+                return (object) [
                     'move' => $move,
                 ];
             }

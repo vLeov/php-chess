@@ -43,9 +43,9 @@ class ModelPlayCli extends CLI
             } elseif ($move !== 'quit') {
                 $game->play('w', $move);
                 $response = $game->ai();
-                $game->play('b', $response);
-                echo self::PROMPT . $game->movetext() . PHP_EOL;
-                echo $game->ascii();
+                $game->play('b', $response->move);
+                echo self::PROMPT . $game->getBoard()->getMovetext() . PHP_EOL;
+                echo $game->getBoard()->toAsciiString();
             } else {
                 break;
             }
