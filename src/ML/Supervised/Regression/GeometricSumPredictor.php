@@ -17,26 +17,14 @@ class GeometricSumPredictor extends AbstractPredictor
 
         $end = end($balance);
 
-        $label = (new GeometricSumLabeller())
-            ->label($end);
+        $label = (new GeometricSumLabeller())->label($end);
+
+        $prediction = current($this->estimator->predict($dataset));
 
         return [
             'label' => $label,
-            'prediction' => current($this->estimator->predict($dataset)),
+            'prediction' => $prediction,
+            'diff' => abs($label - $prediction)
         ];
-    }
-
-    protected function find(): string
-    {
-        $diffs = [];
-        foreach ($this->result as $key => $val) {
-            $current = current($val);
-            $diffs[$key] = abs($current['label'] - $current['prediction']);
-        }
-        $mins = array_keys($diffs, min($diffs));
-        shuffle($mins);
-        $min = $mins[0];
-
-        return key($this->result[$min]);
     }
 }

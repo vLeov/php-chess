@@ -16,8 +16,6 @@ abstract class AbstractPredictor
 
     abstract protected function eval(Board $clone): array;
 
-    abstract protected function find(): string;
-
     public function __construct(Board $board, PersistentModel $estimator)
     {
         $this->board = $board;
@@ -28,11 +26,9 @@ abstract class AbstractPredictor
     {
         usort($this->result, function ($a, $b) use ($color) {
             if ($color === Color::W) {
-                $current = (current($b)['label'] <=> current($a)['label']) * 10 +
-                    (current($b)['prediction'] <=> current($a)['prediction']);
+                $current = current($b)['diff'] <=> current($a)['diff'];
             } else {
-                $current = (current($a)['label'] <=> current($b)['label']) * 10 +
-                    (current($a)['prediction'] <=> current($b)['prediction']);
+                $current = current($a)['diff'] <=> current($b)['diff'];
             }
             return $current;
         });
@@ -48,8 +44,11 @@ abstract class AbstractPredictor
             $clone->play($color, $possibleMove);
             $this->result[] = [ $possibleMove => $this->eval($clone) ];
         }
-        $found = $this->sort($color)->find();
 
-        return $found;
+        $this->sort($color);
+
+        $prediction = current(array_keys($this->result[0]));
+
+        return $prediction;
     }
 }
