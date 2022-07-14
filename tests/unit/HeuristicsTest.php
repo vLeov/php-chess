@@ -4,7 +4,6 @@ namespace Chess\Tests\Unit;
 
 use Chess\Board;
 use Chess\Heuristics;
-use Chess\HeuristicsTrait;
 use Chess\Player;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -198,7 +197,7 @@ class HeuristicsTest extends AbstractUnitTestCase
         $balance = (new Heuristics(
             $board->getMovetext(),
             null,
-            HeuristicsTrait::$loneCheckmateDims
+            Heuristics::$loneCheckmateDims
         ))->getBalance();
 
         $expected = [
@@ -267,7 +266,7 @@ class HeuristicsTest extends AbstractUnitTestCase
         $balance = (new Heuristics(
             $movetext,
             null,
-            HeuristicsTrait::$loneCheckmateDims
+            Heuristics::$loneCheckmateDims
         ))->getBalance();
 
         $expected = [

@@ -13,7 +13,7 @@ class Heuristics extends Player
     {
         parent::__construct($movetext, $board);
 
-        $dims ? $this->dims = $dims : $this->dims = HeuristicsTrait::$openingDims;
+        $dims ? $this->dims = $dims : $this->dims = self::$openingDims;
 
         $this->calc();
     }

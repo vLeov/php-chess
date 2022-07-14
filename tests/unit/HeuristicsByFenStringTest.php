@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\HeuristicsTrait;
 use Chess\HeuristicsByFenString;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -76,7 +75,7 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
     {
         $fen = '7k/8/8/8/8/8/2K5/r7 w - - 0 1';
 
-        $evaluation = (new HeuristicsByFenString($fen, HeuristicsTrait::$loneCheckmateDims))->eval();
+        $evaluation = (new HeuristicsByFenString($fen, HeuristicsByFenString::$loneCheckmateDims))->eval();
 
         $expected = [
             'w' => 28.6,
