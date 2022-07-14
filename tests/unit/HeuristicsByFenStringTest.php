@@ -68,23 +68,6 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
         $this->assertSame($expected, $evaluation);
     }
 
-    /**
-     * @test
-     */
-    public function eval_lone_checkmate()
-    {
-        $fen = '7k/8/8/8/8/8/2K5/r7 w - - 0 1';
-
-        $evaluation = (new HeuristicsByFenString($fen, HeuristicsByFenString::$loneCheckmateDims))->eval();
-
-        $expected = [
-            'w' => 28.6,
-            'b' => 30.8,
-        ];
-
-        $this->assertSame($expected, $evaluation);
-    }
-
     /*
     |--------------------------------------------------------------------------
     | getBalance()
