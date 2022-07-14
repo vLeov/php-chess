@@ -9,9 +9,11 @@ class Heuristics extends Player
 {
     use HeuristicsTrait;
 
-    public function __construct(string $movetext = '', Board $board = null)
+    public function __construct(string $movetext = '', Board $board = null, array $dims = null)
     {
         parent::__construct($movetext, $board);
+
+        $dims ? $this->dims = $dims : $this->dims = HeuristicsTrait::$openingDims;
 
         $this->calc();
     }

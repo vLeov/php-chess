@@ -12,9 +12,11 @@ class HeuristicsByFenString
 
     protected Board $board;
 
-    public function __construct(string $fen)
+    public function __construct(string $fen, array $dims = null)
     {
         $this->board = (new StrToBoard($fen))->create();
+
+        $dims ? $this->dims = $dims : $this->dims = HeuristicsTrait::$openingDims;
 
         $this->calc();
     }

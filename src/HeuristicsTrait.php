@@ -53,7 +53,7 @@ trait HeuristicsTrait
      *
      * @var array
      */
-    protected $dims = [
+    public static $openingDims = [
         MaterialEval::class => 24,
         CenterEval::class => 4,
         ConnectivityEval::class => 4,
@@ -75,6 +75,26 @@ trait HeuristicsTrait
         BishopOutpostEval::class => 4,
         BishopPairEval::class => 4,
     ];
+
+    /**
+     * The evaluation features that make up a heuristic picture.
+     *
+     * @var array
+     */
+    public static $loneCheckmateDims = [
+        CenterEval::class => 20,
+        ConnectivityEval::class => 20,
+        SpaceEval::class => 20,
+        PressureEval::class => 20,
+        KingSafetyEval::class => 20,
+    ];
+
+    /**
+     * The evaluation features that make up a heuristic picture.
+     *
+     * @var array
+     */
+    protected array $dims;
 
     /**
      * The heuristics of $this->board.

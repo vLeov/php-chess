@@ -4,6 +4,7 @@ namespace Chess\Tests\Unit;
 
 use Chess\Board;
 use Chess\Heuristics;
+use Chess\HeuristicsTrait;
 use Chess\Player;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -190,6 +191,26 @@ class HeuristicsTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function get_balance_start_with_lone_checkmate_dims()
+    {
+        $board = new Board();
+
+        $balance = (new Heuristics(
+            $board->getMovetext(),
+            null,
+            HeuristicsTrait::$loneCheckmateDims
+        ))->getBalance();
+
+        $expected = [
+            [ 0.0, 0.0, 0.0, 0.0, 0.0 ],
+        ];
+
+        $this->assertSame($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
     public function get_balance_e4_e5()
     {
         $movetext = '1.e4 e5';
@@ -231,6 +252,27 @@ class HeuristicsTest extends AbstractUnitTestCase
         $expected = [
             [ 0, 0.27, -0.4, 0.17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
             [ 0, 0.82, -0.6, 0.83, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ],
+        ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function get_balance_e4_e6_d4_d5_with_lone_checkmate_dims()
+    {
+        $movetext = '1.e4 e6 2.d4 d5';
+
+        $balance = (new Heuristics(
+            $movetext,
+            null,
+            HeuristicsTrait::$loneCheckmateDims
+        ))->getBalance();
+
+        $expected = [
+            [ 0.27, -0.4, 0.17, 0, 0 ],
+            [ 0.82, -0.6, 0.83, 0, 0 ],
         ];
 
         $this->assertEquals($expected, $balance);

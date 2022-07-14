@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit;
 
+use Chess\HeuristicsTrait;
 use Chess\HeuristicsByFenString;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -63,6 +64,23 @@ class HeuristicsByFenStringTest extends AbstractUnitTestCase
         $expected = [
             'w' => 29.64,
             'b' => 28.16,
+        ];
+
+        $this->assertSame($expected, $evaluation);
+    }
+
+    /**
+     * @test
+     */
+    public function eval_lone_checkmate()
+    {
+        $fen = '7k/8/8/8/8/8/2K5/r7 w - - 0 1';
+
+        $evaluation = (new HeuristicsByFenString($fen, HeuristicsTrait::$loneCheckmateDims))->eval();
+
+        $expected = [
+            'w' => 28.6,
+            'b' => 30.8,
         ];
 
         $this->assertSame($expected, $evaluation);
