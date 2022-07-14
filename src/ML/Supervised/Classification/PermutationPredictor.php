@@ -16,7 +16,7 @@ class PermutationPredictor extends AbstractPredictor
         $this->permutations = (new RestrictedPermutationWithRepetition())
             ->get(
                 [4, 24],
-                count((new Heuristics(''))->getDimensions()),
+                count((new Heuristics(''))->getDims()),
                 100
             );
     }

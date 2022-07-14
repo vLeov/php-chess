@@ -53,7 +53,7 @@ trait HeuristicsTrait
      *
      * @var array
      */
-    protected $dimensions = [
+    protected $dims = [
         MaterialEval::class => 24,
         CenterEval::class => 4,
         ConnectivityEval::class => 4,
@@ -95,20 +95,20 @@ trait HeuristicsTrait
      *
      * @return array
      */
-    public function getDimensions(): array
+    public function getDims(): array
     {
-        return $this->dimensions;
+        return $this->dims;
     }
 
     /**
      * Sets the dimensions.
      *
-     * @param array $dimensions
+     * @param array $dims
      * @return \Chess\Heuristics
      */
-    public function setDimensions(array $dimensions)
+    public function setDims(array $dims)
     {
-        $this->dimensions = $dimensions;
+        $this->dims = $dims;
 
         return $this;
     }

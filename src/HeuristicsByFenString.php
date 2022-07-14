@@ -33,11 +33,11 @@ class HeuristicsByFenString
             Color::B => 0,
         ];
 
-        $weights = array_values($this->getDimensions());
+        $weights = array_values($this->getDims());
 
         $pic = $this->getResult();
 
-        for ($i = 0; $i < count($this->getDimensions()); $i++) {
+        for ($i = 0; $i < count($this->getDims()); $i++) {
             $result[Color::W] += $weights[$i] * $pic[Color::W][$i];
             $result[Color::B] += $weights[$i] * $pic[Color::B][$i];
         }
@@ -77,7 +77,7 @@ class HeuristicsByFenString
     protected function calc(): HeuristicsByFenString
     {
         $item = [];
-        foreach ($this->dimensions as $className => $weight) {
+        foreach ($this->dims as $className => $weight) {
             $dimension = new $className($this->board);
             $eval = $dimension->eval();
             if (is_array($eval[Color::W])) {
@@ -124,7 +124,7 @@ class HeuristicsByFenString
         $min = min($values);
         $max = max($values);
 
-        for ($i = 0; $i < count($this->dimensions); $i++) {
+        for ($i = 0; $i < count($this->dims); $i++) {
             if ($max - $min > 0) {
                 $normalization[Color::W][$i] =
                     round(($this->result[Color::W][$i] - $min) / ($max - $min), 2);

@@ -15,7 +15,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
     public static function setUpBeforeClass(): void
     {
-        $dimensions = (new Heuristics(''))->getDimensions();
+        $dimensions = (new Heuristics(''))->getDims();
 
         self::$permutations = (new RestrictedPermutationWithRepetition())
             ->get(

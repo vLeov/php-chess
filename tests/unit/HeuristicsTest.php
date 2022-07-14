@@ -11,7 +11,7 @@ class HeuristicsTest extends AbstractUnitTestCase
 {
     /*
     |--------------------------------------------------------------------------
-    | getDimensionsNames()
+    | getDimsNames()
     |--------------------------------------------------------------------------
     |
     | Returns the dimensions names.
@@ -21,9 +21,9 @@ class HeuristicsTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_dimensions_names()
+    public function get_dims_names()
     {
-        $dimensionsNames = (new Heuristics())->getDimensionsNames();
+        $dimsNames = (new Heuristics())->getDimsNames();
 
         $expected = [
             'Material',
@@ -48,7 +48,7 @@ class HeuristicsTest extends AbstractUnitTestCase
             'Bishop pair',
         ];
 
-        $this->assertSame($expected, $dimensionsNames);
+        $this->assertSame($expected, $dimsNames);
     }
 
     /*
@@ -407,7 +407,7 @@ class HeuristicsTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | getDimensions()
+    | getDims()
     |--------------------------------------------------------------------------
     |
     | Returns the evaluation features also known as dimensions.
@@ -417,11 +417,11 @@ class HeuristicsTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_dimensions()
+    public function get_dims()
     {
         $heuristics = new Heuristics('');
 
-        $weights = array_values($heuristics->getDimensions());
+        $weights = array_values($heuristics->getDims());
 
         $expected = 100;
 

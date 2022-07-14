@@ -21,15 +21,15 @@ class Heuristics extends Player
      *
      * @return array
      */
-    public function getDimensionsNames(): array
+    public function getDimsNames(): array
     {
-        $dimensionsNames = [];
-        foreach ($this->dimensions as $key => $val) {
-            $dimensionsNames[] = (new \ReflectionClass($key))
+        $dimsNames = [];
+        foreach ($this->dims as $key => $val) {
+            $dimsNames[] = (new \ReflectionClass($key))
                 ->getConstant('NAME');
         }
 
-        return $dimensionsNames;
+        return $dimsNames;
     }
 
     /**
@@ -46,11 +46,11 @@ class Heuristics extends Player
             Color::B => 0,
         ];
 
-        $weights = array_values($this->getDimensions());
+        $weights = array_values($this->getDims());
 
         $pic = $this->getResult();
 
-        for ($i = 0; $i < count($this->getDimensions()); $i++) {
+        for ($i = 0; $i < count($this->getDims()); $i++) {
             $result[Color::W] += $weights[$i] * end($pic[Color::W])[$i];
             $result[Color::B] += $weights[$i] * end($pic[Color::B])[$i];
         }
@@ -97,7 +97,7 @@ class Heuristics extends Player
                 $this->board->play(Color::W, $this->moves[$key]);
                 empty($this->moves[$key+1])
                     ?: $this->board->play(Color::B, $this->moves[$key+1]);
-                foreach ($this->dimensions as $className => $weight) {
+                foreach ($this->dims as $className => $weight) {
                     $dimension = new $className($this->board);
                     $eval = $dimension->eval();
                     if (is_array($eval[Color::W])) {
@@ -150,7 +150,7 @@ class Heuristics extends Player
         $normalization = [];
 
         if (count($this->board->getHistory()) >= 2) {
-            for ($i = 0; $i < count($this->dimensions); $i++) {
+            for ($i = 0; $i < count($this->dims); $i++) {
                 $values = [
                     ...array_column($this->result[Color::W], $i),
                     ...array_column($this->result[Color::B], $i)
@@ -171,7 +171,7 @@ class Heuristics extends Player
             }
         } else {
             $normalization[Color::W][] =
-                $normalization[Color::B][] = array_fill(0, count($this->dimensions), 0);
+                $normalization[Color::B][] = array_fill(0, count($this->dims), 0);
         }
 
         $this->result = $normalization;
