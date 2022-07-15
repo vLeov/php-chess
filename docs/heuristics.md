@@ -20,14 +20,14 @@ For further information you may want to check out the tests in [tests/unit/Heuri
 
 ---
 
-#### `public function getDimensions(): array`
+#### `public function getDims(): array`
 
 Returns the evaluation features also known as dimensions.
 
 ```php
-$dimensions = (new Heuristics())->getDimensions();
+$dims = (new Heuristics())->getDims();
 
-print_r($dimensions);
+print_r($dims);
 ```
 ```text
 Array
