@@ -209,7 +209,10 @@ class MovetextTest extends AbstractUnitTestCase
             [ self::$validData[1], self::$validData[1] . ' 0-1' ],
             [ self::$validData[2], self::$validData[2] . ' 1/2-1/2' ],
             [ self::$validData[3], self::$validData[3] . ' *' ],
-            [ self::$validData[4], self::$validData[4] . ' 1-0' ],
+            [ self::$validData[4], self::$validData[4] . ' 1–0' ],
+            [ self::$validData[0], self::$validData[0] . ' 0–1' ],
+            [ self::$validData[1], self::$validData[1] . ' 1/2–1/2' ],
+            [ self::$validData[2], self::$validData[2] . ' ½–½' ],
         ];
     }
 
