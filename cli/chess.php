@@ -18,20 +18,18 @@ class ModelPlayCli extends CLI
     protected function setup(Options $options)
     {
         $options->setHelp('Play with an AI.');
-        $options->registerArgument('model', 'AI model name. The AIs are stored in the model folder.', true);
         $options->registerArgument('fen', 'FEN string.', false);
     }
 
     protected function main(Options $options)
     {
         $game = new Game(
-            Game::MODE_AI,
-            new Grandmaster(self::FILEPATH),
-            $options->getArgs()[0]
+            Game::MODE_AI_STOCKFISH,
+            new Grandmaster(self::FILEPATH)
         );
 
-        if (isset($options->getArgs()[1])) {
-            $game->loadFen($options->getArgs()[1]);
+        if (isset($options->getArgs()[0])) {
+            $game->loadFen($options->getArgs()[0]);
         }
 
         do {
@@ -42,8 +40,8 @@ class ModelPlayCli extends CLI
                 echo $game->fen() . PHP_EOL;
             } elseif ($move !== 'quit') {
                 $game->play('w', $move);
-                $response = $game->ai();
-                $game->play('b', $response->move);
+                $ai = $game->ai();
+                $game->play('b', $ai->move);
                 echo self::PROMPT . $game->getBoard()->getMovetext() . PHP_EOL;
                 echo $game->getBoard()->toAsciiString();
             } else {

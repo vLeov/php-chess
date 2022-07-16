@@ -13,7 +13,7 @@ class StrToPgn extends AbstractStrToPgn
     protected function find(array $legal): ?string
     {
         foreach ($legal as $key => $val) {
-            if ($this->toFen === current($val)) {
+            if (str_starts_with($this->toFen, current($val))) {
                 return key($val);
             }
         }

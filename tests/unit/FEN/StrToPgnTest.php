@@ -40,4 +40,21 @@ class StrToPgnTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $pgn);
     }
+
+    /**
+     * @test
+     */
+    public function e6()
+    {
+        $pgn = (new StrToPgn(
+            'rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq -',
+            'rnbqkbnr/pp1p1ppp/4p3/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 2'
+        ))->create();
+
+        $expected = [
+            'b' => 'e6',
+        ];
+
+        $this->assertSame($expected, $pgn);
+    }
 }

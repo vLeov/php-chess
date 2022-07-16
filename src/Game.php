@@ -6,8 +6,10 @@ use Chess\Grandmaster;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\ShortStrToPgn;
 use Chess\FEN\StrToBoard;
+use Chess\FEN\StrToPgn;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
+use Chess\UciEngine\Stockfish;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
@@ -24,14 +26,18 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
-    const MODE_AI           = 'ai';
-    const MODE_ANALYSIS     = 'analysis';
-    const MODE_GM           = 'gm';
-    const MODE_FEN          = 'fen';
-    const MODE_PGN          = 'pgn';
-    const MODE_PLAY         = 'play';
+    const MODE_AI_PHP_CHESS     = 'ai php chess';
+    const MODE_AI_STOCKFISH     = 'ai stockfish';
+    const MODE_ANALYSIS         = 'analysis';
+    const MODE_GM               = 'gm';
+    const MODE_FEN              = 'fen';
+    const MODE_PGN              = 'pgn';
+    const MODE_PLAY             = 'play';
 
-    const MODEL_FOLDER      = __DIR__.'/../model/';
+    const MODEL_FOLDER          = __DIR__.'/../model/';
+    // TODO
+    // Train a generic model rather than an endgame one.
+    const MODEL_FILE            = 'regression/checkmate_king_and_rook_vs_king.model';
 
     /**
      * Chess board.
@@ -54,31 +60,13 @@ class Game
      */
     private null|Grandmaster $grandmaster;
 
-    /**
-     * Estimator.
-     *
-     * @var PersistentModel
-     */
-    private PersistentModel $estimator;
-
-    /**
-     * Constructor.
-     *
-     * @param mixed $mode
-     * @param mixed $grandmaster
-     * @param mixed $model
-     */
     public function __construct(
         null|string $mode = null,
-        null|Grandmaster $grandmaster = null,
-        null|string $model = null
+        null|Grandmaster $grandmaster = null
     ) {
         $this->board = new Board();
         $this->grandmaster = $grandmaster;
         $this->mode = $mode ?? self::MODE_ANALYSIS;
-        if ($model) {
-            $this->estimator = PersistentModel::load(new Filesystem(self::MODEL_FOLDER.$model));
-        }
     }
 
     /**
@@ -156,21 +144,36 @@ class Game
      */
     public function ai(): ?object
     {
-        $move = $this->grandmaster->move($this);
-        if ($this->mode === Game::MODE_AI) {
-            if ($move) {
+        if (
+            $this->mode === Game::MODE_AI_PHP_CHESS ||
+            $this->mode === Game::MODE_AI_STOCKFISH
+        ) {
+            if ($move = $this->grandmaster->move($this)) {
                 return $move;
             } else {
-                $move = (new GeometricSumPredictor(
-                    $this->board,
-                    $this->estimator
-                ))->predict();
-                return (object) [
-                    'move' => $move,
-                ];
+                if ($this->mode === Game::MODE_AI_PHP_CHESS) {
+                    $estimator = PersistentModel::load(
+                        new Filesystem(self::MODEL_FOLDER.self::MODEL_FILE)
+                    );
+                    $move = (new GeometricSumPredictor(
+                        $this->board,
+                        $estimator
+                    ))->predict();
+                    return (object) [
+                        'move' => $move,
+                    ];
+                } elseif ($this->mode === Game::MODE_AI_STOCKFISH) {
+                    $stockfish = new Stockfish($this->board);
+                    $fromFen = $this->board->toFen();
+                    $toFen = $stockfish->fen($fromFen, 3);
+                    $pgn = (new StrToPgn($fromFen, $toFen))->create();
+                    return (object) [
+                        'move' => current($pgn),
+                    ];
+                }
             }
         } elseif ($this->mode === Game::MODE_GM) {
-            return $move;
+            return $this->grandmaster->move($this);
         }
 
         return null;
