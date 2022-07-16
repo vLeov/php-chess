@@ -6,7 +6,6 @@ use Chess\Grandmaster;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\ShortStrToPgn;
 use Chess\FEN\StrToBoard;
-use Chess\FEN\StrToPgn;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\UciEngine\Stockfish;
@@ -165,8 +164,8 @@ class Game
                 } elseif ($this->mode === Game::MODE_AI_STOCKFISH) {
                     $stockfish = new Stockfish($this->board);
                     $fromFen = $this->board->toFen();
-                    $toFen = $stockfish->fen($fromFen, 3);
-                    $pgn = (new StrToPgn($fromFen, $toFen))->create();
+                    $toFen = $stockfish->shortFen($fromFen, 3);
+                    $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
                     return (object) [
                         'move' => current($pgn),
                     ];

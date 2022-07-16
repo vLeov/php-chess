@@ -93,13 +93,13 @@ class Stockfish
     }
 
     /**
-     * Makes the best move returning the FEN string.
+     * Makes the best move returning a short FEN string.
      *
      * @param string $fen
      * @param int $seconds
      * @return string
      */
-    public function fen(string $fen, int $seconds): string
+    public function shortFen(string $fen, int $seconds): string
     {
         $bestMove = $this->bestMove($fen, $seconds);
         if ($bestMove !== '(none)') {
@@ -116,6 +116,8 @@ class Stockfish
                     $line = fgets($this->pipes[1]);
                     if (str_starts_with($line, 'Fen: ')) {
                         $fen = substr($line, 5);
+                        $exploded = explode(' ', $fen);
+                        $fen = "{$exploded[0]} {$exploded[1]}";
                     }
                 }
                 fclose($this->pipes[1]);
