@@ -1,10 +1,10 @@
 ### Play Chess With an AI
 
 ```text
-$ php cli/chess.php a1.model
+$ php cli/chess.php
 ```
 
-This will start a prompt awaiting for your next chess move.
+This will start a prompt waiting for your move.
 
 ```text
 chess > e4
@@ -19,8 +19,6 @@ chess > 1.e4 e5
  R  N  B  Q  K  B  N  R
 chess >
 ```
-
-The AIs are stored in the [`model`](https://github.com/chesslablab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as the first argument to the `cli/chess.php` script.
 
 ### Commands Available
 
