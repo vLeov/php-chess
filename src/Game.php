@@ -25,13 +25,15 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
-    const MODE_AI_PHP_CHESS     = 'ai php chess';
-    const MODE_AI_STOCKFISH     = 'ai stockfish';
     const MODE_ANALYSIS         = 'analysis';
     const MODE_GM               = 'gm';
     const MODE_FEN              = 'fen';
     const MODE_PGN              = 'pgn';
     const MODE_PLAY             = 'play';
+
+    // AI modes
+    const MODE_RUBIX            = 'rubix';
+    const MODE_STOCKFISH        = 'stockfish';
 
     const MODEL_FOLDER          = __DIR__.'/../model/';
     // TODO
@@ -57,14 +59,11 @@ class Game
      *
      * @var Grandmaster
      */
-    private null|Grandmaster $grandmaster;
+    private null|Grandmaster $gm;
 
-    public function __construct(
-        null|string $mode = null,
-        null|Grandmaster $grandmaster = null
-    ) {
+    public function __construct(null|string $mode = null, null|Grandmaster $gm = null) {
         $this->board = new Board();
-        $this->grandmaster = $grandmaster;
+        $this->gm = $gm;
         $this->mode = $mode ?? self::MODE_ANALYSIS;
     }
 
@@ -143,36 +142,33 @@ class Game
      */
     public function ai(): ?object
     {
-        if (
-            $this->mode === Game::MODE_AI_PHP_CHESS ||
-            $this->mode === Game::MODE_AI_STOCKFISH
-        ) {
-            if ($move = $this->grandmaster->move($this)) {
+        if ($this->mode === Game::MODE_GM) {
+            return $this->gm->move($this);
+        } else if ($this->mode === Game::MODE_RUBIX) {
+            if ($move = $this->gm->move($this)) {
                 return $move;
-            } else {
-                if ($this->mode === Game::MODE_AI_PHP_CHESS) {
-                    $estimator = PersistentModel::load(
-                        new Filesystem(self::MODEL_FOLDER.self::MODEL_FILE)
-                    );
-                    $move = (new GeometricSumPredictor(
-                        $this->board,
-                        $estimator
-                    ))->predict();
-                    return (object) [
-                        'move' => $move,
-                    ];
-                } elseif ($this->mode === Game::MODE_AI_STOCKFISH) {
-                    $stockfish = new Stockfish($this->board);
-                    $fromFen = $this->board->toFen();
-                    $toFen = $stockfish->shortFen($fromFen, 3);
-                    $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
-                    return (object) [
-                        'move' => current($pgn),
-                    ];
-                }
             }
-        } elseif ($this->mode === Game::MODE_GM) {
-            return $this->grandmaster->move($this);
+            $estimator = PersistentModel::load(
+                new Filesystem(self::MODEL_FOLDER.self::MODEL_FILE)
+            );
+            $move = (new GeometricSumPredictor(
+                $this->board,
+                $estimator
+            ))->predict();
+            return (object) [
+                'move' => $move,
+            ];
+        } else if ($this->mode === Game::MODE_STOCKFISH) {
+            if ($move = $this->gm->move($this)) {
+                return $move;
+            }
+            $stockfish = new Stockfish($this->board);
+            $fromFen = $this->board->toFen();
+            $toFen = $stockfish->shortFen($fromFen, 3);
+            $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
+            return (object) [
+                'move' => current($pgn),
+            ];
         }
 
         return null;

@@ -24,7 +24,7 @@ class ModelPlayCli extends CLI
     protected function main(Options $options)
     {
         $game = new Game(
-            Game::MODE_AI_STOCKFISH,
+            Game::MODE_STOCKFISH,
             new Grandmaster(self::FILEPATH)
         );
 
