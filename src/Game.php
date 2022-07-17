@@ -105,7 +105,8 @@ class Game
      */
     public function state(): object
     {
-        $end = end($this->board->getHistory());
+        $history = $this->board->getHistory();
+        $end = end($history);
 
         return (object) [
             'turn' => $this->board->getTurn(),
