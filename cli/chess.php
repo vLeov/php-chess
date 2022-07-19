@@ -37,7 +37,7 @@ class ModelPlayCli extends CLI
             if ($move === 'ascii') {
                 echo $game->getBoard()->toAsciiString() . PHP_EOL;
             } elseif ($move === 'fen') {
-                echo $game->fen() . PHP_EOL;
+                echo $game->getBoard()->toFen() . PHP_EOL;
             } elseif ($move !== 'quit') {
                 $game->play('w', $move);
                 $ai = $game->ai();
