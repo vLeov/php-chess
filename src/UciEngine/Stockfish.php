@@ -14,7 +14,7 @@ use Chess\Board;
  */
 class Stockfish
 {
-    const NAME = '/usr/games/stockfish';
+    const NAME = 'stockfish';
 
     /**
      * PHP Chess board.
