@@ -14,7 +14,7 @@ use Chess\Board;
  */
 class Stockfish
 {
-    const NAME = 'stockfish';
+    const NAME = '/usr/games/stockfish';
 
     /**
      * PHP Chess board.
@@ -73,14 +73,15 @@ class Stockfish
         $process = proc_open(self::NAME, $this->descr, $this->pipes);
         if (is_resource($process)) {
             fwrite($this->pipes[0], "uci\n");
+            fwrite($this->pipes[0], "ucinewgame\n");
             fwrite($this->pipes[0], "position fen $fen\n");
             fwrite($this->pipes[0], "go movetime $msec\n");
-            fclose($this->pipes[0]);
             while (!feof($this->pipes[1])) {
                 $line = fgets($this->pipes[1]);
                 if (str_starts_with($line, 'bestmove')) {
                     $exploded = explode(' ', $line);
                     $bestMove = $exploded[1];
+                    fclose($this->pipes[0]);
                 }
             }
             fclose($this->pipes[1]);
