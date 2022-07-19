@@ -165,7 +165,7 @@ class Game
             }
             $stockfish = new Stockfish($this->board);
             $fromFen = $this->board->toFen();
-            $toFen = $stockfish->shortFen($fromFen, 3);
+            $toFen = $stockfish->shortFen($fromFen, 3000);
             $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
             return (object) [
                 'move' => current($pgn),

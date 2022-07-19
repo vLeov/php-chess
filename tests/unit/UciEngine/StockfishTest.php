@@ -19,7 +19,7 @@ class StockfishTest extends AbstractUnitTestCase
         $stockfish = new Stockfish($board);
 
         $fromFen = $board->toFen();
-        $toFen = $stockfish->shortFen($fromFen, 3);
+        $toFen = $stockfish->shortFen($fromFen, 3000);
 
         $this->assertNotEmpty($toFen);
     }
@@ -34,14 +34,14 @@ class StockfishTest extends AbstractUnitTestCase
         $stockfish = new Stockfish($board);
 
         $fromFen = $board->toFen();
-        $toFen = $stockfish->shortFen($fromFen, 3);
+        $toFen = $stockfish->shortFen($fromFen, 3000);
         $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
 
         $this->assertTrue($board->play('b', current($pgn)));
         $this->assertTrue($board->play('w', 'a3'));
 
         $fromFen = $board->toFen();
-        $toFen = $stockfish->shortFen($fromFen, 3);
+        $toFen = $stockfish->shortFen($fromFen, 3000);
         $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
 
         $this->assertTrue($board->play('b', current($pgn)));

@@ -64,19 +64,17 @@ class Stockfish
      * Calculates the best move.
      *
      * @param string $fen
-     * @param int $seconds
+     * @param int $msec
      * @return string
      */
-    public function bestMove(string $fen, int $seconds): string
+    public function bestMove(string $fen, int $msec): string
     {
         $bestMove = '(none)';
         $process = proc_open(self::NAME, $this->descr, $this->pipes);
         if (is_resource($process)) {
             fwrite($this->pipes[0], "uci\n");
             fwrite($this->pipes[0], "position fen $fen\n");
-            fwrite($this->pipes[0], "go infinite\n");
-            sleep($seconds);
-            fwrite($this->pipes[0], "stop\n");
+            fwrite($this->pipes[0], "go movetime $msec\n");
             fclose($this->pipes[0]);
             while (!feof($this->pipes[1])) {
                 $line = fgets($this->pipes[1]);
@@ -96,20 +94,17 @@ class Stockfish
      * Makes the best move returning a short FEN string.
      *
      * @param string $fen
-     * @param int $seconds
+     * @param int $msec
      * @return string
      */
-    public function shortFen(string $fen, int $seconds): string
+    public function shortFen(string $fen, int $msec): string
     {
-        $bestMove = $this->bestMove($fen, $seconds);
+        $bestMove = $this->bestMove($fen, $msec);
         if ($bestMove !== '(none)') {
             $process = proc_open(self::NAME, $this->descr, $this->pipes);
             if (is_resource($process)) {
                 fwrite($this->pipes[0], "uci\n");
                 fwrite($this->pipes[0], "position fen $fen moves $bestMove\n");
-                fwrite($this->pipes[0], "go infinite\n");
-                sleep($seconds);
-                fwrite($this->pipes[0], "stop\n");
                 fwrite($this->pipes[0], "d\n");
                 fclose($this->pipes[0]);
                 while (!feof($this->pipes[1])) {
