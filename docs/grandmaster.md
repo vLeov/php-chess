@@ -12,7 +12,7 @@ Figures out the next move to be made.
 use Chess\Game;
 use Chess\Grandmaster;
 
-$game = new Game(Game::MODE_GRANDMASTER);
+$game = new Game(Game::MODE_GM);
 $game->play('w', 'e4');
 
 $move = (new Grandmaster(__DIR__.'/../data/players.json'))->move($game);

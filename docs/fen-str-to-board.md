@@ -1,6 +1,6 @@
-Converts a FEN string to a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object.
+`Chess\FEN\StrToBoard` allows to create a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object from a FEN string as shown in the following example.
 
-Let's look at an example. For further information you may want to check out the tests in [tests/unit/FEN/StrToBoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/FEN/StrToBoardTest.php).
+For further information please check out the tests in [tests/unit/FEN/StrToBoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/FEN/StrToBoardTest.php).
 
 ---
 

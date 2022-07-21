@@ -11,10 +11,12 @@ pages:
   - Chess\Array\PieceArray: array-piece-array.md
   - Chess\Combinatorics\RestrictedPermutationWithRepetition: combinatorics-restricted-permutation-with-repetition.md
   - Chess\FEN\BoardToStr: fen-board-to-str.md
+  - Chess\FEN\ShortStrToPgn: fen-short-str-to-pgn.md
   - Chess\FEN\StrToBoard: fen-str-to-board.md
   - Chess\Media\BoardToJpg: media-board-to-jpg.md
   - Chess\Media\BoardToMp4: media-board-to-mp4.md
   - Chess\Media\BoardToPng: media-board-to-png.md
+  - Chess\UciEngine\Stockfish: uciengine-stockfish.md
   - Command Line Interface: cli.md
   - Usage: usage.md
 theme: readthedocs
