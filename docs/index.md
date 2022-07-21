@@ -23,32 +23,6 @@ $game->play('b', 'e5');
 ```
 The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be made.
 
-### Play Chess With an AI
-
-> The AI features are still experimental being tested on the [Chess Data](https://github.com/chesslablab/chess-data) repo.
-
-Pass the `Game::MODE_AI` parameter when instantiating a `$game`:
-
-```php
-$game = new Game(Game::MODE_AI);
-
-$game->play('w', 'e4');
-$game->play('b', $game->ai());
-$game->play('w', 'e5');
-$game->play('b', $game->ai());
-```
-
-The AIs are stored in the [`model`](https://github.com/chesslablab/php-chess/tree/master/model) folder. The default is `a1.model`, if you want to play with a different AI pass it as a second parameter to the `Chess\Game` constructor:
-
-```php
-$game = new Game(Game::MODE_AI, 'a2.model');
-
-$game->play('w', 'e4');
-$game->play('b', $game->ai());
-$game->play('w', 'e5');
-$game->play('b', $game->ai());
-```
-
 ### Demo
 
 PHP Chess is being used on [Redux Chess](https://github.com/chesslablab/redux-chess), which is a React chessboard connected to a [PHP Chess Server](https://github.com/chesslablab/chess-server). Check out [this demo](https://www.chesslablab.com).
