@@ -97,7 +97,7 @@ class Randomizer
     }
 
     /**
-     * Creates a Chess\Board object with two random kings.
+     * Creates a Chess\Board object with two randomly placed kings.
      *
      * @return array
      */
@@ -127,7 +127,7 @@ class Randomizer
     }
 
     /**
-     * Adds items randomly to the given pieces.
+     * Adds items randomly to the given array of pieces.
      *
      * @param array $items
      * @param array $pieces
@@ -150,7 +150,7 @@ class Randomizer
     }
 
     /**
-     * Finds out if any of the two kings are being attacked.
+     * Finds out if any of the two kings is being attacked.
      *
      * @return bool
      */
