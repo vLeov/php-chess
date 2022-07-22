@@ -1,6 +1,4 @@
-`Chess\Board` is a chessboard representation that allows to play chess in Portable Game Notation (PGN) format. But not only that, it is the cornerstone to create multiple features: FEN string processing, ASCII representation, PNG image creation, position evaluation, etc.
-
-Let's look at the methods available through the following example.
+`Chess\Board` is a chessboard representation that allows to play chess in Portable Game Notation (PGN) format. But not only that, it is the cornerstone to create multiple features: FEN string processing, ASCII representation, PNG image creation, position evaluation, etc. Let's look at the methods available through the following example. For further information please check out the tests in [tests/unit/BoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/BoardTest.php).
 
 ```php
 use Chess\Board;
@@ -12,9 +10,6 @@ $board->play('b', 'd5');
 $board->play('w', 'exd5');
 $board->play('b', 'Qxd5');
 ```
-
-For further information you may want to check out the tests in [tests/unit/BoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/BoardTest.php).
-
 ---
 
 #### `public function getCaptures(): ?array`

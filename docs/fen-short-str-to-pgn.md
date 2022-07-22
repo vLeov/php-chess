@@ -1,6 +1,4 @@
-`Chess\FEN\ShortStrToPgn` allows to create a PGN move from two FEN strings, the first one representing an initial position and the second one a target position. The short FEN format is used to describe the target position as shown in the following example.
-
-For further information please check out the tests in [tests/unit/FEN/ShortStrToPgnTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/FEN/ShortStrToPgnTest.php).
+`Chess\FEN\ShortStrToPgn` allows to create a PGN move from two FEN strings, the first one representing an initial position and the second one a target position. The short FEN format is used to describe the target position as shown in the following example. For further information please check out the tests in [tests/unit/FEN/ShortStrToPgnTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/FEN/ShortStrToPgnTest.php).
 
 ---
 

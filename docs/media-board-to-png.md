@@ -1,6 +1,4 @@
-Converts a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object to a PNG image.
-
-Let's look at an example. For further information you may want to check out the tests in [tests/unit/Media/BoardToPngTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToPngTest.php).
+`Chess\Media\BoardToPng` converts a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object to a PNG image. Let's look at the methods available through the following example. For further information please check out the tests in [tests/unit/Media/BoardToPngTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToPngTest.php).
 
 ---
 

@@ -1,6 +1,4 @@
-A [`Chess\Game`](https://php-chess.readthedocs.io/en/latest/game/) object can be thought of in terms of snapshots describing what's going on its [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) as reported by a number of evaluation features, thus, PGN movetexts can be evaluated by considering those.
-
-Let's look at the `Chess\Heuristics` methods available through the following example:
+A [`Chess\Game`](https://php-chess.readthedocs.io/en/latest/game/) object can be thought of in terms of snapshots describing what's going on its [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) as reported by a number of evaluation features. PGN movetexts can be evaluated by considering those. Let's look at the methods available through the following example. For further information please check out the tests in [tests/unit/HeuristicsTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php).
 
 ```php
 use Chess\Game;
@@ -15,8 +13,6 @@ $game->play('b', 'd5');
 
 $movetext = $game->getBoard()->getMovetext();
 ```
-
-For further information you may want to check out the tests in [tests/unit/HeuristicsTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php).
 
 ---
 
