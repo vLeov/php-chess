@@ -148,8 +148,10 @@ class Game
         if ($this->mode === Game::MODE_GM) {
             return $this->gm->move($this);
         } else if ($this->mode === Game::MODE_RUBIX) {
-            if ($move = $this->gm->move($this)) {
-                return $move;
+            if ($this->gm) {
+                if ($move = $this->gm->move($this)) {
+                    return $move;
+                }
             }
             $estimator = PersistentModel::load(
                 new Filesystem(self::MODEL_FOLDER.self::MODEL_FILE)
@@ -162,8 +164,10 @@ class Game
                 'move' => $move,
             ];
         } else if ($this->mode === Game::MODE_STOCKFISH) {
-            if ($move = $this->gm->move($this)) {
-                return $move;
+            if ($this->gm) {
+                if ($move = $this->gm->move($this)) {
+                    return $move;
+                }
             }
             $stockfish = (new Stockfish($this->board))
                 ->setOptions($options)

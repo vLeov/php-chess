@@ -1,10 +1,21 @@
-`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server), it is basically a wrapper for a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object especially intended to play chess online. Let's look at the methods available through some examples. For further information please check out the tests in [tests/unit/GameTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GameTest.php).
+`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is basically a wrapper for a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object to play chess online but it can also be used on command line (CLI) apps as well as in APIs.
+
+The following game modes are ready for use:
+
+- Chess\Game:MODE_ANALYSIS
+- Chess\Game:MODE_GM
+- Chess\Game:MODE_FEN
+- Chess\Game:MODE_PGN
+- Chess\Game:MODE_PLAY
+- Chess\Game:MODE_STOCKFISH
+
+Let's look at the methods available through some examples. For further information please check out the tests in [tests/unit/GameTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GameTest.php).
 
 ---
 
 #### `public function play(string $color, string $pgn): bool`
 
-Makes a move in PGN format.
+Starts a game in analysis mode (default) and makes a move in PGN format.
 
 ```php
 use Chess\Game;
@@ -15,7 +26,7 @@ $game->play('w', 'Nc3');
 
 #### `public function playFen(string $toShortFen): bool|string`
 
-Makes a move in short FEN format, only the piece placement and the side to move are required.
+Starts a game and makes a move in short FEN format, only the piece placement and the side to move are required.
 
 ```php
 use Chess\Game;
@@ -26,7 +37,7 @@ $game->playFen('rnb1kbnr/ppp1pppp/8/3q4/8/2N5/PPPP1PPP/R1BQKBNR b');
 
 #### `public function loadFen(string $string): void`
 
-Loads a FEN string to continue playing a game.
+Starts a game in FEN mode. A FEN string is loaded to continue playing a game.
 
 ```php
 use Chess\Game;
@@ -38,7 +49,7 @@ $game->play('b', 'Bg7');
 
 #### `public function loadPgn(string $movetext): void`
 
-Loads a PGN movetext to continue playing a game.
+Starts a game in PGN mode. A PGN movetext is loaded to continue playing a game.
 
 ```php
 use Chess\Game;
@@ -51,6 +62,8 @@ $game->play('w', 'e5');
 #### `public function ai(array $options = [], array $params = []): ?object`
 
 Returns a computer generated response to the current position. This method is to be used in either `Game::MODE_GM` or `Game::MODE_AI` otherwise it returns null.
+
+Starts a chess game in grandmaster mode and plays `1.e4`.
 
 ```php
 use Chess\Game;
@@ -79,15 +92,14 @@ stdClass Object
 
 )
 ```
+
+Starts a chess game in Stockfish mode and plays `1.e4`. If provided with a .json file on instantiation `Chess\Game` will try to respond with a grandmaster move first if found in the file.
+
 ```php
 use Chess\Game;
 
 $game = new Game(Game::MODE_STOCKFISH, __DIR__.'/../data/players.json');
 $game->play('w', 'e4');
-$game->play('b', 'a4');
-$game->play('w', 'd4');
-$game->play('b', 'a5');
-$game->play('w', 'Nf3');
 
 $ai = $game->ai(['Skill Level' => 9], ['depth' => 3]);
 print_r($ai);
@@ -95,7 +107,37 @@ print_r($ai);
 ```
 stdClass Object
 (
-    [move] => e6
+    [move] => c5
+    [game] => Array
+        (
+            [Event] => Wijk m
+            [Site] => Wijk aan Zee
+            [Date] => 1993.??.??
+            [White] => Adams, Michael
+            [Black] => Hodgson, Julian M
+            [Result] => 1/2-1/2
+            [ECO] => B99
+            [movetext] => 1.e4 c5 2.Nc3 d6 3.Nge2 Nf6 4.d4 cxd4 5.Nxd4 a6 6.Bg5 e6 7.f4 Be7 8.Qf3 Qc7 9.O-O-O Nbd7 10.g4 b5 11.Bxf6 Nxf6 12.g5 Nd7 13.f5 Bxg5+ 14.Kb1 Ne5 15.Qh5 Qd8 16.Nxe6 Bxe6 17.fxe6 O-O 18.Bh3 g6 19.Qe2 fxe6 20.Bxe6+ Kh8 21.h4 Bf6 22.h5 g5 23.Rhf1 h6 24.Nd5 Bg7 25.Rxf8+ Qxf8 26.Rf1 Qd8 27.Ne3 Qe7 28.Bb3 Rf8 29.Nf5 Qf6 30.c3 g4 31.a3 Qg5 32.Rd1 Qxh5 33.Rxd6 Qg5 34.Rxa6 g3 35.Qg2 Nd3 36.Rd6 Nf4
+        )
+
+)
+```
+
+Starts a chess game in Stockfish mode and plays `1.e4` without any help from grandmasters.
+
+```php
+use Chess\Game;
+
+$game = new Game(Game::MODE_STOCKFISH);
+$game->play('w', 'e4');
+
+$ai = $game->ai(['Skill Level' => 9], ['depth' => 3]);
+print_r($ai);
+```
+```
+stdClass Object
+(
+    [move] => d5
 )
 ```
 
@@ -134,3 +176,7 @@ $game->state()->isCheck;
 $game->state()->isMate;
 $game->state()->isStalemate;
 ```
+
+#### `public function getBoard(): Board`
+
+Returns the `Chess\Board` object.
