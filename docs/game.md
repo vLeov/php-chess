@@ -2,12 +2,12 @@
 
 The following game modes are ready for use:
 
-- Chess\Game:MODE_ANALYSIS
-- Chess\Game:MODE_GM
-- Chess\Game:MODE_FEN
-- Chess\Game:MODE_PGN
-- Chess\Game:MODE_PLAY
-- Chess\Game:MODE_STOCKFISH
+- `Chess\Game:MODE_ANALYSIS`
+- `Chess\Game:MODE_GM`
+- `Chess\Game:MODE_FEN`
+- `Chess\Game:MODE_PGN`
+- `Chess\Game:MODE_PLAY`
+- `Chess\Game:MODE_STOCKFISH`
 
 Let's look at the methods available through some examples. For further information please check out the tests in [tests/unit/GameTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GameTest.php).
 
