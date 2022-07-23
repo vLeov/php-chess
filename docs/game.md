@@ -1,4 +1,4 @@
-`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is basically a wrapper for a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object to play chess online but it can also be used on command line (CLI) apps as well as in APIs.
+`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is a wrapper for a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object to play chess online but it is also used on command line (CLI) apps as well as in APIs.
 
 The following game modes are ready for use:
 
