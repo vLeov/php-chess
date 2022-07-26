@@ -137,9 +137,6 @@ class Game
     /**
      * Returns a computer generated response to the current position.
      *
-     * This method is to be used in either Game::MODE_AI or Game::MODE_GM
-     * otherwise it returns null.
-     *
      * @param array $options
      * @param array $params
      * @return mixed object|null
@@ -164,24 +161,25 @@ class Game
             return (object) [
                 'move' => $move,
             ];
-        } else if ($this->mode === Game::MODE_STOCKFISH) {
-            if ($this->gm) {
-                if ($move = $this->gm->move($this)) {
-                    return $move;
-                }
-            }
-            $stockfish = (new Stockfish($this->board))
-                ->setOptions($options)
-                ->setParams($params);
-            $fromFen = $this->board->toFen();
-            $toFen = $stockfish->shortFen($fromFen);
-            $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
-            return (object) [
-                'move' => current($pgn),
-            ];
         }
 
-        return null;
+        if ($this->gm) {
+            if ($move = $this->gm->move($this)) {
+                return $move;
+            }
+        }
+
+        $stockfish = (new Stockfish($this->board))
+            ->setOptions($options)
+            ->setParams($params);
+            
+        $fromFen = $this->board->toFen();
+        $toFen = $stockfish->shortFen($fromFen);
+        $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
+
+        return (object) [
+            'move' => current($pgn),
+        ];
     }
 
     /**

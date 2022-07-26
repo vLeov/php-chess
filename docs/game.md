@@ -61,7 +61,7 @@ $game->play('w', 'e5');
 
 #### `public function ai(array $options = [], array $params = []): ?object`
 
-Returns a computer generated response to the current position. This method is to be used in either `Game::MODE_GM` or `Game::MODE_AI` otherwise it returns null.
+Returns a computer generated response to the current position.
 
 Starts a chess game in grandmaster mode and plays `1.e4`.
 
