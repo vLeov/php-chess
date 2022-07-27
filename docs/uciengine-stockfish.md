@@ -33,6 +33,6 @@ Set Stockfish options.
 
 Sets the current command params.
 
-#### `public function setParams(array $params): Stockfish`
+#### `public function shortFen(string $fen): string`
 
 Makes the best move returning a short FEN string, only the piece placement and the side to move are returned.
