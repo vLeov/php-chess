@@ -13,6 +13,7 @@ pages:
   - Chess\FEN\BoardToStr: fen-board-to-str.md
   - Chess\FEN\ShortStrToPgn: fen-short-str-to-pgn.md
   - Chess\FEN\StrToBoard: fen-str-to-board.md
+  - Chess\FEN\StrToPgn: fen-str-to-pgn.md
   - Chess\Media\BoardToMp4: media-board-to-mp4.md
   - Chess\Media\BoardToPng: media-board-to-png.md
   - Chess\UciEngine\Stockfish: uciengine-stockfish.md
