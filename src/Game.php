@@ -96,6 +96,8 @@ class Game
      */
     public function setBoard(Board $board): Game
     {
+        $this->board = $board;
+
         return $this;
     }
 
@@ -172,7 +174,7 @@ class Game
         $stockfish = (new Stockfish($this->board))
             ->setOptions($options)
             ->setParams($params);
-            
+
         $fromFen = $this->board->toFen();
         $toFen = $stockfish->shortFen($fromFen);
         $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
