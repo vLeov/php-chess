@@ -40,7 +40,7 @@ abstract class AbstractStrToPgn
                         if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
                             $piece->sqCastleShort()
                         ) {
-                            if ($clone->play($color, Piece::K.$sq)) {
+                            if ($clone->play($color, Castle::SHORT)) {
                                 $legal[] = [
                                     Castle::SHORT => (new BoardToStr($clone))->create()
                                 ];
@@ -48,7 +48,7 @@ abstract class AbstractStrToPgn
                         } elseif ($sq === $rule[Castle::LONG]['sq']['next'] &&
                             $piece->sqCastleLong()
                         ) {
-                            if ($clone->play($color, Piece::K.$sq)) {
+                            if ($clone->play($color, Castle::LONG)) {
                                 $legal[] = [
                                     Castle::LONG => (new BoardToStr($clone))->create()
                                 ];

@@ -74,4 +74,21 @@ class ShortStrToPgnTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $pgn);
     }
+
+    /**
+     * @test
+     */
+    public function b_castles_kingside()
+    {
+        $pgn = (new ShortStrToPgn(
+            'r1bqk2r/pppp1ppp/2n2n2/4p3/PbB1P3/2N2N2/1PPP1PPP/R1BQK2R b KQkq -',
+            'r1bq1rk1/pppp1ppp/2n2n2/4p3/PbB1P3/2N2N2/1PPP1PPP/R1BQK2R w'
+        ))->create();
+
+        $expected = [
+            'b' => 'O-O',
+        ];
+
+        $this->assertSame($expected, $pgn);
+    }
 }
