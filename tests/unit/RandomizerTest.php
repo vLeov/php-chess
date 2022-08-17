@@ -58,4 +58,42 @@ class RandomizerTest extends AbstractUnitTestCase
 
         $this->assertNotEmpty($fen);
     }
+
+    /**
+     * @test
+     */
+    public function w_Q_R_b_R()
+    {
+        $turn = Color::W;
+
+        $items = [
+            Color::W => ['Q', 'R'],
+            Color::B => ['R'],
+        ];
+
+        $board = (new Randomizer($turn, $items))->getBoard();
+
+        $fen = (new BoardToStr($board))->create();
+
+        $this->assertNotEmpty($fen);
+    }
+
+    /**
+     * @test
+     */
+    public function w_R_b_Q_R()
+    {
+        $turn = Color::B;
+
+        $items = [
+            Color::W => ['R'],
+            Color::B => ['Q', 'R'],
+        ];
+
+        $board = (new Randomizer($turn, $items))->getBoard();
+
+        $fen = (new BoardToStr($board))->create();
+
+        $this->assertNotEmpty($fen);
+    }
 }
