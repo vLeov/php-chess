@@ -2255,4 +2255,27 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $string);
     }
+
+    /**
+     * @test
+     */
+    public function undo_e4_b6_Nf3_Bb7_Bc4_Nc6_Ke2()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'b6');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Bb7');
+        $board->play('w', 'Bc4');
+        $board->play('b', 'Nc6');
+        $board->play('w', 'Ke2');
+
+        $board->undo();
+
+        $expected = 'r2qkbnr/pbpppppp/1pn5/8/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq -';
+        $string = (new BoardToStr($board))->create();
+
+        $this->assertSame($expected, $string);
+    }
 }

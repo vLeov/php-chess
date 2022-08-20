@@ -766,8 +766,18 @@ final class Board extends \SplObjectStorage
     public function undo(): Board
     {
         if ($last = end($this->history)) {
-            if ($last->move->type === Move::CASTLE_SHORT || $last->move->type === Move::CASTLE_LONG) {
+            if (
+                $last->move->type === Move::CASTLE_SHORT ||
+                $last->move->type === Move::CASTLE_LONG
+            ) {
                 $this->undoCastle($last->sq, $last->move);
+                $nextToLast = end($this->history);
+                $this->castlingAbility = $nextToLast->castlingAbility;
+            } elseif (
+                $last->move->type === Move::KING ||
+                $last->move->type === Move::KING_CAPTURES
+            ) {
+                $this->undoMove($last->sq, $last->move);
                 $nextToLast = end($this->history);
                 $this->castlingAbility = $nextToLast->castlingAbility;
             } else {
