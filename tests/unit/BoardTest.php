@@ -2060,6 +2060,37 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertSame($expected, $board->legalMoves());
     }
 
+    /**
+     * @test
+     */
+    public function legal_moves_after_e4_d5_exd5_e6_a3_exd5_a4_Nf6_a5_Bc5_Qe2()
+    {
+        $board = new Board();
+        $board->play('w', 'e4');
+        $board->play('b', 'd5');
+        $board->play('w', 'exd5');
+        $board->play('b', 'e6');
+        $board->play('w', 'a3');
+        $board->play('b', 'exd5');
+        $board->play('w', 'a4');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'a5');
+        $board->play('b', 'Bc5');
+        $board->play('w', 'Qe2');
+
+        $expected = [
+            'Be6',
+            'Qe7',
+            'Kf8',
+            'Kd7',
+            'Ne4',
+            'Be7',
+            'Be3',
+        ];
+
+        $this->assertSame($expected, $board->legalMoves());
+    }
+
     /*
     |--------------------------------------------------------------------------
     | toArray()
