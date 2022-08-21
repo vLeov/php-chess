@@ -821,20 +821,10 @@ final class Board extends \SplObjectStorage
     private function leavesInCheck(AbstractPiece $piece): bool
     {
         $lastCastlingAbility = $this->castlingAbility;
-        if (
-            $piece->getMove()->type === Move::CASTLE_SHORT ||
-            $piece->getMove()->type === Move::CASTLE_LONG
-        ) {
-            $this->castle($piece);
-            $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoCastle($piece->getSq(), $piece->getMove());
-        } else {
-            $this->move($piece);
-            $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoMove($piece->getSq(), $piece->getMove());
-        }
+        $this->move($piece);
+        $king = $this->getPiece($piece->getColor(), Piece::K);
+        $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
+        $this->undoMove($piece->getSq(), $piece->getMove());
         $this->castlingAbility = $lastCastlingAbility;
 
         return $leavesInCheck;

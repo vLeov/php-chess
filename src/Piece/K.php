@@ -170,6 +170,7 @@ class K extends AbstractPiece
 
         if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
             if (
+                !$this->board->isCheck() &&
                 !array_diff($rule['sqs'], $this->board->getSqEval()->free) &&
                 empty(array_intersect($rule['sqs'], $this->board->getSpaceEval()->{$this->oppColor()}))
             ) {
@@ -186,6 +187,7 @@ class K extends AbstractPiece
 
         if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {
             if (
+                !$this->board->isCheck() &&
                 !array_diff($rule['sqs'], $this->board->getSqEval()->free) &&
                 empty(array_intersect($rule['sqs'], $this->board->getSpaceEval()->{$this->oppColor()}))
             ) {
