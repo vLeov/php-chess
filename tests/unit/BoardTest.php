@@ -1949,7 +1949,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function possible_moves_on_start()
+    public function legal_moves_on_start()
     {
         $board = new Board();
 
@@ -1982,7 +1982,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function possible_moves_after_e4()
+    public function legal_moves_after_e4()
     {
         $board = new Board();
         $board->play('w', 'e4');
@@ -2016,7 +2016,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function possible_moves_after_e4_e5_Nf3_Nf6_Be2_Be7()
+    public function legal_moves_after_e4_e5_Nf3_Nf6_Be2_Be7()
     {
         $board = new Board();
         $board->play('w', 'e4');
