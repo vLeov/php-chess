@@ -2,6 +2,7 @@
 
 namespace Chess\Randomizer\Endgame;
 
+use Chess\PGN\AN\Color;
 use Chess\Randomizer\Randomizer;
 
 class PawnEndgameRandomizer extends Randomizer
@@ -19,6 +20,9 @@ class PawnEndgameRandomizer extends Randomizer
                     $ranks = $piece->getRanks();
                 }
             }
-        } while ($ranks->next === 9 || $ranks->next === 1);
+        } while (
+            $turn === Color::W && ($ranks->next === 2 || $ranks->next === 9) ||
+            $turn === Color::B && ($ranks->next === 7 || $ranks->next === 0)
+        );
     }
 }
