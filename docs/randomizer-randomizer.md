@@ -14,7 +14,7 @@ use Chess\Randomizer\Randomizer;
 $turn = Color::B;
 
 $items = [
-    Color::B => ['N', 'B', 'R'],
+    Color::B => ['N', 'B'],
 ];
 
 $board = (new Randomizer($turn, $items))->getBoard();
