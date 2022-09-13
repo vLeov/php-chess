@@ -10,7 +10,7 @@ use Chess\Piece\RType;
 /**
  * Randomizer.
  *
- * Creates a board with random pieces.
+ * Creates a Chess\Board object with random pieces.
  *
  * @author Jordi Bassagañas
  * @license GPL

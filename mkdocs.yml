@@ -15,6 +15,9 @@ pages:
   - Chess\FEN\StrToPgn: fen-str-to-pgn.md
   - Chess\Media\BoardToMp4: media-board-to-mp4.md
   - Chess\Media\BoardToPng: media-board-to-png.md
+  - Chess\Randomizer\Checkmate\TwoBishopsRandomizer: randomizer-checkmate-two-bishops-randomizer.md
+  - Chess\Randomizer\Endgame\PawnEndgameRandomizer: randomizer-endgame-pawn-endgame-randomizer.md
+  - Chess\Randomizer\Randomizer: randomizer-randomizer.md
   - Chess\UciEngine\Stockfish: uciengine-stockfish.md
   - Command Line Interface: cli.md
   - Usage: usage.md
