@@ -6,9 +6,9 @@ use Chess\Board;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 
-class OppositionEval extends AbstractEval
+class DirectOppositionEval extends AbstractEval
 {
-    const NAME = 'Opposition';
+    const NAME = 'Direct opposition';
 
     public function __construct(Board $board)
     {

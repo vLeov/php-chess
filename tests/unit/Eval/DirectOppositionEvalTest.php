@@ -2,11 +2,11 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Eval\OppositionEval;
+use Chess\Eval\DirectOppositionEval;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 
-class OppositionEvalTest extends AbstractUnitTestCase
+class DirectOppositionEvalTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -22,7 +22,7 @@ class OppositionEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $oppositionEval = (new OppositionEval($board))->eval();
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
 
         $this->assertSame($expected, $oppositionEval);
     }
@@ -41,7 +41,7 @@ class OppositionEvalTest extends AbstractUnitTestCase
             'b' => 1,
         ];
 
-        $oppositionEval = (new OppositionEval($board))->eval();
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
 
         $this->assertSame($expected, $oppositionEval);
     }
@@ -60,7 +60,7 @@ class OppositionEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $oppositionEval = (new OppositionEval($board))->eval();
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
 
         $this->assertSame($expected, $oppositionEval);
     }
@@ -79,7 +79,7 @@ class OppositionEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $oppositionEval = (new OppositionEval($board))->eval();
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
 
         $this->assertSame($expected, $oppositionEval);
     }
@@ -98,7 +98,7 @@ class OppositionEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $oppositionEval = (new OppositionEval($board))->eval();
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
 
         $this->assertSame($expected, $oppositionEval);
     }
