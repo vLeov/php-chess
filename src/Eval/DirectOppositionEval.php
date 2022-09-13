@@ -40,7 +40,7 @@ class DirectOppositionEval extends AbstractEval
         }
 
         if ($sqs[0][1] === $sqs[1][1]) {
-            if (abs(ord($file) - ord($file)) === 2) {
+            if (abs(ord($sqs[0][0]) - ord($sqs[1][0])) === 2) {
                 $this->result = [
                     Color::W => (int) ($this->board->getTurn() !== Color::W),
                     Color::B => (int) ($this->board->getTurn() !== Color::B),
