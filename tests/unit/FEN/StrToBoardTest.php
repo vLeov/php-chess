@@ -33,6 +33,56 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function no_kings_throws_exception()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        $board = (new StrToBoard('8/8/5r1R/8/7p/8/8/8 b - - 0 1'))->create();
+    }
+
+    /**
+     * @test
+     */
+    public function eT_throws_exception()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        $board = (new StrToBoard('7K/8/5e1T/8/7k/8/8/8 b - - 0 1'))->create();
+    }
+
+    /**
+     * @test
+     */
+    public function x_throws_exception()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        $board = (new StrToBoard('7x/8/5k1K/8/7p/8/8/8 b - - 0 1'))->create();
+    }
+
+    /**
+     * @test
+     */
+    public function y_throws_exception()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        $board = (new StrToBoard('7y/8/5k1K/8/7p/8/8/8 b - - 0 1'))->create();
+    }
+
+    /**
+     * @test
+     */
+    public function nine_throws_exception()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        $board = (new StrToBoard('7k/9/8/8/8/8/2K5/r7 w - - 0 1'))->create();
+    }
+
+    /**
+     * @test
+     */
     public function e4()
     {
         $board = (new StrToBoard('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1'))
@@ -420,29 +470,5 @@ class StrToBoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('w', 'Kb2'));
         $this->assertTrue($board->play('b', 'Kg7'));
         $this->assertTrue($board->play('w', 'Kxa1'));
-    }
-
-    /**
-     * @test
-     */
-    public function endgame_without_kings()
-    {
-        $board = (new StrToBoard('8/8/5r1R/8/7p/8/8/8 b - - 0 1'))
-            ->create();
-
-        $array = $board->toAsciiArray();
-
-        $expected = [
-            7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' r ', ' . ', ' R ' ],
-            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' p ' ],
-            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-        ];
-
-        $this->assertSame($expected, $array);
     }
 }
