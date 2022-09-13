@@ -421,4 +421,28 @@ class StrToBoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('b', 'Kg7'));
         $this->assertTrue($board->play('w', 'Kxa1'));
     }
+
+    /**
+     * @test
+     */
+    public function endgame_without_kings()
+    {
+        $board = (new StrToBoard('8/8/5r1R/8/7p/8/8/8 b - - 0 1'))
+            ->create();
+
+        $array = $board->toAsciiArray();
+
+        $expected = [
+            7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' r ', ' . ', ' R ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' p ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame($expected, $array);
+    }
 }
