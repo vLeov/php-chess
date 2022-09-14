@@ -121,4 +121,61 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $oppositionEval);
     }
+
+    /**
+     * @test
+     */
+    public function position_07()
+    {
+        $fen = '8/8/4k1K1/8/7p/8/8/8 w - -';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $expected = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
+
+        $this->assertSame($expected, $oppositionEval);
+    }
+
+    /**
+     * @test
+     */
+    public function position_08()
+    {
+        $fen = '8/5k2/8/5K2/7p/8/8/8 b - -';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $expected = [
+            'w' => 1,
+            'b' => 0,
+        ];
+
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
+
+        $this->assertSame($expected, $oppositionEval);
+    }
+
+    /**
+     * @test
+     */
+    public function position_09()
+    {
+        $fen = '8/5k2/8/5K2/8/7p/8/8 w - -';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $expected = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
+        $oppositionEval = (new DirectOppositionEval($board))->eval();
+
+        $this->assertSame($expected, $oppositionEval);
+    }
 }

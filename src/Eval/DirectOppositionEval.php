@@ -22,16 +22,11 @@ class DirectOppositionEval extends AbstractEval
 
     public function eval(): array
     {
-        $sqs = [];
+        $wK = $this->board->getPiece(Color::W, Piece::K)->getSq();
+        $bK = $this->board->getPiece(Color::B, Piece::K)->getSq();
 
-        foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() === Piece::K) {
-                $sqs[] = $piece->getSq();
-            }
-        }
-
-        if ($sqs[0][0] === $sqs[1][0]) {
-            if (abs($sqs[0][1] - $sqs[1][1]) === 2) {
+        if ($wK[0] === $bK[0]) {
+            if (abs($wK[1] - $bK[1]) === 2) {
                 $this->result = [
                     Color::W => (int) ($this->board->getTurn() !== Color::W),
                     Color::B => (int) ($this->board->getTurn() !== Color::B),
@@ -39,8 +34,8 @@ class DirectOppositionEval extends AbstractEval
             }
         }
 
-        if ($sqs[0][1] === $sqs[1][1]) {
-            if (abs(ord($sqs[0][0]) - ord($sqs[1][0])) === 2) {
+        if ($wK[1] === $bK[1]) {
+            if (abs(ord($wK[0]) - ord($bK[0])) === 2) {
                 $this->result = [
                     Color::W => (int) ($this->board->getTurn() !== Color::W),
                     Color::B => (int) ($this->board->getTurn() !== Color::B),
