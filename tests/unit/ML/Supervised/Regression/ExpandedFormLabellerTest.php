@@ -43,7 +43,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = '5555555555555001915';
+        $expected = '5555555555555001925';
 
         $this->assertSame($expected, $label);
     }
@@ -63,7 +63,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = '5555555555555087070';
+        $expected = '5555555555555085070';
 
         $this->assertSame($expected, $label);
     }
@@ -83,7 +83,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = '5555555060555516486';
+        $expected = '5555555256555516466';
 
         $this->assertSame($expected, $label);
     }
@@ -103,7 +103,7 @@ class ExpandedFormLabellerTest extends AbstractUnitTestCase
 
         $label = (new ExpandedFormLabeller())->label($end);
 
-        $expected = '5555555555555527275';
+        $expected = '5555555555555526265';
 
         $this->assertSame($expected, $label);
     }

@@ -83,7 +83,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 1,
+            'w' => 4,
             'b' => 2,
         ];
 
@@ -106,7 +106,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 1,
+            'w' => 3,
             'b' => 2,
         ];
 
@@ -175,8 +175,8 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 9,
-            'b' => 11,
+            'w' => 1,
+            'b' => 4,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);
