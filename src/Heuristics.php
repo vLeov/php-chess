@@ -5,10 +5,26 @@ namespace Chess;
 use Chess\Eval\InverseEvalInterface;
 use Chess\PGN\AN\Color;
 
+/**
+ * Heuristics
+ *
+ * A Chess\Game object can be thought of in terms of snapshots describing what's
+ * going on its Chess\Board as reported by a number of evaluation features.
+ * PGN movetexts can be evaluated by considering those.
+ *
+ * @author Jordi Bassagañas
+ * @license GPL
+ */
 class Heuristics extends Player
 {
     use HeuristicsTrait;
 
+    /**
+     * Constructor.
+     *
+     * @param string $movetext
+     * @param Chess\Board $board
+     */
     public function __construct(string $movetext = '', Board $board = null)
     {
         parent::__construct($movetext, $board);
@@ -25,8 +41,7 @@ class Heuristics extends Player
     {
         $dimsNames = [];
         foreach ($this->dims as $key => $val) {
-            $dimsNames[] = (new \ReflectionClass($key))
-                ->getConstant('NAME');
+            $dimsNames[] = (new \ReflectionClass($key))->getConstant('NAME');
         }
 
         return $dimsNames;
@@ -41,24 +56,24 @@ class Heuristics extends Player
      */
     public function eval(): array
     {
-        $result = [
+        $eval = [
             Color::W => 0,
             Color::B => 0,
         ];
 
         $weights = array_values($this->getDims());
 
-        $pic = $this->getResult();
+        $result = $this->getResult();
 
         for ($i = 0; $i < count($this->getDims()); $i++) {
-            $result[Color::W] += $weights[$i] * end($pic[Color::W])[$i];
-            $result[Color::B] += $weights[$i] * end($pic[Color::B])[$i];
+            $eval[Color::W] += $weights[$i] * end($result[Color::W])[$i];
+            $eval[Color::B] += $weights[$i] * end($result[Color::B])[$i];
         }
 
-        $result[Color::W] = round($result[Color::W], 2);
-        $result[Color::B] = round($result[Color::B], 2);
+        $eval[Color::W] = round($eval[Color::W], 2);
+        $eval[Color::B] = round($eval[Color::B], 2);
 
-        return $result;
+        return $eval;
     }
 
     /**
@@ -93,38 +108,11 @@ class Heuristics extends Player
     {
         foreach ($this->moves as $key => $val) {
             if ($key % 2 === 0) {
-                $item = [];
                 $this->board->play(Color::W, $this->moves[$key]);
+                $this->calcItem();
                 empty($this->moves[$key+1])
                     ?: $this->board->play(Color::B, $this->moves[$key+1]);
-                foreach ($this->dims as $className => $weight) {
-                    $dimension = new $className($this->board);
-                    $eval = $dimension->eval();
-                    if (is_array($eval[Color::W])) {
-                        if ($dimension instanceof InverseEvalInterface) {
-                            $item[] = [
-                                Color::W => count($eval[Color::B]),
-                                Color::B => count($eval[Color::W]),
-                            ];
-                        } else {
-                            $item[] = [
-                                Color::W => count($eval[Color::W]),
-                                Color::B => count($eval[Color::B]),
-                            ];
-                        }
-                    } else {
-                        if ($dimension instanceof InverseEvalInterface) {
-                            $item[] = [
-                                Color::W => $eval[Color::B],
-                                Color::B => $eval[Color::W],
-                            ];
-                        } else {
-                            $item[] = $eval;
-                        }
-                    }
-                }
-                $this->result[Color::W][] = array_column($item, Color::W);
-                $this->result[Color::B][] = array_column($item, Color::B);
+                $this->calcItem();
             }
         }
         $this->normalize()->balance();
@@ -133,11 +121,48 @@ class Heuristics extends Player
     }
 
     /**
+     * Adds an item to $this->result.
+     */
+    protected function calcItem(): void
+    {
+        $item = [];
+        foreach ($this->dims as $className => $weight) {
+            $dimension = new $className($this->board);
+            $eval = $dimension->eval();
+            if (is_array($eval[Color::W])) {
+                if ($dimension instanceof InverseEvalInterface) {
+                    $item[] = [
+                        Color::W => count($eval[Color::B]),
+                        Color::B => count($eval[Color::W]),
+                    ];
+                } else {
+                    $item[] = [
+                        Color::W => count($eval[Color::W]),
+                        Color::B => count($eval[Color::B]),
+                    ];
+                }
+            } else {
+                if ($dimension instanceof InverseEvalInterface) {
+                    $item[] = [
+                        Color::W => $eval[Color::B],
+                        Color::B => $eval[Color::W],
+                    ];
+                } else {
+                    $item[] = $eval;
+                }
+            }
+        }
+
+        $this->result[Color::W][] = array_column($item, Color::W);
+        $this->result[Color::B][] = array_column($item, Color::B);
+    }
+
+    /**
      * Normalizes the heuristic picture of $this->board.
      *
      * The dimensions are normalized meaning that the chess features (Material,
      * Center, Connectivity, Space, Pressure, K safety, Tactics, and so on)
-     * are evald and scaled to have values between 0 and 1.
+     * are evaluated and scaled to have values between 0 and 1.
      *
      * It is worth noting that a normalized heuristic picture changes with every
      * chess move that is made because it is recalculated or zoomed out, if you like,
@@ -147,8 +172,7 @@ class Heuristics extends Player
      */
     protected function normalize(): Heuristics
     {
-        $normalization = [];
-
+        $normd = [];
         if (count($this->board->getHistory()) >= 2) {
             for ($i = 0; $i < count($this->dims); $i++) {
                 $values = [
@@ -159,22 +183,22 @@ class Heuristics extends Player
                 $max = round(max($values), 2);
                 for ($j = 0; $j < count($this->result[Color::W]); $j++) {
                     if ($max - $min > 0) {
-                        $normalization[Color::W][$j][$i] =
+                        $normd[Color::W][$j][$i] =
                             round(($this->result[Color::W][$j][$i] - $min) / ($max - $min), 2);
-                        $normalization[Color::B][$j][$i] =
+                        $normd[Color::B][$j][$i] =
                             round(($this->result[Color::B][$j][$i] - $min) / ($max - $min), 2);
                     } elseif ($max == $min) {
-                        $normalization[Color::W][$j][$i] = 0;
-                        $normalization[Color::B][$j][$i] = 0;
+                        $normd[Color::W][$j][$i] = 0;
+                        $normd[Color::B][$j][$i] = 0;
                     }
                 }
             }
         } else {
-            $normalization[Color::W][] =
-                $normalization[Color::B][] = array_fill(0, count($this->dims), 0);
+            $normd[Color::W][] =
+                $normd[Color::B][] = array_fill(0, count($this->dims), 0);
         }
 
-        $this->result = $normalization;
+        $this->result = $normd;
 
         return $this;
     }
