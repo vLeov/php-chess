@@ -107,11 +107,12 @@ class Heuristics extends Player
     protected function calc(): Heuristics
     {
         foreach ($this->moves as $key => $val) {
+            $turn = $this->board->getTurn();
             if ($key % 2 === 0) {
-                $this->board->play(Color::W, $this->moves[$key]);
+                $this->board->play($turn, $this->moves[$key]);
                 $this->calcItem();
                 empty($this->moves[$key+1])
-                    ?: $this->board->play(Color::B, $this->moves[$key+1]);
+                    ?: $this->board->play(Color::opp($turn), $this->moves[$key+1]);
                 $this->calcItem();
             }
         }
