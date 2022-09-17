@@ -6,6 +6,7 @@ use Chess\PGN\AN\Color;
 use Chess\Piece\K;
 use Chess\Piece\RType;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * Randomizer.
@@ -29,6 +30,13 @@ class Randomizer
     protected Board $board;
 
     /**
+     * Castling rule.
+     *
+     * @var array
+     */
+    protected array $castlingRule;
+
+    /**
      * The items to be added.
      *
      * @var array
@@ -43,6 +51,8 @@ class Randomizer
      */
     public function __construct(string $turn, array $items = [])
     {
+        $this->castlingRule = (new CastlingRule())->getRule();
+
         $this->items = $items;
 
         do {
@@ -118,8 +128,8 @@ class Randomizer
         );
 
         $pieces = [
-            new K(Color::W, $wSq),
-            new K(Color::B, $bSq)
+            new K(Color::W, $wSq, $this->castlingRule),
+            new K(Color::B, $bSq, $this->castlingRule),
         ];
 
         $this->board = new Board($pieces);

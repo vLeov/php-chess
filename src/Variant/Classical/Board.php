@@ -22,6 +22,7 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * Board
@@ -104,6 +105,8 @@ class Board extends \SplObjectStorage
      */
     private object $sqEval;
 
+    private array $castlingRule;
+
     /**
      * Constructor.
      *
@@ -112,12 +115,13 @@ class Board extends \SplObjectStorage
      */
     public function __construct(array $pieces = null, string $castlingAbility = '-')
     {
+        $this->castlingRule = (new CastlingRule())->getRule();
         if (!$pieces) {
             $this->attach(new R(Color::W, 'a1', RType::CASTLE_LONG));
             $this->attach(new N(Color::W, 'b1'));
             $this->attach(new B(Color::W, 'c1'));
             $this->attach(new Q(Color::W, 'd1'));
-            $this->attach(new K(Color::W, 'e1'));
+            $this->attach(new K(Color::W, 'e1', $this->castlingRule));
             $this->attach(new B(Color::W, 'f1'));
             $this->attach(new N(Color::W, 'g1'));
             $this->attach(new R(Color::W, 'h1', RType::CASTLE_SHORT));
@@ -133,7 +137,7 @@ class Board extends \SplObjectStorage
             $this->attach(new N(Color::B, 'b8'));
             $this->attach(new B(Color::B, 'c8'));
             $this->attach(new Q(Color::B, 'd8'));
-            $this->attach(new K(Color::B, 'e8'));
+            $this->attach(new K(Color::B, 'e8', $this->castlingRule));
             $this->attach(new B(Color::B, 'f8'));
             $this->attach(new N(Color::B, 'g8'));
             $this->attach(new R(Color::B, 'h8', RType::CASTLE_SHORT));
@@ -572,7 +576,8 @@ class Board extends \SplObjectStorage
             $this->attach(
                 new K(
                     $king->getColor(),
-                    K::$castlingRule[$king->getColor()][Piece::K][rtrim($king->getMove()->pgn, '+')]['sq']['next']
+                    K::$castlingRule[$king->getColor()][Piece::K][rtrim($king->getMove()->pgn, '+')]['sq']['next'],
+                    $this->castlingRule
                 )
              );
             $this->detach($rook);
@@ -601,7 +606,7 @@ class Board extends \SplObjectStorage
     private function undoCastle(string $sq, object $move): Board
     {
         $king = $this->getPieceBySq($move->sq->next);
-        $kingUndone = new K($move->color, $sq);
+        $kingUndone = new K($move->color, $sq, $this->castlingRule);
         $this->detach($king);
         $this->attach($kingUndone);
         if (Move::CASTLE_SHORT === $move->type) {
@@ -706,7 +711,9 @@ class Board extends \SplObjectStorage
         $this->attach(new $className(
             $piece->getColor(),
             $piece->getMove()->sq->next,
-            $piece->getId() !== Piece::R ?: $piece->getType()
+            $piece->getId() === Piece::R
+                ? $piece->getType()
+                : (Piece::K ? $this->castlingRule : null)
         ));
         if ($piece->getId() === Piece::P) {
             if ($piece->isPromoted()) {
@@ -740,7 +747,9 @@ class Board extends \SplObjectStorage
             $pieceUndone = new $className(
                 $move->color,
                 $sq,
-                $piece->getId() !== Piece::R ?: $piece->getType()
+                $piece->getId() === Piece::R
+                    ? $piece->getType()
+                    : (Piece::K ? $this->castlingRule : null)
             );
             $this->attach($pieceUndone);
         }

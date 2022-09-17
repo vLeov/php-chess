@@ -6,17 +6,22 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\Piece\P;
 use Chess\Piece\RType;
+use Chess\Variant\Chess960\Rule\CastlingRule;
 use Chess\Variant\Chess960\StartPosition;
 
 class StartPieces
 {
+    private array $castlingRule;
+
     private array $startPosition;
 
-    private array $startPieces = [];
+    private array $startPieces;
 
     public function __construct()
     {
+        $this->castlingRule = (new CastlingRule())->getRule();
         $this->startPosition = (new StartPosition())->create();
+        $this->startPieces = [];
     }
 
     public function create()
@@ -26,7 +31,10 @@ class StartPieces
             $wSq = chr(97+$key).'1';
             $bSq = chr(97+$key).'8';
             $className = "\\Chess\\Piece\\{$val}";
-            if ($val !== Piece::R) {
+            if ($val === Piece::K) {
+                $this->startPieces[] =  new $className(Color::W, $wSq, $this->castlingRule);
+                $this->startPieces[] =  new $className(Color::B, $bSq, $this->castlingRule);
+            } elseif ($val !== Piece::R) {
                 $this->startPieces[] =  new $className(Color::W, $wSq);
                 $this->startPieces[] =  new $className(Color::B, $bSq);
             } elseif (!$longCastlingRook) {

@@ -17,9 +17,17 @@ use Chess\PGN\AN\Piece;
 use Chess\PGN\Move;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 class BoardTest extends AbstractUnitTestCase
 {
+    static private $castlingRule;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$castlingRule = (new CastlingRule())->getRule();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | getCaptures()
@@ -550,13 +558,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'g3'),
+            new K('w', 'g3', self::$castlingRule),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -691,13 +699,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'g3'),
+            new K('w', 'g3', self::$castlingRule),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -718,13 +726,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -745,13 +753,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -772,13 +780,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -799,13 +807,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -826,13 +834,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'g3'),
+            new K('w', 'g3', self::$castlingRule),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f2', RType::CASTLE_SHORT), // rook defended by knight
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -888,10 +896,10 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new B('b', 'a6'), // bishop threatening f1
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f8'),
             new N('b', 'g8'),
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -920,10 +928,10 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new B('b', 'a6'), // bishop threatening f1
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'c5'), // bishop threatening g1
             new N('b', 'g8'),
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -952,9 +960,9 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'c5'), // bishop threatening g1
             new N('b', 'g8'),
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -983,9 +991,9 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f4'), // bishop threatening c1
             new N('b', 'g8'),
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -1014,9 +1022,9 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f8'),
             new N('b', 'e3'), // knight threatening d1 and f1
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -1046,9 +1054,9 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f8'),
             new N('b', 'd2'), // knight threatening b1 and f1
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -1078,9 +1086,9 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f8'),
             new N('b', 'c3'), // knight threatening b1 and d1
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -1109,9 +1117,9 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f8'),
             new N('b', 'g8'),
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -1144,9 +1152,9 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f8'),
             new N('b', 'g8'),
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -1180,7 +1188,7 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'g2'),
             new P('w', 'h2'),
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new N('w', 'g1'),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new B('w', 'a3'),
@@ -1194,7 +1202,7 @@ class BoardTest extends AbstractUnitTestCase
             new R('b', 'a8', RType::CASTLE_LONG),
             new B('b', 'c8'),
             new Q('b', 'd8'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new R('b', 'h8', RType::CASTLE_SHORT),
             new N('b', 'd7'),
             new N('b', 'f6')
@@ -1225,7 +1233,7 @@ class BoardTest extends AbstractUnitTestCase
         $pieces = [
             new R('w', 'a1', RType::CASTLE_LONG),
             new Q('w', 'd1'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new B('w', 'f1'),
             new N('w', 'g1'),
             new R('w', 'h1', RType::CASTLE_SHORT),
@@ -1240,7 +1248,7 @@ class BoardTest extends AbstractUnitTestCase
             new N('b', 'b8'),
             new B('b', 'c8'),
             new Q('b', 'd8'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'f8'),
             new N('b', 'g8'),
             new R('b', 'h8', RType::CASTLE_SHORT),
@@ -1268,8 +1276,8 @@ class BoardTest extends AbstractUnitTestCase
     {
         $pieces = [
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
-            new K('b', 'e8'),
+            new K('w', 'e1', self::$castlingRule),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'a6'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1289,8 +1297,8 @@ class BoardTest extends AbstractUnitTestCase
     {
         $pieces = [
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
-            new K('b', 'e8'),
+            new K('w', 'e1', self::$castlingRule),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'a6'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1311,9 +1319,9 @@ class BoardTest extends AbstractUnitTestCase
     {
         $pieces = [
             new R('w', 'a1', RType::CASTLE_LONG),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new P('w', 'g6'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'a6'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1334,9 +1342,9 @@ class BoardTest extends AbstractUnitTestCase
     {
         $pieces = [
             new N('w', 'b1'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new P('w', 'g6'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new B('b', 'a6'),
             new P('b', 'c3'),
             new P('b', 'h7')
@@ -1359,7 +1367,7 @@ class BoardTest extends AbstractUnitTestCase
             new N('w', 'b1'),
             new B('w', 'c1'),
             new Q('w', 'd1'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new B('w', 'f1'),
             new N('w', 'g1'),
             new R('w', 'h1', RType::CASTLE_SHORT),
@@ -1375,7 +1383,7 @@ class BoardTest extends AbstractUnitTestCase
             new N('b', 'b8'),
             new B('b', 'c8'),
             new Q('b', 'd8'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new R('b', 'h8', RType::CASTLE_SHORT),
             new P('b', 'a7'),
             new P('b', 'b7'),
@@ -1404,13 +1412,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1431,13 +1439,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1458,13 +1466,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1485,13 +1493,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1512,13 +1520,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'f3'), // in check!
+            new K('w', 'f3', self::$castlingRule), // in check!
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1539,13 +1547,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'g3'),
+            new K('w', 'g3', self::$castlingRule),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f5', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1566,13 +1574,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'g3'),
+            new K('w', 'g3', self::$castlingRule),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'h2', RType::CASTLE_SHORT),
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1593,13 +1601,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'a3'),
             new P('w', 'c3'),
             new R('w', 'e6', RType::CASTLE_LONG),
-            new K('w', 'g3'),
+            new K('w', 'g3', self::$castlingRule),
             new P('b', 'a6'),
             new P('b', 'b5'),
             new P('b', 'c4'),
             new N('b', 'd3'),
             new R('b', 'f3', RType::CASTLE_SHORT), // rook not defended
-            new K('b', 'g5'),
+            new K('b', 'g5', self::$castlingRule),
             new P('b', 'h7')
         ];
 
@@ -1620,13 +1628,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e4'),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
@@ -1648,13 +1656,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e7'),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
@@ -1677,13 +1685,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e7'),
             new P('b', 'f7'),
             new P('b', 'g4'),
             new P('b', 'h7'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
@@ -1705,13 +1713,13 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'f2'),
             new P('w', 'g2'),
             new P('w', 'h2'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'e7'),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h4'),
-            new K('b', 'e8'),
+            new K('b', 'e8', self::$castlingRule),
             new R('b', 'h8', RType::CASTLE_SHORT)
         ];
 
@@ -1765,11 +1773,11 @@ class BoardTest extends AbstractUnitTestCase
             new P('w', 'b2'),
             new P('w', 'c5'),
             new R('w', 'd1', RType::CASTLE_LONG),
-            new K('w', 'e4'),
+            new K('w', 'e4', self::$castlingRule),
             new P('b', 'a7'),
             new P('b', 'b7'),
             new P('b', 'c7'),
-            new K('b', 'g6'),
+            new K('b', 'g6', self::$castlingRule),
             new R('b', 'h8', RType::CASTLE_LONG),
         ];
 
@@ -1790,13 +1798,13 @@ class BoardTest extends AbstractUnitTestCase
         $pieces = [
             new P('w', 'g2'),
             new P('w', 'h7'),
-            new K('w', 'e1'),
+            new K('w', 'e1', self::$castlingRule),
             new R('w', 'h1', RType::CASTLE_SHORT),
             new P('b', 'c7'),
             new P('b', 'd7'),
             new P('b', 'e7'),
             new B('b', 'd6'),
-            new K('b', 'e8')
+            new K('b', 'e8', self::$castlingRule)
         ];
 
         $castlingAbility = 'K';
@@ -1814,10 +1822,10 @@ class BoardTest extends AbstractUnitTestCase
         $pieces = [
             new P('w', 'd5'),
             new Q('w', 'f5'),
-            new K('w', 'g2'),
+            new K('w', 'g2', self::$castlingRule),
             new P('w', 'h2'),
             new R('w', 'h8', RType::CASTLE_LONG),
-            new K('b', 'e7'),
+            new K('b', 'e7', self::$castlingRule),
             new P('b', 'f7'),
             new P('b', 'g7'),
             new P('b', 'h7')
@@ -1862,8 +1870,8 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_king_and_queen_vs_king()
     {
         $pieces = [
-            new K('b', 'h1'),
-            new K('w', 'a8'),
+            new K('b', 'h1', self::$castlingRule),
+            new K('w', 'a8', self::$castlingRule),
             new Q('w', 'f2'),
         ];
 
@@ -1881,9 +1889,9 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_king_and_pawn_vs_king()
     {
         $pieces = [
-            new K('w', 'f6'),
+            new K('w', 'f6', self::$castlingRule),
             new P('w', 'f7'),
-            new K('b', 'f8'),
+            new K('b', 'f8', self::$castlingRule),
         ];
 
         $castlingAbility = '-';
@@ -1900,9 +1908,9 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_king_and_rook_vs_king_and_bishop()
     {
         $pieces = [
-            new K('w', 'b6'),
+            new K('w', 'b6', self::$castlingRule),
             new R('w', 'h8', RType::CASTLE_LONG),
-            new K('b', 'a8'),
+            new K('b', 'a8', self::$castlingRule),
             new B('b', 'b8'),
         ];
 
@@ -1920,13 +1928,13 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_stalemate_endgame()
     {
         $pieces = [
-            new K('w', 'g1'),
+            new K('w', 'g1', self::$castlingRule),
             new Q('w', 'd1'),
             new R('w', 'a5', RType::CASTLE_SHORT),
             new R('w', 'b7', RType::CASTLE_LONG),
             new P('w', 'f6'),
             new P('w', 'g5'),
-            new K('b', 'e6'),
+            new K('b', 'e6', self::$castlingRule),
         ];
 
         $castlingAbility = '-';

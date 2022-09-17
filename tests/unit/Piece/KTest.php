@@ -8,6 +8,7 @@ use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 class KTest extends AbstractUnitTestCase
 {
@@ -72,7 +73,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_a2()
     {
-        $king = new K('w', 'a2');
+        $king = new K('w', 'a2', (new CastlingRule)->getRule());
         $mobility = (object) [
             'up' => 'a3',
             'down' => 'a1',
@@ -88,7 +89,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $king = new K('w', 'd5');
+        $king = new K('w', 'd5', (new CastlingRule)->getRule());
         $mobility = (object) [
             'up' => 'd6',
             'down' => 'd4',
