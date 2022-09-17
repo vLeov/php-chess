@@ -22,7 +22,7 @@ class GameTest extends AbstractUnitTestCase
      */
     public function ascii_kaufman_01()
     {
-        $game = new Game(Game::MODE_FEN);
+        $game = new Game(Game::VARIANT_CLASSICAL, Game::MODE_FEN);
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
 
         $ascii = $game->getBoard()->toAsciiString();
@@ -44,7 +44,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function ascii_kaufman_01_Qg4()
     {
-        $game = new Game(Game::MODE_FEN);
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_FEN
+        );
+
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
         $game->play('w', 'Qg4');
 
@@ -67,7 +71,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function ascii_e4_e5_Nf3_Nc6_Bb5_a6_Ba4_b5_Bb3_Bb7_a4_Nf6_Nc3_g6_Qe2_d6_d3_Be7_Bg5_Qd7_CASTLE_LONG_CASTLE_SHORT()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_FEN
+        );
+
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b'));
@@ -119,7 +127,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function load_fen_checkmate_king_and_rook_vs_king()
     {
-        $game = new Game(Game::MODE_FEN);
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_FEN
+        );
+
         $game->loadFen('7k/8/8/8/8/8/2K5/r7 w - - 0 1');
 
         $this->assertTrue($game->playFen('7k/8/8/8/8/8/1K6/r7 b'));
@@ -141,7 +153,10 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_e4()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
 
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
     }
@@ -151,7 +166,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_e4_e5()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w'));
@@ -162,7 +181,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_e4_Bg6()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 
         $this->assertFalse($game->playFen('rnbqk1nr/pppppppp/6b1/8/4P3/8/PPPP1PPP/RNBQKBNR w'));
@@ -173,7 +196,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_e4_e5_Nf3()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $game->play('w', 'e4');
         $game->play('b', 'e5');
 
@@ -185,7 +212,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_a4_h5_a5_h4_a6_h3_axb7_hxg2()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/P7/8/1PPPPPPP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppppppp1/8/7p/P7/8/1PPPPPPP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppppppp1/8/P6p/8/8/1PPPPPPP/RNBQKBNR b'));
@@ -202,7 +233,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_e4_e5_Nf3_Nf6_Bc4_Bc5_Ke2_Ke7_Nc3()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b'));
@@ -219,7 +254,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_e4_d5_exd5_e5_get_piece_on_d5()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b'));
@@ -233,7 +272,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_e4_c5_Nf3_d6_d4_cxd4_Nxd4_Nf6_get_piece_on_b1()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b'));
@@ -251,7 +294,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_fen_a_sequence_of_moves_CASTLE_SHORT()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
         $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w');
         $game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b');
@@ -276,7 +323,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function movetext_e4_d5_Bb5()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppp1pppp/8/1B1p4/4P3/8/PPPP1PPP/RNBQK1NR b'));
@@ -291,7 +342,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function movetext_f4_e5_g4_Qh4()
     {
-        $game = new Game();
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
         $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/5P2/8/PPPPP1PP/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/5P2/8/PPPPP1PP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/5PP1/8/PPPPP2P/RNBQKBNR b'));
@@ -322,7 +377,10 @@ class GameTest extends AbstractUnitTestCase
             $contents = file_get_contents(self::DATA_FOLDER."/pgn/$filename");
             $contents = (new Movetext($contents))->validate();
             $movetext = (new Movetext($contents))->getMovetext();
-            $game = new Game();
+            $game = new Game(
+                Game::VARIANT_CLASSICAL,
+                Game::MODE_ANALYSIS
+            );
             foreach ($movetext->moves as $key => $val) {
                 if ($key % 2 === 0) {
                     $this->assertTrue($game->play('w', $val));

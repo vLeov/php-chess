@@ -10,7 +10,8 @@ use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\UciEngine\Stockfish;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\Chess960\Board as Chess960Board;
+use Chess\Variant\Classical\Board as ClassicalBoard;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 
@@ -27,19 +28,19 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
+    const VARIANT_960           = '960';
+    const VARIANT_CLASSICAL     = 'classical';
+
     const MODE_ANALYSIS         = 'analysis';
     const MODE_GM               = 'gm';
     const MODE_FEN              = 'fen';
     const MODE_PGN              = 'pgn';
     const MODE_PLAY             = 'play';
-
-    // AI modes
     const MODE_RUBIX            = 'rubix';
     const MODE_STOCKFISH        = 'stockfish';
 
     const MODEL_FOLDER          = __DIR__.'/../model/';
-    // TODO
-    // Train a generic model rather than an endgame one.
+
     const MODEL_FILE            = 'regression/checkmate_king_and_rook_vs_king.model';
 
     /**
@@ -47,7 +48,14 @@ class Game
      *
      * @var \Chess\Variant\Classical\Board
      */
-    private Board $board;
+    private ClassicalBoard $board;
+
+    /**
+     * Variant.
+     *
+     * @var string
+     */
+    private string $variant;
 
     /**
      * Mode.
@@ -63,10 +71,20 @@ class Game
      */
     private null|Grandmaster $gm;
 
-    public function __construct(null|string $mode = null, null|Grandmaster $gm = null) {
-        $this->board = new Board();
+    public function __construct(
+        string $variant = null,
+        string $mode = null,
+        null|Grandmaster $gm = null
+    ) {
+        $this->variant = $variant;
+        $this->mode = $mode;
         $this->gm = $gm;
-        $this->mode = $mode ?? self::MODE_ANALYSIS;
+
+        if ($this->variant === self::VARIANT_CLASSICAL) {
+            $this->board = new ClassicalBoard();
+        } elseif ($this->variant === self::VARIANT_960) {
+            $this->board = new Chess960Board();
+        }
     }
 
     /**
@@ -74,7 +92,7 @@ class Game
      *
      * @return \Chess\Variant\Classical\Board
      */
-    public function getBoard(): Board
+    public function getBoard(): ClassicalBoard
     {
         return $this->board;
     }
