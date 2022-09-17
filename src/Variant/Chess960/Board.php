@@ -5,22 +5,20 @@ namespace Chess\Variant\Chess960;
 use Chess\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Chess960\StartPieces;
+use Chess\Variant\Chess960\StartPosition;
+use Chess\Variant\Chess960\Rule\CastlingRule;
 
 final class Board extends ClassicalBoard
 {
-    public function __construct(array $pieces = null, string $castlingAbility = '-')
+    public function __construct()
     {
-        if (!$pieces) {
-            $pieces = (new StartPieces())->create();
-            $this->castlingAbility = CastlingAbility::START;
-        } else {
-            $this->castlingAbility = $castlingAbility;
-        }
+        $this->castlingAbility = CastlingAbility::START;
+        $startPosition = (new StartPosition())->create();
+        $this->castlingRule = (new CastlingRule($startPosition))->getRule();
+        $startPieces = (new StartPieces($this->castlingRule))->create();
 
-        foreach ($pieces as $piece) {
+        foreach ($startPieces as $piece) {
             $this->attach($piece);
         }
     }
-
-    // TODO ...
 }

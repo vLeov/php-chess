@@ -8,7 +8,7 @@ use Chess\PGN\AN\Piece;
 
 class CastlingRule
 {
-    private $rule = [
+    private array $rule = [
         Color::W => [
             Piece::K => [
                 Castle::SHORT => [
@@ -75,7 +75,7 @@ class CastlingRule
         ],
     ];
 
-    public function getRule()
+    public function getRule(): array
     {
         return $this->rule;
     }

@@ -105,6 +105,11 @@ class Board extends \SplObjectStorage
      */
     private object $sqEval;
 
+    /**
+     * Castling rule.
+     *
+     * @var array
+     */
     private array $castlingRule;
 
     /**

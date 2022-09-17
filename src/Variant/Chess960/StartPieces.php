@@ -11,16 +11,16 @@ use Chess\Variant\Chess960\StartPosition;
 
 class StartPieces
 {
-    private array $castlingRule;
-
     private array $startPosition;
+
+    private array $castlingRule;
 
     private array $startPieces;
 
     public function __construct()
     {
-        $this->castlingRule = (new CastlingRule())->getRule();
         $this->startPosition = (new StartPosition())->create();
+        $this->castlingRule = (new CastlingRule($this->startPosition))->getRule();
         $this->startPieces = [];
     }
 
