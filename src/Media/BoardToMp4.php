@@ -2,7 +2,7 @@
 
 namespace Chess\Media;
 
-use Chess\Board;
+use Chess\Variant\Classical\Board;
 
 class BoardToMp4
 {

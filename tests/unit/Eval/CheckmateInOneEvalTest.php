@@ -2,9 +2,9 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Board;
 use Chess\Eval\CheckmateInOneEval;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class CheckmateInOneEvalTest extends AbstractUnitTestCase
 {

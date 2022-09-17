@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess;
+namespace Chess\Variant\Classical;
 
 use Chess\Piece\AbstractPiece;
 

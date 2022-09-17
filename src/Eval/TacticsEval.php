@@ -2,11 +2,11 @@
 
 namespace Chess\Eval;
 
-use Chess\Board;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\Board;
 
 /**
  * Tactics evaluation.
@@ -35,7 +35,7 @@ class TacticsEval extends AbstractEval
     private array $pressEval;
 
     /**
-     * @param \Chess\Board $board
+     * @param \Chess\Variant\Classical\Board $board
      */
     public function __construct(Board $board)
     {

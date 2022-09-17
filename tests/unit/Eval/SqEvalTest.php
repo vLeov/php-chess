@@ -2,9 +2,9 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Board;
 use Chess\Eval\SqEval;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class SqEvalTest extends AbstractUnitTestCase
 {

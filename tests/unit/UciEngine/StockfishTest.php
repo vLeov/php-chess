@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\UciEngine;
 
-use Chess\Board;
 use Chess\FEN\ShortStrToPgn;
 use Chess\UciEngine\Stockfish;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class StockfishTest extends AbstractUnitTestCase
 {

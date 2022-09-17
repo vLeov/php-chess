@@ -2,11 +2,11 @@
 
 namespace Chess\Piece;
 
-use Chess\Board;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\AN\Square;
+use Chess\Variant\Classical\Board;
 
 /**
  * AbstractPiece
@@ -56,7 +56,7 @@ abstract class AbstractPiece
     /**
      * The chessboard.
      *
-     * @var \Chess\Board
+     * @var \Chess\Variant\Classical\Board
      */
     protected Board $board;
 

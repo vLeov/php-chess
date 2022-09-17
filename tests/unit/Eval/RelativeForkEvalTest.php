@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Board;
 use Chess\Eval\RelativeForkEval;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class RelativeForkEvalTest extends AbstractUnitTestCase
 {

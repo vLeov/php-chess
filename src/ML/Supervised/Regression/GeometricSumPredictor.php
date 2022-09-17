@@ -2,9 +2,9 @@
 
 namespace Chess\ML\Supervised\Regression;
 
-use Chess\Board;
 use Chess\HeuristicsByFenString;
 use Chess\ML\Supervised\AbstractPredictor;
+use Chess\Variant\Classical\Board;
 
 class GeometricSumPredictor extends AbstractPredictor
 {

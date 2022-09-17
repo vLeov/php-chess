@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Eval\Material;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\Eval\ConnectivityEval;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class ConnectivityEvalTest extends AbstractUnitTestCase
 {

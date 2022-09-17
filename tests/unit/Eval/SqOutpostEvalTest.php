@@ -5,6 +5,7 @@ namespace Chess\Tests\Unit\Eval;
 use Chess\Eval\SqOutpostEval;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class SqOutpostEvalTest extends AbstractUnitTestCase
 {

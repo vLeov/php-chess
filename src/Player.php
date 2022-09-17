@@ -3,6 +3,7 @@
 namespace Chess;
 
 use Chess\Exception\PlayerException;
+use Chess\Variant\Classical\Board;
 
 /**
  * Player.
@@ -17,7 +18,7 @@ class Player
     /**
      * Chess board.
      *
-     * @var \Chess\Board
+     * @var \Chess\Variant\Classical\Board
      */
     protected Board $board;
 
@@ -40,7 +41,7 @@ class Player
     /**
      * Returns the resulting Chess\Board object of playing a game.
      *
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function getBoard(): Board
     {

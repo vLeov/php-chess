@@ -2,8 +2,8 @@
 
 namespace Chess\Array;
 
-use Chess\Board;
 use Chess\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\Board;
 
 /**
  * Ascii array.
@@ -28,7 +28,7 @@ class AsciiArray extends AbstractArray
      *
      * @param string $turn
      * @param string $castlingAbility
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function toBoard(
         string $turn,

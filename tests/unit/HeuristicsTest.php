@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\Board;
 use Chess\Heuristics;
 use Chess\Player;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class HeuristicsTest extends AbstractUnitTestCase
 {

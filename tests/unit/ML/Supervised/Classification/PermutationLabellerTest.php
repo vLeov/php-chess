@@ -2,12 +2,12 @@
 
 namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
-use Chess\Board;
 use Chess\Heuristics;
 use Chess\Player;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\ML\Supervised\Classification\PermutationLabeller;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class PermutationLabellerTest extends AbstractUnitTestCase
 {

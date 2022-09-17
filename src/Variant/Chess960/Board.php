@@ -2,8 +2,8 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\Board as ClassicalBoard;
 use Chess\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Chess960\StartPieces;
 
 final class Board extends ClassicalBoard

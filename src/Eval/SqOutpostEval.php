@@ -2,10 +2,10 @@
 
 namespace Chess\Eval;
 
-use Chess\Board;
 use Chess\Piece\P;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\Board;
 
 /**
  * SqOutpostEval

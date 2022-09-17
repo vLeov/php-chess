@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Piece;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\Piece\Q;
 use Chess\Tests\AbstractUnitTestCase;

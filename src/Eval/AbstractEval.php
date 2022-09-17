@@ -2,9 +2,9 @@
 
 namespace Chess\Eval;
 
-use Chess\Board;
 use Chess\PGN\AN\Piece;
 use Chess\Piece\AbstractPiece;
+use Chess\Variant\Classical\Board;
 
 /**
  * Abstract evaluation.

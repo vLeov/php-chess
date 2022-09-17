@@ -2,11 +2,11 @@
 
 namespace Chess\Tests\Unit\Media;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\FEN\StrToBoard;
 use Chess\Media\BoardToPng;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class BoardToPngTest extends AbstractUnitTestCase
 {

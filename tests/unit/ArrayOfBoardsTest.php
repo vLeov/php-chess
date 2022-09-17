@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\Board;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class ArrayOfBoardsTest extends AbstractUnitTestCase
 {

@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\FEN;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\FEN\BoardToStr;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class BoardToStrTest extends AbstractUnitTestCase
 {

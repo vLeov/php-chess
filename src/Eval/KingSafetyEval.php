@@ -2,11 +2,11 @@
 
 namespace Chess\Eval;
 
-use Chess\Board;
 use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\Board;
 
 /**
  * K safety.

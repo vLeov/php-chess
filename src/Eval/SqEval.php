@@ -2,8 +2,8 @@
 
 namespace Chess\Eval;
 
-use Chess\Board;
 use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\Board;
 
 /**
  * Square evaluation.

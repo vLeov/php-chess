@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess;
+namespace Chess\Variant\Classical;
 
 use Chess\Array\AsciiArray;
 use Chess\Eval\DefenseEval;
@@ -170,7 +170,7 @@ class Board extends \SplObjectStorage
      * Sets the current turn.
      *
      * @param string $color
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function setTurn(string $color): Board
     {
@@ -234,7 +234,7 @@ class Board extends \SplObjectStorage
      *
      * @param string $color
      * @param object $capture
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function pushCapture(string $color, object $capture): Board
     {
@@ -247,7 +247,7 @@ class Board extends \SplObjectStorage
      * Removes an element from the captured pieces.
      *
      * @param string $color
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function popCapture(string $color): Board
     {
@@ -287,7 +287,7 @@ class Board extends \SplObjectStorage
      * Adds a new element to the history.
      *
      * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function pushHistory(AbstractPiece $piece): Board
     {
@@ -303,7 +303,7 @@ class Board extends \SplObjectStorage
     /**
      * Removes an element from the history.
      *
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function popHistory(): Board
     {
@@ -419,7 +419,7 @@ class Board extends \SplObjectStorage
      * Captures a piece.
      *
      * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function capture(AbstractPiece $piece): Board
     {
@@ -463,7 +463,7 @@ class Board extends \SplObjectStorage
      * Promotes a pawn.
      *
      * @param \Chess\Piece\P $pawn
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function promote(P $pawn): Board
     {
@@ -596,7 +596,7 @@ class Board extends \SplObjectStorage
      *
      * @param string $sq
      * @param object $move
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function undoCastle(string $sq, object $move): Board
     {
@@ -636,7 +636,7 @@ class Board extends \SplObjectStorage
      * Updates the castle property.
      *
      * @param \Chess\Piece\AbstractPiece $pieceMoved
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function updateCastle(AbstractPiece $pieceMoved): Board
     {
@@ -723,7 +723,7 @@ class Board extends \SplObjectStorage
      *
      * @param string $sq
      * @param object $move
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     private function undoMove(string $sq, object $move): Board
     {
@@ -761,7 +761,7 @@ class Board extends \SplObjectStorage
     /**
      * Undoes the last move.
      *
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function undo(): Board
     {

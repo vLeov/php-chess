@@ -2,7 +2,7 @@
 
 namespace Chess\Piece;
 
-use Chess\Board;
+use Chess\Variant\Classical\Board;
 
 trait PieceObserverBoardTrait
 {

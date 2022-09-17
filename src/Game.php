@@ -10,6 +10,7 @@ use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\UciEngine\Stockfish;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
+use Chess\Variant\Classical\Board;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 
@@ -44,7 +45,7 @@ class Game
     /**
      * Chess board.
      *
-     * @var \Chess\Board
+     * @var \Chess\Variant\Classical\Board
      */
     private Board $board;
 
@@ -71,7 +72,7 @@ class Game
     /**
      * Returns the Chess\Board object.
      *
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function getBoard(): Board
     {
@@ -91,7 +92,7 @@ class Game
     /**
      * Sets the Chess\Board object.
      *
-     * @param \Chess\Board
+     * @param \Chess\Variant\Classical\Board
      * @return \Chess\Game
      */
     public function setBoard(Board $board): Game

@@ -2,6 +2,8 @@
 
 namespace Chess;
 
+use Chess\Variant\Classical\Board;
+
 class Composition
 {
     protected Board $board;

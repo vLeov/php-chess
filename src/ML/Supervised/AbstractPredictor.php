@@ -2,11 +2,11 @@
 
 namespace Chess\ML\Supervised;
 
-use Chess\Board;
 use Chess\HeuristicsByFenString;
 use Chess\PGN\AN\Color;
 use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\PersistentModel;
+use Chess\Variant\Classical\Board;
 
 abstract class AbstractPredictor
 {

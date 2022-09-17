@@ -6,7 +6,6 @@ use Chess\Array\AsciiArray;
 use Chess\Exception\UnknownNotationException;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
-use Generator;
 
 class StrToBoardTest extends AbstractUnitTestCase
 {

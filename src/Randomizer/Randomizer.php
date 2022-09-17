@@ -2,15 +2,15 @@
 
 namespace Chess\Randomizer;
 
-use Chess\Board;
 use Chess\PGN\AN\Color;
 use Chess\Piece\K;
 use Chess\Piece\RType;
+use Chess\Variant\Classical\Board;
 
 /**
  * Randomizer.
  *
- * Creates a Chess\Board object with random pieces.
+ * Creates a \Chess\Variant\Classical\Board object with random pieces.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -24,7 +24,7 @@ class Randomizer
     /**
      * Chess board.
      *
-     * @var \Chess\Board
+     * @var \Chess\Variant\Classical\Board
      */
     protected Board $board;
 
@@ -57,7 +57,7 @@ class Randomizer
     /**
      * Returns the Chess\Board object.
      *
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function getBoard()
     {

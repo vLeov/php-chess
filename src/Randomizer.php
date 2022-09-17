@@ -5,6 +5,7 @@ namespace Chess;
 use Chess\PGN\AN\Color;
 use Chess\Piece\K;
 use Chess\Piece\RType;
+use Chess\Variant\Classical\Board;
 
 /**
  * Randomizer.
@@ -23,7 +24,7 @@ class Randomizer
     /**
      * Chess board.
      *
-     * @var \Chess\Board
+     * @var \Chess\Variant\Classical\Board
      */
     private Board $board;
 
@@ -56,7 +57,7 @@ class Randomizer
     /**
      * Returns the Chess\Board object.
      *
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function getBoard()
     {

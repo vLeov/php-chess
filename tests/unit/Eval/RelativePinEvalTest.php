@@ -5,6 +5,7 @@ namespace Chess\Tests\Unit\Eval;
 use Chess\Eval\RelativePinEval;
 use Chess\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class RelativePinEvalTest extends AbstractUnitTestCase
 {

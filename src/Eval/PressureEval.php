@@ -2,10 +2,10 @@
 
 namespace Chess\Eval;
 
-use Chess\Board;
 use Chess\Eval\SqEval;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\Board;
 
 /**
  * Pressure evaluation.
@@ -27,7 +27,7 @@ class PressureEval extends AbstractEval
     private array $sqEval;
 
     /**
-     * @param \Chess\Board $board
+     * @param \Chess\Variant\Classical\Board $board
      */
     public function __construct(Board $board)
     {

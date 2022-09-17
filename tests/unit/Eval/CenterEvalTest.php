@@ -2,9 +2,10 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Player;
 use Chess\Eval\CenterEval;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
+use Chess\Player;
 
 class CenterEvalTest extends AbstractUnitTestCase
 {

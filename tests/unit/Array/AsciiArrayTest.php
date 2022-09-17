@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Array;
 
-use Chess\Board;
 use Chess\Array\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
 
@@ -57,7 +56,7 @@ class AsciiArrayTest extends AbstractUnitTestCase
     | toBoard()
     |--------------------------------------------------------------------------
     |
-    | Returns a Chess\Board object from an ASCII array.
+    | Returns a Chess\Variant\Classical\Board object from an ASCII array.
     |
     */
 

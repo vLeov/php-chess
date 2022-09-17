@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\Eval\AttackEval;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class AttackEvalTest extends AbstractUnitTestCase
 {

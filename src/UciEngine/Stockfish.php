@@ -2,8 +2,8 @@
 
 namespace Chess\UciEngine;
 
-use Chess\Board;
 use Chess\Exception\StockfishException;
+use Chess\Variant\Classical\Board;
 
 /**
  * Stockfish.
@@ -28,7 +28,7 @@ class Stockfish
     /**
      * PHP Chess board.
      *
-     * @var \Chess\Board
+     * @var \Chess\Variant\Classical\Board
      */
     private Board $board;
 
@@ -66,7 +66,7 @@ class Stockfish
     /**
      * Constructor.
      *
-     * @param \Chess\Board $board
+     * @param \Chess\Variant\Classical\Board $board
      */
     public function __construct(Board $board)
     {
@@ -76,7 +76,7 @@ class Stockfish
     /**
      * Returns the PHP Chess board.
      *
-     * @return \Chess\Board
+     * @return \Chess\Variant\Classical\Board
      */
     public function getBoard(): Board
     {

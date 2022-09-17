@@ -1,8 +1,7 @@
 <?php
 
-namespace Chess\Tests\Unit;
+namespace Chess\Tests\Unit\Variant\Classical;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\StrToBoard;
@@ -17,6 +16,7 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\Move;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class BoardTest extends AbstractUnitTestCase
 {
@@ -2096,7 +2096,7 @@ class BoardTest extends AbstractUnitTestCase
     | toArray()
     |--------------------------------------------------------------------------
     |
-    | Returns an ASCII array representing a Chess\Board object.
+    | Returns an ASCII array representing a Chess\Variant\Classical\Board object.
     |
     */
 

@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Media;
 
-use Chess\Board;
 use Chess\Player;
 use Chess\Media\BoardToMp4;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
 
 class BoardToMp4Test extends AbstractUnitTestCase
 {
