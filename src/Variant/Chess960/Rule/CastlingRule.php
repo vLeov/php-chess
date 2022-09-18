@@ -79,7 +79,7 @@ class CastlingRule
         $path = [];
         $i = ord($from[0]) + 1;
         $j = ord($to[0]);
-        for ($i = 0; $i < $j; $i++) {
+        for ($i; $i < $j; $i++) {
             $path[] = chr($i) . $from[1];
         }
 

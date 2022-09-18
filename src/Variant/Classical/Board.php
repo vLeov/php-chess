@@ -64,6 +64,13 @@ class Board extends \SplObjectStorage
     private array $history = [];
 
     /**
+     * Castling rule.
+     *
+     * @var array
+     */
+    private array $castlingRule = [];
+
+    /**
      * Castling ability.
      *
      * @var array
@@ -104,13 +111,6 @@ class Board extends \SplObjectStorage
      * @var object
      */
     private object $sqEval;
-
-    /**
-     * Castling rule.
-     *
-     * @var array
-     */
-    private array $castlingRule;
 
     /**
      * Constructor.
@@ -216,6 +216,16 @@ class Board extends \SplObjectStorage
     public function getDefenseEval(): object
     {
         return $this->defenseEval;
+    }
+
+    /**
+     * Gets the castling rule.
+     *
+     * @return array
+     */
+    public function getCastlingRule(): array
+    {
+        return $this->castlingRule;
     }
 
     /**
