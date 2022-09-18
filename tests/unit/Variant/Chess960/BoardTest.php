@@ -36,7 +36,7 @@ class BoardTest extends AbstractUnitTestCase
             Color::W => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [],
+                        'sqs' => [ 'f1', 'g1' ],
                         'sq' => [
                             'current' => 'd1',
                             'next' => 'g1',
@@ -68,7 +68,7 @@ class BoardTest extends AbstractUnitTestCase
             Color::B => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [],
+                        'sqs' => [ 'f8', 'g8' ],
                         'sq' => [
                             'current' => 'd8',
                             'next' => 'g8',
