@@ -180,4 +180,30 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $castlingRule);
     }
+
+    /**
+     * @test
+     */
+    public function to_array_e4_e5()
+    {
+        $startPosition = ['Q', 'R', 'B', 'K', 'R', 'B', 'N', 'N'];
+
+        $board = new Board($startPosition);
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+
+        $expected = [
+            7 => [ ' q ', ' r ', ' b ', ' k ', ' r ', ' b ', ' n ', ' n ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' . ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ' ],
+            0 => [ ' Q ', ' R ', ' B ', ' K ', ' R ', ' B ', ' N ', ' N ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
 }

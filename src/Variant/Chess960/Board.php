@@ -17,6 +17,8 @@ final class Board extends ClassicalBoard
         foreach ($pieces as $piece) {
             $this->attach($piece);
         }
+
+        $this->refresh();
     }
 
     public function getCastlingRule(): array
