@@ -28,4 +28,9 @@ final class Board extends ClassicalBoard
     {
         return $this->castlingRule;
     }
+
+    public function getCastlingAbility(): string
+    {
+        return $this->castlingAbility;
+    }
 }

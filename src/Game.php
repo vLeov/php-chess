@@ -115,7 +115,7 @@ class Game
      * @param \Chess\Variant\Classical\Board
      * @return \Chess\Game
      */
-    public function setBoard(Board $board): Game
+    public function setBoard(ClassicalBoard $board): Game
     {
         $this->board = $board;
 

@@ -6,6 +6,7 @@ use Chess\Game;
 use Chess\Movetext;
 use Chess\Exception\UnknownNotationException;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Chess960\Board;
 
 class GameTest extends AbstractUnitTestCase
 {
@@ -156,6 +157,32 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function classical_play_fen_foo()
+    {
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertFalse($game->playFen('foo'));
+    }
+
+    /**
+     * @test
+     */
+    public function chess960_play_fen_foo()
+    {
+        $game = new Game(
+            Game::VARIANT_960,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertFalse($game->playFen('foo'));
+    }
+
+    /**
+     * @test
+     */
     public function classical_play_fen_e4()
     {
         $game = new Game(
@@ -171,14 +198,18 @@ class GameTest extends AbstractUnitTestCase
      */
     public function chess960_play_fen_e4()
     {
-        $this->expectException(UnknownNotationException::class);
-
         $game = new Game(
             Game::VARIANT_960,
             Game::MODE_ANALYSIS
         );
 
-        $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
+        $startPosition = ['R', 'B', 'B', 'K', 'R', 'Q', 'N', 'N'];
+
+        $board = new Board($startPosition);
+
+        $game->setBoard($board);
+
+        $this->assertFalse($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
     }
 
     /**
