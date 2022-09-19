@@ -11,6 +11,7 @@ use Chess\PGN\AN\Color;
 use Chess\UciEngine\Stockfish;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Chess\Variant\Chess960\Board as Chess960Board;
+use Chess\Variant\Chess960\StartPosition;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
@@ -83,7 +84,8 @@ class Game
         if ($this->variant === self::VARIANT_CLASSICAL) {
             $this->board = new ClassicalBoard();
         } elseif ($this->variant === self::VARIANT_960) {
-            $this->board = new Chess960Board();
+            $startPosition = (new StartPosition())->create();
+            $this->board = new Chess960Board($startPosition);
         }
     }
 

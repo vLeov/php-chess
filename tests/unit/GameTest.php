@@ -4,6 +4,7 @@ namespace Chess\Tests\Unit;
 
 use Chess\Game;
 use Chess\Movetext;
+use Chess\Exception\UnknownNotationException;
 use Chess\Tests\AbstractUnitTestCase;
 
 class GameTest extends AbstractUnitTestCase
@@ -22,7 +23,11 @@ class GameTest extends AbstractUnitTestCase
      */
     public function ascii_kaufman_01()
     {
-        $game = new Game(Game::VARIANT_CLASSICAL, Game::MODE_FEN);
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_FEN
+        );
+
         $game->loadFen('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
 
         $ascii = $game->getBoard()->toAsciiString();
@@ -151,7 +156,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_e4()
+    public function classical_play_fen_e4()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -164,7 +169,22 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_e4_e5()
+    public function chess960_play_fen_e4()
+    {
+        $this->expectException(UnknownNotationException::class);
+
+        $game = new Game(
+            Game::VARIANT_960,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
+    }
+
+    /**
+     * @test
+     */
+    public function classical_play_fen_e4_e5()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -179,7 +199,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_e4_Bg6()
+    public function classical_play_fen_e4_Bg6()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -194,7 +214,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_e4_e5_Nf3()
+    public function classical_play_fen_e4_e5_Nf3()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -210,7 +230,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_a4_h5_a5_h4_a6_h3_axb7_hxg2()
+    public function classical_play_fen_a4_h5_a5_h4_a6_h3_axb7_hxg2()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -231,7 +251,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_e4_e5_Nf3_Nf6_Bc4_Bc5_Ke2_Ke7_Nc3()
+    public function classical_play_fen_e4_e5_Nf3_Nf6_Bc4_Bc5_Ke2_Ke7_Nc3()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -252,7 +272,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_e4_d5_exd5_e5_get_piece_on_d5()
+    public function classical_play_fen_e4_d5_exd5_e5_get_piece_on_d5()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -270,7 +290,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_e4_c5_Nf3_d6_d4_cxd4_Nxd4_Nf6_get_piece_on_b1()
+    public function classical_play_fen_e4_c5_Nf3_d6_d4_cxd4_Nxd4_Nf6_get_piece_on_b1()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
@@ -292,7 +312,7 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_fen_a_sequence_of_moves_CASTLE_SHORT()
+    public function classical_play_fen_a_sequence_of_moves_CASTLE_SHORT()
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,

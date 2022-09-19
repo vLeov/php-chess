@@ -73,9 +73,9 @@ class Board extends \SplObjectStorage
     /**
      * Castling ability.
      *
-     * @var array
+     * @var string
      */
-    private string $castlingAbility;
+    private string $castlingAbility = '';
 
     /**
      * Observers.
