@@ -17,10 +17,10 @@ class StartPieces
 
     private array $startPieces;
 
-    public function __construct()
+    public function __construct(array $startPosition, array $castlingRule)
     {
-        $this->startPosition = (new StartPosition())->create();
-        $this->castlingRule = (new CastlingRule($this->startPosition))->getRule();
+        $this->startPosition = $startPosition;
+        $this->castlingRule = $castlingRule;
         $this->startPieces = [];
     }
 
@@ -46,7 +46,6 @@ class StartPieces
                 $this->startPieces[] =  new $className(Color::B, $bSq, RType::CASTLE_SHORT);
             }
         }
-
         $this->startPieces[] = new P(Color::W, 'a2');
         $this->startPieces[] = new P(Color::W, 'b2');
         $this->startPieces[] = new P(Color::W, 'c2');
@@ -55,7 +54,6 @@ class StartPieces
         $this->startPieces[] = new P(Color::W, 'f2');
         $this->startPieces[] = new P(Color::W, 'g2');
         $this->startPieces[] = new P(Color::W, 'h2');
-
         $this->startPieces[] = new P(Color::B, 'a7');
         $this->startPieces[] = new P(Color::B, 'b7');
         $this->startPieces[] = new P(Color::B, 'c7');

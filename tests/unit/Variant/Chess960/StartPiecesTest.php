@@ -4,6 +4,8 @@ namespace Chess\Tests\Unit\Variant\Chess960;
 
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Chess960\StartPieces;
+use Chess\Variant\Chess960\StartPosition;
+use Chess\Variant\Chess960\Rule\CastlingRule;
 
 class StartPiecesTest extends AbstractUnitTestCase
 {
@@ -12,7 +14,10 @@ class StartPiecesTest extends AbstractUnitTestCase
      */
     public function create()
     {
-        $pieces = (new StartPieces())->create();
+        $startPosition = (new StartPosition())->create();
+        $castlingRule =  (new CastlingRule($startPosition))->getRule();
+
+        $pieces = (new StartPieces($startPosition, $castlingRule))->create();
 
         $this->assertSame(32, count($pieces));
     }

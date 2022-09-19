@@ -11,12 +11,15 @@ final class Board extends ClassicalBoard
 {
     public function __construct(array $startPosition)
     {
-        $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule($startPosition))->getRule();
-        $pieces = (new StartPieces($this->castlingRule))->create();
+
+        $pieces = (new StartPieces($startPosition, $this->castlingRule))->create();
+
         foreach ($pieces as $piece) {
             $this->attach($piece);
         }
+
+        $this->castlingAbility = CastlingAbility::START;
 
         $this->refresh();
     }
