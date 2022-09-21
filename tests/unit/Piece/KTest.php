@@ -12,12 +12,19 @@ use Chess\Variant\Classical\Rule\CastlingRule;
 
 class KTest extends AbstractUnitTestCase
 {
+    static private $castlingRule;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$castlingRule = (new CastlingRule())->getRule();
+    }
+
     /**
      * @test
      */
     public function w_CASTLE_LONG()
     {
-        $rule = K::$castlingRule[Color::W];
+        $rule = self::$castlingRule[Color::W];
 
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs'], [ 'b1', 'c1', 'd1' ]);
         $this->assertSame($rule[Piece::K][Castle::LONG]['sq']['current'], 'e1');
@@ -31,7 +38,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function b_CASTLE_LONG()
     {
-        $rule = K::$castlingRule[Color::B];
+        $rule = self::$castlingRule[Color::B];
 
         $this->assertSame($rule[Piece::K][Castle::LONG]['sqs'], [ 'b8', 'c8', 'd8' ]);
         $this->assertSame($rule[Piece::K][Castle::LONG]['sq']['current'], 'e8');
@@ -45,7 +52,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function w_CASTLE_SHORT()
     {
-        $rule = K::$castlingRule[Color::W];
+        $rule = self::$castlingRule[Color::W];
 
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs'], [ 'f1', 'g1' ]);
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sq']['current'], 'e1');
@@ -59,7 +66,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function b_CASTLE_SHORT()
     {
-        $rule = K::$castlingRule[Color::B];
+        $rule = self::$castlingRule[Color::B];
 
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sqs'], [ 'f8', 'g8' ]);
         $this->assertSame($rule[Piece::K][Castle::SHORT]['sq']['current'], 'e8');

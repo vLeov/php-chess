@@ -26,22 +26,18 @@ class K extends AbstractPiece
      */
     private B $bishop;
 
-    public static $castlingRule;
-
     /**
      * Constructor.
      *
      * @param string $color
      * @param string $sq
-     * @param array $castlingRule
      */
-    public function __construct(string $color, string $sq, array $castlingRule)
+    public function __construct(string $color, string $sq)
     {
         parent::__construct($color, $sq, Piece::K);
 
         $this->rook = new R($color, $sq, RType::SLIDER);
         $this->bishop = new B($color, $sq);
-        self::$castlingRule = $castlingRule;
 
         $this->mobility();
     }
@@ -103,7 +99,7 @@ class K extends AbstractPiece
 
     public function sqCastleLong(): ?string
     {
-        $rule = self::$castlingRule[$this->getColor()][Piece::K][Castle::LONG];
+        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::K][Castle::LONG];
 
         if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
             if (
@@ -120,7 +116,7 @@ class K extends AbstractPiece
 
     public function sqCastleShort(): ?string
     {
-        $rule = self::$castlingRule[$this->getColor()][Piece::K][Castle::SHORT];
+        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::K][Castle::SHORT];
 
         if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {
             if (
@@ -160,7 +156,7 @@ class K extends AbstractPiece
      */
     public function getCastleRook(array $pieces): ?R
     {
-        $rule = self::$castlingRule[$this->getColor()][Piece::R];
+        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::R];
 
         foreach ($pieces as $piece) {
             if (

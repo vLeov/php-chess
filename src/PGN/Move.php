@@ -75,10 +75,11 @@ class Move extends AbstractNotation implements ValidationInterface
      *
      * @param string $color
      * @param string $pgn
+     * @param array $castlingRule
      * @return object
      * @throws \Chess\Exception\UnknownNotationException
      */
-    public static function toObj(string $color, string $pgn): object
+    public static function toObj(string $color, string $pgn, array $castlingRule): object
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
         if (preg_match('/^' . Move::KING . '$/', $pgn)) {
@@ -102,7 +103,7 @@ class Move extends AbstractNotation implements ValidationInterface
                 'type' => Move::CASTLE_SHORT,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) K::$castlingRule[$color][Piece::K][Castle::SHORT]['sq'],
+                'sq' => (object) $castlingRule[$color][Piece::K][Castle::SHORT]['sq'],
             ];
         } elseif (preg_match('/^' . Move::CASTLE_LONG . '$/', $pgn)) {
             return (object) [
@@ -112,7 +113,7 @@ class Move extends AbstractNotation implements ValidationInterface
                 'type' => Move::CASTLE_LONG,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
-                'sq' => (object) K::$castlingRule[$color][Piece::K][Castle::LONG]['sq'],
+                'sq' => (object) $castlingRule[$color][Piece::K][Castle::LONG]['sq'],
             ];
         } elseif (preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn)) {
             return (object) [

@@ -36,7 +36,7 @@ abstract class AbstractStrToPgn
                 $position = $piece->getSq();
                 switch ($id) {
                     case Piece::K:
-                        $rule = K::$castlingRule[$color][Piece::K];
+                        $rule = $this->board->getCastlingRule()[$color][Piece::K];
                         if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
                             $piece->sqCastleShort()
                         ) {
