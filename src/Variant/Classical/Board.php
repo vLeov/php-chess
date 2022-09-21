@@ -721,7 +721,9 @@ class Board extends \SplObjectStorage
         if ($piece->getMove()->isCapture) {
             $this->capture($piece);
         }
-        $this->detach($this->getPieceBySq($piece->getSq()));
+        if ($toDetach = $this->getPieceBySq($piece->getSq())) {
+            $this->detach($toDetach);
+        }
         $className = "\\Chess\\Piece\\{$piece->getId()}";
         $this->attach(new $className(
             $piece->getColor(),

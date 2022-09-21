@@ -332,14 +332,15 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_B_B_R_Q_N_N_K_R_Ne3_Ne6()
+    public function play_B_B_R_Q_N_N_K_R_Ne3_Ne6_O_O()
     {
         $startPosition = ['B', 'B', 'R', 'Q', 'N', 'N', 'K', 'R'];
 
         $board = new Board($startPosition);
 
-        $board->play('w', 'Ne3');
-        $board->play('b', 'Ne6');
+        $this->assertTrue($board->play('w', 'Ne3'));
+        $this->assertTrue($board->play('b', 'Ne6'));
+        $this->assertTrue($board->play('w', 'O-O'));
 
         $expected = [
             7 => [ ' b ', ' b ', ' r ', ' q ', ' n ', ' . ', ' k ', ' r ' ],
@@ -349,7 +350,7 @@ class BoardTest extends AbstractUnitTestCase
             3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             2 => [ ' . ', ' . ', ' . ', ' . ', ' N ', ' . ', ' . ', ' . ' ],
             1 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
-            0 => [ ' B ', ' B ', ' R ', ' Q ', ' N ', ' . ', ' K ', ' R ' ],
+            0 => [ ' B ', ' B ', ' R ', ' Q ', ' N ', ' R ', ' K ', ' . ' ],
         ];
 
         $this->assertSame($expected, $board->toAsciiArray());
