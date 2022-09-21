@@ -230,6 +230,46 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function chess960_B_B_N_R_K_R_Q_N_play_fen_e4_e5()
+    {
+        $game = new Game(
+            Game::VARIANT_960,
+            Game::MODE_ANALYSIS
+        );
+
+        $startPosition = ['B', 'B', 'N', 'R', 'K', 'R', 'Q', 'N'];
+
+        $board = new Board($startPosition);
+
+        $game->setBoard($board);
+
+        $this->assertTrue($game->playFen('bbnrkrqn/pppppppp/8/8/4P3/8/PPPP1PPP/BBNRKRQN b'));
+        $this->assertTrue($game->playFen('bbnrkrqn/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/BBNRKRQN w'));
+    }
+
+    /**
+     * @test
+     */
+    public function chess960_Q_R_N_B_B_K_N_R_play_fen_e4_e5()
+    {
+        $game = new Game(
+            Game::VARIANT_960,
+            Game::MODE_ANALYSIS
+        );
+
+        $startPosition = ['Q', 'R', 'N', 'B', 'B', 'K', 'N', 'R'];
+
+        $board = new Board($startPosition);
+
+        $game->setBoard($board);
+
+        $this->assertTrue($game->playFen('qrnbbknr/pppppppp/8/8/4P3/8/PPPP1PPP/QRNBBKNR b'));
+        $this->assertTrue($game->playFen('qrnbbknr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/QRNBBKNR w'));
+    }
+
+    /**
+     * @test
+     */
     public function classical_play_fen_e4_Bg6()
     {
         $game = new Game(
