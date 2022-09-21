@@ -211,7 +211,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_array_Q_R_B_K_R_B_N_N_e4_e5()
+    public function play_Q_R_B_K_R_B_N_N_e4_e5()
     {
         $startPosition = ['Q', 'R', 'B', 'K', 'R', 'B', 'N', 'N'];
 
@@ -237,7 +237,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_array_B_B_N_R_K_R_Q_N_e4_e5()
+    public function play_B_B_N_R_K_R_Q_N_e4_e5()
     {
         $startPosition = ['B', 'B', 'N', 'R', 'K', 'R', 'Q', 'N'];
 
@@ -263,7 +263,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_array_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2()
+    public function play_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2()
     {
         $startPosition = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
 
@@ -297,7 +297,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function to_array_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2_O_O_O()
+    public function play_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2_O_O_O()
     {
         $startPosition = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
 
