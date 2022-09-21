@@ -259,4 +259,73 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
+
+    /**
+     * @test
+     */
+    public function to_array_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2()
+    {
+        $startPosition = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
+
+        $board = new Board($startPosition);
+
+        $board->play('w', 'e4');
+        $board->play('b', 'Nd6');
+
+        $board->play('w', 'Bc4');
+        $board->play('b', 'e6');
+
+        $board->play('w', 'f3');
+        $board->play('b', 'Qe7');
+
+        $board->play('w', 'Bf2');
+
+        $expected = [
+            7 => [ ' n ', ' r ', ' . ', ' . ', ' k ', ' b ', ' b ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' q ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' n ', ' p ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' B ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' B ', ' P ', ' P ' ],
+            0 => [ ' N ', ' R ', ' N ', ' Q ', ' K ', ' . ', ' . ', ' R ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function to_array_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2_O_O_O()
+    {
+        $startPosition = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
+
+        $board = new Board($startPosition);
+
+        $board->play('w', 'e4');
+        $board->play('b', 'Nd6');
+
+        $board->play('w', 'Bc4');
+        $board->play('b', 'e6');
+
+        $board->play('w', 'f3');
+        $board->play('b', 'Qe7');
+
+        $board->play('w', 'Bf2');
+        $board->play('b', 'O-O-O');
+
+        $expected = [
+            7 => [ ' n ', ' . ', ' k ', ' r ', ' . ', ' b ', ' b ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' q ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' n ', ' p ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' B ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' B ', ' P ', ' P ' ],
+            0 => [ ' N ', ' R ', ' N ', ' Q ', ' K ', ' . ', ' . ', ' R ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
 }

@@ -37,24 +37,4 @@ final class Board extends ClassicalBoard
 
         $this->refresh();
     }
-
-    /**
-     * Returns the castling rule.
-     *
-     * @return array
-     */
-    public function getCastlingRule(): array
-    {
-        return $this->castlingRule;
-    }
-
-    /**
-     * Returns the castling ability.
-     *
-     * @return array
-     */
-    public function getCastlingAbility(): string
-    {
-        return $this->castlingAbility;
-    }
 }
