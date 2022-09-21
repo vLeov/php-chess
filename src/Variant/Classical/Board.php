@@ -166,7 +166,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the current turn.
+     * Returns the current turn.
      *
      * @return string
      */
@@ -189,7 +189,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the square evaluation.
+     * Returns the square evaluation.
      *
      * @return object
      */
@@ -199,7 +199,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the space evaluation.
+     * Returns the space evaluation.
      *
      * @return object
      */
@@ -209,7 +209,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the defense evaluation.
+     * Returns the defense evaluation.
      *
      * @return object
      */
@@ -219,7 +219,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the castling rule.
+     * Returns the castling rule.
      *
      * @return array
      */
@@ -229,7 +229,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the castling ability.
+     * Returns the castling ability.
      *
      * @return string
      */
@@ -239,7 +239,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the pieces captured by both players.
+     * Returns the pieces captured by both players.
      *
      * @return mixed array|null
      */
@@ -276,7 +276,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the history.
+     * Returns the history.
      *
      * @return mixed array|null
      */
@@ -286,7 +286,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the movetext.
+     * Returns the movetext.
      *
      * @return string
      */
@@ -332,7 +332,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the first piece on the board matching the search criteria.
+     * Returns the first piece on the board matching the search criteria.
      *
      * @param string $color
      * @param string $id
@@ -353,7 +353,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets the pieces by color.
+     * Returns the pieces by color.
      *
      * @param string $color
      * @return array
@@ -372,7 +372,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets all pieces.
+     * Returns all pieces.
      *
      * @return array
      */
@@ -389,7 +389,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Gets a piece by its position on the board.
+     * Returns a piece by its position on the board.
      *
      * @param string $sq
      * @return mixed \Chess\Piece\AbstractPiece|null

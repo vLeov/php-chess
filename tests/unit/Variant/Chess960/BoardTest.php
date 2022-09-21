@@ -11,6 +11,15 @@ use Chess\Variant\Chess960\StartPosition;
 
 class BoardTest extends AbstractUnitTestCase
 {
+    /*
+    |--------------------------------------------------------------------------
+    | getPieces()
+    |--------------------------------------------------------------------------
+    |
+    | Gets all pieces.
+    |
+    */
+
     /**
      * @test
      */
@@ -22,6 +31,15 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame(32, count($pieces));
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | getCastlingRule()
+    |--------------------------------------------------------------------------
+    |
+    | Returns the castling rule.
+    |
+    */
 
     /**
      * @test
@@ -180,6 +198,15 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $castlingRule);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | play()
+    |--------------------------------------------------------------------------
+    |
+    | Legal moves return true.
+    |
+    */
 
     /**
      * @test
