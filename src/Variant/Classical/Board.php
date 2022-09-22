@@ -815,19 +815,23 @@ class Board extends \SplObjectStorage
         $this->notifyPieces();
     }
 
-    /**
-     * Checks out if the board is in check when a piece is moved.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @return bool
-     */
     private function leavesInCheck(AbstractPiece $piece): bool
     {
         $lastCastlingAbility = $this->castlingAbility;
-        $this->move($piece);
-        $king = $this->getPiece($piece->getColor(), Piece::K);
-        $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-        $this->undoMove($piece->getSq(), $piece->getMove());
+        if (
+            $piece->getMove()->type === Move::CASTLE_SHORT ||
+            $piece->getMove()->type === Move::CASTLE_LONG
+        ) {
+            $this->castle($piece);
+            $king = $this->getPiece($piece->getColor(), Piece::K);
+            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
+            $this->undoCastle($piece->getSq(), $piece->getMove());
+        } else {
+            $this->move($piece);
+            $king = $this->getPiece($piece->getColor(), Piece::K);
+            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
+            $this->undoMove($piece->getSq(), $piece->getMove());
+        }
         $this->castlingAbility = $lastCastlingAbility;
 
         return $leavesInCheck;
@@ -844,30 +848,29 @@ class Board extends \SplObjectStorage
         foreach ($this->getPiecesByColor($this->turn) as $piece) {
             foreach ($piece->sqs() as $sq) {
                 if ($piece->getId() === Piece::K) {
-                    if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
+                    if ($sq === $piece->sqCastleShort()) {
+                        $move = Move::toObj($this->turn, Castle::SHORT, $this->castlingRule);
+                    } elseif ($sq === $piece->sqCastleLong()) {
+                        $move = Move::toObj($this->turn, CASTLE::LONG, $this->castlingRule);
+                    } elseif (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
                         $move = Move::toObj($this->turn, Piece::K."x$sq", $this->castlingRule);
-                        $escape += (int) !$this->leavesInCheck($piece->setMove($move));
                     } elseif (!in_array($sq, $this->spaceEval->{$piece->oppColor()})) {
                         $move = Move::toObj($this->turn, Piece::K.$sq, $this->castlingRule);
-                        $escape += (int) !$this->leavesInCheck($piece->setMove($move));
                     }
                 } elseif ($piece->getId() === Piece::P) {
                     if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
                         $move = Move::toObj($this->turn, $piece->getFile()."x$sq", $this->castlingRule);
-                        $escape += (int) !$this->leavesInCheck($piece->setMove($move));
                     } else {
                         $move = Move::toObj($this->turn, $sq, $this->castlingRule);
-                        $escape += (int) !$this->leavesInCheck($piece->setMove($move));
                     }
                 } else {
                     if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
                         $move = Move::toObj($this->turn, $piece->getId()."x$sq", $this->castlingRule);
-                        $escape += (int) !$this->leavesInCheck($piece->setMove($move));
                     } else {
                         $move = Move::toObj($this->turn, $piece->getId().$sq, $this->castlingRule);
-                        $escape += (int) !$this->leavesInCheck($piece->setMove($move));
                     }
                 }
+                $escape += (int) !$this->leavesInCheck($piece->setMove($move));
             }
         }
 

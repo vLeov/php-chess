@@ -199,6 +199,85 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertEquals($expected, $castlingRule);
     }
 
+    /**
+     * @test
+     */
+    public function get_castling_rule_B_Q_N_R_K_B_R_N()
+    {
+        $startPosition = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
+
+        $castlingRule = (new Board($startPosition))->getCastlingRule();
+
+        $expected = [
+            Color::W => [
+                Piece::K => [
+                    Castle::SHORT => [
+                        'sqs' => [ 'f1' ],
+                        'sq' => [
+                            'current' => 'e1',
+                            'next' => 'g1',
+                        ],
+                    ],
+                    Castle::LONG => [
+                        'sqs' => [ 'c1' ],
+                        'sq' => [
+                            'current' => 'e1',
+                            'next' => 'c1',
+                        ],
+                    ],
+                ],
+                Piece::R => [
+                    Castle::SHORT => [
+                        'sq' => [
+                            'current' => 'g1',
+                            'next' => 'f1',
+                        ],
+                    ],
+                    Castle::LONG => [
+                        'sq' => [
+                            'current' => 'd1',
+                            'next' => 'd1',
+                        ],
+                    ],
+                ],
+            ],
+            Color::B => [
+                Piece::K => [
+                    Castle::SHORT => [
+                        'sqs' => [ 'f8' ],
+                        'sq' => [
+                            'current' => 'e8',
+                            'next' => 'g8',
+                        ],
+                    ],
+                    Castle::LONG => [
+                        'sqs' => [ 'c8' ],
+                        'sq' => [
+                            'current' => 'e8',
+                            'next' => 'c8',
+                        ],
+                    ],
+                ],
+                Piece::R => [
+                    Castle::SHORT => [
+                        'sq' => [
+                            'current' => 'g8',
+                            'next' => 'f8',
+                        ],
+                    ],
+                    Castle::LONG => [
+                        'sq' => [
+                            'current' => 'd8',
+                            'next' => 'd8',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $castlingRule);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | play()
@@ -378,6 +457,35 @@ class BoardTest extends AbstractUnitTestCase
             3 => [ ' . ', ' . ', ' B ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             2 => [ ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
             1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ' ],
+            0 => [ ' B ', ' Q ', ' N ', ' R ', ' K ', ' . ', ' R ', ' N ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function play_B_Q_N_R_K_B_R_N_e3_g6_Bc4_Bh6_a3()
+    {
+        $startPosition = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
+
+        $board = new Board($startPosition);
+
+        $this->assertTrue($board->play('w', 'e3'));
+        $this->assertTrue($board->play('b', 'g6'));
+        $this->assertTrue($board->play('w', 'Bc4'));
+        $this->assertTrue($board->play('b', 'Bh6'));
+        $this->assertTrue($board->play('w', 'a3'));
+
+        $expected = [
+            7 => [ ' b ', ' q ', ' n ', ' r ', ' k ', ' . ', ' r ', ' n ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' . ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' p ', ' b ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' B ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' P ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ' ],
             0 => [ ' B ', ' Q ', ' N ', ' R ', ' K ', ' . ', ' R ', ' N ' ],
         ];
 
