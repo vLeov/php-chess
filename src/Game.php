@@ -245,32 +245,33 @@ class Game
         $toRanks = explode('/', $toPiecePlacement);
 
         $castlingRule = $this->board->getCastlingRule();
-        $shortDistance = $castlingRule[Color::W][Piece::K][Castle::SHORT]['fenDist'];
-        $longDistance = $castlingRule[Color::W][Piece::K][Castle::LONG]['fenDist'];
-        $shortIndex = $castlingRule[Color::W][Piece::K][Castle::SHORT]['i'];
-        $longIndex = $castlingRule[Color::W][Piece::K][Castle::LONG]['i'];
+
+        $shortFenDist = $castlingRule[Color::W][Piece::K][Castle::SHORT]['fenDist'];
+        $longFenDist = $castlingRule[Color::W][Piece::K][Castle::LONG]['fenDist'];
+        $shortI = $castlingRule[Color::W][Piece::K][Castle::SHORT]['i'];
+        $longI = $castlingRule[Color::W][Piece::K][Castle::LONG]['i'];
 
         if (
-            str_contains($fromRanks[7], "K{$shortDistance}R") &&
-            PiecePlacement::charPos($toRanks[7], 'K') === $shortIndex &&
+            str_contains($fromRanks[7], "K{$shortFenDist}R") &&
+            PiecePlacement::charPos($toRanks[7], 'K') === $shortI &&
             $this->board->play(Color::W, Castle::SHORT)
         ) {
             return true;
         } elseif (
-            str_contains($fromRanks[7], "R{$longDistance}K") &&
-            PiecePlacement::charPos($toRanks[7], 'K') === $longIndex &&
+            str_contains($fromRanks[7], "R{$longFenDist}K") &&
+            PiecePlacement::charPos($toRanks[7], 'K') === $longI &&
             $this->board->play(Color::W, Castle::LONG)
         ) {
             return true;
         } elseif (
-            str_contains($fromRanks[0], "k{$shortDistance}r") &&
-            PiecePlacement::charPos($toRanks[0], 'k') === $shortIndex &&
+            str_contains($fromRanks[0], "k{$shortFenDist}r") &&
+            PiecePlacement::charPos($toRanks[0], 'k') === $shortI &&
             $this->board->play(Color::B, Castle::SHORT)
         ) {
             return true;
         } elseif (
-            str_contains($fromRanks[0], "r{$longDistance}k") &&
-            PiecePlacement::charPos($toRanks[0], 'k') === $longIndex &&
+            str_contains($fromRanks[0], "r{$longFenDist}k") &&
+            PiecePlacement::charPos($toRanks[0], 'k') === $longI &&
             $this->board->play(Color::B, Castle::LONG)
         ) {
             return true;

@@ -8,7 +8,7 @@ use Chess\PGN\AN\Piece;
 
 class CastlingRule
 {
-    private array $rule = [
+    protected array $rule = [
         Color::W => [
             Piece::K => [
                 Castle::SHORT => [
@@ -75,40 +75,26 @@ class CastlingRule
         ],
     ];
 
-    public function __construct()
-    {
-        $this->fenDist()->kPos();
-    }
-
     public function getRule(): array
     {
+        $this->fenDist()->kPos();
+
         return $this->rule;
     }
 
     protected function fenDist(): CastlingRule
     {
-        $a = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'][0];
-        $b = $this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'][0];
-        $c = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['current'][0];
-        $d = $this->rule[Color::W][Piece::R][Castle::LONG]['sq']['current'][0];
-
-        $diffShort = abs(ord($a) - ord($b)) - 1;
-        $diffLong = abs(ord($c) - ord($d)) - 1;
-
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['fenDist'] =
-            $diffShort === 0 ? '' : $diffShort;
-        $this->rule[Color::W][Piece::K][Castle::LONG]['fenDist'] =
-            $diffShort === 0 ? '' : $diffLong;
+        $short = count($this->rule[Color::W][Piece::K][Castle::SHORT]['sqs']);
+        $long =  count($this->rule[Color::W][Piece::K][Castle::LONG]['sqs']);
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['fenDist'] = $short === 0 ? '' : $short;
+        $this->rule[Color::W][Piece::K][Castle::LONG]['fenDist'] = $long === 0 ? '' : $long;
 
         return $this;
     }
 
     protected function kPos(): CastlingRule
     {
-        $a = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next'][0];
-        $b = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['next'][0];
-
-        $index = [
+        $i = [
             'a' => 0,
             'b' => 1,
             'c' => 2,
@@ -118,9 +104,10 @@ class CastlingRule
             'g' => 6,
             'h' => 7,
         ];
-
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $index[$a];
-        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $index[$b];
+        $a = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next'][0];
+        $b = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['next'][0];
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $i[$a];
+        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $i[$b];
 
         return $this;
     }

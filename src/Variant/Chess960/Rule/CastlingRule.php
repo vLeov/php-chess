@@ -7,13 +7,11 @@ use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\Variant\Classical\Rule\CastlingRule as ClassicalCastlingRule;
 
-class CastlingRule
+class CastlingRule extends ClassicalCastlingRule
 {
     private array $startPosition;
 
     private array $startFiles;
-
-    private array $rule;
 
     public function __construct(array $startPosition)
     {
@@ -33,11 +31,6 @@ class CastlingRule
         $this->rule = (new ClassicalCastlingRule())->getRule();
 
         $this->sq()->sqs();
-    }
-
-    public function getRule(): array
-    {
-        return $this->rule;
     }
 
     protected function sq()
