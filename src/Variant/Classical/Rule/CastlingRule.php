@@ -75,24 +75,53 @@ class CastlingRule
         ],
     ];
 
+    public function __construct()
+    {
+        $this->fenDist()->kPos();
+    }
+
     public function getRule(): array
     {
         return $this->rule;
     }
 
-    public static function distance(array $rule): array
+    protected function fenDist(): CastlingRule
     {
-        $a = $rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'][0];
-        $b = $rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'][0];
-        $c = $rule[Color::W][Piece::K][Castle::LONG]['sq']['current'][0];
-        $d = $rule[Color::W][Piece::R][Castle::LONG]['sq']['current'][0];
+        $a = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'][0];
+        $b = $this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'][0];
+        $c = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['current'][0];
+        $d = $this->rule[Color::W][Piece::R][Castle::LONG]['sq']['current'][0];
 
         $diffShort = abs(ord($a) - ord($b)) - 1;
         $diffLong = abs(ord($c) - ord($d)) - 1;
 
-        return [
-            Castle::SHORT => $diffShort === 0 ? '' : $diffShort,
-            Castle::LONG => $diffLong === 0 ? '' : $diffLong,
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['fenDist'] =
+            $diffShort === 0 ? '' : $diffShort;
+        $this->rule[Color::W][Piece::K][Castle::LONG]['fenDist'] =
+            $diffShort === 0 ? '' : $diffLong;
+
+        return $this;
+    }
+
+    protected function kPos(): CastlingRule
+    {
+        $a = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next'][0];
+        $b = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['next'][0];
+
+        $index = [
+            'a' => 0,
+            'b' => 1,
+            'c' => 2,
+            'd' => 3,
+            'e' => 4,
+            'f' => 5,
+            'g' => 6,
+            'h' => 7,
         ];
+
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $index[$a];
+        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $index[$b];
+
+        return $this;
     }
 }

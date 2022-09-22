@@ -3,11 +3,13 @@
 namespace Chess;
 
 use Chess\Grandmaster;
+use Chess\FEN\Field\PiecePlacement;
 use Chess\FEN\BoardToStr;
 use Chess\FEN\ShortStrToPgn;
 use Chess\FEN\StrToBoard;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
+use Chess\PGN\AN\Piece;
 use Chess\UciEngine\Stockfish;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Chess\Variant\Chess960\Board as Chess960Board;
@@ -242,29 +244,33 @@ class Game
         $fromRanks = explode('/', $fromPiecePlacement);
         $toRanks = explode('/', $toPiecePlacement);
 
-        // $distance = CastlingRule::distance($this->board->getCastlingRule());
+        $castlingRule = $this->board->getCastlingRule();
+        $shortDistance = $castlingRule[Color::W][Piece::K][Castle::SHORT]['fenDist'];
+        $longDistance = $castlingRule[Color::W][Piece::K][Castle::LONG]['fenDist'];
+        $shortIndex = $castlingRule[Color::W][Piece::K][Castle::SHORT]['i'];
+        $longIndex = $castlingRule[Color::W][Piece::K][Castle::LONG]['i'];
 
         if (
-            str_contains($fromRanks[7], 'K2R') &&
-            str_contains($toRanks[7], 'KR') &&
+            str_contains($fromRanks[7], "K{$shortDistance}R") &&
+            PiecePlacement::charPos($toRanks[7], 'K') === $shortIndex &&
             $this->board->play(Color::W, Castle::SHORT)
         ) {
             return true;
         } elseif (
-            str_contains($fromRanks[7], 'R3K') &&
-            str_contains($toRanks[7], 'R1K') &&
+            str_contains($fromRanks[7], "R{$longDistance}K") &&
+            PiecePlacement::charPos($toRanks[7], 'K') === $longIndex &&
             $this->board->play(Color::W, Castle::LONG)
         ) {
             return true;
         } elseif (
-            str_contains($fromRanks[0], 'k2r') &&
-            str_contains($toRanks[0], 'kr') &&
+            str_contains($fromRanks[0], "k{$shortDistance}r") &&
+            PiecePlacement::charPos($toRanks[0], 'k') === $shortIndex &&
             $this->board->play(Color::B, Castle::SHORT)
         ) {
             return true;
         } elseif (
-            str_contains($fromRanks[0], 'r3k') &&
-            str_contains($toRanks[0], 'r1k') &&
+            str_contains($fromRanks[0], "r{$longDistance}k") &&
+            PiecePlacement::charPos($toRanks[0], 'k') === $longIndex &&
             $this->board->play(Color::B, Castle::LONG)
         ) {
             return true;

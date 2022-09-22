@@ -90,4 +90,27 @@ class PiecePlacement implements ValidationInterface
 
         return true;
     }
+
+    /**
+     * Returns the piece position in the given rank.
+     *
+     * @param string $rank
+     * @param string $char
+     * @return int
+     */
+    public static function charPos(string $rank, string $char)
+    {
+        $str = '';
+        $split = str_split($rank);
+        foreach ($split as $key => $val) {
+            if (is_numeric($val)) {
+                $str .= str_repeat('.', $val);
+            } else {
+                $str .= $val;
+            }
+        }
+        $arr = str_split($str);
+
+        return array_search($char, $arr);
+    }
 }
