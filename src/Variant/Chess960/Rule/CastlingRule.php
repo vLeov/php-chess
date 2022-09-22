@@ -9,23 +9,23 @@ use Chess\Variant\Classical\Rule\CastlingRule as ClassicalCastlingRule;
 
 class CastlingRule extends ClassicalCastlingRule
 {
-    private array $startPosition;
+    private array $startPos;
 
     private array $startFiles;
 
-    public function __construct(array $startPosition)
+    public function __construct(array $startPos)
     {
-        $this->startPosition = $startPosition;
+        $this->startPos = $startPos;
 
         $this->startFiles = [
-            'a' => $this->startPosition[0],
-            'b' => $this->startPosition[1],
-            'c' => $this->startPosition[2],
-            'd' => $this->startPosition[3],
-            'e' => $this->startPosition[4],
-            'f' => $this->startPosition[5],
-            'g' => $this->startPosition[6],
-            'h' => $this->startPosition[7],
+            'a' => $this->startPos[0],
+            'b' => $this->startPos[1],
+            'c' => $this->startPos[2],
+            'd' => $this->startPos[3],
+            'e' => $this->startPos[4],
+            'f' => $this->startPos[5],
+            'g' => $this->startPos[6],
+            'h' => $this->startPos[7],
         ];
 
         $this->rule = (new ClassicalCastlingRule())->getRule();
@@ -36,7 +36,7 @@ class CastlingRule extends ClassicalCastlingRule
     protected function sq()
     {
         $longCastlingRook = false;
-        foreach ($this->startPosition as $key => $val) {
+        foreach ($this->startPos as $key => $val) {
             $wSq = chr(97+$key).'1';
             $bSq = chr(97+$key).'8';
             if ($val === Piece::R) {

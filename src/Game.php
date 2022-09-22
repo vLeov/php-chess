@@ -87,8 +87,8 @@ class Game
         if ($this->variant === self::VARIANT_CLASSICAL) {
             $this->board = new ClassicalBoard();
         } elseif ($this->variant === self::VARIANT_960) {
-            $startPosition = (new StartPosition())->create();
-            $this->board = new Chess960Board($startPosition);
+            $startPos = (new StartPosition())->create();
+            $this->board = new Chess960Board($startPos);
         }
     }
 

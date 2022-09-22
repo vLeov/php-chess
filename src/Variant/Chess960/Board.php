@@ -21,13 +21,13 @@ final class Board extends ClassicalBoard
     /**
      * Constructor.
      *
-     * @param array $startPosition
+     * @param array $startPos
      */
-    public function __construct(array $startPosition)
+    public function __construct(array $startPos)
     {
-        $this->castlingRule = (new CastlingRule($startPosition))->getRule();
+        $this->castlingRule = (new CastlingRule($startPos))->getRule();
 
-        $pieces = (new StartPieces($startPosition, $this->castlingRule))->create();
+        $pieces = (new StartPieces($startPos, $this->castlingRule))->create();
 
         foreach ($pieces as $piece) {
             $this->attach($piece);

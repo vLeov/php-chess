@@ -14,10 +14,10 @@ class StartPiecesTest extends AbstractUnitTestCase
      */
     public function create()
     {
-        $startPosition = (new StartPosition())->create();
-        $castlingRule =  (new CastlingRule($startPosition))->getRule();
+        $startPos = (new StartPosition())->create();
+        $castlingRule =  (new CastlingRule($startPos))->getRule();
 
-        $pieces = (new StartPieces($startPosition, $castlingRule))->create();
+        $pieces = (new StartPieces($startPos, $castlingRule))->create();
 
         $this->assertSame(32, count($pieces));
     }

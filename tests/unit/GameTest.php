@@ -203,9 +203,9 @@ class GameTest extends AbstractUnitTestCase
             Game::MODE_ANALYSIS
         );
 
-        $startPosition = ['R', 'B', 'B', 'K', 'R', 'Q', 'N', 'N'];
+        $startPos = ['R', 'B', 'B', 'K', 'R', 'Q', 'N', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $game->setBoard($board);
 
@@ -237,9 +237,9 @@ class GameTest extends AbstractUnitTestCase
             Game::MODE_ANALYSIS
         );
 
-        $startPosition = ['B', 'B', 'N', 'R', 'K', 'R', 'Q', 'N'];
+        $startPos = ['B', 'B', 'N', 'R', 'K', 'R', 'Q', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $game->setBoard($board);
 
@@ -257,9 +257,9 @@ class GameTest extends AbstractUnitTestCase
             Game::MODE_ANALYSIS
         );
 
-        $startPosition = ['Q', 'R', 'N', 'B', 'B', 'K', 'N', 'R'];
+        $startPos = ['Q', 'R', 'N', 'B', 'B', 'K', 'N', 'R'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $game->setBoard($board);
 
@@ -276,9 +276,9 @@ class GameTest extends AbstractUnitTestCase
             Game::MODE_ANALYSIS
         );
 
-        $startPosition = ['Q', 'R', 'N', 'B', 'B', 'K', 'N', 'R'];
+        $startPos = ['Q', 'R', 'N', 'B', 'B', 'K', 'N', 'R'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $game->setBoard($board);
 
@@ -296,9 +296,9 @@ class GameTest extends AbstractUnitTestCase
             Game::MODE_ANALYSIS
         );
 
-        $startPosition = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
+        $startPos = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $game->setBoard($board);
 
@@ -318,9 +318,9 @@ class GameTest extends AbstractUnitTestCase
             Game::MODE_ANALYSIS
         );
 
-        $startPosition = ['N', 'R', 'Q', 'B', 'B', 'K', 'R', 'N'];
+        $startPos = ['N', 'R', 'Q', 'B', 'B', 'K', 'R', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $game->setBoard($board);
 

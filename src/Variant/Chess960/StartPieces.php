@@ -11,15 +11,15 @@ use Chess\Variant\Chess960\StartPosition;
 
 class StartPieces
 {
-    private array $startPosition;
+    private array $startPos;
 
     private array $castlingRule;
 
     private array $startPieces;
 
-    public function __construct(array $startPosition, array $castlingRule)
+    public function __construct(array $startPos, array $castlingRule)
     {
-        $this->startPosition = $startPosition;
+        $this->startPos = $startPos;
         $this->castlingRule = $castlingRule;
         $this->startPieces = [];
     }
@@ -27,7 +27,7 @@ class StartPieces
     public function create()
     {
         $longCastlingRook = null;
-        foreach ($this->startPosition as $key => $val) {
+        foreach ($this->startPos as $key => $val) {
             $wSq = chr(97+$key).'1';
             $bSq = chr(97+$key).'8';
             $className = "\\Chess\\Piece\\{$val}";
@@ -40,7 +40,7 @@ class StartPieces
             } elseif (!$longCastlingRook) {
                 $this->startPieces[] =  new $className(Color::W, $wSq, RType::CASTLE_LONG);
                 $this->startPieces[] =  new $className(Color::B, $bSq, RType::CASTLE_LONG);
-                $longCastlingRook = $this->startPosition[$key];
+                $longCastlingRook = $this->startPos[$key];
             } else {
                 $this->startPieces[] =  new $className(Color::W, $wSq, RType::CASTLE_SHORT);
                 $this->startPieces[] =  new $className(Color::B, $bSq, RType::CASTLE_SHORT);

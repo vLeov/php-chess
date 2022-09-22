@@ -25,8 +25,8 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_pieces()
     {
-        $startPosition = (new StartPosition())->create();
-        $board = new Board($startPosition);
+        $startPos = (new StartPosition())->create();
+        $board = new Board($startPos);
         $pieces = $board->getPieces();
 
         $this->assertSame(32, count($pieces));
@@ -46,9 +46,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_castling_rule_R_B_B_K_R_Q_N_N()
     {
-        $startPosition = ['R', 'B', 'B', 'K', 'R', 'Q', 'N', 'N'];
+        $startPos = ['R', 'B', 'B', 'K', 'R', 'Q', 'N', 'N'];
 
-        $castlingRule = (new Board($startPosition))->getCastlingRule();
+        $castlingRule = (new Board($startPos))->getCastlingRule();
 
         $expected = [
             Color::W => [
@@ -129,9 +129,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_castling_rule_Q_R_B_K_R_B_N_N()
     {
-        $startPosition = ['Q', 'R', 'B', 'K', 'R', 'B', 'N', 'N'];
+        $startPos = ['Q', 'R', 'B', 'K', 'R', 'B', 'N', 'N'];
 
-        $castlingRule = (new Board($startPosition))->getCastlingRule();
+        $castlingRule = (new Board($startPos))->getCastlingRule();
 
         $expected = [
             Color::W => [
@@ -212,9 +212,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_castling_rule_B_Q_N_R_K_B_R_N()
     {
-        $startPosition = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
+        $startPos = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
 
-        $castlingRule = (new Board($startPosition))->getCastlingRule();
+        $castlingRule = (new Board($startPos))->getCastlingRule();
 
         $expected = [
             Color::W => [
@@ -304,9 +304,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_Q_R_B_K_R_B_N_N_e4_e5()
     {
-        $startPosition = ['Q', 'R', 'B', 'K', 'R', 'B', 'N', 'N'];
+        $startPos = ['Q', 'R', 'B', 'K', 'R', 'B', 'N', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $board->play('w', 'e4');
         $board->play('b', 'e5');
@@ -330,9 +330,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_B_B_N_R_K_R_Q_N_e4_e5()
     {
-        $startPosition = ['B', 'B', 'N', 'R', 'K', 'R', 'Q', 'N'];
+        $startPos = ['B', 'B', 'N', 'R', 'K', 'R', 'Q', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $board->play('w', 'e4');
         $board->play('b', 'e5');
@@ -356,9 +356,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2()
     {
-        $startPosition = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
+        $startPos = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $board->play('w', 'e4');
         $board->play('b', 'Nd6');
@@ -390,9 +390,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_N_R_N_Q_K_B_B_R_e4_Nd6_Bc4_e6_f3_Qe7_Bf2_O_O_O()
     {
-        $startPosition = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
+        $startPos = ['N', 'R', 'N', 'Q', 'K', 'B', 'B', 'R'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $board->play('w', 'e4');
         $board->play('b', 'Nd6');
@@ -425,9 +425,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_B_B_R_Q_N_N_K_R_Ne3_Ne6_O_O()
     {
-        $startPosition = ['B', 'B', 'R', 'Q', 'N', 'N', 'K', 'R'];
+        $startPos = ['B', 'B', 'R', 'Q', 'N', 'N', 'K', 'R'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $this->assertTrue($board->play('w', 'Ne3'));
         $this->assertTrue($board->play('b', 'Ne6'));
@@ -452,9 +452,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_B_Q_N_R_K_B_R_N_e3_g6_Bc4_Bh6()
     {
-        $startPosition = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
+        $startPos = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $this->assertTrue($board->play('w', 'e3'));
         $this->assertTrue($board->play('b', 'g6'));
@@ -480,9 +480,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_B_Q_N_R_K_B_R_N_e3_g6_Bc4_Bh6_a3()
     {
-        $startPosition = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
+        $startPos = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $this->assertTrue($board->play('w', 'e3'));
         $this->assertTrue($board->play('b', 'g6'));
@@ -509,9 +509,9 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_N_R_Q_B_B_K_R_N_O_O()
     {
-        $startPosition = ['N', 'R', 'Q', 'B', 'B', 'K', 'R', 'N'];
+        $startPos = ['N', 'R', 'Q', 'B', 'B', 'K', 'R', 'N'];
 
-        $board = new Board($startPosition);
+        $board = new Board($startPos);
 
         $this->assertTrue($board->play('w', 'O-O'));
 
