@@ -311,6 +311,25 @@ class GameTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function chess960_N_R_Q_B_B_K_R_N_O_O()
+    {
+        $game = new Game(
+            Game::VARIANT_960,
+            Game::MODE_ANALYSIS
+        );
+
+        $startPosition = ['N', 'R', 'Q', 'B', 'B', 'K', 'R', 'N'];
+
+        $board = new Board($startPosition);
+
+        $game->setBoard($board);
+
+        $this->assertTrue($game->playFen('nrqbbkrn/pppppppp/8/8/8/8/PPPPPPPP/NRQBBRKN b'));
+    }
+
+    /**
+     * @test
+     */
     public function classical_play_fen_e4_Bg6()
     {
         $game = new Game(

@@ -79,4 +79,20 @@ class CastlingRule
     {
         return $this->rule;
     }
+
+    public static function distance(array $rule): array
+    {
+        $a = $rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'][0];
+        $b = $rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'][0];
+        $c = $rule[Color::W][Piece::K][Castle::LONG]['sq']['current'][0];
+        $d = $rule[Color::W][Piece::R][Castle::LONG]['sq']['current'][0];
+
+        $diffShort = abs(ord($a) - ord($b)) - 1;
+        $diffLong = abs(ord($c) - ord($d)) - 1;
+
+        return [
+            Castle::SHORT => $diffShort === 0 ? '' : $diffShort,
+            Castle::LONG => $diffLong === 0 ? '' : $diffLong,
+        ];
+    }
 }

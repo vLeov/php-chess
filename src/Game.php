@@ -13,6 +13,7 @@ use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Chess960\StartPosition;
 use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\Rule\CastlingRule;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 
@@ -241,28 +242,30 @@ class Game
         $fromRanks = explode('/', $fromPiecePlacement);
         $toRanks = explode('/', $toPiecePlacement);
 
+        // $distance = CastlingRule::distance($this->board->getCastlingRule());
+
         if (
-          'K2R' === substr($fromRanks[7], -3) &&
-          'KR' === substr($toRanks[7], -2) &&
-          $this->board->play(Color::W, Castle::SHORT)
+            str_contains($fromRanks[7], 'K2R') &&
+            str_contains($toRanks[7], 'KR') &&
+            $this->board->play(Color::W, Castle::SHORT)
         ) {
             return true;
         } elseif (
-          'R3K' === substr($fromRanks[7], 0, 3) &&
-          'R1K' === substr($toRanks[7], 0, 3) &&
-          $this->board->play(Color::W, Castle::LONG)
+            str_contains($fromRanks[7], 'R3K') &&
+            str_contains($toRanks[7], 'R1K') &&
+            $this->board->play(Color::W, Castle::LONG)
         ) {
             return true;
         } elseif (
-          'k2r' === substr($fromRanks[0], -3) &&
-          'kr' === substr($toRanks[0], -2) &&
-          $this->board->play(Color::B, Castle::SHORT)
+            str_contains($fromRanks[0], 'k2r') &&
+            str_contains($toRanks[0], 'kr') &&
+            $this->board->play(Color::B, Castle::SHORT)
         ) {
             return true;
         } elseif (
-          'r3k' === substr($fromRanks[0], 0, 3) &&
-          'r1k' === substr($toRanks[0], 0, 3) &&
-          $this->board->play(Color::B, Castle::LONG)
+            str_contains($fromRanks[0], 'r3k') &&
+            str_contains($toRanks[0], 'r1k') &&
+            $this->board->play(Color::B, Castle::LONG)
         ) {
             return true;
         }
