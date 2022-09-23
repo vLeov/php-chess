@@ -29,6 +29,13 @@ class Player
      */
     protected array $moves;
 
+    /**
+     * History.
+     *
+     * @var array
+     */
+    protected array $history;
+
     public function __construct(string $text, Board $board = null)
     {
         $movetext = (new Movetext($text))->validate();
@@ -36,6 +43,8 @@ class Player
         $board ? $this->board = $board : $this->board = new Board();
 
         $this->moves = (new Movetext($movetext))->getMovetext()->moves;
+
+        $this->history = [array_values((new Board())->toAsciiArray())];
     }
 
     /**
@@ -59,6 +68,16 @@ class Player
     }
 
     /**
+     * Returns the history.
+     *
+     * @return array
+     */
+    public function getHistory(): array
+    {
+        return $this->history;
+    }
+
+    /**
      * Plays a chess game.
      *
      * @return \Chess\Player
@@ -75,6 +94,7 @@ class Player
                     throw new PlayerException;
                 }
             }
+            $this->history[] = array_values($this->board->toAsciiArray());
         }
 
         return $this;
