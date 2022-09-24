@@ -515,13 +515,20 @@ class Board extends \SplObjectStorage
     {
         if ($move->color !== $this->turn) {
             return false;
-        } elseif (
-            $move->isCapture &&
-            $move->id !== Piece::P &&
+        }
+        if (
+            $move->type ===  Move::CASTLE_LONG ||
+            $move->type ===  Move::CASTLE_SHORT
+        ) {
+            return true;
+        }
+        if (
+            $move->isCapture && $move->id !== Piece::P &&
             !$this->getPieceBySq($move->sq->next)
         ) {
             return false;
-        } elseif (!$move->isCapture && $this->getPieceBySq($move->sq->next)) {
+        }
+        if (!$move->isCapture && $this->getPieceBySq($move->sq->next)) {
             return false;
         }
 
