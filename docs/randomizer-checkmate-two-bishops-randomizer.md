@@ -1,10 +1,10 @@
-`Chess\Randomizer\Checkmate\TwoBishopsRandomizer` creates a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object representing an endgame position to deliver checkmate with two bishops as shown in the following example. For further information please check out the tests in [tests/unit/Randomizer/Checkmate/TwoBishopsRandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Randomizer/Checkmate/TwoBishopsRandomizerTest.php).
+`Chess\Randomizer\Checkmate\TwoBishopsRandomizer` creates a `Chess\Variant\Classical\Board` object representing an endgame position to deliver checkmate with two bishops as shown in the following example. For further information please check out the tests in [tests/unit/Randomizer/Checkmate/TwoBishopsRandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Randomizer/Checkmate/TwoBishopsRandomizerTest.php).
 
 ---
 
 #### `public function getBoard()`
 
-Returns a `Chess\Board` object representing an endgame position to deliver checkmate with two bishops.
+Returns a `Chess\Variant\Classical\Board` object representing an endgame position to deliver checkmate with two bishops.
 
 ```php
 use Chess\Media\BoardToPng;

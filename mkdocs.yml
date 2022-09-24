@@ -1,7 +1,6 @@
 site_name: PHP Chess
 pages:
   - Home: index.md
-  - Chess\Board: board.md
   - Chess\Game: game.md
   - Chess\Grandmaster: grandmaster.md
   - Chess\Heuristics: heuristics.md
@@ -19,6 +18,7 @@ pages:
   - Chess\Randomizer\Endgame\PawnEndgameRandomizer: randomizer-endgame-pawn-endgame-randomizer.md
   - Chess\Randomizer\Randomizer: randomizer-randomizer.md
   - Chess\UciEngine\Stockfish: uciengine-stockfish.md
+  - Chess\Variant\Classical\Board: variant-classical-board.md
   - Command Line Interface: cli.md
   - Usage: usage.md
 theme: readthedocs

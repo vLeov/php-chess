@@ -1,4 +1,4 @@
-`Chess\Player` allows to play a PGN movetext returning a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object as it is described in the following example.
+`Chess\Player` allows to play a PGN movetext returning a `Chess\Variant\Classical\Board` object as it is described in the following example.
 
 For further information you may want to check out the tests in [tests/unit/PlayerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/PlayerTest.php).
 
@@ -20,7 +20,7 @@ Plays a chess game.
 
 #### `public function getBoard(): Board`
 
-Returns the resulting `Chess\Board` object of playing a game.
+Returns the resulting `Chess\Variant\Classical\Board` object of playing a game.
 
 #### `public function getMoves(): array`
 

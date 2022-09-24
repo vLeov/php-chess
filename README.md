@@ -14,10 +14,27 @@ Via composer:
 
 ### Play Chess
 
+Variants:
+
+- `Chess\Game:VARIANT_960`
+- `Chess\Game:VARIANT_CLASSICAL`
+
+Modes:
+
+- `Chess\Game:MODE_ANALYSIS`
+- `Chess\Game:MODE_GM`
+- `Chess\Game:MODE_FEN`
+- `Chess\Game:MODE_PGN`
+- `Chess\Game:MODE_PLAY`
+- `Chess\Game:MODE_STOCKFISH`
+
 ```php
 use Chess\Game;
 
-$game = new Game();
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_ANALYSIS
+);
 
 $game->play('w', 'e4');
 $game->play('b', 'e5');

@@ -1,6 +1,11 @@
-`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is a wrapper for a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object to play chess online but it is also used on command line (CLI) apps as well as in APIs.
+`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is a wrapper for a `Chess\Variant\Classical\Board` object to play chess online but it is also used on command line (CLI) apps as well as in APIs.
 
-The following game modes are ready for use:
+Variants:
+
+- `Chess\Game:VARIANT_960`
+- `Chess\Game:VARIANT_CLASSICAL`
+
+Modes:
 
 - `Chess\Game:MODE_ANALYSIS`
 - `Chess\Game:MODE_GM`
@@ -15,12 +20,16 @@ Let's look at the methods available through some examples. For further informati
 
 #### `public function play(string $color, string $pgn): bool`
 
-Starts a game in analysis mode (default) and makes a move in PGN format.
+Starts a game and makes a move in PGN format.
 
 ```php
 use Chess\Game;
 
-$game = new Game();
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_ANALYSIS
+);
+
 $game->play('w', 'Nc3');
 ```
 
@@ -31,8 +40,12 @@ Starts a game and makes a move in short FEN format, only the piece placement and
 ```php
 use Chess\Game;
 
-$game = new Game();
-$game->playFen('rnb1kbnr/ppp1pppp/8/3q4/8/2N5/PPPP1PPP/R1BQKBNR b');
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_ANALYSIS
+);
+
+$game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 ```
 
 #### `public function loadFen(string $string): void`
@@ -42,7 +55,11 @@ Starts a game in FEN mode. A FEN string is loaded to continue playing a game.
 ```php
 use Chess\Game;
 
-$game = new Game(Game::MODE_FEN);
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_FEN
+);
+
 $game->loadFen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9');
 $game->play('b', 'Bg7');
 ```
@@ -54,7 +71,11 @@ Starts a game in PGN mode. A PGN movetext is loaded to continue playing a game.
 ```php
 use Chess\Game;
 
-$game = new Game(Game::MODE_PGN);
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_PGN
+);
+
 $game->loadPgn('1.e4 e6 2.d4 d5 3.Nc3 Nf6');
 $game->play('w', 'e5');
 ```
@@ -68,10 +89,16 @@ Starts a chess game in grandmaster mode and plays `1.e4`.
 ```php
 use Chess\Game;
 
-$game = new Game(Game::MODE_GM, __DIR__.'/../data/players.json');
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_GM,
+    __DIR__.'/../data/players.json'
+);
+
 $game->play('w', 'e4');
 
 $ai = $game->ai();
+
 print_r($ai);
 ```
 ```
@@ -98,10 +125,16 @@ Starts a chess game in Stockfish mode and plays `1.e4`. If provided with a .json
 ```php
 use Chess\Game;
 
-$game = new Game(Game::MODE_STOCKFISH, __DIR__.'/../data/players.json');
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_STOCKFISH,
+    __DIR__.'/../data/players.json'
+);
+
 $game->play('w', 'e4');
 
 $ai = $game->ai(['Skill Level' => 9], ['depth' => 3]);
+
 print_r($ai);
 ```
 ```
@@ -128,10 +161,15 @@ Starts a chess game in Stockfish mode and plays `1.e4` without any help from gra
 ```php
 use Chess\Game;
 
-$game = new Game(Game::MODE_STOCKFISH);
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_STOCKFISH
+);
+
 $game->play('w', 'e4');
 
 $ai = $game->ai(['Skill Level' => 9], ['depth' => 3]);
+
 print_r($ai);
 ```
 ```
@@ -148,7 +186,10 @@ Returns the state of the board.
 ```php
 use Chess\Game;
 
-$game = new Game();
+$game = new Game(
+    Game::VARIANT_CLASSICAL,
+    Game::MODE_ANALYSIS
+);
 
 $state = $game->state();
 ```
@@ -179,4 +220,4 @@ $game->state()->isStalemate;
 
 #### `public function getBoard(): Board`
 
-Returns the `Chess\Board` object.
+Returns the `Chess\Variant\Classical\Board` object.

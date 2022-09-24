@@ -4,10 +4,11 @@
 
 #### `public function getArray(): array`
 
-Create an array of pieces given an ASCII array to then create a `Chess\Board` object with it.
+Create an array of pieces given an ASCII array to then create a `Chess\Variant\Classical\Board` object with it.
 
 ```php
 use Chess\Array\PieceArray;
+use Chess\Variant\Classical\Board;
 
 $array = [
     7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],

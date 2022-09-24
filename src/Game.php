@@ -44,7 +44,6 @@ class Game
     const MODE_STOCKFISH        = 'stockfish';
 
     const MODEL_FOLDER          = __DIR__.'/../model/';
-
     const MODEL_FILE            = 'regression/checkmate_king_and_rook_vs_king.model';
 
     /**

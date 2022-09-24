@@ -1,10 +1,10 @@
-`Chess\Randomizer\Randomizer` creates a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object with random pieces as shown in the following example. For further information please check out the tests in [tests/unit/Randomizer/RandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Randomizer/RandomizerTest.php).
+`Chess\Randomizer\Randomizer` creates a `Chess\Variant\Classical\Board` object with random pieces as shown in the following example. For further information please check out the tests in [tests/unit/Randomizer/RandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Randomizer/RandomizerTest.php).
 
 ---
 
 #### `public function getBoard()`
 
-Returns a `Chess\Board` object with random pieces.
+Returns a `Chess\Variant\Classical\Board` object with random pieces.
 
 ```php
 use Chess\Media\BoardToPng;

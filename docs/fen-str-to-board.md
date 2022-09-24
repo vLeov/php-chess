@@ -1,10 +1,10 @@
-`Chess\FEN\StrToBoard` allows to create a [`Chess\Board`](https://php-chess.readthedocs.io/en/latest/board/) object from a FEN string as shown in the following example. For further information please check out the tests in [tests/unit/FEN/StrToBoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/FEN/StrToBoardTest.php).
+`Chess\FEN\StrToBoard` allows to create a `Chess\Variant\Classical\Board` object from a FEN string as shown in the following example. For further information please check out the tests in [tests/unit/FEN/StrToBoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/FEN/StrToBoardTest.php).
 
 ---
 
 #### `public function create(): Board`
 
-Creates a `Chess\Board` object.
+Creates a `Chess\Variant\Classical\Board` object.
 
 ```php
 use Chess\FEN\StrToBoard;
