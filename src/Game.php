@@ -76,8 +76,8 @@ class Game
     private null|Grandmaster $gm;
 
     public function __construct(
-        string $variant = null,
-        string $mode = null,
+        string $variant,
+        string $mode,
         null|Grandmaster $gm = null
     ) {
         $this->variant = $variant;
