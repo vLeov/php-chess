@@ -506,7 +506,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Checks out if a chess move is valid.
+     * Checks out if a move is syntactically valid.
      *
      * @param object $move
      * @return bool true if the move is valid; otherwise false
