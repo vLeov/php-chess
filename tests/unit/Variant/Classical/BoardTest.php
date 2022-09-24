@@ -2053,7 +2053,7 @@ class BoardTest extends AbstractUnitTestCase
             'g4',
             'h3',
             'h4',
-            'Ne5',
+            'Nxe5',
             'Nd4',
             'Ng1',
             'Nh4',
