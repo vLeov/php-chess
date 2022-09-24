@@ -506,6 +506,29 @@ class Board extends \SplObjectStorage
     }
 
     /**
+     * Checks out if a chess move is valid.
+     *
+     * @param object $move
+     * @return bool true if the move is valid; otherwise false
+     */
+    private function isValidMove(object $move): bool
+    {
+        if ($move->color !== $this->turn) {
+            return false;
+        } elseif (
+            $move->isCapture &&
+            $move->id !== Piece::P &&
+            !$this->getPieceBySq($move->sq->next)
+        ) {
+            return false;
+        } elseif (!$move->isCapture && $this->getPieceBySq($move->sq->next)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Checks out if a chess move is legal.
      *
      * @param object $move
@@ -552,7 +575,7 @@ class Board extends \SplObjectStorage
     {
         $obj = Move::toObj($color, $pgn, $this->castlingRule);
 
-        return $this->isLegalMove($obj);
+        return $this->isValidMove($obj) && $this->isLegalMove($obj);
     }
 
     /**

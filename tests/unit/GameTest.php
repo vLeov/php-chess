@@ -460,6 +460,23 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ2KR b'));
     }
 
+    /**
+     * @test
+     */
+    public function classical_play_fen_e4_Nc6_Bb5_a6_Ba6()
+    {
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
+        $this->assertTrue($game->playFen('r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w'));
+        $this->assertTrue($game->playFen('r1bqkbnr/pppppppp/2n5/1B6/4P3/8/PPPP1PPP/RNBQK1NR b'));
+        $this->assertTrue($game->playFen('r1bqkbnr/1ppppppp/p1n5/1B6/4P3/8/PPPP1PPP/RNBQK1NR w'));
+        $this->assertTrue($game->playFen('r1bqkbnr/1ppppppp/B1n5/8/4P3/8/PPPP1PPP/RNBQK1NR b'));
+    }
+
     /*
     |--------------------------------------------------------------------------
     | movetext()
