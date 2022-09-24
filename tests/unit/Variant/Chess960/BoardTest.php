@@ -59,7 +59,7 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'd1',
                             'next' => 'g1',
                         ],
-                        'fenDist' => 2,
+                        'fenDist' => '',
                         'i' => 6,
                     ],
                     Castle::LONG => [
@@ -142,7 +142,7 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'd1',
                             'next' => 'g1',
                         ],
-                        'fenDist' => 2,
+                        'fenDist' => '',
                         'i' => 6,
                     ],
                     Castle::LONG => [
@@ -234,7 +234,7 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'e1',
                             'next' => 'c1',
                         ],
-                        'fenDist' => 1,
+                        'fenDist' => '',
                         'i' => 2,
                     ],
                 ],

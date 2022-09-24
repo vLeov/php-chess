@@ -84,10 +84,18 @@ class CastlingRule
 
     protected function fenDist(): CastlingRule
     {
-        $short = count($this->rule[Color::W][Piece::K][Castle::SHORT]['sqs']);
-        $long =  count($this->rule[Color::W][Piece::K][Castle::LONG]['sqs']);
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['fenDist'] = $short === 0 ? '' : $short;
-        $this->rule[Color::W][Piece::K][Castle::LONG]['fenDist'] = $long === 0 ? '' : $long;
+        $short = abs(
+            ord($this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'][0]) -
+            ord($this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'][0])
+        );
+
+        $long = abs(
+            ord($this->rule[Color::W][Piece::K][Castle::LONG]['sq']['current'][0]) -
+            ord($this->rule[Color::W][Piece::R][Castle::LONG]['sq']['current'][0])
+        );
+
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['fenDist'] = $short === 1 ? '' : $short - 1;
+        $this->rule[Color::W][Piece::K][Castle::LONG]['fenDist'] = $long === 1 ? '' : $long - 1;
 
         return $this;
     }
@@ -104,10 +112,12 @@ class CastlingRule
             'g' => 6,
             'h' => 7,
         ];
-        $a = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next'][0];
-        $b = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['next'][0];
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $i[$a];
-        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $i[$b];
+
+        $short = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next'][0];
+        $long = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['next'][0];
+
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $i[$short];
+        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $i[$long];
 
         return $this;
     }
