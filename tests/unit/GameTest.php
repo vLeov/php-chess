@@ -159,6 +159,8 @@ class GameTest extends AbstractUnitTestCase
      */
     public function classical_play_fen_foo()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+        
         $game = new Game(
             Game::VARIANT_CLASSICAL,
             Game::MODE_ANALYSIS
@@ -172,6 +174,8 @@ class GameTest extends AbstractUnitTestCase
      */
     public function chess960_play_fen_foo()
     {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
         $game = new Game(
             Game::VARIANT_960,
             Game::MODE_ANALYSIS

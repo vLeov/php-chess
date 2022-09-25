@@ -240,6 +240,10 @@ class Game
 
         $fromPiecePlacement = explode(' ', $fromFen)[0];
         $toPiecePlacement = explode(' ', $toShortFen)[0];
+
+        PiecePlacement::validate($fromPiecePlacement);
+        PiecePlacement::validate($toPiecePlacement);
+
         $fromRanks = explode('/', $fromPiecePlacement);
         $toRanks = explode('/', $toPiecePlacement);
 
