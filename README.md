@@ -16,17 +16,17 @@ Via composer:
 
 Variants:
 
-- `Chess\Game:VARIANT_960`
-- `Chess\Game:VARIANT_CLASSICAL`
+- `Chess\Game::VARIANT_960`
+- `Chess\Game::VARIANT_CLASSICAL`
 
 Modes:
 
-- `Chess\Game:MODE_ANALYSIS`
-- `Chess\Game:MODE_GM`
-- `Chess\Game:MODE_FEN`
-- `Chess\Game:MODE_PGN`
-- `Chess\Game:MODE_PLAY`
-- `Chess\Game:MODE_STOCKFISH`
+- `Chess\Game::MODE_ANALYSIS`
+- `Chess\Game::MODE_GM`
+- `Chess\Game::MODE_FEN`
+- `Chess\Game::MODE_PGN`
+- `Chess\Game::MODE_PLAY`
+- `Chess\Game::MODE_STOCKFISH`
 
 ```php
 use Chess\Game;
