@@ -14,11 +14,11 @@ pages:
   - Chess\FEN\StrToPgn: fen-str-to-pgn.md
   - Chess\Media\BoardToMp4: media-board-to-mp4.md
   - Chess\Media\BoardToPng: media-board-to-png.md
-  - Chess\Randomizer\Checkmate\TwoBishopsRandomizer: randomizer-checkmate-two-bishops-randomizer.md
-  - Chess\Randomizer\Endgame\PawnEndgameRandomizer: randomizer-endgame-pawn-endgame-randomizer.md
-  - Chess\Randomizer\Randomizer: randomizer-randomizer.md
   - Chess\UciEngine\Stockfish: uciengine-stockfish.md
   - Chess\Variant\Classical\Board: variant-classical-board.md
+  - Chess\Variant\Classical\Randomizer\Checkmate\TwoBishopsRandomizer: variant-classical-randomizer-checkmate-two-bishops-randomizer.md
+  - Chess\Variant\Classical\Randomizer\Endgame\PawnEndgameRandomizer: variant-classical-randomizer-endgame-pawn-endgame-randomizer.md
+  - Chess\Variant\Classical\Randomizer\Randomizer: variant-classical-randomizer-randomizer.md
   - Command Line Interface: cli.md
   - Usage: usage.md
 theme: readthedocs
