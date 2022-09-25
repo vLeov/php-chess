@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\Tests\Unit\Randomizer;
+namespace Chess\Tests\Unit\Variant\Classical\Randomizer;
 
-use Chess\Randomizer\Randomizer;
 use Chess\FEN\BoardToStr;
 use Chess\PGN\AN\Color;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Randomizer\Randomizer;
 
 class RandomizerTest extends AbstractUnitTestCase
 {

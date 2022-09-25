@@ -4,8 +4,8 @@ namespace Chess\Eval;
 
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
-use Chess\Piece\P;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\Piece\P;
 
 class PassedPawnEval extends AbstractEval
 {

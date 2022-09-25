@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Piece;
+namespace Chess\Variant\Classical\Piece;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Color;
@@ -77,7 +77,7 @@ abstract class AbstractPiece
     /**
      * Calculates the piece's mobility.
      *
-     * @return \Chess\Piece\AbstractPiece
+     * @return \Chess\Variant\Classical\Piece\AbstractPiece
      */
     abstract protected function mobility(): AbstractPiece;
 

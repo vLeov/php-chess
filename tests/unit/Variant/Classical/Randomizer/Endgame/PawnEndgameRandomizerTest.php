@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\Tests\Unit\Randomizer\Endgame;
+namespace Chess\Tests\Unit\Variant\Classical\Randomizer\Endgame;
 
-use Chess\Randomizer\Endgame\PawnEndgameRandomizer;
 use Chess\FEN\BoardToStr;
 use Chess\PGN\AN\Color;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Randomizer\Endgame\PawnEndgameRandomizer;
 
 class PawnEndgameRandomizerTest extends AbstractUnitTestCase
 {

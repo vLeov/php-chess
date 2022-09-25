@@ -1,12 +1,12 @@
 <?php
 
-namespace Chess\Piece;
+namespace Chess\Variant\Classical\Piece;
 
 use Chess\FEN\Field\CastlingAbility;
 use Chess\PGN\AN\Castle;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
-use Chess\Piece\AbstractPiece;
+use Chess\Variant\Classical\Piece\AbstractPiece;
 
 /**
  * King.
@@ -17,12 +17,12 @@ use Chess\Piece\AbstractPiece;
 class K extends AbstractPiece
 {
     /**
-     * @var \Chess\Piece\R
+     * @var \Chess\Variant\Classical\Piece\R
      */
     private R $rook;
 
     /**
-     * @var \Chess\Piece\B
+     * @var \Chess\Variant\Classical\Piece\B
      */
     private B $bishop;
 
@@ -45,7 +45,7 @@ class K extends AbstractPiece
     /**
      * Calculates the piece's mobility.
      *
-     * @return \Chess\Piece\AbstractPiece
+     * @return \Chess\Variant\Classical\Piece\AbstractPiece
      */
     protected function mobility(): AbstractPiece
     {
@@ -152,7 +152,7 @@ class K extends AbstractPiece
      * Gets the castle rook.
      *
      * @param array $pieces
-     * @return mixed \Chess\Piece\R|null
+     * @return mixed \Chess\Variant\Classical\Piece\R|null
      */
     public function getCastleRook(array $pieces): ?R
     {

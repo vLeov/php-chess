@@ -1,12 +1,12 @@
 <?php
 
-namespace Chess\Piece;
+namespace Chess\Variant\Classical\Piece;
 
 use Chess\Exception\PieceTypeException;
 use Chess\Exception\UnknownNotationException;
 use Chess\PGN\AN\Square;
 use Chess\PGN\AN\Piece;
-use Chess\Piece\AbstractPiece;
+use Chess\Variant\Classical\Piece\AbstractPiece;
 
 /**
  * Rook.
@@ -62,7 +62,7 @@ class R extends Slider
     /**
      * Calculates the piece's mobility.
      *
-     * @return \Chess\Piece\AbstractPiece
+     * @return \Chess\Variant\Classical\Piece\AbstractPiece
      */
     protected function mobility(): AbstractPiece
     {

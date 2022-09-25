@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\Piece;
+namespace Chess\Tests\Unit\Variant\Classical\Piece;
 
-use Chess\Piece\B;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Piece\B;
 
 class BTest extends AbstractUnitTestCase
 {

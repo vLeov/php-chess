@@ -8,7 +8,7 @@ use Chess\PGN\AN\Check;
 use Chess\PGN\AN\Color;
 use Chess\PGN\AN\Piece;
 use Chess\PGN\AN\Square;
-use Chess\Piece\K;
+use Chess\Variant\Classical\Piece\K;
 
 /**
  * Move.
