@@ -16,10 +16,10 @@
             <directory>tests/unit/Media</directory>
             <directory>tests/unit/ML</directory>
             <directory>tests/unit/PGN</directory>
-            <directory>tests/unit/Piece</directory>
-            <directory>tests/unit/Randomizer</directory>
             <directory>tests/unit/UciEngine</directory>
             <directory>tests/unit/Variant</directory>
+            <directory>tests/unit/Variant/Classical/Piece</directory>
+            <directory>tests/unit/Variant/Classical/Randomizer</directory>
             <file>tests/unit/ArrayOfBoardsTest.php</file>
             <file>tests/unit/GameTest.php</file>
             <file>tests/unit/GrandmasterTest.php</file>
