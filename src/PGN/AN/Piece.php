@@ -18,4 +18,6 @@ class Piece extends AbstractNotation
     const P = 'P';
     const Q = 'Q';
     const R = 'R';
+
+    const A = 'A'; // Archbishop
 }
