@@ -4,22 +4,23 @@ namespace Chess\Variant\Capablanca\Piece;
 
 use Chess\Variant\Capablanca\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\AbstractPiece;
-use Chess\Variant\Classical\Piece\B;
 use Chess\Variant\Classical\Piece\N;
+use Chess\Variant\Classical\Piece\R;
+use Chess\Variant\Classical\Piece\RType;
 use Chess\Variant\Classical\Piece\Slider;
 
 /**
- * Archbishop.
+ * Chancellor.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class A extends Slider
+class C extends Slider
 {
     /**
-     * @var \Chess\Variant\Classical\Piece\B
+     * @var \Chess\Variant\Classical\Piece\R
      */
-    private B $bishop;
+    private R $rook;
 
     /**
      * @var \Chess\Variant\Classical\Piece\N
@@ -34,9 +35,9 @@ class A extends Slider
      */
     public function __construct(string $color, string $sq)
     {
-        parent::__construct($color, $sq, Piece::A);
+        parent::__construct($color, $sq, Piece::C);
 
-        $this->bishop = new B($color, $sq);
+        $this->rook = new R($color, $sq, RType::PROMOTED);
         $this->knight = new N($color, $sq);
 
         $this->mobility();
@@ -50,7 +51,7 @@ class A extends Slider
     protected function mobility(): AbstractPiece
     {
         $this->mobility = (object) [
-            ... (array) $this->bishop->getMobility(),
+            ... (array) $this->rook->getMobility(),
             'knight' => (array) $this->knight->getMobility()
         ];
 
