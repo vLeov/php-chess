@@ -3,8 +3,8 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SqOutpostEval;
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
 class BishopOutpostEval extends AbstractEval

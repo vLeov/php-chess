@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised\Classification;
 
 use Chess\ML\Supervised\AbstractLabeller;
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 
 class PermutationLabeller extends AbstractLabeller
 {

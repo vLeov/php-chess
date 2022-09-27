@@ -4,8 +4,8 @@ namespace Chess\Eval;
 
 use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
 /**

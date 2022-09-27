@@ -2,9 +2,9 @@
 
 namespace Chess\Eval;
 
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
-use Chess\PGN\AN\Square;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Board;
 
 class BadBishopEval extends AbstractEval implements InverseEvalInterface

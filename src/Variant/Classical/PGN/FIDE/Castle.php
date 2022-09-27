@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\PGN\FIDE;
+namespace Chess\Variant\Classical\PGN\FIDE;
 
-use Chess\PGN\AbstractNotation;
+use Chess\Variant\Classical\PGN\AbstractNotation;
 
 /**
  * Castle.

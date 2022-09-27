@@ -4,7 +4,7 @@ namespace Chess;
 
 use Chess\Eval\InverseEvalInterface;
 use Chess\FEN\StrToBoard;
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
 class HeuristicsByFenString

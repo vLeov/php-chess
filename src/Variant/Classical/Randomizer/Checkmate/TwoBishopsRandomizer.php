@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Classical\Randomizer\Checkmate;
 
-use Chess\PGN\AN\Square;
+use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Randomizer\Randomizer;
 
 class TwoBishopsRandomizer extends Randomizer

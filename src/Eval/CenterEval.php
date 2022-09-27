@@ -3,7 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SpaceEval;
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
 /**

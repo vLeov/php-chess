@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Classical\Randomizer;
 
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Piece\RType;

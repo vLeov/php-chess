@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN;
+namespace Chess\Tests\Unit\Variant\Classical\PGN;
 
-use Chess\PGN\Move;
-use Chess\PGN\AN\Castle;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Castle;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Piece\K;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Rule\CastlingRule;

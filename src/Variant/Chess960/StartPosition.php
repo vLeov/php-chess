@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Piece;
 
 class StartPosition
 {

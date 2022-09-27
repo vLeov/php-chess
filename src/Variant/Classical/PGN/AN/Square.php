@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\PGN\AN;
+namespace Chess\Variant\Classical\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\AbstractNotation;
-use Chess\PGN\ValidationInterface;
+use Chess\Variant\Classical\PGN\AbstractNotation;
+use Chess\Variant\Classical\PGN\ValidationInterface;
 
 /**
  * Square.

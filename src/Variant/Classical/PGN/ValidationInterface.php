@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\PGN;
+namespace Chess\Variant\Classical\PGN;
 
 /**
  * Validation interface.

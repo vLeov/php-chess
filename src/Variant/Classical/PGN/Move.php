@@ -1,13 +1,13 @@
 <?php
 
-namespace Chess\PGN;
+namespace Chess\Variant\Classical\PGN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\AN\Castle;
-use Chess\PGN\AN\Check;
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
-use Chess\PGN\AN\Square;
+use Chess\Variant\Classical\PGN\AN\Castle;
+use Chess\Variant\Classical\PGN\AN\Check;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Piece\K;
 
 /**

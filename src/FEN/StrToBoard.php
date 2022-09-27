@@ -5,7 +5,7 @@ namespace Chess\FEN;
 use Chess\Array\PieceArray;
 use Chess\Array\AsciiArray;
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
 /**

@@ -3,7 +3,7 @@
 namespace Chess\ML\Supervised;
 
 use Chess\HeuristicsByFenString;
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Rubix\ML\Datasets\Unlabeled;
 use Rubix\ML\PersistentModel;
 use Chess\Variant\Classical\Board;

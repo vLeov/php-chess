@@ -3,8 +3,8 @@
 namespace Chess\FEN;
 
 use Chess\FEN\Field\CastlingAbility;
-use Chess\PGN\AN\Castle;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Castle;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Board;
 

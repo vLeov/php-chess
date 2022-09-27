@@ -2,8 +2,8 @@
 
 namespace Chess\FEN;
 
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
 /**

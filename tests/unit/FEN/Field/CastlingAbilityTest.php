@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\FEN\Field\CastlingAbility;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 
 class CastlingAbilityTest extends AbstractUnitTestCase

@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Variant\Classical\Randomizer\Checkmate;
 
 use Chess\FEN\BoardToStr;
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Randomizer\Checkmate\TwoBishopsRandomizer;
 

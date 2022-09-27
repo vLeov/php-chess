@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
 class RelativeForkEval extends AbstractForkEval

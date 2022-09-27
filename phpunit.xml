@@ -18,6 +18,7 @@
             <directory>tests/unit/PGN</directory>
             <directory>tests/unit/UciEngine</directory>
             <directory>tests/unit/Variant</directory>
+            <directory>tests/unit/Variant/Classical/PGN</directory>
             <directory>tests/unit/Variant/Classical/Piece</directory>
             <directory>tests/unit/Variant/Classical/Randomizer</directory>
             <file>tests/unit/ArrayOfBoardsTest.php</file>

@@ -2,8 +2,8 @@
 
 namespace Chess\Array;
 
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\B;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Piece\N;

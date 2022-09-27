@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Classical\Piece;
 
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\AbstractPiece;
 
 /**

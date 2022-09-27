@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN;
+namespace Chess\Tests\Unit\Variant\Classical\PGN;
 
-use Chess\PGN\Tag;
+use Chess\Variant\Classical\PGN\Tag;
 use Chess\Tests\AbstractUnitTestCase;
 
 class TagTest extends AbstractUnitTestCase

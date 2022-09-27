@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit\Variant\Classical\Piece;
 
 use Chess\Player;
-use Chess\PGN\AN\Castle;
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Castle;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Rule\CastlingRule;

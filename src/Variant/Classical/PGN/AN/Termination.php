@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\PGN\AN;
+namespace Chess\Variant\Classical\PGN\AN;
 
-use Chess\PGN\AbstractNotation;
+use Chess\Variant\Classical\PGN\AbstractNotation;
 
 /**
  * Termination.

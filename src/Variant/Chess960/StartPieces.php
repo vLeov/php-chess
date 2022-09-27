@@ -2,8 +2,8 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\PGN\AN\Color;
-use Chess\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Chess960\Rule\CastlingRule;
 use Chess\Variant\Chess960\StartPosition;
 use Chess\Variant\Classical\Piece\P;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN\AN;
+namespace Chess\Tests\Unit\Variant\Classical\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\AN\Square;
+use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Tests\AbstractUnitTestCase;
 
 class SquareTest extends AbstractUnitTestCase

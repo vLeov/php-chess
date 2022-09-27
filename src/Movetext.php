@@ -4,8 +4,8 @@ namespace Chess;
 
 use Chess\Exception\MovetextException;
 use Chess\Exception\UnknownNotationException;
-use Chess\PGN\AN\Termination;
-use Chess\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Termination;
+use Chess\Variant\Classical\PGN\Move;
 
 /**
  * Movetext.

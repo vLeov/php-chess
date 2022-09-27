@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\PGN;
+namespace Chess\Tests\Unit\Variant\Classical\PGN;
 
 use Chess\Movetext;
 use Chess\Tests\AbstractUnitTestCase;
