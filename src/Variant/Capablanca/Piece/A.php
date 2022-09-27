@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Capablanca\Piece;
 
-use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Capablanca\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\AbstractPiece;
 use Chess\Variant\Classical\Piece\B;
 use Chess\Variant\Classical\Piece\N;
