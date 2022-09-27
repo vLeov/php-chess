@@ -2,19 +2,19 @@
 
 namespace Chess\Tests\Unit\Fen;
 
-use Chess\FEN\StrToPgn;
+use Chess\Variant\Classical\FEN\ShortStrToPgn;
 use Chess\Tests\AbstractUnitTestCase;
 
-class StrToPgnTest extends AbstractUnitTestCase
+class ShortStrToPgnTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
     public function e4()
     {
-        $pgn = (new StrToPgn(
+        $pgn = (new ShortStrToPgn(
             'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -',
-            'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3'
+            'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'
         ))->create();
 
         $expected = [
@@ -29,9 +29,9 @@ class StrToPgnTest extends AbstractUnitTestCase
      */
     public function Nf3()
     {
-        $pgn = (new StrToPgn(
+        $pgn = (new ShortStrToPgn(
             'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -',
-            'rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq -'
+            'rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b'
         ))->create();
 
         $expected = [
@@ -44,15 +44,32 @@ class StrToPgnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e6()
+    public function kaufman_01_play_Qg4()
     {
-        $pgn = (new StrToPgn(
-            'rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq -',
-            'rnbqkbnr/pp1p1ppp/4p3/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 2'
+        $pgn = (new ShortStrToPgn(
+            '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - -',
+            '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN1Q1/P2B4/1P3PPP/2R2R1K b'
         ))->create();
 
         $expected = [
-            'b' => 'e6',
+            'w' => 'Qg4',
+        ];
+
+        $this->assertSame($expected, $pgn);
+    }
+
+    /**
+     * @test
+     */
+    public function endgame_king_and_rook_vs_king()
+    {
+        $pgn = (new ShortStrToPgn(
+            '7k/8/8/8/8/2K5/8/r7 b - -',
+            '6k1/8/8/8/8/2K5/8/r7 w'
+        ))->create();
+
+        $expected = [
+            'b' => 'Kg8',
         ];
 
         $this->assertSame($expected, $pgn);
@@ -63,9 +80,9 @@ class StrToPgnTest extends AbstractUnitTestCase
      */
     public function b_castles_kingside()
     {
-        $pgn = (new StrToPgn(
+        $pgn = (new ShortStrToPgn(
             'r1bqk2r/pppp1ppp/2n2n2/4p3/PbB1P3/2N2N2/1PPP1PPP/R1BQK2R b KQkq -',
-            'r1bq1rk1/pppp1ppp/2n2n2/4p3/PbB1P3/2N2N2/1PPP1PPP/R1BQK2R w KQ -'
+            'r1bq1rk1/pppp1ppp/2n2n2/4p3/PbB1P3/2N2N2/1PPP1PPP/R1BQK2R w'
         ))->create();
 
         $expected = [

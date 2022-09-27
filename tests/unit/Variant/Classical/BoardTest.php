@@ -3,8 +3,8 @@
 namespace Chess\Tests\Unit\Variant\Classical;
 
 use Chess\Player;
-use Chess\FEN\BoardToStr;
-use Chess\FEN\StrToBoard;
+use Chess\Variant\Classical\FEN\BoardToStr;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\Move;

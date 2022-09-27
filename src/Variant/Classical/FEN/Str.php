@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\FEN;
+namespace Chess\Variant\Classical\FEN;
 
-use Chess\FEN\Field\CastlingAbility;
-use Chess\FEN\Field\EnPassantTargetSquare;
-use Chess\FEN\Field\PiecePlacement;
-use Chess\FEN\Field\SideToMove;
+use Chess\Variant\Classical\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\FEN\Field\EnPassantTargetSquare;
+use Chess\Variant\Classical\FEN\Field\PiecePlacement;
+use Chess\Variant\Classical\FEN\Field\SideToMove;
 
 /**
  * FEN string.

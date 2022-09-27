@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\Tests\Unit\FEN;
+namespace Chess\Tests\Unit\Variant\Classical\FEN;
 
 use Chess\Array\AsciiArray;
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\StrToBoard;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 
 class StrToBoardTest extends AbstractUnitTestCase

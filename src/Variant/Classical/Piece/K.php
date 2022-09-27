@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Classical\Piece;
 
-use Chess\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;

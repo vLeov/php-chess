@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\FEN\Field;
+namespace Chess\Variant\Classical\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\ValidationInterface;
+use Chess\Variant\Classical\FEN\ValidationInterface;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**

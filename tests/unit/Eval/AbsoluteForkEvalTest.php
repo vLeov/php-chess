@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Eval;
 
 use Chess\Eval\AbsoluteForkEval;
-use Chess\FEN\StrToBoard;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 
 class AbsoluteForkEvalTest extends AbstractUnitTestCase

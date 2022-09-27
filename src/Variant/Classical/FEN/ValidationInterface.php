@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\FEN;
+namespace Chess\Variant\Classical\FEN;
 
 interface ValidationInterface
 {

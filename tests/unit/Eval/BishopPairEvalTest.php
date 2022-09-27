@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\Eval;
 
 use Chess\Player;
 use Chess\Eval\BishopPairEval;
-use Chess\FEN\StrToBoard;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 
 class BishopPairEvalTest extends AbstractUnitTestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\FEN\Field;
+namespace Chess\Tests\Unit\Variant\Classical\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\Field\EnPassantTargetSquare;
+use Chess\Variant\Classical\FEN\Field\EnPassantTargetSquare;
 use Chess\Tests\AbstractUnitTestCase;
 
 class EnPassantTargetSquareTest extends AbstractUnitTestCase

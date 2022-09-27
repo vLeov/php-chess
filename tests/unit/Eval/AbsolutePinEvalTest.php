@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Eval;
 
 use Chess\Eval\AbsolutePinEval;
-use Chess\FEN\StrToBoard;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 
 class AbsolutePinEvalTest extends AbstractUnitTestCase

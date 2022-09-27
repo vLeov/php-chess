@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Chess960\StartPieces;
 use Chess\Variant\Chess960\Rule\CastlingRule;

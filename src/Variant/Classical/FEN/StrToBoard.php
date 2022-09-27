@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\FEN;
+namespace Chess\Variant\Classical\FEN;
 
 use Chess\Array\PieceArray;
 use Chess\Array\AsciiArray;

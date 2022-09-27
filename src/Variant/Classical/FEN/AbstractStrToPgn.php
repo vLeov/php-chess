@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\FEN;
+namespace Chess\Variant\Classical\FEN;
 
-use Chess\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\K;

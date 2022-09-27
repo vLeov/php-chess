@@ -3,10 +3,10 @@
 namespace Chess;
 
 use Chess\Grandmaster;
-use Chess\FEN\Field\PiecePlacement;
-use Chess\FEN\BoardToStr;
-use Chess\FEN\ShortStrToPgn;
-use Chess\FEN\StrToBoard;
+use Chess\Variant\Classical\FEN\Field\PiecePlacement;
+use Chess\Variant\Classical\FEN\BoardToStr;
+use Chess\Variant\Classical\FEN\ShortStrToPgn;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;

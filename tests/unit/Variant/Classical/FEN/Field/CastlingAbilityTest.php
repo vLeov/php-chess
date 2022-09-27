@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\FEN\Field;
+namespace Chess\Tests\Unit\Variant\Classical\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 

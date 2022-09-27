@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\FEN;
+namespace Chess\Tests\Unit\Variant\Classical\FEN;
 
 use Chess\Player;
-use Chess\FEN\BoardToStr;
+use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 

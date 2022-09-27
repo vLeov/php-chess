@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\UciEngine;
 
-use Chess\FEN\ShortStrToPgn;
+use Chess\Variant\Classical\FEN\ShortStrToPgn;
 use Chess\UciEngine\Stockfish;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;

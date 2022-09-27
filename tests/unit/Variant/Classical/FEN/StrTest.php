@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\FEN\Validate;
+namespace Chess\Tests\Unit\Variant\Classical\FEN\Validate;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\Str;
+use Chess\Variant\Classical\FEN\Str;
 use Chess\Tests\AbstractUnitTestCase;
 
 class StrTest extends AbstractUnitTestCase

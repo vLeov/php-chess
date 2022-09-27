@@ -1,18 +1,18 @@
 <?php
 
-namespace Chess\FEN\Field;
+namespace Chess\Variant\Classical\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\FEN\ValidationInterface;
-use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\FEN\ValidationInterface;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 /**
- * Side to move.
+ * En passant target square.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class SideToMove implements ValidationInterface
+class EnPassantTargetSquare implements ValidationInterface
 {
     /**
      * String validation.
@@ -23,6 +23,10 @@ class SideToMove implements ValidationInterface
      */
      public static function validate(string $value): string
      {
-         return Color::validate($value);
+         if ('-' === $value) {
+             return $value;
+         }
+
+         return Square::validate($value);
      }
 }
