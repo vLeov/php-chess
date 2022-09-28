@@ -102,6 +102,16 @@ class Game
     }
 
     /**
+     * Returns the game variant.
+     *
+     * @return string
+     */
+    public function getVariant(): string
+    {
+        return $this->variant;
+    }
+
+    /**
      * Returns the game mode.
      *
      * @return string
