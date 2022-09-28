@@ -19,12 +19,21 @@ use Chess\Variant\Chess960\Rule\CastlingRule;
 final class Board extends ClassicalBoard
 {
     /**
+     * Start position.
+     *
+     * @var array
+     */
+    protected array $startPos;
+
+    /**
      * Constructor.
      *
      * @param array $startPos
      */
     public function __construct(array $startPos)
     {
+        $this->startPos = $startPos;
+
         $this->castlingRule = (new CastlingRule($startPos))->getRule();
 
         $pieces = (new StartPieces($startPos, $this->castlingRule))->create();
@@ -36,5 +45,15 @@ final class Board extends ClassicalBoard
         $this->castlingAbility = CastlingAbility::START;
 
         $this->refresh();
+    }
+
+    /**
+     * Returns the start position.
+     *
+     * @return array
+     */
+    public function getStartPos(): array
+    {
+        return $this->startPos;
     }
 }
