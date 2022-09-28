@@ -78,6 +78,16 @@ class Board extends \SplObjectStorage
     protected string $castlingAbility = '';
 
     /**
+     * Size.
+     *
+     * @var array
+     */
+    protected array $size = [
+        'files' => 8,
+        'ranks' => 8,
+    ];
+
+    /**
      * Observers.
      *
      * @var array
@@ -1056,22 +1066,17 @@ class Board extends \SplObjectStorage
      */
     public function toAsciiArray(bool $flip = false): array
     {
-        $array = [
-            7 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-            6 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-            5 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-            4 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-            3 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-            2 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-            1 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-            0 => [' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . '],
-        ];
+        $array = [];
+        for ($i = $this->size['files'] - 1; $i >= 0; $i--) {
+            $array[$i] = array_fill(0, $this->size['ranks'], ' . ');
+        }
+
         foreach ($this->getPieces() as $piece) {
             $sq = $piece->getSq();
             list($file, $rank) = AsciiArray::fromAlgebraicToIndex($sq);
             if ($flip) {
-                $file = 7 - $file;
-                $rank = 7 - $rank;
+                $file = $this->size['files'] - 1 - $file;
+                $rank = $this->size['ranks'] - 1 - $rank;
             }
             $piece->getColor() === Color::W
                 ? $array[$file][$rank] = ' ' . $piece->getId() . ' '

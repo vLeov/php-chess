@@ -34,6 +34,11 @@ final class Board extends ClassicalBoard
      */
     public function __construct()
     {
+        $this->size = [
+            'files' => 10,
+            'ranks' => 10,
+        ];
+
         $this->castlingRule = (new CastlingRule())->getRule();
 
         $this->attach(new R(Color::W, 'a1', RType::CASTLE_LONG));
