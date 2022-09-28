@@ -6,6 +6,7 @@ use Chess\Variant\Capablanca\Piece\A;
 use Chess\Variant\Capablanca\Piece\C;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Piece\B;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Piece\N;

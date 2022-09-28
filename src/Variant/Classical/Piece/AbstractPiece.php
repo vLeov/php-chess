@@ -69,8 +69,8 @@ abstract class AbstractPiece
      */
     public function __construct(string $color, string $sq, string $id)
     {
-        $this->color = Color::validate($color);
-        $this->sq = Square::validate($sq);
+        $this->color = $color;
+        $this->sq = $sq;
         $this->id = $id;
     }
 

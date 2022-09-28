@@ -8,6 +8,17 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class CastlingRule
 {
+    protected array $file = [
+        'a' => 0,
+        'b' => 1,
+        'c' => 2,
+        'd' => 3,
+        'e' => 4,
+        'f' => 5,
+        'g' => 6,
+        'h' => 7,
+    ];
+
     protected array $rule = [
         Color::W => [
             Piece::K => [
@@ -102,22 +113,11 @@ class CastlingRule
 
     protected function kPos(): CastlingRule
     {
-        $i = [
-            'a' => 0,
-            'b' => 1,
-            'c' => 2,
-            'd' => 3,
-            'e' => 4,
-            'f' => 5,
-            'g' => 6,
-            'h' => 7,
-        ];
-
         $short = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next'][0];
         $long = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['next'][0];
 
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $i[$short];
-        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $i[$long];
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $this->file[$short];
+        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $this->file[$long];
 
         return $this;
     }
