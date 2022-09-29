@@ -37,14 +37,22 @@ class P extends AbstractPiece
     private string $enPassantSq = '';
 
     /**
+     * @var array
+     */
+    private array $size;
+
+    /**
      * Constructor.
      *
      * @param string $color
      * @param string $sq
+     * @param array $size
      */
-    public function __construct(string $color, string $sq)
+    public function __construct(string $color, string $sq, array $size)
     {
         parent::__construct($color, $sq, Piece::P);
+
+        $this->size = $size;
 
         $this->file = $this->sq[0];
 
@@ -52,11 +60,11 @@ class P extends AbstractPiece
             $this->ranks = (object) [
                 'start' => 2,
                 'next' => (int)$this->sq[1] + 1,
-                'end' => 8
+                'end' => $this->size['ranks'],
             ];
         } elseif ($this->color === Color::B) {
             $this->ranks = (object) [
-                'start' => 7,
+                'start' => $this->size['ranks'] - 1,
                 'next' => (int)$this->sq[1] - 1,
                 'end' => 1
             ];
@@ -89,7 +97,10 @@ class P extends AbstractPiece
         if ($this->sq[1] == 2 && $this->ranks->start == 2) {
             $this->mobility[] = $this->file . ($this->ranks->start + 2);
         }
-        elseif ($this->sq[1] == 7 && $this->ranks->start == 7) {
+        elseif (
+            $this->sq[1] == $this->size['ranks'] - 1 &&
+            $this->ranks->start == $this->size['ranks'] - 1
+        ) {
             $this->mobility[] = $this->file . ($this->ranks->start - 2);
         }
 

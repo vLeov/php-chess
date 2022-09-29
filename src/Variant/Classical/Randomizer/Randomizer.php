@@ -4,6 +4,7 @@ namespace Chess\Variant\Classical\Randomizer;
 
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Piece\RType;
 use Chess\Variant\Classical\Rule\CastlingRule;
@@ -151,8 +152,19 @@ class Randomizer
             foreach ($ids as $id) {
                 $arrayRand = array_rand($freeSqs, 1);
                 $sq = $freeSqs[$arrayRand];
+                switch ($id) {
+                    case Piece::R:
+                        $param = RType::PROMOTED;
+                        break;
+                    case Piece::P:
+                        $param = $this->board->getSize();
+                        break;
+                    default:
+                        $param = null;
+                        break;
+                }
                 $className = "\Chess\\Variant\\Classical\\Piece\\$id";
-                $pieces[] = new $className($color, $sq, RType::PROMOTED);
+                $pieces[] = new $className($color, $sq, $param);
                 unset($freeSqs[$arrayRand]);
             }
         }

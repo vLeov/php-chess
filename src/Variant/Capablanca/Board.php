@@ -52,16 +52,16 @@ final class Board extends ClassicalBoard
         $this->attach(new N(Color::W, 'i1'));
         $this->attach(new R(Color::W, 'j1', RType::CASTLE_SHORT));
 
-        $this->attach(new P(Color::W, 'a2'));
-        $this->attach(new P(Color::W, 'b2'));
-        $this->attach(new P(Color::W, 'c2'));
-        $this->attach(new P(Color::W, 'd2'));
-        $this->attach(new P(Color::W, 'e2'));
-        $this->attach(new P(Color::W, 'f2'));
-        $this->attach(new P(Color::W, 'g2'));
-        $this->attach(new P(Color::W, 'h2'));
-        $this->attach(new P(Color::W, 'i2'));
-        $this->attach(new P(Color::W, 'j2'));
+        $this->attach(new P(Color::W, 'a2', $this->size));
+        $this->attach(new P(Color::W, 'b2', $this->size));
+        $this->attach(new P(Color::W, 'c2', $this->size));
+        $this->attach(new P(Color::W, 'd2', $this->size));
+        $this->attach(new P(Color::W, 'e2', $this->size));
+        $this->attach(new P(Color::W, 'f2', $this->size));
+        $this->attach(new P(Color::W, 'g2', $this->size));
+        $this->attach(new P(Color::W, 'h2', $this->size));
+        $this->attach(new P(Color::W, 'i2', $this->size));
+        $this->attach(new P(Color::W, 'j2', $this->size));
 
         $this->attach(new R(Color::B, 'a10', RType::CASTLE_LONG));
         $this->attach(new N(Color::B, 'b10'));
@@ -74,16 +74,16 @@ final class Board extends ClassicalBoard
         $this->attach(new N(Color::B, 'i10'));
         $this->attach(new R(Color::B, 'j10', RType::CASTLE_SHORT));
 
-        $this->attach(new P(Color::B, 'a9'));
-        $this->attach(new P(Color::B, 'b9'));
-        $this->attach(new P(Color::B, 'c9'));
-        $this->attach(new P(Color::B, 'd9'));
-        $this->attach(new P(Color::B, 'e9'));
-        $this->attach(new P(Color::B, 'f9'));
-        $this->attach(new P(Color::B, 'g9'));
-        $this->attach(new P(Color::B, 'h9'));
-        $this->attach(new P(Color::B, 'i9'));
-        $this->attach(new P(Color::B, 'j9'));
+        $this->attach(new P(Color::B, 'a9', $this->size));
+        $this->attach(new P(Color::B, 'b9', $this->size));
+        $this->attach(new P(Color::B, 'c9', $this->size));
+        $this->attach(new P(Color::B, 'd9', $this->size));
+        $this->attach(new P(Color::B, 'e9', $this->size));
+        $this->attach(new P(Color::B, 'f9', $this->size));
+        $this->attach(new P(Color::B, 'g9', $this->size));
+        $this->attach(new P(Color::B, 'h9', $this->size));
+        $this->attach(new P(Color::B, 'i9', $this->size));
+        $this->attach(new P(Color::B, 'j9', $this->size));
 
         $this->castlingAbility = CastlingAbility::START;
 

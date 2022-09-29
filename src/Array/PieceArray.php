@@ -23,6 +23,11 @@ class PieceArray extends AbstractArray
 {
     private array $castlingRule;
 
+    private array $size = [
+        'files' => 8,
+        'ranks' => 8,
+    ];
+
     /**
      * Constructor.
      *
@@ -80,7 +85,7 @@ class PieceArray extends AbstractArray
         } elseif ($id === Piece::N) {
             $this->array[] = new N($color, $sq);
         } elseif ($id === Piece::P) {
-            $this->array[] = new P($color, $sq);
+            $this->array[] = new P($color, $sq, $this->size);
         }
     }
 }

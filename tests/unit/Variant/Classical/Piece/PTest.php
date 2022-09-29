@@ -7,12 +7,22 @@ use Chess\Variant\Classical\Piece\P;
 
 class PTest extends AbstractUnitTestCase
 {
+    static private $size;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$size = [
+            'files' => 8,
+            'ranks' => 8,
+        ];
+    }
+
     /**
      * @test
      */
     public function white_a2()
     {
-        $pawn = new P('w', 'a2');
+        $pawn = new P('w', 'a2', self::$size);
 
         $position = 'a2';
         $mobility = ['a3', 'a4'];
@@ -28,7 +38,7 @@ class PTest extends AbstractUnitTestCase
      */
     public function white_d5()
     {
-        $pawn = new P('w', 'd5');
+        $pawn = new P('w', 'd5', self::$size);
 
         $position = 'd5';
         $mobility = ['d6'];
@@ -44,7 +54,7 @@ class PTest extends AbstractUnitTestCase
      */
     public function white_f7()
     {
-        $pawn = new P('w', 'f7');
+        $pawn = new P('w', 'f7', self::$size);
 
         $position = 'f7';
         $mobility = ['f8'];
@@ -60,7 +70,7 @@ class PTest extends AbstractUnitTestCase
      */
     public function white_f8()
     {
-        $pawn = new P('w', 'f8');
+        $pawn = new P('w', 'f8', self::$size);
 
         $position = 'f8';
         $mobility = [];
@@ -76,7 +86,7 @@ class PTest extends AbstractUnitTestCase
      */
     public function black_a2()
     {
-        $pawn = new P('b', 'a2');
+        $pawn = new P('b', 'a2', self::$size);
 
         $position = 'a2';
         $mobility = ['a1'];
@@ -92,7 +102,7 @@ class PTest extends AbstractUnitTestCase
      */
     public function black_d5()
     {
-        $pawn = new P('b', 'd5');
+        $pawn = new P('b', 'd5', self::$size);
 
         $position = 'd5';
         $mobility = ['d4'];
