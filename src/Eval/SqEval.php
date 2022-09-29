@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Array\AsciiArray;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
@@ -51,9 +52,9 @@ class SqEval extends AbstractEval
     private function all(): array
     {
         $all = [];
-        for($i=0; $i<8; $i++) {
-            for($j=1; $j<=8; $j++) {
-                $all[] = chr((ord('a') + $i)) . $j;
+        for ($i = 0; $i < $this->board->getSize()['files']; $i++) {
+            for ($j = 0; $j < $this->board->getSize()['ranks']; $j++) {
+                $all[] = AsciiArray::fromIndexToAlgebraic($i, $j);
             }
         }
 

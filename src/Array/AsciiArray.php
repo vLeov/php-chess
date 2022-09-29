@@ -76,4 +76,19 @@ class AsciiArray extends AbstractArray
             $j,
         ];
     }
+
+    /**
+     * Returns a square given the indexes of an array.
+     *
+     * @param int $i
+     * @param int $j
+     * @return string
+     */
+    public static function fromIndexToAlgebraic(int $i, int $j): string
+    {
+        $file = chr(97 + $i);
+        $rank = $j + 1;
+
+        return $file.$rank;
+    }
 }

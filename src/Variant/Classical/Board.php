@@ -249,6 +249,16 @@ class Board extends \SplObjectStorage
     }
 
     /**
+     * Returns the size.
+     *
+     * @return array
+     */
+    public function getSize(): array
+    {
+        return $this->size;
+    }
+
+    /**
      * Returns the pieces captured by both players.
      *
      * @return mixed array|null

@@ -143,4 +143,37 @@ class AsciiArrayTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | fromIndexToAlgebraic()
+    |--------------------------------------------------------------------------
+    |
+    | Returns a square given the indexes of an array.
+    |
+    */
+
+    /**
+     * @test
+     */
+    public function from_index_to_algebraic_0_0()
+    {
+        $this->assertSame('a1', AsciiArray::fromIndexToAlgebraic(0, 0));
+    }
+
+    /**
+     * @test
+     */
+    public function from_index_to_algebraic_0_7()
+    {
+        $this->assertSame('a8', AsciiArray::fromIndexToAlgebraic(0, 7));
+    }
+
+    /**
+     * @test
+     */
+    public function from_index_to_algebraic_0_8()
+    {
+        $this->assertSame('a9', AsciiArray::fromIndexToAlgebraic(0, 8));
+    }
 }
