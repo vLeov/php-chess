@@ -78,7 +78,7 @@ class KTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function mobility_a2()
+    public function mobility_w_a2()
     {
         $king = new K('w', 'a2', (new CastlingRule)->getRule());
         $mobility = (object) [
@@ -94,7 +94,7 @@ class KTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function mobility_d5()
+    public function mobility_w_d5()
     {
         $king = new K('w', 'd5', (new CastlingRule)->getRule());
         $mobility = (object) [
@@ -107,6 +107,42 @@ class KTest extends AbstractUnitTestCase
             'downLeft' => 'c4',
             'downRight' => 'e4'
         ];
+        $this->assertEquals($mobility, $king->getMobility());
+    }
+
+    /**
+     * @test
+     */
+    public function mobility_w_f1()
+    {
+        $king = new K('w', 'f1');
+
+        $mobility = (object) [
+            'up' => 'f2',
+            'left' => 'e1',
+            'right' => 'g1',
+            'upLeft' => 'e2',
+            'upRight' => 'g2',
+        ];
+
+        $this->assertEquals($mobility, $king->getMobility());
+    }
+
+    /**
+     * @test
+     */
+    public function mobility_b_f8()
+    {
+        $king = new K('b', 'f8');
+
+        $mobility = (object) [
+            'down' => 'f7',
+            'left' => 'e8',
+            'right' => 'g8',
+            'downLeft' => 'e7',
+            'downRight' => 'g7',
+        ];
+
         $this->assertEquals($mobility, $king->getMobility());
     }
 
