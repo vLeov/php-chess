@@ -26,18 +26,23 @@ abstract class AbstractPiece
     protected string $color;
 
     /**
-     * The piece's id in PGN format.
-     *
-     * @var string
-     */
-    protected string $id;
-
-    /**
      * The piece's square.
      *
      * @var string
      */
     protected string $sq;
+
+    /**
+     * @var array
+     */
+    protected array $size;
+
+    /**
+     * The piece's id in PGN format.
+     *
+     * @var string
+     */
+    protected string $id;
 
     /**
      * The piece's mobility.
@@ -67,10 +72,11 @@ abstract class AbstractPiece
      * @param string $sq
      * @param string $id
      */
-    public function __construct(string $color, string $sq, string $id)
+    public function __construct(string $color, string $sq, array $size, string $id)
     {
         $this->color = $color;
         $this->sq = $sq;
+        $this->size = $size;
         $this->id = $id;
     }
 

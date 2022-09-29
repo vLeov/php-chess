@@ -11,7 +11,6 @@ use Chess\Variant\Classical\Piece\P;
 use Chess\Variant\Classical\Piece\Q;
 use Chess\Variant\Classical\Piece\R;
 use Chess\Variant\Classical\Piece\RType;
-use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * Piece array.
@@ -21,8 +20,6 @@ use Chess\Variant\Classical\Rule\CastlingRule;
  */
 class PieceArray extends AbstractArray
 {
-    private array $castlingRule;
-
     private array $size = [
         'files' => 8,
         'ranks' => 8,
@@ -35,8 +32,6 @@ class PieceArray extends AbstractArray
      */
     public function __construct(array $array)
     {
-        $this->castlingRule = (new CastlingRule())->getRule();
-
         foreach ($array as $i => $row) {
             $file = 'a';
             $rank = $i + 1;
@@ -65,25 +60,25 @@ class PieceArray extends AbstractArray
     private function push(string $color, string $id, string $sq): void
     {
         if ($id === Piece::K) {
-            $this->array[] = new K($color, $sq, $this->castlingRule);
+            $this->array[] = new K($color, $sq, $this->size);
         } elseif ($id === Piece::Q) {
-            $this->array[] = new Q($color, $sq);
+            $this->array[] = new Q($color, $sq, $this->size);
         } elseif ($id === Piece::R) {
             if ($color === Color::B && $sq === 'a8') {
-                $this->array[] = new R($color, $sq, RType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_LONG);
             } elseif ($color === Color::B && $sq === 'h8') {
-                $this->array[] = new R($color, $sq, RType::CASTLE_SHORT);
+                $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_SHORT);
             } elseif ($color === Color::W && $sq === 'a1') {
-                $this->array[] = new R($color, $sq, RType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_LONG);
             } elseif ($color === Color::W && $sq === 'h1') {
-                $this->array[] = new R($color, $sq, RType::CASTLE_SHORT);
+                $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_SHORT);
             } else { // it doesn't matter which RType is assigned
-                $this->array[] = new R($color, $sq, RType::CASTLE_LONG);
+                $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_LONG);
             }
         } elseif ($id === Piece::B) {
-            $this->array[] = new B($color, $sq);
+            $this->array[] = new B($color, $sq, $this->size);
         } elseif ($id === Piece::N) {
-            $this->array[] = new N($color, $sq);
+            $this->array[] = new N($color, $sq, $this->size);
         } elseif ($id === Piece::P) {
             $this->array[] = new P($color, $sq, $this->size);
         }

@@ -37,11 +37,6 @@ class P extends AbstractPiece
     private string $enPassantSq = '';
 
     /**
-     * @var array
-     */
-    private array $size;
-
-    /**
      * Constructor.
      *
      * @param string $color
@@ -50,9 +45,7 @@ class P extends AbstractPiece
      */
     public function __construct(string $color, string $sq, array $size)
     {
-        parent::__construct($color, $sq, Piece::P);
-
-        $this->size = $size;
+        parent::__construct($color, $sq, $size, Piece::P);
 
         $this->file = $this->sq[0];
 

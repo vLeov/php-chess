@@ -26,16 +26,17 @@ class R extends Slider
      *
      * @param string $color
      * @param string $sq
+     * @param array $size
      * @param string $type
      * @throws \Chess\Exception\PieceTypeException
      */
-    public function __construct(string $color, string $sq, string $type)
+    public function __construct(string $color, string $sq, array $size, string $type)
     {
         if (!in_array($type, RType::all())) {
             throw new PieceTypeException;
         }
 
-        parent::__construct($color, $sq, Piece::R);
+        parent::__construct($color, $sq, $size, Piece::R);
 
         $this->type = $type;
 

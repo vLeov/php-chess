@@ -7,12 +7,22 @@ use Chess\Variant\Classical\Piece\K;
 
 class KTest extends AbstractUnitTestCase
 {
+    static private $size;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$size = [
+            'files' => 10,
+            'ranks' => 10,
+        ];
+    }
+
     /**
      * @test
      */
     public function mobility_w_f1()
     {
-        $king = new K('w', 'f1');
+        $king = new K('w', 'f1', self::$size);
 
         $mobility = (object) [
             'up' => 'f2',
@@ -30,7 +40,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_b_f10()
     {
-        $king = new K('b', 'f10');
+        $king = new K('b', 'f10', self::$size);
 
         $mobility = (object) [
             'down' => 'f9',

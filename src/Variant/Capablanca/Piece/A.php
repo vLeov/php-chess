@@ -31,13 +31,14 @@ class A extends Slider
      *
      * @param string $color
      * @param string $sq
+     * @param array $size
      */
-    public function __construct(string $color, string $sq)
+    public function __construct(string $color, string $sq, array $size)
     {
-        parent::__construct($color, $sq, Piece::A);
+        parent::__construct($color, $sq, $size, Piece::A);
 
-        $this->bishop = new B($color, $sq);
-        $this->knight = new N($color, $sq);
+        $this->bishop = new B($color, $sq, $size);
+        $this->knight = new N($color, $sq, $size);
 
         $this->mobility();
     }

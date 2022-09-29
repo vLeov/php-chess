@@ -7,12 +7,22 @@ use Chess\Variant\Capablanca\Piece\C;
 
 class CTest extends AbstractUnitTestCase
 {
+    static private $size;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$size = [
+            'files' => 10,
+            'ranks' => 10,
+        ];
+    }
+
     /**
      * @test
      */
     public function mobility_a1()
     {
-        $chancellor = new C('w', 'a1');
+        $chancellor = new C('w', 'a1', self::$size);
         $mobility = (object) [
             'up' => ['a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => [],
@@ -29,7 +39,7 @@ class CTest extends AbstractUnitTestCase
      */
     public function mobility_e4()
     {
-        $chancellor = new C('w', 'e4');
+        $chancellor = new C('w', 'e4', self::$size);
         $mobility = (object) [
             'up' => ['e5', 'e6', 'e7', 'e8'],
             'down' => ['e3', 'e2', 'e1'],
@@ -46,7 +56,7 @@ class CTest extends AbstractUnitTestCase
      */
     public function mobility_d4()
     {
-        $chancellor = new C('w', 'd4');
+        $chancellor = new C('w', 'd4', self::$size);
         $mobility = (object) [
             'up' => ['d5', 'd6', 'd7', 'd8'],
             'down' => ['d3', 'd2', 'd1'],

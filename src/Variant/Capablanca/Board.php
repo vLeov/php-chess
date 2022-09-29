@@ -41,16 +41,16 @@ final class Board extends ClassicalBoard
 
         $this->castlingRule = (new CastlingRule())->getRule();
 
-        $this->attach(new R(Color::W, 'a1', RType::CASTLE_LONG));
-        $this->attach(new N(Color::W, 'b1'));
-        $this->attach(new A(Color::W, 'c1'));
-        $this->attach(new B(Color::W, 'd1'));
-        $this->attach(new Q(Color::W, 'e1'));
-        $this->attach(new K(Color::W, 'f1', $this->castlingRule));
-        $this->attach(new B(Color::W, 'g1'));
-        $this->attach(new C(Color::W, 'h1'));
-        $this->attach(new N(Color::W, 'i1'));
-        $this->attach(new R(Color::W, 'j1', RType::CASTLE_SHORT));
+        $this->attach(new R(Color::W, 'a1', $this->size, RType::CASTLE_LONG));
+        $this->attach(new N(Color::W, 'b1', $this->size));
+        $this->attach(new A(Color::W, 'c1', $this->size));
+        $this->attach(new B(Color::W, 'd1', $this->size));
+        $this->attach(new Q(Color::W, 'e1', $this->size));
+        $this->attach(new K(Color::W, 'f1', $this->size));
+        $this->attach(new B(Color::W, 'g1', $this->size));
+        $this->attach(new C(Color::W, 'h1', $this->size));
+        $this->attach(new N(Color::W, 'i1', $this->size));
+        $this->attach(new R(Color::W, 'j1', $this->size, RType::CASTLE_SHORT));
 
         $this->attach(new P(Color::W, 'a2', $this->size));
         $this->attach(new P(Color::W, 'b2', $this->size));
@@ -63,16 +63,16 @@ final class Board extends ClassicalBoard
         $this->attach(new P(Color::W, 'i2', $this->size));
         $this->attach(new P(Color::W, 'j2', $this->size));
 
-        $this->attach(new R(Color::B, 'a10', RType::CASTLE_LONG));
-        $this->attach(new N(Color::B, 'b10'));
-        $this->attach(new A(Color::B, 'c10'));
-        $this->attach(new B(Color::B, 'd10'));
-        $this->attach(new Q(Color::B, 'e10'));
-        $this->attach(new K(Color::B, 'f10', $this->castlingRule));
-        $this->attach(new B(Color::B, 'g10'));
-        $this->attach(new C(Color::B, 'h10'));
-        $this->attach(new N(Color::B, 'i10'));
-        $this->attach(new R(Color::B, 'j10', RType::CASTLE_SHORT));
+        $this->attach(new R(Color::B, 'a10', $this->size, RType::CASTLE_LONG));
+        $this->attach(new N(Color::B, 'b10', $this->size));
+        $this->attach(new A(Color::B, 'c10', $this->size));
+        $this->attach(new B(Color::B, 'd10', $this->size));
+        $this->attach(new Q(Color::B, 'e10', $this->size));
+        $this->attach(new K(Color::B, 'f10', $this->size));
+        $this->attach(new B(Color::B, 'g10', $this->size));
+        $this->attach(new C(Color::B, 'h10', $this->size));
+        $this->attach(new N(Color::B, 'i10', $this->size));
+        $this->attach(new R(Color::B, 'j10', $this->size, RType::CASTLE_SHORT));
 
         $this->attach(new P(Color::B, 'a9', $this->size));
         $this->attach(new P(Color::B, 'b9', $this->size));

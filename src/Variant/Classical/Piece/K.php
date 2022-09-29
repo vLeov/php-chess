@@ -31,13 +31,14 @@ class K extends AbstractPiece
      *
      * @param string $color
      * @param string $sq
+     * @param array $size
      */
-    public function __construct(string $color, string $sq)
+    public function __construct(string $color, string $sq, array $size)
     {
-        parent::__construct($color, $sq, Piece::K);
+        parent::__construct($color, $sq, $size, Piece::K);
 
-        $this->rook = new R($color, $sq, RType::SLIDER);
-        $this->bishop = new B($color, $sq);
+        $this->rook = new R($color, $sq, $size, RType::SLIDER);
+        $this->bishop = new B($color, $sq, $size);
 
         $this->mobility();
     }

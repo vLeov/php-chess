@@ -8,12 +8,22 @@ use Chess\Variant\Classical\Piece\Q;
 
 class QTest extends AbstractUnitTestCase
 {
+    static private $size;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$size = [
+            'files' => 8,
+            'ranks' => 8,
+        ];
+    }
+
     /**
      * @test
      */
     public function mobility_a2()
     {
-        $queen = new Q('w', 'a2');
+        $queen = new Q('w', 'a2', self::$size);
         $mobility = (object) [
             'up' => ['a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => ['a1'],
@@ -33,7 +43,7 @@ class QTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $queen = new Q('w', 'd5');
+        $queen = new Q('w', 'd5', self::$size);
         $mobility = (object) [
             'up' => ['d6', 'd7', 'd8'],
             'down' => ['d4', 'd3', 'd2', 'd1'],

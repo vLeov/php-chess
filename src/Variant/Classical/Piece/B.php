@@ -20,10 +20,11 @@ class B extends Slider
      *
      * @param string $color
      * @param string $sq
+     * @param array $size
      */
-    public function __construct(string $color, string $sq)
+    public function __construct(string $color, string $sq, array $size)
     {
-        parent::__construct($color, $sq, Piece::B);
+        parent::__construct($color, $sq, $size, Piece::B);
 
         $this->mobility = (object)[
             'upLeft' => [],

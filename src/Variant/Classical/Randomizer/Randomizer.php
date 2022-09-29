@@ -152,19 +152,13 @@ class Randomizer
             foreach ($ids as $id) {
                 $arrayRand = array_rand($freeSqs, 1);
                 $sq = $freeSqs[$arrayRand];
-                switch ($id) {
-                    case Piece::R:
-                        $param = RType::PROMOTED;
-                        break;
-                    case Piece::P:
-                        $param = $this->board->getSize();
-                        break;
-                    default:
-                        $param = null;
-                        break;
-                }
                 $className = "\Chess\\Variant\\Classical\\Piece\\$id";
-                $pieces[] = new $className($color, $sq, $param);
+                $pieces[] = new $className(
+                    $color,
+                    $sq,
+                    $this->board->getSize(),
+                    $id !== Piece::R ?: RType::PROMOTED
+                );
                 unset($freeSqs[$arrayRand]);
             }
         }

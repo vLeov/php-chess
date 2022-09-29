@@ -14,9 +14,16 @@ class KTest extends AbstractUnitTestCase
 {
     static private $castlingRule;
 
+    static private $size;
+
     public static function setUpBeforeClass(): void
     {
         self::$castlingRule = (new CastlingRule())->getRule();
+
+        self::$size = [
+            'files' => 8,
+            'ranks' => 8,
+        ];
     }
 
     /**
@@ -80,7 +87,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_w_a2()
     {
-        $king = new K('w', 'a2', (new CastlingRule)->getRule());
+        $king = new K('w', 'a2', self::$size);
         $mobility = (object) [
             'up' => 'a3',
             'down' => 'a1',
@@ -96,7 +103,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_w_d5()
     {
-        $king = new K('w', 'd5', (new CastlingRule)->getRule());
+        $king = new K('w', 'd5', self::$size);
         $mobility = (object) [
             'up' => 'd6',
             'down' => 'd4',
@@ -115,7 +122,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_w_f1()
     {
-        $king = new K('w', 'f1');
+        $king = new K('w', 'f1', self::$size);
 
         $mobility = (object) [
             'up' => 'f2',
@@ -133,7 +140,7 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_b_f8()
     {
-        $king = new K('b', 'f8');
+        $king = new K('b', 'f8', self::$size);
 
         $mobility = (object) [
             'down' => 'f7',

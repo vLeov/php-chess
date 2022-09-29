@@ -7,12 +7,22 @@ use Chess\Variant\Classical\Piece\N;
 
 class NTest extends AbstractUnitTestCase
 {
+    static private $size;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$size = [
+            'files' => 8,
+            'ranks' => 8,
+        ];
+    }
+
     /**
      * @test
      */
     public function mobility_d4()
     {
-        $knight = new N('w', 'd4');
+        $knight = new N('w', 'd4', self::$size);
         $mobility = [
             'c6',
             'b5',
@@ -32,7 +42,7 @@ class NTest extends AbstractUnitTestCase
      */
     public function mobility_h1()
     {
-        $knight = new N('w', 'h1');
+        $knight = new N('w', 'h1', self::$size);
         $mobility = [
             'g3',
             'f2'
@@ -46,7 +56,7 @@ class NTest extends AbstractUnitTestCase
      */
     public function mobility_b1()
     {
-        $knight = new N('w', 'b1');
+        $knight = new N('w', 'b1', self::$size);
         $mobility = [
             'a3',
             'd2',
