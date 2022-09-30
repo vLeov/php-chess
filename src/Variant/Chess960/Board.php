@@ -36,7 +36,7 @@ final class Board extends ClassicalBoard
 
         $this->castlingRule = (new CastlingRule($startPos))->getRule();
 
-        $pieces = (new StartPieces($startPos, $this->castlingRule))->create();
+        $pieces = (new StartPieces($startPos))->create();
 
         foreach ($pieces as $piece) {
             $this->attach($piece);
