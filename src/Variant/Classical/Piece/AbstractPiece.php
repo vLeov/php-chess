@@ -2,10 +2,8 @@
 
 namespace Chess\Variant\Classical\Piece;
 
-use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Board;
 
 /**
