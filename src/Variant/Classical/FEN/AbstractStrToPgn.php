@@ -2,10 +2,10 @@
 
 namespace Chess\Variant\Classical\FEN;
 
+use Chess\Piece\K;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Board;
 
 abstract class AbstractStrToPgn

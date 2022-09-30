@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Classical\Piece;
+namespace Chess\Piece;
 
 use Chess\Variant\Classical\Board;
 

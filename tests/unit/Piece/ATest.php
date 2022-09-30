@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Variant\Capablanca\Piece;
 
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Capablanca\Piece\A;
+use Chess\Piece\A;
 
 class ATest extends AbstractUnitTestCase
 {

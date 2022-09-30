@@ -1,12 +1,12 @@
 <?php
 
-namespace Chess\Variant\Capablanca\Piece;
+namespace Chess\Piece;
 
+use Chess\Piece\AbstractPiece;
+use Chess\Piece\B;
+use Chess\Piece\N;
+use Chess\Piece\Slider;
 use Chess\Variant\Capablanca\PGN\AN\Piece;
-use Chess\Variant\Classical\Piece\AbstractPiece;
-use Chess\Variant\Classical\Piece\B;
-use Chess\Variant\Classical\Piece\N;
-use Chess\Variant\Classical\Piece\Slider;
 
 /**
  * Archbishop.
@@ -17,12 +17,12 @@ use Chess\Variant\Classical\Piece\Slider;
 class A extends Slider
 {
     /**
-     * @var \Chess\Variant\Classical\Piece\B
+     * @var \Chess\Piece\B
      */
     private B $bishop;
 
     /**
-     * @var \Chess\Variant\Classical\Piece\N
+     * @var \Chess\Piece\N
      */
     private N $knight;
 
@@ -46,7 +46,7 @@ class A extends Slider
     /**
      * Calculates the piece's mobility.
      *
-     * @return \Chess\Variant\Classical\Piece\AbstractPiece
+     * @return \Chess\Piece\AbstractPiece
      */
     protected function mobility(): AbstractPiece
     {

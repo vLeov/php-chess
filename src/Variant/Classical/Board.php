@@ -8,6 +8,14 @@ use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqEval;
 use Chess\Exception\BoardException;
+use Chess\Piece\AbstractPiece;
+use Chess\Piece\B;
+use Chess\Piece\K;
+use Chess\Piece\N;
+use Chess\Piece\P;
+use Chess\Piece\Q;
+use Chess\Piece\R;
+use Chess\Piece\RType;
 use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
@@ -15,14 +23,6 @@ use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
-use Chess\Variant\Classical\Piece\AbstractPiece;
-use Chess\Variant\Classical\Piece\B;
-use Chess\Variant\Classical\Piece\K;
-use Chess\Variant\Classical\Piece\N;
-use Chess\Variant\Classical\Piece\P;
-use Chess\Variant\Classical\Piece\Q;
-use Chess\Variant\Classical\Piece\R;
-use Chess\Variant\Classical\Piece\RType;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
@@ -324,7 +324,7 @@ class Board extends \SplObjectStorage
     /**
      * Adds a new element to the history.
      *
-     * @param \Chess\Variant\Classical\Piece\AbstractPiece $piece
+     * @param \Chess\Piece\AbstractPiece $piece
      * @return \Chess\Variant\Classical\Board
      */
     private function pushHistory(AbstractPiece $piece): Board
@@ -355,7 +355,7 @@ class Board extends \SplObjectStorage
      *
      * @param string $color
      * @param string $id
-     * @return mixed \Chess\Variant\Classical\Piece\AbstractPiece|null
+     * @return mixed \Chess\Piece\AbstractPiece|null
      */
     public function getPiece(string $color, string $id): ?AbstractPiece
     {
@@ -411,7 +411,7 @@ class Board extends \SplObjectStorage
      * Returns a piece by its position on the board.
      *
      * @param string $sq
-     * @return mixed \Chess\Variant\Classical\Piece\AbstractPiece|null
+     * @return mixed \Chess\Piece\AbstractPiece|null
      */
     public function getPieceBySq(string $sq): ?AbstractPiece
     {
@@ -456,7 +456,7 @@ class Board extends \SplObjectStorage
     /**
      * Captures a piece.
      *
-     * @param \Chess\Variant\Classical\Piece\AbstractPiece $piece
+     * @param \Chess\Piece\AbstractPiece $piece
      * @return \Chess\Variant\Classical\Board
      */
     private function capture(AbstractPiece $piece): Board
@@ -500,7 +500,7 @@ class Board extends \SplObjectStorage
     /**
      * Promotes a pawn.
      *
-     * @param \Chess\Variant\Classical\Piece\P $pawn
+     * @param \Chess\Piece\P $pawn
      * @return \Chess\Variant\Classical\Board
      */
     private function promote(P $pawn): Board
@@ -628,7 +628,7 @@ class Board extends \SplObjectStorage
      */
     private function newPiece($color, $sq, $piece): AbstractPiece
     {
-        $className = "\\Chess\\Variant\\Classical\\Piece\\{$piece->getId()}";
+        $className = "\\Chess\\Piece\\{$piece->getId()}";
         if ($piece->getId() === Piece::R) {
             return new $className($color, $sq, $this->size, $piece->getType());
         }
@@ -639,7 +639,7 @@ class Board extends \SplObjectStorage
     /**
      * Castles the king.
      *
-     * @param \Chess\Variant\Classical\Piece\K $king
+     * @param \Chess\Piece\K $king
      * @return bool true if the castle move can be made; otherwise false
      */
     private function castle(K $king): bool
@@ -716,7 +716,7 @@ class Board extends \SplObjectStorage
     /**
      * Updates the castle property.
      *
-     * @param \Chess\Variant\Classical\Piece\AbstractPiece $pieceMoved
+     * @param \Chess\Piece\AbstractPiece $pieceMoved
      * @return \Chess\Variant\Classical\Board
      */
     private function updateCastle(AbstractPiece $pieceMoved): Board
@@ -774,7 +774,7 @@ class Board extends \SplObjectStorage
     /**
      * Moves a piece.
      *
-     * @param \Chess\Variant\Classical\Piece\AbstractPiece $piece
+     * @param \Chess\Piece\AbstractPiece $piece
      * @return bool true if the move can be made; otherwise false
      */
     private function move(AbstractPiece $piece): bool
@@ -822,7 +822,7 @@ class Board extends \SplObjectStorage
             $this->attach($pieceUndone);
         }
         if ($move->isCapture && $capture = end($this->captures[$move->color])) {
-            $className = "\\Chess\\Variant\\Classical\\Piece\\{$capture->captured->id}";
+            $className = "\\Chess\\Piece\\{$capture->captured->id}";
             $this->attach(new $className(
                 Color::opp($move->color),
                 $capture->captured->sq,

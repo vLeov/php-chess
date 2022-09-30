@@ -2,20 +2,20 @@
 
 namespace Chess\Variant\Capablanca;
 
-use Chess\Variant\Capablanca\Piece\A;
-use Chess\Variant\Capablanca\Piece\C;
+use Chess\Piece\A;
+use Chess\Piece\C;
+use Chess\Piece\B;
+use Chess\Piece\K;
+use Chess\Piece\N;
+use Chess\Piece\P;
+use Chess\Piece\Q;
+use Chess\Piece\R;
+use Chess\Piece\RType;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
-use Chess\Variant\Capablanca\PGN\Move as CapablancaMove;
+use Chess\Variant\Capablanca\PGN\Move;
 use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Piece\B;
-use Chess\Variant\Classical\Piece\K;
-use Chess\Variant\Classical\Piece\N;
-use Chess\Variant\Classical\Piece\P;
-use Chess\Variant\Classical\Piece\Q;
-use Chess\Variant\Classical\Piece\R;
-use Chess\Variant\Classical\Piece\RType;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
 /**
@@ -86,7 +86,7 @@ final class Board extends ClassicalBoard
 
     public function play(string $color, string $pgn): bool
     {
-        $obj = CapablancaMove::toObj($color, $pgn, $this->castlingRule);
+        $obj = Move::toObj($color, $pgn, $this->castlingRule);
 
         return $this->isValidMove($obj) && $this->isLegalMove($obj);
     }

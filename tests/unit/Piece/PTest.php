@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\Variant\Classical\Piece;
 
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Classical\Piece\P;
+use Chess\Piece\P;
 
 class PTest extends AbstractUnitTestCase
 {

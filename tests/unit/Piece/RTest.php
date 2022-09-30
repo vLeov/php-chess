@@ -3,8 +3,8 @@
 namespace Chess\Tests\Unit\Variant\Classical\Piece;
 
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Classical\Piece\R;
-use Chess\Variant\Classical\Piece\RType;
+use Chess\Piece\R;
+use Chess\Piece\RType;
 
 class RTest extends AbstractUnitTestCase
 {

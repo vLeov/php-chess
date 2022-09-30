@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Variant\Classical\Piece;
+namespace Chess\Piece;
 
+use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Piece\AbstractPiece;
 
 /**
  * Queen.
@@ -14,12 +14,12 @@ use Chess\Variant\Classical\Piece\AbstractPiece;
 class Q extends Slider
 {
     /**
-     * @var \Chess\Variant\Classical\Piece\R
+     * @var \Chess\Piece\R
      */
     private R $rook;
 
     /**
-     * @var \Chess\Variant\Classical\Piece\B
+     * @var \Chess\Piece\B
      */
     private B $bishop;
 
@@ -43,7 +43,7 @@ class Q extends Slider
     /**
      * Calculates the piece's mobility.
      *
-     * @return \Chess\Variant\Classical\Piece\AbstractPiece
+     * @return \Chess\Piece\AbstractPiece
      */
     protected function mobility(): AbstractPiece
     {

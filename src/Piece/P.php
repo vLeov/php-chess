@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\Variant\Classical\Piece;
+namespace Chess\Piece;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Piece\AbstractPiece;
 
 /**
  * Pawn.
@@ -72,7 +72,7 @@ class P extends AbstractPiece
     /**
      * Calculates the piece's mobility.
      *
-     * @return \Chess\Variant\Classical\Piece\AbstractPiece
+     * @return \Chess\Piece\AbstractPiece
      */
     protected function mobility(): AbstractPiece
     {

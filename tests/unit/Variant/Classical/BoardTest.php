@@ -10,13 +10,13 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
-use Chess\Variant\Classical\Piece\B;
-use Chess\Variant\Classical\Piece\K;
-use Chess\Variant\Classical\Piece\N;
-use Chess\Variant\Classical\Piece\P;
-use Chess\Variant\Classical\Piece\Q;
-use Chess\Variant\Classical\Piece\R;
-use Chess\Variant\Classical\Piece\RType;
+use Chess\Piece\B;
+use Chess\Piece\K;
+use Chess\Piece\N;
+use Chess\Piece\P;
+use Chess\Piece\Q;
+use Chess\Piece\R;
+use Chess\Piece\RType;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 class BoardTest extends AbstractUnitTestCase

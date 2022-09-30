@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Classical\Piece\K;
+use Chess\Piece\K;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 class KTest extends AbstractUnitTestCase
@@ -167,5 +167,47 @@ class KTest extends AbstractUnitTestCase
         $expected = [ 'e1', 'e2', 'g2' ];
 
         $this->assertSame($expected, $king->sqs());
+    }
+
+    /**
+     * @test
+     */
+    public function mobility_w_f1_size_10_10()
+    {
+        $king = new K('w', 'f1', [
+            'files' => 10,
+            'ranks' => 10,
+        ]);
+
+        $mobility = (object) [
+            'up' => 'f2',
+            'left' => 'e1',
+            'right' => 'g1',
+            'upLeft' => 'e2',
+            'upRight' => 'g2',
+        ];
+
+        $this->assertEquals($mobility, $king->getMobility());
+    }
+
+    /**
+     * @test
+     */
+    public function mobility_b_f10_size_10_10()
+    {
+        $king = new K('b', 'f10', [
+            'files' => 10,
+            'ranks' => 10,
+        ]);
+
+        $mobility = (object) [
+            'down' => 'f9',
+            'left' => 'e10',
+            'right' => 'g10',
+            'downLeft' => 'e9',
+            'downRight' => 'g9',
+        ];
+
+        $this->assertEquals($mobility, $king->getMobility());
     }
 }

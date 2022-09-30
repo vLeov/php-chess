@@ -2,10 +2,10 @@
 
 namespace Chess\Eval;
 
+use Chess\Piece\P;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
-use Chess\Variant\Classical\Piece\P;
 
 class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
 {

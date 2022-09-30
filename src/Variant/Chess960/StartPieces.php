@@ -2,11 +2,11 @@
 
 namespace Chess\Variant\Chess960;
 
+use Chess\Piece\P;
+use Chess\Piece\RType;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Chess960\StartPosition;
-use Chess\Variant\Classical\Piece\P;
-use Chess\Variant\Classical\Piece\RType;
 
 class StartPieces
 {
@@ -32,7 +32,7 @@ class StartPieces
         foreach ($this->startPos as $key => $val) {
             $wSq = chr(97+$key).'1';
             $bSq = chr(97+$key).'8';
-            $className = "\\Chess\\Variant\\Classical\\Piece\\{$val}";
+            $className = "\\Chess\\Piece\\{$val}";
             if ($val === Piece::K) {
                 $this->startPieces[] =  new $className(Color::W, $wSq, $this->size);
                 $this->startPieces[] =  new $className(Color::B, $bSq, $this->size);

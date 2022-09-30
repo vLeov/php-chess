@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Classical\Piece;
+namespace Chess\Piece;
 
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -81,7 +81,7 @@ abstract class AbstractPiece
     /**
      * Calculates the piece's mobility.
      *
-     * @return \Chess\Variant\Classical\Piece\AbstractPiece
+     * @return \Chess\Piece\AbstractPiece
      */
     abstract protected function mobility(): AbstractPiece;
 

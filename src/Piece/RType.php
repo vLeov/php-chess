@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Classical\Piece;
+namespace Chess\Piece;
 
 /**
  * Rook type.

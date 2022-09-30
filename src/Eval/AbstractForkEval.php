@@ -2,8 +2,8 @@
 
 namespace Chess\Eval;
 
+use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Piece\AbstractPiece;
 
 abstract class AbstractForkEval extends AbstractEval
 {

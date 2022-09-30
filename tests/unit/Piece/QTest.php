@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\Variant\Classical\Piece;
 
 use Chess\Player;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Classical\Piece\Q;
+use Chess\Piece\Q;
 
 class QTest extends AbstractUnitTestCase
 {
