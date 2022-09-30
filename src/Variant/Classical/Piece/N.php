@@ -38,7 +38,7 @@ class N extends AbstractPiece
     {
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = (int)$this->sq[1] + 2;
+            $rank = intval(ltrim($this->sq, $this->sq[0])) + 2;
             if (Square::validate($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -48,7 +48,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 2);
-            $rank = (int)$this->sq[1] + 1;
+            $rank = intval(ltrim($this->sq, $this->sq[0])) + 1;
             if (Square::validate($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -58,7 +58,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 2);
-            $rank = (int)$this->sq[1] - 1;
+            $rank = intval(ltrim($this->sq, $this->sq[0])) - 1;
             if (Square::validate($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -68,7 +68,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = (int)$this->sq[1] - 2;
+            $rank = intval(ltrim($this->sq, $this->sq[0])) - 2;
             if (Square::validate($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -78,18 +78,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = (int)$this->sq[1] - 2;
-            if (Square::validate($file.$rank)) {
-                $this->mobility[] = $file . $rank;
-            }
-        } catch (UnknownNotationException $e) {
-
-        }
-
-        try {
-
-            $file = chr(ord($this->sq[0]) + 2);
-            $rank = (int)$this->sq[1] - 1;
+            $rank = intval(ltrim($this->sq, $this->sq[0])) - 2;
             if (Square::validate($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -99,7 +88,17 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 2);
-            $rank = (int)$this->sq[1] + 1;
+            $rank = intval(ltrim($this->sq, $this->sq[0])) - 1;
+            if (Square::validate($file.$rank)) {
+                $this->mobility[] = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) + 2);
+            $rank = intval(ltrim($this->sq, $this->sq[0])) + 1;
             if (Square::validate($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -109,7 +108,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = (int)$this->sq[1] + 2;
+            $rank = intval(ltrim($this->sq, $this->sq[0])) + 2;
             if (Square::validate($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
