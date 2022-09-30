@@ -5,6 +5,7 @@ namespace Chess\Variant\Capablanca;
 use Chess\Variant\Capablanca\Piece\A;
 use Chess\Variant\Capablanca\Piece\C;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
+use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Piece\B;
@@ -34,11 +35,8 @@ final class Board extends ClassicalBoard
      */
     public function __construct()
     {
-        $this->size = [
-            'files' => 10,
-            'ranks' => 10,
-        ];
-
+        $this->size = Square::SIZE;
+        $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule())->getRule();
 
         $this->attach(new R(Color::W, 'a1', $this->size, RType::CASTLE_LONG));
@@ -51,7 +49,6 @@ final class Board extends ClassicalBoard
         $this->attach(new C(Color::W, 'h1', $this->size));
         $this->attach(new N(Color::W, 'i1', $this->size));
         $this->attach(new R(Color::W, 'j1', $this->size, RType::CASTLE_SHORT));
-
         $this->attach(new P(Color::W, 'a2', $this->size));
         $this->attach(new P(Color::W, 'b2', $this->size));
         $this->attach(new P(Color::W, 'c2', $this->size));
@@ -62,7 +59,6 @@ final class Board extends ClassicalBoard
         $this->attach(new P(Color::W, 'h2', $this->size));
         $this->attach(new P(Color::W, 'i2', $this->size));
         $this->attach(new P(Color::W, 'j2', $this->size));
-
         $this->attach(new R(Color::B, 'a10', $this->size, RType::CASTLE_LONG));
         $this->attach(new N(Color::B, 'b10', $this->size));
         $this->attach(new A(Color::B, 'c10', $this->size));
@@ -73,7 +69,6 @@ final class Board extends ClassicalBoard
         $this->attach(new C(Color::B, 'h10', $this->size));
         $this->attach(new N(Color::B, 'i10', $this->size));
         $this->attach(new R(Color::B, 'j10', $this->size, RType::CASTLE_SHORT));
-
         $this->attach(new P(Color::B, 'a9', $this->size));
         $this->attach(new P(Color::B, 'b9', $this->size));
         $this->attach(new P(Color::B, 'c9', $this->size));
@@ -84,8 +79,6 @@ final class Board extends ClassicalBoard
         $this->attach(new P(Color::B, 'h9', $this->size));
         $this->attach(new P(Color::B, 'i9', $this->size));
         $this->attach(new P(Color::B, 'j9', $this->size));
-
-        $this->castlingAbility = CastlingAbility::START;
 
         $this->refresh();
     }

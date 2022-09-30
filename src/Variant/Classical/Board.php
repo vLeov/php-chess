@@ -14,6 +14,7 @@ use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Piece\AbstractPiece;
 use Chess\Variant\Classical\Piece\B;
 use Chess\Variant\Classical\Piece\K;
@@ -82,10 +83,7 @@ class Board extends \SplObjectStorage
      *
      * @var array
      */
-    protected array $size = [
-        'files' => 8,
-        'ranks' => 8,
-    ];
+    protected array $size;
 
     /**
      * Observers.
@@ -130,6 +128,8 @@ class Board extends \SplObjectStorage
      */
     public function __construct(array $pieces = null, string $castlingAbility = '-')
     {
+        $this->size = Square::SIZE;
+        $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule())->getRule();
         if (!$pieces) {
             $this->attach(new R(Color::W, 'a1', $this->size, RType::CASTLE_LONG));
@@ -164,7 +164,6 @@ class Board extends \SplObjectStorage
             $this->attach(new P(Color::B, 'f7', $this->size));
             $this->attach(new P(Color::B, 'g7', $this->size));
             $this->attach(new P(Color::B, 'h7', $this->size));
-            $this->castlingAbility = CastlingAbility::START;
         } else {
             foreach ($pieces as $piece) {
                 $this->attach($piece);
