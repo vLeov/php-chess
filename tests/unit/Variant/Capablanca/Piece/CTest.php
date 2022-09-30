@@ -24,10 +24,10 @@ class CTest extends AbstractUnitTestCase
     {
         $chancellor = new C('w', 'a1', self::$size);
         $mobility = (object) [
-            'up' => ['a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
+            'up' => ['a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10'],
             'down' => [],
             'left' => [],
-            'right' => ['b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1'],
+            'right' => ['b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1', 'i1', 'j1'],
             'knight' => ['c2', 'b3'],
         ];
 
@@ -41,10 +41,10 @@ class CTest extends AbstractUnitTestCase
     {
         $chancellor = new C('w', 'e4', self::$size);
         $mobility = (object) [
-            'up' => ['e5', 'e6', 'e7', 'e8'],
+            'up' => ['e5', 'e6', 'e7', 'e8', 'e9', 'e10'],
             'down' => ['e3', 'e2', 'e1'],
             'left' => ['d4', 'c4', 'b4', 'a4'],
-            'right' => ['f4', 'g4', 'h4'],
+            'right' => ['f4', 'g4', 'h4', 'i4', 'j4'],
             'knight' => ['d6', 'c5', 'c3', 'd2', 'f2', 'g3', 'g5', 'f6'],
         ];
 
@@ -58,10 +58,10 @@ class CTest extends AbstractUnitTestCase
     {
         $chancellor = new C('w', 'd4', self::$size);
         $mobility = (object) [
-            'up' => ['d5', 'd6', 'd7', 'd8'],
+            'up' => ['d5', 'd6', 'd7', 'd8', 'd9', 'd10'],
             'down' => ['d3', 'd2', 'd1'],
             'left' => ['c4', 'b4', 'a4'],
-            'right' => ['e4', 'f4', 'g4', 'h4'],
+            'right' => ['e4', 'f4', 'g4', 'h4', 'i4', 'j4'],
             'knight' => ['c6', 'b5', 'b3', 'c2', 'e2', 'f3', 'f5', 'e6'],
         ];
 
