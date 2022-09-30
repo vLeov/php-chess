@@ -65,8 +65,7 @@ class AsciiArray extends AbstractArray
     public static function fromAlgebraicToIndex(string $sq): array
     {
         $j = ord($sq[0]) - 97;
-        $ranks = ltrim($sq, $sq[0]);
-        $i = intval($ranks) - 1;
+        $i = intval(ltrim($sq, $sq[0])) - 1;
 
         return [
             $i,
