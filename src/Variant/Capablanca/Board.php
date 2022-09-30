@@ -5,6 +5,7 @@ namespace Chess\Variant\Capablanca;
 use Chess\Variant\Capablanca\Piece\A;
 use Chess\Variant\Capablanca\Piece\C;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
+use Chess\Variant\Capablanca\PGN\Move as CapablancaMove;
 use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Color;
@@ -81,5 +82,12 @@ final class Board extends ClassicalBoard
         $this->attach(new P(Color::B, 'j9', $this->size));
 
         $this->refresh();
+    }
+
+    public function play(string $color, string $pgn): bool
+    {
+        $obj = CapablancaMove::toObj($color, $pgn, $this->castlingRule);
+
+        return $this->isValidMove($obj) && $this->isLegalMove($obj);
     }
 }

@@ -547,7 +547,7 @@ class Board extends \SplObjectStorage
      * @param object $move
      * @return bool true if the move is valid; otherwise false
      */
-    private function isValidMove(object $move): bool
+    protected function isValidMove(object $move): bool
     {
         if ($move->color !== $this->turn) {
             return false;
@@ -577,7 +577,7 @@ class Board extends \SplObjectStorage
      * @param object $move
      * @return bool true if the move is legal; otherwise false
      */
-    private function isLegalMove(object $move): bool
+    protected function isLegalMove(object $move): bool
     {
         $pieces = $this->pickPiece($move);
         if (count($pieces) > 1) {

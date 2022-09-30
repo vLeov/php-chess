@@ -41,29 +41,29 @@ class Move extends AbstractNotation implements ValidationInterface
     public static function validate(string $value): string
     {
         switch (true) {
-            case preg_match('/^' . self::KING . '$/', $value):
+            case preg_match('/^' . static::KING . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::CASTLE_SHORT . '$/', $value):
+            case preg_match('/^' . static::CASTLE_SHORT . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::CASTLE_LONG . '$/', $value):
+            case preg_match('/^' . static::CASTLE_LONG . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::KING_CAPTURES . '$/', $value):
+            case preg_match('/^' . static::KING_CAPTURES . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::PIECE . '$/', $value):
+            case preg_match('/^' . static::PIECE . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::PIECE_CAPTURES . '$/', $value):
+            case preg_match('/^' . static::PIECE_CAPTURES . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::KNIGHT . '$/', $value):
+            case preg_match('/^' . static::KNIGHT . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::KNIGHT_CAPTURES . '$/', $value):
+            case preg_match('/^' . static::KNIGHT_CAPTURES . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::PAWN . '$/', $value):
+            case preg_match('/^' . static::PAWN . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::PAWN_CAPTURES . '$/', $value):
+            case preg_match('/^' . static::PAWN_CAPTURES . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::PAWN_PROMOTES . '$/', $value):
+            case preg_match('/^' . static::PAWN_PROMOTES . '$/', $value):
                 return $value;
-            case preg_match('/^' . self::PAWN_CAPTURES_AND_PROMOTES . '$/', $value):
+            case preg_match('/^' . static::PAWN_CAPTURES_AND_PROMOTES . '$/', $value):
                 return $value;
         }
 
@@ -82,12 +82,12 @@ class Move extends AbstractNotation implements ValidationInterface
     public static function toObj(string $color, string $pgn, array $castlingRule): object
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
-        if (preg_match('/^' . Move::KING . '$/', $pgn)) {
+        if (preg_match('/^' . static::KING . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::KING,
+                'type' => static::KING,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
                 'sq' => (object) [
@@ -95,32 +95,32 @@ class Move extends AbstractNotation implements ValidationInterface
                     'next' => mb_substr($pgn, -2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::CASTLE_SHORT . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::CASTLE_SHORT . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::CASTLE_SHORT,
+                'type' => static::CASTLE_SHORT,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
                 'sq' => (object) $castlingRule[$color][Piece::K][Castle::SHORT]['sq'],
             ];
-        } elseif (preg_match('/^' . Move::CASTLE_LONG . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::CASTLE_LONG . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::CASTLE_LONG,
+                'type' => static::CASTLE_LONG,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
                 'sq' => (object) $castlingRule[$color][Piece::K][Castle::LONG]['sq'],
             ];
-        } elseif (preg_match('/^' . Move::KING_CAPTURES . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::KING_CAPTURES . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
-                'type' => Move::KING_CAPTURES,
+                'type' => static::KING_CAPTURES,
                 'color' => Color::validate($color),
                 'id' => Piece::K,
                 'sq' => (object) [
@@ -128,12 +128,12 @@ class Move extends AbstractNotation implements ValidationInterface
                     'next' => mb_substr($pgn, -2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::PIECE . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::PIECE . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::PIECE,
+                'type' => static::PIECE,
                 'color' => Color::validate($color),
                 'id' => mb_substr($pgn, 0, 1),
                 'sq' => (object) [
@@ -145,12 +145,12 @@ class Move extends AbstractNotation implements ValidationInterface
                         : mb_substr($pgn, -2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::PIECE_CAPTURES . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::PIECE_CAPTURES . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
-                'type' => Move::PIECE_CAPTURES,
+                'type' => static::PIECE_CAPTURES,
                 'color' => Color::validate($color),
                 'id' => mb_substr($pgn, 0, 1),
                 'sq' => (object) [
@@ -162,12 +162,12 @@ class Move extends AbstractNotation implements ValidationInterface
                         : mb_substr($pgn, -2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::KNIGHT . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::KNIGHT . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::KNIGHT,
+                'type' => static::KNIGHT,
                 'color' => Color::validate($color),
                 'id' => Piece::N,
                 'sq' => (object) [
@@ -179,12 +179,12 @@ class Move extends AbstractNotation implements ValidationInterface
                         : mb_substr($pgn, -2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::KNIGHT_CAPTURES . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::KNIGHT_CAPTURES . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
-                'type' => Move::KNIGHT_CAPTURES,
+                'type' => static::KNIGHT_CAPTURES,
                 'color' => Color::validate($color),
                 'id' => Piece::N,
                 'sq' => (object) [
@@ -196,12 +196,12 @@ class Move extends AbstractNotation implements ValidationInterface
                         : mb_substr($pgn, -2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::PAWN_PROMOTES . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::PAWN_PROMOTES . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::PAWN_PROMOTES,
+                'type' => static::PAWN_PROMOTES,
                 'color' => Color::validate($color),
                 'id' => Piece::P,
                 'newId' => $isCheck ? mb_substr($pgn, -2, -1) : mb_substr($pgn, -1),
@@ -210,12 +210,12 @@ class Move extends AbstractNotation implements ValidationInterface
                     'next' => mb_substr($pgn, 0, 2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
-                'type' => Move::PAWN_CAPTURES_AND_PROMOTES,
+                'type' => static::PAWN_CAPTURES_AND_PROMOTES,
                 'color' => Color::validate($color),
                 'id' => Piece::P,
                 'newId' => $isCheck
@@ -226,12 +226,12 @@ class Move extends AbstractNotation implements ValidationInterface
                     'next' => mb_substr($pgn, 2, 2)
                 ],
             ];
-        } elseif (preg_match('/^' . Move::PAWN . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::PAWN . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
-                'type' => Move::PAWN,
+                'type' => static::PAWN,
                 'color' => Color::validate($color),
                 'id' => Piece::P,
                 'sq' => (object) [
@@ -239,12 +239,12 @@ class Move extends AbstractNotation implements ValidationInterface
                     'next' => $isCheck ? mb_substr($pgn, 0, -1) : $pgn
                 ],
             ];
-        } elseif (preg_match('/^' . Move::PAWN_CAPTURES . '$/', $pgn)) {
+        } elseif (preg_match('/^' . static::PAWN_CAPTURES . '$/', $pgn)) {
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
-                'type' => Move::PAWN_CAPTURES,
+                'type' => static::PAWN_CAPTURES,
                 'color' => Color::validate($color),
                 'id' => Piece::P,
                 'sq' => (object) [
