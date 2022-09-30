@@ -43,8 +43,8 @@ class Game
     const MODE_RUBIX            = 'rubix';
     const MODE_STOCKFISH        = 'stockfish';
 
-    const MODEL_FOLDER          = __DIR__.'/../model/';
-    const MODEL_FILE            = 'regression/checkmate_king_and_rook_vs_king.model';
+    const ML_FOLDER             = __DIR__.'/../ml/';
+    const ML_FILE               = 'regression/checkmate_king_and_rook_vs_king.rbx';
 
     /**
      * Chess board.
@@ -187,7 +187,7 @@ class Game
                 }
             }
             $estimator = PersistentModel::load(
-                new Filesystem(self::MODEL_FOLDER.self::MODEL_FILE)
+                new Filesystem(self::ML_FOLDER.self::ML_FILE)
             );
             $move = (new GeometricSumPredictor(
                 $this->board,
