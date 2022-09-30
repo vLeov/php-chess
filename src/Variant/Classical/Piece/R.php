@@ -4,7 +4,6 @@ namespace Chess\Variant\Classical\Piece;
 
 use Chess\Exception\PieceTypeException;
 use Chess\Exception\UnknownNotationException;
-use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\AbstractPiece;
 
@@ -71,7 +70,7 @@ class R extends Slider
         try {
             $file = $this->sq[0];
             $rank = intval(ltrim($this->sq, $this->sq[0])) + 1;
-            while (Square::validate($file.$rank)) {
+            while ($this->isValidSq($file.$rank)) {
                 $this->mobility->up[] = $file . $rank;
                 $rank = (int)$rank + 1;
             }
@@ -83,7 +82,7 @@ class R extends Slider
         try {
             $file = $this->sq[0];
             $rank = intval(ltrim($this->sq, $this->sq[0])) - 1;
-            while (Square::validate($file.$rank)) {
+            while ($this->isValidSq($file.$rank)) {
                 $this->mobility->down[] = $file . $rank;
                 $rank = (int)$rank - 1;
             }
@@ -95,7 +94,7 @@ class R extends Slider
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = intval(ltrim($this->sq, $this->sq[0]));
-            while (Square::validate($file.$rank)) {
+            while ($this->isValidSq($file.$rank)) {
                 $this->mobility->left[] = $file . $rank;
                 $file = chr(ord($file) - 1);
             }
@@ -107,7 +106,7 @@ class R extends Slider
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = intval(ltrim($this->sq, $this->sq[0]));
-            while (Square::validate($file.$rank)) {
+            while ($this->isValidSq($file.$rank)) {
                 $this->mobility->right[] = $file . $rank;
                 $file = chr(ord($file) + 1);
             }

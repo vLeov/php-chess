@@ -4,7 +4,6 @@ namespace Chess\Variant\Classical\Piece;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\AbstractPiece;
 
@@ -79,7 +78,7 @@ class P extends AbstractPiece
     {
         // next rank
         try {
-            if (Square::validate($this->file . $this->ranks->next, true)) {
+            if ($this->isValidSq($this->file.$this->ranks->next)) {
                 $this->mobility[] = $this->file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
@@ -89,8 +88,7 @@ class P extends AbstractPiece
         // two square advance
         if (intval(ltrim($this->sq, $this->sq[0])) === 2 && $this->ranks->start == 2) {
             $this->mobility[] = $this->file . ($this->ranks->start + 2);
-        }
-        elseif (
+        } elseif (
             intval(ltrim($this->sq, $this->sq[0])) === $this->size['ranks'] - 1 &&
             $this->ranks->start == $this->size['ranks'] - 1
         ) {
@@ -100,7 +98,7 @@ class P extends AbstractPiece
         // capture square
         try {
             $file = chr(ord($this->file) - 1);
-            if (Square::validate($file.$this->ranks->next, true)) {
+            if ($this->isValidSq($file.$this->ranks->next)) {
                 $this->captureSqs[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
@@ -110,7 +108,7 @@ class P extends AbstractPiece
         // capture square
         try {
             $file = chr(ord($this->file) + 1);
-            if (Square::validate($file.$this->ranks->next, true)) {
+            if ($this->isValidSq($file.$this->ranks->next)) {
                 $this->captureSqs[] = $file . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
