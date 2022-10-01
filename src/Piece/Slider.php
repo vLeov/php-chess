@@ -31,8 +31,8 @@ abstract class Slider extends AbstractPiece
     public function sqs(): array
     {
         $sqs = [];
-        foreach ($this->mobility as $direction) {
-            foreach ($direction as $sq) {
+        foreach ($this->mobility as $key => $val) {
+            foreach ($val as $sq) {
                 if (
                     !in_array($sq, $this->board->getSqEval()->used->{$this->getColor()}) &&
                     !in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})
@@ -58,8 +58,8 @@ abstract class Slider extends AbstractPiece
     public function defendedSqs(): ?array
     {
         $sqs = [];
-        foreach ($this->mobility as $direction) {
-            foreach ($direction as $sq) {
+        foreach ($this->mobility as $key => $val) {
+            foreach ($val as $sq) {
                 if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
                     $sqs[] = $sq;
                     break 1;
