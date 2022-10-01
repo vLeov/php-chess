@@ -3,9 +3,9 @@
 namespace Chess\Piece;
 
 use Chess\Piece\AbstractPiece;
+use Chess\Piece\CapablancaTrait;
 use Chess\Piece\B;
 use Chess\Piece\N;
-use Chess\Piece\Slider;
 use Chess\Variant\Capablanca\PGN\AN\Piece;
 
 /**
@@ -14,8 +14,10 @@ use Chess\Variant\Capablanca\PGN\AN\Piece;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class A extends Slider
+class A extends AbstractPiece
 {
+    use CapablancaTrait;
+
     /**
      * @var \Chess\Piece\B
      */
