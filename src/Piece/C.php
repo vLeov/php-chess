@@ -6,7 +6,6 @@ use Chess\Piece\AbstractPiece;
 use Chess\Piece\N;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Piece\Slider;
 use Chess\Variant\Capablanca\PGN\AN\Piece;
 
 /**
@@ -15,7 +14,7 @@ use Chess\Variant\Capablanca\PGN\AN\Piece;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class C extends Slider
+class C extends AbstractPiece
 {
     /**
      * @var \Chess\Piece\R
@@ -57,5 +56,72 @@ class C extends Slider
         ];
 
         return $this;
+    }
+
+    /**
+     * Returns the piece's legal moves.
+     *
+     * @return array
+     */
+    public function sqs(): array
+    {
+        $sqs = [];
+        foreach ($this->mobility as $key => $val) {
+            if ($key !== 'knight') {
+                foreach ($val as $sq) {
+                    if (
+                        !in_array($sq, $this->board->getSqEval()->used->{$this->getColor()}) &&
+                        !in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})
+                    ) {
+                        $sqs[] = $sq;
+                    } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
+                        $sqs[] = $sq;
+                        break 1;
+                    } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                        break 1;
+                    }
+                }
+            } else {
+                foreach ($val as $sq) {
+                    if (in_array($sq, $this->board->getSqEval()->free)) {
+                        $sqs[] = $sq;
+                    } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
+                        $sqs[] = $sq;
+                    }
+                }
+            }
+        }
+
+        return $sqs;
+    }
+
+    /**
+     * Returns the squares defended by the piece.
+     *
+     * @return mixed array|null
+     */
+    public function defendedSqs(): ?array
+    {
+        $sqs = [];
+        foreach ($this->mobility as $key => $val) {
+            if ($key !== 'knight') {
+                foreach ($val as $sq) {
+                    if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                        $sqs[] = $sq;
+                        break 1;
+                    } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
+                        break 1;
+                    }
+                }
+            } else {
+                foreach ($val as $sq) {
+                    if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+                        $sqs[] = $sq;
+                    }
+                }
+            }
+        }
+
+        return $sqs;
     }
 }
