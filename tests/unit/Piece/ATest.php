@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Capablanca\Piece;
+namespace Chess\Tests\Unit\Piece;
 
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Piece\A;

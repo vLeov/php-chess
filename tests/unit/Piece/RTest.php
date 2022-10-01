@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Classical\Piece;
+namespace Chess\Tests\Unit\Piece;
 
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Piece\R;
@@ -17,7 +17,7 @@ class RTest extends AbstractUnitTestCase
             'ranks' => 8,
         ];
     }
-    
+
     /**
      * @test
      */

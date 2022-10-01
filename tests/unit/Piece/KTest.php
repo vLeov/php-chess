@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Classical\Piece;
+namespace Chess\Tests\Unit\Piece;
 
 use Chess\Player;
 use Chess\Variant\Classical\PGN\AN\Castle;
