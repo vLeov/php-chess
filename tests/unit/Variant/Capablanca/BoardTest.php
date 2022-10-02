@@ -281,4 +281,26 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
+
+    /**
+     * @test
+     */
+    public function play_Nj3_e7_Ci3_Nc8_h3_b8_Bh2_Ci8_O_O()
+    {
+        $board = new Board();
+        $board->play('w', 'Nj3');
+        $board->play('b', 'e7');
+        $board->play('w', 'Ci3');
+        $board->play('b', 'Nc8');
+        $board->play('w', 'h3');
+        $board->play('b', 'b8');
+        $board->play('w', 'Bh2');
+        $board->play('b', 'Ci8');
+        $board->play('w', 'O-O');
+
+        // TODO
+        $expected = [];
+
+        $this->assertTrue(true);
+    }
 }

@@ -22,14 +22,14 @@ class Move extends AbstractNotation implements ValidationInterface
     const CASTLE_LONG = Castle::LONG . Check::REGEX;
     const KING = 'K' . Square::REGEX . Check::REGEX;
     const KING_CAPTURES = 'Kx' . Square::REGEX . Check::REGEX;
-    const PIECE = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;
-    const PIECE_CAPTURES = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}x' . Square::REGEX . Check::REGEX;
     const KNIGHT = 'N[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;
     const KNIGHT_CAPTURES = 'N[a-h]{0,1}[1-8]{0,1}x' . Square::REGEX . Check::REGEX;
     const PAWN = Square::REGEX . Check::REGEX;
     const PAWN_CAPTURES = '[a-h]{1}x' . Square::REGEX . Check::REGEX;
     const PAWN_PROMOTES = '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Check::REGEX;
     const PAWN_CAPTURES_AND_PROMOTES = '[a-h]{1}x' . '[a-h]{1}(1|8){1}' . '[=]{0,1}[NBRQ]{0,1}' . Check::REGEX;
+    const PIECE = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;
+    const PIECE_CAPTURES = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}x' . Square::REGEX . Check::REGEX;
 
     /**
      * Validate.

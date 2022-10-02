@@ -14,6 +14,8 @@ use Chess\Variant\Classical\PGN\AN\Check;
  */
 class Move extends ClassicalMove
 {
+    const KNIGHT = 'N[a-j]{0,1}(10|[1-9]?)' . Square::REGEX . Check::REGEX;
+    const KNIGHT_CAPTURES = 'N[a-j]{0,1}(10|[1-9]?)x' . Square::REGEX . Check::REGEX;
     const PIECE = '[ABCRQ]{1}[a-j]{0,1}(10|[1-9]?)' . Square::REGEX . Check::REGEX;
     const PIECE_CAPTURES = '[ABCRQ]{1}[a-j]{0,1}(10|[1-9]?)x' . Square::REGEX . Check::REGEX;
 
