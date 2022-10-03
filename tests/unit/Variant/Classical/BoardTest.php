@@ -2396,4 +2396,27 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertTrue($board->play('w', 'O-O'));
     }
+
+    /**
+     * @test
+     */
+    public function legal_sqs_e4_e5_Nf3_Nf6_Bc4_Be7()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Bc4');
+        $board->play('b', 'Be7');
+
+        $expected = (object) [
+            'color' => 'w',
+            'id' => 'K',
+            'sqs' => [ 'e2', 'f1', 'g1'],
+        ];
+
+        $this->assertEquals($expected, $board->legalSqs('e1'));
+    }
 }

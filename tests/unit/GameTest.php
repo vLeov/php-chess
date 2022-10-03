@@ -568,15 +568,13 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnbqkb1r/pppp1ppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b'));
         $this->assertTrue($game->playFen('rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w'));
 
-        $sqs = $game->getBoard()->legalSqs('e1')->sqs;
-
-        $expected = [
-            'e2',
-            'f1',
-            'g1',
+        $expected = (object) [
+            'color' => 'w',
+            'id' => 'K',
+            'sqs' => [ 'e2', 'f1', 'g1'],
         ];
 
-        $this->assertSame($expected, $sqs);
+        $this->assertEquals($expected, $game->getBoard()->legalSqs('e1'));
     }
 
     /*
