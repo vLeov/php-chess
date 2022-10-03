@@ -3,9 +3,9 @@
 namespace Chess\Piece;
 
 use Chess\Piece\AbstractPiece;
+use Chess\Piece\RType;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Castle;
-use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 /**
@@ -150,22 +150,18 @@ class K extends AbstractPiece
     }
 
     /**
-     * Gets the castle rook.
+     * Returns the castle rook.
      *
-     * @param array $pieces
+     * @param string $type
      * @return mixed \Chess\Piece\R|null
      */
-    public function getCastleRook(array $pieces): ?R
+    public function getCastleRook(string $type): ?R
     {
-        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::R];
-
-        foreach ($pieces as $piece) {
-            if (
-                $piece->getId() === Piece::R &&
-                $piece->getSq() === $rule[rtrim($this->getMove()->pgn, '+')]['sq']['current']
-            ) {
-                return $piece;
-            }
+        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::R][$type];
+        if ($type === RType::CASTLE_LONG && $this->sqCastleLong()) {
+            return $this->board->getPieceBySq($rule['sq']['current']);
+        } elseif ($type === RType::CASTLE_SHORT && $this->sqCastleShort()) {
+            return $this->board->getPieceBySq($rule['sq']['current']);
         }
 
         return null;

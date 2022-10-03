@@ -588,16 +588,10 @@ class Board extends \SplObjectStorage
             }
         } elseif ($piece = $pieces[0]) {
             if ($piece->isMovable() && !$this->leavesInCheck($piece)) {
-                if (
-                  $piece->getMove()->type === Move::CASTLE_SHORT &&
-                  $piece->sqCastleShort()
-                ) {
-                    return $this->castle($piece);
-                } elseif (
-                  $piece->getMove()->type === Move::CASTLE_LONG &&
-                  $piece->sqCastleLong()
-                ) {
-                    return $this->castle($piece);
+                if ($piece->getMove()->type === Move::CASTLE_SHORT) {
+                    return $this->castle($piece, RType::CASTLE_SHORT);
+                } elseif ($piece->getMove()->type === Move::CASTLE_LONG) {
+                    return $this->castle($piece, RType::CASTLE_LONG);
                 } else {
                     return $this->move($piece);
                 }
@@ -640,11 +634,12 @@ class Board extends \SplObjectStorage
      * Castles the king.
      *
      * @param \Chess\Piece\K $king
+     * @param string $rookType
      * @return bool true if the castle move can be made; otherwise false
      */
-    private function castle(K $king): bool
+    private function castle(K $king, string $rookType): bool
     {
-        if ($rook = $king->getCastleRook(iterator_to_array($this, false))) {
+        if ($rook = $king->getCastleRook($rookType)) {
             $this->detach($this->getPieceBySq($king->getSq()));
             $this->attach(
                 new K(
@@ -894,10 +889,16 @@ class Board extends \SplObjectStorage
     {
         $lastCastlingAbility = $this->castlingAbility;
         if (
-            $piece->getMove()->type === Move::CASTLE_SHORT ||
-            $piece->getMove()->type === Move::CASTLE_LONG
+            $piece->getMove()->type === Move::CASTLE_SHORT &&
+            $this->castle($piece, RType::CASTLE_SHORT)
         ) {
-            $this->castle($piece);
+            $king = $this->getPiece($piece->getColor(), Piece::K);
+            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
+            $this->undoCastle($piece->getSq(), $piece->getMove());
+        } elseif (
+            $piece->getMove()->type === Move::CASTLE_LONG &&
+            $this->castle($piece, RType::CASTLE_LONG)
+        ) {
             $king = $this->getPiece($piece->getColor(), Piece::K);
             $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
             $this->undoCastle($piece->getSq(), $piece->getMove());
