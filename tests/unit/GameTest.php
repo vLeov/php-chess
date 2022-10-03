@@ -523,6 +523,34 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('r1bqkbnr/1ppppppp/B1n5/8/4P3/8/PPPP1PPP/RNBQK1NR b'));
     }
 
+    /**
+     * @test
+     */
+    public function classical_play_fen_e4_e5_Nf3_Nf6_Bc4_Be7()
+    {
+        $game = new Game(
+            Game::VARIANT_CLASSICAL,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertTrue($game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b'));
+        $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w'));
+        $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b'));
+        $this->assertTrue($game->playFen('rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w'));
+        $this->assertTrue($game->playFen('rnbqkb1r/pppp1ppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b'));
+        $this->assertTrue($game->playFen('rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w'));
+
+        $king = $game->getBoard()->getPieceBySq('e1');
+
+        $expected = [
+            'e2',
+            'f1',
+            'g1',
+        ];
+
+        $this->assertSame($expected, $king->sqs());
+    }
+
     /*
     |--------------------------------------------------------------------------
     | movetext()
