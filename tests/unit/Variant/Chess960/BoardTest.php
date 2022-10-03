@@ -621,7 +621,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertTrue($board->play('w', 'Ne3'));
         $this->assertTrue($board->play('b', 'Ne6'));
-        $this->assertTrue($board->play('w', 'O-O-O'));
+        $this->assertFalse($board->play('w', 'O-O-O'));
 
         $expected = [
             7 => [ ' r ', ' k ', ' r ', ' . ', ' b ', ' q ', ' n ', ' b ' ],
@@ -631,7 +631,7 @@ class BoardTest extends AbstractUnitTestCase
             3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             2 => [ ' . ', ' . ', ' . ', ' . ', ' N ', ' . ', ' . ', ' . ' ],
             1 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
-            0 => [ ' . ', ' . ', ' K ', ' R ', ' B ', ' Q ', ' N ', ' B ' ],
+            0 => [ ' R ', ' K ', ' R ', ' . ', ' B ', ' Q ', ' N ', ' B ' ],
         ];
 
         $this->assertSame($expected, $board->toAsciiArray());

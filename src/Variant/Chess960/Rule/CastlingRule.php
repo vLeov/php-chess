@@ -66,15 +66,17 @@ class CastlingRule extends ClassicalCastlingRule
             $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next']
         );
 
-
         $rPath = $this->path(
             $this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'],
             $this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['next']
         );
 
         $path = array_unique(array_merge($kPath, $rPath));
-        sort($path);
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['sqs'] = $path;
+
+        $this->rule[Color::W][Piece::K][Castle::SHORT]['sqs'] = array_diff($path, [
+            $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'],
+            $this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'],
+        ]);
 
         $kPath = $this->path(
             $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['current'],
@@ -87,8 +89,11 @@ class CastlingRule extends ClassicalCastlingRule
         );
 
         $path = array_unique(array_merge($kPath, $rPath));
-        sort($path);
-        $this->rule[Color::W][Piece::K][Castle::LONG]['sqs'] = $path;
+
+        $this->rule[Color::W][Piece::K][Castle::LONG]['sqs'] = array_diff($path, [
+            $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['current'],
+            $this->rule[Color::W][Piece::R][Castle::LONG]['sq']['current'],
+        ]);
 
         $kPath = $this->path(
             $this->rule[Color::B][Piece::K][Castle::SHORT]['sq']['current'],
@@ -101,8 +106,11 @@ class CastlingRule extends ClassicalCastlingRule
         );
 
         $path = array_unique(array_merge($kPath, $rPath));
-        sort($path);
-        $this->rule[Color::B][Piece::K][Castle::SHORT]['sqs'] = $path;
+
+        $this->rule[Color::B][Piece::K][Castle::SHORT]['sqs'] = array_diff($path, [
+            $this->rule[Color::B][Piece::K][Castle::SHORT]['sq']['current'],
+            $this->rule[Color::B][Piece::R][Castle::SHORT]['sq']['current'],
+        ]);
 
         $kPath = $this->path(
             $this->rule[Color::B][Piece::K][Castle::LONG]['sq']['current'],
@@ -115,8 +123,16 @@ class CastlingRule extends ClassicalCastlingRule
         );
 
         $path = array_unique(array_merge($kPath, $rPath));
-        sort($path);
-        $this->rule[Color::B][Piece::K][Castle::LONG]['sqs'] = $path;
+
+        $this->rule[Color::B][Piece::K][Castle::LONG]['sqs'] = array_diff($path, [
+            $this->rule[Color::B][Piece::K][Castle::LONG]['sq']['current'],
+            $this->rule[Color::B][Piece::R][Castle::LONG]['sq']['current'],
+        ]);
+
+        sort($this->rule[Color::W][Piece::K][Castle::SHORT]['sqs']);
+        sort($this->rule[Color::W][Piece::K][Castle::LONG]['sqs']);
+        sort($this->rule[Color::B][Piece::K][Castle::SHORT]['sqs']);
+        sort($this->rule[Color::B][Piece::K][Castle::LONG]['sqs']);
     }
 
     protected function path(string $from, string $to)
@@ -128,12 +144,7 @@ class CastlingRule extends ClassicalCastlingRule
         $max = max($i, $j);
         for ($min; $min <= $max; $min++) {
             $file = chr($min);
-            if (
-                $this->startFiles[$file] !== Piece::R &&
-                $this->startFiles[$file] !== Piece::K
-            ) {
-                $path[] = $file . $from[1];
-            }
+            $path[] = $file . $from[1];
         }
 
         return $path;
