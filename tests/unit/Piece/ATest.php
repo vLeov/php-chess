@@ -26,10 +26,10 @@ class ATest extends AbstractUnitTestCase
 
         $mobility = (object) [
             'upLeft' => [],
-            'upRight' => ['b2', 'c3', 'd4', 'e5', 'f6', 'g7', 'h8'],
+            'upRight' => ['b2', 'c3', 'd4', 'e5', 'f6', 'g7', 'h8', 'i9', 'j10'],
             'downLeft' => [],
             'downRight' => [],
-            'knight' => ['b3', 'c2']
+            'knight' => ['c2', 'b3']
         ];
 
         $this->assertEquals($mobility, $archbishop->getMobility());
