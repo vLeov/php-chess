@@ -2345,4 +2345,55 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $king->sqs());
     }
+
+    /**
+     * @test
+     */
+    public function king_sqs_e4_e5_Nf3_Nf6_Bc4_Be7_Kf1()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Bc4');
+        $board->play('b', 'Be7');
+
+        $this->assertTrue($board->play('w', 'Kf1'));
+    }
+
+    /**
+     * @test
+     */
+    public function king_sqs_e4_e5_Nf3_Nf6_Bc4_Be7_Ke2()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Bc4');
+        $board->play('b', 'Be7');
+
+        $this->assertTrue($board->play('w', 'Ke2'));
+    }
+
+    /**
+     * @test
+     */
+    public function king_sqs_e4_e5_Nf3_Nf6_Bc4_Be7_O_O()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Bc4');
+        $board->play('b', 'Be7');
+
+        $this->assertTrue($board->play('w', 'O-O'));
+    }
 }
