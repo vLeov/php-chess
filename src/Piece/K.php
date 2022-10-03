@@ -159,9 +159,17 @@ class K extends AbstractPiece
     {
         $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::R][$type];
         if ($type === RType::CASTLE_LONG && $this->sqCastleLong()) {
-            return $this->board->getPieceBySq($rule['sq']['current']);
+            if ($piece = $this->board->getPieceBySq($rule['sq']['current'])) {
+                if ($piece->getId() === Piece::R) {
+                    return $piece;
+                }
+            }
         } elseif ($type === RType::CASTLE_SHORT && $this->sqCastleShort()) {
-            return $this->board->getPieceBySq($rule['sq']['current']);
+            if ($piece = $this->board->getPieceBySq($rule['sq']['current'])) {
+                if ($piece->getId() === Piece::R) {
+                    return $piece;
+                }
+            }
         }
 
         return null;
