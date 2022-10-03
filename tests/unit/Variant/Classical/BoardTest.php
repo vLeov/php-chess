@@ -2320,4 +2320,29 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $string);
     }
+
+    /**
+     * @test
+     */
+    public function king_sqs_e4_e5_Nf3_Nf6_Bc4_Be7()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Bc4');
+        $board->play('b', 'Be7');
+
+        $king = $board->getPieceBySq('e1');
+
+        $expected = [
+            'e2',
+            'f1',
+            'g1',
+        ];
+
+        $this->assertSame($expected, $king->sqs());
+    }
 }

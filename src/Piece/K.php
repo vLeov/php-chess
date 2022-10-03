@@ -78,7 +78,7 @@ class K extends AbstractPiece
             ...[$this->sqCastleShort()]
         ];
 
-        return array_filter($sqs);
+        return array_values(array_filter($sqs));
     }
 
     /**
