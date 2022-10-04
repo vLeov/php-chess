@@ -69,7 +69,7 @@ class R extends Slider
         // up
         try {
             $file = $this->sq[0];
-            $rank = intval(ltrim($this->sq, $this->sq[0])) + 1;
+            $rank = intval(substr($this->sq, 1)) + 1;
             while ($this->isValidSq($file.$rank)) {
                 $this->mobility->up[] = $file . $rank;
                 $rank = (int)$rank + 1;
@@ -81,7 +81,7 @@ class R extends Slider
         // down
         try {
             $file = $this->sq[0];
-            $rank = intval(ltrim($this->sq, $this->sq[0])) - 1;
+            $rank = intval(substr($this->sq, 1)) - 1;
             while ($this->isValidSq($file.$rank)) {
                 $this->mobility->down[] = $file . $rank;
                 $rank = (int)$rank - 1;
@@ -93,7 +93,7 @@ class R extends Slider
         // left
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = intval(ltrim($this->sq, $this->sq[0]));
+            $rank = intval(substr($this->sq, 1));
             while ($this->isValidSq($file.$rank)) {
                 $this->mobility->left[] = $file . $rank;
                 $file = chr(ord($file) - 1);
@@ -105,7 +105,7 @@ class R extends Slider
         // right
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = intval(ltrim($this->sq, $this->sq[0]));
+            $rank = intval(substr($this->sq, 1));
             while ($this->isValidSq($file.$rank)) {
                 $this->mobility->right[] = $file . $rank;
                 $file = chr(ord($file) + 1);
