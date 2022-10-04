@@ -317,7 +317,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_a4_j7_a5_j6_a6_j5_a7_j4_a8_j3_axb9_jxi2_bxc10()
+    public function play_a4_j7_a5_j6_a6_j5_a7_j4_a8_j3_axb9_jxi2_bxc10_ixj1()
     {
         $board = new Board();
         $board->play('w', 'a4');
@@ -333,6 +333,7 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('w', 'axb9');
         $board->play('b', 'jxi2');
         $board->play('w', 'bxc10=Q');
+        $board->play('b', 'ixj1=Q');
 
         $expected = [
             9 => [ ' r ', ' n ', ' Q ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
@@ -343,8 +344,8 @@ class BoardTest extends AbstractUnitTestCase
             4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            1 => [ ' . ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' p ', ' P ' ],
-            0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' K ', ' B ', ' C ', ' N ', ' R ' ],
+            1 => [ ' . ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' . ', ' P ' ],
+            0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' K ', ' B ', ' C ', ' N ', ' q ' ],
         ];
 
         $this->assertSame($expected, $board->toAsciiArray());
