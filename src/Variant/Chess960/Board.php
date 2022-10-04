@@ -4,6 +4,7 @@ namespace Chess\Variant\Chess960;
 
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Chess960\StartPieces;
 use Chess\Variant\Chess960\Rule\CastlingRule;
@@ -37,6 +38,7 @@ final class Board extends ClassicalBoard
         $this->size = Square::SIZE;
         $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule($startPos))->getRule();
+        $this->move = new Move();
         $pieces = (new StartPieces($startPos))->create();
         foreach ($pieces as $piece) {
             $this->attach($piece);

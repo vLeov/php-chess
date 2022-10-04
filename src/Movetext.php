@@ -17,6 +17,13 @@ use Chess\Variant\Classical\PGN\Move;
 class Movetext
 {
     /**
+     * Move.
+     *
+     * @var \Chess\Variant\Classical\PGN\Move
+     */
+    private Move $move;
+
+    /**
      * Movetext.
      *
      * @var object
@@ -25,6 +32,8 @@ class Movetext
 
     public function __construct(string $text)
     {
+        $this->move = new Move();
+
         $this->movetext = (object) [
             'n' => [],
             'moves' => [],
@@ -55,7 +64,7 @@ class Movetext
         }
 
         foreach ($this->movetext->moves as $move) {
-            Move::validate($move);
+            $this->move->validate($move);
         }
 
         return $this->join();

@@ -31,12 +31,12 @@ class Move extends ClassicalMove
      * @return string if the value is valid
      * @throws UnknownNotationException
      */
-    public static function validate(string $value): string
+    public function validate(string $value): string
     {
         parent::__validate($value);
     }
 
-    public static function toObj(string $color, string $pgn, array $castlingRule): object
+    public function toObj(string $color, string $pgn, array $castlingRule): object
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
         if (preg_match('/^' . static::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {

@@ -39,7 +39,7 @@ final class Board extends ClassicalBoard
         $this->size = Square::SIZE;
         $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule())->getRule();
-
+        $this->move = new Move();
         $this->attach(new R(Color::W, 'a1', $this->size, RType::CASTLE_LONG));
         $this->attach(new N(Color::W, 'b1', $this->size));
         $this->attach(new A(Color::W, 'c1', $this->size));
@@ -86,7 +86,7 @@ final class Board extends ClassicalBoard
 
     public function play(string $color, string $pgn): bool
     {
-        $obj = Move::toObj($color, $pgn, $this->castlingRule);
+        $obj = $this->move->toObj($color, $pgn, $this->castlingRule);
 
         return $this->isValidMove($obj) && $this->isLegalMove($obj);
     }
