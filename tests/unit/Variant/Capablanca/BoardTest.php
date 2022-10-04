@@ -350,4 +350,43 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
+
+    /**
+     * @test
+     */
+    public function play_a4_j7___Nh3_i1()
+    {
+        $board = new Board();
+        $board->play('w', 'a4');
+        $board->play('b', 'j7');
+        $board->play('w', 'a5');
+        $board->play('b', 'j6');
+        $board->play('w', 'a6');
+        $board->play('b', 'j5');
+        $board->play('w', 'a7');
+        $board->play('b', 'j4');
+        $board->play('w', 'a8');
+        $board->play('b', 'j3');
+        $board->play('w', 'axb9');
+        $board->play('b', 'Nc8');
+        $board->play('w', 'b10=Q');
+        $board->play('b', 'jxi2');
+        $board->play('w', 'Nh3');
+        $board->play('b', 'i1=Q');
+
+        $expected = [
+            9 => [ ' r ', ' Q ', ' a ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
+            8 => [ ' p ', ' . ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' . ' ],
+            7 => [ ' . ', ' . ', ' n ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' N ', ' . ', ' . ' ],
+            1 => [ ' . ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' . ', ' P ' ],
+            0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' K ', ' B ', ' C ', ' q ', ' R ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
 }

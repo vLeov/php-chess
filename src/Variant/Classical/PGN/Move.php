@@ -54,7 +54,13 @@ class Move extends AbstractNotation
         return $this->cases()[$key];
     }
 
-    protected function extractSqs(string $string)
+    /**
+     * Extract squares from a string.
+     *
+     * @param string $string
+     * @return string if the value is valid
+     */
+    protected function extractSqs(string $string): string
     {
         $sqs = preg_replace('/[^a-h0-9 "\']/', '', $string);
 
@@ -226,6 +232,7 @@ class Move extends AbstractNotation
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN_PROMOTES . '$/', $pgn)) {
+            $sq = $this->extractSqs($pgn);
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
@@ -236,7 +243,7 @@ class Move extends AbstractNotation
                 'newId' => $isCheck ? mb_substr($pgn, -2, -1) : mb_substr($pgn, -1),
                 'sq' => (object) [
                     'current' => '',
-                    'next' => mb_substr($pgn, 0, 2)
+                    'next' => $sq,
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {
