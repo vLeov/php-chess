@@ -36,41 +36,16 @@ class Move extends ClassicalMove
         parent::__validate($value);
     }
 
+    protected function extractSq(string $string)
+    {
+        $sq = preg_replace('/[^a-j0-9 "\']/', '', $string);
+
+        return $sq;
+    }
+
     public function toObj(string $color, string $pgn, array $castlingRule): object
     {
-        $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
-        if (preg_match('/^' . static::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {
-            $next = preg_replace('/[^a-j0-9 "\']/', '', explode('x', $pgn)[1]);
-            return (object) [
-                'pgn' => $pgn,
-                'isCapture' => true,
-                'isCheck' => $isCheck,
-                'type' => static::PAWN_CAPTURES_AND_PROMOTES,
-                'color' => Color::validate($color),
-                'id' => Piece::P,
-                'newId' => $isCheck
-                    ? mb_substr($pgn, -2, -1)
-                    : mb_substr($pgn, -1),
-                'sq' => (object) [
-                    'current' => '',
-                    'next' => $next
-                ],
-            ];
-        } elseif (preg_match('/^' . static::PAWN_CAPTURES . '$/', $pgn)) {
-            $next = preg_replace('/[^a-j0-9 "\']/', '', explode('x', $pgn)[1]);
-            return (object) [
-                'pgn' => $pgn,
-                'isCapture' => true,
-                'isCheck' => $isCheck,
-                'type' => static::PAWN_CAPTURES,
-                'color' => Color::validate($color),
-                'id' => Piece::P,
-                'sq' => (object) [
-                    'current' => mb_substr($pgn, 0, 1),
-                    'next' => $next
-                ],
-            ];
-        }
+        // Rewrite moves here
 
         return parent::toObj($color, $pgn, $castlingRule);
     }

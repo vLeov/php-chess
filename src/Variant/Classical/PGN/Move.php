@@ -54,6 +54,13 @@ class Move extends AbstractNotation
         return $this->cases()[$key];
     }
 
+    protected function extractSq(string $string)
+    {
+        $sq = preg_replace('/[^a-h0-9 "\']/', '', $string);
+
+        return $sq;
+    }
+
     /**
      * Validate.
      *
@@ -246,7 +253,7 @@ class Move extends AbstractNotation
                     : mb_substr($pgn, -1),
                 'sq' => (object) [
                     'current' => '',
-                    'next' => mb_substr($pgn, 2, 2)
+                    'next' => $this->extractSq(explode('x', $pgn)[1])
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN . '$/', $pgn)) {
@@ -272,9 +279,7 @@ class Move extends AbstractNotation
                 'id' => Piece::P,
                 'sq' => (object) [
                     'current' => mb_substr($pgn, 0, 1),
-                    'next' => $isCheck
-                        ? mb_substr($pgn, -3, -1)
-                        : mb_substr($pgn, -2)
+                    'next' => $this->extractSq(explode('x', $pgn)[1])
                 ],
             ];
         }
