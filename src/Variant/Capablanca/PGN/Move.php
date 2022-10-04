@@ -36,17 +36,10 @@ class Move extends ClassicalMove
         parent::__validate($value);
     }
 
-    protected function extractSq(string $string)
+    protected function extractSqs(string $string)
     {
-        $sq = preg_replace('/[^a-j0-9 "\']/', '', $string);
+        $sqs = preg_replace('/[^a-j0-9 "\']/', '', $string);
 
-        return $sq;
-    }
-
-    public function toObj(string $color, string $pgn, array $castlingRule): object
-    {
-        // Rewrite moves here
-
-        return parent::toObj($color, $pgn, $castlingRule);
+        return $sqs;
     }
 }

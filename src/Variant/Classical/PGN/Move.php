@@ -54,11 +54,11 @@ class Move extends AbstractNotation
         return $this->cases()[$key];
     }
 
-    protected function extractSq(string $string)
+    protected function extractSqs(string $string)
     {
-        $sq = preg_replace('/[^a-h0-9 "\']/', '', $string);
+        $sqs = preg_replace('/[^a-h0-9 "\']/', '', $string);
 
-        return $sq;
+        return $sqs;
     }
 
     /**
@@ -193,6 +193,9 @@ class Move extends AbstractNotation
                 ],
             ];
         } elseif (preg_match('/^' . static::KNIGHT . '$/', $pgn)) {
+            $sqs = $this->extractSqs($pgn);
+            $next = substr($sqs, -2);
+            $current = str_replace($next, '', $sqs);
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => false,
@@ -201,12 +204,8 @@ class Move extends AbstractNotation
                 'color' => Color::validate($color),
                 'id' => Piece::N,
                 'sq' => (object) [
-                    'current' => $isCheck
-                        ? mb_substr(mb_substr($pgn, 0, -3), 1)
-                        : mb_substr(mb_substr($pgn, 0, -2), 1),
-                    'next' => $isCheck
-                        ? mb_substr(mb_substr($pgn, 0, -1), -2)
-                        : mb_substr($pgn, -2)
+                    'current' => $current,
+                    'next' => $next,
                 ],
             ];
         } elseif (preg_match('/^' . static::KNIGHT_CAPTURES . '$/', $pgn)) {
@@ -253,7 +252,7 @@ class Move extends AbstractNotation
                     : mb_substr($pgn, -1),
                 'sq' => (object) [
                     'current' => '',
-                    'next' => $this->extractSq(explode('x', $pgn)[1])
+                    'next' => $this->extractSqs(explode('x', $pgn)[1])
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN . '$/', $pgn)) {
@@ -279,7 +278,7 @@ class Move extends AbstractNotation
                 'id' => Piece::P,
                 'sq' => (object) [
                     'current' => mb_substr($pgn, 0, 1),
-                    'next' => $this->extractSq(explode('x', $pgn)[1])
+                    'next' => $this->extractSqs(explode('x', $pgn)[1])
                 ],
             ];
         }
