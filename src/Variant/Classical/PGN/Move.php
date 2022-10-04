@@ -16,7 +16,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Move extends AbstractNotation implements ValidationInterface
+class Move extends AbstractNotation
 {
     const CASTLE_SHORT = Castle::SHORT . Check::REGEX;
     const CASTLE_LONG = Castle::LONG . Check::REGEX;
@@ -32,13 +32,36 @@ class Move extends AbstractNotation implements ValidationInterface
     const PIECE_CAPTURES = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}x' . Square::REGEX . Check::REGEX;
 
     /**
+     * Returns the constants.
+     *
+     * @return array
+     */
+    public function cases(): array
+    {
+        return (new \ReflectionClass(__CLASS__))->getConstants();
+    }
+
+    /**
+     * Returns the given constant.
+     *
+     * @param string $case
+     * @return string
+     */
+    public function case(string $case): string
+    {
+        $key = array_search($case, $this->cases());
+
+        return $this->cases()[$key];
+    }
+
+    /**
      * Validate.
      *
      * @param string $value
      * @return string if the value is valid
      * @throws UnknownNotationException
      */
-    public static function validate(string $value): string
+    public function validate(string $value): string
     {
         switch (true) {
             case preg_match('/^' . static::KING . '$/', $value):
@@ -79,7 +102,7 @@ class Move extends AbstractNotation implements ValidationInterface
      * @return object
      * @throws \Chess\Exception\UnknownNotationException
      */
-    public static function toObj(string $color, string $pgn, array $castlingRule): object
+    public function toObj(string $color, string $pgn, array $castlingRule): object
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
         if (preg_match('/^' . static::KING . '$/', $pgn)) {
