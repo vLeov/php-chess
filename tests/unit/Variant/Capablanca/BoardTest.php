@@ -192,7 +192,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_e4_e7_Nh3_Nc8_d4_b8_Ad2()
+    public function play_e4_e7___b8_Ad2()
     {
         $board = new Board();
         $board->play('w', 'e4');
@@ -222,7 +222,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_e4_e7_Nh3_Nc8_d4_b8_Ad2_Ci8()
+    public function play_e4_e7___Ad2_Ci8()
     {
         $board = new Board();
         $board->play('w', 'e4');
@@ -253,7 +253,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_e4_e7_Nh3_Nc8_d4_b8_Ad2_Ci8_Af3()
+    public function play_e4_e7___Ci8_Af3()
     {
         $board = new Board();
         $board->play('w', 'e4');
@@ -285,7 +285,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_Nj3_e7_Ci3_Nc8_h3_b8_Bh2_Ci8_O_O()
+    public function play_Nj3_e7___Ci8_O_O()
     {
         $board = new Board();
         $board->play('w', 'Nj3');
@@ -317,7 +317,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_a4_j7_a5_j6_a6_j5_a7_j4_a8_j3_axb9_jxi2_bxc10_ixj1()
+    public function play_a4_j7___bxc10_ixj1()
     {
         $board = new Board();
         $board->play('w', 'a4');
