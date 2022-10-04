@@ -40,8 +40,7 @@ class Move extends ClassicalMove
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
         if (preg_match('/^' . static::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {
-            $exploded = explode('x', $pgn);
-            $next = preg_replace('/[^a-j0-9 "\']/', '', $exploded[1]);
+            $next = preg_replace('/[^a-j0-9 "\']/', '', explode('x', $pgn)[1]);
             return (object) [
                 'pgn' => $pgn,
                 'isCapture' => true,
@@ -54,6 +53,20 @@ class Move extends ClassicalMove
                     : mb_substr($pgn, -1),
                 'sq' => (object) [
                     'current' => '',
+                    'next' => $next
+                ],
+            ];
+        } elseif (preg_match('/^' . static::PAWN_CAPTURES . '$/', $pgn)) {
+            $next = preg_replace('/[^a-j0-9 "\']/', '', explode('x', $pgn)[1]);
+            return (object) [
+                'pgn' => $pgn,
+                'isCapture' => true,
+                'isCheck' => $isCheck,
+                'type' => static::PAWN_CAPTURES,
+                'color' => Color::validate($color),
+                'id' => Piece::P,
+                'sq' => (object) [
+                    'current' => mb_substr($pgn, 0, 1),
                     'next' => $next
                 ],
             ];

@@ -51,13 +51,13 @@ class P extends AbstractPiece
         if ($this->color === Color::W) {
             $this->ranks = (object) [
                 'start' => 2,
-                'next' => intval(ltrim($this->sq, $this->sq[0])) + 1,
+                'next' => intval(substr($this->sq, 1)) + 1,
                 'end' => $this->size['ranks'],
             ];
         } elseif ($this->color === Color::B) {
             $this->ranks = (object) [
                 'start' => $this->size['ranks'] - 1,
-                'next' => intval(ltrim($this->sq, $this->sq[0])) - 1,
+                'next' => intval(substr($this->sq, 1)) - 1,
                 'end' => 1,
             ];
         }
@@ -86,10 +86,10 @@ class P extends AbstractPiece
         }
 
         // two square advance
-        if (intval(ltrim($this->sq, $this->sq[0])) === 2 && $this->ranks->start == 2) {
+        if (intval(substr($this->sq, 1)) === 2 && $this->ranks->start == 2) {
             $this->mobility[] = $this->file . ($this->ranks->start + 2);
         } elseif (
-            intval(ltrim($this->sq, $this->sq[0])) === $this->size['ranks'] - 1 &&
+            intval(substr($this->sq, 1)) === $this->size['ranks'] - 1 &&
             $this->ranks->start == $this->size['ranks'] - 1
         ) {
             $this->mobility[] = $this->file . ($this->ranks->start - 2);
@@ -148,7 +148,7 @@ class P extends AbstractPiece
         // en passant squares
         if ($end && $end->move->id === Piece::P && $end->move->color === $this->oppColor()) {
             if ($this->color === Color::W) {
-                if (intval(ltrim($this->sq, $this->sq[0])) === $this->size['ranks'] - 3) {
+                if (intval(substr($this->sq, 1)) === $this->size['ranks'] - 3) {
                     $captureSq = $end->move->sq->next[0].($end->move->sq->next[1]+1);
                     if (in_array($captureSq, $this->captureSqs)) {
                         $this->enPassantSq = $end->move->sq->next;
@@ -156,7 +156,7 @@ class P extends AbstractPiece
                     }
                 }
             } elseif ($this->color === Color::B) {
-                if (intval(ltrim($this->sq, $this->sq[0])) === 4) {
+                if (intval(substr($this->sq, 1)) === 4) {
                     $captureSq = $end->move->sq->next[0].($end->move->sq->next[1]-1);
                     if (in_array($captureSq, $this->captureSqs)) {
                         $this->enPassantSq = $end->move->sq->next;
@@ -233,7 +233,8 @@ class P extends AbstractPiece
      */
     public function isPromoted(): bool
     {
-        return isset($this->move->newId) &&
-            (int)$this->getMove()->sq->next[1] === $this->ranks->end;
+        $rank = (int) substr($this->getMove()->sq->next, 1);
+
+        return isset($this->move->newId) && $rank === $this->ranks->end;
     }
 }

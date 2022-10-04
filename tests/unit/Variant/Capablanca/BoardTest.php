@@ -322,26 +322,20 @@ class BoardTest extends AbstractUnitTestCase
         $board = new Board();
         $board->play('w', 'a4');
         $board->play('b', 'j7');
-
         $board->play('w', 'a5');
         $board->play('b', 'j6');
-
         $board->play('w', 'a6');
         $board->play('b', 'j5');
-
         $board->play('w', 'a7');
         $board->play('b', 'j4');
-
         $board->play('w', 'a8');
         $board->play('b', 'j3');
-
         $board->play('w', 'axb9');
         $board->play('b', 'jxi2');
-
         $board->play('w', 'bxc10=Q');
 
         $expected = [
-            9 => [ ' r ', ' n ', ' P ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
+            9 => [ ' r ', ' n ', ' Q ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
             8 => [ ' p ', ' . ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' . ' ],
             7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
