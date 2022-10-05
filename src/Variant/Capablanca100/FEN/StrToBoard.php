@@ -8,13 +8,15 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 /**
  * StrToBoard
  *
- * Converts a FEN string to a Chess\Board object.
+ * Converts a FEN string to a chessboard object.
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
 class StrToBoard extends ClassicalFenStrToBoard
 {
+    protected string $boardClassName = '\\Chess\\Variant\\Capablanca100\\Board';
+
     public function __construct(string $string)
     {
         $this->fenStr = new Str();

@@ -12,7 +12,7 @@ use Chess\Variant\Classical\Board;
 /**
  * StrToBoard
  *
- * Converts a FEN string to a Chess\Board object.
+ * Converts a FEN string to a chessboard object.
  *
  * @author Jordi Bassagañas
  * @license GPL
@@ -20,6 +20,8 @@ use Chess\Variant\Classical\Board;
 class StrToBoard
 {
     protected Str $fenStr;
+
+    protected string $boardClassName = '\\Chess\\Variant\\Classical\\Board';
 
     protected string $string;
 
@@ -40,7 +42,7 @@ class StrToBoard
         try {
             $asciiArray = $this->fenStr->toAsciiArray($this->fields[0]);
             $pieces = (new PieceArray($asciiArray))->getArray();
-            $board = (new Board($pieces, $this->castlingAbility))
+            $board = (new $this->boardClassName($pieces, $this->castlingAbility))
                 ->setTurn($this->fields[1]);
             if ($this->fields[3] !== '-') {
                 $board = $this->doublePawnPush($board);
