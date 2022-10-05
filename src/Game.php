@@ -12,6 +12,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\UciEngine\Stockfish;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
+use Chess\Variant\Capablanca80\Board as Capablanca80Board;
+use Chess\Variant\Capablanca100\Board as Capablanca100Board;
 use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Chess960\StartPosition;
 use Chess\Variant\Classical\Board as ClassicalBoard;
@@ -32,19 +34,21 @@ use Rubix\ML\Persisters\Filesystem;
  */
 class Game
 {
-    const VARIANT_960           = '960';
-    const VARIANT_CLASSICAL     = 'classical';
+    const VARIANT_960               = '960';
+    const VARIANT_CAPABLANCA_80     = 'capablanca80';
+    const VARIANT_CAPABLANCA_100    = 'capablanca100';
+    const VARIANT_CLASSICAL         = 'classical';
 
-    const MODE_ANALYSIS         = 'analysis';
-    const MODE_GM               = 'gm';
-    const MODE_FEN              = 'fen';
-    const MODE_PGN              = 'pgn';
-    const MODE_PLAY             = 'play';
-    const MODE_RUBIX            = 'rubix';
-    const MODE_STOCKFISH        = 'stockfish';
+    const MODE_ANALYSIS             = 'analysis';
+    const MODE_GM                   = 'gm';
+    const MODE_FEN                  = 'fen';
+    const MODE_PGN                  = 'pgn';
+    const MODE_PLAY                 = 'play';
+    const MODE_RUBIX                = 'rubix';
+    const MODE_STOCKFISH            = 'stockfish';
 
-    const ML_FOLDER             = __DIR__.'/../ml/';
-    const ML_FILE               = 'regression/checkmate_king_and_rook_vs_king.rbx';
+    const ML_FOLDER                 = __DIR__.'/../ml/';
+    const ML_FILE                   = 'regression/checkmate_king_and_rook_vs_king.rbx';
 
     /**
      * Chess board.
@@ -83,11 +87,15 @@ class Game
         $this->mode = $mode;
         $this->gm = $gm;
 
-        if ($this->variant === self::VARIANT_CLASSICAL) {
-            $this->board = new ClassicalBoard();
-        } elseif ($this->variant === self::VARIANT_960) {
+        if ($this->variant === self::VARIANT_960) {
             $startPos = (new StartPosition())->create();
             $this->board = new Chess960Board($startPos);
+        } elseif ($this->variant === self::VARIANT_CAPABLANCA_80) {
+            $this->board = new Capablanca80Board();
+        } elseif ($this->variant === self::VARIANT_CAPABLANCA_100) {
+            $this->board = new Capablanca100Board();
+        } elseif ($this->variant === self::VARIANT_CLASSICAL) {
+            $this->board = new ClassicalBoard();
         }
     }
 

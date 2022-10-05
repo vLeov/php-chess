@@ -17,6 +17,8 @@ Via composer:
 Variants:
 
 - `Chess\Game::VARIANT_960`
+- `Chess\Game::VARIANT_CAPABLANCA_80`
+- `Chess\Game::VARIANT_CAPABLANCA_100`
 - `Chess\Game::VARIANT_CLASSICAL`
 
 Modes:
