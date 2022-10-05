@@ -4,8 +4,8 @@ namespace Chess\Variant\Capablanca100\FEN;
 
 use Chess\Array\PieceArray;
 use Chess\Exception\UnknownNotationException;
+use Chess\Variant\Capablanca100\Board;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
-use Chess\Variant\Classical\Board;
 
 /**
  * StrToBoard

@@ -14,7 +14,7 @@ class ShortStrToPgnTest extends AbstractUnitTestCase
     {
         $pgn = (new ShortStrToPgn(
             'rnabqkbcnr/pppppppppp/10/10/10/10/10/10/PPPPPPPPPP/RNABQKBCNR w KQkq -',
-            'rnabqkbcnr/pppppppppp/10/10/10/10/4P5/10/PPPP1PPPPP/RNABQKBCNR w'
+            'rnabqkbcnr/pppppppppp/10/10/10/10/4P5/10/PPPP1PPPPP/RNABQKBCNR b'
         ))->create();
 
         $expected = [
