@@ -11,12 +11,12 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Capablanca100\Rule\CastlingRule;
-use Chess\Variant\Capablanca100\PGN\Move;
+use Chess\Variant\Capablanca80\Rule\CastlingRule;
+use Chess\Variant\Capablanca80\PGN\Move;
 use Chess\Variant\Capablanca80\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Capablanca100\Board as Capablanca100Board;
+use Chess\Variant\Classical\Board as ClassicalBoard;
 
 /**
  * Board
@@ -27,7 +27,7 @@ use Chess\Variant\Capablanca100\Board as Capablanca100Board;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Board extends Capablanca100Board
+class Board extends ClassicalBoard
 {
     /**
      * Constructor.
