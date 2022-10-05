@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Capablanca100\FEN\Field;
+namespace Chess\Tests\Unit\Variant\Capablanca80\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Capablanca100\FEN\Field\PiecePlacement;
+use Chess\Variant\Capablanca80\FEN\Field\PiecePlacement;
 
 class PiecePlacementTest extends AbstractUnitTestCase
 {
@@ -21,13 +21,13 @@ class PiecePlacementTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function validate_start_capablanca_100()
+    public function validate_start_capablanca_80()
     {
-        $expected = 'rnabqkbcnr/pppppppppp/10/10/10/10/10/10/PPPPPPPPPP/RNABQKBCNR';
+        $expected = 'rnabqkbcnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNABQKBCNR';
 
         $this->assertSame(
             $expected,
-            PiecePlacement::validate('rnabqkbcnr/pppppppppp/10/10/10/10/10/10/PPPPPPPPPP/RNABQKBCNR'
+            PiecePlacement::validate('rnabqkbcnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNABQKBCNR'
         ));
     }
 }
