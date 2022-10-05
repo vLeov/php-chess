@@ -4,7 +4,7 @@ namespace Chess\Tests\Unit\Variant\Capablanca\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Capablanca\PGN\AN\Square;
+use Chess\Variant\Capablanca1010\PGN\AN\Square;
 
 class SquareTest extends AbstractUnitTestCase
 {

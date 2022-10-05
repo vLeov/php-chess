@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Variant\Capablanca\PGN;
+namespace Chess\Variant\Capablanca1010\PGN;
 
-use Chess\Variant\Capablanca\PGN\AN\Square;
+use Chess\Variant\Capablanca1010\PGN\AN\Square;
 use Chess\Variant\Classical\PGN\Move as ClassicalMove;
 use Chess\Variant\Classical\PGN\AN\Check;
 use Chess\Variant\Classical\PGN\AN\Color;
