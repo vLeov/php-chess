@@ -19,11 +19,26 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_pieces()
+    public function get_pieces_10_10()
     {
         $size = [
             'files' => 10,
             'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
+        $this->assertSame(40, count($board->getPieces()));
+    }
+
+    /**
+     * @test
+     */
+    public function get_pieces_10_8()
+    {
+        $size = [
+            'files' => 10,
+            'ranks' => 8
         ];
 
         $board = new Board($size);
@@ -43,7 +58,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function start()
+    public function start_10_10()
     {
         $size = [
             'files' => 10,
@@ -57,6 +72,32 @@ class BoardTest extends AbstractUnitTestCase
             8 => [ ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
             7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' K ', ' B ', ' C ', ' N ', ' R ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function start_10_8()
+    {
+        $size = [
+            'files' => 10,
+            'ranks' => 8
+        ];
+
+        $board = new Board($size);
+
+        $expected = [
+            7 => [ ' r ', ' n ', ' a ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
             5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],

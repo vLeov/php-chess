@@ -25,6 +25,8 @@ class N extends AbstractPiece
     {
         parent::__construct($color, $sq, $size, Piece::N);
 
+        $this->mobility = [];
+
         $this->mobility();
     }
 
