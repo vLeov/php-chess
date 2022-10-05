@@ -7,7 +7,7 @@ use Chess\Piece\CapablancaTrait;
 use Chess\Piece\N;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Capablanca1010\PGN\AN\Piece;
+use Chess\Variant\Capablanca100\PGN\AN\Piece;
 
 /**
  * Chancellor.

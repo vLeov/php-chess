@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Capablanca1010;
+namespace Chess\Variant\Capablanca100;
 
 use Chess\Piece\A;
 use Chess\Piece\C;
@@ -11,9 +11,9 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Capablanca1010\Rule\CastlingRule;
-use Chess\Variant\Capablanca1010\PGN\Move;
-use Chess\Variant\Capablanca1010\PGN\AN\Square;
+use Chess\Variant\Capablanca100\Rule\CastlingRule;
+use Chess\Variant\Capablanca100\PGN\Move;
+use Chess\Variant\Capablanca100\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board as ClassicalBoard;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Capablanca1010;
+namespace Chess\Tests\Unit\Variant\Capablanca100;
 
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Capablanca1010\Board;
+use Chess\Variant\Capablanca100\Board;
 
 class BoardTest extends AbstractUnitTestCase
 {

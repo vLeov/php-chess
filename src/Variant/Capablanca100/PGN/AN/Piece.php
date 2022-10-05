@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Capablanca1010\PGN\AN;
+namespace Chess\Variant\Capablanca100\PGN\AN;
 
 use Chess\Variant\Classical\PGN\AN\Piece as ClassicalPiece;
 

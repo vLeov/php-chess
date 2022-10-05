@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Capablanca1008;
+namespace Chess\Variant\Capablanca80;
 
 use Chess\Piece\A;
 use Chess\Piece\C;
@@ -11,12 +11,12 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Capablanca1010\Rule\CastlingRule;
-use Chess\Variant\Capablanca1010\PGN\Move;
-use Chess\Variant\Capablanca1008\PGN\AN\Square;
+use Chess\Variant\Capablanca100\Rule\CastlingRule;
+use Chess\Variant\Capablanca100\PGN\Move;
+use Chess\Variant\Capablanca80\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Capablanca1010\Board as Capablanca1010Board;
+use Chess\Variant\Capablanca100\Board as Capablanca100Board;
 
 /**
  * Board
@@ -27,7 +27,7 @@ use Chess\Variant\Capablanca1010\Board as Capablanca1010Board;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Board extends Capablanca1010Board
+class Board extends Capablanca100Board
 {
     /**
      * Constructor.

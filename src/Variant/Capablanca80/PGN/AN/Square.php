@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Capablanca1008\PGN\AN;
+namespace Chess\Variant\Capablanca80\PGN\AN;
 
 use Chess\Variant\Classical\PGN\AN\Square as ClassicalSquare;
 
