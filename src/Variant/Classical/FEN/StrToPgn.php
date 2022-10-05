@@ -10,6 +10,13 @@ namespace Chess\Variant\Classical\FEN;
  */
 class StrToPgn extends AbstractStrToPgn
 {
+    public function __construct(string $fromFen, string $toFen)
+    {
+        $this->board = (new StrToBoard($fromFen))->create();
+
+        parent::__construct($fromFen, $toFen);
+    }
+    
     protected function find(array $legal): ?string
     {
         foreach ($legal as $key => $val) {

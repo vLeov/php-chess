@@ -18,11 +18,11 @@ use Chess\Variant\Classical\Board;
  */
 class StrToBoard
 {
-    private string $string;
+    protected string $string;
 
-    private array $fields;
+    protected array $fields;
 
-    private string $castlingAbility;
+    protected string $castlingAbility;
 
     public function __construct(string $string)
     {

@@ -1,6 +1,8 @@
 <?php
 
-namespace Chess\Variant\Classical\FEN;
+namespace Chess\Variant\Capablanca100\FEN;
+
+use Chess\Variant\Classical\FEN\AbstractStrToPgn;
 
 /**
  * Converts a short FEN string into PGN move.
