@@ -32,8 +32,6 @@ class Move extends ClassicalMove
      */
     protected function extractSqs(string $string): string
     {
-        $sqs = preg_replace('/[^a-j0-8 "\']/', '', $string);
-
-        return $sqs;
+        return preg_replace(Square::EXTRACT, '', $string);
     }
 }

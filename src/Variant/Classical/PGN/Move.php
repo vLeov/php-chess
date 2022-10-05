@@ -62,9 +62,7 @@ class Move extends AbstractNotation
      */
     protected function extractSqs(string $string): string
     {
-        $sqs = preg_replace('/[^a-h0-9 "\']/', '', $string);
-
-        return $sqs;
+        return preg_replace(Square::EXTRACT, '', $string);
     }
 
     /**

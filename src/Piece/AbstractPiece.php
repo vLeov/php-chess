@@ -222,6 +222,8 @@ abstract class AbstractPiece
     {
         if ($this->size === ['files' => 8, 'ranks' => 8]) {
             return \Chess\Variant\Classical\PGN\AN\Square::validate($sq);
+        } elseif ($this->size === ['files' => 8, 'ranks' => 10]) {
+            return \Chess\Variant\Capablanca80\PGN\AN\Square::validate($sq);
         } elseif ($this->size === ['files' => 10, 'ranks' => 10]) {
             return \Chess\Variant\Capablanca100\PGN\AN\Square::validate($sq);
         }

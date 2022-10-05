@@ -22,6 +22,8 @@ class Square extends AbstractNotation implements ValidationInterface
         'ranks' => 8,
     ];
 
+    const EXTRACT = '/[^a-h0-9 "\']/';
+
     /**
      * Validate.
      *

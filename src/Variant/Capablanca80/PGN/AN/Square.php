@@ -18,4 +18,6 @@ class Square extends ClassicalSquare
         'files' => 10,
         'ranks' => 8,
     ];
+
+    const EXTRACT = '/[^a-j1-8 "\']/';
 }
