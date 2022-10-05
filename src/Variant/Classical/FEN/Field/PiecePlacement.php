@@ -28,7 +28,7 @@ class PiecePlacement implements ValidationInterface
         if (
             self::eightFields($fields) &&
             self::twoKings($fields) &&
-            self::validPieces($fields)
+            self::validChars($fields)
         ) {
             return $value;
         }
@@ -80,7 +80,7 @@ class PiecePlacement implements ValidationInterface
      * @param array $fields
      * @return bool
      */
-    protected static function validPieces(array $fields)
+    protected static function validChars(array $fields)
     {
         foreach ($fields as $field) {
             if (!preg_match("#^[rnbqkpRNBQKP1-8]+$#", $field)) {

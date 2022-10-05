@@ -27,7 +27,7 @@ class PiecePlacement extends ClassicalFenPiecePlacement
         if (
             self::tenFields($fields) &&
             self::twoKings($fields) &&
-            self::validPieces($fields)
+            self::validChars($fields)
         ) {
             return $value;
         }
@@ -52,7 +52,7 @@ class PiecePlacement extends ClassicalFenPiecePlacement
      * @param array $fields
      * @return bool
      */
-    protected static function validPieces(array $fields)
+    protected static function validChars(array $fields)
     {
         foreach ($fields as $field) {
             if (!preg_match("#^[rnbqkpacRNBQKPAC0-9]+$#", $field)) {
