@@ -27,7 +27,7 @@ class BoardToStr
     {
         $string = '';
         $array = $this->board->toAsciiArray();
-        for ($i = 7; $i >= 0; $i--) {
+        for ($i = $this->board->getSize()['ranks'] - 1; $i >= 0; $i--) {
             $string .= str_replace(' ', '', implode('', $array[$i]));
             if ($i != 0) {
                 $string .= '/';
@@ -64,22 +64,19 @@ class BoardToStr
 
     private function enPassant()
     {
-        $history = $this->board->getHistory();
-        if ($history) {
+        if ($history = $this->board->getHistory()) {
             $last = array_slice($history, -1)[0];
             if ($last->move->id === Piece::P) {
-                $prev = $last->sq;
-                $next = $last->move->sq->next;
+                $prevFile = intval(substr($last->sq, 1));
+                $nextFile = intval(substr($last->move->sq->next, 1));
                 if ($last->move->color === Color::W) {
-                    if ($last->move->sq->next[1] - $last->sq[1] === 2) {
-                        $rank = $last->sq[1] + 1;
+                    if ($nextFile - $prevFile === 2) {
+                        $rank = $prevFile + 1;
                         return $last->move->sq->current.$rank;
                     }
-                } else {
-                    if ($last->sq[1] - $last->move->sq->next[1] === 2) {
-                        $rank = $last->sq[1] - 1;
-                        return $last->move->sq->current.$rank;
-                    }
+                } elseif ($prevFile - $nextFile === 2) {
+                    $rank = $prevFile - 1;
+                    return $last->move->sq->current.$rank;
                 }
             }
         }
