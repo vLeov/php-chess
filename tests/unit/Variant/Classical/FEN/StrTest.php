@@ -8,6 +8,13 @@ use Chess\Tests\AbstractUnitTestCase;
 
 class StrTest extends AbstractUnitTestCase
 {
+    static private $fenStr;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$fenStr = new Str();
+    }
+
     /**
      * @test
      */
@@ -15,7 +22,7 @@ class StrTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Str::validate('foo');
+        self::$fenStr->validate('foo');
     }
 
     /**
@@ -25,7 +32,7 @@ class StrTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        Str::validate('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP w - - bm Nf6+');
+        self::$fenStr->validate('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP w - - bm Nf6+');
     }
 
     /**
@@ -35,7 +42,7 @@ class StrTest extends AbstractUnitTestCase
     {
         $string = '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+; id "position 01";';
 
-        $this->assertSame($string, Str::validate($string));
+        $this->assertSame($string, self::$fenStr->validate($string));
     }
 
     /**
@@ -45,7 +52,7 @@ class StrTest extends AbstractUnitTestCase
     {
         $string = '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+';
 
-        $this->assertSame($string, Str::validate($string));
+        $this->assertSame($string, self::$fenStr->validate($string));
     }
 
     /**
@@ -66,6 +73,6 @@ class StrTest extends AbstractUnitTestCase
             0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
         ];
 
-        $this->assertSame($expected, Str::toAsciiArray($piecePlacement));
+        $this->assertSame($expected, self::$fenStr->toAsciiArray($piecePlacement));
     }
 }

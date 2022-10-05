@@ -5,6 +5,7 @@ namespace Chess\Variant\Classical\FEN;
 use Chess\Array\PieceArray;
 use Chess\Array\AsciiArray;
 use Chess\Exception\UnknownNotationException;
+use Chess\Variant\Classical\FEN\Str;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
@@ -18,6 +19,8 @@ use Chess\Variant\Classical\Board;
  */
 class StrToBoard
 {
+    protected Str $fenStr;
+
     protected string $string;
 
     protected array $fields;
@@ -26,17 +29,16 @@ class StrToBoard
 
     public function __construct(string $string)
     {
-        $this->string = Str::validate($string);
-
+        $this->fenStr = new Str();
+        $this->string = $this->fenStr->validate($string);
         $this->fields = array_filter(explode(' ', $this->string));
-
         $this->castlingAbility = $this->fields[2];
     }
 
     public function create(): Board
     {
         try {
-            $asciiArray = Str::toAsciiArray($this->fields[0]);
+            $asciiArray = $this->fenStr->toAsciiArray($this->fields[0]);
             $pieces = (new PieceArray($asciiArray))->getArray();
             $board = (new Board($pieces, $this->castlingAbility))
                 ->setTurn($this->fields[1]);

@@ -23,7 +23,7 @@ class Str extends ClassicalFenStr
      * @return string if the value is valid
      * @throws \Chess\Exception\UnknownNotationException
      */
-    public static function validate(string $string): string
+    public function validate(string $string): string
     {
         $fields = explode(' ', $string);
 

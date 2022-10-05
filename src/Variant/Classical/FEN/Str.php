@@ -13,7 +13,7 @@ use Chess\Variant\Classical\FEN\Field\SideToMove;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Str implements ValidationInterface
+class Str
 {
     /**
      * String validation.
@@ -22,7 +22,7 @@ class Str implements ValidationInterface
      * @return string if the value is valid
      * @throws \Chess\Exception\UnknownNotationException
      */
-    public static function validate(string $string): string
+    public function validate(string $string): string
     {
         $fields = explode(' ', $string);
 
@@ -40,7 +40,7 @@ class Str implements ValidationInterface
      * @param string $string
      * @return array
      */
-    public static function toAsciiArray(string $string): array
+    public function toAsciiArray(string $string): array
     {
         $array = [];
         $ranks = array_reverse(explode('/', $string));
