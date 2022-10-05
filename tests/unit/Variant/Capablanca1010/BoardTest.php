@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Capablanca;
+namespace Chess\Tests\Unit\Variant\Capablanca1010;
 
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Capablanca1010\Board;
@@ -19,29 +19,9 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_pieces_10_10()
+    public function get_pieces()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
-
-        $this->assertSame(40, count($board->getPieces()));
-    }
-
-    /**
-     * @test
-     */
-    public function get_pieces_10_8()
-    {
-        $size = [
-            'files' => 10,
-            'ranks' => 8
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $this->assertSame(40, count($board->getPieces()));
     }
@@ -58,14 +38,9 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function start_10_10()
+    public function start()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $expected = [
             9 => [ ' r ', ' n ', ' a ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
@@ -86,40 +61,9 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function start_10_8()
-    {
-        $size = [
-            'files' => 10,
-            'ranks' => 8
-        ];
-
-        $board = new Board($size);
-
-        $expected = [
-            7 => [ ' r ', ' n ', ' a ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
-            6 => [ ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
-            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            1 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
-            0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' K ', ' B ', ' C ', ' N ', ' R ' ],
-        ];
-
-        $this->assertSame($expected, $board->toAsciiArray());
-    }
-
-    /**
-     * @test
-     */
     public function play_e4()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
 
@@ -144,12 +88,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
         $board->play('b', 'e7');
@@ -175,12 +114,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7_Nh3()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
         $board->play('b', 'e7');
@@ -207,12 +141,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7_Nh3_Nc8()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
         $board->play('b', 'e7');
@@ -240,12 +169,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7_Nh3_Nc8_d4_b8()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
         $board->play('b', 'e7');
@@ -275,12 +199,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7___b8_Ad2()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
         $board->play('b', 'e7');
@@ -311,12 +230,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7___Ad2_Ci8()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
         $board->play('b', 'e7');
@@ -348,12 +262,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7___Ci8_Af3()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'e4');
         $board->play('b', 'e7');
@@ -386,12 +295,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_Nj3_e7___Ci8_O_O()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'Nj3');
         $board->play('b', 'e7');
@@ -424,12 +328,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_a4_j7___bxc10_ixj1()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'a4');
         $board->play('b', 'j7');
@@ -467,12 +366,7 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_a4_j7___Nh3_i1()
     {
-        $size = [
-            'files' => 10,
-            'ranks' => 10
-        ];
-
-        $board = new Board($size);
+        $board = new Board();
 
         $board->play('w', 'a4');
         $board->play('b', 'j7');

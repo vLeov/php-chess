@@ -1112,8 +1112,8 @@ class Board extends \SplObjectStorage
     public function toAsciiArray(bool $flip = false): array
     {
         $array = [];
-        for ($i = $this->size['files'] - 1; $i >= 0; $i--) {
-            $array[$i] = array_fill(0, $this->size['ranks'], ' . ');
+        for ($i = $this->size['ranks'] - 1; $i >= 0; $i--) {
+            $array[$i] = array_fill(0, $this->size['files'], ' . ');
         }
 
         foreach ($this->getPieces() as $piece) {
