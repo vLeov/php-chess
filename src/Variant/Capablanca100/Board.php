@@ -83,11 +83,4 @@ class Board extends ClassicalBoard
 
         $this->refresh();
     }
-
-    public function play(string $color, string $pgn): bool
-    {
-        $obj = $this->move->toObj($color, $pgn, $this->castlingRule);
-
-        return $this->isValidMove($obj) && $this->isLegalMove($obj);
-    }
 }
