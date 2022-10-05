@@ -21,9 +21,14 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function get_pieces()
     {
-        $pieces = (new Board())->getPieces();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
 
-        $this->assertSame(40, count($pieces));
+        $board = new Board($size);
+
+        $this->assertSame(40, count($board->getPieces()));
     }
 
     /*
@@ -40,7 +45,12 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
 
         $expected = [
             9 => [ ' r ', ' n ', ' a ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
@@ -63,7 +73,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
 
         $expected = [
@@ -87,7 +103,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
         $board->play('b', 'e7');
 
@@ -112,7 +134,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7_Nh3()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
         $board->play('b', 'e7');
         $board->play('w', 'Nh3');
@@ -138,7 +166,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7_Nh3_Nc8()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
         $board->play('b', 'e7');
         $board->play('w', 'Nh3');
@@ -165,7 +199,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7_Nh3_Nc8_d4_b8()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
         $board->play('b', 'e7');
         $board->play('w', 'Nh3');
@@ -194,7 +234,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7___b8_Ad2()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
         $board->play('b', 'e7');
         $board->play('w', 'Nh3');
@@ -224,7 +270,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7___Ad2_Ci8()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
         $board->play('b', 'e7');
         $board->play('w', 'Nh3');
@@ -255,7 +307,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_e4_e7___Ci8_Af3()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'e4');
         $board->play('b', 'e7');
         $board->play('w', 'Nh3');
@@ -287,7 +345,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_Nj3_e7___Ci8_O_O()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'Nj3');
         $board->play('b', 'e7');
         $board->play('w', 'Ci3');
@@ -319,7 +383,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_a4_j7___bxc10_ixj1()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'a4');
         $board->play('b', 'j7');
         $board->play('w', 'a5');
@@ -356,7 +426,13 @@ class BoardTest extends AbstractUnitTestCase
      */
     public function play_a4_j7___Nh3_i1()
     {
-        $board = new Board();
+        $size = [
+            'files' => 10,
+            'ranks' => 10
+        ];
+
+        $board = new Board($size);
+
         $board->play('w', 'a4');
         $board->play('b', 'j7');
         $board->play('w', 'a5');

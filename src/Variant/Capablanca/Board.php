@@ -13,7 +13,6 @@ use Chess\Piece\R;
 use Chess\Piece\RType;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
 use Chess\Variant\Capablanca\PGN\Move;
-use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board as ClassicalBoard;
@@ -34,9 +33,9 @@ final class Board extends ClassicalBoard
      *
      * @param array $startPos
      */
-    public function __construct()
+    public function __construct(array $size)
     {
-        $this->size = Square::SIZE;
+        $this->size = $size;
         $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule())->getRule();
         $this->move = new Move();
