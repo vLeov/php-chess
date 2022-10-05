@@ -31,8 +31,6 @@ class Board extends ClassicalBoard
 {
     /**
      * Constructor.
-     *
-     * @param array $startPos
      */
     public function __construct()
     {
