@@ -53,7 +53,7 @@ class StrToBoard
     protected function doublePawnPush(Board $board)
     {
         $file = $this->fields[3][0];
-        $rank = $this->fields[3][1];
+        $rank = intval(substr($this->fields[3], 1));
         if ($this->fields[1] === Color::W) {
             $piece = ' p ';
             $fromRank = $rank + 1;
