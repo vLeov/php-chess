@@ -19,8 +19,8 @@ class Move extends ClassicalMove
     const KNIGHT_CAPTURES = 'N[a-j]{0,1}(10|[1-9]?)x' . Square::REGEX . Check::REGEX;
     const PAWN = Square::REGEX . Check::REGEX;
     const PAWN_CAPTURES = '[a-j]{1}x' . Square::REGEX . Check::REGEX;
-    const PAWN_PROMOTES = Square::REGEX . '[=]{0,1}[NBRQAC]{0,1}' . Check::REGEX;
-    const PAWN_CAPTURES_AND_PROMOTES = '[a-j]{1}x' . Square::REGEX . '[=]{0,1}[NBRQAC]{0,1}' . Check::REGEX;
+    const PAWN_PROMOTES = '[a-j]{1}(1|10){1}' . '[=]{0,1}[NBRQAC]{0,1}' . Check::REGEX;
+    const PAWN_CAPTURES_AND_PROMOTES = '[a-j]{1}x' . '[a-j]{1}(1|10){1}' . '[=]{0,1}[NBRQAC]{0,1}' . Check::REGEX;
     const PIECE = '[ABCRQ]{1}[a-j]{0,1}(10|[1-9]?)' . Square::REGEX . Check::REGEX;
     const PIECE_CAPTURES = '[ABCRQ]{1}[a-j]{0,1}(10|[1-9]?)x' . Square::REGEX . Check::REGEX;
 
