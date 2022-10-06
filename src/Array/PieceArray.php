@@ -20,20 +20,42 @@ use Chess\Piece\RType;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class PieceArray extends AbstractArray
+class PieceArray
 {
-    private array $size = [
-        'files' => 8,
-        'ranks' => 8,
-    ];
+    /**
+     * Array.
+     *
+     * @var array
+     */
+    protected array $array;
+
+    /**
+     * Size.
+     *
+     * @var array
+     */
+    private array $size;
+
+    /**
+     * Castling rule.
+     *
+     * @var array
+     */
+     private array $castlingRule;
 
     /**
      * Constructor.
      *
      * @param array $array
+     * @param array $size
+     * @param array $castlingRule
      */
-    public function __construct(array $array)
+    public function __construct(array $array, array $size, array $castlingRule)
     {
+        $this->size = $size;
+
+        $this->castlingRule = $castlingRule;
+
         foreach ($array as $i => $row) {
             $file = 'a';
             $rank = $i + 1;
@@ -51,6 +73,16 @@ class PieceArray extends AbstractArray
 
         return $this;
     }
+
+    /**
+     * Returns the array.
+     *
+     * @return array
+     */
+     public function getArray(): array
+     {
+         return $this->array;
+     }
 
     /**
      * Pushes an element into the array.

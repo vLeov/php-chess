@@ -11,17 +11,54 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class AsciiArray extends AbstractArray
+class AsciiArray
 {
+    /**
+     * Array.
+     *
+     * @var array
+     */
+    protected array $array;
+
+    /**
+     * Size.
+     *
+     * @var array
+     */
+    private array $size;
+
+    /**
+     * Castling rule.
+     *
+     * @var array
+     */
+     private array $castlingRule;
+
     /**
      * Constructor.
      *
      * @param array $array
+     * @param array $size
+     * @param array $castlingRule
      */
-    public function __construct(array $array)
+    public function __construct(array $array, array $size, array $castlingRule)
     {
         $this->array = $array;
+
+        $this->size = $size;
+
+        $this->castlingRule = $castlingRule;
     }
+
+    /**
+     * Returns the array.
+     *
+     * @return array
+     */
+     public function getArray(): array
+     {
+         return $this->array;
+     }
 
     /**
      * Returns a Chess\Board object.
@@ -35,7 +72,7 @@ class AsciiArray extends AbstractArray
         $castlingAbility = CastlingAbility::NEITHER
     ): Board
     {
-        $pieces = (new PieceArray($this->array))->getArray();
+        $pieces = (new PieceArray($this->array, $this->size, $this->castlingRule))->getArray();
         $board = (new Board($pieces, $castlingAbility))->setTurn($turn);
 
         return $board;

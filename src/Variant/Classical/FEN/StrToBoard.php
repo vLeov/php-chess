@@ -5,9 +5,11 @@ namespace Chess\Variant\Classical\FEN;
 use Chess\Array\PieceArray;
 use Chess\Array\AsciiArray;
 use Chess\Exception\UnknownNotationException;
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\FEN\Str;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * StrToBoard
@@ -19,9 +21,9 @@ use Chess\Variant\Classical\Board;
  */
 class StrToBoard
 {
-    protected Str $fenStr;
+    protected array $size;
 
-    protected string $boardClassName = '\\Chess\\Variant\\Classical\\Board';
+    protected Str $fenStr;
 
     protected string $string;
 
@@ -29,20 +31,27 @@ class StrToBoard
 
     protected string $castlingAbility;
 
+    protected array $castlingRule;
+
     public function __construct(string $string)
     {
+        $this->size = Square::SIZE;
         $this->fenStr = new Str();
         $this->string = $this->fenStr->validate($string);
         $this->fields = array_filter(explode(' ', $this->string));
         $this->castlingAbility = $this->fields[2];
+        $this->castlingRule = (new CastlingRule())->getRule();
     }
 
     public function create(): Board
     {
         try {
-            $asciiArray = $this->fenStr->toAsciiArray($this->fields[0]);
-            $pieces = (new PieceArray($asciiArray))->getArray();
-            $board = (new $this->boardClassName($pieces, $this->castlingAbility))
+            $pieces = (new PieceArray(
+                $this->fenStr->toAsciiArray($this->fields[0]),
+                $this->size,
+                $this->castlingRule
+            ))->getArray();
+            $board = (new Board($pieces, $this->castlingAbility))
                 ->setTurn($this->fields[1]);
             if ($this->fields[3] !== '-') {
                 $board = $this->doublePawnPush($board);
@@ -71,11 +80,11 @@ class StrToBoard
         }
         $fromSq = $file.$fromRank;
         $toSq = $file.$toRank;
-        $array = (new AsciiArray($board->toAsciiArray()))
+        $array = (new AsciiArray($board->toAsciiArray(), $this->size, $this->castlingRule))
             ->setElem($piece, $fromSq)
             ->setElem(' . ', $toSq)
             ->getArray();
-        $board = (new AsciiArray($array))
+        $board = (new AsciiArray($array, $this->size, $this->castlingRule))
             ->toBoard($turn, $board->getCastlingAbility());
         $board->play($turn, $toSq);
 

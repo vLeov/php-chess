@@ -5,9 +5,22 @@ namespace Chess\Tests\Unit\Eval;
 use Chess\Array\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Eval\IsolatedPawnEval;
+use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 class IsolatedPawnEvalTest extends AbstractUnitTestCase
 {
+    static private $size;
+
+    static private $castlingRule;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$size = Square::SIZE;
+
+        self::$castlingRule = (new CastlingRule())->getRule();
+    }
+
     /**
      * @test
      */
@@ -24,7 +37,8 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
             0 => [ ' R ', ' . ', ' . ', ' . ', ' K ', ' . ', ' . ', ' R ' ],
         ];
 
-        $board = (new AsciiArray($position))->toBoard('w');
+        $board = (new AsciiArray($position, self::$size, self::$castlingRule))
+            ->toBoard('w');
 
         $expected = [
             'w' => 0,
@@ -52,7 +66,8 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
             0 => [ ' . ', ' . ', ' . ', ' N ', ' . ', ' R ', ' K ', ' . ' ],
         ];
 
-        $board = (new AsciiArray($position))->toBoard('w');
+        $board = (new AsciiArray($position, self::$size, self::$castlingRule))
+            ->toBoard('w');
 
         $expected = [
             'w' => 1,
@@ -80,7 +95,8 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
             0 => [ ' . ', ' R ', ' . ', ' . ', ' . ', ' R ', ' . ', ' . ' ],
         ];
 
-        $board = (new AsciiArray($position))->toBoard('w');
+        $board = (new AsciiArray($position, self::$size, self::$castlingRule))
+            ->toBoard('w');
 
         $expected = [
             'w' => 2,

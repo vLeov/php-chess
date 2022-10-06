@@ -5,9 +5,22 @@ namespace Chess\Tests\Unit\Eval;
 use Chess\Array\AsciiArray;
 use Chess\Eval\BackwardPawnEval;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 class BackwardPawnEvalTest extends AbstractUnitTestCase
 {
+    static private $size;
+
+    static private $castlingRule;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$size = Square::SIZE;
+
+        self::$castlingRule = (new CastlingRule())->getRule();
+    }
+
     /**
      * @test
      */
@@ -24,7 +37,8 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
             0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
         ];
 
-        $board = (new AsciiArray($position))->toBoard('w');
+        $board = (new AsciiArray($position, self::$size, self::$castlingRule))
+            ->toBoard('w');
 
         $expected = [
             'w' => 2,
@@ -52,7 +66,8 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
             0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
         ];
 
-        $board = (new AsciiArray($position))->toBoard('w');
+        $board = (new AsciiArray($position, self::$size, self::$castlingRule))
+            ->toBoard('w');
 
         $expected = [
             'w' => 0,
