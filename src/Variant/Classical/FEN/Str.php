@@ -46,18 +46,20 @@ class Str
         $ranks = array_reverse(explode('/', $string));
         foreach ($ranks as $rank) {
             $row = [];
-            foreach ($chars = str_split($rank) as $char) {
-                if (is_numeric($char)) {
-                    for ($i = 0; $i <= $char - 1; $i++) {
-                        $row[] = ' . ';
-                    }
-                } else {
-                    $row[] = " $char ";
-                }
+            preg_match_all('!\d+!', $rank, $digits, PREG_OFFSET_CAPTURE);
+            preg_match_all('/[a-zA-Z]{1}/', $rank, $letters, PREG_OFFSET_CAPTURE);
+            $all = array_merge($digits[0], $letters[0]);
+            usort($all, function ($a, $b) {
+                return $a[1] <=> $b[1];
+            });
+            foreach ($all as $key => $val) {
+                !is_numeric($val[0])
+                    ? $elem = [" {$val[0]} "]
+                    : $elem = array_fill(0, $val[0], ' . ');
+                $row = array_values(array_merge($row, $elem));
             }
             $array[] = $row;
         }
-        krsort($array);
 
         return $array;
     }
