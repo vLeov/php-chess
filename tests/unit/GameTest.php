@@ -611,6 +611,21 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnabqkbcnr/pppppppppp/10/10/4P5/10/PPPP1PPPPP/RNABQKBCNR b'));
     }
 
+    /**
+     * @test
+     */
+    public function capablanca80_play_fen_e4_e5()
+    {
+        $game = new Game(
+            Game::VARIANT_CAPABLANCA_80,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertTrue($game->playFen('rnabqkbcnr/pppppppppp/10/10/4P5/10/PPPP1PPPPP/RNABQKBCNR b'));
+        $this->assertTrue($game->playFen('rnabqkbcnr/pppp1ppppp/10/4p5/4P5/10/PPPP1PPPPP/RNABQKBCNR w'));
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | movetext()
