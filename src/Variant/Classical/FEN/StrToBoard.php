@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Classical\FEN;
 
-use Chess\Array\AsciiArray;
+use Chess\Piece\AsciiArray;
 use Chess\Exception\UnknownNotationException;
 use Chess\Piece\PieceArray;
 use Chess\Variant\Classical\Board;
@@ -80,12 +80,10 @@ class StrToBoard
         }
         $fromSq = $file.$fromRank;
         $toSq = $file.$toRank;
-        $array = (new AsciiArray($board->toAsciiArray(), $this->size, $this->castlingRule))
+        $board = (new AsciiArray($board->toAsciiArray(), $this->size, $this->castlingRule))
             ->setElem($piece, $fromSq)
             ->setElem(' . ', $toSq)
-            ->getArray();
-        $board = (new AsciiArray($array, $this->size, $this->castlingRule))
-            ->toBoard($turn, $board->getCastlingAbility());
+            ->toBoard(get_class($board), $turn);
         $board->play($turn, $toSq);
 
         return $board;

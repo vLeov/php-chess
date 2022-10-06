@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Array;
+namespace Chess\Piece;
 
 use Chess\Piece\PieceArray;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
@@ -45,9 +45,7 @@ class AsciiArray
     public function __construct(array $array, array $size, array $castlingRule)
     {
         $this->array = $array;
-
         $this->size = $size;
-
         $this->castlingRule = $castlingRule;
     }
 
@@ -62,21 +60,29 @@ class AsciiArray
      }
 
     /**
-     * Returns a Chess\Board object.
+     * Returns a \Chess\Variant\Classical\Board object.
      *
+     * @param string $className
      * @param string $turn
-     * @param string $castlingAbility
      * @return \Chess\Variant\Classical\Board
      */
-    public function toBoard(
-        string $turn,
-        $castlingAbility = CastlingAbility::NEITHER
-    ): Board
+    public function toBoard(string $className, string $turn, string $castlingAbility = null): Board
     {
-        $pieces = (new PieceArray($this->array, $this->size, $this->castlingRule))->getArray();
-        $board = (new Board($pieces, $castlingAbility))->setTurn($turn);
+        $board = new $className();
 
-        return $board;
+        $pieces = (new PieceArray(
+            $this->array,
+            $board->getSize(),
+            $board->getCastlingRule()
+        ))->getArray();
+
+        if (!$castlingAbility) {
+            $castlingAbility = CastlingAbility::START;
+        }
+
+        $newBoard = (new $className($pieces, $castlingAbility))->setTurn($turn);
+
+        return $newBoard;
     }
 
     /**
@@ -84,7 +90,7 @@ class AsciiArray
      *
      * @param string $elem
      * @param string $sq
-     * @return \Chess\Array\AsciiArray
+     * @return \Chess\Piece\AsciiArray
      */
     public function setElem(string $elem, string $sq): AsciiArray
     {

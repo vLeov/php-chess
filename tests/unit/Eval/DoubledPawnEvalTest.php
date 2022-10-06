@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Array\AsciiArray;
 use Chess\Eval\DoubledPawnEval;
+use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
@@ -38,7 +38,7 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
-            ->toBoard('w');
+            ->toBoard('\Chess\Variant\Classical\Board', 'w');
 
         $expected = [
             'w' => 1,
@@ -67,7 +67,7 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
-            ->toBoard('w');
+            ->toBoard('\Chess\Variant\Classical\Board', 'w');
 
         $expected = [
             'w' => 0,

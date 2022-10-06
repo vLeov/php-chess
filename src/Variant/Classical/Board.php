@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Classical;
 
-use Chess\Array\AsciiArray;
+use Chess\Piece\AsciiArray;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;

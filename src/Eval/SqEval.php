@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Array\AsciiArray;
+use Chess\Piece\AsciiArray;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 

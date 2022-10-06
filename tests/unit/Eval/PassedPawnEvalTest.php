@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Array\AsciiArray;
 use Chess\Eval\PassedPawnEval;
+use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
@@ -20,7 +20,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
 
         self::$castlingRule = (new CastlingRule())->getRule();
     }
-    
+
     /**
      * @test
      */
@@ -38,7 +38,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
-            ->toBoard('w');
+            ->toBoard('\Chess\Variant\Classical\Board', 'w');
 
         $expected = [
             'w' => 0,
@@ -67,7 +67,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
-            ->toBoard('w');
+            ->toBoard('\Chess\Variant\Classical\Board', 'w');
 
         $expected = [
             'w' => 2,
@@ -96,7 +96,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
-            ->toBoard('w');
+            ->toBoard('\Chess\Variant\Classical\Board', 'w');
 
         $expected = [
             'w' => 0,

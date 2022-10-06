@@ -2,7 +2,7 @@
 
 namespace Chess\Variant\Classical\PGN\AN;
 
-use Chess\Array\AsciiArray;
+use Chess\Piece\AsciiArray;
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AbstractNotation;
 use Chess\Variant\Classical\PGN\ValidationInterface;
