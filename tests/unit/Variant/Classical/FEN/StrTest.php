@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Classical\FEN\Validate;
+namespace Chess\Tests\Unit\Variant\Classical\FEN;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\FEN\Str;

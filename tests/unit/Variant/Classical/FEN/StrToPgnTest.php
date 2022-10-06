@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Tests\Unit\Fen;
+namespace Chess\Tests\Unit\Variant\Classical\FEN;
 
 use Chess\Variant\Classical\FEN\StrToPgn;
 use Chess\Tests\AbstractUnitTestCase;
