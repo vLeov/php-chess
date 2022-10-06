@@ -4,11 +4,10 @@ namespace Chess\Variant\Capablanca80\FEN;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Piece\PieceArray;
-use Chess\Variant\Capablanca80\Board as Capablanca80Board;
+use Chess\Variant\Capablanca80\Board;
 use Chess\Variant\Capablanca80\FEN\Str;
 use Chess\Variant\Capablanca80\PGN\AN\Square;
 use Chess\Variant\Capablanca80\Rule\CastlingRule;
-use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 /**
@@ -31,7 +30,7 @@ class StrToBoard extends ClassicalFenStrToBoard
         $this->castlingRule = (new CastlingRule())->getRule();
     }
 
-    public function create(): ClassicalBoard
+    public function create(): Board
     {
         try {
             $pieces = (new PieceArray(
@@ -39,7 +38,7 @@ class StrToBoard extends ClassicalFenStrToBoard
                 $this->size,
                 $this->castlingRule
             ))->getArray();
-            $board = (new Capablanca80Board($pieces, $this->castlingAbility))
+            $board = (new Board($pieces, $this->castlingAbility))
                 ->setTurn($this->fields[1]);
             if ($this->fields[3] !== '-') {
                 $board = $this->doublePawnPush($board);
