@@ -1,18 +1,9 @@
 <?php
 
-namespace Chess\Array;
+namespace Chess\Piece;
 
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Piece\A;
-use Chess\Piece\B;
-use Chess\Piece\C;
-use Chess\Piece\K;
-use Chess\Piece\N;
-use Chess\Piece\P;
-use Chess\Piece\Q;
-use Chess\Piece\R;
-use Chess\Piece\RType;
 
 /**
  * Piece array.

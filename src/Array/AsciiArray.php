@@ -2,6 +2,7 @@
 
 namespace Chess\Array;
 
+use Chess\Piece\PieceArray;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\Board;
 

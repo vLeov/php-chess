@@ -2,8 +2,8 @@
 
 namespace Chess\Variant\Capablanca80\FEN;
 
-use Chess\Array\PieceArray;
 use Chess\Exception\UnknownNotationException;
+use Chess\Piece\PieceArray;
 use Chess\Variant\Capablanca80\Board as Capablanca80Board;
 use Chess\Variant\Capablanca80\FEN\Str;
 use Chess\Variant\Capablanca80\PGN\AN\Square;
