@@ -164,7 +164,7 @@ class BoardToPngTest extends AbstractUnitTestCase
 
         $this->assertSame(
             md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/start_capablanca_100.png')
+            md5_file(self::DATA_FOLDER.'/img/start_capablanca100.png')
         );
     }
 
@@ -179,7 +179,62 @@ class BoardToPngTest extends AbstractUnitTestCase
 
         $this->assertSame(
             md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/start_capablanca_80.png')
+            md5_file(self::DATA_FOLDER.'/img/start_capablanca80.png')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function output_capablanca80_Nj3_e5___Ci6_O_O()
+    {
+        $board = new Capablanca80Board();
+
+        $board->play('w', 'Nj3');
+        $board->play('b', 'e5');
+        $board->play('w', 'Ci3');
+        $board->play('b', 'Nc6');
+        $board->play('w', 'h3');
+        $board->play('b', 'b6');
+        $board->play('w', 'Bh2');
+        $board->play('b', 'Ci6');
+        $board->play('w', 'O-O');
+
+        $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
+
+        $this->assertSame(
+            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
+            md5_file(self::DATA_FOLDER.'/img/Nj3_e5___capablanca80.png')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function output_capablanca100_a4_j7___bxc10_ixj1()
+    {
+        $board = new Capablanca100Board();
+
+        $board->play('w', 'a4');
+        $board->play('b', 'j7');
+        $board->play('w', 'a5');
+        $board->play('b', 'j6');
+        $board->play('w', 'a6');
+        $board->play('b', 'j5');
+        $board->play('w', 'a7');
+        $board->play('b', 'j4');
+        $board->play('w', 'a8');
+        $board->play('b', 'j3');
+        $board->play('w', 'axb9');
+        $board->play('b', 'jxi2');
+        $board->play('w', 'bxc10=Q');
+        $board->play('b', 'ixj1=Q');
+
+        $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
+
+        $this->assertSame(
+            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
+            md5_file(self::DATA_FOLDER.'/img/a4_j7___capablanca100.png')
         );
     }
 }
