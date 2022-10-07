@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\Tests\Unit;
+namespace Chess\Tests\Unit\Player;
 
 use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 
-class PlayerTest extends AbstractUnitTestCase
+class PgnPlayerTest extends AbstractUnitTestCase
 {
     /**
      * @test
