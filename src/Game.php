@@ -3,17 +3,8 @@
 namespace Chess;
 
 use Chess\Grandmaster;
-use Chess\Variant\Capablanca80\FEN\ShortStrToPgn as Capablanca80FenShortStrToPgn;
-use Chess\Variant\Capablanca80\FEN\Field\PiecePlacement as Capablanca80FenFieldPiecePlacement;
-use Chess\Variant\Capablanca100\FEN\ShortStrToPgn as Capablanca100FenShortStrToPgn;
-use Chess\Variant\Capablanca100\FEN\Field\PiecePlacement as Capablanca100FenFieldPiecePlacement;
-use Chess\Variant\Classical\FEN\Field\PiecePlacement as ClassicalFenFieldPiecePlacement;
 use Chess\Variant\Classical\FEN\BoardToStr;
-use Chess\Variant\Classical\FEN\ShortStrToPgn as ClassicalFenShortStrToPgn;
 use Chess\Variant\Classical\FEN\StrToBoard;
-use Chess\Variant\Classical\PGN\AN\Castle;
-use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\UciEngine\Stockfish;
 use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Chess\Variant\Capablanca80\Board as Capablanca80Board;
@@ -21,7 +12,6 @@ use Chess\Variant\Capablanca100\Board as Capablanca100Board;
 use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Chess960\StartPosition;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\Rule\CastlingRule;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 
@@ -262,208 +252,36 @@ class Game
         $fromPiecePlacement = explode(' ', $fromFen)[0];
         $toPiecePlacement = explode(' ', $toShortFen)[0];
 
+        $player = new FenPlayer($this->board);
+
         if ($this->variant === self::VARIANT_960) {
-            return $this->playClassical(
+            return $player->chess960(
                 $fromFen,
                 $toShortFen,
                 $fromPiecePlacement,
                 $toPiecePlacement
             );
         } elseif ($this->variant === self::VARIANT_CAPABLANCA_80) {
-            return $this->playCapablanca80(
+            return $player->capablanca80(
                 $fromFen,
                 $toShortFen,
                 $fromPiecePlacement,
                 $toPiecePlacement
             );
         } elseif ($this->variant === self::VARIANT_CAPABLANCA_100) {
-            return $this->playCapablanca100(
+            return $player->capablanca100(
                 $fromFen,
                 $toShortFen,
                 $fromPiecePlacement,
                 $toPiecePlacement
             );
         } elseif ($this->variant === self::VARIANT_CLASSICAL) {
-            return $this->playClassical(
+            return $player->classical(
                 $fromFen,
                 $toShortFen,
                 $fromPiecePlacement,
                 $toPiecePlacement
             );
-        }
-
-        return false;
-    }
-
-    protected function playClassical(
-        string $fromFen,
-        string $toShortFen,
-        string $fromPiecePlacement,
-        string $toPiecePlacement
-    ) {
-        ClassicalFenFieldPiecePlacement::validate($fromPiecePlacement);
-        ClassicalFenFieldPiecePlacement::validate($toPiecePlacement);
-
-        $fromRanks = explode('/', $fromPiecePlacement);
-        $toRanks = explode('/', $toPiecePlacement);
-
-        $castlingRule = $this->board->getCastlingRule();
-
-        $shortFenDist = $castlingRule[Color::W][Piece::K][Castle::SHORT]['fenDist'];
-        $longFenDist = $castlingRule[Color::W][Piece::K][Castle::LONG]['fenDist'];
-        $shortI = $castlingRule[Color::W][Piece::K][Castle::SHORT]['i'];
-        $longI = $castlingRule[Color::W][Piece::K][Castle::LONG]['i'];
-
-        if (
-            str_contains($fromRanks[7], "K{$shortFenDist}R") &&
-            ClassicalFenFieldPiecePlacement::charPos($toRanks[7], 'K') === $shortI &&
-            $this->board->play(Color::W, Castle::SHORT)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[7], "R{$longFenDist}K") &&
-            ClassicalFenFieldPiecePlacement::charPos($toRanks[7], 'K') === $longI &&
-            $this->board->play(Color::W, Castle::LONG)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[0], "k{$shortFenDist}r") &&
-            ClassicalFenFieldPiecePlacement::charPos($toRanks[0], 'k') === $shortI &&
-            $this->board->play(Color::B, Castle::SHORT)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[0], "r{$longFenDist}k") &&
-            ClassicalFenFieldPiecePlacement::charPos($toRanks[0], 'k') === $longI &&
-            $this->board->play(Color::B, Castle::LONG)
-        ) {
-            return true;
-        }
-
-        $pgn = (new ClassicalFenShortStrToPgn($fromFen, $toShortFen))->create();
-
-        if ($result = current($pgn)) {
-            $color = key($pgn);
-            $clone = unserialize(serialize($this->board));
-            $clone->play($color, $result);
-            $clone->isMate() ? $check = '#' : ($clone->isCheck() ? $check = '+' : $check = '');
-            return $this->board->play($color, $result.$check);
-        }
-
-        return false;
-    }
-
-    protected function playCapablanca80(
-        string $fromFen,
-        string $toShortFen,
-        string $fromPiecePlacement,
-        string $toPiecePlacement
-    ) {
-        Capablanca80FenFieldPiecePlacement::validate($fromPiecePlacement);
-        Capablanca80FenFieldPiecePlacement::validate($toPiecePlacement);
-
-        $fromRanks = explode('/', $fromPiecePlacement);
-        $toRanks = explode('/', $toPiecePlacement);
-
-        $castlingRule = $this->board->getCastlingRule();
-
-        $shortFenDist = $castlingRule[Color::W][Piece::K][Castle::SHORT]['fenDist'];
-        $longFenDist = $castlingRule[Color::W][Piece::K][Castle::LONG]['fenDist'];
-        $shortI = $castlingRule[Color::W][Piece::K][Castle::SHORT]['i'];
-        $longI = $castlingRule[Color::W][Piece::K][Castle::LONG]['i'];
-
-        if (
-            str_contains($fromRanks[7], "K{$shortFenDist}R") &&
-            Capablanca80FenFieldPiecePlacement::charPos($toRanks[7], 'K') === $shortI &&
-            $this->board->play(Color::W, Castle::SHORT)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[7], "R{$longFenDist}K") &&
-            Capablanca80FenFieldPiecePlacement::charPos($toRanks[7], 'K') === $longI &&
-            $this->board->play(Color::W, Castle::LONG)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[0], "k{$shortFenDist}r") &&
-            Capablanca80FenFieldPiecePlacement::charPos($toRanks[0], 'k') === $shortI &&
-            $this->board->play(Color::B, Castle::SHORT)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[0], "r{$longFenDist}k") &&
-            Capablanca80FenFieldPiecePlacement::charPos($toRanks[0], 'k') === $longI &&
-            $this->board->play(Color::B, Castle::LONG)
-        ) {
-            return true;
-        }
-
-        $pgn = (new Capablanca80FenShortStrToPgn($fromFen, $toShortFen))->create();
-
-        if ($result = current($pgn)) {
-            $color = key($pgn);
-            $clone = unserialize(serialize($this->board));
-            $clone->play($color, $result);
-            $clone->isMate() ? $check = '#' : ($clone->isCheck() ? $check = '+' : $check = '');
-            return $this->board->play($color, $result.$check);
-        }
-
-        return false;
-    }
-
-    protected function playCapablanca100(
-        string $fromFen,
-        string $toShortFen,
-        string $fromPiecePlacement,
-        string $toPiecePlacement
-    ) {
-        Capablanca100FenFieldPiecePlacement::validate($fromPiecePlacement);
-        Capablanca100FenFieldPiecePlacement::validate($toPiecePlacement);
-
-        $fromRanks = explode('/', $fromPiecePlacement);
-        $toRanks = explode('/', $toPiecePlacement);
-
-        $castlingRule = $this->board->getCastlingRule();
-
-        $shortFenDist = $castlingRule[Color::W][Piece::K][Castle::SHORT]['fenDist'];
-        $longFenDist = $castlingRule[Color::W][Piece::K][Castle::LONG]['fenDist'];
-        $shortI = $castlingRule[Color::W][Piece::K][Castle::SHORT]['i'];
-        $longI = $castlingRule[Color::W][Piece::K][Castle::LONG]['i'];
-
-        if (
-            str_contains($fromRanks[9], "K{$shortFenDist}R") &&
-            Capablanca100FenFieldPiecePlacement::charPos($toRanks[9], 'K') === $shortI &&
-            $this->board->play(Color::W, Castle::SHORT)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[9], "R{$longFenDist}K") &&
-            Capablanca100FenFieldPiecePlacement::charPos($toRanks[9], 'K') === $longI &&
-            $this->board->play(Color::W, Castle::LONG)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[0], "k{$shortFenDist}r") &&
-            Capablanca100FenFieldPiecePlacement::charPos($toRanks[0], 'k') === $shortI &&
-            $this->board->play(Color::B, Castle::SHORT)
-        ) {
-            return true;
-        } elseif (
-            str_contains($fromRanks[0], "r{$longFenDist}k") &&
-            Capablanca100FenFieldPiecePlacement::charPos($toRanks[0], 'k') === $longI &&
-            $this->board->play(Color::B, Castle::LONG)
-        ) {
-            return true;
-        }
-
-        $pgn = (new Capablanca100FenShortStrToPgn($fromFen, $toShortFen))->create();
-
-        if ($result = current($pgn)) {
-            $color = key($pgn);
-            $clone = unserialize(serialize($this->board));
-            $clone->play($color, $result);
-            $clone->isMate() ? $check = '#' : ($clone->isCheck() ? $check = '+' : $check = '');
-            return $this->board->play($color, $result.$check);
         }
 
         return false;
