@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess;
+namespace Chess\Player;
 
 use Chess\Variant\Capablanca80\FEN\ShortStrToPgn as Capablanca80FenShortStrToPgn;
 use Chess\Variant\Capablanca80\FEN\Field\PiecePlacement as Capablanca80FenFieldPiecePlacement;

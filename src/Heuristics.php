@@ -3,6 +3,7 @@
 namespace Chess;
 
 use Chess\Eval\InverseEvalInterface;
+use Chess\Player\PgnPlayer;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
@@ -16,7 +17,7 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Heuristics extends Player
+class Heuristics extends PgnPlayer
 {
     use HeuristicsTrait;
 

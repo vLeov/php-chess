@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Player;
 use Chess\Eval\MaterialEval;
+use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
@@ -33,7 +33,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($A59))->play()->getBoard();
+        $board = (new PgnPlayer($A59))->play()->getBoard();
 
         $expected = [
             'w' => 35.73,
@@ -52,7 +52,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
 
-        $board = (new Player($C60))->play()->getBoard();
+        $board = (new PgnPlayer($C60))->play()->getBoard();
 
         $expected = [
             'w' => 40.06,

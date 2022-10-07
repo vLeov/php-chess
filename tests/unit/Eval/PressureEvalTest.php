@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Player;
 use Chess\Eval\PressureEval;
+use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
@@ -31,7 +31,7 @@ class PressureEvalTest extends AbstractUnitTestCase
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new Player($B25))->play()->getBoard();
+        $board = (new PgnPlayer($B25))->play()->getBoard();
 
         $pressEval = (new PressureEval($board))->eval();
 
@@ -50,7 +50,7 @@ class PressureEvalTest extends AbstractUnitTestCase
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
-        $board = (new Player($B56))->play()->getBoard();
+        $board = (new PgnPlayer($B56))->play()->getBoard();
 
         $pressEval = (new PressureEval($board))->eval();
 
@@ -69,7 +69,7 @@ class PressureEvalTest extends AbstractUnitTestCase
     {
         $C67 = file_get_contents(self::DATA_FOLDER.'/sample/C67.pgn');
 
-        $board = (new Player($C67))->play()->getBoard();
+        $board = (new PgnPlayer($C67))->play()->getBoard();
 
         $pressEval = (new PressureEval($board))->eval();
 

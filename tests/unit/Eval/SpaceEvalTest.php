@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Player;
 use Chess\Eval\SpaceEval;
+use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
@@ -35,7 +35,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new Player($B25))->play()->getBoard();
+        $board = (new PgnPlayer($B25))->play()->getBoard();
 
         $spEval = (new SpaceEval($board))->eval();
 
@@ -62,7 +62,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
-        $board = (new Player($B56))->play()->getBoard();
+        $board = (new PgnPlayer($B56))->play()->getBoard();
 
         $spEval = (new SpaceEval($board))->eval();
 

@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit\Board;
 
-use Chess\Player;
 use Chess\Eval\DefenseEval;
+use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 
 class DefenseEvalTest extends AbstractUnitTestCase
@@ -15,7 +15,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 
-        $board = (new Player($D06))->play()->getBoard();
+        $board = (new PgnPlayer($D06))->play()->getBoard();
 
         $expected = [
             'w' => [

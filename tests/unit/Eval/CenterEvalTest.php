@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit\Eval;
 
 use Chess\Eval\CenterEval;
+use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
-use Chess\Player;
 
 class CenterEvalTest extends AbstractUnitTestCase
 {
@@ -16,7 +16,7 @@ class CenterEvalTest extends AbstractUnitTestCase
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new Player($B25))->play()->getBoard();
+        $board = (new PgnPlayer($B25))->play()->getBoard();
 
         $expected = [
             'w' => 37.73,
@@ -35,7 +35,7 @@ class CenterEvalTest extends AbstractUnitTestCase
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
-        $board = (new Player($B56))->play()->getBoard();
+        $board = (new PgnPlayer($B56))->play()->getBoard();
 
         $expected = [
             'w' => 47.0,
@@ -54,7 +54,7 @@ class CenterEvalTest extends AbstractUnitTestCase
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
 
-        $board = (new Player($C60))->play()->getBoard();
+        $board = (new PgnPlayer($C60))->play()->getBoard();
 
         $expected = [
             'w' => 37.73,

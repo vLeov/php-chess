@@ -2,8 +2,8 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Player;
 use Chess\Eval\AttackEval;
+use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
@@ -31,7 +31,7 @@ class AttackEvalTest extends AbstractUnitTestCase
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new Player($B25))->play()->getBoard();
+        $board = (new PgnPlayer($B25))->play()->getBoard();
 
         $attEval = (new AttackEval($board))->eval();
 
@@ -50,7 +50,7 @@ class AttackEvalTest extends AbstractUnitTestCase
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
-        $board = (new Player($B56))->play()->getBoard();
+        $board = (new PgnPlayer($B56))->play()->getBoard();
 
         $attEval = (new AttackEval($board))->eval();
 

@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\Player;
+use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 
 class PlayerTest extends AbstractUnitTestCase
@@ -13,7 +13,7 @@ class PlayerTest extends AbstractUnitTestCase
     public function e4_e5()
     {
         $movetext = '1.e4 e5';
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new PgnPlayer($movetext))->play()->getBoard();
 
         $this->assertSame($movetext, $board->getMovetext());
     }
@@ -26,7 +26,7 @@ class PlayerTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
         $movetext = 'foo';
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new PgnPlayer($movetext))->play()->getBoard();
     }
 
     /**
@@ -37,6 +37,6 @@ class PlayerTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\PlayerException::class);
 
         $movetext = '1.e4 e4';
-        $board = (new Player($movetext))->play()->getBoard();
+        $board = (new PgnPlayer($movetext))->play()->getBoard();
     }
 }

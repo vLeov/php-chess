@@ -3,10 +3,11 @@
 namespace Chess;
 
 use Chess\Grandmaster;
+use Chess\ML\Supervised\Regression\GeometricSumPredictor;
+use Chess\Player\FenPlayer;
+use Chess\UciEngine\Stockfish;
 use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\FEN\StrToBoard;
-use Chess\UciEngine\Stockfish;
-use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Chess\Variant\Capablanca80\Board as Capablanca80Board;
 use Chess\Variant\Capablanca100\Board as Capablanca100Board;
 use Chess\Variant\Chess960\Board as Chess960Board;

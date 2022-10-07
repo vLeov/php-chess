@@ -2,12 +2,12 @@
 
 namespace Chess\Tests\Unit\Piece;
 
-use Chess\Player;
+use Chess\Piece\K;
+use Chess\Player\PgnPlayer;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Piece\K;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 class KTest extends AbstractUnitTestCase
@@ -160,7 +160,7 @@ class KTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new Player($A59))->play()->getBoard();
+        $board = (new PgnPlayer($A59))->play()->getBoard();
 
         $king = $board->getPieceBySq('f1');
 
