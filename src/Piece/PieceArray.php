@@ -2,6 +2,7 @@
 
 namespace Chess\Piece;
 
+use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -85,13 +86,25 @@ class PieceArray
     private function push(string $color, string $id, string $sq): void
     {
         if ($id === Piece::R) {
-            if ($color === Color::B && $sq === 'a8') {
+            if (
+                $color === Color::B &&
+                $sq === $this->castlingRule[Color::B][Piece::R][Castle::LONG]['sq']['current']
+            ) {
                 $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_LONG);
-            } elseif ($color === Color::B && $sq === 'h8') {
+            } elseif (
+                $color === Color::B &&
+                $sq === $this->castlingRule[Color::B][Piece::R][Castle::SHORT]['sq']['current']
+            ) {
                 $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_SHORT);
-            } elseif ($color === Color::W && $sq === 'a1') {
+            } elseif (
+                $color === Color::W &&
+                $sq === $this->castlingRule[Color::B][Piece::R][Castle::LONG]['sq']['current']
+            ) {
                 $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_LONG);
-            } elseif ($color === Color::W && $sq === 'h1') {
+            } elseif (
+                $color === Color::W &&
+                $sq === $this->castlingRule[Color::W][Piece::R][Castle::SHORT]['sq']['current']
+            ) {
                 $this->array[] = new R($color, $sq, $this->size, RType::CASTLE_SHORT);
             } else { // it doesn't matter which RType is assigned
                 $this->array[] = new R($color, $sq, $this->size, RType::PROMOTED);
