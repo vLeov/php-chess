@@ -7,7 +7,7 @@
 Creates a PNG image with a randomish filename, for example `620a7d61dcf57.png`.
 
 ```php
-use Chess\FEN\StrToBoard;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Media\BoardToPng;
 
 $fen = '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+';
