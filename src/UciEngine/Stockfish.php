@@ -15,7 +15,7 @@ use Chess\Variant\Classical\Board;
  */
 class Stockfish
 {
-    const NAME = '/usr/games/stockfish';
+    const FILEPATH = '/usr/games/stockfish';
 
     const OPTIONS = [
         'Skill Level' => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
@@ -31,6 +31,13 @@ class Stockfish
      * @var \Chess\Variant\Classical\Board
      */
     private Board $board;
+
+    /**
+     * Stockfish filepath.
+     *
+     * @var string
+     */
+    private string $filepath;
 
     /**
      * Process descriptor.
@@ -67,10 +74,13 @@ class Stockfish
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
+     * @param string $filepath
      */
-    public function __construct(Board $board)
+    public function __construct(Board $board, string $filepath = '')
     {
         $this->board = $board;
+
+        $this->filepath = !$filepath ? self::FILEPATH : $filepath;
     }
 
     /**
@@ -146,7 +156,7 @@ class Stockfish
     public function bestMove(string $fen): string
     {
         $bestMove = '(none)';
-        $process = proc_open(self::NAME, $this->descr, $this->pipes);
+        $process = proc_open($this->filepath, $this->descr, $this->pipes);
         if (is_resource($process)) {
             fwrite($this->pipes[0], "uci\n");
             fwrite($this->pipes[0], "ucinewgame\n");
@@ -178,7 +188,7 @@ class Stockfish
     {
         $bestMove = $this->bestMove($fen);
         if ($bestMove !== '(none)') {
-            $process = proc_open(self::NAME, $this->descr, $this->pipes);
+            $process = proc_open($this->filepath, $this->descr, $this->pipes);
             if (is_resource($process)) {
                 fwrite($this->pipes[0], "uci\n");
                 fwrite($this->pipes[0], "position fen $fen moves $bestMove\n");
