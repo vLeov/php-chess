@@ -1,4 +1,4 @@
-`Chess\Randomizer\Endgame\PawnEndgameRandomizer` creates a `Chess\Variant\Classical\Board` object representing a pawn endgame position as shown in the following example. For further information please check out the tests in [tests/unit/Randomizer/Endgame/PawnEndgameRandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Randomizer/Endgame/PawnEndgameRandomizerTest.php).
+`Chess\Randomizer\Endgame\PawnEndgameRandomizer` creates a `Chess\Variant\Classical\Board` object representing a pawn endgame position as shown in the following example. For further information please check out the tests in [tests/unit/Variant/Classical/Randomizer/Endgame/PawnEndgameRandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/Randomizer/Endgame/PawnEndgameRandomizerTest.php).
 
 ---
 

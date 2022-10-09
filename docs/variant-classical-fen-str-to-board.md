@@ -1,4 +1,4 @@
-`Chess\Variant\Classical\FEN\StrToBoard` allows to create a `Chess\Variant\Classical\Board` object from a FEN string as shown in the following example. For further information please check out the tests in [tests/unit/FEN/StrToBoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/FEN/StrToBoardTest.php).
+`Chess\Variant\Classical\FEN\StrToBoard` allows to create a `Chess\Variant\Classical\Board` object from a FEN string as shown in the following example. For further information please check out the tests in [tests/unit/Variant/Classical/FEN/StrToBoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/FEN/StrToBoardTest.php).
 
 ---
 
