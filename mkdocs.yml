@@ -10,10 +10,10 @@ pages:
   - Chess\Player\PgnPlayer: player-pgn-player.md
   - Chess\UciEngine\Stockfish: uciengine-stockfish.md
   - Chess\Variant\Classical\Board: variant-classical-board.md
-  - Chess\Variant\Classica\FEN\BoardToStr: variant-classical-fen-board-to-str.md
-  - Chess\Variant\Classica\FEN\ShortStrToPgn: variant-classical-fen-short-str-to-pgn.md
-  - Chess\Variant\Classica\FEN\StrToBoard: variant-classical-fen-str-to-board.md
-  - Chess\Variant\Classica\FEN\StrToPgn: variant-classical-fen-str-to-pgn.md
+  - Chess\Variant\Classical\FEN\BoardToStr: variant-classical-fen-board-to-str.md
+  - Chess\Variant\Classical\FEN\ShortStrToPgn: variant-classical-fen-short-str-to-pgn.md
+  - Chess\Variant\Classical\FEN\StrToBoard: variant-classical-fen-str-to-board.md
+  - Chess\Variant\Classical\FEN\StrToPgn: variant-classical-fen-str-to-pgn.md
   - Chess\Variant\Classical\Randomizer\Checkmate\TwoBishopsRandomizer: variant-classical-randomizer-checkmate-two-bishops-randomizer.md
   - Chess\Variant\Classical\Randomizer\Endgame\PawnEndgameRandomizer: variant-classical-randomizer-endgame-pawn-endgame-randomizer.md
   - Chess\Variant\Classical\Randomizer\Randomizer: variant-classical-randomizer-randomizer.md
