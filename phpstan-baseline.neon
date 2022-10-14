@@ -206,11 +206,6 @@ parameters:
 			path: src/Variant/Capablanca100/FEN/Str.php
 
 		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$value$#"
-			count: 1
-			path: src/Variant/Capablanca80/FEN/Str.php
-
-		-
 			message: "#^Call to an undefined method Chess\\\\Piece\\\\AbstractPiece\\:\\:getEnPassantSq\\(\\)\\.$#"
 			count: 4
 			path: src/Variant/Classical/Board.php
@@ -244,11 +239,6 @@ parameters:
 			message: "#^Method Chess\\\\Variant\\\\Classical\\\\FEN\\\\Field\\\\CastlingAbility\\:\\:can\\(\\) should return string but returns bool\\.$#"
 			count: 1
 			path: src/Variant/Classical/FEN/Field/CastlingAbility.php
-
-		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$value$#"
-			count: 1
-			path: src/Variant/Classical/FEN/Str.php
 
 		-
 			message: "#^PHPDoc tag @throws with type Chess\\\\Variant\\\\Classical\\\\FEN\\\\UnknownNotationException is not subtype of Throwable$#"
