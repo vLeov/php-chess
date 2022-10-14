@@ -224,7 +224,7 @@ class Game
     /**
      * Loads a FEN string allowing to continue a chess game.
      *
-     * @param string
+     * @param string $string
      */
     public function loadFen(string $string): void
     {
@@ -234,7 +234,7 @@ class Game
     /**
      * Loads a PGN movetext allowing to continue a chess game.
      *
-     * @param string
+     * @param string $movetext
      */
     public function loadPgn(string $movetext): void
     {

@@ -19,7 +19,7 @@ class Str extends ClassicalFenStr
     /**
      * String validation.
      *
-     * @param string $value
+     * @param string $string
      * @return string if the value is valid
      * @throws \Chess\Exception\UnknownNotationException
      */

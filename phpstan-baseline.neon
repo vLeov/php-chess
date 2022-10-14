@@ -26,11 +26,6 @@ parameters:
 			path: src/Eval/SqOutpostEval.php
 
 		-
-			message: "#^Access to an undefined property Chess\\\\Eval\\\\TacticsEval\\:\\:\\$target\\.$#"
-			count: 4
-			path: src/Eval/TacticsEval.php
-
-		-
 			message: "#^PHPDoc tag @return with type array is incompatible with native type void\\.$#"
 			count: 1
 			path: src/Eval/TacticsEval.php
@@ -46,17 +41,7 @@ parameters:
 			path: src/Game.php
 
 		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\\\Chess\\\\Variant\\\\Classical\\\\Board\\)\\: Unexpected token \"\\\\r\\\\n     \\* \", expected variable at offset 94$#"
-			count: 1
-			path: src/Game.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(string\\)\\: Unexpected token \"\\\\r\\\\n     \", expected variable at offset 95$#"
-			count: 1
-			path: src/Game.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(string\\)\\: Unexpected token \"\\\\r\\\\n     \", expected variable at offset 97$#"
+			message: "#^PHPDoc tag @param has invalid value \\(\\\\Chess\\\\Variant\\\\Classical\\\\Board\\)\\: Unexpected token \"\\\\n     \\* \", expected variable at offset 91$#"
 			count: 1
 			path: src/Game.php
 
@@ -69,11 +54,6 @@ parameters:
 			message: "#^PHPDoc tag @return with type mixed is not subtype of native type object\\|null\\.$#"
 			count: 1
 			path: src/Game.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\\\Chess\\\\Game\\)\\: Unexpected token \"\\\\r\\\\n     \\* \", expected variable at offset 84$#"
-			count: 1
-			path: src/Grandmaster.php
 
 		-
 			message: "#^PHPDoc tag @return with type mixed is not subtype of native type object\\|null\\.$#"
@@ -271,11 +251,6 @@ parameters:
 			path: src/Variant/Capablanca100/FEN/Str.php
 
 		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$value$#"
-			count: 1
-			path: src/Variant/Capablanca80/FEN/Str.php
-
-		-
 			message: "#^Call to an undefined method Chess\\\\Piece\\\\AbstractPiece\\:\\:getEnPassantSq\\(\\)\\.$#"
 			count: 4
 			path: src/Variant/Classical/Board.php
@@ -324,11 +299,6 @@ parameters:
 			message: "#^Method Chess\\\\Variant\\\\Classical\\\\FEN\\\\Field\\\\CastlingAbility\\:\\:can\\(\\) should return string but returns bool\\.$#"
 			count: 1
 			path: src/Variant/Classical/FEN/Field/CastlingAbility.php
-
-		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$value$#"
-			count: 1
-			path: src/Variant/Classical/FEN/Str.php
 
 		-
 			message: "#^PHPDoc tag @throws with type Chess\\\\Variant\\\\Classical\\\\FEN\\\\UnknownNotationException is not subtype of Throwable$#"
