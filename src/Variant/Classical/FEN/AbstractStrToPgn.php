@@ -26,14 +26,14 @@ abstract class AbstractStrToPgn
     public function create(): array
     {
         $legal = [];
-        $color = $this->board->getTurn();
-        foreach ($this->board->getPiecesByColor($color) as $piece) {
-            foreach ($piece->sqs() as $sq) {
-                $clone = unserialize(serialize($this->board));
-                $id = $piece->getId();
-                $position = $piece->getSq();
-                switch ($id) {
-                    case Piece::K:
+        try {
+            $color = $this->board->getTurn();
+            foreach ($this->board->getPiecesByColor($color) as $piece) {
+                foreach ($piece->sqs() as $sq) {
+                    $clone = unserialize(serialize($this->board));
+                    $id = $piece->getId();
+                    $position = $piece->getSq();
+                    if ($id === Piece::K) {
                         $rule = $this->board->getCastlingRule()[$color][Piece::K];
                         if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
                             $piece->sqCastleShort()
@@ -60,22 +60,18 @@ abstract class AbstractStrToPgn
                                 Piece::K.'x'.$sq => (new BoardToStr($clone))->create()
                             ];
                         }
-                        break;
-                    case Piece::P:
-                        try {
-                            if ($clone->play($color, $sq)) {
-                                $legal[] = [
-                                    $sq => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
+                    } elseif ($id === Piece::P) {
+                        if ($clone->play($color, $sq)) {
+                            $legal[] = [
+                                $sq => (new BoardToStr($clone))->create()
+                            ];
+                        }
                         if ($clone->play($color, $piece->getFile()."x$sq")) {
                             $legal[] = [
                                 $piece->getFile()."x$sq" => (new BoardToStr($clone))->create()
                             ];
                         }
-                        break;
-                    default:
+                    } else {
                         if (in_array($sq, $this->disambiguation($color, $id))) {
                             if ($clone->play($color, $id.$position.$sq)) {
                                 $legal[] = [
@@ -97,9 +93,10 @@ abstract class AbstractStrToPgn
                                 ];
                             }
                         }
-                        break;
+                    }
                 }
             }
+        } catch (\Exception $e) {
         }
 
         return [
@@ -109,22 +106,16 @@ abstract class AbstractStrToPgn
 
     protected function disambiguation(string $color, string $id): array
     {
-        $identities = [];
+        $ids = [];
         $clone = unserialize(serialize($this->board));
         foreach ($clone->getPiecesByColor($color) as $piece) {
             foreach ($piece->sqs() as $sq) {
-                switch ($piece->getId()) {
-                    case Piece::K:
-                        break;
-                    case Piece::P:
-                        break;
-                    default:
-                        $identities[$piece->getId()][$piece->getSq()][] = $sq;
-                        break;
+                if ($piece->getId() !== Piece::K && $piece->getId() !== Piece::P) {
+                    $ids[$piece->getId()][$piece->getSq()][] = $sq;
                 }
             }
         }
-        $vals = array_merge(...array_values($identities[$id]));
+        $vals = array_merge(...array_values($ids[$id]));
         $duplicates = array_diff_assoc($vals, array_unique($vals));
 
         return $duplicates;
