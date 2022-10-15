@@ -954,7 +954,8 @@ class Board extends \SplObjectStorage
                         $move = $this->move->toObj($this->turn, $piece->getId().$sq, $this->castlingRule);
                     }
                 }
-                $escape += (int) !$this->leavesInCheck($piece->setMove($move));
+                $clone = unserialize(serialize($this));
+                $escape += (int) !$clone->leavesInCheck($piece->setMove($move));
             }
         }
 
