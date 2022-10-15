@@ -625,6 +625,21 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnabqkbcnr/pppp1ppppp/10/4p5/4P5/10/PPPP1PPPPP/RNABQKBCNR w'));
     }
 
+    /**
+     * @test
+     */
+    public function capablanca100_play_fen_f4_f7_Nh3()
+    {
+        $game = new Game(
+            Game::VARIANT_CAPABLANCA_100,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertTrue($game->playFen('rnabqkbcnr/pppppppppp/10/10/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b'));
+        $this->assertTrue($game->playFen('rnabqkbcnr/ppppp1pppp/10/5p4/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR w'));
+        $this->assertTrue($game->playFen('rnabqkbcnr/ppppp1pppp/10/5p4/10/10/5P4/7N2/PPPPP1PPPP/RNABQKBC1R b'));
+    }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -649,7 +664,7 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w'));
         $this->assertTrue($game->playFen('rnbqkbnr/ppp1pppp/8/1B1p4/4P3/8/PPPP1PPP/RNBQK1NR b'));
 
-        $expected = '1.e4 d5 2.Bb5+';
+        $expected = '1.e4 d5 2.Bb5';
 
         $this->assertSame($expected, $game->getBoard()->getMovetext());
     }
@@ -669,7 +684,7 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnbqkbnr/pppp1ppp/8/4p3/5PP1/8/PPPPP2P/RNBQKBNR b'));
         $this->assertTrue($game->playFen('rnb1kbnr/pppp1ppp/8/4p3/5PPq/8/PPPPP2P/RNBQKBNR w'));
 
-        $expected = '1.f4 e5 2.g4 Qh4#';
+        $expected = '1.f4 e5 2.g4 Qh4';
 
         $this->assertSame($expected, $game->getBoard()->getMovetext());
     }

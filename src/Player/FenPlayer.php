@@ -250,10 +250,7 @@ class FenPlayer
     {
         if ($result = current($pgn)) {
             $color = key($pgn);
-            $clone = unserialize(serialize($this->board));
-            $clone->play($color, $result);
-            $clone->isMate() ? $check = '#' : ($clone->isCheck() ? $check = '+' : $check = '');
-            return $this->board->play($color, $result.$check);
+            return $this->board->play($color, $result);
         }
 
         return false;
