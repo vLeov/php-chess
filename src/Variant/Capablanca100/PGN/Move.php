@@ -15,6 +15,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
  */
 class Move extends ClassicalMove
 {
+    const KING = 'K' . Square::REGEX . Check::REGEX;
+    const KING_CAPTURES = 'Kx' . Square::REGEX . Check::REGEX;
     const KNIGHT = 'N[a-j]{0,1}(10|[1-9]?)' . Square::REGEX . Check::REGEX;
     const KNIGHT_CAPTURES = 'N[a-j]{0,1}(10|[1-9]?)x' . Square::REGEX . Check::REGEX;
     const PAWN = Square::REGEX . Check::REGEX;
