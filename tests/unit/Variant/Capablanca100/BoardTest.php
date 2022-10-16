@@ -493,7 +493,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_f4_f7_Nh3_Cg8_Cg3()
+    public function play_f4_f7___Cg8_Cg3()
     {
         $board = new Board();
 
