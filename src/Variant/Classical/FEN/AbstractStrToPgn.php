@@ -37,95 +37,25 @@ abstract class AbstractStrToPgn
                     if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
                         $piece->sqCastleShort()
                     ) {
-                        try {
-                            $isPlayed = $clone->play($color, Castle::SHORT);
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    Castle::SHORT => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
+                        $this->play($clone, $color, Castle::SHORT, $legal);
                     } elseif ($sq === $rule[Castle::LONG]['sq']['next'] &&
                         $piece->sqCastleLong()
                     ) {
-                        try {
-                            $isPlayed = $clone->play($color, Castle::LONG);
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    Castle::LONG => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
+                        $this->play($clone, $color, Castle::LONG, $legal);
                     } else {
-                        try {
-                            $isPlayed = $clone->play($color, Piece::K.$sq);
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    Piece::K.$sq => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
-                        try {
-                            $isPlayed = $clone->play($color, Piece::K.'x'.$sq);
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    Piece::K.'x'.$sq => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
+                        $this->play($clone, $color, Piece::K.$sq, $legal);
+                        $this->play($clone, $color, Piece::K.'x'.$sq, $legal);
                     }
                 } elseif ($id === Piece::P) {
-                    try {
-                        $isPlayed = $clone->play($color, $sq);
-                        if ($isPlayed) {
-                            $legal[] = [
-                                $sq => (new BoardToStr($clone))->create()
-                            ];
-                        }
-                    } catch (\Exception $e) {}
-                    try {
-                        $isPlayed = ($clone->play($color, $piece->getFile()."x$sq"));
-                        if ($isPlayed) {
-                            $legal[] = [
-                                $piece->getFile()."x$sq" => (new BoardToStr($clone))->create()
-                            ];
-                        }
-                    } catch (\Exception $e) {}
+                    $this->play($clone, $color, $sq, $legal);
+                    $this->play($clone, $color, $piece->getFile()."x$sq", $legal);
                 } else {
                     if (in_array($sq, $this->disambiguation($color, $id))) {
-                        try {
-                            $isPlayed = $clone->play($color, $id.$position.$sq);
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    $id.$position.$sq => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
-                        try {
-                            $isPlayed = $clone->play($color, "{$id}{$position}x$sq");
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    "{$id}{$position}x$sq" => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
+                        $this->play($clone, $color, $id.$position.$sq, $legal);
+                        $this->play($clone, $color, "{$id}{$position}x$sq", $legal);
                     } else {
-                        try {
-                            $isPlayed = $clone->play($color, $id.$sq);
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    $id.$sq => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
-                        try {
-                            $isPlayed = $clone->play($color, "{$id}x{$sq}");
-                            if ($isPlayed) {
-                                $legal[] = [
-                                    "{$id}x{$sq}" => (new BoardToStr($clone))->create()
-                                ];
-                            }
-                        } catch (\Exception $e) {}
+                        $this->play($clone, $color, $id.$sq, $legal);
+                        $this->play($clone, $color, "{$id}x{$sq}", $legal);
                     }
                 }
             }
@@ -134,6 +64,19 @@ abstract class AbstractStrToPgn
         return [
             $color => $this->find($legal),
         ];
+    }
+
+    protected function play($clone, $color, $str, &$legal)
+    {
+        try {
+            if ($isPlayed = $clone->play($color, $str)) {
+                $legal[] = [
+                    $str => (new BoardToStr($clone))->create()
+                ];
+            }
+        } catch (\Exception $e) {
+
+        }
     }
 
     protected function disambiguation(string $color, string $id): array
