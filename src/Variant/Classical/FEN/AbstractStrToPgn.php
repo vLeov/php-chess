@@ -69,7 +69,7 @@ abstract class AbstractStrToPgn
     protected function play($clone, $color, $str, &$legal)
     {
         try {
-            if ($isPlayed = $clone->play($color, $str)) {
+            if ($clone->play($color, $str)) {
                 $legal[] = [
                     $str => (new BoardToStr($clone))->create()
                 ];
