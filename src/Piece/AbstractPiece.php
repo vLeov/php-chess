@@ -220,6 +220,7 @@ abstract class AbstractPiece
 
     protected function isValidSq(string $sq)
     {
+        // TODO: Refactor this if statement
         if ($this->size === ['files' => 8, 'ranks' => 8]) {
             return \Chess\Variant\Classical\PGN\AN\Square::validate($sq);
         } elseif ($this->size === ['files' => 10, 'ranks' => 8]) {

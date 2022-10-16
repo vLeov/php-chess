@@ -4,7 +4,6 @@ namespace Chess\Eval;
 
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Board;
 
 class BadBishopEval extends AbstractEval implements InverseEvalInterface
@@ -27,7 +26,7 @@ class BadBishopEval extends AbstractEval implements InverseEvalInterface
             if ($piece->getId() === Piece::B) {
                 $this->result[$piece->getColor()] += $this->count(
                     $piece->getColor(),
-                    Square::color($piece->getSq())
+                    $this->isValidSqColor($piece->getSq())
                 );
             }
         }
@@ -40,12 +39,29 @@ class BadBishopEval extends AbstractEval implements InverseEvalInterface
         $pawns = 0;
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::P) {
-                if ($piece->getColor() === $bColor && Square::color($piece->getSq()) === $sqColor) {
+                if (
+                    $piece->getColor() === $bColor &&
+                    $this->isValidSqColor($piece->getSq()) === $sqColor
+                ) {
                     $pawns += 1;
                 }
             }
         }
 
         return $pawns;
+    }
+
+    protected function isValidSqColor(string $sq)
+    {
+        // TODO: Refactor this if statement
+        if ($this->board->getSize() === ['files' => 8, 'ranks' => 8]) {
+            return \Chess\Variant\Classical\PGN\AN\Square::color($sq);
+        } elseif ($this->board->getSize() === ['files' => 10, 'ranks' => 8]) {
+            return \Chess\Variant\Capablanca80\PGN\AN\Square::color($sq);
+        } elseif ($this->board->getSize() === ['files' => 10, 'ranks' => 10]) {
+            return \Chess\Variant\Capablanca100\PGN\AN\Square::color($sq);
+        }
+
+        return false;
     }
 }

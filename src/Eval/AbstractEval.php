@@ -3,7 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Piece\AbstractPiece;
-use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Capablanca100\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
 /**
@@ -25,12 +25,14 @@ abstract class AbstractEval
         $this->board = $board;
 
         $this->value = [
-            Piece::P => 1,
-            Piece::N => 3.2,
+            Piece::A => 6.53,
             Piece::B => 3.33,
+            Piece::C => 8.3,
             Piece::K => 4,
-            Piece::R => 5.1,
+            Piece::N => 3.2,
+            Piece::P => 1,
             Piece::Q => 8.8,
+            Piece::R => 5.1,
         ];
     }
 }
