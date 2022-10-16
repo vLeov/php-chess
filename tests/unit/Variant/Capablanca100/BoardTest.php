@@ -519,4 +519,30 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
+
+    /**
+     * @test
+     */
+    public function play_f4_f7___Cg8_legal_sqs_g8()
+    {
+        $board = new Board();
+
+        $board->play('w', 'f4');
+        $board->play('b', 'f7');
+        $board->play('w', 'Nh3');
+        $board->play('b', 'Cg8');
+        $board->play('w', 'Cg3');
+
+        $expected = (object) [
+            'color' => 'b',
+            'id' => 'C',
+            'sqs' => [
+                'g7', 'g6', 'g5', 'g4', 'g3',
+                'f8', 'e8', 'd8', 'c8', 'b8', 'a8', 'h8', 'i8', 'j8',
+                'e7', 'f6', 'h6', 'i7',
+            ],
+        ];
+
+        $this->assertEquals($expected, $board->legalSqs('g8'));
+    }
 }

@@ -1065,24 +1065,45 @@ class Board extends \SplObjectStorage
                 $clone = unserialize(serialize($this));
                 switch ($piece->getId()) {
                     case Piece::K:
-                        if ($clone->play($color, Piece::K.$sq)) {
-                            $sqs[] = $sq;
-                        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                            $sqs[] = $sq;
+                        try {
+                            if ($clone->play($color, Piece::K.$sq)) {
+                                $sqs[] = $sq;
+                            }
+                        } catch (\Exception $e) {
+                        }
+                        try {
+                            if ($clone->play($color, Piece::K.'x'.$sq)) {
+                                $sqs[] = $sq;
+                            }
+                        } catch (\Exception $e) {
                         }
                         break;
                     case Piece::P:
-                        if ($clone->play($color, $piece->getFile()."x$sq")) {
-                            $sqs[] = $sq;
-                        } elseif ($clone->play($color, $sq)) {
-                            $sqs[] = $sq;
+                        try {
+                            if ($clone->play($color, $piece->getFile()."x$sq")) {
+                                $sqs[] = $sq;
+                            }
+                        } catch (\Exception $e) {
+                        }
+                        try {
+                            if ($clone->play($color, $sq)) {
+                                $sqs[] = $sq;
+                            }
+                        } catch (\Exception $e) {
                         }
                         break;
                     default:
-                        if ($clone->play($color, $piece->getId().$sq)) {
-                            $sqs[] = $sq;
-                        } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
-                            $sqs[] = $sq;
+                        try {
+                            if ($clone->play($color, $piece->getId().$sq)) {
+                                $sqs[] = $sq;
+                            }
+                        } catch (\Exception $e) {
+                        }
+                        try {
+                            if ($clone->play($color, "{$piece->getId()}x$sq")) {
+                                $sqs[] = $sq;
+                            }
+                        } catch (\Exception $e) {
                         }
                         break;
                 }
