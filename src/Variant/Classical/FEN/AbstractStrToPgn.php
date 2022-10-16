@@ -26,77 +26,109 @@ abstract class AbstractStrToPgn
     public function create(): array
     {
         $legal = [];
-        try {
-            $color = $this->board->getTurn();
-            foreach ($this->board->getPiecesByColor($color) as $piece) {
-                foreach ($piece->sqs() as $sq) {
-                    $clone = unserialize(serialize($this->board));
-                    $id = $piece->getId();
-                    $position = $piece->getSq();
-                    if ($id === Piece::K) {
-                        $rule = $this->board->getCastlingRule()[$color][Piece::K];
-                        if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
-                            $piece->sqCastleShort()
-                        ) {
-                            if ($clone->play($color, Castle::SHORT)) {
+        $color = $this->board->getTurn();
+        foreach ($this->board->getPiecesByColor($color) as $piece) {
+            foreach ($piece->sqs() as $sq) {
+                $clone = unserialize(serialize($this->board));
+                $id = $piece->getId();
+                $position = $piece->getSq();
+                if ($id === Piece::K) {
+                    $rule = $this->board->getCastlingRule()[$color][Piece::K];
+                    if ($sq === $rule[Castle::SHORT]['sq']['next'] &&
+                        $piece->sqCastleShort()
+                    ) {
+                        try {
+                            $isPlayed = $clone->play($color, Castle::SHORT);
+                            if ($isPlayed) {
                                 $legal[] = [
                                     Castle::SHORT => (new BoardToStr($clone))->create()
                                 ];
                             }
-                        } elseif ($sq === $rule[Castle::LONG]['sq']['next'] &&
-                            $piece->sqCastleLong()
-                        ) {
-                            if ($clone->play($color, Castle::LONG)) {
+                        } catch (\Exception $e) {}
+                    } elseif ($sq === $rule[Castle::LONG]['sq']['next'] &&
+                        $piece->sqCastleLong()
+                    ) {
+                        try {
+                            $isPlayed = $clone->play($color, Castle::LONG);
+                            if ($isPlayed) {
                                 $legal[] = [
                                     Castle::LONG => (new BoardToStr($clone))->create()
                                 ];
                             }
-                        } elseif ($clone->play($color, Piece::K.$sq)) {
-                            $legal[] = [
-                                Piece::K.$sq => (new BoardToStr($clone))->create()
-                            ];
-                        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                            $legal[] = [
-                                Piece::K.'x'.$sq => (new BoardToStr($clone))->create()
-                            ];
-                        }
-                    } elseif ($id === Piece::P) {
-                        if ($clone->play($color, $sq)) {
+                        } catch (\Exception $e) {}
+                    } else {
+                        try {
+                            $isPlayed = $clone->play($color, Piece::K.$sq);
+                            if ($isPlayed) {
+                                $legal[] = [
+                                    Piece::K.$sq => (new BoardToStr($clone))->create()
+                                ];
+                            }
+                        } catch (\Exception $e) {}
+                        try {
+                            $isPlayed = $clone->play($color, Piece::K.'x'.$sq);
+                            if ($isPlayed) {
+                                $legal[] = [
+                                    Piece::K.'x'.$sq => (new BoardToStr($clone))->create()
+                                ];
+                            }
+                        } catch (\Exception $e) {}
+                    }
+                } elseif ($id === Piece::P) {
+                    try {
+                        $isPlayed = $clone->play($color, $sq);
+                        if ($isPlayed) {
                             $legal[] = [
                                 $sq => (new BoardToStr($clone))->create()
                             ];
                         }
-                        if ($clone->play($color, $piece->getFile()."x$sq")) {
+                    } catch (\Exception $e) {}
+                    try {
+                        $isPlayed = ($clone->play($color, $piece->getFile()."x$sq"));
+                        if ($isPlayed) {
                             $legal[] = [
                                 $piece->getFile()."x$sq" => (new BoardToStr($clone))->create()
                             ];
                         }
-                    } else {
-                        if (in_array($sq, $this->disambiguation($color, $id))) {
-                            if ($clone->play($color, $id.$position.$sq)) {
+                    } catch (\Exception $e) {}
+                } else {
+                    if (in_array($sq, $this->disambiguation($color, $id))) {
+                        try {
+                            $isPlayed = $clone->play($color, $id.$position.$sq);
+                            if ($isPlayed) {
                                 $legal[] = [
                                     $id.$position.$sq => (new BoardToStr($clone))->create()
                                 ];
-                            } elseif ($clone->play($color, "{$id}{$position}x$sq")) {
+                            }
+                        } catch (\Exception $e) {}
+                        try {
+                            $isPlayed = $clone->play($color, "{$id}{$position}x$sq");
+                            if ($isPlayed) {
                                 $legal[] = [
                                     "{$id}{$position}x$sq" => (new BoardToStr($clone))->create()
                                 ];
                             }
-                        } else {
-                            if ($clone->play($color, $id.$sq)) {
+                        } catch (\Exception $e) {}
+                    } else {
+                        try {
+                            $isPlayed = $clone->play($color, $id.$sq);
+                            if ($isPlayed) {
                                 $legal[] = [
                                     $id.$sq => (new BoardToStr($clone))->create()
                                 ];
-                            } elseif ($clone->play($color, "{$id}x{$sq}")) {
+                            }
+                        } catch (\Exception $e) {}
+                        try {
+                            $isPlayed = $clone->play($color, "{$id}x{$sq}");
+                            if ($isPlayed) {
                                 $legal[] = [
                                     "{$id}x{$sq}" => (new BoardToStr($clone))->create()
                                 ];
                             }
-                        }
+                        } catch (\Exception $e) {}
                     }
                 }
             }
-        } catch (\Exception $e) {
         }
 
         return [

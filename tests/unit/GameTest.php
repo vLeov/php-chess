@@ -658,6 +658,26 @@ class GameTest extends AbstractUnitTestCase
         $this->assertTrue($game->playFen('rnabqk1c1r/pppppbpppp/7n2/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w'));
     }
 
+    /**
+     * @test
+     */
+    public function capablanca100_play_fen_f4_f7___Bf2_Ci8()
+    {
+        $game = new Game(
+            Game::VARIANT_CAPABLANCA_100,
+            Game::MODE_ANALYSIS
+        );
+
+        $this->assertTrue($game->playFen('rnabqkbcnr/pppppppppp/10/10/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b'));
+        $this->assertTrue($game->playFen('rnabqkbcnr/ppppp1pppp/10/5p4/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR w'));
+        $this->assertTrue($game->playFen('rnabqkbcnr/ppppp1pppp/10/5p4/10/10/5P4/7N2/PPPPP1PPPP/RNABQKBC1R b'));
+        $this->assertTrue($game->playFen('rnabqkbc1r/ppppp1pppp/7n2/5p4/10/10/5P4/7N2/PPPPP1PPPP/RNABQKBC1R w'));
+        $this->assertTrue($game->playFen('rnabqkbc1r/ppppp1pppp/7n2/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R b'));
+        $this->assertTrue($game->playFen('rnabqk1c1r/pppppbpppp/7n2/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w'));
+        $this->assertTrue($game->playFen('rnabqk1c1r/pppppbpppp/7n2/5p4/10/10/5P4/6CN2/PPPPPBPPPP/RNABQK3R b'));
+        $this->assertTrue($game->playFen('rnabqk3r/pppppbpppp/7nc1/5p4/10/10/5P4/6CN2/PPPPPBPPPP/RNABQK3R w'));
+    }
+
 
     /*
     |--------------------------------------------------------------------------
