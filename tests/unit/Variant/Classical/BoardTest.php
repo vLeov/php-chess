@@ -2494,4 +2494,15 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->playUci('w', 'a2a3'));
         $this->assertTrue($board->playUci('b', 'd5e4'));
     }
+
+    /**
+     * @test
+     */
+    public function play_uci_e2e4_e7e5()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playUci('w', 'e2e4'));
+        $this->assertFalse($board->playUci('w', 'e7e5'));
+    }
 }

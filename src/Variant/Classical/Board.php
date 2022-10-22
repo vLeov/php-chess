@@ -634,7 +634,7 @@ class Board extends \SplObjectStorage
     {
         $sqs = $this->move->explodeSqs($uci);
         if (isset($sqs[0]) && isset($sqs[1])) {
-            if ($piece = $this->getPieceBySq($sqs[0])) {
+            if ($color === $this->getTurn() && $piece = $this->getPieceBySq($sqs[0])) {
                 $clone = unserialize(serialize($this));
                 switch ($piece->getId()) {
                     case Piece::K:
