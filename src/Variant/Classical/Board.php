@@ -610,7 +610,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Makes a move.
+     * Makes a move in PGN format.
      *
      * @param string $color
      * @param string $pgn
@@ -621,6 +621,61 @@ class Board extends \SplObjectStorage
         $obj = $this->move->toObj($color, $pgn, $this->castlingRule);
 
         return $this->isValidMove($obj) && $this->isLegalMove($obj);
+    }
+
+    /**
+     * Makes a move in UCI format.
+     *
+     * @param string $color
+     * @param string $uci
+     * @return bool true if the move can be made; otherwise false
+     */
+    public function playUci(string $color, string $uci): bool
+    {
+        $sqs = $this->move->explodeSqs($uci);
+        if (isset($sqs[0]) && isset($sqs[1])) {
+            if ($piece = $this->getPieceBySq($sqs[0])) {
+                $clone = unserialize(serialize($this));
+                switch ($piece->getId()) {
+                    case Piece::K:
+                        if (
+                            $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
+                            $piece->sqCastleShort() &&
+                            $clone->play($color, Castle::SHORT)
+                        ) {
+                            $pgn = Castle::SHORT;
+                        } elseif (
+                            $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
+                            $piece->sqCastleLong() &&
+                            $clone->play($color, Castle::LONG)
+                        ) {
+                            $pgn = Castle::LONG;
+                        } elseif ($clone->play($color, Piece::K.$sqs[1])) {
+                            $pgn = Piece::K.$sqs[1];
+                        } elseif ($clone->play($color, Piece::K.'x'.$sqs[1])) {
+                            $pgn = Piece::K.'x'.$sqs[1];
+                        }
+                        break;
+                    case Piece::P:
+                        if ($clone->play($color, $sqs[1])) {
+                            $pgn = $sqs[1];
+                        } elseif ($clone->play($color, $piece->getFile()."x$sqs[1]")) {
+                            $pgn = $piece->getFile()."x$sqs[1]";
+                        }
+                        break;
+                    default:
+                        if ($clone->play($color, $piece->getId().$sqs[1])) {
+                            $pgn = $piece->getId().$sqs[1];
+                        } elseif ($clone->play($color, "{$piece->getId()}x$sqs[1]")) {
+                            $pgn = "{$piece->getId()}x$sqs[1]";
+                        }
+                        break;
+                }
+                return $this->play($color, $pgn);
+            }
+        }
+
+        return false;
     }
 
     /**

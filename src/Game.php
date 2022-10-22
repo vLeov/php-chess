@@ -212,12 +212,13 @@ class Game
             ->setOptions($options)
             ->setParams($params);
 
-        $fromFen = $this->board->toFen();
-        $toFen = $stockfish->shortFen($fromFen);
-        $pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
+        $uci = $stockfish->play($board->toFen());
+        $clone = unserialize(serialize($this->board));
+        $clone->playUci($board->getTurn(), $uci);
+        $end = end($clone->getHistory());
 
         return (object) [
-            'move' => current($pgn),
+            'move' => $end->move->pgn,
         ];
     }
 
@@ -287,5 +288,17 @@ class Game
         }
 
         return false;
+    }
+
+    /**
+     * Makes a move in UCI format.
+     *
+     * @param string $color
+     * @param string $uci
+     * @return bool true if the move can be made; otherwise false
+     */
+    public function playUci(string $color, string $uci): bool
+    {
+        return $this->board->playUci($color, $uci);
     }
 }

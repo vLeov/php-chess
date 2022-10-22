@@ -2419,4 +2419,79 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $board->legalSqs('e1'));
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | playUci()
+    |--------------------------------------------------------------------------
+    |
+    | Invalid moves throw an exception.
+    |
+    */
+
+    /**
+     * @test
+     */
+    public function play_uci_w_foo()
+    {
+        $board = new Board();
+
+        $this->assertFalse($board->playUci('w', 'foo'));
+    }
+
+    /**
+     * @test
+     */
+    public function play_uci_w_e2e4()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playUci('w', 'e2e4'));
+    }
+
+    /**
+     * @test
+     */
+    public function play_uci_C00()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playUci('w', 'e2e4'));
+        $this->assertTrue($board->playUci('b', 'e7e6'));
+        $this->assertTrue($board->playUci('w', 'd2d4'));
+        $this->assertTrue($board->playUci('b', 'd7d5'));
+        $this->assertTrue($board->playUci('w', 'c1e3'));
+    }
+
+    /**
+     * @test
+     */
+    public function play_uci_B00()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playUci('w', 'e2e4'));
+        $this->assertTrue($board->playUci('b', 'b8c6'));
+        $this->assertTrue($board->playUci('w', 'g1f3'));
+        $this->assertTrue($board->playUci('b', 'd7d6'));
+        $this->assertTrue($board->playUci('w', 'f1e2'));
+        $this->assertTrue($board->playUci('b', 'c8e6'));
+        $this->assertTrue($board->playUci('w', 'e1g1'));
+        $this->assertTrue($board->playUci('b', 'd8d7'));
+        $this->assertTrue($board->playUci('w', 'h2h3'));
+        $this->assertTrue($board->playUci('b', 'e8c8'));
+    }
+
+    /**
+     * @test
+     */
+    public function play_uci_e2e4_d7d5_a2a3_d5e4()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playUci('w', 'e2e4'));
+        $this->assertTrue($board->playUci('b', 'd7d5'));
+        $this->assertTrue($board->playUci('w', 'a2a3'));
+        $this->assertTrue($board->playUci('b', 'd5e4'));
+    }
 }
