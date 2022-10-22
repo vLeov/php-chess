@@ -7,7 +7,6 @@ use Chess\ML\Supervised\Regression\GeometricSumPredictor;
 use Chess\Player\FenPlayer;
 use Chess\UciEngine\Stockfish;
 use Chess\Variant\Classical\FEN\BoardToStr;
-use Chess\Variant\Classical\FEN\ShortStrToPgn;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Capablanca80\Board as Capablanca80Board;
 use Chess\Variant\Capablanca100\Board as Capablanca100Board;
