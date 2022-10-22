@@ -1,7 +1,6 @@
 `Chess\UciEngine\Stockfish` allows to play chess against the Stockfish chess engine. Let's look at the methods available through the following example. For further information please check out the tests in [tests/unit/UciEngine/StockfishTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php).
 
 ```php
-use Chess\Variant\Classical\FEN\ShortStrToPgn;
 use Chess\UciEngine\Stockfish;
 use Chess\Variant\Classical\Board;
 
@@ -16,13 +15,9 @@ $stockfish = (new Stockfish($board))
         'depth' => 3
     ]);
 
-$fromFen = $board->toFen();
-$toFen = $stockfish->shortFen($fromFen);
-$pgn = (new ShortStrToPgn($fromFen, $toFen))->create();
-
-$board->play('b', current($pgn));
+$uci = $stockfish->play($board->toFen());
+$board->playUci('b', $uci);
 ```
-
 ---
 
 #### `public function setOptions(array $options): Stockfish`
