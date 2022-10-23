@@ -60,7 +60,7 @@ class Move extends AbstractNotation
      * @param string $string
      * @return string if the value is valid
      */
-    protected function extractSqs(string $string): string
+    public function extractSqs(string $string): string
     {
         return preg_replace(Square::EXTRACT, '', $string);
     }

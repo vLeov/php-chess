@@ -2425,14 +2425,12 @@ class BoardTest extends AbstractUnitTestCase
     | playLan()
     |--------------------------------------------------------------------------
     |
-    | Invalid moves throw an exception.
-    |
     */
 
     /**
      * @test
      */
-    public function play_uci_w_foo()
+    public function play_lan_w_foo()
     {
         $board = new Board();
 
@@ -2442,7 +2440,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_uci_w_e2e4()
+    public function play_lan_w_e2e4()
     {
         $board = new Board();
 
@@ -2452,7 +2450,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_uci_C00()
+    public function play_lan_C00()
     {
         $board = new Board();
 
@@ -2466,7 +2464,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_uci_B00()
+    public function play_lan_B00()
     {
         $board = new Board();
 
@@ -2485,7 +2483,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_uci_e2e4_d7d5_a2a3_d5e4()
+    public function play_lan_e2e4_d7d5_a2a3_d5e4()
     {
         $board = new Board();
 
@@ -2498,7 +2496,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_uci_e2e4_e7e5()
+    public function play_lan_e2e4_e7e5()
     {
         $board = new Board();
 

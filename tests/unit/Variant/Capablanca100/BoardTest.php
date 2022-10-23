@@ -545,4 +545,32 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $board->legalSqs('g8'));
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | playLan()
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    /**
+     * @test
+     */
+    public function play_lan_w_f2f4()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playLan('w', 'f2f4'));
+    }
+
+    /**
+     * @test
+     */
+    public function play_lan_w_f2f4_f9f7()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playLan('w', 'f2f4'));
+        $this->assertTrue($board->playLan('b', 'f9f7'));
+    }
 }
