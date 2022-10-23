@@ -2503,4 +2503,15 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->playLan('w', 'e2e4'));
         $this->assertFalse($board->playLan('w', 'e7e5'));
     }
+
+    /**
+     * @test
+     */
+    public function play_lan_b1a3_d7d5()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playLan('w', 'b1a3'));
+        $this->assertTrue($board->playLan('b', 'd7d5'));
+    }
 }

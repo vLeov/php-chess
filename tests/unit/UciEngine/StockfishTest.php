@@ -32,7 +32,7 @@ class StockfishTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play()
+    public function play_e4()
     {
         $board = new Board();
         $board->play('w', 'e4');
@@ -52,6 +52,34 @@ class StockfishTest extends AbstractUnitTestCase
 
         $uci = $stockfish->play($board->toFen());
 
+        $this->assertTrue($board->playLan('b', $uci));
+    }
+
+    /**
+     * @test
+     */
+    public function play_Na3()
+    {
+        $board = new Board();
+        $board->play('w', 'Na3');
+
+        $stockfish = (new Stockfish($board))
+            ->setOptions([
+                'Skill Level' => 17
+            ])
+            ->setParams([
+                'depth' => 8
+            ]);
+
+        $uci = $stockfish->play($board->toFen());
+        $this->assertTrue($board->playLan('b', $uci));
+        $this->assertTrue($board->playLan('w', 'g1h3'));
+
+        $uci = $stockfish->play($board->toFen());
+        $this->assertTrue($board->playLan('b', $uci));
+        $this->assertTrue($board->playLan('w', 'a1b1'));
+
+        $uci = $stockfish->play($board->toFen());
         $this->assertTrue($board->playLan('b', $uci));
     }
 }

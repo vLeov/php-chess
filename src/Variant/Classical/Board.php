@@ -671,7 +671,9 @@ class Board extends \SplObjectStorage
                         }
                         break;
                 }
-                return $this->play($color, $pgn);
+                if (isset($pgn)) {
+                    return $this->play($color, $pgn);
+                }
             }
         }
 
