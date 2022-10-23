@@ -630,7 +630,7 @@ class Board extends \SplObjectStorage
      * @param string $uci
      * @return bool true if the move can be made; otherwise false
      */
-    public function playUci(string $color, string $uci): bool
+    public function playLan(string $color, string $uci): bool
     {
         $sqs = $this->move->explodeSqs($uci);
         if (isset($sqs[0]) && isset($sqs[1])) {

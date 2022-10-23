@@ -2422,7 +2422,7 @@ class BoardTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | playUci()
+    | playLan()
     |--------------------------------------------------------------------------
     |
     | Invalid moves throw an exception.
@@ -2436,7 +2436,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $this->assertFalse($board->playUci('w', 'foo'));
+        $this->assertFalse($board->playLan('w', 'foo'));
     }
 
     /**
@@ -2446,7 +2446,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $this->assertTrue($board->playUci('w', 'e2e4'));
+        $this->assertTrue($board->playLan('w', 'e2e4'));
     }
 
     /**
@@ -2456,11 +2456,11 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $this->assertTrue($board->playUci('w', 'e2e4'));
-        $this->assertTrue($board->playUci('b', 'e7e6'));
-        $this->assertTrue($board->playUci('w', 'd2d4'));
-        $this->assertTrue($board->playUci('b', 'd7d5'));
-        $this->assertTrue($board->playUci('w', 'c1e3'));
+        $this->assertTrue($board->playLan('w', 'e2e4'));
+        $this->assertTrue($board->playLan('b', 'e7e6'));
+        $this->assertTrue($board->playLan('w', 'd2d4'));
+        $this->assertTrue($board->playLan('b', 'd7d5'));
+        $this->assertTrue($board->playLan('w', 'c1e3'));
     }
 
     /**
@@ -2470,16 +2470,16 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $this->assertTrue($board->playUci('w', 'e2e4'));
-        $this->assertTrue($board->playUci('b', 'b8c6'));
-        $this->assertTrue($board->playUci('w', 'g1f3'));
-        $this->assertTrue($board->playUci('b', 'd7d6'));
-        $this->assertTrue($board->playUci('w', 'f1e2'));
-        $this->assertTrue($board->playUci('b', 'c8e6'));
-        $this->assertTrue($board->playUci('w', 'e1g1'));
-        $this->assertTrue($board->playUci('b', 'd8d7'));
-        $this->assertTrue($board->playUci('w', 'h2h3'));
-        $this->assertTrue($board->playUci('b', 'e8c8'));
+        $this->assertTrue($board->playLan('w', 'e2e4'));
+        $this->assertTrue($board->playLan('b', 'b8c6'));
+        $this->assertTrue($board->playLan('w', 'g1f3'));
+        $this->assertTrue($board->playLan('b', 'd7d6'));
+        $this->assertTrue($board->playLan('w', 'f1e2'));
+        $this->assertTrue($board->playLan('b', 'c8e6'));
+        $this->assertTrue($board->playLan('w', 'e1g1'));
+        $this->assertTrue($board->playLan('b', 'd8d7'));
+        $this->assertTrue($board->playLan('w', 'h2h3'));
+        $this->assertTrue($board->playLan('b', 'e8c8'));
     }
 
     /**
@@ -2489,10 +2489,10 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $this->assertTrue($board->playUci('w', 'e2e4'));
-        $this->assertTrue($board->playUci('b', 'd7d5'));
-        $this->assertTrue($board->playUci('w', 'a2a3'));
-        $this->assertTrue($board->playUci('b', 'd5e4'));
+        $this->assertTrue($board->playLan('w', 'e2e4'));
+        $this->assertTrue($board->playLan('b', 'd7d5'));
+        $this->assertTrue($board->playLan('w', 'a2a3'));
+        $this->assertTrue($board->playLan('b', 'd5e4'));
     }
 
     /**
@@ -2502,7 +2502,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $this->assertTrue($board->playUci('w', 'e2e4'));
-        $this->assertFalse($board->playUci('w', 'e7e5'));
+        $this->assertTrue($board->playLan('w', 'e2e4'));
+        $this->assertFalse($board->playLan('w', 'e7e5'));
     }
 }

@@ -47,11 +47,11 @@ class StockfishTest extends AbstractUnitTestCase
 
         $uci = $stockfish->play($board->toFen());
 
-        $this->assertTrue($board->playUci('b', $uci));
-        $this->assertTrue($board->playUci('w', 'a2a3'));
+        $this->assertTrue($board->playLan('b', $uci));
+        $this->assertTrue($board->playLan('w', 'a2a3'));
 
         $uci = $stockfish->play($board->toFen());
 
-        $this->assertTrue($board->playUci('b', $uci));
+        $this->assertTrue($board->playLan('b', $uci));
     }
 }

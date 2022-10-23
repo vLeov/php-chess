@@ -108,7 +108,7 @@ class GameTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | playUci()
+    | playLan()
     |--------------------------------------------------------------------------
     |
     | Makes a move in UCI format.
@@ -125,15 +125,15 @@ class GameTest extends AbstractUnitTestCase
             Game::MODE_ANALYSIS
         );
 
-        $this->assertTrue($game->playUci('w', 'e2e4'));
-        $this->assertTrue($game->playUci('b', 'b8c6'));
-        $this->assertTrue($game->playUci('w', 'g1f3'));
-        $this->assertTrue($game->playUci('b', 'd7d6'));
-        $this->assertTrue($game->playUci('w', 'f1e2'));
-        $this->assertTrue($game->playUci('b', 'c8e6'));
-        $this->assertTrue($game->playUci('w', 'e1g1'));
-        $this->assertTrue($game->playUci('b', 'd8d7'));
-        $this->assertTrue($game->playUci('w', 'h2h3'));
-        $this->assertTrue($game->playUci('b', 'e8c8'));
+        $this->assertTrue($game->playLan('w', 'e2e4'));
+        $this->assertTrue($game->playLan('b', 'b8c6'));
+        $this->assertTrue($game->playLan('w', 'g1f3'));
+        $this->assertTrue($game->playLan('b', 'd7d6'));
+        $this->assertTrue($game->playLan('w', 'f1e2'));
+        $this->assertTrue($game->playLan('b', 'c8e6'));
+        $this->assertTrue($game->playLan('w', 'e1g1'));
+        $this->assertTrue($game->playLan('b', 'd8d7'));
+        $this->assertTrue($game->playLan('w', 'h2h3'));
+        $this->assertTrue($game->playLan('b', 'e8c8'));
     }
 }

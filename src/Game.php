@@ -213,7 +213,7 @@ class Game
 
         $uci = $stockfish->play($board->toFen());
         $clone = unserialize(serialize($this->board));
-        $clone->playUci($board->getTurn(), $uci);
+        $clone->playLan($board->getTurn(), $uci);
         $end = end($clone->getHistory());
 
         return (object) [
@@ -242,62 +242,14 @@ class Game
     }
 
     /**
-     * Makes a move in short FEN format. Only the piece placement and the side
-     * to move are required.
-     *
-     * @param string $toShortFen
-     * @return bool|string
-     */
-    public function playFen(string $toShortFen): bool|string
-    {
-        $fromFen = (new BoardToStr($this->board))->create();
-        $fromPiecePlacement = explode(' ', $fromFen)[0];
-        $toPiecePlacement = explode(' ', $toShortFen)[0];
-
-        $player = new FenPlayer($this->board);
-
-        if ($this->variant === self::VARIANT_960) {
-            return $player->chess960(
-                $fromFen,
-                $toShortFen,
-                $fromPiecePlacement,
-                $toPiecePlacement
-            );
-        } elseif ($this->variant === self::VARIANT_CAPABLANCA_80) {
-            return $player->capablanca80(
-                $fromFen,
-                $toShortFen,
-                $fromPiecePlacement,
-                $toPiecePlacement
-            );
-        } elseif ($this->variant === self::VARIANT_CAPABLANCA_100) {
-            return $player->capablanca100(
-                $fromFen,
-                $toShortFen,
-                $fromPiecePlacement,
-                $toPiecePlacement
-            );
-        } elseif ($this->variant === self::VARIANT_CLASSICAL) {
-            return $player->classical(
-                $fromFen,
-                $toShortFen,
-                $fromPiecePlacement,
-                $toPiecePlacement
-            );
-        }
-
-        return false;
-    }
-
-    /**
      * Makes a move in UCI format.
      *
      * @param string $color
      * @param string $uci
      * @return bool true if the move can be made; otherwise false
      */
-    public function playUci(string $color, string $uci): bool
+    public function playLan(string $color, string $uci): bool
     {
-        return $this->board->playUci($color, $uci);
+        return $this->board->playLan($color, $uci);
     }
 }
