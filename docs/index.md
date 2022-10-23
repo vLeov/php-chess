@@ -41,7 +41,13 @@ $game = new Game(
 $game->play('w', 'e4');
 $game->play('b', 'e5');
 ```
-The call to the `$game->play` method returns `true` or `false` depending on whether or not a chess move can be made.
+
+The call to the `$game->play` method returns `true` or `false` depending on whether or not a move can be made in Portable Game Notation (PGN) format. The Universal Chess Interface (UCI) protocol is also supported and chess moves can be made in long algebraic notation.
+
+```php
+$game->playLan('w', 'e2e4');
+$game->playLan('b', 'e7e5');
+```
 
 ### Documentation
 
