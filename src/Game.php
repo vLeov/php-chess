@@ -211,9 +211,9 @@ class Game
             ->setOptions($options)
             ->setParams($params);
 
-        $uci = $stockfish->play($board->toFen());
+        $lan = $stockfish->play($board->toFen());
         $clone = unserialize(serialize($this->board));
-        $clone->playLan($board->getTurn(), $uci);
+        $clone->playLan($board->getTurn(), $lan);
         $end = end($clone->getHistory());
 
         return (object) [
@@ -242,14 +242,14 @@ class Game
     }
 
     /**
-     * Makes a move in UCI format.
+     * Makes a move in long algebraic notation.
      *
      * @param string $color
-     * @param string $uci
+     * @param string $lan
      * @return bool true if the move can be made; otherwise false
      */
-    public function playLan(string $color, string $uci): bool
+    public function playLan(string $color, string $lan): bool
     {
-        return $this->board->playLan($color, $uci);
+        return $this->board->playLan($color, $lan);
     }
 }

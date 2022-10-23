@@ -624,15 +624,15 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Makes a move in UCI format.
+     * Makes a move in long algebraic notation.
      *
      * @param string $color
-     * @param string $uci
+     * @param string $lan
      * @return bool true if the move can be made; otherwise false
      */
-    public function playLan(string $color, string $uci): bool
+    public function playLan(string $color, string $lan): bool
     {
-        $sqs = $this->move->explodeSqs($uci);
+        $sqs = $this->move->explodeSqs($lan);
         if (isset($sqs[0]) && isset($sqs[1])) {
             if ($color === $this->getTurn() && $piece = $this->getPieceBySq($sqs[0])) {
                 $clone = unserialize(serialize($this));
