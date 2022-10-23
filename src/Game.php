@@ -214,7 +214,8 @@ class Game
         $lan = $stockfish->play($this->board->toFen());
         $clone = unserialize(serialize($this->board));
         $clone->playLan($this->board->getTurn(), $lan);
-        $end = end($clone->getHistory());
+        $history = $clone->getHistory();
+        $end = end($history);
 
         return (object) [
             'move' => $end->move->pgn,
