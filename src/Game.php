@@ -211,9 +211,9 @@ class Game
             ->setOptions($options)
             ->setParams($params);
 
-        $lan = $stockfish->play($board->toFen());
+        $lan = $stockfish->play($this->board->toFen());
         $clone = unserialize(serialize($this->board));
-        $clone->playLan($board->getTurn(), $lan);
+        $clone->playLan($this->board->getTurn(), $lan);
         $end = end($clone->getHistory());
 
         return (object) [
