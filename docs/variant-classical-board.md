@@ -162,12 +162,12 @@ var_export($movetext);
 '1.e4 d5 2.exd5 Qxd5 3.Nc3'
 ```
 
-#### `public function playUci(string $color, string $uci): bool`
+#### `public function playLan(string $color, string $uci): bool`
 
 Make a move in UCI format.
 
 ```php
-$board->playUci('w', 'b1c3');
+$board->playLan('w', 'b1c3');
 
 $movetext = $board->getMovetext();
 

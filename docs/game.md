@@ -35,7 +35,7 @@ $game = new Game(
 $game->play('w', 'Nc3');
 ```
 
-#### `public function playUci(string $color, string $uci): bool`
+#### `public function playLan(string $color, string $uci): bool`
 
 Starts a game and makes a move in UCI format.
 
@@ -47,7 +47,7 @@ $game = new Game(
     Game::MODE_ANALYSIS
 );
 
-$game->playUci('w', 'b1c3');
+$game->playLan('w', 'b1c3');
 ```
 
 #### `public function playFen(string $toShortFen): bool|string`

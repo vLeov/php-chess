@@ -16,7 +16,7 @@ $stockfish = (new Stockfish($board))
     ]);
 
 $uci = $stockfish->play($board->toFen());
-$board->playUci('b', $uci);
+$board->playLan('b', $uci);
 ```
 ---
 
