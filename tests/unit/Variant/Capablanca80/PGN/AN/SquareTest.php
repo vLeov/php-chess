@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Capablanca100\PGN\AN;
+namespace Chess\Tests\Unit\Variant\Capablanca80\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Capablanca100\PGN\AN\Square;
+use Chess\Variant\Capablanca80\PGN\AN\Square;
 
 class SquareTest extends AbstractUnitTestCase
 {
@@ -51,9 +51,11 @@ class SquareTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function a9()
+    public function a9_throws_exception()
     {
-        $this->assertSame(Square::validate('a9'), 'a9');
+        $this->expectException(UnknownNotationException::class);
+
+        Square::validate('a9');
     }
 
     /**
@@ -75,9 +77,11 @@ class SquareTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function a10()
+    public function a10_throws_exception()
     {
-        $this->assertSame(Square::validate('a10'), 'a10');
+        $this->expectException(UnknownNotationException::class);
+
+        Square::validate('a10');
     }
 
     /**
@@ -91,8 +95,8 @@ class SquareTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function color_j10()
+    public function color_j8()
     {
-        $this->assertSame(Square::color('j10'), 'b');
+        $this->assertSame(Square::color('j8'), 'b');
     }
 }
