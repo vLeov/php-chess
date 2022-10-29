@@ -80,6 +80,31 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertSame($expected, $board->toAsciiArray());
     }
 
+    /**
+     * @test
+     */
+    public function play_e4_e5_Nh3()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nh3');
+
+        $expected = [
+            7 => [ ' r ', ' n ', ' a ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' . ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' N ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' K ', ' B ', ' C ', ' . ', ' R ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
 
     /**
      * @test
@@ -107,6 +132,38 @@ class BoardTest extends AbstractUnitTestCase
             2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' P ', ' C ', ' N ' ],
             1 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' B ', ' P ', ' P ' ],
             0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' . ', ' . ', ' R ', ' K ', ' . ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | playLan()
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    /**
+     * @test
+     */
+    public function play_lan_e2e4_e7e5_i1h3()
+    {
+        $board = new Board();
+
+        $board->playLan('w', 'e2e4');
+        $board->playLan('b', 'e7e5');
+        $board->playLan('w', 'i1h3');
+
+        $expected = [
+            7 => [ ' r ', ' n ', ' a ', ' b ', ' q ', ' k ', ' b ', ' c ', ' n ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' . ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' N ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' N ', ' A ', ' B ', ' Q ', ' K ', ' B ', ' C ', ' . ', ' R ' ],
         ];
 
         $this->assertSame($expected, $board->toAsciiArray());

@@ -36,4 +36,17 @@ class Move extends ClassicalMove
     {
         return preg_replace(Square::EXTRACT, '', $string);
     }
+
+    /**
+     * Explode squares from a string.
+     *
+     * @param string $string
+     * @return array
+     */
+    public function explodeSqs(string $string): array
+    {
+        preg_match_all('/'.Square::REGEX.'/', $string, $matches);
+
+        return $matches[0];
+    }
 }
