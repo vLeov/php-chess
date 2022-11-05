@@ -3,6 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/chesslablab/php-chess/v/stable)](https://packagist.org/packages/chesslablab/php-chess)
 ![GitHub Workflow Status](https://github.com/chesslablab/php-chess/actions/workflows/php.yml/badge.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Downloads](https://img.shields.io/packagist/dt/chesslablab/php-chess.svg)]((https://packagist.org/packages/chesslablab/php-chess))
 
 A chess library for PHP.
 
