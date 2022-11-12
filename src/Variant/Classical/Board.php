@@ -975,28 +975,29 @@ class Board extends \SplObjectStorage
 
     private function leavesInCheck(AbstractPiece $piece): bool
     {
-        $lastCastlingAbility = $this->castlingAbility;
+        $clone = unserialize(serialize($this));
+        $lastCastlingAbility = $clone->castlingAbility;
         if (
-            $piece->getMove()->type === $this->move->case(MOVE::CASTLE_SHORT) &&
-            $this->castle($piece, RType::CASTLE_SHORT)
+            $piece->getMove()->type === $clone->move->case(MOVE::CASTLE_SHORT) &&
+            $clone->castle($piece, RType::CASTLE_SHORT)
         ) {
-            $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoCastle($piece->getSq(), $piece->getMove());
+            $king = $clone->getPiece($piece->getColor(), Piece::K);
+            $leavesInCheck = in_array($king->getSq(), $clone->pressureEval->{$king->oppColor()});
+            $clone->undoCastle($piece->getSq(), $piece->getMove());
         } elseif (
-            $piece->getMove()->type === $this->move->case(MOVE::CASTLE_LONG) &&
-            $this->castle($piece, RType::CASTLE_LONG)
+            $piece->getMove()->type === $clone->move->case(MOVE::CASTLE_LONG) &&
+            $clone->castle($piece, RType::CASTLE_LONG)
         ) {
-            $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoCastle($piece->getSq(), $piece->getMove());
+            $king = $clone->getPiece($piece->getColor(), Piece::K);
+            $leavesInCheck = in_array($king->getSq(), $clone->pressureEval->{$king->oppColor()});
+            $clone->undoCastle($piece->getSq(), $piece->getMove());
         } else {
-            $this->move($piece);
-            $king = $this->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $this->pressureEval->{$king->oppColor()});
-            $this->undoMove($piece->getSq(), $piece->getMove());
+            $clone->move($piece);
+            $king = $clone->getPiece($piece->getColor(), Piece::K);
+            $leavesInCheck = in_array($king->getSq(), $clone->pressureEval->{$king->oppColor()});
+            $clone->undoMove($piece->getSq(), $piece->getMove());
         }
-        $this->castlingAbility = $lastCastlingAbility;
+        $clone->castlingAbility = $lastCastlingAbility;
 
         return $leavesInCheck;
     }
@@ -1034,8 +1035,7 @@ class Board extends \SplObjectStorage
                         $move = $this->move->toObj($this->turn, $piece->getId().$sq, $this->castlingRule);
                     }
                 }
-                $clone = unserialize(serialize($this));
-                $escape += (int) !$clone->leavesInCheck($piece->setMove($move));
+                $escape += (int) !$this->leavesInCheck($piece->setMove($move));
             }
         }
 
