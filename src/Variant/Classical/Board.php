@@ -1055,59 +1055,6 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns the legal moves.
-     *
-     * @return array
-     */
-    public function legalMoves(): ?array
-    {
-        $moves = [];
-        $color = $this->getTurn();
-        foreach ($this->getPiecesByColor($color) as $piece) {
-            foreach ($piece->sqs() as $sq) {
-                $clone = unserialize(serialize($this));
-                switch ($piece->getId()) {
-                    case Piece::K:
-                        if (
-                            $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
-                            $piece->sqCastleShort() &&
-                            $clone->play($color, Castle::SHORT)
-                        ) {
-                            $moves[] = Castle::SHORT;
-                        } elseif (
-                            $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
-                            $piece->sqCastleLong() &&
-                            $clone->play($color, Castle::LONG)
-                        ) {
-                            $moves[] = Castle::LONG;
-                        } elseif ($clone->play($color, Piece::K.$sq)) {
-                            $moves[] = Piece::K.$sq;
-                        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                            $moves[] = Piece::K.'x'.$sq;
-                        }
-                        break;
-                    case Piece::P:
-                        if ($clone->play($color, $sq)) {
-                            $moves[] = $sq;
-                        } elseif ($clone->play($color, $piece->getFile()."x$sq")) {
-                            $moves[] = $piece->getFile()."x$sq";
-                        }
-                        break;
-                    default:
-                        if ($clone->play($color, $piece->getId().$sq)) {
-                            $moves[] = $piece->getId().$sq;
-                        } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
-                            $moves[] = "{$piece->getId()}x$sq";
-                        }
-                        break;
-                }
-            }
-        }
-
-        return $moves;
-    }
-
-    /**
      * Returns the legal squares of a piece.
      *
      * @param string $sq
