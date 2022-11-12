@@ -1079,24 +1079,73 @@ class Board extends \SplObjectStorage
      * @param string $sq
      * @return object|null
      */
-    public function legalSqs(string $sq): ?object
-    {
-        if ($piece = $this->getPieceBySq($sq)) {
-            $result = [
-                'color' => $piece->getColor(),
-                'id' => $piece->getId(),
-                'sqs' => $piece->sqs(),
-            ];
-            if ($piece->getId() === Piece::P) {
-                if ($enPassant = $piece->getEnPassantSq()) {
-                    $result['enPassant'] = $enPassant;
-                }
-            }
-            return (object) $result;
-        }
+     public function legalSqs(string $sq): ?object
+     {
+         if ($piece = $this->getPieceBySq($sq)) {
+             $sqs = [];
+             $color = $piece->getColor();
+             foreach ($piece->sqs() as $sq) {
+                 $clone = unserialize(serialize($this));
+                 switch ($piece->getId()) {
+                     case Piece::K:
+                         try {
+                             if ($clone->play($color, Piece::K.$sq)) {
+                                 $sqs[] = $sq;
+                             }
+                         } catch (\Exception $e) {
+                         }
+                         try {
+                             if ($clone->play($color, Piece::K.'x'.$sq)) {
+                                 $sqs[] = $sq;
+                             }
+                         } catch (\Exception $e) {
+                         }
+                         break;
+                     case Piece::P:
+                         try {
+                             if ($clone->play($color, $piece->getFile()."x$sq")) {
+                                 $sqs[] = $sq;
+                             }
+                         } catch (\Exception $e) {
+                         }
+                         try {
+                             if ($clone->play($color, $sq)) {
+                                 $sqs[] = $sq;
+                             }
+                         } catch (\Exception $e) {
+                         }
+                         break;
+                     default:
+                         try {
+                             if ($clone->play($color, $piece->getId().$sq)) {
+                                 $sqs[] = $sq;
+                             }
+                         } catch (\Exception $e) {
+                         }
+                         try {
+                             if ($clone->play($color, "{$piece->getId()}x$sq")) {
+                                 $sqs[] = $sq;
+                             }
+                         } catch (\Exception $e) {
+                         }
+                         break;
+                 }
+             }
+             $result = [
+                 'color' => $color,
+                 'id' => $piece->getId(),
+                 'sqs' => $sqs,
+             ];
+             if ($piece->getId() === Piece::P) {
+                 if ($enPassant = $piece->getEnPassantSq()) {
+                     $result['enPassant'] = $enPassant;
+                 }
+             }
+             return (object) $result;
+         }
 
-        return null;
-    }
+         return null;
+     }
 
     /**
      * Returns an ASCII array representing this Chess\Board object.
