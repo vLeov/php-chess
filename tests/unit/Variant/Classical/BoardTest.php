@@ -2364,6 +2364,35 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function play_d3_d6___Nd7_Nf3()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->play('w', 'd3'));
+        $this->assertTrue($board->play('b', 'd6'));
+        $this->assertTrue($board->play('w', 'e3'));
+        $this->assertTrue($board->play('b', 'e6'));
+        $this->assertTrue($board->play('w', 'Nd2'));
+        $this->assertTrue($board->play('b', 'Nd7'));
+        $this->assertTrue($board->play('w', 'Nd2f3'));
+
+        $expected = [
+            7 => [ ' r ', ' . ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' n ', ' . ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' p ', ' p ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' P ', ' P ', ' N ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' . ', ' . ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' . ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
     public function play_lan_d2d3_d7d6___b8d7_d2f3()
     {
         $board = new Board();
@@ -2393,29 +2422,38 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_d3_d6___Nd7_Nf3()
+    public function play_d4_d5___axb5_cxb5()
     {
         $board = new Board();
 
-        $this->assertTrue($board->play('w', 'd3'));
-        $this->assertTrue($board->play('b', 'd6'));
-        $this->assertTrue($board->play('w', 'e3'));
-        $this->assertTrue($board->play('b', 'e6'));
-        $this->assertTrue($board->play('w', 'Nd2'));
-        $this->assertTrue($board->play('b', 'Nd7'));
-        $this->assertTrue($board->play('w', 'Nd2f3'));
+        $this->assertTrue($board->play('w', 'd4'));
+        $this->assertTrue($board->play('b', 'd5'));
+        $this->assertTrue($board->play('w', 'c4'));
+        $this->assertTrue($board->play('b', 'dxc4'));
+        $this->assertTrue($board->play('w', 'Nf3'));
+        $this->assertTrue($board->play('b', 'b5'));
+        $this->assertTrue($board->play('w', 'a4'));
+        $this->assertTrue($board->play('b', 'c6'));
+        $this->assertTrue($board->play('w', 'axb5'));
+        $this->assertTrue($board->play('b', 'cxb5'));
+    }
 
-        $expected = [
-            7 => [ ' r ', ' . ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],
-            6 => [ ' p ', ' p ', ' p ', ' n ', ' . ', ' p ', ' p ', ' p ' ],
-            5 => [ ' . ', ' . ', ' . ', ' p ', ' p ', ' . ', ' . ', ' . ' ],
-            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            2 => [ ' . ', ' . ', ' . ', ' P ', ' P ', ' N ', ' . ', ' . ' ],
-            1 => [ ' P ', ' P ', ' P ', ' . ', ' . ', ' P ', ' P ', ' P ' ],
-            0 => [ ' R ', ' . ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
-        ];
+    /**
+     * @test
+     */
+    public function play_lan_d2d4_d7d5___a4b5_c6b5()
+    {
+        $board = new Board();
 
-        $this->assertSame($expected, $board->toAsciiArray());
+        $this->assertTrue($board->playLan('w', 'd2d4'));
+        $this->assertTrue($board->playLan('b', 'd7d5'));
+        $this->assertTrue($board->playLan('w', 'c2c4'));
+        $this->assertTrue($board->playLan('b', 'd5c4'));
+        $this->assertTrue($board->playLan('w', 'g1f3'));
+        $this->assertTrue($board->playLan('b', 'b7b5'));
+        $this->assertTrue($board->playLan('w', 'a2a4'));
+        $this->assertTrue($board->playLan('b', 'c7c6'));
+        $this->assertTrue($board->playLan('w', 'a4b5'));
+        $this->assertTrue($board->playLan('b', 'c6b5'));
     }
 }
