@@ -1063,59 +1063,10 @@ class Board extends \SplObjectStorage
     public function legalSqs(string $sq): ?object
     {
         if ($piece = $this->getPieceBySq($sq)) {
-            $sqs = [];
-            $color = $piece->getColor();
-            foreach ($piece->sqs() as $sq) {
-                $clone = unserialize(serialize($this));
-                switch ($piece->getId()) {
-                    case Piece::K:
-                        try {
-                            if ($clone->play($color, Piece::K.$sq)) {
-                                $sqs[] = $sq;
-                            }
-                        } catch (\Exception $e) {
-                        }
-                        try {
-                            if ($clone->play($color, Piece::K.'x'.$sq)) {
-                                $sqs[] = $sq;
-                            }
-                        } catch (\Exception $e) {
-                        }
-                        break;
-                    case Piece::P:
-                        try {
-                            if ($clone->play($color, $piece->getFile()."x$sq")) {
-                                $sqs[] = $sq;
-                            }
-                        } catch (\Exception $e) {
-                        }
-                        try {
-                            if ($clone->play($color, $sq)) {
-                                $sqs[] = $sq;
-                            }
-                        } catch (\Exception $e) {
-                        }
-                        break;
-                    default:
-                        try {
-                            if ($clone->play($color, $piece->getId().$sq)) {
-                                $sqs[] = $sq;
-                            }
-                        } catch (\Exception $e) {
-                        }
-                        try {
-                            if ($clone->play($color, "{$piece->getId()}x$sq")) {
-                                $sqs[] = $sq;
-                            }
-                        } catch (\Exception $e) {
-                        }
-                        break;
-                }
-            }
             $result = [
-                'color' => $color,
+                'color' => $piece->getColor(),
                 'id' => $piece->getId(),
-                'sqs' => $sqs,
+                'sqs' => $piece->sqs(),
             ];
             if ($piece->getId() === Piece::P) {
                 if ($enPassant = $piece->getEnPassantSq()) {
