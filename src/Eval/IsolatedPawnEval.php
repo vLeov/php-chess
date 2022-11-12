@@ -35,7 +35,7 @@ class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
     private function checkIsolatedPawn(P $pawn): int
     {
         $color = $pawn->getColor();
-        $pawnFile = $pawn->getFile();
+        $pawnFile = $pawn->getSqFile();
 
         $prevFile = chr(ord($pawnFile) - 1);
         $nextFile = chr(ord($pawnFile) + 1);

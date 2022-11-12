@@ -664,8 +664,8 @@ class Board extends \SplObjectStorage
                     case Piece::P:
                         if ($clone->play($color, $sqs[1])) {
                             $pgn = $sqs[1];
-                        } elseif ($clone->play($color, $piece->getFile()."x$sqs[1]")) {
-                            $pgn = $piece->getFile()."x$sqs[1]";
+                        } elseif ($clone->play($color, $piece->getSqFile()."x$sqs[1]")) {
+                            $pgn = $piece->getSqFile()."x$sqs[1]";
                         }
                         break;
                     default:
@@ -1023,7 +1023,7 @@ class Board extends \SplObjectStorage
                     }
                 } elseif ($piece->getId() === Piece::P) {
                     if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
-                        $move = $this->move->toObj($this->turn, $piece->getFile()."x$sq", $this->castlingRule);
+                        $move = $this->move->toObj($this->turn, $piece->getSqFile()."x$sq", $this->castlingRule);
                     } else {
                         $move = $this->move->toObj($this->turn, $sq, $this->castlingRule);
                     }

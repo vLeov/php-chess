@@ -35,7 +35,7 @@ class PassedPawnEval extends AbstractEval
     private function getThreatPassedPawn(P $pawn): int
     {
         $color = $pawn->getColor();
-        $pawnFile = $pawn->getFile();
+        $pawnFile = $pawn->getSqFile();
         $ranks = $pawn->getRanks();
 
         $prevFile = chr(ord($pawnFile) - 1);

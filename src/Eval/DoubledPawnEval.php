@@ -25,7 +25,7 @@ class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
             if ($piece->getId() === Piece::P) {
-                $file = $piece->getFile();
+                $file = $piece->getSqFile();
                 $ranks = $piece->getRanks();
                 if ($nextPiece = $this->board->getPieceBySq($file.$ranks->next)) {
                     if ($nextPiece->getId() === Piece::P && $nextPiece->getColor() === $color) {

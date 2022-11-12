@@ -16,11 +16,6 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 class P extends AbstractPiece
 {
     /**
-     * @var string
-     */
-    private string $file;
-
-    /**
      * @var object
      */
     private object $ranks;
@@ -45,8 +40,6 @@ class P extends AbstractPiece
     public function __construct(string $color, string $sq, array $size)
     {
         parent::__construct($color, $sq, $size, Piece::P);
-
-        $this->file = $this->sq[0];
 
         if ($this->color === Color::W) {
             $this->ranks = (object) [
@@ -78,8 +71,8 @@ class P extends AbstractPiece
     {
         // next rank
         try {
-            if ($this->isValidSq($this->file.$this->ranks->next)) {
-                $this->mobility[] = $this->file . $this->ranks->next;
+            if ($this->isValidSq($this->getSqFile().$this->ranks->next)) {
+                $this->mobility[] = $this->getSqFile() . $this->ranks->next;
             }
         } catch (UnknownNotationException $e) {
 
@@ -87,17 +80,17 @@ class P extends AbstractPiece
 
         // two square advance
         if (intval(substr($this->sq, 1)) === 2 && $this->ranks->start == 2) {
-            $this->mobility[] = $this->file . ($this->ranks->start + 2);
+            $this->mobility[] = $this->getSqFile() . ($this->ranks->start + 2);
         } elseif (
             intval(substr($this->sq, 1)) === $this->size['ranks'] - 1 &&
             $this->ranks->start == $this->size['ranks'] - 1
         ) {
-            $this->mobility[] = $this->file . ($this->ranks->start - 2);
+            $this->mobility[] = $this->getSqFile() . ($this->ranks->start - 2);
         }
 
         // capture square
         try {
-            $file = chr(ord($this->file) - 1);
+            $file = chr(ord($this->getSqFile()) - 1);
             if ($this->isValidSq($file.$this->ranks->next)) {
                 $this->captureSqs[] = $file . $this->ranks->next;
             }
@@ -107,7 +100,7 @@ class P extends AbstractPiece
 
         // capture square
         try {
-            $file = chr(ord($this->file) + 1);
+            $file = chr(ord($this->getSqFile()) + 1);
             if ($this->isValidSq($file.$this->ranks->next)) {
                 $this->captureSqs[] = $file . $this->ranks->next;
             }
@@ -184,16 +177,6 @@ class P extends AbstractPiece
         }
 
         return $sqs;
-    }
-
-    /**
-     * Gets the pawn's file.
-     *
-     * @return string
-     */
-    public function getFile(): string
-    {
-        return $this->file;
     }
 
     /**

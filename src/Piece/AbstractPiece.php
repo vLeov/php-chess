@@ -153,13 +153,33 @@ abstract class AbstractPiece
     }
 
     /**
-     * Gets the piece's position on the board.
+     * Gets the piece's square.
      *
      * @return string
      */
     public function getSq(): string
     {
         return $this->sq;
+    }
+
+    /**
+     * Gets the piece's file.
+     *
+     * @return string
+     */
+    public function getSqFile(): string
+    {
+        return $this->sq[0];
+    }
+
+    /**
+     * Gets the piece's rank.
+     *
+     * @return string
+     */
+    public function getSqRank(): string
+    {
+        return substr($this->sq, 1);
     }
 
     /**

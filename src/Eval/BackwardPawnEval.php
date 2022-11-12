@@ -39,7 +39,7 @@ class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
                 ];
 
                 //Only check for movable pawns and their next possible square
-                if (0 === count($piece->sqs()) || !str_contains($piece->sqs()[0], $piece->getFile())) {
+                if (0 === count($piece->sqs()) || !str_contains($piece->sqs()[0], $piece->getSqFile())) {
                     continue;
                 }
                 $nextMoves[] = [

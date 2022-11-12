@@ -34,15 +34,15 @@ class SqOutpostEval extends AbstractEval
             if ($piece->getId() === Piece::P) {
                 $captureSquares = $piece->getCaptureSqs();
                 if ($piece->getColor() === Color::W) {
-                    $lFile = chr(ord($piece->getFile()) - 2);
-                    $rFile = chr(ord($piece->getFile()) + 2);
+                    $lFile = chr(ord($piece->getSqFile()) - 2);
+                    $rFile = chr(ord($piece->getSqFile()) + 2);
                 } else {
-                    $lFile = chr(ord($piece->getFile()) + 2);
-                    $rFile = chr(ord($piece->getFile()) - 2);
+                    $lFile = chr(ord($piece->getSqFile()) + 2);
+                    $rFile = chr(ord($piece->getSqFile()) - 2);
                     rsort($captureSquares);
                 }
                 if (in_array($piece->getSq()[1], $this->ranks)) {
-                    if (!$this->opposition($piece, $piece->getFile())) {
+                    if (!$this->opposition($piece, $piece->getSqFile())) {
                         if ($lFile >= 'a' && $lFile <= 'h' &&
                             !$this->opposition($piece, $lFile)
                         ) {
