@@ -572,9 +572,11 @@ class Board extends \SplObjectStorage
     {
         $ambiguous = [];
         foreach ($this->pickPiece($move) as $piece) {
-            foreach ($piece->sqs() as $sq) {
-                if ($move->sq->next === $sq) {
-                    $ambiguous[] = $sq;
+            if ($piece->isMovable() && !$this->leavesInCheck($piece)) {
+                foreach ($piece->sqs() as $sq) {
+                    if ($move->sq->next === $sq) {
+                        $ambiguous[] = $sq;
+                    }
                 }
             }
         }
