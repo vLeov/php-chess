@@ -164,7 +164,7 @@ var_export($movetext);
 
 #### `public function playLan(string $color, string $uci): bool`
 
-Make a move in UCI format.
+Make a move in long algebraic notation.
 
 ```php
 $board->playLan('w', 'b1c3');

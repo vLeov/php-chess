@@ -37,7 +37,7 @@ $game->play('w', 'Nc3');
 
 #### `public function playLan(string $color, string $uci): bool`
 
-Starts a game and makes a move in UCI format.
+Starts a game and makes a move in long algebraic notation.
 
 ```php
 use Chess\Game;
@@ -48,21 +48,6 @@ $game = new Game(
 );
 
 $game->playLan('w', 'b1c3');
-```
-
-#### `public function playFen(string $toShortFen): bool|string`
-
-Starts a game and makes a move in short FEN format, only the piece placement and the side to move are required.
-
-```php
-use Chess\Game;
-
-$game = new Game(
-    Game::VARIANT_CLASSICAL,
-    Game::MODE_ANALYSIS
-);
-
-$game->playFen('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b');
 ```
 
 #### `public function loadFen(string $string): void`
