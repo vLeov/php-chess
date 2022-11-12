@@ -1103,7 +1103,7 @@ class Board extends \SplObjectStorage
                          break;
                      case Piece::P:
                          try {
-                             if ($clone->play($color, $piece->getFile()."x$sq")) {
+                             if ($clone->play($color, $piece->getSqFile()."x$sq")) {
                                  $sqs[] = $sq;
                              }
                          } catch (\Exception $e) {
