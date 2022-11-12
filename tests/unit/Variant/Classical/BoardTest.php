@@ -2403,7 +2403,7 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('b', 'e6'));
         $this->assertTrue($board->play('w', 'Nd2'));
         $this->assertTrue($board->play('b', 'Nd7'));
-        $this->assertTrue($board->play('w', 'Nf3'));
+        $this->assertTrue($board->play('w', 'Nd2f3'));
 
         $expected = [
             7 => [ ' r ', ' . ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],

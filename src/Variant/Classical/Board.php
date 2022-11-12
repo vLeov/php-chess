@@ -557,26 +557,29 @@ class Board extends \SplObjectStorage
      */
     protected function isValidMove(object $move): bool
     {
-        if ($move->color !== $this->turn) {
-            return false;
-        }
-        if (
-            $move->type ===  $this->move->case(MOVE::CASTLE_LONG) ||
-            $move->type ===  $this->move->case(MOVE::CASTLE_SHORT)
-        ) {
-            return true;
-        }
-        if (
-            $move->isCapture && $move->id !== Piece::P &&
-            !$this->getPieceBySq($move->sq->next)
-        ) {
-            return false;
-        }
-        if (!$move->isCapture && $this->getPieceBySq($move->sq->next)) {
-            return false;
+        $isAmbiguousMove = $this->isAmbiguousMove($move);
+
+        return !$isAmbiguousMove;
+    }
+
+    /**
+     * Checks out if a move is ambiguous.
+     *
+     * @param object $move
+     * @return bool true if the move is not ambiguous; otherwise false
+     */
+    protected function isAmbiguousMove(object $move): bool
+    {
+        $ambiguous = [];
+        foreach ($this->pickPiece($move) as $piece) {
+            foreach ($piece->sqs() as $sq) {
+                if ($move->sq->next === $sq) {
+                    $ambiguous[] = $sq;
+                }
+            }
         }
 
-        return true;
+        return count($ambiguous) > 1;
     }
 
     /**
