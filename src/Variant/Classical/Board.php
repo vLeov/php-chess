@@ -671,6 +671,12 @@ class Board extends \SplObjectStorage
                             $pgn = $piece->getId().$sqs[1];
                         } elseif ($clone->play($color, "{$piece->getId()}x$sqs[1]")) {
                             $pgn = "{$piece->getId()}x$sqs[1]";
+                        } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
+                            // disambiguation
+                            $pgn = $piece->getId().$piece->getSq().$sqs[1];
+                        } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
+                            // disambiguation
+                            $pgn = "{$piece->getId()}{$piece->getSq()}x$sqs[1]";
                         }
                         break;
                 }
