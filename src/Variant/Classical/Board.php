@@ -1101,17 +1101,17 @@ class Board extends \SplObjectStorage
                                 $sqs[] = $sq;
                             } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
                                 $sqs[] = $sq;
-                            } elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sq)) {
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
                                 $sqs[] = $sq; // disambiguation by file
-                            } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
+                            } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
                                 $sqs[] = $sq; // disambiguation by file
-                            } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sq)) {
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
                                 $sqs[] = $sq; // disambiguation by rank
-                            } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
+                            } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
                                 $sqs[] = $sq; // disambiguation by rank
-                            } elseif ($this->play($color, $piece->getId().$piece->getSq().$sq)) {
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
                                 $sqs[] = $sq; // disambiguation by square
-                            } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
+                            } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
                                 $sqs[] = $sq; // disambiguation by square
                             }
                             break;
