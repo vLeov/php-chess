@@ -557,9 +557,18 @@ class Board extends \SplObjectStorage
      */
     protected function isValidMove(object $move): bool
     {
-        $isAmbiguousMove = $this->isAmbiguousMove($move);
+        if ($this->isAmbiguousMove($move)) {
+            return false;
+        }
+        if (
+            $move->isCapture &&
+            $move->id !== Piece::P &&
+            !$this->getPieceBySq($move->sq->next)
+        ) {
+            return false;
+        }
 
-        return !$isAmbiguousMove;
+        return true;
     }
 
     /**
@@ -654,9 +663,9 @@ class Board extends \SplObjectStorage
                             $this->play($color, Castle::LONG)
                         ) {
                             return true;
-                        } elseif ($this->play($color, Piece::K.$sqs[1])) {
-                            return true;
                         } elseif ($this->play($color, Piece::K.'x'.$sqs[1])) {
+                            return true;
+                        } elseif ($this->play($color, Piece::K.$sqs[1])) {
                             return true;
                         }
                         break;
@@ -675,21 +684,21 @@ class Board extends \SplObjectStorage
                         }
                         break;
                     default:
-                        if ($this->play($color, $piece->getId().$sqs[1])) {
+                        if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
                             return true;
-                        } elseif ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
+                        } elseif ($this->play($color, $piece->getId().$sqs[1])) {
                             return true;
-                        } elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
-                            return true; // disambiguation by file
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
                             return true; // disambiguation by file
-                        } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
-                            return true; // disambiguation by rank
+                        } elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
+                            return true; // disambiguation by file
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
                             return true; // disambiguation by rank
-                        } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
-                            return true; // disambiguation by square
+                        } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
+                            return true; // disambiguation by rank
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
+                            return true; // disambiguation by square
+                        } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
                             return true; // disambiguation by square
                         }
                         break;
@@ -1090,9 +1099,9 @@ class Board extends \SplObjectStorage
                  try {
                     switch ($piece->getId()) {
                         case Piece::K:
-                            if ($clone->play($color, Piece::K.$sq)) {
+                            if ($clone->play($color, Piece::K.'x'.$sq)) {
                                 $sqs[] = $sq;
-                            } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
+                            } elseif ($clone->play($color, Piece::K.$sq)) {
                                 $sqs[] = $sq;
                             }
                             break;
@@ -1104,21 +1113,21 @@ class Board extends \SplObjectStorage
                             }
                             break;
                         default:
-                            if ($clone->play($color, $piece->getId().$sq)) {
+                            if ($clone->play($color, "{$piece->getId()}x$sq")) {
                                 $sqs[] = $sq;
-                            } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
+                            } elseif ($clone->play($color, $piece->getId().$sq)) {
                                 $sqs[] = $sq;
-                            } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
-                                $sqs[] = $sq; // disambiguation by file
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
                                 $sqs[] = $sq; // disambiguation by file
-                            } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
-                                $sqs[] = $sq; // disambiguation by rank
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
+                                $sqs[] = $sq; // disambiguation by file
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
                                 $sqs[] = $sq; // disambiguation by rank
-                            } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
-                                $sqs[] = $sq; // disambiguation by square
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
+                                $sqs[] = $sq; // disambiguation by rank
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
+                                $sqs[] = $sq; // disambiguation by square
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
                                 $sqs[] = $sq; // disambiguation by square
                             }
                             break;
