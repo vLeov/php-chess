@@ -673,23 +673,17 @@ class Board extends \SplObjectStorage
                         } elseif ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
                             return true;
                         } elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
-                            // move disambiguation by file
-                            return true;
+                            return true; // disambiguation by file
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
-                            // capture disambiguation by file
-                            return true;
+                            return true; // disambiguation by file
                         } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
-                            // move disambiguation by rank
-                            return true;
+                            return true; // disambiguation by rank
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
-                            // capture disambiguation by rank
-                            return true;
+                            return true; // disambiguation by rank
                         } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
-                            // move disambiguation by square
-                            return true;
+                            return true; // disambiguation by square
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
-                            // capture disambiguation by square
-                            return true;
+                            return true; // disambiguation by square
                         }
                         break;
                 }
@@ -1086,50 +1080,44 @@ class Board extends \SplObjectStorage
              $color = $piece->getColor();
              foreach ($piece->sqs() as $sq) {
                  $clone = unserialize(serialize($this));
-                 switch ($piece->getId()) {
-                     case Piece::K:
-                         try {
-                             if ($clone->play($color, Piece::K.$sq)) {
-                                 $sqs[] = $sq;
-                             }
-                         } catch (\Exception $e) {
-                         }
-                         try {
-                             if ($clone->play($color, Piece::K.'x'.$sq)) {
-                                 $sqs[] = $sq;
-                             }
-                         } catch (\Exception $e) {
-                         }
-                         break;
-                     case Piece::P:
-                         try {
-                             if ($clone->play($color, $piece->getSqFile()."x$sq")) {
-                                 $sqs[] = $sq;
-                             }
-                         } catch (\Exception $e) {
-                         }
-                         try {
-                             if ($clone->play($color, $sq)) {
-                                 $sqs[] = $sq;
-                             }
-                         } catch (\Exception $e) {
-                         }
-                         break;
-                     default:
-                         try {
-                             if ($clone->play($color, $piece->getId().$sq)) {
-                                 $sqs[] = $sq;
-                             }
-                         } catch (\Exception $e) {
-                         }
-                         try {
-                             if ($clone->play($color, "{$piece->getId()}x$sq")) {
-                                 $sqs[] = $sq;
-                             }
-                         } catch (\Exception $e) {
-                         }
-                         break;
-                 }
+                 try {
+                    switch ($piece->getId()) {
+                        case Piece::K:
+                            if ($clone->play($color, Piece::K.$sq)) {
+                                $sqs[] = $sq;
+                            } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
+                                $sqs[] = $sq;
+                            }
+                            break;
+                        case Piece::P:
+                            if ($clone->play($color, $piece->getSqFile()."x$sq")) {
+                                $sqs[] = $sq;
+                            } elseif ($clone->play($color, $sq)) {
+                                $sqs[] = $sq;
+                            }
+                            break;
+                        default:
+                            if ($clone->play($color, $piece->getId().$sq)) {
+                                $sqs[] = $sq;
+                            } elseif ($clone->play($color, "{$piece->getId()}x$sq")) {
+                                $sqs[] = $sq;
+                            } elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sq)) {
+                                $sqs[] = $sq; // disambiguation by file
+                            } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
+                                $sqs[] = $sq; // disambiguation by file
+                            } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sq)) {
+                                $sqs[] = $sq; // disambiguation by rank
+                            } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
+                                $sqs[] = $sq; // disambiguation by rank
+                            } elseif ($this->play($color, $piece->getId().$piece->getSq().$sq)) {
+                                $sqs[] = $sq; // disambiguation by square
+                            } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
+                                $sqs[] = $sq; // disambiguation by square
+                            }
+                            break;
+                    }
+                } catch (\Exception $e) {
+                }
              }
              $result = [
                  'color' => $color,

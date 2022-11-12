@@ -539,7 +539,7 @@ class BoardTest extends AbstractUnitTestCase
             'sqs' => [
                 'g7', 'g6', 'g5', 'g4', 'g3',
                 'f8', 'e8', 'd8', 'c8', 'b8', 'a8', 'h8', 'i8', 'j8',
-                'e7', 'f6', 'h6', 'i7', 'h10',
+                'e7', 'f6', 'h6', 'i7',
             ],
         ];
 
