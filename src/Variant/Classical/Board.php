@@ -982,30 +982,22 @@ class Board extends \SplObjectStorage
     private function leavesInCheck(AbstractPiece $piece): bool
     {
         $clone = unserialize(serialize($this));
-        $lastCastlingAbility = $clone->castlingAbility;
         if (
             $piece->getMove()->type === $clone->move->case(MOVE::CASTLE_SHORT) &&
             $clone->castle($piece, RType::CASTLE_SHORT)
         ) {
             $king = $clone->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $clone->pressureEval->{$king->oppColor()});
-            $clone->undoCastle($piece->getSq(), $piece->getMove());
         } elseif (
             $piece->getMove()->type === $clone->move->case(MOVE::CASTLE_LONG) &&
             $clone->castle($piece, RType::CASTLE_LONG)
         ) {
             $king = $clone->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $clone->pressureEval->{$king->oppColor()});
-            $clone->undoCastle($piece->getSq(), $piece->getMove());
         } else {
             $clone->move($piece);
             $king = $clone->getPiece($piece->getColor(), Piece::K);
-            $leavesInCheck = in_array($king->getSq(), $clone->pressureEval->{$king->oppColor()});
-            $clone->undoMove($piece->getSq(), $piece->getMove());
         }
-        $clone->castlingAbility = $lastCastlingAbility;
 
-        return $leavesInCheck;
+        return in_array($king->getSq(), $clone->pressureEval->{$king->oppColor()});
     }
 
     /**
