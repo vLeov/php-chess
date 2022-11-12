@@ -673,18 +673,18 @@ class Board extends \SplObjectStorage
                             $pgn = $piece->getId().$sqs[1];
                         } elseif ($clone->play($color, "{$piece->getId()}x$sqs[1]")) {
                             $pgn = "{$piece->getId()}x$sqs[1]";
-                        } elseif ($clone->play($color, $piece->getId().$piece->getSq()[0].$sqs[1])) {
+                        } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
                             // move disambiguation by file
-                            $pgn = $piece->getId().$piece->getSq()[0].$sqs[1];
-                        } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()[0]}x$sqs[1]")) {
+                            $pgn = $piece->getId().$piece->getSqFile().$sqs[1];
+                        } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
                             // capture disambiguation by file
-                            $pgn = "{$piece->getId()}{$piece->getSq()[0]}x$sqs[1]";
-                        } elseif ($clone->play($color, $piece->getId().$piece->getSq()[1].$sqs[1])) {
+                            $pgn = "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]";
+                        } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
                             // move disambiguation by rank
-                            $pgn = $piece->getId().$piece->getSq()[1].$sqs[1];
-                        } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()[1]}x$sqs[1]")) {
+                            $pgn = $piece->getId().$piece->getSqRank().$sqs[1];
+                        } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
                             // capture disambiguation by rank
-                            $pgn = "{$piece->getId()}{$piece->getSq()[1]}x$sqs[1]";
+                            $pgn = "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]";
                         } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
                             // move disambiguation by square
                             $pgn = $piece->getId().$piece->getSq().$sqs[1];
