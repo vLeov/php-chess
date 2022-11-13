@@ -547,7 +547,7 @@ class Board extends \SplObjectStorage
     protected function isValidMove(object $move): bool
     {
         return !$this->isAmbiguousMove($move) &&
-            !$this->isAmbiguousCapture($move);  
+            !$this->isAmbiguousCapture($move);
     }
 
     /**
@@ -659,44 +659,44 @@ class Board extends \SplObjectStorage
                             $piece->sqCastleLong() &&
                             $this->play($color, Castle::LONG)
                         ) {
-                            return true;
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, Piece::K.'x'.$sqs[1])) {
-                            return true;
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, Piece::K.$sqs[1])) {
-                            return true;
+                            return $this->afterPlayLan();
                         }
                         break;
                     case Piece::P:
                         try {
                             if ($this->play($color, $sqs[1])) {
-                                return true;
+                                return $this->afterPlayLan();
                             }
                         } catch (\Exception $e) {
                         }
                         try {
                             if ($this->play($color, $piece->getSqFile()."x$sqs[1]")) {
-                                return true;
+                                return $this->afterPlayLan();
                             }
                         } catch (\Exception $e) {
                         }
                         break;
                     default:
                         if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
-                            return true;
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, $piece->getId().$sqs[1])) {
-                            return true;
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
-                            return true; // disambiguation by file
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
-                            return true; // disambiguation by file
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
-                            return true; // disambiguation by rank
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
-                            return true; // disambiguation by rank
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
-                            return true; // disambiguation by square
+                            return $this->afterPlayLan();
                         } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
-                            return true; // disambiguation by square
+                            return $this->afterPlayLan();
                         }
                         break;
                 }
@@ -704,6 +704,24 @@ class Board extends \SplObjectStorage
         }
 
         return false;
+    }
+
+    /**
+     * Updates the history after a move in long algebrac notation is made.
+     *
+     * @return bool
+     */
+    private function afterPlayLan(): bool
+    {
+        $end = $this->getHistory()[count($this->getHistory()) - 1];
+        if ($this->isMate()) {
+            $end->move->pgn .= '#';
+        } elseif ($this->isCheck()) {
+            $end->move->pgn .= '+';
+        }
+        $this->getHistory()[count($this->getHistory()) - 1] = $end;
+
+        return true;
     }
 
     /**
