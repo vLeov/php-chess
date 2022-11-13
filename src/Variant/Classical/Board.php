@@ -546,13 +546,8 @@ class Board extends \SplObjectStorage
      */
     protected function isValidMove(object $move): bool
     {
-        if ($this->isAmbiguousMove($move)) {
-            return false;
-        } elseif ($this->isAmbiguousCapture($move)) {
-            return false;
-        }
-
-        return true;
+        return !$this->isAmbiguousMove($move) &&
+            !$this->isAmbiguousCapture($move);  
     }
 
     /**
