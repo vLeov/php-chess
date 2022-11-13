@@ -548,12 +548,7 @@ class Board extends \SplObjectStorage
     {
         if ($this->isAmbiguousMove($move)) {
             return false;
-        }
-        if (
-            $move->isCapture &&
-            $move->id !== Piece::P &&
-            !$this->getPieceBySq($move->sq->next)
-        ) {
+        } elseif ($this->isAmbiguousCapture($move)) {
             return false;
         }
 
@@ -580,6 +575,24 @@ class Board extends \SplObjectStorage
         }
 
         return count($ambiguous) > 1;
+    }
+
+    /**
+     * Checks out if a capture is ambiguous.
+     *
+     * @param object $move
+     * @return bool true if the capture is ambiguous; otherwise false
+     */
+    protected function isAmbiguousCapture(object $move): bool
+    {
+        // because of the en passant rule
+        if ($move->id !== Piece::P) {
+            if ($move->isCapture && !$this->getPieceBySq($move->sq->next)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
