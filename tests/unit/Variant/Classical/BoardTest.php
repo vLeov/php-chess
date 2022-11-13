@@ -454,7 +454,7 @@ class BoardTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | getPiecesByColor()
+    | getPieces()
     |--------------------------------------------------------------------------
     |
     | Gets the pieces by color.
@@ -470,8 +470,8 @@ class BoardTest extends AbstractUnitTestCase
 
         $board = (new PgnPlayer($A59))->play()->getBoard();
 
-        $this->assertSame(14, count($board->getPiecesByColor(Color::W)));
-        $this->assertSame(13, count($board->getPiecesByColor(Color::B)));
+        $this->assertSame(14, count($board->getPieces(Color::W)));
+        $this->assertSame(13, count($board->getPieces(Color::B)));
     }
 
     /**
@@ -483,8 +483,8 @@ class BoardTest extends AbstractUnitTestCase
 
         $board = (new PgnPlayer($A74))->play()->getBoard();
 
-        $this->assertSame(15, count($board->getPiecesByColor(Color::W)));
-        $this->assertSame(15, count($board->getPiecesByColor(Color::B)));
+        $this->assertSame(15, count($board->getPieces(Color::W)));
+        $this->assertSame(15, count($board->getPieces(Color::B)));
     }
 
     /**
@@ -496,8 +496,8 @@ class BoardTest extends AbstractUnitTestCase
 
         $board = (new PgnPlayer($B56))->play()->getBoard();
 
-        $this->assertSame(15, count($board->getPiecesByColor(Color::W)));
-        $this->assertSame(15, count($board->getPiecesByColor(Color::B)));
+        $this->assertSame(15, count($board->getPieces(Color::W)));
+        $this->assertSame(15, count($board->getPieces(Color::B)));
     }
 
     /*

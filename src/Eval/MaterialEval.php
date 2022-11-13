@@ -28,12 +28,12 @@ class MaterialEval extends AbstractEval
 
     public function eval(): array
     {
-        foreach ($this->board->getPiecesByColor(Color::W) as $piece) {
+        foreach ($this->board->getPieces(Color::W) as $piece) {
             if ($piece->getId() !== Piece::K) {
                 $this->result[Color::W] += $this->value[$piece->getId()];
             }
         }
-        foreach ($this->board->getPiecesByColor(Color::B) as $piece) {
+        foreach ($this->board->getPieces(Color::B) as $piece) {
             if ($piece->getId() !== Piece::K) {
                 $this->result[Color::B] += $this->value[$piece->getId()];
             }

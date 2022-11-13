@@ -46,7 +46,7 @@ class ConnectivityEval extends AbstractEval
 
     private function color(string $color): void
     {
-        foreach ($this->board->getPiecesByColor($color) as $piece) {
+        foreach ($this->board->getPieces($color) as $piece) {
             switch ($piece->getId()) {
                 case Piece::K:
                     $this->result[$color] += count(

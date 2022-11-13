@@ -380,35 +380,24 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns the pieces by color.
+     * Returns an array of pieces.
      *
      * @param string $color
      * @return array
      */
-    public function getPiecesByColor(string $color): array
+    public function getPieces(string $color = ''): array
     {
         $pieces = [];
         $this->rewind();
         while ($this->valid()) {
             $piece = $this->current();
-            $piece->getColor() !== $color ?: $pieces[] = $piece;
-            $this->next();
-        }
-
-        return $pieces;
-    }
-
-    /**
-     * Returns all pieces.
-     *
-     * @return array
-     */
-    public function getPieces(): array
-    {
-        $pieces = [];
-        $this->rewind();
-        while ($this->valid()) {
-            $pieces[] = $this->current();
+            if ($color) {
+                if ($piece->getColor() === $color) {
+                    $pieces[] = $piece;
+                }
+            } else {
+                $pieces[] = $piece;
+            }
             $this->next();
         }
 
@@ -445,7 +434,7 @@ class Board extends \SplObjectStorage
     private function pickPiece(object $move): array
     {
         $found = [];
-        foreach ($this->getPiecesByColor($move->color) as $piece) {
+        foreach ($this->getPieces($move->color) as $piece) {
             if ($piece->getId() === $move->id) {
                 if ($piece->getId() === Piece::K) {
                     return [$piece->setMove($move)];
@@ -1008,7 +997,7 @@ class Board extends \SplObjectStorage
     private function isTrapped(): bool
     {
         $escape = 0;
-        foreach ($this->getPiecesByColor($this->turn) as $piece) {
+        foreach ($this->getPieces($this->turn) as $piece) {
             foreach ($piece->sqs() as $sq) {
                 if ($piece->getId() === Piece::K) {
                     if ($sq === $piece->sqCastleShort()) {
