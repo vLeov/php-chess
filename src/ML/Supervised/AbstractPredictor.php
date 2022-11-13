@@ -42,10 +42,6 @@ abstract class AbstractPredictor
         $dataset = new Unlabeled([$balance]);
         $prediction = current($this->estimator->predict($dataset));
         $color = $this->board->getTurn();
-        // TODO
-        // Replace legalMoves()
-        // For example:
-        // $this->board->getPieceBySq('e5')->sqs();
         foreach ($this->board->legalMoves() as $legalMove) {
             $clone = unserialize(serialize($this->board));
             $clone->play($color, $legalMove);
