@@ -8,17 +8,6 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class CastlingRule
 {
-    protected array $file = [
-        'a' => 0,
-        'b' => 1,
-        'c' => 2,
-        'd' => 3,
-        'e' => 4,
-        'f' => 5,
-        'g' => 6,
-        'h' => 7,
-    ];
-
     protected array $rule = [
         Color::W => [
             Piece::K => [
@@ -88,37 +77,6 @@ class CastlingRule
 
     public function getRule(): array
     {
-        $this->fenDist()->kPos();
-
         return $this->rule;
-    }
-
-    protected function fenDist(): CastlingRule
-    {
-        $short = abs(
-            ord($this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'][0]) -
-            ord($this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['current'][0])
-        );
-
-        $long = abs(
-            ord($this->rule[Color::W][Piece::K][Castle::LONG]['sq']['current'][0]) -
-            ord($this->rule[Color::W][Piece::R][Castle::LONG]['sq']['current'][0])
-        );
-
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['fenDist'] = $short === 1 ? '' : $short - 1;
-        $this->rule[Color::W][Piece::K][Castle::LONG]['fenDist'] = $long === 1 ? '' : $long - 1;
-
-        return $this;
-    }
-
-    protected function kPos(): CastlingRule
-    {
-        $short = $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['next'][0];
-        $long = $this->rule[Color::W][Piece::K][Castle::LONG]['sq']['next'][0];
-
-        $this->rule[Color::W][Piece::K][Castle::SHORT]['i'] = $this->file[$short];
-        $this->rule[Color::W][Piece::K][Castle::LONG]['i'] = $this->file[$long];
-
-        return $this;
     }
 }

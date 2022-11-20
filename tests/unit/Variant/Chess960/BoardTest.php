@@ -59,8 +59,6 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'd1',
                             'next' => 'g1',
                         ],
-                        'fenDist' => '',
-                        'i' => 6,
                     ],
                     Castle::LONG => [
                         'sqs' => [ 'b1', 'c1' ],
@@ -68,8 +66,6 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'd1',
                             'next' => 'c1',
                         ],
-                        'fenDist' => 2,
-                        'i' => 2,
                     ],
                 ],
                 Piece::R => [
@@ -142,8 +138,6 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'd1',
                             'next' => 'g1',
                         ],
-                        'fenDist' => '',
-                        'i' => 6,
                     ],
                     Castle::LONG => [
                         'sqs' => [ 'c1' ],
@@ -151,8 +145,6 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'd1',
                             'next' => 'c1',
                         ],
-                        'fenDist' => 1,
-                        'i' => 2,
                     ],
                 ],
                 Piece::R => [
@@ -225,8 +217,6 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'e1',
                             'next' => 'g1',
                         ],
-                        'fenDist' => 1,
-                        'i' => 6,
                     ],
                     Castle::LONG => [
                         'sqs' => [ 'c1' ],
@@ -234,8 +224,6 @@ class BoardTest extends AbstractUnitTestCase
                             'current' => 'e1',
                             'next' => 'c1',
                         ],
-                        'fenDist' => '',
-                        'i' => 2,
                     ],
                 ],
                 Piece::R => [
