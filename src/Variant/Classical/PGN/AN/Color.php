@@ -27,7 +27,7 @@ class Color extends AbstractNotation implements ValidationInterface
     public static function validate(string $value): string
     {
         if (!in_array($value, self::values())) {
-            throw new UnknownNotationException;
+            throw new UnknownNotationException();
         }
 
         return $value;

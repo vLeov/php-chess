@@ -34,7 +34,7 @@ class Square extends AbstractNotation implements ValidationInterface
     public static function validate(string $value): string
     {
         if (!preg_match('/^' . static::REGEX . '$/', $value)) {
-            throw new UnknownNotationException;
+            throw new UnknownNotationException();
         }
 
         return $value;

@@ -106,7 +106,7 @@ class Stockfish
                 !in_array($key, array_keys(self::OPTIONS)) ||
                 !in_array($val, self::OPTIONS[$key])
             ) {
-                throw new StockfishException;
+                throw new StockfishException();
             }
         }
 
@@ -128,7 +128,7 @@ class Stockfish
                 !in_array($key, array_keys(self::PARAMS)) ||
                 !in_array($val, self::PARAMS[$key])
             ) {
-                throw new StockfishException;
+                throw new StockfishException();
             }
         }
 

@@ -91,11 +91,11 @@ class PgnPlayer
         foreach ($this->moves as $key => $val) {
             if ($key % 2 === 0) {
                 if (!$this->board->play('w', $val)) {
-                    throw new PlayerException;
+                    throw new PlayerException();
                 }
             } else {
                 if (!$this->board->play('b', $val)) {
-                    throw new PlayerException;
+                    throw new PlayerException();
                 }
             }
             $this->history[] = array_values($this->board->toAsciiArray());

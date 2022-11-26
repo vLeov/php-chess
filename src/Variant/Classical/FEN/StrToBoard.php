@@ -57,7 +57,7 @@ class StrToBoard
                 $board = $this->doublePawnPush($board);
             }
         } catch (\Throwable $e) {
-            throw new UnknownNotationException;
+            throw new UnknownNotationException();
         }
 
         return $board;

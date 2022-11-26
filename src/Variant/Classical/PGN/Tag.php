@@ -96,7 +96,7 @@ class Tag extends AbstractNotation
         }
 
         if (!$isValid) {
-            throw new UnknownNotationException;
+            throw new UnknownNotationException();
         }
 
         $exploded = explode(' "', $tag);

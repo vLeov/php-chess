@@ -34,7 +34,7 @@ class CastlingAbility implements ValidationInterface
             return $value;
         }
 
-        throw new UnknownNotationException;
+        throw new UnknownNotationException();
     }
 
     /**

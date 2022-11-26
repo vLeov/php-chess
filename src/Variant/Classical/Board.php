@@ -444,7 +444,7 @@ class Board extends \SplObjectStorage
             }
         }
         if (!$found) {
-            throw new BoardException;
+            throw new BoardException();
         }
 
         return $found;

@@ -114,7 +114,7 @@ class Move extends AbstractNotation
                 return $value;
         }
 
-        throw new UnknownNotationException;
+        throw new UnknownNotationException();
     }
 
     /**
@@ -297,6 +297,6 @@ class Move extends AbstractNotation
             ];
         }
 
-        throw new UnknownNotationException;
+        throw new UnknownNotationException();
     }
 }

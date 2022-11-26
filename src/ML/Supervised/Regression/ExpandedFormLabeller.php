@@ -58,7 +58,7 @@ class ExpandedFormLabeller extends AbstractLabeller
     protected function sum(array $terms): BigInteger
     {
         if (count($terms) !== count((new Heuristics())->getDims())) {
-            throw new MLException;
+            throw new MLException();
         }
 
         $sum = BigInteger::of(0)

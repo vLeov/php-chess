@@ -32,7 +32,7 @@ class PiecePlacement extends ClassicalFenPiecePlacement
             return $value;
         }
 
-        throw new UnknownNotationException;
+        throw new UnknownNotationException();
     }
 
     /**

@@ -60,7 +60,7 @@ class Movetext
     public function validate(): string
     {
         if (!$this->isOrdered()) {
-            throw new MovetextException;
+            throw new MovetextException();
         }
 
         foreach ($this->movetext->moves as $move) {

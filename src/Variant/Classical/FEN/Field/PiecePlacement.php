@@ -33,7 +33,7 @@ class PiecePlacement implements ValidationInterface
             return $value;
         }
 
-        throw new UnknownNotationException;
+        throw new UnknownNotationException();
     }
 
     /**

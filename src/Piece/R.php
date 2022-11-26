@@ -32,7 +32,7 @@ class R extends Slider
     public function __construct(string $color, string $sq, array $size, string $type)
     {
         if (!in_array($type, RType::all())) {
-            throw new PieceTypeException;
+            throw new PieceTypeException();
         }
 
         parent::__construct($color, $sq, $size, Piece::R);
