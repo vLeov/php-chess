@@ -2,15 +2,17 @@
 
 namespace Chess\Media;
 
-use Chess\Variant\Classical\Board;
+use Chess\Variant\Capablanca80\Board as Capablanca80Board;
+use Chess\Variant\Chess960\Board as Chess960Board;
+use Chess\Variant\Classical\Board as ClassicalBoard;
 
 class BoardToMp4
 {
-    protected Board $board;
+    protected ClassicalBoard $board;
 
     protected bool $flip;
 
-    public function __construct(Board $board, bool $flip = false)
+    public function __construct(ClassicalBoard $board, bool $flip = false)
     {
         $this->board = $board;
 
@@ -34,7 +36,13 @@ class BoardToMp4
 
     private function frames(string $filepath, string $filename): BoardToMp4
     {
-        $board = new Board();
+        if (is_a($this->board, Capablanca80Board::class)) {
+            $board = new Capablanca80Board();
+        } elseif (is_a($this->board, Chess960Board::class)) {
+            $board = new Chess960Board($this->board->getStartPos());
+        } elseif (is_a($this->board, ClassicalBoard::class)) {
+            $board = new ClassicalBoard();
+        }
         $boardToPng = new BoardToPng($board, $this->flip);
         foreach ($this->board->getHistory() as $key => $item) {
             $n = sprintf("%02d", $key);
