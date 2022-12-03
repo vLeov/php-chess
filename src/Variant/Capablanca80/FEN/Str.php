@@ -2,9 +2,9 @@
 
 namespace Chess\Variant\Capablanca80\FEN;
 
-use Chess\Variant\Capablanca80\FEN\Field\EnPassantTargetSquare;
 use Chess\Variant\Capablanca80\FEN\Field\PiecePlacement;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
+use Chess\Variant\Classical\FEN\Field\EnPassantTargetSquare;
 use Chess\Variant\Classical\FEN\Field\SideToMove;
 use Chess\Variant\Classical\FEN\Str as ClassicalFenStr;
 
