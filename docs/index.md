@@ -1,4 +1,4 @@
-`Chess\Game` is the building block of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is a wrapper for a chessboard object of type `Chess\Variant\Classical\Board` to play chess online actually, and it is also used in the [Chess API](https://github.com/chesslablab/chess-api) as well as in [command line](https://github.com/chesslablab/php-chess/blob/master/cli/chess.php) (CLI) apps.
+`Chess\Game` is the building block of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is a wrapper for a chessboard object of type `Chess\Variant\Classical\Board` to play chess online actually. It is also used in the [Chess API](https://github.com/chesslablab/chess-api) as well as in [command line](https://php-chess.readthedocs.io/en/latest/cli/) (CLI) apps.
 
 Variants:
 

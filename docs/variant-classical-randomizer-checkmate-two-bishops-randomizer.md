@@ -2,7 +2,7 @@
 
 ---
 
-#### `public function getBoard()`
+#### `public function getBoard(): Board`
 
 Returns a `Chess\Variant\Classical\Board` object representing an endgame position to deliver checkmate with two bishops.
 

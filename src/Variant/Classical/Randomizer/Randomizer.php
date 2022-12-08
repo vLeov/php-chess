@@ -70,7 +70,7 @@ class Randomizer
      *
      * @return \Chess\Variant\Classical\Board
      */
-    public function getBoard()
+    public function getBoard(): Board
     {
         return $this->board;
     }

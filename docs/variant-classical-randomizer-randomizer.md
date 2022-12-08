@@ -2,7 +2,7 @@
 
 ---
 
-#### `public function getBoard()`
+#### `public function getBoard(): Board`
 
 Returns a `Chess\Variant\Classical\Board` object with random pieces.
 
