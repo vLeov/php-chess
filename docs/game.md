@@ -1,4 +1,4 @@
-`Chess\Game` is the main component of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is a wrapper for a `Chess\Variant\Classical\Board` object to play chess online but it is also used on command line (CLI) apps as well as in APIs.
+`Chess\Game` is the building block of the [PHP Chess Server](https://github.com/chesslablab/chess-server). It is a wrapper for a chessboard object of type `Chess\Variant\Classical\Board` to play chess online actually, and it is also used in the [Chess API](https://github.com/chesslablab/chess-api) as well as in [command line](https://github.com/chesslablab/php-chess/blob/master/cli/chess.php) (CLI) apps.
 
 Variants:
 
@@ -16,13 +16,13 @@ Modes:
 - `Chess\Game:MODE_PLAY`
 - `Chess\Game:MODE_STOCKFISH`
 
-Let's look at the methods available through some examples. For further information please check out the tests in [tests/unit/GameTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GameTest.php).
+Let's look at the methods available in the `Chess\Game` class through some examples. For further information please check out the tests in [tests/unit/GameTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GameTest.php).
 
 ---
 
 #### `public function play(string $color, string $pgn): bool`
 
-Starts a game and makes a move in PGN format.
+The following code snippet starts a classical game in analysis mode and makes the first move in PGN format.
 
 ```php
 use Chess\Game;
@@ -37,7 +37,7 @@ $game->play('w', 'Nc3');
 
 #### `public function playLan(string $color, string $uci): bool`
 
-Starts a game and makes a move in long algebraic notation.
+This one also starts a classical game in analysis mode making the first move in long algebraic notation instead.
 
 ```php
 use Chess\Game;
@@ -50,9 +50,9 @@ $game = new Game(
 $game->playLan('w', 'b1c3');
 ```
 
-#### `public function loadFen(string $string): void`
+#### `public function loadFen(string $fen): void`
 
-Starts a game in FEN mode. A FEN string is loaded to continue playing a game.
+Described next is how to start a classical game in FEN mode. After a FEN string is successfully loaded the game can be continued by making moves either in PGN or in long algebraic notation.
 
 ```php
 use Chess\Game;
@@ -68,7 +68,7 @@ $game->play('b', 'Bg7');
 
 #### `public function loadPgn(string $movetext): void`
 
-Starts a game in PGN mode. A PGN movetext is loaded to continue playing a game.
+This is how to start a game in PGN mode. After a PGN movetext is successfully loaded the game can be continued by making moves either in PGN or in long algebraic notation.
 
 ```php
 use Chess\Game;
@@ -84,9 +84,7 @@ $game->play('w', 'e5');
 
 #### `public function ai(array $options = [], array $params = []): ?object`
 
-Returns a computer generated response to the current position.
-
-Starts a chess game in grandmaster mode and plays `1.e4`.
+The code snippet below returns a computer generated response to the current position. It starts a classical chess game in grandmaster mode to then play `1.e4`.
 
 ```php
 use Chess\Game;
@@ -122,7 +120,7 @@ stdClass Object
 )
 ```
 
-Starts a chess game in Stockfish mode and plays `1.e4`. If provided with a .json file on instantiation `Chess\Game` will try to respond with a grandmaster move first if found in the file.
+A `Chess\Game` object can also be started in Stockfish mode. If provided with a `.json` file on instantiation it'll try to respond with a grandmaster move first, if found in the file.
 
 ```php
 use Chess\Game;
@@ -158,7 +156,7 @@ stdClass Object
 )
 ```
 
-Starts a chess game in Stockfish mode and plays `1.e4` without any help from grandmasters.
+The `players.json` file, which is an optional parameter, is to be generated with the command line tools available in the [Chess Data](https://github.com/chesslablab/chess-data) repository. The chess game can be started in Stockfish mode without any help from grandmasters.
 
 ```php
 use Chess\Game;
@@ -183,7 +181,7 @@ stdClass Object
 
 #### `public function state(): object`
 
-Returns the state of the board.
+Returns the state of the game in `stdClass` format.
 
 ```php
 use Chess\Game;
@@ -220,6 +218,6 @@ $game->state()->isMate;
 $game->state()->isStalemate;
 ```
 
-#### `public function getBoard(): Board`
+#### `public function getBoard(): ClassicalBoard`
 
-Returns the `Chess\Variant\Classical\Board` object.
+`Chess\Game` is a wrapper for an object of type `Chess\Variant\Classical\Board` and this method returns the underlying chessboard.

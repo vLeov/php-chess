@@ -226,11 +226,11 @@ class Game
     /**
      * Loads a FEN string allowing to continue a chess game.
      *
-     * @param string $string
+     * @param string $fen
      */
-    public function loadFen(string $string): void
+    public function loadFen(string $fen): void
     {
-        $this->board = (new StrToBoard($string))->create();
+        $this->board = (new StrToBoard($fen))->create();
     }
 
     /**
