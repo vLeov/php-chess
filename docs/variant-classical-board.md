@@ -1,4 +1,6 @@
-`Chess\Variant\Classical\Board` is a chessboard representation that allows to play chess in Portable Game Notation (PGN) format. It is the cornerstone to create multiple features such as FEN string processing, ASCII representation, PNG image creation and position evaluation. Let's look at the methods available through the following example. For further information please check out the tests in [tests/unit/Variant/Classical/BoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php).
+`Chess\Variant\Classical\Board` is a chessboard representation serving as a cornerstone that allows to create multiple features: FEN and PGN processing, ASCII representation, PNG image creation, position evaluation and more. Also it is a base class for other chess variants such as `Chess\Variant\Capablanca80\Board` and `Chess\Variant\Chess960\Board`.
+
+Let's look at the methods available in this class through the following example.
 
 ```php
 use Chess\Variant\Classical\Board;
@@ -10,11 +12,14 @@ $board->play('b', 'd5');
 $board->play('w', 'exd5');
 $board->play('b', 'Qxd5');
 ```
+
+For further information please check out the tests in [tests/unit/Variant/Classical/BoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php).
+
 ---
 
 #### `public function getCaptures(): ?array`
 
-Get the pieces captured by both players.
+Returns the pieces captured by both players.
 
 ```php
 $captures = $board->getCaptures();
@@ -60,7 +65,7 @@ array (
 
 #### `public function getCastlingAbility(): string`
 
-Get the castling ability in FEN format.
+Returns the castling ability in FEN format.
 
 ```php
 $castlingAbility = $board->getCastlingAbility();
@@ -73,7 +78,7 @@ var_export($castlingAbility);
 
 #### `public function getHistory(): ?array`
 
-Get the history.
+Returns the history.
 
 ```php
 $history = $board->getHistory();
@@ -123,7 +128,7 @@ array (
 
 #### `public function getMovetext(): string`
 
-Get the movetext.
+Returns the PGN movetext.
 
 ```php
 $movetext = $board->getMovetext();
@@ -136,7 +141,7 @@ var_export($movetext);
 
 #### `public function getTurn(): string`
 
-Get the current turn.
+Returns the current turn.
 
 ```php
 $turn = $board->getTurn();
@@ -149,7 +154,7 @@ var_export($turn);
 
 #### `public function play(string $color, string $pgn): bool`
 
-Make a move in PGN format.
+Makes a move in PGN format.
 
 ```php
 $board->play('w', 'Nc3');
@@ -162,9 +167,9 @@ var_export($movetext);
 '1.e4 d5 2.exd5 Qxd5 3.Nc3'
 ```
 
-#### `public function playLan(string $color, string $uci): bool`
+#### `public function playLan(string $color, string $lan): bool`
 
-Make a move in long algebraic notation.
+Makes a move in long algebraic notation.
 
 ```php
 $board->playLan('w', 'b1c3');
@@ -179,7 +184,7 @@ var_export($movetext);
 
 #### `public function toAsciiArray(bool $flip = false): array`
 
-Returns an ASCII array.
+Returns an ASCII array representing the current position.
 
 ```php
 $array = $board->toAsciiArray();
@@ -290,7 +295,7 @@ Array
 
 #### `public function toAsciiString(bool $flip = false): string`
 
-Returns an ASCII string.
+Returns an ASCII string representing the current position.
 
 ```php
 $string = $board->toAsciiString();
@@ -310,7 +315,7 @@ R  N  B  Q  K  B  N  R
 
 #### `public function toFen(): string`
 
-Returns a FEN string.
+Returns a FEN string representing the current position.
 
 ```php
 $string = $board->toFen();
@@ -323,7 +328,7 @@ rnb1kbnr/ppp1pppp/8/3q4/8/8/PPPP1PPP/RNBQKBNR w KQkq -
 
 #### `public function legalSqs(string $sq): ?object`
 
-Returns the legal squares of a piece.
+Returns the legal squares of the given piece.
 
 ```php
 $sqs = $board->legalSqs('d5');
@@ -377,7 +382,7 @@ Output:
 
 #### `public function isCheck(): bool`
 
-Check out whether the current player is in check.
+Finds out if the player whose turn is to move is in check.
 
 ```php
 $isCheck = $board->isCheck();
@@ -390,7 +395,7 @@ false
 
 #### `public function isMate(): bool`
 
-Check out whether the current player is checkmated.
+Finds out if the player whose turn is to move is checkmated.
 
 ```php
 $isMate = $board->isMate();
@@ -403,7 +408,7 @@ false
 
 #### `public function isStalemate(): bool`
 
-Check out whether the current player is stalemated.
+Finds out if the player whose turn is to move is stalemated.
 
 ```php
 $isStalemate = $board->isStalemate();

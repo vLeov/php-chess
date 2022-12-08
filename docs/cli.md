@@ -4,8 +4,6 @@
 $ php cli/chess.php
 ```
 
-This will start a prompt waiting for your move.
-
 ```text
 chess > e4
 chess > 1.e4 e5

@@ -1,7 +1,6 @@
 site_name: PHP Chess
 pages:
-  - Home: index.md
-  - Chess\Game: game.md
+  - Chess\Game: index.md
   - Chess\Grandmaster: grandmaster.md
   - Chess\Heuristics: heuristics.md
   - Chess\Movetext: movetext.md
@@ -16,5 +15,4 @@ pages:
   - Chess\Variant\Classical\Randomizer\Endgame\PawnEndgameRandomizer: variant-classical-randomizer-endgame-pawn-endgame-randomizer.md
   - Chess\Variant\Classical\Randomizer\Randomizer: variant-classical-randomizer-randomizer.md
   - Command Line Interface: cli.md
-  - Usage: usage.md
 theme: readthedocs

@@ -1,4 +1,4 @@
-A [`Chess\Game`](https://php-chess.readthedocs.io/en/latest/game/) object can be thought of in terms of snapshots describing what's going on its `Chess\Variant\Classical\Board` as reported by a number of evaluation features. PGN movetexts can be evaluated by considering those. Let's look at the methods available through the following example. For further information please check out the tests in [tests/unit/HeuristicsTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php).
+A `Chess\Game` object can be thought of in terms of snapshots describing what's going on on its underlying `Chess\Variant\Classical\Board` as reported by a number of evaluation features. PGN movetexts can be evaluated by considering those. Let's look at the methods available through the following example. For further information please check out the tests in [tests/unit/HeuristicsTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php).
 
 ```php
 use Chess\Game;
