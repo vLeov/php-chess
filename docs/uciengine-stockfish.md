@@ -28,6 +28,6 @@ Set Stockfish options.
 
 Sets the current command params.
 
-#### `public function shortFen(string $fen): string`
+#### `public function play(string $fen): string`
 
-Makes the best move returning a short FEN string, only the piece placement and the side to move are returned.
+Returns Stockfish's move.
