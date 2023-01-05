@@ -15,8 +15,8 @@ $stockfish = (new Stockfish($board))
         'depth' => 3
     ]);
 
-$uci = $stockfish->play($board->toFen());
-$board->playLan('b', $uci);
+$lan = $stockfish->play($board->toFen());
+$board->playLan('b', $lan);
 ```
 ---
 

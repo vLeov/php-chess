@@ -35,7 +35,7 @@ $game = new Game(
 $game->play('w', 'Nc3');
 ```
 
-#### `public function playLan(string $color, string $uci): bool`
+#### `public function playLan(string $color, string $lan): bool`
 
 This one also starts a classical game in analysis mode making the first move in long algebraic notation instead.
 
