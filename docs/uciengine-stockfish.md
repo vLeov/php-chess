@@ -30,4 +30,4 @@ Sets the current command params.
 
 #### `public function play(string $fen): string`
 
-Returns Stockfish's move.
+Returns Stockfish's move in LAN format.

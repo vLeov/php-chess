@@ -179,7 +179,7 @@ class Stockfish
     }
 
     /**
-     * Makes the best move.
+     * Returns the best move in LAN format.
      *
      * @param string $fen
      * @return string
