@@ -44,9 +44,9 @@ class BoardToMp4
             $board = new ClassicalBoard();
         }
         $boardToPng = new BoardToPng($board, $this->flip);
-        $boardToPng->setBoard($board)->output($filepath, "{$filename}_00");
+        $boardToPng->setBoard($board)->output($filepath, "{$filename}_000");
         foreach ($this->board->getHistory() as $key => $item) {
-            $n = sprintf("%02d", $key + 1);
+            $n = sprintf("%03d", $key + 1);
             $board->play($item->move->color, $item->move->pgn);
             $boardToPng->setBoard($board)->output($filepath, "{$filename}_{$n}");
         }
