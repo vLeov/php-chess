@@ -7,6 +7,7 @@ use Chess\Movetext;
 use Chess\Exception\UnknownNotationException;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Chess960\Board;
+use Chess\Variant\Classical\PGN\Move as ClassicalPgnMove;
 
 class GameTest extends AbstractUnitTestCase
 {
@@ -86,12 +87,13 @@ class GameTest extends AbstractUnitTestCase
      */
     public function play_games()
     {
+        $move = new ClassicalPgnMove();
         foreach (new \DirectoryIterator(self::DATA_FOLDER."/pgn/") as $fileInfo) {
             if ($fileInfo->isDot()) continue;
             $filename = $fileInfo->getFilename();
-            $contents = file_get_contents(self::DATA_FOLDER."/pgn/$filename");
-            $contents = (new Movetext($contents))->validate();
-            $movetext = (new Movetext($contents))->getMovetext();
+            $text = file_get_contents(self::DATA_FOLDER."/pgn/$filename");
+            $text = (new Movetext($move, $text))->validate();
+            $movetext = (new Movetext($move, $text))->getMovetext();
             $game = new Game(
                 Game::VARIANT_CLASSICAL,
                 Game::MODE_ANALYSIS

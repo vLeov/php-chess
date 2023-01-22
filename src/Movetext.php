@@ -3,14 +3,11 @@
 namespace Chess;
 
 use Chess\Exception\MovetextException;
-use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Termination;
 use Chess\Variant\Classical\PGN\Move;
 
 /**
  * Movetext.
- *
- * Movetext provides with functionality to parse and process a PGN movetext.
  *
  * @license GPL
  */
@@ -30,9 +27,15 @@ class Movetext
      */
     private object $movetext;
 
-    public function __construct(string $text)
+    /**
+     * Constructor.
+     *
+     * @param \Chess\Variant\Classical\PGN\Move $move
+     * @param string $text
+     */
+    public function __construct(Move $move, string $text)
     {
-        $this->move = new Move();
+        $this->move = $move;
 
         $this->movetext = (object) [
             'n' => [],

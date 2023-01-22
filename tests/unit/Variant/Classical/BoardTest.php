@@ -157,6 +157,7 @@ class BoardTest extends AbstractUnitTestCase
     public function get_history_in_D06()
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
+        $D06 = str_replace("\n", "", $D06);
 
         $board = (new PgnPlayer($D06))->play()->getBoard();
 
@@ -236,6 +237,7 @@ class BoardTest extends AbstractUnitTestCase
     public function get_history_in_C60()
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
+        $C60 = str_replace("\n", "", $C60);
 
         $board = (new PgnPlayer($C60))->play()->getBoard();
 
@@ -347,6 +349,7 @@ class BoardTest extends AbstractUnitTestCase
     public function get_history_in_C11()
     {
         $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
+        $C11 = str_replace("\n", "", $C11);
 
         $board = (new PgnPlayer($C11))->play()->getBoard();
 

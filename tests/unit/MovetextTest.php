@@ -4,9 +4,17 @@ namespace Chess\Tests\Unit\Variant\Classical\PGN;
 
 use Chess\Movetext;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\PGN\Move as ClassicalPgnMove;
 
 class MovetextTest extends AbstractUnitTestCase
 {
+    static private $move;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$move = new ClassicalPgnMove();
+    }
+
     public static $validData = [
         '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5',
         '1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3 dxe5 5.Nxe5 c6 6.Be2 Bf5 7.c3 Nd7',
@@ -27,7 +35,7 @@ class MovetextTest extends AbstractUnitTestCase
             'moves' => [ 'd4', 'Nf6', 'Nf3', 'e6', 'c4', 'Bb4+', 'Nbd2', 'O-O', 'a3', 'Be7', 'e4', 'd6', 'Bd3', 'c5' ],
         ];
 
-        $this->assertEquals($expected, (new Movetext($text))->getMovetext());
+        $this->assertEquals($expected, (new Movetext(self::$move, $text))->getMovetext());
     }
 
     /**
@@ -36,7 +44,7 @@ class MovetextTest extends AbstractUnitTestCase
      */
     public function sequence($text, $expected)
     {
-        $this->assertSame($expected, (new Movetext($text))->sequence());
+        $this->assertSame($expected, (new Movetext(self::$move, $text))->sequence());
     }
 
     /**
@@ -46,83 +54,83 @@ class MovetextTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Movetext('foo'))->validate();
+        (new Movetext(self::$move, 'foo'))->validate();
     }
 
     /**
      * @dataProvider validData
      * @test
      */
-    public function valid($expected, $movetext)
+    public function valid($expected, $text)
     {
-        $this->assertSame($expected, (new Movetext($movetext))->validate());
+        $this->assertSame($expected, (new Movetext(self::$move, $text))->validate());
     }
 
     /**
      * @dataProvider wrongNumbersData
      * @test
      */
-    public function wrong_numbers($movetext)
+    public function wrong_numbers($text)
     {
         $this->expectException(\Chess\Exception\MovetextException::class);
 
-        (new Movetext($movetext))->validate();
+        (new Movetext(self::$move,  $text))->validate();
     }
 
     /**
      * @dataProvider invalidMovesData
      * @test
      */
-    public function invalid_moves($movetext)
+    public function invalid_moves($text)
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new Movetext($movetext))->validate();
+        (new Movetext(self::$move, $text))->validate();
     }
 
     /**
      * @dataProvider curlyBracesFilteredData
      * @test
      */
-    public function curly_braces_filtered($expected, $movetext)
+    public function curly_braces_filtered($expected, $text)
     {
-        $this->assertSame($expected, (new Movetext($movetext))->validate());
+        $this->assertSame($expected, (new Movetext(self::$move, $text))->validate());
     }
 
     /**
      * @dataProvider parenthesesFilteredData
      * @test
      */
-    public function parentheses_filtered($expected, $movetext)
+    public function parentheses_filtered($expected, $text)
     {
-        $this->assertSame($expected, (new Movetext($movetext))->validate());
+        $this->assertSame($expected, (new Movetext(self::$move, $text))->validate());
     }
 
     /**
      * @dataProvider tooManySpacesFilteredData
      * @test
      */
-    public function too_many_spaces_filtered($expected, $movetext)
+    public function too_many_spaces_filtered($expected, $text)
     {
-        $this->assertSame($expected, (new Movetext($movetext))->validate());
+        $this->assertSame($expected, (new Movetext(self::$move, $text))->validate());
     }
 
     /**
      * @dataProvider fideFilteredData
      * @test
      */
-    public function fide_filtered($expected, $movetext)
+    public function fide_filtered($expected, $text)
     {
-        $this->assertSame($expected, (new Movetext($movetext))->validate());
+        $this->assertSame($expected, (new Movetext(self::$move, $text))->validate());
     }
 
     /**
      * @dataProvider withResultData
      * @test
      */
-    public function with_result_filtered($expected, $movetext)
+    public function with_result_filtered($expected, $text)
     {
-        $this->assertSame($expected, (new Movetext($movetext))->validate());
+        $this->assertSame($expected, (new Movetext(self::$move, $text))->validate());
     }
 
     public function validData()

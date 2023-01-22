@@ -3,7 +3,10 @@
 namespace Chess\Player;
 
 use Chess\Exception\PlayerException;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\Capablanca80\Board as Capablanca80Board;
+use Chess\Variant\Capablanca80\PGN\Move as Capablanca80PgnMove;
+use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\PGN\Move as ClassicalPgnMove;
 use Chess\Movetext;
 
 /**
@@ -20,14 +23,22 @@ class PgnPlayer extends AbstractPlayer
      * Constructor.
      *
      * @param string $text
-     * @param \Chess\Variant\Classical\Board $board
+     * @param ClassicalBoard $board
      */
-    public function __construct(string $text, Board $board = null)
+    public function __construct(string $text, ClassicalBoard $board = null)
     {
-        $movetext = (new Movetext($text))->validate();
-        $board ? $this->board = $board : $this->board = new Board();
-        $this->moves = (new Movetext($movetext))->getMovetext()->moves;
-        $this->history = [array_values((new Board())->toAsciiArray())];
+        $board ? $this->board = $board : $this->board = new ClassicalBoard();
+
+        if (is_a($board, Capablanca80Board::class)) {
+            $movetext = new Movetext(new Capablanca80PgnMove(), $text);
+        } else {
+            $movetext = new Movetext(new ClassicalPgnMove(), $text);
+        }
+
+        $movetext->validate();
+
+        $this->moves = $movetext->getMovetext()->moves;
+        $this->history = [array_values((new ClassicalBoard())->toAsciiArray())];
     }
 
     /**
