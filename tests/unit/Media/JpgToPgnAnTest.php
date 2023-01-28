@@ -10,9 +10,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_a1()
+    public function predict_a1_52()
     {
-        $filename = self::DATA_FOLDER.'/img/a1.jpg';
+        $filename = self::DATA_FOLDER.'/img/a1_52.jpg';
 
         $expected = 'empty';
 
@@ -22,9 +22,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_b1()
+    public function predict_b1_52()
     {
-        $filename = self::DATA_FOLDER.'/img/b1.jpg';
+        $filename = self::DATA_FOLDER.'/img/b1_52.jpg';
 
         $expected = 'empty';
 
@@ -34,9 +34,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_w_B()
+    public function predict_w_B_52()
     {
-        $filename = self::DATA_FOLDER.'/img/B.jpg';
+        $filename = self::DATA_FOLDER.'/img/B_52.jpg';
 
         $expected = 'B';
 
@@ -46,9 +46,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_b_B()
+    public function predict_b_B_52()
     {
-        $filename = self::DATA_FOLDER.'/img/b.jpg';
+        $filename = self::DATA_FOLDER.'/img/b_52.jpg';
 
         $expected = 'b';
 
@@ -58,9 +58,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_w_Q()
+    public function predict_w_Q_52()
     {
-        $filename = self::DATA_FOLDER.'/img/Q.jpg';
+        $filename = self::DATA_FOLDER.'/img/Q_52.jpg';
 
         $expected = 'Q';
 
@@ -70,9 +70,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_b_Q()
+    public function predict_b_Q_52()
     {
-        $filename = self::DATA_FOLDER.'/img/q.jpg';
+        $filename = self::DATA_FOLDER.'/img/q_52.jpg';
 
         $expected = 'q';
 
@@ -82,9 +82,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_w_R()
+    public function predict_w_R_52()
     {
-        $filename = self::DATA_FOLDER.'/img/R.jpg';
+        $filename = self::DATA_FOLDER.'/img/R_52.jpg';
 
         $expected = 'R';
 
@@ -94,9 +94,9 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function predict_b_R()
+    public function predict_b_R_52()
     {
-        $filename = self::DATA_FOLDER.'/img/r.jpg';
+        $filename = self::DATA_FOLDER.'/img/r_52.jpg';
 
         $expected = 'r';
 
