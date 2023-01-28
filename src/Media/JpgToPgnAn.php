@@ -16,7 +16,7 @@ class JpgToPgnAn
 
     protected \GdImage $image;
 
-    protected array $pieces;
+    protected array $labels;
 
     protected array $report;
 
@@ -28,7 +28,7 @@ class JpgToPgnAn
 
         $this->image = imagecreatefromjpeg($filename);
 
-        $this->pieces = [
+        $this->labels = [
             Piece::B,
             Piece::K,
             Piece::N,
@@ -41,6 +41,7 @@ class JpgToPgnAn
             mb_strtolower(Piece::P),
             mb_strtolower(Piece::Q),
             mb_strtolower(Piece::R),
+            'empty',
         ];
 
         $this->calcReport();
@@ -48,9 +49,9 @@ class JpgToPgnAn
 
     protected function calcReport()
     {
-        foreach ($this->pieces as $piece) {
+        foreach ($this->labels as $label) {
             $samples[] = [$this->image];
-            $labels[] = $piece;
+            $labels[] = $label;
         }
 
         $dataset = new Labeled($samples, $labels);
