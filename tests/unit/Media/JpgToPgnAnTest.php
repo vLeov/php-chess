@@ -10,6 +10,30 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function predict_a1()
+    {
+        $filename = self::DATA_FOLDER.'/img/a1.jpg';
+
+        $expected = 'empty';
+
+        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+    }
+
+    /**
+     * @test
+     */
+    public function predict_b1()
+    {
+        $filename = self::DATA_FOLDER.'/img/b1.jpg';
+
+        $expected = 'empty';
+
+        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+    }
+
+    /**
+     * @test
+     */
     public function predict_w_B()
     {
         $filename = self::DATA_FOLDER.'/img/B.jpg';
