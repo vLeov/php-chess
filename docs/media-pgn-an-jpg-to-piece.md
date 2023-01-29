@@ -2,7 +2,7 @@
 
 ---
 
-#### `public function predict()`
+#### `public function predict(): string`
 
 Converts a chess piece image in JPG format into its algebraic notation (AN) counterpart in PGN format.
 

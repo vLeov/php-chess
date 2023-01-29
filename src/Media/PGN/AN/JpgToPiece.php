@@ -47,7 +47,7 @@ class JpgToPiece
         $this->calcReport();
     }
 
-    protected function calcReport()
+    protected function calcReport(): void
     {
         foreach ($this->labels as $label) {
             $samples[] = [$this->image];
@@ -67,7 +67,7 @@ class JpgToPiece
         $this->report = $results['classes'];
     }
 
-    public function predict()
+    public function predict(): string
     {
         foreach ($this->report as $key => $val) {
             if ($val['true positives'] === 1) {
