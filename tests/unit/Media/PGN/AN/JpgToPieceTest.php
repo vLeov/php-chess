@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\Tests\Unit\Media;
+namespace Chess\Tests\Unit\Media\PGN\AN;
 
-use Chess\Media\JpgToPgnAn;
+use Chess\Media\PGN\AN\JpgToPiece;
 use Chess\Tests\AbstractUnitTestCase;
 
-class JpgToPgnAnTest extends AbstractUnitTestCase
+class JpgToPieceTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -16,7 +16,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'empty';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -28,7 +28,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'empty';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -40,7 +40,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'B';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -52,7 +52,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'b';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -64,7 +64,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'n';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -76,7 +76,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'P';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -88,7 +88,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'p';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -100,7 +100,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'Q';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -112,7 +112,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'Q';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -124,7 +124,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'q';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -136,7 +136,7 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'R';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 
     /**
@@ -148,6 +148,6 @@ class JpgToPgnAnTest extends AbstractUnitTestCase
 
         $expected = 'r';
 
-        $this->assertSame($expected, (new JpgToPgnAn($filename))->predict());
+        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
 }

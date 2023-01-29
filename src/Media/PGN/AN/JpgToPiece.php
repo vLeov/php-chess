@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Media;
+namespace Chess\Media\PGN\AN;
 
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Rubix\ML\PersistentModel;
@@ -8,9 +8,9 @@ use Rubix\ML\CrossValidation\Reports\MulticlassBreakdown;
 use Rubix\ML\Datasets\Labeled;
 use Rubix\ML\Persisters\Filesystem;
 
-class JpgToPgnAn
+class JpgToPiece
 {
-    const ML_PATH = __DIR__ . '/../../ml';
+    const ML_PATH = __DIR__ . '/../../../../ml';
 
     protected string $filename;
 
