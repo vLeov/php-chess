@@ -20,8 +20,6 @@ class JpgToPiece
 
     protected array $report;
 
-    protected string $prediction;
-
     public function __construct(string $filename)
     {
         $this->filename = $filename;
