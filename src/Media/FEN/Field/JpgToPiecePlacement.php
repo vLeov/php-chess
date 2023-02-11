@@ -72,9 +72,7 @@ class JpgToPiecePlacement
         foreach ($this->filepaths as $key => $val) {
             foreach ($val as $filepath) {
                 $prediction = (new JpgToPiece($filepath))->predict();
-                $prediction === 'empty'
-                    ? $this->piecePlacement .= '1'
-                    : $this->piecePlacement .= $prediction;
+                $this->piecePlacement .= $prediction;
             }
             $this->piecePlacement .= '/';
         }

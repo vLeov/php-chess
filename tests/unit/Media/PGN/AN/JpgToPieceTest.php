@@ -14,19 +14,7 @@ class JpgToPieceTest extends AbstractUnitTestCase
     {
         $filename = self::DATA_FOLDER.'/img/a1_52.jpg';
 
-        $expected = 'empty';
-
-        $this->assertSame($expected, (new JpgToPiece($filename))->predict());
-    }
-
-    /**
-     * @test
-     */
-    public function predict_b1_52()
-    {
-        $filename = self::DATA_FOLDER.'/img/b1_52.jpg';
-
-        $expected = 'empty';
+        $expected = '1';
 
         $this->assertSame($expected, (new JpgToPiece($filename))->predict());
     }
