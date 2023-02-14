@@ -53,7 +53,7 @@ $game->playLan('b', 'e7e5');
 
 ### Documentation
 
-Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/). Also you may want to read the [API Reference Guide](https://www.chesslablab.com/api/).
+Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/). Also you may want to read the [API Reference Guide](https://www.chesslablab.com/documentation/).
 
 ### Demo
 
