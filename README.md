@@ -14,43 +14,6 @@ Via composer:
 
     $ composer require chesslablab/php-chess
 
-### Play Chess
-
-Variants:
-
-- `Chess\Game::VARIANT_960`
-- `Chess\Game::VARIANT_CAPABLANCA_80`
-- `Chess\Game::VARIANT_CAPABLANCA_100`
-- `Chess\Game::VARIANT_CLASSICAL`
-
-Modes:
-
-- `Chess\Game::MODE_ANALYSIS`
-- `Chess\Game::MODE_GM`
-- `Chess\Game::MODE_FEN`
-- `Chess\Game::MODE_PGN`
-- `Chess\Game::MODE_PLAY`
-- `Chess\Game::MODE_STOCKFISH`
-
-```php
-use Chess\Game;
-
-$game = new Game(
-    Game::VARIANT_CLASSICAL,
-    Game::MODE_ANALYSIS
-);
-
-$game->play('w', 'e4');
-$game->play('b', 'e5');
-```
-
-`$game->play` returns `true` or `false` depending on whether or not a move can be made in Portable Game Notation (PGN) format. The Universal Chess Interface (UCI) protocol is supported as well as the long algebraic notation.
-
-```php
-$game->playLan('w', 'e2e4');
-$game->playLan('b', 'e7e5');
-```
-
 ### Documentation
 
 Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/) as well as the [reference guide](https://www.chesslablab.com/documentation/).
