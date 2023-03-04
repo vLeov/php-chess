@@ -69,7 +69,7 @@ class BoardToMp4
             }
         } else {
             if ($this->variant === Game::VARIANT_960) {
-                $this->board = new Chess960Board($this->board->getStartPos());
+                $this->board = new Chess960Board(str_split($this->startPos));
             } elseif ($this->variant === Game::VARIANT_CAPABLANCA_80) {
                 $this->board = new Capablanca80Board();
             } elseif ($this->variant === Game::VARIANT_CLASSICAL) {
