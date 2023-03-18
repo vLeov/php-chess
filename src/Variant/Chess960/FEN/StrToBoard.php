@@ -1,15 +1,16 @@
 <?php
 
-namespace Chess\Variant\Classical\FEN;
+namespace Chess\Variant\Chess960\FEN;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Piece\AsciiArray;
 use Chess\Piece\PieceArray;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\Chess960\Board;
+use Chess\Variant\Chess960\Rule\CastlingRule;
 use Chess\Variant\Classical\FEN\Str;
 use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
-use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * StrToBoard
@@ -31,16 +32,19 @@ class StrToBoard
 
     protected string $castlingAbility;
 
+    private array $startPos;
+
     protected array $castlingRule;
 
-    public function __construct(string $string)
+    public function __construct(string $string, array $startPos)
     {
         $this->size = Square::SIZE;
         $this->fenStr = new Str();
         $this->string = $this->fenStr->validate($string);
         $this->fields = array_filter(explode(' ', $this->string));
         $this->castlingAbility = $this->fields[2];
-        $this->castlingRule = (new CastlingRule())->getRule();
+        $this->startPos = $startPos;
+        $this->castlingRule =  (new CastlingRule($this->startPos))->getRule();
     }
 
     public function create(): Board
@@ -51,7 +55,7 @@ class StrToBoard
                 $this->size,
                 $this->castlingRule
             ))->getArray();
-            $board = (new Board($pieces, $this->castlingAbility))
+            $board = (new Board($this->startPos, $pieces, $this->castlingAbility))
                 ->setTurn($this->fields[1]);
             if ($this->fields[3] !== '-') {
                 $board = $this->doublePawnPush($board);
@@ -83,7 +87,7 @@ class StrToBoard
         $board = (new AsciiArray($board->toAsciiArray(), $this->size, $this->castlingRule))
             ->setElem($piece, $fromSq)
             ->setElem(' . ', $toSq)
-            ->toClassicalBoard(get_class($board), $turn);
+            ->toChess960Board(get_class($board), $turn, $this->castlingAbility, $this->startPos);
         $board->play($turn, $toSq);
 
         return $board;
