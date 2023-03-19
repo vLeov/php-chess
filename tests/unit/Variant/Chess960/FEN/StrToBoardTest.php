@@ -10,7 +10,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4()
+    public function RNBQKBNR_e4()
     {
         $startPos = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R' ];
 
@@ -38,7 +38,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_e5()
+    public function RNBQKBNR_e4_e5()
     {
         $startPos = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R' ];
 
@@ -66,7 +66,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_e5_Ng3_Nc6_Bc4_d6()
+    public function QNBRKBRN_e4_e5_Ng3_Nc6_Bc4_d6()
     {
         $startPos = ['Q', 'N', 'B', 'R', 'K', 'B', 'R', 'N' ];
 
@@ -94,7 +94,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_e5_Ng3_Nc6_Bc4_d6_play_O_O()
+    public function QNBRKBRN_e4_e5_Ng3_Nc6_Bc4_d6_play_O_O()
     {
         $startPos = ['Q', 'N', 'B', 'R', 'K', 'B', 'R', 'N' ];
 
@@ -124,7 +124,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_e5_Ng3_Nc6_Bc4_d6_O_O()
+    public function QNBRKBRN_e4_e5_Ng3_Nc6_Bc4_d6_O_O()
     {
         $startPos = ['Q', 'N', 'B', 'R', 'K', 'B', 'R', 'N' ];
 
@@ -152,9 +152,9 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function e4_Nc6_d3_Nd6_c3_e6_Nd2_Bf6_Ne2_Qe7()
+    public function BNNBQRKR_e4_Nc6_d3_Nd6_c3_e6_Nd2_Bf6_Ne2_Qe7()
     {
-        $startPos = ['B', 'N', 'N', 'B', 'Q', 'R', 'Q', 'R' ];
+        $startPos = ['B', 'N', 'N', 'B', 'Q', 'R', 'K', 'R' ];
 
         $board = (new StrToBoard(
             'b4rkr/ppppqppp/2nnpb2/8/4P3/2PP4/PP1NNPPP/B2BQRKR w KQkq -',
