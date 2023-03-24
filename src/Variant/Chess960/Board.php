@@ -26,16 +26,7 @@ final class Board extends ClassicalBoard
      *
      * @var array
      */
-     private array $startPos = [
-        Piece::R,
-        Piece::N,
-        Piece::B,
-        Piece::Q,
-        Piece::K,
-        Piece::B,
-        Piece::N,
-        Piece::R,
-     ];
+     private array $startPos;
 
     /**
      * Constructor.
@@ -47,10 +38,8 @@ final class Board extends ClassicalBoard
         array $pieces = null,
         string $castlingAbility = '-'
     ) {
-        if ($startPos) {
-            $this->startPos = $startPos;
-        }
         $this->size = Square::SIZE;
+        $this->startPos = $startPos ?? (new StartPosition())->getClassical();
         $this->castlingRule =  (new CastlingRule($this->startPos))->getRule();
         $this->move = new Move();
         if (!$pieces) {

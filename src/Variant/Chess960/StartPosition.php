@@ -26,6 +26,10 @@ class StartPosition
         return $this->arr;
     }
 
+    public function getClassical(): array {
+        return $this->arr;
+    }
+
     private function bishops()
     {
         $keys = [];
