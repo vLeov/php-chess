@@ -39,7 +39,7 @@ class BoardToMp4
     ) {
         $this->variant = $variant;
         $this->fen = $fen;
-        $this->startPos = $startPos;
+        $this->startPos = str_split($startPos);
         $this->flip = $flip;
 
         if ($variant === Game::VARIANT_960) {
@@ -73,7 +73,7 @@ class BoardToMp4
             }
         } else {
             if ($this->variant === Game::VARIANT_960) {
-                $this->board = new Chess960Board(str_split($this->startPos));
+                $this->board = new Chess960Board($this->startPos);
             } elseif ($this->variant === Game::VARIANT_CAPABLANCA_80) {
                 $this->board = new Capablanca80Board();
             } elseif ($this->variant === Game::VARIANT_CLASSICAL) {
