@@ -1,4 +1,4 @@
-`Chess\Media\BoardToPng` converts a `Chess\Variant\Classical\Board` object to a PNG image. Let's look at the methods available in this class through the following example. For further information please check out the tests in [tests/unit/Media/BoardToPngTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToPngTest.php).
+`Chess\Media\BoardToPng` converts a chess board object to a PNG image. Let's look at the methods available in this class through the following example. For further information please check out these [tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToPngTest.php).
 
 ---
 

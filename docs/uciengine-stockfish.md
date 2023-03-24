@@ -1,4 +1,4 @@
-`Chess\UciEngine\Stockfish` allows to play chess against the Stockfish chess engine. Let's look at the methods available in this class through the following example. For further information please check out the tests in [tests/unit/UciEngine/StockfishTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php).
+`Chess\UciEngine\Stockfish` allows to play chess against the Stockfish chess engine. Let's look at the methods available in this class through the following example. For further information please check out these [tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php).
 
 ```php
 use Chess\UciEngine\Stockfish;

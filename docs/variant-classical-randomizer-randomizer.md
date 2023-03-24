@@ -1,4 +1,4 @@
-`Chess\Randomizer\Randomizer` creates a `Chess\Variant\Classical\Board` object with random pieces as shown in the following example. For further information please check out the tests in [tests/unit/Randomizer/RandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Randomizer/RandomizerTest.php).
+`Chess\Randomizer\Randomizer` creates a `Chess\Variant\Classical\Board` object with random pieces as shown in the following example. For further information please check out these [tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Randomizer/RandomizerTest.php).
 
 ---
 

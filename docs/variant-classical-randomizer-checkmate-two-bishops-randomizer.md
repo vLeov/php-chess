@@ -1,4 +1,4 @@
-`Chess\Randomizer\Checkmate\TwoBishopsRandomizer` creates a `Chess\Variant\Classical\Board` object representing an endgame position to deliver checkmate with two bishops as shown in the following example. For further information please check out the tests in [tests/unit/Variant/Classical/Randomizer/Checkmate/TwoBishopsRandomizerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/Randomizer/Checkmate/TwoBishopsRandomizerTest.php).
+`Chess\Randomizer\Checkmate\TwoBishopsRandomizer` creates a chess board object representing an endgame position to deliver checkmate with two bishops as shown in the following example. For further information please check out these [tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/Randomizer/Checkmate/TwoBishopsRandomizerTest.php).
 
 ---
 

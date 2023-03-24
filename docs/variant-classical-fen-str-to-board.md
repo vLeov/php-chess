@@ -1,4 +1,4 @@
-`Chess\Variant\Classical\FEN\StrToBoard` converts a classical FEN string to a chess board object of type `Chess\Variant\Classical\Board`. Let's look at the methods available in this class through the following example. For further information please check out the tests in [tests/unit/Variant/Classical/FEN/StrToBoardTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/FEN/StrToBoardTest.php).
+`Chess\Variant\Classical\FEN\StrToBoard` converts a classical FEN string to a chess board object of type `Chess\Variant\Classical\Board`. Let's look at the methods available in this class through the following example. For further information please check out these [tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/FEN/StrToBoardTest.php).
 
 ---
 

@@ -1,4 +1,4 @@
-`Chess\Player\PgnPlayer` allows to play a PGN movetext returning a `Chess\Variant\Classical\Board` object as it is described in the following example. For further information you may want to check out the tests in [tests/unit/Player/PgnPlayerTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/PgnPlayerTest.php).
+`Chess\Player\PgnPlayer` allows to play a PGN movetext returning a `Chess\Variant\Classical\Board` object as it is described in the following example. For further information you may want to check out these [tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/PgnPlayerTest.php).
 
 ---
 
