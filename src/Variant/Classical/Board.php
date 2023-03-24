@@ -28,10 +28,7 @@ use Chess\Variant\Classical\Rule\CastlingRule;
 /**
  * Board
  *
- * Chess board representation that allows to play a game of chess in Portable
- * Game Notation (PGN) format. This class is the cornerstone that allows to build
- * multiple features on top of it: FEN string generation, ASCII representation,
- * PNG image creation, position evaluation, etc.
+ * Chess board representation to play classical chess.
  *
  * @author Jordi Bassagañas
  * @license GPL

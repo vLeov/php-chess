@@ -21,8 +21,7 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 /**
  * Board
  *
- * Chess board representation that allows to play a game of Capablanca chess in
- * Portable Game Notation (PGN) format.
+ * Chess board representation to play Capablanca chess on a 10×8 board.
  *
  * @author Jordi Bassagañas
  * @license GPL
