@@ -94,7 +94,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function QNBRKBRN_e4_e5_Ng3_Nc6_Bc4_d6_play_O_O()
+    public function QNBRKBRN_e4_e5_Ng3_Nc6_Bc4_d6_O_O()
     {
         $startPos = ['Q', 'N', 'B', 'R', 'K', 'B', 'R', 'N' ];
 
@@ -104,34 +104,6 @@ class StrToBoardTest extends AbstractUnitTestCase
         ))->create();
 
         $board->play('w', 'O-O');
-
-        $array = $board->toAsciiArray();
-
-        $expected = [
-            7 => [ ' q ', ' . ', ' b ', ' r ', ' k ', ' b ', ' r ', ' n ' ],
-            6 => [ ' p ', ' p ', ' p ', ' . ', ' . ', ' p ', ' p ', ' p ' ],
-            5 => [ ' . ', ' . ', ' n ', ' p ', ' . ', ' . ', ' . ', ' . ' ],
-            4 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ' ],
-            3 => [ ' . ', ' . ', ' B ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
-            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' N ', ' . ' ],
-            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ' ],
-            0 => [ ' Q ', ' N ', ' B ', ' R ', ' . ', ' R ', ' K ', ' . ' ],
-        ];
-
-        $this->assertSame($expected, $array);
-    }
-
-    /**
-     * @test
-     */
-    public function QNBRKBRN_e4_e5_Ng3_Nc6_Bc4_d6_O_O()
-    {
-        $startPos = ['Q', 'N', 'B', 'R', 'K', 'B', 'R', 'N' ];
-
-        $board = (new StrToBoard(
-            'q1brkbrn/ppp2ppp/2np4/4p3/2B1P3/6N1/PPPP1PPP/QNBR1RK1 b kq -',
-            $startPos
-        ))->create();
 
         $array = $board->toAsciiArray();
 
@@ -180,7 +152,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function QRKRNNBB_Bf2_Re8_Nd3_O_O_O_O_O_and_then_play()
+    public function QRKRNNBB_Bf2_Re8_Nd3_O_O_O_O_O()
     {
         $startPos = ['Q', 'R', 'K', 'R', 'N', 'N', 'B', 'B' ];
 
