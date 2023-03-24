@@ -1,4 +1,4 @@
-`Chess\Grandmaster` figures out the next move to be made based on the JSON filepath that is passed to its constructor. This file is to be generated with the command line tools available in the [Chess Data](https://github.com/chesslablab/chess-data) repo. Let's look at the methods available through some examples. For further information please check out the tests in [tests/unit/GrandmasterTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GrandmasterTest.php).
+`Chess\Grandmaster` figures out the next move to be made based on the JSON filepath that is passed to its constructor. This file is to be generated with the command line tools available in the [Chess Data](https://github.com/chesslablab/chess-data) repo. Let's look at the methods available in this class through some examples. For further information please check out the tests in [tests/unit/GrandmasterTest.php](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GrandmasterTest.php).
 
 ---
 
