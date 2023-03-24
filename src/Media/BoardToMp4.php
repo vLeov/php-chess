@@ -24,7 +24,7 @@ class BoardToMp4
 
     protected string $fen;
 
-    protected string $startPos;
+    protected array $startPos;
 
     protected bool $flip;
 
