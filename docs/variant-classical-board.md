@@ -1,4 +1,4 @@
-`Chess\Variant\Classical\Board` is a chessboard representation serving as a cornerstone that allows to create multiple features on top of it: FEN and PGN processing, ASCII representation, PNG image creation, position evaluation and more. Also it is a base class for other chess variants such as `Chess\Variant\Capablanca80\Board` and `Chess\Variant\Chess960\Board`.
+`Chess\Variant\Classical\Board` is a classical chess board representation allowing multiple features like FEN and PGN processing, ASCII representation, PNG image creation, position evaluation and more. Also it is the base class for chess variants such as `Chess\Variant\Capablanca80\Board` and `Chess\Variant\Chess960\Board`.
 
 Let's look at the methods available in this class through the following example.
 
