@@ -128,7 +128,8 @@ class BoardToPngTest extends AbstractUnitTestCase
 
         $board = (new PgnPlayer($D06))->play()->getBoard();
 
-        $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
+        $filename = (new BoardToPng($board))
+            ->output(self::OUTPUT_FOLDER, 'D06');
 
         $this->assertSame(
             sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
@@ -145,7 +146,8 @@ class BoardToPngTest extends AbstractUnitTestCase
 
         $board = (new PgnPlayer($D06))->play()->getBoard();
 
-        $filename = (new BoardToPng($board, $flip = true))->output(self::OUTPUT_FOLDER);
+        $filename = (new BoardToPng($board, $flip = true))
+            ->output(self::OUTPUT_FOLDER, 'D06_flip');
 
         $this->assertSame(
             sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
