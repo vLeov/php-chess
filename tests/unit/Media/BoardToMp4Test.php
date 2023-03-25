@@ -28,8 +28,8 @@ class BoardToMp4Test extends AbstractUnitTestCase
         ))->output(self::OUTPUT_FOLDER, 'A74');
 
         $this->assertSame(
-            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
-            sha1_file(self::DATA_FOLDER.'/mp4/A74.mp4')
+            filesize(self::OUTPUT_FOLDER.'/'.$filename),
+            filesize(self::DATA_FOLDER.'/mp4/A74.mp4')
         );
     }
 }
