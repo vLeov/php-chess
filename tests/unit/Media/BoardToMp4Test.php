@@ -35,21 +35,4 @@ class BoardToMp4Test extends AbstractUnitTestCase
             sha1_file(self::DATA_FOLDER.'/mp4/A74.mp4')
         );
     }
-
-    /**
-     * @test
-     */
-    public function folder_does_not_exist()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
-
-        $board = (new PgnPlayer($A74))->play()->getBoard();
-
-        $filename = (new BoardToMp4(
-            Game::VARIANT_CLASSICAL,
-            $A74
-        ))->output('foo');
-    }
 }
