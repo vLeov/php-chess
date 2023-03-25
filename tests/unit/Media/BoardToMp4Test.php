@@ -4,7 +4,6 @@ namespace Chess\Tests\Unit\Media;
 
 use Chess\Game;
 use Chess\Media\BoardToMp4;
-use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
 
 class BoardToMp4Test extends AbstractUnitTestCase
@@ -26,7 +25,7 @@ class BoardToMp4Test extends AbstractUnitTestCase
         $filename = (new BoardToMp4(
             Game::VARIANT_CLASSICAL,
             $A74
-        ))->output(self::OUTPUT_FOLDER);
+        ))->output(self::OUTPUT_FOLDER, 'A74');
 
         $this->assertSame(
             sha1_file(self::OUTPUT_FOLDER.'/'.$filename),

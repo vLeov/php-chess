@@ -30,6 +30,8 @@ class BoardToMp4
 
     protected ClassicalBoard $board;
 
+    protected $ext = '.mp4';
+
     public function __construct(
         string $variant,
         string $movetext,
@@ -82,19 +84,19 @@ class BoardToMp4
         }
     }
 
-    public function output(string $filepath): string
+    public function output(string $filepath, string $salt = ''): string
     {
         if (!file_exists($filepath)) {
             throw new \InvalidArgumentException('The folder does not exist.');
         }
 
-        $filename = uniqid();
+        $salt ? $filename = $salt.$this->ext : $filename = uniqid().$this->ext;
 
         $this->frames($filepath, $filename)
             ->animate(escapeshellarg($filepath), $filename)
             ->cleanup($filepath, $filename);
 
-        return $filename.'.mp4';
+        return $filename;
     }
 
     private function frames(string $filepath, string $filename): BoardToMp4
@@ -112,7 +114,7 @@ class BoardToMp4
 
     private function animate(string $filepath, string $filename): BoardToMp4
     {
-        $cmd = "ffmpeg -r 1 -pattern_type glob -i {$filepath}/{$filename}*.png -vf fps=25 -x264-params threads=6 -pix_fmt yuv420p {$filepath}/{$filename}.mp4";
+        $cmd = "ffmpeg -r 1 -pattern_type glob -i {$filepath}/{$filename}*.png -vf fps=25 -x264-params threads=6 -pix_fmt yuv420p {$filepath}/{$filename}";
         $escapedCmd = escapeshellcmd($cmd);
         exec($escapedCmd);
 
@@ -121,7 +123,7 @@ class BoardToMp4
 
     private function cleanup(string $filepath, string $filename): void
     {
-        if (file_exists("{$filepath}/$filename.mp4")) {
+        if (file_exists("{$filepath}/$filename")) {
             array_map('unlink', glob($filepath . '/*.png'));
         }
     }
