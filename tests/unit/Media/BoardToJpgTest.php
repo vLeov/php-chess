@@ -29,8 +29,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/start.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/start.jpg')
         );
     }
 
@@ -46,8 +46,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/01_kaufman.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/01_kaufman.jpg')
         );
     }
 
@@ -63,8 +63,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/01_kaufman_flip.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/01_kaufman_flip.jpg')
         );
     }
 
@@ -80,8 +80,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/02_kaufman.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/02_kaufman.jpg')
         );
     }
 
@@ -97,8 +97,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/A59.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/A59.jpg')
         );
     }
 
@@ -114,8 +114,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/A59_flip.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/A59_flip.jpg')
         );
     }
 
@@ -131,8 +131,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/symmetrical_defense_to_the_queens_gambit.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/symmetrical_defense_to_the_queens_gambit.jpg')
         );
     }
 
@@ -148,8 +148,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/symmetrical_defense_to_the_queens_gambit_flip.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/symmetrical_defense_to_the_queens_gambit_flip.jpg')
         );
     }
 
@@ -163,8 +163,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/start_capablanca100.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/start_capablanca100.jpg')
         );
     }
 
@@ -178,8 +178,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/start_capablanca80.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/start_capablanca80.jpg')
         );
     }
 
@@ -203,8 +203,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/Nj3_e5___capablanca80.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/Nj3_e5___capablanca80.jpg')
         );
     }
 
@@ -233,8 +233,8 @@ class BoardToJpgTest extends AbstractUnitTestCase
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
-            md5_file(self::OUTPUT_FOLDER.'/'.$filename),
-            md5_file(self::DATA_FOLDER.'/img/a4_j7___capablanca100.jpg')
+            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
+            sha1_file(self::DATA_FOLDER.'/img/a4_j7___capablanca100.jpg')
         );
     }
 }
