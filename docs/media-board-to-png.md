@@ -2,9 +2,9 @@
 
 ---
 
-#### `public function output(string $filepath, string $salt = ''): string`
+#### `public function output(string $filepath, string $filename = ''): string`
 
-Creates a PNG image with a randomish filename, for example `620a7d61dcf57.png`.
+Creates a PNG image.
 
 ```php
 use Chess\Variant\Classical\FEN\StrToBoard;

@@ -1,10 +1,10 @@
-Creates an MP4 video given a set of parameters.
+`Chess\Media\BoardToMp4` converts a chess board object to an MP4 video. Let's look at the methods available in this class through the following example. For further information please check out these [tests](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToMp4Test.php).
 
 ---
 
-#### `public function output(string $filepath): string`
+#### `public function output(string $filepath, string $filename = ''): string`
 
-Creates an MP4 video with a randomish filename, for example `620a7d61dcf57.mp4`.
+Creates an MP4 video.
 
 ```php
 use Chess\Game;
