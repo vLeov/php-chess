@@ -23,8 +23,6 @@ class BoardToMp4Test extends AbstractUnitTestCase
     {
         $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
 
-        $board = (new PgnPlayer($A74))->play()->getBoard();
-
         $filename = (new BoardToMp4(
             Game::VARIANT_CLASSICAL,
             $A74
