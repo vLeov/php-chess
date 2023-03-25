@@ -84,13 +84,13 @@ class BoardToMp4
         }
     }
 
-    public function output(string $filepath, string $salt = ''): string
+    public function output(string $filepath, string $filename = ''): string
     {
         if (!file_exists($filepath)) {
             throw new \InvalidArgumentException('The folder does not exist.');
         }
 
-        $salt ? $filename = $salt.$this->ext : $filename = uniqid().$this->ext;
+        $filename ? $filename = $filename.$this->ext : $filename = uniqid().$this->ext;
 
         $this->frames($filepath, $filename)
             ->animate(escapeshellarg($filepath), $filename)
