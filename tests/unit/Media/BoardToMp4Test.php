@@ -29,4 +29,25 @@ class BoardToMp4Test extends AbstractUnitTestCase
 
         $this->assertTrue(file_exists(self::OUTPUT_FOLDER.'/'.$filename));
     }
+
+    /**
+     * @test
+     */
+    public function output_960_QRKRNNBB()
+    {
+        $movetext = '1.Bf2 Re8 2.Nd3 O-O-O 3.O-O';
+
+        $fen = 'qrkr1nbb/pppp2pp/3n1p2/4p3/4P3/4NP2/PPPP2PP/QRKRN1BB w KQkq -';
+
+        $startPos = 'QRKRNNBB';
+
+        $filename = (new BoardToMp4(
+            Game::VARIANT_960,
+            $movetext,
+            $fen,
+            $startPos
+        ))->output(self::OUTPUT_FOLDER);
+
+        $this->assertTrue(file_exists(self::OUTPUT_FOLDER.'/'.$filename));
+    }
 }
