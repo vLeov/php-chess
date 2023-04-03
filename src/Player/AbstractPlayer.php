@@ -36,6 +36,13 @@ abstract class AbstractPlayer
     protected array $history;
 
     /**
+     * FEN history.
+     *
+     * @var array
+     */
+    protected array $fen;
+
+    /**
      * Returns the resulting board object of playing a game.
      *
      * @return \Chess\Variant\Classical\Board
@@ -63,5 +70,15 @@ abstract class AbstractPlayer
     public function getHistory(): array
     {
         return $this->history;
+    }
+
+    /**
+     * Returns the FEN history.
+     *
+     * @return array
+     */
+    public function getFen(): array
+    {
+        return $this->fen;
     }
 }

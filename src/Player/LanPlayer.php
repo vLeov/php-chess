@@ -26,6 +26,7 @@ class LanPlayer extends AbstractPlayer
         $board ? $this->board = $board : $this->board = new Board();
         $this->moves = array_values(array_filter(explode(' ', $text)));
         $this->history = [array_values((new Board())->toAsciiArray())];
+        $this->fen = [(new Board())->toFen()];
     }
 
     /**
@@ -46,6 +47,7 @@ class LanPlayer extends AbstractPlayer
                 }
             }
             $this->history[] = array_values($this->board->toAsciiArray());
+            $this->fen[] = $this->board->toFen();
         }
 
         return $this;
