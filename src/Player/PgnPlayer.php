@@ -38,7 +38,6 @@ class PgnPlayer extends AbstractPlayer
         $movetext->validate();
 
         $this->moves = $movetext->getMovetext()->moves;
-        $this->history = [array_values((new ClassicalBoard())->toAsciiArray())];
         $this->fen = [(new ClassicalBoard())->toFen()];
     }
 
@@ -59,7 +58,6 @@ class PgnPlayer extends AbstractPlayer
                     throw new PlayerException();
                 }
             }
-            $this->history[] = array_values($this->board->toAsciiArray());
             $this->fen[] = $this->board->toFen();
         }
 

@@ -29,13 +29,6 @@ abstract class AbstractPlayer
     protected array $moves;
 
     /**
-     * History.
-     *
-     * @var array
-     */
-    protected array $history;
-
-    /**
      * FEN history.
      *
      * @var array
@@ -60,16 +53,6 @@ abstract class AbstractPlayer
     public function getMoves(): array
     {
         return $this->moves;
-    }
-
-    /**
-     * Returns the history.
-     *
-     * @return array
-     */
-    public function getHistory(): array
-    {
-        return $this->history;
     }
 
     /**
