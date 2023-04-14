@@ -523,7 +523,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_f4_f7___Cg8_legal_sqs_g8()
+    public function play_f4_f7___Cg8_legal_g8()
     {
         $board = new Board();
 
@@ -536,14 +536,29 @@ class BoardTest extends AbstractUnitTestCase
         $expected = (object) [
             'color' => 'b',
             'id' => 'C',
-            'sqs' => [
-                'g7', 'g6', 'g5', 'g4', 'g3',
-                'f8', 'e8', 'd8', 'c8', 'b8', 'a8', 'h8', 'i8', 'j8',
-                'e7', 'f6', 'h6', 'i7',
+            'fen' => [
+                'g7' => 'rnabqkb1nr/ppppp1pppp/10/5pc3/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'g6' => 'rnabqkb1nr/ppppp1pppp/10/5p4/6c3/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'g5' => 'rnabqkb1nr/ppppp1pppp/10/5p4/10/6c3/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'g4' => 'rnabqkb1nr/ppppp1pppp/10/5p4/10/10/5Pc3/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'g3' => 'rnabqkb1nr/ppppp1pppp/10/5p4/10/10/5P4/6cN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'f8' => 'rnabqkb1nr/ppppp1pppp/5c4/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'e8' => 'rnabqkb1nr/ppppp1pppp/4c5/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'd8' => 'rnabqkb1nr/ppppp1pppp/3c6/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'c8' => 'rnabqkb1nr/ppppp1pppp/2c7/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'b8' => 'rnabqkb1nr/ppppp1pppp/1c8/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'a8' => 'rnabqkb1nr/ppppp1pppp/c9/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'h8' => 'rnabqkb1nr/ppppp1pppp/7c2/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'i8' => 'rnabqkb1nr/ppppp1pppp/8c1/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'j8' => 'rnabqkb1nr/ppppp1pppp/9c/5p4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'e7' => 'rnabqkb1nr/ppppp1pppp/10/4cp4/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'f6' => 'rnabqkb1nr/ppppp1pppp/10/5p4/5c4/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'h6' => 'rnabqkb1nr/ppppp1pppp/10/5p4/7c2/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
+                'i7' => 'rnabqkb1nr/ppppp1pppp/10/5p2c1/10/10/5P4/6CN2/PPPPP1PPPP/RNABQKB2R w KQkq -',
             ],
         ];
 
-        $this->assertEquals($expected, $board->legalSqs('g8'));
+        $this->assertEquals($expected, $board->legal('g8'));
     }
 
     /*

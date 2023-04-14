@@ -1088,68 +1088,68 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns the legal squares of a piece.
+     * Returns the legal FEN positions of a piece.
      *
      * @param string $sq
      * @return object|null
      */
-     public function legalSqs(string $sq): ?object
+     public function legal(string $sq): ?object
      {
          if ($piece = $this->getPieceBySq($sq)) {
-             $sqs = [];
-             $color = $piece->getColor();
-             foreach ($piece->sqs() as $sq) {
-                 $clone = unserialize(serialize($this));
-                 try {
+            $fen = [];
+            $color = $piece->getColor();
+            foreach ($piece->sqs() as $sq) {
+                $clone = unserialize(serialize($this));
+                try {
                     switch ($piece->getId()) {
                         case Piece::K:
                             if ($clone->play($color, Piece::K.'x'.$sq)) {
-                                $sqs[] = $sq;
+                                $fen[$sq] = $clone->toFen();
                             } elseif ($clone->play($color, Piece::K.$sq)) {
-                                $sqs[] = $sq;
+                                $fen[$sq] = $clone->toFen();
                             }
                             break;
                         case Piece::P:
                             if ($clone->play($color, $piece->getSqFile()."x$sq")) {
-                                $sqs[] = $sq;
+                                $fen[$sq] = $clone->toFen();
                             } elseif ($clone->play($color, $sq)) {
-                                $sqs[] = $sq;
+                                $fen[$sq] = $clone->toFen();
                             }
                             break;
                         default:
                             if ($clone->play($color, "{$piece->getId()}x$sq")) {
-                                $sqs[] = $sq;
+                                $fen[$sq] = $clone->toFen();
                             } elseif ($clone->play($color, $piece->getId().$sq)) {
-                                $sqs[] = $sq;
+                                $fen[$sq] = $clone->toFen();
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
-                                $sqs[] = $sq; // disambiguation by file
+                                $fen[$sq] = $clone->toFen(); // disambiguation by file
                             } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
-                                $sqs[] = $sq; // disambiguation by file
+                                $fen[$sq] = $clone->toFen(); // disambiguation by file
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
-                                $sqs[] = $sq; // disambiguation by rank
+                                $fen[$sq] = $clone->toFen(); // disambiguation by rank
                             } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
-                                $sqs[] = $sq; // disambiguation by rank
+                                $fen[$sq] = $clone->toFen(); // disambiguation by rank
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
-                                $sqs[] = $sq; // disambiguation by square
+                                $fen[$sq] = $clone->toFen(); // disambiguation by square
                             } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
-                                $sqs[] = $sq; // disambiguation by square
+                                $fen[$sq] = $clone->toFen(); // disambiguation by square
                             }
-                            break;
+                        break;
                     }
                 } catch (\Exception $e) {
                 }
-             }
-             $result = [
-                 'color' => $color,
-                 'id' => $piece->getId(),
-                 'sqs' => $sqs,
-             ];
-             if ($piece->getId() === Piece::P) {
-                 if ($enPassant = $piece->getEnPassantSq()) {
-                     $result['enPassant'] = $enPassant;
-                 }
-             }
-             return (object) $result;
+            }
+            $result = [
+                'color' => $color,
+                'id' => $piece->getId(),
+                'fen' => $fen,
+            ];
+            if ($piece->getId() === Piece::P) {
+                if ($enPassant = $piece->getEnPassantSq()) {
+                    $result['enPassant'] = $enPassant;
+                }
+            }
+            return (object) $result;
          }
 
          return null;

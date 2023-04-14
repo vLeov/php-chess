@@ -2249,7 +2249,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function legal_sqs_e4_e5_Nf3_Nf6_Bc4_Be7()
+    public function legal_e4_e5_Nf3_Nf6_Bc4_Be7()
     {
         $board = new Board();
 
@@ -2263,10 +2263,14 @@ class BoardTest extends AbstractUnitTestCase
         $expected = (object) [
             'color' => 'w',
             'id' => 'K',
-            'sqs' => [ 'e2', 'f1', 'g1'],
+            'fen' => [
+                'e2' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPPKPPP/RNBQ3R b kq -',
+                'f1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1K1R b kq -',
+                'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ2KR b kq -',
+            ],
         ];
 
-        $this->assertEquals($expected, $board->legalSqs('e1'));
+        $this->assertEquals($expected, $board->legal('e1'));
     }
 
     /*

@@ -326,24 +326,23 @@ print_r($string);
 rnb1kbnr/ppp1pppp/8/3q4/8/8/PPPP1PPP/RNBQKBNR w KQkq -
 ```
 
-#### `public function legalSqs(string $sq): ?object`
+#### `public function legal(string $sq): ?object`
 
-Returns the legal squares of the given piece.
+Returns the legal FEN positions of a piece.
 
 ```php
-$sqs = $board->legalSqs('d5');
+$legal = $board->legal('d5');
 
-var_export($sqs);
+var_export($legal);
 ```
 
-`$sqs` is a PHP object with the information described below.
+`$legal` is a PHP object with the information described below.
 
 | Property    | Description                          |
 |-------------|--------------------------------------|
 | `color`     | The piece's color in PGN format      |
 | `id`        | The piece's id in PGN format         |
-| `sq`        | The piece's position on the board    |
-| `moves`     | The piece's possible moves           |
+| `fen`       | The piece's legal FEN positions      |
 | `enPassant` | The en passant pawn, if any          |
 
 Output:
@@ -352,30 +351,29 @@ Output:
 (object) array(
    'color' => 'b',
    'id' => 'Q',
-   'sq' => 'd5',
-   'moves' =>
+   'fen' =>
   array (
-    0 => 'd6',
-    1 => 'd7',
-    2 => 'd8',
-    3 => 'd4',
-    4 => 'd3',
-    5 => 'd2',
-    6 => 'c5',
-    7 => 'b5',
-    8 => 'a5',
-    9 => 'e5',
-    10 => 'f5',
-    11 => 'g5',
-    12 => 'h5',
-    13 => 'c6',
-    14 => 'e6',
-    15 => 'c4',
-    16 => 'b3',
-    17 => 'a2',
-    18 => 'e4',
-    19 => 'f3',
-    20 => 'g2',
+    'd6' => 'rnb1kbnr/ppp1pppp/3q4/8/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'd7' => 'rnb1kbnr/pppqpppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'd8' => 'rnbqkbnr/ppp1pppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'd4' => 'rnb1kbnr/ppp1pppp/8/8/3q4/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'd3' => 'rnb1kbnr/ppp1pppp/8/8/8/3q4/PPPP1PPP/RNBQKBNR b KQkq -',
+    'd2' => 'rnb1kbnr/ppp1pppp/8/8/8/8/PPPq1PPP/RNBQKBNR b KQkq -',
+    'c5' => 'rnb1kbnr/ppp1pppp/8/2q5/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'b5' => 'rnb1kbnr/ppp1pppp/8/1q6/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'a5' => 'rnb1kbnr/ppp1pppp/8/q7/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'e5' => 'rnb1kbnr/ppp1pppp/8/4q3/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'f5' => 'rnb1kbnr/ppp1pppp/8/5q2/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'g5' => 'rnb1kbnr/ppp1pppp/8/6q1/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'h5' => 'rnb1kbnr/ppp1pppp/8/7q/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'c6' => 'rnb1kbnr/ppp1pppp/2q5/8/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'e6' => 'rnb1kbnr/ppp1pppp/4q3/8/8/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'c4' => 'rnb1kbnr/ppp1pppp/8/8/2q5/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'b3' => 'rnb1kbnr/ppp1pppp/8/8/8/1q6/PPPP1PPP/RNBQKBNR b KQkq -',
+    'a2' => 'rnb1kbnr/ppp1pppp/8/8/8/8/qPPP1PPP/RNBQKBNR b KQkq -',
+    'e4' => 'rnb1kbnr/ppp1pppp/8/8/4q3/8/PPPP1PPP/RNBQKBNR b KQkq -',
+    'f3' => 'rnb1kbnr/ppp1pppp/8/8/8/5q2/PPPP1PPP/RNBQKBNR b KQkq -',
+    'g2' => 'rnb1kbnr/ppp1pppp/8/8/8/8/PPPP1PqP/RNBQKBNR b KQkq -',
   ),
 )
 ```
