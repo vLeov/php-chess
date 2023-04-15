@@ -11,7 +11,6 @@ use Chess\Piece\R;
 use Chess\Piece\RType;
 use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -2119,9 +2118,8 @@ class BoardTest extends AbstractUnitTestCase
         $board->undo($board->getCastlingAbility());
 
         $expected = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3';
-        $string = (new BoardToStr($board))->create();
 
-        $this->assertSame($expected, $string);
+        $this->assertSame($expected, $board->toFen());
     }
 
     /**
@@ -2142,9 +2140,8 @@ class BoardTest extends AbstractUnitTestCase
         $board->undo();
 
         $expected = 'r2qkbnr/pbpppppp/1pn5/8/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq -';
-        $string = (new BoardToStr($board))->create();
 
-        $this->assertSame($expected, $string);
+        $this->assertSame($expected, $board->toFen());
     }
 
     /**
@@ -2165,9 +2162,30 @@ class BoardTest extends AbstractUnitTestCase
         $board->undo();
 
         $expected = 'r2qkbnr/pbpppppp/1pn5/8/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq -';
-        $string = (new BoardToStr($board))->create();
 
-        $this->assertSame($expected, $string);
+        $this->assertSame($expected, $board->toFen());
+    }
+
+    /**
+     * @test
+     */
+    public function undo_e4_e5_Nf3_Nf6_Be2_Be7_O_O()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Be2');
+        $board->play('b', 'Be7');
+        $board->play('w', 'O-O');
+
+        $board->undo();
+
+        $expected = 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQK2R w KQkq -';
+
+        $this->assertSame($expected, $board->toFen());
     }
 
     /**
