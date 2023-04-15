@@ -422,7 +422,8 @@ false
 Undoes the last move.
 
 ```php
-$movetext = $board->undo()->getMovetext();
+$board = $board->undo();
+$movetext = $board->getMovetext();
 
 var_export($movetext);
 ```
