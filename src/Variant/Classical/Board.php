@@ -1103,7 +1103,19 @@ class Board extends \SplObjectStorage
                 try {
                     switch ($piece->getId()) {
                         case Piece::K:
-                            if ($clone->play($color, Piece::K.'x'.$sq)) {
+                            if (
+                                $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
+                                $piece->sqCastleShort() &&
+                                $clone->play($color, Castle::SHORT)
+                            ) {
+                                $fen[$sq] = $clone->toFen();
+                            } elseif (
+                                $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
+                                $piece->sqCastleLong() &&
+                                $clone->play($color, Castle::LONG)
+                            ) {
+                                $fen[$sq] = $clone->toFen();
+                            } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
                                 $fen[$sq] = $clone->toFen();
                             } elseif ($clone->play($color, Piece::K.$sq)) {
                                 $fen[$sq] = $clone->toFen();

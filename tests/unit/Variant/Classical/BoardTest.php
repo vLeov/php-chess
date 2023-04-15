@@ -2266,7 +2266,7 @@ class BoardTest extends AbstractUnitTestCase
             'fen' => [
                 'e2' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPPKPPP/RNBQ3R b kq -',
                 'f1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1K1R b kq -',
-                'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ2KR b kq -',
+                'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq -',
             ],
         ];
 
