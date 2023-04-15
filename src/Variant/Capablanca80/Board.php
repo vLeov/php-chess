@@ -11,6 +11,7 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
+use Chess\Player\PgnPlayer;
 use Chess\Variant\Capablanca80\Rule\CastlingRule;
 use Chess\Variant\Capablanca80\PGN\Move;
 use Chess\Variant\Capablanca80\PGN\AN\Square;
@@ -89,5 +90,18 @@ class Board extends ClassicalBoard
         }
 
         $this->refresh();
+    }
+
+    /**
+     * Undoes the last move.
+     *
+     * @return \Chess\Variant\Capablanca80\Board
+     */
+    public function undo(): Board
+    {
+        $movetext = $this->popHistory()->getMovetext();
+        $board = new Board();
+
+        return (new PgnPlayer($movetext, $board))->play()->getBoard();
     }
 }

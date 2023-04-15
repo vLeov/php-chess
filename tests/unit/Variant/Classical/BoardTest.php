@@ -2115,7 +2115,7 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('w', 'e4');
         $board->play('b', 'e5');
 
-        $board->undo($board->getCastlingAbility());
+        $board = $board->undo($board->getCastlingAbility());
 
         $expected = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3';
 
@@ -2137,7 +2137,7 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('b', 'Nc6');
         $board->play('w', 'O-O');
 
-        $board->undo();
+        $board = $board->undo();
 
         $expected = 'r2qkbnr/pbpppppp/1pn5/8/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq -';
 
@@ -2159,7 +2159,7 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('b', 'Nc6');
         $board->play('w', 'Ke2');
 
-        $board->undo();
+        $board = $board->undo();
 
         $expected = 'r2qkbnr/pbpppppp/1pn5/8/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq -';
 
@@ -2181,11 +2181,40 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('b', 'Be7');
         $board->play('w', 'O-O');
 
-        $board->undo();
+        $board = $board->undo();
 
         $expected = 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQK2R w KQkq -';
 
         $this->assertSame($expected, $board->toFen());
+    }
+
+    /**
+     * @test
+     */
+    public function undo_e4_e5_Nf3_Nf6_Be2_Be7_O_O_legal()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'Be2');
+        $board->play('b', 'Be7');
+        $board->play('w', 'O-O');
+
+        $board = $board->undo();
+
+        $expected = (object) [
+            'color' => 'w',
+            'id' => 'K',
+            'fen' => [
+                'f1' => 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1K1R b kq -',
+                'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b kq -',
+            ],
+        ];
+
+        $this->assertEquals($expected, $board->legal('e1'));
     }
 
     /**

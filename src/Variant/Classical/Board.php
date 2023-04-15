@@ -16,6 +16,7 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
+use Chess\Player\PgnPlayer;
 use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
@@ -332,7 +333,7 @@ class Board extends \SplObjectStorage
      * @param \Chess\Piece\AbstractPiece $piece
      * @return \Chess\Variant\Classical\Board
      */
-    private function pushHistory(AbstractPiece $piece): Board
+    protected function pushHistory(AbstractPiece $piece): Board
     {
         $this->history[] = (object) [
             'castlingAbility' => $this->castlingAbility,
@@ -348,7 +349,7 @@ class Board extends \SplObjectStorage
      *
      * @return \Chess\Variant\Classical\Board
      */
-    private function popHistory(): Board
+    protected function popHistory(): Board
     {
         array_pop($this->history);
 
@@ -772,49 +773,6 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Undoes a castle move.
-     *
-     * @param string $sq
-     * @param object $move
-     * @return \Chess\Variant\Classical\Board
-     */
-    private function undoCastle(string $sq, object $move): Board
-    {
-        $king = $this->getPieceBySq($move->sq->next);
-        $kingUndone = new K($move->color, $sq, $this->castlingRule);
-        $this->detach($king);
-        $this->attach($kingUndone);
-        if ($this->move->case(MOVE::CASTLE_SHORT) === $move->type) {
-            $rook = $this->getPieceBySq(
-                $this->castlingRule[$move->color][Piece::R][Castle::SHORT]['sq']['next']
-            );
-            $rookUndone = new R(
-                $move->color,
-                $this->castlingRule[$move->color][Piece::R][Castle::SHORT]['sq']['current'],
-                $this->size,
-                $rook->getType()
-            );
-            $this->detach($rook);
-            $this->attach($rookUndone);
-        } elseif ($this->move->case(MOVE::CASTLE_LONG) === $move->type) {
-            $rook = $this->getPieceBySq(
-                $this->castlingRule[$move->color][Piece::R][Castle::LONG]['sq']['next']
-            );
-            $rookUndone = new R(
-                $move->color,
-                $this->castlingRule[$move->color][Piece::R][Castle::LONG]['sq']['current'],
-                $this->size,
-                $rook->getType()
-            );
-            $this->detach($rook);
-            $this->attach($rookUndone);
-        }
-        $this->popHistory()->refresh();
-
-        return $this;
-    }
-
-    /**
      * Updates the castle property.
      *
      * @param \Chess\Piece\AbstractPiece $pieceMoved
@@ -904,68 +862,13 @@ class Board extends \SplObjectStorage
     /**
      * Undoes the last move.
      *
-     * @param string $sq
-     * @param object $move
-     * @return \Chess\Variant\Classical\Board
-     */
-    private function undoMove(string $sq, object $move): Board
-    {
-        $piece = $this->getPieceBySq($move->sq->next);
-        $this->detach($piece);
-        if (
-            $move->type === $this->move->case(MOVE::PAWN_PROMOTES) ||
-            $move->type === $this->move->case(MOVE::PAWN_CAPTURES_AND_PROMOTES)
-        ) {
-            $pieceUndone = new P($move->color, $sq, $this->size);
-            $this->attach($pieceUndone);
-        } else {
-            $pieceUndone = $this->newPiece($move->color, $sq, $piece);
-            $this->attach($pieceUndone);
-        }
-        if ($move->isCapture && $capture = end($this->captures[$move->color])) {
-            $className = "\\Chess\\Piece\\{$capture->captured->id}";
-            $this->attach(new $className(
-                Color::opp($move->color),
-                $capture->captured->sq,
-                $this->size,
-                $capture->captured->id !== Piece::R ?: $capture->captured->type
-            ));
-            $this->popCapture($move->color);
-        }
-        $this->popHistory()->refresh();
-
-        return $this;
-    }
-
-    /**
-     * Undoes the last move.
-     *
      * @return \Chess\Variant\Classical\Board
      */
     public function undo(): Board
     {
-        if ($last = end($this->history)) {
-            if (
-                $last->move->type === $this->move->case(MOVE::CASTLE_SHORT) ||
-                $last->move->type === $this->move->case(MOVE::CASTLE_LONG)
-            ) {
-                $this->undoCastle($last->sq, $last->move);
-                $nextToLast = end($this->history);
-                $this->castlingAbility = $nextToLast->castlingAbility;
-            } elseif (
-                $last->move->type === $this->move->case(MOVE::KING) ||
-                $last->move->type === $this->move->case(MOVE::KING_CAPTURES)
-            ) {
-                $this->undoMove($last->sq, $last->move);
-                $nextToLast = end($this->history);
-                $this->castlingAbility = $nextToLast->castlingAbility;
-            } else {
-                $this->undoMove($last->sq, $last->move);
-                $this->castlingAbility = $last->castlingAbility;
-            }
-        }
+        $movetext = $this->popHistory()->getMovetext();
 
-        return $this;
+        return (new PgnPlayer($movetext))->play()->getBoard();
     }
 
     /**

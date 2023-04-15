@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\Chess960;
 
+use Chess\Player\PgnPlayer;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
@@ -61,5 +62,18 @@ final class Board extends ClassicalBoard
     public function getStartPos(): array
     {
         return $this->startPos;
+    }
+
+    /**
+     * Undoes the last move.
+     *
+     * @return \Chess\Variant\Chess960\Board
+     */
+    public function undo(): Board
+    {
+        $movetext = $this->popHistory()->getMovetext();
+        $board = new Board($this->startPos);
+
+        return (new PgnPlayer($movetext, $board))->play()->getBoard();
     }
 }
