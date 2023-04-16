@@ -2220,6 +2220,39 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function undo_e4_e5_Nf3_Nc6()
+    {
+        $board = new Board();
+
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nc6');
+
+        $board = $board->undo();
+        $board = $board->undo();
+        $board = $board->undo();
+        $board = $board->undo();
+
+        $board->play('w', 'e4');
+
+        $expected = [
+            7 => [ ' r ', ' n ', ' b ', ' q ', ' k ', ' b ', ' n ', ' r ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' . ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
     public function king_sqs_e4_e5_Nf3_Nf6_Bc4_Be7()
     {
         $board = new Board();
