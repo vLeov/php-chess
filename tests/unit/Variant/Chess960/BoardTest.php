@@ -766,4 +766,31 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
+
+    /**
+     * @test
+     */
+    public function play_RNNQBKRB_O_O_undo()
+    {
+        $startPos = ['R', 'N', 'N', 'Q', 'B', 'K', 'R', 'B'];
+
+        $board = new Board($startPos);
+
+        $this->assertTrue($board->play('w', 'O-O'));
+
+        $board = $board->undo();
+
+        $expected = [
+            7 => [ ' r ', ' n ', ' n ', ' q ', ' b ', ' k ', ' r ', ' b ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' N ', ' N ', ' Q ', ' B ', ' K ', ' R ', ' B ' ],
+        ];
+
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
 }
