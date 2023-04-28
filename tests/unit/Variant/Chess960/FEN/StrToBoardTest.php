@@ -182,4 +182,36 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $array);
     }
+
+    /**
+     * @test
+     */
+    public function QNRNBKRB_O_O_undo()
+    {
+        $startPos = ['Q', 'N', 'R', 'N', 'B', 'K', 'R', 'B' ];
+
+        $board = (new StrToBoard(
+            'qnrnbkrb/pppppppp/8/8/8/8/PPPPPPPP/QNRNBKRB w KQkq -',
+            $startPos
+        ))->create();
+
+        $board->play('w', 'O-O');
+
+        $board = $board->undo();
+
+        $array = $board->toAsciiArray();
+
+        $expected = [
+            7 => [ ' q ', ' n ', ' r ', ' n ', ' b ', ' k ', ' r ', ' b ' ],
+            6 => [ ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ', ' p ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
+            0 => [ ' Q ', ' N ', ' R ', ' N ', ' B ', ' K ', ' R ', ' B ' ],
+        ];
+
+        $this->assertSame($expected, $array);
+    }
 }
