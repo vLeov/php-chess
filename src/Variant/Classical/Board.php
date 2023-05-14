@@ -892,6 +892,10 @@ class Board extends \SplObjectStorage
         $this->defenseEval = (object) (new DefenseEval($this))->eval();
 
         $this->notifyPieces();
+
+        if ($this->history) {
+            $this->history[count($this->history) - 1]->fen = $this->toFen();
+        }
     }
 
     private function leavesInCheck(AbstractPiece $piece): bool
@@ -991,6 +995,23 @@ class Board extends \SplObjectStorage
     }
 
     /**
+     * Checks out whether the same position occurs five times.
+     *
+     * @return bool
+     */
+    public function isFivefoldRepetition(): bool
+    {
+        $count = array_count_values(array_column($this->history, 'fen'));
+        foreach ($count as $key => $val) {
+            if ($val >= 5) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Returns the legal FEN positions of a piece.
      *
      * @param string $sq
@@ -1011,60 +1032,60 @@ class Board extends \SplObjectStorage
                                 $piece->sqCastleShort() &&
                                 $clone->play($color, Castle::SHORT)
                             ) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif (
                                 $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
                                 $piece->sqCastleLong() &&
                                 $clone->play($color, Castle::LONG)
                             ) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, Piece::K.$sq)) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             }
                             break;
                         case Piece::P:
                             if ($clone->play($color, $piece->getSqFile()."x$sq")) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, $sq)) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             }
                             break;
                         default:
                             if ($clone->play($color, "{$piece->getId()}x$sq")) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, $piece->getId().$sq)) {
-                                $fen[$sq] = $clone->toFen();
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
-                                $fen[$sq] = $clone->toFen(); // disambiguation by file
+                                // disambiguation by file
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
-                                $fen[$sq] = $clone->toFen(); // disambiguation by file
+                                // disambiguation by file
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
-                                $fen[$sq] = $clone->toFen(); // disambiguation by rank
+                                // disambiguation by rank
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
-                                $fen[$sq] = $clone->toFen(); // disambiguation by rank
+                                // disambiguation by rank
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
-                                $fen[$sq] = $clone->toFen(); // disambiguation by square
+                                // disambiguation by square
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
-                                $fen[$sq] = $clone->toFen(); // disambiguation by square
+                                // disambiguation by square
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             }
                         break;
                     }
                 } catch (\Exception $e) {
                 }
             }
-            $result = [
+            return (object) [
                 'color' => $color,
                 'id' => $piece->getId(),
                 'fen' => $fen,
             ];
-            if ($piece->getId() === Piece::P) {
-                if ($enPassant = $piece->getEnPassantSq()) {
-                    $result['enPassant'] = $enPassant;
-                }
-            }
-            return (object) $result;
          }
 
          return null;
