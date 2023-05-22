@@ -35,7 +35,6 @@ class Game
     const VARIANT_CAPABLANCA_100    = 'capablanca100';
     const VARIANT_CLASSICAL         = 'classical';
 
-    const MODE_ANALYSIS             = 'analysis';
     const MODE_GM                   = 'gm';
     const MODE_FEN                  = 'fen';
     const MODE_PGN                  = 'pgn';
@@ -228,20 +227,26 @@ class Game
      * Loads a FEN string allowing to continue a chess game.
      *
      * @param string $fen
+     * @return \Chess\Game
      */
-    public function loadFen(string $fen): void
+    public function loadFen(string $fen): Game
     {
         $this->board = (new StrToBoard($fen))->create();
+
+        return $this;
     }
 
     /**
      * Loads a PGN movetext allowing to continue a chess game.
      *
      * @param string $movetext
+     * @return \Chess\Game
      */
-    public function loadPgn(string $movetext): void
+    public function loadPgn(string $movetext): Game
     {
         $this->board = (new PgnPlayer($movetext))->play()->getBoard();
+
+        return $this;
     }
 
     /**

@@ -9,7 +9,6 @@ Variants:
 
 Modes:
 
-- `Chess\Game:MODE_ANALYSIS`
 - `Chess\Game:MODE_GM`
 - `Chess\Game:MODE_FEN`
 - `Chess\Game:MODE_PGN`
@@ -22,32 +21,34 @@ Let's look at the methods available in the `Chess\Game` class through some examp
 
 #### `public function play(string $color, string $pgn): bool`
 
-The following code snippet starts a classical game in analysis mode and makes the first move in PGN format.
+The following code snippet starts a classical game in FEN mode and makes the first move in PGN format.
 
 ```php
 use Chess\Game;
 
 $game = new Game(
     Game::VARIANT_CLASSICAL,
-    Game::MODE_ANALYSIS
+    Game::MODE_FEN
 );
 
-$game->play('w', 'Nc3');
+$game->loadFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -')
+    ->play('w', 'Nc3');
 ```
 
 #### `public function playLan(string $color, string $lan): bool`
 
-This one also starts a classical game in analysis mode making the first move in long algebraic notation instead.
+This one also starts a classical game in FEN mode making the first move in long algebraic notation instead.
 
 ```php
 use Chess\Game;
 
 $game = new Game(
     Game::VARIANT_CLASSICAL,
-    Game::MODE_ANALYSIS
+    Game::MODE_FEN
 );
 
-$game->playLan('w', 'b1c3');
+$game->loadFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -')
+    ->playLan('w', 'b1c3');
 ```
 
 #### `public function loadFen(string $fen): void`
@@ -62,8 +63,8 @@ $game = new Game(
     Game::MODE_FEN
 );
 
-$game->loadFen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9');
-$game->play('b', 'Bg7');
+$game->loadFen('rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9')
+    ->play('b', 'Bg7');
 ```
 
 #### `public function loadPgn(string $movetext): void`
@@ -188,8 +189,11 @@ use Chess\Game;
 
 $game = new Game(
     Game::VARIANT_CLASSICAL,
-    Game::MODE_ANALYSIS
+    Game::MODE_FEN
 );
+
+$game->loadFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -')
+    ->play('w', 'Nc3');
 
 $state = $game->state();
 ```

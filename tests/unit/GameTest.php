@@ -92,17 +92,12 @@ class GameTest extends AbstractUnitTestCase
             if ($fileInfo->isDot()) continue;
             $filename = $fileInfo->getFilename();
             $text = file_get_contents(self::DATA_FOLDER."/pgn/$filename");
-            $text = (new Movetext($move, $text))->validate();
-            $movetext = (new Movetext($move, $text))->getMovetext();
-            $game = new Game(
-                Game::VARIANT_CLASSICAL,
-                Game::MODE_ANALYSIS
-            );
-            foreach ($movetext->moves as $key => $val) {
-                if ($key % 2 === 0) {
-                    $this->assertTrue($game->play('w', $val));
-                } else {
-                    $this->assertTrue($game->play('b', $val));
+            $movetext = new Movetext($move, $text);
+            if ($movetext->validate()) {
+                $game = new Game(Game::VARIANT_CLASSICAL, Game::MODE_FEN);
+                $game->loadFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -');
+                foreach ($movetext->getMovetext()->moves as $key => $val) {
+                    $this->assertTrue($game->play($game->getBoard()->getTurn(), $val));
                 }
             }
         }
@@ -124,8 +119,10 @@ class GameTest extends AbstractUnitTestCase
     {
         $game = new Game(
             Game::VARIANT_CLASSICAL,
-            Game::MODE_ANALYSIS
+            Game::MODE_FEN
         );
+
+        $game->loadFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -');
 
         $this->assertTrue($game->playLan('w', 'e2e4'));
         $this->assertTrue($game->playLan('b', 'b8c6'));
