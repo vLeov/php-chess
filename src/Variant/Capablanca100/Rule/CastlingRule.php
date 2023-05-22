@@ -13,14 +13,14 @@ class CastlingRule extends ClassicalCastlingRule
         Color::W => [
             Piece::K => [
                 Castle::SHORT => [
-                    'sqs' => [ 'g1', 'h1', 'i1' ],
+                    'vacant' => [ 'g1', 'h1', 'i1' ],
                     'sq' => [
                         'current' => 'f1',
                         'next' => 'i1',
                     ],
                 ],
                 Castle::LONG => [
-                    'sqs' => [ 'b1', 'c1', 'd1', 'e1' ],
+                    'vacant' => [ 'b1', 'c1', 'd1', 'e1' ],
                     'sq' => [
                         'current' => 'f1',
                         'next' => 'c1',
@@ -45,14 +45,14 @@ class CastlingRule extends ClassicalCastlingRule
         Color::B => [
             Piece::K => [
                 Castle::SHORT => [
-                    'sqs' => [ 'g10', 'h10', 'i10' ],
+                    'vacant' => [ 'g10', 'h10', 'i10' ],
                     'sq' => [
                         'current' => 'f10',
                         'next' => 'i10',
                     ],
                 ],
                 Castle::LONG => [
-                    'sqs' => [ 'b10', 'c10', 'd10', 'e10' ],
+                    'vacant' => [ 'b10', 'c10', 'd10', 'e10' ],
                     'sq' => [
                         'current' => 'f10',
                         'next' => 'c10',

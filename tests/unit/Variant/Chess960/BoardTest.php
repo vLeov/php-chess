@@ -55,14 +55,14 @@ class BoardTest extends AbstractUnitTestCase
             Color::W => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [ 'f1', 'g1' ],
+                        'vacant' => [ 'f1', 'g1' ],
                         'sq' => [
                             'current' => 'd1',
                             'next' => 'g1',
                         ],
                     ],
                     Castle::LONG => [
-                        'sqs' => [ 'b1', 'c1' ],
+                        'vacant' => [ 'b1', 'c1' ],
                         'sq' => [
                             'current' => 'd1',
                             'next' => 'c1',
@@ -87,14 +87,14 @@ class BoardTest extends AbstractUnitTestCase
             Color::B => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [ 'f8', 'g8' ],
+                        'vacant' => [ 'f8', 'g8' ],
                         'sq' => [
                             'current' => 'd8',
                             'next' => 'g8',
                         ],
                     ],
                     Castle::LONG => [
-                        'sqs' => [ 'b8', 'c8' ],
+                        'vacant' => [ 'b8', 'c8' ],
                         'sq' => [
                             'current' => 'd8',
                             'next' => 'c8',
@@ -134,14 +134,14 @@ class BoardTest extends AbstractUnitTestCase
             Color::W => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [ 'f1', 'g1' ],
+                        'vacant' => [ 'f1', 'g1' ],
                         'sq' => [
                             'current' => 'd1',
                             'next' => 'g1',
                         ],
                     ],
                     Castle::LONG => [
-                        'sqs' => [ 'c1' ],
+                        'vacant' => [ 'c1' ],
                         'sq' => [
                             'current' => 'd1',
                             'next' => 'c1',
@@ -166,14 +166,14 @@ class BoardTest extends AbstractUnitTestCase
             Color::B => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [ 'f8', 'g8' ],
+                        'vacant' => [ 'f8', 'g8' ],
                         'sq' => [
                             'current' => 'd8',
                             'next' => 'g8',
                         ],
                     ],
                     Castle::LONG => [
-                        'sqs' => [ 'c8' ],
+                        'vacant' => [ 'c8' ],
                         'sq' => [
                             'current' => 'd8',
                             'next' => 'c8',
@@ -213,14 +213,14 @@ class BoardTest extends AbstractUnitTestCase
             Color::W => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [ 'f1' ],
+                        'vacant' => [ 'f1' ],
                         'sq' => [
                             'current' => 'e1',
                             'next' => 'g1',
                         ],
                     ],
                     Castle::LONG => [
-                        'sqs' => [ 'c1' ],
+                        'vacant' => [ 'c1' ],
                         'sq' => [
                             'current' => 'e1',
                             'next' => 'c1',
@@ -245,14 +245,14 @@ class BoardTest extends AbstractUnitTestCase
             Color::B => [
                 Piece::K => [
                     Castle::SHORT => [
-                        'sqs' => [ 'f8' ],
+                        'vacant' => [ 'f8' ],
                         'sq' => [
                             'current' => 'e8',
                             'next' => 'g8',
                         ],
                     ],
                     Castle::LONG => [
-                        'sqs' => [ 'c8' ],
+                        'vacant' => [ 'c8' ],
                         'sq' => [
                             'current' => 'e8',
                             'next' => 'c8',
