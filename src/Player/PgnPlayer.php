@@ -27,7 +27,7 @@ class PgnPlayer extends AbstractPlayer
      */
     public function __construct(string $text, ClassicalBoard $board = null)
     {
-        $board ? $this->board = $board : $this->board = new ClassicalBoard();
+        $this->board = $board ?? new ClassicalBoard();
 
         if (is_a($board, Capablanca80Board::class)) {
             $movetext = new Movetext(new Capablanca80PgnMove(), $text);
