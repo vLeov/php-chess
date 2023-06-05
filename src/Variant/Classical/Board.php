@@ -184,6 +184,8 @@ class Board extends \SplObjectStorage
         }
 
         $this->refresh();
+
+        $this->startFen = $this->toFen();
     }
 
     /**
