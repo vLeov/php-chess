@@ -49,14 +49,8 @@ class PgnPlayer extends AbstractPlayer
     public function play(): PgnPlayer
     {
         foreach ($this->moves as $key => $val) {
-            if ($key % 2 === 0) {
-                if (!$this->board->play('w', $val)) {
-                    throw new PlayerException();
-                }
-            } else {
-                if (!$this->board->play('b', $val)) {
-                    throw new PlayerException();
-                }
+            if (!$this->board->play($this->board->getTurn(), $val)) {
+                throw new PlayerException();
             }
             $this->fen[] = $this->board->toFen();
         }

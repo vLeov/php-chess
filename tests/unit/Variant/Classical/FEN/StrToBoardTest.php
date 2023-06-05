@@ -470,4 +470,20 @@ class StrToBoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('b', 'Kg7'));
         $this->assertTrue($board->play('w', 'Kxa1'));
     }
+
+    /**
+     * @test
+     */
+    public function endgame_checkmate_play_and_undo()
+    {
+        $board = (new StrToBoard('8/8/R7/8/4Q3/rk3K2/8/8 w - -'))
+            ->create();
+
+        $this->assertTrue($board->play('w', 'Qd5'));
+        $this->assertTrue($board->play('b', 'Kb2'));
+        $this->assertTrue($board->play('w', 'Ke4'));
+        $this->assertTrue($board->play('b', 'Rxa6'));
+
+        $board = $board->undo();
+    }
 }
