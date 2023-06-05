@@ -17,6 +17,7 @@ use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
 use Chess\Variant\Classical\FEN\BoardToStr;
+use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Castle;
@@ -137,8 +138,11 @@ class Board extends \SplObjectStorage
      * @param array $pieces
      * @param string $castlingAbility
      */
-    public function __construct(array $pieces = null, string $castlingAbility = '-')
-    {
+    public function __construct(
+        array $pieces = null,
+        string $castlingAbility = '-',
+        string $startFen = null
+    ) {
         $this->size = Square::SIZE;
         $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule())->getRule();
@@ -185,7 +189,7 @@ class Board extends \SplObjectStorage
 
         $this->refresh();
 
-        $this->startFen = $this->toFen();
+        $this->startFen = $startFen ?? $this->toFen();
     }
 
     /**
@@ -884,7 +888,7 @@ class Board extends \SplObjectStorage
      */
     public function undo(): Board
     {
-        $board = new self();
+        $board = (new StrToBoard($this->getStartFen()))->create();
         foreach ($this->popHistory()->getHistory() as $key => $val) {
             $board->play($val->move->color, $val->move->pgn);
         }

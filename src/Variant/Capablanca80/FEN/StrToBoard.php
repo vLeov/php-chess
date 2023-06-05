@@ -38,8 +38,11 @@ class StrToBoard extends ClassicalFenStrToBoard
                 $this->size,
                 $this->castlingRule
             ))->getArray();
-            $board = (new Board($pieces, $this->castlingAbility))
-                ->setTurn($this->fields[1]);
+            $board = (new Board(
+                $pieces,
+                $this->castlingAbility,
+                $this->string
+            ))->setTurn($this->fields[1]);
             if ($this->fields[3] !== '-') {
                 $board = $this->doublePawnPush($board);
             }

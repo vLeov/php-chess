@@ -494,7 +494,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function endgame_checkmate_play_and_undo()
+    public function endgame_checkmate_play_undo_and_get_start_fen()
     {
         $board = (new StrToBoard('8/8/R7/8/4Q3/rk3K2/8/8 w - -'))
             ->create();
@@ -505,5 +505,11 @@ class StrToBoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('b', 'Rxa6'));
 
         $board = $board->undo();
+
+        $expected = '8/8/R7/8/4Q3/rk3K2/8/8 w - -';
+
+        $startFen = $board->getStartFen();
+
+        $this->assertSame($expected, $startFen);
     }
 }
