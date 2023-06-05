@@ -81,7 +81,7 @@ class Board extends \SplObjectStorage
      *
      * @var string
      */
-    private string $startFen = '';
+    protected string $startFen = '';
 
     /**
      * Size.

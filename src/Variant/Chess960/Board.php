@@ -2,12 +2,12 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\Player\PgnPlayer;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Chess960\StartPieces;
+use Chess\Variant\Chess960\FEN\StrToBoard;
 use Chess\Variant\Chess960\Rule\CastlingRule;
 
 /**
@@ -74,9 +74,14 @@ final class Board extends ClassicalBoard
      */
     public function undo(): Board
     {
-        $movetext = $this->popHistory()->getMovetext();
-        $board = new Board($this->startPos);
+        $board = (new StrToBoard(
+            $this->getStartFen(),
+            $this->startPos
+        ))->create();
+        foreach ($this->popHistory()->getHistory() as $key => $val) {
+            $board->play($val->move->color, $val->move->pgn);
+        }
 
-        return (new PgnPlayer($movetext, $board))->play()->getBoard();
+        return $board;
     }
 }
