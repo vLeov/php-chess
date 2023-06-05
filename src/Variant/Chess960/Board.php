@@ -35,8 +35,7 @@ final class Board extends ClassicalBoard
     public function __construct(
         array $startPos = null,
         array $pieces = null,
-        string $castlingAbility = '-',
-        string $startFen = null
+        string $castlingAbility = '-'
     ) {
         $this->size = Square::SIZE;
         $this->startPos = $startPos ?? (new StartPosition())->getClassical();
@@ -54,7 +53,7 @@ final class Board extends ClassicalBoard
 
         $this->refresh();
 
-        $this->startFen = $startFen ?? $this->toFen();
+        $this->startFen = $this->toFen();
     }
 
     /**
@@ -74,10 +73,7 @@ final class Board extends ClassicalBoard
      */
     public function undo(): Board
     {
-        $board = (new StrToBoard(
-            $this->getStartFen(),
-            $this->startPos
-        ))->create();
+        $board = (new StrToBoard($this->getStartFen(), $this->startPos))->create();
         foreach ($this->popHistory()->getHistory() as $key => $val) {
             $board->play($val->move->color, $val->move->pgn);
         }

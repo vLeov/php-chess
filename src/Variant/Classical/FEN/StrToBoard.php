@@ -53,8 +53,7 @@ class StrToBoard
             ))->getArray();
             $board = (new Board(
                 $pieces,
-                $this->castlingAbility,
-                $this->string
+                $this->castlingAbility
             ))->setTurn($this->fields[1]);
             if ($this->fields[3] !== '-') {
                 $board = $this->doublePawnPush($board);

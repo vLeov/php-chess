@@ -37,8 +37,7 @@ class Board extends ClassicalBoard
      */
     public function __construct(
         array $pieces = null,
-        string $castlingAbility = '-',
-        string $startFen = null
+        string $castlingAbility = '-'
     ) {
         $this->size = Square::SIZE;
         $this->castlingAbility = CastlingAbility::START;
@@ -94,7 +93,7 @@ class Board extends ClassicalBoard
 
         $this->refresh();
 
-        $this->startFen = $startFen ?? $this->toFen();
+        $this->startFen = $this->toFen();
     }
 
     /**
