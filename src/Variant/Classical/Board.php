@@ -16,7 +16,6 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Player\PgnPlayer;
 use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
@@ -866,9 +865,12 @@ class Board extends \SplObjectStorage
      */
     public function undo(): Board
     {
-        $movetext = $this->popHistory()->getMovetext();
+        $board = new self();
+        foreach ($this->popHistory()->getHistory() as $key => $val) {
+            $board->play($val->move->color, $val->move->pgn);
+        }
 
-        return (new PgnPlayer($movetext))->play()->getBoard();
+        return $board;
     }
 
     /**
