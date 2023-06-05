@@ -76,6 +76,13 @@ class Board extends \SplObjectStorage
     protected string $castlingAbility = '';
 
     /**
+     * Start FEN position.
+     *
+     * @var string
+     */
+    private string $startFen = '';
+
+    /**
      * Size.
      *
      * @var array
@@ -250,6 +257,16 @@ class Board extends \SplObjectStorage
     public function getCastlingAbility(): string
     {
         return $this->castlingAbility;
+    }
+
+    /**
+     * Returns the start FEN.
+     *
+     * @return string
+     */
+    public function getStartFen(): string
+    {
+        return $this->startFen;
     }
 
     /**
