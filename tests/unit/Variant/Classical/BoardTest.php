@@ -2591,4 +2591,20 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertTrue($board->isFivefoldRepetition());
     }
+
+    /**
+     * @test
+     */
+    public function play_lan_e2e4_f7f5_d1h5()
+    {
+        $board = new Board();
+
+        $this->assertTrue($board->playLan('w', 'e2e4'));
+        $this->assertTrue($board->playLan('b', 'f7f5'));
+        $this->assertTrue($board->playLan('w', 'd1h5'));
+
+        $expected = '1.e4 f5 2.Qh5+';
+
+        $this->assertSame($expected, $board->getMovetext());
+    }
 }
