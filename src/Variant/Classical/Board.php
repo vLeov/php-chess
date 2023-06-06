@@ -674,17 +674,11 @@ class Board extends \SplObjectStorage
                         }
                         break;
                     case Piece::P:
-                        try {
-                            if ($this->play($color, $sqs[1])) {
-                                return $this->afterPlayLan();
-                            }
-                        } catch (\Exception $e) {
+                        if ($this->play($color, $sqs[1])) {
+                            return $this->afterPlayLan();
                         }
-                        try {
-                            if ($this->play($color, $piece->getSqFile()."x$sqs[1]")) {
-                                return $this->afterPlayLan();
-                            }
-                        } catch (\Exception $e) {
+                        if ($this->play($color, $piece->getSqFile()."x$sqs[1]")) {
+                            return $this->afterPlayLan();
                         }
                         break;
                     default:
