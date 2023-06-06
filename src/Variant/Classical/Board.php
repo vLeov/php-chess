@@ -703,21 +703,6 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns a new piece.
-     *
-     * @return AbstractPiece
-     */
-    private function newPiece($color, $sq, $piece): AbstractPiece
-    {
-        $className = "\\Chess\\Piece\\{$piece->getId()}";
-        if ($piece->getId() === Piece::R) {
-            return new $className($color, $sq, $this->size, $piece->getType());
-        }
-
-        return new $className($color, $sq, $this->size);
-    }
-
-    /**
      * Castles the king.
      *
      * @param \Chess\Piece\K $king
@@ -824,10 +809,12 @@ class Board extends \SplObjectStorage
         if ($toDetach = $this->getPieceBySq($piece->getSq())) {
             $this->detach($toDetach);
         }
-        $this->attach($this->newPiece(
+        $class = "\\Chess\\Piece\\{$piece->getId()}";
+        $this->attach(new $class(
             $piece->getColor(),
             $piece->getMove()->sq->next,
-            $piece
+            $this->size,
+            $piece->getId() === Piece::R ? $piece->getType() : null
         ));
         if ($piece->getId() === Piece::P) {
             if ($piece->isPromoted()) {
