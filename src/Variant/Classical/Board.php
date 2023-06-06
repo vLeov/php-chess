@@ -572,11 +572,7 @@ class Board extends \SplObjectStorage
     {
         $ambiguous = [];
         foreach ($this->pickPiece($move) as $piece) {
-            if (
-                $piece->isMovable() &&
-                !$this->leavesInCheck($piece) &&
-                in_array($move->sq->next, $piece->sqs())
-            ) {
+            if (!$this->isPinned($piece) && in_array($move->sq->next, $piece->sqs())) {
                 $ambiguous[] = $move->sq->next;
             }
         }
@@ -611,7 +607,7 @@ class Board extends \SplObjectStorage
     protected function isLegalMove(object $move): bool
     {
         foreach ($pieces = $this->pickPiece($move) as $piece) {
-            if ($piece->isMovable() && !$this->leavesInCheck($piece)) {
+            if ($piece->isMovable() && !$this->isPinned($piece)) {
                 if ($piece->getMove()->type === $this->move->case(MOVE::CASTLE_SHORT)) {
                     return $this->castle($piece, RType::CASTLE_SHORT);
                 } elseif ($piece->getMove()->type === $this->move->case(MOVE::CASTLE_LONG)) {
@@ -867,7 +863,13 @@ class Board extends \SplObjectStorage
         }
     }
 
-    private function leavesInCheck(AbstractPiece $piece): bool
+    /**
+     * Checks out if a piece is pinned.
+     *
+     * @param \Chess\Piece\AbstractPiece $piece
+     * @return bool true if the piece is pinned; otherwise false
+     */
+    private function isPinned(AbstractPiece $piece): bool
     {
         $clone = unserialize(serialize($this));
         if (
@@ -921,7 +923,7 @@ class Board extends \SplObjectStorage
                         $move = $this->move->toObj($this->turn, $piece->getId().$sq, $this->castlingRule);
                     }
                 }
-                $escape += (int) !$this->leavesInCheck($piece->setMove($move));
+                $escape += (int) !$this->isPinned($piece->setMove($move));
             }
         }
 
