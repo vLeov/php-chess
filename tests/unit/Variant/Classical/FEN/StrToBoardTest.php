@@ -534,4 +534,30 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $startFen);
     }
+
+    /**
+     * @test
+     */
+    public function disambiguate_rook_capture()
+    {
+        $board = (new StrToBoard('r1Q2rk1/p2p1pp1/1ppq1n1p/4p3/1PP1P3/P4N2/1B3PPP/R4RK1 b - -'))
+            ->create();
+
+        $board->playLan('b', 'f8c8');
+
+        $array = $board->toAsciiArray();
+
+        $expected = [
+            7 => [ ' r ', ' . ', ' r ', ' . ', ' . ', ' . ', ' k ', ' . ' ],
+            6 => [ ' p ', ' . ', ' . ', ' p ', ' . ', ' p ', ' p ', ' . ' ],
+            5 => [ ' . ', ' p ', ' p ', ' q ', ' . ', ' n ', ' . ', ' p ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' P ', ' P ', ' . ', ' P ', ' . ', ' . ', ' . ' ],
+            2 => [ ' P ', ' . ', ' . ', ' . ', ' . ', ' N ', ' . ', ' . ' ],
+            1 => [ ' . ', ' B ', ' . ', ' . ', ' . ', ' P ', ' P ', ' P ' ],
+            0 => [ ' R ', ' . ', ' . ', ' . ', ' . ', ' R ', ' K ', ' . ' ],
+        ];
+
+        $this->assertSame($expected, $array);
+    }
 }

@@ -702,13 +702,13 @@ class Board extends \SplObjectStorage
                     default:
                         if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
                             return $this->afterPlayLan();
-                        } elseif ($this->play($color, $piece->getId().$sqs[1])) {
-                            return $this->afterPlayLan();
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
                             return $this->afterPlayLan();
-                        } elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
-                            return $this->afterPlayLan();
                         } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
+                            return $this->afterPlayLan();
+                        } elseif ($this->play($color, $piece->getId().$sqs[1])) {
+                            return $this->afterPlayLan();
+                        }  elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
                             return $this->afterPlayLan();
                         } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
                             return $this->afterPlayLan();
