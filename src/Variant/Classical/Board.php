@@ -608,9 +608,9 @@ class Board extends \SplObjectStorage
     {
         foreach ($pieces = $this->pickPiece($move) as $piece) {
             if ($piece->isMovable() && !$this->isPinned($piece)) {
-                if ($piece->getMove()->type === $this->move->case(MOVE::CASTLE_SHORT)) {
+                if ($piece->getMove()->type === $this->move->case(Move::CASTLE_SHORT)) {
                     return $this->castle($piece, RType::CASTLE_SHORT);
-                } elseif ($piece->getMove()->type === $this->move->case(MOVE::CASTLE_LONG)) {
+                } elseif ($piece->getMove()->type === $this->move->case(Move::CASTLE_LONG)) {
                     return $this->castle($piece, RType::CASTLE_LONG);
                 } else {
                     return $this->move($piece);
@@ -873,12 +873,12 @@ class Board extends \SplObjectStorage
     {
         $clone = unserialize(serialize($this));
         if (
-            $piece->getMove()->type === $clone->move->case(MOVE::CASTLE_SHORT) &&
+            $piece->getMove()->type === $clone->move->case(Move::CASTLE_SHORT) &&
             $clone->castle($piece, RType::CASTLE_SHORT)
         ) {
             $king = $clone->getPiece($piece->getColor(), Piece::K);
         } elseif (
-            $piece->getMove()->type === $clone->move->case(MOVE::CASTLE_LONG) &&
+            $piece->getMove()->type === $clone->move->case(Move::CASTLE_LONG) &&
             $clone->castle($piece, RType::CASTLE_LONG)
         ) {
             $king = $clone->getPiece($piece->getColor(), Piece::K);
