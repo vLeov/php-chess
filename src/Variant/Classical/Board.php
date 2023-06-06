@@ -670,7 +670,6 @@ class Board extends \SplObjectStorage
                         } elseif ($this->play($color, Piece::K.$sqs[1])) {
                             return true;
                         }
-                        break;
                     case Piece::P:
                         if ($this->play($color, $sqs[1])) {
                             return true;
@@ -678,7 +677,6 @@ class Board extends \SplObjectStorage
                         if ($this->play($color, $piece->getSqFile()."x$sqs[1]")) {
                             return true;
                         }
-                        break;
                     default:
                         if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
                             return true;
@@ -697,7 +695,6 @@ class Board extends \SplObjectStorage
                         } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
                             return true;
                         }
-                        break;
                 }
             }
         }
