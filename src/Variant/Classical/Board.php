@@ -634,9 +634,9 @@ class Board extends \SplObjectStorage
      */
     public function play(string $color, string $pgn): bool
     {
-        $obj = $this->move->toObj($color, $pgn, $this->castlingRule);
+        $move = $this->move->toObj($color, $pgn, $this->castlingRule);
 
-        return $this->isValidMove($obj) && $this->isLegalMove($obj);
+        return $this->isValidMove($move) && $this->isLegalMove($move);
     }
 
     /**
