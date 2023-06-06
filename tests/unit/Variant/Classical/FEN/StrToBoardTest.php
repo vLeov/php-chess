@@ -629,4 +629,25 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $board->legal('c8'));
     }
+
+    /**
+     * @test
+     */
+    public function disambiguate_g8_knight_legal()
+    {
+        $board = (new StrToBoard('k1N3N1/8/2K5/8/8/8/8/8 w - - 0 1'))
+            ->create();
+
+        $expected = (object) [
+            'color' => 'w',
+            'id' => 'N',
+            'fen' => [
+                'e7' => 'k1N5/4N3/2K5/8/8/8/8/8 b - -',
+                'f6' => 'k1N5/8/2K2N2/8/8/8/8/8 b - -',
+                'h6' => 'k1N5/8/2K4N/8/8/8/8/8 b - -',
+            ],
+        ];
+
+        $this->assertEquals($expected, $board->legal('g8'));
+    }
 }
