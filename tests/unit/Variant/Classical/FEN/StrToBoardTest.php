@@ -586,4 +586,25 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $array);
     }
+
+    /**
+     * @test
+     */
+    public function disambiguate_f8_rook_legal()
+    {
+        $board = (new StrToBoard('r1Q2rk1/p2p1pp1/1ppq1n1p/4p3/1PP1P3/P4N2/1B3PPP/R4RK1 b - -'))
+            ->create();
+
+        $expected = (object) [
+            'color' => 'b',
+            'id' => 'R',
+            'fen' => [
+                'e8' => 'r1Q1r1k1/p2p1pp1/1ppq1n1p/4p3/1PP1P3/P4N2/1B3PPP/R4RK1 w - -',
+                'd8' => 'r1Qr2k1/p2p1pp1/1ppq1n1p/4p3/1PP1P3/P4N2/1B3PPP/R4RK1 w - -',
+                'c8' => 'r1r3k1/p2p1pp1/1ppq1n1p/4p3/1PP1P3/P4N2/1B3PPP/R4RK1 w - -',
+            ],
+        ];
+
+        $this->assertEquals($expected, $board->legal('f8'));
+    }
 }

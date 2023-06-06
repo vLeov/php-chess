@@ -1067,22 +1067,22 @@ class Board extends \SplObjectStorage
                         default:
                             if ($clone->play($color, "{$piece->getId()}x$sq")) {
                                 $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                            } elseif ($clone->play($color, $piece->getId().$sq)) {
-                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
-                                // disambiguation by file
-                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                            } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
                                 // disambiguation by file
                                 $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
                                 // disambiguation by rank
                                 $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                            } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
-                                // disambiguation by rank
-                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
                                 // disambiguation by square
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                            } elseif ($clone->play($color, $piece->getId().$sq)) {
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
+                                // disambiguation by file
+                                $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                            } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
+                                // disambiguation by rank
                                 $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
                             } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
                                 // disambiguation by square
