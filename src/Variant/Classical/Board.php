@@ -452,21 +452,16 @@ class Board extends \SplObjectStorage
      */
     private function pickPiece(object $move): array
     {
-        $found = [];
+        $pieces = [];
         foreach ($this->getPieces($move->color) as $piece) {
             if ($piece->getId() === $move->id) {
-                if ($piece->getId() === Piece::K) {
-                    return [$piece->setMove($move)];
-                } elseif (preg_match("/{$move->sq->current}/", $piece->getSq())) {
-                    $found[] = $piece->setMove($move);
+                if (strstr($piece->getSq(), $move->sq->current)) {
+                    $pieces[] = $piece->setMove($move);
                 }
             }
         }
-        if (!$found) {
-            throw new BoardException();
-        }
 
-        return $found;
+        return $pieces;
     }
 
     /**
@@ -617,14 +612,7 @@ class Board extends \SplObjectStorage
      */
     protected function isLegalMove(object $move): bool
     {
-        $pieces = $this->pickPiece($move);
-        if (count($pieces) > 1) {
-            foreach ($pieces as $piece) {
-                if ($piece->isMovable() && !$this->leavesInCheck($piece)) {
-                    return $this->move($piece);
-                }
-            }
-        } elseif ($piece = $pieces[0]) {
+        foreach ($pieces = $this->pickPiece($move) as $piece) {
             if ($piece->isMovable() && !$this->leavesInCheck($piece)) {
                 if ($piece->getMove()->type === $this->move->case(MOVE::CASTLE_SHORT)) {
                     return $this->castle($piece, RType::CASTLE_SHORT);
@@ -634,7 +622,7 @@ class Board extends \SplObjectStorage
                     return $this->move($piece);
                 }
             }
-         }
+        }
 
         return false;
     }
