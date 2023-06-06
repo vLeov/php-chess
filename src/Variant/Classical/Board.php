@@ -673,8 +673,7 @@ class Board extends \SplObjectStorage
                     case Piece::P:
                         if ($this->play($color, $sqs[1])) {
                             return true;
-                        }
-                        if ($this->play($color, $piece->getSqFile()."x$sqs[1]")) {
+                        } elseif ($this->play($color, $piece->getSqFile()."x$sqs[1]")) {
                             return true;
                         }
                     default:
