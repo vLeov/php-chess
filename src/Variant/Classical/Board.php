@@ -729,26 +729,26 @@ class Board extends \SplObjectStorage
     /**
      * Updates the castle property.
      *
-     * @param \Chess\Piece\AbstractPiece $pieceMoved
+     * @param \Chess\Piece\AbstractPiece $piece The moved piece
      * @return \Chess\Variant\Classical\Board
      */
-    private function updateCastle(AbstractPiece $pieceMoved): Board
+    private function updateCastle(AbstractPiece $piece): Board
     {
         if (CastlingAbility::can($this->castlingAbility, $this->turn)) {
-            if ($pieceMoved->getId() === Piece::K) {
+            if ($piece->getId() === Piece::K) {
                 $this->castlingAbility = CastlingAbility::remove(
                     $this->castlingAbility,
                     $this->turn,
                     [Piece::K, Piece::Q]
                 );
-            } elseif ($pieceMoved->getId() === Piece::R) {
-                if ($pieceMoved->getType() === RType::CASTLE_SHORT) {
+            } elseif ($piece->getId() === Piece::R) {
+                if ($piece->getType() === RType::CASTLE_SHORT) {
                     $this->castlingAbility = CastlingAbility::remove(
                         $this->castlingAbility,
                         $this->turn,
                         [Piece::K]
                     );
-                } elseif ($pieceMoved->getType() === RType::CASTLE_LONG) {
+                } elseif ($piece->getType() === RType::CASTLE_LONG) {
                     $this->castlingAbility = CastlingAbility::remove(
                         $this->castlingAbility,
                         $this->turn,
@@ -759,8 +759,8 @@ class Board extends \SplObjectStorage
         }
         $oppColor = Color::opp($this->turn);
         if (CastlingAbility::can($this->castlingAbility, $oppColor)) {
-            if ($pieceMoved->getMove()->isCapture) {
-                if ($pieceMoved->getMove()->sq->next ===
+            if ($piece->getMove()->isCapture) {
+                if ($piece->getMove()->sq->next ===
                     $this->castlingRule[$oppColor][Piece::R][Castle::SHORT]['sq']['current']
                 ) {
                     $this->castlingAbility = CastlingAbility::remove(
@@ -769,7 +769,7 @@ class Board extends \SplObjectStorage
                         [Piece::K]
                     );
                 } elseif (
-                    $pieceMoved->getMove()->sq->next ===
+                    $piece->getMove()->sq->next ===
                     $this->castlingRule[$oppColor][Piece::R][Castle::LONG]['sq']['current']
                 ) {
                     $this->castlingAbility = CastlingAbility::remove(
