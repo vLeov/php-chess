@@ -515,36 +515,31 @@ class Board extends \SplObjectStorage
     private function promote(P $pawn): Board
     {
         $this->detach($this->getPieceBySq($pawn->getMove()->sq->next));
-        switch ($pawn->getMove()->newId) {
-            case Piece::N:
-                $this->attach(new N(
-                    $pawn->getColor(),
-                    $pawn->getMove()->sq->next,
-                    $this->size
-                ));
-                break;
-            case Piece::B:
-                $this->attach(new B(
-                    $pawn->getColor(),
-                    $pawn->getMove()->sq->next,
-                    $this->size
-                ));
-                break;
-            case Piece::R:
-                $this->attach(new R(
-                    $pawn->getColor(),
-                    $pawn->getMove()->sq->next,
-                    $this->size,
-                    RType::PROMOTED
-                ));
-                break;
-            default:
-                $this->attach(new Q(
-                    $pawn->getColor(),
-                    $pawn->getMove()->sq->next,
-                    $this->size
-                ));
-                break;
+        if ($pawn->getMove()->newId === Piece::N) {
+            $this->attach(new N(
+                $pawn->getColor(),
+                $pawn->getMove()->sq->next,
+                $this->size
+            ));
+        } elseif ($pawn->getMove()->newId === Piece::B) {
+            $this->attach(new B(
+                $pawn->getColor(),
+                $pawn->getMove()->sq->next,
+                $this->size
+            ));
+        } elseif ($pawn->getMove()->newId === Piece::R) {
+            $this->attach(new R(
+                $pawn->getColor(),
+                $pawn->getMove()->sq->next,
+                $this->size,
+                RType::PROMOTED
+            ));
+        } else {
+            $this->attach(new Q(
+                $pawn->getColor(),
+                $pawn->getMove()->sq->next,
+                $this->size
+            ));
         }
 
         return $this;
@@ -1062,7 +1057,7 @@ class Board extends \SplObjectStorage
                     }
                 }
             }
-            
+
             return (object) [
                 'color' => $color,
                 'id' => $piece->getId(),
