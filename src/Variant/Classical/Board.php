@@ -957,14 +957,14 @@ class Board extends \SplObjectStorage
     private function addSymbol(): bool
     {
         $end = $this->getHistory()[count($this->getHistory()) - 1];
-          if ($this->isMate()) {
-              $end->move->pgn .= '#';
-          } elseif ($this->isCheck()) {
-              $end->move->pgn .= '+';
-          }
-          $this->getHistory()[count($this->getHistory()) - 1] = $end;
+        if ($this->isMate()) {
+            $end->move->pgn .= '#';
+        } elseif ($this->isCheck()) {
+            $end->move->pgn .= '+';
+        }
+        $this->getHistory()[count($this->getHistory()) - 1] = $end;
 
-          return true;
+        return true;
     }
 
     /**
