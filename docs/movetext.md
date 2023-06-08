@@ -21,6 +21,40 @@ print_r($movetext);
 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5
 ```
 
+#### `public function getMoves(): array`
+
+Returns an array of PGN moves.
+
+```php
+use Chess\Variant\Classical\PGN\Move;
+use Chess\Movetext;
+
+$move = new Move();
+$text = '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5';
+
+$moves = (new Movetext($move, $text))->getMoves();
+
+print_r($moves);
+```
+```
+(
+    [0] => d4
+    [1] => Nf6
+    [2] => Nf3
+    [3] => e6
+    [4] => c4
+    [5] => Bb4+
+    [6] => Nbd2
+    [7] => O-O
+    [8] => a3
+    [9] => Be7
+    [10] => e4
+    [11] => d6
+    [12] => Bd3
+    [13] => c5
+)
+```
+
 #### `public function sequence(): array`
 
 Returns an array representing the movetext as a sequence of moves.

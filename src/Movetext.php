@@ -44,7 +44,7 @@ class Movetext
     }
 
     /**
-     * Returns the moves.
+     * Returns an array of PGN moves.
      *
      * @return array
      */
