@@ -362,7 +362,7 @@ class Board extends \SplObjectStorage
         for ($i = 1; $i < count($this->history); $i++) {
             if ($this->history[0]->move->color === Color::W) {
                 if ($i % 2 === 0) {
-                    $movetext .= (($i / 2) + 1) . ".{$this->history[$i]->move->pgn}";
+                    $movetext .= ($i / 2 + 1) . ".{$this->history[$i]->move->pgn}";
                 } else {
                     $movetext .= " {$this->history[$i]->move->pgn} ";
                 }
