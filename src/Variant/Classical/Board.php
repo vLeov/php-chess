@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\Classical;
 
+use Chess\Movetext;
 use Chess\Piece\AsciiArray;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
@@ -274,6 +275,19 @@ class Board extends \SplObjectStorage
     }
 
     /**
+     * Sets the start FEN.
+     *
+     * @param string $fen
+     * @return \Chess\Variant\Classical\Board
+     */
+    public function setStartFen(string $fen): Board
+    {
+        $this->startFen = $fen;
+
+        return $this;
+    }
+
+    /**
      * Returns the size.
      *
      * @return array
@@ -338,10 +352,27 @@ class Board extends \SplObjectStorage
     public function getMovetext(): string
     {
         $movetext = '';
-        foreach ($this->history as $key => $val) {
-            $key % 2 === 0
-                ? $movetext .= (($key / 2) + 1) . ".{$val->move->pgn}"
-                : $movetext .= " {$val->move->pgn} ";
+        if (isset($this->history[0]->move)) {
+            if ($this->history[0]->move->color === Color::W) {
+                $movetext = "1.{$this->history[0]->move->pgn}";
+            } else {
+                $movetext = '1' . Movetext::SYMBOL_ELLIPSIS . "{$this->history[0]->move->pgn} ";
+            }
+        }
+        for ($i = 1; $i < count($this->history); $i++) {
+            if ($this->history[0]->move->color === Color::W) {
+                if ($i % 2 === 0) {
+                    $movetext .= (($i / 2) + 1) . ".{$this->history[$i]->move->pgn}";
+                } else {
+                    $movetext .= " {$this->history[$i]->move->pgn} ";
+                }
+            } else {
+                if ($i % 2 === 0) {
+                    $movetext .= " {$this->history[$i]->move->pgn} ";
+                } else {
+                    $movetext .= (ceil($i / 2) + 1) . ".{$this->history[$i]->move->pgn}";
+                }
+            }
         }
 
         return trim($movetext);

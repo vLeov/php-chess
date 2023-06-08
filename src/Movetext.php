@@ -2,7 +2,6 @@
 
 namespace Chess;
 
-use Chess\Exception\MovetextException;
 use Chess\Variant\Classical\PGN\AN\Termination;
 use Chess\Variant\Classical\PGN\Move;
 
@@ -13,6 +12,8 @@ use Chess\Variant\Classical\PGN\Move;
  */
 class Movetext
 {
+    const SYMBOL_ELLIPSIS = '...';
+
     /**
      * Move.
      *
@@ -21,11 +22,11 @@ class Movetext
     private Move $move;
 
     /**
-     * Movetext.
+     * Array of PGN moves.
      *
-     * @var object
+     * @var array
      */
-    private object $movetext;
+    private array $moves;
 
     /**
      * Constructor.
@@ -36,23 +37,20 @@ class Movetext
     public function __construct(Move $move, string $text)
     {
         $this->move = $move;
+        $this->moves = [];
+        $text = $this->filter($text);
 
-        $this->movetext = (object) [
-            'n' => [],
-            'moves' => [],
-        ];
-
-        $this->filter($text);
+        $this->fill($text);
     }
 
     /**
-     * Returns the movetext.
+     * Returns the moves.
      *
-     * @return object
+     * @return array
      */
-    public function getMovetext(): object
+    public function getMoves(): array
     {
-        return $this->movetext;
+        return $this->moves;
     }
 
     /**
@@ -62,32 +60,69 @@ class Movetext
      */
     public function validate(): string
     {
-        if (!$this->isOrdered()) {
-            throw new MovetextException();
+        foreach ($this->moves as $move) {
+            if ($move !== self::SYMBOL_ELLIPSIS) {
+                $this->move->validate($move);
+            }
         }
 
-        foreach ($this->movetext->moves as $move) {
-            $this->move->validate($move);
-        }
-
-        return $this->join();
+        return $this->toString();
     }
 
     /**
-     * Concatenates the moves to form a string.
+     * Converts the array of PGN moves to a string.
      *
      * @return string
      */
-    protected function join(): string
+    public function toString(): string
     {
         $text = '';
-        foreach ($this->movetext->moves as $key => $val) {
-            $key % 2 === 0
-                ? $text .= (($key / 2) + 1) . ".{$this->movetext->moves[$key]}"
-                : $text .= " {$this->movetext->moves[$key]} ";
+        $offset = 0;
+        if (isset($this->moves[0])) {
+            if ($this->moves[0] === self::SYMBOL_ELLIPSIS) {
+                $text = '1' . self::SYMBOL_ELLIPSIS . "{$this->moves[1]} ";
+                $offset = 2;
+            }
+        }
+        for ($i = $offset; $i < count($this->moves); $i++) {
+            if ($i % 2 === 0) {
+                $text .= (($i / 2) + 1) . ".{$this->moves[$i]}";
+            } else {
+                $text .= " {$this->moves[$i]} ";
+            }
         }
 
         return trim($text);
+    }
+
+    /**
+     * Returns an array representing the movetext as a sequence of moves.
+     *
+     * e.g. 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+
+     *
+     * Array
+     * (
+     *     [0] => 1.d4 Nf6
+     *     [1] => 1.d4 Nf6 2.Nf3 e6
+     *     [2] => 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+
+     * )
+     *
+     * @return array
+     */
+    public function sequence(): array
+    {
+        $n = floor(count($this->moves) / 2);
+        $sequence = [];
+        for ($i = 0; $i < $n; $i++) {
+            $j = 2 * $i;
+            if (isset($this->moves[$j+1])) {
+                $item = end($sequence) . ' ' .  $i + 1 .
+                ".{$this->moves[$j]} {$this->moves[$j+1]}";
+                $sequence[] = trim($item);
+            }
+        }
+
+        return $sequence;
     }
 
     /**
@@ -95,83 +130,50 @@ class Movetext
      *
      * @param string $text
      */
-    protected function filter(string $text): void
+    protected function filter(string $text): string
     {
-        // remove the PGN symbols found in the filter
+        // remove PGN symbols
         $text = str_replace(Termination::values(), '', $text);
-
         // remove comments
         $text = preg_replace("/\{[^)]+\}/", '', $text);
         $text = preg_replace("/\([^)]+\)/", '', $text);
-
-        // replace fide long castle
-        $text = preg_replace("/0-0/", 'O-O', $text);
-
-        // replace fide short castle
-        $text = preg_replace("/0-0-0/", 'O-O-O', $text);
-
+        // replace FIDE notation with PGN notation
+        $text = str_replace('0-0', 'O-O', $text);
+        $text = str_replace('0-0-0', 'O-O-O', $text);
         // remove spaces between dots
         $text = preg_replace('/\s+\./', '.', $text);
 
-        // build the array of moves
-        foreach ($moves = explode(' ', $text) as $move) {
-            if (preg_match('/^[1-9][0-9]*\.(.*)$/', $move)) {
-                $exploded = explode('.', $move);
-                $this->movetext->n[] = $exploded[0];
-                $this->movetext->moves[] = $exploded[1];
+        return $text;
+    }
+
+    /**
+     * Fills the array of PGN moves with data.
+     *
+     * @param string $text
+     */
+    protected function fill(string $text): void
+    {
+        $moves = explode(' ', $text);
+        foreach ($moves as $key => $val) {
+            if ($key === 0) {
+                if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
+                    $exploded = explode(self::SYMBOL_ELLIPSIS, $val);
+                    $this->moves[] = self::SYMBOL_ELLIPSIS;
+                    $this->moves[] = $exploded[1];
+                } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
+                    $this->moves[] = explode('.', $val)[1];
+                } else {
+                    $this->moves[] = $val;
+                }
             } else {
-                $this->movetext->moves[] = $move;
+                if (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
+                    $this->moves[] = explode('.', $val)[1];
+                } else {
+                    $this->moves[] = $val;
+                }
             }
         }
 
-        $this->movetext->moves = array_values(array_filter($this->movetext->moves));
-    }
-
-    /**
-     * Finds out if the movetext is ordered.
-     *
-     * @return bool
-     */
-    protected function isOrdered(): bool
-    {
-        $isOrdered = 1;
-        for ($i = 0; $i < count($this->movetext->n); $i++) {
-            $isOrdered *= (int) $this->movetext->n[$i] == $i + 1;
-        }
-
-        return (bool) $isOrdered;
-    }
-
-    /**
-     * Returns an array representing the movetext as a sequence of moves.
-     *
-     * e.g. 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5
-     *
-     * Array
-     * (
-     *  [0] => 1.d4 Nf6
-     *  [1] => 1.d4 Nf6 2.Nf3 e6
-     *  [2] => 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+
-     *  [3] => 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O
-     *  [4] => 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7
-     *  [5] => 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6
-     *  [6] => 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5
-     * )
-     *
-     * @return array
-     */
-    public function sequence(): array
-    {
-        $sequence = [];
-        for ($i = 0; $i < count($this->movetext->n); $i++) {
-            $j = 2 * $i;
-            if (isset($this->movetext->moves[$j+1])) {
-                $item = end($sequence) .
-                    " {$this->movetext->n[$i]}.{$this->movetext->moves[$j]} {$this->movetext->moves[$j+1]}";
-                $sequence[] = trim($item);
-            }
-        }
-
-        return $sequence;
+        $this->moves = array_values(array_filter($this->moves));
     }
 }
