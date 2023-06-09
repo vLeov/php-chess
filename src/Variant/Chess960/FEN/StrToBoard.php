@@ -60,9 +60,7 @@ class StrToBoard
                 $pieces,
                 $this->castlingAbility
             ))->setTurn($this->fields[1])->setStartFen($this->string);
-            if ($this->fields[3] !== '-') {
-                $board = $this->doublePawnPush($board);
-            }
+            $board = $this->enPassant($board);
         } catch (\Throwable $e) {
             throw new UnknownNotationException();
         }
@@ -70,28 +68,17 @@ class StrToBoard
         return $board;
     }
 
-    protected function doublePawnPush(Board $board)
+    protected function enPassant(Board $board)
     {
-        $file = $this->fields[3][0];
-        $rank = intval(substr($this->fields[3], 1));
-        if ($this->fields[1] === Color::W) {
-            $piece = ' p ';
-            $fromRank = $rank + 1;
-            $toRank = $rank - 1;
-            $turn = Color::B;
-        } else {
-            $piece = ' P ';
-            $fromRank = $rank - 1;
-            $toRank = $rank + 1;
-            $turn = Color::W;
+        if ($this->fields[3] !== '-') {
+            foreach ($pieces = $board->getPieces($this->fields[1]) as $piece) {
+                if ($piece->getId() === Piece::P) {
+                    if (in_array($this->fields[3], $piece->getCaptureSqs())) {
+                        $piece->setEnPassantSq($this->fields[3]);
+                    }
+                }
+            }
         }
-        $fromSq = $file.$fromRank;
-        $toSq = $file.$toRank;
-        $board = (new AsciiArray($board->toAsciiArray(), $this->size, $this->castlingRule))
-            ->setElem($piece, $fromSq)
-            ->setElem(' . ', $toSq)
-            ->toChess960Board(get_class($board), $turn, $this->castlingAbility, $this->startPos);
-        $board->play($turn, $toSq);
 
         return $board;
     }
