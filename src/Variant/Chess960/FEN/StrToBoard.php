@@ -3,13 +3,11 @@
 namespace Chess\Variant\Chess960\FEN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Piece\AsciiArray;
 use Chess\Piece\PieceArray;
 use Chess\Variant\Chess960\Board;
 use Chess\Variant\Chess960\Rule\CastlingRule;
 use Chess\Variant\Classical\FEN\Str;
-use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 use Chess\Variant\Classical\PGN\AN\Square;
 
 /**
@@ -20,7 +18,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class StrToBoard
+class StrToBoard extends ClassicalFenStrToBoard
 {
     protected array $size;
 
@@ -63,21 +61,6 @@ class StrToBoard
             $board = $this->enPassant($board);
         } catch (\Throwable $e) {
             throw new UnknownNotationException();
-        }
-
-        return $board;
-    }
-
-    protected function enPassant(Board $board)
-    {
-        if ($this->fields[3] !== '-') {
-            foreach ($pieces = $board->getPieces($this->fields[1]) as $piece) {
-                if ($piece->getId() === Piece::P) {
-                    if (in_array($this->fields[3], $piece->getCaptureSqs())) {
-                        $piece->setEnPassantSq($this->fields[3]);
-                    }
-                }
-            }
         }
 
         return $board;
