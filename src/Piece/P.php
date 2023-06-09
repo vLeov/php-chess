@@ -210,6 +210,19 @@ class P extends AbstractPiece
     }
 
     /**
+     * Sets the en passant square.
+     *
+     * @param string $sq
+     * @return \Chess\Piece\P
+     */
+    public function setEnPassantSq(string $sq): P
+    {
+        $this->enPassantSq = $sq;
+
+        return $this;
+    }
+
+    /**
      * Checks whether the pawn is promoted.
      *
      * @return boolean
