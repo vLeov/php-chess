@@ -43,9 +43,6 @@ class StrToBoard extends ClassicalFenStrToBoard
                 $this->castlingAbility
             ))->setTurn($this->fields[1])->setStartFen($this->string);
             $board = $this->enPassant($board);
-            if ($this->fields[3] !== '-') {
-                $board = $this->doublePawnPush($board);
-            }
         } catch (\Throwable $e) {
             throw new UnknownNotationException();
         }
