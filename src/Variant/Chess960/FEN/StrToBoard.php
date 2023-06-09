@@ -58,11 +58,10 @@ class StrToBoard extends ClassicalFenStrToBoard
                 $pieces,
                 $this->castlingAbility
             ))->setTurn($this->fields[1])->setStartFen($this->string);
-            $board = $this->enPassant($board);
         } catch (\Throwable $e) {
             throw new UnknownNotationException();
         }
 
-        return $board;
+        return $this->enPassant($board);
     }
 }

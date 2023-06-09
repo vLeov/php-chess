@@ -54,15 +54,14 @@ class StrToBoard
                 $pieces,
                 $this->castlingAbility
             ))->setTurn($this->fields[1])->setStartFen($this->string);
-            $board = $this->enPassant($board);
         } catch (\Throwable $e) {
             throw new UnknownNotationException();
         }
 
-        return $board;
+        return $this->enPassant($board);
     }
 
-    protected function enPassant(Board $board)
+    protected function enPassant(Board $board): Board
     {
         if ($this->fields[3] !== '-') {
             foreach ($pieces = $board->getPieces($this->fields[1]) as $piece) {
