@@ -119,8 +119,6 @@ class P extends AbstractPiece
     public function sqs(): array
     {
         $sqs = [];
-        $history = $this->board->getHistory();
-        $end = end($history);
 
         // mobility squares
         foreach ($this->mobility as $sq) {
@@ -138,7 +136,12 @@ class P extends AbstractPiece
             }
         }
 
-        // en passant squares
+        // the previously set en passant square if any
+        $sqs[] = $this->enPassantSq;
+
+        // calculate the en passant square from the history
+        $history = $this->board->getHistory();
+        $end = end($history);
         if ($end && $end->move->id === Piece::P && $end->move->color === $this->oppColor()) {
             if ($this->color === Color::W) {
                 if (intval($this->getSqRank()) === $this->size['ranks'] - 3) {
@@ -158,6 +161,8 @@ class P extends AbstractPiece
                 }
             }
         }
+
+        $sqs = array_filter(array_unique($sqs));
 
         return $sqs;
     }
