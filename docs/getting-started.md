@@ -1,5 +1,7 @@
 # Getting Started
 
+📌 Some familiarity with chess terms and concepts is required but if you're new to chess this tutorial will guide you through how to easily create amazing apps with PHP Chess.
+
 The [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) class is the easiest way to get started with PHP Chess.
 
 ```php
@@ -38,5 +40,3 @@ string(55) "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3"
 ```
 
 This is the chess position in Forsyth–Edwards Notation (FEN) format after 1.e4.
-
-📌 Terms such as FEN, LAN and PGN are already being used. Of course, some familiarity with chess terms and concepts is required but if you're new to chess this tutorial will guide you through how to easily create amazing apps with PHP Chess.

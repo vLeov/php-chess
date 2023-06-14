@@ -12,7 +12,7 @@ The PHP Chess docs are more of a tutorial rather than an API description.
 
 ### Common Formats Supported
 
-Universal chess interface (UCI). Move format in Long Algebraic Notation (LAN) and Portable Game Notation (PGN). Forsyth-Edwards Notation (FEN).
+Universal chess interface (UCI) protocol. Move format in Long Algebraic Notation (LAN) and Portable Game Notation (PGN). Forsyth-Edwards Notation (FEN).
 
 ### Chess Variants
 

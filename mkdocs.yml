@@ -4,5 +4,6 @@ pages:
   - Getting Started: getting-started.md
   - Read PGN: read-pgn.md
   - Read LAN: read-lan.md
-  - Convert FEN: convert-fen-to-board.md
+  - Convert FEN to Board: convert-fen-to-board.md
+  - Play Computer: play-computer.md
 theme: readthedocs
