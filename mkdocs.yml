@@ -6,5 +6,6 @@ pages:
   - Read PGN: read-pgn.md
   - Read LAN: read-lan.md
   - Convert FEN to Board: convert-fen-to-board.md
+  - Convert Board to PNG Image: convert-board-to-png-image.md
   - Play Computer: play-computer.md
 theme: readthedocs

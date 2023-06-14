@@ -1,6 +1,6 @@
 # Read PGN
 
-📝 Portable Game Notation is a human-readable format that allows chess players to read and write chess games.
+📝 Portable Game Notation is a human-readable text format that allows chess players to read and write chess games.
 
 ---
 
