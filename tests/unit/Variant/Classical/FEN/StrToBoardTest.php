@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Variant\Classical\FEN;
 
-use Chess\Array\AsciiArray;
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
