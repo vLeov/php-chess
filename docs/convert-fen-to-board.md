@@ -6,7 +6,7 @@ FEN stands for Forsyth-Edwards Notation and is the standard way for describing c
 
 | Variant | FEN Converter |
 | ------- | ------------- |
-| Capablanca | Chess\Variant\Capablanca\FEN\StrToBoard |
+| Capablanca | [Chess\Variant\Capablanca\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Capablanca/FEN/StrToBoardTest.php) |
 | Chess960 | [Chess\Variant\Chess960\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/FEN/StrToBoardTest.php) |
 | Classical | [Chess\Variant\Classical\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/FEN/StrToBoardTest.php) |
 
