@@ -1,8 +1,10 @@
 # Convert FEN to Board
 
-📌 Almost everything in PHP Chess can be done with a chessboard object.
+📝 FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings.
 
-FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done according to the variants supported.
+---
+
+Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done according to the variants supported.
 
 | Variant | FEN Converter |
 | ------- | ------------- |
