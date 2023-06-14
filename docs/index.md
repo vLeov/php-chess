@@ -24,6 +24,14 @@ There are three different variants supported with the default one being classica
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) |
 
+### UCI Engines
+
+UCI engines not only allow to play chess with the computer but are also a helpful tool when analyzing chess games.
+
+| Name | UCI Engine |
+| ---- | ---------- |
+| Stockfish | [Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php) |
+
 ### Object-Oriented API
 
 Data processing with an object-oriented API. The chess board representation is an object of type [SplObjectStorage](https://www.php.net/manual/en/class.splobjectstorage.php) as opposed to a bitboard.
@@ -31,7 +39,7 @@ Data processing with an object-oriented API. The chess board representation is a
 ### Thoroughly Tested
 
 PHP Chess has been developed with a test-driven development (TDD) approach. The [tests/unit](https://github.com/chesslablab/php-chess/tree/master/tests/unit) folder contains plenty of real examples.
-### Lightweight
 
+### Lightweight
 
 Requires two PHP dependencies: Rubix ML for machine learning and Imagine for image processing.

@@ -45,14 +45,14 @@ class StockfishTest extends AbstractUnitTestCase
                 'depth' => 8
             ]);
 
-        $uci = $stockfish->play($board->toFen());
+        $lan = $stockfish->play($board->toFen());
 
-        $this->assertTrue($board->playLan('b', $uci));
+        $this->assertTrue($board->playLan('b', $lan));
         $this->assertTrue($board->playLan('w', 'a2a3'));
 
-        $uci = $stockfish->play($board->toFen());
+        $lan = $stockfish->play($board->toFen());
 
-        $this->assertTrue($board->playLan('b', $uci));
+        $this->assertTrue($board->playLan('b', $lan));
     }
 
     /**
@@ -71,15 +71,15 @@ class StockfishTest extends AbstractUnitTestCase
                 'depth' => 8
             ]);
 
-        $uci = $stockfish->play($board->toFen());
-        $this->assertTrue($board->playLan('b', $uci));
+        $lan = $stockfish->play($board->toFen());
+        $this->assertTrue($board->playLan('b', $lan));
         $this->assertTrue($board->playLan('w', 'g1h3'));
 
-        $uci = $stockfish->play($board->toFen());
-        $this->assertTrue($board->playLan('b', $uci));
+        $lan = $stockfish->play($board->toFen());
+        $this->assertTrue($board->playLan('b', $lan));
         $this->assertTrue($board->playLan('w', 'a1b1'));
 
-        $uci = $stockfish->play($board->toFen());
-        $this->assertTrue($board->playLan('b', $uci));
+        $lan = $stockfish->play($board->toFen());
+        $this->assertTrue($board->playLan('b', $lan));
     }
 }
