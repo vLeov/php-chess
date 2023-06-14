@@ -2,8 +2,6 @@
 
 📝 Portable Game Notation is a human-readable text format that allows chess players to read and write chess games.
 
----
-
 There are three different variants supported with the default one being classical chess.
 
 | Variant | Chessboard |

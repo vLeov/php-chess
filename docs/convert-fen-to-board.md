@@ -2,8 +2,6 @@
 
 📝 FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings.
 
----
-
 Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done according to the variants supported.
 
 | Variant | FEN Converter |
@@ -113,4 +111,4 @@ echo $board->getStartFen();
 rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -
 ```
 
-🎉 Congrats! You just learned a new chess opening.
+🎉 Well done! You just learned a well-known and frequently played chess opening. 

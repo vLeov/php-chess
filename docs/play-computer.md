@@ -2,8 +2,6 @@
 
 📝 UCI engines not only allow to play chess with the computer but are also a helpful tool when analyzing chess games.
 
----
-
 [Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php) allows to play chess against the Stockfish chess engine using PHP, but first things first, make sure to install it on your computer.
 
 ```text
