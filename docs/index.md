@@ -43,7 +43,3 @@ PHP Chess has been developed with a test-driven development (TDD) approach. The 
 ### Lightweight
 
 Requires two PHP dependencies: Rubix ML for machine learning and Imagine for image processing.
-
-### Contributing
-
-PHP Chess is being used in websites and apps right now. If you find a bug or want to request a new feature, please let us know by opening an issue or sending a PR. Thank you.
