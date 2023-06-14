@@ -10,7 +10,7 @@ FEN stands for Forsyth-Edwards Notation and is the standard way for describing c
 | Chess960 | [Chess\Variant\Chess960\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/FEN/StrToBoardTest.php) |
 | Classical | [Chess\Variant\Classical\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/FEN/StrToBoardTest.php) |
 
-Let's continue a classical game from the FEN position of B54, which is the ECO code for "Sicilian Defense: Modern Variations, Main Line" previously discussed in Section 3, Read PGN.
+Let's continue a classical game from the FEN position of B54, which is the ECO code for "Sicilian Defense: Modern Variations, Main Line" previously discussed in [Read PGN](https://php-chess.readthedocs.io/en/latest/read-pgn/).
 
 ```php
 use Chess\Variant\Classical\FEN\StrToBoard;

@@ -2,13 +2,13 @@
 
 📌 UCI engines not only allow to play chess with the computer but are also a helpful tool when analyzing chess games.
 
-[Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php) allows to play chess against the Stockfish chess engine using PHP, but first things first, make sure to install the Stockfish chess engine on your computer.
+[Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php) allows to play chess against the Stockfish chess engine using PHP, but first things first, make sure to install it on your computer as described in [Installation](https://php-chess.readthedocs.io/en/latest/installation/).
 
 ```text
 sudo apt-get install stockfish
 ```
 
-Then you're set up to play chess against Stockfish as described in the following example.
+Then, you're set up to play chess against Stockfish as described in the following example.
 
 ```php
 use Chess\UciEngine\Stockfish;
@@ -28,3 +28,5 @@ $stockfish = (new Stockfish($board))
 $lan = $stockfish->play($board->toFen());
 $board->playLan('b', $lan);
 ```
+
+🎉 Can you beat Stockfish? Keep it up! What about a `Skill Level` of `20` and a `depth` of `12`?
