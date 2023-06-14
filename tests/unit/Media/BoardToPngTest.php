@@ -5,8 +5,7 @@ namespace Chess\Tests\Unit\Media;
 use Chess\Media\BoardToPng;
 use Chess\Player\PgnPlayer;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Capablanca80\Board as Capablanca80Board;
-use Chess\Variant\Capablanca100\Board as Capablanca100Board;
+use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
@@ -158,39 +157,24 @@ class BoardToPngTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function output_start_capablanca100()
+    public function output_start_capablanca()
     {
-        $board = new Capablanca100Board();
+        $board = new CapablancaBoard();
 
         $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
 
         $this->assertSame(
             sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
-            sha1_file(self::DATA_FOLDER.'/img/start_capablanca100.png')
+            sha1_file(self::DATA_FOLDER.'/img/start_capablanca.png')
         );
     }
 
     /**
      * @test
      */
-    public function output_start_capablanca80()
+    public function output_capablanca_Nj3_e5___Ci6_O_O()
     {
-        $board = new Capablanca80Board();
-
-        $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
-
-        $this->assertSame(
-            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
-            sha1_file(self::DATA_FOLDER.'/img/start_capablanca80.png')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function output_capablanca80_Nj3_e5___Ci6_O_O()
-    {
-        $board = new Capablanca80Board();
+        $board = new CapablancaBoard();
 
         $board->play('w', 'Nj3');
         $board->play('b', 'e5');
@@ -206,46 +190,16 @@ class BoardToPngTest extends AbstractUnitTestCase
 
         $this->assertSame(
             sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
-            sha1_file(self::DATA_FOLDER.'/img/Nj3_e5___capablanca80.png')
+            sha1_file(self::DATA_FOLDER.'/img/Nj3_e5___capablanca.png')
         );
     }
 
     /**
      * @test
      */
-    public function output_capablanca100_a4_j7___bxc10_ixj1()
+    public function output_capablanca_f4_f5_Nh3_Nc6_flip()
     {
-        $board = new Capablanca100Board();
-
-        $board->play('w', 'a4');
-        $board->play('b', 'j7');
-        $board->play('w', 'a5');
-        $board->play('b', 'j6');
-        $board->play('w', 'a6');
-        $board->play('b', 'j5');
-        $board->play('w', 'a7');
-        $board->play('b', 'j4');
-        $board->play('w', 'a8');
-        $board->play('b', 'j3');
-        $board->play('w', 'axb9');
-        $board->play('b', 'jxi2');
-        $board->play('w', 'bxc10=Q');
-        $board->play('b', 'ixj1=Q');
-
-        $filename = (new BoardToPng($board))->output(self::OUTPUT_FOLDER);
-
-        $this->assertSame(
-            sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
-            sha1_file(self::DATA_FOLDER.'/img/a4_j7___capablanca100.png')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function output_capablanca80_f4_f5_Nh3_Nc6_flip()
-    {
-        $board = new Capablanca80Board();
+        $board = new CapablancaBoard();
 
         $board->play('w', 'f4');
         $board->play('b', 'f5');
@@ -256,16 +210,16 @@ class BoardToPngTest extends AbstractUnitTestCase
 
         $this->assertSame(
             sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
-            sha1_file(self::DATA_FOLDER.'/img/f4_f5_Nh3_Nc6_flip___capablanca80.png')
+            sha1_file(self::DATA_FOLDER.'/img/f4_f5_Nh3_Nc6_flip___capablanca.png')
         );
     }
 
     /**
      * @test
      */
-    public function output_capablanca80_f4_f5___e3_O_O_O_flip()
+    public function output_capablanca_f4_f5___e3_O_O_O_flip()
     {
-        $board = new Capablanca80Board();
+        $board = new CapablancaBoard();
 
         $board->play('w', 'f4');
         $board->play('b', 'f5');
@@ -288,7 +242,7 @@ class BoardToPngTest extends AbstractUnitTestCase
 
         $this->assertSame(
             sha1_file(self::OUTPUT_FOLDER.'/'.$filename),
-            sha1_file(self::DATA_FOLDER.'/img/f4_f5___e3_O_O_O_flip___capablanca80.png')
+            sha1_file(self::DATA_FOLDER.'/img/f4_f5___e3_O_O_O_flip___capablanca.png')
         );
     }
 }

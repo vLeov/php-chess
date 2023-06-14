@@ -2,12 +2,11 @@
 
 namespace Chess\Media;
 
-use Chess\Game;
 use Chess\Movetext;
 use Chess\Exception\MediaException;
-use Chess\Variant\Capablanca80\Board as Capablanca80Board;
-use Chess\Variant\Capablanca80\FEN\StrToBoard as Capablanca80FenStrToBoard;
-use Chess\Variant\Capablanca80\PGN\Move as Capablanca80PgnMove;
+use Chess\Variant\Capablanca\Board as CapablancaBoard;
+use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
+use Chess\Variant\Capablanca\PGN\Move as CapablancaPgnMove;
 use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Chess960\FEN\StrToBoard as Chess960FenStrToBoard;
 use Chess\Variant\Classical\Board as ClassicalBoard;
@@ -44,11 +43,11 @@ class BoardToMp4
         $this->startPos = str_split($startPos);
         $this->flip = $flip;
 
-        if ($variant === Game::VARIANT_960) {
+        if ($variant === Chess960Board::VARIANT) {
             $move = new ClassicalPgnMove();
-        } elseif ($variant === Game::VARIANT_CAPABLANCA_80) {
-            $move = new Capablanca80PgnMove();
-        } elseif ($variant === Game::VARIANT_CLASSICAL) {
+        } elseif ($variant === CapablancaBoard::VARIANT) {
+            $move = new CapablancaPgnMove();
+        } elseif ($variant === ClassicalBoard::VARIANT) {
             $move = new ClassicalPgnMove();
         } else {
             throw new MediaException();
@@ -63,22 +62,22 @@ class BoardToMp4
         }
 
         if ($this->fen) {
-            if ($this->variant === Game::VARIANT_960) {
+            if ($this->variant === Chess960Board::VARIANT) {
                 $this->board = (new Chess960FenStrToBoard($this->fen, $this->startPos))
                     ->create();
-            } elseif ($this->variant === Game::VARIANT_CAPABLANCA_80) {
-                $this->board = (new Capablanca80FenStrToBoard($this->fen))
+            } elseif ($this->variant === CapablancaBoard::VARIANT) {
+                $this->board = (new CapablancaFenStrToBoard($this->fen))
                     ->create();
-            } elseif ($this->variant === Game::VARIANT_CLASSICAL) {
+            } elseif ($this->variant === ClassicalBoard::VARIANT) {
                 $this->board = (new ClassicalFenStrToBoard($this->fen))
                     ->create();
             }
         } else {
-            if ($this->variant === Game::VARIANT_960) {
+            if ($this->variant === Chess960Board::VARIANT) {
                 $this->board = new Chess960Board($this->startPos);
-            } elseif ($this->variant === Game::VARIANT_CAPABLANCA_80) {
-                $this->board = new Capablanca80Board();
-            } elseif ($this->variant === Game::VARIANT_CLASSICAL) {
+            } elseif ($this->variant === CapablancaBoard::VARIANT) {
+                $this->board = new CapablancaBoard();
+            } elseif ($this->variant === ClassicalBoard::VARIANT) {
                 $this->board = new ClassicalBoard();
             }
         }
