@@ -33,7 +33,7 @@ Be that as it may, every time a move is made, the state of the board changes.
 var_dump($board->toFen());
 ```
 
-```
+```text
 string(55) "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3"
 ```
 

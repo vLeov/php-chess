@@ -1,6 +1,6 @@
 site_name: PHP Chess
 pages:
-  - Home: home.md
+  - Home: index.md
   - Getting Started: getting-started.md
   - Read PGN: read-pgn.md
   - Read LAN: read-lan.md

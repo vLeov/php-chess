@@ -29,7 +29,7 @@ $board->play('w', 'Nxd4');
 echo $board->toAsciiString();
 ```
 
-```
+```text
 r  n  b  q  k  b  n  r
 p  p  .  .  p  p  p  p
 .  .  .  p  .  .  .  .
@@ -42,7 +42,9 @@ R  N  B  Q  K  B  .  R
 
 As discussed in Section 2, Getting Started, the PGN format is convenient for when reading chess games annotated by humans, for example, those ones available in online databases or published in chess websites.
 
-> 1. e4 e5 2. Nf3 Nf6 3. d4 Nxe4 4. Bd3 d5 5. Nxe5 Nd7 6. Nxd7 Bxd7 7. Nd2 Nxd2 8. Bxd2 Bd6 9. 0-0 h5 10. Qe1+ Kf8 11. Bb4 Qe7 12. Bxd6 Qxd6 13. Qd2 Re8 14. Rae1 Rh6 15. Qg5 c6 16. Rxe8+ Bxe8 17. Re1 Qf6 18. Qe3 Bd7 19. h3 h4 20. c4 dxc4 21. Bxc4 b5 (diagram) 22. Qa3+ Kg8 23. Qxa7 Qd8 24. Bb3 Rd6 25. Re4 Be6 26. Bxe6 Rxe6 27. Rxe6 fxe6 28. Qc5 Qa5 29. Qxc6 Qe1+ 30. Kh2 Qxf2 31. Qxe6+ Kh7 32. Qe4+ Kg8 33. b3 Qxa2 34. Qe8+ Kh7 35. Qxb5 Qf2 36. Qe5 Qb2 37. Qe4+ Kg8 38. Qd3 Qf2 39. Qc3 Qf4+ 40. Kg1 Kh7 41. Qd3+ g6 42. Qd1 Qe3+ 43. Kh1 g5 44. d5 g4 45. hxg4 h3 46. Qf3 1–0
+```text
+1. e4 e5 2. Nf3 Nf6 3. d4 Nxe4 4. Bd3 d5 5. Nxe5 Nd7 6. Nxd7 Bxd7 7. Nd2 Nxd2 8. Bxd2 Bd6 9. 0-0 h5 10. Qe1+ Kf8 11. Bb4 Qe7 12. Bxd6 Qxd6 13. Qd2 Re8 14. Rae1 Rh6 15. Qg5 c6 16. Rxe8+ Bxe8 17. Re1 Qf6 18. Qe3 Bd7 19. h3 h4 20. c4 dxc4 21. Bxc4 b5 (diagram) 22. Qa3+ Kg8 23. Qxa7 Qd8 24. Bb3 Rd6 25. Re4 Be6 26. Bxe6 Rxe6 27. Rxe6 fxe6 28. Qc5 Qa5 29. Qxc6 Qe1+ 30. Kh2 Qxf2 31. Qxe6+ Kh7 32. Qe4+ Kg8 33. b3 Qxa2 34. Qe8+ Kh7 35. Qxb5 Qf2 36. Qe5 Qb2 37. Qe4+ Kg8 38. Qd3 Qf2 39. Qc3 Qf4+ 40. Kg1 Kh7 41. Qd3+ g6 42. Qd1 Qe3+ 43. Kh1 g5 44. d5 g4 45. hxg4 h3 46. Qf3 1–0
+```
 
 The example above is a game from [World Chess Championship 2022](https://en.wikipedia.org/wiki/World_Chess_Championship_2021) published in Wikipedia.
 
@@ -54,7 +56,7 @@ $board->play('b', 'Na6');
 echo $board->toAsciiString();
 ```
 
-```
+```text
 r  .  b  q  k  b  n  r
 p  p  .  .  p  p  p  p
 n  .  .  p  .  .  .  .
@@ -74,7 +76,7 @@ $board->play('b', 'Nf6');
 echo $board->getMovetext();
 ```
 
-```
+```text
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
@@ -92,7 +94,7 @@ $board = (new PgnPlayer($movetext))
 echo $board->toAsciiString();
 ```
 
-```
+```text
 r  n  b  q  k  b  .  r
 p  p  .  .  p  p  p  p
 .  .  .  p  .  n  .  .

@@ -24,7 +24,7 @@ $board->play('b', 'Nc6');
 echo $board->toFen();
 ```
 
-```
+```text
 r1bqkb1r/pp2pppp/2np1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq -
 ```
 
@@ -34,7 +34,7 @@ It is worth saying that after 5.Nc3 Nc6, B54 has turned into B56 which is the EC
 var_dump($board->getHistory());
 ```
 
-```
+```text
 array(2) {
   [0]=>
   object(stdClass)#323 (4) {
@@ -107,6 +107,6 @@ The initial FEN string is always accessible through the `getStartFen()` method.
 echo $board->getStartFen();
 ```
 
-```
+```text
 rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -
 ```
