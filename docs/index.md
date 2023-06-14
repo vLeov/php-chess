@@ -10,17 +10,13 @@ The PHP Chess docs are more of a tutorial rather than an API description.
 
 ## Features
 
-### Object-Oriented API
+### Common Formats Supported
 
-Data processing with an object-oriented API. The chess board representation is an object of type [SplObjectStorage](https://www.php.net/manual/en/class.splobjectstorage.php) as opposed to a bitboard.
+Universal chess interface (UCI). Move format in Long Algebraic Notation (LAN) and Portable Game Notation (PGN). Forsyth-Edwards Notation (FEN).
 
-### Thoroughly Tested
+### Chess Variants
 
-PHP Chess has been developed with a test-driven development (TDD) approach. The [tests/unit](https://github.com/chesslablab/php-chess/tree/master/tests/unit) folder contains plenty of real examples.
-
-### Easy to Learn
-
-Almost everything in PHP Chess can be done with a chessboard object. There are three different variants supported with the default one being classical chess.
+There are three different variants supported with the default one being classical chess.
 
 | Variant | Chessboard |
 | ------- | ---------- |
@@ -28,6 +24,14 @@ Almost everything in PHP Chess can be done with a chessboard object. There are t
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) |
 
+### Object-Oriented API
+
+Data processing with an object-oriented API. The chess board representation is an object of type [SplObjectStorage](https://www.php.net/manual/en/class.splobjectstorage.php) as opposed to a bitboard.
+
+### Thoroughly Tested
+
+PHP Chess has been developed with a test-driven development (TDD) approach. The [tests/unit](https://github.com/chesslablab/php-chess/tree/master/tests/unit) folder contains plenty of real examples.
 ### Lightweight
+
 
 Requires two PHP dependencies: Rubix ML for machine learning and Imagine for image processing.
