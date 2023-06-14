@@ -78,7 +78,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Player\PgnPlayer](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/PgnPlayerTest.php) allows to easily do so. As it name implies, this class is intended to play a PGN movetext in string format.
+Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Player\PgnPlayer](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/PgnPlayerTest.php) allows to easily do so.
 
 ```php
 use Chess\Player\PgnPlayer;
@@ -102,3 +102,5 @@ p  p  .  .  p  p  p  p
 P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
+
+🎉 As it name implies, this class is intended to play a PGN movetext in string format.

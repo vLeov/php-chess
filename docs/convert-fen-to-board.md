@@ -110,3 +110,5 @@ echo $board->getStartFen();
 ```text
 rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -
 ```
+
+🎉 Congrats! You just learned a new chess opening.
