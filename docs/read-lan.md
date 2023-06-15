@@ -24,7 +24,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Also [Chess\Player\LanPlayer](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/LanPlayerTest.php) allows to easily play a bunch of LAN moves at once instead of one by one.
+Also [Chess\Player\LanPlayer](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/LanPlayerTest.php) allows to easily play a bunch of LAN moves at once instead of one by one. As it name implies, this class is intended to play a LAN movetext in string format.
 
 ```php
 use Chess\Player\LanPlayer;
@@ -49,4 +49,4 @@ P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
 
-🎉 As it name implies, this class is intended to play a LAN movetext in string format.
+🎉 And, it's easy! The Universal Chess Interface (UCI) protocol enables chess engines to communicate with user interfaces using Long Algebraic Notation for moves.
