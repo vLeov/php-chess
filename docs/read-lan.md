@@ -49,4 +49,4 @@ P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
 
-🎉 And, it's easy! The Universal Chess Interface (UCI) protocol enables chess engines to communicate with user interfaces using Long Algebraic Notation for moves.
+🎉 And, it's easy! The UCI protocol enables chess engines to communicate with user interfaces using LAN for moves.
