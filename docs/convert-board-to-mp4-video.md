@@ -1,6 +1,6 @@
 # Convert Board to MP4 Video
 
-📝 Text-based PGN movetexts can be easily converted to MP4, a widely-used video format which comes in handy for pausing the games.
+✨ Text-based PGN movetexts can be easily converted to MP4, a widely-used video format which comes in handy for pausing the games.
 
 [Chess\Media\BoardToMp4](https://github.com/chesslablab/php-chess/blob/ac99506b7e09a30f61d6ad3b0a1d6436b4985226/tests/unit/Media/BoardToMp4Test.php) allows to convert a chess board object to an MP4 video.
 
@@ -16,4 +16,4 @@ $filename = (new BoardToMp4(
 ))->output(__DIR__.'/../../storage/tmp');
 ```
 
-🎉 Done! Now you can share your favorite games with friends.
+🎉 That's it!

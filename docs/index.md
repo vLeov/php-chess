@@ -12,7 +12,7 @@ The PHP Chess docs are more of a tutorial rather than an API description.
 
 ### Common Formats Supported
 
-Universal chess interface (UCI) protocol. Move format in Long Algebraic Notation (LAN) and Portable Game Notation (PGN). Forsyth-Edwards Notation (FEN).
+Universal chess interface (UCI) protocol. Move format in Long Algebraic Notation (LAN) and Portable Game Notation (PGN). Forsyth-Edwards Notation (FEN). PNG and JPG for image files and MP4 for videos.
 
 ### Chess Variants
 
@@ -26,7 +26,7 @@ There are three different variants supported with the default one being classica
 
 ### UCI Engines
 
-UCI engines not only allow to play chess with the computer but are also a helpful tool when analyzing chess games.
+Listed below are the UCI engines available at the moment.
 
 | Name | UCI Engine |
 | ---- | ---------- |
