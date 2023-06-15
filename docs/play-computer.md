@@ -58,6 +58,37 @@ echo $board->getMovetext();
 1.Qb4
 ```
 
-On this occasion, the FEN is converted to a chessboard object as described in [Convert FEN to Board](https://php-chess.readthedocs.io/en/latest/convert-fen-to-board/). The `Skill Level` is set to `20` and the depth is set to `12` in order to get a more accurate response from Stockfish.
+The FEN is converted to a chessboard object as described in [Convert FEN to Board](https://php-chess.readthedocs.io/en/latest/convert-fen-to-board/). The `Skill Level` is set to `20` and the depth is set to `12` in order to get a more accurate response from Stockfish. The same thing goes for PGN annotated games. This is how to play against Stockfish after a sequence of PGN moves has been loaded into a chess board.
 
-🎉 Can you beat Stockfish? Keep it up!
+```php
+use Chess\Player\PgnPlayer;
+use Chess\UciEngine\Stockfish;
+
+$movetext = '1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7';
+
+$board = (new PgnPlayer($movetext))
+    ->play()
+    ->getBoard();
+
+$stockfish = (new Stockfish($board))
+    ->setOptions([
+        'Skill Level' => 20
+    ])
+    ->setParams([
+        'depth' => 12
+    ]);
+
+$lan = $stockfish->play($board->toFen());
+
+$board->playLan('w', $lan);
+
+echo $board->getMovetext();
+```
+
+```text
+1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7 8.h3
+```
+
+As you can see, Stockfish responds with 8.h3.
+
+🎉 Can you beat the computer? Keep it up!
