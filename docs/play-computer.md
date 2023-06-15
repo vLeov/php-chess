@@ -26,7 +26,38 @@ $stockfish = (new Stockfish($board))
     ]);
 
 $lan = $stockfish->play($board->toFen());
+
 $board->playLan('b', $lan);
 ```
 
-🎉 Keep it up! Can you beat Stockfish?
+PHP Chess classes can be combined to do different things. For example, you may want to play against Stockfish from this FEN position published in your favorite online publication.
+
+```php
+use Chess\UciEngine\Stockfish;
+use Chess\Variant\Classical\FEN\StrToBoard;
+
+$board = (new StrToBoard('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -'))
+    ->create();
+
+$stockfish = (new Stockfish($board))
+    ->setOptions([
+        'Skill Level' => 20
+    ])
+    ->setParams([
+        'depth' => 12
+    ]);
+
+$lan = $stockfish->play($board->toFen());
+
+$board->playLan('w', $lan);
+
+echo $board->getMovetext();
+```
+
+```text
+1.Qb4
+```
+
+On this occasion, the FEN is converted to a chessboard object as described in [Convert FEN to Board](https://php-chess.readthedocs.io/en/latest/convert-fen-to-board/). The `Skill Level` is set to `20` and the depth is set to `12` in order to get a more accurate response from Stockfish.
+
+🎉 Can you beat Stockfish? Keep it up!

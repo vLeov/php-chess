@@ -37,4 +37,4 @@ stdClass Object
 
 1.e4 e5 is the move that a grandmaster would play. As you can see in this example, Chess\Grandmaster could find a response to 1.e4 returning the corresponding game's metadata.
 
-🎉 Let's put our knowledge of chess openings to the test to beat this grandmaster!
+🎉 Let's now put our knowledge of chess openings to the test.
