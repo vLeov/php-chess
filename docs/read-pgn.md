@@ -10,9 +10,7 @@ There are three different variants supported with the default one being classica
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) |
 
-Both Capablanca and Chess960 were originally conceived to minimize memorization. So when it comes to chess openings, it is assumed that we're in the realms of classical chess as well.
-
-Let's now have a look at B54 which is the ECO code for "Sicilian Defense: Modern Variations, Main Line".
+Both Capablanca and Chess960 were originally conceived to minimize memorization. So when it comes to chess openings, it is assumed that we're in the realms of classical chess as well. Let's now have a look at B54 which is the ECO code for "Sicilian Defense: Modern Variations, Main Line".
 
 ```php
 use Chess\Variant\Classical\Board;
