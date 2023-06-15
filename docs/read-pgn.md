@@ -78,7 +78,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Player\PgnPlayer](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/PgnPlayerTest.php) allows to easily do so.
+Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Player\PgnPlayer](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Player/PgnPlayerTest.php) allows to easily do so. As it name implies, this class is intended to play a PGN movetext in string format.
 
 ```php
 use Chess\Player\PgnPlayer;
@@ -103,4 +103,33 @@ P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
 
-🎉 As it name implies, this class is intended to play a PGN movetext in string format.
+The game can be continued from this position — remember, almost everything in PHP Chess is done using a chessboard object.
+
+```php
+$board->play('w', 'Bb5+');
+
+echo $board->toAsciiString();
+```
+
+```text
+r  n  b  q  k  b  .  r
+ p  p  .  .  p  p  p  p
+ .  .  .  p  .  n  .  .
+ .  B  .  .  .  .  .  .
+ .  .  .  N  P  .  .  .
+ .  .  .  .  .  .  .  .
+ P  P  P  .  .  P  P  P
+ R  N  B  Q  K  .  .  R
+```
+
+Every time a move is made, the state of the board changes and now the white king is in check.
+
+```php
+var_dump($board->isCheck());
+```
+
+```text
+bool(true)
+```
+
+🎉 Next, let's learn how to process chess moves from a graphical user interface.
