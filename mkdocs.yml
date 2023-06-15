@@ -7,7 +7,7 @@ pages:
   - Read LAN: read-lan.md
   - Convert FEN to Board: convert-fen-to-board.md
   - Convert Board to PNG Image: convert-board-to-png-image.md
-  - Convert Board to MP4 Video: convert-board-to-mp4-video.md
+  - Convert Board to MP4: convert-board-to-mp4.md
   - Play Like a Pro: play-like-a-pro.md
   - Play Computer: play-computer.md
 theme: readthedocs

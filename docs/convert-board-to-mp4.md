@@ -1,4 +1,4 @@
-# Convert Board to MP4 Video
+# Convert Board to MP4
 
 ✨ Text-based PGN movetexts can be easily converted to MP4, a widely-used video format which comes in handy for pausing the games.
 
