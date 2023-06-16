@@ -48,7 +48,7 @@ $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
 $heuristics = new HeuristicsByFenString($fen);
 
 $result = [
-    'eval' => $heuristics->getEvalNames(),
+    'evalNames' => $heuristics->getEvalNames(),
     'balance' => $heuristics->getBalance(),
 ];
 
@@ -58,7 +58,7 @@ print_r($result);
 ```text
 Array
 (
-    [eval] => Array
+    [evalNames] => Array
         (
             [0] => Material
             [1] => Center
@@ -127,7 +127,7 @@ $movetext = '1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3';
 $heuristics = new Heuristics($movetext);
 
 $result = [
-    'eval' => $heuristics->getEvalNames(),
+    'evalNames' => $heuristics->getEvalNames(),
     'balance' => $heuristics->getBalance(),
 ];
 
