@@ -10,6 +10,12 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
+/**
+ * HeuristicsByFenString
+ *
+ * @author Jordi Bassagañas
+ * @license GPL
+ */
 class HeuristicsByFenString
 {
     use HeuristicsTrait;
@@ -32,9 +38,7 @@ class HeuristicsByFenString
     }
 
     /**
-     * Returns the current evaluation of $this->board.
-     *
-     * The result obtained suggests which player is probably better.
+     * Returns the current evaluation.
      *
      * @return array
      */
@@ -61,7 +65,7 @@ class HeuristicsByFenString
     }
 
     /**
-     * Returns the resized balanced heuristics given a new range of values.
+     * Returns the resized balance given a new range of values.
      *
      * @param float $newMin
      * @param float $newMax
@@ -90,10 +94,10 @@ class HeuristicsByFenString
     {
         $item = [];
         foreach ($this->eval as $className => $weight) {
-            $dimension = new $className($this->board);
-            $eval = $dimension->eval();
+            $heuristic = new $className($this->board);
+            $eval = $heuristic->eval();
             if (is_array($eval[Color::W])) {
-                if ($dimension instanceof InverseEvalInterface) {
+                if ($heuristic instanceof InverseEvalInterface) {
                     $item[] = [
                         Color::W => count($eval[Color::B]),
                         Color::B => count($eval[Color::W]),
@@ -105,7 +109,7 @@ class HeuristicsByFenString
                     ];
                 }
             } else {
-                if ($dimension instanceof InverseEvalInterface) {
+                if ($heuristic instanceof InverseEvalInterface) {
                     $item[] = [
                         Color::W => $eval[Color::B],
                         Color::B => $eval[Color::W],

@@ -10,9 +10,6 @@ use Chess\Variant\Classical\Board;
 /**
  * Heuristics
  *
- * A chess game can be thought of in terms of snapshots describing what's going
- * on as reported by a number of evaluation features.
- *
  * @author Jordi Bassagañas
  * @license GPL
  */
@@ -34,24 +31,7 @@ class Heuristics extends PgnPlayer
     }
 
     /**
-     * Returns the dimensions names.
-     *
-     * @return array
-     */
-    public function getEvalNames(): array
-    {
-        $evalNames = [];
-        foreach ($this->eval as $key => $val) {
-            $evalNames[] = (new \ReflectionClass($key))->getConstant('NAME');
-        }
-
-        return $evalNames;
-    }
-
-    /**
-     * Returns the current evaluation of $this->board.
-     *
-     * The result obtained suggests which player may be better.
+     * Returns the current evaluation.
      *
      * @return array
      */
@@ -129,10 +109,10 @@ class Heuristics extends PgnPlayer
     {
         $item = [];
         foreach ($this->eval as $className => $weight) {
-            $dimension = new $className($this->board);
-            $eval = $dimension->eval();
+            $heuristic = new $className($this->board);
+            $eval = $heuristic->eval();
             if (is_array($eval[Color::W])) {
-                if ($dimension instanceof InverseEvalInterface) {
+                if ($heuristic instanceof InverseEvalInterface) {
                     $item[] = [
                         Color::W => count($eval[Color::B]),
                         Color::B => count($eval[Color::W]),
@@ -144,7 +124,7 @@ class Heuristics extends PgnPlayer
                     ];
                 }
             } else {
-                if ($dimension instanceof InverseEvalInterface) {
+                if ($heuristic instanceof InverseEvalInterface) {
                     $item[] = [
                         Color::W => $eval[Color::B],
                         Color::B => $eval[Color::W],
@@ -160,15 +140,10 @@ class Heuristics extends PgnPlayer
     }
 
     /**
-     * Normalizes the heuristic picture of $this->board.
+     * Normalizes the chess evaluations.
      *
-     * The dimensions are normalized meaning that the chess features (Material,
-     * Center, Connectivity, Space, Pressure, K safety, Tactics, and so on)
-     * are evaluated and scaled to have values between 0 and 1.
-     *
-     * It is worth noting that a normalized heuristic picture changes with every
-     * chess move that is made because it is recalculated or zoomed out, if you like,
-     * to fit within a 0–1 range.
+     * Material, Center, Connectivity, Space, and so on, are scaled to have
+     * values between 0 and 1.
      *
      * @return \Chess\Heuristics
      */
