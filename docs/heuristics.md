@@ -1,14 +1,10 @@
 # Heuristics
 
-✨ If you ask a grandmaster why a chess move is considered to be good, they'll probably give you a bunch of reasons intuitively about their decision.
+✨ If you ask a chess pro why a chess move is good, they'll probably give you a bunch of reasons, many of them intuitive, about why they made that decision.
 
-It is important to develop your pieces in the opening while trying to control the board's center at the same time. Castling is an excellent move in an early stage of the game: It helps your king be safer and develop one of your rooks towards the center of the board too.
+It is important to develop your pieces in the opening while trying to control the center of the board at the same time. Castling is an excellent move as long as the king gets safe. Then, in the middlegame space becomes an advantage. And if a complex position can be simplified when you have an advantage, then so much the better. The pawn structure could determine the endgame.
 
-Then, in the middlegame space becomes an advantage.
-
-And if a complex chess position can be simplified by taking advantage of your opponent's weaknesses, then so much the better — the pawn structure could determine the endgame.
-
-The list of strategies used behind the scenes goes on and on.
+The list of reasons why a chess move is good goes on and on.
 
 The mathematician Claude Shannon came to the conclusion that there are more chess moves than atoms in the universe. The game is complex and you need to learn how to make decisions to play chess like a pro. Since no human can calculate more than, let's say 30 moves ahead, it's all about thinking in terms of heuristics.
 
