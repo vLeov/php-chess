@@ -55,7 +55,7 @@ trait HeuristicsTrait
      *
      * @var array
      */
-    protected $dims = [
+    protected $eval = [
         MaterialEval::class => 16,
         CenterEval::class => 4,
         ConnectivityEval::class => 4,
@@ -99,20 +99,20 @@ trait HeuristicsTrait
      *
      * @return array
      */
-    public function getDims(): array
+    public function getEval(): array
     {
-        return $this->dims;
+        return $this->eval;
     }
 
     /**
      * Sets the dimensions.
      *
-     * @param array $dims
+     * @param array $eval
      * @return self
      */
-    public function setDims(array $dims)
+    public function setEval(array $eval)
     {
-        $this->dims = $dims;
+        $this->eval = $eval;
 
         return $this;
     }

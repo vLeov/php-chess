@@ -38,14 +38,14 @@ class Heuristics extends PgnPlayer
      *
      * @return array
      */
-    public function getDimsNames(): array
+    public function getEvalNames(): array
     {
-        $dimsNames = [];
-        foreach ($this->dims as $key => $val) {
-            $dimsNames[] = (new \ReflectionClass($key))->getConstant('NAME');
+        $evalNames = [];
+        foreach ($this->eval as $key => $val) {
+            $evalNames[] = (new \ReflectionClass($key))->getConstant('NAME');
         }
 
-        return $dimsNames;
+        return $evalNames;
     }
 
     /**
@@ -62,11 +62,11 @@ class Heuristics extends PgnPlayer
             Color::B => 0,
         ];
 
-        $weights = array_values($this->getDims());
+        $weights = array_values($this->getEval());
 
         $result = $this->getResult();
 
-        for ($i = 0; $i < count($this->getDims()); $i++) {
+        for ($i = 0; $i < count($this->getEval()); $i++) {
             $eval[Color::W] += $weights[$i] * end($result[Color::W])[$i];
             $eval[Color::B] += $weights[$i] * end($result[Color::B])[$i];
         }
@@ -128,7 +128,7 @@ class Heuristics extends PgnPlayer
     protected function calcItem(): void
     {
         $item = [];
-        foreach ($this->dims as $className => $weight) {
+        foreach ($this->eval as $className => $weight) {
             $dimension = new $className($this->board);
             $eval = $dimension->eval();
             if (is_array($eval[Color::W])) {
@@ -176,7 +176,7 @@ class Heuristics extends PgnPlayer
     {
         $normd = [];
         if (count($this->board->getHistory()) >= 2) {
-            for ($i = 0; $i < count($this->dims); $i++) {
+            for ($i = 0; $i < count($this->eval); $i++) {
                 $values = [
                     ...array_column($this->result[Color::W], $i),
                     ...array_column($this->result[Color::B], $i)
@@ -197,7 +197,7 @@ class Heuristics extends PgnPlayer
             }
         } else {
             $normd[Color::W][] =
-                $normd[Color::B][] = array_fill(0, count($this->dims), 0);
+                $normd[Color::B][] = array_fill(0, count($this->eval), 0);
         }
 
         $this->result = $normd;
