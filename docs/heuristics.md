@@ -1,6 +1,6 @@
 # Heuristics
 
-✨ If you ask a grandmaster why a chess move is considered to be good, they'll probably give you a bunch of reasons intuitively supporting the best decision.
+✨ If you ask a grandmaster why a chess move is considered to be good, they'll probably give you a bunch of reasons intuitively about their decision.
 
 It is important to develop your pieces in the opening while trying to control the board's center at the same time. Castling is an excellent move in an early stage of the game: It helps your king be safer and develop one of your rooks towards the center of the board too.
 
@@ -44,9 +44,97 @@ Listed below are the chess heuristics implemented in PHP Chess.
 
 The evaluation functions are then grouped in two heuristics classes to transform the chess board state into numbers: [Chess\HeuristicsByFenString](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsByFenStringTest.php) and [Chess\Heuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php). The former allows to take a so-called heuristic picture of a particular chess position while the latter enables to take a picture of an entire game.
 
+```php
+use Chess\HeuristicsByFenString;
+
+$fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
+
+$heuristics = new HeuristicsByFenString($fen);
+
+$result = [
+    'eval' => $heuristics->getEvalNames(),
+    'balance' => $heuristics->getBalance(),
+];
+
+print_r($result);
+```
+
+```text
+Array
+(
+    [eval] => Array
+        (
+            [0] => Material
+            [1] => Center
+            [2] => Connectivity
+            [3] => Space
+            [4] => Pressure
+            [5] => King safety
+            [6] => Tactics
+            [7] => Attack
+            [8] => Doubled pawn
+            [9] => Passed pawn
+            [10] => Isolated pawn
+            [11] => Backward pawn
+            [12] => Absolute pin
+            [13] => Relative pin
+            [14] => Absolute fork
+            [15] => Relative fork
+            [16] => Square outpost
+            [17] => Knight outpost
+            [18] => Bishop outpost
+            [19] => Bishop pair
+            [20] => Bad bishop
+            [21] => Direct opposition
+        )
+
+    [balance] => Array
+        (
+            [0] => 0
+            [1] => 0.28
+            [2] => 0
+            [3] => 0.07
+            [4] => 0
+            [5] => 0
+            [6] => 0
+            [7] => 0
+            [8] => 0
+            [9] => 0
+            [10] => 0
+            [11] => 0.04
+            [12] => 0
+            [13] => 0
+            [14] => 0
+            [15] => 0
+            [16] => 0
+            [17] => 0
+            [18] => 0
+            [19] => 0
+            [20] => 0
+            [21] => 0
+        )
+
+)
+```
+
 ![Figure 1](https://raw.githubusercontent.com/chesslablab/website/master/public/assets/img/heuristics_bar.png)
 
 Figure 1. Heuristics of `rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -`
+
+```php
+use Chess\Heuristics;
+
+$movetext = '1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3';
+
+$heuristics = new Heuristics($movetext);
+
+$result = [
+    'eval' => $heuristics->getEvalNames(),
+    'balance' => $heuristics->getBalance(),
+];
+
+print_r($result);
+```
 
 ![Figure 2](https://raw.githubusercontent.com/chesslablab/website/master/public/assets/img/heuristics.png)
 
