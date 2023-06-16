@@ -10,4 +10,5 @@ pages:
   - Convert Board to MP4: convert-board-to-mp4.md
   - Play Like a Pro: play-like-a-pro.md
   - Play Computer: play-computer.md
+  - Heuristics: heuristics.md
 theme: readthedocs
