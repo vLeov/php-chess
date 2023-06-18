@@ -150,6 +150,16 @@ var_dump($board->isStalemate());
 bool(false)
 ```
 
+And it is not a fivefold repetition yet.
+
+```php
+var_dump($board->isFivefoldRepetition());
+```
+
+```text
+bool(false)
+```
+
 Otherwise the game would end.
 
 🎉 Next, let's learn how to process chess moves from a graphical user interface.
