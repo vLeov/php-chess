@@ -4,83 +4,31 @@ namespace Chess\Media;
 
 use Chess\Movetext;
 use Chess\Exception\MediaException;
-use Chess\Variant\Capablanca\Board as CapablancaBoard;
-use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
-use Chess\Variant\Capablanca\PGN\Move as CapablancaPgnMove;
-use Chess\Variant\Chess960\Board as Chess960Board;
-use Chess\Variant\Chess960\FEN\StrToBoard as Chess960FenStrToBoard;
-use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
-use Chess\Variant\Classical\PGN\Move as ClassicalPgnMove;
+use Chess\Variant\Classical\Board;
 
 class BoardToMp4
 {
     const MAX_MOVES = 300;
 
-    protected string $variant;
+    protected $ext = '.mp4';
 
     protected Movetext $movetext;
 
-    protected string $fen;
-
-    protected array $startPos;
+    protected Board $board;
 
     protected bool $flip;
 
-    protected ClassicalBoard $board;
-
-    protected $ext = '.mp4';
-
-    public function __construct(
-        string $variant,
-        string $movetext,
-        string $fen = '',
-        string $startPos = '',
-        bool $flip = false
-    ) {
-        $this->variant = $variant;
-        $this->fen = $fen;
-        $this->startPos = str_split($startPos);
-        $this->flip = $flip;
-
-        if ($variant === Chess960Board::VARIANT) {
-            $move = new ClassicalPgnMove();
-        } elseif ($variant === CapablancaBoard::VARIANT) {
-            $move = new CapablancaPgnMove();
-        } elseif ($variant === ClassicalBoard::VARIANT) {
-            $move = new ClassicalPgnMove();
-        } else {
-            throw new MediaException();
-        }
-
-        $this->movetext = new Movetext($move, $movetext);
+    public function __construct(string $movetext, Board $board, bool $flip = false)
+    {
+        $this->movetext = new Movetext($board->getMove(), $movetext);
         if (!$this->movetext->validate()) {
             throw new MediaException();
         }
         if (self::MAX_MOVES < count($this->movetext->getMoves())) {
             throw new MediaException();
         }
-
-        if ($this->fen) {
-            if ($this->variant === Chess960Board::VARIANT) {
-                $this->board = (new Chess960FenStrToBoard($this->fen, $this->startPos))
-                    ->create();
-            } elseif ($this->variant === CapablancaBoard::VARIANT) {
-                $this->board = (new CapablancaFenStrToBoard($this->fen))
-                    ->create();
-            } elseif ($this->variant === ClassicalBoard::VARIANT) {
-                $this->board = (new ClassicalFenStrToBoard($this->fen))
-                    ->create();
-            }
-        } else {
-            if ($this->variant === Chess960Board::VARIANT) {
-                $this->board = new Chess960Board($this->startPos);
-            } elseif ($this->variant === CapablancaBoard::VARIANT) {
-                $this->board = new CapablancaBoard();
-            } elseif ($this->variant === ClassicalBoard::VARIANT) {
-                $this->board = new ClassicalBoard();
-            }
-        }
+        $this->board = $board;
+        $this->flip = $flip;
     }
 
     public function output(string $filepath, string $filename = ''): string
@@ -89,8 +37,10 @@ class BoardToMp4
             throw new \InvalidArgumentException('The folder does not exist.');
         }
 
-        $filename ? $filename = $filename.$this->ext : $filename = uniqid().$this->ext;
-
+        $filename
+            ? $filename = $filename.$this->ext
+            : $filename = uniqid().$this->ext;
+            
         $this->frames($filepath, $filename)
             ->animate(escapeshellarg($filepath), $filename)
             ->cleanup($filepath, $filename);

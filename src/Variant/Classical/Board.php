@@ -300,6 +300,16 @@ class Board extends \SplObjectStorage
     }
 
     /**
+     * Returns the move.
+     *
+     * @return \Chess\Variant\Classical\PGN\Move
+     */
+    public function getMove(): Move
+    {
+        return $this->move;
+    }
+
+    /**
      * Returns the pieces captured by both players.
      *
      * @return array|null

@@ -4,7 +4,8 @@ namespace Chess\Tests\Unit\Media;
 
 use Chess\Media\BoardToMp4;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Chess960\FEN\StrToBoard as Chess960FenStrToBoard;
+use Chess\Variant\Classical\Board;
 
 class BoardToMp4Test extends AbstractUnitTestCase
 {
@@ -22,9 +23,12 @@ class BoardToMp4Test extends AbstractUnitTestCase
     {
         $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
 
+        $board = new Board();
+
         $filename = (new BoardToMp4(
-            ClassicalBoard::VARIANT,
-            $A74
+            $A74,
+            $board,
+            $flip = false
         ))->output(self::OUTPUT_FOLDER, 'A74');
 
         $this->assertTrue(file_exists(self::OUTPUT_FOLDER.'/'.$filename));
@@ -35,17 +39,18 @@ class BoardToMp4Test extends AbstractUnitTestCase
      */
     public function output_960_QRKRNNBB()
     {
-        $movetext = '1.Bf2 Re8 2.Nd3 O-O-O 3.O-O';
-
         $fen = 'qrkr1nbb/pppp2pp/3n1p2/4p3/4P3/4NP2/PPPP2PP/QRKRN1BB w KQkq -';
 
-        $startPos = 'QRKRNNBB';
+        $startPos = ['Q', 'R', 'K', 'R', 'N', 'N', 'B', 'B'];
+
+        $board = (new Chess960FenStrToBoard($fen, $startPos))->create();
+
+        $movetext = '1.Bf2 Re8 2.Nd3 O-O-O 3.O-O';
 
         $filename = (new BoardToMp4(
-            ClassicalBoard::VARIANT,
             $movetext,
-            $fen,
-            $startPos
+            $board,
+            $flip = false
         ))->output(self::OUTPUT_FOLDER);
 
         $this->assertTrue(file_exists(self::OUTPUT_FOLDER.'/'.$filename));
@@ -56,17 +61,18 @@ class BoardToMp4Test extends AbstractUnitTestCase
      */
     public function output_960_BNNBQRKR()
     {
-        $movetext = '1.Bc2 O-O-O 2.Qc1 Rhe8 3.Rd1 h6 4.O-O';
-
         $fen = 'b4rkr/ppppqppp/2nnpb2/8/4P3/2PP4/PP1NNPPP/B2BQRKR w KQkq -';
 
-        $startPos = 'BNNBQRKR';
+        $startPos = ['B', 'N', 'N', 'B', 'Q', 'R', 'K', 'R'];
+
+        $board = (new Chess960FenStrToBoard($fen, $startPos))->create();
+
+        $movetext = '1.Bc2 O-O-O 2.Qc1 Rhe8 3.Rd1 h6 4.O-O';
 
         $filename = (new BoardToMp4(
-            ClassicalBoard::VARIANT,
             $movetext,
-            $fen,
-            $startPos
+            $board,
+            $flip = false
         ))->output(self::OUTPUT_FOLDER);
 
         $this->assertTrue(file_exists(self::OUTPUT_FOLDER.'/'.$filename));
