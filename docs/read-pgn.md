@@ -130,4 +130,26 @@ var_dump($board->isCheck());
 bool(true)
 ```
 
+Of course the king is not mated in this position.
+
+```php
+var_dump($board->isMate());
+```
+
+```text
+bool(false)
+```
+
+Also it is not stalemated.
+
+```php
+var_dump($board->isStalemate());
+```
+
+```text
+bool(false)
+```
+
+Otherwise the game would end.
+
 🎉 Next, let's learn how to process chess moves from a graphical user interface.
