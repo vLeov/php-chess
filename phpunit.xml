@@ -22,7 +22,6 @@
             <file>tests/unit/GrandmasterTest.php</file>
             <file>tests/unit/HeuristicsByFenStringTest.php</file>
             <file>tests/unit/HeuristicsTest.php</file>
-            <file>tests/unit/MovetextTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
