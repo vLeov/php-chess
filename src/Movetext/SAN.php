@@ -72,33 +72,7 @@ class SAN
             }
         }
 
-        return $this->toString();
-    }
-
-    /**
-     * Converts the array of PGN moves to a string.
-     *
-     * @return string
-     */
-    public function toString(): string
-    {
-        $str = '';
-        $offset = 0;
-        if (isset($this->moves[0])) {
-            if ($this->moves[0] === self::SYMBOL_ELLIPSIS) {
-                $str = '1' . self::SYMBOL_ELLIPSIS . "{$this->moves[1]} ";
-                $offset = 2;
-            }
-        }
-        for ($i = $offset; $i < count($this->moves); $i++) {
-            if ($i % 2 === 0) {
-                $str .= (($i / 2) + 1) . ".{$this->moves[$i]}";
-            } else {
-                $str .= " {$this->moves[$i]} ";
-            }
-        }
-
-        return trim($str);
+        return $this->movetext;
     }
 
     /**
@@ -132,7 +106,7 @@ class SAN
     }
 
     /**
-     * Filters the given movetext for further processing.
+     * Filters the movetext for further processing.
      *
      * @param string $movetext
      */
@@ -140,8 +114,6 @@ class SAN
     {
         // remove PGN symbols
         $movetext = str_replace(Termination::values(), '', $movetext);
-        // remove spaces between dots
-        $movetext = preg_replace('/\s+\./', '.', $movetext);
         // remove comments
         $movetext = preg_replace("/\{[^)]+\}/", '', $movetext);
         // remove variations
@@ -149,8 +121,14 @@ class SAN
         // replace FIDE notation with PGN notation
         $movetext = str_replace('0-0', 'O-O', $movetext);
         $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        // replace multiple spaces with a single space
+        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        // remove space between dots
+        $movetext = preg_replace('/\s\./', '.', $movetext);
+        // remove space after dots
+        $movetext = preg_replace('/\.\s/', '.', $movetext);
 
-        return $movetext;
+        return trim($movetext);
     }
 
     /**
