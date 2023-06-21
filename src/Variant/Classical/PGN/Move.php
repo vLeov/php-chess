@@ -20,6 +20,7 @@ class Move extends AbstractNotation
 {
     const CASTLE_SHORT = Castle::SHORT . Check::REGEX;
     const CASTLE_LONG = Castle::LONG . Check::REGEX;
+    const ELLIPSIS = '...';
     const KING = 'K' . Square::REGEX . Check::REGEX;
     const KING_CAPTURES = 'Kx' . Square::REGEX . Check::REGEX;
     const KNIGHT = 'N[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;

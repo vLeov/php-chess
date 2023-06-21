@@ -6,7 +6,6 @@ use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqEval;
-use Chess\Movetext\SAN;
 use Chess\Piece\AbstractPiece;
 use Chess\Piece\AsciiArray;
 use Chess\Piece\B;
@@ -368,7 +367,7 @@ class Board extends \SplObjectStorage
             if ($this->history[0]->move->color === Color::W) {
                 $movetext = "1.{$this->history[0]->move->pgn}";
             } else {
-                $movetext = '1' . SAN::SYMBOL_ELLIPSIS . "{$this->history[0]->move->pgn} ";
+                $movetext = '1' . Move::ELLIPSIS . "{$this->history[0]->move->pgn} ";
             }
         }
         for ($i = 1; $i < count($this->history); $i++) {

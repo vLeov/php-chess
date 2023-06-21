@@ -12,8 +12,6 @@ use Chess\Variant\Classical\PGN\Move;
  */
 class SAN
 {
-    const SYMBOL_ELLIPSIS = '...';
-
     /**
      * Move.
      *
@@ -68,7 +66,7 @@ class SAN
     public function validate(): string
     {
         foreach ($this->moves as $move) {
-            if ($move !== self::SYMBOL_ELLIPSIS) {
+            if ($move !== Move::ELLIPSIS) {
                 $this->move->validate($move);
             }
         }
@@ -142,8 +140,8 @@ class SAN
         foreach (explode(' ', $movetext) as $key => $val) {
             if ($key === 0) {
                 if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
-                    $exploded = explode(self::SYMBOL_ELLIPSIS, $val);
-                    $this->moves[] = self::SYMBOL_ELLIPSIS;
+                    $exploded = explode(Move::ELLIPSIS, $val);
+                    $this->moves[] = Move::ELLIPSIS;
                     $this->moves[] = $exploded[1];
                 } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
                     $this->moves[] = explode('.', $val)[1];

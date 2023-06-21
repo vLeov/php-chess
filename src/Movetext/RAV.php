@@ -2,6 +2,8 @@
 
 namespace Chess\Movetext;
 
+use Chess\Variant\Classical\PGN\Move;
+
 /**
  * Recursive Annotation Variation.
  *
@@ -43,7 +45,7 @@ class RAV extends SAN
     {
         foreach (explode(' ', $movetext) as $key => $val) {
             if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
-                $exploded = explode(self::SYMBOL_ELLIPSIS, $val);
+                $exploded = explode(Move::ELLIPSIS, $val);
                 $this->moves[] = $exploded[1];
             } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
                 $this->moves[] = explode('.', $val)[1];
