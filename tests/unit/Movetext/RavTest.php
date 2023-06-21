@@ -48,4 +48,16 @@ class RavTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, (new RAV(self::$move, $movetext))->getMain());
     }
+
+    /**
+     * @test
+     */
+    public function Ke2_Kd5__Kc1_Ra1()
+    {
+        $movetext = '1.Ke2 Kd5 2.Ke3 Kc4 (2...Ke5 3.Rh5+) (2...Kc4 3.Rh5) 3.Rh5 (3...Kb4 4.Kd3) 3...Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#';
+
+        $expected = '1.Ke2 Kd5 2.Ke3 Kc4 3.Rh5 Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#';
+
+        $this->assertSame($expected, (new RAV(self::$move, $movetext))->getMain());
+    }
 }
