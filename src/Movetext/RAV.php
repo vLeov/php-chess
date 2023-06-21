@@ -15,6 +15,20 @@ class RAV extends SAN
     }
 
     /**
+     * Filters the movetext for further processing.
+     *
+     * @param string $movetext
+     */
+    protected function filter(string $movetext): string
+    {
+        $movetext = parent::filter($movetext);
+        // remove ellipsis
+        $movetext = preg_replace('/[1-9][0-9]*\.\.\./', '', $movetext);
+
+        return $movetext;
+    }
+
+    /**
      * Fills the array of PGN moves.
      *
      * @param string $movetext
