@@ -19,14 +19,14 @@ class SAN
      *
      * @var \Chess\Variant\Classical\PGN\Move
      */
-    private Move $move;
+    protected Move $move;
 
     /**
      * Array of PGN moves.
      *
      * @var array
      */
-    private array $moves;
+    protected array $moves;
 
     /**
      * Constructor.
