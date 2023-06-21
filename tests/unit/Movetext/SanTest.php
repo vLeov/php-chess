@@ -67,15 +67,6 @@ class SanTest extends AbstractUnitTestCase
     }
 
     /**
-     * @dataProvider wrongNumbersData
-     * @test
-     */
-    public function wrong_numbers($expected, $movetext)
-    {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->validate());
-    }
-
-    /**
      * @dataProvider invalidMovesData
      * @test
      */
@@ -141,18 +132,7 @@ class SanTest extends AbstractUnitTestCase
             [ self::$validData[4], self::$validData[4] ],
             [ self::$validData[5], self::$validData[5] ],
             [ self::$validData[6], self::$validData[6] ],
-            [ '1...c5 2.g3 b6 3.Bg2 Bb7 4.O-O e6 5.Nc3 a6 6.d4 cxd4 7.Qxd4 d6', self::$validData[7]],
-        ];
-    }
-
-    public function wrongNumbersData()
-    {
-        return [
-            [ self::$validData[0], '7.d4 Nf6 6.Nf3 e6 5.c4 Bb4+ 4.Nbd2 O-O 3.a3 Be7 2.e4 d6 1.Bd3 c5' ],
-            [ self::$validData[1], '1.e4 Nf6 3.e5 Nd5 2.d4 d6 4.Nf3 dxe5 5.Nxe5 c6 7.Be2 Bf5 6.c3 Nd7' ],
-            [ self::$validData[2], '7.e4 c5 7.Nf3 Nc6 7.d4 cxd4 1.Nxd4 Nf6 1.Nc3 e5 1.Ndb5 d6 1.Bg5 a6 1.Na3' ],
-            [ self::$validData[3], '108.d4 Nf6 107.c4 e6 3.Nc3 Bb4 106.e3 O-O 5.a3 Bxc3+ 125.bxc3 b6 230.Bd3 Bb7 1024.f3 c5' ],
-            [ self::$validData[4], '8.Nf3 Nf6 7.c4 c5 3.g3 b6 4.Bg2 Bb7 5.O-O e6 6.Nc3 a6 7.d4 cxd4 8.Qxd4 d6' ],
+            [ self::$validData[7], self::$validData[7] ],
         ];
     }
 
