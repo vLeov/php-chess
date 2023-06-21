@@ -9,5 +9,8 @@ namespace Chess\Movetext;
  */
 class RAV extends SAN
 {
-
+    public function getMain()
+    {
+        return $this->validate();
+    }
 }
