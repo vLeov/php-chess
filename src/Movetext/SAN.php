@@ -43,7 +43,7 @@ class SAN
     }
 
     /**
-     * Returns an array of PGN moves.
+     * Returns the array of PGN moves.
      *
      * @return array
      */
@@ -147,14 +147,13 @@ class SAN
     }
 
     /**
-     * Fills the array of PGN moves with data.
+     * Fills the array of PGN moves.
      *
      * @param string $movetext
      */
     protected function fill(string $movetext): void
     {
-        $moves = explode(' ', $movetext);
-        foreach ($moves as $key => $val) {
+        foreach (explode(' ', $movetext) as $key => $val) {
             if ($key === 0) {
                 if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
                     $exploded = explode(self::SYMBOL_ELLIPSIS, $val);
