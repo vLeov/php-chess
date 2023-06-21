@@ -35,11 +35,11 @@ class RAV extends SAN
     }
 
     /**
-     * Fills the array of PGN moves.
+     * Insert elements into the array of moves.
      *
      * @param string $movetext
      */
-    protected function fill(string $movetext): void
+    protected function insert(string $movetext): void
     {
         foreach (explode(' ', $movetext) as $key => $val) {
             if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {

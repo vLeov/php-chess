@@ -46,7 +46,8 @@ class SAN
         $this->move = $move;
         $this->movetext = $this->filter($movetext);
         $this->moves = [];
-        $this->fill($this->movetext);
+
+        $this->insert($this->movetext);
     }
 
     /**
@@ -132,11 +133,11 @@ class SAN
     }
 
     /**
-     * Fills the array of PGN moves.
+     * Insert elements into the array of moves.
      *
      * @param string $movetext
      */
-    protected function fill(string $movetext): void
+    protected function insert(string $movetext): void
     {
         foreach (explode(' ', $movetext) as $key => $val) {
             if ($key === 0) {
