@@ -22,6 +22,13 @@ class SAN
     protected Move $move;
 
     /**
+     * Movetext.
+     *
+     * @var string
+     */
+    protected string $movetext;
+
+    /**
      * Array of PGN moves.
      *
      * @var array
@@ -37,9 +44,9 @@ class SAN
     public function __construct(Move $move, string $movetext)
     {
         $this->move = $move;
+        $this->movetext = $this->filter($movetext);
         $this->moves = [];
-        $movetext = $this->filter($movetext);
-        $this->fill($movetext);
+        $this->fill($this->movetext);
     }
 
     /**
