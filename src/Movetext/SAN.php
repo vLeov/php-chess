@@ -2,65 +2,20 @@
 
 namespace Chess\Movetext;
 
-use Chess\Variant\Classical\PGN\AN\Termination;
 use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Termination;
 
 /**
  * Standard Algebraic Notation.
  *
  * @license GPL
  */
-class SAN
+class SAN extends AbstractMovetext
 {
     /**
-     * Move.
+     * Syntactic validation.
      *
-     * @var \Chess\Variant\Classical\PGN\Move
-     */
-    protected Move $move;
-
-    /**
-     * Movetext.
-     *
-     * @var string
-     */
-    protected string $movetext;
-
-    /**
-     * Array of PGN moves.
-     *
-     * @var array
-     */
-    protected array $moves;
-
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\PGN\Move $move
-     * @param string $movetext
-     */
-    public function __construct(Move $move, string $movetext)
-    {
-        $this->move = $move;
-        $this->movetext = $this->filter($movetext);
-        $this->moves = [];
-
-        $this->insert($this->movetext);
-    }
-
-    /**
-     * Returns the array of PGN moves.
-     *
-     * @return array
-     */
-    public function getMoves(): array
-    {
-        return $this->moves;
-    }
-
-    /**
-     * Validation.
-     *
+     * @throws \Chess\Exception\UnknownNotationException
      * @return string
      */
     public function validate(): string
@@ -72,6 +27,63 @@ class SAN
         }
 
         return $this->movetext;
+    }
+
+    /**
+     * Filters the movetext.
+     *
+     * @param string $movetext
+     */
+    protected function filter(string $movetext): string
+    {
+        // remove PGN symbols
+        $movetext = str_replace(Termination::values(), '', $movetext);
+        // remove comments
+        $movetext = preg_replace("/\{[^)]+\}/", '', $movetext);
+        // remove variations
+        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $movetext);
+        // replace FIDE notation with PGN notation
+        $movetext = str_replace('0-0', 'O-O', $movetext);
+        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        // replace multiple spaces with a single space
+        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        // remove space between dots
+        $movetext = preg_replace('/\s\./', '.', $movetext);
+        // remove space after dots
+        $movetext = preg_replace('/\.\s/', '.', $movetext);
+
+        return trim($movetext);
+    }
+
+    /**
+     * Insert elements into the array of moves for further validation.
+     *
+     * @see \Chess\Play\SAN
+     * @param string $movetext
+     */
+    protected function insert(string $movetext): void
+    {
+        foreach (explode(' ', $movetext) as $key => $val) {
+            if ($key === 0) {
+                if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
+                    $exploded = explode(Move::ELLIPSIS, $val);
+                    $this->moves[] = Move::ELLIPSIS;
+                    $this->moves[] = $exploded[1];
+                } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
+                    $this->moves[] = explode('.', $val)[1];
+                } else {
+                    $this->moves[] = $val;
+                }
+            } else {
+                if (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
+                    $this->moves[] = explode('.', $val)[1];
+                } else {
+                    $this->moves[] = $val;
+                }
+            }
+        }
+
+        $this->moves = array_values(array_filter($this->moves));
     }
 
     /**
@@ -102,61 +114,5 @@ class SAN
         }
 
         return $sequence;
-    }
-
-    /**
-     * Filters the movetext for further processing.
-     *
-     * @param string $movetext
-     */
-    protected function filter(string $movetext): string
-    {
-        // remove PGN symbols
-        $movetext = str_replace(Termination::values(), '', $movetext);
-        // remove comments
-        $movetext = preg_replace("/\{[^)]+\}/", '', $movetext);
-        // remove variations
-        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $movetext);
-        // replace FIDE notation with PGN notation
-        $movetext = str_replace('0-0', 'O-O', $movetext);
-        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
-        // replace multiple spaces with a single space
-        $movetext = preg_replace('/\s+/', ' ', $movetext);
-        // remove space between dots
-        $movetext = preg_replace('/\s\./', '.', $movetext);
-        // remove space after dots
-        $movetext = preg_replace('/\.\s/', '.', $movetext);
-
-        return trim($movetext);
-    }
-
-    /**
-     * Insert elements into the array of moves.
-     *
-     * @param string $movetext
-     */
-    protected function insert(string $movetext): void
-    {
-        foreach (explode(' ', $movetext) as $key => $val) {
-            if ($key === 0) {
-                if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
-                    $exploded = explode(Move::ELLIPSIS, $val);
-                    $this->moves[] = Move::ELLIPSIS;
-                    $this->moves[] = $exploded[1];
-                } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
-                    $this->moves[] = explode('.', $val)[1];
-                } else {
-                    $this->moves[] = $val;
-                }
-            } else {
-                if (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
-                    $this->moves[] = explode('.', $val)[1];
-                } else {
-                    $this->moves[] = $val;
-                }
-            }
-        }
-
-        $this->moves = array_values(array_filter($this->moves));
     }
 }

@@ -84,7 +84,7 @@ class Move extends AbstractNotation
      *
      * @param string $value
      * @return string if the value is valid
-     * @throws UnknownNotationException
+     * @throws \Chess\Exception\UnknownNotationException
      */
     public function validate(string $value): string
     {

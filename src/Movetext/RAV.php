@@ -3,42 +3,77 @@
 namespace Chess\Movetext;
 
 use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Termination;
 
 /**
  * Recursive Annotation Variation.
  *
  * @license GPL
  */
-class RAV extends SAN
+class RAV extends AbstractMovetext
 {
+    private SAN $san;
+
     /**
-     * Returns the main variation.
+     * Constructor.
      *
-     * @return string
+     * @param \Chess\Variant\Classical\PGN\Move $move
+     * @param string $movetext
      */
-    public function main(): string
+    public function __construct(Move $move, string $movetext)
     {
-        return $this->validate();
+        parent::__construct($move, $movetext);
+
+        $this->san = new SAN($move, $movetext);
     }
 
     /**
-     * Filters the movetext for further processing.
+     * Syntactic validation.
+     *
+     * @throws \Chess\Exception\UnknownNotationException
+     * @return string
+     */
+    public function validate(): string
+    {
+        foreach ($this->moves as $move) {
+            $this->move->validate($move);
+        }
+
+        return $this->movetext;
+    }
+
+    /**
+     * Filters the movetext.
      *
      * @param string $movetext
      * @return string
      */
     protected function filter(string $movetext): string
     {
-        $movetext = parent::filter($movetext);
-        // remove ellipsis
-        $movetext = preg_replace('/[1-9][0-9]*\.\.\./', '', $movetext);
+        // remove PGN symbols
+        $movetext = str_replace(Termination::values(), '', $movetext);
+        // remove comments
+        $movetext = preg_replace("/\{[^)]+\}/", '', $movetext);
+        // remove parentheses
+        $movetext = preg_replace("/\(/", '', $movetext);
+        $movetext = preg_replace("/\)/", '', $movetext);
+        // replace FIDE notation with PGN notation
+        $movetext = str_replace('0-0', 'O-O', $movetext);
+        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        // replace multiple spaces with a single space
+        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        // remove space between dots
+        $movetext = preg_replace('/\s\./', '.', $movetext);
+        // remove space after dots
+        $movetext = preg_replace('/\.\s/', '.', $movetext);
 
-        return $movetext;
+        return trim($movetext);
     }
 
     /**
-     * Insert elements into the array of moves.
+     * Insert elements into the array of moves for further validation.
      *
+     * @see \Chess\Play\RAV
      * @param string $movetext
      */
     protected function insert(string $movetext): void
@@ -55,5 +90,19 @@ class RAV extends SAN
         }
 
         $this->moves = array_values(array_filter($this->moves));
+    }
+
+    /**
+     * Returns the main variation.
+     *
+     * @return string
+     */
+    public function main(): string
+    {
+        $movetext = $this->san->validate();
+        // remove ellipsis
+        $movetext = preg_replace('/[1-9][0-9]*\.\.\./', '', $movetext);
+
+        return $movetext;
     }
 }
