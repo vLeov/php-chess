@@ -9,7 +9,12 @@ namespace Chess\Movetext;
  */
 class RAV extends SAN
 {
-    public function getMain()
+    /**
+     * Returns the main variation.
+     *
+     * @return string
+     */
+    public function main(): string
     {
         return $this->validate();
     }
@@ -18,6 +23,7 @@ class RAV extends SAN
      * Filters the movetext for further processing.
      *
      * @param string $movetext
+     * @return string
      */
     protected function filter(string $movetext): string
     {
