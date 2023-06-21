@@ -39,7 +39,6 @@ class SAN
         $this->move = $move;
         $this->moves = [];
         $movetext = $this->filter($movetext);
-
         $this->fill($movetext);
     }
 
@@ -134,14 +133,15 @@ class SAN
     {
         // remove PGN symbols
         $movetext = str_replace(Termination::values(), '', $movetext);
+        // remove spaces between dots
+        $movetext = preg_replace('/\s+\./', '.', $movetext);
         // remove comments
         $movetext = preg_replace("/\{[^)]+\}/", '', $movetext);
-        $movetext = preg_replace("/\([^)]+\)/", '', $movetext);
+        // remove variations
+        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $movetext);
         // replace FIDE notation with PGN notation
         $movetext = str_replace('0-0', 'O-O', $movetext);
         $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
-        // remove spaces between dots
-        $movetext = preg_replace('/\s+\./', '.', $movetext);
 
         return $movetext;
     }
