@@ -13,28 +13,11 @@ use Chess\Variant\Classical\PGN\AN\Termination;
 class SAN extends AbstractMovetext
 {
     /**
-     * Syntactic validation.
-     *
-     * @throws \Chess\Exception\UnknownNotationException
-     * @return string
-     */
-    public function validate(): string
-    {
-        foreach ($this->moves as $move) {
-            if ($move !== Move::ELLIPSIS) {
-                $this->move->validate($move);
-            }
-        }
-
-        return $this->movetext;
-    }
-
-    /**
      * Filters the movetext.
      *
      * @param string $movetext
      */
-    protected function filter(string $movetext): string
+    protected function beforeInsert(string $movetext): string
     {
         // remove PGN symbols
         $movetext = str_replace(Termination::values(), '', $movetext);
@@ -84,6 +67,47 @@ class SAN extends AbstractMovetext
         }
 
         $this->moves = array_values(array_filter($this->moves));
+    }
+
+    /**
+     * Syntactically validated movetext.
+     *
+     * @throws \Chess\Exception\UnknownNotationException
+     * @return string
+     */
+    public function validate(): string
+    {
+        foreach ($this->moves as $move) {
+            if ($move !== Move::ELLIPSIS) {
+                $this->move->validate($move);
+            }
+        }
+
+        return $this->validation;
+    }
+
+    /**
+     * Filtered movetext.
+     *
+     * @return string
+     */
+    public function filter(): string
+    {
+        // remove PGN symbols
+        $movetext = str_replace(Termination::values(), '', $this->movetext);
+        // remove variations
+        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $movetext);
+        // replace FIDE notation with PGN notation
+        $movetext = str_replace('0-0', 'O-O', $movetext);
+        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        // replace multiple spaces with a single space
+        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        // remove space between dots
+        $movetext = preg_replace('/\s\./', '.', $movetext);
+        // remove space after dots
+        $movetext = preg_replace('/\.\s/', '.', $movetext);
+
+        return trim($movetext);
     }
 
     /**

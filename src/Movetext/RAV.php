@@ -12,6 +12,11 @@ use Chess\Variant\Classical\PGN\AN\Termination;
  */
 class RAV extends AbstractMovetext
 {
+    /**
+     * SAN movetext.
+     *
+     * @var \Chess\Movetext\SAN
+     */
     private SAN $san;
 
     /**
@@ -28,27 +33,11 @@ class RAV extends AbstractMovetext
     }
 
     /**
-     * Syntactic validation.
-     *
-     * @throws \Chess\Exception\UnknownNotationException
-     * @return string
-     */
-    public function validate(): string
-    {
-        foreach ($this->moves as $move) {
-            $this->move->validate($move);
-        }
-
-        return $this->movetext;
-    }
-
-    /**
-     * Filters the movetext.
+     * Before inserting moves into the array.
      *
      * @param string $movetext
-     * @return string
      */
-    protected function filter(string $movetext): string
+    protected function beforeInsert(string $movetext): string
     {
         // remove PGN symbols
         $movetext = str_replace(Termination::values(), '', $movetext);
@@ -71,7 +60,7 @@ class RAV extends AbstractMovetext
     }
 
     /**
-     * Insert elements into the array of moves for further validation.
+     * Insert elements into the array of moves.
      *
      * @see \Chess\Play\RAV
      * @param string $movetext
@@ -90,6 +79,43 @@ class RAV extends AbstractMovetext
         }
 
         $this->moves = array_values(array_filter($this->moves));
+    }
+
+    /**
+     * Syntactically validated movetext.
+     *
+     * @throws \Chess\Exception\UnknownNotationException
+     * @return string
+     */
+    public function validate(): string
+    {
+        foreach ($this->moves as $move) {
+            $this->move->validate($move);
+        }
+
+        return $this->validation;
+    }
+
+    /**
+     * Filtered movetext.
+     *
+     * @return string
+     */
+    public function filter(): string
+    {
+        // remove PGN symbols
+        $movetext = str_replace(Termination::values(), '', $this->movetext);
+        // replace FIDE notation with PGN notation
+        $movetext = str_replace('0-0', 'O-O', $movetext);
+        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        // replace multiple spaces with a single space
+        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        // remove space between dots
+        $movetext = preg_replace('/\s\./', '.', $movetext);
+        // remove space after dots
+        $movetext = preg_replace('/\.\s/', '.', $movetext);
+
+        return trim($movetext);
     }
 
     /**

@@ -33,6 +33,20 @@ abstract class AbstractMovetext
     protected array $moves;
 
     /**
+     * Validated movetext.
+     *
+     * @var string
+     */
+    protected string $validation;
+
+    /**
+     * Filtered movetext.
+     *
+     * @var string
+     */
+    protected string $filter;
+
+    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\PGN\Move $move
@@ -41,14 +55,14 @@ abstract class AbstractMovetext
     public function __construct(Move $move, string $movetext)
     {
         $this->move = $move;
-        $this->movetext = $this->filter($movetext);
+        $this->movetext = $movetext;
         $this->moves = [];
-
-        $this->insert($this->movetext);
+        $this->validation = $this->beforeInsert($movetext);
+        $this->insert($this->validation);
     }
 
     /**
-     * Returns the array of PGN moves for further validation.
+     * Returns the array of moves.
      *
      * @see \Chess\Play\RAV
      * @see \Chess\Play\SAN
@@ -60,7 +74,21 @@ abstract class AbstractMovetext
     }
 
     /**
-     * Syntactic validation.
+     * Before inserting moves into the array.
+     *
+     * @param string $movetext
+     */
+    abstract protected function beforeInsert(string $movetext): string;
+
+    /**
+     * Insert elements into the array of moves.
+     *
+     * @param string $movetext
+     */
+    abstract protected function insert(string $movetext): void;
+
+    /**
+     * Syntactically validated movetext.
      *
      * @throws \Chess\Exception\UnknownNotationException
      * @return string
@@ -68,16 +96,9 @@ abstract class AbstractMovetext
     abstract public function validate(): string;
 
     /**
-     * Filters the movetext.
+     * Filtered movetext.
      *
-     * @param string $movetext
+     * @return string
      */
-    abstract protected function filter(string $movetext): string;
-
-    /**
-     * Insert elements into the array of moves for further validation.
-     *
-     * @param string $movetext
-     */
-    abstract protected function insert(string $movetext): void;
+    abstract public function filter(): string;
 }
