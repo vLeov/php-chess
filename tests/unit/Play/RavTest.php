@@ -98,4 +98,23 @@ class RavTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, (new RAV($movetext))->getBreakdown());
     }
+
+    /**
+     * @test
+     */
+    public function breakdown_starting_with_ellipsis_Kc4__Ra1()
+    {
+        $movetext = '2...Kc4 (2...Ke5 3.Rh5+) (2...Kc4 3.Rh5) 3.Rh5 (3...Kb4 4.Kd3) 3...Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#';
+
+        $expected = [
+            '2...Kc4',
+            '2...Ke5 3.Rh5+',
+            '2...Kc4 3.Rh5',
+            '3.Rh5',
+            '3...Kb4 4.Kd3',
+            '3...Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#',
+        ];
+
+        $this->assertSame($expected, (new RAV($movetext))->getBreakdown());
+    }
 }
