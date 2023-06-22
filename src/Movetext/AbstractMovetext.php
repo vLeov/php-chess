@@ -62,6 +62,16 @@ abstract class AbstractMovetext
     }
 
     /**
+     * Returns the move.
+     *
+     * @return \Chess\Variant\Classical\PGN\Move
+     */
+    public function getMove(): Move
+    {
+        return $this->move;
+    }
+
+    /**
      * Returns the movetext.
      *
      * @return string

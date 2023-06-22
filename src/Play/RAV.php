@@ -4,6 +4,7 @@ namespace Chess\Play;
 
 use Chess\Exception\PlayException;
 use Chess\Movetext\RAV as RavMovetext;
+use Chess\Movetext\SAN as SanMovetext;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
 /**
@@ -56,14 +57,23 @@ class RAV extends AbstractPlay
     }
 
     /**
-     * Plays a RAV movetext.
+     * Plays the main variation of a RAV movetext.
      *
      * @throws \Chess\Exception\PlayException
      * @return \Chess\Play\RAV
      */
     public function play(): RAV
     {
-        // TODO
+        $mainMoves = (new SanMovetext(
+            $this->rav->getMove(),
+            $this->rav->main()
+        ))->getMoves();
+
+        foreach ($mainMoves as $key => $val) {
+            if (!$this->board->play($this->board->getTurn(), $val)) {
+                throw new PlayException();
+            }
+        }
 
         return $this;
     }
