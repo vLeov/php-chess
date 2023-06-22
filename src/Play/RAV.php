@@ -4,10 +4,7 @@ namespace Chess\Play;
 
 use Chess\Exception\PlayException;
 use Chess\Movetext\RAV as RavMovetext;
-use Chess\Variant\Capablanca\Board as CapablancaBoard;
-use Chess\Variant\Capablanca\PGN\Move as CapablancaPgnMove;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\PGN\Move as ClassicalPgnMove;
 
 /**
  * Recursive Annotation Variation.
@@ -26,17 +23,10 @@ class RAV extends AbstractPlay
     public function __construct(string $movetext, ClassicalBoard $board = null)
     {
         $this->board = $board ?? new ClassicalBoard();
-
-        if (is_a($board, CapablancaBoard::class)) {
-            $rav = new RavMovetext(new CapablancaPgnMove(), $movetext);
-        } else {
-            $rav = new RavMovetext(new ClassicalPgnMove(), $movetext);
-        }
-
-        $rav->validate();
-
         $this->fen = [$this->board->toFen()];
-        $this->moves = $san->getMoves();
+        $rav = new RavMovetext($this->board->getMove(), $movetext);
+        $rav->validate();
+        $this->moves = $rav->getMoves();
     }
 
     /**

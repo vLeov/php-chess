@@ -4,10 +4,7 @@ namespace Chess\Play;
 
 use Chess\Exception\PlayException;
 use Chess\Movetext\SAN as SanMovetext;
-use Chess\Variant\Capablanca\Board as CapablancaBoard;
-use Chess\Variant\Capablanca\PGN\Move as CapablancaPgnMove;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\PGN\Move as ClassicalPgnMove;
 
 /**
  * Standard Algebraic Notation.
@@ -26,16 +23,9 @@ class SAN extends AbstractPlay
     public function __construct(string $movetext, ClassicalBoard $board = null)
     {
         $this->board = $board ?? new ClassicalBoard();
-
-        if (is_a($board, CapablancaBoard::class)) {
-            $san = new SanMovetext(new CapablancaPgnMove(), $movetext);
-        } else {
-            $san = new SanMovetext(new ClassicalPgnMove(), $movetext);
-        }
-
-        $san->validate();
-
         $this->fen = [$this->board->toFen()];
+        $san = new SanMovetext($this->board->getMove(), $movetext);
+        $san->validate();
         $this->moves = $san->getMoves();
     }
 
