@@ -74,11 +74,11 @@ abstract class AbstractMovetext
     }
 
     /**
-     * Before inserting moves into the array.
+     * Before inserting elements into the array of moves.
      *
-     * @param string $movetext
+     * @return string
      */
-    abstract protected function beforeInsert(string $movetext): string;
+    abstract protected function beforeInsert(): string;
 
     /**
      * Insert elements into the array of moves.

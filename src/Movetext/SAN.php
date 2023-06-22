@@ -13,27 +13,16 @@ use Chess\Variant\Classical\PGN\AN\Termination;
 class SAN extends AbstractMovetext
 {
     /**
-     * Filters the movetext.
+     * Before inserting into the array of moves.
      *
-     * @param string $movetext
+     * @return string
      */
-    protected function beforeInsert(string $movetext): string
+    protected function beforeInsert(): string
     {
-        // remove PGN symbols
-        $movetext = str_replace(Termination::values(), '', $movetext);
         // remove comments
-        $movetext = preg_replace("/\{[^)]+\}/", '', $movetext);
-        // remove variations
-        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $movetext);
-        // replace FIDE notation with PGN notation
-        $movetext = str_replace('0-0', 'O-O', $movetext);
-        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
-        // remove space between dots
-        $movetext = preg_replace('/\s\./', '.', $movetext);
-        // remove space after dots
-        $movetext = preg_replace('/\.\s/', '.', $movetext);
 
         return trim($movetext);
     }

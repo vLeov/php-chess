@@ -33,28 +33,19 @@ class RAV extends AbstractMovetext
     }
 
     /**
-     * Before inserting moves into the array.
+     * Before inserting elements into the array of moves.
      *
-     * @param string $movetext
+     * @return string
      */
-    protected function beforeInsert(string $movetext): string
+    protected function beforeInsert(): string
     {
-        // remove PGN symbols
-        $movetext = str_replace(Termination::values(), '', $movetext);
         // remove comments
-        $movetext = preg_replace("/\{[^)]+\}/", '', $movetext);
+        $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
         // remove parentheses
         $movetext = preg_replace("/\(/", '', $movetext);
         $movetext = preg_replace("/\)/", '', $movetext);
-        // replace FIDE notation with PGN notation
-        $movetext = str_replace('0-0', 'O-O', $movetext);
-        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
-        // remove space between dots
-        $movetext = preg_replace('/\s\./', '.', $movetext);
-        // remove space after dots
-        $movetext = preg_replace('/\.\s/', '.', $movetext);
 
         return trim($movetext);
     }
