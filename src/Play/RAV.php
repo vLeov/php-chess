@@ -77,6 +77,7 @@ class RAV extends AbstractPlay
     {
         $data = preg_split("/[()]+/", $this->rav->filter(), -1, PREG_SPLIT_NO_EMPTY);
         $data = array_map('trim', $data);
+        $data = array_values(array_filter($data));
 
         $this->breakdown = $data;
     }
