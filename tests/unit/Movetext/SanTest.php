@@ -63,6 +63,30 @@ class SanTest extends AbstractUnitTestCase
     }
 
     /**
+     * @test
+     */
+    public function get_first_a5__Nxg4()
+    {
+        $movetext = '12...a5 13.g4 Nxg4';
+
+        $expected = 12;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getFirst());
+    }
+
+    /**
+     * @test
+     */
+    public function get_last_a5__Nxg4()
+    {
+        $movetext = '12...a5 13.g4 Nxg4';
+
+        $expected = 13;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getLast());
+    }
+
+    /**
      * @dataProvider sequenceData
      * @test
      */

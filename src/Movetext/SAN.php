@@ -35,7 +35,7 @@ class SAN extends AbstractMovetext
     public function __construct(Move $move, string $movetext)
     {
         parent::__construct($move, $movetext);
-        
+
         $this->first();
         $this->last();
     }
@@ -124,7 +124,12 @@ class SAN extends AbstractMovetext
     {
         $exploded = explode(' ', $this->validation);
         $last = end($exploded);
-        $exploded = explode('.', $last);
+        if (str_contains($last, '.')) {
+            $exploded = explode('.', $last);
+        } else {
+            $last = prev($exploded);
+            $exploded = explode('.', $last);
+        }
 
         $this->last = intval($exploded[0]);
     }
