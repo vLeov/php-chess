@@ -87,6 +87,54 @@ class SanTest extends AbstractUnitTestCase
     }
 
     /**
+     * @test
+     */
+    public function get_first_Kb8()
+    {
+        $movetext = '6...Kb8';
+
+        $expected = 6;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getFirst());
+    }
+
+    /**
+     * @test
+     */
+    public function get_last_Kb8()
+    {
+        $movetext = '6...Kb8';
+
+        $expected = 6;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getLast());
+    }
+
+    /**
+     * @test
+     */
+    public function get_first_Rh5()
+    {
+        $movetext = '3.Rh5';
+
+        $expected = 3;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getFirst());
+    }
+
+    /**
+     * @test
+     */
+    public function get_last_Rh5()
+    {
+        $movetext = '3.Rh5';
+
+        $expected = 3;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getLast());
+    }
+
+    /**
      * @dataProvider sequenceData
      * @test
      */
