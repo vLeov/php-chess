@@ -47,20 +47,6 @@ abstract class AbstractMovetext
     protected string $filter;
 
     /**
-     * First move.
-     *
-     * @var int
-     */
-    protected int $first;
-
-    /**
-     * Last move.
-     *
-     * @var int
-     */
-    protected int $last;
-
-    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\PGN\Move $move
@@ -72,8 +58,7 @@ abstract class AbstractMovetext
         $this->movetext = $movetext;
         $this->moves = [];
         $this->validation = $this->beforeInsert($movetext);
-        $this->first();
-        $this->last();
+        
         $this->insert();
     }
 
@@ -107,50 +92,6 @@ abstract class AbstractMovetext
     public function getMoves(): array
     {
         return $this->moves;
-    }
-
-    /**
-     * Returns the first move.
-     *
-     * @return int
-     */
-    public function getFirst(): int
-    {
-        return $this->first;
-    }
-
-    /**
-     * Returns the last move.
-     *
-     * @return int
-     */
-    public function getLast(): int
-    {
-        return $this->last;
-    }
-
-    /**
-     * Calculates the first move.
-     */
-    protected function first(): void
-    {
-        $exploded = explode(' ', $this->validation);
-        $first = $exploded[0];
-        $exploded = explode('.', $first);
-
-        $this->first = intval($exploded[0]);
-    }
-
-    /**
-     * Calculates the last move.
-     */
-    protected function last(): void
-    {
-        $exploded = explode(' ', $this->validation);
-        $last = end($exploded);
-        $exploded = explode('.', $last);
-
-        $this->last = intval($exploded[0]);
     }
 
     /**

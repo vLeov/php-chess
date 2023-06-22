@@ -13,6 +13,54 @@ use Chess\Variant\Classical\PGN\AN\Termination;
 class SAN extends AbstractMovetext
 {
     /**
+     * First move.
+     *
+     * @var int
+     */
+    protected int $first;
+
+    /**
+     * Last move.
+     *
+     * @var int
+     */
+    protected int $last;
+
+    /**
+     * Constructor.
+     *
+     * @param \Chess\Variant\Classical\PGN\Move $move
+     * @param string $movetext
+     */
+    public function __construct(Move $move, string $movetext)
+    {
+        parent::__construct($move, $movetext);
+        
+        $this->first();
+        $this->last();
+    }
+
+    /**
+     * Returns the first move.
+     *
+     * @return int
+     */
+    public function getFirst(): int
+    {
+        return $this->first;
+    }
+
+    /**
+     * Returns the last move.
+     *
+     * @return int
+     */
+    public function getLast(): int
+    {
+        return $this->last;
+    }
+
+    /**
      * Before inserting into the array of moves.
      *
      * @return string
@@ -55,6 +103,30 @@ class SAN extends AbstractMovetext
         }
 
         $this->moves = array_values(array_filter($this->moves));
+    }
+
+    /**
+     * Calculates the first move.
+     */
+    protected function first(): void
+    {
+        $exploded = explode(' ', $this->validation);
+        $first = $exploded[0];
+        $exploded = explode('.', $first);
+
+        $this->first = intval($exploded[0]);
+    }
+
+    /**
+     * Calculates the last move.
+     */
+    protected function last(): void
+    {
+        $exploded = explode(' ', $this->validation);
+        $last = end($exploded);
+        $exploded = explode('.', $last);
+
+        $this->last = intval($exploded[0]);
     }
 
     /**

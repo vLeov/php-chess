@@ -39,6 +39,30 @@ class SanTest extends AbstractUnitTestCase
     }
 
     /**
+     * @test
+     */
+    public function get_first_e4_e5__Nd5()
+    {
+        $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
+
+        $expected = 1;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getFirst());
+    }
+
+    /**
+     * @test
+     */
+    public function get_last_e4_e5__Nd5()
+    {
+        $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
+
+        $expected = 11;
+
+        $this->assertSame($expected, (new SAN(self::$move, $movetext))->getLast());
+    }
+
+    /**
      * @dataProvider sequenceData
      * @test
      */
