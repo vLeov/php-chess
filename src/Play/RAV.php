@@ -5,6 +5,7 @@ namespace Chess\Play;
 use Chess\Exception\PlayException;
 use Chess\Movetext\RAV as RavMovetext;
 use Chess\Movetext\SAN as SanMovetext;
+use Chess\Play\SAN as SanPlay;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
 /**
@@ -28,6 +29,7 @@ class RAV extends AbstractPlay
      * @var array
      */
     protected array $breakdown;
+
 
     /**
      * Constructor.
@@ -90,5 +92,32 @@ class RAV extends AbstractPlay
         $data = array_values(array_filter($data));
 
         $this->breakdown = $data;
+    }
+
+    // TODO
+    protected function fen()
+    {
+        $board = (new SanPlay($this->breakdown[0], $this->board))
+            ->play()
+            ->getBoard();
+        $this->fen = $board->getFen();
+        for ($i = 1; $i < count($this->breakdown); $i++) {
+            $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
+            for ($j = $i; $j < 0; $j--) {
+                $found = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
+                if ($current->getFirst() === $found->getLast()) {
+                    if (!$current->startsWithEllipsis()) {
+                        $board = $board->undo();
+                    }
+                    $board = (new SanPlay($this->breakdown[$i], $board))
+                        ->play()
+                        ->getBoard();
+                    $this->fen = [
+                        ...$this->fen,
+                        ...$board->getFen(),
+                    ];
+                }
+            }
+        }
     }
 }
