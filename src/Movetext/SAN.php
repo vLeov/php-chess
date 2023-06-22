@@ -31,11 +31,10 @@ class SAN extends AbstractMovetext
      * Insert elements into the array of moves for further validation.
      *
      * @see \Chess\Play\SAN
-     * @param string $movetext
      */
-    protected function insert(string $movetext): void
+    protected function insert(): void
     {
-        foreach (explode(' ', $movetext) as $key => $val) {
+        foreach (explode(' ', $this->validation) as $key => $val) {
             if ($key === 0) {
                 if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
                     $exploded = explode(Move::ELLIPSIS, $val);

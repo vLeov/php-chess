@@ -47,6 +47,20 @@ abstract class AbstractMovetext
     protected string $filter;
 
     /**
+     * First move.
+     *
+     * @var int
+     */
+    protected int $first;
+
+    /**
+     * Last move.
+     *
+     * @var int
+     */
+    protected int $last;
+
+    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\PGN\Move $move
@@ -58,7 +72,9 @@ abstract class AbstractMovetext
         $this->movetext = $movetext;
         $this->moves = [];
         $this->validation = $this->beforeInsert($movetext);
-        $this->insert($this->validation);
+        $this->first();
+        $this->last();
+        $this->insert();
     }
 
     /**
@@ -94,6 +110,50 @@ abstract class AbstractMovetext
     }
 
     /**
+     * Returns the first move.
+     *
+     * @return int
+     */
+    public function getFirst(): int
+    {
+        return $this->first;
+    }
+
+    /**
+     * Returns the last move.
+     *
+     * @return int
+     */
+    public function getLast(): int
+    {
+        return $this->last;
+    }
+
+    /**
+     * Calculates the first move.
+     */
+    protected function first(): void
+    {
+        $exploded = explode(' ', $this->validation);
+        $first = $exploded[0];
+        $exploded = explode('.', $first);
+
+        $this->first = intval($exploded[0]);
+    }
+
+    /**
+     * Calculates the last move.
+     */
+    protected function last(): void
+    {
+        $exploded = explode(' ', $this->validation);
+        $last = end($exploded);
+        $exploded = explode('.', $last);
+
+        $this->last = intval($exploded[0]);
+    }
+
+    /**
      * Before inserting elements into the array of moves.
      *
      * @return string
@@ -102,10 +162,8 @@ abstract class AbstractMovetext
 
     /**
      * Insert elements into the array of moves.
-     *
-     * @param string $movetext
      */
-    abstract protected function insert(string $movetext): void;
+    abstract protected function insert(): void;
 
     /**
      * Syntactically validated movetext.

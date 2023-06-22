@@ -54,11 +54,10 @@ class RAV extends AbstractMovetext
      * Insert elements into the array of moves.
      *
      * @see \Chess\Play\RAV
-     * @param string $movetext
      */
-    protected function insert(string $movetext): void
+    protected function insert(): void
     {
-        foreach (explode(' ', $movetext) as $key => $val) {
+        foreach (explode(' ', $this->validation) as $key => $val) {
             if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
                 $exploded = explode(Move::ELLIPSIS, $val);
                 $this->moves[] = $exploded[1];
