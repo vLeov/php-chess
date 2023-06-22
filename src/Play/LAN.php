@@ -29,6 +29,7 @@ class LAN extends AbstractPlay
     /**
      * Plays a chess game.
      *
+     * @throws \Chess\Exception\PlayException
      * @return \Chess\Play\LAN
      */
     public function play(): LAN

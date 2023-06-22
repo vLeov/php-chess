@@ -42,6 +42,7 @@ class SAN extends AbstractPlay
     /**
      * Plays a chess game.
      *
+     * @throws \Chess\Exception\PlayException
      * @return \Chess\Play\SAN
      */
     public function play(): SAN
