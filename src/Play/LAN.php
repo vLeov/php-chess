@@ -14,6 +14,13 @@ use Chess\Variant\Classical\Board;
 class LAN extends AbstractPlay
 {
     /**
+     * Moves.
+     *
+     * @var array
+     */
+    protected array $moves;
+
+    /**
      * Constructor.
      *
      * @param string $movetext

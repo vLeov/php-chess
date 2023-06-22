@@ -87,13 +87,17 @@ class Heuristics extends SAN
      */
     protected function calc(): Heuristics
     {
-        foreach ($this->moves as $key => $val) {
+        foreach ($this->san->getMoves() as $key => $val) {
             $turn = $this->board->getTurn();
             if ($key % 2 === 0) {
-                $this->board->play($turn, $this->moves[$key]);
+                $this->board->play($turn, $this->san->getMoves()[$key]);
                 $this->calcItem();
-                empty($this->moves[$key+1])
-                    ?: $this->board->play(Color::opp($turn), $this->moves[$key+1]);
+                if (!empty($this->san->getMoves()[$key+1])) {
+                     $this->board->play(
+                         Color::opp($turn),
+                         $this->san->getMoves()[$key+1]
+                     );
+                }
                 $this->calcItem();
             }
         }

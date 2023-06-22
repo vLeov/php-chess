@@ -15,6 +15,13 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 class RAV extends AbstractPlay
 {
     /**
+     * RAV movetext.
+     *
+     * @var array
+     */
+    protected RavMovetext $san;
+
+    /**
      * Constructor.
      *
      * @param string $movetext
@@ -24,13 +31,13 @@ class RAV extends AbstractPlay
     {
         $this->board = $board ?? new ClassicalBoard();
         $this->fen = [$this->board->toFen()];
-        $rav = new RavMovetext($this->board->getMove(), $movetext);
-        $rav->validate();
-        $this->moves = $rav->getMoves();
+        $this->rav = new RavMovetext($this->board->getMove(), $movetext);
+
+        $this->rav->validate();
     }
 
     /**
-     * Plays a chess game.
+     * Plays a RAV movetext.
      *
      * @throws \Chess\Exception\PlayException
      * @return \Chess\Play\RAV
