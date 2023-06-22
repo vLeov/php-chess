@@ -35,8 +35,8 @@ class SAN extends AbstractPlay
 
         $san->validate();
 
+        $this->fen = [$this->board->toFen()];
         $this->moves = $san->getMoves();
-        $this->fen = [(new ClassicalBoard())->toFen()];
     }
 
     /**

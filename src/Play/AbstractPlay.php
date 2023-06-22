@@ -20,18 +20,18 @@ abstract class AbstractPlay
     protected Board $board;
 
     /**
-     * Moves.
-     *
-     * @var array
-     */
-    protected array $moves;
-
-    /**
      * FEN history.
      *
      * @var array
      */
     protected array $fen;
+
+    /**
+     * Moves.
+     *
+     * @var array
+     */
+    protected array $moves;
 
     /**
      * Returns the chessboard object.
@@ -44,16 +44,6 @@ abstract class AbstractPlay
     }
 
     /**
-     * Returns the moves as an array.
-     *
-     * @return array
-     */
-    public function getMoves(): array
-    {
-        return $this->moves;
-    }
-
-    /**
      * Returns the FEN history.
      *
      * @return array
@@ -61,5 +51,15 @@ abstract class AbstractPlay
     public function getFen(): array
     {
         return $this->fen;
+    }
+
+    /**
+     * Returns the moves.
+     *
+     * @return array
+     */
+    public function getMoves(): array
+    {
+        return $this->moves;
     }
 }

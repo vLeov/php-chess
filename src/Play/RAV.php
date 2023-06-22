@@ -35,8 +35,8 @@ class RAV extends AbstractPlay
 
         $rav->validate();
 
-        $this->moves = $rav->getMoves();
-        $this->fen = [(new ClassicalBoard())->toFen()];
+        $this->fen = [$this->board->toFen()];
+        $this->moves = $san->getMoves();
     }
 
     /**
