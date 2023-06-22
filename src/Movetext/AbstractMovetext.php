@@ -62,6 +62,16 @@ abstract class AbstractMovetext
     }
 
     /**
+     * Returns the movetext.
+     *
+     * @return string
+     */
+    public function getMovetext(): string
+    {
+        return $this->movetext;
+    }
+
+    /**
      * Returns the array of moves.
      *
      * @see \Chess\Play\RAV

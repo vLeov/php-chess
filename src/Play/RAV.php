@@ -22,6 +22,13 @@ class RAV extends AbstractPlay
     protected RavMovetext $san;
 
     /**
+     * Breakdown.
+     *
+     * @var array
+     */
+    protected array $breakdown;
+
+    /**
      * Constructor.
      *
      * @param string $movetext
@@ -34,6 +41,18 @@ class RAV extends AbstractPlay
         $this->rav = new RavMovetext($this->board->getMove(), $movetext);
 
         $this->rav->validate();
+
+        $this->breakdown();
+    }
+
+    /**
+     * Returns the breakdown.
+     *
+     * @return array
+     */
+    public function getBreakdown(): array
+    {
+        return $this->breakdown;
     }
 
     /**
@@ -47,5 +66,18 @@ class RAV extends AbstractPlay
         // TODO
 
         return $this;
+    }
+
+    /**
+     * A breakdown of the variations for further processing.
+     *
+     * @return array
+     */
+    protected function breakdown()
+    {
+        $data = preg_split("/[()]+/", $this->rav->filter(), -1, PREG_SPLIT_NO_EMPTY);
+        $data = array_map('trim', $data);
+
+        $this->breakdown = $data;
     }
 }
