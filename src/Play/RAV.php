@@ -99,10 +99,9 @@ class RAV extends AbstractPlay
 
     protected function fen()
     {
-        $board = (new SanPlay($this->breakdown[0], $this->board))
-            ->play()
-            ->getBoard();
-        $this->fen = [$board->toFen()];
+        $sanPlay = new SanPlay($this->breakdown[0], $this->board);
+        $board = $sanPlay->play()->getBoard();
+        $this->fen = $sanPlay->getFen();
         $resume = [$board];
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
