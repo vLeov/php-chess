@@ -2,12 +2,12 @@
 
 namespace Chess\Play;
 
+use Chess\FenToBoardFactory;
 use Chess\Exception\PlayException;
 use Chess\Movetext\RAV as RavMovetext;
 use Chess\Movetext\SAN as SanMovetext;
 use Chess\Play\SAN as SanPlay;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 /**
  * Recursive Annotation Variation.
@@ -77,11 +77,15 @@ class RAV extends AbstractPlay
                 if ($current->startNumber() === $prev->endingNumber()) {
                     if (str_contains($this->rav->filter(), "({$this->breakdown[$i]}")) {
                         $undo = $resume[$j]->undo();
-                        $board = (new ClassicalFenStrToBoard($undo->toFen()))
-                            ->create();
+                        $board = FenToBoardFactory::create(
+                            $undo->toFen(),
+                            $board
+                        );
                     } else {
-                        $board = (new ClassicalFenStrToBoard($resume[$j]->toFen()))
-                            ->create();
+                        $board = FenToBoardFactory::create(
+                            $resume[$j]->toFen(),
+                            $board
+                        );
                     }
                     $sanPlay = new SanPlay($this->breakdown[$i], $board);
                     $board = $sanPlay->play()->getBoard();
