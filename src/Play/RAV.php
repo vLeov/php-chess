@@ -109,7 +109,7 @@ class RAV extends AbstractPlay
                 $needle = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
                 if ($current->startNumber() === $needle->endingNumber()) {
                     $clone = unserialize(serialize($resume));
-                    if (str_contains($rav->getValidation(), $this->breakdown[$j])) {
+                    if (str_contains($rav->getValidation(), "({$this->breakdown[$j]}")) {
                         $undone = $clone[$i]->undo();
                         $clone[$i] = $undone;
                     }
