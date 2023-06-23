@@ -7,6 +7,7 @@ use Chess\Movetext\RAV as RavMovetext;
 use Chess\Movetext\SAN as SanMovetext;
 use Chess\Play\SAN as SanPlay;
 use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 /**
  * Recursive Annotation Variation.
@@ -100,32 +101,32 @@ class RAV extends AbstractPlay
         $board = (new SanPlay($this->breakdown[0], $this->board))
             ->play()
             ->getBoard();
-
-        $this->fen = $board->getFen();
-
+        $resume = [ $board ];
+        $fen = $board->getFen();
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
             for ($j = $i; $j < 0; $j--) {
                 $needle = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
                 if ($current->startNumber() === $needle->endingNumber()) {
-                    if ($this->rav->isVariation($this->breakdown[$j])) {
-                        $board = $board->undo();
-                        $board = (new SanPlay($this->breakdown[$i], $board))
-                            ->play()
-                            ->getBoard();
-                        // TODO
-                        // $board = $board->redo();
-                    } else {
-                        $board = (new SanPlay($this->breakdown[$i], $board))
-                            ->play()
-                            ->getBoard();
+                    $clone = unserialize(serialize($resume));
+                    if (str_contains($rav->getValidation(), $this->breakdown[$j])) {
+                        $undone = $clone[$i]->undo();
+                        $clone[$i] = $undone;
                     }
-                    $this->fen = [
-                        ...$this->fen,
+                    $board = (new ClassicalFenStrToBoard($clone[$i]->toFen()))
+                        ->create();
+                    $board = (new SanPlay($this->breakdown[$j], $board))
+                        ->play()
+                        ->getBoard();
+                    $fen = [
+                        ...$fen,
                         ...$board->getFen(),
                     ];
+                    $resume[] = $board;
                 }
             }
         }
+
+        $this->fen = $fen;
     }
 }

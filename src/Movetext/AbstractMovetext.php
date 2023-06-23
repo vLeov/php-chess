@@ -94,6 +94,16 @@ abstract class AbstractMovetext
     }
 
     /**
+     * Returns the validation string.
+     *
+     * @return string
+     */
+    public function getValidation(): string
+    {
+        return $this->validation;
+    }
+
+    /**
      * Before inserting elements into the array of moves.
      *
      * @return \Chess\Movetext\AbstractMovetext
