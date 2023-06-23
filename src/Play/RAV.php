@@ -43,12 +43,9 @@ class RAV extends AbstractPlay
         $this->board = $board ?? new ClassicalBoard();
         $this->fen = [$this->board->toFen()];
         $this->rav = new RavMovetext($this->board->getMove(), $movetext);
-
         $this->rav->validate();
 
         $this->breakdown();
-
-        $this->fen();
     }
 
     /**
@@ -113,14 +110,12 @@ class RAV extends AbstractPlay
                         $undo = $resume[$j]->undo();
                         $board = (new ClassicalFenStrToBoard($undo->toFen()))
                             ->create();
-                        $sanPlay = new SanPlay($this->breakdown[$i], $board);
-                        $board = $sanPlay->play()->getBoard();
                     } else {
                         $board = (new ClassicalFenStrToBoard($resume[$j]->toFen()))
                             ->create();
-                        $sanPlay = new SanPlay($this->breakdown[$i], $board);
-                        $board = $sanPlay->play()->getBoard();
                     }
+                    $sanPlay = new SanPlay($this->breakdown[$i], $board);
+                    $board = $sanPlay->play()->getBoard();
                     $fen = $sanPlay->getFen();
                     array_shift($fen);
                     $this->fen = [
@@ -132,5 +127,12 @@ class RAV extends AbstractPlay
                 }
             }
         }
+    }
+
+    public function getFen(): array
+    {
+        $this->fen();
+
+        return $this->fen;
     }
 }
