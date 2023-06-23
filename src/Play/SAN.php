@@ -5,6 +5,7 @@ namespace Chess\Play;
 use Chess\Exception\PlayException;
 use Chess\Movetext\SAN as SanMovetext;
 use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\PGN\Move;
 
 /**
  * Standard Algebraic Notation.
@@ -45,10 +46,12 @@ class SAN extends AbstractPlay
     public function play(): SAN
     {
         foreach ($this->san->getMoves() as $key => $val) {
-            if (!$this->board->play($this->board->getTurn(), $val)) {
-                throw new PlayException();
+            if ($val !== Move::ELLIPSIS) {
+                if (!$this->board->play($this->board->getTurn(), $val)) {
+                    throw new PlayException();
+                }
+                $this->fen[] = $this->board->toFen();
             }
-            $this->fen[] = $this->board->toFen();
         }
 
         return $this;

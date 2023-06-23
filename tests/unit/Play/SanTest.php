@@ -4,6 +4,7 @@ namespace Chess\Tests\Unit\Play;
 
 use Chess\Play\SAN;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 class SanTest extends AbstractUnitTestCase
 {
@@ -38,5 +39,19 @@ class SanTest extends AbstractUnitTestCase
 
         $movetext = '1.e4 e4';
         $board = (new SAN($movetext))->play()->getBoard();
+    }
+
+    /**
+     * @test
+     */
+    public function ellipsis_Nc6_Bc4()
+    {
+        $fen = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq -';
+        $board = (new ClassicalFenStrToBoard($fen))->create();
+        $movetext = '2...Nc6 3.Bc4';
+        $board = (new SAN($movetext, $board))->play()->getBoard();
+        $expected = '1...Nc6 2.Bc4';
+
+        $this->assertSame($expected, $board->getMovetext());
     }
 }
