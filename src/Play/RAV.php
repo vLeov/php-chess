@@ -106,8 +106,8 @@ class RAV extends AbstractPlay
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
             for ($j = $i; $j < 0; $j--) {
-                $found = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
-                if ($current->startsWith() === $found->endsWith()) {
+                $needle = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
+                if ($current->startsWith() === $needle->endsWith()) {
                     if ($current->isParenthesized()) {
                         $board = $board->undo();
                     }
