@@ -47,6 +47,8 @@ class RAV extends AbstractPlay
         $this->rav->validate();
 
         $this->breakdown();
+
+        $this->fen();
     }
 
     /**
@@ -95,37 +97,38 @@ class RAV extends AbstractPlay
         $this->breakdown = $data;
     }
 
-    // TODO
-    public function fen()
+    protected function fen()
     {
         $board = (new SanPlay($this->breakdown[0], $this->board))
             ->play()
             ->getBoard();
+        $this->fen = [$board->toFen()];
         $resume = [$board];
-        $fen =  [$board->toFen()];
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
             for ($j = $i - 1; $j >= 0; $j--) {
-                $foo = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
-                if ($current->startNumber() === $foo->endingNumber()) {
-                    $clone = unserialize(serialize($resume));
+                $prev = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
+                if ($current->startNumber() === $prev->endingNumber()) {
                     if (str_contains($this->rav->filter(), "({$this->breakdown[$i]}")) {
-                        $undone = $clone[$i-1]->undo();
-                        $clone[$i-1] = $undone;
+                        $undo = $resume[$j]->undo();
+                        $board = (new ClassicalFenStrToBoard($undo->toFen()))
+                            ->create();
+                        $sanPlay = new SanPlay($this->breakdown[$i], $board);
+                        $board = $sanPlay->play()->getBoard();
+                    } else {
+                        $board = (new ClassicalFenStrToBoard($resume[$j]->toFen()))
+                            ->create();
+                        $sanPlay = new SanPlay($this->breakdown[$i], $board);
+                        $board = $sanPlay->play()->getBoard();
                     }
-                    $board = (new ClassicalFenStrToBoard($clone[$i-1]->toFen()))
-                        ->create();
-                    $sanPlay = new SanPlay($this->breakdown[$i], $board);
-                    $fen = [
-                        ...$fen,
+                    $this->fen = [
+                        ...$this->fen,
                         ...$sanPlay->getFen(),
                     ];
-                    $resume[] = $sanPlay->play()->getBoard();
+                    $resume[] = $board;
                     break;
                 }
             }
         }
-
-        $this->fen = $fen;
     }
 }
