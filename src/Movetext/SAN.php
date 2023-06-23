@@ -45,7 +45,7 @@ class SAN extends AbstractMovetext
      *
      * @return int
      */
-    public function startsWith(): int
+    public function startNumber(): int
     {
         return $this->first;
     }
@@ -55,7 +55,7 @@ class SAN extends AbstractMovetext
      *
      * @return int
      */
-    public function endsWith(): int
+    public function endingNumber(): int
     {
         return $this->last;
     }
