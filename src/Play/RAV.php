@@ -22,10 +22,10 @@ class RAV extends AbstractPlay
      *
      * @var array
      */
-    protected RavMovetext $rav;
+    protected RavMovetext $ravMovetext;
 
     /**
-     * Breakdown.
+     * RAV breakdown.
      *
      * @var array
      */
@@ -42,8 +42,8 @@ class RAV extends AbstractPlay
     {
         $this->board = $board ?? new ClassicalBoard();
         $this->fen = [$this->board->toFen()];
-        $this->rav = new RavMovetext($this->board->getMove(), $movetext);
-        $this->rav->validate();
+        $this->ravMovetext = new RavMovetext($this->board->getMove(), $movetext);
+        $this->ravMovetext->validate();
 
         $this->breakdown();
     }
@@ -71,11 +71,11 @@ class RAV extends AbstractPlay
         $this->fen = $sanPlay->getFen();
         $resume = [$board];
         for ($i = 1; $i < count($this->breakdown); $i++) {
-            $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
+            $current = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
             for ($j = $i - 1; $j >= 0; $j--) {
-                $prev = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
+                $prev = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$j]);
                 if ($current->startNumber() === $prev->endingNumber()) {
-                    if (str_contains($this->rav->filter(), "({$this->breakdown[$i]}")) {
+                    if (str_contains($this->ravMovetext->filter(), "({$this->breakdown[$i]}")) {
                         $undo = $resume[$j]->undo();
                         $board = FenToBoardFactory::create(
                             $undo->toFen(),
@@ -113,8 +113,8 @@ class RAV extends AbstractPlay
     public function play(): RAV
     {
         $mainMoves = (new SanMovetext(
-            $this->rav->getMove(),
-            $this->rav->main()
+            $this->ravMovetext->getMove(),
+            $this->ravMovetext->main()
         ))->getMoves();
 
         foreach ($mainMoves as $key => $val) {
@@ -133,7 +133,7 @@ class RAV extends AbstractPlay
      */
     protected function breakdown()
     {
-        $data = preg_split("/[()]+/", $this->rav->filter(), -1, PREG_SPLIT_NO_EMPTY);
+        $data = preg_split("/[()]+/", $this->ravMovetext->filter(), -1, PREG_SPLIT_NO_EMPTY);
         $data = array_map('trim', $data);
         $data = array_values(array_filter($data));
 

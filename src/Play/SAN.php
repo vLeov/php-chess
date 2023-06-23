@@ -20,7 +20,7 @@ class SAN extends AbstractPlay
      *
      * @var array
      */
-    protected SanMovetext $san;
+    protected SanMovetext $sanMovetext;
 
     /**
      * Constructor.
@@ -32,9 +32,9 @@ class SAN extends AbstractPlay
     {
         $this->board = $board ?? new ClassicalBoard();
         $this->fen = [$this->board->toFen()];
-        $this->san = new SanMovetext($this->board->getMove(), $movetext);
+        $this->sanMovetext = new SanMovetext($this->board->getMove(), $movetext);
 
-        $this->san->validate();
+        $this->sanMovetext->validate();
     }
 
     /**
@@ -45,7 +45,7 @@ class SAN extends AbstractPlay
      */
     public function play(): SAN
     {
-        foreach ($this->san->getMoves() as $key => $val) {
+        foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
                 if (!$this->board->play($this->board->getTurn(), $val)) {
                     throw new PlayException();
