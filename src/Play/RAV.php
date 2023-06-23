@@ -59,6 +59,48 @@ class RAV extends AbstractPlay
     }
 
     /**
+     * Calculates and returns the FEN history.
+     *
+     * @return array
+     */
+    public function getFen(): array
+    {
+        $clone = unserialize(serialize($this->board));
+        $sanPlay = new SanPlay($this->breakdown[0], $clone);
+        $board = $sanPlay->play()->getBoard();
+        $this->fen = $sanPlay->getFen();
+        $resume = [$board];
+        for ($i = 1; $i < count($this->breakdown); $i++) {
+            $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
+            for ($j = $i - 1; $j >= 0; $j--) {
+                $prev = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
+                if ($current->startNumber() === $prev->endingNumber()) {
+                    if (str_contains($this->rav->filter(), "({$this->breakdown[$i]}")) {
+                        $undo = $resume[$j]->undo();
+                        $board = (new ClassicalFenStrToBoard($undo->toFen()))
+                            ->create();
+                    } else {
+                        $board = (new ClassicalFenStrToBoard($resume[$j]->toFen()))
+                            ->create();
+                    }
+                    $sanPlay = new SanPlay($this->breakdown[$i], $board);
+                    $board = $sanPlay->play()->getBoard();
+                    $fen = $sanPlay->getFen();
+                    array_shift($fen);
+                    $this->fen = [
+                        ...$this->fen,
+                        ...$fen,
+                    ];
+                    $resume[] = $board;
+                    break;
+                }
+            }
+        }
+
+        return $this->fen;
+    }
+
+    /**
      * Plays the main variation of a RAV movetext.
      *
      * @throws \Chess\Exception\PlayException
@@ -92,47 +134,5 @@ class RAV extends AbstractPlay
         $data = array_values(array_filter($data));
 
         $this->breakdown = $data;
-    }
-
-    protected function fen()
-    {
-        $clone = unserialize(serialize($this->board));
-        $sanPlay = new SanPlay($this->breakdown[0], $clone);
-        $board = $sanPlay->play()->getBoard();
-        $this->fen = $sanPlay->getFen();
-        $resume = [$board];
-        for ($i = 1; $i < count($this->breakdown); $i++) {
-            $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
-            for ($j = $i - 1; $j >= 0; $j--) {
-                $prev = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
-                if ($current->startNumber() === $prev->endingNumber()) {
-                    if (str_contains($this->rav->filter(), "({$this->breakdown[$i]}")) {
-                        $undo = $resume[$j]->undo();
-                        $board = (new ClassicalFenStrToBoard($undo->toFen()))
-                            ->create();
-                    } else {
-                        $board = (new ClassicalFenStrToBoard($resume[$j]->toFen()))
-                            ->create();
-                    }
-                    $sanPlay = new SanPlay($this->breakdown[$i], $board);
-                    $board = $sanPlay->play()->getBoard();
-                    $fen = $sanPlay->getFen();
-                    array_shift($fen);
-                    $this->fen = [
-                        ...$this->fen,
-                        ...$fen,
-                    ];
-                    $resume[] = $board;
-                    break;
-                }
-            }
-        }
-    }
-
-    public function getFen(): array
-    {
-        $this->fen();
-
-        return $this->fen;
     }
 }
