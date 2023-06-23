@@ -41,21 +41,21 @@ class SAN extends AbstractMovetext
     }
 
     /**
-     * Returns the first move.
+     * Returns the number that starts the movetext.
      *
      * @return int
      */
-    public function getFirst(): int
+    public function startsWith(): int
     {
         return $this->first;
     }
 
     /**
-     * Returns the last move.
+     * Returns the number that ends the movetext.
      *
      * @return int
      */
-    public function getLast(): int
+    public function endsWith(): int
     {
         return $this->last;
     }

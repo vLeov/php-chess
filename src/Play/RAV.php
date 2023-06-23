@@ -100,13 +100,15 @@ class RAV extends AbstractPlay
         $board = (new SanPlay($this->breakdown[0], $this->board))
             ->play()
             ->getBoard();
+
         $this->fen = $board->getFen();
+
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $current = new SanMovetext($this->rav->getMove(), $this->breakdown[$i]);
             for ($j = $i; $j < 0; $j--) {
                 $found = new SanMovetext($this->rav->getMove(), $this->breakdown[$j]);
-                if ($current->getFirst() === $found->getLast()) {
-                    if (!$current->startsWithEllipsis()) {
+                if ($current->startsWith() === $found->endsWith()) {
+                    if ($current->isParenthesized()) {
                         $board = $board->undo();
                     }
                     $board = (new SanPlay($this->breakdown[$i], $board))
