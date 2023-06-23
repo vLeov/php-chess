@@ -61,18 +61,20 @@ class SAN extends AbstractMovetext
     }
 
     /**
-     * Before inserting into the array of moves.
+     * Before inserting elements into the array of moves.
      *
-     * @return string
+     * @return \Chess\Movetext\SAN
      */
-    protected function beforeInsert(): string
+    protected function beforeInsert(): SAN
     {
         // remove comments
         $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 
-        return trim($movetext);
+        $this->validation = trim($movetext);
+
+        return $this;
     }
 
     /**

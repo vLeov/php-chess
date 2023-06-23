@@ -57,9 +57,8 @@ abstract class AbstractMovetext
         $this->move = $move;
         $this->movetext = $movetext;
         $this->moves = [];
-        $this->validation = $this->beforeInsert($movetext);
-        
-        $this->insert();
+
+        $this->beforeInsert()->insert();
     }
 
     /**
@@ -97,9 +96,9 @@ abstract class AbstractMovetext
     /**
      * Before inserting elements into the array of moves.
      *
-     * @return string
+     * @return \Chess\Movetext\AbstractMovetext
      */
-    abstract protected function beforeInsert(): string;
+    abstract protected function beforeInsert(): AbstractMovetext;
 
     /**
      * Insert elements into the array of moves.

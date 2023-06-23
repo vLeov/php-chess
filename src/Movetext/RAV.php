@@ -35,9 +35,9 @@ class RAV extends AbstractMovetext
     /**
      * Before inserting elements into the array of moves.
      *
-     * @return string
+     * @return \Chess\Movetext\RAV
      */
-    protected function beforeInsert(): string
+    protected function beforeInsert(): RAV
     {
         // remove comments
         $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
@@ -47,7 +47,9 @@ class RAV extends AbstractMovetext
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 
-        return trim($movetext);
+        $this->validation = trim($movetext);
+
+        return $this;
     }
 
     /**

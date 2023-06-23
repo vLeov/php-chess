@@ -21,7 +21,7 @@ class RAV extends AbstractPlay
      *
      * @var array
      */
-    protected RavMovetext $san;
+    protected RavMovetext $rav;
 
     /**
      * Breakdown.
