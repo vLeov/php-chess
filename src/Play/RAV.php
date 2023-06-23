@@ -99,7 +99,8 @@ class RAV extends AbstractPlay
 
     protected function fen()
     {
-        $sanPlay = new SanPlay($this->breakdown[0], $this->board);
+        $clone = unserialize(serialize($this->board));
+        $sanPlay = new SanPlay($this->breakdown[0], $clone);
         $board = $sanPlay->play()->getBoard();
         $this->fen = $sanPlay->getFen();
         $resume = [$board];
@@ -114,15 +115,14 @@ class RAV extends AbstractPlay
                             ->create();
                         $sanPlay = new SanPlay($this->breakdown[$i], $board);
                         $board = $sanPlay->play()->getBoard();
-                        $fen = $sanPlay->getFen();
-                        array_shift($fen);
                     } else {
                         $board = (new ClassicalFenStrToBoard($resume[$j]->toFen()))
                             ->create();
                         $sanPlay = new SanPlay($this->breakdown[$i], $board);
                         $board = $sanPlay->play()->getBoard();
-                        $fen = $sanPlay->getFen();
                     }
+                    $fen = $sanPlay->getFen();
+                    array_shift($fen);
                     $this->fen = [
                         ...$this->fen,
                         ...$fen,
