@@ -3,7 +3,7 @@
 namespace Chess;
 
 use Chess\Eval\InverseEvalInterface;
-use Chess\Play\SAN;
+use Chess\Play\SanPlay;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
@@ -13,7 +13,7 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class Heuristics extends SAN
+class Heuristics extends SanPlay
 {
     use HeuristicsTrait;
 
@@ -87,15 +87,15 @@ class Heuristics extends SAN
      */
     protected function calc(): Heuristics
     {
-        foreach ($this->san->getMoves() as $key => $val) {
+        foreach ($this->sanMovetext->getMoves() as $key => $val) {
             $turn = $this->board->getTurn();
             if ($key % 2 === 0) {
-                $this->board->play($turn, $this->san->getMoves()[$key]);
+                $this->board->play($turn, $this->sanMovetext->getMoves()[$key]);
                 $this->calcItem();
-                if (!empty($this->san->getMoves()[$key+1])) {
+                if (!empty($this->sanMovetext->getMoves()[$key+1])) {
                      $this->board->play(
                          Color::opp($turn),
-                         $this->san->getMoves()[$key+1]
+                         $this->sanMovetext->getMoves()[$key+1]
                      );
                 }
                 $this->calcItem();

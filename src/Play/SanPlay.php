@@ -3,7 +3,7 @@
 namespace Chess\Play;
 
 use Chess\Exception\PlayException;
-use Chess\Movetext\SAN as SanMovetext;
+use Chess\Movetext\SanMovetext;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\PGN\Move;
 
@@ -13,7 +13,7 @@ use Chess\Variant\Classical\PGN\Move;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class SAN extends AbstractPlay
+class SanPlay extends AbstractPlay
 {
     /**
      * SAN movetext.
@@ -41,9 +41,9 @@ class SAN extends AbstractPlay
      * Plays a SAN movetext.
      *
      * @throws \Chess\Exception\PlayException
-     * @return \Chess\Play\SAN
+     * @return \Chess\Play\SanPlay
      */
-    public function play(): SAN
+    public function play(): SanPlay
     {
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {

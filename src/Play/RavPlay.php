@@ -4,9 +4,9 @@ namespace Chess\Play;
 
 use Chess\FenToBoardFactory;
 use Chess\Exception\PlayException;
-use Chess\Movetext\RAV as RavMovetext;
-use Chess\Movetext\SAN as SanMovetext;
-use Chess\Play\SAN as SanPlay;
+use Chess\Movetext\RavMovetext;
+use Chess\Movetext\SanMovetext;
+use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
 /**
@@ -15,7 +15,7 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class RAV extends AbstractPlay
+class RavPlay extends AbstractPlay
 {
     /**
      * RAV movetext.
@@ -108,9 +108,9 @@ class RAV extends AbstractPlay
      * Plays the main variation of a RAV movetext.
      *
      * @throws \Chess\Exception\PlayException
-     * @return \Chess\Play\RAV
+     * @return \Chess\Play\RavPlay
      */
-    public function play(): RAV
+    public function play(): RavPlay
     {
         $mainMoves = (new SanMovetext(
             $this->ravMovetext->getMove(),

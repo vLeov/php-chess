@@ -3,7 +3,7 @@
 namespace Chess\Media;
 
 use Chess\Exception\MediaException;
-use Chess\Movetext\SAN;
+use Chess\Movetext\SanMovetext;
 use Chess\Variant\Classical\Board;
 
 class BoardToMp4
@@ -12,7 +12,7 @@ class BoardToMp4
 
     protected $ext = '.mp4';
 
-    protected SAN $san;
+    protected SanMovetext $sanMovetext;
 
     protected Board $board;
 
@@ -20,11 +20,11 @@ class BoardToMp4
 
     public function __construct(string $movetext, Board $board, bool $flip = false)
     {
-        $this->san = new SAN($board->getMove(), $movetext);
-        if (!$this->san->validate()) {
+        $this->sanMovetext = new SanMovetext($board->getMove(), $movetext);
+        if (!$this->sanMovetext->validate()) {
             throw new MediaException();
         }
-        if (self::MAX_MOVES < count($this->san->getMoves())) {
+        if (self::MAX_MOVES < count($this->sanMovetext->getMoves())) {
             throw new MediaException();
         }
         $this->board = $board;
@@ -52,7 +52,7 @@ class BoardToMp4
     {
         $boardToPng = new BoardToPng($this->board, $this->flip);
         $boardToPng->output($filepath, "{$filename}_000");
-        foreach ($this->san->getMoves() as $key => $val) {
+        foreach ($this->sanMovetext->getMoves() as $key => $val) {
             $n = sprintf("%03d", $key + 1);
             $this->board->play($this->board->getTurn(), $val);
             $boardToPng->setBoard($this->board)->output($filepath, "{$filename}_{$n}");

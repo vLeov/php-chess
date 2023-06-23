@@ -2,11 +2,11 @@
 
 namespace Chess\Tests\Unit\Movetext;
 
-use Chess\Movetext\SAN;
+use Chess\Movetext\SanMovetext;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\PGN\Move;
 
-class SanTest extends AbstractUnitTestCase
+class SanMovetextTest extends AbstractUnitTestCase
 {
     static private $move;
 
@@ -35,103 +35,130 @@ class SanTest extends AbstractUnitTestCase
 
         $expected = [ 'd4', 'Nf6', 'Nf3', 'e6', 'c4', 'Bb4+', 'Nbd2', 'O-O', 'a3', 'Be7', 'e4', 'd6', 'Bd3', 'c5' ];
 
-        $this->assertEquals($expected, (new SAN(self::$move, $movetext))->getMoves());
+        $this->assertEquals(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->getMoves()
+        );
     }
 
     /**
      * @test
      */
-    public function get_first_e4_e5__Nd5()
+    public function start_number_e4_e5__Nd5()
     {
         $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
 
         $expected = 1;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->startNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->startNumber()
+        );
     }
 
     /**
      * @test
      */
-    public function get_last_e4_e5__Nd5()
+    public function ending_number_e4_e5__Nd5()
     {
         $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
 
         $expected = 11;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->endingNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->endingNumber()
+        );
     }
 
     /**
      * @test
      */
-    public function get_first_a5__Nxg4()
+    public function start_number_a5__Nxg4()
     {
         $movetext = '12...a5 13.g4 Nxg4';
 
         $expected = 12;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->startNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->startNumber()
+        );
     }
 
     /**
      * @test
      */
-    public function get_last_a5__Nxg4()
+    public function ending_number_a5__Nxg4()
     {
         $movetext = '12...a5 13.g4 Nxg4';
 
         $expected = 13;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->endingNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->endingNumber()
+        );
     }
 
     /**
      * @test
      */
-    public function get_first_Kb8()
+    public function start_number_Kb8()
     {
         $movetext = '6...Kb8';
 
         $expected = 6;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->startNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->startNumber()
+        );
     }
 
     /**
      * @test
      */
-    public function get_last_Kb8()
+    public function ending_number_Kb8()
     {
         $movetext = '6...Kb8';
 
         $expected = 6;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->endingNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->endingNumber()
+        );
     }
 
     /**
      * @test
      */
-    public function get_first_Rh5()
+    public function start_number_Rh5()
     {
         $movetext = '3.Rh5';
 
         $expected = 3;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->startNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->startNumber()
+        );
     }
 
     /**
      * @test
      */
-    public function get_last_Rh5()
+    public function ending_number_Rh5()
     {
         $movetext = '3.Rh5';
 
         $expected = 3;
 
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->endingNumber());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->endingNumber()
+        );
     }
 
     /**
@@ -140,7 +167,10 @@ class SanTest extends AbstractUnitTestCase
      */
     public function sequence($movetext, $expected)
     {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->sequence());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->sequence()
+        );
     }
 
     /**
@@ -150,7 +180,7 @@ class SanTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new SAN(self::$move, 'foo'))->validate();
+        (new SanMovetext(self::$move, 'foo'))->validate();
     }
 
     /**
@@ -159,7 +189,10 @@ class SanTest extends AbstractUnitTestCase
      */
     public function valid($expected, $movetext)
     {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->validate());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->validate()
+        );
     }
 
     /**
@@ -170,7 +203,7 @@ class SanTest extends AbstractUnitTestCase
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
-        (new SAN(self::$move, $movetext))->validate();
+        (new SanMovetext(self::$move, $movetext))->validate();
     }
 
     /**
@@ -179,7 +212,10 @@ class SanTest extends AbstractUnitTestCase
      */
     public function curly_braces_filtered($expected, $movetext)
     {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->validate());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->validate()
+        );
     }
 
     /**
@@ -188,7 +224,10 @@ class SanTest extends AbstractUnitTestCase
      */
     public function parentheses_filtered($expected, $movetext)
     {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->validate());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->validate()
+        );
     }
 
     /**
@@ -197,7 +236,10 @@ class SanTest extends AbstractUnitTestCase
      */
     public function too_many_spaces_filtered($expected, $movetext)
     {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->validate());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->validate()
+        );
     }
 
     /**
@@ -206,7 +248,10 @@ class SanTest extends AbstractUnitTestCase
      */
     public function fide_filtered($expected, $movetext)
     {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->validate());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->validate()
+        );
     }
 
     /**
@@ -215,7 +260,10 @@ class SanTest extends AbstractUnitTestCase
      */
     public function with_result_filtered($expected, $movetext)
     {
-        $this->assertSame($expected, (new SAN(self::$move, $movetext))->validate());
+        $this->assertSame(
+            $expected,
+            (new SanMovetext(self::$move, $movetext))->validate()
+        );
     }
 
     public function validData()

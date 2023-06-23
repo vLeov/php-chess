@@ -10,14 +10,14 @@ use Chess\Variant\Classical\PGN\AN\Termination;
  *
  * @license GPL
  */
-class RAV extends AbstractMovetext
+class RavMovetext extends AbstractMovetext
 {
     /**
      * SAN movetext.
      *
-     * @var \Chess\Movetext\SAN
+     * @var \Chess\Movetext\SanMovetext
      */
-    private SAN $san;
+    private SanMovetext $san;
 
     /**
      * Constructor.
@@ -29,15 +29,15 @@ class RAV extends AbstractMovetext
     {
         parent::__construct($move, $movetext);
 
-        $this->san = new SAN($move, $movetext);
+        $this->san = new SanMovetext($move, $movetext);
     }
 
     /**
      * Before inserting elements into the array of moves.
      *
-     * @return \Chess\Movetext\RAV
+     * @return \Chess\Movetext\RavMovetext
      */
-    protected function beforeInsert(): RAV
+    protected function beforeInsert(): RavMovetext
     {
         // remove comments
         $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
@@ -55,7 +55,7 @@ class RAV extends AbstractMovetext
     /**
      * Insert elements into the array of moves.
      *
-     * @see \Chess\Play\RAV
+     * @see \Chess\Play\RavPlay
      */
     protected function insert(): void
     {

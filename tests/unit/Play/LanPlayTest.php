@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Play;
 
-use Chess\Play\LAN;
+use Chess\Play\LanPlay;
 use Chess\Tests\AbstractUnitTestCase;
 
-class LanTest extends AbstractUnitTestCase
+class LanPlayTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class LanTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\PlayException::class);
 
         $movetext = 'foo';
-        $board = (new LAN($movetext))->play()->getBoard();
+        $board = (new LanPlay($movetext))->play()->getBoard();
     }
 
     /**
@@ -26,7 +26,7 @@ class LanTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\PlayException::class);
 
         $movetext = 'e2e4 e2e4';
-        $board = (new LAN($movetext))->play()->getBoard();
+        $board = (new LanPlay($movetext))->play()->getBoard();
     }
 
     /**
@@ -36,7 +36,7 @@ class LanTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4 e7e5';
 
-        $board = (new LAN($movetext))->play()->getBoard();
+        $board = (new LanPlay($movetext))->play()->getBoard();
 
         $expected = '1.e4 e5';
 
@@ -50,7 +50,7 @@ class LanTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4  e7e5';
 
-        $board = (new LAN($movetext))->play()->getBoard();
+        $board = (new LanPlay($movetext))->play()->getBoard();
 
         $expected = '1.e4 e5';
 
@@ -64,7 +64,7 @@ class LanTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4 e7e5 g1f3';
 
-        $board = (new LAN($movetext))->play()->getBoard();
+        $board = (new LanPlay($movetext))->play()->getBoard();
 
         $expected = '1.e4 e5 2.Nf3';
 
@@ -78,7 +78,7 @@ class LanTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4 e7e5   g1f3';
 
-        $board = (new LAN($movetext))->play()->getBoard();
+        $board = (new LanPlay($movetext))->play()->getBoard();
 
         $expected = '1.e4 e5 2.Nf3';
 

@@ -11,7 +11,7 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagañas
  * @license GPL
  */
-class LAN extends AbstractPlay
+class LanPlay extends AbstractPlay
 {
     /**
      * Moves.
@@ -37,9 +37,9 @@ class LAN extends AbstractPlay
      * Plays a chess game.
      *
      * @throws \Chess\Exception\PlayException
-     * @return \Chess\Play\LAN
+     * @return \Chess\Play\LanPlay
      */
-    public function play(): LAN
+    public function play(): LanPlay
     {
         foreach ($this->moves as $key => $val) {
             if ($key % 2 === 0) {

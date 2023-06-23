@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Play;
 
-use Chess\Play\RAV;
+use Chess\Play\RavPlay;
 use Chess\Tests\AbstractUnitTestCase;
 
-class RavTest extends AbstractUnitTestCase
+class RavPlayTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -13,7 +13,7 @@ class RavTest extends AbstractUnitTestCase
     public function e4_e5()
     {
         $movetext = '1.e4 e5';
-        $board = (new RAV($movetext))->play()->getBoard();
+        $board = (new RavPlay($movetext))->play()->getBoard();
 
         $this->assertSame($movetext, $board->getMovetext());
     }
@@ -25,7 +25,7 @@ class RavTest extends AbstractUnitTestCase
     {
         $movetext = '1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5 (11. Nb1 h6 12. h4 (12. Nh4 g5 13. Nf5) 12... a5 13. g4 Nxg4) 11... Nxd5 12. Bxd5 Rb8 13. h4 h6 14. Rdg1 a5 15. g4 g5 16. h5 (16. hxg5 Bxg5 17. Nxg5 hxg5 18. Rh5)';
 
-        $breakdown = (new RAV($movetext))->getBreakdown();
+        $breakdown = (new RavPlay($movetext))->getBreakdown();
 
         $expected = [
             '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5',
@@ -36,7 +36,7 @@ class RavTest extends AbstractUnitTestCase
             '16.hxg5 Bxg5 17.Nxg5 hxg5 18.Rh5',
         ];
 
-        $this->assertSame($expected, (new RAV($movetext))->getBreakdown());
+        $this->assertSame($expected, (new RavPlay($movetext))->getBreakdown());
     }
 
     /**
@@ -46,7 +46,7 @@ class RavTest extends AbstractUnitTestCase
     {
         $movetext = '2...Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5 (11. Nb1 h6 12. h4 (12. Nh4 g5 13. Nf5) 12... a5 13. g4 Nxg4) 11... Nxd5 12. Bxd5 Rb8 13. h4 h6 14. Rdg1 a5 15. g4 g5 16. h5 (16. hxg5 Bxg5 17. Nxg5 hxg5 18. Rh5)';
 
-        $breakdown = (new RAV($movetext))->getBreakdown();
+        $breakdown = (new RavPlay($movetext))->getBreakdown();
 
         $expected = [
             '2...Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5',
@@ -57,7 +57,7 @@ class RavTest extends AbstractUnitTestCase
             '16.hxg5 Bxg5 17.Nxg5 hxg5 18.Rh5',
         ];
 
-        $this->assertSame($expected, (new RAV($movetext))->getBreakdown());
+        $this->assertSame($expected, (new RavPlay($movetext))->getBreakdown());
     }
 
     /**
@@ -77,7 +77,7 @@ class RavTest extends AbstractUnitTestCase
             '7.Rc7 Ka8 8.Kc6 Kb8 9.Kb6 Ka8 10.Rc8#',
         ];
 
-        $this->assertSame($expected, (new RAV($movetext))->getBreakdown());
+        $this->assertSame($expected, (new RavPlay($movetext))->getBreakdown());
     }
 
     /**
@@ -96,7 +96,7 @@ class RavTest extends AbstractUnitTestCase
             '3...Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#',
         ];
 
-        $this->assertSame($expected, (new RAV($movetext))->getBreakdown());
+        $this->assertSame($expected, (new RavPlay($movetext))->getBreakdown());
     }
 
     /**
@@ -115,7 +115,7 @@ class RavTest extends AbstractUnitTestCase
             '3...Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#',
         ];
 
-        $this->assertSame($expected, (new RAV($movetext))->getBreakdown());
+        $this->assertSame($expected, (new RavPlay($movetext))->getBreakdown());
     }
 
     /**
@@ -125,7 +125,7 @@ class RavTest extends AbstractUnitTestCase
     {
         $movetext = '1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5 (11. Nb1 h6 12. h4 (12. Nh4 g5 13. Nf5) 12... a5 13. g4 Nxg4) 11... Nxd5 12. Bxd5 Rb8 13. h4 h6 14. Rdg1 a5 15. g4 g5 16. h5 (16. hxg5 Bxg5 17. Nxg5 hxg5 18. Rh5)';
 
-        $board = (new RAV($movetext))->play()->getBoard();
+        $board = (new RavPlay($movetext))->play()->getBoard();
 
         $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 Nxd5 12.Bxd5 Rb8 13.h4 h6 14.Rdg1 a5 15.g4 g5 16.h5';
 
@@ -188,6 +188,6 @@ class RavTest extends AbstractUnitTestCase
             '1r1q1rk1/2pb1p2/2np4/p2Bp1pR/1p2P1P1/3PB3/PPPQ1P2/2K3R1 b - -',
         ];
 
-        $this->assertSame($expected, (new RAV($movetext))->getFen());
+        $this->assertSame($expected, (new RavPlay($movetext))->getFen());
     }
 }

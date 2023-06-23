@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Termination;
  *
  * @license GPL
  */
-class SAN extends AbstractMovetext
+class SanMovetext extends AbstractMovetext
 {
     /**
      * First move.
@@ -63,9 +63,9 @@ class SAN extends AbstractMovetext
     /**
      * Before inserting elements into the array of moves.
      *
-     * @return \Chess\Movetext\SAN
+     * @return \Chess\Movetext\SanMovetext
      */
-    protected function beforeInsert(): SAN
+    protected function beforeInsert(): SanMovetext
     {
         // remove comments
         $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
@@ -80,7 +80,7 @@ class SAN extends AbstractMovetext
     /**
      * Insert elements into the array of moves for further validation.
      *
-     * @see \Chess\Play\SAN
+     * @see \Chess\Play\SanPlay
      */
     protected function insert(): void
     {
