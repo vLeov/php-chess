@@ -1,4 +1,4 @@
-# Home
+# Features
 
 PHP Chess is a library implemented in PHP that allows to create chess apps out-of-the-box.
 
@@ -8,27 +8,25 @@ Almost every class in the [src](https://github.com/chesslablab/php-chess/tree/ma
 
 The PHP Chess docs are more of a tutorial rather than an API description.
 
-## Features
+## Common Formats Supported
 
-### Common Formats Supported
-
-- UCI protocol.
 - Chess moves in LAN and PGN formats.
 - Movetext processing in LAN, SAN and RAV formats.
+- UCI protocol.
 - FEN conversion to chess board.
 - Chess board conversion to PNG and JPG image.
 - Chess board conversion to MP4 video.
 
 | Acronym | Description |
 | ------- | ---------- |
-| UCI | Universal Chess Interface |
 | LAN | Long Algebraic Notation |
 | PGN | Portable Game Notation |
 | SAN | Standard Algebraic Notation |
 | RAV | Recursive Annotation Variation |
+| UCI | Universal Chess Interface |
 | FEN | Forsyth-Edwards Notation |
 
-### Chess Variants
+## Chess Variants
 
 Three different variants are supported with the default one being classical chess.
 
@@ -38,7 +36,7 @@ Three different variants are supported with the default one being classical ches
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) |
 
-### UCI Engines
+## UCI Engines
 
 Listed below are the UCI engines available at the moment.
 
@@ -46,14 +44,14 @@ Listed below are the UCI engines available at the moment.
 | ---- | ---------- |
 | Stockfish | [Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php) |
 
-### Object-Oriented API
+## Object-Oriented API
 
 Data processing with an object-oriented API. The chess board representation is an object of type [SplObjectStorage](https://www.php.net/manual/en/class.splobjectstorage.php) as opposed to a bitboard.
 
-### Thoroughly Tested
+## Thoroughly Tested
 
 PHP Chess has been developed with a test-driven development (TDD) approach. The [tests/unit](https://github.com/chesslablab/php-chess/tree/master/tests/unit) folder contains plenty of real examples.
 
-### Lightweight
+## Lightweight
 
 Requires two PHP dependencies: Rubix ML for machine learning and Imagine for image processing.
