@@ -63,12 +63,12 @@ The FEN is converted to a chessboard object as described in [Convert FEN to Boar
 The same thing goes for PGN annotated games. This is how to play against Stockfish after loading a SAN movetext into a chess board object.
 
 ```php
-use Chess\Play\SAN;
+use Chess\Play\SanPlay;
 use Chess\UciEngine\Stockfish;
 
 $movetext = '1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7';
 
-$board = (new SAN($movetext))
+$board = (new SanPlay($movetext))
     ->play()
     ->getBoard();
 
