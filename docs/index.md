@@ -12,11 +12,25 @@ The PHP Chess docs are more of a tutorial rather than an API description.
 
 ### Common Formats Supported
 
-Universal chess interface (UCI) protocol. Move format in Long Algebraic Notation (LAN) and Portable Game Notation (PGN). Forsyth-Edwards Notation (FEN). PNG and JPG for image files and MP4 for videos.
+- UCI protocol.
+- Chess moves in LAN and PGN formats.
+- Movetext processing in LAN, SAN and RAV formats.
+- FEN conversion to chess board.
+- Chess board conversion to PNG and JPG image.
+- Chess board conversion to MP4 video.
+
+| Acronym | Description |
+| ------- | ---------- |
+| UCI | Universal Chess Interface |
+| LAN | Long Algebraic Notation |
+| PGN | Portable Game Notation |
+| SAN | Standard Algebraic Notation |
+| RAV | Recursive Annotation Variation |
+| FEN | Forsyth-Edwards Notation |
 
 ### Chess Variants
 
-There are three different variants supported with the default one being classical chess.
+Three different variants are supported with the default one being classical chess.
 
 | Variant | Chessboard |
 | ------- | ---------- |
