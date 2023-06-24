@@ -2,21 +2,14 @@
 
 ✨ FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings.
 
-Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done according to the variants supported.
-
-| Variant | FEN Converter |
-| ------- | ------------- |
-| Capablanca | [Chess\Variant\Capablanca\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Capablanca/FEN/StrToBoardTest.php) |
-| Chess960 | [Chess\Variant\Chess960\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/FEN/StrToBoardTest.php) |
-| Classical | [Chess\Variant\Classical\FEN\StrToBoard](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/FEN/StrToBoardTest.php) |
+Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoard](https://github.com/chesslablab/php-chess/blob/master/src/FenToBoard.php) class according to the variants supported.
 
 Let's continue a classical game from the FEN position of B54, which is the ECO code for "Sicilian Defense: Modern Variations, Main Line" previously discussed in [Read PGN](https://php-chess.readthedocs.io/en/latest/read-pgn/).
 
 ```php
-use Chess\Variant\Classical\FEN\StrToBoard;
+use Chess\FenToBoard;
 
-$board = (new StrToBoard('rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -'))
-    ->create();
+$board = FenToBoard::create('rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -');
 
 $board->play('w', 'Nc3');
 $board->play('b', 'Nc6');

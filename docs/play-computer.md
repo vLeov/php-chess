@@ -33,11 +33,10 @@ $board->playLan('b', $lan);
 PHP Chess classes can be combined to do different things. For example, you may want to play against Stockfish from this FEN position published in your favorite online publication.
 
 ```php
+use Chess\FenToBoard;
 use Chess\UciEngine\Stockfish;
-use Chess\Variant\Classical\FEN\StrToBoard;
 
-$board = (new StrToBoard('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -'))
-    ->create();
+$board = FenToBoard::create('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -');
 
 $stockfish = (new Stockfish($board))
     ->setOptions([

@@ -5,12 +5,10 @@
 [Chess\Media\BoardToPng](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToPngTest.php) converts a chess board object to a PNG image.
 
 ```php
-use Chess\Variant\Classical\FEN\StrToBoard;
+use Chess\FenToBoard;
 use Chess\Media\BoardToPng;
 
-$fen = '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+';
-
-$board = (new StrToBoard($fen))->create();
+$board = FenToBoard::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
 
 $filename = (new BoardToPng($board, $flip = true))->output();
 ```
