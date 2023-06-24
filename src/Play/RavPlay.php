@@ -2,7 +2,7 @@
 
 namespace Chess\Play;
 
-use Chess\FenToBoardFactory;
+use Chess\FenToBoard;
 use Chess\Exception\PlayException;
 use Chess\Movetext\RavMovetext;
 use Chess\Movetext\SanMovetext;
@@ -77,12 +77,12 @@ class RavPlay extends AbstractPlay
                 if ($current->startNumber() === $prev->endingNumber()) {
                     if (str_contains($this->ravMovetext->filter(), "({$this->breakdown[$i]}")) {
                         $undo = $resume[$j]->undo();
-                        $board = FenToBoardFactory::create(
+                        $board = FenToBoard::create(
                             $undo->toFen(),
                             $board
                         );
                     } else {
-                        $board = FenToBoardFactory::create(
+                        $board = FenToBoard::create(
                             $resume[$j]->toFen(),
                             $board
                         );
