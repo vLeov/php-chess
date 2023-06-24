@@ -11,12 +11,12 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
- * HeuristicsByFenString
+ * HeuristicsByFen
  *
  * @author Jordi Bassagañas
  * @license GPL
  */
-class HeuristicsByFenString
+class HeuristicsByFen
 {
     use HeuristicsTrait;
 
@@ -88,9 +88,9 @@ class HeuristicsByFenString
     /**
      * Heristics calc.
      *
-     * @return HeuristicsByFenString
+     * @return HeuristicsByFen
      */
-    protected function calc(): HeuristicsByFenString
+    protected function calc(): HeuristicsByFen
     {
         $item = [];
         foreach ($this->eval as $className => $weight) {
@@ -128,7 +128,7 @@ class HeuristicsByFenString
         return $this;
     }
 
-    protected function normalize(): HeuristicsByFenString
+    protected function normalize(): HeuristicsByFen
     {
         $normalization = [];
 
@@ -157,7 +157,7 @@ class HeuristicsByFenString
         return $this;
     }
 
-    protected function balance(): HeuristicsByFenString
+    protected function balance(): HeuristicsByFen
     {
         foreach ($this->result[Color::W] as $key => $val) {
             $this->balance[$key] =
