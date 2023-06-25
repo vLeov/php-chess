@@ -23,6 +23,13 @@ class SanPlay extends AbstractPlay
     protected SanMovetext $sanMovetext;
 
     /**
+     * Inline notation.
+     *
+     * @var array
+     */
+    protected string $inline;
+
+    /**
      * Constructor.
      *
      * @param string $movetext
@@ -33,8 +40,18 @@ class SanPlay extends AbstractPlay
         $this->board = $board ?? new ClassicalBoard();
         $this->fen = [$this->board->toFen()];
         $this->sanMovetext = new SanMovetext($this->board->getMove(), $movetext);
-
         $this->sanMovetext->validate();
+        $this->inline = $this->sanMovetext->filter();
+    }
+
+    /**
+     * Returns the inline notation.
+     *
+     * @return array
+     */
+    public function getInline(): array
+    {
+        return $this->inline;
     }
 
     /**

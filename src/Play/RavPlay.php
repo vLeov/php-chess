@@ -31,6 +31,13 @@ class RavPlay extends AbstractPlay
      */
     protected array $breakdown;
 
+    /**
+     * Inline notation.
+     *
+     * @var array
+     */
+    protected string $inline;
+
 
     /**
      * Constructor.
@@ -44,7 +51,7 @@ class RavPlay extends AbstractPlay
         $this->fen = [$this->board->toFen()];
         $this->ravMovetext = new RavMovetext($this->board->getMove(), $movetext);
         $this->ravMovetext->validate();
-
+        $this->inline = $this->ravMovetext->filter();
         $this->breakdown();
     }
 
@@ -56,6 +63,16 @@ class RavPlay extends AbstractPlay
     public function getBreakdown(): array
     {
         return $this->breakdown;
+    }
+
+    /**
+     * Returns the inline notation.
+     *
+     * @return array
+     */
+    public function getInline(): array
+    {
+        return $this->inline;
     }
 
     /**
