@@ -40,11 +40,11 @@ abstract class AbstractMovetext
     protected string $validation;
 
     /**
-     * Filtered movetext.
+     * Inline notation.
      *
      * @var string
      */
-    protected string $filter;
+    protected string $inline;
 
     /**
      * Constructor.
@@ -114,9 +114,9 @@ abstract class AbstractMovetext
     abstract public function validate(): string;
 
     /**
-     * Filtered movetext.
+     * Inline notation.
      *
      * @return string
      */
-    abstract public function filter(): string;
+    abstract public function inline(): string;
 }

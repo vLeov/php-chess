@@ -32,14 +32,6 @@ class RavPlay extends AbstractPlay
     protected array $breakdown;
 
     /**
-     * Inline notation.
-     *
-     * @var array
-     */
-    protected string $inline;
-
-
-    /**
      * Constructor.
      *
      * @param string $movetext
@@ -51,7 +43,6 @@ class RavPlay extends AbstractPlay
         $this->fen = [$this->board->toFen()];
         $this->ravMovetext = new RavMovetext($this->board->getMove(), $movetext);
         $this->ravMovetext->validate();
-        $this->inline = $this->ravMovetext->filter();
         $this->breakdown();
     }
 
@@ -63,16 +54,6 @@ class RavPlay extends AbstractPlay
     public function getBreakdown(): array
     {
         return $this->breakdown;
-    }
-
-    /**
-     * Returns the inline notation.
-     *
-     * @return array
-     */
-    public function getInline(): array
-    {
-        return $this->inline;
     }
 
     /**
@@ -92,7 +73,7 @@ class RavPlay extends AbstractPlay
             for ($j = $i - 1; $j >= 0; $j--) {
                 $prev = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$j]);
                 if ($current->startNumber() === $prev->endingNumber()) {
-                    if (str_contains($this->ravMovetext->filter(), "({$this->breakdown[$i]}")) {
+                    if (str_contains($this->ravMovetext->inline(), "({$this->breakdown[$i]}")) {
                         $undo = $resume[$j]->undo();
                         $board = FenToBoard::create(
                             $undo->toFen(),
@@ -150,10 +131,20 @@ class RavPlay extends AbstractPlay
      */
     protected function breakdown()
     {
-        $data = preg_split("/[()]+/", $this->ravMovetext->filter(), -1, PREG_SPLIT_NO_EMPTY);
+        $data = preg_split("/[()]+/", $this->ravMovetext->inline(), -1, PREG_SPLIT_NO_EMPTY);
         $data = array_map('trim', $data);
         $data = array_values(array_filter($data));
 
         $this->breakdown = $data;
+    }
+
+    /**
+     * Returns the inline notation of the RAV movetext.
+     *
+     * @return array
+     */
+    public function inline(): array
+    {
+        return $this->ravMovetext->inline();
     }
 }

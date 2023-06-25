@@ -40,7 +40,7 @@ class RavMovetext extends AbstractMovetext
     protected function beforeInsert(): RavMovetext
     {
         // remove comments
-        $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
+        $movetext = preg_replace("/\{[^)]+\}/", '', $this->inline());
         // remove parentheses
         $movetext = preg_replace("/\(/", '', $movetext);
         $movetext = preg_replace("/\)/", '', $movetext);
@@ -89,11 +89,11 @@ class RavMovetext extends AbstractMovetext
     }
 
     /**
-     * Filtered movetext.
+     * Inline notation with comments and parentheses.
      *
      * @return string
      */
-    public function filter(): string
+    public function inline(): string
     {
         // remove PGN symbols
         $movetext = str_replace(Termination::values(), '', $this->movetext);

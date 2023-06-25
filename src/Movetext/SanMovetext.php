@@ -68,7 +68,7 @@ class SanMovetext extends AbstractMovetext
     protected function beforeInsert(): SanMovetext
     {
         // remove comments
-        $movetext = preg_replace("/\{[^)]+\}/", '', $this->filter());
+        $movetext = preg_replace("/\{[^)]+\}/", '', $this->inline());
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 
@@ -154,11 +154,11 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Filtered movetext.
+     * Inline notation with comments.
      *
      * @return string
      */
-    public function filter(): string
+    public function inline(): string
     {
         // remove PGN symbols
         $movetext = str_replace(Termination::values(), '', $this->movetext);
