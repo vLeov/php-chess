@@ -85,7 +85,7 @@ class RavMovetextTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function filter_comments_and_parentheses_Ra7_Kg8__Rc8()
+    public function filter_with_comments_and_parentheses_Ra7_Kg8__Rc8()
     {
         $movetext = '1.  Ke2 Kd5 {this is foo} 2.Ke3   Kc4 (2...Ke5 {this is bar} 3.Rh5+) (2...Kc4 3.Rh5) 3  .  Rh5 (3...Kb4 4.Kd3) {this is foobar} 3...Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#';
 
