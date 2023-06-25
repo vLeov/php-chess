@@ -207,10 +207,10 @@ class SanMovetextTest extends AbstractUnitTestCase
     }
 
     /**
-     * @dataProvider curlyBracesFilteredData
+     * @dataProvider validateCurlyBracesData
      * @test
      */
-    public function curly_braces_filtered($expected, $movetext)
+    public function validate_curly_braces($expected, $movetext)
     {
         $this->assertSame(
             $expected,
@@ -219,10 +219,10 @@ class SanMovetextTest extends AbstractUnitTestCase
     }
 
     /**
-     * @dataProvider parenthesesFilteredData
+     * @dataProvider validateParenthesesData
      * @test
      */
-    public function parentheses_filtered($expected, $movetext)
+    public function validate_parentheses($expected, $movetext)
     {
         $this->assertSame(
             $expected,
@@ -231,10 +231,10 @@ class SanMovetextTest extends AbstractUnitTestCase
     }
 
     /**
-     * @dataProvider tooManySpacesFilteredData
+     * @dataProvider validateTooManySpacesData
      * @test
      */
-    public function too_many_spaces_filtered($expected, $movetext)
+    public function validate_too_many_spaces($expected, $movetext)
     {
         $this->assertSame(
             $expected,
@@ -243,10 +243,10 @@ class SanMovetextTest extends AbstractUnitTestCase
     }
 
     /**
-     * @dataProvider fideFilteredData
+     * @dataProvider validateFideData
      * @test
      */
-    public function fide_filtered($expected, $movetext)
+    public function validate_fide($expected, $movetext)
     {
         $this->assertSame(
             $expected,
@@ -258,7 +258,7 @@ class SanMovetextTest extends AbstractUnitTestCase
      * @dataProvider withResultData
      * @test
      */
-    public function with_result_filtered($expected, $movetext)
+    public function validate_with_result($expected, $movetext)
     {
         $this->assertSame(
             $expected,
@@ -291,7 +291,7 @@ class SanMovetextTest extends AbstractUnitTestCase
         ];
     }
 
-    public function curlyBracesFilteredData()
+    public function validateCurlyBracesData()
     {
         return [
             [ self::$validData[0], '{This is foo} 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5' ],
@@ -302,7 +302,7 @@ class SanMovetextTest extends AbstractUnitTestCase
         ];
     }
 
-    public function parenthesesFilteredData()
+    public function validateParenthesesData()
     {
         return [
             [ self::$validData[0], '(This is foo) 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5' ],
@@ -313,7 +313,7 @@ class SanMovetextTest extends AbstractUnitTestCase
         ];
     }
 
-    public function tooManySpacesFilteredData()
+    public function validateTooManySpacesData()
     {
         return [
             [ self::$validData[0], '1  .  d4    Nf6 2.Nf3 e6 3.c4    Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5' ],
@@ -324,7 +324,7 @@ class SanMovetextTest extends AbstractUnitTestCase
         ];
     }
 
-    public function fideFilteredData()
+    public function validateFideData()
     {
         return [
             [ self::$validData[0], '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 0-0 5.a3 Be7 6.e4 d6 7.Bd3 c5' ],
