@@ -188,7 +188,7 @@ class RavPlayTest extends AbstractUnitTestCase
             '1r1q1rk1/2pb1p2/2np4/p2Bp1pR/1p2P1P1/3PB3/PPPQ1P2/2K3R1 b - -',
         ];
 
-        $this->assertSame($expected, (new RavPlay($movetext))->getFen());
+        $this->assertSame($expected, (new RavPlay($movetext))->fen()->getFen());
     }
 
     /**
@@ -248,21 +248,23 @@ class RavPlayTest extends AbstractUnitTestCase
             'r1bqkb1r/pp1n1ppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq -',
         ];
 
-        $this->assertSame($expected, (new RavPlay($movetext))->getFen());
+        $this->assertSame($expected, (new RavPlay($movetext))->fen()->getFen());
     }
 
     /**
      * @test
      */
-    public function fen_after_play_d4_d5__Nxb5_Ng4()
+    public function play_and_fen_d4_d5__Nxb5_Ng4()
     {
         $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
 
         $ravPlay = new RavPlay($movetext);
-
         $board = $ravPlay->play()->getBoard();
+        $fen = $ravPlay->fen()->getFen();
 
-        $expected = [
+        $expectedMovetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
+
+        $expectedFen = [
             'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -',
             'rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3',
             'rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq d6',
@@ -276,6 +278,7 @@ class RavPlayTest extends AbstractUnitTestCase
             'r1bqkb1r/pp1n1ppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq -',
         ];
 
-        $this->assertSame($expected, $ravPlay->getFen());
+        $this->assertSame($expectedMovetext, $board->getMovetext());
+        $this->assertSame($expectedFen, $fen);
     }
 }
