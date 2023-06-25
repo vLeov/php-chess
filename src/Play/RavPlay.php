@@ -59,7 +59,7 @@ class RavPlay extends AbstractPlay
     }
 
     /**
-     * Returns the breakdown.
+     * Returns the breakdown of the variations.
      *
      * @return array
      */
