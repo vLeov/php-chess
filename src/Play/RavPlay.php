@@ -47,6 +47,16 @@ class RavPlay extends AbstractPlay
     }
 
     /**
+     * Returns the RAV movetext.
+     *
+     * @return RavMovetext
+     */
+    public function getRavMovetext(): RavMovetext
+    {
+        return $this->ravMovetext;
+    }
+
+    /**
      * Returns the breakdown.
      *
      * @return array
@@ -136,15 +146,5 @@ class RavPlay extends AbstractPlay
         $data = array_values(array_filter($data));
 
         $this->breakdown = $data;
-    }
-
-    /**
-     * Returns the inline notation of the RAV movetext.
-     *
-     * @return array
-     */
-    public function inline(): array
-    {
-        return $this->ravMovetext->inline();
     }
 }

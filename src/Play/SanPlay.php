@@ -37,6 +37,16 @@ class SanPlay extends AbstractPlay
     }
 
     /**
+     * Returns the SAN movetext.
+     *
+     * @return SanMovetext
+     */
+    public function getSanMovetext(): SanMovetext
+    {
+        return $this->sanMovetext;
+    }
+
+    /**
      * Plays a SAN movetext.
      *
      * @throws \Chess\Exception\PlayException
@@ -54,15 +64,5 @@ class SanPlay extends AbstractPlay
         }
 
         return $this;
-    }
-
-    /**
-     * Returns the inline notation of the SAN movetext.
-     *
-     * @return array
-     */
-    public function inline(): array
-    {
-        return $this->sanMovetext->inline();
     }
 }
