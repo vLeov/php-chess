@@ -31,6 +31,8 @@ class RavPlay extends AbstractPlay
      */
     protected array $breakdown;
 
+    protected $foo;
+
     /**
      * Constructor.
      *
@@ -39,6 +41,7 @@ class RavPlay extends AbstractPlay
      */
     public function __construct(string $movetext, ClassicalBoard $board = null)
     {
+        $this->initialBoard = $board ?? new ClassicalBoard();
         $this->board = $board ?? new ClassicalBoard();
         $this->fen = [$this->board->toFen()];
         $this->ravMovetext = new RavMovetext($this->board->getMove(), $movetext);
@@ -73,8 +76,7 @@ class RavPlay extends AbstractPlay
      */
     public function getFen(): array
     {
-        $clone = unserialize(serialize($this->board));
-        $sanPlay = new SanPlay($this->breakdown[0], $clone);
+        $sanPlay = new SanPlay($this->breakdown[0], $this->initialBoard);
         $board = $sanPlay->play()->getBoard();
         $this->fen = $sanPlay->getFen();
         $resume = [$board];

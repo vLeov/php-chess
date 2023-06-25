@@ -13,7 +13,14 @@ use Chess\Variant\Classical\Board;
 abstract class AbstractPlay
 {
     /**
-     * Chess board.
+     * Initial chess board.
+     *
+     * @var \Chess\Variant\Classical\Board
+     */
+    protected Board $initialBoard;
+
+    /**
+     * Resulting chess board.
      *
      * @var \Chess\Variant\Classical\Board
      */

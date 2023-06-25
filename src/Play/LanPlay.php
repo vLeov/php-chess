@@ -28,7 +28,8 @@ class LanPlay extends AbstractPlay
      */
     public function __construct(string $movetext, Board $board = null)
     {
-        $board ? $this->board = $board : $this->board = new Board();
+        $this->initialBoard = $board ?? new Board();
+        $this->board = $board ?? new Board();
         $this->fen = [$this->board->toFen()];
         $this->moves = array_values(array_filter(explode(' ', $movetext)));
     }
