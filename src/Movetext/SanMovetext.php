@@ -68,7 +68,7 @@ class SanMovetext extends AbstractMovetext
     protected function beforeInsert(): SanMovetext
     {
         // remove comments
-        $movetext = preg_replace("/\{[^)]+\}/", '', $this->inline());
+        $movetext = preg_replace('(\{.*?\})', '', $this->inline());
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 

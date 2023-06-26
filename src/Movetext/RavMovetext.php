@@ -40,10 +40,10 @@ class RavMovetext extends AbstractMovetext
     protected function beforeInsert(): RavMovetext
     {
         // remove comments
-        $movetext = preg_replace("/\{[^)]+\}/", '', $this->inline());
+        $movetext = preg_replace('(\{.*?\})', '', $this->inline());
         // remove parentheses
-        $movetext = preg_replace("/\(/", '', $movetext);
-        $movetext = preg_replace("/\)/", '', $movetext);
+        $movetext = preg_replace('/\(/', '', $movetext);
+        $movetext = preg_replace('/\)/', '', $movetext);
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 
