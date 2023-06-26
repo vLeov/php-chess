@@ -48,12 +48,14 @@ class SanPlay extends AbstractPlay
     }
 
     /**
-     * Plays a SAN movetext.
+     * Semantically validated movetext.
+     *
+     * Makes the moves in a SAN movetext.
      *
      * @throws \Chess\Exception\PlayException
      * @return \Chess\Play\SanPlay
      */
-    public function play(): SanPlay
+    public function validate(): SanPlay
     {
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {

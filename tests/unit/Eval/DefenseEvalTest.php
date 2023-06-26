@@ -15,7 +15,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 
-        $board = (new SanPlay($D06))->play()->getBoard();
+        $board = (new SanPlay($D06))->validate()->getBoard();
 
         $expected = [
             'w' => [

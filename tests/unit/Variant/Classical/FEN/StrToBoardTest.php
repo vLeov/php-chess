@@ -460,7 +460,7 @@ class StrToBoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function endgame_checkmate_king_and_rook_vs_king_play()
+    public function endgame_checkmate_king_and_rook_vs_king_validate()
     {
         $board = (new StrToBoard('7k/8/8/8/8/8/2K5/r7 w - - 0 1'))
             ->create();

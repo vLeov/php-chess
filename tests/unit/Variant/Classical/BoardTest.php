@@ -77,7 +77,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
 
-        $board = (new SanPlay($C68))->play()->getBoard();
+        $board = (new SanPlay($C68))->validate()->getBoard();
 
         $expected = [
             'w' => [
@@ -165,7 +165,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $C67 = file_get_contents(self::DATA_FOLDER.'/sample/C67.pgn');
 
-        $board = (new SanPlay($C67))->play()->getBoard();
+        $board = (new SanPlay($C67))->validate()->getBoard();
 
         $expected = 'kq';
 
@@ -189,7 +189,7 @@ class BoardTest extends AbstractUnitTestCase
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
         $D06 = str_replace("\n", "", $D06);
 
-        $board = (new SanPlay($D06))->play()->getBoard();
+        $board = (new SanPlay($D06))->validate()->getBoard();
 
         $expected = [
             (object) [
@@ -273,7 +273,7 @@ class BoardTest extends AbstractUnitTestCase
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
         $C60 = str_replace("\n", "", $C60);
 
-        $board = (new SanPlay($C60))->play()->getBoard();
+        $board = (new SanPlay($C60))->validate()->getBoard();
 
         $expected = [
             (object) [
@@ -391,7 +391,7 @@ class BoardTest extends AbstractUnitTestCase
         $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
         $C11 = str_replace("\n", "", $C11);
 
-        $board = (new SanPlay($C11))->play()->getBoard();
+        $board = (new SanPlay($C11))->validate()->getBoard();
 
         $expected = [
             (object) [
@@ -517,7 +517,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->play()->getBoard();
+        $board = (new SanPlay($A59))->validate()->getBoard();
 
         $this->assertSame(14, count($board->getPieces(Color::W)));
         $this->assertSame(13, count($board->getPieces(Color::B)));
@@ -530,7 +530,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
 
-        $board = (new SanPlay($A74))->play()->getBoard();
+        $board = (new SanPlay($A74))->validate()->getBoard();
 
         $this->assertSame(15, count($board->getPieces(Color::W)));
         $this->assertSame(15, count($board->getPieces(Color::B)));
@@ -543,7 +543,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
-        $board = (new SanPlay($B56))->play()->getBoard();
+        $board = (new SanPlay($B56))->validate()->getBoard();
 
         $this->assertSame(15, count($board->getPieces(Color::W)));
         $this->assertSame(15, count($board->getPieces(Color::B)));
@@ -551,7 +551,7 @@ class BoardTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | play()
+    | validate()
     |--------------------------------------------------------------------------
     |
     | Invalid moves throw an exception.
@@ -600,7 +600,7 @@ class BoardTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | play()
+    | validate()
     |--------------------------------------------------------------------------
     |
     | Illegal moves return false.
@@ -1270,7 +1270,7 @@ class BoardTest extends AbstractUnitTestCase
 
     /*
     |--------------------------------------------------------------------------
-    | play()
+    | validate()
     |--------------------------------------------------------------------------
     |
     | Legal moves return true.
@@ -2036,7 +2036,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->play()->getBoard();
+        $board = (new SanPlay($A59))->validate()->getBoard();
 
         $expected = [
             7 => [ ' r ', ' n ', ' . ', ' q ', ' k ', ' b ', ' . ', ' r ' ],
@@ -2059,7 +2059,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
 
-        $board = (new SanPlay($A74))->play()->getBoard();
+        $board = (new SanPlay($A74))->validate()->getBoard();
 
         $expected = [
             7 => [ ' r ', ' n ', ' b ', ' q ', ' . ', ' r ', ' k ', ' . ' ],
@@ -2082,7 +2082,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
 
-        $board = (new SanPlay($C11))->play()->getBoard();
+        $board = (new SanPlay($C11))->validate()->getBoard();
 
         $expected = [
             7 => [ ' r ', ' n ', ' b ', ' q ', ' k ', ' b ', ' . ', ' r ' ],

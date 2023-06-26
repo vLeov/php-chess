@@ -35,7 +35,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new SanPlay($B25))->play()->getBoard();
+        $board = (new SanPlay($B25))->validate()->getBoard();
 
         $spEval = (new SpaceEval($board))->eval();
 
@@ -62,7 +62,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
-        $board = (new SanPlay($B56))->play()->getBoard();
+        $board = (new SanPlay($B56))->validate()->getBoard();
 
         $spEval = (new SpaceEval($board))->eval();
 

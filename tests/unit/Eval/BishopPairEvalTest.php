@@ -16,7 +16,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new SanPlay($B25))->play()->getBoard();
+        $board = (new SanPlay($B25))->validate()->getBoard();
 
         $bishopPairEval = (new BishopPairEval($board))->eval();
 
@@ -35,7 +35,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
     {
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
 
-        $board = (new SanPlay($C68))->play()->getBoard();
+        $board = (new SanPlay($C68))->validate()->getBoard();
 
         $bishopPairEval = (new BishopPairEval($board))->eval();
 

@@ -45,7 +45,7 @@ class BoardToStrTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->play()->getBoard();
+        $board = (new SanPlay($A59))->validate()->getBoard();
 
         $expected = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq -';
         $string = (new BoardToStr($board))->create();
@@ -60,7 +60,7 @@ class BoardToStrTest extends AbstractUnitTestCase
     {
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
 
-        $board = (new SanPlay($C68))->play()->getBoard();
+        $board = (new SanPlay($C68))->validate()->getBoard();
 
         $expected = 'r1b1kbnr/1pp2ppp/p1p5/8/3NP3/8/PPP2PPP/RNB1K2R b KQkq -';
         $string = (new BoardToStr($board))->create();

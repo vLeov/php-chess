@@ -13,7 +13,7 @@ class RavPlayTest extends AbstractUnitTestCase
     public function e4_e5()
     {
         $movetext = '1.e4 e5';
-        $board = (new RavPlay($movetext))->play()->getBoard();
+        $board = (new RavPlay($movetext))->validate()->getBoard();
 
         $this->assertSame($movetext, $board->getMovetext());
     }
@@ -125,7 +125,7 @@ class RavPlayTest extends AbstractUnitTestCase
     {
         $movetext = '1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5 (11. Nb1 h6 12. h4 (12. Nh4 g5 13. Nf5) 12... a5 13. g4 Nxg4) 11... Nxd5 12. Bxd5 Rb8 13. h4 h6 14. Rdg1 a5 15. g4 g5 16. h5 (16. hxg5 Bxg5 17. Nxg5 hxg5 18. Rh5)';
 
-        $board = (new RavPlay($movetext))->play()->getBoard();
+        $board = (new RavPlay($movetext))->validate()->getBoard();
 
         $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 Nxd5 12.Bxd5 Rb8 13.h4 h6 14.Rdg1 a5 15.g4 g5 16.h5';
 
@@ -259,7 +259,7 @@ class RavPlayTest extends AbstractUnitTestCase
         $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
 
         $ravPlay = new RavPlay($movetext);
-        $board = $ravPlay->play()->getBoard();
+        $board = $ravPlay->validate()->getBoard();
         $fen = $ravPlay->fen()->getFen();
 
         $expectedMovetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
@@ -290,7 +290,7 @@ class RavPlayTest extends AbstractUnitTestCase
         $movetext = '1. e4 e5 {foo} 2. Nf3 {bar} Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5 {foobar} (11. Nb1 h6 12. h4 (12. Nh4 g5 13. Nf5) 12... a5 13. g4 Nxg4) 11... Nxd5 12. Bxd5 Rb8 13. h4 h6 14. Rdg1 a5 15. g4 g5 16. h5 (16. hxg5 Bxg5 17. Nxg5 hxg5 18. Rh5)';
 
         $ravPlay = new RavPlay($movetext);
-        $board = $ravPlay->play()->getBoard();
+        $board = $ravPlay->validate()->getBoard();
 
         $expectedMovetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 Nxd5 12.Bxd5 Rb8 13.h4 h6 14.Rdg1 a5 15.g4 g5 16.h5';
 

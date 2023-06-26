@@ -33,7 +33,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->play()->getBoard();
+        $board = (new SanPlay($A59))->validate()->getBoard();
 
         $expected = [
             'w' => 35.73,
@@ -52,7 +52,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
 
-        $board = (new SanPlay($C60))->play()->getBoard();
+        $board = (new SanPlay($C60))->validate()->getBoard();
 
         $expected = [
             'w' => 40.06,

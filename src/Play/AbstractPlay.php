@@ -52,4 +52,14 @@ abstract class AbstractPlay
     {
         return $this->fen;
     }
+
+    /**
+     * Semantically validated movetext.
+     *
+     * Makes the moves in a movetext.
+     *
+     * @throws \Chess\Exception\PlayException
+     * @return AbstractPlay
+     */
+    abstract public function validate(): AbstractPlay;
 }

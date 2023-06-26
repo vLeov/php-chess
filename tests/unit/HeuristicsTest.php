@@ -102,7 +102,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new SanPlay($A00))->play()->getBoard();
+        $board = (new SanPlay($A00))->validate()->getBoard();
 
         $end = (new Heuristics($board->getMovetext()))->end();
 
@@ -121,7 +121,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $movetext = file_get_contents(self::DATA_FOLDER.'/sample/scholar_checkmate.pgn');
 
-        $board = (new SanPlay($movetext))->play()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->getBoard();
 
         $end = (new Heuristics($board->getMovetext()))->end();
 
@@ -150,7 +150,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->play()->getBoard();
+        $board = (new SanPlay($A59))->validate()->getBoard();
 
         $heuristics = new Heuristics($board->getMovetext());
 
@@ -270,7 +270,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new SanPlay($A00))->play()->getBoard();
+        $board = (new SanPlay($A00))->validate()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
@@ -291,7 +291,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $movetext = file_get_contents(self::DATA_FOLDER.'/sample/scholar_checkmate.pgn');
 
-        $board = (new SanPlay($movetext))->play()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 

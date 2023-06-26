@@ -35,12 +35,14 @@ class LanPlay extends AbstractPlay
     }
 
     /**
-     * Plays a chess game.
+     * Semantically validated movetext.
+     *
+     * Makes the moves in a LAN movetext.
      *
      * @throws \Chess\Exception\PlayException
      * @return \Chess\Play\LanPlay
      */
-    public function play(): LanPlay
+    public function validate(): LanPlay
     {
         foreach ($this->moves as $key => $val) {
             if ($key % 2 === 0) {

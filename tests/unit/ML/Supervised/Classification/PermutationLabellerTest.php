@@ -122,7 +122,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
     {
         $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new SanPlay($A00))->play()->getBoard();
+        $board = (new SanPlay($A00))->validate()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
@@ -145,7 +145,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
     {
         $movetext = file_get_contents(self::DATA_FOLDER.'/sample/scholar_checkmate.pgn');
 
-        $board = (new SanPlay($movetext))->play()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
@@ -168,7 +168,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->play()->getBoard();
+        $board = (new SanPlay($A59))->validate()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 
@@ -191,7 +191,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
     {
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
 
-        $board = (new SanPlay($B25))->play()->getBoard();
+        $board = (new SanPlay($B25))->validate()->getBoard();
 
         $balance = (new Heuristics($board->getMovetext()))->getBalance();
 

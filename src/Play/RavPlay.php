@@ -69,12 +69,14 @@ class RavPlay extends AbstractPlay
     }
 
     /**
-     * Plays the main variation of a RAV movetext.
+     * Semantically validated movetext.
+     *
+     * Makes the moves in the main variation of a RAV movetext.
      *
      * @throws \Chess\Exception\PlayException
      * @return \Chess\Play\RavPlay
      */
-    public function play(): RavPlay
+    public function validate(): RavPlay
     {
         $moves = (new SanMovetext(
             $this->ravMovetext->getMove(),
@@ -98,7 +100,7 @@ class RavPlay extends AbstractPlay
     public function fen(): RavPlay
     {
         $sanPlay = new SanPlay($this->breakdown[0], $this->initialBoard);
-        $board = $sanPlay->play()->getBoard();
+        $board = $sanPlay->validate()->getBoard();
         $this->fen = $sanPlay->getFen();
         $resume = [$board];
         for ($i = 1; $i < count($this->breakdown); $i++) {
@@ -113,7 +115,7 @@ class RavPlay extends AbstractPlay
                         $board = FenToBoard::create($resume[$j]->toFen(), $board);
                     }
                     $sanPlay = new SanPlay($this->breakdown[$i], $board);
-                    $board = $sanPlay->play()->getBoard();
+                    $board = $sanPlay->validate()->getBoard();
                     $fen = $sanPlay->getFen();
                     array_shift($fen);
                     $this->fen = [
