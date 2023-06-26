@@ -72,7 +72,7 @@ class SanMovetext extends AbstractMovetext
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 
-        $this->validation = trim($movetext);
+        $this->validated = trim($movetext);
 
         return $this;
     }
@@ -84,7 +84,7 @@ class SanMovetext extends AbstractMovetext
      */
     protected function insert(): void
     {
-        foreach (explode(' ', $this->validation) as $key => $val) {
+        foreach (explode(' ', $this->validated) as $key => $val) {
             if ($key === 0) {
                 if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
                     $exploded = explode(Move::ELLIPSIS, $val);
@@ -112,7 +112,7 @@ class SanMovetext extends AbstractMovetext
      */
     protected function first(): void
     {
-        $exploded = explode(' ', $this->validation);
+        $exploded = explode(' ', $this->validated);
         $first = $exploded[0];
         $exploded = explode('.', $first);
 
@@ -124,7 +124,7 @@ class SanMovetext extends AbstractMovetext
      */
     protected function last(): void
     {
-        $exploded = explode(' ', $this->validation);
+        $exploded = explode(' ', $this->validated);
         $last = end($exploded);
         if (str_contains($last, '.')) {
             $exploded = explode('.', $last);
@@ -153,7 +153,7 @@ class SanMovetext extends AbstractMovetext
             }
         }
 
-        return $this->validation;
+        return $this->validated;
     }
 
     /**

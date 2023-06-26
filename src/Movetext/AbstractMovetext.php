@@ -40,7 +40,7 @@ abstract class AbstractMovetext
      *
      * @var string
      */
-    protected string $validation;
+    protected string $validated;
 
     /**
      * Inline movetext.

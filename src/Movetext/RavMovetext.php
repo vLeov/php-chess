@@ -47,7 +47,7 @@ class RavMovetext extends AbstractMovetext
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 
-        $this->validation = trim($movetext);
+        $this->validated = trim($movetext);
 
         return $this;
     }
@@ -59,7 +59,7 @@ class RavMovetext extends AbstractMovetext
      */
     protected function insert(): void
     {
-        foreach (explode(' ', $this->validation) as $key => $val) {
+        foreach (explode(' ', $this->validated) as $key => $val) {
             if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
                 $exploded = explode(Move::ELLIPSIS, $val);
                 $this->moves[] = $exploded[1];
@@ -88,7 +88,7 @@ class RavMovetext extends AbstractMovetext
             $this->move->validate($move);
         }
 
-        return $this->validation;
+        return $this->validated;
     }
 
     /**
