@@ -33,9 +33,10 @@ abstract class AbstractMovetext
     protected array $moves;
 
     /**
-     * Validated movetext.
+     * Syntactically validated movetext.
      *
-     * The validated movetext does not contain any comments or parentheses.
+     * The syntactically validated movetext does not contain any comments or
+     * parentheses.
      *
      * @var string
      */

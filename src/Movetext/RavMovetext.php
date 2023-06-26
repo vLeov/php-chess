@@ -76,6 +76,9 @@ class RavMovetext extends AbstractMovetext
     /**
      * Syntactically validated movetext.
      *
+     * The syntactically validated movetext does not contain any comments or
+     * parentheses.
+     *
      * @throws \Chess\Exception\UnknownNotationException
      * @return string
      */
@@ -89,7 +92,9 @@ class RavMovetext extends AbstractMovetext
     }
 
     /**
-     * Inline notation with comments and parentheses.
+     * Inline movetext.
+     *
+     * The inline movetext contains comments and parentheses.
      *
      * @return string
      */

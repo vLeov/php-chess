@@ -41,7 +41,7 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Returns the number that starts the movetext.
+     * Returns the number that the movetext starts with.
      *
      * @return int
      */
@@ -51,7 +51,7 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Returns the number that ends the movetext.
+     * Returns the number that the movetext ends with.
      *
      * @return int
      */
@@ -139,6 +139,9 @@ class SanMovetext extends AbstractMovetext
     /**
      * Syntactically validated movetext.
      *
+     * The syntactically validated movetext does not contain any comments or
+     * parentheses.
+     *
      * @throws \Chess\Exception\UnknownNotationException
      * @return string
      */
@@ -154,7 +157,9 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Inline notation with comments.
+     * Inline movetext.
+     *
+     * The inline movetext contains comments and parentheses.
      *
      * @return string
      */
