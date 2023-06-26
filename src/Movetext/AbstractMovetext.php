@@ -35,12 +35,16 @@ abstract class AbstractMovetext
     /**
      * Validated movetext.
      *
+     * The validated movetext does not contain any comments or parentheses.
+     *
      * @var string
      */
     protected string $validation;
 
     /**
-     * Inline notation.
+     * Inline movetext.
+     *
+     * The inline movetext contains comments and parentheses.
      *
      * @var string
      */
