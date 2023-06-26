@@ -76,12 +76,12 @@ class RavPlay extends AbstractPlay
      */
     public function play(): RavPlay
     {
-        $mainMoves = (new SanMovetext(
+        $moves = (new SanMovetext(
             $this->ravMovetext->getMove(),
             $this->ravMovetext->main()
         ))->getMoves();
 
-        foreach ($mainMoves as $key => $val) {
+        foreach ($moves as $key => $val) {
             if (!$this->board->play($this->board->getTurn(), $val)) {
                 throw new PlayException();
             }
@@ -136,10 +136,10 @@ class RavPlay extends AbstractPlay
      */
     protected function breakdown()
     {
-        $data = preg_split("/[()]+/", $this->ravMovetext->filtered(), -1, PREG_SPLIT_NO_EMPTY);
-        $data = array_map('trim', $data);
-        $data = array_values(array_filter($data));
+        $arr = preg_split("/[()]+/", $this->ravMovetext->filtered(), -1, PREG_SPLIT_NO_EMPTY);
+        $arr = array_map('trim', $arr);
+        $arr = array_values(array_filter($arr));
 
-        $this->breakdown = $data;
+        $this->breakdown = $arr;
     }
 }
