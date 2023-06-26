@@ -118,13 +118,20 @@ class RavMovetext extends AbstractMovetext
     /**
      * Returns the main variation.
      *
+     * The main variation does not contain any comments or parentheses.
+     *
      * @return string
      */
     public function main(): string
     {
-        $movetext = $this->sanMovetext->validate();
+        // remove variations
+        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $this->sanMovetext->inline());
+        // remove comments
+        $movetext = preg_replace('(\{.*?\})', '', $movetext);
         // remove ellipsis
         $movetext = preg_replace('/[1-9][0-9]*\.\.\./', '', $movetext);
+        // replace multiple spaces with a single space
+        $movetext = preg_replace('/\s+/', ' ', $movetext);
 
         return $movetext;
     }
