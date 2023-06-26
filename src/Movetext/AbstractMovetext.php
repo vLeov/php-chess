@@ -111,11 +111,11 @@ abstract class AbstractMovetext
     abstract public function validate(): string;
 
     /**
-     * Inlined movetext.
+     * Filtered movetext.
      *
-     * The inlined movetext contains comments and parentheses.
+     * The filtered movetext contains comments and parentheses.
      *
      * @return string
      */
-    abstract public function inlined(): string;
+    abstract public function filtered(): string;
 }

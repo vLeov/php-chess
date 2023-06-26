@@ -40,7 +40,7 @@ class RavMovetext extends AbstractMovetext
     protected function beforeInsert(): RavMovetext
     {
         // remove comments
-        $str = preg_replace('(\{.*?\})', '', $this->inlined());
+        $str = preg_replace('(\{.*?\})', '', $this->filtered());
         // remove parentheses
         $str = preg_replace('/\(/', '', $str);
         $str = preg_replace('/\)/', '', $str);
@@ -92,13 +92,13 @@ class RavMovetext extends AbstractMovetext
     }
 
     /**
-     * Inlined movetext.
+     * Filtered movetext.
      *
-     * The inlined movetext contains comments and parentheses.
+     * The filtered movetext contains comments and parentheses.
      *
      * @return string
      */
-    public function inlined(): string
+    public function filtered(): string
     {
         // remove PGN symbols
         $str = str_replace(Termination::values(), '', $this->movetext);
@@ -125,7 +125,7 @@ class RavMovetext extends AbstractMovetext
     public function main(): string
     {
         // remove variations
-        $str = preg_replace('/\(([^()]|(?R))*\)/', '', $this->sanMovetext->inlined());
+        $str = preg_replace('/\(([^()]|(?R))*\)/', '', $this->sanMovetext->filtered());
         // remove comments
         $str = preg_replace('(\{.*?\})', '', $str);
         // remove ellipsis

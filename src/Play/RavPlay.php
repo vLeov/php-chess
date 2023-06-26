@@ -106,7 +106,7 @@ class RavPlay extends AbstractPlay
             for ($j = $i - 1; $j >= 0; $j--) {
                 $prev = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$j]);
                 if ($current->startNumber() === $prev->endingNumber()) {
-                    if (str_contains($this->ravMovetext->inlined(), "({$this->breakdown[$i]}")) {
+                    if (str_contains($this->ravMovetext->filtered(), "({$this->breakdown[$i]}")) {
                         $undo = $resume[$j]->undo();
                         $board = FenToBoard::create($undo->toFen(), $board);
                     } else {
@@ -136,7 +136,7 @@ class RavPlay extends AbstractPlay
      */
     protected function breakdown()
     {
-        $data = preg_split("/[()]+/", $this->ravMovetext->inlined(), -1, PREG_SPLIT_NO_EMPTY);
+        $data = preg_split("/[()]+/", $this->ravMovetext->filtered(), -1, PREG_SPLIT_NO_EMPTY);
         $data = array_map('trim', $data);
         $data = array_values(array_filter($data));
 
