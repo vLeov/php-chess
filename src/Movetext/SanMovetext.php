@@ -68,11 +68,11 @@ class SanMovetext extends AbstractMovetext
     protected function beforeInsert(): SanMovetext
     {
         // remove comments
-        $movetext = preg_replace('(\{.*?\})', '', $this->inlined());
+        $str = preg_replace('(\{.*?\})', '', $this->inlined());
         // replace multiple spaces with a single space
-        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        $str = preg_replace('/\s+/', ' ', $str);
 
-        $this->validated = trim($movetext);
+        $this->validated = trim($str);
 
         return $this;
     }
@@ -166,20 +166,20 @@ class SanMovetext extends AbstractMovetext
     public function inlined(): string
     {
         // remove PGN symbols
-        $movetext = str_replace(Termination::values(), '', $this->movetext);
+        $str = str_replace(Termination::values(), '', $this->movetext);
         // remove variations
-        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $movetext);
+        $str = preg_replace('/\(([^()]|(?R))*\)/', '', $str);
         // replace FIDE notation with PGN notation
-        $movetext = str_replace('0-0', 'O-O', $movetext);
-        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        $str = str_replace('0-0', 'O-O', $str);
+        $str = str_replace('0-0-0', 'O-O-O', $str);
         // replace multiple spaces with a single space
-        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        $str = preg_replace('/\s+/', ' ', $str);
         // remove space between dots
-        $movetext = preg_replace('/\s\./', '.', $movetext);
+        $str = preg_replace('/\s\./', '.', $str);
         // remove space after dots
-        $movetext = preg_replace('/\.\s/', '.', $movetext);
+        $str = preg_replace('/\.\s/', '.', $str);
 
-        return trim($movetext);
+        return trim($str);
     }
 
     /**

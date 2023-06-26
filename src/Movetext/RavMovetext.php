@@ -40,14 +40,14 @@ class RavMovetext extends AbstractMovetext
     protected function beforeInsert(): RavMovetext
     {
         // remove comments
-        $movetext = preg_replace('(\{.*?\})', '', $this->inlined());
+        $str = preg_replace('(\{.*?\})', '', $this->inlined());
         // remove parentheses
-        $movetext = preg_replace('/\(/', '', $movetext);
-        $movetext = preg_replace('/\)/', '', $movetext);
+        $str = preg_replace('/\(/', '', $str);
+        $str = preg_replace('/\)/', '', $str);
         // replace multiple spaces with a single space
-        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        $str = preg_replace('/\s+/', ' ', $str);
 
-        $this->validated = trim($movetext);
+        $this->validated = trim($str);
 
         return $this;
     }
@@ -101,18 +101,18 @@ class RavMovetext extends AbstractMovetext
     public function inlined(): string
     {
         // remove PGN symbols
-        $movetext = str_replace(Termination::values(), '', $this->movetext);
+        $str = str_replace(Termination::values(), '', $this->movetext);
         // replace FIDE notation with PGN notation
-        $movetext = str_replace('0-0', 'O-O', $movetext);
-        $movetext = str_replace('0-0-0', 'O-O-O', $movetext);
+        $str = str_replace('0-0', 'O-O', $str);
+        $str = str_replace('0-0-0', 'O-O-O', $str);
         // replace multiple spaces with a single space
-        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        $str = preg_replace('/\s+/', ' ', $str);
         // remove space between dots
-        $movetext = preg_replace('/\s\./', '.', $movetext);
+        $str = preg_replace('/\s\./', '.', $str);
         // remove space after dots
-        $movetext = preg_replace('/\.\s/', '.', $movetext);
+        $str = preg_replace('/\.\s/', '.', $str);
 
-        return trim($movetext);
+        return trim($str);
     }
 
     /**
@@ -125,14 +125,14 @@ class RavMovetext extends AbstractMovetext
     public function main(): string
     {
         // remove variations
-        $movetext = preg_replace('/\(([^()]|(?R))*\)/', '', $this->sanMovetext->inlined());
+        $str = preg_replace('/\(([^()]|(?R))*\)/', '', $this->sanMovetext->inlined());
         // remove comments
-        $movetext = preg_replace('(\{.*?\})', '', $movetext);
+        $str = preg_replace('(\{.*?\})', '', $str);
         // remove ellipsis
-        $movetext = preg_replace('/[1-9][0-9]*\.\.\./', '', $movetext);
+        $str = preg_replace('/[1-9][0-9]*\.\.\./', '', $str);
         // replace multiple spaces with a single space
-        $movetext = preg_replace('/\s+/', ' ', $movetext);
+        $str = preg_replace('/\s+/', ' ', $str);
 
-        return $movetext;
+        return $str;
     }
 }
