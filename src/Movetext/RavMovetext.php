@@ -17,7 +17,7 @@ class RavMovetext extends AbstractMovetext
      *
      * @var \Chess\Movetext\SanMovetext
      */
-    private SanMovetext $san;
+    private SanMovetext $sanMovetext;
 
     /**
      * Constructor.
@@ -29,7 +29,7 @@ class RavMovetext extends AbstractMovetext
     {
         parent::__construct($move, $movetext);
 
-        $this->san = new SanMovetext($move, $movetext);
+        $this->sanMovetext = new SanMovetext($move, $movetext);
     }
 
     /**
@@ -117,7 +117,7 @@ class RavMovetext extends AbstractMovetext
      */
     public function main(): string
     {
-        $movetext = $this->san->validate();
+        $movetext = $this->sanMovetext->validate();
         // remove ellipsis
         $movetext = preg_replace('/[1-9][0-9]*\.\.\./', '', $movetext);
 
