@@ -41,7 +41,7 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Returns the number that the movetext starts with.
+     * Returns the move number that the movetext starts with.
      *
      * @return int
      */
@@ -51,7 +51,7 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Returns the number that the movetext ends with.
+     * Returns the move number that the movetext ends with.
      *
      * @return int
      */
@@ -68,7 +68,7 @@ class SanMovetext extends AbstractMovetext
     protected function beforeInsert(): SanMovetext
     {
         // remove comments
-        $movetext = preg_replace('(\{.*?\})', '', $this->inline());
+        $movetext = preg_replace('(\{.*?\})', '', $this->inlined());
         // replace multiple spaces with a single space
         $movetext = preg_replace('/\s+/', ' ', $movetext);
 
@@ -157,13 +157,13 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Inline movetext.
+     * Inlined movetext.
      *
-     * The inline movetext contains comments and parentheses.
+     * The inlined movetext contains comments and parentheses.
      *
      * @return string
      */
-    public function inline(): string
+    public function inlined(): string
     {
         // remove PGN symbols
         $movetext = str_replace(Termination::values(), '', $this->movetext);

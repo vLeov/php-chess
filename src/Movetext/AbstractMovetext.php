@@ -42,14 +42,6 @@ abstract class AbstractMovetext
      */
     protected string $validated;
 
-    /**
-     * Inline movetext.
-     *
-     * The inline movetext contains comments and parentheses.
-     *
-     * @var string
-     */
-    protected string $inline;
 
     /**
      * Constructor.
@@ -119,9 +111,11 @@ abstract class AbstractMovetext
     abstract public function validate(): string;
 
     /**
-     * Inline notation.
+     * Inlined movetext.
+     *
+     * The inlined movetext contains comments and parentheses.
      *
      * @return string
      */
-    abstract public function inline(): string;
+    abstract public function inlined(): string;
 }
