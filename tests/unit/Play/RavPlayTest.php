@@ -4,6 +4,7 @@ namespace Chess\Tests\Unit\Play;
 
 use Chess\Play\RavPlay;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\FEN\StrToBoard;
 
 class RavPlayTest extends AbstractUnitTestCase
 {
@@ -295,5 +296,31 @@ class RavPlayTest extends AbstractUnitTestCase
         $expectedMovetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 Nxd5 12.Bxd5 Rb8 13.h4 h6 14.Rdg1 a5 15.g4 g5 16.h5';
 
         $this->assertSame($expectedMovetext, $board->getMovetext());
+    }
+
+    /**
+     * @test
+     */
+    public function breakdown_chess_fundamentals()
+    {
+        $fen = '7k/8/8/8/8/8/8/R6K w - -';
+
+        $movetext = '1.Ra7 Kg8 2.Kg2 Kf8 3.Kf3 Ke8 4.Ke4 Kd8 5.Kd5 Kc8 (5...Ke8 6.Kd6 Kf8 7.Ke6 Kg8 8.Kf6 Kh8 9.Kg6 Kg8 10.Ra8#) 6.Kd6 (6.Kc6 Kd8) 6...Kb8';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $ravPlay = new RavPlay($movetext, $board);
+
+        $breakdown = $ravPlay->getBreakdown();
+
+        $expected = [
+            '1.Ra7 Kg8 2.Kg2 Kf8 3.Kf3 Ke8 4.Ke4 Kd8 5.Kd5 Kc8',
+            '5...Ke8 6.Kd6 Kf8 7.Ke6 Kg8 8.Kf6 Kh8 9.Kg6 Kg8 10.Ra8#',
+            '6.Kd6',
+            '6.Kc6 Kd8',
+            '6...Kb8',
+        ];
+
+        $this->assertSame($expected, $breakdown);
     }
 }
