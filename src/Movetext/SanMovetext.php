@@ -3,6 +3,7 @@
 namespace Chess\Movetext;
 
 use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Termination;
 
 /**
@@ -27,6 +28,13 @@ class SanMovetext extends AbstractMovetext
     protected int $last;
 
     /**
+     * Current turn.
+     *
+     * @var string
+     */
+    protected string $turn = '';
+
+    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\PGN\Move $move
@@ -38,6 +46,7 @@ class SanMovetext extends AbstractMovetext
 
         $this->first();
         $this->last();
+        $this->turn();
     }
 
     /**
@@ -58,6 +67,16 @@ class SanMovetext extends AbstractMovetext
     public function endingNumber(): int
     {
         return $this->last;
+    }
+
+    /**
+     * Returns the current turn.
+     *
+     * @return string
+     */
+    public function getTurn(): string
+    {
+        return $this->turn;
     }
 
     /**
@@ -134,6 +153,20 @@ class SanMovetext extends AbstractMovetext
         }
 
         $this->last = intval($exploded[0]);
+    }
+
+    /**
+     * Calculates the current turn.
+     */
+    protected function turn(): void
+    {
+        $exploded = explode(' ', $this->validated);
+        $last = end($exploded);
+        if (str_contains($last, '.')) {
+            $this->turn = Color::B;
+        } else {
+            $this->turn = Color::W;    
+        }
     }
 
     /**
