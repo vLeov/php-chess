@@ -107,7 +107,7 @@ class RavPlay extends AbstractPlay
             $current = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
             for ($j = $i - 1; $j >= 0; $j--) {
                 $prev = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$j]);
-                if ($current->startNumber() === $prev->endingNumber()) {
+                if ($current->getFirst() === $prev->getLast()) {
                     if (str_contains($this->ravMovetext->filtered(), "({$this->breakdown[$i]}")) {
                         $undo = $resume[$j]->undo();
                         $board = FenToBoard::create($undo->toFen(), $board);

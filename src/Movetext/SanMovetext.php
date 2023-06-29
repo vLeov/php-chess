@@ -54,7 +54,7 @@ class SanMovetext extends AbstractMovetext
      *
      * @return int
      */
-    public function startNumber(): int
+    public function getFirst(): int
     {
         return $this->first;
     }
@@ -64,7 +64,7 @@ class SanMovetext extends AbstractMovetext
      *
      * @return int
      */
-    public function endingNumber(): int
+    public function getLast(): int
     {
         return $this->last;
     }
@@ -165,7 +165,7 @@ class SanMovetext extends AbstractMovetext
         if (str_contains($last, '.')) {
             $this->turn = Color::B;
         } else {
-            $this->turn = Color::W;    
+            $this->turn = Color::W;
         }
     }
 

@@ -55,7 +55,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 1;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->startNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getFirst());
     }
 
     /**
@@ -67,7 +67,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 11;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->endingNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getLast());
     }
 
     /**
@@ -79,7 +79,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 12;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->startNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getFirst());
     }
 
     /**
@@ -91,7 +91,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 13;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->endingNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getLast());
     }
 
     /**
@@ -103,7 +103,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 6;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->startNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getFirst());
     }
 
     /**
@@ -115,7 +115,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 6;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->endingNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getLast());
     }
 
     /**
@@ -127,7 +127,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 3;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->startNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getFirst());
     }
 
     /**
@@ -139,7 +139,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = 3;
 
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->endingNumber());
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->getLast());
     }
 
     /**
