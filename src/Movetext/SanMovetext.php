@@ -35,6 +35,13 @@ class SanMovetext extends AbstractMovetext
     protected string $startTurn = '';
 
     /**
+     * Ending turn.
+     *
+     * @var string
+     */
+    protected string $endTurn = '';
+
+    /**
      * Current turn.
      *
      * @var string
@@ -54,6 +61,7 @@ class SanMovetext extends AbstractMovetext
         $this->first();
         $this->last();
         $this->startTurn();
+        $this->endTurn();
         $this->turn();
     }
 
@@ -85,6 +93,16 @@ class SanMovetext extends AbstractMovetext
     public function getStartTurn(): string
     {
         return $this->startTurn;
+    }
+
+    /**
+     * Returns the ending turn.
+     *
+     * @return string
+     */
+    public function getEndTurn(): string
+    {
+        return $this->endTurn;
     }
 
     /**
@@ -182,6 +200,22 @@ class SanMovetext extends AbstractMovetext
             $this->startTurn = Color::B;
         } else {
             $this->startTurn = Color::W;
+        }
+    }
+
+    /**
+     * Calculates the ending turn.
+     */
+    protected function endTurn(): void
+    {
+        $exploded = explode(' ', $this->validated);
+        $last = end($exploded);
+        if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $last)) {
+            $this->endTurn = Color::B;
+        } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $last)) {
+            $this->endTurn = Color::W;
+        } else {
+            $this->endTurn = Color::B;
         }
     }
 
