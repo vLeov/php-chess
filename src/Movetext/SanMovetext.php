@@ -14,39 +14,11 @@ use Chess\Variant\Classical\PGN\AN\Termination;
 class SanMovetext extends AbstractMovetext
 {
     /**
-     * First move.
+     * Metadata.
      *
-     * @var int
+     * @var array
      */
-    protected int $first;
-
-    /**
-     * Last move.
-     *
-     * @var int
-     */
-    protected int $last;
-
-    /**
-     * Starting turn.
-     *
-     * @var string
-     */
-    protected string $startTurn = '';
-
-    /**
-     * Ending turn.
-     *
-     * @var string
-     */
-    protected string $endTurn = '';
-
-    /**
-     * Current turn.
-     *
-     * @var string
-     */
-    protected string $turn = '';
+    protected array $metadata = [];
 
     /**
      * Constructor.
@@ -58,61 +30,23 @@ class SanMovetext extends AbstractMovetext
     {
         parent::__construct($move, $movetext);
 
-        $this->first();
-        $this->last();
-        $this->startTurn();
-        $this->endTurn();
-        $this->turn();
+        $this->metadata = [
+            'first' => $this->first(),
+            'last' => $this->last(),
+            'startTurn' => $this->startTurn(),
+            'endTurn' => $this->endTurn(),
+            'turn' => $this->turn(),
+        ];
     }
 
     /**
-     * Returns the move number that the movetext starts with.
+     * Returns the metadata.
      *
      * @return int
      */
-    public function getFirst(): int
+    public function getMetadata(): array
     {
-        return $this->first;
-    }
-
-    /**
-     * Returns the move number that the movetext ends with.
-     *
-     * @return int
-     */
-    public function getLast(): int
-    {
-        return $this->last;
-    }
-
-    /**
-     * Returns the starting turn.
-     *
-     * @return string
-     */
-    public function getStartTurn(): string
-    {
-        return $this->startTurn;
-    }
-
-    /**
-     * Returns the ending turn.
-     *
-     * @return string
-     */
-    public function getEndTurn(): string
-    {
-        return $this->endTurn;
-    }
-
-    /**
-     * Returns the current turn.
-     *
-     * @return string
-     */
-    public function getTurn(): string
-    {
-        return $this->turn;
+        return $this->metadata;
     }
 
     /**
@@ -165,19 +99,19 @@ class SanMovetext extends AbstractMovetext
     /**
      * Calculates the first move.
      */
-    protected function first(): void
+    protected function first(): int
     {
         $exploded = explode(' ', $this->validated);
         $first = $exploded[0];
         $exploded = explode('.', $first);
 
-        $this->first = intval($exploded[0]);
+        return intval($exploded[0]);
     }
 
     /**
      * Calculates the last move.
      */
-    protected function last(): void
+    protected function last(): int
     {
         $exploded = explode(' ', $this->validated);
         $last = end($exploded);
@@ -188,49 +122,43 @@ class SanMovetext extends AbstractMovetext
             $exploded = explode('.', $last);
         }
 
-        $this->last = intval($exploded[0]);
+        return intval($exploded[0]);
     }
 
     /**
      * Calculates the starting turn.
      */
-    protected function startTurn(): void
+    protected function startTurn(): string
     {
         if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $this->validated)) {
-            $this->startTurn = Color::B;
-        } else {
-            $this->startTurn = Color::W;
+            return Color::B;
         }
+
+        return Color::W;
     }
 
     /**
      * Calculates the ending turn.
      */
-    protected function endTurn(): void
+    protected function endTurn(): string
     {
         $exploded = explode(' ', $this->validated);
         $last = end($exploded);
         if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $last)) {
-            $this->endTurn = Color::B;
+            return Color::B;
         } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $last)) {
-            $this->endTurn = Color::W;
-        } else {
-            $this->endTurn = Color::B;
+            return Color::W;
         }
+
+        return Color::B;
     }
 
     /**
      * Calculates the current turn.
      */
-    protected function turn(): void
+    protected function turn(): string
     {
-        $exploded = explode(' ', $this->validated);
-        $last = end($exploded);
-        if (str_contains($last, '.')) {
-            $this->turn = Color::B;
-        } else {
-            $this->turn = Color::W;
-        }
+        return Color::opp($this->endTurn());
     }
 
     /**
