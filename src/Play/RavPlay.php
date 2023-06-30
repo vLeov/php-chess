@@ -149,14 +149,14 @@ class RavPlay extends AbstractPlay
         foreach ($this->resume as $key => $val) {
             $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
 
-            if ($sanMovetext->getMetadata()->first === $sanMovetextKey->getMetadata()->last + 1) {
+            if ($sanMovetext->getMetadata()->firstNumber === $sanMovetextKey->getMetadata()->lastNumber + 1) {
                 if ($sanMovetext->getMetadata()->turn === $sanMovetextKey->getMetadata()->turn) {
                     $board = FenToBoard::create($val->toFen(), $this->initialBoard);
                 } else {
                     $undo = $val->undo();
                     $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
                 }
-            } else if ($sanMovetext->getMetadata()->first === $sanMovetextKey->getMetadata()->last) {
+            } else if ($sanMovetext->getMetadata()->firstNumber === $sanMovetextKey->getMetadata()->lastNumber) {
                 if ($sanMovetext->getMetadata()->turn === $sanMovetextKey->getMetadata()->turn) {
                     $board = FenToBoard::create($val->toFen(), $this->initialBoard);
                 } else {

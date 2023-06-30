@@ -54,8 +54,8 @@ class SanMovetextTest extends AbstractUnitTestCase
         $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
 
         $expected = (object) [
-            'first' => 1,
-            'last' => 11,
+            'firstNumber' => 1,
+            'lastNumber' => 11,
             'startTurn' => 'w',
             'endTurn' => 'w',
             'turn' => 'b',
@@ -72,8 +72,8 @@ class SanMovetextTest extends AbstractUnitTestCase
         $movetext = '12...a5 13.g4 Nxg4';
 
         $expected = (object) [
-            'first' => 12,
-            'last' => 13,
+            'firstNumber' => 12,
+            'lastNumber' => 13,
             'startTurn' => 'b',
             'endTurn' => 'b',
             'turn' => 'w',
@@ -90,8 +90,8 @@ class SanMovetextTest extends AbstractUnitTestCase
         $movetext = '6...Kb8';
 
         $expected = (object) [
-            'first' => 6,
-            'last' => 6,
+            'firstNumber' => 6,
+            'lastNumber' => 6,
             'startTurn' => 'b',
             'endTurn' => 'b',
             'turn' => 'w',
@@ -108,8 +108,8 @@ class SanMovetextTest extends AbstractUnitTestCase
         $movetext = '3.Rh5';
 
         $expected = (object) [
-            'first' => 3,
-            'last' => 3,
+            'firstNumber' => 3,
+            'lastNumber' => 3,
             'startTurn' => 'w',
             'endTurn' => 'w',
             'turn' => 'b',

@@ -31,8 +31,8 @@ class SanMovetext extends AbstractMovetext
         parent::__construct($move, $movetext);
 
         $this->metadata = (object) [
-            'first' => $this->first(),
-            'last' => $this->last(),
+            'firstNumber' => $this->firstNumber(),
+            'lastNumber' => $this->lastNumber(),
             'startTurn' => $this->startTurn(),
             'endTurn' => $this->endTurn(),
             'turn' => $this->turn(),
@@ -99,7 +99,7 @@ class SanMovetext extends AbstractMovetext
     /**
      * Calculates the first move.
      */
-    protected function first(): int
+    protected function firstNumber(): int
     {
         $exploded = explode(' ', $this->validated);
         $first = $exploded[0];
@@ -111,7 +111,7 @@ class SanMovetext extends AbstractMovetext
     /**
      * Calculates the last move.
      */
-    protected function last(): int
+    protected function lastNumber(): int
     {
         $exploded = explode(' ', $this->validated);
         $last = end($exploded);
