@@ -31,11 +31,16 @@ class SanMovetext extends AbstractMovetext
         parent::__construct($move, $movetext);
 
         $this->metadata = (object) [
-            'firstNumber' => $this->firstNumber(),
-            'lastNumber' => $this->lastNumber(),
-            'startTurn' => $this->startTurn(),
-            'endTurn' => $this->endTurn(),
-            'turn' => $this->turn(),
+            'number' => (object) [
+                'first' => $this->firstNumber(),
+                'last' => $this->lastNumber(),
+                'current' => $this->currentNumber(),
+            ],
+            'turn' => (object) [
+                'start' => $this->startTurn(),
+                'end' => $this->endTurn(),
+                'current' => $this->currentTurn(),
+            ],
         ];
     }
 
@@ -126,6 +131,22 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
+     * Calculates the current move.
+     */
+    protected function currentNumber(): int
+    {
+        $exploded = explode(' ', $this->validated);
+        $last = end($exploded);
+        if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $last)) {
+            return $this->lastNumber() + 1;
+        } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $last)) {
+            return $this->lastNumber();
+        }
+
+        return $this->lastNumber() + 1;
+    }
+
+    /**
      * Calculates the starting turn.
      */
     protected function startTurn(): string
@@ -156,7 +177,7 @@ class SanMovetext extends AbstractMovetext
     /**
      * Calculates the current turn.
      */
-    protected function turn(): string
+    protected function currentTurn(): string
     {
         return Color::opp($this->endTurn());
     }
