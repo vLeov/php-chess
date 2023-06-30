@@ -148,24 +148,24 @@ class RavPlay extends AbstractPlay
     {
         foreach ($this->resume as $key => $val) {
             $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
-
-            if ($sanMovetext->getMetadata()->firstNumber === $sanMovetextKey->getMetadata()->lastNumber + 1) {
-                if ($sanMovetext->getMetadata()->turn === $sanMovetextKey->getMetadata()->turn) {
-                    $board = FenToBoard::create($val->toFen(), $this->initialBoard);
+            if ($sanMovetext->getMetadata()->number->first === $sanMovetextKey->getMetadata()->number->current) {
+                if ($sanMovetext->getMetadata()->turn->start === $sanMovetextKey->getMetadata()->turn->current) {
+                    return FenToBoard::create($val->toFen(), $this->initialBoard);
                 } else {
                     $undo = $val->undo();
-                    $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+                    return FenToBoard::create($undo->toFen(), $this->initialBoard);
                 }
-            } else if ($sanMovetext->getMetadata()->firstNumber === $sanMovetextKey->getMetadata()->lastNumber) {
-                if ($sanMovetext->getMetadata()->turn === $sanMovetextKey->getMetadata()->turn) {
-                    $board = FenToBoard::create($val->toFen(), $this->initialBoard);
+            }
+            if ($sanMovetext->getMetadata()->number->first + 1 === $sanMovetextKey->getMetadata()->number->current) {
+                if ($sanMovetext->getMetadata()->turn->start === $sanMovetextKey->getMetadata()->turn->current) {
+                    return FenToBoard::create($val->toFen(), $this->initialBoard);
                 } else {
                     $undo = $val->undo();
-                    $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+                    return FenToBoard::create($undo->toFen(), $this->initialBoard);
                 }
             }
         }
 
-        return $board;
+        return null;
     }
 }
