@@ -18,7 +18,7 @@ class SanMovetext extends AbstractMovetext
      *
      * @var array
      */
-    protected array $metadata = [];
+    protected object $metadata;
 
     /**
      * Constructor.
@@ -30,7 +30,7 @@ class SanMovetext extends AbstractMovetext
     {
         parent::__construct($move, $movetext);
 
-        $this->metadata = [
+        $this->metadata = (object) [
             'first' => $this->first(),
             'last' => $this->last(),
             'startTurn' => $this->startTurn(),
@@ -42,9 +42,9 @@ class SanMovetext extends AbstractMovetext
     /**
      * Returns the metadata.
      *
-     * @return int
+     * @return object
      */
-    public function getMetadata(): array
+    public function getMetadata(): object
     {
         return $this->metadata;
     }
