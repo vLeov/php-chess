@@ -110,8 +110,7 @@ class RavPlay extends AbstractPlay
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $sanMovetext = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
             $next = $this->findNext($sanMovetext);
-            $undone = $this->undo($sanMovetext, $next);
-            $sanPlay = new SanPlay($this->breakdown[$i], $undone);
+            $sanPlay = new SanPlay($this->breakdown[$i], $next);
             $board = $sanPlay->validate()->getBoard();
             $fen = $sanPlay->getFen();
             array_shift($fen);
@@ -140,45 +139,29 @@ class RavPlay extends AbstractPlay
     }
 
     /**
-     * Finds the next element to be processed.
+     * Returns the next board to be processed.
      *
      * @param SanMovetext $sanMovetext
      * @return object
      */
     protected function findNext(SanMovetext $sanMovetext): ?object
     {
-        foreach (array_reverse($this->resume, true) as $key => $val) {
+        foreach ($this->resume as $key => $val) {
             $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
-            if (
-                $sanMovetextKey->getLast() === $sanMovetext->getFirst() ||
-                $sanMovetextKey->getLast() + 1 === $sanMovetext->getFirst()
-            ) {
-                return (object) [
-                    'movetext' => $key,
-                    'board' => $val,
-                ];
-            }
-        }
-
-        return null;
-    }
-
-    protected function undo(SanMovetext $sanMovetext, object $next): ClassicalBoard
-    {
-        $nextMovetext = new SanMovetext($this->ravMovetext->getMove(), $next->movetext);
-        if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $sanMovetext->getMovetext())) {
-            if ($nextMovetext->getTurn() === Color::W) {
-                $undo = $next->board->undo();
-                $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
-            } else {
-                $board = FenToBoard::create($next->board->toFen(), $this->initialBoard);
-            }
-        } else {
-            if ($nextMovetext->getTurn() === Color::W) {
-                $board = FenToBoard::create($next->board->toFen(), $this->initialBoard);
-            } else {
-                $undo = $next->board->undo();
-                $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+            if ($sanMovetext->getFirst() === $sanMovetextKey->getLast() + 1) {
+                if ($sanMovetext->getStartTurn() === $sanMovetextKey->getTurn()) {
+                    $board = FenToBoard::create($val->toFen(), $this->initialBoard);
+                } else {
+                    $undo = $val->undo();
+                    $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+                }
+            } else if ($sanMovetext->getFirst() === $sanMovetextKey->getLast()) {
+                if ($sanMovetext->getStartTurn() === $sanMovetextKey->getTurn()) {
+                    $board = FenToBoard::create($val->toFen(), $this->initialBoard);
+                } else {
+                    $undo = $val->undo();
+                    $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+                }
             }
         }
 
