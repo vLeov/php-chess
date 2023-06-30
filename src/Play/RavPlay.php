@@ -8,6 +8,8 @@ use Chess\Movetext\RavMovetext;
 use Chess\Movetext\SanMovetext;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
  * Recursive Annotation Variation.
@@ -30,6 +32,8 @@ class RavPlay extends AbstractPlay
      * @var array
      */
     protected array $breakdown;
+
+    protected array $resume;
 
     /**
      * Constructor.
@@ -102,30 +106,20 @@ class RavPlay extends AbstractPlay
         $sanPlay = new SanPlay($this->breakdown[0], $this->initialBoard);
         $board = $sanPlay->validate()->getBoard();
         $this->fen = $sanPlay->getFen();
-        $resume = [$board];
+        $this->resume[$this->breakdown[0]] = $board;
         for ($i = 1; $i < count($this->breakdown); $i++) {
-            $current = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
-            for ($j = $i - 1; $j >= 0; $j--) {
-                $prev = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$j]);
-                if ($current->getFirst() === $prev->getLast()) {
-                    if (str_contains($this->ravMovetext->filtered(), "({$this->breakdown[$i]}")) {
-                        $undo = $resume[$j]->undo();
-                        $board = FenToBoard::create($undo->toFen(), $board);
-                    } else {
-                        $board = FenToBoard::create($resume[$j]->toFen(), $board);
-                    }
-                    $sanPlay = new SanPlay($this->breakdown[$i], $board);
-                    $board = $sanPlay->validate()->getBoard();
-                    $fen = $sanPlay->getFen();
-                    array_shift($fen);
-                    $this->fen = [
-                        ...$this->fen,
-                        ...$fen,
-                    ];
-                    $resume[] = $board;
-                    break;
-                }
-            }
+            $sanMovetext = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
+            $next = $this->findNext($sanMovetext);
+            $undone = $this->undo($sanMovetext, $next);
+            $sanPlay = new SanPlay($this->breakdown[$i], $undone);
+            $board = $sanPlay->validate()->getBoard();
+            $fen = $sanPlay->getFen();
+            array_shift($fen);
+            $this->fen = [
+                ...$this->fen,
+                ...$fen,
+            ];
+            $this->resume[$this->breakdown[$i]] = $board;
         }
 
         return $this;
@@ -143,5 +137,51 @@ class RavPlay extends AbstractPlay
         $arr = array_values(array_filter($arr));
 
         $this->breakdown = $arr;
+    }
+
+    /**
+     * Finds the next element to be processed.
+     *
+     * @param SanMovetext $sanMovetext
+     * @return object
+     */
+    protected function findNext(SanMovetext $sanMovetext): ?object
+    {
+        foreach (array_reverse($this->resume, true) as $key => $val) {
+            $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
+            if (
+                $sanMovetextKey->getLast() === $sanMovetext->getFirst() ||
+                $sanMovetextKey->getLast() + 1 === $sanMovetext->getFirst()
+            ) {
+                return (object) [
+                    'movetext' => $key,
+                    'board' => $val,
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    protected function undo(SanMovetext $sanMovetext, object $next): ClassicalBoard
+    {
+        $nextMovetext = new SanMovetext($this->ravMovetext->getMove(), $next->movetext);
+        if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $sanMovetext->getMovetext())) {
+            if ($nextMovetext->getTurn() === Color::W) {
+                $undo = $next->board->undo();
+                $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+            } else {
+                $board = FenToBoard::create($next->board->toFen(), $this->initialBoard);
+            }
+        } else {
+            if ($nextMovetext->getTurn() === Color::W) {
+                $board = FenToBoard::create($next->board->toFen(), $this->initialBoard);
+            } else {
+                $undo = $next->board->undo();
+                $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+            }
+        }
+
+        return $board;
     }
 }
