@@ -328,17 +328,28 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals()
+    public function fen_chess_fundamentals_Ra7_Kc8()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
-        $movetext = '1.Ra7 Kg8 2.Kg2 Kf8 3.Kf3 Ke8 4.Ke4 Kd8 5.Kd5 Kc8 (5...Ke8 6.Kd6 Kf8 7.Ke6 Kg8 8.Kf6 Kh8 9.Kg6 Kg8 10.Ra8#) 6.Kd6 (6.Kc6 Kd8) 6...Kb8 (6...Kd8 7.Ra8#)';
+        $movetext = '1.Ra7 Kg8 2.Kg2 Kf8 3.Kf3 Ke8 4.Ke4 Kd8 5.Kd5 Kc8';
 
         $board = (new StrToBoard($fen))->create();
 
         $fen = (new RavPlay($movetext, $board))->fen()->getFen();
 
         $expected = [
+            '7k/8/8/8/8/8/8/R6K w - -',
+            '7k/R7/8/8/8/8/8/7K b - -',
+            '6k1/R7/8/8/8/8/8/7K w - -',
+            '6k1/R7/8/8/8/8/6K1/8 b - -',
+            '5k2/R7/8/8/8/8/6K1/8 w - -',
+            '5k2/R7/8/8/8/5K2/8/8 b - -',
+            '4k3/R7/8/8/8/5K2/8/8 w - -',
+            '4k3/R7/8/8/4K3/8/8/8 b - -',
+            '3k4/R7/8/8/4K3/8/8/8 w - -',
+            '3k4/R7/8/3K4/8/8/8/8 b - -',
+            '2k5/R7/8/3K4/8/8/8/8 w - -',
         ];
 
         $this->assertSame($expected, $fen);
