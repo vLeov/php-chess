@@ -149,19 +149,42 @@ class RavPlay extends AbstractPlay
         foreach ($this->resume as $key => $val) {
             $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
             if ($sanMovetext->getMetadata()->number->first === $sanMovetextKey->getMetadata()->number->current) {
-                if ($sanMovetext->getMetadata()->turn->start === $sanMovetextKey->getMetadata()->turn->current) {
-                    return FenToBoard::create($val->toFen(), $this->initialBoard);
+                if ($sanMovetextKey->getMetadata()->number->last === $sanMovetextKey->getMetadata()->number->current) {
+                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
+                        //      5.Kd5,
+                        // ---> 5.Ke8,
+                        $undo = $val->undo();
+                        return FenToBoard::create($undo->toFen(), $this->initialBoard);
+                    } else {
+                        //      5.Kd5,
+                        // ---> 5...Ke8,
+                        return FenToBoard::create($val->toFen(), $this->initialBoard);
+                    }
                 } else {
-                    $undo = $val->undo();
-                    return FenToBoard::create($undo->toFen(), $this->initialBoard);
+                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
+                        //      5.Kd5 Kc8,
+                        // ---> 6.Kd6
+                        return FenToBoard::create($val->toFen(), $this->initialBoard);
+                    } else {
+                        //      5.Kd5 Kc8,
+                        // ---> 6...Kd6
+                        //      do nothing
+                    }
                 }
-            }
-            if ($sanMovetext->getMetadata()->number->first + 1 === $sanMovetextKey->getMetadata()->number->current) {
-                if ($sanMovetext->getMetadata()->turn->start === $sanMovetextKey->getMetadata()->turn->current) {
-                    return FenToBoard::create($val->toFen(), $this->initialBoard);
+            } else {
+                if ($sanMovetextKey->getMetadata()->number->last === $sanMovetextKey->getMetadata()->number->current) {
+                    
                 } else {
-                    $undo = $val->undo();
-                    return FenToBoard::create($undo->toFen(), $this->initialBoard);
+                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
+                        //      5.Kd5 Kc8,
+                        // ---> 5.Ke8,
+                        //      do nothing
+                    } elseif ($sanMovetext->getMetadata()->turn->start === Color::B) {
+                        //      5.Kd5 Kc8,
+                        // ---> 5...Ke8,
+                        $undo = $val->undo();
+                        return FenToBoard::create($undo->toFen(), $this->initialBoard);
+                    }
                 }
             }
         }
