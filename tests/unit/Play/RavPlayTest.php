@@ -634,4 +634,85 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $fen);
     }
+
+    /**
+     * @test
+     */
+    public function fen_chess_fundamentals_Ke2_Kd5__Kc4()
+    {
+        $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
+
+        $movetext = '1.Ke2 Kd5 2.Ke3 Kc4';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $fen = (new RavPlay($movetext, $board))->fen()->getFen();
+
+        $expected = [
+            '8/8/8/4k3/8/8/8/4K2R w - -',
+            '8/8/8/4k3/8/8/4K3/7R b - -',
+            '8/8/8/3k4/8/8/4K3/7R w - -',
+            '8/8/8/3k4/8/4K3/8/7R b - -',
+            '8/8/8/8/2k5/4K3/8/7R w - -',
+
+        ];
+
+        $this->assertSame($expected, $fen);
+    }
+
+    /**
+     * @test
+     */
+    public function fen_chess_fundamentals_Ke2_Kd5__Ke5_Rh5()
+    {
+        $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
+
+        $movetext = '1.Ke2 Kd5 2.Ke3 Kc4
+            (2...Ke5 3.Rh5+)';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $fen = (new RavPlay($movetext, $board))->fen()->getFen();
+
+        $expected = [
+            '8/8/8/4k3/8/8/8/4K2R w - -',
+            '8/8/8/4k3/8/8/4K3/7R b - -',
+            '8/8/8/3k4/8/8/4K3/7R w - -',
+            '8/8/8/3k4/8/4K3/8/7R b - -',
+            '8/8/8/8/2k5/4K3/8/7R w - -',
+            '8/8/8/4k3/8/4K3/8/7R w - -',
+            '8/8/8/4k2R/8/4K3/8/8 b - -',
+        ];
+
+        $this->assertSame($expected, $fen);
+    }
+
+    /**
+     * @test
+     */
+    public function fen_chess_fundamentals_Ke2_Kd5__Rh5()
+    {
+        $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
+
+        $movetext = '1.Ke2 Kd5 2.Ke3 Kc4
+            (2...Ke5 3.Rh5+)
+            3.Rh5';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $fen = (new RavPlay($movetext, $board))->fen()->getFen();
+
+        $expected = [
+            '8/8/8/4k3/8/8/8/4K2R w - -',
+            '8/8/8/4k3/8/8/4K3/7R b - -',
+            '8/8/8/3k4/8/8/4K3/7R w - -',
+            '8/8/8/3k4/8/4K3/8/7R b - -',
+            '8/8/8/8/2k5/4K3/8/7R w - -',
+            '8/8/8/4k3/8/4K3/8/7R w - -',
+            '8/8/8/4k2R/8/4K3/8/8 b - -',
+            '8/8/8/7R/2k5/4K3/8/8 b - -',
+        ];
+
+        $this->assertSame($expected, $fen);
+    }
 }
