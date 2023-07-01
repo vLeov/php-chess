@@ -32,14 +32,14 @@ class SanMovetext extends AbstractMovetext
 
         $this->metadata = (object) [
             'number' => (object) [
-                'first' => $this->firstNumber(),
-                'last' => $this->lastNumber(),
-                'current' => $this->currentNumber(),
+                'first' => $this->firstNumber($this->validated),
+                'last' => $this->lastNumber($this->validated),
+                'current' => $this->currentNumber($this->validated),
             ],
             'turn' => (object) [
-                'start' => $this->startTurn(),
-                'end' => $this->endTurn(),
-                'current' => $this->currentTurn(),
+                'start' => $this->startTurn($this->validated),
+                'end' => $this->endTurn($this->validated),
+                'current' => $this->currentTurn($this->validated),
             ],
         ];
     }
@@ -102,11 +102,11 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Calculates the first move.
+     * Returns the first move.
      */
-    protected function firstNumber(): int
+    protected function firstNumber(string $str): int
     {
-        $exploded = explode(' ', $this->validated);
+        $exploded = explode(' ', $str);
         $first = $exploded[0];
         $exploded = explode('.', $first);
 
@@ -114,11 +114,11 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Calculates the last move.
+     * Returns the last move.
      */
-    protected function lastNumber(): int
+    protected function lastNumber(string $str): int
     {
-        $exploded = explode(' ', $this->validated);
+        $exploded = explode(' ', $str);
         $last = end($exploded);
         if (str_contains($last, '.')) {
             $exploded = explode('.', $last);
@@ -131,27 +131,27 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Calculates the current move.
+     * Returns the current move.
      */
-    protected function currentNumber(): int
+    protected function currentNumber(string $str): int
     {
-        $exploded = explode(' ', $this->validated);
+        $exploded = explode(' ', $str);
         $last = end($exploded);
         if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $last)) {
-            return $this->lastNumber() + 1;
+            return $this->lastNumber($str) + 1;
         } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $last)) {
-            return $this->lastNumber();
+            return $this->lastNumber($str);
         }
 
-        return $this->lastNumber() + 1;
+        return $this->lastNumber($str) + 1;
     }
 
     /**
-     * Calculates the starting turn.
+     * Returns the starting turn.
      */
-    protected function startTurn(): string
+    protected function startTurn(string $str): string
     {
-        if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $this->validated)) {
+        if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $str)) {
             return Color::B;
         }
 
@@ -159,11 +159,11 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Calculates the ending turn.
+     * Returns the ending turn.
      */
-    protected function endTurn(): string
+    protected function endTurn(string $str): string
     {
-        $exploded = explode(' ', $this->validated);
+        $exploded = explode(' ', $str);
         $last = end($exploded);
         if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $last)) {
             return Color::B;
@@ -175,11 +175,11 @@ class SanMovetext extends AbstractMovetext
     }
 
     /**
-     * Calculates the current turn.
+     * Returns the current turn.
      */
-    protected function currentTurn(): string
+    protected function currentTurn(string $str): string
     {
-        return Color::opp($this->endTurn());
+        return Color::opp($this->endTurn($str));
     }
 
     /**
