@@ -173,7 +173,11 @@ class RavPlay extends AbstractPlay
                 }
             } else {
                 if ($sanMovetextKey->getMetadata()->number->last === $sanMovetextKey->getMetadata()->number->current) {
-                    
+                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
+                        // do nothing
+                    } else {
+                        // do nothing
+                    }
                 } else {
                     if ($sanMovetext->getMetadata()->turn->start === Color::W) {
                         //      5.Kd5 Kc8,
