@@ -146,7 +146,7 @@ class RavPlay extends AbstractPlay
      */
     protected function findNext(SanMovetext $sanMovetext): ?object
     {
-        foreach ($this->resume as $key => $val) {
+        foreach (array_reverse($this->resume, true) as $key => $val) {
             $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
             if ($sanMovetext->getMetadata()->number->first === $sanMovetextKey->getMetadata()->number->current) {
                 if ($sanMovetextKey->getMetadata()->number->last === $sanMovetextKey->getMetadata()->number->current) {
@@ -154,17 +154,17 @@ class RavPlay extends AbstractPlay
                         //      5.Kd5,
                         // ---> 5.Ke8,
                         $undo = $val->undo();
-                        return FenToBoard::create($undo->toFen(), $this->initialBoard);
+                        $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
                     } else {
                         //      5.Kd5,
                         // ---> 5...Ke8,
-                        return FenToBoard::create($val->toFen(), $this->initialBoard);
+                        $board = FenToBoard::create($val->toFen(), $this->initialBoard);
                     }
                 } else {
                     if ($sanMovetext->getMetadata()->turn->start === Color::W) {
                         //      5.Kd5 Kc8,
                         // ---> 6.Kd6
-                        return FenToBoard::create($val->toFen(), $this->initialBoard);
+                        $board = FenToBoard::create($val->toFen(), $this->initialBoard);
                     } else {
                         //      5.Kd5 Kc8,
                         // ---> 6...Kd6
@@ -187,12 +187,12 @@ class RavPlay extends AbstractPlay
                         //      5.Kd5 Kc8,
                         // ---> 5...Ke8,
                         $undo = $val->undo();
-                        return FenToBoard::create($undo->toFen(), $this->initialBoard);
+                        $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
                     }
                 }
             }
         }
 
-        return null;
+        return $board;
     }
 }
