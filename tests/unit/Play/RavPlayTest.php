@@ -747,4 +747,53 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $fen);
     }
+
+    /**
+     * @test
+     */
+    public function fen_chess_fundamentals_Ke2_Kd5__Ra1()
+    {
+        $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
+
+        $movetext = '1.Ke2 Kd5 2.Ke3 Kc4
+            (2...Ke5 3.Rh5+)
+            3.Rh5
+            (3...Kb4 4.Kd3)
+            3...Kc3 4.Rh4 Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 9.Ra4+ Kb1 10.Ra5 Kc1 11.Ra1#';
+
+        $board = (new StrToBoard($fen))->create();
+
+        $fen = (new RavPlay($movetext, $board))->fen()->getFen();
+
+        $expected = [
+            '8/8/8/4k3/8/8/8/4K2R w - -',
+            '8/8/8/4k3/8/8/4K3/7R b - -',
+            '8/8/8/3k4/8/8/4K3/7R w - -',
+            '8/8/8/3k4/8/4K3/8/7R b - -',
+            '8/8/8/8/2k5/4K3/8/7R w - -',
+            '8/8/8/4k3/8/4K3/8/7R w - -',
+            '8/8/8/4k2R/8/4K3/8/8 b - -',
+            '8/8/8/7R/2k5/4K3/8/8 b - -',
+            '8/8/8/7R/1k6/4K3/8/8 w - -',
+            '8/8/8/7R/1k6/3K4/8/8 b - -',
+            '8/8/8/7R/8/2k1K3/8/8 w - -',
+            '8/8/8/8/7R/2k1K3/8/8 b - -',
+            '8/8/8/8/7R/4K3/2k5/8 w - -',
+            '8/8/8/8/2R5/4K3/2k5/8 b - -',
+            '8/8/8/8/2R5/1k2K3/8/8 w - -',
+            '8/8/8/8/2R5/1k1K4/8/8 b - -',
+            '8/8/8/8/2R5/3K4/1k6/8 w - -',
+            '8/8/8/8/1R6/3K4/1k6/8 b - -',
+            '8/8/8/8/1R6/k2K4/8/8 w - -',
+            '8/8/8/8/1R6/k1K5/8/8 b - -',
+            '8/8/8/8/1R6/2K5/k7/8 w - -',
+            '8/8/8/8/R7/2K5/k7/8 b - -',
+            '8/8/8/8/R7/2K5/8/1k6 w - -',
+            '8/8/8/R7/8/2K5/8/1k6 b - -',
+            '8/8/8/R7/8/2K5/8/2k5 w - -',
+            '8/8/8/8/8/2K5/8/R1k5 b - -',
+        ];
+
+        $this->assertSame($expected, $fen);
+    }
 }
