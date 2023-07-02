@@ -122,12 +122,10 @@ class RavPlay extends AbstractPlay
                     } else {
                         $board = FenToBoard::create($val->toFen(), $this->initialBoard);
                     }
-                    break;
                 }
             }
             $sanPlay = new SanPlay($this->breakdown[$i], $board);
-            $board = $sanPlay->validate()->getBoard();
-            $this->resume[$this->breakdown[$i]] = $board;
+            $this->resume[$this->breakdown[$i]] = $sanPlay->validate()->getBoard();
             $fen = $sanPlay->getFen();
             array_shift($fen);
             $this->fen = [
