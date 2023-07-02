@@ -8,7 +8,6 @@ use Chess\Movetext\RavMovetext;
 use Chess\Movetext\SanMovetext;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
@@ -33,6 +32,11 @@ class RavPlay extends AbstractPlay
      */
     protected array $breakdown;
 
+    /**
+     * Resume the variations.
+     *
+     * @var array
+     */
     protected array $resume;
 
     /**
@@ -99,7 +103,7 @@ class RavPlay extends AbstractPlay
     /**
      * Calculates the FEN history.
      *
-     * @return array
+     * @return \Chess\Play\RavPlay
      */
     public function fen(): RavPlay
     {
@@ -121,19 +125,15 @@ class RavPlay extends AbstractPlay
                     break;
                 }
             }
-
-            // try {
-                $sanPlay = new SanPlay($this->breakdown[$i], $board);
-                $board = $sanPlay->validate()->getBoard();
-                $fen = $sanPlay->getFen();
-                array_shift($fen);
-                $this->fen = [
-                    ...$this->fen,
-                    ...$fen,
-                ];
-                $this->resume[$this->breakdown[$i]] = $board;
-            // } catch (\Exception $e) {
-            // }
+            $sanPlay = new SanPlay($this->breakdown[$i], $board);
+            $board = $sanPlay->validate()->getBoard();
+            $this->resume[$this->breakdown[$i]] = $board;
+            $fen = $sanPlay->getFen();
+            array_shift($fen);
+            $this->fen = [
+                ...$this->fen,
+                ...$fen,
+            ];
         }
 
         return $this;
@@ -141,10 +141,8 @@ class RavPlay extends AbstractPlay
 
     /**
      * A breakdown of the variations for further processing.
-     *
-     * @return array
      */
-    protected function breakdown()
+    protected function breakdown(): void
     {
         $arr = preg_split("/[()]+/", $this->ravMovetext->filtered(), -1, PREG_SPLIT_NO_EMPTY);
         $arr = array_map('trim', $arr);
@@ -153,16 +151,25 @@ class RavPlay extends AbstractPlay
         $this->breakdown = $arr;
     }
 
-    protected function isParent(string $a, string $b)
+    /**
+     * Finds out if a node is a parent of another node.
+     *
+     * @param string $parent
+     * @param string $child
+     * @return bool
+     */
+    protected function isParent(string $parent, string $child): bool
     {
-        $foo = new SanMovetext($this->ravMovetext->getMove(), $a);
-        $bar = new SanMovetext($this->ravMovetext->getMove(), $b);
-        if ($foo->getMetadata()->number->first === $bar->getMetadata()->number->first) {
-            return true;
-        } elseif ($foo->getMetadata()->number->first !== $foo->getMetadata()->number->current) {
-            if ($foo->getMetadata()->number->first + 1 === $bar->getMetadata()->number->first) {
-                if ($bar->getMetadata()->turn->start === Color::W) {
-                    return true;
+        $parent = new SanMovetext($this->ravMovetext->getMove(), $parent);
+        $child = new SanMovetext($this->ravMovetext->getMove(), $child);
+        if (!str_contains($this->ravMovetext->filtered($uncommented = true), "{$parent->getMovetext()})")) {
+            if ($parent->getMetadata()->number->first === $child->getMetadata()->number->first) {
+                return true;
+            } elseif ($parent->getMetadata()->number->first !== $parent->getMetadata()->number->current) {
+                if ($parent->getMetadata()->number->first + 1 === $child->getMetadata()->number->first) {
+                    if ($child->getMetadata()->turn->start === Color::W) {
+                        return true;
+                    }
                 }
             }
         }
@@ -170,11 +177,18 @@ class RavPlay extends AbstractPlay
         return false;
     }
 
-    protected function isUndo(string $a, string $b)
+    /**
+     * Finds out if a move must be undone.
+     *
+     * @param string $parent
+     * @param string $child
+     * @return bool
+     */
+    protected function isUndo(string $parent, string $child)
     {
-        $foo = new SanMovetext($this->ravMovetext->getMove(), $a);
-        $bar = new SanMovetext($this->ravMovetext->getMove(), $b);
-        if ($foo->getMetadata()->turn->current === $bar->getMetadata()->turn->current) {
+        $parent = new SanMovetext($this->ravMovetext->getMove(), $parent);
+        $child = new SanMovetext($this->ravMovetext->getMove(), $child);
+        if ($parent->getMetadata()->turn->current === $child->getMetadata()->turn->current) {
             return true;
         }
 

@@ -741,6 +741,8 @@ class RavPlayTest extends AbstractUnitTestCase
             '8/8/8/4k3/8/4K3/8/7R w - -',
             '8/8/8/4k2R/8/4K3/8/8 b - -',
             '8/8/8/7R/2k5/4K3/8/8 b - -',
+            '8/8/8/7R/1k6/4K3/8/8 w - -',
+            '8/8/8/7R/1k6/3K4/8/8 b - -',
         ];
 
         $this->assertSame($expected, $fen);

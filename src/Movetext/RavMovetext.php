@@ -98,7 +98,7 @@ class RavMovetext extends AbstractMovetext
      *
      * @return string
      */
-    public function filtered(): string
+    public function filtered($uncommented = false): string
     {
         // remove PGN symbols
         $str = str_replace(Termination::values(), '', $this->movetext);
@@ -111,6 +111,13 @@ class RavMovetext extends AbstractMovetext
         $str = preg_replace('/\s\./', '.', $str);
         // remove space after dots
         $str = preg_replace('/\.\s/', '.', $str);
+
+        if ($uncommented) {
+            // remove comments
+            $str = preg_replace('(\{.*?\})', '', $this->filtered());
+            // replace multiple spaces with a single space
+            $str = preg_replace('/\s+/', ' ', $str);
+        }
 
         return trim($str);
     }
