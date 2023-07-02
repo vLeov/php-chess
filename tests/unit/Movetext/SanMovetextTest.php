@@ -108,6 +108,18 @@ class SanMovetextTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function get_first_move_Kb4_Kd3()
+    {
+        $movetext = '3...Kb4 4.Kd3';
+
+        $expected = '3...Kb4';
+
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getFirstMove());
+    }
+
+    /**
+     * @test
+     */
     public function get_metadata_a5__Nxg4()
     {
         $movetext = '12...a5 13.g4 Nxg4';

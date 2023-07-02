@@ -109,16 +109,31 @@ class RavPlay extends AbstractPlay
         $this->resume[$this->breakdown[0]] = $board;
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $sanMovetext = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
-            $next = $this->findNext($sanMovetext);
-            $sanPlay = new SanPlay($this->breakdown[$i], $next);
-            $board = $sanPlay->validate()->getBoard();
-            $fen = $sanPlay->getFen();
-            array_shift($fen);
-            $this->fen = [
-                ...$this->fen,
-                ...$fen,
-            ];
-            $this->resume[$this->breakdown[$i]] = $board;
+            foreach ($this->resume as $key => $val) {
+                $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
+                if ($this->isParent($sanMovetextKey->getLastMove(), $sanMovetext->getFirstMove())) {
+                    if ($this->isUndo($sanMovetextKey->getLastMove(), $sanMovetext->getFirstMove())) {
+                        $undo = $val->undo();
+                        $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+                    } else {
+                        $board = FenToBoard::create($val->toFen(), $this->initialBoard);
+                    }
+                    break;
+                }
+            }
+
+            // try {
+                $sanPlay = new SanPlay($this->breakdown[$i], $board);
+                $board = $sanPlay->validate()->getBoard();
+                $fen = $sanPlay->getFen();
+                array_shift($fen);
+                $this->fen = [
+                    ...$this->fen,
+                    ...$fen,
+                ];
+                $this->resume[$this->breakdown[$i]] = $board;
+            // } catch (\Exception $e) {
+            // }
         }
 
         return $this;
@@ -138,61 +153,31 @@ class RavPlay extends AbstractPlay
         $this->breakdown = $arr;
     }
 
-    /**
-     * Returns the next board to be processed.
-     *
-     * @param SanMovetext $sanMovetext
-     * @return object
-     */
-    protected function findNext(SanMovetext $sanMovetext): ?object
+    protected function isParent(string $a, string $b)
     {
-        foreach (array_reverse($this->resume, true) as $key => $val) {
-            $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
-            if ($sanMovetext->getMetadata()->number->first === $sanMovetextKey->getMetadata()->number->current) {
-                if ($sanMovetextKey->getMetadata()->number->last === $sanMovetextKey->getMetadata()->number->current) {
-                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
-                        //      5.Kd5,
-                        // ---> 5.Ke8,
-                        $undo = $val->undo();
-                        $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
-                    } else {
-                        //      5.Kd5,
-                        // ---> 5...Ke8,
-                        $board = FenToBoard::create($val->toFen(), $this->initialBoard);
-                    }
-                } else {
-                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
-                        //      5.Kd5 Kc8,
-                        // ---> 6.Kd6
-                        $board = FenToBoard::create($val->toFen(), $this->initialBoard);
-                    } else {
-                        //      5.Kd5 Kc8,
-                        // ---> 6...Kd6
-                        //      do nothing
-                    }
-                }
-            } else {
-                if ($sanMovetextKey->getMetadata()->number->last === $sanMovetextKey->getMetadata()->number->current) {
-                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
-                        // do nothing
-                    } else {
-                        // do nothing
-                    }
-                } else {
-                    if ($sanMovetext->getMetadata()->turn->start === Color::W) {
-                        //      5.Kd5 Kc8,
-                        // ---> 5.Ke8,
-                        //      do nothing
-                    } elseif ($sanMovetext->getMetadata()->turn->start === Color::B) {
-                        //      5.Kd5 Kc8,
-                        // ---> 5...Ke8,
-                        $undo = $val->undo();
-                        $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
-                    }
+        $foo = new SanMovetext($this->ravMovetext->getMove(), $a);
+        $bar = new SanMovetext($this->ravMovetext->getMove(), $b);
+        if ($foo->getMetadata()->number->first === $bar->getMetadata()->number->first) {
+            return true;
+        } elseif ($foo->getMetadata()->number->first !== $foo->getMetadata()->number->current) {
+            if ($foo->getMetadata()->number->first + 1 === $bar->getMetadata()->number->first) {
+                if ($bar->getMetadata()->turn->start === Color::W) {
+                    return true;
                 }
             }
         }
 
-        return $board;
+        return false;
+    }
+
+    protected function isUndo(string $a, string $b)
+    {
+        $foo = new SanMovetext($this->ravMovetext->getMove(), $a);
+        $bar = new SanMovetext($this->ravMovetext->getMove(), $b);
+        if ($foo->getMetadata()->turn->current === $bar->getMetadata()->turn->current) {
+            return true;
+        }
+
+        return false;
     }
 }
