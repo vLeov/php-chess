@@ -20,6 +20,10 @@ class SanMovetext extends AbstractMovetext
      */
     protected object $metadata;
 
+    protected string $firstMove = '';
+
+    protected string $lastMove = '';
+
     /**
      * Constructor.
      *
@@ -29,6 +33,10 @@ class SanMovetext extends AbstractMovetext
     public function __construct(Move $move, string $movetext)
     {
         parent::__construct($move, $movetext);
+
+        $this->firstMove();
+
+        $this->lastMove();
 
         $this->metadata = (object) [
             'number' => (object) [
@@ -52,6 +60,16 @@ class SanMovetext extends AbstractMovetext
     public function getMetadata(): object
     {
         return $this->metadata;
+    }
+
+    public function getFirstMove(): string
+    {
+        return $this->firstMove;
+    }
+
+    public function getLastMove(): string
+    {
+        return $this->lastMove;
     }
 
     /**
@@ -180,6 +198,25 @@ class SanMovetext extends AbstractMovetext
     protected function currentTurn(string $str): string
     {
         return Color::opp($this->endTurn($str));
+    }
+
+    protected function firstMove()
+    {
+        $exploded = explode(' ', $this->validated);
+
+        $this->firstMove = $exploded[0];
+    }
+
+    protected function lastMove()
+    {
+        $exploded = explode(' ', $this->validated);
+        $last = end($exploded);
+        if (!str_contains($last, '.')) {
+            $nextToLast = prev($exploded);
+            $this->lastMove = "{$nextToLast} {$last}";
+        } else {
+            $this->lastMove = $last;
+        }
     }
 
     /**

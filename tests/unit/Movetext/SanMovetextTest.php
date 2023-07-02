@@ -72,6 +72,42 @@ class SanMovetextTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function get_first_move_e4_e5__Nd5()
+    {
+        $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
+
+        $expected = '1.e4';
+
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getFirstMove());
+    }
+
+    /**
+     * @test
+     */
+    public function get_last_move_e4_e5__Nd5()
+    {
+        $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
+
+        $expected = '11.Nd5';
+
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getLastMove());
+    }
+
+    /**
+     * @test
+     */
+    public function get_last_move_e4_e5__Nf6()
+    {
+        $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6';
+
+        $expected = '3.Bb5 Nf6';
+
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getLastMove());
+    }
+
+    /**
+     * @test
+     */
     public function get_metadata_a5__Nxg4()
     {
         $movetext = '12...a5 13.g4 Nxg4';
