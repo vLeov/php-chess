@@ -160,7 +160,7 @@ class RavPlay extends AbstractPlay
     {
         $parent = new SanMovetext($this->ravMovetext->getMove(), $parent);
         $child = new SanMovetext($this->ravMovetext->getMove(), $child);
-        if (!str_contains($this->ravMovetext->filtered($uncommented = true), "{$parent->getMovetext()})")) {
+        if (!str_contains($this->ravMovetext->filtered($comments = false), "{$parent->getMovetext()})")) {
             if ($parent->getMetadata()->number->first === $child->getMetadata()->number->first) {
                 return true;
             } elseif ($parent->getMetadata()->number->first !== $parent->getMetadata()->number->current) {

@@ -922,7 +922,15 @@ class RavPlayTest extends AbstractUnitTestCase
      */
     public function fen_open_sicilian_tutorial_uncommented()
     {
-        $movetext = "1.e4 c5 (2.Nf3 (2... Nc6) (2... e6) (2... d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 (5...a6) (5...g6) (5...Nc6) (5...e6)))";
+        $movetext = "1.e4 c5
+            (2.Nf3 (2... Nc6) (2... e6)
+                (2... d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3
+                    (5...a6)
+                    (5...g6)
+                    (5...Nc6)
+                    (5...e6)
+                )
+            )";
 
         $expected = [
             'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -',
@@ -951,7 +959,15 @@ class RavPlayTest extends AbstractUnitTestCase
      */
     public function fen_open_sicilian_tutorial_commented()
     {
-        $movetext = "1.e4 c5 {enters the Sicilian Defense, the most popular and best-scoring response to White's first move.} (2.Nf3 {is played in about 80% of Master-level games after which there are three main options for Black.} (2... Nc6) (2... e6) (2... d6 {is Black's most common move.} 3.d4 {lines are collectively known as the Open Sicilian.} cxd4 4.Nxd4 Nf6 5.Nc3 {allows Black choose between four major variations: the Najdorf, Dragon, Classical and Scheveningen.} (5...a6 {is played in the Najdorf variation.}) (5...g6 {is played in the Dragon variation.}) (5...Nc6 {is played in the Classical variation.}) (5...e6 {is played in the Scheveningen variation.})))";
+        $movetext = "1.e4 c5 {enters the Sicilian Defense, the most popular and best-scoring response to White's first move.}
+            (2.Nf3 {is played in about 80% of Master-level games after which there are three main options for Black.} (2... Nc6) (2... e6)
+                (2... d6 {is Black's most common move.} 3.d4 {lines are collectively known as the Open Sicilian.} cxd4 4.Nxd4 Nf6 5.Nc3 {allows Black choose between four major variations: the Najdorf, Dragon, Classical and Scheveningen.}
+                    (5...a6 {is played in the Najdorf variation.})
+                    (5...g6 {is played in the Dragon variation.})
+                    (5...Nc6 {is played in the Classical variation.})
+                    (5...e6 {is played in the Scheveningen variation.})
+                )
+            )";
 
         $expected = [
             'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -',
