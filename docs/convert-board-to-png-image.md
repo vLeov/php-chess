@@ -13,6 +13,6 @@ $board = FenToBoard::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1
 $filename = (new BoardToPng($board, $flip = true))->output();
 ```
 
-![Figure 1](https://github.com/chesslablab/php-chess/blob/master/docs/convert-board-to-png-image_01.png)
+![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/convert-board-to-png-image_01.png)
 
 🎉 Try this thing! Share a puzzling chess position with friends for further study.

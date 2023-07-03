@@ -113,7 +113,7 @@ Array
 )
 ```
 
-![Figure 1](https://github.com/chesslablab/php-chess/blob/master/docs/heuristics_01.png)
+![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/heuristics_01.png)
 
 Figure 1. Heuristics of `rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -`
 
@@ -134,7 +134,7 @@ $result = [
 print_r($result);
 ```
 
-![Figure 2](https://github.com/chesslablab/php-chess/blob/master/docs/heuristics_02.png)
+![Figure 2](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/heuristics_02.png)
 
 Figure 2. Heuristics of `1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3`
 
