@@ -8,7 +8,7 @@ The example below describes how to play the Open Sicilian.
 
 > 1.e4 c5 {enters the Sicilian Defense, the most popular and best-scoring response to White's first move.} (2.Nf3 {is played in about 80% of Master-level games after which there are three main options for Black.} (2... Nc6) (2... e6) (2... d6 {is Black's most common move.} 3.d4 {lines are collectively known as the Open Sicilian.} cxd4 4.Nxd4 Nf6 5.Nc3 {allows Black choose between four major variations: the Najdorf, Dragon, Classical and Scheveningen.} (5...a6 {is played in the Najdorf variation.}) (5...g6 {is played in the Dragon variation.}) (5...Nc6 {is played in the Classical variation.}) (5...e6 {is played in the Scheveningen variation.})))
 
-Sicilian Defense. (2023, July 2). In Wikipedia. https://en.wikipedia.org/wiki/Sicilian_Defence
+Sicilian Defense. (2023, July 2). In Wikipedia. [https://en.wikipedia.org/wiki/Sicilian_Defence](https://en.wikipedia.org/wiki/Sicilian_Defence)
 
 Then all you need is a RAV reader.
 
