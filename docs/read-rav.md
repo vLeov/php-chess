@@ -12,7 +12,7 @@ Sicilian Defense. (2023, July 2). In Wikipedia. https://en.wikipedia.org/wiki/Si
 
 Then all you need is a RAV reader.
 
-![Figure 1](/src/docs/read-rav_01.png)
+![Figure 1](https://github.com/chesslablab/php-chess/blob/master/docs/read-rav_01.png)
 Figure 1. The response received from PHP Chess can be displayed as an HTML table.
 
 Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the fen() method. This method calculates the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
