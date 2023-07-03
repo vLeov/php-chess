@@ -111,4 +111,16 @@ class RavMovetextTest extends AbstractUnitTestCase
             (new RavMovetext(self::$move, $movetext))->filtered($uncommented = true)
         );
     }
+
+    /**
+     * @test
+     */
+    public function sicilian_commented()
+    {
+        $movetext = '1.e4 c5 {foo} (2.Nf3 d6 {foobar}) (2.Nf3 Nc6)';
+
+        $expected = '1.e4 c5 (2.Nf3 d6) (2.Nf3 Nc6)';
+
+        $this->assertSame($expected, (new RavMovetext(self::$move, $movetext))->filtered($uncommented = true));
+    }
 }
