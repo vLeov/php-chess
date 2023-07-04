@@ -107,10 +107,9 @@ class RavPlay extends AbstractPlay
      */
     public function fen(): RavPlay
     {
-        $sanPlay = new SanPlay($this->breakdown[0], $this->initialBoard);
-        $board = $sanPlay->validate()->getBoard();
+        $sanPlay = (new SanPlay($this->breakdown[0], $this->initialBoard))->validate();
         $this->fen = $sanPlay->getFen();
-        $this->resume[$this->breakdown[0]] = $board;
+        $this->resume[$this->breakdown[0]] = $sanPlay->getBoard();
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $sanMovetext = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
             foreach ($this->resume as $key => $val) {
@@ -124,8 +123,8 @@ class RavPlay extends AbstractPlay
                     }
                 }
             }
-            $sanPlay = new SanPlay($this->breakdown[$i], $board);
-            $this->resume[$this->breakdown[$i]] = $sanPlay->validate()->getBoard();
+            $sanPlay = (new SanPlay($this->breakdown[$i], $board))->validate();
+            $this->resume[$this->breakdown[$i]] = $sanPlay->getBoard();
             $fen = $sanPlay->getFen();
             array_shift($fen);
             $this->fen = [
