@@ -97,6 +97,8 @@ class RavPlay extends AbstractPlay
             }
         }
 
+        $this->fen();
+
         return $this;
     }
 
@@ -105,7 +107,7 @@ class RavPlay extends AbstractPlay
      *
      * @return \Chess\Play\RavPlay
      */
-    public function fen(): RavPlay
+    protected function fen(): RavPlay
     {
         $sanPlay = (new SanPlay($this->breakdown[0], $this->initialBoard))->validate();
         $this->fen = $sanPlay->getFen();
