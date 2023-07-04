@@ -48,7 +48,7 @@ class RavPlay extends AbstractPlay
     public function __construct(string $movetext, ClassicalBoard $board = null)
     {
         $this->initialBoard = $board ?? new ClassicalBoard();
-        $this->board = $board ?? new ClassicalBoard();
+        $this->board = unserialize(serialize($board)) ?? new ClassicalBoard();
         $this->fen = [$this->board->toFen()];
         $this->ravMovetext = new RavMovetext($this->board->getMove(), $movetext);
         $this->ravMovetext->validate();
