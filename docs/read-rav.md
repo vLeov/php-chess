@@ -15,7 +15,7 @@ Then all you need is a RAV reader.
 ![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/read-rav_01.png)
 Figure 1. The response received from PHP Chess can be displayed as an HTML table.
 
-Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the fen() method. This method calculates the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
+Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the getFen() method. This method retrieves the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
 
 ```php
 use Chess\Play\RavPlay;
@@ -30,11 +30,9 @@ $movetext = "1.e4 c5
         )
     )";
 
-$ravPlay = new RavPlay($movetext);
+$ravPlay = (new RavPlay($movetext))->validate();
 
-$fen = $ravPlay
-    ->fen()
-    ->getFen();
+$fen = $ravPlay->getFen();
 
 print_r($fen);
 ```
@@ -76,11 +74,9 @@ $movetext = "1.e4 c5 {enters the Sicilian Defense.}
         )
     )";
 
-$ravPlay = new RavPlay($movetext);
+$ravPlay = (new RavPlay($movetext))->validate();
 
-$fen = $ravPlay
-    ->fen()
-    ->getFen();
+$fen = $ravPlay->getFen();
 
 print_r($fen);
 ```
@@ -109,7 +105,7 @@ Array
 )
 ```
 
-The fen() method will throw a Chess\Exception\PlayException if the RAV movetext is not valid, so this is how to obtain a validated movetext.
+In both cases the validate() method will throw a Chess\Exception\PlayException if the RAV movetext is not valid. This is how to obtain the validated movetext.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->getMovetext();
