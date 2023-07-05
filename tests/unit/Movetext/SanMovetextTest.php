@@ -231,10 +231,7 @@ class SanMovetextTest extends AbstractUnitTestCase
      */
     public function validate_curly_braces($expected, $movetext)
     {
-        $this->assertSame(
-            $expected,
-            (new SanMovetext(self::$move, $movetext))->validate()
-        );
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->validate());
     }
 
     /**
@@ -243,10 +240,7 @@ class SanMovetextTest extends AbstractUnitTestCase
      */
     public function filtered($expected, $movetext)
     {
-        $this->assertSame(
-            $expected,
-            (new SanMovetext(self::$move, $movetext))->filtered()
-        );
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->filtered());
     }
 
     /**
@@ -255,10 +249,7 @@ class SanMovetextTest extends AbstractUnitTestCase
      */
     public function validate_parentheses($expected, $movetext)
     {
-        $this->assertSame(
-            $expected,
-            (new SanMovetext(self::$move, $movetext))->validate()
-        );
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->validate());
     }
 
     /**
@@ -267,10 +258,7 @@ class SanMovetextTest extends AbstractUnitTestCase
      */
     public function validate_too_many_spaces($expected, $movetext)
     {
-        $this->assertSame(
-            $expected,
-            (new SanMovetext(self::$move, $movetext))->validate()
-        );
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->validate());
     }
 
     /**
@@ -279,10 +267,7 @@ class SanMovetextTest extends AbstractUnitTestCase
      */
     public function validate_fide($expected, $movetext)
     {
-        $this->assertSame(
-            $expected,
-            (new SanMovetext(self::$move, $movetext))->validate()
-        );
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->validate());
     }
 
     /**
@@ -291,10 +276,7 @@ class SanMovetextTest extends AbstractUnitTestCase
      */
     public function validate_with_result($expected, $movetext)
     {
-        $this->assertSame(
-            $expected,
-            (new SanMovetext(self::$move, $movetext))->validate()
-        );
+        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->validate());
     }
 
     public function validData()
