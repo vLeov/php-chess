@@ -100,6 +100,18 @@ class RavMovetextTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function filtered_Ra7_Kg8__Kf3()
+    {
+        $movetext = "1  . Ra7 Kg8 2 .Kg2 {activates the White king. The combined action of King and Rook is needed to arrive at a position in which mate can be forced.} Kf8 3.Kf3";
+
+        $expected = "1.Ra7 Kg8 2.Kg2 {activates the White king. The combined action of King and Rook is needed to arrive at a position in which mate can be forced.} Kf8 3.Kf3";
+
+        $this->assertEquals($expected, (new RavMovetext(self::$move, $movetext))->filtered());
+    }
+
+    /**
+     * @test
+     */
     public function sicilian_commented()
     {
         $movetext = '1.e4 c5 {foo} (2.Nf3 d6 {foobar}) (2.Nf3 Nc6)';

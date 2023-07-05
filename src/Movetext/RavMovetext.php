@@ -109,16 +109,18 @@ class RavMovetext extends AbstractMovetext
         $str = preg_replace('/\s+/', ' ', $str);
         // remove space between dots
         $str = preg_replace('/\s\./', '.', $str);
-        // remove space after dots
-        $str = preg_replace('/\.\s/', '.', $str);
-
+        // remove space after dots only in the text outside brackets
+        preg_match_all('/[^{}]*(?=(?:[^}]*{[^{]*})*[^{}]*$)/', $str, $matches);
+        foreach (array_filter($matches[0]) as $match) {
+            $replaced = preg_replace('/\.\s/', '.', $match);
+            $str = str_replace($match, $replaced, $str);
+        }
         if (!$comments) {
             // remove comments
             $str = preg_replace('(\{.*?\})', '', $this->filtered());
             // replace multiple spaces with a single space
             $str = preg_replace('/\s+/', ' ', $str);
         }
-
         // remove the blank space before and after parentheses
         $str = preg_replace('/\( /', '', $str);
         $str = preg_replace('/ \)/', ')', $str);
