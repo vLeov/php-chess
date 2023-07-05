@@ -156,7 +156,7 @@ $fen = $ravPlay->getFen();
 print_r($fen);
 ```
 
-```
+```text
 Array
 (
     [0] => 7k/8/8/8/8/8/8/R6K w - -
