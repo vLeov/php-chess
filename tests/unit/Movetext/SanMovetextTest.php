@@ -37,6 +37,16 @@ class SanMovetextTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function foo()
+    {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+
+        (new SanMovetext(self::$move, 'foo'))->validate();
+    }
+
+    /**
+     * @test
+     */
     public function get_movetext()
     {
         $movetext = '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5';
@@ -187,22 +197,24 @@ class SanMovetextTest extends AbstractUnitTestCase
     }
 
     /**
+     * @test
+     */
+    public function filtered_Ra7_Kg8__Kf3()
+    {
+        $movetext = "1.Ra7 Kg8 2.Kg2 {activates the White king. The combined action of King and Rook is needed to arrive at a position in which mate can be forced.} Kf8 3.Kf3";
+
+        $expected = "1.Ra7 Kg8 2.Kg2 {activates the White king. The combined action of King and Rook is needed to arrive at a position in which mate can be forced.} Kf8 3.Kf3";
+
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->filtered());
+    }
+
+    /**
      * @dataProvider sequenceData
      * @test
      */
     public function sequence($movetext, $expected)
     {
         $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->sequence());
-    }
-
-    /**
-     * @test
-     */
-    public function foo()
-    {
-        $this->expectException(\Chess\Exception\UnknownNotationException::class);
-
-        (new SanMovetext(self::$move, 'foo'))->validate();
     }
 
     /**
