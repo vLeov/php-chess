@@ -1007,6 +1007,61 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function chess_fundamentals_tutorial()
+    {
+        $fen = '7k/8/8/8/8/8/8/R6K w - -';
+
+        $movetext = "1.Ra7 Kg8 2.Kg2 Kf8 3.Kf3 Ke8 4.Ke4 Kd8 5.Kd5 Kc8
+            (5...Ke8 6.Kd6 Kf8 7.Ke6 Kg8 8.Kf6 Kh8 9.Kg6 Kg8 10.Ra8#)
+            6.Kd6 Kb8
+            (6...Kd8 7.Ra8#)
+            7.Rc7 Ka8 8.Kc6 Kb8 9.Kb6 Ka8 10.Rc8#";
+
+        $expected = [
+            '7k/8/8/8/8/8/8/R6K w - -',
+            '7k/R7/8/8/8/8/8/7K b - -',
+            '6k1/R7/8/8/8/8/8/7K w - -',
+            '6k1/R7/8/8/8/8/6K1/8 b - -',
+            '5k2/R7/8/8/8/8/6K1/8 w - -',
+            '5k2/R7/8/8/8/5K2/8/8 b - -',
+            '4k3/R7/8/8/8/5K2/8/8 w - -',
+            '4k3/R7/8/8/4K3/8/8/8 b - -',
+            '3k4/R7/8/8/4K3/8/8/8 w - -',
+            '3k4/R7/8/3K4/8/8/8/8 b - -',
+            '2k5/R7/8/3K4/8/8/8/8 w - -',
+            '4k3/R7/8/3K4/8/8/8/8 w - -',
+            '4k3/R7/3K4/8/8/8/8/8 b - -',
+            '5k2/R7/3K4/8/8/8/8/8 w - -',
+            '5k2/R7/4K3/8/8/8/8/8 b - -',
+            '6k1/R7/4K3/8/8/8/8/8 w - -',
+            '6k1/R7/5K2/8/8/8/8/8 b - -',
+            '7k/R7/5K2/8/8/8/8/8 w - -',
+            '7k/R7/6K1/8/8/8/8/8 b - -',
+            '6k1/R7/6K1/8/8/8/8/8 w - -',
+            'R5k1/8/6K1/8/8/8/8/8 b - -',
+            '2k5/R7/3K4/8/8/8/8/8 b - -',
+            '1k6/R7/3K4/8/8/8/8/8 w - -',
+            '3k4/R7/3K4/8/8/8/8/8 w - -',
+            'R2k4/8/3K4/8/8/8/8/8 b - -',
+            '1k6/2R5/3K4/8/8/8/8/8 b - -',
+            'k7/2R5/3K4/8/8/8/8/8 w - -',
+            'k7/2R5/2K5/8/8/8/8/8 b - -',
+            '1k6/2R5/2K5/8/8/8/8/8 w - -',
+            '1k6/2R5/1K6/8/8/8/8/8 b - -',
+            'k7/2R5/1K6/8/8/8/8/8 w - -',
+            'k1R5/8/1K6/8/8/8/8/8 b - -',
+        ];
+
+        $board = FenToBoard::create($fen);
+
+        $ravPlay = (new RavPlay($movetext, $board))->validate();
+
+        $this->assertSame($expected, $ravPlay->getFen());
+    }
+
+    /**
+     * @test
+     */
     public function chess_fundamentals_tutorial_commented()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
