@@ -123,7 +123,7 @@ echo $movetext;
 1.e4 c5 {enters the Sicilian Defense, the most popular and best-scoring response to White's first move.} (2.Nf3 {is played in about 80% of Master-level games after which there are three main options for Black.} (2...Nc6) (2...e6) (2...d6 {is Black's most common move.} 3.d4 {lines are collectively known as the Open Sicilian.} cxd4 4.Nxd4 Nf6 5.Nc3 {allows Black choose between four major variations: the Najdorf, Dragon, Classical and Scheveningen.} (5...a6 {is played in the Najdorf variation.}) (5...g6 {is played in the Dragon variation.}) (5...Nc6 {is played in the Classical variation.}) (5...e6 {is played in the Scheveningen variation.})))
 ```
 
-Also comments can be easily removed using the filtered() method.
+Comments are removed by passing the false value to the filtered() method.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->filtered($comments = false);
@@ -133,6 +133,65 @@ echo $movetext;
 
 ```text
 1.e4 c5 (2.Nf3 (2...Nc6) (2...e6) (2...d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 (5...a6) (5...g6) (5...Nc6) (5...e6)))
+```
+
+RAV files can also be loaded from a particular FEN position as opposed to the start position.
+
+```php
+use Chess\FenToBoard;
+use Chess\Play\RavPlay;
+
+$movetext = "1.Ra7 Kg8 2.Kg2 Kf8 3.Kf3 Ke8 4.Ke4 Kd8 5.Kd5 Kc8
+    (5...Ke8 6.Kd6 Kf8 7.Ke6 Kg8 8.Kf6 Kh8 9.Kg6 Kg8 10.Ra8#)
+    6.Kd6 Kb8
+    (6...Kd8 7.Ra8#)
+    7.Rc7 Ka8 8.Kc6 Kb8 9.Kb6 Ka8 10.Rc8#";
+
+$board = FenToBoard::create('7k/8/8/8/8/8/8/R6K w - -');
+
+$ravPlay = (new RavPlay($movetext, $board))->validate();
+
+$fen = $ravPlay->getFen();
+
+print_r($fen);
+```
+
+```
+Array
+(
+    [0] => 7k/8/8/8/8/8/8/R6K w - -
+    [1] => 7k/R7/8/8/8/8/8/7K b - -
+    [2] => 6k1/R7/8/8/8/8/8/7K w - -
+    [3] => 6k1/R7/8/8/8/8/6K1/8 b - -
+    [4] => 5k2/R7/8/8/8/8/6K1/8 w - -
+    [5] => 5k2/R7/8/8/8/5K2/8/8 b - -
+    [6] => 4k3/R7/8/8/8/5K2/8/8 w - -
+    [7] => 4k3/R7/8/8/4K3/8/8/8 b - -
+    [8] => 3k4/R7/8/8/4K3/8/8/8 w - -
+    [9] => 3k4/R7/8/3K4/8/8/8/8 b - -
+    [10] => 2k5/R7/8/3K4/8/8/8/8 w - -
+    [11] => 4k3/R7/8/3K4/8/8/8/8 w - -
+    [12] => 4k3/R7/3K4/8/8/8/8/8 b - -
+    [13] => 5k2/R7/3K4/8/8/8/8/8 w - -
+    [14] => 5k2/R7/4K3/8/8/8/8/8 b - -
+    [15] => 6k1/R7/4K3/8/8/8/8/8 w - -
+    [16] => 6k1/R7/5K2/8/8/8/8/8 b - -
+    [17] => 7k/R7/5K2/8/8/8/8/8 w - -
+    [18] => 7k/R7/6K1/8/8/8/8/8 b - -
+    [19] => 6k1/R7/6K1/8/8/8/8/8 w - -
+    [20] => R5k1/8/6K1/8/8/8/8/8 b - -
+    [21] => 2k5/R7/3K4/8/8/8/8/8 b - -
+    [22] => 1k6/R7/3K4/8/8/8/8/8 w - -
+    [23] => 3k4/R7/3K4/8/8/8/8/8 w - -
+    [24] => R2k4/8/3K4/8/8/8/8/8 b - -
+    [25] => 1k6/2R5/3K4/8/8/8/8/8 b - -
+    [26] => k7/2R5/3K4/8/8/8/8/8 w - -
+    [27] => k7/2R5/2K5/8/8/8/8/8 b - -
+    [28] => 1k6/2R5/2K5/8/8/8/8/8 w - -
+    [29] => 1k6/2R5/1K6/8/8/8/8/8 b - -
+    [30] => k7/2R5/1K6/8/8/8/8/8 w - -
+    [31] => k1R5/8/1K6/8/8/8/8/8 b - -
+)
 ```
 
 🎉 So this is amazing! That's all we need to read and write chess tutorials, guides and how-tos.
