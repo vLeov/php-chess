@@ -174,7 +174,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_e4_e5__h5()
+    public function get_fen_e4_e5__h5()
     {
         $movetext = '1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5
             (11. Nb1 h6 12. h4
@@ -287,7 +287,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_d4_d5__Nxb5_Ng4()
+    public function get_fen_d4_d5__Nxb5_Ng4()
     {
         $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
 
@@ -313,7 +313,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_and_fen_d4_d5__Nxb5_Ng4()
+    public function play_and_get_fen_d4_d5__Nxb5_Ng4()
     {
         $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
 
@@ -390,7 +390,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ra7_Kg8__Kd5_Kc8()
+    public function get_fen_chess_fundamentals_Ra7_Kg8__Kd5_Kc8()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
@@ -419,7 +419,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ra7_Kg8__Ra8()
+    public function get_fen_chess_fundamentals_Ra7_Kg8__Ra8()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
@@ -459,7 +459,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ra7_Kg8__Kd6()
+    public function get_fen_chess_fundamentals_Ra7_Kg8__Kd6()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
@@ -501,7 +501,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ra7_Kg8__Kd8()
+    public function get_fen_chess_fundamentals_Ra7_Kg8__Kd8()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
@@ -546,7 +546,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ra7_Kg8__Kb8()
+    public function get_fen_chess_fundamentals_Ra7_Kg8__Kb8()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
@@ -593,7 +593,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ra7_Kg8__Kd8_Ra8()
+    public function get_fen_chess_fundamentals_Ra7_Kg8__Kd8_Ra8()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
@@ -643,7 +643,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ke2_Kd5__Kc4()
+    public function get_fen_chess_fundamentals_Ke2_Kd5__Kc4()
     {
         $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
 
@@ -667,7 +667,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ke2_Kd5__Ke5_Rh5()
+    public function get_fen_chess_fundamentals_Ke2_Kd5__Ke5_Rh5()
     {
         $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
 
@@ -693,7 +693,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ke2_Kd5__Rh5()
+    public function get_fen_chess_fundamentals_Ke2_Kd5__Rh5()
     {
         $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
 
@@ -721,7 +721,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ke2_Kd5__Kb4_Kd3()
+    public function get_fen_chess_fundamentals_Ke2_Kd5__Kb4_Kd3()
     {
         $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
 
@@ -752,7 +752,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_chess_fundamentals_Ke2_Kd5__Ra1()
+    public function get_fen_chess_fundamentals_Ke2_Kd5__Ra1()
     {
         $fen = '8/8/8/4k3/8/8/8/4K2R w - -';
 
@@ -800,7 +800,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_sicilian_defense_e4_c5_Nf3()
+    public function get_fen_sicilian_defense_e4_c5_Nf3()
     {
         $movetext = '1. e4 c5
             (2.Nf3 d6)
@@ -827,7 +827,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_sicilian_defense_e4_c5_Nf3_d6()
+    public function get_fen_sicilian_defense_e4_c5_Nf3_d6()
     {
         $movetext = '1. e4 c5
             (2.Nf3 d6)
@@ -884,7 +884,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_sicilian_uncommented()
+    public function get_fen_sicilian_uncommented()
     {
         $movetext = '1.e4 c5 (2.Nf3 d6) (2.Nf3 Nc6)';
 
@@ -906,7 +906,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_sicilian_commented()
+    public function get_fen_sicilian_commented()
     {
         $movetext = '1.e4 c5 {foo} (2.Nf3 d6 {foobar}) (2.Nf3 Nc6)';
 
@@ -928,7 +928,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_open_sicilian_tutorial_uncommented()
+    public function get_fen_open_sicilian_tutorial_uncommented()
     {
         $movetext = "1.e4 c5
             (2.Nf3 (2... Nc6) (2... e6)
@@ -967,7 +967,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function fen_open_sicilian_tutorial_commented()
+    public function get_fen_open_sicilian_tutorial_commented()
     {
         $movetext = "1.e4 c5 {enters the Sicilian Defense, the most popular and best-scoring response to White's first move.}
             (2.Nf3 {is played in about 80% of Master-level games after which there are three main options for Black.} (2... Nc6) (2... e6)
