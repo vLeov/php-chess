@@ -1007,7 +1007,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function chess_fundamentals_tutorial()
+    public function chess_fundamentals_tutorial_simple_mates_01()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
@@ -1062,7 +1062,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function chess_fundamentals_tutorial_commented()
+    public function chess_fundamentals_tutorial_simple_mates_01_commented()
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
