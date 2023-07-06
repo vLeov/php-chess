@@ -1162,4 +1162,53 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $ravPlay->getFen());
     }
+
+    /**
+     * @test
+     */
+    public function chess_fundamentals_tutorial_simple_mates_02_commented()
+    {
+        $fen = '8/8/8/4k3/8/8/8/4K2R w - - 0 1';
+
+        $movetext = "1.Ke2 {Since the Black King is in the center of the board, the best way to proceed is to advance the White King.} Kd5 2.Ke3 {As the Rook has not yet come into play, it is better to advance the King straight into the center of the board, not in front, but to one side of the other King.} Kc4
+            (2...Ke5 Rh5+)
+            3.Rh5 Kc3
+            (3...Kb4 4.Kd3)
+            4.Rh4 {Keeping the King confined to as few squares as possible. Now the ending may continue as follows.} Kc2 5.Rc4+ Kb3 6.Kd3 Kb2 7.Rb4+ Ka3 8.Kc3 Ka2 {It should be noticed how often the White King has moved next to the Rook, not only to defend it, but also to reduce the mobility of the opposing King. Now White mates in three moves.} 9.Ra4+ Kb1 10.Ra5 {Or any square of the a-file, forcing the Black King in front of the White.} Kc1 11.Ra1#";
+
+        $expected = [
+            '8/8/8/4k3/8/8/8/4K2R w - -',
+            '8/8/8/4k3/8/8/4K3/7R b - -',
+            '8/8/8/3k4/8/8/4K3/7R w - -',
+            '8/8/8/3k4/8/4K3/8/7R b - -',
+            '8/8/8/8/2k5/4K3/8/7R w - -',
+            '8/8/8/4k3/8/4K3/8/7R w - -',
+            '8/8/8/4k2R/8/4K3/8/8 b - -',
+            '8/8/8/7R/2k5/4K3/8/8 b - -',
+            '8/8/8/7R/8/2k1K3/8/8 w - -',
+            '8/8/8/7R/1k6/4K3/8/8 w - -',
+            '8/8/8/7R/1k6/3K4/8/8 b - -',
+            '8/8/8/8/7R/2k1K3/8/8 b - -',
+            '8/8/8/8/7R/4K3/2k5/8 w - -',
+            '8/8/8/8/2R5/4K3/2k5/8 b - -',
+            '8/8/8/8/2R5/1k2K3/8/8 w - -',
+            '8/8/8/8/2R5/1k1K4/8/8 b - -',
+            '8/8/8/8/2R5/3K4/1k6/8 w - -',
+            '8/8/8/8/1R6/3K4/1k6/8 b - -',
+            '8/8/8/8/1R6/k2K4/8/8 w - -',
+            '8/8/8/8/1R6/k1K5/8/8 b - -',
+            '8/8/8/8/1R6/2K5/k7/8 w - -',
+            '8/8/8/8/R7/2K5/k7/8 b - -',
+            '8/8/8/8/R7/2K5/8/1k6 w - -',
+            '8/8/8/R7/8/2K5/8/1k6 b - -',
+            '8/8/8/R7/8/2K5/8/2k5 w - -',
+            '8/8/8/8/8/2K5/8/R1k5 b - -',
+        ];
+
+        $board = FenToBoard::create($fen);
+
+        $ravPlay = (new RavPlay($movetext, $board))->validate();
+
+        $this->assertSame($expected, $ravPlay->getFen());
+    }
 }
