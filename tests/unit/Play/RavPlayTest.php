@@ -1219,7 +1219,15 @@ class RavPlayTest extends AbstractUnitTestCase
     {
         $fen = '8/8/5k2/8/5K2/8/4P3/8 w - - 0 1';
 
-        $movetext = "1.Ke4 Ke6 2.e3 Kf6 3.Kd5 Ke7 4.Ke5 Kd7 5.Kf6 Ke8 6.e4 Kd7 7.e5 Ke8 8.Ke6 Kf8 9.Kd7";
+        $movetext = "1.Ke4 Ke6 2.e3 Kf6 3.Kd5 Ke7
+            (3...Kf5 4.e4+)
+          4.Ke5 Kd7 5.Kf6 Ke8 6.e4 Kd7 7.e5
+            (7.Kf7 Kd6)
+          7...Ke8
+            (7...Kd8 8.Kf7)
+          8.Ke6
+            (8.e6 Kf8)
+          8...Kf8 9.Kd7";
 
         $expected = [
           '8/8/5k2/8/5K2/8/4P3/8 w - -',
@@ -1229,6 +1237,8 @@ class RavPlayTest extends AbstractUnitTestCase
           '8/8/5k2/8/4K3/4P3/8/8 w - -',
           '8/8/5k2/3K4/8/4P3/8/8 b - -',
           '8/4k3/8/3K4/8/4P3/8/8 w - -',
+          '8/8/8/3K1k2/8/4P3/8/8 w - -',
+          '8/8/8/3K1k2/4P3/8/8/8 b - -',
           '8/4k3/8/4K3/8/4P3/8/8 b - -',
           '8/3k4/8/4K3/8/4P3/8/8 w - -',
           '8/3k4/5K2/8/8/4P3/8/8 b - -',
@@ -1236,8 +1246,67 @@ class RavPlayTest extends AbstractUnitTestCase
           '4k3/8/5K2/8/4P3/8/8/8 b - -',
           '8/3k4/5K2/8/4P3/8/8/8 w - -',
           '8/3k4/5K2/4P3/8/8/8/8 b - -',
+          '8/3k1K2/8/8/4P3/8/8/8 b - -',
+          '8/5K2/3k4/8/4P3/8/8/8 w - -',
           '4k3/8/5K2/4P3/8/8/8/8 w - -',
+          '3k4/8/5K2/4P3/8/8/8/8 w - -',
+          '3k4/5K2/8/4P3/8/8/8/8 b - -',
           '4k3/8/4K3/4P3/8/8/8/8 b - -',
+          '4k3/8/4PK2/8/8/8/8/8 b - -',
+          '5k2/8/4PK2/8/8/8/8/8 w - -',
+          '5k2/8/4K3/4P3/8/8/8/8 w - -',
+          '5k2/3K4/8/4P3/8/8/8/8 b - -',
+        ];
+
+        $board = FenToBoard::create($fen);
+
+        $ravPlay = (new RavPlay($movetext, $board))->validate();
+
+        $this->assertSame($expected, $ravPlay->getFen());
+    }
+
+    /**
+     * @test
+     */
+    public function chess_fundamentals_tutorial_simple_mates_03_commented()
+    {
+        $fen = '8/8/5k2/8/5K2/8/4P3/8 w - - 0 1';
+
+        $movetext = "1.Ke4 Ke6 {does not allow White's king to advance.} 2.e3 {advances the pawn forcing Black to move away.} Kf6 3.Kd5 Ke7
+            (3...Kf5 {forces White to advance the pawn to e4.} 4.e4+)
+          4.Ke5 {is the continuation of this example.} Kd7 5.Kf6 Ke8 6.e4 {brings up the pawn within protection of the king.} Kd7 7.e5 {is the right thing to do after 6...Kd7}
+            (7.Kf7 {is not the right move to make.} Kd6 {forces White to bring back its king to protect the pawn.})
+          7...Ke8 {is the continuation of this example.}
+            (7...Kd8 {is a variation that allows White to advance its pawn more quickly.} 8.Kf7 { and the advance of the pawn to e6, e7 and e8 will follow.})
+          8.Ke6 {is therefore the right thing to do after 7...Ke8}
+            (8.e6 {is a blunder that allows Black to draw.} Kf8 {draws the game.})
+          8...Kf8 9.Kd7";
+
+        $expected = [
+          '8/8/5k2/8/5K2/8/4P3/8 w - -',
+          '8/8/5k2/8/4K3/8/4P3/8 b - -',
+          '8/8/4k3/8/4K3/8/4P3/8 w - -',
+          '8/8/4k3/8/4K3/4P3/8/8 b - -',
+          '8/8/5k2/8/4K3/4P3/8/8 w - -',
+          '8/8/5k2/3K4/8/4P3/8/8 b - -',
+          '8/4k3/8/3K4/8/4P3/8/8 w - -',
+          '8/8/8/3K1k2/8/4P3/8/8 w - -',
+          '8/8/8/3K1k2/4P3/8/8/8 b - -',
+          '8/4k3/8/4K3/8/4P3/8/8 b - -',
+          '8/3k4/8/4K3/8/4P3/8/8 w - -',
+          '8/3k4/5K2/8/8/4P3/8/8 b - -',
+          '4k3/8/5K2/8/8/4P3/8/8 w - -',
+          '4k3/8/5K2/8/4P3/8/8/8 b - -',
+          '8/3k4/5K2/8/4P3/8/8/8 w - -',
+          '8/3k4/5K2/4P3/8/8/8/8 b - -',
+          '8/3k1K2/8/8/4P3/8/8/8 b - -',
+          '8/5K2/3k4/8/4P3/8/8/8 w - -',
+          '4k3/8/5K2/4P3/8/8/8/8 w - -',
+          '3k4/8/5K2/4P3/8/8/8/8 w - -',
+          '3k4/5K2/8/4P3/8/8/8/8 b - -',
+          '4k3/8/4K3/4P3/8/8/8/8 b - -',
+          '4k3/8/4PK2/8/8/8/8/8 b - -',
+          '5k2/8/4PK2/8/8/8/8/8 w - -',
           '5k2/8/4K3/4P3/8/8/8/8 w - -',
           '5k2/3K4/8/4P3/8/8/8/8 b - -',
         ];
