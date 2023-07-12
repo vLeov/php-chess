@@ -97,25 +97,27 @@ class SanMovetext extends AbstractMovetext
     protected function insert(): void
     {
         foreach (explode(' ', $this->validated) as $key => $val) {
-            if ($key === 0) {
-                if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
-                    $exploded = explode(Move::ELLIPSIS, $val);
-                    $this->moves[] = Move::ELLIPSIS;
-                    $this->moves[] = $exploded[1];
-                } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
-                    $this->moves[] = explode('.', $val)[1];
+            if (!NagMovetext::glyph($val)) {
+                if ($key === 0) {
+                    if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
+                        $exploded = explode(Move::ELLIPSIS, $val);
+                        $this->moves[] = Move::ELLIPSIS;
+                        $this->moves[] = $exploded[1];
+                    } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
+                        $this->moves[] = explode('.', $val)[1];
+                    } else {
+                        $this->moves[] = $val;
+                    }
                 } else {
-                    $this->moves[] = $val;
-                }
-            } else {
-                if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
-                    $exploded = explode(Move::ELLIPSIS, $val);
-                    $this->moves[] = Move::ELLIPSIS;
-                    $this->moves[] = $exploded[1];
-                } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
-                    $this->moves[] = explode('.', $val)[1];
-                } else {
-                    $this->moves[] = $val;
+                    if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
+                        $exploded = explode(Move::ELLIPSIS, $val);
+                        $this->moves[] = Move::ELLIPSIS;
+                        $this->moves[] = $exploded[1];
+                    } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
+                        $this->moves[] = explode('.', $val)[1];
+                    } else {
+                        $this->moves[] = $val;
+                    }
                 }
             }
         }
@@ -246,14 +248,25 @@ class SanMovetext extends AbstractMovetext
     /**
      * Filtered movetext.
      *
-     * The filtered movetext contains comments and parentheses.
-     *
+     * @param bool $nags
      * @return string
      */
-    public function filtered(): string
+    public function filtered($nags = true): string
     {
+        $str = $this->movetext;
+        // the filtered movetext contains NAGs by default
+        if (!$nags) {
+            // remove nags
+            preg_match_all('/\$[1-9][0-9]*/', $str, $matches);
+            usort($matches[0], function($a, $b) {
+                return strlen($a) < strlen($b);
+            });
+            foreach (array_filter($matches[0]) as $match) {
+                $str = str_replace($match, '', $str);
+            }
+        }
         // remove PGN symbols
-        $str = str_replace(Termination::values(), '', $this->movetext);
+        $str = str_replace(Termination::values(), '', $str);
         // remove variations
         $str = preg_replace('/\(([^()]|(?R))*\)/', '', $str);
         // replace FIDE notation with PGN notation
