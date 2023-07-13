@@ -70,7 +70,7 @@ class SanPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_fen_e4_c6__Nf3_dxe4_commented()
+    public function get_movetext_e4_c6__Nf3_dxe4_commented()
     {
         $movetext = '1. e4 c6 2. Nc3 d5 3. Nf3 { B10 Caro-Kann Defense: Two Knights Attack } 3...dxe4';
 
@@ -79,5 +79,19 @@ class SanPlayTest extends AbstractUnitTestCase
         $board = (new SanPlay($movetext))->validate()->getBoard();
 
         $this->assertSame($expected, $board->getMovetext());
+    }
+
+    /**
+     * @test
+     */
+    public function validate_with_nags_e4_c6__Nf3_dxe4()
+    {
+        $movetext = '1. e4 $2 c6 2. Nc3 d5 3. Nf3 $4 3...dxe4';
+
+        $expected = '1.e4 c6 2.Nc3 d5 3.Nf3 dxe4';
+
+        $sanPlay = (new SanPlay($movetext))->validate();
+
+        $this->assertSame($expected, $sanPlay->getBoard()->getMovetext());
     }
 }

@@ -156,7 +156,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_e4_e5__h5()
+    public function validate_e4_e5__h5()
     {
         $movetext = '1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5
             (11. Nb1 h6 12. h4
@@ -164,6 +164,25 @@ class RavPlayTest extends AbstractUnitTestCase
             12... a5 13. g4 Nxg4)
             11... Nxd5 12. Bxd5 Rb8 13. h4 h6 14. Rdg1 a5 15. g4 g5 16. h5
             (16. hxg5 Bxg5 17. Nxg5 hxg5 18. Rh5)';
+
+        $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 Nxd5 12.Bxd5 Rb8 13.h4 h6 14.Rdg1 a5 15.g4 g5 16.h5';
+
+        $ravPlay = (new RavPlay($movetext))->validate();
+
+        $this->assertSame($expected, $ravPlay->getBoard()->getMovetext());
+    }
+
+    /**
+     * @test
+     */
+    public function validate_with_nags_e4_e5__h5()
+    {
+        $movetext = '1. e4 $1 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5
+            (11. Nb1 h6 12. h4
+            (12. Nh4 g5 13. Nf5)
+            12... a5 13. g4 Nxg4)
+            11... Nxd5 12. Bxd5 Rb8 13. h4 h6 14. Rdg1 a5 15. g4 g5 16. h5
+            (16. hxg5 $2 Bxg5 17. Nxg5 hxg5 18. Rh5)';
 
         $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 Nxd5 12.Bxd5 Rb8 13.h4 h6 14.Rdg1 a5 15.g4 g5 16.h5';
 
@@ -274,20 +293,6 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function validate_d4_d5__Nxb5_Ng4()
-    {
-        $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7 6.Bd3 dxc4 7.Bxc4 b5 8.Bd3 a6 9.e4 c5 10.e5 cxd4 11.Nxb5 Ng4';
-
-        $expected = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7 6.Bd3 dxc4 7.Bxc4 b5 8.Bd3 a6 9.e4 c5 10.e5 cxd4 11.Nxb5 Ng4';
-
-        $ravPlay = (new RavPlay($movetext))->validate();
-
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getMovetext());
-    }
-
-    /**
-     * @test
-     */
     public function get_fen_d4_d5__Nxb5_Ng4()
     {
         $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
@@ -314,7 +319,7 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_and_get_fen_d4_d5__Nxb5_Ng4()
+    public function validate_and_get_fen_d4_d5__Nxb5_Ng4()
     {
         $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7';
 
@@ -343,7 +348,21 @@ class RavPlayTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function play_d4_d5__Nxb5_Ng4()
+    public function validate_d4_d5__Nxb5_Ng4()
+    {
+        $movetext = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7 6.Bd3 dxc4 7.Bxc4 b5 8.Bd3 a6 9.e4 c5 10.e5 cxd4 11.Nxb5 Ng4';
+
+        $expected = '1.d4 d5 2.c4 c6 3.Nc3 Nf6 4.e3 e6 5.Nf3 Nbd7 6.Bd3 dxc4 7.Bxc4 b5 8.Bd3 a6 9.e4 c5 10.e5 cxd4 11.Nxb5 Ng4';
+
+        $ravPlay = (new RavPlay($movetext))->validate();
+
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->getMovetext());
+    }
+
+    /**
+     * @test
+     */
+    public function validate_d4_d5__Nxb5_Ng4_commented()
     {
         $movetext = '1. e4 e5 {foo} 2. Nf3 {bar} Nc6 3. Bb5 Nf6 4. Nc3 Be7 5. d3 d6 6. Be3 Bd7 7. Qd2 a6 8. Ba4 b5 9. Bb3 O-O 10. O-O-O b4 11. Nd5 {foobar}
             (11. Nb1 h6 12. h4
