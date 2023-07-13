@@ -111,7 +111,7 @@ class RavPlay extends AbstractPlay
     {
         $sanPlay = (new SanPlay($this->breakdown[0], $this->initialBoard))->validate();
         $this->fen = $sanPlay->getFen();
-        $this->resume[$this->breakdown[0]] = $sanPlay->getBoard();
+        $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->getBoard();
         for ($i = 1; $i < count($this->breakdown); $i++) {
             $sanMovetext = new SanMovetext($this->ravMovetext->getMove(), $this->breakdown[$i]);
             foreach ($this->resume as $key => $val) {
@@ -125,16 +125,14 @@ class RavPlay extends AbstractPlay
                     }
                 }
             }
-            if (isset($board)) {
-                $sanPlay = (new SanPlay($this->breakdown[$i], $board))->validate();
-                $this->resume[$this->breakdown[$i]] = $sanPlay->getBoard();
-                $fen = $sanPlay->getFen();
-                array_shift($fen);
-                $this->fen = [
-                    ...$this->fen,
-                    ...$fen,
-                ];
-            }
+            $sanPlay = (new SanPlay($this->breakdown[$i], $board))->validate();
+            $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->getBoard();
+            $fen = $sanPlay->getFen();
+            array_shift($fen);
+            $this->fen = [
+                ...$this->fen,
+                ...$fen,
+            ];
         }
 
         return $this;
@@ -177,7 +175,7 @@ class RavPlay extends AbstractPlay
     {
         $parent = new SanMovetext($this->ravMovetext->getMove(), $parent);
         $child = new SanMovetext($this->ravMovetext->getMove(), $child);
-        if (!str_contains($this->ravMovetext->filtered($comments = false), "{$parent->getMovetext()})")) {
+        if (!str_contains($this->ravMovetext->filtered(false, false), "{$parent->getMovetext()})")) {
             if ($parent->getMetadata()->number->first === $child->getMetadata()->number->first) {
                 return true;
             } elseif ($parent->getMetadata()->number->first !== $parent->getMetadata()->number->current) {
