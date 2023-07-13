@@ -178,10 +178,10 @@ echo $sanPlay->getSanMovetext()->filtered();
 1.e4 c5 2.Nf3 $1 d6 3.d4 cxd4 4.Nxd4 $48 Nf6 $113
 ```
 
-NAGs can be removed by passing the false value to the filtered() method.
+NAGs can be removed by passing the false value to the second argument of the filtered() method.
 
 ```php
-echo $sanPlay->getSanMovetext()->filtered($nags = false);
+echo $sanPlay->getSanMovetext()->filtered($comments = true, $nags = false);
 ```
 
 ```text
