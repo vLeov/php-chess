@@ -3,6 +3,7 @@
 namespace Chess\Movetext;
 
 use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Termination;
 
 /**
  * AbstractMovetext.
@@ -91,6 +92,53 @@ abstract class AbstractMovetext
     }
 
     /**
+     * Filtered movetext.
+     *
+     * @param bool $comments
+     * @param bool $nags
+     * @return string
+     */
+    public function filtered($comments = true, $nags = true): string
+    {
+        $str = $this->movetext;
+        // the filtered movetext contains comments and NAGs by default
+        if (!$comments) {
+            // remove comments
+            $str = preg_replace('(\{.*?\})', '', $str);
+        }
+        if (!$nags) {
+            // remove nags
+            preg_match_all('/\$[1-9][0-9]*/', $str, $matches);
+            usort($matches[0], function($a, $b) {
+                return strlen($a) < strlen($b);
+            });
+            foreach (array_filter($matches[0]) as $match) {
+                $str = str_replace($match, '', $str);
+            }
+        }
+        // remove PGN symbols
+        $str = str_replace(Termination::values(), '', $str);
+        // replace FIDE notation with PGN notation
+        $str = str_replace('0-0', 'O-O', $str);
+        $str = str_replace('0-0-0', 'O-O-O', $str);
+        // replace multiple spaces with a single space
+        $str = preg_replace('/\s+/', ' ', $str);
+        // remove space between dots
+        $str = preg_replace('/\s\./', '.', $str);
+        // remove space after dots only in the text outside brackets
+        preg_match_all('/[^{}]*(?=(?:[^}]*{[^{]*})*[^{}]*$)/', $str, $matches);
+        foreach (array_filter($matches[0]) as $match) {
+            $replaced = preg_replace('/\.\s/', '.', $match);
+            $str = str_replace($match, $replaced, $str);
+        }
+        // remove the blank space before and after parentheses
+        $str = preg_replace('/\( /', '(', $str);
+        $str = preg_replace('/ \)/', ')', $str);
+
+        return trim($str);
+    }
+
+    /**
      * Before inserting elements into the array of moves.
      *
      * @return \Chess\Movetext\AbstractMovetext
@@ -109,13 +157,4 @@ abstract class AbstractMovetext
      * @return string
      */
     abstract public function validate(): string;
-
-    /**
-     * Filtered movetext.
-     *
-     * @param bool $comments
-     * @param bool $nags
-     * @return string
-     */
-    abstract public function filtered($comments = true, $nags = true): string;
 }
