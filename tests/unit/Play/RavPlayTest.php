@@ -1544,4 +1544,20 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $ravPlay->getFen());
     }
+
+    /**
+     * @test
+     */
+    public function validate_with_nags_e4_c5__e6()
+    {
+        $movetext = '1.e4 $1 c5 (2.Nf3 (2...Nc6) (2...e6) (2...d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 (5...a6) (5...g6) (5...Nc6) (5...e6)))';
+
+        $expected = '1.e4 c5 (2.Nf3 (2...Nc6) (2...e6) (2...d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 (5...a6) (5...g6) (5...Nc6) (5...e6)))';
+
+        $ravPlay = new RavPlay($movetext);
+
+        $ravPlay->validate();
+
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->filtered($nags = false));
+    }
 }
