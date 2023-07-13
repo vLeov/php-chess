@@ -102,8 +102,9 @@ class RavMovetext extends AbstractMovetext
      */
     public function filtered($comments = true, $nags = true): string
     {
+        $str = $this->movetext;
         // remove PGN symbols
-        $str = str_replace(Termination::values(), '', $this->movetext);
+        $str = str_replace(Termination::values(), '', $str);
         // replace FIDE notation with PGN notation
         $str = str_replace('0-0', 'O-O', $str);
         $str = str_replace('0-0-0', 'O-O-O', $str);
