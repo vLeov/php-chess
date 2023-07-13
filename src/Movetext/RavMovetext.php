@@ -60,13 +60,15 @@ class RavMovetext extends AbstractMovetext
     protected function insert(): void
     {
         foreach (explode(' ', $this->validated) as $key => $val) {
-            if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
-                $exploded = explode(Move::ELLIPSIS, $val);
-                $this->moves[] = $exploded[1];
-            } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
-                $this->moves[] = explode('.', $val)[1];
-            } else {
-                $this->moves[] = $val;
+            if (!NagMovetext::glyph($val)) {
+                if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
+                    $exploded = explode(Move::ELLIPSIS, $val);
+                    $this->moves[] = $exploded[1];
+                } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
+                    $this->moves[] = explode('.', $val)[1];
+                } else {
+                    $this->moves[] = $val;
+                }
             }
         }
 
