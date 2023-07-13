@@ -1558,6 +1558,6 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->filtered($nags = false));
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->filtered($comments = false, $nags = false));
     }
 }

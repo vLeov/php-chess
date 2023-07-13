@@ -257,7 +257,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = "1.Ra7 Kg8 2.Kg2 {activates the White king. The combined action of King and Rook is needed to arrive at a position in which mate can be forced.} Kf8 3.Kf3";
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->filtered($nags = false));
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->filtered($comments = true, $nags = false));
     }
 
     /**
@@ -269,7 +269,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->filtered($nags = false));
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->filtered($comments = true, $nags = false));
     }
 
     /**

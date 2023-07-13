@@ -113,9 +113,9 @@ abstract class AbstractMovetext
     /**
      * Filtered movetext.
      *
-     * The filtered movetext contains comments and parentheses.
-     *
+     * @param bool $comments
+     * @param bool $nags
      * @return string
      */
-    abstract public function filtered(): string;
+    abstract public function filtered($comments = true, $nags = true): string;
 }

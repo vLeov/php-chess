@@ -96,12 +96,11 @@ class RavMovetext extends AbstractMovetext
     /**
      * Filtered movetext.
      *
-     * The filtered movetext contains comments by default.
-     *
      * @param bool $comments
+     * @param bool $nags
      * @return string
      */
-    public function filtered($comments = true): string
+    public function filtered($comments = true, $nags = true): string
     {
         // remove PGN symbols
         $str = str_replace(Termination::values(), '', $this->movetext);
@@ -118,9 +117,22 @@ class RavMovetext extends AbstractMovetext
             $replaced = preg_replace('/\.\s/', '.', $match);
             $str = str_replace($match, $replaced, $str);
         }
+        // the filtered movetext contains comments and NAGs by default
         if (!$comments) {
             // remove comments
             $str = preg_replace('(\{.*?\})', '', $this->filtered());
+            // replace multiple spaces with a single space
+            $str = preg_replace('/\s+/', ' ', $str);
+        }
+        if (!$nags) {
+            // remove nags
+            preg_match_all('/\$[1-9][0-9]*/', $str, $matches);
+            usort($matches[0], function($a, $b) {
+                return strlen($a) < strlen($b);
+            });
+            foreach (array_filter($matches[0]) as $match) {
+                $str = str_replace($match, '', $str);
+            }
             // replace multiple spaces with a single space
             $str = preg_replace('/\s+/', ' ', $str);
         }

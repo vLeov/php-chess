@@ -248,23 +248,13 @@ class SanMovetext extends AbstractMovetext
     /**
      * Filtered movetext.
      *
+     * @param bool $comments
      * @param bool $nags
      * @return string
      */
-    public function filtered($nags = true): string
+    public function filtered($comments = true, $nags = true): string
     {
         $str = $this->movetext;
-        // the filtered movetext contains NAGs by default
-        if (!$nags) {
-            // remove nags
-            preg_match_all('/\$[1-9][0-9]*/', $str, $matches);
-            usort($matches[0], function($a, $b) {
-                return strlen($a) < strlen($b);
-            });
-            foreach (array_filter($matches[0]) as $match) {
-                $str = str_replace($match, '', $str);
-            }
-        }
         // remove PGN symbols
         $str = str_replace(Termination::values(), '', $str);
         // remove variations
@@ -281,6 +271,25 @@ class SanMovetext extends AbstractMovetext
         foreach (array_filter($matches[0]) as $match) {
             $replaced = preg_replace('/\.\s/', '.', $match);
             $str = str_replace($match, $replaced, $str);
+        }
+        // the filtered movetext contains NAGs by default
+        if (!$comments) {
+            // remove comments
+            $str = preg_replace('(\{.*?\})', '', $this->filtered());
+            // replace multiple spaces with a single space
+            $str = preg_replace('/\s+/', ' ', $str);
+        }
+        if (!$nags) {
+            // remove nags
+            preg_match_all('/\$[1-9][0-9]*/', $str, $matches);
+            usort($matches[0], function($a, $b) {
+                return strlen($a) < strlen($b);
+            });
+            foreach (array_filter($matches[0]) as $match) {
+                $str = str_replace($match, '', $str);
+            }
+            // replace multiple spaces with a single space
+            $str = preg_replace('/\s+/', ' ', $str);
         }
 
         return trim($str);
