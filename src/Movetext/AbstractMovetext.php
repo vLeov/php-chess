@@ -131,7 +131,9 @@ abstract class AbstractMovetext
             $replaced = preg_replace('/\.\s/', '.', $match);
             $str = str_replace($match, $replaced, $str);
         }
-        // remove the blank space before and after parentheses
+        // remove space between number and dot
+        $str = preg_replace('/\.\.\.\s/', '...', $str);
+        // remove space before and after parentheses
         $str = preg_replace('/\( /', '(', $str);
         $str = preg_replace('/ \)/', ')', $str);
 
