@@ -1085,10 +1085,11 @@ class RavPlayTest extends AbstractUnitTestCase
     {
         $fen = '7k/8/8/8/8/8/8/R6K w - -';
 
-        $movetext = "1.Ra7 {demonstrates the power of the Rook.} Kg8 {is the only possible move because the Black King has been confined to the last rank.} 2.Kg2 {activates the White king. The combined action of King and Rook is needed to arrive at a position in which mate can be forced.} Kf8 3.Kf3 Ke8 4.Ke4 {keeps the King on the same rank, or, as in this case, file, as the opposing King. This is the general principle for a beginner to follow.} Kd8 5.Kd5 Kc8
-            (5...Ke8 {is a continuation that ends in checkmate if the Black King is ultimately forced to move in front of the White King.} 6.Kd6 Kf8 7.Ke6 Kg8 8.Kf6 Kh8 9.Kg6 Kg8 10.Ra8#)
+        $movetext = "{The ending Rook and King against King. The principle is to drive the opposing King to the last line on any side of the board.}
+            1.Ra7 {demonstrates the power of the Rook.} Kg8 {is the only possible move because the Black King has been confined to the last rank.} 2.Kg2 {activates the White king. The combined action of King and Rook is needed to arrive at a position in which mate can be forced.} Kf8 3.Kf3 Ke8 4.Ke4 {keeps the King on the same rank, or, as in this case, file, as the opposing King. This is the general principle for a beginner to follow.} Kd8 5.Kd5 Kc8
+              (5...Ke8 {is a continuation that ends in checkmate if the Black King is ultimately forced to move in front of the White King.} 6.Kd6 Kf8 7.Ke6 Kg8 8.Kf6 Kh8 9.Kg6 Kg8 10.Ra8#)
             6.Kd6 {is the quickest way to deliver checkmate after 5...Kc8. Once the King is brought to the sixth rank, it is better to place it not on the same file, but on the one next to it towards the center.} Kb8
-            (6...Kd8 {is checkmate in one move.} 7.Ra8#)
+              (6...Kd8 {is checkmate in one move.} 7.Ra8#)
             7.Rc7 Ka8 8.Kc6 Kb8 9.Kb6 Ka8 10.Rc8# {It has taken exactly ten moves to mate from the original position.}";
 
         $expected = [
