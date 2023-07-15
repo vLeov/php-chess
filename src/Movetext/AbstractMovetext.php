@@ -136,6 +136,9 @@ abstract class AbstractMovetext
         // remove space before and after parentheses
         $str = preg_replace('/\( /', '(', $str);
         $str = preg_replace('/ \)/', ')', $str);
+        // remove space before and after curly brackets
+        $str = preg_replace('/\{ /', '{', $str);
+        $str = preg_replace('/ \}/', '}', $str);
 
         return trim($str);
     }
