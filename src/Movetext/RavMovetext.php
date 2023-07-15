@@ -110,6 +110,6 @@ class RavMovetext extends AbstractMovetext
         // replace multiple spaces with a single space
         $str = preg_replace('/\s+/', ' ', $str);
 
-        return $str;
+        return trim($str);
     }
 }
