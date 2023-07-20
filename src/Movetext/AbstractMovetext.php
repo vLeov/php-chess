@@ -53,7 +53,7 @@ abstract class AbstractMovetext
     public function __construct(Move $move, string $movetext)
     {
         $this->move = $move;
-        $this->movetext = $movetext;
+        $this->movetext = str_replace(["\r\n", "\r", "\n"], ' ', $movetext);
         $this->moves = [];
 
         $this->beforeInsert()->insert();
