@@ -254,47 +254,47 @@ class RavMovetext extends AbstractMovetext
        return $matches;
    }
 
-   /**
-    * Returns all lines sorted by depth level.
-    *
-    * @return array
-    */
-   public function lines(): array
-   {
-       $matches = [];
-       $str = $this->filtered(false, false);
-       $ravMovetext = unserialize(serialize($this));
-       $maxDepth = $ravMovetext->maxDepth();
+    /**
+     * Returns all lines sorted by depth level.
+     *
+     * @return array
+     */
+    public function lines(): array
+    {
+        $matches = [];
+        $str = $this->filtered(false, false);
+        $ravMovetext = unserialize(serialize($this));
+        $maxDepth = $ravMovetext->maxDepth();
 
-       do {
-           $matches[$maxDepth] = $ravMovetext->maxDepthStrings();
-           $enclosedMatches = [];
-           foreach ($matches[$maxDepth] as $match) {
-               $enclosedMatches[] = '(' . key($match) . ')';
-           }
-           $str = str_replace($enclosedMatches, '', $str);
-           $str = preg_replace('/\s+/', ' ', $str);
-           $str = preg_replace('/\( /', '(', $str);
-           $str = preg_replace('/ \)/', ')', $str);
-           $ravMovetext = new self($this->move, $str);
-           $maxDepth = $ravMovetext->maxDepth();
-       } while ($maxDepth > 0);
+        while ($maxDepth > 0) {
+            $matches[$maxDepth] = $ravMovetext->maxDepthStrings();
+            $enclosedMatches = [];
+            foreach ($matches[$maxDepth] as $match) {
+                $enclosedMatches[] = '(' . key($match) . ')';
+            }
+            $str = str_replace($enclosedMatches, '', $str);
+            $str = preg_replace('/\s+/', ' ', $str);
+            $str = preg_replace('/\( /', '(', $str);
+            $str = preg_replace('/ \)/', ')', $str);
+            $ravMovetext = new self($this->move, $str);
+            $maxDepth = $ravMovetext->maxDepth();
+        }
 
-       $mainLine = preg_replace('/\(([^()]|(?R))*\)/', '', $this->sanMovetext->filtered(false, false));
-       $mainLine = preg_replace('/\s+/', ' ', $mainLine);
-       $mainLine = preg_replace('/\( /', '(', $mainLine);
-       $mainLine = preg_replace('/ \)/', ')', $mainLine);
+        $mainLine = preg_replace('/\(([^()]|(?R))*\)/', '', $this->sanMovetext->filtered(false, false));
+        $mainLine = preg_replace('/\s+/', ' ', $mainLine);
+        $mainLine = preg_replace('/\( /', '(', $mainLine);
+        $mainLine = preg_replace('/ \)/', ')', $mainLine);
 
-       $matches[0] = [
-           [
-               $mainLine => null,
-           ],
-       ];
+        $matches[0] = [
+            [
+                $mainLine => null,
+            ],
+        ];
 
-       ksort($matches);
+        ksort($matches);
 
-       return $matches;
-   }
+        return $matches;
+    }
 
    /**
     * Returns the chunk of movetext immediately preceding the given substring.

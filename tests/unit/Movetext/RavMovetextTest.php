@@ -574,4 +574,22 @@ class RavMovetextTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $lines);
     }
+
+    /**
+     * @test
+     */
+    public function lines_e4_e5__Nf3_Nc6()
+    {
+        $movetext = '1.e4 e5 2.Nf3 Nc6';
+
+        $expected = [
+            0 => [
+                [ '1.e4 e5 2.Nf3 Nc6' => null ],
+            ],
+        ];
+
+        $lines = (new RavMovetext(self::$move, $movetext))->lines();
+
+        $this->assertSame($expected, $lines);
+    }
 }
