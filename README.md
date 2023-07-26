@@ -17,7 +17,7 @@ composer require chesslablab/php-chess
 
 ### Documentation
 
-Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/) as well as the [reference guide](https://www.chesslablab.com/documentation/).
+Read the latest docs [here](https://php-chess.readthedocs.io/en/latest/).
 
 ### Demo
 
