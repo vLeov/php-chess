@@ -43,6 +43,7 @@ class Tag extends AbstractNotation
     // event related information
     const EVENT_DATE = 'EventDate';
     const EVENT_SPONSOR = 'EventSponsor';
+    const EVENT_TYPE = 'EventType';
     const SECTION = 'Section';
     const STAGE = 'Stage';
     const BOARD = 'Board';
