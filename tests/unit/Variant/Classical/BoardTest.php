@@ -1804,7 +1804,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function init_board_and_promote_w_h8()
+    public function init_board_and_promote_w_h8_q()
     {
         $pieces = [
             new P('w', 'g2', self::$size),
