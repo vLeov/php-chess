@@ -12,7 +12,7 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 /**
  * Factory of chess board objects.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class FenToBoard

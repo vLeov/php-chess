@@ -9,7 +9,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 /**
  * Piece array.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class PieceArray

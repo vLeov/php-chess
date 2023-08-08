@@ -7,7 +7,7 @@ use Chess\Variant\Classical\Board;
 /**
  * AbstractPlay.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 abstract class AbstractPlay

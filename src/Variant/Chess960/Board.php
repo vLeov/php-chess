@@ -15,7 +15,7 @@ use Chess\Variant\Chess960\Rule\CastlingRule;
  *
  * Chess board representation to play Chess960.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 final class Board extends ClassicalBoard

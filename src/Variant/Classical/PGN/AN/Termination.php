@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\AbstractNotation;
 /**
  * Termination.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Termination extends AbstractNotation

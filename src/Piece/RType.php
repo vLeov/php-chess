@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\AN\Castle;
 /**
  * Rook type.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class RType

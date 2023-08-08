@@ -11,7 +11,7 @@ use Chess\Variant\Classical\FEN\Str as ClassicalFenStr;
 /**
  * FEN string.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Str extends ClassicalFenStr

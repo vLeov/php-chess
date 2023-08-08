@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Square evaluation.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class SqEval extends AbstractEval

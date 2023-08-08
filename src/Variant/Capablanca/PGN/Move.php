@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * Move.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Move extends ClassicalMove

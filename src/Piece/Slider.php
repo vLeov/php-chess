@@ -5,7 +5,7 @@ namespace Chess\Piece;
 /**
  * Class that represents a bishop, a rook or a queen.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 abstract class Slider extends AbstractPiece

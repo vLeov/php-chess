@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\AbstractNotation;
 /**
  * Piece.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Piece extends AbstractNotation

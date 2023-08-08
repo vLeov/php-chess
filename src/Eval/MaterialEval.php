@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Material.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class MaterialEval extends AbstractEval

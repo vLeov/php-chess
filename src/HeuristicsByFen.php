@@ -13,7 +13,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * HeuristicsByFen
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class HeuristicsByFen

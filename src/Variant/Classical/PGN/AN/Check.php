@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\AbstractNotation;
 /**
  * Check.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Check extends AbstractNotation

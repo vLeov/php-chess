@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\Move;
 /**
  * Standard Algebraic Notation.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class SanPlay extends AbstractPlay

@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 /**
  * Castling ability.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class CastlingAbility implements ValidationInterface

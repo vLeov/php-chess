@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
 /**
  * AbstractPiece
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 abstract class AbstractPiece

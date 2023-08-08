@@ -5,7 +5,7 @@ namespace Chess\Variant\Classical\PGN;
 /**
  * Validation interface.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 interface ValidationInterface

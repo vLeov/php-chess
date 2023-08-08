@@ -11,7 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * Heuristics
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Heuristics extends SanPlay

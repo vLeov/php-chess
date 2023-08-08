@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 /**
  * Rook.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class R extends Slider

@@ -11,7 +11,7 @@ use Chess\Variant\Capablanca\PGN\AN\Piece;
 /**
  * Archbishop.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class A extends AbstractPiece

@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Attack evaluation.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class AttackEval extends AbstractEval

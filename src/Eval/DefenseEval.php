@@ -10,7 +10,7 @@ use Chess\Variant\Classical\Board;
  *
  * Squares containing the pieces being defended at the present moment.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class DefenseEval extends AbstractEval

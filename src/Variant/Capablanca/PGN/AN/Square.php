@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\AN\Square as ClassicalSquare;
 /**
  * Square.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Square extends ClassicalSquare

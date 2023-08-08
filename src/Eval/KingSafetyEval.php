@@ -11,7 +11,7 @@ use Chess\Variant\Classical\Board;
 /**
  * K safety.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class KingSafetyEval extends AbstractEval

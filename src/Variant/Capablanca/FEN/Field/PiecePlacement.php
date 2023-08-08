@@ -8,7 +8,7 @@ use Chess\Variant\Classical\FEN\Field\PiecePlacement as ClassicalFenPiecePlaceme
 /**
  * Piece placement.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class PiecePlacement extends ClassicalFenPiecePlacement

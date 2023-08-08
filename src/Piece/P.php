@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 /**
  * Pawn.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class P extends AbstractPiece

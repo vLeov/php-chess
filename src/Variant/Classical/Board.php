@@ -30,7 +30,7 @@ use Chess\Variant\Classical\Rule\CastlingRule;
  *
  * Chess board representation to play classical chess.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Board extends \SplObjectStorage

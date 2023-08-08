@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Ascii array.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class AsciiArray

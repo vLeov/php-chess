@@ -8,7 +8,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Long algebraic notation.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class LanPlay extends AbstractPlay

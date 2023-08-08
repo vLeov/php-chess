@@ -10,7 +10,7 @@ use Chess\Variant\Classical\Board;
  *
  * PHP wrapper for the Stockfish chess engine.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Stockfish

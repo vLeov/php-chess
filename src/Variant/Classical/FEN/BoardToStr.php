@@ -11,7 +11,7 @@ use Chess\Variant\Classical\Board;
  *
  * Converts a Chess\Board object to a FEN string.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class BoardToStr

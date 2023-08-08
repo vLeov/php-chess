@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Abstract evaluation.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 abstract class AbstractEval

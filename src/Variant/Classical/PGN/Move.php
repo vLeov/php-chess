@@ -13,7 +13,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
 /**
  * Move.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class Move extends AbstractNotation

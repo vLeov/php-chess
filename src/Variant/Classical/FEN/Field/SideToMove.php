@@ -9,7 +9,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * Side to move.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class SideToMove implements ValidationInterface

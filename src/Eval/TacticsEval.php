@@ -13,7 +13,7 @@ use Chess\Variant\Classical\Board;
  *
  * Total piece value obtained from the squares that are not being defended.
  *
- * @author Jordi Bassagañas
+ * @author Jordi Bassagaña
  * @license GPL
  */
 class TacticsEval extends AbstractEval
