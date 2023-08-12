@@ -1804,7 +1804,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function init_board_and_promote_w_h8_q()
+    public function init_board_and_play_w_h8_q()
     {
         $pieces = [
             new P('w', 'g2', self::$size),
@@ -1828,7 +1828,31 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function init_board_and_promote_w_h8_n()
+    public function init_board_and_play_lan_w_h8_q()
+    {
+        $pieces = [
+            new P('w', 'g2', self::$size),
+            new P('w', 'h7', self::$size),
+            new K('w', 'e1', self::$size),
+            new R('w', 'h1', self::$size, RType::CASTLE_SHORT),
+            new P('b', 'c7', self::$size),
+            new P('b', 'd7', self::$size),
+            new P('b', 'e7', self::$size),
+            new B('b', 'd6', self::$size),
+            new K('b', 'e8', self::$size)
+        ];
+
+        $castlingAbility = 'K';
+
+        $board = new Board($pieces, $castlingAbility);
+
+        $this->assertTrue($board->playLan('w', 'h7h8q'));
+    }
+
+    /**
+     * @test
+     */
+    public function init_board_and_play_w_h8_n()
     {
         $pieces = [
             new P('w', 'g2', self::$size),
@@ -1852,7 +1876,33 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function init_board_and_promote_w_h8_r()
+    public function init_board_and_play_lan_w_h8_n()
+    {
+        $pieces = [
+            new P('w', 'g2', self::$size),
+            new P('w', 'h7', self::$size),
+            new K('w', 'e1', self::$size),
+            new R('w', 'h1', self::$size, RType::CASTLE_SHORT),
+            new P('b', 'c7', self::$size),
+            new P('b', 'd7', self::$size),
+            new P('b', 'e7', self::$size),
+            new B('b', 'd6', self::$size),
+            new K('b', 'e8', self::$size)
+        ];
+
+        $castlingAbility = 'K';
+
+        $board = new Board($pieces, $castlingAbility);
+
+        $board->playLan('w', 'h7h8n');
+
+        $this->assertEquals('N', $board->getPieceBySq('h8')->getId());
+    }
+
+    /**
+     * @test
+     */
+    public function init_board_and_play_w_h8_r()
     {
         $pieces = [
             new P('w', 'g2', self::$size),
@@ -1876,7 +1926,33 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function init_board_and_promote_w_h8_b()
+    public function init_board_and_play_lan_w_h8_r()
+    {
+        $pieces = [
+            new P('w', 'g2', self::$size),
+            new P('w', 'h7', self::$size),
+            new K('w', 'e1', self::$size),
+            new R('w', 'h1', self::$size, RType::CASTLE_SHORT),
+            new P('b', 'c7', self::$size),
+            new P('b', 'd7', self::$size),
+            new P('b', 'e7', self::$size),
+            new B('b', 'd6', self::$size),
+            new K('b', 'e8', self::$size)
+        ];
+
+        $castlingAbility = 'K';
+
+        $board = new Board($pieces, $castlingAbility);
+
+        $board->playLan('w', 'h7h8r');
+
+        $this->assertEquals('R', $board->getPieceBySq('h8')->getId());
+    }
+
+    /**
+     * @test
+     */
+    public function init_board_and_play_w_h8_b()
     {
         $pieces = [
             new P('w', 'g2', self::$size),
@@ -1895,6 +1971,58 @@ class BoardTest extends AbstractUnitTestCase
         $board = new Board($pieces, $castlingAbility);
 
         $this->assertTrue($board->play('w', 'h8=B'));
+    }
+
+    /**
+     * @test
+     */
+    public function init_board_and_play_lan_w_h8_b()
+    {
+        $pieces = [
+            new P('w', 'g2', self::$size),
+            new P('w', 'h7', self::$size),
+            new K('w', 'e1', self::$size),
+            new R('w', 'h1', self::$size, RType::CASTLE_SHORT),
+            new P('b', 'c7', self::$size),
+            new P('b', 'd7', self::$size),
+            new P('b', 'e7', self::$size),
+            new B('b', 'd6', self::$size),
+            new K('b', 'e8', self::$size)
+        ];
+
+        $castlingAbility = 'K';
+
+        $board = new Board($pieces, $castlingAbility);
+
+        $board->playLan('w', 'h7h8b');
+
+        $this->assertEquals('B', $board->getPieceBySq('h8')->getId());
+    }
+
+    /**
+     * @test
+     */
+    public function init_board_and_play_lan_w_h8_z()
+    {
+        $this->expectException(\Chess\Exception\UnknownNotationException::class);
+        
+        $pieces = [
+            new P('w', 'g2', self::$size),
+            new P('w', 'h7', self::$size),
+            new K('w', 'e1', self::$size),
+            new R('w', 'h1', self::$size, RType::CASTLE_SHORT),
+            new P('b', 'c7', self::$size),
+            new P('b', 'd7', self::$size),
+            new P('b', 'e7', self::$size),
+            new B('b', 'd6', self::$size),
+            new K('b', 'e8', self::$size)
+        ];
+
+        $castlingAbility = 'K';
+
+        $board = new Board($pieces, $castlingAbility);
+
+        $board->playLan('w', 'h7h8z');
     }
 
     /**
