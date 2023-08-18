@@ -91,13 +91,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = 0.13;
 
@@ -111,13 +105,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = '$10';
 
@@ -131,13 +119,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = -1.5;
 
@@ -151,13 +133,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = '$17';
 
@@ -171,13 +147,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('3r2k1/p2r1p1p/1p2p1p1/q4n2/3P4/PQ5P/1P1RNPP1/3R2K1 b - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = -0.44;
 
@@ -191,13 +161,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('3r2k1/p2r1p1p/1p2p1p1/q4n2/3P4/PQ5P/1P1RNPP1/3R2K1 b - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = '$15';
 
@@ -211,13 +175,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('3r2k1/1p3ppp/2pq4/p1n5/P6P/1P6/1PB2QP1/1K2R3 w - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = -1.24;
 
@@ -231,13 +189,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('3r2k1/1p3ppp/2pq4/p1n5/P6P/1P6/1PB2QP1/1K2R3 w - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = '$17';
 
@@ -251,13 +203,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('r1b1r1k1/1ppn1p1p/3pnqp1/8/p1P1P3/5P2/PbNQNBPP/1R2RB1K w - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = -1.05;
 
@@ -271,13 +217,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('r1b1r1k1/1ppn1p1p/3pnqp1/8/p1P1P3/5P2/PbNQNBPP/1R2RB1K w - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = '$17';
 
@@ -291,13 +231,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('2r4k/pB4bp/1p4p1/6q1/1P1n4/2N5/P4PPP/2R1Q1K1 b - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = 0.84;
 
@@ -311,13 +245,7 @@ class StockfishTest extends AbstractUnitTestCase
     {
         $board = FenToBoard::create('2r4k/pB4bp/1p4p1/6q1/1P1n4/2N5/P4PPP/2R1Q1K1 b - -');
 
-        $stockfish = (new Stockfish($board))
-            ->setOptions([
-                'Skill Level' => 20
-            ])
-            ->setParams([
-                'depth' => 12
-            ]);
+        $stockfish = new Stockfish($board);
 
         $expected = '$16';
 
