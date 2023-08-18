@@ -64,7 +64,7 @@ class NagMovetext
         ],
         [
             'nag' => '$10',
-            'meaning' => 'drawish position',
+            'meaning' => 'Equal position',
             'symbol' => '=',
         ],
         [
