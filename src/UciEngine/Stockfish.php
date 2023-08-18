@@ -206,22 +206,22 @@ class Stockfish
      * Returns the evaluation of the current position.
      *
      * @param string $fen
+     * @param string $type
      * @return float
      */
-    public function eval(string $fen): float
+    public function eval(string $fen, string $type): float
     {
         $eval = '(none)';
         $process = proc_open($this->filepath, $this->descr, $this->pipes);
         if (is_resource($process)) {
             fwrite($this->pipes[0], "uci\n");
             fwrite($this->pipes[0], "ucinewgame\n");
-            $this->configure();
             fwrite($this->pipes[0], "position fen $fen\n");
             fwrite($this->pipes[0], "eval\n");
             while (!feof($this->pipes[1])) {
                 $line = fgets($this->pipes[1]);
-                if (str_starts_with($line, 'Total evaluation:')) {
-                    $exploded = explode(' ', $line);
+                if (str_starts_with($line, $type)) {
+                    $exploded = array_values(array_filter(explode(' ', $line)));
                     $eval = $exploded[2];
                     fclose($this->pipes[0]);
                 }
@@ -237,9 +237,10 @@ class Stockfish
      * Returns the evaluation of the current position in a readable format.
      *
      * @param string $fen
+     * @param string $type
      * @return string
      */
-    public function evalNag(string $fen): string
+    public function evalNag(string $fen, string $type): string
     {
         $scores = [
             [
@@ -269,7 +270,7 @@ class Stockfish
             ],
         ];
 
-        $eval = $this->eval($fen);
+        $eval = $this->eval($fen, $type);
 
         foreach ($scores as $score) {
             if ($eval >= 0) {

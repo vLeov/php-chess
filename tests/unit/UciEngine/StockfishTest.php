@@ -95,7 +95,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = 0.13;
 
-        $this->assertSame($expected, $stockfish->eval($board->toFen()));
+        $this->assertSame($expected, $stockfish->eval($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -109,7 +109,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = '$10';
 
-        $this->assertSame($expected, $stockfish->evalNag($board->toFen()));
+        $this->assertSame($expected, $stockfish->evalNag($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -123,7 +123,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = -1.5;
 
-        $this->assertSame($expected, $stockfish->eval($board->toFen()));
+        $this->assertSame($expected, $stockfish->eval($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -137,7 +137,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = '$17';
 
-        $this->assertSame($expected, $stockfish->evalNag($board->toFen()));
+        $this->assertSame($expected, $stockfish->evalNag($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -151,7 +151,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = -0.44;
 
-        $this->assertSame($expected, $stockfish->eval($board->toFen()));
+        $this->assertSame($expected, $stockfish->eval($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -165,7 +165,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = '$15';
 
-        $this->assertSame($expected, $stockfish->evalNag($board->toFen()));
+        $this->assertSame($expected, $stockfish->evalNag($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -179,7 +179,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = -1.24;
 
-        $this->assertSame($expected, $stockfish->eval($board->toFen()));
+        $this->assertSame($expected, $stockfish->eval($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -193,7 +193,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = '$17';
 
-        $this->assertSame($expected, $stockfish->evalNag($board->toFen()));
+        $this->assertSame($expected, $stockfish->evalNag($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -207,7 +207,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = -1.05;
 
-        $this->assertSame($expected, $stockfish->eval($board->toFen()));
+        $this->assertSame($expected, $stockfish->eval($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -221,7 +221,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = '$17';
 
-        $this->assertSame($expected, $stockfish->evalNag($board->toFen()));
+        $this->assertSame($expected, $stockfish->evalNag($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -235,7 +235,7 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = 0.84;
 
-        $this->assertSame($expected, $stockfish->eval($board->toFen()));
+        $this->assertSame($expected, $stockfish->eval($board->toFen(), 'Total evaluation'));
     }
 
     /**
@@ -249,6 +249,6 @@ class StockfishTest extends AbstractUnitTestCase
 
         $expected = '$16';
 
-        $this->assertSame($expected, $stockfish->evalNag($board->toFen()));
+        $this->assertSame($expected, $stockfish->evalNag($board->toFen(), 'Total evaluation'));
     }
 }
