@@ -6,9 +6,7 @@ use Chess\Exception\StockfishException;
 use Chess\Variant\Classical\Board;
 
 /**
- * Stockfish.
- *
- * PHP wrapper for the Stockfish chess engine.
+ * Stockfish >= 15.1
  *
  * @author Jordi Bassagaña
  * @license GPL
@@ -24,6 +22,12 @@ class Stockfish
     const PARAMS = [
         'depth' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
     ];
+
+    const EVAL_CLASSICAL = 'Classical';
+
+    const EVAL_NNUE = 'NNUE';
+
+    const EVAL_FINAL = 'Final';
 
     /**
      * PHP Chess board.
@@ -211,6 +215,7 @@ class Stockfish
      */
     public function eval(string $fen, string $type): float
     {
+        $this->validateEvalType($type);
         $eval = '(none)';
         $process = proc_open($this->filepath, $this->descr, $this->pipes);
         if (is_resource($process)) {
@@ -220,7 +225,7 @@ class Stockfish
             fwrite($this->pipes[0], "eval\n");
             while (!feof($this->pipes[1])) {
                 $line = fgets($this->pipes[1]);
-                if (str_starts_with($line, $type)) {
+                if (str_starts_with($line, $type.' evaluation')) {
                     $exploded = array_values(array_filter(explode(' ', $line)));
                     $eval = $exploded[2];
                     fclose($this->pipes[0]);
@@ -242,52 +247,96 @@ class Stockfish
      */
     public function evalNag(string $fen, string $type): string
     {
+        $eval = $this->eval($fen, $type);
+        $score = $this->score($eval);
+
+        return $this->nag($eval, $score);
+    }
+
+    /**
+     * Validates the evaluation type.
+     *
+     * @param string $type
+     * @return string
+     * @throws StockfishException
+     */
+    protected function validateEvalType(string $type): string
+    {
+        if (
+            $type !== self::EVAL_CLASSICAL &&
+            $type !== self::EVAL_NNUE &&
+            $type !== self::EVAL_FINAL
+        ) {
+            throw new StockfishException();
+        }
+
+        return $type;
+    }
+
+    /**
+     * Assigns a score to the given evaluation.
+     *
+     * @param float $eval
+     * @return int
+     */
+    protected function score(float $eval): int
+    {
+        $eval = abs($eval);
+
         $scores = [
             [
-                'from' => -0.26,
+                'from' => 0,
                 'to' => 0.26,
-                'nag' => '$10',
+                'score' => 0,
             ],
             [
                 'from' => 0.27,
                 'to' => 0.7,
-                'nag' => '$14',
+                'score' => 1,
             ],
             [
                 'from' => 0.7,
                 'to' => 1.5,
-                'nag' => '$16',
-            ],
-            [
-                'from' => -0.27,
-                'to' => -0.7,
-                'nag' => '$15',
-            ],
-            [
-                'from' => -0.7,
-                'to' => -1.5,
-                'nag' => '$17',
+                'score' => 2,
             ],
         ];
 
-        $eval = $this->eval($fen, $type);
-
         foreach ($scores as $score) {
-            if ($eval >= 0) {
-                if ($eval >= $score['from'] && $eval <= $score['to']) {
-                    return $score['nag'];
-                }
-            } elseif ($eval < 0) {
-                if (!$eval <= $score['from'] && $eval >= $score['to']) {
-                    return $score['nag'];
-                }
+            if ($eval >= $score['from'] && $eval <= $score['to']) {
+                return $score['score'];
             }
         }
 
-        if ($eval >= 1.5) {
-            return '$18';
+        return 3;
+    }
+
+    /**
+     * Returns a NAG given an evaluation along with a score.
+     *
+     * @param float $eval
+     * @param int $score
+     * @return string
+     */
+    protected function nag(float $eval, int $score): string
+    {
+        $w = [
+            0 => '$10',
+            1 => '$14',
+            2 => '$16',
+            3 => '$18',
+        ];
+
+        $b = [
+            0 => '$10',
+            1 => '$15',
+            2 => '$17',
+            3 => '$19',
+        ];
+
+        if ($eval > 0) {
+            return $w[$score];
         }
 
-        return '$19';
+        return $b[$score];
     }
 }
