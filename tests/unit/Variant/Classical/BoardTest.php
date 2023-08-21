@@ -2005,7 +2005,7 @@ class BoardTest extends AbstractUnitTestCase
     public function init_board_and_play_lan_w_h8_z()
     {
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
-        
+
         $pieces = [
             new P('w', 'g2', self::$size),
             new P('w', 'h7', self::$size),
@@ -2796,5 +2796,16 @@ class BoardTest extends AbstractUnitTestCase
         $expected = '1.e4 f5 2.Qh5+';
 
         $this->assertSame($expected, $board->getMovetext());
+    }
+
+    /**
+     * @test
+     */
+    public function play_exe4_exe5()
+    {
+        $board = new Board();
+
+        $this->assertFalse($board->play('w', 'exe4'));
+        $this->assertFalse($board->play('b', 'exe5'));
     }
 }
