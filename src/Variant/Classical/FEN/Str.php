@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\Classical\FEN;
 
+use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\FEN\Field\EnPassantTargetSquare;
 use Chess\Variant\Classical\FEN\Field\PiecePlacement;
@@ -25,6 +26,15 @@ class Str
     public function validate(string $string): string
     {
         $fields = explode(' ', $string);
+
+        if (
+            !isset($fields[0]) ||
+            !isset($fields[1]) ||
+            !isset($fields[2]) ||
+            !isset($fields[3])
+        ) {
+            throw new UnknownNotationException();
+        }
 
         PiecePlacement::validate($fields[0]);
         SideToMove::validate($fields[1]);
