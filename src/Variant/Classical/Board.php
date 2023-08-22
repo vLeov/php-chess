@@ -627,7 +627,9 @@ class Board extends \SplObjectStorage
     {
         if ($move->isCapture) {
             if ($move->id === Piece::P) {
-                $enPassant = (new BoardToStr($this))->enPassant();
+                $enPassant = $this->history
+                    ? (new BoardToStr($this))->enPassant()
+                    : explode(' ', $this->startFen)[3];
                 if (!$this->getPieceBySq($move->sq->next) && $enPassant !== $move->sq->next) {
                     return true;
                 }
