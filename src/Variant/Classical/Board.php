@@ -356,6 +356,33 @@ class Board extends \SplObjectStorage
     }
 
     /**
+     * Returns the en passant square.
+     *
+     * @return string
+     */
+    public function enPassant(): string
+    {
+        if ($this->history) {
+            $last = array_slice($this->history, -1)[0];
+            if ($last->move->id === Piece::P) {
+                $prevFile = intval(substr($last->sq, 1));
+                $nextFile = intval(substr($last->move->sq->next, 1));
+                if ($last->move->color === Color::W) {
+                    if ($nextFile - $prevFile === 2) {
+                        $rank = $prevFile + 1;
+                        return $last->move->sq->current.$rank;
+                    }
+                } elseif ($prevFile - $nextFile === 2) {
+                    $rank = $prevFile - 1;
+                    return $last->move->sq->current.$rank;
+                }
+            }
+        }
+
+        return '-';
+    }
+
+    /**
      * Returns the movetext.
      *
      * @return string
@@ -628,7 +655,7 @@ class Board extends \SplObjectStorage
         if ($move->isCapture) {
             if ($move->id === Piece::P) {
                 $enPassant = $this->history
-                    ? (new BoardToStr($this))->enPassant()
+                    ? $this->enPassant()
                     : explode(' ', $this->startFen)[3];
                 if (!$this->getPieceBySq($move->sq->next) && $enPassant !== $move->sq->next) {
                     return true;

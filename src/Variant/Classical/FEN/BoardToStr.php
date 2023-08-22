@@ -37,7 +37,7 @@ class BoardToStr
         return $this->filter($string).' '.
             $this->board->getTurn().' '.
             $this->board->getCastlingAbility().' '.
-            $this->enPassant();
+            $this->board->enPassant();
     }
 
     private function filter(string $string)
@@ -60,27 +60,5 @@ class BoardToStr
         }
 
         return $filtered;
-    }
-
-    public function enPassant()
-    {
-        if ($history = $this->board->getHistory()) {
-            $last = array_slice($history, -1)[0];
-            if ($last->move->id === Piece::P) {
-                $prevFile = intval(substr($last->sq, 1));
-                $nextFile = intval(substr($last->move->sq->next, 1));
-                if ($last->move->color === Color::W) {
-                    if ($nextFile - $prevFile === 2) {
-                        $rank = $prevFile + 1;
-                        return $last->move->sq->current.$rank;
-                    }
-                } elseif ($prevFile - $nextFile === 2) {
-                    $rank = $prevFile - 1;
-                    return $last->move->sq->current.$rank;
-                }
-            }
-        }
-
-        return '-';
     }
 }
