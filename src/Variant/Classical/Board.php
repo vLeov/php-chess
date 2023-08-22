@@ -712,9 +712,9 @@ class Board extends \SplObjectStorage
                     strlen($lan) === 5
                         ? $promotion = '='.mb_strtoupper(substr($lan, -1))
                         : $promotion = '';
-                    if ($this->play($color, $piece->getSqFile()."x$sqs[1]")) {
+                    if ($this->play($color, $piece->getSqFile()."x$sqs[1]".$promotion)) {
                         return $this->addSymbol();
-                    } elseif ($this->play($color, $sqs[1])) {
+                    } elseif ($this->play($color, $sqs[1].$promotion)) {
                         return $this->addSymbol();
                     }
                 } else {
