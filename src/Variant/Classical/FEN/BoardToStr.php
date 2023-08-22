@@ -62,7 +62,7 @@ class BoardToStr
         return $filtered;
     }
 
-    private function enPassant()
+    public function enPassant()
     {
         if ($history = $this->board->getHistory()) {
             $last = array_slice($history, -1)[0];

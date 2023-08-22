@@ -625,10 +625,16 @@ class Board extends \SplObjectStorage
      */
     protected function isAmbiguousCapture(object $move): bool
     {
-        // because of the en passant rule
-        if ($move->id !== Piece::P) {
-            if ($move->isCapture && !$this->getPieceBySq($move->sq->next)) {
-                return true;
+        if ($move->isCapture) {
+            if ($move->id === Piece::P) {
+                $enPassant = (new BoardToStr($this))->enPassant();
+                if (!$this->getPieceBySq($move->sq->next) && $enPassant !== $move->sq->next) {
+                    return true;
+                }
+            } else {
+                if (!$this->getPieceBySq($move->sq->next)) {
+                    return true;
+                }
             }
         }
 
