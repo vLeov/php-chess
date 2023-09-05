@@ -27,7 +27,7 @@
   ],
   "require": {
     "php": ">=8.1",
-    "rubix/ml": "^2.0",
+    "rubix/ml": "^2.4",
     "imagine/imagine": "^1.2"
   },
   "require-dev": {
