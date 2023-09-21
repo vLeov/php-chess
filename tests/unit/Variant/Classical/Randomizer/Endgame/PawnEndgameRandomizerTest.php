@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Variant\Classical\Randomizer\Endgame;
 
-use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Randomizer\Endgame\PawnEndgameRandomizer;
@@ -16,9 +15,7 @@ class PawnEndgameRandomizerTest extends AbstractUnitTestCase
     {
         $board = (new PawnEndgameRandomizer($turn = Color::W))->getBoard();
 
-        $fen = (new BoardToStr($board))->create();
-
-        $this->assertNotEmpty($fen);
+        $this->assertNotEmpty($board->toFen());
     }
 
     /**
@@ -28,8 +25,6 @@ class PawnEndgameRandomizerTest extends AbstractUnitTestCase
     {
         $board = (new PawnEndgameRandomizer($turn = Color::B))->getBoard();
 
-        $fen = (new BoardToStr($board))->create();
-
-        $this->assertNotEmpty($fen);
+        $this->assertNotEmpty($board->toFen());
     }
 }

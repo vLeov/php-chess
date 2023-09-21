@@ -15,7 +15,6 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
@@ -1101,7 +1100,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns an ASCII array representing this Chess\Board object.
+     * Returns an ASCII array representing this chessboard object.
      *
      * @param bool $flip
      * @return array
@@ -1150,13 +1149,39 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns a FEN representing this Chess\Board object.
+     * Returns a FEN representing this chessboard object.
      *
      * @return string
      */
     public function toFen(): string
     {
-        return (new BoardToStr($this))->create();
+        $string = '';
+        $array = $this->toAsciiArray();
+        for ($i = $this->getSize()['ranks'] - 1; $i >= 0; $i--) {
+            $string .= str_replace(' ', '', implode('', $array[$i]));
+            if ($i != 0) {
+                $string .= '/';
+            }
+        }
+
+        $filtered = '';
+        $strSplit = str_split($string);
+        $n = 1;
+        for ($i = 0; $i < count($strSplit); $i++) {
+            if ($strSplit[$i] === '.') {
+                if (isset($strSplit[$i+1]) && $strSplit[$i+1] === '.') {
+                    $n++;
+                } else {
+                    $filtered .= $n;
+                    $n = 1;
+                }
+            } else {
+                $filtered .= $strSplit[$i];
+                $n = 1;
+            }
+        }
+
+        return "{$filtered} {$this->getTurn()} {$this->getCastlingAbility()} {$this->enPassant()}";
     }
 
     /**

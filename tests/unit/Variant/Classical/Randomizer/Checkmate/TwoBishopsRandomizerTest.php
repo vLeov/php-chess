@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Variant\Classical\Randomizer\Checkmate;
 
-use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Randomizer\Checkmate\TwoBishopsRandomizer;
@@ -16,9 +15,7 @@ class TwoBishopsRandomizerTest extends AbstractUnitTestCase
     {
         $board = (new TwoBishopsRandomizer($turn = Color::W))->getBoard();
 
-        $fen = (new BoardToStr($board))->create();
-
-        $this->assertNotEmpty($fen);
+        $this->assertNotEmpty($board->toFen());
     }
 
     /**
@@ -28,8 +25,6 @@ class TwoBishopsRandomizerTest extends AbstractUnitTestCase
     {
         $board = (new TwoBishopsRandomizer($turn = Color::B))->getBoard();
 
-        $fen = (new BoardToStr($board))->create();
-
-        $this->assertNotEmpty($fen);
+        $this->assertNotEmpty($board->toFen());
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Chess\Tests\Unit\Variant\Classical\Randomizer;
 
-use Chess\Variant\Classical\FEN\BoardToStr;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Randomizer\Randomizer;
@@ -18,9 +17,7 @@ class RandomizerTest extends AbstractUnitTestCase
 
         $board = (new Randomizer($turn))->getBoard();
 
-        $fen = (new BoardToStr($board))->create();
-
-        $this->assertNotEmpty($fen);
+        $this->assertNotEmpty($board->toFen());
     }
 
     /**
@@ -36,9 +33,7 @@ class RandomizerTest extends AbstractUnitTestCase
 
         $board = (new Randomizer($turn, $items))->getBoard();
 
-        $fen = (new BoardToStr($board))->create();
-
-        $this->assertNotEmpty($fen);
+        $this->assertNotEmpty($board->toFen());
     }
 
     /**
@@ -54,8 +49,6 @@ class RandomizerTest extends AbstractUnitTestCase
 
         $board = (new Randomizer($turn, $items))->getBoard();
 
-        $fen = (new BoardToStr($board))->create();
-
-        $this->assertNotEmpty($fen);
+        $this->assertNotEmpty($board->toFen());
     }
 }
