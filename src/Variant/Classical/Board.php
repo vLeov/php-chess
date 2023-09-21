@@ -1080,18 +1080,25 @@ class Board extends \SplObjectStorage
      * @param string $sq
      * @return object|null
      */
-     public function legal(string $sq): ?object
-     {
-         if ($piece = $this->getPieceBySq($sq)) {
+    public function legal(string $sq): ?object
+    {
+        if ($piece = $this->getPieceBySq($sq)) {
+            $fen = [];
+            foreach ($piece->sqs() as $sq) {
+                $clone = msgpack_unpack(msgpack_pack($this));
+                if ($clone->playLan($piece->getColor(), $piece->getSq().$sq)) {
+                    $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                }
+            }
             return (object) [
                 'color' => $piece->getColor(),
                 'id' => $piece->getId(),
-                'sqs' => $piece->sqs(),
+                'fen' => $fen,
             ];
-         }
+        }
 
-         return null;
-     }
+        return null;
+    }
 
     /**
      * Returns an ASCII array representing this Chess\Board object.
