@@ -1074,30 +1074,78 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns the legal squares of a piece.
+     * Returns the legal FEN positions of a piece.
      *
      * @param string $sq
      * @return object|null
      */
-    public function legal(string $sq): ?object
-    {
-        if ($piece = $this->getPieceBySq($sq)) {
+     public function legal(string $sq): ?object
+     {
+         if ($piece = $this->getPieceBySq($sq)) {
             $fen = [];
+            $color = $piece->getColor();
             foreach ($piece->sqs() as $sq) {
                 $clone = msgpack_unpack(msgpack_pack($this));
-                if ($clone->playLan($piece->getColor(), $piece->getSq().$sq)) {
-                    $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                if ($piece->getId() === Piece::K) {
+                    if (
+                        $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
+                        $piece->sqCastleShort() &&
+                        $clone->play($color, Castle::SHORT)
+                    ) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif (
+                        $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
+                        $piece->sqCastleLong() &&
+                        $clone->play($color, Castle::LONG)
+                    ) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, Piece::K.$sq)) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    }
+                } elseif ($piece->getId() === Piece::P) {
+                    if ($clone->play($color, $piece->getSqFile()."x$sq")) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, $sq)) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    }
+                } else {
+                    if ($clone->play($color, "{$piece->getId()}x$sq")) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
+                        // disambiguation by file
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
+                        // disambiguation by rank
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
+                        // disambiguation by square
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, $piece->getId().$sq)) {
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
+                        // disambiguation by file
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
+                        // disambiguation by rank
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
+                        // disambiguation by square
+                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+                    }
                 }
             }
+
             return (object) [
-                'color' => $piece->getColor(),
+                'color' => $color,
                 'id' => $piece->getId(),
                 'fen' => $fen,
             ];
-        }
+         }
 
-        return null;
-    }
+         return null;
+     }
 
     /**
      * Returns an ASCII array representing this chessboard object.
