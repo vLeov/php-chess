@@ -28,6 +28,6 @@ class SqEvalTest extends AbstractUnitTestCase
             'h3', 'h4', 'h5', 'h6',
         ];
 
-        $this->assertEqualsCanonicalizing($expected, $sqEval);
+        $this->assertEqualsCanonicalizing($expected, $sqEval->free);
     }
 }

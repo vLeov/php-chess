@@ -17,18 +17,13 @@ class SpaceEval extends AbstractEval
 {
     const NAME = 'Space';
 
-    private array $sqEval;
+    private object $sqEval;
 
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
-        $sqEval = new SqEval($board);
-
-        $this->sqEval = [
-            SqEval::TYPE_FREE => $sqEval->eval(SqEval::TYPE_FREE),
-            SqEval::TYPE_USED => $sqEval->eval(SqEval::TYPE_USED),
-        ];
+        $this->sqEval = (new SqEval($board))->eval();
 
         $this->result = [
             Color::W => [],
@@ -54,7 +49,7 @@ class SpaceEval extends AbstractEval
                             ...array_values(
                                 array_intersect(
                                     array_values((array) $piece->getMobility()),
-                                    $this->sqEval[SqEval::TYPE_FREE]
+                                    $this->sqEval->free
                                 )
                             )
                         ]
@@ -66,7 +61,7 @@ class SpaceEval extends AbstractEval
                             ...$this->result[$piece->getColor()],
                             ...array_intersect(
                                 $piece->getCaptureSqs(),
-                                $this->sqEval[SqEval::TYPE_FREE]
+                                $this->sqEval->free
                             )
                         ]
                     );
@@ -77,7 +72,7 @@ class SpaceEval extends AbstractEval
                             ...$this->result[$piece->getColor()],
                             ...array_diff(
                                 $piece->sqs(),
-                                $this->sqEval[SqEval::TYPE_USED][$piece->oppColor()]
+                                $this->sqEval->used->{$piece->oppColor()}
                             )
                         ]
                     );

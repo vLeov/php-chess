@@ -19,16 +19,24 @@ class SqEval extends AbstractEval
     const TYPE_FREE      = 'free';
     const TYPE_USED      = 'used';
 
-    public function eval($feature): ?array
-    {
-        switch ($feature) {
-            case self::TYPE_FREE:
-                return $this->free();
-            case self::TYPE_USED:
-                return $this->used();
-        }
+    private $used = [];
 
-        return null;
+    private $free = [];
+
+    public function __construct(Board $board)
+    {
+        parent::__construct($board);
+
+        $this->used = $this->used();
+        $this->free = $this->free();
+    }
+
+    public function eval(): object
+    {
+        return (object) [
+            self::TYPE_FREE => $this->free,
+            self::TYPE_USED => (object) $this->used,
+        ];
     }
 
     /**
@@ -55,9 +63,7 @@ class SqEval extends AbstractEval
      */
     private function free(): array
     {
-        $used = $this->used();
-
-        return array_diff($this->all(), [...$used[Color::W], ...$used[Color::B]]);
+        return array_diff($this->all(), [...$this->used[Color::W], ...$this->used[Color::B]]);
     }
 
     /**

@@ -916,10 +916,7 @@ class Board extends \SplObjectStorage
     {
         $this->turn = Color::opp($this->turn);
 
-        $this->sqEval = (object) [
-            SqEval::TYPE_FREE => (new SqEval($this))->eval(SqEval::TYPE_FREE),
-            SqEval::TYPE_USED => (object) (new SqEval($this))->eval(SqEval::TYPE_USED),
-        ];
+        $this->sqEval = (new SqEval($this))->eval();
 
         $this->detachPieces()
             ->attachPieces()
