@@ -19,29 +19,16 @@ class SqEval extends AbstractEval
     const TYPE_FREE      = 'free';
     const TYPE_USED      = 'used';
 
-    public function __construct(Board $board)
+    public function eval($feature): ?array
     {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => [],
-            Color::B => [],
-        ];
-    }
-
-    public function eval($feature): array
-    {
-        $pieces = iterator_to_array($this->board, false);
         switch ($feature) {
             case self::TYPE_FREE:
-                $this->result = $this->free($pieces);
-                break;
+                return $this->free();
             case self::TYPE_USED:
-                $this->result = $this->used($pieces);
-                break;
+                return $this->used();
         }
 
-        return $this->result;
+        return null;
     }
 
     /**
@@ -66,15 +53,11 @@ class SqEval extends AbstractEval
      *
      * @return array
      */
-    private function free(array $pieces): array
+    private function free(): array
     {
-        $used = $this->used($pieces);
+        $used = $this->used();
 
-        return array_values(
-            array_diff(
-                $this->all(),
-                [...$used[Color::W], ...$used[Color::B]]
-        ));
+        return array_diff($this->all(), [...$used[Color::W], ...$used[Color::B]]);
     }
 
     /**
@@ -82,14 +65,10 @@ class SqEval extends AbstractEval
      *
      * @return array
      */
-    private function used(array $pieces): array
+    private function used(): array
     {
-        $used = [
-            Color::W => [],
-            Color::B => []
-        ];
-
-        foreach ($pieces as $piece) {
+        $used = [];
+        foreach ($this->board->getPieces() as $piece) {
             $used[$piece->getColor()][] = $piece->getSq();
         }
 
