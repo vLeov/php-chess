@@ -78,7 +78,7 @@ class K extends AbstractPiece
             ...[$this->sqCastleShort()]
         ];
 
-        return array_values(array_filter(array_unique($sqs)));
+        return array_filter(array_unique($sqs));
     }
 
     /**
@@ -133,7 +133,7 @@ class K extends AbstractPiece
     protected function sqsCaptures(): ?array
     {
         $sqsCaptures = array_intersect(
-            array_values((array)$this->mobility),
+            (array)$this->mobility,
             $this->board->getSqEval()->used->{$this->oppColor()}
         );
 
@@ -142,7 +142,7 @@ class K extends AbstractPiece
 
     protected function sqsKing(): ?array
     {
-        $sqsKing = array_intersect(array_values((array)$this->mobility), $this->board->getSqEval()->free);
+        $sqsKing = array_intersect((array)$this->mobility, $this->board->getSqEval()->free);
 
         return array_diff($sqsKing, $this->board->getSpaceEval()->{$this->oppColor()});
     }
@@ -171,5 +171,34 @@ class K extends AbstractPiece
         }
 
         return null;
+    }
+
+    /**
+     * Returns the FEN corresponding to a legal square.
+     *
+     * @param string $color
+     * @param string $sq
+     * @return string
+     */
+    public function fen($color, $sq): string
+    {
+        $clone = msgpack_unpack(msgpack_pack($this->board));
+        if (
+            $this->board->getCastlingRule()[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
+            $this->sqCastleShort() &&
+            $clone->play($color, Castle::SHORT)
+        ) {
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif (
+            $this->board->getCastlingRule()[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
+            $this->sqCastleLong() &&
+            $clone->play($color, Castle::LONG)
+        ) {
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, Piece::K.$sq)) {
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        }
     }
 }

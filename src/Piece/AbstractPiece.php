@@ -2,8 +2,10 @@
 
 namespace Chess\Piece;
 
+use Chess\Variant\Capablanca\PGN\AN\Square as CapablancaSquare;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Square as ClassicalSquare;
 use Chess\Variant\Classical\Board;
 
 /**
@@ -240,15 +242,47 @@ abstract class AbstractPiece
 
     protected function isValidSq(string $sq)
     {
-        // TODO: Refactor this if statement
-        if ($this->size === ['files' => 8, 'ranks' => 8]) {
-            return \Chess\Variant\Classical\PGN\AN\Square::validate($sq);
-        } elseif ($this->size === ['files' => 10, 'ranks' => 8]) {
-            return \Chess\Variant\Capablanca\PGN\AN\Square::validate($sq);
-        } elseif ($this->size === ['files' => 10, 'ranks' => 10]) {
-            return \Chess\Variant\Capablanca\PGN\AN\Square::validate($sq);
+        if ($this->size === ClassicalSquare::SIZE) {
+            return ClassicalSquare::validate($sq);
+        } elseif ($this->size === CapablancaSquare::SIZE) {
+            return CapablancaSquare::validate($sq);
         }
 
         return false;
+    }
+
+    /**
+     * Returns the FEN corresponding to a legal square.
+     *
+     * @param string $color
+     * @param string $sq
+     * @return string
+     */
+    public function fen($color, $sq): string
+    {
+        $clone = msgpack_unpack(msgpack_pack($this->board));
+        if ($clone->play($color, "{$this->getId()}x$sq")) {
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, "{$this->getId()}{$this->getSqFile()}x$sq")) {
+            // disambiguation by file
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, "{$this->getId()}{$this->getSqRank()}x$sq")) {
+            // disambiguation by rank
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, "{$this->getId()}{$this->getSq()}x$sq")) {
+            // disambiguation by square
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, $this->getId().$sq)) {
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, $this->getId().$this->getSqFile().$sq)) {
+            // disambiguation by file
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, $this->getId().$this->getSqRank().$sq)) {
+            // disambiguation by rank
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        } elseif ($clone->play($color, $this->getId().$this->getSq().$sq)) {
+            // disambiguation by square
+            return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
+        }
     }
 }

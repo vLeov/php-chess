@@ -91,6 +91,13 @@ class Board extends \SplObjectStorage
     protected array $size;
 
     /**
+     * Squares.
+     *
+     * @var array
+     */
+    protected array $sqs = [];
+
+    /**
      * Move.
      *
      * @var \Chess\Variant\Classical\PGN\Move
@@ -143,6 +150,7 @@ class Board extends \SplObjectStorage
         string $castlingAbility = '-'
     ) {
         $this->size = Square::SIZE;
+        $this->sqs = Square::all();
         $this->castlingAbility = CastlingAbility::START;
         $this->castlingRule = (new CastlingRule())->getRule();
         $this->move = new Move();
@@ -295,6 +303,16 @@ class Board extends \SplObjectStorage
     public function getSize(): array
     {
         return $this->size;
+    }
+
+    /**
+     * Returns the squares.
+     *
+     * @return array
+     */
+    public function getSqs(): array
+    {
+        return $this->sqs;
     }
 
     /**
@@ -719,17 +737,9 @@ class Board extends \SplObjectStorage
         if (isset($sqs[0]) && isset($sqs[1])) {
             if ($color === $this->getTurn() && $piece = $this->getPieceBySq($sqs[0])) {
                 if ($piece->getId() === Piece::K) {
-                    if (
-                        $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
-                        $piece->sqCastleShort() &&
-                        $this->play($color, Castle::SHORT)
-                    ) {
+                    if ($this->play($color, Castle::SHORT)) {
                         return $this->addSymbol();
-                    } elseif (
-                        $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
-                        $piece->sqCastleLong() &&
-                        $this->play($color, Castle::LONG)
-                    ) {
+                    } elseif ($this->play($color, Castle::LONG)) {
                         return $this->addSymbol();
                     } elseif ($this->play($color, Piece::K.'x'.$sqs[1])) {
                         return $this->addSymbol();
@@ -1080,62 +1090,12 @@ class Board extends \SplObjectStorage
      {
          if ($piece = $this->getPieceBySq($sq)) {
             $fen = [];
-            $color = $piece->getColor();
             foreach ($piece->sqs() as $sq) {
-                $clone = msgpack_unpack(msgpack_pack($this));
-                if ($piece->getId() === Piece::K) {
-                    if (
-                        $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sq &&
-                        $piece->sqCastleShort() &&
-                        $clone->play($color, Castle::SHORT)
-                    ) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif (
-                        $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sq &&
-                        $piece->sqCastleLong() &&
-                        $clone->play($color, Castle::LONG)
-                    ) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, Piece::K.'x'.$sq)) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, Piece::K.$sq)) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    }
-                } elseif ($piece->getId() === Piece::P) {
-                    if ($clone->play($color, $piece->getSqFile()."x$sq")) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, $sq)) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    }
-                } else {
-                    if ($clone->play($color, "{$piece->getId()}x$sq")) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sq")) {
-                        // disambiguation by file
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sq")) {
-                        // disambiguation by rank
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, "{$piece->getId()}{$piece->getSq()}x$sq")) {
-                        // disambiguation by square
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, $piece->getId().$sq)) {
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, $piece->getId().$piece->getSqFile().$sq)) {
-                        // disambiguation by file
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, $piece->getId().$piece->getSqRank().$sq)) {
-                        // disambiguation by rank
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    } elseif ($clone->play($color, $piece->getId().$piece->getSq().$sq)) {
-                        // disambiguation by square
-                        $fen[$sq] = $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
-                    }
-                }
+                $fen[$sq] = $piece->fen($piece->getColor(), $sq);
             }
 
             return (object) [
-                'color' => $color,
+                'color' => $piece->getColor(),
                 'id' => $piece->getId(),
                 'fen' => $fen,
             ];
