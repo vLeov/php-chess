@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Variant\Chess960;
+namespace Chess\Variant\CapablancaFischer;
 
 use Chess\Variant\RandomPosition;
-use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Capablanca\PGN\AN\Piece;
 
 class StartPosition extends RandomPosition
 {
@@ -12,10 +12,12 @@ class StartPosition extends RandomPosition
         $this->default =  [
             Piece::R,
             Piece::N,
+            Piece::A,
             Piece::B,
             Piece::Q,
             Piece::K,
             Piece::B,
+            Piece::C,
             Piece::N,
             Piece::R,
         ];
