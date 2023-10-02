@@ -4,7 +4,7 @@ namespace Chess\Variant;
 
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class RandomPosition
+class RandomStartPosition
 {
     protected array $default = [];
 

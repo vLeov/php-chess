@@ -2,10 +2,10 @@
 
 namespace Chess\Variant\CapablancaFischer;
 
-use Chess\Variant\RandomPosition;
+use Chess\Variant\RandomStartPosition;
 use Chess\Variant\Capablanca\PGN\AN\Piece;
 
-class StartPosition extends RandomPosition
+class StartPosition extends RandomStartPosition
 {
     public function __construct()
     {

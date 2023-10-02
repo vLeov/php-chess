@@ -2,10 +2,10 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\Variant\RandomPosition;
+use Chess\Variant\RandomStartPosition;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class StartPosition extends RandomPosition
+class StartPosition extends RandomStartPosition
 {
     public function __construct()
     {
