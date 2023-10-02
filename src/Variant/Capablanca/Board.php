@@ -11,7 +11,6 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Capablanca\FEN\StrToBoard;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
 use Chess\Variant\Capablanca\PGN\Move;
 use Chess\Variant\Capablanca\PGN\AN\Square;
@@ -97,20 +96,5 @@ class Board extends ClassicalBoard
         $this->refresh();
 
         $this->startFen = $this->toFen();
-    }
-
-    /**
-     * Undoes the last move.
-     *
-     * @return \Chess\Variant\Capablanca\Board
-     */
-    public function undo(): Board
-    {
-        $board = (new StrToBoard($this->getStartFen()))->create();
-        foreach ($this->popHistory()->getHistory() as $key => $val) {
-            $board->play($val->move->color, $val->move->pgn);
-        }
-
-        return $board;
     }
 }

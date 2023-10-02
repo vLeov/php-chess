@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\Classical;
 
+use Chess\FenToBoard;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
@@ -927,7 +928,7 @@ class Board extends \SplObjectStorage
      */
     public function undo(): Board
     {
-        $board = (new StrToBoard($this->getStartFen()))->create();
+        $board = FenToBoard::create($this->getStartFen(), $this);
         foreach ($this->popHistory()->getHistory() as $key => $val) {
             $board->play($val->move->color, $val->move->pgn);
         }

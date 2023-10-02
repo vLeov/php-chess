@@ -7,7 +7,6 @@ use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Chess960\StartPieces;
-use Chess\Variant\Chess960\FEN\StrToBoard;
 use Chess\Variant\Chess960\Rule\CastlingRule;
 
 /**
@@ -67,20 +66,5 @@ final class Board extends ClassicalBoard
     public function getStartPos(): array
     {
         return $this->startPos;
-    }
-
-    /**
-     * Undoes the last move.
-     *
-     * @return \Chess\Variant\Chess960\Board
-     */
-    public function undo(): Board
-    {
-        $board = (new StrToBoard($this->getStartFen(), $this->startPos))->create();
-        foreach ($this->popHistory()->getHistory() as $key => $val) {
-            $board->play($val->move->color, $val->move->pgn);
-        }
-
-        return $board;
     }
 }
