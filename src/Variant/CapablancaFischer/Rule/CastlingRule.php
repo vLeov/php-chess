@@ -1,12 +1,12 @@
 <?php
 
-namespace Chess\Variant\Chess960\Rule;
+namespace Chess\Variant\CapablancaFischer\Rule;
 
 use Chess\Variant\RandomCastlingRuleTrait;
-use Chess\Variant\Classical\PGN\AN\Square;
-use Chess\Variant\Classical\Rule\CastlingRule as ClassicalCastlingRule;
+use Chess\Variant\Capablanca\PGN\AN\Square;
+use Chess\Variant\Capablanca\Rule\CastlingRule as CapablancaCastlingRule;
 
-class CastlingRule extends ClassicalCastlingRule
+class CastlingRule extends CapablancaCastlingRule
 {
     use RandomCastlingRuleTrait;
 
@@ -20,7 +20,7 @@ class CastlingRule extends ClassicalCastlingRule
 
         $this->size = Square::SIZE;
 
-        $this->rule = (new ClassicalCastlingRule())->getRule();
+        $this->rule = (new CapablancaCastlingRule())->getRule();
 
         $this->sq()->sqs();
     }

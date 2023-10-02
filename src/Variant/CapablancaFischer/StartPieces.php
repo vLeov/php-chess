@@ -1,14 +1,14 @@
 <?php
 
-namespace Chess\Variant\Chess960;
+namespace Chess\Variant\CapablancaFischer;
 
 use Chess\Variant\RandomStartPiecesTrait;
-use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Capablanca\PGN\AN\Square;
 
 class StartPieces
 {
     use RandomStartPiecesTrait;
-    
+
     public function __construct(array $startPos)
     {
         $this->startPos = $startPos;
