@@ -1,25 +1,25 @@
 <?php
 
-namespace Chess\Variant\Chess960;
+namespace Chess\Variant\CapablancaFischer;
 
+use Chess\Variant\Capablanca\PGN\Move;
+use Chess\Variant\Capablanca\PGN\AN\Square;
+use Chess\Variant\CapablancaFischer\StartPieces;
+use Chess\Variant\CapablancaFischer\Rule\CastlingRule;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
-use Chess\Variant\Classical\PGN\Move;
-use Chess\Variant\Classical\PGN\AN\Square;
-use Chess\Variant\Chess960\StartPieces;
-use Chess\Variant\Chess960\Rule\CastlingRule;
 
 /**
  * Board
  *
- * Fischer Random chessboard representation.
+ * Capablanca-Fischer chessboard representation.
  *
  * @author Jordi Bassagaña
  * @license GPL
  */
 final class Board extends ClassicalBoard
 {
-    const VARIANT = '960';
+    const VARIANT = 'capablanca-fischer';
 
     /**
      * Start position.
