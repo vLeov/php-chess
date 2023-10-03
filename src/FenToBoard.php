@@ -4,6 +4,8 @@ namespace Chess;
 
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
+use Chess\Variant\CapablancaFischer\Board as CapablancaFischerBoard;
+use Chess\Variant\CapablancaFischer\FEN\StrToBoard as CapablancaFischerFenStrToBoard;
 use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Chess960\FEN\StrToBoard as Chess960FenStrToBoard;
 use Chess\Variant\Classical\Board as ClassicalBoard;
@@ -22,6 +24,9 @@ class FenToBoard
         $board = $board ?? new ClassicalBoard();
         if (is_a($board, CapablancaBoard::class)) {
             $board = (new CapablancaFenStrToBoard($fen))->create();
+        } elseif (is_a($board, CapablancaFischerBoard::class)) {
+            $startPos = $board->getStartPos();
+            $board = (new CapablancaFischerFenStrToBoard($fen, $startPos))->create();
         } elseif (is_a($board, Chess960Board::class)) {
             $startPos = $board->getStartPos();
             $board = (new Chess960FenStrToBoard($fen, $startPos))->create();
