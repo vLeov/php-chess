@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\Chess960;
 
+use Chess\Variant\RandomBoardInterface;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
@@ -17,7 +18,7 @@ use Chess\Variant\Chess960\Rule\CastlingRule;
  * @author Jordi Bassagaña
  * @license GPL
  */
-final class Board extends ClassicalBoard
+final class Board extends ClassicalBoard implements RandomBoardInterface
 {
     const VARIANT = '960';
 

@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\CapablancaFischer;
 
+use Chess\Variant\RandomBoardInterface;
 use Chess\Variant\Capablanca\PGN\Move;
 use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\CapablancaFischer\StartPieces;
@@ -17,7 +18,7 @@ use Chess\Variant\Classical\FEN\Field\CastlingAbility;
  * @author Jordi Bassagaña
  * @license GPL
  */
-final class Board extends ClassicalBoard
+final class Board extends ClassicalBoard implements RandomBoardInterface
 {
     const VARIANT = 'capablanca-fischer';
 
