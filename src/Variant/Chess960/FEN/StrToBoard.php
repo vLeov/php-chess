@@ -20,19 +20,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
  */
 class StrToBoard extends ClassicalFenStrToBoard
 {
-    protected array $size;
-
-    protected Str $fenStr;
-
-    protected string $string;
-
-    protected array $fields;
-
-    protected string $castlingAbility;
-
     private array $startPos;
-
-    protected array $castlingRule;
 
     public function __construct(string $string, array $startPos)
     {

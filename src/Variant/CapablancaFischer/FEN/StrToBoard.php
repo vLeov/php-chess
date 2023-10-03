@@ -20,17 +20,7 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
  */
 class StrToBoard extends ClassicalFenStrToBoard
 {
-    protected array $size;
-
-    protected string $string;
-
-    protected array $fields;
-
-    protected string $castlingAbility;
-
     private array $startPos;
-
-    protected array $castlingRule;
 
     public function __construct(string $string, array $startPos)
     {
