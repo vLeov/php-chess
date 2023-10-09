@@ -52,7 +52,7 @@ trait RandomCastlingRuleTrait
             $this->rule[Color::W][Piece::R][Castle::SHORT]['sq']['next']
         );
 
-        $path = array_unique(array_merge($kPath, $rPath));
+        $path = array_unique([...$kPath, ...$rPath]);
 
         $this->rule[Color::W][Piece::K][Castle::SHORT]['attack'] = $kPath;
         $this->rule[Color::W][Piece::K][Castle::SHORT]['free'] = array_diff($path, [
@@ -70,7 +70,7 @@ trait RandomCastlingRuleTrait
             $this->rule[Color::W][Piece::R][Castle::LONG]['sq']['next']
         );
 
-        $path = array_unique(array_merge($kPath, $rPath));
+        $path = array_unique([...$kPath, ...$rPath]);
 
         $this->rule[Color::W][Piece::K][Castle::LONG]['attack'] = $kPath;
         $this->rule[Color::W][Piece::K][Castle::LONG]['free'] = array_diff($path, [
@@ -88,7 +88,7 @@ trait RandomCastlingRuleTrait
             $this->rule[Color::B][Piece::R][Castle::SHORT]['sq']['next']
         );
 
-        $path = array_unique(array_merge($kPath, $rPath));
+        $path = array_unique([...$kPath, ...$rPath]);
 
         $this->rule[Color::B][Piece::K][Castle::SHORT]['attack'] = $kPath;
         $this->rule[Color::B][Piece::K][Castle::SHORT]['free'] = array_diff($path, [
@@ -106,7 +106,7 @@ trait RandomCastlingRuleTrait
             $this->rule[Color::B][Piece::R][Castle::LONG]['sq']['next']
         );
 
-        $path = array_unique(array_merge($kPath, $rPath));
+        $path = array_unique([...$kPath, ...$rPath]);
 
         $this->rule[Color::B][Piece::K][Castle::LONG]['attack'] = $kPath;
         $this->rule[Color::B][Piece::K][Castle::LONG]['free'] = array_diff($path, [
