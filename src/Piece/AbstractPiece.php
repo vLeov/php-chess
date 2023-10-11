@@ -256,9 +256,9 @@ abstract class AbstractPiece
      *
      * @param string $color
      * @param string $sq
-     * @return string
+     * @return string|null
      */
-    public function fen($color, $sq): string
+    public function fen($color, $sq): ?string
     {
         $clone = msgpack_unpack(msgpack_pack($this->board));
         if ($clone->play($color, "{$this->getId()}x$sq")) {
@@ -284,5 +284,7 @@ abstract class AbstractPiece
             // disambiguation by square
             return $clone->getHistory()[count($clone->getHistory()) - 1]->fen;
         }
+
+        return null;
     }
 }
