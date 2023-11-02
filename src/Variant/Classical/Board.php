@@ -1101,9 +1101,9 @@ class Board extends \SplObjectStorage
      * Returns the legal FEN positions of a piece.
      *
      * @param string $sq
-     * @return object|null
+     * @return object
      */
-     public function legal(string $sq): ?object
+     public function legal(string $sq): object
      {
          if ($piece = $this->getPieceBySq($sq)) {
             $fen = [];
@@ -1118,7 +1118,7 @@ class Board extends \SplObjectStorage
             ];
          }
 
-         return null;
+         return (object) [];
      }
 
     /**
