@@ -2414,7 +2414,7 @@ class BoardTest extends AbstractUnitTestCase
         $expected = (object) [
             'color' => 'w',
             'id' => 'K',
-            'fen' => [
+            'fen' => (object) [
                 'f1' => 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1K1R b kq -',
                 'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b kq -',
             ],
@@ -2549,7 +2549,7 @@ class BoardTest extends AbstractUnitTestCase
         $expected = (object) [
             'color' => 'w',
             'id' => 'K',
-            'fen' => [
+            'fen' => (object) [
                 'e2' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPPKPPP/RNBQ3R b kq -',
                 'f1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1K1R b kq -',
                 'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq -',
@@ -2824,7 +2824,7 @@ class BoardTest extends AbstractUnitTestCase
         $expected = (object) [
             'color' => 'w',
             'id' => 'P',
-            'fen' => [
+            'fen' => (object) [
                 'h6' => 'rnbqkbnr/1ppppp1p/7P/p5p1/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
                 'g6' => 'rnbqkbnr/1ppppp1p/6P1/p7/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
             ],
@@ -2848,12 +2848,28 @@ class BoardTest extends AbstractUnitTestCase
         $expected = (object) [
             'color' => 'w',
             'id' => 'P',
-            'fen' => [
+            'fen' => (object) [
                 'h6' => 'rnbqkbnr/1ppppp1p/7P/p5p1/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
                 'g6' => 'rnbqkbnr/1ppppp1p/6P1/p7/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
             ],
         ];
 
         $this->assertEquals($expected, $board->legal('h5'));
+    }
+
+    /**
+     * @test
+     */
+    public function legal_a1()
+    {
+        $board = new Board();
+
+        $expected = (object) [
+            'color' => 'w',
+            'id' => 'R',
+            'fen' => (object) [],
+        ];
+
+        $this->assertEquals($expected, $board->legal('a1'));
     }
 }
