@@ -1108,7 +1108,9 @@ class Board extends \SplObjectStorage
          if ($piece = $this->getPieceBySq($sq)) {
             $fen = [];
             foreach ($piece->sqs() as $sq) {
-                $fen[$sq] = $piece->fen($piece->getColor(), $sq);
+                if ($res = $piece->fen($piece->getColor(), $sq)) {
+                    $fen[$sq] = $res; 
+                }
             }
 
             return (object) [
