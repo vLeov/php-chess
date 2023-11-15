@@ -41,6 +41,7 @@ Listed below are the chess heuristics implemented in PHP Chess.
 The evaluation functions are then grouped in two heuristics classes to transform the chess board state into numbers: [Chess\HeuristicsByFen](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsByFenTest.php) and [Chess\Heuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php). The former allows to take a so-called heuristic picture of a particular chess position while the latter enables to take a picture of an entire game.
 
 ```php
+use Chess\EvalFunction;
 use Chess\HeuristicsByFen;
 
 $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
@@ -48,7 +49,7 @@ $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
 $heuristics = new HeuristicsByFen($fen);
 
 $result = [
-    'evalNames' => $heuristics->getEvalNames(),
+    'evalNames' => $evalFunction->names(),
     'balance' => $heuristics->getBalance(),
 ];
 
