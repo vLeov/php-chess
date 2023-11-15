@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
+use Chess\EvalFunction;
 use Chess\Heuristics;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\ML\Supervised\Classification\PermutationLabeller;
@@ -15,35 +16,14 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
     public static function setUpBeforeClass(): void
     {
-        $dimensions = (new Heuristics(''))->getEval();
+        $eval = (new EvalFunction())->getEval();
 
         self::$permutations = (new RestrictedPermutationWithRepetition())
             ->get(
                 [ 4, 16 ],
-                count($dimensions),
+                count($eval),
                 100
             );
-    }
-
-    /**
-     * @test
-     */
-    public function start_labelled()
-    {
-        $board = new Board();
-
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
-
-        $end = end($balance);
-
-        $label = (new PermutationLabeller(self::$permutations))->label($end);
-
-        $expected = [
-            'w' => 0,
-            'b' => 0,
-        ];
-
-        $this->assertSame($expected, $label);
     }
 
     /**
@@ -62,7 +42,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $label = (new PermutationLabeller(self::$permutations))->label($end);
 
         $expected = [
-            'w' => 0,
+            'w' => 2,
             'b' => 0,
         ];
 
@@ -84,7 +64,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             'w' => 4,
-            'b' => 2,
+            'b' => 0,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);
@@ -106,8 +86,8 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 3,
-            'b' => 2,
+            'w' => 0,
+            'b' => 0,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);
@@ -130,7 +110,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             'w' => 2,
-            'b' => 4,
+            'b' => 0,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);
@@ -153,7 +133,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             'w' => 0,
-            'b' => 20,
+            'b' => 8,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);
@@ -175,8 +155,8 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 1,
-            'b' => 4,
+            'w' => 5,
+            'b' => 7,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);
@@ -198,8 +178,8 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 3,
-            'b' => 4,
+            'w' => 2,
+            'b' => 0,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);

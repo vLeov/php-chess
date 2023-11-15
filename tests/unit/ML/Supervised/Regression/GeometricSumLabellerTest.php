@@ -13,24 +13,6 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function start_labelled()
-    {
-        $board = new Board();
-
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
-
-        $end = end($balance);
-
-        $label = (new GeometricSumLabeller())->label($end);
-
-        $expected = 0.0;
-
-        $this->assertSame($expected, $label);
-    }
-
-    /**
-     * @test
-     */
     public function A00_labelled()
     {
         $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
@@ -43,7 +25,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $label = (new GeometricSumLabeller())->label($end);
 
-        $expected = -50.9;
+        $expected = 4.0;
 
         $this->assertSame($expected, $label);
     }
@@ -63,7 +45,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $label = (new GeometricSumLabeller())->label($end);
 
-        $expected = -1048541.64;
+        $expected = 32988.88;
 
         $this->assertSame($expected, $label);
     }
@@ -83,7 +65,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $label = (new GeometricSumLabeller())->label($end);
 
-        $expected = -210620.85;
+        $expected = 734215.35;
 
         $this->assertSame($expected, $label);
     }
@@ -103,7 +85,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $label = (new GeometricSumLabeller())->label($end);
 
-        $expected = 24680.32;
+        $expected = 32955.72;
 
         $this->assertSame($expected, $label);
     }
