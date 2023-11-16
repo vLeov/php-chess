@@ -11,6 +11,7 @@
         <testsuite name="unit">
             <directory>tests/unit/Combinatorics</directory>
             <directory>tests/unit/Eval</directory>
+            <directory>tests/unit/Heuristics</directory>
             <directory>tests/unit/Media</directory>
             <directory>tests/unit/ML</directory>
             <directory>tests/unit/Movetext</directory>
@@ -19,8 +20,6 @@
             <directory>tests/unit/Variant</directory>
             <file>tests/unit/FenToBoardTest.php</file>
             <file>tests/unit/GrandmasterTest.php</file>
-            <file>tests/unit/HeuristicsByFenTest.php</file>
-            <file>tests/unit/HeuristicsTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
