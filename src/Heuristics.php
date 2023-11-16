@@ -12,13 +12,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * Heuristics
  *
- * Heuristics are quick, mental shortcuts that we humans use to make decisions
- * and solve problems in our daily lives. While far from being perfect,
- * heuristics are approximations that help manage cognitive load.
- *
  * The PHP Chess evaluation function is used in this class to transform a chess
- * game in SAN format into numbers. Chess games converted to numbers can be
- * processed with machine learning techniques.
+ * game in SAN format to numbers for further processing with ML techniques.
  *
  * @author Jordi Bassagaña
  * @license GPL
