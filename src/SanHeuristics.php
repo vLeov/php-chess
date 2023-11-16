@@ -7,10 +7,9 @@ use Chess\FenHeuristics;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
-use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
- * Heuristics
+ * SanHeuristics
  *
  * The PHP Chess evaluation function is used in this class to transform a chess
  * game in SAN format to numbers for further processing with ML techniques.
@@ -18,7 +17,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * @author Jordi Bassagaña
  * @license GPL
  */
-class Heuristics extends SanPlay
+class SanHeuristics extends SanPlay
 {
     /**
      * The evaluation function.
@@ -62,9 +61,9 @@ class Heuristics extends SanPlay
     /**
      * Calculates the balance.
      *
-     * @return \Chess\Heuristics
+     * @return \Chess\SanHeuristics
      */
-    protected function balance(): Heuristics
+    protected function balance(): SanHeuristics
     {
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
@@ -81,9 +80,9 @@ class Heuristics extends SanPlay
     /**
      * Normalizes the balance.
      *
-     * @return \Chess\Heuristics
+     * @return \Chess\SanHeuristics
      */
-    protected function normalize(): Heuristics
+    protected function normalize(): SanHeuristics
     {
         if ($this->balance) {
             $columns = [];

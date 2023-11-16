@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
 use Chess\EvalFunction;
-use Chess\Heuristics;
+use Chess\SanHeuristics;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
 use Chess\ML\Supervised\Classification\PermutationLabeller;
 use Chess\Play\SanPlay;
@@ -35,7 +35,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $board->play('w', 'e4');
         $board->play('b', 'e5');
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 
@@ -58,7 +58,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $board->play('w', 'e4');
         $board->play('b', 'Na6');
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 
@@ -81,7 +81,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $board->play('w', 'e4');
         $board->play('b', 'Nc6');
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 
@@ -104,7 +104,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($A00))->validate()->getBoard();
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 
@@ -127,7 +127,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($movetext))->validate()->getBoard();
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 
@@ -150,7 +150,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($A59))->validate()->getBoard();
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 
@@ -173,7 +173,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($B25))->validate()->getBoard();
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $end = end($balance);
 

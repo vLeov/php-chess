@@ -2,13 +2,13 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\Heuristics;
+use Chess\SanHeuristics;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\FEN\StrToBoard;
 
-class HeuristicsTest extends AbstractUnitTestCase
+class SanHeuristicsTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -17,7 +17,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $expected = [];
 
@@ -31,7 +31,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4';
 
-        $balance = (new Heuristics($movetext))->getBalance();
+        $balance = (new SanHeuristics($movetext))->getBalance();
 
         $expected = [
             [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -47,7 +47,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5';
 
-        $balance = (new Heuristics($movetext))->getBalance();
+        $balance = (new SanHeuristics($movetext))->getBalance();
 
         $expected = [
             [ 0, 1.0, 0.0, 1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -64,7 +64,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e6';
 
-        $balance = (new Heuristics($movetext))->getBalance();
+        $balance = (new SanHeuristics($movetext))->getBalance();
 
         $expected = [
             [ 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -81,7 +81,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e6 2.d4 d5';
 
-        $balance = (new Heuristics($movetext))->getBalance();
+        $balance = (new SanHeuristics($movetext))->getBalance();
 
         $expected = [
             [ 0, 0.82, 0.33, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -100,7 +100,7 @@ class HeuristicsTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e6 2.d4 d5 3.Nd2 Nf6';
 
-        $balance = (new Heuristics($movetext))->getBalance();
+        $balance = (new SanHeuristics($movetext))->getBalance();
 
         $expected = [
             [ 0, 0.82, 0.17, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -123,7 +123,7 @@ class HeuristicsTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($A00))->validate()->getBoard();
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $expected = [
             [ 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
@@ -144,7 +144,7 @@ class HeuristicsTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($movetext))->validate()->getBoard();
 
-        $balance = (new Heuristics($board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristics($board->getMovetext()))->getBalance();
 
         $expected = [
             [ 0, 1, 0.71, 1, 0, 0, 0.8, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ],
