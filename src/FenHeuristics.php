@@ -13,7 +13,7 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
- * HeuristicsByFen
+ * FenHeuristics
  *
  * The PHP Chess evaluation function is used in this class to transform a FEN
  * position to numbers for further processing with ML techniques.
@@ -21,7 +21,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * @author Jordi Bassagaña
  * @license GPL
  */
-class HeuristicsByFen
+class FenHeuristics
 {
     /**
      * Chess board.
@@ -87,9 +87,9 @@ class HeuristicsByFen
     /**
      * Calculates the result.
      *
-     * @return HeuristicsByFen
+     * @return FenHeuristics
      */
-    protected function calc(): HeuristicsByFen
+    protected function calc(): FenHeuristics
     {
         foreach ($this->evalFunction->getEval() as $key => $val) {
             $heuristic = new $key($this->board);
@@ -127,9 +127,9 @@ class HeuristicsByFen
     /**
      * Calculates the balance.
      *
-     * @return HeuristicsByFen
+     * @return FenHeuristics
      */
-    protected function balance(): HeuristicsByFen
+    protected function balance(): FenHeuristics
     {
         foreach ($this->result[Color::W] as $key => $val) {
             $this->balance[$key] =

@@ -3,7 +3,7 @@
 namespace Chess;
 
 use Chess\EvalFunction;
-use Chess\HeuristicsByFen;
+use Chess\FenHeuristics;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
@@ -69,7 +69,7 @@ class Heuristics extends SanPlay
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
                 if ($this->board->play($this->board->getTurn(), $val)) {
-                    $this->balance[] = (new HeuristicsByFen($this->board->toFen()))
+                    $this->balance[] = (new FenHeuristics($this->board->toFen()))
                         ->getBalance();
                 }
             }
