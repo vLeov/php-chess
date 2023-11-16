@@ -43,11 +43,11 @@ class Heuristics extends SanPlay
 
         $this->evalFunction = new EvalFunction();
 
-        $this->calc()->normalize();
+        $this->balance()->normalize();
     }
 
     /**
-     * Returns the balance.
+     * Returns the normalized balance.
      *
      * @return array
      */
@@ -57,11 +57,11 @@ class Heuristics extends SanPlay
     }
 
     /**
-     * Calculates the evaluation.
+     * Calculates the balance.
      *
      * @return \Chess\Heuristics
      */
-    protected function calc(): Heuristics
+    protected function balance(): Heuristics
     {
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
@@ -76,7 +76,7 @@ class Heuristics extends SanPlay
     }
 
     /**
-     * Normalizes the evaluation.
+     * Normalizes the balance.
      *
      * @return \Chess\Heuristics
      */
