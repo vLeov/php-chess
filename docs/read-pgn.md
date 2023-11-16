@@ -2,15 +2,18 @@
 
 ✨ Portable Game Notation is a human-readable text format that allows chess players to read and write chess games.
 
-There are three different variants supported with the default one being classical chess.
+Multiple variants are supported with the default one being classical chess.
 
 | Variant | Chessboard |
 | ------- | ---------- |
 | Capablanca | [Chess\Variant\Capablanca\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Capablanca/BoardTest.php) |
+| Capablanca-Fischer | [Chess\Variant\CapablancaFischer\Board](https://github.com/chesslablab/php-chess/blob/master/src/Variant/CapablancaFischer/Board.php) |
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) |
 
-Both Capablanca and Chess960 were originally conceived to minimize memorization. So when it comes to chess openings, it is assumed that we're in the realms of classical chess as well. Let's now have a look at B54 which is the ECO code for "Sicilian Defense: Modern Variations, Main Line".
+There is no such thing as a chess opening in either Capablanca chess or Chess960. Those two variants were originally conceived to minimize memorization so when it comes to chess openings, it is assumed that we're in the realms of classical chess.
+
+Let's now have a look at B54 which is the ECO code for "Sicilian Defense: Modern Variations, Main Line".
 
 ```php
 use Chess\Variant\Classical\Board;

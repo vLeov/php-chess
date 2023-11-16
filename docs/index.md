@@ -49,7 +49,7 @@ Listed below are the UCI engines available at the moment.
 
 ## Object-Oriented API
 
-Data processing with an object-oriented API. The chess board representation is an object of type [SplObjectStorage](https://www.php.net/manual/en/class.splobjectstorage.php) as opposed to a bitboard.
+The chess board representation is an object of type [SplObjectStorage](https://www.php.net/manual/en/class.splobjectstorage.php) as opposed to a bitboard.
 
 ## Thoroughly Tested
 
