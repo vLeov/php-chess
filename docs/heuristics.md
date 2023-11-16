@@ -38,19 +38,17 @@ Listed below are the chess heuristics implemented in PHP Chess.
 | Square outpost | [Chess\Eval\SqOutpostEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/SqOutpostEvalTest.php) |
 | Tactics | [Chess\Eval\TacticsEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/TacticsEvalTest.php) |
 
-The evaluation functions are then grouped in two heuristics classes to transform the chess board state into numbers: [Chess\HeuristicsByFen](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsByFenTest.php) and [Chess\Heuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/HeuristicsTest.php). The former allows to take a so-called heuristic picture of a particular chess position while the latter enables to take a picture of an entire game.
+The evaluation features are used in two heuristics classes: [Chess\Heuristics\FenHeuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Heuristics/FenHeuristicsTest.php) and [Chess\Heuristics\SanHeuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Heuristics/SanHeuristicsTest.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
 
 ```php
-use Chess\EvalFunction;
-use Chess\HeuristicsByFen;
+use Chess\Heuristics\EvalFunction;
+use Chess\Heuristics\FenHeuristics;
 
 $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
 
-$heuristics = new HeuristicsByFen($fen);
-
 $result = [
-    'evalNames' => $evalFunction->names(),
-    'balance' => $heuristics->getBalance(),
+    'evalNames' => (new EvalFunction())->names(),
+    'balance' => (new FenHeuristics($fen))->getBalance(),
 ];
 
 print_r($result);
@@ -121,15 +119,14 @@ Figure 1. Heuristics of `rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R 
 A chess game can be plotted in terms of balance. +1 is the best possible evaluation for White and -1 the best possible evaluation for Black. Both forces being set to 0 means they're balanced.
 
 ```php
-use Chess\Heuristics;
+use Chess\Heuristics\EvalFunction;
+use Chess\Heuristics\SanHeuristics;
 
 $movetext = '1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3';
 
-$heuristics = new Heuristics($movetext);
-
 $result = [
-    'evalNames' => $heuristics->getEvalNames(),
-    'balance' => $heuristics->getBalance(),
+    'evalNames' => (new EvalFunction())->names(),
+    'balance' => (new SanHeuristics($movetext))->getBalance(),
 ];
 
 print_r($result);
