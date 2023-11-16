@@ -15,7 +15,9 @@ Then all you need is a RAV reader.
 ![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/read-rav_01.png)
 Figure 1. The response received from PHP Chess can be displayed as an HTML table.
 
-Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the getFen() method. This method retrieves the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
+The RAV reader shown in Figure 1 displays the variation levels in different shades of gray. It is a 2D scrollable HTML table where the main line is shown in a white background color. The deeper the level, the darker the background color is displayed.
+
+Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the `getFen()` method. This method retrieves the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
 
 ```php
 use Chess\Play\RavPlay;
