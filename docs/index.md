@@ -30,11 +30,12 @@ The PHP Chess docs are more of a tutorial rather than an API description.
 
 ## Chess Variants
 
-Three different variants are supported with the default one being classical chess.
+Multiple variants are supported with the default one being classical chess.
 
 | Variant | Chessboard |
 | ------- | ---------- |
 | Capablanca | [Chess\Variant\Capablanca\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Capablanca/BoardTest.php) |
+| Capablanca-Fischer | [Chess\Variant\CapablancaFischer\Board](https://github.com/chesslablab/php-chess/blob/master/src/Variant/CapablancaFischer/Board.php) |
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) |
 
