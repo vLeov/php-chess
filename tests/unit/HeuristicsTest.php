@@ -27,6 +27,22 @@ class HeuristicsTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function get_balance_e4()
+    {
+        $movetext = '1.e4';
+
+        $balance = (new Heuristics($movetext))->getBalance();
+
+        $expected = [
+            [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+        ];
+
+        $this->assertSame($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
     public function get_balance_e4_e5()
     {
         $movetext = '1.e4 e5';
