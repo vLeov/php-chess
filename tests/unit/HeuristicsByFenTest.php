@@ -10,6 +10,34 @@ class HeuristicsByFenTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function get_balance_start()
+    {
+        $fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+
+        $balance = (new HeuristicsByFen($fen))->getBalance();
+
+        $expected = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function get_balance_e4()
+    {
+        $fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1';
+
+        $balance = (new HeuristicsByFen($fen))->getBalance();
+
+        $expected = [ 0, 12, -4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
     public function get_balance_e4_e5()
     {
         $fen = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2';
