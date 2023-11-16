@@ -50,7 +50,7 @@ class HeuristicsByFen
     protected array $result;
 
     /**
-     * The balanced result.
+     * The balance.
      *
      * @var array
      */
