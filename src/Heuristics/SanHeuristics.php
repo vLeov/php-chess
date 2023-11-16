@@ -1,9 +1,7 @@
 <?php
 
-namespace Chess;
+namespace Chess\Heuristics;
 
-use Chess\EvalFunction;
-use Chess\FenHeuristics;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
@@ -11,8 +9,8 @@ use Chess\Variant\Classical\PGN\Move;
 /**
  * SanHeuristics
  *
- * The PHP Chess evaluation function is used in this class to transform a chess
- * game in SAN format to numbers for further processing with ML techniques.
+ * The evaluation function is used in this class to transform a chess game in
+ * SAN format to numbers for further processing with ML techniques.
  *
  * @author Jordi Bassagaña
  * @license GPL

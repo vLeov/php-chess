@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\FenHeuristics;
+use Chess\Heuristics\FenHeuristics;
 use Chess\Tests\AbstractUnitTestCase;
 
 class FenHeuristicsTest extends AbstractUnitTestCase

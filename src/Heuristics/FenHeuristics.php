@@ -1,8 +1,7 @@
 <?php
 
-namespace Chess;
+namespace Chess\Heuristics;
 
-use Chess\EvalFunction;
 use Chess\Eval\InverseEvalInterface;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
@@ -15,8 +14,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * FenHeuristics
  *
- * The PHP Chess evaluation function is used in this class to transform a FEN
- * position to numbers for further processing with ML techniques.
+ * The evaluation function is used in this class to transform a FEN position to
+ * numbers for further processing with ML techniques.
  *
  * @author Jordi Bassagaña
  * @license GPL

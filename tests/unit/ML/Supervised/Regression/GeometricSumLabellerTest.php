@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\ML\Supervised\Regression;
 
-use Chess\SanHeuristics;
+use Chess\Heuristics\SanHeuristics;
 use Chess\ML\Supervised\Regression\GeometricSumLabeller;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;

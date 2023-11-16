@@ -2,9 +2,9 @@
 
 namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
-use Chess\EvalFunction;
-use Chess\SanHeuristics;
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
+use Chess\Heuristics\EvalFunction;
+use Chess\Heuristics\SanHeuristics;
 use Chess\ML\Supervised\Classification\PermutationLabeller;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;

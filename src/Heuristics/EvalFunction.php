@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess;
+namespace Chess\Heuristics;
 
 use Chess\Eval\AttackEval;
 use Chess\Eval\BackwardPawnEval;

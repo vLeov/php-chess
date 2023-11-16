@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\EvalFunction;
+use Chess\Heuristics\EvalFunction;
 use Chess\Tests\AbstractUnitTestCase;
 
 class EvalFunctionTest extends AbstractUnitTestCase
