@@ -79,7 +79,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/SanPlayTest.php) allows to easily do so. As it name implies, this class is intended to play a Standard Algebaric Notation (SAN) movetext. The validate() method will throw a Chess\Exception\PlayException if the movetext is not valid.
+Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/SanPlayTest.php) allows to easily do so. As it name implies, this class is intended to play a Standard Algebaric Notation (SAN) movetext. The `validate()` method will throw a Chess\Exception\PlayException if the movetext is not valid.
 
 ```php
 use Chess\Play\SanPlay;
@@ -165,7 +165,7 @@ bool(false)
 
 Otherwise the game would end.
 
-[Numeric Annotation Glyphs](https://en.wikipedia.org/wiki/Numeric_Annotation_Glyphs) (NAGs) can optionally be used in SAN movetexts, so this is how you'd typically validate a SAN movetext using NAGs for further processing. Remember, the validate() method will throw a Chess\Exception\PlayException if the movetext is not valid.
+[Numeric Annotation Glyphs](https://en.wikipedia.org/wiki/Numeric_Annotation_Glyphs) (NAGs) can optionally be used in SAN movetexts, so this is how you'd typically validate a SAN movetext using NAGs for further processing. Remember, the `validate()` method will throw a Chess\Exception\PlayException if the movetext is not valid.
 
 ```php
 use Chess\Play\SanPlay;
@@ -181,7 +181,7 @@ echo $sanPlay->getSanMovetext()->filtered();
 1.e4 c5 2.Nf3 $1 d6 3.d4 cxd4 4.Nxd4 $48 Nf6 $113
 ```
 
-NAGs can be removed by passing the false value to the second argument of the filtered() method.
+NAGs can be removed by passing the false value to the second argument of the `filtered()` method.
 
 ```php
 echo $sanPlay->getSanMovetext()->filtered($comments = true, $nags = false);

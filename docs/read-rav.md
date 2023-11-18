@@ -107,13 +107,13 @@ Array
 )
 ```
 
-In both cases the validate() method will throw a Chess\Exception\PlayException if the RAV movetext is not valid. This is how to obtain the validated movetext.
+In both cases the `validate()` method will throw a Chess\Exception\PlayException if the RAV movetext is not valid. This is how to obtain the validated movetext.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->getMovetext();
 ```
 
-You may want to remove tabs and spaces from a valid RAV movetext with the help of the filtered() method.
+You may want to remove tabs and spaces from a valid RAV movetext with the help of the `filtered()` method.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->filtered();
@@ -125,7 +125,7 @@ echo $movetext;
 1.e4 c5 {enters the Sicilian Defense, the most popular and best-scoring response to White's first move.} (2.Nf3 {is played in about 80% of Master-level games after which there are three main options for Black.} (2...Nc6) (2...e6) (2...d6 {is Black's most common move.} 3.d4 {lines are collectively known as the Open Sicilian.} cxd4 4.Nxd4 Nf6 5.Nc3 {allows Black choose between four major variations: the Najdorf, Dragon, Classical and Scheveningen.} (5...a6 {is played in the Najdorf variation.}) (5...g6 {is played in the Dragon variation.}) (5...Nc6 {is played in the Classical variation.}) (5...e6 {is played in the Scheveningen variation.})))
 ```
 
-Comments are removed by passing the false value to the first argument of the filtered() method.
+Comments are removed by passing the false value to the first argument of the `filtered()` method.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->filtered($comments = false);
