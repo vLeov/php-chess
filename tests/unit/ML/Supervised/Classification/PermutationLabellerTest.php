@@ -86,7 +86,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
         $end = end($balance);
 
         $expected = [
-            'w' => 0,
+            'w' => 3,
             'b' => 0,
         ];
 

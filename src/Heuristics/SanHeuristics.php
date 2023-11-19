@@ -63,6 +63,8 @@ class SanHeuristics extends SanPlay
      */
     protected function balance(): SanHeuristics
     {
+        $this->balance[] = (new FenHeuristics($this->board->getStartFen()))
+            ->getBalance();
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
                 if ($this->board->play($this->board->getTurn(), $val)) {
