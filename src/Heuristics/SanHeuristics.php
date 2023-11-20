@@ -43,7 +43,7 @@ class SanHeuristics extends SanPlay
 
         $this->evalFunction = new EvalFunction();
 
-        $this->balance()->normalize();
+        $this->balance()->normalize(-1, 1);
     }
 
     /**
@@ -82,14 +82,10 @@ class SanHeuristics extends SanPlay
      *
      * @return \Chess\SanHeuristics
      */
-    protected function normalize(): SanHeuristics
+    protected function normalize($newMin, $newMax): SanHeuristics
     {
         if ($this->balance) {
-            $columns = [];
-            $mins = [];
-            $maxs = [];
-            $normd = [];
-            $transpose = [];
+            $columns = $mins = $maxs = $normd = $transpose = [];
             for ($i = 0; $i < count($this->evalFunction->getEval()); $i++) {
                 $columns[$i] = array_column($this->balance, $i);
                 $mins[$i] = round(min($columns[$i]), 2);
@@ -97,9 +93,11 @@ class SanHeuristics extends SanPlay
             }
             for ($i = 0; $i < count($this->evalFunction->getEval()); $i++) {
                 for ($j = 0; $j < count($columns[$i]); $j++) {
-                    if ($maxs[$i] - $mins[$i] > 0) {
-                        $normd[$i][$j] = round(($columns[$i][$j] - $mins[$i]) / ($maxs[$i] - $mins[$i]), 2);
-                    } elseif ($maxs[$i] == $mins[$i]) {
+                    if ($columns[$i][$j] > 0) {
+                        $normd[$i][$j] = round($columns[$i][$j] * $newMax / $maxs[$i], 2);
+                    } elseif ($columns[$i][$j] < 0) {
+                        $normd[$i][$j] = round($columns[$i][$j] * $newMin / $mins[$i], 2);
+                    } else {
                         $normd[$i][$j] = 0;
                     }
                 }
