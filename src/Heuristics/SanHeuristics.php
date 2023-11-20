@@ -9,8 +9,8 @@ use Chess\Variant\Classical\PGN\Move;
 /**
  * SanHeuristics
  *
- * The evaluation function is used in this class to transform a chess game in
- * SAN format to numbers for further processing with ML techniques.
+ * SanHeuristics transforms a chess game in SAN format to numbers for further
+ * processing with ML techniques.
  *
  * @author Jordi Bassagaña
  * @license GPL
@@ -47,7 +47,7 @@ class SanHeuristics extends SanPlay
     }
 
     /**
-     * Returns the normalized balance.
+     * Returns the balance.
      *
      * @return array
      */
@@ -102,14 +102,25 @@ class SanHeuristics extends SanPlay
                     }
                 }
             }
-            for ($i = 0; $i < count($normd); $i++) {
-                for ($j = 0; $j < count($normd[$i]); $j++) {
-                    $transpose[$j][$i] = $normd[$i][$j];
-                }
-            }
-            $this->balance = $transpose;
+            $this->balance = $this->transpose($normd);
         }
 
         return $this;
+    }
+
+    /**
+     * Transposes the given array.
+     *
+     * @return array
+     */
+    protected function transpose(array $normd): array
+    {
+        for ($i = 0; $i < count($normd); $i++) {
+            for ($j = 0; $j < count($normd[$i]); $j++) {
+                $transpose[$j][$i] = $normd[$i][$j];
+            }
+        }
+
+        return $transpose;
     }
 }
