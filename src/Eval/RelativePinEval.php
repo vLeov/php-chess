@@ -3,23 +3,11 @@
 namespace Chess\Eval;
 
 use Chess\Eval\AttackEval;
-use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 class RelativePinEval extends AbstractEval
 {
     const NAME = 'Relative pin';
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
-    }
 
     public function eval(): array
     {

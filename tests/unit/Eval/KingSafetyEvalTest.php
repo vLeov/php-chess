@@ -17,8 +17,8 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
         $kSafetyEval = (new KingSafetyEval(new Board()))->eval();
 
         $expected = [
-            'w' => 1,
-            'b' => 1,
+            'w' => 0,
+            'b' => 0,
         ];
 
         $this->assertSame($expected, $kSafetyEval);
@@ -36,8 +36,8 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
         $kSafetyEval = (new KingSafetyEval($board))->eval();
 
         $expected = [
-            'w' => 0,
-            'b' => 1,
+            'w' => -1,
+            'b' => 0,
         ];
 
         $this->assertSame($expected, $kSafetyEval);
@@ -55,8 +55,8 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
         $kSafetyEval = (new KingSafetyEval($board))->eval();
 
         $expected = [
-            'w' => 1,
-            'b' => 1,
+            'w' => 0,
+            'b' => 0,
         ];
 
         $this->assertSame($expected, $kSafetyEval);

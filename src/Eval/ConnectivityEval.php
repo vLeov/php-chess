@@ -24,11 +24,6 @@ class ConnectivityEval extends AbstractEval
         parent::__construct($board);
 
         $this->sqCount = (new SqCount($board))->count();
-
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
     }
 
     public function eval(): array

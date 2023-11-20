@@ -2,8 +2,8 @@
 
 namespace Chess\Eval;
 
-use Chess\Piece\AbstractPiece;
 use Chess\Variant\Capablanca\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
 /**
@@ -33,6 +33,11 @@ abstract class AbstractEval
             Piece::P => 1,
             Piece::Q => 8.8,
             Piece::R => 5.1,
+        ];
+
+        $this->result = [
+            Color::W => 0,
+            Color::B => 0,
         ];
     }
 }

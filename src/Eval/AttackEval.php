@@ -2,9 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 /**
  * Attack evaluation.
@@ -15,16 +13,6 @@ use Chess\Variant\Classical\Board;
 class AttackEval extends AbstractEval
 {
     const NAME = 'Attack';
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
-    }
 
     public function eval(): array
     {

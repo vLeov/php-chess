@@ -5,21 +5,10 @@ namespace Chess\Eval;
 use Chess\Piece\P;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 class PassedPawnEval extends AbstractEval
 {
     const NAME = 'Passed pawn';
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
-    }
 
     public function eval(): array
     {

@@ -2,23 +2,11 @@
 
 namespace Chess\Eval;
 
-use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 class BadBishopEval extends AbstractEval implements InverseEvalInterface
 {
     const NAME = 'Bad bishop';
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
-    }
 
     public function eval(): array
     {

@@ -54,11 +54,6 @@ class TacticsEval extends AbstractEval
             Color::B => [],
         ];
 
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
-
         $this->target();
     }
 

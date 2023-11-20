@@ -4,7 +4,6 @@ namespace Chess\Eval;
 
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 /**
  * Material.
@@ -15,16 +14,6 @@ use Chess\Variant\Classical\Board;
 class MaterialEval extends AbstractEval
 {
     const NAME = 'Material';
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
-    }
 
     public function eval(): array
     {

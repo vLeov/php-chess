@@ -4,7 +4,6 @@ namespace Chess\Eval;
 
 use Chess\Eval\SpaceEval;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Board;
 
 /**
  * Center.
@@ -26,16 +25,6 @@ class CenterEval extends AbstractEval
         'a2' => 0, 'b2' => 1, 'c2' => 1, 'd2' => 1, 'e2' => 1, 'f2' => 1, 'g2' => 1, 'h2' => 0,
         'a1' => 0, 'b1' => 0, 'c1' => 0, 'd1' => 0, 'e1' => 0, 'f1' => 0, 'g1' => 0, 'h1' => 0,
     ];
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => 0,
-            Color::B => 0,
-        ];
-    }
 
     public function eval(): array
     {

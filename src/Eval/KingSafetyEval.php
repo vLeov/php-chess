@@ -6,7 +6,6 @@ use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 /**
  * K safety.
@@ -17,16 +16,6 @@ use Chess\Variant\Classical\Board;
 class KingSafetyEval extends AbstractEval
 {
     const NAME = 'King safety';
-
-    public function __construct(Board $board)
-    {
-        parent::__construct($board);
-
-        $this->result = [
-            Color::W => 1,
-            Color::B => 1,
-        ];
-    }
 
     public function eval(): array
     {
