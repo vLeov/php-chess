@@ -14,8 +14,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * FenHeuristics
  *
- * The evaluation function is used in this class to transform a FEN position to
- * numbers for further processing with ML techniques.
+ * SanHeuristics transforms a FEN position to numbers for further processing
+ * with ML techniques.
  *
  * @author Jordi Bassagaña
  * @license GPL
