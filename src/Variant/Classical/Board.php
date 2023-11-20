@@ -6,7 +6,7 @@ use Chess\FenToBoard;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
-use Chess\Eval\SqEval;
+use Chess\Eval\SqCount;
 use Chess\Piece\AbstractPiece;
 use Chess\Piece\AsciiArray;
 use Chess\Piece\B;
@@ -134,11 +134,11 @@ class Board extends \SplObjectStorage
     private object $spaceEval;
 
     /**
-     * Square evaluation.
+     * Count squares.
      *
      * @var object
      */
-    private object $sqEval;
+    private object $sqCount;
 
     /**
      * Constructor.
@@ -228,9 +228,9 @@ class Board extends \SplObjectStorage
      *
      * @return object
      */
-    public function getSqEval(): object
+    public function getSqCount(): object
     {
-        return $this->sqEval;
+        return $this->sqCount;
     }
 
     /**
@@ -943,7 +943,7 @@ class Board extends \SplObjectStorage
     {
         $this->turn = Color::opp($this->turn);
 
-        $this->sqEval = (new SqEval($this))->eval();
+        $this->sqCount = (new SqCount($this))->count();
 
         $this->detachPieces()
             ->attachPieces()
@@ -1002,19 +1002,19 @@ class Board extends \SplObjectStorage
                         $move = $this->move->toObj($this->turn, Castle::SHORT, $this->castlingRule);
                     } elseif ($sq === $piece->sqCastleLong()) {
                         $move = $this->move->toObj($this->turn, CASTLE::LONG, $this->castlingRule);
-                    } elseif (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
+                    } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
                         $move = $this->move->toObj($this->turn, Piece::K."x$sq", $this->castlingRule);
                     } elseif (!in_array($sq, $this->spaceEval->{$piece->oppColor()})) {
                         $move = $this->move->toObj($this->turn, Piece::K.$sq, $this->castlingRule);
                     }
                 } elseif ($piece->getId() === Piece::P) {
-                    if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
+                    if (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
                         $move = $this->move->toObj($this->turn, $piece->getSqFile()."x$sq", $this->castlingRule);
                     } else {
                         $move = $this->move->toObj($this->turn, $sq, $this->castlingRule);
                     }
                 } else {
-                    if (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
+                    if (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
                         $move = $this->move->toObj($this->turn, $piece->getId()."x$sq", $this->castlingRule);
                     } else {
                         $move = $this->move->toObj($this->turn, $piece->getId().$sq, $this->castlingRule);
@@ -1109,7 +1109,7 @@ class Board extends \SplObjectStorage
             $fen = [];
             foreach ($piece->sqs() as $sq) {
                 if ($res = $piece->fen($piece->getColor(), $sq)) {
-                    $fen[$sq] = $res; 
+                    $fen[$sq] = $res;
                 }
             }
 

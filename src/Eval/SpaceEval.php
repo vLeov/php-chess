@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Eval\SqEval;
+use Chess\Eval\SqCount;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
@@ -17,13 +17,13 @@ class SpaceEval extends AbstractEval
 {
     const NAME = 'Space';
 
-    private object $sqEval;
+    private object $sqCount;
 
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
-        $this->sqEval = (new SqEval($board))->eval();
+        $this->sqCount = (new SqCount($board))->count();
 
         $this->result = [
             Color::W => [],
@@ -40,7 +40,7 @@ class SpaceEval extends AbstractEval
                         ...$this->result[$piece->getColor()],
                         ...array_intersect(
                             (array) $piece->getMobility(),
-                            $this->sqEval->free
+                            $this->sqCount->free
                         )
                     ]
                 );
@@ -50,7 +50,7 @@ class SpaceEval extends AbstractEval
                         ...$this->result[$piece->getColor()],
                         ...array_intersect(
                             $piece->getCaptureSqs(),
-                            $this->sqEval->free
+                            $this->sqCount->free
                         )
                     ]
                 );
@@ -60,7 +60,7 @@ class SpaceEval extends AbstractEval
                         ...$this->result[$piece->getColor()],
                         ...array_diff(
                             $piece->sqs(),
-                            $this->sqEval->used->{$piece->oppColor()}
+                            $this->sqCount->used->{$piece->oppColor()}
                         )
                     ]
                 );

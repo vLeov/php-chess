@@ -2,22 +2,21 @@
 
 namespace Chess\Eval;
 
-use Chess\Piece\AsciiArray;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
 /**
- * Square evaluation.
+ * Square count.
  *
  * @author Jordi Bassagaña
  * @license GPL
  */
-class SqEval extends AbstractEval
+class SqCount
 {
-    const NAME           = 'Square';
-
     const TYPE_FREE      = 'free';
     const TYPE_USED      = 'used';
+
+    private Board $board;
 
     private $used = [];
 
@@ -25,13 +24,18 @@ class SqEval extends AbstractEval
 
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
         $this->used = $this->used();
         $this->free = $this->free();
     }
 
-    public function eval(): object
+    /**
+     * Count squares.
+     *
+     * @return object
+     */
+    public function count(): object
     {
         return (object) [
             self::TYPE_FREE => $this->free,
@@ -56,7 +60,6 @@ class SqEval extends AbstractEval
      */
     private function used(): object
     {
-        $used = [];
         foreach ($this->board->getPieces() as $piece) {
             $used[$piece->getColor()][] = $piece->getSq();
         }

@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Eval\SqEval;
+use Chess\Eval\SqCount;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
@@ -20,11 +20,11 @@ class PressureEval extends AbstractEval
     const NAME = 'Pressure';
 
     /**
-     * Square evaluation containing the free and used squares.
+     * Count squares.
      *
      * @var object
      */
-    private object $sqEval;
+    private object $sqCount;
 
     /**
      * @param \Chess\Variant\Classical\Board $board
@@ -33,7 +33,7 @@ class PressureEval extends AbstractEval
     {
         parent::__construct($board);
 
-        $this->sqEval = (new SqEval($board))->eval();
+        $this->sqCount = (new SqCount($board))->count();
 
         $this->result = [
             Color::W => [],
@@ -54,7 +54,7 @@ class PressureEval extends AbstractEval
                     ...$this->result[$piece->getColor()],
                     ...array_intersect(
                         (array) $piece->getMobility(),
-                        $this->sqEval->used->{$piece->oppColor()}
+                        $this->sqCount->used->{$piece->oppColor()}
                     )
                 ];
             } elseif ($piece->getId() === Piece::P) {
@@ -62,7 +62,7 @@ class PressureEval extends AbstractEval
                     ...$this->result[$piece->getColor()],
                     ...array_intersect(
                         $piece->getCaptureSqs(),
-                        $this->sqEval->used->{$piece->oppColor()}
+                        $this->sqCount->used->{$piece->oppColor()}
                     )
                 ];
             } else {
@@ -70,7 +70,7 @@ class PressureEval extends AbstractEval
                     ...$this->result[$piece->getColor()],
                     ...array_intersect(
                         $piece->sqs(),
-                        $this->sqEval->used->{$piece->oppColor()}
+                        $this->sqCount->used->{$piece->oppColor()}
                     )
                 ];
             }

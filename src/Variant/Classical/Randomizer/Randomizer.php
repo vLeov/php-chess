@@ -147,7 +147,7 @@ class Randomizer
      */
     protected function rand(array $items, array $pieces): array
     {
-        $freeSqs = $this->board->getSqEval()->free;
+        $freeSqs = $this->board->getSqCount()->free;
         foreach ($items as $color => $ids) {
             foreach ($ids as $id) {
                 $arrayRand = array_rand($freeSqs, 1);

@@ -129,9 +129,9 @@ class N extends AbstractPiece
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->free)) {
+            if (in_array($sq, $this->board->getSqCount()->free)) {
                 $sqs[] = $sq;
-            } elseif (in_array($sq, $this->board->getSqEval()->used->{$this->oppColor()})) {
+            } elseif (in_array($sq, $this->board->getSqCount()->used->{$this->oppColor()})) {
                 $sqs[] = $sq;
             }
         }
@@ -148,7 +148,7 @@ class N extends AbstractPiece
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+            if (in_array($sq, $this->board->getSqCount()->used->{$this->getColor()})) {
                 $sqs[] = $sq;
             }
         }

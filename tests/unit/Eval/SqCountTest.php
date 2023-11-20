@@ -2,11 +2,11 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Eval\SqEval;
+use Chess\Eval\SqCount;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
-class SqEvalTest extends AbstractUnitTestCase
+class SqCountTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class SqEvalTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $sqEval = (new SqEval($board))->eval();
+        $sqCount = (new SqCount($board))->count();
 
         $expected = [
             'a3', 'a4', 'a5', 'a6',
@@ -28,6 +28,6 @@ class SqEvalTest extends AbstractUnitTestCase
             'h3', 'h4', 'h5', 'h6',
         ];
 
-        $this->assertEqualsCanonicalizing($expected, $sqEval->free);
+        $this->assertEqualsCanonicalizing($expected, $sqCount->free);
     }
 }

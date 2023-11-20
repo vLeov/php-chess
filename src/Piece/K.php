@@ -90,7 +90,7 @@ class K extends AbstractPiece
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->getSqEval()->used->{$this->getColor()})) {
+            if (in_array($sq, $this->board->getSqCount()->used->{$this->getColor()})) {
                 $sqs[] = $sq;
             }
         }
@@ -104,7 +104,7 @@ class K extends AbstractPiece
 
         if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
             if (
-                !array_diff($rule['free'], $this->board->getSqEval()->free) &&
+                !array_diff($rule['free'], $this->board->getSqCount()->free) &&
                 empty(array_intersect($rule['attack'], $this->board->getSpaceEval()->{$this->oppColor()}))
             ) {
                 return $rule['sq']['next'];
@@ -120,7 +120,7 @@ class K extends AbstractPiece
 
         if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {
             if (
-                !array_diff($rule['free'], $this->board->getSqEval()->free) &&
+                !array_diff($rule['free'], $this->board->getSqCount()->free) &&
                 empty(array_intersect($rule['attack'], $this->board->getSpaceEval()->{$this->oppColor()}))
             ) {
                 return $rule['sq']['next'];
@@ -134,7 +134,7 @@ class K extends AbstractPiece
     {
         $sqsCaptures = array_intersect(
             (array)$this->mobility,
-            $this->board->getSqEval()->used->{$this->oppColor()}
+            $this->board->getSqCount()->used->{$this->oppColor()}
         );
 
         return array_diff($sqsCaptures, $this->board->getDefenseEval()->{$this->oppColor()});
@@ -142,7 +142,7 @@ class K extends AbstractPiece
 
     protected function sqsKing(): ?array
     {
-        $sqsKing = array_intersect((array)$this->mobility, $this->board->getSqEval()->free);
+        $sqsKing = array_intersect((array)$this->mobility, $this->board->getSqCount()->free);
 
         return array_diff($sqsKing, $this->board->getSpaceEval()->{$this->oppColor()});
     }

@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Eval\SqEval;
+use Chess\Eval\SqCount;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
@@ -17,13 +17,13 @@ class ConnectivityEval extends AbstractEval
 {
     const NAME = 'Connectivity';
 
-    private object $sqEval;
+    private object $sqCount;
 
     public function __construct(Board $board)
     {
         parent::__construct($board);
 
-        $this->sqEval = (new SqEval($board))->eval();
+        $this->sqCount = (new SqCount($board))->count();
 
         $this->result = [
             Color::W => 0,
@@ -46,28 +46,28 @@ class ConnectivityEval extends AbstractEval
                 case Piece::K:
                     $this->result[$color] += count(
                         array_intersect((array)$piece->getMobility(),
-                        $this->sqEval->used->{$color})
+                        $this->sqCount->used->{$color})
                     );
                     break;
                 case Piece::N:
                     $this->result[$color] += count(
                         array_intersect($piece->getMobility(),
-                        $this->sqEval->used->{$color})
+                        $this->sqCount->used->{$color})
                     );
                     break;
                 case Piece::P:
                     $this->result[$color] += count(
                         array_intersect($piece->getCaptureSqs(),
-                        $this->sqEval->used->{$color})
+                        $this->sqCount->used->{$color})
                     );
                     break;
                 default:
                     foreach ((array)$piece->getMobility() as $key => $val) {
                         foreach ($val as $sq) {
-                            if (in_array($sq, $this->sqEval->used->{$color})) {
+                            if (in_array($sq, $this->sqCount->used->{$color})) {
                                 $this->result[$color] += 1;
                                 break;
-                            } elseif (in_array($sq, $this->sqEval->used->{$piece->oppColor()})) {
+                            } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
                                 break;
                             }
                         }
