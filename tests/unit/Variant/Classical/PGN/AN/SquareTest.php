@@ -55,4 +55,36 @@ class SquareTest extends AbstractUnitTestCase
     {
         $this->assertSame(Square::validate('e4'), 'e4');
     }
+
+    /**
+     * @test
+     */
+    public function color_a1()
+    {
+        $this->assertSame(Square::color('a1'), 'b');
+    }
+
+    /**
+     * @test
+     */
+    public function color_a2()
+    {
+        $this->assertSame(Square::color('a2'), 'w');
+    }
+
+    /**
+     * @test
+     */
+    public function color_b1()
+    {
+        $this->assertSame(Square::color('b1'), 'w');
+    }
+
+    /**
+     * @test
+     */
+    public function color_b2()
+    {
+        $this->assertSame(Square::color('b2'), 'b');
+    }
 }
