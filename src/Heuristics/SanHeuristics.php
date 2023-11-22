@@ -80,9 +80,11 @@ class SanHeuristics extends SanPlay
     /**
      * Normalizes the balance.
      *
+     * @param int $newMin
+     * @param int $newMax
      * @return \Chess\SanHeuristics
      */
-    protected function normalize($newMin, $newMax): SanHeuristics
+    protected function normalize(int $newMin, int $newMax): SanHeuristics
     {
         if ($this->balance) {
             $columns = $mins = $maxs = $normd = $transpose = [];
@@ -111,6 +113,7 @@ class SanHeuristics extends SanPlay
     /**
      * Transposes the given array.
      *
+     * @param array $normd
      * @return array
      */
     protected function transpose(array $normd): array
