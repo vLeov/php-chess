@@ -19,14 +19,16 @@ class PiecePhrase
      */
     public static $phrase = [
         [
-            'pgn' => "N",
+            'id' => "N",
+            'color' => "w",
             'meanings' => [
                 "White's knight",
                 "white knight",
             ],
         ],
         [
-            'pgn' => "n",
+            'id' => "N",
+            'color' => "b",
             'meanings' => [
                 "Black's knight",
                 "black knight",
@@ -36,12 +38,11 @@ class PiecePhrase
 
     public static function deterministic(AbstractPiece $piece): ?string
     {
-        $pgn = $piece->getColor() === Color::W
-            ? $piece->getId()
-            : mb_strtolower($piece->getId());
-
         foreach (self::$phrase as $item) {
-            if ($item['pgn'] === $pgn) {
+            if (
+                $item['id'] === $piece->getId() &&
+                $item['color'] === $piece->getColor()
+            ) {
                 return "{$item['meanings'][0]} on {$piece->getSq()}";
             }
         }
