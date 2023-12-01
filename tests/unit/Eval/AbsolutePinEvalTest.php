@@ -22,7 +22,7 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            'N on c6 is pinned.',
+            "Black's knight on c6 is pinned.",
         ];
 
         $absPinEval = new AbsolutePinEval($board);
@@ -39,14 +39,19 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -'))
             ->create();
 
-        $expected = [
+        $expectedEval = [
             'w' => 0,
             'b' => 3.2,
         ];
 
+        $expectedExplanation = [
+            "Black's knight on c6 is pinned.",
+        ];
+
         $absPinEval = new AbsolutePinEval($board);
 
-        $this->assertSame($expected, $absPinEval->getResult());
+        $this->assertSame($expectedEval, $absPinEval->getResult());
+        $this->assertSame($expectedExplanation, $absPinEval->getExplanation());
     }
 
     /**
@@ -57,14 +62,20 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('r2qk1nr/ppp2ppp/2n5/1B1pp3/1b1PP1b1/2N1BN2/PPP2PPP/R2QK2R w KQkq -'))
             ->create();
 
-        $expected = [
+        $expectedEval = [
             'w' => 3.2,
             'b' => 3.2,
         ];
 
+        $expectedExplanation = [
+            "Black's knight on c6 is pinned.",
+            "White's knight on c3 is pinned.",
+        ];
+
         $absPinEval = new AbsolutePinEval($board);
 
-        $this->assertSame($expected, $absPinEval->getResult());
+        $this->assertSame($expectedEval, $absPinEval->getResult());
+        $this->assertSame($expectedExplanation, $absPinEval->getExplanation());
     }
 
     /**

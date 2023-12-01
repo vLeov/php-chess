@@ -2,6 +2,9 @@
 
 namespace Chess\Tutor;
 
+use Chess\Piece\AbstractPiece;
+use Chess\Variant\Classical\PGN\AN\Color;
+
 /**
  * Human-like explanation.
  *
@@ -31,8 +34,12 @@ class Explanation
         ],
     ];
 
-    public static function deterministic(string $pgn): ?string
+    public static function deterministic(AbstractPiece $piece): ?string
     {
+        $pgn = $piece->getColor() === Color::W
+            ? $piece->getId()
+            : mb_strtolower($piece->getId());
+
         foreach (self::$explanation as $item) {
             if ($item['pgn'] === $pgn) {
                 return $item['meanings'][0];
