@@ -26,8 +26,8 @@ class AttackEval extends AbstractEval
                         if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
                                 $id = $item->getId();
-                                if ($id !== Piece::K && $this->value[Piece::P] < $this->value[$id]) {
-                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[Piece::P];
+                                if ($id !== Piece::K && self::$value[Piece::P] < self::$value[$id]) {
+                                    $this->result[$piece->getColor()] += self::$value[$id] - self::$value[Piece::P];
                                 }
                             }
                         }
@@ -38,8 +38,8 @@ class AttackEval extends AbstractEval
                         if ($item = $this->board->getPieceBySq($sq)) {
                             if ($item->getColor() !== $piece->getColor()) {
                                 $id = $item->getId();
-                                if ($id !== Piece::K && $this->value[$piece->getId()] < $this->value[$id]) {
-                                    $this->result[$piece->getColor()] += $this->value[$id] - $this->value[$piece->getId()];
+                                if ($id !== Piece::K && self::$value[$piece->getId()] < self::$value[$id]) {
+                                    $this->result[$piece->getColor()] += self::$value[$id] - self::$value[$piece->getId()];
                                 }
                             }
                         }

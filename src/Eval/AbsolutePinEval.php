@@ -18,7 +18,7 @@ class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
                 $clone->refresh();
                 $newCheckingPieces = $clone->checkingPieces();
                 if (count($newCheckingPieces) > count($checkingPieces)) {
-                    $this->result[$piece->getColor()] += $this->value[$piece->getId()];
+                    $this->result[$piece->getColor()] += self::$value[$piece->getId()];
                     $this->explain($piece);
                 }
             }

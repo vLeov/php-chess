@@ -68,7 +68,7 @@ class TacticsEval extends AbstractEval
             foreach ($sqs as $sq) {
                 $id = $this->board->getPieceBySq($sq)->getId();
                 if ($id !== Piece::K) {
-                    $this->result[$color] += $this->value[$id];
+                    $this->result[$color] += self::$value[$id];
                 }
             }
         }

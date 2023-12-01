@@ -10,10 +10,10 @@ abstract class AbstractForkEval extends AbstractEval
     protected function sumValues(AbstractPiece $piece, array $attackedPieces)
     {
         $values = 0;
-        $pieceValue = $this->value[$piece->getId()];
+        $pieceValue = self::$value[$piece->getId()];
         foreach ($attackedPieces as $attackedPiece) {
             if ($attackedPiece->getId() !== Piece::K) {
-                $attackedPieceValue = $this->value[$attackedPiece->getId()];
+                $attackedPieceValue = self::$value[$attackedPiece->getId()];
                 if ($pieceValue < $attackedPieceValue) {
                     $values += $attackedPieceValue;
                 }
