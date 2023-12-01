@@ -4,6 +4,7 @@ namespace Chess\Eval;
 
 use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -17,15 +18,15 @@ class KingSafetyEval extends AbstractEval
 {
     const NAME = 'King safety';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
-        $pressEval = (new PressureEval($this->board))->eval();
-        $spEval = (new SpaceEval($this->board))->eval();
+        $this->board = $board;
+
+        $pressEval = (new PressureEval($this->board))->getResult();
+        $spEval = (new SpaceEval($this->board))->getResult();
 
         $this->color(Color::W, $pressEval, $spEval);
         $this->color(Color::B, $pressEval, $spEval);
-
-        return $this->result;
     }
 
     private function color(string $color, array $pressEval, array $spEval): void

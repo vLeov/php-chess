@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -9,8 +10,10 @@ class DirectOppositionEval extends AbstractEval
 {
     const NAME = 'Direct opposition';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         $wK = $this->board->getPiece(Color::W, Piece::K)->getSq();
         $bK = $this->board->getPiece(Color::B, Piece::K)->getSq();
 
@@ -31,7 +34,5 @@ class DirectOppositionEval extends AbstractEval
                 ];
             }
         }
-
-        return $this->result;
     }
 }

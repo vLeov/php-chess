@@ -2,12 +2,16 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\Classical\Board;
+
 class RelativeForkEval extends AbstractForkEval
 {
     const NAME = 'Relative fork';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         foreach ($this->board->getPieces() as $piece) {
             if (!$piece->isAttackingKing()) {
                 $attackedPieces = $piece->attackedPieces();
@@ -17,7 +21,5 @@ class RelativeForkEval extends AbstractForkEval
                 }
             }
         }
-
-        return $this->result;
     }
 }

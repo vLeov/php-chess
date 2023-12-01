@@ -34,9 +34,9 @@ abstract class AbstractEval
 
     protected array $explanation = [];
 
-    public function __construct(Board $board)
+    public function getResult()
     {
-        $this->board = $board;
+        return $this->result;
     }
 
     public function getExplanation()

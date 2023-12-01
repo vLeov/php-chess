@@ -10,18 +10,13 @@ class KnightOutpostEval extends AbstractEval
 {
     const NAME = 'Knight outpost';
 
-    private array $sqOutpostEval;
-
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
-        $this->sqOutpostEval = (new SqOutpostEval($board))->eval();
-    }
+        $sqOutpostEval = (new SqOutpostEval($board))->getResult();
 
-    public function eval(): array
-    {
-        foreach ($this->sqOutpostEval as $key => $val) {
+        foreach ($sqOutpostEval as $key => $val) {
             foreach ($val as $sq) {
                 if ($piece = $this->board->getPieceBySq($sq)) {
                     if ($piece->getColor() === $key && $piece->getId() === Piece::N) {
@@ -30,7 +25,5 @@ class KnightOutpostEval extends AbstractEval
                 }
             }
         }
-
-        return $this->result;
     }
 }

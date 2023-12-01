@@ -3,21 +3,23 @@
 namespace Chess\Eval;
 
 use Chess\Piece\P;
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
 {
     const NAME = 'Isolated pawn';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
             if ($piece->getId() === Piece::P) {
                 $this->result[ $color ] += $this->checkIsolatedPawn($piece);
             }
         }
-        return $this->result;
     }
 
     private function checkIsolatedPawn(P $pawn): int
@@ -47,6 +49,7 @@ class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
                 }
             }
         }
+
         return 1;
     }
 }

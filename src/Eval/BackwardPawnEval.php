@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 /**
@@ -14,10 +15,13 @@ class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
 {
     const NAME = 'Backward pawn';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         $captureSquares = [];
         $nextMoves = [];
+
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::P) {
                 $captureSquares[] = [
@@ -25,7 +29,7 @@ class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
                     'captureSquares' => $piece->getCaptureSqs(),
                 ];
 
-                //Only check for movable pawns and their next possible square
+                // Only check for movable pawns and their next possible square
                 if (0 === count($piece->sqs()) || !str_contains($piece->sqs()[0], $piece->getSqFile())) {
                     continue;
                 }
@@ -68,6 +72,5 @@ class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
                 }
             }
         }
-        return $this->result;
     }
 }

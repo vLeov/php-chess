@@ -26,6 +26,11 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_16()
     {
+        $expected = [
+            'w' => 1,
+            'b' => 0,
+        ];
+
         $position = [
             7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             6 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ' ],
@@ -40,14 +45,9 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
             ->toClassicalBoard('\Chess\Variant\Classical\Board', 'w');
 
-        $expected = [
-            'w' => 1,
-            'b' => 0,
-        ];
+        $result = (new DoubledPawnEval($board))->getResult();
 
-        $doubledPawnEval = (new DoubledPawnEval($board))->eval();
-
-        $this->assertSame($expected, $doubledPawnEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -55,6 +55,11 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_17()
     {
+        $expected = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
         $position = [
             7 => [ ' . ', ' r ', ' . ', ' q ', ' . ', ' r ', ' k ', ' . ' ],
             6 => [ ' p ', ' . ', ' p ', ' . ', ' . ', ' p ', ' b ', ' p ' ],
@@ -69,13 +74,8 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
             ->toClassicalBoard('\Chess\Variant\Classical\Board', 'w');
 
-        $expected = [
-            'w' => 0,
-            'b' => 1,
-        ];
+        $result = (new DoubledPawnEval($board))->getResult();
 
-        $doubledPawnEval = (new DoubledPawnEval($board))->eval();
-
-        $this->assertSame($expected, $doubledPawnEval);
+        $this->assertSame($expected, $result);
     }
 }

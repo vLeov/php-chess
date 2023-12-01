@@ -14,14 +14,14 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $connEval = (new ConnectivityEval(new Board()))->eval();
-
         $expected = [
             'w' => 20,
             'b' => 20,
         ];
 
-        $this->assertSame($expected, $connEval);
+        $result = (new ConnectivityEval(new Board()))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -29,17 +29,15 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
      */
     public function C60()
     {
-        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
-
-        $board = (new SanPlay($C60))->validate()->getBoard();
-
         $expected = [
             'w' => 19,
             'b' => 23,
         ];
 
-        $connEval = (new ConnectivityEval($board))->eval();
+        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
+        $board = (new SanPlay($C60))->validate()->getBoard();
+        $result = (new ConnectivityEval($board))->getResult();
 
-        $this->assertSame($expected, $connEval);
+        $this->assertSame($expected, $result);
     }
 }

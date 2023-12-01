@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 /**
@@ -14,8 +15,10 @@ class AttackEval extends AbstractEval
 {
     const NAME = 'Attack';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
                 case Piece::K:
@@ -47,7 +50,5 @@ class AttackEval extends AbstractEval
                     break;
             }
         }
-
-        return $this->result;
     }
 }

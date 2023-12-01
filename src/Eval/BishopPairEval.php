@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -9,8 +10,10 @@ class BishopPairEval extends AbstractEval
 {
     const NAME = 'Bishop pair';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         $count = [
             Color::W => 0,
             Color::B => 0,
@@ -27,7 +30,5 @@ class BishopPairEval extends AbstractEval
         } elseif ($count[Color::B] === 2 && $count[Color::B] > $count[Color::W]) {
             $this->result[Color::B] = 1;
         }
-
-        return $this->result;
     }
 }

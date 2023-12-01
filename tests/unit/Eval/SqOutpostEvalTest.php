@@ -17,9 +17,9 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
     {
         $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEval = (new SqOutpostEval($board))->eval();
+        $result = (new SqOutpostEval($board))->getResult();
 
-        $this->assertSame($expected, $sqOutpostEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -30,9 +30,9 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
     {
         $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEval = (new SqOutpostEval($board))->eval();
+        $result = (new SqOutpostEval($board))->getResult();
 
-        $this->assertSame($expected, $sqOutpostEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -43,9 +43,9 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
     {
         $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEval = (new SqOutpostEval($board))->eval();
+        $result = (new SqOutpostEval($board))->getResult();
 
-        $this->assertSame($expected, $sqOutpostEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -56,9 +56,9 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
     {
         $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEval = (new SqOutpostEval($board))->eval();
+        $result = (new SqOutpostEval($board))->getResult();
 
-        $this->assertSame($expected, $sqOutpostEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -69,9 +69,9 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
     {
         $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEval = (new SqOutpostEval($board))->eval();
+        $result = (new SqOutpostEval($board))->getResult();
 
-        $this->assertSame($expected, $sqOutpostEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -82,9 +82,9 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
     {
         $board = (new StrToBoard($fen))->create();
 
-        $sqOutpostEval = (new SqOutpostEval($board))->eval();
+        $result = (new SqOutpostEval($board))->getResult();
 
-        $this->assertSame($expected, $sqOutpostEval);
+        $this->assertSame($expected, $result);
     }
 
     public function wAdvancingData()
@@ -352,17 +352,15 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
      */
     public function d17()
     {
-        $fen = 'r3kb1r/ppq2ppp/2p2n2/4nb2/P1N5/2N3P1/1P2PP1P/R1BQKB1R w KQkq -';
-
-        $board = (new StrToBoard($fen))->create();
-
         $expected = [
             'w' => [],
             'b' => [],
         ];
 
-        $sqOutpostEval = (new SqOutpostEval($board))->eval();
+        $fen = 'r3kb1r/ppq2ppp/2p2n2/4nb2/P1N5/2N3P1/1P2PP1P/R1BQKB1R w KQkq -';
+        $board = (new StrToBoard($fen))->create();
+        $result = (new SqOutpostEval($board))->getResult();
 
-        $this->assertSame($expected, $sqOutpostEval);
+        $this->assertSame($expected, $result);
     }
 }

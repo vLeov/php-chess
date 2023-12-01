@@ -10,7 +10,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Pressure evaluation.
  *
- * Squares being threatened at the present moment.
+ * Squares being threatened.
  *
  * @author Jordi Bassagaña
  * @license GPL
@@ -27,11 +27,13 @@ class PressureEval extends AbstractEval
     private object $sqCount;
 
     /**
+     * Constructor.
+     *
      * @param \Chess\Variant\Classical\Board $board
      */
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
         $this->sqCount = (new SqCount($board))->count();
 
@@ -39,15 +41,7 @@ class PressureEval extends AbstractEval
             Color::W => [],
             Color::B => [],
         ];
-    }
 
-    /**
-     * Returns the squares being threatened at the present moment.
-     *
-     * @return array
-     */
-    public function eval(): array
-    {
         foreach ($pieces = $this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::K) {
                 $this->result[$piece->getColor()] = [
@@ -75,7 +69,5 @@ class PressureEval extends AbstractEval
                 ];
             }
         }
-
-        return $this->result;
     }
 }

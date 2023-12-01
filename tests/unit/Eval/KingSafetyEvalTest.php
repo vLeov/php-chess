@@ -14,14 +14,14 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $kSafetyEval = (new KingSafetyEval(new Board()))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $kSafetyEval);
+        $result = (new KingSafetyEval(new Board()))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -29,18 +29,16 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
      */
     public function A00()
     {
-        $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
-
-        $board = (new SanPlay($A00))->validate()->getBoard();
-
-        $kSafetyEval = (new KingSafetyEval($board))->eval();
-
         $expected = [
             'w' => -1,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $kSafetyEval);
+        $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
+        $board = (new SanPlay($A00))->validate()->getBoard();
+        $result = (new KingSafetyEval($board))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -48,17 +46,15 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
      */
     public function B25()
     {
-        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-
-        $board = (new SanPlay($B25))->validate()->getBoard();
-
-        $kSafetyEval = (new KingSafetyEval($board))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $kSafetyEval);
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+        $board = (new SanPlay($B25))->validate()->getBoard();
+        $result = (new KingSafetyEval($board))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 }

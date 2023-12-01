@@ -14,18 +14,16 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function B25()
     {
-        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-
-        $board = (new SanPlay($B25))->validate()->getBoard();
-
         $expected = [
             'w' => 37.73,
             'b' => 34.73,
         ];
 
-        $ctrEval = (new CenterEval($board))->eval();
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+        $board = (new SanPlay($B25))->validate()->getBoard();
+        $result = (new CenterEval($board))->getResult();
 
-        $this->assertSame($expected, $ctrEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -33,18 +31,16 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function B56()
     {
-        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-
-        $board = (new SanPlay($B56))->validate()->getBoard();
-
         $expected = [
             'w' => 47.0,
             'b' => 36.8,
         ];
 
-        $ctrEval = (new CenterEval($board))->eval();
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+        $board = (new SanPlay($B56))->validate()->getBoard();
+        $result = (new CenterEval($board))->getResult();
 
-        $this->assertSame($expected, $ctrEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -52,17 +48,15 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function C60()
     {
-        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
-
-        $board = (new SanPlay($C60))->validate()->getBoard();
-
         $expected = [
             'w' => 37.73,
             'b' => 34.73,
         ];
 
-        $ctrEval = (new CenterEval($board))->eval();
+        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
+        $board = (new SanPlay($C60))->validate()->getBoard();
+        $result = (new CenterEval($board))->getResult();
 
-        $this->assertSame($expected, $ctrEval);
+        $this->assertSame($expected, $result);
     }
 }

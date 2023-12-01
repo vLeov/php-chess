@@ -92,27 +92,27 @@ class FenHeuristics
     {
         foreach ($this->evalFunction->getEval() as $key => $val) {
             $heuristic = new $key($this->board);
-            $eval = $heuristic->eval();
-            if (is_array($eval[Color::W])) {
+            $result = $heuristic->getResult();
+            if (is_array($result[Color::W])) {
                 if ($heuristic instanceof InverseEvalInterface) {
                     $item[] = [
-                        Color::W => count($eval[Color::B]),
-                        Color::B => count($eval[Color::W]),
+                        Color::W => count($result[Color::B]),
+                        Color::B => count($result[Color::W]),
                     ];
                 } else {
                     $item[] = [
-                        Color::W => count($eval[Color::W]),
-                        Color::B => count($eval[Color::B]),
+                        Color::W => count($result[Color::W]),
+                        Color::B => count($result[Color::B]),
                     ];
                 }
             } else {
                 if ($heuristic instanceof InverseEvalInterface) {
                     $item[] = [
-                        Color::W => $eval[Color::B],
-                        Color::B => $eval[Color::W],
+                        Color::W => $result[Color::B],
+                        Color::B => $result[Color::W],
                     ];
                 } else {
-                    $item[] = $eval;
+                    $item[] = $result;
                 }
             }
         }

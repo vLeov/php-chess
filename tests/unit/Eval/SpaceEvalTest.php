@@ -14,7 +14,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $spEval = (new SpaceEval(new Board()))->eval();
+        $spEval = (new SpaceEval(new Board()))->getResult();
 
         $expected = [
             'w' => [
@@ -37,7 +37,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($B25))->validate()->getBoard();
 
-        $spEval = (new SpaceEval($board))->eval();
+        $spEval = (new SpaceEval($board))->getResult();
 
         $expected = [
             'w' => [
@@ -64,7 +64,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($B56))->validate()->getBoard();
 
-        $spEval = (new SpaceEval($board))->eval();
+        $spEval = (new SpaceEval($board))->getResult();
 
         $expected = [
             'w' => [

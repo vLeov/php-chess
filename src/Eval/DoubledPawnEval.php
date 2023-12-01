@@ -2,14 +2,17 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
 {
     const NAME = 'Doubled pawn';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
             if ($piece->getId() === Piece::P) {
@@ -22,7 +25,5 @@ class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
                 }
             }
         }
-
-        return $this->result;
     }
 }

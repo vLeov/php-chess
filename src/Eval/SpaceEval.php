@@ -21,7 +21,7 @@ class SpaceEval extends AbstractEval
 
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
         $this->sqCount = (new SqCount($board))->count();
 
@@ -29,10 +29,7 @@ class SpaceEval extends AbstractEval
             Color::W => [],
             Color::B => [],
         ];
-    }
 
-    public function eval(): array
-    {
         foreach ($pieces = $this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::K) {
                 $this->result[$piece->getColor()] = array_unique(
@@ -66,7 +63,5 @@ class SpaceEval extends AbstractEval
                 );
             }
         }
-
-        return $this->result;
     }
 }

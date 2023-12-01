@@ -21,17 +21,11 @@ class ConnectivityEval extends AbstractEval
 
     public function __construct(Board $board)
     {
-        parent::__construct($board);
-
+        $this->board = $board;
         $this->sqCount = (new SqCount($board))->count();
-    }
 
-    public function eval(): array
-    {
         $this->color(Color::W);
         $this->color(Color::B);
-
-        return $this->result;
     }
 
     private function color(string $color): void

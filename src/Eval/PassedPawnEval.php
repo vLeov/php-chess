@@ -3,6 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Piece\P;
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -10,15 +11,16 @@ class PassedPawnEval extends AbstractEval
 {
     const NAME = 'Passed pawn';
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
             if ($piece->getId() === Piece::P) {
                 $this->result[ $color ] += $this->getThreatPassedPawn($piece);
             }
         }
-        return $this->result;
     }
 
     private function getThreatPassedPawn(P $pawn): int
@@ -45,6 +47,7 @@ class PassedPawnEval extends AbstractEval
             }, $listRanks);
             $sqs = [...$sqs, ...$sqsFile];
         }
+
         $passedPawn = true;
         foreach ($sqs as $sq) {
             if ($nextPiece = $this->board->getPieceBySq($sq)) {
@@ -54,6 +57,7 @@ class PassedPawnEval extends AbstractEval
                 }
             }
         }
+
         if ($passedPawn) {
             $position = $pawn->getSq();
             if ($color === Color::W) {

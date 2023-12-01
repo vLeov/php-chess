@@ -26,11 +26,9 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         ];
 
         $absPinEval = new AbsolutePinEval($board);
-        $eval = $absPinEval->eval();
-        $explanation = $absPinEval->getExplanation();
 
-        $this->assertSame($expectedEval, $eval);
-        $this->assertSame($expectedExplanation, $explanation);
+        $this->assertSame($expectedEval, $absPinEval->getResult());
+        $this->assertSame($expectedExplanation, $absPinEval->getExplanation());
     }
 
     /**
@@ -46,9 +44,9 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 3.2,
         ];
 
-        $absPinEval = (new AbsolutePinEval($board))->eval();
+        $absPinEval = new AbsolutePinEval($board);
 
-        $this->assertSame($expected, $absPinEval);
+        $this->assertSame($expected, $absPinEval->getResult());
     }
 
     /**
@@ -64,9 +62,9 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 3.2,
         ];
 
-        $absPinEval = (new AbsolutePinEval($board))->eval();
+        $absPinEval = new AbsolutePinEval($board);
 
-        $this->assertSame($expected, $absPinEval);
+        $this->assertSame($expected, $absPinEval->getResult());
     }
 
     /**
@@ -82,9 +80,9 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $absPinEval = (new AbsolutePinEval($board))->eval();
+        $absPinEval = new AbsolutePinEval($board);
 
-        $this->assertSame($expected, $absPinEval);
+        $this->assertSame($expected, $absPinEval->getResult());
     }
 
     /**
@@ -100,9 +98,9 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $absPinEval = (new AbsolutePinEval($board))->eval();
+        $absPinEval = new AbsolutePinEval($board);
 
-        $this->assertSame($expected, $absPinEval);
+        $this->assertSame($expected, $absPinEval->getResult());
     }
 
     /**
@@ -118,8 +116,8 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $absPinEval = (new AbsolutePinEval($board))->eval();
+        $absPinEval = new AbsolutePinEval($board);
 
-        $this->assertSame($expected, $absPinEval);
+        $this->assertSame($expected, $absPinEval->getResult());
     }
 }

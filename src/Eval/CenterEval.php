@@ -3,6 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SpaceEval;
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
@@ -26,9 +27,12 @@ class CenterEval extends AbstractEval
         'a1' => 0, 'b1' => 0, 'c1' => 0, 'd1' => 0, 'e1' => 0, 'f1' => 0, 'g1' => 0, 'h1' => 0,
     ];
 
-    public function eval(): array
+    public function __construct(Board $board)
     {
-        $spEval = (new SpaceEval($this->board))->eval();
+        $this->board = $board;
+
+        $spEval = (new SpaceEval($this->board))->getResult();
+
         foreach ($this->center as $sq => $val) {
             if ($piece = $this->board->getPieceBySq($sq)) {
                 $this->result[$piece->getColor()] += self::$value[$piece->getId()] * $val;
@@ -40,6 +44,7 @@ class CenterEval extends AbstractEval
                 $this->result[Color::B] += $val;
             }
         }
+
         $this->result[Color::W] = round($this->result[Color::W], 2);
         $this->result[Color::B] = round($this->result[Color::B], 2);
 

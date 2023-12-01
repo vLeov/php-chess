@@ -14,14 +14,14 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $attEval = (new TacticsEval(new Board()))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $attEval);
+        $result = (new TacticsEval(new Board()))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -29,16 +29,16 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function e4_d5()
     {
-        $board = new Board();
-        $board->play('w', 'e4');
-        $board->play('b', 'd5');
-
-        $tacticsEval = (new TacticsEval($board))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 1,
         ];
+
+        $board = new Board();
+        $board->play('w', 'e4');
+        $board->play('b', 'd5');
+
+        $tacticsEval = (new TacticsEval($board))->getResult();
 
         $this->assertSame($expected, $tacticsEval);
     }
@@ -48,18 +48,18 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function B56()
     {
-        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-
-        $board = (new SanPlay($B56))->validate()->getBoard();
-
-        $attEval = (new TacticsEval($board))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $attEval);
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+
+        $board = (new SanPlay($B56))->validate()->getBoard();
+
+        $result = (new TacticsEval($board))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -67,18 +67,18 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function B25()
     {
-        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-
-        $board = (new SanPlay($B25))->validate()->getBoard();
-
-        $attEval = (new TacticsEval($board))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $attEval);
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+
+        $board = (new SanPlay($B25))->validate()->getBoard();
+
+        $result = (new TacticsEval($board))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -86,6 +86,11 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
     {
+        $expected = [
+            'w' => 0,
+            'b' => 6.53,
+        ];
+
         $board = new Board();
         $board->play('w', 'e4');
         $board->play('b', 'e5');
@@ -95,12 +100,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
         $board->play('b', 'a6');
         $board->play('w', 'Nxe5');
 
-        $tacticsEval = (new TacticsEval($board))->eval();
-
-        $expected = [
-            'w' => 0,
-            'b' => 6.53,
-        ];
+        $tacticsEval = (new TacticsEval($board))->getResult();
 
         $this->assertSame($expected, $tacticsEval);
     }
@@ -110,6 +110,11 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_a3_Nxe4_d3()
     {
+        $expected = [
+            'w' => 4.2,
+            'b' => 0,
+        ];
+
         $board = new Board();
         $board->play('w', 'e4');
         $board->play('b', 'e5');
@@ -119,12 +124,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
         $board->play('b', 'Nxe4');
         $board->play('w', 'd3');
 
-        $tacticsEval = (new TacticsEval($board))->eval();
-
-        $expected = [
-            'w' => 4.2,
-            'b' => 0,
-        ];
+        $tacticsEval = (new TacticsEval($board))->getResult();
 
         $this->assertSame($expected, $tacticsEval);
     }

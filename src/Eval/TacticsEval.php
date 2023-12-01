@@ -44,10 +44,10 @@ class TacticsEval extends AbstractEval
      */
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
-        $this->defenseEval = (new DefenseEval($board))->eval();
-        $this->pressEval = (new PressureEval($board))->eval();
+        $this->defenseEval = (new DefenseEval($board))->getResult();
+        $this->pressEval = (new PressureEval($board))->getResult();
 
         $this->target = [
             Color::W => [],
@@ -55,15 +55,7 @@ class TacticsEval extends AbstractEval
         ];
 
         $this->target();
-    }
 
-    /**
-     * Returns the value obtained from the squares that are not being defended.
-     *
-     * @return array
-     */
-    public function eval(): array
-    {
         foreach ($this->target as $color => $sqs) {
             foreach ($sqs as $sq) {
                 $id = $this->board->getPieceBySq($sq)->getId();
@@ -72,8 +64,6 @@ class TacticsEval extends AbstractEval
                 }
             }
         }
-
-        return $this->result;
     }
 
     /**

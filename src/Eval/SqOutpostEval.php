@@ -20,16 +20,13 @@ class SqOutpostEval extends AbstractEval
 
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
         $this->result = [
             Color::W => [],
             Color::B => [],
         ];
-    }
 
-    public function eval(): array
-    {
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::P) {
                 $captureSquares = $piece->getCaptureSqs();
@@ -63,8 +60,6 @@ class SqOutpostEval extends AbstractEval
         $this->result[Color::B] = array_unique($this->result[Color::B]);
         sort($this->result[Color::W]);
         sort($this->result[Color::B]);
-
-        return $this->result;
     }
 
     protected function opposition(P $pawn, string $file): bool

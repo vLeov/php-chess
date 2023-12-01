@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
@@ -18,12 +19,14 @@ class BadBishopEval extends AbstractEval implements InverseEvalInterface
     const NAME = 'Bad bishop';
 
     /**
-     * Returns the result.
+     * Constructor.
      *
-     * @return array
+     * @param \Chess\Variant\Classical\Board $board
      */
-    public function eval(): array
+    public function __construct(Board $board)
     {
+        $this->board = $board;
+
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::B) {
                 $this->result[$piece->getColor()] += $this->count(
@@ -32,8 +35,6 @@ class BadBishopEval extends AbstractEval implements InverseEvalInterface
                 );
             }
         }
-
-        return $this->result;
     }
 
     /**

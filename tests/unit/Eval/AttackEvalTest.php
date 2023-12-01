@@ -14,14 +14,14 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function start()
     {
-        $attEval = (new AttackEval(new Board()))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $attEval);
+        $result = (new AttackEval(new Board()))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -29,18 +29,16 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function B25()
     {
-        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-
-        $board = (new SanPlay($B25))->validate()->getBoard();
-
-        $attEval = (new AttackEval($board))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $attEval);
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+        $board = (new SanPlay($B25))->validate()->getBoard();
+        $result = (new AttackEval($board))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -48,18 +46,16 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function B56()
     {
-        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-
-        $board = (new SanPlay($B56))->validate()->getBoard();
-
-        $attEval = (new AttackEval($board))->eval();
-
         $expected = [
             'w' => 0,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $attEval);
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+        $board = (new SanPlay($B56))->validate()->getBoard();
+        $result = (new AttackEval($board))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -67,6 +63,11 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
     {
+        $expected = [
+            'w' => 0,
+            'b' => 2.33,
+        ];
+
         $board = new Board();
         $board->play('w', 'e4');
         $board->play('b', 'e5');
@@ -76,14 +77,9 @@ class AttackEvalTest extends AbstractUnitTestCase
         $board->play('b', 'a6');
         $board->play('w', 'Nxe5');
 
-        $attEval = (new AttackEval($board))->eval();
+        $result = (new AttackEval($board))->getResult();
 
-        $expected = [
-            'w' => 0,
-            'b' => 2.33,
-        ];
-
-        $this->assertSame($expected, $attEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -91,6 +87,11 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_a3_Nxe4_d3()
     {
+        $expected = [
+            'w' => 2.2,
+            'b' => 0,
+        ];
+
         $board = new Board();
         $board->play('w', 'e4');
         $board->play('b', 'e5');
@@ -100,14 +101,9 @@ class AttackEvalTest extends AbstractUnitTestCase
         $board->play('b', 'Nxe4');
         $board->play('w', 'd3');
 
-        $attEval = (new AttackEval($board))->eval();
+        $result = (new AttackEval($board))->getResult();
 
-        $expected = [
-            'w' => 2.2,
-            'b' => 0,
-        ];
-
-        $this->assertSame($expected, $attEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -115,18 +111,18 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function e4_Nf6_e5()
     {
-        $board = new Board();
-        $board->play('w', 'e4');
-        $board->play('b', 'Nf6');
-        $board->play('w', 'e5');
-
-        $attEval = (new AttackEval($board))->eval();
-
         $expected = [
             'w' => 2.2,
             'b' => 0,
         ];
 
-        $this->assertSame($expected, $attEval);
+        $board = new Board();
+        $board->play('w', 'e4');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'e5');
+
+        $result = (new AttackEval($board))->getResult();
+
+        $this->assertSame($expected, $result);
     }
 }

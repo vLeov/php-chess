@@ -28,8 +28,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
             ],
         ];
 
-        $defenseEval = (new DefenseEval($board))->eval();
+        $result = (new DefenseEval($board))->getResult();
 
-        $this->assertSame($expected, $defenseEval);
+        $this->assertSame($expected, $result);
     }
 }

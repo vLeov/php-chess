@@ -26,6 +26,11 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_16()
     {
+        $expected = [
+            'w' => 2,
+            'b' => 1,
+        ];
+
         $position = [
             7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             6 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ' ],
@@ -40,14 +45,9 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
             ->toClassicalBoard('\Chess\Variant\Classical\Board', 'w');
 
-        $expected = [
-            'w' => 2,
-            'b' => 1,
-        ];
+        $result = (new BackwardPawnEval($board))->getResult();
 
-        $backwardPawnEval = (new BackwardPawnEval($board))->eval();
-
-        $this->assertSame($expected, $backwardPawnEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -55,6 +55,11 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_16_recognizes_defended_pawns(): void
     {
+        $expected = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
         $position = [
             7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
             6 => [ ' . ', ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ' ],
@@ -69,13 +74,8 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
             ->toClassicalBoard('\Chess\Variant\Classical\Board', 'w');
 
-        $expected = [
-            'w' => 0,
-            'b' => 1,
-        ];
+        $result = (new BackwardPawnEval($board))->getResult();
 
-        $backwardPawnEval = (new BackwardPawnEval($board))->eval();
-
-        $this->assertSame($expected, $backwardPawnEval);
+        $this->assertSame($expected, $result);
     }
 }

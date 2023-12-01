@@ -14,16 +14,15 @@ class MaterialEvalTest extends AbstractUnitTestCase
      */
     public function starting_position()
     {
-        $board = new Board();
-
         $expected = [
             'w' => 40.06,
             'b' => 40.06,
         ];
 
-        $mtlEval = (new MaterialEval($board))->eval();
+        $board = new Board();
+        $result = (new MaterialEval($board))->getResult();
 
-        $this->assertEquals($expected, $mtlEval);
+        $this->assertEquals($expected, $result);
     }
 
     /**
@@ -31,18 +30,16 @@ class MaterialEvalTest extends AbstractUnitTestCase
      */
     public function A59()
     {
-        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
-
-        $board = (new SanPlay($A59))->validate()->getBoard();
-
         $expected = [
             'w' => 35.73,
             'b' => 34.73,
         ];
 
-        $mtlEval = (new MaterialEval($board))->eval();
+        $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
+        $board = (new SanPlay($A59))->validate()->getBoard();
+        $result = (new MaterialEval($board))->getResult();
 
-        $this->assertSame($expected, $mtlEval);
+        $this->assertSame($expected, $result);
     }
 
     /**
@@ -50,17 +47,15 @@ class MaterialEvalTest extends AbstractUnitTestCase
      */
     public function C60()
     {
-        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
-
-        $board = (new SanPlay($C60))->validate()->getBoard();
-
         $expected = [
             'w' => 40.06,
             'b' => 40.06,
         ];
 
-        $mtlEval = (new MaterialEval($board))->eval();
+        $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
+        $board = (new SanPlay($C60))->validate()->getBoard();
+        $result = (new MaterialEval($board))->getResult();
 
-        $this->assertSame($expected, $mtlEval);
+        $this->assertSame($expected, $result);
     }
 }

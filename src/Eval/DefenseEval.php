@@ -8,7 +8,7 @@ use Chess\Variant\Classical\Board;
 /**
  * Defense evaluation.
  *
- * Squares containing the pieces being defended at the present moment.
+ * Squares containing the pieces being defended.
  *
  * @author Jordi Bassagaña
  * @license GPL
@@ -19,21 +19,13 @@ class DefenseEval extends AbstractEval
 
     public function __construct(Board $board)
     {
-        parent::__construct($board);
+        $this->board = $board;
 
         $this->result = [
             Color::W => [],
             Color::B => [],
         ];
-    }
 
-    /**
-     * Returns the squares containing the pieces being defended at the present moment.
-     *
-     * @return array
-     */
-    public function eval(): array
-    {
         $this->board->rewind();
         while ($this->board->valid()) {
             $piece = $this->board->current();
@@ -46,7 +38,5 @@ class DefenseEval extends AbstractEval
 
         sort($this->result[Color::W]);
         sort($this->result[Color::B]);
-
-        return $this->result;
     }
 }

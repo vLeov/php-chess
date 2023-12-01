@@ -949,9 +949,9 @@ class Board extends \SplObjectStorage
             ->attachPieces()
             ->notifyPieces();
 
-        $this->spaceEval = (object) (new SpaceEval($this))->eval();
-        $this->pressureEval = (object) (new PressureEval($this))->eval();
-        $this->defenseEval = (object) (new DefenseEval($this))->eval();
+        $this->spaceEval = (object) (new SpaceEval($this))->getResult();
+        $this->pressureEval = (object) (new PressureEval($this))->getResult();
+        $this->defenseEval = (object) (new DefenseEval($this))->getResult();
 
         $this->notifyPieces();
 
