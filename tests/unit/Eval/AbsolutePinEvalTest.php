@@ -27,7 +27,7 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
 
         $absPinEval = new AbsolutePinEval($board);
         $eval = $absPinEval->eval();
-        $explanation = $absPinEval->explanation();
+        $explanation = $absPinEval->getExplanation();
 
         $this->assertSame($expectedEval, $eval);
         $this->assertSame($expectedExplanation, $explanation);

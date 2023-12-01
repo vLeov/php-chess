@@ -39,7 +39,7 @@ abstract class AbstractEval
         $this->board = $board;
     }
 
-    public function explanation()
+    public function getExplanation()
     {
         return $this->explanation;
     }
