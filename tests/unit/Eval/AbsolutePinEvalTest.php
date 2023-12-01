@@ -21,14 +21,14 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 3.2,
         ];
 
-        $expectedExplanation = [
+        $expectedPhrase = [
             "Black's knight on c6 is pinned.",
         ];
 
         $absPinEval = new AbsolutePinEval($board);
 
         $this->assertSame($expectedEval, $absPinEval->getResult());
-        $this->assertSame($expectedExplanation, $absPinEval->getExplanation());
+        $this->assertSame($expectedPhrase, $absPinEval->getPhrase());
     }
 
     /**
@@ -44,14 +44,14 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 3.2,
         ];
 
-        $expectedExplanation = [
+        $expectedPhrase = [
             "Black's knight on c6 is pinned.",
         ];
 
         $absPinEval = new AbsolutePinEval($board);
 
         $this->assertSame($expectedEval, $absPinEval->getResult());
-        $this->assertSame($expectedExplanation, $absPinEval->getExplanation());
+        $this->assertSame($expectedPhrase, $absPinEval->getPhrase());
     }
 
     /**
@@ -67,7 +67,7 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
             'b' => 3.2,
         ];
 
-        $expectedExplanation = [
+        $expectedPhrase = [
             "Black's knight on c6 is pinned.",
             "White's knight on c3 is pinned.",
         ];
@@ -75,7 +75,7 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         $absPinEval = new AbsolutePinEval($board);
 
         $this->assertSame($expectedEval, $absPinEval->getResult());
-        $this->assertSame($expectedExplanation, $absPinEval->getExplanation());
+        $this->assertSame($expectedPhrase, $absPinEval->getPhrase());
     }
 
     /**

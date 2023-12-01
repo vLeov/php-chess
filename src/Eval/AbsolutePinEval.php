@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Tutor\Explanation;
+use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -30,8 +30,8 @@ class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
 
     private function explain($subject, $target = null)
     {
-        $deterministic = Explanation::deterministic($subject);
-        $this->explanation[] = "{$deterministic} on {$subject->getSq()} is pinned.";
+        $phrase = PiecePhrase::deterministic($subject);        
+        $this->explanation[] = "{$phrase} is pinned.";
 
         return $this->explanation;
     }

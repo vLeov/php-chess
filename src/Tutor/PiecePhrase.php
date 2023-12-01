@@ -6,18 +6,18 @@ use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
- * Human-like explanation.
+ * Human-like phrase.
  *
  * @license GPL
  */
-class Explanation
+class PiecePhrase
 {
     /**
-     * Array of explanations.
+     * Array of phrases.
      *
      * @var array
      */
-    public static $explanation = [
+    public static $phrase = [
         [
             'pgn' => "N",
             'meanings' => [
@@ -40,9 +40,9 @@ class Explanation
             ? $piece->getId()
             : mb_strtolower($piece->getId());
 
-        foreach (self::$explanation as $item) {
+        foreach (self::$phrase as $item) {
             if ($item['pgn'] === $pgn) {
-                return $item['meanings'][0];
+                return "{$item['meanings'][0]} on {$piece->getSq()}";
             }
         }
 

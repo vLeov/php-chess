@@ -39,7 +39,7 @@ abstract class AbstractEval
         return $this->result;
     }
 
-    public function getExplanation()
+    public function getPhrase()
     {
         return $this->explanation;
     }
