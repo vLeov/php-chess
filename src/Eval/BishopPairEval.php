@@ -37,7 +37,7 @@ class BishopPairEval extends AbstractEval
 
     private function explain($subject, $target = null)
     {
-        $phrase = ColorPhrase::deterministic($subject);
+        $phrase = ColorPhrase::predictable($subject);
         $this->phrases[] = "{$phrase} has the bishop pair.";
 
         return $this->phrases;

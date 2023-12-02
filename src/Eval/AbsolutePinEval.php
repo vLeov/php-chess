@@ -30,7 +30,7 @@ class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
 
     private function explain($subject, $target = null)
     {
-        $phrase = PiecePhrase::deterministic($subject);        
+        $phrase = PiecePhrase::predictable($subject);        
         $this->phrases[] = "{$phrase} is pinned.";
 
         return $this->phrases;

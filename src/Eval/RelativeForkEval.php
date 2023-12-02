@@ -29,7 +29,7 @@ class RelativeForkEval extends AbstractEval
 
     private function explain($subject, $target = null)
     {
-        $phrase = PiecePhrase::deterministic($subject);
+        $phrase = PiecePhrase::predictable($subject);
         $this->phrases[] = "Relative fork attack on {$phrase}.";
 
         return $this->phrases;

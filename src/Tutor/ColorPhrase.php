@@ -31,7 +31,7 @@ class ColorPhrase
         ],
     ];
 
-    public static function deterministic(string $color): ?string
+    public static function predictable(string $color): ?string
     {
         foreach (self::$phrase as $item) {
             if ($item['color'] === $color) {
