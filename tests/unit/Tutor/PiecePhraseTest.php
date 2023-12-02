@@ -21,13 +21,13 @@ class PiecePhraseTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function deterministic_whites_knight()
+    public function predictable_whites_knight()
     {
         $expected = "White's knight on d4";
 
         $piece = new N('w', 'd4', self::$size);
 
-        $explanation = PiecePhrase::deterministic($piece);
+        $explanation = PiecePhrase::predictable($piece);
 
         $this->assertSame($expected, $explanation);
     }
@@ -35,13 +35,13 @@ class PiecePhraseTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function deterministic_black_knight()
+    public function predictable_black_knight()
     {
         $expected = "Black's knight on e4";
 
         $piece = new N('b', 'e4', self::$size);
 
-        $explanation = PiecePhrase::deterministic($piece);
+        $explanation = PiecePhrase::predictable($piece);
 
         $this->assertSame($expected, $explanation);
     }
