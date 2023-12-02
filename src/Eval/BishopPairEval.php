@@ -38,8 +38,8 @@ class BishopPairEval extends AbstractEval
     private function explain($subject, $target = null)
     {
         $phrase = ColorPhrase::deterministic($subject);
-        $this->explanation[] = "{$phrase} has the bishop pair.";
+        $this->phrases[] = "{$phrase} has the bishop pair.";
 
-        return $this->explanation;
+        return $this->phrases;
     }
 }

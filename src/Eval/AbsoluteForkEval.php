@@ -29,8 +29,8 @@ class AbsoluteForkEval extends AbstractEval
     private function explain($subject, $target = null)
     {
         $phrase = PiecePhrase::deterministic($subject);
-        $this->explanation[] = "Absolute fork attack on {$phrase}.";
+        $this->phrases[] = "Absolute fork attack on {$phrase}.";
 
-        return $this->explanation;
+        return $this->phrases;
     }
 }

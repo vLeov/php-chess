@@ -32,15 +32,15 @@ abstract class AbstractEval
         Color::B => 0,
     ];
 
-    protected array $explanation = [];
+    protected array $phrases = [];
 
     public function getResult()
     {
         return $this->result;
     }
 
-    public function getPhrase()
+    public function getPhrases()
     {
-        return $this->explanation;
+        return $this->phrases;
     }
 }
