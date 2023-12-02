@@ -32,17 +32,23 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
      */
     public function pawn_forks_bishop_and_knight()
     {
-        $expected = [
+        $expectedEval = [
             'w' => 6.53,
             'b' => 0,
+        ];
+
+        $expectedPhrase = [
+            "Relative fork attack on Black's bishop on f6.",
+            "Relative fork attack on Black's knight on h6.",
         ];
 
         $board = (new StrToBoard('8/1k6/5b1n/6P1/7K/8/8/8 w - -'))
             ->create();
 
-        $result = (new RelativeForkEval($board))->getResult();
+        $relativeForkEval = new RelativeForkEval($board);
 
-        $this->assertSame($expected, $result);
+        $this->assertSame($expectedEval, $relativeForkEval->getResult());
+        $this->assertSame($expectedPhrase, $relativeForkEval->getPhrase());
     }
 
     /**
@@ -194,17 +200,23 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
      */
     public function knight_forks_rook_and_rook()
     {
-        $expected = [
+        $expectedEval = [
             'w' => 10.2,
             'b' => 0,
+        ];
+
+        $expectedPhrase = [
+            "Relative fork attack on Black's rook on b2.",
+            "Relative fork attack on Black's rook on d6.",
         ];
 
         $board = (new StrToBoard('8/2k5/3r4/8/2N5/5K2/1r6/8 w - -'))
             ->create();
 
-        $result = (new RelativeForkEval($board))->getResult();
+        $relativeForkEval = new RelativeForkEval($board);
 
-        $this->assertSame($expected, $result);
+        $this->assertSame($expectedEval, $relativeForkEval->getResult());
+        $this->assertSame($expectedPhrase, $relativeForkEval->getPhrase());
     }
 
     /**
@@ -248,17 +260,23 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
      */
     public function b17_caro_kann_defense_karpov_variation_modern_main_line()
     {
-        $expected = [
-            'w' => 0,
+        $expectedEval = [
+            'w' => 2,
             'b' => 0,
+        ];
+
+        $expectedPhrase = [
+            "Relative fork attack on Black's pawn on f7.",
+            "Relative fork attack on Black's pawn on e6.",
         ];
 
         $board = (new StrToBoard('r1bqk2r/pp1n1pp1/2pbpn1p/6N1/3P4/3B1N2/PPP1QPPP/R1B1K2R w KQkq -'))
             ->create();
 
-        $result = (new RelativeForkEval($board))->getResult();
+        $relativeForkEval = new RelativeForkEval($board);
 
-        $this->assertSame($expected, $result);
+        $this->assertSame($expectedEval, $relativeForkEval->getResult());
+        $this->assertSame($expectedPhrase, $relativeForkEval->getPhrase());
     }
 
     /**
