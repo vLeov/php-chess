@@ -91,10 +91,10 @@ class FenHeuristics
     protected function calc(): FenHeuristics
     {
         foreach ($this->evalFunction->getEval() as $key => $val) {
-            $heuristic = new $key($this->board);
-            $result = $heuristic->getResult();
+            $eval = new $key($this->board);
+            $result = $eval->getResult();
             if (is_array($result[Color::W])) {
-                if ($heuristic instanceof InverseEvalInterface) {
+                if ($eval instanceof InverseEvalInterface) {
                     $item[] = [
                         Color::W => count($result[Color::B]),
                         Color::B => count($result[Color::W]),
@@ -106,7 +106,7 @@ class FenHeuristics
                     ];
                 }
             } else {
-                if ($heuristic instanceof InverseEvalInterface) {
+                if ($eval instanceof InverseEvalInterface) {
                     $item[] = [
                         Color::W => $result[Color::B],
                         Color::B => $result[Color::W],
