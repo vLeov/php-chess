@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Heuristics;
+namespace Chess\Function;
 
 use Chess\Eval\AttackEval;
 use Chess\Eval\BackwardPawnEval;
@@ -27,12 +27,14 @@ use Chess\Eval\BadBishopEval;
 use Chess\Eval\DirectOppositionEval;
 
 /**
- * EvalFunction
+ * StandardFunction
+ *
+ * Standard evaluation function.
  *
  * @author Jordi Bassagaña
  * @license GPL
  */
-class EvalFunction
+class StandardFunction
 {
     /**
      * The evaluation features.

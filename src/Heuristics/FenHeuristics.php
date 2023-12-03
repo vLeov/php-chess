@@ -3,6 +3,7 @@
 namespace Chess\Heuristics;
 
 use Chess\Eval\InverseEvalInterface;
+use Chess\Function\StandardFunction;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
 use Chess\Variant\CapablancaFischer\Board as CapablancaFischerBoard;
@@ -32,9 +33,9 @@ class FenHeuristics
     /**
      * The evaluation function.
      *
-     * @var \Chess\EvalFunction
+     * @var \Chess\Function\StandardFunction
      */
-    protected EvalFunction $evalFunction;
+    protected StandardFunction $function;
 
     /**
      * The result.
@@ -68,7 +69,7 @@ class FenHeuristics
             $this->board = (new ClassicalFenStrToBoard($fen))->create();
         }
 
-        $this->evalFunction = new EvalFunction();
+        $this->function = new StandardFunction();
 
         $this->calc()->balance();
     }
@@ -90,7 +91,7 @@ class FenHeuristics
      */
     protected function calc(): FenHeuristics
     {
-        foreach ($this->evalFunction->getEval() as $key => $val) {
+        foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
             $result = $eval->getResult();
             if (is_array($result[Color::W])) {

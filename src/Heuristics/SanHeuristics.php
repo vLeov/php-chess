@@ -2,6 +2,7 @@
 
 namespace Chess\Heuristics;
 
+use Chess\Function\StandardFunction;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
@@ -20,9 +21,9 @@ class SanHeuristics extends SanPlay
     /**
      * The evaluation function.
      *
-     * @var \Chess\EvalFunction
+     * @var \Chess\Function\StandardFunction
      */
-    protected EvalFunction $evalFunction;
+    protected StandardFunction $function;
 
     /**
      * The balance.
@@ -41,7 +42,7 @@ class SanHeuristics extends SanPlay
     {
         parent::__construct($movetext, $board);
 
-        $this->evalFunction = new EvalFunction();
+        $this->function = new StandardFunction();
 
         $this->balance()->normalize(-1, 1);
     }
@@ -88,12 +89,12 @@ class SanHeuristics extends SanPlay
     {
         if ($this->balance) {
             $columns = $mins = $maxs = $normd = $transpose = [];
-            for ($i = 0; $i < count($this->evalFunction->getEval()); $i++) {
+            for ($i = 0; $i < count($this->function->getEval()); $i++) {
                 $columns[$i] = array_column($this->balance, $i);
                 $mins[$i] = round(min($columns[$i]), 2);
                 $maxs[$i] = round(max($columns[$i]), 2);
             }
-            for ($i = 0; $i < count($this->evalFunction->getEval()); $i++) {
+            for ($i = 0; $i < count($this->function->getEval()); $i++) {
                 for ($j = 0; $j < count($columns[$i]); $j++) {
                     if ($columns[$i][$j] > 0) {
                         $normd[$i][$j] = round($columns[$i][$j] * $newMax / $maxs[$i], 2);

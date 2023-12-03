@@ -2,7 +2,7 @@
 
 namespace Chess\Tutor;
 
-use Chess\Heuristics\EvalFunction;
+use Chess\Function\StandardFunction;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
 use Chess\Variant\CapablancaFischer\Board as CapablancaFischerBoard;
@@ -30,9 +30,9 @@ class FenSentence
     /**
      * The evaluation function.
      *
-     * @var \Chess\EvalFunction
+     * @var \Chess\Function\StandardFunction
      */
-    protected EvalFunction $evalFunction;
+    protected StandardFunction $function;
 
     /**
      * The sentence.
@@ -59,7 +59,7 @@ class FenSentence
             $this->board = (new ClassicalFenStrToBoard($fen))->create();
         }
 
-        $this->evalFunction = new EvalFunction();
+        $this->function = new StandardFunction();
 
         $this->explain();
     }
@@ -81,7 +81,7 @@ class FenSentence
      */
     protected function explain(): FenSentence
     {
-        foreach ($this->evalFunction->getEval() as $key => $val) {
+        foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
             if ($phrases = $eval->getPhrases()) {
                 $this->sentence = [...$this->sentence, ...$phrases];

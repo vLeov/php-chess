@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\Heuristics\EvalFunction;
+use Chess\Function\StandardFunction;
 use Chess\Tests\AbstractUnitTestCase;
 
-class EvalFunctionTest extends AbstractUnitTestCase
+class StandardFunctionTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -37,6 +37,6 @@ class EvalFunctionTest extends AbstractUnitTestCase
             'Direct opposition',
         ];
 
-        $this->assertSame($expected, (new EvalFunction())->names());
+        $this->assertSame($expected, (new StandardFunction())->names());
     }
 }

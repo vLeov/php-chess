@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
 use Chess\Combinatorics\RestrictedPermutationWithRepetition;
-use Chess\Heuristics\EvalFunction;
+use Chess\Function\StandardFunction;
 use Chess\Heuristics\SanHeuristics;
 use Chess\ML\Supervised\Classification\PermutationLabeller;
 use Chess\Play\SanPlay;
@@ -16,7 +16,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
     public static function setUpBeforeClass(): void
     {
-        $eval = (new EvalFunction())->getEval();
+        $eval = (new StandardFunction())->getEval();
 
         self::$permutations = (new RestrictedPermutationWithRepetition())
             ->get(
