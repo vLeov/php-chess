@@ -9,7 +9,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  *
  * @license GPL
  */
-class EvalPhrase
+class ConnectivityEvalSentence
 {
     /**
      * Array of phrases.

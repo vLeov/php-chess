@@ -3,7 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SqCount;
-use Chess\Tutor\EvalPhrase;
+use Chess\Tutor\ConnectivityEvalSentence;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
@@ -71,7 +71,7 @@ class ConnectivityEval extends AbstractEval
 
     private function explain($subject, $target = null)
     {
-        $this->phrases[] = EvalPhrase::predictable($subject);
+        $this->phrases[] = ConnectivityEvalSentence::predictable($subject);
 
         return $this->phrases;
     }
