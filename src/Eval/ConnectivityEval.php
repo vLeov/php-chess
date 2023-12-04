@@ -3,6 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SqCount;
+use Chess\Tutor\EvalPhrase;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
@@ -26,6 +27,8 @@ class ConnectivityEval extends AbstractEval
 
         $this->color(Color::W);
         $this->color(Color::B);
+
+        $this->explain($this->result);
     }
 
     private function color(string $color): void
@@ -34,7 +37,7 @@ class ConnectivityEval extends AbstractEval
             switch ($piece->getId()) {
                 case Piece::K:
                     $this->result[$color] += count(
-                        array_intersect((array)$piece->getMobility(),
+                        array_intersect((array) $piece->getMobility(),
                         $this->sqCount->used->{$color})
                     );
                     break;
@@ -51,7 +54,7 @@ class ConnectivityEval extends AbstractEval
                     );
                     break;
                 default:
-                    foreach ((array)$piece->getMobility() as $key => $val) {
+                    foreach ((array) $piece->getMobility() as $key => $val) {
                         foreach ($val as $sq) {
                             if (in_array($sq, $this->sqCount->used->{$color})) {
                                 $this->result[$color] += 1;
@@ -64,5 +67,12 @@ class ConnectivityEval extends AbstractEval
                     break;
             }
         }
+    }
+
+    private function explain($subject, $target = null)
+    {
+        $this->phrases[] = EvalPhrase::predictable($subject);
+
+        return $this->phrases;
     }
 }
