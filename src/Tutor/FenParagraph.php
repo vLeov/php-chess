@@ -11,14 +11,14 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 /**
- * FenSentence
+ * FenParagraph
  *
  * Human-like sentence.
  *
  * @author Jordi Bassagaña
  * @license GPL
  */
-class FenSentence
+class FenParagraph
 {
     /**
      * Chess board.
@@ -79,7 +79,7 @@ class FenSentence
      *
      * @return FenHeuristics
      */
-    protected function explain(): FenSentence
+    protected function explain(): FenParagraph
     {
         foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
