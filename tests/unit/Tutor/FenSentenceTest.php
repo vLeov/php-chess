@@ -13,6 +13,7 @@ class FenSentenceTest extends AbstractUnitTestCase
     public function endgame()
     {
         $expected = [
+            "The white pieces are slightly better connected.",
             "Black's knight on e6 is pinned.",
             "White has the bishop pair.",
         ];
