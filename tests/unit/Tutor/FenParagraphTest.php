@@ -19,7 +19,7 @@ class FenParagraphTest extends AbstractUnitTestCase
         ];
 
         $sentence = (new FenParagraph('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
-            ->getSentence();
+            ->getParagraph();
 
         $this->assertSame($expected, $sentence);
     }

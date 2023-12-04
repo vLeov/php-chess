@@ -13,7 +13,7 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 /**
  * FenParagraph
  *
- * Human-like sentence.
+ * Human-like paragraph.
  *
  * @author Jordi Bassagaña
  * @license GPL
@@ -35,11 +35,11 @@ class FenParagraph
     protected StandardFunction $function;
 
     /**
-     * The sentence.
+     * The paragraph.
      *
      * @var array
      */
-    protected array $sentence = [];
+    protected array $paragraph = [];
 
     /**
      * Constructor.
@@ -65,26 +65,26 @@ class FenParagraph
     }
 
     /**
-     * Returns the sentence.
+     * Returns the paragraph.
      *
      * @return array
      */
-    public function getSentence(): array
+    public function getParagraph(): array
     {
-        return $this->sentence;
+        return $this->paragraph;
     }
 
     /**
-     * Calculates the sentence.
+     * Calculates the paragraph.
      *
-     * @return FenHeuristics
+     * @return FenParagraph
      */
     protected function explain(): FenParagraph
     {
         foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
             if ($phrases = $eval->getPhrases()) {
-                $this->sentence = [...$this->sentence, ...$phrases];
+                $this->paragraph = [...$this->paragraph, ...$phrases];
             }
         }
 
