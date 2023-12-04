@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Tutor\ColorPhrase;
+use Chess\Tutor\BishopPairEvalSentence;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -37,8 +37,7 @@ class BishopPairEval extends AbstractEval
 
     private function explain($subject, $target = null)
     {
-        $phrase = ColorPhrase::predictable($subject);
-        $this->phrases[] = "{$phrase} has the bishop pair.";
+        $this->phrases[] = BishopPairEvalSentence::predictable($subject);
 
         return $this->phrases;
     }

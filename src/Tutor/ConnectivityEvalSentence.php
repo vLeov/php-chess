@@ -5,7 +5,7 @@ namespace Chess\Tutor;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
- * Human-like phrase.
+ * Human-like sentence.
  *
  * @license GPL
  */
