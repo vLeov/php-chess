@@ -12,6 +12,28 @@ class CenterEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function A08()
+    {
+        $expectedEval = [
+            'w' => 29.4,
+            'b' => 33.0,
+        ];
+
+        $expectedPhrase = [
+            "Black has a remarkable control of the center.",
+        ];
+
+        $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
+        $board = (new SanPlay($A08))->validate()->getBoard();
+        $centerEval = new CenterEval($board);
+
+        $this->assertSame($expectedEval, $centerEval->getResult());
+        $this->assertSame($expectedPhrase, $centerEval->getPhrases());
+    }
+
+    /**
+     * @test
+     */
     public function B25()
     {
         $expectedEval = [
