@@ -100,11 +100,10 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
 
         $expectedEval = [
             'w' => 8.8,
-            'b' => 1,
+            'b' => 0,
         ];
 
         $expectedPhrase = [
-            "Absolute fork attack on the pawn on g5.",
             "Absolute fork attack on Black's queen on h6.",
         ];
 
@@ -141,7 +140,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
             ->create();
 
         $expected = [
-            'w' => 3.2,
+            'w' => 0,
             'b' => 0,
         ];
 

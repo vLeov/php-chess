@@ -261,13 +261,8 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
     public function b17_caro_kann_defense_karpov_variation_modern_main_line()
     {
         $expectedEval = [
-            'w' => 2,
+            'w' => 0,
             'b' => 0,
-        ];
-
-        $expectedPhrase = [
-            "Relative fork attack on the pawn on f7.",
-            "Relative fork attack on the pawn on e6.",
         ];
 
         $board = (new StrToBoard('r1bqk2r/pp1n1pp1/2pbpn1p/6N1/3P4/3B1N2/PPP1QPPP/R1B1K2R w KQkq -'))
@@ -276,7 +271,6 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
         $relativeForkEval = new RelativeForkEval($board);
 
         $this->assertSame($expectedEval, $relativeForkEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeForkEval->getPhrases());
     }
 
     /**

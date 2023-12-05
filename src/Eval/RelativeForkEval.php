@@ -18,9 +18,16 @@ class RelativeForkEval extends AbstractEval
             if (!$piece->isAttackingKing()) {
                 $attackedPieces = $piece->attackedPieces();
                 if (count($attackedPieces) >= 2) {
+                    $pieceValue = self::$value[$piece->getId()];
                     foreach ($attackedPieces as $attackedPiece) {
-                        $this->result[$piece->getColor()] += self::$value[$attackedPiece->getId()];
-                        $this->explain($attackedPiece);
+                        $attackedPieceValue = self::$value[$attackedPiece->getId()];
+                        if (
+                            $attackedPieceValue - $pieceValue > 0 ||
+                            $attackedPiece->getId() === Piece::N && $piece->getId() === Piece::B
+                        ) {
+                            $this->result[$piece->getColor()] += $attackedPieceValue;
+                            $this->explain($attackedPiece);
+                        }
                     }
                 }
             }

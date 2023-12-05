@@ -16,10 +16,17 @@ class AbsoluteForkEval extends AbstractEval
 
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->isAttackingKing()) {
+                $pieceValue = self::$value[$piece->getId()];
                 foreach ($piece->attackedPieces() as $attackedPiece) {
                     if ($attackedPiece->getId() !== Piece::K) {
-                        $this->result[$piece->getColor()] += self::$value[$attackedPiece->getId()];
-                        $this->explain($attackedPiece);
+                        $attackedPieceValue = self::$value[$attackedPiece->getId()];
+                        if (
+                            $attackedPieceValue - $pieceValue > 0 ||
+                            $attackedPiece->getId() === Piece::N && $piece->getId() === Piece::B
+                        ) {
+                            $this->result[$piece->getColor()] += $attackedPieceValue;
+                            $this->explain($attackedPiece);
+                        }
                     }
                 }
             }
