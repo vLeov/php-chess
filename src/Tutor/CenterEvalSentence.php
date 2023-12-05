@@ -17,60 +17,56 @@ class CenterEvalSentence
      * @var array
      */
     public static $phrase = [
-        [
-            'diff' => -4,
-            'color' => 'b',
-            'meanings' => [
-                "Black has an absolute control of the center.",
+        Color::W => [
+            [
+                'diff' => 4,
+                'meanings' => [
+                    "White has an absolute control of the center.",
+                ],
+            ],
+            [
+                'diff' => 3,
+                'meanings' => [
+                    "White has a remarkable control of the center.",
+                ],
+            ],
+            [
+                'diff' => 2,
+                'meanings' => [
+                    "White has a somewhat better control of the center.",
+                ],
+            ],
+            [
+                'diff' => 1,
+                'meanings' => [
+                    "White has a slightly better control of the center.",
+                ],
             ],
         ],
-        [
-            'diff' => -3,
-            'color' => 'b',
-            'meanings' => [
-                "Black has a remarkable control of the center.",
+        Color::B => [
+            [
+                'diff' => -4,
+                'meanings' => [
+                    "Black has an absolute control of the center.",
+                ],
             ],
-        ],
-        [
-            'diff' => -2,
-            'color' => 'b',
-            'meanings' => [
-                "Black has a somewhat better control of the center.",
+            [
+                'diff' => -3,
+                'meanings' => [
+                    "Black has a remarkable control of the center.",
+                ],
             ],
-        ],
-        [
-            'diff' => -1,
-            'color' => 'b',
-            'meanings' => [
-                "Black has a slightly better control of the center.",
+            [
+                'diff' => -2,
+                'meanings' => [
+                    "Black has a somewhat better control of the center.",
+                ],
             ],
-        ],
-        [
-            'diff' => 4,
-            'color' => 'w',
-            'meanings' => [
-                "White has an absolute control of the center.",
-            ],
-        ],
-        [
-            'diff' => 3,
-            'color' => 'w',
-            'meanings' => [
-                "White has a remarkable control of the center.",
-            ],
-        ],
-        [
-            'diff' => 2,
-            'color' => 'w',
-            'meanings' => [
-                "White has a somewhat better control of the center.",
-            ],
-        ],
-        [
-            'diff' => 1,
-            'color' => 'w',
-            'meanings' => [
-                "White has a slightly better control of the center.",
+            [
+                'diff' => -1,
+                'meanings' => [
+                    "Black has a slightly better control of the center.",
+                ],
             ],
         ],
     ];
@@ -79,12 +75,14 @@ class CenterEvalSentence
     {
         $diff = $result[Color::W] - $result[Color::B];
 
-        foreach (self::$phrase as $item) {
-            if ($item['color'] === Color::W) {
+        if ($diff > 0) {
+            foreach (self::$phrase[Color::W] as $item) {
                 if ($diff > $item['diff']) {
                     return $item['meanings'][0];
                 }
-            } elseif ($item['color'] === Color::B) {
+            }
+        } else {
+            foreach (self::$phrase[Color::B] as $item) {
                 if ($diff < $item['diff']) {
                     return $item['meanings'][0];
                 }

@@ -17,60 +17,56 @@ class ConnectivityEvalSentence
      * @var array
      */
     public static $phrase = [
-        [
-            'diff' => -4,
-            'color' => 'b',
-            'meanings' => [
-                "The black pieces are absolutely better connected.",
+        Color::W => [
+            [
+                'diff' => 4,
+                'meanings' => [
+                    "The white pieces are absolutely better connected.",
+                ],
+            ],
+            [
+                'diff' => 3,
+                'meanings' => [
+                    "The white pieces are remarkably better connected.",
+                ],
+            ],
+            [
+                'diff' => 2,
+                'meanings' => [
+                    "The white pieces are somewhat better connected.",
+                ],
+            ],
+            [
+                'diff' => 1,
+                'meanings' => [
+                    "The white pieces are slightly better connected.",
+                ],
             ],
         ],
-        [
-            'diff' => -3,
-            'color' => 'b',
-            'meanings' => [
-                "The black pieces are remarkably better connected.",
+        Color::B => [
+            [
+                'diff' => -4,
+                'meanings' => [
+                    "The black pieces are absolutely better connected.",
+                ],
             ],
-        ],
-        [
-            'diff' => -2,
-            'color' => 'b',
-            'meanings' => [
-                "The black pieces are somewhat better connected.",
+            [
+                'diff' => -3,
+                'meanings' => [
+                    "The black pieces are remarkably better connected.",
+                ],
             ],
-        ],
-        [
-            'diff' => -1,
-            'color' => 'b',
-            'meanings' => [
-                "The black pieces are slightly better connected.",
+            [
+                'diff' => -2,
+                'meanings' => [
+                    "The black pieces are somewhat better connected.",
+                ],
             ],
-        ],
-        [
-            'diff' => 4,
-            'color' => 'w',
-            'meanings' => [
-                "The white pieces are absolutely better connected.",
-            ],
-        ],
-        [
-            'diff' => 3,
-            'color' => 'w',
-            'meanings' => [
-                "The white pieces are remarkably better connected.",
-            ],
-        ],
-        [
-            'diff' => 2,
-            'color' => 'w',
-            'meanings' => [
-                "The white pieces are somewhat better connected.",
-            ],
-        ],
-        [
-            'diff' => 1,
-            'color' => 'w',
-            'meanings' => [
-                "The white pieces are slightly better connected.",
+            [
+                'diff' => -1,
+                'meanings' => [
+                    "The black pieces are slightly better connected.",
+                ],
             ],
         ],
     ];
@@ -79,12 +75,14 @@ class ConnectivityEvalSentence
     {
         $diff = $result[Color::W] - $result[Color::B];
 
-        foreach (self::$phrase as $item) {
-            if ($item['color'] === Color::W) {
+        if ($diff > 0) {
+            foreach (self::$phrase[Color::W] as $item) {
                 if ($diff > $item['diff']) {
                     return $item['meanings'][0];
                 }
-            } elseif ($item['color'] === Color::B) {
+            }
+        } else {
+            foreach (self::$phrase[Color::B] as $item) {
                 if ($diff < $item['diff']) {
                     return $item['meanings'][0];
                 }
