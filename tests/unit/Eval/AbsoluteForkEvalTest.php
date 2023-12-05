@@ -195,7 +195,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
 
         $expected = [
             'w' => 0,
-            'b' => 3.2,
+            'b' => 0,
         ];
 
         $result = (new AbsoluteForkEval($board))->getResult();
