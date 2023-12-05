@@ -23,7 +23,7 @@ class PiecePhraseTest extends AbstractUnitTestCase
      */
     public function predictable_whites_knight()
     {
-        $expected = "White's knight on d4";
+        $expected = "the knight on d4";
 
         $piece = new N('w', 'd4', self::$size);
 
@@ -37,7 +37,7 @@ class PiecePhraseTest extends AbstractUnitTestCase
      */
     public function predictable_black_knight()
     {
-        $expected = "Black's knight on e4";
+        $expected = "the knight on e4";
 
         $piece = new N('b', 'e4', self::$size);
 

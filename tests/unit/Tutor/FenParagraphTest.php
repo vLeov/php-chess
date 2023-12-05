@@ -38,7 +38,7 @@ class FenParagraphTest extends AbstractUnitTestCase
         $expected = [
             "White has a remarkable control of the center.",
             "The white pieces are slightly better connected.",
-            "Black's knight on e6 is pinned.",
+            "The knight on e6 is pinned.",
             "White has the bishop pair.",
         ];
 

@@ -22,7 +22,7 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black's knight on c6 is pinned.",
+            "The knight on c6 is pinned.",
         ];
 
         $absPinEval = new AbsolutePinEval($board);
@@ -45,7 +45,7 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black's knight on c6 is pinned.",
+            "The knight on c6 is pinned.",
         ];
 
         $absPinEval = new AbsolutePinEval($board);
@@ -68,8 +68,8 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black's knight on c6 is pinned.",
-            "White's knight on c3 is pinned.",
+            "The knight on c6 is pinned.",
+            "The knight on c3 is pinned.",
         ];
 
         $absPinEval = new AbsolutePinEval($board);

@@ -69,7 +69,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black's pawn on a6 is attacking White's bishop on b5.",
+            "The pawn on a6 is attacking the bishop on b5.",
         ];
 
         $board = new Board();
@@ -98,7 +98,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White's pawn on d3 is attacking Black's knight on e4.",
+            "The pawn on d3 is attacking the knight on e4.",
         ];
 
         $board = new Board();
@@ -127,7 +127,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White's pawn on e5 is attacking Black's knight on f6.",
+            "The pawn on e5 is attacking the knight on f6.",
         ];
 
         $board = new Board();

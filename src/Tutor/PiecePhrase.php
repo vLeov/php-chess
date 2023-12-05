@@ -22,6 +22,7 @@ class PiecePhrase
             'id' => "B",
             'color' => "w",
             'meanings' => [
+                "the bishop",
                 "White's bishop",
                 "white bishop",
             ],
@@ -30,6 +31,7 @@ class PiecePhrase
             'id' => "B",
             'color' => "b",
             'meanings' => [
+                "the bishop",
                 "Black's bishop",
                 "black bishop",
             ],
@@ -54,6 +56,7 @@ class PiecePhrase
             'id' => "N",
             'color' => "w",
             'meanings' => [
+                "the knight",
                 "White's knight",
                 "white knight",
             ],
@@ -62,6 +65,7 @@ class PiecePhrase
             'id' => "N",
             'color' => "b",
             'meanings' => [
+                "the knight",
                 "Black's knight",
                 "black knight",
             ],
@@ -70,6 +74,7 @@ class PiecePhrase
             'id' => "P",
             'color' => "w",
             'meanings' => [
+                "the pawn",
                 "White's pawn",
                 "white pawn",
             ],
@@ -78,6 +83,7 @@ class PiecePhrase
             'id' => "P",
             'color' => "b",
             'meanings' => [
+                "the pawn",
                 "Black's pawn",
                 "black pawn",
             ],
@@ -102,6 +108,7 @@ class PiecePhrase
             'id' => "R",
             'color' => "w",
             'meanings' => [
+                "the rook",
                 "White's rook",
                 "white rook",
             ],
@@ -110,6 +117,7 @@ class PiecePhrase
             'id' => "R",
             'color' => "b",
             'meanings' => [
+                "the rook",
                 "Black's rook",
                 "black rook",
             ],

@@ -59,7 +59,7 @@ class AttackEval extends AbstractEval
     {
         $subjectPhrase = PiecePhrase::predictable($subject);
         $targetPhrase = PiecePhrase::predictable($target);
-        $this->phrases[] = "{$subjectPhrase} is attacking {$targetPhrase}.";
+        $this->phrases[] = ucfirst("{$subjectPhrase} is attacking {$targetPhrase}.");
 
         return $this->phrases;
     }
