@@ -54,7 +54,9 @@ class CenterEval extends AbstractEval
 
     private function explain($subject, $target = null)
     {
-        $this->phrases[] = CenterEvalSentence::predictable($subject);
+        if ($sentence = CenterEvalSentence::predictable($subject)) {
+            $this->phrases[] = $sentence;
+        }
 
         return $this->phrases;
     }

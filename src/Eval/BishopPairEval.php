@@ -37,7 +37,9 @@ class BishopPairEval extends AbstractEval
 
     private function explain($subject, $target = null)
     {
-        $this->phrases[] = BishopPairEvalSentence::predictable($subject);
+        if ($sentence = BishopPairEvalSentence::predictable($subject)) {
+            $this->phrases[] = $sentence;
+        }
 
         return $this->phrases;
     }
