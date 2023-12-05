@@ -46,17 +46,10 @@ class ConnectivityEvalSentence
             ],
         ],
         [
-            'diff' => 1,
+            'diff' => 4,
             'color' => 'w',
             'meanings' => [
-                "The white pieces are slightly better connected.",
-            ],
-        ],
-        [
-            'diff' => 2,
-            'color' => 'w',
-            'meanings' => [
-                "The white pieces are somewhat better connected.",
+                "The white pieces are absolutely better connected.",
             ],
         ],
         [
@@ -67,10 +60,17 @@ class ConnectivityEvalSentence
             ],
         ],
         [
-            'diff' => 4,
+            'diff' => 2,
             'color' => 'w',
             'meanings' => [
-                "The white pieces are absolutely better connected.",
+                "The white pieces are somewhat better connected.",
+            ],
+        ],
+        [
+            'diff' => 1,
+            'color' => 'w',
+            'meanings' => [
+                "The white pieces are slightly better connected.",
             ],
         ],
     ];
