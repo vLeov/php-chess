@@ -24,37 +24,37 @@ class SpaceEval extends AbstractEval
         Color::W => [
             [
                 'diff' => 8,
-                'meaning' => "White has an absolute space advantage.",
+                'meaning' => "White has a total space advantage.",
             ],
             [
                 'diff' => 5,
-                'meaning' => "White has a remarkable space advantage.",
+                'meaning' => "White has a significant space advantage.",
             ],
             [
                 'diff' => 3,
-                'meaning' => "White has a somewhat better space advantage.",
+                'meaning' => "White has a kind of space advantage.",
             ],
             [
                 'diff' => 2,
-                'meaning' => "White has a slightly better space advantage.",
+                'meaning' => "White has a tiny bit space advantage.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -8,
-                'meaning' => "Black has an absolute space advantage.",
+                'meaning' => "Black has a total space advantage.",
             ],
             [
                 'diff' => -5,
-                'meaning' => "Black has a remarkable space advantage.",
+                'meaning' => "Black has a significant space advantage.",
             ],
             [
                 'diff' => -3,
-                'meaning' => "Black has a somewhat better space advantage.",
+                'meaning' => "Black has a kind of space advantage.",
             ],
             [
                 'diff' => -2,
-                'meaning' => "Black has a slightly better space advantage.",
+                'meaning' => "Black has a tiny bit space advantage.",
             ],
         ],
     ];
