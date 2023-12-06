@@ -36,7 +36,7 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The black pieces are remarkably better connected.",
+            "The black pieces are totally better connected.",
         ];
 
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');

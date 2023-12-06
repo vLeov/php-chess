@@ -16,7 +16,7 @@ class FenParagraphTest extends AbstractUnitTestCase
         $expected = [
             "Black has a remarkable control of the center.",
             "The white pieces are totally better connected.",
-            "Black has a somewhat better space advantage.",
+            "Black has a remarkable space advantage.",
         ];
 
         $sentence = (new FenParagraph('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
@@ -37,7 +37,7 @@ class FenParagraphTest extends AbstractUnitTestCase
     {
         $expected = [
             "White has a remarkable control of the center.",
-            "The white pieces are slightly better connected.",
+            "The white pieces are somewhat better connected.",
             "The knight on e6 is pinned.",
             "White has the bishop pair.",
         ];

@@ -70,6 +70,9 @@ class SpaceEval extends AbstractEval
 
     private function explain(array $result): void
     {
+        $result[Color::W] = count($result[Color::W]);
+        $result[Color::B] = count($result[Color::B]);
+
         if ($sentence = SpaceEvalSentence::predictable($result)) {
             $this->phrases[] = $sentence;
         }

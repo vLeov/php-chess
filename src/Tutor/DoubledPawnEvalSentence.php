@@ -81,7 +81,9 @@ class DoubledPawnEvalSentence
                     return $item['meanings'][0];
                 }
             }
-        } elseif ($diff < 0) {
+        }
+
+        if ($diff < 0) {
             foreach (self::$phrase[Color::B] as $item) {
                 if ($diff <= $item['diff']) {
                     return $item['meanings'][0];

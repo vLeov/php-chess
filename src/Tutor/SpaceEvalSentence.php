@@ -73,17 +73,19 @@ class SpaceEvalSentence
 
     public static function predictable(array $result): ?string
     {
-        $diff = count($result[Color::W]) - count($result[Color::B]);
+        $diff = $result[Color::W] - $result[Color::B];
 
         if ($diff > 0) {
             foreach (self::$phrase[Color::W] as $item) {
-                if ($diff > $item['diff']) {
+                if ($diff >= $item['diff']) {
                     return $item['meanings'][0];
                 }
             }
-        } else {
+        }
+
+        if ($diff < 0) {
             foreach (self::$phrase[Color::B] as $item) {
-                if ($diff < $item['diff']) {
+                if ($diff <= $item['diff']) {
                     return $item['meanings'][0];
                 }
             }
