@@ -37,19 +37,19 @@ class MaterialEval extends AbstractEval
         ],
         Color::B => [
             [
-                'diff' => 4,
+                'diff' => -4,
                 'meaning' => "Black has a decisive material advantage.",
             ],
             [
-                'diff' => 3,
+                'diff' => -3,
                 'meaning' => "Black has a significant material advantage.",
             ],
             [
-                'diff' => 2,
+                'diff' => -2,
                 'meaning' => "Black has some material advantage.",
             ],
             [
-                'diff' => 1,
+                'diff' => -1,
                 'meaning' => "Black has a tiny material advantage.",
             ],
         ],

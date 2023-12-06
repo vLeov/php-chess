@@ -63,4 +63,26 @@ class MaterialEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function C00()
+    {
+        $expectedEval = [
+            'w' => 39.06,
+            'b' => 40.06,
+        ];
+
+        $expectedPhrase = [
+            "Black has a tiny material advantage.",
+        ];
+
+        $C00 = file_get_contents(self::DATA_FOLDER.'/sample/C00.pgn');
+        $board = (new SanPlay($C00))->validate()->getBoard();
+        $materialEval = new MaterialEval($board);
+
+        $this->assertEqualsCanonicalizing($expectedEval, $materialEval->getResult());
+        $this->assertEqualsCanonicalizing($expectedPhrase, $materialEval->getPhrases());
+    }
 }
