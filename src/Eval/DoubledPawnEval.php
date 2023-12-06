@@ -2,13 +2,68 @@
 
 namespace Chess\Eval;
 
-use Chess\Tutor\DoubledPawnEvalSentence;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
 {
     const NAME = 'Doubled pawn';
+
+    protected array $phrase = [
+        Color::W => [
+            [
+                'diff' => 4,
+                'meanings' => [
+                    "The white pieces are totally better in terms of doubled pawns.",
+                ],
+            ],
+            [
+                'diff' => 3,
+                'meanings' => [
+                    "The white pieces are remarkably better in terms of doubled pawns.",
+                ],
+            ],
+            [
+                'diff' => 2,
+                'meanings' => [
+                    "The white pieces are somewhat better in terms of doubled pawns.",
+                ],
+            ],
+            [
+                'diff' => 1,
+                'meanings' => [
+                    "The white pieces are slightly better in terms of doubled pawns.",
+                ],
+            ],
+        ],
+        Color::B => [
+            [
+                'diff' => -4,
+                'meanings' => [
+                    "The black pieces are totally better in terms of doubled pawns.",
+                ],
+            ],
+            [
+                'diff' => -3,
+                'meanings' => [
+                    "The black pieces are remarkably better in terms of doubled pawns.",
+                ],
+            ],
+            [
+                'diff' => -2,
+                'meanings' => [
+                    "The black pieces are somewhat better in terms of doubled pawns.",
+                ],
+            ],
+            [
+                'diff' => -1,
+                'meanings' => [
+                    "The black pieces are slightly better in terms of doubled pawns.",
+                ],
+            ],
+        ],
+    ];
 
     public function __construct(Board $board)
     {
@@ -32,7 +87,7 @@ class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
 
     private function explain(array $result): void
     {
-        if ($sentence = DoubledPawnEvalSentence::predictable($result)) {
+        if ($sentence = $this->predictable($result)) {
             $this->phrases[] = $sentence;
         }
     }

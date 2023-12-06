@@ -3,7 +3,6 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SqCount;
-use Chess\Tutor\ConnectivityEvalSentence;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
