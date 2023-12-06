@@ -2,6 +2,8 @@
 
 namespace Chess\Tutor;
 
+use Chess\Variant\Classical\PGN\AN\Color;
+
 /**
  * Human-like sentence.
  *
@@ -15,25 +17,42 @@ class BishopPairEvalSentence
      * @var array
      */
     public static $phrase = [
-        [
-            'color' => 'w',
-            'meanings' => [
-                "White has the bishop pair.",
+        Color::W => [
+            [
+                'diff' => 1,
+                'meanings' => [
+                    "White has the bishop pair.",
+                ],
             ],
         ],
-        [
-            'color' => 'b',
-            'meanings' => [
-                "Black has the bishop pair.",
+        Color::B => [
+            [
+                'diff' => -1,
+                'meanings' => [
+                    "Black has the bishop pair.",
+                ],
             ],
         ],
     ];
 
-    public static function predictable(string $color): ?string
+
+    public static function predictable(array $result): ?string
     {
-        foreach (self::$phrase as $item) {
-            if ($item['color'] === $color) {
-                return $item['meanings'][0];
+        $diff = $result[Color::W] - $result[Color::B];
+
+        if ($diff > 0) {
+            foreach (self::$phrase[Color::W] as $item) {
+                if ($diff >= $item['diff']) {
+                    return $item['meanings'][0];
+                }
+            }
+        }
+
+        if ($diff < 0) {
+            foreach (self::$phrase[Color::B] as $item) {
+                if ($diff <= $item['diff']) {
+                    return $item['meanings'][0];
+                }
             }
         }
 

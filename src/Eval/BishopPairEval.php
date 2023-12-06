@@ -28,16 +28,16 @@ class BishopPairEval extends AbstractEval implements TernaryEvalInterface
 
         if ($count[Color::W] === 2 && $count[Color::W] > $count[Color::B]) {
             $this->result[Color::W] = 1;
-            $this->explain(Color::W);
         } elseif ($count[Color::B] === 2 && $count[Color::B] > $count[Color::W]) {
             $this->result[Color::B] = 1;
-            $this->explain(Color::B);
         }
+
+        $this->explain($this->result);
     }
 
-    private function explain(string $color): void
+    private function explain(array $result): void
     {
-        if ($sentence = BishopPairEvalSentence::predictable($color)) {
+        if ($sentence = BishopPairEvalSentence::predictable($result)) {
             $this->phrases[] = $sentence;
         }
     }
