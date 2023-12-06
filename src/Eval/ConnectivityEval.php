@@ -69,12 +69,10 @@ class ConnectivityEval extends AbstractEval
         }
     }
 
-    private function explain($subject, $target = null)
+    private function explain(array $result): void
     {
-        if ($sentence = ConnectivityEvalSentence::predictable($subject)) {
+        if ($sentence = ConnectivityEvalSentence::predictable($result)) {
             $this->phrases[] = $sentence;
         }
-
-        return $this->phrases;
     }
 }

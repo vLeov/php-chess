@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -31,11 +32,10 @@ class RelativeForkEval extends AbstractEval
         }
     }
 
-    private function explain($subject, $target = null)
+    private function explain(AbstractPiece $piece): void
     {
-        $phrase = PiecePhrase::predictable($subject);
-        $this->phrases[] = "Relative fork attack on {$phrase}.";
+        $phrase = PiecePhrase::predictable($piece);
 
-        return $this->phrases;
+        $this->phrases[] = "Relative fork attack on {$phrase}.";
     }
 }

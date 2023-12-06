@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -28,11 +29,10 @@ class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
         }
     }
 
-    private function explain($subject, $target = null)
+    private function explain(AbstractPiece $piece): void
     {
-        $phrase = PiecePhrase::predictable($subject);
-        $this->phrases[] = ucfirst("{$phrase} is pinned.");
+        $phrase = PiecePhrase::predictable($piece);
 
-        return $this->phrases;
+        $this->phrases[] = ucfirst("{$phrase} is pinned.");
     }
 }

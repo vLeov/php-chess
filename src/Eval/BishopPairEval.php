@@ -35,12 +35,10 @@ class BishopPairEval extends AbstractEval
         }
     }
 
-    private function explain($subject, $target = null)
+    private function explain(string $color): void
     {
-        if ($sentence = BishopPairEvalSentence::predictable($subject)) {
+        if ($sentence = BishopPairEvalSentence::predictable($color)) {
             $this->phrases[] = $sentence;
         }
-
-        return $this->phrases;
     }
 }

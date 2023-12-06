@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -55,12 +56,11 @@ class AttackEval extends AbstractEval
         }
     }
 
-    private function explain($subject, $target = null)
+    private function explain(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
     {
-        $subjectPhrase = PiecePhrase::predictable($subject);
-        $targetPhrase = PiecePhrase::predictable($target);
-        $this->phrases[] = ucfirst("{$subjectPhrase} is attacking {$targetPhrase}.");
+        $attacking = PiecePhrase::predictable($attackingPiece);
+        $attacked = PiecePhrase::predictable($attackedPiece);
 
-        return $this->phrases;
+        $this->phrases[] = ucfirst("{$attacking} is attacking {$attacked}.");
     }
 }

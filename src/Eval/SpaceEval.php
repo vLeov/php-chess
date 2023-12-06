@@ -68,12 +68,10 @@ class SpaceEval extends AbstractEval
         $this->explain($this->result);
     }
 
-    private function explain($subject, $target = null)
+    private function explain(array $result): void
     {
-        if ($sentence = SpaceEvalSentence::predictable($subject)) {
+        if ($sentence = SpaceEvalSentence::predictable($result)) {
             $this->phrases[] = $sentence;
         }
-
-        return $this->phrases;
     }
 }
