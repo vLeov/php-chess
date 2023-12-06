@@ -77,13 +77,15 @@ class CenterEvalSentence
 
         if ($diff > 0) {
             foreach (self::$phrase[Color::W] as $item) {
-                if ($diff > $item['diff']) {
+                if ($diff >= $item['diff']) {
                     return $item['meanings'][0];
                 }
             }
-        } else {
+        }
+
+        if ($diff < 0) {
             foreach (self::$phrase[Color::B] as $item) {
-                if ($diff < $item['diff']) {
+                if ($diff <= $item['diff']) {
                     return $item['meanings'][0];
                 }
             }

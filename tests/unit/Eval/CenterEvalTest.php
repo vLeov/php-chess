@@ -42,7 +42,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has a somewhat better control of the center.",
+            "White has a remarkable control of the center.",
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
@@ -86,7 +86,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has a somewhat better control of the center.",
+            "White has a remarkable control of the center.",
         ];
 
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
