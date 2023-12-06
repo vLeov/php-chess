@@ -36,7 +36,7 @@ class SpaceEval extends AbstractEval
             ],
             [
                 'diff' => 2,
-                'meaning' => "White has a tiny bit space advantage.",
+                'meaning' => "White has a tiny space advantage.",
             ],
         ],
         Color::B => [
@@ -54,7 +54,7 @@ class SpaceEval extends AbstractEval
             ],
             [
                 'diff' => -2,
-                'meaning' => "Black has a tiny bit space advantage.",
+                'meaning' => "Black has a tiny space advantage.",
             ],
         ],
     ];

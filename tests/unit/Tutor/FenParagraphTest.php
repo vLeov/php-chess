@@ -14,8 +14,8 @@ class FenParagraphTest extends AbstractUnitTestCase
     public function A08()
     {
         $expected = [
-            "Black has a remarkable control of the center.",
-            "The white pieces are totally better connected.",
+            "Black has a significant control of the center.",
+            "The white pieces are just better connected.",
             "Black has a significant space advantage.",
         ];
 
@@ -36,7 +36,8 @@ class FenParagraphTest extends AbstractUnitTestCase
     public function endgame()
     {
         $expected = [
-            "White has a remarkable control of the center.",
+            "White has a significant material advantage.",
+            "White has a significant control of the center.",
             "The white pieces are somewhat better connected.",
             "White is pressuring a little bit more squares than its opponent.",
             "The knight on e6 is pinned.",
