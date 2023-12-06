@@ -20,6 +20,61 @@ class SpaceEval extends AbstractEval
 
     private object $sqCount;
 
+    protected array $phrase = [
+        Color::W => [
+            [
+                'diff' => 8,
+                'meanings' => [
+                    "White has an absolute space advantage.",
+                ],
+            ],
+            [
+                'diff' => 5,
+                'meanings' => [
+                    "White has a remarkable space advantage.",
+                ],
+            ],
+            [
+                'diff' => 3,
+                'meanings' => [
+                    "White has a somewhat better space advantage.",
+                ],
+            ],
+            [
+                'diff' => 2,
+                'meanings' => [
+                    "White has a slightly better space advantage.",
+                ],
+            ],
+        ],
+        Color::B => [
+            [
+                'diff' => -8,
+                'meanings' => [
+                    "Black has an absolute space advantage.",
+                ],
+            ],
+            [
+                'diff' => -5,
+                'meanings' => [
+                    "Black has a remarkable space advantage.",
+                ],
+            ],
+            [
+                'diff' => -3,
+                'meanings' => [
+                    "Black has a somewhat better space advantage.",
+                ],
+            ],
+            [
+                'diff' => -2,
+                'meanings' => [
+                    "Black has a slightly better space advantage.",
+                ],
+            ],
+        ],
+    ];
+
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -73,7 +128,7 @@ class SpaceEval extends AbstractEval
         $result[Color::W] = count($result[Color::W]);
         $result[Color::B] = count($result[Color::B]);
 
-        if ($sentence = SpaceEvalSentence::predictable($result)) {
+        if ($sentence = $this->predictable($result)) {
             $this->phrases[] = $sentence;
         }
     }
