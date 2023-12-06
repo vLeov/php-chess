@@ -58,8 +58,8 @@ class AttackEval extends AbstractEval
 
     private function explain(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
     {
-        $attacking = PiecePhrase::sentence($attackingPiece);
-        $attacked = PiecePhrase::sentence($attackedPiece);
+        $attacking = PiecePhrase::create($attackingPiece);
+        $attacked = PiecePhrase::create($attackedPiece);
 
         $this->phrases[] = ucfirst("{$attacking} is attacking {$attacked}.");
     }

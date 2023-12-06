@@ -124,7 +124,7 @@ class PiecePhrase
         ],
     ];
 
-    public static function sentence(AbstractPiece $piece): ?string
+    public static function create(AbstractPiece $piece): ?string
     {
         foreach (self::$phrase as $item) {
             if (

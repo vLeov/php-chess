@@ -31,7 +31,7 @@ class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
 
     private function explain(AbstractPiece $piece): void
     {
-        $phrase = PiecePhrase::sentence($piece);
+        $phrase = PiecePhrase::create($piece);
 
         $this->phrases[] = ucfirst("{$phrase} is pinned.");
     }

@@ -33,7 +33,7 @@ class AbsoluteForkEval extends AbstractEval
 
     private function explain(AbstractPiece $piece): void
     {
-        $phrase = PiecePhrase::sentence($piece);
+        $phrase = PiecePhrase::create($piece);
 
         $this->phrases[] = "Absolute fork attack on {$phrase}.";
     }
