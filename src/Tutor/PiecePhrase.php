@@ -124,7 +124,7 @@ class PiecePhrase
         ],
     ];
 
-    public static function predictable(AbstractPiece $piece): ?string
+    public static function sentence(AbstractPiece $piece): ?string
     {
         foreach (self::$phrase as $item) {
             if (

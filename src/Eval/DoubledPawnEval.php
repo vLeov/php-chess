@@ -87,7 +87,7 @@ class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
 
     private function explain(array $result): void
     {
-        if ($sentence = $this->predictable($result)) {
+        if ($sentence = $this->sentence($result)) {
             $this->phrases[] = $sentence;
         }
     }

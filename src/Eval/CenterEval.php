@@ -108,7 +108,7 @@ class CenterEval extends AbstractEval
 
     private function explain(array $result): void
     {
-        if ($sentence = $this->predictable($result)) {
+        if ($sentence = $this->sentence($result)) {
             $this->phrases[] = $sentence;
         }
     }

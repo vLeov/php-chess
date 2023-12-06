@@ -128,7 +128,7 @@ class SpaceEval extends AbstractEval
         $result[Color::W] = count($result[Color::W]);
         $result[Color::B] = count($result[Color::B]);
 
-        if ($sentence = $this->predictable($result)) {
+        if ($sentence = $this->sentence($result)) {
             $this->phrases[] = $sentence;
         }
     }

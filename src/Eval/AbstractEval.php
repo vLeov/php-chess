@@ -44,7 +44,7 @@ abstract class AbstractEval
         return $this->phrases;
     }
 
-    protected function predictable(array $result): ?string
+    protected function sentence(array $result): ?string
     {
         $diff = $result[Color::W] - $result[Color::B];
 

@@ -34,7 +34,7 @@ class RelativeForkEval extends AbstractEval
 
     private function explain(AbstractPiece $piece): void
     {
-        $phrase = PiecePhrase::predictable($piece);
+        $phrase = PiecePhrase::sentence($piece);
 
         $this->phrases[] = "Relative fork attack on {$phrase}.";
     }
