@@ -39,7 +39,7 @@ class FenParagraphTest extends AbstractUnitTestCase
             "White has a significant material advantage.",
             "White has a significant control of the center.",
             "The white pieces are somewhat better connected.",
-            "White is pressuring a little bit more squares than its opponent.",
+            "The white player is pressuring a little bit more squares than its opponent.",
             "The knight on e6 is pinned.",
             "White has the bishop pair.",
         ];

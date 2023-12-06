@@ -35,37 +35,37 @@ class PressureEval extends AbstractEval
         Color::W => [
             [
                 'diff' => 4,
-                'meaning' => "White is utterly pressuring more squares than its opponent.",
+                'meaning' => "The white player is utterly pressuring more squares than its opponent.",
             ],
             [
                 'diff' => 3,
-                'meaning' => "White is really pressuring more squares than its opponent.",
+                'meaning' => "The white player is really pressuring more squares than its opponent.",
             ],
             [
                 'diff' => 2,
-                'meaning' => "White is somewhat pressuring more squares than its opponent.",
+                'meaning' => "The white player is somewhat pressuring more squares than its opponent.",
             ],
             [
                 'diff' => 1,
-                'meaning' => "White is pressuring a little bit more squares than its opponent.",
+                'meaning' => "The white player is pressuring a little bit more squares than its opponent.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -4,
-                'meaning' => "Black is utterly pressuring more squares than its opponent.",
+                'meaning' => "The black player is utterly pressuring more squares than its opponent.",
             ],
             [
                 'diff' => -3,
-                'meaning' => "Black is really pressuring more squares than its opponent.",
+                'meaning' => "The black player is really pressuring more squares than its opponent.",
             ],
             [
                 'diff' => -2,
-                'meaning' => "Black is somewhat pressuring more squares than its opponent.",
+                'meaning' => "The black player is somewhat pressuring more squares than its opponent.",
             ],
             [
                 'diff' => -1,
-                'meaning' => "Black is pressuring a little bit more squares than its opponent.",
+                'meaning' => "The black player is pressuring a little bit more squares than its opponent.",
             ],
         ],
     ];
