@@ -24,53 +24,37 @@ class SpaceEval extends AbstractEval
         Color::W => [
             [
                 'diff' => 8,
-                'meanings' => [
-                    "White has an absolute space advantage.",
-                ],
+                'meaning' => "White has an absolute space advantage.",
             ],
             [
                 'diff' => 5,
-                'meanings' => [
-                    "White has a remarkable space advantage.",
-                ],
+                'meaning' => "White has a remarkable space advantage.",
             ],
             [
                 'diff' => 3,
-                'meanings' => [
-                    "White has a somewhat better space advantage.",
-                ],
+                'meaning' => "White has a somewhat better space advantage.",
             ],
             [
                 'diff' => 2,
-                'meanings' => [
-                    "White has a slightly better space advantage.",
-                ],
+                'meaning' => "White has a slightly better space advantage.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -8,
-                'meanings' => [
-                    "Black has an absolute space advantage.",
-                ],
+                'meaning' => "Black has an absolute space advantage.",
             ],
             [
                 'diff' => -5,
-                'meanings' => [
-                    "Black has a remarkable space advantage.",
-                ],
+                'meaning' => "Black has a remarkable space advantage.",
             ],
             [
                 'diff' => -3,
-                'meanings' => [
-                    "Black has a somewhat better space advantage.",
-                ],
+                'meaning' => "Black has a somewhat better space advantage.",
             ],
             [
                 'diff' => -2,
-                'meanings' => [
-                    "Black has a slightly better space advantage.",
-                ],
+                'meaning' => "Black has a slightly better space advantage.",
             ],
         ],
     ];

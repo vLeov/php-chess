@@ -14,53 +14,37 @@ class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
         Color::W => [
             [
                 'diff' => 4,
-                'meanings' => [
-                    "The white pieces are totally better in terms of doubled pawns.",
-                ],
+                'meaning' => "The white pieces are totally better in terms of doubled pawns.",
             ],
             [
                 'diff' => 3,
-                'meanings' => [
-                    "The white pieces are remarkably better in terms of doubled pawns.",
-                ],
+                'meaning' => "The white pieces are remarkably better in terms of doubled pawns.",
             ],
             [
                 'diff' => 2,
-                'meanings' => [
-                    "The white pieces are somewhat better in terms of doubled pawns.",
-                ],
+                'meaning' => "The white pieces are somewhat better in terms of doubled pawns.",
             ],
             [
                 'diff' => 1,
-                'meanings' => [
-                    "The white pieces are slightly better in terms of doubled pawns.",
-                ],
+                'meaning' => "The white pieces are slightly better in terms of doubled pawns.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -4,
-                'meanings' => [
-                    "The black pieces are totally better in terms of doubled pawns.",
-                ],
+                'meaning' => "The black pieces are totally better in terms of doubled pawns.",
             ],
             [
                 'diff' => -3,
-                'meanings' => [
-                    "The black pieces are remarkably better in terms of doubled pawns.",
-                ],
+                'meaning' => "The black pieces are remarkably better in terms of doubled pawns.",
             ],
             [
                 'diff' => -2,
-                'meanings' => [
-                    "The black pieces are somewhat better in terms of doubled pawns.",
-                ],
+                'meaning' => "The black pieces are somewhat better in terms of doubled pawns.",
             ],
             [
                 'diff' => -1,
-                'meanings' => [
-                    "The black pieces are slightly better in terms of doubled pawns.",
-                ],
+                'meaning' => "The black pieces are slightly better in terms of doubled pawns.",
             ],
         ],
     ];

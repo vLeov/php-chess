@@ -31,53 +31,37 @@ class CenterEval extends AbstractEval
         Color::W => [
             [
                 'diff' => 4,
-                'meanings' => [
-                    "White has an absolute control of the center.",
-                ],
+                'meaning' => "White has an absolute control of the center.",
             ],
             [
                 'diff' => 3,
-                'meanings' => [
-                    "White has a remarkable control of the center.",
-                ],
+                'meaning' => "White has a remarkable control of the center.",
             ],
             [
                 'diff' => 2,
-                'meanings' => [
-                    "White has a somewhat better control of the center.",
-                ],
+                'meaning' => "White has a somewhat better control of the center.",
             ],
             [
                 'diff' => 1,
-                'meanings' => [
-                    "White has a slightly better control of the center.",
-                ],
+                'meaning' => "White has a slightly better control of the center.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -4,
-                'meanings' => [
-                    "Black has an absolute control of the center.",
-                ],
+                'meaning' => "Black has an absolute control of the center.",
             ],
             [
                 'diff' => -3,
-                'meanings' => [
-                    "Black has a remarkable control of the center.",
-                ],
+                'meaning' => "Black has a remarkable control of the center.",
             ],
             [
                 'diff' => -2,
-                'meanings' => [
-                    "Black has a somewhat better control of the center.",
-                ],
+                'meaning' => "Black has a somewhat better control of the center.",
             ],
             [
                 'diff' => -1,
-                'meanings' => [
-                    "Black has a slightly better control of the center.",
-                ],
+                'meaning' => "Black has a slightly better control of the center.",
             ],
         ],
     ];

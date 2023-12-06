@@ -23,53 +23,37 @@ class ConnectivityEval extends AbstractEval
         Color::W => [
             [
                 'diff' => 4,
-                'meanings' => [
-                    "The white pieces are totally better connected.",
-                ],
+                'meaning' => "The white pieces are totally better connected.",
             ],
             [
                 'diff' => 3,
-                'meanings' => [
-                    "The white pieces are remarkably better connected.",
-                ],
+                'meaning' => "The white pieces are remarkably better connected.",
             ],
             [
                 'diff' => 2,
-                'meanings' => [
-                    "The white pieces are somewhat better connected.",
-                ],
+                'meaning' => "The white pieces are somewhat better connected.",
             ],
             [
                 'diff' => 1,
-                'meanings' => [
-                    "The white pieces are slightly better connected.",
-                ],
+                'meaning' => "The white pieces are slightly better connected.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -4,
-                'meanings' => [
-                    "The black pieces are totally better connected.",
-                ],
+                'meaning' => "The black pieces are totally better connected.",
             ],
             [
                 'diff' => -3,
-                'meanings' => [
-                    "The black pieces are remarkably better connected.",
-                ],
+                'meaning' => "The black pieces are remarkably better connected.",
             ],
             [
                 'diff' => -2,
-                'meanings' => [
-                    "The black pieces are somewhat better connected.",
-                ],
+                'meaning' => "The black pieces are somewhat better connected.",
             ],
             [
                 'diff' => -1,
-                'meanings' => [
-                    "The black pieces are slightly better connected.",
-                ],
+                'meaning' => "The black pieces are slightly better connected.",
             ],
         ],
     ];

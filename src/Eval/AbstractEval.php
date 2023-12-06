@@ -51,7 +51,7 @@ abstract class AbstractEval
         if ($diff > 0) {
             foreach ($this->phrase[Color::W] as $item) {
                 if ($diff >= $item['diff']) {
-                    return $item['meanings'][0];
+                    return $item['meaning'];
                 }
             }
         }
@@ -59,7 +59,7 @@ abstract class AbstractEval
         if ($diff < 0) {
             foreach ($this->phrase[Color::B] as $item) {
                 if ($diff <= $item['diff']) {
-                    return $item['meanings'][0];
+                    return $item['meaning'];
                 }
             }
         }

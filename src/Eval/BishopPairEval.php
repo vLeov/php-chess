@@ -14,17 +14,13 @@ class BishopPairEval extends AbstractEval implements TernaryEvalInterface
         Color::W => [
             [
                 'diff' => 1,
-                'meanings' => [
-                    "White has the bishop pair.",
-                ],
+                'meaning' => "White has the bishop pair.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -1,
-                'meanings' => [
-                    "Black has the bishop pair.",
-                ],
+                'meaning' => "Black has the bishop pair.",
             ],
         ],
     ];
