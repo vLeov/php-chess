@@ -23,11 +23,11 @@ class ConnectivityEval extends AbstractEval
         Color::W => [
             [
                 'diff' => 4,
-                'meaning' => "The white pieces are totally better connected.",
+                'meaning' => "The white pieces are just better connected.",
             ],
             [
                 'diff' => 3,
-                'meaning' => "The white pieces are remarkably better connected.",
+                'meaning' => "The white pieces are significantly better connected.",
             ],
             [
                 'diff' => 2,
@@ -41,11 +41,11 @@ class ConnectivityEval extends AbstractEval
         Color::B => [
             [
                 'diff' => -4,
-                'meaning' => "The black pieces are totally better connected.",
+                'meaning' => "The black pieces are just better connected.",
             ],
             [
                 'diff' => -3,
-                'meaning' => "The black pieces are remarkably better connected.",
+                'meaning' => "The black pieces are significantly better connected.",
             ],
             [
                 'diff' => -2,

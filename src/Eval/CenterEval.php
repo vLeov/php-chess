@@ -31,11 +31,11 @@ class CenterEval extends AbstractEval
         Color::W => [
             [
                 'diff' => 4,
-                'meaning' => "White has an absolute control of the center.",
+                'meaning' => "White is just controlling the center.",
             ],
             [
                 'diff' => 3,
-                'meaning' => "White has a remarkable control of the center.",
+                'meaning' => "White has a significant control of the center.",
             ],
             [
                 'diff' => 2,
@@ -49,11 +49,11 @@ class CenterEval extends AbstractEval
         Color::B => [
             [
                 'diff' => -4,
-                'meaning' => "Black has an absolute control of the center.",
+                'meaning' => "Black is just controlling the center.",
             ],
             [
                 'diff' => -3,
-                'meaning' => "Black has a remarkable control of the center.",
+                'meaning' => "Black has a significant control of the center.",
             ],
             [
                 'diff' => -2,
