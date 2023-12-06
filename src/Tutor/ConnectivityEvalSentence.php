@@ -21,7 +21,7 @@ class ConnectivityEvalSentence
             [
                 'diff' => 4,
                 'meanings' => [
-                    "The white pieces are absolutely better connected.",
+                    "The white pieces are totally better connected.",
                 ],
             ],
             [
@@ -47,7 +47,7 @@ class ConnectivityEvalSentence
             [
                 'diff' => -4,
                 'meanings' => [
-                    "The black pieces are absolutely better connected.",
+                    "The black pieces are totally better connected.",
                 ],
             ],
             [

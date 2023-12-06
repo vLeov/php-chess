@@ -15,7 +15,7 @@ class FenParagraphTest extends AbstractUnitTestCase
     {
         $expected = [
             "Black has a remarkable control of the center.",
-            "The white pieces are absolutely better connected.",
+            "The white pieces are totally better connected.",
             "Black has a somewhat better space advantage.",
         ];
 

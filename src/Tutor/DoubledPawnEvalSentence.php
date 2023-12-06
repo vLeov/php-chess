@@ -21,7 +21,7 @@ class DoubledPawnEvalSentence
             [
                 'diff' => 4,
                 'meanings' => [
-                    "The white pieces are absolutely better in terms of doubled pawns.",
+                    "The white pieces are totally better in terms of doubled pawns.",
                 ],
             ],
             [
@@ -47,7 +47,7 @@ class DoubledPawnEvalSentence
             [
                 'diff' => -4,
                 'meanings' => [
-                    "The black pieces are absolutely better in terms of doubled pawns.",
+                    "The black pieces are totally better in terms of doubled pawns.",
                 ],
             ],
             [
