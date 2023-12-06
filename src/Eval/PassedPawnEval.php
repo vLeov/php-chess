@@ -2,7 +2,9 @@
 
 namespace Chess\Eval;
 
+use Chess\Piece\AbstractPiece;
 use Chess\Piece\P;
+use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -25,10 +27,7 @@ class PassedPawnEval extends AbstractEval
 
     private function getThreatPassedPawn(P $pawn): int
     {
-        $color = $pawn->getColor();
         $pawnFile = $pawn->getSqFile();
-        $ranks = $pawn->getRanks();
-
         $prevFile = chr(ord($pawnFile) - 1);
         $nextFile = chr(ord($pawnFile) + 1);
 
@@ -37,12 +36,12 @@ class PassedPawnEval extends AbstractEval
             if ($file < 'a' || $file > 'h') {
                 continue;
             }
-            if ($color === Color::W) {
-                $listRanks = range($ranks->next, $ranks->end - 1);
+            if ($pawn->getColor() === Color::W) {
+                $listRanks = range($pawn->getRanks()->next, $pawn->getRanks()->end - 1);
             } else {
-                $listRanks = range($ranks->next, $ranks->end + 1);
+                $listRanks = range($pawn->getRanks()->next, $pawn->getRanks()->end + 1);
             }
-            $sqsFile = array_map(function($rank) use ($file){
+            $sqsFile = array_map(function($rank) use ($file) {
                 return $file . $rank;
             }, $listRanks);
             $sqs = [...$sqs, ...$sqsFile];
@@ -51,7 +50,10 @@ class PassedPawnEval extends AbstractEval
         $passedPawn = true;
         foreach ($sqs as $sq) {
             if ($nextPiece = $this->board->getPieceBySq($sq)) {
-                if ($nextPiece->getId() === Piece::P && $nextPiece->getColor() !== $color) {
+                if (
+                    $nextPiece->getId() === Piece::P &&
+                    $nextPiece->getColor() !== $pawn->getColor()
+                ) {
                     $passedPawn = false;
                     break;
                 }
@@ -59,14 +61,21 @@ class PassedPawnEval extends AbstractEval
         }
 
         if ($passedPawn) {
-            $position = $pawn->getSq();
-            if ($color === Color::W) {
-                return $position[ 1 ];
+            $this->explain($pawn);
+            if ($pawn->getColor() === Color::W) {
+                return $pawn->getSq()[1];
             } else {
-                return 9 - $position[ 1 ];
+                return 9 - $pawn->getSq()[1];
             }
         }
 
         return 0;
+    }
+
+    private function explain(AbstractPiece $piece): void
+    {
+        $phrase = PiecePhrase::create($piece);
+
+        $this->phrases[] = ucfirst("{$phrase} is passed.");
     }
 }
