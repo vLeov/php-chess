@@ -20,6 +20,61 @@ class ConnectivityEval extends AbstractEval
 
     private object $sqCount;
 
+    protected array $phrase = [
+        Color::W => [
+            [
+                'diff' => 4,
+                'meanings' => [
+                    "The white pieces are totally better connected.",
+                ],
+            ],
+            [
+                'diff' => 3,
+                'meanings' => [
+                    "The white pieces are remarkably better connected.",
+                ],
+            ],
+            [
+                'diff' => 2,
+                'meanings' => [
+                    "The white pieces are somewhat better connected.",
+                ],
+            ],
+            [
+                'diff' => 1,
+                'meanings' => [
+                    "The white pieces are slightly better connected.",
+                ],
+            ],
+        ],
+        Color::B => [
+            [
+                'diff' => -4,
+                'meanings' => [
+                    "The black pieces are totally better connected.",
+                ],
+            ],
+            [
+                'diff' => -3,
+                'meanings' => [
+                    "The black pieces are remarkably better connected.",
+                ],
+            ],
+            [
+                'diff' => -2,
+                'meanings' => [
+                    "The black pieces are somewhat better connected.",
+                ],
+            ],
+            [
+                'diff' => -1,
+                'meanings' => [
+                    "The black pieces are slightly better connected.",
+                ],
+            ],
+        ],
+    ];
+
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -71,7 +126,7 @@ class ConnectivityEval extends AbstractEval
 
     private function explain(array $result): void
     {
-        if ($sentence = ConnectivityEvalSentence::predictable($result)) {
+        if ($sentence = $this->predictable($result)) {
             $this->phrases[] = $sentence;
         }
     }
