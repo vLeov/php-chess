@@ -3,7 +3,6 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SpaceEval;
-use Chess\Tutor\CenterEvalSentence;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
@@ -26,6 +25,61 @@ class CenterEval extends AbstractEval
         'a3' => 0, 'b3' => 1, 'c3' => 2, 'd3' => 2, 'e3' => 2, 'f3' => 2, 'g3' => 1, 'h3' => 0,
         'a2' => 0, 'b2' => 1, 'c2' => 1, 'd2' => 1, 'e2' => 1, 'f2' => 1, 'g2' => 1, 'h2' => 0,
         'a1' => 0, 'b1' => 0, 'c1' => 0, 'd1' => 0, 'e1' => 0, 'f1' => 0, 'g1' => 0, 'h1' => 0,
+    ];
+
+    protected array $phrase = [
+        Color::W => [
+            [
+                'diff' => 4,
+                'meanings' => [
+                    "White has an absolute control of the center.",
+                ],
+            ],
+            [
+                'diff' => 3,
+                'meanings' => [
+                    "White has a remarkable control of the center.",
+                ],
+            ],
+            [
+                'diff' => 2,
+                'meanings' => [
+                    "White has a somewhat better control of the center.",
+                ],
+            ],
+            [
+                'diff' => 1,
+                'meanings' => [
+                    "White has a slightly better control of the center.",
+                ],
+            ],
+        ],
+        Color::B => [
+            [
+                'diff' => -4,
+                'meanings' => [
+                    "Black has an absolute control of the center.",
+                ],
+            ],
+            [
+                'diff' => -3,
+                'meanings' => [
+                    "Black has a remarkable control of the center.",
+                ],
+            ],
+            [
+                'diff' => -2,
+                'meanings' => [
+                    "Black has a somewhat better control of the center.",
+                ],
+            ],
+            [
+                'diff' => -1,
+                'meanings' => [
+                    "Black has a slightly better control of the center.",
+                ],
+            ],
+        ],
     ];
 
     public function __construct(Board $board)
@@ -54,7 +108,7 @@ class CenterEval extends AbstractEval
 
     private function explain(array $result): void
     {
-        if ($sentence = CenterEvalSentence::predictable($result)) {
+        if ($sentence = $this->predictable($result)) {
             $this->phrases[] = $sentence;
         }
     }
