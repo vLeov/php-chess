@@ -2,7 +2,6 @@
 
 namespace Chess\Eval;
 
-use Chess\Tutor\BishopPairEvalSentence;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -10,6 +9,25 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 class BishopPairEval extends AbstractEval implements TernaryEvalInterface
 {
     const NAME = 'Bishop pair';
+
+    protected array $phrase = [
+        Color::W => [
+            [
+                'diff' => 1,
+                'meanings' => [
+                    "White has the bishop pair.",
+                ],
+            ],
+        ],
+        Color::B => [
+            [
+                'diff' => -1,
+                'meanings' => [
+                    "Black has the bishop pair.",
+                ],
+            ],
+        ],
+    ];
 
     public function __construct(Board $board)
     {
@@ -37,7 +55,7 @@ class BishopPairEval extends AbstractEval implements TernaryEvalInterface
 
     private function explain(array $result): void
     {
-        if ($sentence = BishopPairEvalSentence::predictable($result)) {
+        if ($sentence = $this->predictable($result)) {
             $this->phrases[] = $sentence;
         }
     }
