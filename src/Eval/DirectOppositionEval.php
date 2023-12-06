@@ -6,7 +6,7 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class DirectOppositionEval extends AbstractEval
+class DirectOppositionEval extends AbstractEval implements TernaryEvalInterface
 {
     const NAME = 'Direct opposition';
 
