@@ -32,7 +32,7 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The white pieces are slightly better in terms of doubled pawns.",
+            "The pawn on b3 is doubled.",
         ];
 
         $position = [
@@ -66,7 +66,7 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The black pieces are slightly better in terms of doubled pawns.",
+            "The pawn on c6 is doubled.",
         ];
 
         $position = [
