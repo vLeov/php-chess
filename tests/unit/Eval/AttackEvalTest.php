@@ -63,7 +63,7 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 2.33,
         ];
@@ -83,7 +83,7 @@ class AttackEvalTest extends AbstractUnitTestCase
 
         $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedEval, $attackEval->getResult());
+        $this->assertSame($expectedResult, $attackEval->getResult());
         $this->assertSame($expectedPhrase, $attackEval->getPhrases());
     }
 
@@ -92,7 +92,7 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_a3_Nxe4_d3()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 2.2,
             'b' => 0,
         ];
@@ -112,7 +112,7 @@ class AttackEvalTest extends AbstractUnitTestCase
 
         $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedEval, $attackEval->getResult());
+        $this->assertSame($expectedResult, $attackEval->getResult());
         $this->assertSame($expectedPhrase, $attackEval->getPhrases());
     }
 
@@ -121,7 +121,7 @@ class AttackEvalTest extends AbstractUnitTestCase
      */
     public function e4_Nf6_e5()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 2.2,
             'b' => 0,
         ];
@@ -137,7 +137,7 @@ class AttackEvalTest extends AbstractUnitTestCase
 
         $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedEval, $attackEval->getResult());
+        $this->assertSame($expectedResult, $attackEval->getResult());
         $this->assertSame($expectedPhrase, $attackEval->getPhrases());
     }
 }

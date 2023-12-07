@@ -14,7 +14,7 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function A08()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 29.4,
             'b' => 33.0,
         ];
@@ -27,7 +27,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($A08))->validate()->getBoard();
         $centerEval = new CenterEval($board);
 
-        $this->assertSame($expectedEval, $centerEval->getResult());
+        $this->assertSame($expectedResult, $centerEval->getResult());
         $this->assertSame($expectedPhrase, $centerEval->getPhrases());
     }
 
@@ -36,7 +36,7 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function B25()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 37.73,
             'b' => 34.73,
         ];
@@ -49,7 +49,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($B25))->validate()->getBoard();
         $centerEval = new CenterEval($board);
 
-        $this->assertSame($expectedEval, $centerEval->getResult());
+        $this->assertSame($expectedResult, $centerEval->getResult());
         $this->assertSame($expectedPhrase, $centerEval->getPhrases());
     }
 
@@ -58,7 +58,7 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function B56()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 47.0,
             'b' => 36.8,
         ];
@@ -71,7 +71,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($B56))->validate()->getBoard();
         $centerEval = new CenterEval($board);
 
-        $this->assertSame($expectedEval, $centerEval->getResult());
+        $this->assertSame($expectedResult, $centerEval->getResult());
         $this->assertSame($expectedPhrase, $centerEval->getPhrases());
     }
 
@@ -80,7 +80,7 @@ class CenterEvalTest extends AbstractUnitTestCase
      */
     public function C60()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 37.73,
             'b' => 34.73,
         ];
@@ -93,7 +93,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($C60))->validate()->getBoard();
         $centerEval = new CenterEval($board);
 
-        $this->assertSame($expectedEval, $centerEval->getResult());
+        $this->assertSame($expectedResult, $centerEval->getResult());
         $this->assertSame($expectedPhrase, $centerEval->getPhrases());
     }
 }

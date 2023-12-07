@@ -31,7 +31,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
      */
     public function C68()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 1,
         ];
@@ -44,7 +44,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($C68))->validate()->getBoard();
         $bishopPairEval = new BishopPairEval($board);
 
-        $this->assertSame($expectedEval, $bishopPairEval->getResult());
+        $this->assertSame($expectedResult, $bishopPairEval->getResult());
         $this->assertSame($expectedPhrase, $bishopPairEval->getPhrases());
     }
 
@@ -69,7 +69,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
      */
     public function B_B_vs_n_b()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 1,
             'b' => 0,
         ];
@@ -81,7 +81,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/5n2/4k3/4b3/8/8/1KBB4/8 w - -'))->create();
         $bishopPairEval = new BishopPairEval($board);
 
-        $this->assertSame($expectedEval, $bishopPairEval->getResult());
+        $this->assertSame($expectedResult, $bishopPairEval->getResult());
         $this->assertSame($expectedPhrase, $bishopPairEval->getPhrases());
     }
 
@@ -90,7 +90,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
      */
     public function N_B_vs_b_b()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 1,
         ];
@@ -102,7 +102,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/3k4/2bb4/8/8/4BN2/4K3/8 w - -'))->create();
         $bishopPairEval = new BishopPairEval($board);
 
-        $this->assertSame($expectedEval, $bishopPairEval->getResult());
+        $this->assertSame($expectedResult, $bishopPairEval->getResult());
         $this->assertSame($expectedPhrase, $bishopPairEval->getPhrases());
     }
 

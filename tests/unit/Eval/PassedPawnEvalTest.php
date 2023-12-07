@@ -26,7 +26,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_13()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 4,
         ];
@@ -51,7 +51,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
 
         $passedPawnEval = new PassedPawnEval($board);
 
-        $this->assertSame($expectedEval, $passedPawnEval->getResult());
+        $this->assertSame($expectedResult, $passedPawnEval->getResult());
         $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
     }
 
@@ -60,7 +60,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_14()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 2,
             'b' => 0,
         ];
@@ -85,7 +85,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
 
         $passedPawnEval = new PassedPawnEval($board);
 
-        $this->assertSame($expectedEval, $passedPawnEval->getResult());
+        $this->assertSame($expectedResult, $passedPawnEval->getResult());
         $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
     }
 
@@ -94,7 +94,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_21()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 11,
         ];
@@ -120,7 +120,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
 
         $passedPawnEval = new PassedPawnEval($board);
 
-        $this->assertSame($expectedEval, $passedPawnEval->getResult());
+        $this->assertSame($expectedResult, $passedPawnEval->getResult());
         $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
     }
 }

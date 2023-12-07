@@ -30,7 +30,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
      */
     public function A59()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 35.73,
             'b' => 34.73,
         ];
@@ -43,7 +43,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($A59))->validate()->getBoard();
         $materialEval = new MaterialEval($board);
 
-        $this->assertEqualsCanonicalizing($expectedEval, $materialEval->getResult());
+        $this->assertEqualsCanonicalizing($expectedResult, $materialEval->getResult());
         $this->assertEqualsCanonicalizing($expectedPhrase, $materialEval->getPhrases());
     }
 
@@ -69,7 +69,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
      */
     public function C00()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 39.06,
             'b' => 40.06,
         ];
@@ -82,7 +82,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($C00))->validate()->getBoard();
         $materialEval = new MaterialEval($board);
 
-        $this->assertEqualsCanonicalizing($expectedEval, $materialEval->getResult());
+        $this->assertEqualsCanonicalizing($expectedResult, $materialEval->getResult());
         $this->assertEqualsCanonicalizing($expectedPhrase, $materialEval->getPhrases());
     }
 }

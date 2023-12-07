@@ -34,14 +34,14 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/1k6/5b1n/6P1/7K/8/8/8 w - -'))
             ->create();
 
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 0,
         ];
 
         $result = (new AbsoluteForkEval($board))->getResult();
 
-        $this->assertSame($expectedEval, $result);
+        $this->assertSame($expectedResult, $result);
     }
 
     /**
@@ -52,7 +52,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/8/5k1n/6P1/7K/8/8/8 w - -'))
             ->create();
 
-        $expectedEval = [
+        $expectedResult = [
             'w' => 3.2,
             'b' => 0,
         ];
@@ -63,7 +63,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
 
         $absForkEval = new AbsoluteForkEval($board);
 
-        $this->assertSame($expectedEval, $absForkEval->getResult());
+        $this->assertSame($expectedResult, $absForkEval->getResult());
         $this->assertSame($expectedPhrase, $absForkEval->getPhrases());
     }
 
@@ -75,7 +75,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/8/5k1r/6P1/7K/8/8/8 w - -'))
             ->create();
 
-        $expectedEval = [
+        $expectedResult = [
             'w' => 5.1,
             'b' => 0,
         ];
@@ -86,7 +86,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
 
         $absForkEval = new AbsoluteForkEval($board);
 
-        $this->assertSame($expectedEval, $absForkEval->getResult());
+        $this->assertSame($expectedResult, $absForkEval->getResult());
         $this->assertSame($expectedPhrase, $absForkEval->getPhrases());
     }
 
@@ -98,7 +98,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/8/5k1q/6P1/7K/8/8/8 w - -'))
             ->create();
 
-        $expectedEval = [
+        $expectedResult = [
             'w' => 8.8,
             'b' => 0,
         ];
@@ -109,7 +109,7 @@ class AbsoluteForkEvalTest extends AbstractUnitTestCase
 
         $absForkEval = new AbsoluteForkEval($board);
 
-        $this->assertSame($expectedEval, $absForkEval->getResult());
+        $this->assertSame($expectedResult, $absForkEval->getResult());
         $this->assertSame($expectedPhrase, $absForkEval->getPhrases());
     }
 

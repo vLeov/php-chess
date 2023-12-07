@@ -33,7 +33,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
      */
     public function B25()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => [
                 'a3', 'a4', 'b1', 'b3', 'b5', 'c4', 'd2', 'd5',
                 'e2', 'e3', 'f1', 'f3', 'f4', 'f5', 'g4', 'g5',
@@ -54,7 +54,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($B25))->validate()->getBoard();
         $spEval = new SpaceEval($board);
 
-        $this->assertEqualsCanonicalizing($expectedEval, $spEval->getResult());
+        $this->assertEqualsCanonicalizing($expectedResult, $spEval->getResult());
         $this->assertEqualsCanonicalizing($expectedPhrase, $spEval->getPhrases());
     }
 
@@ -63,7 +63,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
      */
     public function B56()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => [
                 'a3', 'a4', 'a6', 'b1', 'b3', 'b5', 'c4', 'd2',
                 'd3', 'd5', 'e2', 'e3', 'e6', 'f3', 'f4', 'f5',
@@ -84,7 +84,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($B56))->validate()->getBoard();
         $spEval = new SpaceEval($board);
 
-        $this->assertEqualsCanonicalizing($expectedEval, $spEval->getResult());
+        $this->assertEqualsCanonicalizing($expectedResult, $spEval->getResult());
         $this->assertEqualsCanonicalizing($expectedPhrase, $spEval->getPhrases());
     }
 }

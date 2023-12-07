@@ -30,7 +30,7 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
      */
     public function C60()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 19,
             'b' => 23,
         ];
@@ -43,7 +43,7 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
         $board = (new SanPlay($C60))->validate()->getBoard();
         $connectivityEval = new ConnectivityEval($board);
 
-        $this->assertSame($expectedEval, $connectivityEval->getResult());
+        $this->assertSame($expectedResult, $connectivityEval->getResult());
         $this->assertSame($expectedPhrase, $connectivityEval->getPhrases());
     }
 }

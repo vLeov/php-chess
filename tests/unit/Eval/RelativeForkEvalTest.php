@@ -32,7 +32,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
      */
     public function pawn_forks_bishop_and_knight()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 6.53,
             'b' => 0,
         ];
@@ -47,7 +47,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
 
         $relativeForkEval = new RelativeForkEval($board);
 
-        $this->assertSame($expectedEval, $relativeForkEval->getResult());
+        $this->assertSame($expectedResult, $relativeForkEval->getResult());
         $this->assertSame($expectedPhrase, $relativeForkEval->getPhrases());
     }
 
@@ -200,7 +200,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
      */
     public function knight_forks_rook_and_rook()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 10.2,
             'b' => 0,
         ];
@@ -215,7 +215,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
 
         $relativeForkEval = new RelativeForkEval($board);
 
-        $this->assertSame($expectedEval, $relativeForkEval->getResult());
+        $this->assertSame($expectedResult, $relativeForkEval->getResult());
         $this->assertSame($expectedPhrase, $relativeForkEval->getPhrases());
     }
 
@@ -260,7 +260,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
      */
     public function b17_caro_kann_defense_karpov_variation_modern_main_line()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 0,
         ];
@@ -270,7 +270,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
 
         $relativeForkEval = new RelativeForkEval($board);
 
-        $this->assertSame($expectedEval, $relativeForkEval->getResult());
+        $this->assertSame($expectedResult, $relativeForkEval->getResult());
     }
 
     /**

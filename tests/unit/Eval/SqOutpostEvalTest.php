@@ -93,7 +93,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
      */
     public function b4()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => ['b4'],
             'b' => [],
         ];
@@ -106,7 +106,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
 
         $sqOutpostEval = new SqOutpostEval($board);
 
-        $this->assertSame($expectedEval, $sqOutpostEval->getResult());
+        $this->assertSame($expectedResult, $sqOutpostEval->getResult());
         $this->assertSame($expectedPhrase, $sqOutpostEval->getPhrases());
     }
 
@@ -115,7 +115,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
      */
     public function d4_b4_b5()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => [
                 'b5',
             ],
@@ -134,7 +134,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
 
         $sqOutpostEval = new SqOutpostEval($board);
 
-        $this->assertSame($expectedEval, $sqOutpostEval->getResult());
+        $this->assertSame($expectedResult, $sqOutpostEval->getResult());
         $this->assertSame($expectedPhrase, $sqOutpostEval->getPhrases());
     }
 

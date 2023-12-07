@@ -26,7 +26,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_09()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 0,
             'b' => 2,
         ];
@@ -52,7 +52,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
 
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
-        $this->assertSame($expectedEval, $isolatedPawnEval->getResult());
+        $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
         $this->assertSame($expectedPhrase, $isolatedPawnEval->getPhrases());
     }
 
@@ -61,7 +61,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_13()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 1,
             'b' => 1,
         ];
@@ -87,7 +87,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
 
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
-        $this->assertSame($expectedEval, $isolatedPawnEval->getResult());
+        $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
         $this->assertSame($expectedPhrase, $isolatedPawnEval->getPhrases());
     }
 
@@ -96,7 +96,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_14()
     {
-        $expectedEval = [
+        $expectedResult = [
             'w' => 2,
             'b' => 1,
         ];
@@ -123,7 +123,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
 
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
-        $this->assertSame($expectedEval, $isolatedPawnEval->getResult());
+        $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
         $this->assertSame($expectedPhrase, $isolatedPawnEval->getPhrases());
     }
 }
