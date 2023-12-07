@@ -38,7 +38,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "the knight on f3 is pinned shielding a piece that is more valuable than the attacking piece.",
+            "The knight on f3 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
         $board = (new StrToBoard('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -'))
@@ -61,7 +61,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "the knight on e6 is pinned shielding a piece that is more valuable than the attacking piece.",
+            "The knight on e6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
         $board = (new StrToBoard('4q1k1/8/4n3/8/8/4R3/8/6K1 w - -'))
@@ -84,7 +84,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "the knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
+            "The knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
         $board = (new StrToBoard('4q1k1/8/2n5/8/B7/8/8/6K1 w - -'))
@@ -107,7 +107,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "the knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
+            "The knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
         $board = (new StrToBoard('4r1k1/8/2n5/8/B7/8/8/6K1 w - -'))
@@ -130,7 +130,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "the knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
+            "The knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
         $board = (new StrToBoard('4r1k1/8/2n5/8/B2R4/8/8/6K1 w - -'))
