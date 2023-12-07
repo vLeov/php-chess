@@ -46,12 +46,13 @@ class SqOutpostEval extends AbstractEval
                             $this->result[$piece->getColor()][] = $captureSquares[0];
                             $sqs[] = $captureSquares[0];
                         }
-                        if ($rFile >= 'a' && $rFile <= 'h' &&
-                            !$this->opposition($piece, $rFile)
-                        ) {
+                        if ($rFile >= 'a' && $rFile <= 'h' && !$this->opposition($piece, $rFile)) {
                             $this->result[$piece->getColor()][] = $captureSquares[0];
-                            empty($captureSquares[1]) ?: $this->result[$piece->getColor()][] = $captureSquares[1];
-                            $sqs = [...$sqs, ...$captureSquares];
+                            $sqs[] = $captureSquares[0];
+                            if (!empty($captureSquares[1])) {
+                                $this->result[$piece->getColor()][] = $captureSquares[1];
+                                $sqs[] = $captureSquares[1];
+                            }
                         }
                     }
                 }
