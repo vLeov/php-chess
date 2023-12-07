@@ -40,7 +40,7 @@ class FenParagraphTest extends AbstractUnitTestCase
             "White has a significant control of the center.",
             "The white pieces are somewhat better connected.",
             "The white player is pressuring a little bit more squares than its opponent.",
-            "The knight on e6 is pinned.",
+            "The knight on e6 is pinned so it can't be moved because the king would be put in check.",
             "White has the bishop pair.",
         ];
 
