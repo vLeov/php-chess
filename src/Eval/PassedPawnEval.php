@@ -76,6 +76,6 @@ class PassedPawnEval extends AbstractEval
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("{$phrase} is passed.");
+        $this->phrases[] = ucfirst("$phrase is passed.");
     }
 }

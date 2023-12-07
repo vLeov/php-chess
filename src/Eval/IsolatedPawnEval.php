@@ -62,6 +62,6 @@ class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("{$phrase} is isolated.");
+        $this->phrases[] = ucfirst("$phrase is isolated.");
     }
 }

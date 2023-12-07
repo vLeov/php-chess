@@ -35,6 +35,6 @@ class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("{$phrase} is doubled.");
+        $this->phrases[] = ucfirst("$phrase is doubled.");
     }
 }

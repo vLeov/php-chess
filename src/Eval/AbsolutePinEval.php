@@ -33,6 +33,6 @@ class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("{$phrase} is pinned so it can't be moved because the king would be put in check.");
+        $this->phrases[] = ucfirst("$phrase is pinned so it can't be moved because the king would be put in check.");
     }
 }

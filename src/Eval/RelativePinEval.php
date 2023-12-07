@@ -37,6 +37,6 @@ class RelativePinEval extends AbstractEval
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("{$phrase} is pinned shielding a piece that is more valuable than the attacking piece.");
+        $this->phrases[] = ucfirst("$phrase is pinned shielding a piece that is more valuable than the attacking piece.");
     }
 }
