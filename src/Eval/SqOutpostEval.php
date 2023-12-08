@@ -66,16 +66,17 @@ class SqOutpostEval extends AbstractEval
         $rank = substr($sq, 1);
         for ($i = 2; $i < 8; $i++) {
             if ($piece = $this->board->getPieceBySq($file.$i)) {
-                if ($piece->getId() === Piece::P) {
-                    if ($piece->getColor() === Color::opp($color)) {
-                        if ($color === Color::W) {
-                            if ($i > $rank) {
-                                return true;
-                            }
-                        } else {
-                            if ($i < $rank) {
-                                return true;
-                            }
+                if (
+                    $piece->getId() === Piece::P &&
+                    $piece->getColor() === Color::opp($color)
+                ) {
+                    if ($color === Color::W) {
+                        if ($i > $rank) {
+                            return true;
+                        }
+                    } else {
+                        if ($i < $rank) {
+                            return true;
                         }
                     }
                 }
