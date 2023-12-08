@@ -125,7 +125,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "d4, b4 and b5 are outpost squares.",
+            "b4, d4 and b5 are outpost squares.",
         ];
 
         $board = FenToBoard::create('5k2/7K/8/2p5/P7/8/8/8 w - -');
@@ -141,7 +141,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         return [
             [
                 [
-                    'w' => [],
+                    'w' => ['b3'],
                     'b' => [],
                 ],
                 '5k2/7K/8/8/8/8/P7/8 w - -',
@@ -211,7 +211,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             [
                 [
                     'w' => [],
-                    'b' => [],
+                    'b' => ['d6'],
                 ],
                 '5k2/2p4K/8/P7/8/8/8/8 w - -',
             ],
@@ -272,7 +272,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             [
                 [
                     'w' => [],
-                    'b' => [],
+                    'b' => ['g6'],
                 ],
                 '8/7p/8/8/8/8/K7/2k5 w - -',
             ],
@@ -340,7 +340,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             ],
             [
                 [
-                    'w' => [],
+                    'w' => ['e3'],
                     'b' => [],
                 ],
                 '8/8/8/8/7p/8/K4P2/2k5 w - -',
@@ -411,5 +411,31 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         $result = (new SqOutpostEval($board))->getResult();
 
         $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function c99_ruy_lopez()
+    {
+        $expectedResult = [
+            'w' => [
+                'd5',
+            ],
+            'b' => [
+                'd4',
+            ],
+        ];
+
+        $expectedPhrase = [
+            "d4 and d5 are outpost squares.",
+        ];
+
+        $fen = 'r1b2rk1/2q1bppp/p2p1n2/np2p3/3PP3/5N1P/PPBN1PP1/R1BQR1K1 b - - 0 13';
+        $board = (new StrToBoard($fen))->create();
+        $sqOutpostEval = new SqOutpostEval($board);
+
+        $this->assertSame($expectedResult, $sqOutpostEval->getResult());
+        $this->assertSame($expectedPhrase, $sqOutpostEval->getPhrases());
     }
 }
