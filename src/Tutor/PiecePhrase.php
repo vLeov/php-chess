@@ -21,106 +21,62 @@ class PiecePhrase
         [
             'id' => "B",
             'color' => "w",
-            'meanings' => [
-                "the bishop",
-                "White's bishop",
-                "white bishop",
-            ],
+            'meaning' => "the bishop",
         ],
         [
             'id' => "B",
             'color' => "b",
-            'meanings' => [
-                "the bishop",
-                "Black's bishop",
-                "black bishop",
-            ],
+            'meaning' => "the bishop",
         ],
         [
             'id' => "K",
             'color' => "w",
-            'meanings' => [
-                "White's king",
-                "white king",
-            ],
+            'meaning' => "White's king",
         ],
         [
             'id' => "K",
             'color' => "b",
-            'meanings' => [
-                "Black's king",
-                "black king",
-            ],
+            'meaning' => "Black's king",
         ],
         [
             'id' => "N",
             'color' => "w",
-            'meanings' => [
-                "the knight",
-                "White's knight",
-                "white knight",
-            ],
+            'meaning' => "the knight",
         ],
         [
             'id' => "N",
             'color' => "b",
-            'meanings' => [
-                "the knight",
-                "Black's knight",
-                "black knight",
-            ],
+            'meaning' => "the knight",
         ],
         [
             'id' => "P",
             'color' => "w",
-            'meanings' => [
-                "the pawn",
-                "White's pawn",
-                "white pawn",
-            ],
+            'meaning' => "the pawn",
         ],
         [
             'id' => "P",
             'color' => "b",
-            'meanings' => [
-                "the pawn",
-                "Black's pawn",
-                "black pawn",
-            ],
+            'meaning' => "the pawn",
         ],
         [
             'id' => "Q",
             'color' => "w",
-            'meanings' => [
-                "White's queen",
-                "white queen",
-            ],
+            'meaning' => "White's queen",
         ],
         [
             'id' => "Q",
             'color' => "b",
-            'meanings' => [
-                "Black's queen",
-                "black queen",
-            ],
+            'meaning' => "Black's queen",
         ],
         [
             'id' => "R",
             'color' => "w",
-            'meanings' => [
-                "the rook",
-                "White's rook",
-                "white rook",
-            ],
+            'meaning' => "the rook",
         ],
         [
             'id' => "R",
             'color' => "b",
-            'meanings' => [
-                "the rook",
-                "Black's rook",
-                "black rook",
-            ],
+            'meaning' => "the rook",
         ],
     ];
 
@@ -131,7 +87,7 @@ class PiecePhrase
                 $item['id'] === $piece->getId() &&
                 $item['color'] === $piece->getColor()
             ) {
-                return "{$item['meanings'][0]} on {$piece->getSq()}";
+                return "{$item['meaning']} on {$piece->getSq()}";
             }
         }
 

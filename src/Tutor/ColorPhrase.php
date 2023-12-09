@@ -19,15 +19,11 @@ class ColorPhrase
     public static $phrase = [
         [
             'color' => "w",
-            'meanings' => [
-                "White",
-            ],
+            'meaning' => "White",
         ],
         [
             'color' => "b",
-            'meanings' => [
-                "Black",
-            ],
+            'meaning' => "Black",
         ],
     ];
 
@@ -35,7 +31,7 @@ class ColorPhrase
     {
         foreach (self::$phrase as $item) {
             if ($item['color'] === $color) {
-                return $item['meanings'][0];
+                return $item['meaning'];
             }
         }
 
