@@ -11,7 +11,7 @@ use Chess\Eval\KingSafetyEval;
 use Chess\Eval\MaterialEval;
 use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
-use Chess\Eval\TacticsEval;
+use Chess\Eval\ProtectionEval;
 use Chess\Eval\DoubledPawnEval;
 use Chess\Eval\PassedPawnEval;
 use Chess\Eval\InverseEvalInterface;
@@ -48,7 +48,7 @@ class StandardFunction
         SpaceEval::class => 4,
         PressureEval::class => 4,
         KingSafetyEval::class => 4,
-        TacticsEval::class => 4,
+        ProtectionEval::class => 4,
         AttackEval::class => 4,
         DoubledPawnEval::class => 4,
         PassedPawnEval::class => 4,

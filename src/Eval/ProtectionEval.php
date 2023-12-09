@@ -10,16 +10,16 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
 /**
- * Tactics evaluation.
+ * Protection evaluation.
  *
  * Total piece value obtained from the squares that are not being defended.
  *
  * @author Jordi Bassagaña
  * @license GPL
  */
-class TacticsEval extends AbstractEval
+class ProtectionEval extends AbstractEval
 {
-    const NAME = 'Tactics';
+    const NAME = 'Protection';
 
     /**
      * Defense evaluation containing the defended squares.

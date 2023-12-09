@@ -2,12 +2,12 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Eval\TacticsEval;
+use Chess\Eval\ProtectionEval;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
-class TacticsEvalTest extends AbstractUnitTestCase
+class ProtectionEvalTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,7 +19,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $result = (new TacticsEval(new Board()))->getResult();
+        $result = (new ProtectionEval(new Board()))->getResult();
 
         $this->assertSame($expected, $result);
     }
@@ -42,7 +42,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
         $board->play('w', 'e4');
         $board->play('b', 'd5');
 
-        $tacticsEval = new TacticsEval($board);
+        $tacticsEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $tacticsEval->getResult());
         $this->assertSame($expectedPhrase, $tacticsEval->getPhrases());
@@ -62,7 +62,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($B56))->validate()->getBoard();
 
-        $result = (new TacticsEval($board))->getResult();
+        $result = (new ProtectionEval($board))->getResult();
 
         $this->assertSame($expected, $result);
     }
@@ -81,7 +81,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($B25))->validate()->getBoard();
 
-        $result = (new TacticsEval($board))->getResult();
+        $result = (new ProtectionEval($board))->getResult();
 
         $this->assertSame($expected, $result);
     }
@@ -110,7 +110,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
         $board->play('b', 'a6');
         $board->play('w', 'Nxe5');
 
-        $tacticsEval = new TacticsEval($board);
+        $tacticsEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $tacticsEval->getResult());
         $this->assertSame($expectedPhrase, $tacticsEval->getPhrases());
@@ -140,7 +140,7 @@ class TacticsEvalTest extends AbstractUnitTestCase
         $board->play('b', 'Nxe4');
         $board->play('w', 'd3');
 
-        $tacticsEval = new TacticsEval($board);
+        $tacticsEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $tacticsEval->getResult());
         $this->assertSame($expectedPhrase, $tacticsEval->getPhrases());
