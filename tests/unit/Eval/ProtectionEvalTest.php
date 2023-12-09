@@ -59,9 +59,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-
         $board = (new SanPlay($B56))->validate()->getBoard();
-
         $result = (new ProtectionEval($board))->getResult();
 
         $this->assertSame($expected, $result);
@@ -78,9 +76,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-
         $board = (new SanPlay($B25))->validate()->getBoard();
-
         $result = (new ProtectionEval($board))->getResult();
 
         $this->assertSame($expected, $result);
@@ -140,6 +136,28 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         $board->play('b', 'Nxe4');
         $board->play('w', 'd3');
 
+        $tacticsEval = new ProtectionEval($board);
+
+        $this->assertSame($expectedResult, $tacticsEval->getResult());
+        $this->assertSame($expectedPhrase, $tacticsEval->getPhrases());
+    }
+
+    /**
+     * @test
+     */
+    public function D07()
+    {
+        $expectedResult = [
+            'w' => 4,
+            'b' => 0,
+        ];
+
+        $expectedPhrase = [
+            "The pawn on d4 is unprotected.",
+        ];
+
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/D07.pgn');
+        $board = (new SanPlay($B56))->validate()->getBoard();
         $tacticsEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $tacticsEval->getResult());
