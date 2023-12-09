@@ -29,18 +29,23 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function e4_d5()
     {
-        $expected = [
+        $expectedResult = [
             'w' => 0,
             'b' => 1,
+        ];
+
+        $expectedPhrase = [
+            "The pawn on e4 is unprotected.",
         ];
 
         $board = new Board();
         $board->play('w', 'e4');
         $board->play('b', 'd5');
 
-        $tacticsEval = (new TacticsEval($board))->getResult();
+        $tacticsEval = new TacticsEval($board);
 
-        $this->assertSame($expected, $tacticsEval);
+        $this->assertSame($expectedResult, $tacticsEval->getResult());
+        $this->assertSame($expectedPhrase, $tacticsEval->getPhrases());
     }
 
     /**
@@ -86,9 +91,14 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
     {
-        $expected = [
+        $expectedResult = [
             'w' => 0,
             'b' => 6.53,
+        ];
+
+        $expectedPhrase = [
+            "The knight on e5 is unprotected.",
+            "The bishop on b5 is unprotected.",
         ];
 
         $board = new Board();
@@ -100,9 +110,10 @@ class TacticsEvalTest extends AbstractUnitTestCase
         $board->play('b', 'a6');
         $board->play('w', 'Nxe5');
 
-        $tacticsEval = (new TacticsEval($board))->getResult();
+        $tacticsEval = new TacticsEval($board);
 
-        $this->assertSame($expected, $tacticsEval);
+        $this->assertSame($expectedResult, $tacticsEval->getResult());
+        $this->assertSame($expectedPhrase, $tacticsEval->getPhrases());
     }
 
     /**
@@ -110,9 +121,14 @@ class TacticsEvalTest extends AbstractUnitTestCase
      */
     public function e4_e5_Nf3_Nf6_a3_Nxe4_d3()
     {
-        $expected = [
+        $expectedResult = [
             'w' => 4.2,
             'b' => 0,
+        ];
+
+        $expectedPhrase = [
+            "The pawn on e5 is unprotected.",
+            "The knight on e4 is unprotected.",
         ];
 
         $board = new Board();
@@ -124,8 +140,9 @@ class TacticsEvalTest extends AbstractUnitTestCase
         $board->play('b', 'Nxe4');
         $board->play('w', 'd3');
 
-        $tacticsEval = (new TacticsEval($board))->getResult();
+        $tacticsEval = new TacticsEval($board);
 
-        $this->assertSame($expected, $tacticsEval);
+        $this->assertSame($expectedResult, $tacticsEval->getResult());
+        $this->assertSame($expectedPhrase, $tacticsEval->getPhrases());
     }
 }

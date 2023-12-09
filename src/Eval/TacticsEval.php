@@ -4,6 +4,8 @@ namespace Chess\Eval;
 
 use Chess\Eval\DefenseEval;
 use Chess\Eval\PressureEval;
+use Chess\Piece\AbstractPiece;
+use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
@@ -47,14 +49,24 @@ class TacticsEval extends AbstractEval
             $countPress = array_count_values($sqs);
             $countDefense = array_count_values($this->defenseEval[Color::opp($color)]);
             foreach ($sqs as $sq) {
+                $piece = $this->board->getPieceBySq($sq);
                 if (in_array($sq, $this->defenseEval[Color::opp($color)])) {
                     if ($countPress[$sq] > $countDefense[$sq]) {
-                        $this->result[$color] += self::$value[$this->board->getPieceBySq($sq)->getId()];
+                        $this->result[$color] += self::$value[$piece->getId()];
+                        $this->explain($piece);
                     }
                 } else {
-                    $this->result[$color] += self::$value[$this->board->getPieceBySq($sq)->getId()];
+                    $this->result[$color] += self::$value[$piece->getId()];
+                    $this->explain($piece);
                 }
             }
         }
+    }
+
+    private function explain(AbstractPiece $piece): void
+    {
+        $phrase = PiecePhrase::create($piece);
+
+        $this->phrases[] = ucfirst("$phrase is unprotected.");
     }
 }
