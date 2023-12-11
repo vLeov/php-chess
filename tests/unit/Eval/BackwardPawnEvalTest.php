@@ -2,8 +2,10 @@
 
 namespace Chess\Tests\Unit\Eval;
 
+use Chess\FenToBoard;
 use Chess\Eval\BackwardPawnEval;
 use Chess\Piece\AsciiArray;
+use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
@@ -26,9 +28,13 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_16()
     {
-        $expected = [
-            'w' => 2,
-            'b' => 1,
+        $expectedResult = [
+            'w' => ['e4', 'b3'],
+            'b' => [],
+        ];
+
+        $expectedPhrase = [
+            "The pawns on e4 and b3 are backward.",
         ];
 
         $position = [
@@ -45,9 +51,10 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
             ->toClassicalBoard('\Chess\Variant\Classical\Board', 'w');
 
-        $result = (new BackwardPawnEval($board))->getResult();
+        $backwardPawnEval = new BackwardPawnEval($board);
 
-        $this->assertSame($expected, $result);
+        $this->assertSame($expectedResult, $backwardPawnEval->getResult());
+        $this->assertSame($expectedPhrase, $backwardPawnEval->getPhrases());
     }
 
     /**
@@ -55,9 +62,13 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
      */
     public function kaufman_16_recognizes_defended_pawns(): void
     {
-        $expected = [
-            'w' => 0,
-            'b' => 1,
+        $expectedResult = [
+            'w' => ['d4', 'e4'],
+            'b' => [],
+        ];
+
+        $expectedPhrase = [
+            "The pawns on d4 and e4 are backward.",
         ];
 
         $position = [
@@ -74,8 +85,9 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         $board = (new AsciiArray($position, self::$size, self::$castlingRule))
             ->toClassicalBoard('\Chess\Variant\Classical\Board', 'w');
 
-        $result = (new BackwardPawnEval($board))->getResult();
+        $backwardPawnEval = new BackwardPawnEval($board);
 
-        $this->assertSame($expected, $result);
+        $this->assertSame($expectedResult, $backwardPawnEval->getResult());
+        $this->assertSame($expectedPhrase, $backwardPawnEval->getPhrases());
     }
 }

@@ -2,75 +2,102 @@
 
 namespace Chess\Eval;
 
+use Chess\Eval\IsolatedPawnEval;
+use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * Backward P
- *
- * @author Boas Falke
- * @license GPL
- */
 class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
 {
     const NAME = 'Backward pawn';
+
+    private array $isolatedPawnEval;
 
     public function __construct(Board $board)
     {
         $this->board = $board;
 
-        $captureSquares = [];
-        $nextMoves = [];
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
+        ];
+
+        $this->isolatedPawnEval = (new IsolatedPawnEval($board))->getResult();
 
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::P) {
-                $captureSquares[] = [
-                    'color' => $piece->getColor(),
-                    'captureSquares' => $piece->getCaptureSqs(),
-                ];
-
-                // Only check for movable pawns and their next possible square
-                if (0 === count($piece->sqs()) || !str_contains($piece->sqs()[0], $piece->getSqFile())) {
-                    continue;
-                }
-                $nextMoves[] = [
-                    'color' => $piece->getColor(),
-                    'nextSquare' => $piece->sqs()[0],
-                    'nextSquareDefendedByPawn' => false,
-                ];
-            }
-        }
-
-        if (0 === count($nextMoves) || 0 === count($captureSquares)) {
-            return $this->result;
-        }
-
-        $nextMoves = array_map(static function ($nextMove) use ($captureSquares) {
-            foreach ($captureSquares as $captureSquare) {
+                $left = chr(ord($piece->getSq()) - 1);
+                $right = chr(ord($piece->getSq()) + 1);
                 if (
-                    $nextMove['color'] === $captureSquare['color'] &&
-                    in_array($nextMove['nextSquare'], $captureSquare['captureSquares'], true)
-                )
-                {
-                    $nextMove['nextSquareDefendedByPawn'] = true;
-                    return $nextMove;
-                }
-            }
-            return $nextMove;
-        }, $nextMoves);
-
-        foreach ($nextMoves as $nextMove) {
-            foreach ($captureSquares as $captureSquare) {
-                if ($nextMove['nextSquareDefendedByPawn']) {
-                    continue;
-                }
-                if (
-                    $nextMove['color'] !== $captureSquare['color'] &&
-                        in_array($nextMove['nextSquare'], $captureSquare['captureSquares'], true)
+                    !$this->isDefensible($piece, $left) &&
+                    !$this->isDefensible($piece, $right) &&
+                    !in_array($piece->getSq(), [
+                        ...$this->isolatedPawnEval[Color::W],
+                        ...$this->isolatedPawnEval[Color::B]
+                    ])
                 ) {
-                    ++$this->result[$nextMove['color']];
+                    $this->result[$piece->getColor()][] = $piece->getSq();
                 }
             }
+        }
+
+        $this->explain($this->result);
+    }
+
+    private function isDefensible(AbstractPiece $pawn, string $file): bool
+    {
+        if ($pawn->getSqRank() == 2 || $pawn->getSqRank() == $this->board->getSize()['ranks'] - 1) {
+            return true;
+        }
+
+        $rank = (int) $pawn->getSqRank();
+
+        if ($pawn->getColor() === Color::W) {
+            for ($i = $rank - 1; $i >= 2; $i--) {
+                if ($piece = $this->board->getPieceBySq($file.$i)) {
+                    if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            for ($i = $rank + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
+                if ($piece = $this->board->getPieceBySq($file.$i)) {
+                    if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()
+                    ) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function explain(array $result): void
+    {
+        $sqs = [...$result[Color::W], ...$result[Color::B]];
+
+        if (count($sqs) > 1) {
+            $str = 'The pawns on ';
+            $keys = array_keys($sqs);
+            $lastKey = end($keys);
+            foreach ($sqs as $key => $val) {
+                if ($key === $lastKey) {
+                    $str = substr($str, 0, -2);
+                    $str .= " and $val are backward.";
+                } else {
+                    $str .= "$val, ";
+                }
+            }
+            $this->phrases = [
+                $str,
+            ];
+        } elseif (count($sqs) === 1) {
+            $this->phrases = [
+                "The pawn on $sqs[0] is backward.",
+            ];
         }
     }
 }
