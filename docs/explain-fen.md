@@ -2,7 +2,7 @@
 
 ✨ Beginners often approach chess by trying to deliver checkmate quickly. However, there are so many different things to look at in order to understand a chess position.
 
-[Chess\Tutor\FenParagraph](https://github.com/chesslablab/php-chess/blob/master/src/Tutor/FenParagraph.php) helps you improve your chess thinking process by explaining a chess position like a chess tutor would do.
+[Chess\Tutor\FenParagraph](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Tutor/FenParagraphTest.php) helps you improve your chess thinking process by explaining a chess position like a chess tutor would do.
 
 ```php
 use Chess\Tutor\FenParagraph;
