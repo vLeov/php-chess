@@ -3,10 +3,10 @@
 namespace Chess\Tests\Unit\Tutor;
 
 use Chess\Play\SanPlay;
-use Chess\Tutor\PgnParagraph;
+use Chess\Tutor\PgnExplanation;
 use Chess\Tests\AbstractUnitTestCase;
 
-class PgnParagraphTest extends AbstractUnitTestCase
+class PgnExplanationTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -21,7 +21,7 @@ class PgnParagraphTest extends AbstractUnitTestCase
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
         $board = (new SanPlay($A08))->validate()->getBoard();
 
-        $paragraph = (new PgnParagraph('d4', $board->toFen()))
+        $paragraph = (new PgnExplanation('d4', $board->toFen()))
             ->getParagraph();
 
         $this->assertSame($expected, $paragraph);
@@ -41,7 +41,7 @@ class PgnParagraphTest extends AbstractUnitTestCase
             "The bishop on e6 is unprotected.",
         ];
 
-        $paragraph = (new PgnParagraph('Bxe6+', '8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
+        $paragraph = (new PgnExplanation('Bxe6+', '8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
             ->getParagraph();
 
         $this->assertSame($expected, $paragraph);

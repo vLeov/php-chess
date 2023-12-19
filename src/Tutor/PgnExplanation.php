@@ -3,28 +3,26 @@
 namespace Chess\Tutor;
 
 /**
- * PgnParagraph
- *
- * Human-like paragraph.
+ * PgnExplanation
  *
  * @author Jordi Bassagaña
  * @license GPL
  */
-class PgnParagraph
+class PgnExplanation
 {
     /**
-     * FEN paragraph.
+     * FEN explanation.
      *
-     * @var \Chess\Tutor\FenParagraph
+     * @var \Chess\Tutor\FenExplanation
      */
-    protected FenParagraph $FenParagraph;
+    private FenExplanation $FenExplanation;
 
     /**
-     * The paragraph.
+     * Paragraph.
      *
      * @var array
      */
-    protected array $paragraph = [];
+    private array $paragraph = [];
 
     /**
      * Constructor.
@@ -35,7 +33,7 @@ class PgnParagraph
      */
     public function __construct(string $pgn, string $fen, string $variant = '')
     {
-        $this->fenParagraph = new FenParagraph($fen, $variant);
+        $this->fenParagraph = new FenExplanation($fen, $variant);
 
         $this->explain($pgn, $variant);
     }
@@ -53,13 +51,13 @@ class PgnParagraph
     /**
      * Calculates the paragraph.
      *
-     * @return \Chess\Tutor\PgnParagraph
+     * @return \Chess\Tutor\PgnExplanation
      */
-    protected function explain(string $pgn, string $variant): PgnParagraph
+    private function explain(string $pgn, string $variant): PgnExplanation
     {
         $board = $this->fenParagraph->getBoard();
         $board->play($board->getTurn(), $pgn);
-        $fenParagraph = new FenParagraph($board->toFen(), $variant);
+        $fenParagraph = new FenExplanation($board->toFen(), $variant);
         foreach ($fenParagraph->getParagraph() as $key => $val) {
             if (!in_array($val, $this->fenParagraph->getParagraph())) {
                 $this->paragraph[] = $val;

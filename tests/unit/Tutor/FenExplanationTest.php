@@ -3,10 +3,10 @@
 namespace Chess\Tests\Unit\Tutor;
 
 use Chess\Play\SanPlay;
-use Chess\Tutor\FenParagraph;
+use Chess\Tutor\FenExplanation;
 use Chess\Tests\AbstractUnitTestCase;
 
-class FenParagraphTest extends AbstractUnitTestCase
+class FenExplanationTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -22,7 +22,7 @@ class FenParagraphTest extends AbstractUnitTestCase
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
         $board = (new SanPlay($A08))->validate()->getBoard();
 
-        $paragraph = (new FenParagraph($board->toFen()))->getParagraph();
+        $paragraph = (new FenExplanation($board->toFen()))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
@@ -41,7 +41,7 @@ class FenParagraphTest extends AbstractUnitTestCase
             "White has the bishop pair.",
         ];
 
-        $paragraph = (new FenParagraph('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
+        $paragraph = (new FenExplanation('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
             ->getParagraph();
 
         $this->assertSame($expected, $paragraph);

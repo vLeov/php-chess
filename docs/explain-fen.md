@@ -2,14 +2,14 @@
 
 ✨ Beginners often approach chess by trying to deliver checkmate quickly. However, there are so many different things to look at in order to understand a chess position.
 
-[Chess\Tutor\FenParagraph](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Tutor/FenParagraphTest.php) helps you improve your chess thinking process by explaining a FEN position in terms of [chess concepts](https://php-chess.readthedocs.io/en/latest/heuristics/) like a tutor would do.
+[Chess\Tutor\FenExplanation](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Tutor/FenExplanationTest.php) helps you improve your chess thinking process by explaining a FEN position in terms of [chess concepts](https://php-chess.readthedocs.io/en/latest/heuristics/) like a tutor would do.
 
 ```php
-use Chess\Tutor\FenParagraph;
+use Chess\Tutor\FenExplanation;
 
 $fen = '8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1';
 
-$paragraph = (new FenParagraph($fen))->getParagraph();
+$paragraph = (new FenExplanation($fen))->getParagraph();
 
 $text = implode(' ', $paragraph);
 

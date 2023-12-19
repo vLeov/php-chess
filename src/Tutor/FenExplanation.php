@@ -11,35 +11,33 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 /**
- * FenParagraph
- *
- * Human-like paragraph.
+ * FenExplanation
  *
  * @author Jordi Bassagaña
  * @license GPL
  */
-class FenParagraph
+class FenExplanation
 {
     /**
      * Chess board.
      *
      * @var \Chess\Variant\Classical\Board
      */
-    protected ClassicalBoard $board;
+    private ClassicalBoard $board;
 
     /**
-     * The evaluation function.
+     * Evaluation function.
      *
      * @var \Chess\Function\StandardFunction
      */
-    protected StandardFunction $function;
+    private StandardFunction $function;
 
     /**
-     * The paragraph.
+     * Paragraph.
      *
      * @var array
      */
-    protected array $paragraph = [];
+    private array $paragraph = [];
 
     /**
      * Constructor.
@@ -87,9 +85,9 @@ class FenParagraph
     /**
      * Calculates the paragraph.
      *
-     * @return \Chess\Tutor\FenParagraph
+     * @return \Chess\Tutor\FenExplanation
      */
-    protected function explain(): FenParagraph
+    private function explain(): FenExplanation
     {
         foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
