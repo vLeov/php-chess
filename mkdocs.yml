@@ -10,6 +10,7 @@ pages:
   - Convert Board to PNG Image: convert-board-to-png-image.md
   - Convert Board to MP4: convert-board-to-mp4.md
   - Explain FEN: explain-fen.md
+  - Explain PGN: explain-pgn.md
   - Play Like a Pro: play-like-a-pro.md
   - Play Computer: play-computer.md
   - Heuristics: heuristics.md
