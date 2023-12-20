@@ -21,6 +21,11 @@ class BadBishopEval extends AbstractEval implements InverseEvalInterface
 {
     const NAME = 'Bad bishop';
 
+    /**
+     * Phrase.
+     *
+     * @var array
+     */
     protected array $phrase = [
         Color::W => [
             [
@@ -93,6 +98,11 @@ class BadBishopEval extends AbstractEval implements InverseEvalInterface
         return $count;
     }
 
+    /**
+     * Explain the result.
+     *
+     * @param array $result
+     */
     private function explain(array $result): void
     {
         if ($sentence = $this->sentence($result)) {
