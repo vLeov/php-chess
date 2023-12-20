@@ -15,7 +15,7 @@ class PgnExplanation
      *
      * @var \Chess\Tutor\FenExplanation
      */
-    private FenExplanation $FenExplanation;
+    private FenExplanation $fenExplanation;
 
     /**
      * Paragraph.
@@ -33,7 +33,7 @@ class PgnExplanation
      */
     public function __construct(string $pgn, string $fen, string $variant = '')
     {
-        $this->fenParagraph = new FenExplanation($fen, $variant);
+        $this->fenExplanation = new FenExplanation($fen, $variant);
 
         $this->explain($pgn, $variant);
     }
@@ -55,11 +55,11 @@ class PgnExplanation
      */
     private function explain(string $pgn, string $variant): PgnExplanation
     {
-        $board = $this->fenParagraph->getBoard();
+        $board = $this->fenExplanation->getBoard();
         $board->play($board->getTurn(), $pgn);
         $fenParagraph = new FenExplanation($board->toFen(), $variant);
         foreach ($fenParagraph->getParagraph() as $key => $val) {
-            if (!in_array($val, $this->fenParagraph->getParagraph())) {
+            if (!in_array($val, $this->fenExplanation->getParagraph())) {
                 $this->paragraph[] = $val;
             }
         }
