@@ -15,7 +15,7 @@ use Chess\Variant\Classical\Board;
  */
 class SqOutpostEval extends AbstractEval
 {
-    const NAME = 'Square outpost';
+    const NAME = 'Outpost square';
 
     public function __construct(Board $board)
     {
@@ -86,27 +86,9 @@ class SqOutpostEval extends AbstractEval
 
     private function explain(array $result): void
     {
-        $sqs = [...$result[Color::W], ...$result[Color::B]];
+        $singular = mb_strtolower('an ' . self::NAME);
+        $plural = mb_strtolower(self::NAME.'s');
 
-        if (count($sqs) > 1) {
-            $str = '';
-            $keys = array_keys($sqs);
-            $lastKey = end($keys);
-            foreach ($sqs as $key => $val) {
-                if ($key === $lastKey) {
-                    $str = substr($str, 0, -2);
-                    $str .= " and $val are outpost squares.";
-                } else {
-                    $str .= "$val, ";
-                }
-            }
-            $this->phrases = [
-                $str,
-            ];
-        } elseif (count($sqs) === 1) {
-            $this->phrases = [
-                "$sqs[0] is an outpost square.",
-            ];
-        }
+        $this->shorten($result, $singular, $plural);
     }
 }

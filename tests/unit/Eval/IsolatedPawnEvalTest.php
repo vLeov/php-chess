@@ -32,7 +32,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The pawns on a7 and d5 are isolated.",
+            "a7 and d5 are isolated pawns.",
         ];
 
         $position = [
@@ -66,7 +66,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The pawns on h2 and d5 are isolated.",
+            "h2 and d5 are isolated pawns.",
         ];
 
         $position = [
@@ -100,7 +100,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The pawns on a2, c2 and a7 are isolated.",
+            "a2, c2 and a7 are isolated pawns.",
         ];
 
         $position = [

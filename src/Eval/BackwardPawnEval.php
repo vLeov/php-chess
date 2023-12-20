@@ -77,27 +77,9 @@ class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
 
     private function explain(array $result): void
     {
-        $sqs = [...$result[Color::W], ...$result[Color::B]];
+        $singular = mb_strtolower('a ' . self::NAME);
+        $plural = mb_strtolower(self::NAME.'s');
 
-        if (count($sqs) > 1) {
-            $str = 'The pawns on ';
-            $keys = array_keys($sqs);
-            $lastKey = end($keys);
-            foreach ($sqs as $key => $val) {
-                if ($key === $lastKey) {
-                    $str = substr($str, 0, -2);
-                    $str .= " and $val are backward.";
-                } else {
-                    $str .= "$val, ";
-                }
-            }
-            $this->phrases = [
-                $str,
-            ];
-        } elseif (count($sqs) === 1) {
-            $this->phrases = [
-                "The pawn on $sqs[0] is backward.",
-            ];
-        }
+        $this->shorten($result, $singular, $plural);
     }
 }

@@ -29,7 +29,7 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Relative pin',
             'Absolute fork',
             'Relative fork',
-            'Square outpost',
+            'Outpost square',
             'Knight outpost',
             'Bishop outpost',
             'Bishop pair',
