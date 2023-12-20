@@ -28,22 +28,22 @@ class PassedPawnEval extends AbstractEval
     private function getThreatPassedPawn(P $pawn): int
     {
         $pawnFile = $pawn->getSqFile();
-        $prevFile = chr(ord($pawnFile) - 1);
-        $nextFile = chr(ord($pawnFile) + 1);
+        $leftFile = chr(ord($pawnFile) - 1);
+        $rightFile = chr(ord($pawnFile) + 1);
 
         $sqs = [];
-        foreach ([ $prevFile, $pawnFile, $nextFile ] as $file) {
+        foreach ([ $leftFile, $pawnFile, $rightFile ] as $file) {
             if ($file < 'a' || $file > 'h') {
                 continue;
             }
             if ($pawn->getColor() === Color::W) {
-                $listRanks = range($pawn->getRanks()->next, $pawn->getRanks()->end - 1);
+                $ranks = range($pawn->getRanks()->next, $pawn->getRanks()->end - 1);
             } else {
-                $listRanks = range($pawn->getRanks()->next, $pawn->getRanks()->end + 1);
+                $ranks = range($pawn->getRanks()->next, $pawn->getRanks()->end + 1);
             }
             $sqsFile = array_map(function($rank) use ($file) {
                 return $file . $rank;
-            }, $listRanks);
+            }, $ranks);
             $sqs = [...$sqs, ...$sqsFile];
         }
 
