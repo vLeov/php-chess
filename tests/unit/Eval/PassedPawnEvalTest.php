@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\Eval;
 
+use Chess\FenToBoard;
 use Chess\Eval\PassedPawnEval;
 use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
@@ -27,12 +28,12 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
     public function kaufman_13()
     {
         $expectedResult = [
-            'w' => 0,
-            'b' => 4,
+            'w' => [],
+            'b' => ['d5'],
         ];
 
         $expectedPhrase = [
-            "The pawn on d5 is passed.",
+            "d5 is a passed pawn.",
         ];
 
         $position = [
@@ -61,12 +62,12 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
     public function kaufman_14()
     {
         $expectedResult = [
-            'w' => 2,
-            'b' => 0,
+            'w' => ['c2'],
+            'b' => [],
         ];
 
         $expectedPhrase = [
-            "The pawn on c2 is passed.",
+            "c2 is a passed pawn.",
         ];
 
         $position = [
@@ -95,28 +96,37 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
     public function kaufman_21()
     {
         $expectedResult = [
-            'w' => 0,
-            'b' => 11,
+            'w' => [],
+            'b' => ['e6', 'f5'],
         ];
 
         $expectedPhrase = [
-            "The pawn on c4 is passed.",
-            "The pawn on d3 is passed.",
+            "e6 and f5 are passed pawns.",
         ];
 
-        $position = [
-            7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            6 => [ ' . ', ' B ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
-            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' K ', ' . ', ' . ' ],
-            3 => [ ' . ', ' . ', ' p ', ' . ', ' . ', ' b ', ' n ', ' . ' ],
-            2 => [ ' . ', ' . ', ' . ', ' p ', ' . ', ' . ', ' . ', ' . ' ],
-            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' k ', ' . ', ' . ' ],
-            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        $board = FenToBoard::create('8/2k5/4p3/1nb2p2/2K5/8/6B1/8 w - -');
+
+        $passedPawnEval = new PassedPawnEval($board);
+
+        $this->assertSame($expectedResult, $passedPawnEval->getResult());
+        $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
+    }
+
+    /**
+     * @test
+     */
+    public function a4()
+    {
+        $expectedResult = [
+            'w' => ['a4'],
+            'b' => [],
         ];
 
-        $board = (new AsciiArray($position, self::$size, self::$castlingRule))
-            ->toClassicalBoard('\Chess\Variant\Classical\Board', 'w');
+        $expectedPhrase = [
+            "a4 is a passed pawn.",
+        ];
+
+        $board = FenToBoard::create('8/8/8/5k2/P7/4K3/8/8 w - - 0 1');
 
         $passedPawnEval = new PassedPawnEval($board);
 

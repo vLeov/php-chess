@@ -2,9 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Piece\AbstractPiece;
 use Chess\Piece\P;
-use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -17,65 +15,56 @@ class PassedPawnEval extends AbstractEval
     {
         $this->board = $board;
 
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
+        ];
+
         foreach ($this->board->getPieces() as $piece) {
-            $color = $piece->getColor();
-            if ($piece->getId() === Piece::P) {
-                $this->result[ $color ] += $this->getThreatPassedPawn($piece);
+            if ($piece->getId() === Piece::P && $this->isPassedPawn($piece)) {
+                $this->result[$piece->getColor()][] = $piece->getSq();
             }
         }
+
+        $this->explain($this->result);
     }
 
-    private function getThreatPassedPawn(P $pawn): int
+    private function isPassedPawn(P $pawn): bool
     {
-        $pawnFile = $pawn->getSqFile();
-        $leftFile = chr(ord($pawnFile) - 1);
-        $rightFile = chr(ord($pawnFile) + 1);
+        $leftFile = chr(ord($pawn->getSqFile()) - 1);
+        $rightFile = chr(ord($pawn->getSqFile()) + 1);
 
-        $sqs = [];
-        foreach ([ $leftFile, $pawnFile, $rightFile ] as $file) {
-            if ($file < 'a' || $file > 'h') {
-                continue;
-            }
-            if ($pawn->getColor() === Color::W) {
-                $ranks = range($pawn->getRanks()->next, $pawn->getRanks()->end - 1);
-            } else {
-                $ranks = range($pawn->getRanks()->next, $pawn->getRanks()->end + 1);
-            }
-            $sqsFile = array_map(function($rank) use ($file) {
-                return $file . $rank;
-            }, $ranks);
-            $sqs = [...$sqs, ...$sqsFile];
-        }
-
-        $passedPawn = true;
-        foreach ($sqs as $sq) {
-            if ($nextPiece = $this->board->getPieceBySq($sq)) {
-                if (
-                    $nextPiece->getId() === Piece::P &&
-                    $nextPiece->getColor() !== $pawn->getColor()
-                ) {
-                    $passedPawn = false;
-                    break;
+        foreach ([$leftFile, $pawn->getSqFile(), $rightFile] as $file) {
+            if ($file >= 'a' && $file <= 'h') {
+                $rank = (int) $pawn->getSqRank();
+                if ($pawn->getColor() === Color::W) {
+                    for ($i = $rank + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
+                        if ($piece = $this->board->getPieceBySq($file.$i)) {
+                            if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
+                                return false;
+                            }
+                        }
+                    }
+                } else {
+                    for ($i = $rank - 1; $i >= 2; $i--) {
+                        if ($piece = $this->board->getPieceBySq($file.$i)) {
+                            if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        if ($passedPawn) {
-            $this->explain($pawn);
-            if ($pawn->getColor() === Color::W) {
-                return $pawn->getSq()[1];
-            } else {
-                return 9 - $pawn->getSq()[1];
-            }
-        }
-
-        return 0;
+        return true;
     }
 
-    private function explain(AbstractPiece $piece): void
+    private function explain(array $result): void
     {
-        $phrase = PiecePhrase::create($piece);
+        $singular = mb_strtolower('a ' . self::NAME);
+        $plural = mb_strtolower(self::NAME.'s');
 
-        $this->phrases[] = ucfirst("$phrase is passed.");
+        $this->shorten($result, $singular, $plural);
     }
 }
