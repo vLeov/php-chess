@@ -53,24 +53,22 @@ class PassedPawnEval extends AbstractEval
     {
         $leftFile = chr(ord($pawn->getSqFile()) - 1);
         $rightFile = chr(ord($pawn->getSqFile()) + 1);
+        $rank = (int) $pawn->getSqRank();
 
         foreach ([$leftFile, $pawn->getSqFile(), $rightFile] as $file) {
-            if ($file >= 'a' && $file <= 'h') {
-                $rank = (int) $pawn->getSqRank();
-                if ($pawn->getColor() === Color::W) {
-                    for ($i = $rank + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
-                        if ($piece = $this->board->getPieceBySq($file.$i)) {
-                            if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
-                                return false;
-                            }
+            if ($pawn->getColor() === Color::W) {
+                for ($i = $rank + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
+                    if ($piece = $this->board->getPieceBySq($file.$i)) {
+                        if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
+                            return false;
                         }
                     }
-                } else {
-                    for ($i = $rank - 1; $i >= 2; $i--) {
-                        if ($piece = $this->board->getPieceBySq($file.$i)) {
-                            if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
-                                return false;
-                            }
+                }
+            } else {
+                for ($i = $rank - 1; $i >= 2; $i--) {
+                    if ($piece = $this->board->getPieceBySq($file.$i)) {
+                        if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
+                            return false;
                         }
                     }
                 }
