@@ -38,7 +38,6 @@ class SqOutpostEval extends AbstractEval
                         !$this->isFileAttacked($piece->getColor(), $captureSqs[0], $right)
                     ) {
                         $this->result[$piece->getColor()][] = $captureSqs[0];
-                        $sqs[] = $captureSqs[0];
                     }
                     if (isset($captureSqs[1])) {
                         $left = chr(ord($captureSqs[1]) - 1);
@@ -48,7 +47,6 @@ class SqOutpostEval extends AbstractEval
                             !$this->isFileAttacked($piece->getColor(), $captureSqs[1], $right)
                         ) {
                             $this->result[$piece->getColor()][] = $captureSqs[1];
-                            $sqs[] = $captureSqs[1];
                         }
                     }
                 }
@@ -58,7 +56,7 @@ class SqOutpostEval extends AbstractEval
         $this->result[Color::W] = array_unique($this->result[Color::W]);
         $this->result[Color::B] = array_unique($this->result[Color::B]);
 
-        $this->explain(array_unique($sqs));
+        $this->explain($this->result);
     }
 
     private function isFileAttacked($color, $sq, $file): bool
@@ -86,8 +84,10 @@ class SqOutpostEval extends AbstractEval
         return false;
     }
 
-    private function explain(array $sqs): void
+    private function explain(array $result): void
     {
+        $sqs = [...$result[Color::W], ...$result[Color::B]];
+
         if (count($sqs) > 1) {
             $str = '';
             $keys = array_keys($sqs);
