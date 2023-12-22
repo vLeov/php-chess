@@ -102,20 +102,56 @@ abstract class AbstractPiece
     abstract public function defendedSqs(): ?array;
 
     /**
-     * Returns the pieces attacked by the piece.
+     * Returns the opponent's pieces that are being attacked by this piece.
      *
      * @return array|null
      */
     public function attackedPieces(): ?array
     {
-        $pieces = [];
+        $attackedPieces = [];
         foreach ($sqs = $this->sqs() as $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
-                $pieces[] = $piece;
+                if ($piece->getColor() === $this->oppColor()) {
+                    $attackedPieces[] = $piece;
+                }
             }
         }
 
-        return $pieces;
+        return $attackedPieces;
+    }
+
+    /**
+     * Returns the opponent's pieces that attack this piece.
+     *
+     * @return array|null
+     */
+    public function attackingPieces(): ?array
+    {
+        $attackingPieces = [];
+        foreach ($this->board->getPieces($this->oppColor()) as $piece) {
+            if (in_array($this->sq, $piece->sqs())) {
+                $attackingPieces[] = $piece;
+            }
+        }
+
+        return $attackingPieces;
+    }
+
+    /**
+     * Returns the pieces that are defending this piece.
+     *
+     * @return array|null
+     */
+    public function defendingPieces(): ?array
+    {
+        $defendingPieces = [];
+        foreach ($this->board->getPieces($this->color) as $piece) {
+            if (in_array($this->sq, $piece->defendedSqs())) {
+                $defendingPieces[] = $piece;
+            }
+        }
+
+        return $defendingPieces;
     }
 
     /**
