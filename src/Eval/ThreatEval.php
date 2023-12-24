@@ -18,7 +18,7 @@ class ThreatEval extends AbstractEval
             $countAttacking = count($piece->attackingPieces());
             $countDefending = count($piece->defendingPieces());
             $diff = $countAttacking - $countDefending;
-            if ($diff >= 1) {
+            if ($diff > 0 && $countDefending > 0) {
                 $this->result[$piece->oppColor()] += $diff;
                 $this->explain($piece);
             }
