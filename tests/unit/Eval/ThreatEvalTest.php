@@ -14,8 +14,8 @@ class ThreatEvalTest extends AbstractUnitTestCase
     public function endgame()
     {
         $expectedResult = [
-            'w' => 1,
-            'b' => 0,
+            'w' => 0,
+            'b' => 1,
         ];
 
         $expectedPhrase = [
