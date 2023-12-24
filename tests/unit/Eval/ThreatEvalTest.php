@@ -11,6 +11,46 @@ class ThreatEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function B21()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedPhrase = [];
+
+        $board = (new StrToBoard('r1bqkbnr/5ppp/p1npp3/1p6/2B1P3/2N2N2/PP2QPPP/R1B2RK1 w kq b6'))->create();
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedPhrase, $threatEval->getPhrases());
+    }
+
+    /**
+     * @test
+     */
+    public function middlegame()
+    {
+        $expectedResult = [
+            'w' => 1,
+            'b' => 0,
+        ];
+
+        $expectedPhrase = [
+            "The knight on b5 is being threatened and may be lost if not defended properly.",
+        ];
+
+        $board = (new StrToBoard('r1bqkbnr/5ppp/p1npp3/1n6/2B1P3/2N2N2/PP2QPPP/R1B2RK1 w kq b6'))->create();
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedPhrase, $threatEval->getPhrases());
+    }
+
+    /**
+     * @test
+     */
     public function endgame()
     {
         $expectedResult = [
