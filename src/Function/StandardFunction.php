@@ -2,29 +2,29 @@
 
 namespace Chess\Function;
 
+use Chess\Eval\AbsoluteForkEval;
+use Chess\Eval\AbsolutePinEval;
 use Chess\Eval\AttackEval;
 use Chess\Eval\BackwardPawnEval;
-use Chess\Eval\CenterEval;
-use Chess\Eval\ConnectivityEval;
-use Chess\Eval\IsolatedPawnEval;
-use Chess\Eval\KingSafetyEval;
-use Chess\Eval\MaterialEval;
-use Chess\Eval\PressureEval;
-use Chess\Eval\SpaceEval;
-use Chess\Eval\ProtectionEval;
-use Chess\Eval\DoubledPawnEval;
-use Chess\Eval\PassedPawnEval;
-use Chess\Eval\InverseEvalInterface;
-use Chess\Eval\AbsolutePinEval;
-use Chess\Eval\RelativePinEval;
-use Chess\Eval\AbsoluteForkEval;
-use Chess\Eval\RelativeForkEval;
-use Chess\Eval\SqOutpostEval;
-use Chess\Eval\KnightOutpostEval;
+use Chess\Eval\BadBishopEval;
 use Chess\Eval\BishopOutpostEval;
 use Chess\Eval\BishopPairEval;
-use Chess\Eval\BadBishopEval;
+use Chess\Eval\CenterEval;
+use Chess\Eval\ConnectivityEval;
 use Chess\Eval\DirectOppositionEval;
+use Chess\Eval\DoubledPawnEval;
+use Chess\Eval\InverseEvalInterface;
+use Chess\Eval\IsolatedPawnEval;
+use Chess\Eval\KingSafetyEval;
+use Chess\Eval\KnightOutpostEval;
+use Chess\Eval\MaterialEval;
+use Chess\Eval\PassedPawnEval;
+use Chess\Eval\PressureEval;
+use Chess\Eval\ProtectionEval;
+use Chess\Eval\RelativeForkEval;
+use Chess\Eval\RelativePinEval;
+use Chess\Eval\SpaceEval;
+use Chess\Eval\SqOutpostEval;
 use Chess\Eval\ThreatEval;
 
 /**
