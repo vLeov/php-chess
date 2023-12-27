@@ -122,7 +122,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_bishop_pinned_knight_shielded_rook_and_attacked_rock()
+    public function pinnig_bishop_pinned_knight_shielded_rook_and_attacked_rook()
     {
         $expectedResult = [
             'w' => 1.77,
