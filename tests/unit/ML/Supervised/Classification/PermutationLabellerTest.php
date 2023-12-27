@@ -20,7 +20,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         self::$permutations = (new RestrictedPermutationWithRepetition())
             ->get(
-                [ 3, 34 ],
+                [ 3, 31 ],
                 count($eval),
                 100
             );
@@ -133,7 +133,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             'w' => 0,
-            'b' => 21,
+            'b' => 22,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);
@@ -156,7 +156,7 @@ class PermutationLabellerTest extends AbstractUnitTestCase
 
         $expected = [
             'w' => 1,
-            'b' => 4,
+            'b' => 13,
         ];
 
         $label = (new PermutationLabeller(self::$permutations))->label($end);

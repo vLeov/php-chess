@@ -23,6 +23,7 @@ use Chess\Eval\PressureEval;
 use Chess\Eval\ProtectionEval;
 use Chess\Eval\RelativeForkEval;
 use Chess\Eval\RelativePinEval;
+use Chess\Eval\RelativeSkewerEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqOutpostEval;
 use Chess\Eval\ThreatEval;
@@ -43,7 +44,7 @@ class StandardFunction
      * @var array
      */
     protected $eval = [
-        MaterialEval::class => 34,
+        MaterialEval::class => 31,
         CenterEval::class => 3,
         ConnectivityEval::class => 3,
         SpaceEval::class => 3,
@@ -56,6 +57,7 @@ class StandardFunction
         PassedPawnEval::class => 3,
         IsolatedPawnEval::class => 3,
         BackwardPawnEval::class => 3,
+        RelativeSkewerEval::class => 3,
         AbsolutePinEval::class => 3,
         RelativePinEval::class => 3,
         AbsoluteForkEval::class => 3,
