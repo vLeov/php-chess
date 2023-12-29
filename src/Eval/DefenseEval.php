@@ -8,9 +8,9 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class RelativeSkewerEval extends AbstractEval
+class DefenseEval extends AbstractEval
 {
-    const NAME = 'Relative skewer';
+    const NAME = 'Defense';
 
     public function __construct(Board $board)
     {
@@ -39,6 +39,6 @@ class RelativeSkewerEval extends AbstractEval
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("if $phrase is moved, a piece would be exposed to attack.");
+        $this->phrases[] = ucfirst("if $phrase is moved, a piece will be exposed to attack.");
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Eval\RelativeSkewerEval;
+use Chess\Eval\DefenseEval;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
-class RelativeSkewerEvalTest extends AbstractUnitTestCase
+class DefenseEvalTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -24,7 +24,7 @@ class RelativeSkewerEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('r1bqkbnr/ppp2ppp/2np4/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq -'))
             ->create();
 
-        $relativeSkewerEval = new RelativeSkewerEval($board);
+        $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
         $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
@@ -45,7 +45,7 @@ class RelativeSkewerEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -'))
             ->create();
 
-        $relativeSkewerEval = new RelativeSkewerEval($board);
+        $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
         $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
@@ -66,7 +66,7 @@ class RelativeSkewerEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('4qk2/8/4n3/8/8/4R3/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new RelativeSkewerEval($board);
+        $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
         $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
@@ -83,13 +83,13 @@ class RelativeSkewerEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "If the knight on e6 is moved, a piece would be exposed to attack.",
+            "If the knight on e6 is moved, a piece will be exposed to attack.",
         ];
 
         $board = (new StrToBoard('4q1k1/8/4n3/8/8/4R3/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new RelativeSkewerEval($board);
+        $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
         $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
@@ -110,7 +110,7 @@ class RelativeSkewerEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('4qk2/8/2n5/8/B7/8/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new RelativeSkewerEval($board);
+        $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
         $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
@@ -127,13 +127,13 @@ class RelativeSkewerEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "If the knight on c6 is moved, a piece would be exposed to attack.",
+            "If the knight on c6 is moved, a piece will be exposed to attack.",
         ];
 
         $board = (new StrToBoard('4q1k1/8/2n5/8/B7/8/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new RelativeSkewerEval($board);
+        $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
         $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
@@ -150,13 +150,13 @@ class RelativeSkewerEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "If the knight on c6 is moved, a piece would be exposed to attack.",
+            "If the knight on c6 is moved, a piece will be exposed to attack.",
         ];
 
         $board = (new StrToBoard('4r1k1/8/2n5/8/B7/8/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new RelativeSkewerEval($board);
+        $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
         $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());

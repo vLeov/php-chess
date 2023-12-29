@@ -23,7 +23,7 @@ use Chess\Eval\PressureEval;
 use Chess\Eval\ProtectionEval;
 use Chess\Eval\RelativeForkEval;
 use Chess\Eval\RelativePinEval;
-use Chess\Eval\RelativeSkewerEval;
+use Chess\Eval\DefenseEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqOutpostEval;
 use Chess\Eval\ThreatEval;
@@ -57,7 +57,7 @@ class StandardFunction
         PassedPawnEval::class => 3,
         IsolatedPawnEval::class => 3,
         BackwardPawnEval::class => 3,
-        RelativeSkewerEval::class => 3,
+        DefenseEval::class => 3,
         AbsolutePinEval::class => 3,
         RelativePinEval::class => 3,
         AbsoluteForkEval::class => 3,
