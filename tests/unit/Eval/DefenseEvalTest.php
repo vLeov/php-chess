@@ -33,7 +33,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_rook_pinned_knight_shielded_queen()
+    public function attacking_rook_with_a_knight_shielding_the_queen()
     {
         $expectedResult = [
             'w' => 0,
@@ -54,7 +54,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_rook_pinned_knight_shielded_queen_skewer()
+    public function attacking_rook_with_a_knight_shielding_the_unprotected_queen()
     {
         $expectedResult = [
             'w' => 8.8,
@@ -77,7 +77,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_bishop_pinned_knight_shielded_queen()
+    public function attacking_bishop_with_a_knight_shielding_the_queen()
     {
         $expectedResult = [
             'w' => 0,
@@ -98,7 +98,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_bishop_pinned_knight_shielded_queen_skewer()
+    public function attacking_bishop_with_a_knight_shielding_the_unprotected_queen()
     {
         $expectedResult = [
             'w' => 8.8,
@@ -121,7 +121,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_bishop_pinned_knight_shielded_rook()
+    public function attacking_bishop_with_a_knight_shielding_the_unprotected_rook()
     {
         $expectedResult = [
             'w' => 1.9,
