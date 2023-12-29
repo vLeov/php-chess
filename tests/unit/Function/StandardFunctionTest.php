@@ -27,6 +27,7 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Isolated pawn',
             'Backward pawn',
             'Defense',
+            'Absolute skewer',
             'Absolute pin',
             'Relative pin',
             'Absolute fork',
