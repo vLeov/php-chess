@@ -39,6 +39,6 @@ class RelativeSkewerEval extends AbstractEval
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("$phrase is shielding a piece that otherwise would be exposed to attack.");
+        $this->phrases[] = ucfirst("if $phrase is moved, a piece would be exposed to attack.");
     }
 }
