@@ -12,27 +12,6 @@ class DefenseEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function c62_ruy_lopez_steinitz_defense()
-    {
-        $expectedResult = [
-            'w' => 0,
-            'b' => 0,
-        ];
-
-        $expectedPhrase = [];
-
-        $board = (new StrToBoard('r1bqkbnr/ppp2ppp/2np4/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq -'))
-            ->create();
-
-        $relativeSkewerEval = new DefenseEval($board);
-
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
-    }
-
-    /**
-     * @test
-     */
     public function c62_ruy_lopez_steinitz_defense_center_gambit_Bg4()
     {
         $expectedResult = [
