@@ -22,33 +22,14 @@ class AbsoluteSkewerEval extends AbstractEval
                 $clone->playLan($clone->getTurn(), $king->getSq().current($king->sqs()));
                 $attackedPieces = $piece->attackedPieces();
                 $newAttackedPieces = $clone->getPieceBySq($piece->getSq())->attackedPieces();
-                if ($attackedPiece = $this->attackedPiece($attackedPieces, $newAttackedPieces)) {
-                    if (self::$value[$piece->getId()] < self::$value[$attackedPiece->getId()]) {
+                if ($diffPieces = $this->diffPieces($attackedPieces, $newAttackedPieces)) {
+                    if (self::$value[$piece->getId()] < self::$value[current($diffPieces)->getId()]) {
                         $this->result[$piece->getColor()] = 1;
                         $this->explain($piece, $king);
                     }
                 }
             }
         }
-    }
-
-    private function attackedPiece(array $attackedPieces, array $newAttackedPieces)
-    {
-        $a = array_map(function($attackedPiece) {
-            return $attackedPiece->getSq();
-        }, $attackedPieces);
-
-        $b = array_map(function($newAttackedPiece) {
-            return $newAttackedPiece->getSq();
-        }, $newAttackedPieces);
-
-        foreach ($b as $sq) {
-            if (!in_array($sq, $a)) {
-                return $this->board->getPieceBySq($sq);
-            }
-        }
-
-        return null;
     }
 
     private function explain(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
