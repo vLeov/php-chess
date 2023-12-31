@@ -131,4 +131,22 @@ class AbsolutePinEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $absPinEval->getResult());
     }
+
+    /**
+     * @test
+     */
+    public function b20_sicilian_defense()
+    {
+        $board = (new StrToBoard('r1b1kbnr/pp3ppp/2n1q3/4p3/1pP5/P4N2/1B1P1PPP/RN1QKB1R w KQkq -'))
+            ->create();
+
+        $expected = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $absPinEval = new AbsolutePinEval($board);
+
+        $this->assertSame($expected, $absPinEval->getResult());
+    }
 }
