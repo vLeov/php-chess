@@ -18,12 +18,17 @@ class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() !== Piece::K) {
                 $clone = unserialize(serialize($this->board));
-                $clone->detach($clone->getPieceBySq($piece->getSq()));
+                $pinnedPiece = $clone->getPieceBySq($piece->getSq());
+                $clone->detach($pinnedPiece);
                 $clone->refresh();
+                $checkingPieces = $this->board->checkingPieces();
                 $newCheckingPieces = $clone->checkingPieces();
-                if (count($newCheckingPieces) > count($this->board->checkingPieces())) {
-                    $this->result[$piece->getColor()] += self::$value[$piece->getId()];
-                    $this->explain($piece);
+                $diffPieces = $this->diffPieces($checkingPieces, $newCheckingPieces);
+                foreach ($diffPieces as $diffPiece) {
+                    if ($diffPiece->getColor() !== $pinnedPiece->getColor()) {
+                        $this->result[$pinnedPiece->getColor()] += self::$value[$pinnedPiece->getId()];
+                        $this->explain($pinnedPiece);
+                    }
                 }
             }
         }
