@@ -3,9 +3,12 @@
 namespace Chess\Tutor;
 
 use Chess\Function\StandardFunction;
+use Chess\Heuristics\FenHeuristics;
+use Chess\ML\Supervised\Classification\CountLabeller;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
 use Chess\Variant\CapablancaFischer\Board as CapablancaFischerBoard;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
@@ -75,10 +78,17 @@ class FenExplanation
     /**
      * Returns the paragraph.
      *
+     * @param bool $isEvaluated     *
      * @return array
      */
-    public function getParagraph(): array
+    public function getParagraph(bool $isEvaluated = false): array
     {
+        if ($isEvaluated) {
+            $balance = (new FenHeuristics($this->board->toFen()))->getBalance();
+            $label = (new CountLabeller())->label($balance);
+            $this->paragraph[] = "Overall, {$label[Color::W]} {$this->noun($label[Color::W])} {$this->verb($label[Color::W])} favoring White while {$label[Color::B]} {$this->verb($label[Color::B])} favoring Black, which suggests that {$this->eval($label)}.";
+        }
+
         return $this->paragraph;
     }
 
@@ -97,5 +107,51 @@ class FenExplanation
         }
 
         return $this;
+    }
+
+    /**
+     * Evaluates the labelled balance.
+     *
+     * @param array $label     *
+     * @return string
+     */
+    private function eval(array $label): string
+    {
+        $diff = $label[Color::W] - $label[Color::B];
+        if ($diff > 0) {
+            return 'White is probably better in this position';
+        } elseif ($diff < 0) {
+            return 'Black is probably better in this position';
+        }
+
+        return 'both players are equal';
+    }
+
+    /**
+     * Decline the noun.
+     *
+     * @param int $total     *
+     * @return string
+     */
+    private function noun(int $total): string
+    {
+        $noun = $total === 1
+            ? 'heuristic evaluation feature'
+            : 'heuristic evaluation features';
+
+        return $noun;
+    }
+
+    /**
+     * Decline the verb.
+     *
+     * @param int $total     *
+     * @return string
+     */
+    private function verb(int $total)
+    {
+        $verb = $total === 1 ? 'is' : 'are';
+
+        return $verb;
     }
 }

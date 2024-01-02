@@ -46,4 +46,43 @@ class FenExplanationTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $paragraph);
     }
+
+    /**
+     * @test
+     */
+    public function evaluated_endgame_plural()
+    {
+        $expected = [
+            "White has a significant material advantage.",
+            "White has a significant control of the center.",
+            "The white pieces are somewhat better connected.",
+            "The white player is pressuring a little bit more squares than its opponent.",
+            "The knight on e6 is pinned shielding the king so it cannot move out of the line of attack because the king would be put in check.",
+            "White has the bishop pair.",
+            "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black, which suggests that White is probably better in this position.",
+        ];
+
+        $paragraph = (new FenExplanation('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
+            ->getParagraph($isEvaluated = true);
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
+    public function evaluated_endgame_singular()
+    {
+        $expected = [
+            "Black has a somewhat better control of the center.",
+            "The black pieces are significantly better connected.",
+            "White has a kind of space advantage.",
+            "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black, which suggests that Black is probably better in this position.",
+        ];
+
+        $paragraph = (new FenExplanation('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -'))
+            ->getParagraph($isEvaluated = true);
+
+        $this->assertSame($expected, $paragraph);
+    }
 }
