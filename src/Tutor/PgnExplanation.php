@@ -25,17 +25,36 @@ class PgnExplanation
     private array $paragraph = [];
 
     /**
+     * Heuristic evaluation.
+     *
+     * @var bool
+     */
+    private bool $isEvaluated;
+
+    /**
+     * Variant.
+     *
+     * @var string
+     */
+    private string $variant;
+
+    /**
      * Constructor.
      *
      * @param string $pgn
      * @param string $fen
+     * @param bool $isEvaluated
      * @param string $variant
      */
-    public function __construct(string $pgn, string $fen, string $variant = '')
+    public function __construct(string $pgn, string $fen, bool $isEvaluated = false, string $variant = '')
     {
         $this->fenExplanation = new FenExplanation($fen, $variant);
 
-        $this->explain($pgn, $variant);
+        $this->isEvaluated = $isEvaluated;
+
+        $this->variant = $variant;
+
+        $this->explain($pgn);
     }
 
     /**
@@ -51,13 +70,14 @@ class PgnExplanation
     /**
      * Calculates the paragraph.
      *
+     * @param string $pgn
      * @return \Chess\Tutor\PgnExplanation
      */
-    private function explain(string $pgn, string $variant): PgnExplanation
+    private function explain(string $pgn): PgnExplanation
     {
         $board = $this->fenExplanation->getBoard();
         $board->play($board->getTurn(), $pgn);
-        $fenParagraph = new FenExplanation($board->toFen(), $variant);
+        $fenParagraph = new FenExplanation($board->toFen(), $this->isEvaluated, $this->variant);
         foreach ($fenParagraph->getParagraph() as $key => $val) {
             if (!in_array($val, $this->fenExplanation->getParagraph())) {
                 $this->paragraph[] = $val;

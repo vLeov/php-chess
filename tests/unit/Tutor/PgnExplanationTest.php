@@ -45,4 +45,27 @@ class PgnExplanationTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $paragraph);
     }
+
+    /**
+     * @test
+     */
+    public function evaluated_endgame()
+    {
+        $expected = [
+            "White has a decisive material advantage.",
+            "White is just controlling the center.",
+            "White has a total space advantage.",
+            "The white pieces are timidly approaching the other side's king.",
+            "The bishop on e6 is unprotected.",
+            "Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black, which suggests that White is probably better in this position.",
+        ];
+
+        $paragraph = (new PgnExplanation(
+            'Bxe6+',
+            '8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1',
+            $isEvaluated = true)
+        )->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
 }
