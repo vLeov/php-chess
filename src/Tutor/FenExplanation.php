@@ -46,9 +46,10 @@ class FenExplanation
      * Constructor.
      *
      * @param string $fen
+     * @param bool $isEvaluated
      * @param string $variant
      */
-    public function __construct(string $fen, string $variant = '')
+    public function __construct(string $fen, bool $isEvaluated = false, string $variant = '')
     {
         if ($variant === Chess960Board::VARIANT) {
             $this->board = (new ClassicalFenStrToBoard($fen))->create();
@@ -63,6 +64,12 @@ class FenExplanation
         $this->function = new StandardFunction();
 
         $this->explain();
+
+        if ($isEvaluated) {
+            $balance = (new FenHeuristics($this->board->toFen()))->getBalance();
+            $label = (new CountLabeller())->label($balance);
+            $this->paragraph[] = "Overall, {$label[Color::W]} {$this->noun($label[Color::W])} {$this->verb($label[Color::W])} favoring White while {$label[Color::B]} {$this->verb($label[Color::B])} favoring Black, which suggests that {$this->eval($label)}.";
+        }
     }
 
     /**
@@ -78,17 +85,10 @@ class FenExplanation
     /**
      * Returns the paragraph.
      *
-     * @param bool $isEvaluated     *
      * @return array
      */
-    public function getParagraph(bool $isEvaluated = false): array
+    public function getParagraph(): array
     {
-        if ($isEvaluated) {
-            $balance = (new FenHeuristics($this->board->toFen()))->getBalance();
-            $label = (new CountLabeller())->label($balance);
-            $this->paragraph[] = "Overall, {$label[Color::W]} {$this->noun($label[Color::W])} {$this->verb($label[Color::W])} favoring White while {$label[Color::B]} {$this->verb($label[Color::B])} favoring Black, which suggests that {$this->eval($label)}.";
-        }
-
         return $this->paragraph;
     }
 

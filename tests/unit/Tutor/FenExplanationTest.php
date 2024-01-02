@@ -62,8 +62,10 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black, which suggests that White is probably better in this position.",
         ];
 
-        $paragraph = (new FenExplanation('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
-            ->getParagraph($isEvaluated = true);
+        $paragraph = (new FenExplanation(
+            '8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1',
+            $isEvaluated = true
+        ))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
@@ -80,8 +82,10 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black, which suggests that Black is probably better in this position.",
         ];
 
-        $paragraph = (new FenExplanation('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -'))
-            ->getParagraph($isEvaluated = true);
+        $paragraph = (new FenExplanation(
+            'rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -',
+            $isEvaluated = true
+        ))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
