@@ -24,6 +24,7 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Attack',
             'Doubled pawn',
             'Passed pawn',
+            'Advanced pawn',
             'Isolated pawn',
             'Backward pawn',
             'Defense',

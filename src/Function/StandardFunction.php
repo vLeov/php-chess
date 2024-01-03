@@ -5,6 +5,7 @@ namespace Chess\Function;
 use Chess\Eval\AbsoluteForkEval;
 use Chess\Eval\AbsolutePinEval;
 use Chess\Eval\AbsoluteSkewerEval;
+use Chess\Eval\AdvancedPawnEval;
 use Chess\Eval\AttackEval;
 use Chess\Eval\BackwardPawnEval;
 use Chess\Eval\BadBishopEval;
@@ -56,6 +57,7 @@ class StandardFunction
         AttackEval::class => 5,
         DoubledPawnEval::class => 5,
         PassedPawnEval::class => 5,
+        AdvancedPawnEval::class => 5,
         IsolatedPawnEval::class => 5,
         BackwardPawnEval::class => 5,
         DefenseEval::class => 5,
