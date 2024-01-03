@@ -16,6 +16,7 @@ use Chess\Eval\ConnectivityEval;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\DirectOppositionEval;
 use Chess\Eval\DoubledPawnEval;
+use Chess\Eval\FarAdvancedPawnEval;
 use Chess\Eval\InverseEvalInterface;
 use Chess\Eval\IsolatedPawnEval;
 use Chess\Eval\KingSafetyEval;
@@ -46,32 +47,33 @@ class StandardFunction
      * @var array
      */
     protected $eval = [
-        MaterialEval::class => 30,
-        CenterEval::class => 5,
-        ConnectivityEval::class => 5,
-        SpaceEval::class => 5,
-        PressureEval::class => 5,
-        KingSafetyEval::class => 5,
-        ProtectionEval::class => 5,
-        ThreatEval::class => 5,
-        AttackEval::class => 5,
-        DoubledPawnEval::class => 5,
-        PassedPawnEval::class => 5,
-        AdvancedPawnEval::class => 5,
-        IsolatedPawnEval::class => 5,
-        BackwardPawnEval::class => 5,
-        DefenseEval::class => 5,
-        AbsoluteSkewerEval::class => 5,
-        AbsolutePinEval::class => 5,
-        RelativePinEval::class => 5,
-        AbsoluteForkEval::class => 5,
-        RelativeForkEval::class => 5,
-        SqOutpostEval::class => 5,
-        KnightOutpostEval::class => 5,
-        BishopOutpostEval::class => 5,
-        BishopPairEval::class => 5,
-        BadBishopEval::class => 5,
-        DirectOppositionEval::class => 5,
+        MaterialEval::class => 22,
+        CenterEval::class => 3,
+        ConnectivityEval::class => 3,
+        SpaceEval::class => 3,
+        PressureEval::class => 3,
+        KingSafetyEval::class => 3,
+        ProtectionEval::class => 3,
+        ThreatEval::class => 3,
+        AttackEval::class => 3,
+        DoubledPawnEval::class => 3,
+        PassedPawnEval::class => 3,
+        AdvancedPawnEval::class => 3,
+        FarAdvancedPawnEval::class => 3,
+        IsolatedPawnEval::class => 3,
+        BackwardPawnEval::class => 3,
+        DefenseEval::class => 3,
+        AbsoluteSkewerEval::class => 3,
+        AbsolutePinEval::class => 3,
+        RelativePinEval::class => 3,
+        AbsoluteForkEval::class => 3,
+        RelativeForkEval::class => 3,
+        SqOutpostEval::class => 3,
+        KnightOutpostEval::class => 3,
+        BishopOutpostEval::class => 3,
+        BishopPairEval::class => 3,
+        BadBishopEval::class => 3,
+        DirectOppositionEval::class => 3,
     ];
 
     /**
