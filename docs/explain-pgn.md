@@ -40,4 +40,4 @@ echo $text;
 White has a decisive material advantage. White is just controlling the center. White has a total space advantage. The white pieces are timidly approaching the other side's king. The bishop on e6 is unprotected. Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black, which suggests that White is probably better in this position.
 ```
 
-🎉 The chances of winning are determined heuristically without considering checkmate.
+🎉 Let's do this!
