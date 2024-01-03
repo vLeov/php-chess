@@ -44,13 +44,13 @@ class P extends AbstractPiece
         if ($this->color === Color::W) {
             $this->ranks = (object) [
                 'start' => 2,
-                'next' => intval($this->getSqRank()) + 1,
+                'next' => $this->getSqRank() + 1,
                 'end' => $this->size['ranks'],
             ];
         } elseif ($this->color === Color::B) {
             $this->ranks = (object) [
                 'start' => $this->size['ranks'] - 1,
-                'next' => intval($this->getSqRank()) - 1,
+                'next' => $this->getSqRank() - 1,
                 'end' => 1,
             ];
         }
@@ -79,10 +79,10 @@ class P extends AbstractPiece
         }
 
         // two square advance
-        if (intval($this->getSqRank()) === 2 && $this->ranks->start == 2) {
+        if ($this->getSqRank() === 2 && $this->ranks->start == 2) {
             $this->mobility[] = $this->getSqFile() . ($this->ranks->start + 2);
         } elseif (
-            intval($this->getSqRank()) === $this->size['ranks'] - 1 &&
+            $this->getSqRank() === $this->size['ranks'] - 1 &&
             $this->ranks->start == $this->size['ranks'] - 1
         ) {
             $this->mobility[] = $this->getSqFile() . ($this->ranks->start - 2);

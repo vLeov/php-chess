@@ -51,10 +51,8 @@ class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
             return true;
         }
 
-        $rank = (int) $pawn->getSqRank();
-
         if ($pawn->getColor() === Color::W) {
-            for ($i = $rank - 1; $i >= 2; $i--) {
+            for ($i = $pawn->getSqRank() - 1; $i >= 2; $i--) {
                 if ($piece = $this->board->getPieceBySq($file.$i)) {
                     if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()) {
                         return true;
@@ -62,7 +60,7 @@ class BackwardPawnEval extends AbstractEval implements InverseEvalInterface
                 }
             }
         } else {
-            for ($i = $rank + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
+            for ($i = $pawn->getSqRank() + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
                 if ($piece = $this->board->getPieceBySq($file.$i)) {
                     if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()
                     ) {

@@ -213,11 +213,11 @@ abstract class AbstractPiece
     /**
      * Gets the piece's rank.
      *
-     * @return string
+     * @return int
      */
-    public function getSqRank(): string
+    public function getSqRank(): int
     {
-        return substr($this->sq, 1);
+        return (int) substr($this->sq, 1);
     }
 
     /**

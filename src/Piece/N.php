@@ -39,7 +39,7 @@ class N extends AbstractPiece
     {
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = intval($this->getSqRank()) + 2;
+            $rank = $this->getSqRank() + 2;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -49,7 +49,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 2);
-            $rank = intval($this->getSqRank()) + 1;
+            $rank = $this->getSqRank() + 1;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -59,7 +59,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 2);
-            $rank = intval($this->getSqRank()) - 1;
+            $rank = $this->getSqRank() - 1;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -69,7 +69,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = intval($this->getSqRank()) - 2;
+            $rank = $this->getSqRank() - 2;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -79,7 +79,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = intval($this->getSqRank()) - 2;
+            $rank = $this->getSqRank() - 2;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -89,7 +89,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 2);
-            $rank = intval($this->getSqRank()) - 1;
+            $rank = $this->getSqRank() - 1;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -99,7 +99,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 2);
-            $rank = intval($this->getSqRank()) + 1;
+            $rank = $this->getSqRank() + 1;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }
@@ -109,7 +109,7 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = intval($this->getSqRank()) + 2;
+            $rank = $this->getSqRank() + 2;
             if ($this->isValidSq($file.$rank)) {
                 $this->mobility[] = $file . $rank;
             }

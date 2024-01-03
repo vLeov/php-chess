@@ -53,11 +53,10 @@ class PassedPawnEval extends AbstractEval
     {
         $leftFile = chr(ord($pawn->getSqFile()) - 1);
         $rightFile = chr(ord($pawn->getSqFile()) + 1);
-        $rank = (int) $pawn->getSqRank();
 
         foreach ([$leftFile, $pawn->getSqFile(), $rightFile] as $file) {
             if ($pawn->getColor() === Color::W) {
-                for ($i = $rank + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
+                for ($i = $pawn->getSqRank() + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
                     if ($piece = $this->board->getPieceBySq($file.$i)) {
                         if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
                             return false;
@@ -65,7 +64,7 @@ class PassedPawnEval extends AbstractEval
                     }
                 }
             } else {
-                for ($i = $rank - 1; $i >= 2; $i--) {
+                for ($i = $pawn->getSqRank() - 1; $i >= 2; $i--) {
                     if ($piece = $this->board->getPieceBySq($file.$i)) {
                         if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
                             return false;
