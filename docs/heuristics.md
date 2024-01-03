@@ -17,6 +17,7 @@ Listed below are the chess heuristics implemented in PHP Chess.
 | Absolute fork | [Chess\Eval\AbsoluteForkEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/AbsoluteForkEvalTest.php) |
 | Absolute pin | [Chess\Eval\AbsolutePinEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/AbsolutePinEvalTest.php) |
 | Absolute skewer | [Chess\Eval\AbsoluteSkewerEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/AbsoluteSkewerEvalTest.php) |
+| Advanced pawn | [Chess\Eval\AdvancedPawnEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/AdvancedPawnEvalTest.php) |
 | Attack | [Chess\Eval\AttackEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/AttackEvalTest.php) |
 | Backward pawn | [Chess\Eval\BackwardPawnEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/BackwardPawnEvalTest.php) |
 | Bad bishop | [Chess\Eval\BadBishopEval](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Eval/BadBishopEvalTest.php) |
