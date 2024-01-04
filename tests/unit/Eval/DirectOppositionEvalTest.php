@@ -36,7 +36,7 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The black king has the opposition preventing the advance of the other king.",
+            "The black king has the direct opposition preventing the advance of the other king.",
         ];
 
         $fen = '8/8/2k5/8/2K5/8/8/8 w - - 0 1';
@@ -58,7 +58,7 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The white king has the opposition preventing the advance of the other king.",
+            "The white king has the direct opposition preventing the advance of the other king.",
         ];
 
         $fen = '8/8/2k5/8/2K5/8/8/8 b - - 0 1';
@@ -97,7 +97,7 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The white king has the opposition preventing the advance of the other king.",
+            "The white king has the direct opposition preventing the advance of the other king.",
         ];
 
         $fen = '8/8/8/8/8/k7/8/K7 b - - 0 1';
@@ -119,7 +119,7 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The white king has the opposition preventing the advance of the other king.",
+            "The white king has the direct opposition preventing the advance of the other king.",
         ];
 
         $fen = '8/8/5k1K/8/7p/8/8/8 b - - 0 1';
@@ -141,7 +141,7 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The black king has the opposition preventing the advance of the other king.",
+            "The black king has the direct opposition preventing the advance of the other king.",
         ];
 
         $fen = '8/8/4k1K1/8/7p/8/8/8 w - -';
@@ -163,7 +163,7 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The white king has the opposition preventing the advance of the other king.",
+            "The white king has the direct opposition preventing the advance of the other king.",
         ];
 
         $fen = '8/5k2/8/5K2/7p/8/8/8 b - -';
@@ -185,7 +185,7 @@ class DirectOppositionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "The black king has the opposition preventing the advance of the other king.",
+            "The black king has the direct opposition preventing the advance of the other king.",
         ];
 
         $fen = '8/5k2/8/5K2/8/7p/8/8 w - -';

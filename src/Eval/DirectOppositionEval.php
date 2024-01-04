@@ -14,13 +14,13 @@ class DirectOppositionEval extends AbstractEval implements TernaryEvalInterface
         Color::W => [
             [
                 'diff' => 1,
-                'meaning' => "The white king has the opposition preventing the advance of the other king.",
+                'meaning' => "The white king has the direct opposition preventing the advance of the other king.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -1,
-                'meaning' => "The black king has the opposition preventing the advance of the other king.",
+                'meaning' => "The black king has the direct opposition preventing the advance of the other king.",
             ],
         ],
     ];
