@@ -145,8 +145,8 @@ $result = [
 print_r($result);
 ```
 
-![Figure 2](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/heuristics_02.png)
+![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/heuristics_01.png)
 
-Figure 2. Heuristics of `1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3`
+Figure 1. Heuristics of `1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3`
 
 🎉 There it is! Chess positions converted to numbers can be processed with machine learning techniques.
