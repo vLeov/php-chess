@@ -39,6 +39,7 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Bishop outpost',
             'Bishop pair',
             'Bad bishop',
+            'Diagonal opposition',
             'Direct opposition',
         ];
 

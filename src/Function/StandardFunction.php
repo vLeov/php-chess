@@ -14,6 +14,7 @@ use Chess\Eval\BishopPairEval;
 use Chess\Eval\CenterEval;
 use Chess\Eval\ConnectivityEval;
 use Chess\Eval\DefenseEval;
+use Chess\Eval\DiagonalOppositionEval;
 use Chess\Eval\DirectOppositionEval;
 use Chess\Eval\DoubledPawnEval;
 use Chess\Eval\FarAdvancedPawnEval;
@@ -47,7 +48,7 @@ class StandardFunction
      * @var array
      */
     protected $eval = [
-        MaterialEval::class => 22,
+        MaterialEval::class => 19,
         CenterEval::class => 3,
         ConnectivityEval::class => 3,
         SpaceEval::class => 3,
@@ -73,6 +74,7 @@ class StandardFunction
         BishopOutpostEval::class => 3,
         BishopPairEval::class => 3,
         BadBishopEval::class => 3,
+        DiagonalOppositionEval::class => 3,
         DirectOppositionEval::class => 3,
     ];
 
