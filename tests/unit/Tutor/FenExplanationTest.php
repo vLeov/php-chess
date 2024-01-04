@@ -59,7 +59,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "The white player is pressuring a little bit more squares than its opponent.",
             "The knight on e6 is pinned shielding the king so it cannot move out of the line of attack because the king would be put in check.",
             "White has the bishop pair.",
-            "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black, which suggests that White is probably better in this position.",
+            "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black.",
         ];
 
         $paragraph = (new FenExplanation(
@@ -79,7 +79,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Black has a somewhat better control of the center.",
             "The black pieces are significantly better connected.",
             "White has a kind of space advantage.",
-            "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black, which suggests that Black is probably better in this position.",
+            "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black.",
         ];
 
         $paragraph = (new FenExplanation(

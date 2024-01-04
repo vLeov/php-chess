@@ -57,7 +57,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
             "White has a total space advantage.",
             "The white pieces are timidly approaching the other side's king.",
             "The bishop on e6 is unprotected.",
-            "Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black, which suggests that White is probably better in this position.",
+            "Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black.",
         ];
 
         $paragraph = (new PgnExplanation(

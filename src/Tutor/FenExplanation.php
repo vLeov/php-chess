@@ -68,7 +68,7 @@ class FenExplanation
         if ($isEvaluated) {
             $balance = (new FenHeuristics($this->board->toFen()))->getBalance();
             $label = (new CountLabeller())->label($balance);
-            $this->paragraph[] = "Overall, {$label[Color::W]} {$this->noun($label[Color::W])} {$this->verb($label[Color::W])} favoring White while {$label[Color::B]} {$this->verb($label[Color::B])} favoring Black, which suggests that {$this->eval($label)}.";
+            $this->paragraph[] = "Overall, {$label[Color::W]} {$this->noun($label[Color::W])} {$this->verb($label[Color::W])} favoring White while {$label[Color::B]} {$this->verb($label[Color::B])} favoring Black.";
         }
     }
 
@@ -107,24 +107,6 @@ class FenExplanation
         }
 
         return $this;
-    }
-
-    /**
-     * Evaluates the labelled balance.
-     *
-     * @param array $label     *
-     * @return string
-     */
-    private function eval(array $label): string
-    {
-        $diff = $label[Color::W] - $label[Color::B];
-        if ($diff > 0) {
-            return 'White is probably better in this position';
-        } elseif ($diff < 0) {
-            return 'Black is probably better in this position';
-        }
-
-        return 'both players are equal';
     }
 
     /**

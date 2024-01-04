@@ -35,9 +35,9 @@ echo $text;
 ```
 
 ```text
-Black has a somewhat better control of the center. The black pieces are significantly better connected. White has a kind of space advantage. Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black, which suggests that Black is probably better in this position.
+Black has a somewhat better control of the center. The black pieces are significantly better connected. White has a kind of space advantage. Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black.
 ```
 
-A heuristic evaluation is a quick numerical estimate of a chess position that suggests who is probably better without considering checkmate. It is not the same thing as a chess calculation. Heuristic evaluations are often correct but may fail as long as they are based on probabilities and opportunities more than anything else.
+A heuristic evaluation is a quick numerical estimate of a chess position that suggests who may be better without considering checkmate. Please note that a heuristic evaluation is not the same thing as a chess calculation. Heuristic evaluations are often correct but may fail as long as they are based on probabilities more than anything else.
 
 🎉 This is a form of abductive reasoning.
