@@ -46,13 +46,13 @@ Listed below are the chess heuristics implemented in PHP Chess.
 The evaluation features are used in two heuristics classes: [Chess\Heuristics\FenHeuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Heuristics/FenHeuristicsTest.php) and [Chess\Heuristics\SanHeuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Heuristics/SanHeuristicsTest.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
 
 ```php
-use Chess\Heuristics\EvalFunction;
+use Chess\Function\StandardFunction;
 use Chess\Heuristics\FenHeuristics;
 
 $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
 
 $result = [
-    'evalNames' => (new EvalFunction())->names(),
+    'names' => (new StandardFunction())->names(),
     'balance' => (new FenHeuristics($fen))->getBalance(),
 ];
 
@@ -62,7 +62,7 @@ print_r($result);
 ```text
 Array
 (
-    [evalNames] => Array
+    [names] => Array
         (
             [0] => Material
             [1] => Center
@@ -70,30 +70,36 @@ Array
             [3] => Space
             [4] => Pressure
             [5] => King safety
-            [6] => Tactics
-            [7] => Attack
-            [8] => Doubled pawn
-            [9] => Passed pawn
-            [10] => Isolated pawn
-            [11] => Backward pawn
-            [12] => Absolute pin
-            [13] => Relative pin
-            [14] => Absolute fork
-            [15] => Relative fork
-            [16] => Square outpost
-            [17] => Knight outpost
-            [18] => Bishop outpost
-            [19] => Bishop pair
-            [20] => Bad bishop
-            [21] => Direct opposition
+            [6] => Protection
+            [7] => Threat
+            [8] => Attack
+            [9] => Doubled pawn
+            [10] => Passed pawn
+            [11] => Advanced pawn
+            [12] => Far-advanced pawn
+            [13] => Isolated pawn
+            [14] => Backward pawn
+            [15] => Defense
+            [16] => Absolute skewer
+            [17] => Absolute pin
+            [18] => Relative pin
+            [19] => Absolute fork
+            [20] => Relative fork
+            [21] => Outpost square
+            [22] => Knight outpost
+            [23] => Bishop outpost
+            [24] => Bishop pair
+            [25] => Bad bishop
+            [26] => Diagonal opposition
+            [27] => Direct opposition
         )
 
     [balance] => Array
         (
             [0] => 0
-            [1] => 0.28
+            [1] => 12.4
             [2] => 0
-            [3] => 0.07
+            [3] => 3
             [4] => 0
             [5] => 0
             [6] => 0
@@ -101,7 +107,7 @@ Array
             [8] => 0
             [9] => 0
             [10] => 0
-            [11] => 0.04
+            [11] => 0
             [12] => 0
             [13] => 0
             [14] => 0
@@ -112,25 +118,27 @@ Array
             [19] => 0
             [20] => 0
             [21] => 0
+            [22] => 0
+            [23] => 0
+            [24] => 0
+            [25] => 0
+            [26] => 0
+            [27] => 0
         )
 
 )
 ```
 
-![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/heuristics_01.png)
-
-Figure 1. Heuristics of `rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -`
-
 A chess game can be plotted in terms of balance. +1 is the best possible evaluation for White and -1 the best possible evaluation for Black. Both forces being set to 0 means they're balanced.
 
 ```php
-use Chess\Heuristics\EvalFunction;
+use Chess\Function\StandardFunction;
 use Chess\Heuristics\SanHeuristics;
 
 $movetext = '1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3';
 
 $result = [
-    'evalNames' => (new EvalFunction())->names(),
+    'names' => (new StandardFunction())->names(),
     'balance' => (new SanHeuristics($movetext))->getBalance(),
 ];
 
