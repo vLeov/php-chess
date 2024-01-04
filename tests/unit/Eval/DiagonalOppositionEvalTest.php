@@ -49,4 +49,25 @@ class DiagonalOppositionEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedResult, $directOppositionEval->getResult());
         $this->assertSame($expectedPhrase, $directOppositionEval->getPhrases());
     }
+
+    /**
+     * @test
+     */
+    public function position_03()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
+        $expectedPhrase = [
+            "The black king has the diagonal opposition preventing the advance of the other king.",
+        ];
+
+        $board = (new StrToBoard('8/8/8/8/8/2K5/8/k7 w - - 0 1'))->create();
+        $directOppositionEval = new DiagonalOppositionEval($board);
+
+        $this->assertSame($expectedResult, $directOppositionEval->getResult());
+        $this->assertSame($expectedPhrase, $directOppositionEval->getPhrases());
+    }
 }
