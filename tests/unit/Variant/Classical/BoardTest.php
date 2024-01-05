@@ -2872,4 +2872,23 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $board->legal('a1'));
     }
+
+    /**
+     * @test
+     */
+    public function legal_e2()
+    {
+        $board = new Board();
+
+        $expected = (object) [
+            'color' => 'w',
+            'id' => 'P',
+            'fen' => (object) [
+                'e3' => 'rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQKBNR b KQkq -',
+                'e4' => 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3',
+            ],
+        ];
+
+        $this->assertEquals($expected, $board->legal('e2'));
+    }
 }

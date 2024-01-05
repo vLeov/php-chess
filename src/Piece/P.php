@@ -149,7 +149,7 @@ class P extends AbstractPiece
             $sqs[] = $this->enPassantSq;
         }
 
-        return array_unique($sqs);
+        return array_filter(array_unique($sqs));
     }
 
     /**
