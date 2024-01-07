@@ -27,4 +27,10 @@ The GNU General Public License.
 
 See the [contributing guidelines](https://github.com/chesslablab/php-chess/blob/master/CONTRIBUTING.md).
 
-Happy learning and coding! Thank you, and keep it up.
+Happy learning and coding!
+
+<a href="https://github.com/chesslablab/php-chess/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=chesslablab/php-chess" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
