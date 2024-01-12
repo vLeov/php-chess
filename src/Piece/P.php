@@ -139,14 +139,26 @@ class P extends AbstractPiece
         // en passant square
         $history = $this->board->getHistory();
         $end = end($history);
-        if ($end) {
-            $fen = explode(' ', $end->fen);
-            if ($fen[3] !== '-') {
-                $this->enPassantSq = $fen[3];
-                $sqs[] = $this->enPassantSq;
-            }
+        if ($end && $end->move->id === Piece::P && $end->move->color === $this->oppColor()) {
+           if ($this->color === Color::W) {
+               if ($this->getSqRank() === $this->size['ranks'] - 3) {
+                   $captureSq = $end->move->sq->next[0] . ($this->getSqRank() + 1);
+                   if (in_array($captureSq, $this->captureSqs)) {
+                        $this->enPassantSq = $captureSq;
+                        $sqs[] = $captureSq;
+                   }
+               }
+           } elseif ($this->color === Color::B) {
+               if ($this->getSqRank() === 4) {
+                   $captureSq = $end->move->sq->next[0] . ($this->getSqRank() - 1);
+                   if (in_array($captureSq, $this->captureSqs)) {
+                       $this->enPassantSq = $captureSq;
+                       $sqs[] = $captureSq;
+                   }
+               }
+           }
         } else {
-            $sqs[] = $this->enPassantSq;
+           $sqs[] = $this->enPassantSq;
         }
 
         return array_filter(array_unique($sqs));
