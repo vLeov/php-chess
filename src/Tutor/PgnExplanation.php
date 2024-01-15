@@ -2,6 +2,8 @@
 
 namespace Chess\Tutor;
 
+use Chess\Variant\Classical\Board as ClassicalBoard;
+
 /**
  * PgnExplanation
  *
@@ -32,27 +34,17 @@ class PgnExplanation
     private bool $isEvaluated;
 
     /**
-     * Variant.
-     *
-     * @var string
-     */
-    private string $variant;
-
-    /**
      * Constructor.
      *
      * @param string $pgn
-     * @param string $fen
+     * @param \Chess\Variant\Classical\Board $board
      * @param bool $isEvaluated
-     * @param string $variant
      */
-    public function __construct(string $pgn, string $fen, bool $isEvaluated = false, string $variant = '')
+    public function __construct(string $pgn, ClassicalBoard $board, bool $isEvaluated = false)
     {
-        $this->fenExplanation = new FenExplanation($fen, $variant);
+        $this->fenExplanation = new FenExplanation($board);
 
         $this->isEvaluated = $isEvaluated;
-
-        $this->variant = $variant;
 
         $this->explain($pgn);
     }
@@ -77,7 +69,7 @@ class PgnExplanation
     {
         $board = $this->fenExplanation->getBoard();
         $board->play($board->getTurn(), $pgn);
-        $fenParagraph = new FenExplanation($board->toFen(), $this->isEvaluated, $this->variant);
+        $fenParagraph = new FenExplanation($board, $this->isEvaluated);
         foreach ($fenParagraph->getParagraph() as $key => $val) {
             if (!in_array($val, $this->fenExplanation->getParagraph())) {
                 $this->paragraph[] = $val;

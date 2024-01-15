@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\Tutor;
 
+use Chess\FenToBoard;
 use Chess\Play\SanPlay;
 use Chess\Tutor\FenExplanation;
 use Chess\Tests\AbstractUnitTestCase;
@@ -22,7 +23,7 @@ class FenExplanationTest extends AbstractUnitTestCase
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
         $board = (new SanPlay($A08))->validate()->getBoard();
 
-        $paragraph = (new FenExplanation($board->toFen()))->getParagraph();
+        $paragraph = (new FenExplanation($board))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
@@ -41,8 +42,9 @@ class FenExplanationTest extends AbstractUnitTestCase
             "White has the bishop pair.",
         ];
 
-        $paragraph = (new FenExplanation('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1'))
-            ->getParagraph();
+        $board = FenToBoard::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
@@ -62,10 +64,9 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black.",
         ];
 
-        $paragraph = (new FenExplanation(
-            '8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1',
-            $isEvaluated = true
-        ))->getParagraph();
+        $board = FenToBoard::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
+
+        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
@@ -82,10 +83,9 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black.",
         ];
 
-        $paragraph = (new FenExplanation(
-            'rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -',
-            $isEvaluated = true
-        ))->getParagraph();
+        $board = FenToBoard::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
+
+        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }

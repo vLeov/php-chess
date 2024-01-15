@@ -5,13 +5,8 @@ namespace Chess\Tutor;
 use Chess\Function\StandardFunction;
 use Chess\Heuristics\FenHeuristics;
 use Chess\ML\Supervised\Classification\CountLabeller;
-use Chess\Variant\Capablanca\Board as CapablancaBoard;
-use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
-use Chess\Variant\CapablancaFischer\Board as CapablancaFischerBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 /**
  * FenExplanation
@@ -45,21 +40,12 @@ class FenExplanation
     /**
      * Constructor.
      *
-     * @param string $fen
+     * @param \Chess\Variant\Classical\Board $board
      * @param bool $isEvaluated
-     * @param string $variant
      */
-    public function __construct(string $fen, bool $isEvaluated = false, string $variant = '')
+    public function __construct(ClassicalBoard $board, bool $isEvaluated = false)
     {
-        if ($variant === Chess960Board::VARIANT) {
-            $this->board = (new ClassicalFenStrToBoard($fen))->create();
-        } elseif ($variant === CapablancaBoard::VARIANT) {
-            $this->board = (new CapablancaFenStrToBoard($fen))->create();
-        } elseif ($variant === CapablancaFischerBoard::VARIANT) {
-            $this->board = (new CapablancaFenStrToBoard($fen))->create();
-        } else {
-            $this->board = (new ClassicalFenStrToBoard($fen))->create();
-        }
+        $this->board = $board;
 
         $this->function = new StandardFunction();
 
