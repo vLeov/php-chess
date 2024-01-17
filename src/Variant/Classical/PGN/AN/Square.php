@@ -48,8 +48,6 @@ class Square extends AbstractNotation implements ValidationInterface
      */
      public static function color(string $sq): string
      {
-        static::validate($sq);
-
         $file = $sq[0];
         $rank = substr($sq, 1);
 

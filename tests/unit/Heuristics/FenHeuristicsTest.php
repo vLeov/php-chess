@@ -4,6 +4,7 @@ namespace Chess\Tests\Unit;
 
 use Chess\Heuristics\FenHeuristics;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Capablanca\Board as CapablancaBoard;
 
 class FenHeuristicsTest extends AbstractUnitTestCase
 {
@@ -87,6 +88,20 @@ class FenHeuristicsTest extends AbstractUnitTestCase
         $balance = (new FenHeuristics($fen))->getBalance();
 
         $expected = [ 1.0, 5.66, -12.0, 2.0, 3.0, 4.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0 ];
+
+        $this->assertEquals($expected, $balance);
+    }
+
+    /**
+     * @test
+     */
+    public function capablanca_f4()
+    {
+        $fen = 'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3';
+
+        $balance = (new FenHeuristics($fen, CapablancaBoard::VARIANT))->getBalance();
+
+        $expected = [ 0, 12, -3, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
         $this->assertEquals($expected, $balance);
     }
