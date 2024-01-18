@@ -6,6 +6,7 @@ use Chess\FenToBoard;
 use Chess\Play\SanPlay;
 use Chess\Tutor\FenExplanation;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Capablanca\Board as CapablancaBoard;
 
 class FenExplanationTest extends AbstractUnitTestCase
 {
@@ -84,6 +85,29 @@ class FenExplanationTest extends AbstractUnitTestCase
         ];
 
         $board = FenToBoard::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
+
+        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
+    public function evaluated_capablanca_f4()
+    {
+        $expected = [
+            "White is just controlling the center.",
+            "The black pieces are significantly better connected.",
+            "White has a total space advantage.",
+            "The white player is pressuring a little bit more squares than its opponent.",
+            "Overall, 3 heuristic evaluation features are favoring White while 1 is favoring Black.",
+        ];
+
+        $board = FenToBoard::create(
+            'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
+            new CapablancaBoard()
+        );
 
         $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 

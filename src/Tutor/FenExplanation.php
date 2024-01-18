@@ -52,7 +52,7 @@ class FenExplanation
         $this->explain();
 
         if ($isEvaluated) {
-            $balance = (new FenHeuristics($this->board->toFen()))->getBalance();
+            $balance = (new FenHeuristics($this->board))->getBalance();
             $label = (new CountLabeller())->label($balance);
             $this->paragraph[] = "Overall, {$label[Color::W]} {$this->noun($label[Color::W])} {$this->verb($label[Color::W])} favoring White while {$label[Color::B]} {$this->verb($label[Color::B])} favoring Black.";
         }

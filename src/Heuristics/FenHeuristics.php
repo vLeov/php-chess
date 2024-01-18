@@ -4,18 +4,13 @@ namespace Chess\Heuristics;
 
 use Chess\Eval\InverseEvalInterface;
 use Chess\Function\StandardFunction;
-use Chess\Variant\Capablanca\Board as CapablancaBoard;
-use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
-use Chess\Variant\CapablancaFischer\Board as CapablancaFischerBoard;
-use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
  * FenHeuristics
  *
- * SanHeuristics transforms a FEN position to numbers for further processing
+ * FenHeuristics transforms a FEN position to numbers for further processing
  * with ML techniques.
  *
  * @author Jordi Bassagaña
@@ -54,20 +49,11 @@ class FenHeuristics
     /**
      * Constructor.
      *
-     * @param string $fen
-     * @param string $variant
+     * @param \Chess\Variant\Classical\Board $board
      */
-    public function __construct(string $fen, string $variant = '')
+    public function __construct(ClassicalBoard $board)
     {
-        if ($variant === Chess960Board::VARIANT) {
-            $this->board = (new ClassicalFenStrToBoard($fen))->create();
-        } elseif ($variant === CapablancaBoard::VARIANT) {
-            $this->board = (new CapablancaFenStrToBoard($fen))->create();
-        } elseif ($variant === CapablancaFischerBoard::VARIANT) {
-            $this->board = (new CapablancaFenStrToBoard($fen))->create();
-        } else {
-            $this->board = (new ClassicalFenStrToBoard($fen))->create();
-        }
+        $this->board = $board;
 
         $this->function = new StandardFunction();
 
