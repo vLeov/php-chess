@@ -26,7 +26,6 @@ class SqOutpostEval extends AbstractEval
             Color::B => [],
         ];
 
-        $sqs = [];
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() === Piece::P) {
                 $captureSqs = $piece->getCaptureSqs();
