@@ -3,7 +3,6 @@
 namespace Chess\Eval;
 
 use Chess\Piece\P;
-use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -34,33 +33,22 @@ class IsolatedPawnEval extends AbstractEval implements InverseEvalInterface
 
     private function isIsolatedPawn(P $pawn): int
     {
-        $color = $pawn->getColor();
-        $pawnFile = $pawn->getSqFile();
-
-        $prevFile = chr(ord($pawnFile) - 1);
-        $nextFile = chr(ord($pawnFile) + 1);
-
-        $sqs = [];
-        foreach ([ $prevFile, $nextFile ] as $file) {
-            if ($file < 'a' || $file > 'h') {
-                continue;
+        $left = chr(ord($pawn->getSq()) - 1);
+        $right = chr(ord($pawn->getSq()) + 1);
+        for ($i = 2; $i < $this->board->getSize()['ranks']; $i++) {
+            if ($piece = $this->board->getPieceBySq($left.$i)) {
+                if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()) {
+                    return false;
+                }
             }
-            $ranks = range(2, 7);
-            $sqsFile = array_map(function($rank) use ($file){
-                return $file . $rank;
-            }, $ranks);
-            $sqs = [...$sqs, ...$sqsFile];
-        }
-
-        foreach ($sqs as $sq) {
-            if ($nextPiece = $this->board->getPieceBySq($sq)) {
-                if ($nextPiece->getId() === Piece::P && $nextPiece->getColor() === $color) {
-                    return 0;
+            if ($piece = $this->board->getPieceBySq($right.$i)) {
+                if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()) {
+                    return false;
                 }
             }
         }
 
-        return 1;
+        return true;
     }
 
     private function explain(array $result): void
