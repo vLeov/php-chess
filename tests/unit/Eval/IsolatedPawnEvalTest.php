@@ -2,9 +2,11 @@
 
 namespace Chess\Tests\Unit\Eval;
 
+use Chess\FenToBoard;
 use Chess\Eval\IsolatedPawnEval;
 use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
@@ -121,5 +123,25 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
         $this->assertSame($expectedPhrase, $isolatedPawnEval->getPhrases());
+    }
+
+    /**
+     * @test
+     */
+    public function capablanca_f4()
+    {
+        $expectedResult = [
+            'w' => [],
+            'b' => [],
+        ];
+
+        $board = FenToBoard::create(
+            'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
+            new CapablancaBoard()
+        );
+
+        $isolatedPawnEval = new IsolatedPawnEval($board);
+
+        $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
     }
 }
