@@ -46,14 +46,17 @@ Listed below are the chess heuristics implemented in PHP Chess.
 The evaluation features are used in two heuristics classes: [Chess\Heuristics\FenHeuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Heuristics/FenHeuristicsTest.php) and [Chess\Heuristics\SanHeuristics](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Heuristics/SanHeuristicsTest.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
 
 ```php
+use Chess\FenToBoard;
 use Chess\Function\StandardFunction;
 use Chess\Heuristics\FenHeuristics;
 
 $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
 
+$board = FenToBoard::create($fen);
+
 $result = [
     'names' => (new StandardFunction())->names(),
-    'balance' => (new FenHeuristics($fen))->getBalance(),
+    'balance' => (new FenHeuristics($board))->getBalance(),
 ];
 
 print_r($result);
