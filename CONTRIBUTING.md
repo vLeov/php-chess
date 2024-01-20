@@ -23,10 +23,3 @@ $ git checkout -b issue/236-update-to-MUI-5
 ```
 
 That's it!
-
-For further information please visit:
-
-- [PHP Chess Docs](https://php-chess.readthedocs.io/en/latest/)
-- [PHP Chess Server](https://github.com/chesslablab/chess-server)
-- [Redux Chess](https://github.com/chesslablab/redux-chess)
-- [Redux Chess Testing Application](https://github.com/chesslablab/testing-redux-chess)
