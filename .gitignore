@@ -7,3 +7,5 @@ composer.lock
 /storage/tmp/*.jpg
 /tests/tmp/*.png
 /vendor/
+
+/site/
