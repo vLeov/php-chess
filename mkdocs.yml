@@ -1,5 +1,5 @@
 site_name: PHP Chess
-pages:
+nav:
   - Features: index.md
   - Installation: installation.md
   - Getting Started: getting-started.md
