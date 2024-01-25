@@ -1,4 +1,4 @@
-# Features
+# PHP Chess
 
 PHP Chess is a library implemented in PHP that allows to create chess apps out-of-the-box.
 
