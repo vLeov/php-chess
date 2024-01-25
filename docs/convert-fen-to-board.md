@@ -4,7 +4,7 @@
 
 Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoard](https://github.com/chesslablab/php-chess/blob/master/src/FenToBoard.php) class according to the variants supported.
 
-Let's continue a classical game from the FEN position of B54, which is the ECO code for "Sicilian Defense: Modern Variations, Main Line" previously discussed in [Read PGN](https://php-chess.readthedocs.io/en/latest/read-pgn/).
+Let's continue a classical game from the FEN position of B54, which is the ECO code for "Sicilian Defense: Modern Variations, Main Line" previously discussed in [Read PGN](https://php-chess.docs.chesslablab.org/read-pgn/).
 
 ```php
 use Chess\FenToBoard;

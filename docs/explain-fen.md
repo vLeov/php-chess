@@ -2,7 +2,7 @@
 
 ✨ Chess beginners often think they can checkmate the opponent's king quickly. However, there are so many different things to consider in order to understand a position.
 
-[Chess\Tutor\FenExplanation](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Tutor/FenExplanationTest.php) helps you improve your chess thinking process by explaining a FEN position in terms of [chess concepts](https://php-chess.readthedocs.io/en/latest/heuristics/) like a tutor would do.
+[Chess\Tutor\FenExplanation](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Tutor/FenExplanationTest.php) helps you improve your chess thinking process by explaining a FEN position in terms of [chess concepts](https://php-chess.docs.chesslablab.org/heuristics/).
 
 ```php
 use Chess\FenToBoard;

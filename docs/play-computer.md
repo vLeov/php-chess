@@ -57,7 +57,7 @@ echo $board->getMovetext();
 1.Qb4
 ```
 
-The FEN is converted to a chessboard object as described in [Convert FEN to Board](https://php-chess.readthedocs.io/en/latest/convert-fen-to-board/). The `Skill Level` is set to `20` and the depth is set to `12` in order to get a more accurate response from Stockfish.
+The FEN is converted to a chessboard object as described in [Convert FEN to Board](https://php-chess.docs.chesslablab.org/convert-fen-to-board/). The `Skill Level` is set to `20` and the depth is set to `12` in order to get a more accurate response from Stockfish.
 
 The same thing goes for PGN annotated games. This is how to play against Stockfish after loading a SAN movetext into a chess board object.
 

@@ -9,13 +9,6 @@
 
 A chess library for PHP.
 
-### Install
-
-Via composer:
-```
-composer require chesslablab/php-chess
-```
-
 ### Documentation
 
 Read the latest docs [here](https://php-chess.docs.chesslablab.org/).
