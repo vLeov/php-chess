@@ -1,5 +1,12 @@
 # PHP Chess
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Contributing](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![Contributors](https://img.shields.io/github/contributors/chesslablab/php-chess)](https://github.com/chesslablab/php-chess/graphs/contributors)
+[![Downloads](https://img.shields.io/packagist/dt/chesslablab/php-chess.svg)](https://packagist.org/packages/chesslablab/php-chess)
+[![Latest Stable Version](https://poser.pugx.org/chesslablab/php-chess/v/stable)](https://packagist.org/packages/chesslablab/php-chess)
+![GitHub Workflow Status](https://github.com/chesslablab/php-chess/actions/workflows/php.yml/badge.svg)
+
 PHP Chess is a library implemented in PHP that allows to create chess apps out-of-the-box.
 
 One key feature is that it has been designed with OOP principles in mind and is thoroughly tested with plenty of unit tests. The unit tests are the best documentation. They contain hundreds of real examples on how to use the PHP Chess library.
