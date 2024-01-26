@@ -3,7 +3,6 @@
 namespace Chess\Variant\Classical;
 
 use Chess\FenToBoard;
-use Chess\Eval\PressureEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqCount;
 use Chess\Piece\AbstractPiece;
@@ -112,13 +111,6 @@ class Board extends \SplObjectStorage
     private array $observers;
 
     /**
-     * Pressure evaluation.
-     *
-     * @var object
-     */
-    private object $pressureEval;
-
-    /**
      * Space evaluation.
      *
      * @var object
@@ -223,16 +215,6 @@ class Board extends \SplObjectStorage
     public function getSqCount(): object
     {
         return $this->sqCount;
-    }
-
-    /**
-     * Returns the pressure evaluation.
-     *
-     * @return object
-     */
-    public function getPressureEval(): object
-    {
-        return $this->pressureEval;
     }
 
     /**
@@ -940,7 +922,6 @@ class Board extends \SplObjectStorage
             ->attachPieces()
             ->notifyPieces();
 
-        $this->pressureEval = (object) (new PressureEval($this))->getResult();
         $this->spaceEval = (object) (new SpaceEval($this))->getResult();
 
         $this->notifyPieces();
