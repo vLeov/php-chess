@@ -1,6 +1,6 @@
 # PHP Chess
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit/)
 [![Contributors](https://img.shields.io/github/contributors/chesslablab/php-chess)](https://github.com/chesslablab/php-chess/graphs/contributors)
 [![Downloads](https://img.shields.io/packagist/dt/chesslablab/php-chess.svg)](https://packagist.org/packages/chesslablab/php-chess)
 [![Latest Stable Version](https://poser.pugx.org/chesslablab/php-chess/v/stable)](https://packagist.org/packages/chesslablab/php-chess)
