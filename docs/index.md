@@ -1,7 +1,6 @@
 # PHP Chess
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Contributing](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![Contributors](https://img.shields.io/github/contributors/chesslablab/php-chess)](https://github.com/chesslablab/php-chess/graphs/contributors)
 [![Downloads](https://img.shields.io/packagist/dt/chesslablab/php-chess.svg)](https://packagist.org/packages/chesslablab/php-chess)
 [![Latest Stable Version](https://poser.pugx.org/chesslablab/php-chess/v/stable)](https://packagist.org/packages/chesslablab/php-chess)
@@ -25,15 +24,15 @@ The PHP Chess docs are more of a tutorial rather than an API description.
 - Chess board conversion to PNG and JPG image.
 - Chess board conversion to MP4 video.
 
-| Acronym | Description |
-| ------- | ---------- |
-| LAN | Long Algebraic Notation |
-| PGN | Portable Game Notation |
-| SAN | Standard Algebraic Notation |
-| RAV | Recursive Annotation Variation |
-| NAG | Numeric Annotation Glyphs |
-| UCI | Universal Chess Interface |
-| FEN | Forsyth-Edwards Notation |
+| Acronym | Description                    |
+| :------ | :----------------------------- |
+| LAN     | Long Algebraic Notation        |
+| PGN     | Portable Game Notation         |
+| SAN     | Standard Algebraic Notation    |
+| RAV     | Recursive Annotation Variation |
+| NAG     | Numeric Annotation Glyphs      |
+| UCI     | Universal Chess Interface      |
+| FEN     | Forsyth-Edwards Notation       |
 
 ## Chess Variants
 
