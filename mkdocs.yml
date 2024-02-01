@@ -1,4 +1,5 @@
 site_name: PHP Chess
+site_url: https://php-chess.docs.chesslablab.org/
 theme:
   name: readthedocs
 nav:
