@@ -16,6 +16,7 @@ use Chess\Eval\ConnectivityEval;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\DiagonalOppositionEval;
 use Chess\Eval\DirectOppositionEval;
+use Chess\Eval\DiscoveredCheckEval;
 use Chess\Eval\DoubledPawnEval;
 use Chess\Eval\FarAdvancedPawnEval;
 use Chess\Eval\InverseEvalInterface;
@@ -48,7 +49,7 @@ class StandardFunction
      * @var array
      */
     protected $eval = [
-        MaterialEval::class => 19,
+        MaterialEval::class => 16,
         CenterEval::class => 3,
         ConnectivityEval::class => 3,
         SpaceEval::class => 3,
@@ -57,6 +58,7 @@ class StandardFunction
         ProtectionEval::class => 3,
         ThreatEval::class => 3,
         AttackEval::class => 3,
+        DiscoveredCheckEval::class => 3,
         DoubledPawnEval::class => 3,
         PassedPawnEval::class => 3,
         AdvancedPawnEval::class => 3,
