@@ -8,10 +8,10 @@ Multiple variants are supported with the default one being classical chess.
 
 | Variant | Chessboard |
 | ------- | ---------- |
-| Capablanca | [Chess\Variant\Capablanca\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Capablanca/BoardTest.php) |
-| Capablanca-Fischer | [Chess\Variant\CapablancaFischer\Board](https://github.com/chesslablab/php-chess/blob/master/src/Variant/CapablancaFischer/Board.php) |
-| Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Chess960/BoardTest.php) |
-| Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) |
+| Capablanca | [Chess\Variant\Capablanca\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Capablanca/BoardTest.php) |
+| Capablanca-Fischer | [Chess\Variant\CapablancaFischer\Board](https://github.com/chesslablab/php-chess/blob/main/src/Variant/CapablancaFischer/Board.php) |
+| Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Chess960/BoardTest.php) |
+| Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Classical/BoardTest.php) |
 
 There is no such thing as a chess opening in either Capablanca chess or Chess960. Those two variants were originally conceived to minimize memorization so when it comes to chess openings, it is assumed that we're in the realms of classical chess.
 
@@ -81,7 +81,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/SanPlayTest.php) allows to easily do so. As it name implies, this class is intended to play a Standard Algebaric Notation (SAN) movetext. The `validate()` method will throw a Chess\Exception\PlayException if the movetext is not valid.
+Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/SanPlayTest.php) allows to easily do so. As it name implies, this class is intended to play a Standard Algebaric Notation (SAN) movetext. The `validate()` method will throw a Chess\Exception\PlayException if the movetext is not valid.
 
 ```php
 use Chess\Play\SanPlay;
@@ -221,7 +221,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Also [Chess\Play\LanPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/LanPlayTest.php) allows to easily play a bunch of LAN moves at once instead of one by one. As it name implies, this class is intended to play a LAN movetext.
+Also [Chess\Play\LanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/LanPlayTest.php) allows to easily play a bunch of LAN moves at once instead of one by one. As it name implies, this class is intended to play a LAN movetext.
 
 ```php
 use Chess\Play\LanPlay;
@@ -262,12 +262,12 @@ Sicilian Defense. (2023, July 2). In Wikipedia. [https://en.wikipedia.org/wiki/S
 
 Then all you need is a RAV reader.
 
-![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/read-moves_01.png)
+![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/main/docs/read-moves_01.png)
 Figure 1. The response received from PHP Chess can be displayed as an HTML table.
 
 The RAV reader shown in Figure 1 displays the variation levels in different shades of gray. It is a 2D scrollable HTML table where the main line is shown in a white background color. The deeper the level, the darker the background color is displayed.
 
-Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the `getFen()` method. This method retrieves the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
+Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the `getFen()` method. This method retrieves the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
 
 ```php
 use Chess\Play\RavPlay;

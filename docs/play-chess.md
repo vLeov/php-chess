@@ -2,9 +2,9 @@
 
 ## Play Like a Pro
 
-✨ The [players.json](https://github.com/chesslablab/chess-server/blob/master/data/players.json) file in the [Chess Server](https://github.com/chesslablab/chess-server) contains thousands of games by titled FIDE players. This file can be generated and customized with the command line tools available in the [Chess Data](https://github.com/chesslablab/chess-data) repo.
+✨ The [players.json](https://github.com/chesslablab/chess-server/blob/main/data/players.json) file in the [Chess Server](https://github.com/chesslablab/chess-server) contains thousands of games by titled FIDE players. This file can be generated and customized with the command line tools available in the [Chess Data](https://github.com/chesslablab/chess-data) repo.
 
-[Chess\Grandmaster](https://github.com/chesslablab/php-chess/blob/master/tests/unit/GrandmasterTest.php) figures out the next move to be made based on the JSON file that is passed to its constructor. Please make sure to first create one for it or feel free to use the players.json linked above.
+[Chess\Grandmaster](https://github.com/chesslablab/php-chess/blob/main/tests/unit/GrandmasterTest.php) figures out the next move to be made based on the JSON file that is passed to its constructor. Please make sure to first create one for it or feel free to use the players.json linked above.
 
 ```php
 use Chess\Grandmaster;
@@ -45,7 +45,7 @@ stdClass Object
 
 ✨ UCI engines not only allow to play chess with the computer but are also a helpful tool when analyzing chess games.
 
-[Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/master/tests/unit/UciEngine/StockfishTest.php) allows to play chess against the Stockfish chess engine using PHP, but first things first, make sure to install it on your computer.
+[Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/main/tests/unit/UciEngine/StockfishTest.php) allows to play chess against the Stockfish chess engine using PHP, but first things first, make sure to install it on your computer.
 
 ```text
 sudo apt-get install stockfish

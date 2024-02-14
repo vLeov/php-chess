@@ -2,7 +2,7 @@
 
 ✨ Some familiarity with chess terms and concepts is required but if you're new to chess this tutorial will guide you through how to easily create amazing apps with PHP Chess. Happy coding and learning!
 
-The [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Variant/Classical/BoardTest.php) class is the easiest way to get started with PHP Chess.
+The [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Classical/BoardTest.php) class is the easiest way to get started with PHP Chess.
 
 ```php
 use Chess\Variant\Classical\Board;

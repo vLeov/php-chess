@@ -4,7 +4,7 @@
 
 ✨ FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings.
 
-Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoard](https://github.com/chesslablab/php-chess/blob/master/src/FenToBoard.php) class according to the variants supported.
+Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoard](https://github.com/chesslablab/php-chess/blob/main/src/FenToBoard.php) class according to the variants supported.
 
 Let's continue a classical game from the FEN position of B54, which is the ECO code for "Sicilian Defense: Modern Variations, Main Line" previously discussed in [Read PGN](https://php-chess.docs.chesslablab.org/read-pgn/).
 
@@ -112,7 +112,7 @@ rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -
 
 ✨ PNG stands for Portable Network Graphics and is a widely used format for image files. Not to be confused with PGN, the text-based file format to annotate chess games.
 
-[Chess\Media\BoardToPng](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToPngTest.php) converts a chess board object to a PNG image.
+[Chess\Media\BoardToPng](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Media/BoardToPngTest.php) converts a chess board object to a PNG image.
 
 ```php
 use Chess\FenToBoard;
@@ -123,7 +123,7 @@ $board = FenToBoard::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1
 $filename = (new BoardToPng($board, $flip = true))->output();
 ```
 
-![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/master/docs/data-conversion_01.png)
+![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/main/docs/data-conversion_01.png)
 
 🎉 Try this thing! Share a puzzling chess position with friends for further study.
 
@@ -131,7 +131,7 @@ $filename = (new BoardToPng($board, $flip = true))->output();
 
 ✨ Text-based PGN movetexts can be easily converted to MP4, a widely-used video format which comes in handy for pausing the games.
 
-[Chess\Media\BoardToMp4](https://github.com/chesslablab/php-chess/blob/master/tests/unit/Media/BoardToMp4Test.php) allows to convert a chess board object to an MP4 video.
+[Chess\Media\BoardToMp4](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Media/BoardToMp4Test.php) allows to convert a chess board object to an MP4 video.
 
 ```php
 use Chess\Media\BoardToMp4;
