@@ -18,7 +18,7 @@ The PHP Chess library is open-sourced software licensed under the MIT license.
 
 ### Contributions
 
-We encourage you to contribute to PHP Chess! Please follow the [Contributing Guidelines](https://github.com/chesslablab/php-chess/blob/master/CONTRIBUTING.md).
+We encourage you to contribute to PHP Chess! Please follow the [Contributing Guidelines](https://github.com/chesslablab/php-chess/blob/main/CONTRIBUTING.md).
 
 <a href="https://github.com/chesslablab/php-chess/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=chesslablab/php-chess" />
