@@ -2,7 +2,7 @@
   "name": "chesslablab/php-chess",
   "description": "A chess library for PHP.",
   "type": "library",
-  "license": "GPL-3.0-only",
+  "license": "MIT",
   "keywords": [
       "chess",
       "library",
