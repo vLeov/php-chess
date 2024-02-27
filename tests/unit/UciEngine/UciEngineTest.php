@@ -58,14 +58,14 @@ class UciEngineTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function analyse_e4_limit()
+    public function analysis_e4_limit()
     {
         $board = new Board();
         $board->play('w', 'e4');
 
         $limit = (new Limit())->setMovetime(3000);
         $stockfish = new UciEngine('/usr/games/stockfish');
-        $analysis = $stockfish->analyse($board, $limit);
+        $analysis = $stockfish->analysis($board, $limit);
 
         $expected = 'c7c5';
 
@@ -75,7 +75,7 @@ class UciEngineTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function analyse_e4_limit_set_options()
+    public function analysis_e4_limit_set_options()
     {
         $board = new Board();
         $board->play('w', 'e4');
@@ -86,7 +86,7 @@ class UciEngineTest extends AbstractUnitTestCase
             ->setOption('Skill Level', 20)
             ->setOption('UCI_Elo', 1500);
 
-        $analysis = $stockfish->analyse($board, $limit);
+        $analysis = $stockfish->analysis($board, $limit);
 
         $expected = 'c7c5';
 

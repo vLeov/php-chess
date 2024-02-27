@@ -105,14 +105,13 @@ class UciEngine
     }
 
     /**
-     * Analyse the board with the given limit and
-     * return the bestmove and all uci info lines.
+     * Board analysis returning the bestmove and all uci info lines.
      *
      * @param Board $board
      * @param Limit $limit
      * @return array
      */
-    public function analyse(Board $board, Limit $limit): array
+    public function analysis(Board $board, Limit $limit): array
     {
         $this->process->writeLine("position fen " . $board->toFen());
         $this->process->writeLine($this->buildGoCommand($limit));

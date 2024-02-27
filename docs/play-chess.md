@@ -63,7 +63,7 @@ $board->play('w', 'e4');
 
 $limit = (new Limit())->setDepth(3);
 $stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 9);
-$analysis = $stockfish->analyse($board, $limit);
+$analysis = $stockfish->analysis($board, $limit);
 
 $board->playLan('b', $analysis['bestmove']);
 
@@ -85,7 +85,7 @@ $board = FenToBoard::create('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w
 
 $limit = (new Limit())->setDepth(12);
 $stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 20);
-$analysis = $stockfish->analyse($board, $limit);
+$analysis = $stockfish->analysis($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
 
@@ -113,7 +113,7 @@ $board = (new SanPlay($movetext))
 
 $limit = (new Limit())->setDepth(12);
 $stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 20);
-$analysis = $stockfish->analyse($board, $limit);
+$analysis = $stockfish->analysis($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
 
