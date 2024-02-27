@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\UciEngine;
 
+use Chess\Grandmaster;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
@@ -9,6 +10,8 @@ use Chess\Variant\Classical\Board;
 
 class UciEngineTest extends AbstractUnitTestCase
 {
+    const FILEPATH = __DIR__.'/../../data/json/players.json';
+
     /**
      * @test
      */
@@ -91,5 +94,35 @@ class UciEngineTest extends AbstractUnitTestCase
         $expected = 'c7c5';
 
         $this->assertSame($expected, $analysis['bestmove']);
+    }
+
+    /**
+     * @test
+     */
+    public function play_against_itself()
+    {
+        $skillLevel = 14;
+        $skillLevelOffset = 3;
+
+        $depth = 6;
+        $depthOffset = 2;
+
+        $stockfish = (new UciEngine('/usr/games/stockfish'))
+            ->setOption('Skill Level', $skillLevel + rand(0, $skillLevelOffset));
+
+        $board = new Board();
+        $move = (new Grandmaster(self::FILEPATH))->move($board);
+
+        do {
+            $limit = (new Limit())->setDepth($depth + rand(0, $depthOffset));
+            $analysis = $stockfish
+                ->setOption('Skill Level', $skillLevel + rand(0, $skillLevelOffset))
+                ->analysis($board, $limit);
+            $this->assertTrue($board->playLan($board->getTurn(), $analysis['bestmove']));
+        } while (
+            !$board->isMate() &&
+            !$board->isStalemate() &&
+            count($board->getHistory()) < 250
+        );
     }
 }
