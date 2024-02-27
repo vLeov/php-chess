@@ -3,30 +3,20 @@
 namespace Chess\Tests\Unit\UciEngine;
 
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\UciEngine\Stockfish;
+use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
 use Chess\Variant\Classical\Board;
 
-class StockfishTest extends AbstractUnitTestCase
+class UciEngineTest extends AbstractUnitTestCase
 {
     /**
      * @test
      */
-    public function instantiation()
+    public function uci_engine_stockfish()
     {
-        $stockfish = new Stockfish();
+        $stockfish = new UciEngine('/usr/games/stockfish');
 
-        $this->assertTrue(is_a($stockfish, Stockfish::class));
-    }
-
-    /**
-     * @test
-     */
-    public function instantiation_with_path()
-    {
-        $stockfish = new Stockfish('/usr/games/stockfish');
-
-        $this->assertTrue(is_a($stockfish, Stockfish::class));
+        $this->assertTrue(is_a($stockfish, UciEngine::class));
     }
 
     /**
@@ -34,7 +24,7 @@ class StockfishTest extends AbstractUnitTestCase
      */
     public function get_options()
     {
-        $stockfish = new Stockfish();
+        $stockfish = new UciEngine('/usr/games/stockfish');
 
         $expected = [
             'Debug Log File',
@@ -76,7 +66,7 @@ class StockfishTest extends AbstractUnitTestCase
         $limit = new Limit();
         $limit->time = 3000;
 
-        $stockfish = new Stockfish();
+        $stockfish = new UciEngine('/usr/games/stockfish');
 
         $expected = 'c7c5';
         $analysis = $stockfish->analyse($board, $limit);
@@ -95,7 +85,7 @@ class StockfishTest extends AbstractUnitTestCase
         $limit = new Limit();
         $limit->depth = 8;
 
-        $stockfish = (new Stockfish())
+        $stockfish = (new UciEngine('/usr/games/stockfish'))
             ->setOption('Skill Level', 20)
             ->setOption('UCI_Elo', 1500);
 

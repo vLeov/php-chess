@@ -8,10 +8,8 @@ use Chess\UciEngine\Details\UCIInfoLine;
 use Chess\UciEngine\Details\UCIOption;
 use Chess\Variant\Classical\Board;
 
-class Stockfish
+class UciEngine
 {
-    const PATH = '/usr/games/stockfish';
-
     /**
      * Process for the engine.
      *
@@ -26,9 +24,9 @@ class Stockfish
      */
     private array $options;
 
-    public function __construct(string $path = '')
+    public function __construct(string $path)
     {
-        $this->process = new Process(!$path ? self::PATH : $path);
+        $this->process = new Process($path);
 
         $this->process->writeLine('uci');
         $this->process->readUntil('uciok');
@@ -89,7 +87,7 @@ class Stockfish
      * @param string $value
      * @return \Chess\UciEngine\Stockfish
      */
-    public function setOption(string $name, string $value): Stockfish
+    public function setOption(string $name, string $value): UciEngine
     {
         if (!array_key_exists($name, $this->options)) {
             throw new \InvalidArgumentException("Option $name does not exist");
