@@ -66,7 +66,7 @@ class UciEngineTest extends AbstractUnitTestCase
         $board = new Board();
         $board->play('w', 'e4');
 
-        $limit = (new Limit())->setMovetime(3000);
+        $limit = (new Limit())->setDepth(8);
         $stockfish = new UciEngine('/usr/games/stockfish');
         $analysis = $stockfish->analysis($board, $limit);
 
