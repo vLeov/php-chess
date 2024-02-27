@@ -37,28 +37,28 @@ class Limit
     private ?int $mate;
 
     /**
-     * Time to search in milliseconds.
+     * White has x msec left on the clock.
      *
      * @var int|null
      */
     private ?int $wtime;
 
     /**
-     * Time to search in milliseconds.
+     * Black has x msec left on the clock.
      *
      * @var int|null
      */
     private ?int $btime;
 
     /**
-     * Time to search in milliseconds.
+     * White increment per move in mseconds.
      *
      * @var int|null
      */
     private ?int $winc;
 
     /**
-     * Time to search in milliseconds.
+     * Black increment per move in mseconds.
      *
      * @var int|null
      */
