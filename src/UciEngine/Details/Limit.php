@@ -93,6 +93,11 @@ class Limit
         $this->movestogo = $movestogo;
     }
 
+    /**
+     * Returns the movetime param.
+     *
+     * @return int|null
+     */
     public function getMovetime(): ?int
     {
         return $this->movetime;
@@ -105,6 +110,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the depth param.
+     *
+     * @return int|null
+     */
     public function getDepth(): ?int
     {
         return $this->depth;
@@ -117,6 +127,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the nodes param.
+     *
+     * @return int|null
+     */
     public function getNodes(): ?int
     {
         return $this->nodes;
@@ -129,6 +144,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the mate param.
+     *
+     * @return int|null
+     */
     public function getMate(): ?int
     {
         return $this->mate;
@@ -141,6 +161,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the wtime param.
+     *
+     * @return int|null
+     */
     public function getWtime(): ?int
     {
         return $this->wtime;
@@ -153,6 +178,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the btime param.
+     *
+     * @return int|null
+     */
     public function getBtime(): ?int
     {
         return $this->btime;
@@ -165,6 +195,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the winc param.
+     *
+     * @return int|null
+     */
     public function getWinc(): ?int
     {
         return $this->winc;
@@ -177,6 +212,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the binc param.
+     *
+     * @return int|null
+     */
     public function getBinc(): ?int
     {
         return $this->binc;
@@ -189,6 +229,11 @@ class Limit
         return $this;
     }
 
+    /**
+     * Returns the movestogo param.
+     *
+     * @return int|null
+     */
     public function getMovestogo(): ?int
     {
         return $this->movestogo;
