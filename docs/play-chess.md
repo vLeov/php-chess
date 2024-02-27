@@ -78,26 +78,24 @@ PHP Chess classes can be combined to do different things. For example, you may w
 ```php
 use Chess\FenToBoard;
 use Chess\UciEngine\Stockfish;
+use Chess\UciEngine\Details\Limit;
 
 $board = FenToBoard::create('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -');
 
-$stockfish = (new Stockfish($board))
-    ->setOptions([
-        'Skill Level' => 20
-    ])
-    ->setParams([
-        'depth' => 12
-    ]);
+$limit = new Limit();
+$limit->depth = 12;
 
-$lan = $stockfish->play($board->toFen());
+$stockfish = (new Stockfish())->setOption('Skill Level', 20);
 
-$board->playLan('w', $lan);
+$analysis = $stockfish->analyse($board, $limit);
+
+$board->playLan('w', $analysis['bestmove']);
 
 echo $board->getMovetext();
 ```
 
 ```text
-1.Qb4
+1.Rb1
 ```
 
 The FEN is converted to a chessboard object as described in [Convert FEN to Board](https://php-chess.docs.chesslablab.org/convert-fen-to-board/). The `Skill Level` is set to `20` and the depth is set to `12` in order to get a more accurate response from Stockfish.
@@ -107,6 +105,7 @@ The same thing goes for PGN annotated games. This is how to play against Stockfi
 ```php
 use Chess\Play\SanPlay;
 use Chess\UciEngine\Stockfish;
+use Chess\UciEngine\Details\Limit;
 
 $movetext = '1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7';
 
@@ -114,23 +113,20 @@ $board = (new SanPlay($movetext))
     ->validate()
     ->getBoard();
 
-$stockfish = (new Stockfish($board))
-    ->setOptions([
-        'Skill Level' => 20
-    ])
-    ->setParams([
-        'depth' => 12
-    ]);
+$limit = new Limit();
+$limit->time = 3000;
 
-$lan = $stockfish->play($board->toFen());
+$stockfish = (new Stockfish())->setOption('Skill Level', 20);
 
-$board->playLan('w', $lan);
+$analysis = $stockfish->analyse($board, $limit);
+
+$board->playLan('w', $analysis['bestmove']);
 
 echo $board->getMovetext();
 ```
 
 ```text
-1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7 8.h3
+1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7 8.Nd2
 ```
 
 As you can see, Stockfish responds with 8.h3.
