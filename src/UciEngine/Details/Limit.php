@@ -62,7 +62,7 @@ class Limit
      *
      * @var int|null
      */
-    private ?int $blackInc;
+    private ?int $binc;
 
     /**
      * Remaining moves to the next time control.
@@ -79,7 +79,7 @@ class Limit
         $wtime = null,
         $btime = null,
         $winc = null,
-        $blackInc = null,
+        $binc = null,
         $remainingMoves = null
     ) {
         $this->movetime = $movetime;
@@ -89,7 +89,7 @@ class Limit
         $this->wtime = $wtime;
         $this->btime = $btime;
         $this->winc = $winc;
-        $this->blackInc = $blackInc;
+        $this->binc = $binc;
         $this->remainingMoves = $remainingMoves;
     }
 
@@ -177,14 +177,14 @@ class Limit
         return $this;
     }
 
-    public function getBlackInc(): ?int
+    public function getBinc(): ?int
     {
-        return $this->blackInc;
+        return $this->binc;
     }
 
-    public function setBlackInc(int $blackInc): Limit
+    public function setBinc(int $binc): Limit
     {
-        $this->blackInc = $blackInc;
+        $this->binc = $binc;
 
         return $this;
     }

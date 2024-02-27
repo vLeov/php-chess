@@ -186,8 +186,8 @@ class UciEngine
             $command .= ' winc ' . $limit->getWinc();
         }
 
-        if ($limit->getBlackInc() !== null) {
-            $command .= ' binc ' . $limit->getBlackInc();
+        if ($limit->getBinc() !== null) {
+            $command .= ' binc ' . $limit->getBinc();
         }
 
         if ($limit->getRemainingMoves() !== null) {
