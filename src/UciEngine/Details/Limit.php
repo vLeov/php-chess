@@ -55,7 +55,7 @@ class Limit
      *
      * @var int|null
      */
-    private ?int $whiteInc;
+    private ?int $winc;
 
     /**
      * Time to search in milliseconds.
@@ -78,7 +78,7 @@ class Limit
         $mate = null,
         $wtime = null,
         $btime = null,
-        $whiteInc = null,
+        $winc = null,
         $blackInc = null,
         $remainingMoves = null
     ) {
@@ -88,7 +88,7 @@ class Limit
         $this->mate = $mate;
         $this->wtime = $wtime;
         $this->btime = $btime;
-        $this->whiteInc = $whiteInc;
+        $this->winc = $winc;
         $this->blackInc = $blackInc;
         $this->remainingMoves = $remainingMoves;
     }
@@ -165,14 +165,14 @@ class Limit
         return $this;
     }
 
-    public function getWhiteInc(): ?int
+    public function getWinc(): ?int
     {
-        return $this->whiteInc;
+        return $this->winc;
     }
 
-    public function setWhiteInc(int $whiteInc): Limit
+    public function setWinc(int $winc): Limit
     {
-        $this->whiteInc = $whiteInc;
+        $this->winc = $winc;
 
         return $this;
     }

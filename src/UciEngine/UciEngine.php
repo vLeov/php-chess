@@ -182,8 +182,8 @@ class UciEngine
             $command .= ' btime ' . $limit->getBtime();
         }
 
-        if ($limit->getWhiteInc() !== null) {
-            $command .= ' winc ' . $limit->getWhiteInc();
+        if ($limit->getWinc() !== null) {
+            $command .= ' winc ' . $limit->getWinc();
         }
 
         if ($limit->getBlackInc() !== null) {
