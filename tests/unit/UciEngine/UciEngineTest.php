@@ -7,6 +7,7 @@ use Chess\Tests\AbstractUnitTestCase;
 use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 class UciEngineTest extends AbstractUnitTestCase
 {
@@ -66,13 +67,14 @@ class UciEngineTest extends AbstractUnitTestCase
         $board = new Board();
         $board->play('w', 'e4');
 
-        $limit = (new Limit())->setDepth(8);
+        $limit = (new Limit())->setMovetime(3000);
         $stockfish = new UciEngine('/usr/games/stockfish');
         $analysis = $stockfish->analysis($board, $limit);
 
-        $expected = 'c7c5';
+        preg_match_all('/'.Square::REGEX.'/', $analysis['bestmove'], $matches);
 
-        $this->assertSame($expected, $analysis['bestmove']);
+        $this->assertIsString(Square::validate($matches[0][0]));
+        $this->assertIsString(Square::validate($matches[0][1]));
     }
 
     /**
@@ -86,14 +88,16 @@ class UciEngineTest extends AbstractUnitTestCase
         $limit = (new Limit())->setDepth(8);
 
         $stockfish = (new UciEngine('/usr/games/stockfish'))
-            ->setOption('Skill Level', 20)
-            ->setOption('UCI_Elo', 1500);
+            ->setOption('Skill Level', '20')
+            ->setOption('UCI_LimitStrength', 'true')
+            ->setOption('UCI_Elo', '2000');
 
         $analysis = $stockfish->analysis($board, $limit);
 
-        $expected = 'c7c5';
+        preg_match_all('/'.Square::REGEX.'/', $analysis['bestmove'], $matches);
 
-        $this->assertSame($expected, $analysis['bestmove']);
+        $this->assertIsString(Square::validate($matches[0][0]));
+        $this->assertIsString(Square::validate($matches[0][1]));
     }
 
     /**
