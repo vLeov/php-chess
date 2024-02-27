@@ -69,7 +69,7 @@ class Limit
      *
      * @var int|null
      */
-    private ?int $remainingMoves;
+    private ?int $movestogo;
 
     public function __construct(
         $movetime = null,
@@ -80,7 +80,7 @@ class Limit
         $btime = null,
         $winc = null,
         $binc = null,
-        $remainingMoves = null
+        $movestogo = null
     ) {
         $this->movetime = $movetime;
         $this->depth = $depth;
@@ -90,7 +90,7 @@ class Limit
         $this->btime = $btime;
         $this->winc = $winc;
         $this->binc = $binc;
-        $this->remainingMoves = $remainingMoves;
+        $this->movestogo = $movestogo;
     }
 
     public function getMovetime(): ?int
@@ -189,14 +189,14 @@ class Limit
         return $this;
     }
 
-    public function getRemainintMoves(): ?int
+    public function getMovestogo(): ?int
     {
-        return $this->remainingMoves;
+        return $this->movestogo;
     }
 
-    public function setRemainintMoves(int $remainingMoves): Limit
+    public function setMovestogo(int $movestogo): Limit
     {
-        $this->remainingMoves = $remainingMoves;
+        $this->movestogo = $movestogo;
 
         return $this;
     }

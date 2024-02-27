@@ -190,8 +190,8 @@ class UciEngine
             $command .= ' binc ' . $limit->getBinc();
         }
 
-        if ($limit->getRemainingMoves() !== null) {
-            $command .= ' movestogo ' . $limit->getRemainingMoves();
+        if ($limit->getMovestogo() !== null) {
+            $command .= ' movestogo ' . $limit->getMovestogo();
         }
 
         return $command;
