@@ -55,22 +55,24 @@ Then, you're set up to play chess against Stockfish as described in the followin
 
 ```php
 use Chess\UciEngine\Stockfish;
+use Chess\UciEngine\Details\Limit;
 use Chess\Variant\Classical\Board;
 
 $board = new Board();
 $board->play('w', 'e4');
 
-$stockfish = (new Stockfish($board))
-    ->setOptions([
-        'Skill Level' => 9
-    ])
-    ->setParams([
-        'depth' => 3
-    ]);
+$stockfish = (new Stockfish())->setOption('Skill Level', 9);
+$limit = new Limit();
+$limit->depth = 3;
+$analysis = $stockfish->analyse($board, $limit);
 
-$lan = $stockfish->play($board->toFen());
+$board->playLan('b', $analysis['bestmove']);
 
-$board->playLan('b', $lan);
+echo $board->getMovetext();
+```
+
+```text
+1.e4 Nf6
 ```
 
 PHP Chess classes can be combined to do different things. For example, you may want to play against Stockfish from this FEN position published in your favorite online publication.
@@ -82,11 +84,9 @@ use Chess\UciEngine\Details\Limit;
 
 $board = FenToBoard::create('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -');
 
+$stockfish = (new Stockfish())->setOption('Skill Level', 20);
 $limit = new Limit();
 $limit->depth = 12;
-
-$stockfish = (new Stockfish())->setOption('Skill Level', 20);
-
 $analysis = $stockfish->analyse($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
@@ -113,11 +113,9 @@ $board = (new SanPlay($movetext))
     ->validate()
     ->getBoard();
 
-$limit = new Limit();
-$limit->time = 3000;
-
 $stockfish = (new Stockfish())->setOption('Skill Level', 20);
-
+$limit = new Limit();
+$limit->depth = 12;
 $analysis = $stockfish->analyse($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
@@ -126,7 +124,7 @@ echo $board->getMovetext();
 ```
 
 ```text
-1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7 8.Nd2
+1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7 8.h3
 ```
 
 As you can see, Stockfish responds with 8.h3.
