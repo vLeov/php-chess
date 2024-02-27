@@ -71,6 +71,19 @@ class Limit
      */
     private ?int $movestogo;
 
+    /**
+     * Constructor.
+     *
+     * @param int|null $movetime
+     * @param int|null $depth
+     * @param int|null $nodes
+     * @param int|null $mate
+     * @param int|null $wtime
+     * @param int|null $btime
+     * @param int|null $winc
+     * @param int|null $binc
+     * @param int|null $movestogo
+     */
     public function __construct(
         $movetime = null,
         $depth = null,
@@ -103,6 +116,12 @@ class Limit
         return $this->movetime;
     }
 
+    /**
+     * Sets the movetime param.
+     *
+     * @param int $movetime
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setMovetime(int $movetime): Limit
     {
         $this->movetime = $movetime;
@@ -120,6 +139,12 @@ class Limit
         return $this->depth;
     }
 
+    /**
+     * Sets the depth param.
+     *
+     * @param int $depth
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setDepth(int $depth): Limit
     {
         $this->depth = $depth;
@@ -137,6 +162,12 @@ class Limit
         return $this->nodes;
     }
 
+    /**
+     * Sets the nodes param.
+     *
+     * @param int $nodes
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setNodes(int $nodes): Limit
     {
         $this->nodes = $nodes;
@@ -154,6 +185,12 @@ class Limit
         return $this->mate;
     }
 
+    /**
+     * Sets the mate param.
+     *
+     * @param int $mate
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setMate(int $mate): Limit
     {
         $this->mate = $mate;
@@ -171,6 +208,12 @@ class Limit
         return $this->wtime;
     }
 
+    /**
+     * Sets the wtime param.
+     *
+     * @param int $wtime
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setWtime(int $wtime): Limit
     {
         $this->wtime = $wtime;
@@ -188,6 +231,12 @@ class Limit
         return $this->btime;
     }
 
+    /**
+     * Sets the btime param.
+     *
+     * @param int $btime
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setBtime(int $btime): Limit
     {
         $this->btime = $btime;
@@ -205,6 +254,12 @@ class Limit
         return $this->winc;
     }
 
+    /**
+     * Sets the winc param.
+     *
+     * @param int $winc
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setWinc(int $winc): Limit
     {
         $this->winc = $winc;
@@ -222,6 +277,12 @@ class Limit
         return $this->binc;
     }
 
+    /**
+     * Sets the binc param.
+     *
+     * @param int $binc
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setBinc(int $binc): Limit
     {
         $this->binc = $binc;
@@ -239,6 +300,12 @@ class Limit
         return $this->movestogo;
     }
 
+    /**
+     * Sets the movestogo param.
+     *
+     * @param int $movestogo
+     * @return \Chess\UciEngine\Details\Limit
+     */
     public function setMovestogo(int $movestogo): Limit
     {
         $this->movestogo = $movestogo;
