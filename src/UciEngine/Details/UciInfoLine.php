@@ -9,7 +9,7 @@ use Chess\UciEngine\Details\Type;
 /**
  * UCI Info Line Structure for handling the analysis info.
  */
-class UCIInfoLine implements JsonSerializable
+class UciInfoLine implements JsonSerializable
 {
     /**
      * Depth of the search.
@@ -92,18 +92,18 @@ class UCIInfoLine implements JsonSerializable
     }
 
     /**
-     * Combine multiple UCIInfoLine together, the returned
+     * Combine multiple UciInfoLine together, the returned
      * object will contain the latest data for each available key.
      *
      * @param array $infoLines
-     * @return UCIInfoLine
+     * @return UciInfoLine
      */
-    public static function aggregateInfo(array $infoLines): UCIInfoLine
+    public static function aggregateInfo(array $infoLines): UciInfoLine
     {
-        $combined = new UCIInfoLine('');
+        $combined = new UciInfoLine('');
 
         foreach ($infoLines as $infoLine) {
-            $infoLine = new UCIInfoLine($infoLine);
+            $infoLine = new UciInfoLine($infoLine);
 
             foreach (get_object_vars($infoLine) as $key => $value) {
                 if ($value !== null) {

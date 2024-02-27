@@ -4,7 +4,7 @@ namespace Chess\UciEngine;
 
 use Chess\UciEngine\Details\Limit;
 use Chess\UciEngine\Details\Process;
-use Chess\UciEngine\Details\UCIInfoLine;
+use Chess\UciEngine\Details\UciInfoLine;
 use Chess\UciEngine\Details\UCIOption;
 use Chess\Variant\Classical\Board;
 
@@ -120,7 +120,7 @@ class UciEngine
         return [
             "bestmove" => explode(' ', end($output))[1],
             "info" => array_map(function ($line) {
-                return new UCIInfoLine($line);
+                return new UciInfoLine($line);
             }, $output)
         ];
     }
