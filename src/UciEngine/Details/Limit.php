@@ -12,7 +12,7 @@ class Limit
      *
      * @var int|null
      */
-    private ?int $time;
+    private ?int $movetime;
 
     /**
      * Depth to search.
@@ -72,7 +72,7 @@ class Limit
     private ?int $remainingMoves;
 
     public function __construct(
-        $time = null,
+        $movetime = null,
         $depth = null,
         $nodes = null,
         $mate = null,
@@ -82,7 +82,7 @@ class Limit
         $blackInc = null,
         $remainingMoves = null
     ) {
-        $this->time = $time;
+        $this->movetime = $movetime;
         $this->depth = $depth;
         $this->nodes = $nodes;
         $this->mate = $mate;
@@ -93,14 +93,14 @@ class Limit
         $this->remainingMoves = $remainingMoves;
     }
 
-    public function getTime(): ?int
+    public function getMovetime(): ?int
     {
-        return $this->time;
+        return $this->movetime;
     }
 
-    public function setTime(int $time): Limit
+    public function setMovetime(int $movetime): Limit
     {
-        $this->time = $time;
+        $this->movetime = $movetime;
 
         return $this;
     }

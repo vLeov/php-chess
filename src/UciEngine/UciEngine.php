@@ -158,8 +158,8 @@ class UciEngine
     {
         $command = 'go';
 
-        if ($limit->getTime() !== null) {
-            $command .= ' movetime ' . $limit->getTime();
+        if ($limit->getMovetime() !== null) {
+            $command .= ' movetime ' . $limit->getMovetime();
         }
 
         if ($limit->getDepth() !== null) {
