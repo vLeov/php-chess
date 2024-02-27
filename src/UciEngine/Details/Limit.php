@@ -3,75 +3,201 @@
 namespace Chess\UciEngine\Details;
 
 /**
- * UCI Limit Structure for handling the analysis limit.
+ * UCI Limit for handling the analysis limit.
  */
 class Limit
 {
     /**
      * Time to search in milliseconds.
+     *
      * @var int|null
      */
-    public ?int $time;
+    private ?int $time;
 
     /**
      * Depth to search.
+     *
      * @var int|null
      */
 
-    public ?int $depth;
+    private ?int $depth;
 
     /**
      * Nodes to search.
+     *
      * @var int|null
      */
-    public ?int $nodes;
+    private ?int $nodes;
 
     /**
      * Search for Mate in x moves. Not supported by all engines.
+     *
      * @var int|null
      */
-    public ?int $mate;
+    private ?int $mate;
 
     /**
      * Time to search in milliseconds.
+     *
      * @var int|null
      */
-    public ?int $white_clock;
+    private ?int $whiteClock;
 
     /**
      * Time to search in milliseconds.
+     *
      * @var int|null
      */
-    public ?int $black_clock;
+    private ?int $blackClock;
 
     /**
      * Time to search in milliseconds.
+     *
      * @var int|null
      */
-    public ?int $white_inc;
+    private ?int $whiteInc;
 
     /**
      * Time to search in milliseconds.
+     *
      * @var int|null
      */
-    public ?int $black_inc;
+    private ?int $blackInc;
 
     /**
      * Remaining moves to the next time control.
+     *
      * @var int|null
      */
-    public ?int $remaining_moves;
+    private ?int $remainingMoves;
 
-    public function __construct($time = null, $depth = null, $nodes = null, $mate = null, $white_clock = null, $black_clock = null, $white_inc = null, $black_inc = null, $remaining_moves = null)
-    {
+    public function __construct(
+        $time = null,
+        $depth = null,
+        $nodes = null,
+        $mate = null,
+        $whiteClock = null,
+        $blackClock = null,
+        $whiteInc = null,
+        $blackInc = null,
+        $remainingMoves = null
+    ) {
         $this->time = $time;
         $this->depth = $depth;
         $this->nodes = $nodes;
         $this->mate = $mate;
-        $this->white_clock = $white_clock;
-        $this->black_clock = $black_clock;
-        $this->white_inc = $white_inc;
-        $this->black_inc = $black_inc;
-        $this->remaining_moves = $remaining_moves;
+        $this->whiteClock = $whiteClock;
+        $this->blackClock = $blackClock;
+        $this->whiteInc = $whiteInc;
+        $this->blackInc = $blackInc;
+        $this->remainingMoves = $remainingMoves;
+    }
+
+    public function getTime(): ?int
+    {
+        return $this->time;
+    }
+
+    public function setTime(int $time): Limit
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    public function getDepth(): ?int
+    {
+        return $this->depth;
+    }
+
+    public function setDepth(int $depth): Limit
+    {
+        $this->depth = $depth;
+
+        return $this;
+    }
+
+    public function getNodes(): ?int
+    {
+        return $this->nodes;
+    }
+
+    public function setNodes(int $nodes): Limit
+    {
+        $this->nodes = $nodes;
+
+        return $this;
+    }
+
+    public function getMate(): ?int
+    {
+        return $this->mate;
+    }
+
+    public function setMate(int $mate): Limit
+    {
+        $this->mate = $mate;
+
+        return $this;
+    }
+
+    public function getWhiteClock(): ?int
+    {
+        return $this->whiteClock;
+    }
+
+    public function setWhiteClock(int $whiteClock): Limit
+    {
+        $this->whiteClock = $whiteClock;
+
+        return $this;
+    }
+
+    public function getBlackClock(): ?int
+    {
+        return $this->blackClock;
+    }
+
+    public function setBlackClock(int $blackClock): Limit
+    {
+        $this->blackClock = $blackClock;
+
+        return $this;
+    }
+
+    public function getWhiteInc(): ?int
+    {
+        return $this->whiteInc;
+    }
+
+    public function setWhiteInc(int $whiteInc): Limit
+    {
+        $this->whiteInc = $whiteInc;
+
+        return $this;
+    }
+
+    public function getBlackInc(): ?int
+    {
+        return $this->blackInc;
+    }
+
+    public function setBlackInc(int $blackInc): Limit
+    {
+        $this->blackInc = $blackInc;
+
+        return $this;
+    }
+
+    public function getRemainintMoves(): ?int
+    {
+        return $this->remainingMoves;
+    }
+
+    public function setRemainintMoves(int $remainingMoves): Limit
+    {
+        $this->remainingMoves = $remainingMoves;
+
+        return $this;
     }
 }

@@ -158,40 +158,40 @@ class UciEngine
     {
         $command = 'go';
 
-        if ($limit->time !== null) {
-            $command .= ' movetime ' . $limit->time;
+        if ($limit->getTime() !== null) {
+            $command .= ' movetime ' . $limit->getTime();
         }
 
-        if ($limit->depth !== null) {
-            $command .= ' depth ' . $limit->depth;
+        if ($limit->getDepth() !== null) {
+            $command .= ' depth ' . $limit->getDepth();
         }
 
-        if ($limit->nodes !== null) {
-            $command .= ' nodes ' . $limit->nodes;
+        if ($limit->getNodes() !== null) {
+            $command .= ' nodes ' . $limit->getNodes();
         }
 
-        if ($limit->mate !== null) {
-            $command .= ' mate ' . $limit->mate;
+        if ($limit->getMate() !== null) {
+            $command .= ' mate ' . $limit->getMate();
         }
 
-        if ($limit->white_clock !== null) {
-            $command .= ' wtime ' . $limit->white_clock;
+        if ($limit->getWhiteClock() !== null) {
+            $command .= ' wtime ' . $limit->getWhiteClock();
         }
 
-        if ($limit->black_clock !== null) {
-            $command .= ' btime ' . $limit->black_clock;
+        if ($limit->getBlackClock() !== null) {
+            $command .= ' btime ' . $limit->getBlackClock();
         }
 
-        if ($limit->white_inc !== null) {
-            $command .= ' winc ' . $limit->white_inc;
+        if ($limit->getWhiteInc() !== null) {
+            $command .= ' winc ' . $limit->getWhiteInc();
         }
 
-        if ($limit->black_inc !== null) {
-            $command .= ' binc ' . $limit->black_inc;
+        if ($limit->getBlackInc() !== null) {
+            $command .= ' binc ' . $limit->getBlackInc();
         }
 
-        if ($limit->remaining_moves !== null) {
-            $command .= ' movestogo ' . $limit->remaining_moves;
+        if ($limit->getRemainingMoves() !== null) {
+            $command .= ' movestogo ' . $limit->getRemainingMoves();
         }
 
         return $command;
