@@ -2,341 +2,200 @@
 
 namespace Chess\UciEngine;
 
-use Chess\Exception\StockfishException;
+use Chess\UciEngine\Details\Limit;
+use Chess\UciEngine\Details\Process;
+use Chess\UciEngine\Details\UCIInfoLine;
+use Chess\UciEngine\Details\UCIOption;
 use Chess\Variant\Classical\Board;
 
-/**
- * Stockfish >= 15.1
- *
- * @author Jordi Bassagaña
- * @license GPL
- */
 class Stockfish
 {
-    const FILEPATH = '/usr/games/stockfish';
-
-    const OPTIONS = [
-        'Skill Level' => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-    ];
-
-    const PARAMS = [
-        'depth' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-    ];
-
-    const EVAL_CLASSICAL = 'Classical';
-
-    const EVAL_NNUE = 'NNUE';
-
-    const EVAL_FINAL = 'Final';
+    const PATH = '/usr/games/stockfish';
 
     /**
-     * PHP Chess board.
+     * Process for the engine.
      *
-     * @var \Chess\Variant\Classical\Board
+     * @var Process
      */
-    private Board $board;
+    private Process $process;
 
     /**
-     * Stockfish filepath.
-     *
-     * @var string
-     */
-    private string $filepath;
-
-    /**
-     * Process descriptor.
+     * Array of UCIOptions
      *
      * @var array
      */
-    private array $descr = [
-        ['pipe', 'r'],
-        ['pipe', 'w'],
-    ];
+    private array $options;
 
-    /**
-     * Process pipes.
-     *
-     * @var array
-     */
-    private array $pipes = [];
-
-    /**
-     * Stockfish options.
-     *
-     * @var array
-     */
-    private array $options = [];
-
-    /**
-     * Command params.
-     *
-     * @var array
-     */
-    private array $params = [];
-
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     * @param string $filepath
-     */
-    public function __construct(Board $board, string $filepath = '')
+    public function __construct(string $path = '')
     {
-        $this->board = $board;
+        $this->process = new Process(!$path ? self::PATH : $path);
 
-        $this->filepath = !$filepath ? self::FILEPATH : $filepath;
+        $this->process->writeLine('uci');
+        $this->process->readUntil('uciok');
+
+        $this->process->writeLine('isready');
+        $this->process->readUntil('readyok');
+
+        $this->options = $this->readOptions();
+    }
+
+    public function __destruct()
+    {
+        $this->process->writeLine('quit');
     }
 
     /**
-     * Returns the PHP Chess board.
+     * Returns an array of key value pairs with the value
+     * being the UCIOption and the key being the name of the option.
      *
-     * @return \Chess\Variant\Classical\Board
+     * @return array
      */
-    public function getBoard(): Board
+    private function readOptions(): array
     {
-        return $this->board;
-    }
+        $this->process->writeLine('uci');
 
-    /**
-     * Set Stockfish options.
-     *
-     * @param array $options
-     * @return \Chess\UciEngine\Stockfish
-     */
-    public function setOptions(array $options): Stockfish
-    {
-        foreach ($options as $key => $val) {
-            if (
-                !in_array($key, array_keys(self::OPTIONS)) ||
-                !in_array($val, self::OPTIONS[$key])
-            ) {
-                throw new StockfishException();
+        $options = [];
+
+        while (true) {
+            $line = $this->process->readLine();
+
+            if (str_contains($line, 'uciok')) {
+                break;
+            }
+
+            if (str_contains($line, 'option')) {
+                $option = UCIOption::createFromLine($line);
+                $options[$option->name] = $option;
             }
         }
 
-        $this->options = $options;
+        return $options;
+    }
+
+    /**
+     * Get current UCIOptions
+     *
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * Set an uci option for the engine.
+     *
+     * @param string $name
+     * @param string $value
+     * @return \Chess\UciEngine\Stockfish
+     */
+    public function setOption(string $name, string $value): Stockfish
+    {
+        if (!array_key_exists($name, $this->options)) {
+            throw new \InvalidArgumentException("Option $name does not exist");
+        }
+
+        if ($value === '') {
+            $this->process->writeLine("setoption name $name");
+        }
+
+        $this->options[$name]->value = $value;
+
+        $this->process->writeLine("setoption name $name value $value");
 
         return $this;
     }
 
     /**
-     * Sets the current command params.
+     * Analyse the board with the given limit and
+     * return the bestmove and all uci info lines.
      *
-     * @param array $params
-     * @return \Chess\UciEngine\Stockfish
+     * @param Board $board
+     * @param Limit $limit
+     * @return array
      */
-    public function setParams(array $params): Stockfish
+    public function analyse(Board $board, Limit $limit): array
     {
-        foreach ($params as $key => $val) {
-            if (
-                !in_array($key, array_keys(self::PARAMS)) ||
-                !in_array($val, self::PARAMS[$key])
-            ) {
-                throw new StockfishException();
-            }
-        }
+        $this->process->writeLine("position fen " . $board->toFen());
+        $this->process->writeLine($this->buildGoCommand($limit));
+        $output = $this->process->readUntil('bestmove');
 
-        $this->params = $params;
-
-        return $this;
-    }
-
-    /**
-     * Configure Stockfish options.
-     */
-    private function configure(): void
-    {
-        foreach ($this->options as $key => $val) {
-            fwrite($this->pipes[0], "setoption name $key value $val\n");
-        }
-    }
-
-    /**
-     * Calculates the best move.
-     *
-     * @param string $fen
-     * @return string
-     */
-    public function bestMove(string $fen): string
-    {
-        $bestMove = '(none)';
-        $process = proc_open($this->filepath, $this->descr, $this->pipes);
-        if (is_resource($process)) {
-            fwrite($this->pipes[0], "uci\n");
-            fwrite($this->pipes[0], "ucinewgame\n");
-            $this->configure();
-            fwrite($this->pipes[0], "position fen $fen\n");
-            fwrite($this->pipes[0], "go depth {$this->params['depth']}\n");
-            while (!feof($this->pipes[1])) {
-                $line = fgets($this->pipes[1]);
-                if (str_starts_with($line, 'bestmove')) {
-                    $exploded = explode(' ', $line);
-                    $bestMove = trim($exploded[1]);
-                    fclose($this->pipes[0]);
-                }
-            }
-            fclose($this->pipes[1]);
-            proc_close($process);
-        }
-
-        return $bestMove;
-    }
-
-    /**
-     * Returns the best move in LAN format.
-     *
-     * @param string $fen
-     * @return string
-     */
-    public function play(string $fen): string
-    {
-        $bestMove = $this->bestMove($fen);
-        if ($bestMove !== '(none)') {
-            $process = proc_open($this->filepath, $this->descr, $this->pipes);
-            if (is_resource($process)) {
-                fwrite($this->pipes[0], "uci\n");
-                fwrite($this->pipes[0], "position fen $fen moves $bestMove\n");
-                fwrite($this->pipes[0], "d\n");
-                fclose($this->pipes[0]);
-                fclose($this->pipes[1]);
-                proc_close($process);
-            }
-        }
-
-        return $bestMove;
-    }
-
-    /**
-     * Returns the evaluation of the current position.
-     *
-     * @param string $fen
-     * @param string $type
-     * @return float
-     */
-    public function eval(string $fen, string $type): float
-    {
-        $this->validateEvalType($type);
-        $eval = '(none)';
-        $process = proc_open($this->filepath, $this->descr, $this->pipes);
-        if (is_resource($process)) {
-            fwrite($this->pipes[0], "uci\n");
-            fwrite($this->pipes[0], "ucinewgame\n");
-            fwrite($this->pipes[0], "position fen $fen\n");
-            fwrite($this->pipes[0], "eval\n");
-            while (!feof($this->pipes[1])) {
-                $line = fgets($this->pipes[1]);
-                if (str_starts_with($line, $type.' evaluation')) {
-                    $exploded = array_values(array_filter(explode(' ', $line)));
-                    $eval = $exploded[2];
-                    fclose($this->pipes[0]);
-                }
-            }
-            fclose($this->pipes[1]);
-            proc_close($process);
-        }
-
-        return floatval($eval);
-    }
-
-    /**
-     * Returns the evaluation of the current position in a readable format.
-     *
-     * @param string $fen
-     * @param string $type
-     * @return string
-     */
-    public function evalNag(string $fen, string $type): string
-    {
-        $eval = $this->eval($fen, $type);
-        $score = $this->score($eval);
-
-        return $this->nag($eval, $score);
-    }
-
-    /**
-     * Validates the evaluation type.
-     *
-     * @param string $type
-     * @return string
-     * @throws StockfishException
-     */
-    protected function validateEvalType(string $type): string
-    {
-        if (
-            $type !== self::EVAL_CLASSICAL &&
-            $type !== self::EVAL_NNUE &&
-            $type !== self::EVAL_FINAL
-        ) {
-            throw new StockfishException();
-        }
-
-        return $type;
-    }
-
-    /**
-     * Assigns a score to the given evaluation.
-     *
-     * @param float $eval
-     * @return int
-     */
-    protected function score(float $eval): int
-    {
-        $eval = abs($eval);
-
-        $scores = [
-            [
-                'from' => 0,
-                'to' => 0.26,
-                'score' => 0,
-            ],
-            [
-                'from' => 0.27,
-                'to' => 0.7,
-                'score' => 1,
-            ],
-            [
-                'from' => 0.7,
-                'to' => 1.5,
-                'score' => 2,
-            ],
+        return [
+            "bestmove" => explode(' ', end($output))[1],
+            "info" => array_map(function ($line) {
+                return new UCIInfoLine($line);
+            }, $output)
         ];
-
-        foreach ($scores as $score) {
-            if ($eval >= $score['from'] && $eval <= $score['to']) {
-                return $score['score'];
-            }
-        }
-
-        return 3;
     }
 
     /**
-     * Returns a NAG given an evaluation along with a score.
+     * Sends the ucinewgame command to the engine. Does not reset the options.
      *
-     * @param float $eval
-     * @param int $score
+     * @return void
+     */
+    public function newGame(): void
+    {
+        $this->process->writeLine("ucinewgame");
+    }
+
+    /**
+     * Reset all options to their default values.
+     *
+     * @return void
+     */
+    public function resetOptions(): void
+    {
+        foreach ($this->options as $option) {
+            $this->setOption($option->name, $option->default);
+        }
+    }
+
+    /**
+     * Build the go command based on the given limit.
+     *
+     * @param Limit $limit
      * @return string
      */
-    protected function nag(float $eval, int $score): string
+    private function buildGoCommand(Limit $limit): string
     {
-        $w = [
-            0 => '$10',
-            1 => '$14',
-            2 => '$16',
-            3 => '$18',
-        ];
+        $command = 'go';
 
-        $b = [
-            0 => '$10',
-            1 => '$15',
-            2 => '$17',
-            3 => '$19',
-        ];
-
-        if ($eval > 0) {
-            return $w[$score];
+        if ($limit->time !== null) {
+            $command .= ' movetime ' . $limit->time;
         }
 
-        return $b[$score];
+        if ($limit->depth !== null) {
+            $command .= ' depth ' . $limit->depth;
+        }
+
+        if ($limit->nodes !== null) {
+            $command .= ' nodes ' . $limit->nodes;
+        }
+
+        if ($limit->mate !== null) {
+            $command .= ' mate ' . $limit->mate;
+        }
+
+        if ($limit->white_clock !== null) {
+            $command .= ' wtime ' . $limit->white_clock;
+        }
+
+        if ($limit->black_clock !== null) {
+            $command .= ' btime ' . $limit->black_clock;
+        }
+
+        if ($limit->white_inc !== null) {
+            $command .= ' winc ' . $limit->white_inc;
+        }
+
+        if ($limit->black_inc !== null) {
+            $command .= ' binc ' . $limit->black_inc;
+        }
+
+        if ($limit->remaining_moves !== null) {
+            $command .= ' movestogo ' . $limit->remaining_moves;
+        }
+
+        return $command;
     }
 }
