@@ -49,9 +49,7 @@ Multiple variants are supported with the default one being classical chess.
 
 Listed below are the UCI engines available at the moment.
 
-| Name | UCI Engine |
-| ---- | ---------- |
-| Stockfish | [Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/main/tests/unit/UciEngine/StockfishTest.php) |
+- Stockfish
 
 ## Object-Oriented
 

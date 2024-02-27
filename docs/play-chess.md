@@ -45,7 +45,7 @@ stdClass Object
 
 ✨ UCI engines not only allow to play chess with the computer but are also a helpful tool when analyzing chess games.
 
-[Chess\UciEngine\Stockfish](https://github.com/chesslablab/php-chess/blob/main/tests/unit/UciEngine/StockfishTest.php) allows to play chess against the Stockfish chess engine using PHP, but first things first, make sure to install it on your computer.
+[Chess\UciEngine\UciEngine](https://github.com/chesslablab/php-chess/blob/main/tests/unit/UciEngine/UciEngineTest.php) allows to play chess against the Stockfish chess engine using PHP, but first things first, make sure to install Stockfish on your computer.
 
 ```text
 sudo apt-get install stockfish
@@ -54,16 +54,15 @@ sudo apt-get install stockfish
 Then, you're set up to play chess against Stockfish as described in the following example.
 
 ```php
-use Chess\UciEngine\Stockfish;
+use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
 use Chess\Variant\Classical\Board;
 
 $board = new Board();
 $board->play('w', 'e4');
 
-$stockfish = (new Stockfish())->setOption('Skill Level', 9);
-$limit = new Limit();
-$limit->depth = 3;
+$limit = (new Limit())->setDepth(3);
+$stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 9);
 $analysis = $stockfish->analyse($board, $limit);
 
 $board->playLan('b', $analysis['bestmove']);
@@ -79,14 +78,13 @@ PHP Chess classes can be combined to do different things. For example, you may w
 
 ```php
 use Chess\FenToBoard;
-use Chess\UciEngine\Stockfish;
+use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
 
 $board = FenToBoard::create('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -');
 
-$stockfish = (new Stockfish())->setOption('Skill Level', 20);
-$limit = new Limit();
-$limit->depth = 12;
+$limit = (new Limit())->setDepth(12);
+$stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 20);
 $analysis = $stockfish->analyse($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
@@ -104,7 +102,7 @@ The same thing goes for PGN annotated games. This is how to play against Stockfi
 
 ```php
 use Chess\Play\SanPlay;
-use Chess\UciEngine\Stockfish;
+use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
 
 $movetext = '1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7';
@@ -113,9 +111,8 @@ $board = (new SanPlay($movetext))
     ->validate()
     ->getBoard();
 
-$stockfish = (new Stockfish())->setOption('Skill Level', 20);
-$limit = new Limit();
-$limit->depth = 12;
+$limit = (new Limit())->setDepth(12);
+$stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 20);
 $analysis = $stockfish->analyse($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
