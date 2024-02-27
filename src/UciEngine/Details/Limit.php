@@ -48,7 +48,7 @@ class Limit
      *
      * @var int|null
      */
-    private ?int $blackClock;
+    private ?int $btime;
 
     /**
      * Time to search in milliseconds.
@@ -77,7 +77,7 @@ class Limit
         $nodes = null,
         $mate = null,
         $wtime = null,
-        $blackClock = null,
+        $btime = null,
         $whiteInc = null,
         $blackInc = null,
         $remainingMoves = null
@@ -87,7 +87,7 @@ class Limit
         $this->nodes = $nodes;
         $this->mate = $mate;
         $this->wtime = $wtime;
-        $this->blackClock = $blackClock;
+        $this->btime = $btime;
         $this->whiteInc = $whiteInc;
         $this->blackInc = $blackInc;
         $this->remainingMoves = $remainingMoves;
@@ -153,14 +153,14 @@ class Limit
         return $this;
     }
 
-    public function getBlackClock(): ?int
+    public function getBtime(): ?int
     {
-        return $this->blackClock;
+        return $this->btime;
     }
 
-    public function setBlackClock(int $blackClock): Limit
+    public function setBtime(int $btime): Limit
     {
-        $this->blackClock = $blackClock;
+        $this->btime = $btime;
 
         return $this;
     }

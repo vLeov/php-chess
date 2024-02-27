@@ -178,8 +178,8 @@ class UciEngine
             $command .= ' wtime ' . $limit->getWtime();
         }
 
-        if ($limit->getBlackClock() !== null) {
-            $command .= ' btime ' . $limit->getBlackClock();
+        if ($limit->getBtime() !== null) {
+            $command .= ' btime ' . $limit->getBtime();
         }
 
         if ($limit->getWhiteInc() !== null) {
