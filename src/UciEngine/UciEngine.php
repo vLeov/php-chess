@@ -5,7 +5,7 @@ namespace Chess\UciEngine;
 use Chess\UciEngine\Details\Limit;
 use Chess\UciEngine\Details\Process;
 use Chess\UciEngine\Details\UciInfoLine;
-use Chess\UciEngine\Details\UCIOption;
+use Chess\UciEngine\Details\UciOption;
 use Chess\Variant\Classical\Board;
 
 class UciEngine
@@ -18,7 +18,7 @@ class UciEngine
     private Process $process;
 
     /**
-     * Array of UCIOptions
+     * Array of UciOptions
      *
      * @var array
      */
@@ -44,7 +44,7 @@ class UciEngine
 
     /**
      * Returns an array of key value pairs with the value
-     * being the UCIOption and the key being the name of the option.
+     * being the UciOption and the key being the name of the option.
      *
      * @return array
      */
@@ -62,7 +62,7 @@ class UciEngine
             }
 
             if (str_contains($line, 'option')) {
-                $option = UCIOption::createFromLine($line);
+                $option = UciOption::createFromLine($line);
                 $options[$option->name] = $option;
             }
         }
@@ -71,7 +71,7 @@ class UciEngine
     }
 
     /**
-     * Get current UCIOptions
+     * Get current UciOptions
      *
      * @return array
      */

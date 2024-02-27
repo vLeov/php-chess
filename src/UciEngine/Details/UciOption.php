@@ -5,7 +5,7 @@ namespace Chess\UciEngine\Details;
 /**
  * UCI Option Structure for handling the engine options.
  */
-class UCIOption
+class UciOption
 {
     public string $name;
     public string $type;
@@ -25,12 +25,12 @@ class UCIOption
     }
 
     /**
-     * Creates an UCIOption object from a uci info line.
+     * Creates an UciOption object from a uci info line.
      *
      * @param string $line
-     * @return UCIOption
+     * @return UciOption
      */
-    public static function createFromLine(string $line): UCIOption
+    public static function createFromLine(string $line): UciOption
     {
         // uci options are structured like this:
         // option name {name} type {check|spin|combo|button|string} default {default} [min {min} max {max}] [var {var1} var {var2} ...]
