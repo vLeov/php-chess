@@ -9,7 +9,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Queen.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Q extends Slider
 {

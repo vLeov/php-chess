@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
  * Long algebraic notation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class LanPlay extends AbstractPlay
 {

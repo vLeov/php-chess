@@ -39,7 +39,7 @@ use Chess\Eval\ThreatEval;
  * Standard evaluation function.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class StandardFunction
 {

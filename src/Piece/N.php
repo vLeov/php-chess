@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Knight.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class N extends AbstractPiece
 {

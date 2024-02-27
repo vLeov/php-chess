@@ -8,7 +8,7 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * PgnExplanation
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class PgnExplanation
 {

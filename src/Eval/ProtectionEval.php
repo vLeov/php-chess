@@ -13,7 +13,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Total piece value obtained from the squares that are not being defended.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class ProtectionEval extends AbstractEval
 {

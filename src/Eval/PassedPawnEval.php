@@ -14,7 +14,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * adjacent files.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class PassedPawnEval extends AbstractEval
 {

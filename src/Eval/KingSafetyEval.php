@@ -12,7 +12,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * K safety.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class KingSafetyEval extends AbstractEval implements InverseEvalInterface
 {

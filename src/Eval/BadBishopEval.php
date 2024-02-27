@@ -15,7 +15,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
  * A bad bishop is a bishop that is blocked by its own pawns.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class BadBishopEval extends AbstractEval implements InverseEvalInterface
 {

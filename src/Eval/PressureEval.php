@@ -13,7 +13,7 @@ use Chess\Variant\Classical\Board;
  * Squares being threatened.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class PressureEval extends AbstractEval
 {

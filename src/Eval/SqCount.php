@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Board;
  * Square count.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class SqCount
 {

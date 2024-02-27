@@ -16,7 +16,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
  * Converts a FEN string to a chessboard object.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class StrToBoard extends ClassicalFenStrToBoard
 {

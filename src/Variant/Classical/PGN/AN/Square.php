@@ -11,7 +11,7 @@ use Chess\Variant\Classical\PGN\ValidationInterface;
  * Square.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Square extends AbstractNotation implements ValidationInterface
 {

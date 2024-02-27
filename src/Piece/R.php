@@ -11,7 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Rook.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class R extends Slider
 {

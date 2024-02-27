@@ -5,7 +5,7 @@ namespace Chess\Movetext;
 /**
  * Numeric Annotation Glyphs.
  *
- * @license GPL
+ * @license MIT
  */
 class NagMovetext
 {

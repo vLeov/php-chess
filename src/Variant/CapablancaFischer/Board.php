@@ -16,7 +16,7 @@ use Chess\Variant\Classical\FEN\Field\CastlingAbility;
  * Capablanca-Fischer chessboard representation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 final class Board extends ClassicalBoard implements RandomBoardInterface
 {

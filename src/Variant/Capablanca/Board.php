@@ -24,7 +24,7 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * Chess board representation to play Capablanca chess on a 10×8 board.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Board extends ClassicalBoard
 {

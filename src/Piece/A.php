@@ -12,7 +12,7 @@ use Chess\Variant\Capablanca\PGN\AN\Piece;
  * Archbishop.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class A extends AbstractPiece
 {

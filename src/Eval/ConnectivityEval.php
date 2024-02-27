@@ -11,7 +11,7 @@ use Chess\Variant\Classical\Board;
  * Connectivity.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class ConnectivityEval extends AbstractEval
 {

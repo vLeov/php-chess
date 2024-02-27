@@ -12,7 +12,7 @@ use Chess\Variant\Classical\Board;
  * AbstractPiece
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 abstract class AbstractPiece
 {

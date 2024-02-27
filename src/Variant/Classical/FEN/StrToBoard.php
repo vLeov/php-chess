@@ -16,7 +16,7 @@ use Chess\Variant\Classical\Rule\CastlingRule;
  * Converts a FEN string to a chessboard object.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class StrToBoard
 {

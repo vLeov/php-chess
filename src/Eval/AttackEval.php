@@ -11,7 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Attack evaluation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class AttackEval extends AbstractEval
 {

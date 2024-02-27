@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * Center.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class CenterEval extends AbstractEval
 {

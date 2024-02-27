@@ -14,7 +14,7 @@ use Chess\Variant\Classical\PGN\Move;
  * processing with ML techniques.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class SanHeuristics extends SanPlay
 {

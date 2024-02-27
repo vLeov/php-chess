@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Bishop.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class B extends Slider
 {

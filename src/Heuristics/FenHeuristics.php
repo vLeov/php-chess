@@ -14,7 +14,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * with ML techniques.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class FenHeuristics
 {

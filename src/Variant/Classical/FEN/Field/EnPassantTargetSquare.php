@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
  * En passant target square.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class EnPassantTargetSquare implements ValidationInterface
 {

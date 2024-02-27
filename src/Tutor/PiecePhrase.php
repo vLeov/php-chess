@@ -8,7 +8,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * Human-like phrase.
  *
- * @license GPL
+ * @license MIT
  */
 class PiecePhrase
 {

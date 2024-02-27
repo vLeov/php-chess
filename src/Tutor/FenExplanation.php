@@ -12,7 +12,7 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * FenExplanation
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class FenExplanation
 {

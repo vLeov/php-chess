@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * Piece placement.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class PiecePlacement implements ValidationInterface
 {

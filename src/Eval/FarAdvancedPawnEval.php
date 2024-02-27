@@ -13,7 +13,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * A pawn is far advanced if it is threatening to promote.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class FarAdvancedPawnEval extends AbstractEval
 {

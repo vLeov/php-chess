@@ -13,7 +13,7 @@ use Chess\Variant\Capablanca\PGN\AN\Piece;
  * Chancellor.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class C extends AbstractPiece
 {

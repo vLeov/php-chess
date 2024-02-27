@@ -12,7 +12,7 @@ use Chess\Variant\Classical\Board;
  * players.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Grandmaster
 {

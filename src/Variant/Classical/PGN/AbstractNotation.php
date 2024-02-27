@@ -6,7 +6,7 @@ namespace Chess\Variant\Classical\PGN;
  * Abstract notation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 abstract class AbstractNotation
 {

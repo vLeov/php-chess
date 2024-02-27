@@ -9,7 +9,7 @@ use Chess\Variant\Classical\FEN\Field\PiecePlacement as ClassicalFenPiecePlaceme
  * Piece placement.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class PiecePlacement extends ClassicalFenPiecePlacement
 {

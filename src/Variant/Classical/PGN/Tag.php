@@ -8,7 +8,7 @@ use Chess\Exception\UnknownNotationException;
  * Tag.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Tag extends AbstractNotation
 {

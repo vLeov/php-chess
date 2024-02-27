@@ -11,7 +11,7 @@ use Chess\Variant\Classical\PGN\Move;
  * Standard Algebraic Notation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class SanPlay extends AbstractPlay
 {

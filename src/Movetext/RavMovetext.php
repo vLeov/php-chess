@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\Move;
 /**
  * Recursive Annotation Variation.
  *
- * @license GPL
+ * @license MIT
  */
 class RavMovetext extends AbstractMovetext
 {

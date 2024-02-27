@@ -10,7 +10,7 @@ use Chess\Variant\Classical\Board;
  * Abstract evaluation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 abstract class AbstractEval
 {

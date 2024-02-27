@@ -8,7 +8,7 @@ use Chess\Variant\Classical\PGN\AN\Termination;
 /**
  * AbstractMovetext.
  *
- * @license GPL
+ * @license MIT
  */
 abstract class AbstractMovetext
 {

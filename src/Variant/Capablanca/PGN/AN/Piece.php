@@ -8,7 +8,7 @@ use Chess\Variant\Classical\PGN\AN\Piece as ClassicalPiece;
  * Piece.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Piece extends ClassicalPiece
 {

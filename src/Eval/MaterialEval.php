@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Material.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class MaterialEval extends AbstractEval
 {

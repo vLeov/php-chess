@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\ValidationInterface;
  * Color.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Color extends AbstractNotation implements ValidationInterface
 {

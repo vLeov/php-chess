@@ -15,7 +15,7 @@ use Chess\Variant\Classical\Rule\CastlingRule;
  * Creates a \Chess\Variant\Classical\Board object with random pieces.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Randomizer
 {

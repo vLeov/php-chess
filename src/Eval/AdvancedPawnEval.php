@@ -14,7 +14,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * (the fifth rank or higher).
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class AdvancedPawnEval extends AbstractEval
 {

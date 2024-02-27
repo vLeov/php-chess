@@ -8,7 +8,7 @@ use Chess\Variant\Classical\PGN\AbstractNotation;
  * Castle.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Castle extends AbstractNotation
 {

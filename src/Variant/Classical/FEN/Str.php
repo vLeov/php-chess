@@ -12,7 +12,7 @@ use Chess\Variant\Classical\FEN\Field\SideToMove;
  * FEN string.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Str
 {

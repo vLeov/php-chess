@@ -11,7 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Pawn.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class P extends AbstractPiece
 {

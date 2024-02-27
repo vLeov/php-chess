@@ -12,7 +12,7 @@ use Chess\Variant\Classical\Board;
  * Space evaluation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class SpaceEval extends AbstractEval
 {

@@ -13,7 +13,7 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * Recursive Annotation Variation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class RavPlay extends AbstractPlay
 {

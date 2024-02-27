@@ -8,7 +8,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 /**
  * Standard Algebraic Notation.
  *
- * @license GPL
+ * @license MIT
  */
 class SanMovetext extends AbstractMovetext
 {

@@ -11,7 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * Move.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 class Move extends ClassicalMove
 {

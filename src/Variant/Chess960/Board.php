@@ -16,7 +16,7 @@ use Chess\Variant\Chess960\Rule\CastlingRule;
  * Fischer Random chessboard representation.
  *
  * @author Jordi Bassagaña
- * @license GPL
+ * @license MIT
  */
 final class Board extends ClassicalBoard implements RandomBoardInterface
 {
