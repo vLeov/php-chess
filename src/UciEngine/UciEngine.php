@@ -174,8 +174,8 @@ class UciEngine
             $command .= ' mate ' . $limit->getMate();
         }
 
-        if ($limit->getWhiteClock() !== null) {
-            $command .= ' wtime ' . $limit->getWhiteClock();
+        if ($limit->getWtime() !== null) {
+            $command .= ' wtime ' . $limit->getWtime();
         }
 
         if ($limit->getBlackClock() !== null) {

@@ -41,7 +41,7 @@ class Limit
      *
      * @var int|null
      */
-    private ?int $whiteClock;
+    private ?int $wtime;
 
     /**
      * Time to search in milliseconds.
@@ -76,7 +76,7 @@ class Limit
         $depth = null,
         $nodes = null,
         $mate = null,
-        $whiteClock = null,
+        $wtime = null,
         $blackClock = null,
         $whiteInc = null,
         $blackInc = null,
@@ -86,7 +86,7 @@ class Limit
         $this->depth = $depth;
         $this->nodes = $nodes;
         $this->mate = $mate;
-        $this->whiteClock = $whiteClock;
+        $this->wtime = $wtime;
         $this->blackClock = $blackClock;
         $this->whiteInc = $whiteInc;
         $this->blackInc = $blackInc;
@@ -141,14 +141,14 @@ class Limit
         return $this;
     }
 
-    public function getWhiteClock(): ?int
+    public function getWtime(): ?int
     {
-        return $this->whiteClock;
+        return $this->wtime;
     }
 
-    public function setWhiteClock(int $whiteClock): Limit
+    public function setWtime(int $wtime): Limit
     {
-        $this->whiteClock = $whiteClock;
+        $this->wtime = $wtime;
 
         return $this;
     }
