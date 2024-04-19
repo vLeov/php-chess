@@ -7,10 +7,10 @@
 [Chess\Tutor\FenExplanation](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Tutor/FenExplanationTest.php) helps you improve your chess thinking process by explaining a FEN position in terms of [chess concepts](https://php-chess.docs.chesslablab.org/heuristics/).
 
 ```php
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Tutor\FenExplanation;
 
-$board = FenToBoard::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
+$board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
 $paragraph = (new FenExplanation($board))->getParagraph();
 
@@ -26,10 +26,10 @@ White has a significant material advantage. White has a significant control of t
 The resulting text may sound a little robotic but it can be easily rephrased by the AI of your choice to make it sound more human-like. Also a quick numerical estimate of the position can be obtained by passing the `$isEvaluated` parameter to the constructor.
 
 ```php
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Tutor\FenExplanation;
 
-$board = FenToBoard::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
+$board = FenToBoardFactory::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
 
 $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 

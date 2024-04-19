@@ -4,14 +4,14 @@
 
 ✨ FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings.
 
-Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoard](https://github.com/chesslablab/php-chess/blob/main/src/FenToBoard.php) class according to the variants supported.
+Almost everything in PHP Chess can be done with a chessboard object. At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoardFactory](https://github.com/chesslablab/php-chess/blob/main/src/FenToBoardFactory.php) class according to the variants supported.
 
 Let's continue a classical game from the FEN position of B54, which is the ECO code for "Sicilian Defense: Modern Variations, Main Line" previously discussed in [Read PGN](https://php-chess.docs.chesslablab.org/read-pgn/).
 
 ```php
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 
-$board = FenToBoard::create('rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -');
+$board = FenToBoardFactory::create('rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -');
 
 $board->play('w', 'Nc3');
 $board->play('b', 'Nc6');
@@ -115,10 +115,10 @@ rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq -
 [Chess\Media\BoardToPng](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Media/BoardToPngTest.php) converts a chess board object to a PNG image.
 
 ```php
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Media\BoardToPng;
 
-$board = FenToBoard::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
+$board = FenToBoardFactory::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
 
 $filename = (new BoardToPng($board, $flip = true))->output();
 ```

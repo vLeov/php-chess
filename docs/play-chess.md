@@ -77,11 +77,11 @@ echo $board->getMovetext();
 PHP Chess classes can be combined to do different things. For example, you may want to play against Stockfish from this FEN position published in your favorite online publication.
 
 ```php
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
 
-$board = FenToBoard::create('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -');
+$board = FenToBoardFactory::create('4k2r/pp1b1pp1/8/3pPp1p/P2P1P2/1P3N2/1qr3PP/R3QR1K w k -');
 
 $limit = (new Limit())->setDepth(12);
 $stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 20);
