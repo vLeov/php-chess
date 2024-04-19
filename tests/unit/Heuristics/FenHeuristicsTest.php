@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Heuristics\FenHeuristics;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
@@ -16,7 +16,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
     {
         $fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $balance = (new FenHeuristics($board))->getBalance();
 
@@ -32,7 +32,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
     {
         $fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1';
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $balance = (new FenHeuristics($board))->getBalance();
 
@@ -48,7 +48,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
     {
         $fen = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2';
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $balance = (new FenHeuristics($board))->getBalance();
 
@@ -64,7 +64,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
     {
         $fen = 'rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3';
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $balance = (new FenHeuristics($board))->getBalance();
 
@@ -80,7 +80,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
     {
         $fen = 'rn1qkb1r/4pp1p/3p1np1/2pP4/4P3/2N3P1/PP3P1P/R1BQ1KNR b kq - 0 9';
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $balance = (new FenHeuristics($board))->getBalance();
 
@@ -96,7 +96,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
     {
         $fen = 'r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq -';
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $balance = (new FenHeuristics($board))->getBalance();
 
@@ -112,7 +112,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
     {
         $fen = 'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3';
 
-        $board = FenToBoard::create($fen, new CapablancaBoard());
+        $board = FenToBoardFactory::create($fen, new CapablancaBoard());
 
         $balance = (new FenHeuristics($board))->getBalance();
 

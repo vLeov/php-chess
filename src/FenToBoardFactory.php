@@ -17,7 +17,7 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class FenToBoard
+class FenToBoardFactory
 {
     /**
      * Creates a chessboard object.

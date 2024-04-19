@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Eval\BishopOutpostEval;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
@@ -361,7 +361,7 @@ class BishopOutpostEvalTest extends AbstractUnitTestCase
             "The bishop on g4 is nicely placed on an outpost.",
         ];
 
-        $board = FenToBoard::create('8/8/8/7p/6b1/8/K7/2k5 w - -');
+        $board = FenToBoardFactory::create('8/8/8/7p/6b1/8/K7/2k5 w - -');
 
         $bishopOutpostEval = new BishopOutpostEval($board);
 

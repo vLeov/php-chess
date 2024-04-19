@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Tutor;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Play\SanPlay;
 use Chess\Tutor\FenExplanation;
 use Chess\Tests\AbstractUnitTestCase;
@@ -43,7 +43,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "White has the bishop pair.",
         ];
 
-        $board = FenToBoard::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
+        $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
         $paragraph = (new FenExplanation($board))->getParagraph();
 
@@ -65,7 +65,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black.",
         ];
 
-        $board = FenToBoard::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
+        $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
         $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 
@@ -84,7 +84,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black.",
         ];
 
-        $board = FenToBoard::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
+        $board = FenToBoardFactory::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
 
         $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 
@@ -104,7 +104,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Overall, 3 heuristic evaluation features are favoring White while 1 is favoring Black.",
         ];
 
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
             new CapablancaBoard()
         );

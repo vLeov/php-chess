@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Eval\PassedPawnEval;
 use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
@@ -104,7 +104,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
             "e6 and f5 are passed pawns.",
         ];
 
-        $board = FenToBoard::create('8/2k5/4p3/1nb2p2/2K5/8/6B1/8 w - -');
+        $board = FenToBoardFactory::create('8/2k5/4p3/1nb2p2/2K5/8/6B1/8 w - -');
 
         $passedPawnEval = new PassedPawnEval($board);
 
@@ -126,7 +126,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
             "a4 is a passed pawn.",
         ];
 
-        $board = FenToBoard::create('8/8/8/5k2/P7/4K3/8/8 w - - 0 1');
+        $board = FenToBoardFactory::create('8/8/8/5k2/P7/4K3/8/8 w - - 0 1');
 
         $passedPawnEval = new PassedPawnEval($board);
 

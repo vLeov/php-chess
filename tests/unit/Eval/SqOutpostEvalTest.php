@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Eval\SqOutpostEval;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
@@ -102,7 +102,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             "b4 is an outpost square.",
         ];
 
-        $board = FenToBoard::create('5k2/7K/8/8/8/P7/8/8 w - -');
+        $board = FenToBoardFactory::create('5k2/7K/8/8/8/P7/8/8 w - -');
 
         $sqOutpostEval = new SqOutpostEval($board);
 
@@ -128,7 +128,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             "b5, b4 and d4 are outpost squares.",
         ];
 
-        $board = FenToBoard::create('5k2/7K/8/2p5/P7/8/8/8 w - -');
+        $board = FenToBoardFactory::create('5k2/7K/8/2p5/P7/8/8/8 w - -');
 
         $sqOutpostEval = new SqOutpostEval($board);
 

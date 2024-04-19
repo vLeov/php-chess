@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Eval\IsolatedPawnEval;
 use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
@@ -135,7 +135,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
             'b' => [],
         ];
 
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
             new CapablancaBoard()
         );

@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Eval\ProtectionEval;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
@@ -172,7 +172,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
 
         $expectedPhrase = [];
 
-        $board = FenToBoard::create('r2q1rk1/pb1nbppp/2p1pn2/1pPp4/3P4/1PN2NP1/P1Q1PPBP/R1BR2K1 b - -');
+        $board = FenToBoardFactory::create('r2q1rk1/pb1nbppp/2p1pn2/1pPp4/3P4/1PN2NP1/P1Q1PPBP/R1BR2K1 b - -');
 
         $protectionEval = new ProtectionEval($board);
 

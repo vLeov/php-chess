@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Eval\KnightOutpostEval;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Tests\AbstractUnitTestCase;
@@ -361,7 +361,7 @@ class KnightOutpostEvalTest extends AbstractUnitTestCase
             "The knight on b5 is nicely placed on an outpost.",
         ];
 
-        $board = FenToBoard::create('5k2/7K/8/1N6/P7/8/8/8 w - -');
+        $board = FenToBoardFactory::create('5k2/7K/8/1N6/P7/8/8/8 w - -');
 
         $knightOutpostEval = new KnightOutpostEval($board);
 

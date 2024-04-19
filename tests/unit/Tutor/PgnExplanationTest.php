@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Tutor;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Play\SanPlay;
 use Chess\Tutor\PgnExplanation;
 use Chess\Tests\AbstractUnitTestCase;
@@ -40,7 +40,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
             "The bishop on e6 is unprotected.",
         ];
 
-        $board = FenToBoard::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
+        $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
         $paragraph = (new PgnExplanation('Bxe6+', $board))->getParagraph();
 
@@ -61,7 +61,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
             "Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black.",
         ];
 
-        $board = FenToBoard::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
+        $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
         $paragraph = (new PgnExplanation('Bxe6+',
             $board,

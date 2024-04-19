@@ -2,14 +2,14 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Exception\UnknownNotationException;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Chess960\Board as Chess960Board;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
-class FenToBoardTest extends AbstractUnitTestCase
+class FenToBoardFactoryTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -18,7 +18,7 @@ class FenToBoardTest extends AbstractUnitTestCase
     {
         $this->expectException(UnknownNotationException::class);
 
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             'foo',
             new ClassicalBoard()
         );
@@ -29,7 +29,7 @@ class FenToBoardTest extends AbstractUnitTestCase
      */
     public function classical_kaufman_01()
     {
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+',
         );
 
@@ -54,7 +54,7 @@ class FenToBoardTest extends AbstractUnitTestCase
      */
     public function classical_kaufman_01_Qg4_a5()
     {
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             '1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+',
             new ClassicalBoard()
         );
@@ -83,7 +83,7 @@ class FenToBoardTest extends AbstractUnitTestCase
      */
     public function chess960_QNBRKBRN_e4_e5_Ng3_Nc6_Bc4_d6()
     {
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             'q1brkbrn/ppp2ppp/2np4/4p3/2B1P3/6N1/PPPP1PPP/QNBRK1R1 w KQkq -',
             new Chess960Board(['Q', 'N', 'B', 'R', 'K', 'B', 'R', 'N' ])
         );
@@ -109,7 +109,7 @@ class FenToBoardTest extends AbstractUnitTestCase
      */
     public function capablanca_e4_e5()
     {
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             'rnabqkbcnr/pppp1ppppp/10/4p5/4P5/10/PPPP1PPPPP/RNABQKBCNR w KQkq e6',
             new CapablancaBoard()
         );
@@ -135,7 +135,7 @@ class FenToBoardTest extends AbstractUnitTestCase
      */
     public function classical_en_passant_b4_e6_b5_c5_bxc6()
     {
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             'rnbqkbnr/pp1p1ppp/4p3/1Pp5/8/8/P1PPPPPP/RNBQKBNR w KQkq c6',
             new ClassicalBoard()
         );
@@ -161,7 +161,7 @@ class FenToBoardTest extends AbstractUnitTestCase
      */
     public function classical_en_passant_bxc6()
     {
-        $board = FenToBoard::create(
+        $board = FenToBoardFactory::create(
             'r1bqkbnr/p3pppp/8/1Pp5/8/8/P1PPPPPP/RNBQKBNR w KQkq c6 0 1',
             new ClassicalBoard()
         );

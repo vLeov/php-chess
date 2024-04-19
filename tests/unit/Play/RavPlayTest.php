@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Play;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Play\RavPlay;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\FEN\StrToBoard;
@@ -669,7 +669,7 @@ class RavPlayTest extends AbstractUnitTestCase
             'k1R5/8/1K6/8/8/8/8/8 b - -',
         ];
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $ravPlay = (new RavPlay($movetext, $board))->validate();
 
@@ -725,7 +725,7 @@ class RavPlayTest extends AbstractUnitTestCase
             'k1R5/8/1K6/8/8/8/8/8 b - -',
         ];
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $ravPlay = (new RavPlay($movetext, $board))->validate();
 
@@ -774,7 +774,7 @@ class RavPlayTest extends AbstractUnitTestCase
             '8/8/8/8/8/2K5/8/R1k5 b - -',
         ];
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $ravPlay = (new RavPlay($movetext, $board))->validate();
 
@@ -823,7 +823,7 @@ class RavPlayTest extends AbstractUnitTestCase
             '8/8/8/8/8/2K5/8/R1k5 b - -',
         ];
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $ravPlay = (new RavPlay($movetext, $board))->validate();
 
@@ -876,7 +876,7 @@ class RavPlayTest extends AbstractUnitTestCase
           '5k2/3K4/8/4P3/8/8/8/8 b - -',
         ];
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $ravPlay = (new RavPlay($movetext, $board))->validate();
 
@@ -929,7 +929,7 @@ class RavPlayTest extends AbstractUnitTestCase
           '5k2/3K4/8/4P3/8/8/8/8 b - -',
         ];
 
-        $board = FenToBoard::create($fen);
+        $board = FenToBoardFactory::create($fen);
 
         $ravPlay = (new RavPlay($movetext, $board))->validate();
 

@@ -2,7 +2,7 @@
 
 namespace Chess\Play;
 
-use Chess\FenToBoard;
+use Chess\FenToBoardFactory;
 use Chess\Exception\PlayException;
 use Chess\Movetext\RavMovetext;
 use Chess\Movetext\SanMovetext;
@@ -109,9 +109,9 @@ class RavPlay extends AbstractPlay
                     ) {
                         $clone = unserialize(serialize($val));
                         $undo = $clone->undo();
-                        $board = FenToBoard::create($undo->toFen(), $this->initialBoard);
+                        $board = FenToBoardFactory::create($undo->toFen(), $this->initialBoard);
                     } else {
-                        $board = FenToBoard::create($val->toFen(), $this->initialBoard);
+                        $board = FenToBoardFactory::create($val->toFen(), $this->initialBoard);
                     }
                 }
             }
