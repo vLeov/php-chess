@@ -18,7 +18,7 @@
             <directory>tests/unit/Play</directory>
             <directory>tests/unit/Tutor</directory>
             <directory>tests/unit/Variant</directory>
-            <file>tests/unit/FenToBoardTest.php</file>
+            <file>tests/unit/FenToBoardFactoryTest.php</file>
             <file>tests/unit/GrandmasterTest.php</file>
         </testsuite>
     </testsuites>
