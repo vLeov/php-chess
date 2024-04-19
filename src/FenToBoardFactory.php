@@ -28,18 +28,17 @@ class FenToBoardFactory
     public static function create(string $fen, ClassicalBoard $board = null)
     {
         $board ??= new ClassicalBoard();
+        
         if (is_a($board, CapablancaBoard::class)) {
-            $board = (new CapablancaFenStrToBoard($fen))->create();
+            return (new CapablancaFenStrToBoard($fen))->create();
         } elseif (is_a($board, CapablancaFischerBoard::class)) {
             $startPos = $board->getStartPos();
-            $board = (new CapablancaFischerFenStrToBoard($fen, $startPos))->create();
+            return (new CapablancaFischerFenStrToBoard($fen, $startPos))->create();
         } elseif (is_a($board, Chess960Board::class)) {
             $startPos = $board->getStartPos();
-            $board = (new Chess960FenStrToBoard($fen, $startPos))->create();
-        } else {
-            $board = (new ClassicalFenStrToBoard($fen))->create();
+            return (new Chess960FenStrToBoard($fen, $startPos))->create();
         }
 
-        return $board;
+        return (new ClassicalFenStrToBoard($fen))->create();
     }
 }
