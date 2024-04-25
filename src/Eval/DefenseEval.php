@@ -28,20 +28,25 @@ class DefenseEval extends AbstractEval
                     $newProtectionEval = new ProtectionEval($clone);
                     $diffResult = $newProtectionEval->getResult()[$piece->oppColor()] - $protectionEval->getResult()[$piece->oppColor()];
                     if ($diffResult > 0) {
-                        foreach ($newProtectionEval->getPhrases() as $key => $val) {
-                            if (!in_array($val, $protectionEval->getPhrases())) {
+                        foreach ($newProtectionEval->getElaboration() as $key => $val) {
+                            if (!in_array($val, $protectionEval->getElaboration())) {
                                 $diffPhrases[] = $val;
                             }
                         }
                         $this->result[$piece->oppColor()] += round($diffResult, 2);
-                        $this->explain($piece, $diffPhrases);
+                        $this->elaborate($piece, $diffPhrases);
                     }
                 }
             }
         }
     }
 
-    private function explain(AbstractPiece $piece, array $diffPhrases): void
+    /**
+     * Elaborate on the result.
+     *
+     * @param array $result
+     */
+    private function elaborate(AbstractPiece $piece, array $diffPhrases): void
     {
         $phrase = PiecePhrase::create($piece);
         $phrase = "If $phrase moved, ";
@@ -61,6 +66,6 @@ class DefenseEval extends AbstractEval
             $phrase = substr_replace(trim($phrase), '.', -1);
         }
 
-        $this->phrases[] = $phrase;
+        $this->elaboration[] = $phrase;
     }
 }

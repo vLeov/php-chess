@@ -71,7 +71,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
     }
 
     /**
@@ -92,7 +92,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
     }
 
     /**
@@ -115,7 +115,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
     }
 
     /**
@@ -138,7 +138,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
     }
 
     /**
@@ -161,7 +161,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
     }
 
     /**
@@ -185,6 +185,6 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $relativeSkewerEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
     }
 }
