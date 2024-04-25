@@ -27,7 +27,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getPhrases());
+        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
     }
 
     /**
@@ -49,7 +49,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getPhrases());
+        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
     }
 
     /**
@@ -71,7 +71,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getPhrases());
+        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
     }
 
     /**
@@ -93,7 +93,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getPhrases());
+        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
     }
 
     /**

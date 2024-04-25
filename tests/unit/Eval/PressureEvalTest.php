@@ -43,7 +43,7 @@ class PressureEvalTest extends AbstractUnitTestCase
         $pressureEval = new PressureEval($board);
 
         $this->assertEqualsCanonicalizing($expectedResult, $pressureEval->getResult());
-        $this->assertEqualsCanonicalizing($expectedPhrase, $pressureEval->getPhrases());
+        $this->assertEqualsCanonicalizing($expectedPhrase, $pressureEval->getExplanation());
     }
 
     /**
@@ -65,7 +65,7 @@ class PressureEvalTest extends AbstractUnitTestCase
         $pressureEval = new PressureEval($board);
 
         $this->assertEqualsCanonicalizing($expectedResult, $pressureEval->getResult());
-        $this->assertEqualsCanonicalizing($expectedPhrase, $pressureEval->getPhrases());
+        $this->assertEqualsCanonicalizing($expectedPhrase, $pressureEval->getExplanation());
     }
 
     /**

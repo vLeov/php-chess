@@ -41,6 +41,11 @@ abstract class AbstractEval
         return $this->result;
     }
 
+    public function getExplanation()
+    {
+        return $this->explanation;
+    }
+
     public function getElaboration()
     {
         return $this->elaboration;

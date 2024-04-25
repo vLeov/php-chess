@@ -55,7 +55,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
         $spEval = new SpaceEval($board);
 
         $this->assertEqualsCanonicalizing($expectedResult, $spEval->getResult());
-        $this->assertEqualsCanonicalizing($expectedPhrase, $spEval->getPhrases());
+        $this->assertEqualsCanonicalizing($expectedPhrase, $spEval->getExplanation());
     }
 
     /**
@@ -85,6 +85,6 @@ class SpaceEvalTest extends AbstractUnitTestCase
         $spEval = new SpaceEval($board);
 
         $this->assertEqualsCanonicalizing($expectedResult, $spEval->getResult());
-        $this->assertEqualsCanonicalizing($expectedPhrase, $spEval->getPhrases());
+        $this->assertEqualsCanonicalizing($expectedPhrase, $spEval->getExplanation());
     }
 }

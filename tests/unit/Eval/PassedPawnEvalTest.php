@@ -53,7 +53,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         $passedPawnEval = new PassedPawnEval($board);
 
         $this->assertSame($expectedResult, $passedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
+        $this->assertSame($expectedPhrase, $passedPawnEval->getExplanation());
     }
 
     /**
@@ -87,7 +87,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         $passedPawnEval = new PassedPawnEval($board);
 
         $this->assertSame($expectedResult, $passedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
+        $this->assertSame($expectedPhrase, $passedPawnEval->getExplanation());
     }
 
     /**
@@ -109,7 +109,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         $passedPawnEval = new PassedPawnEval($board);
 
         $this->assertSame($expectedResult, $passedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
+        $this->assertSame($expectedPhrase, $passedPawnEval->getExplanation());
     }
 
     /**
@@ -131,6 +131,6 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         $passedPawnEval = new PassedPawnEval($board);
 
         $this->assertSame($expectedResult, $passedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $passedPawnEval->getPhrases());
+        $this->assertSame($expectedPhrase, $passedPawnEval->getExplanation());
     }
 }

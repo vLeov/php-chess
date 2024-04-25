@@ -43,7 +43,7 @@ class KingSafetyEvalTest extends AbstractUnitTestCase
         $kingSafetyEval = new KingSafetyEval($board);
 
         $this->assertSame($expectedResult, $kingSafetyEval->getResult());
-        $this->assertSame($expectedPhrase, $kingSafetyEval->getPhrases());
+        $this->assertSame($expectedPhrase, $kingSafetyEval->getExplanation());
     }
 
     /**

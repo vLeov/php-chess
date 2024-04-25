@@ -87,7 +87,7 @@ class FenExplanation
     {
         foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
-            if ($phrases = $eval->getPhrases()) {
+            if ($phrases = $eval->getExplanation()) {
                 $this->paragraph = [...$this->paragraph, ...$phrases];
             }
         }

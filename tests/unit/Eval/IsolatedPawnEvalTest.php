@@ -54,7 +54,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
         $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $isolatedPawnEval->getPhrases());
+        $this->assertSame($expectedPhrase, $isolatedPawnEval->getExplanation());
     }
 
     /**
@@ -86,7 +86,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
         $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $isolatedPawnEval->getPhrases());
+        $this->assertSame($expectedPhrase, $isolatedPawnEval->getExplanation());
     }
 
     /**
@@ -120,7 +120,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
         $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $isolatedPawnEval->getPhrases());
+        $this->assertSame($expectedPhrase, $isolatedPawnEval->getExplanation());
     }
 
     /**

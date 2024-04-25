@@ -46,7 +46,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         $protectionEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $protectionEval->getResult());
-        $this->assertSame($expectedPhrase, $protectionEval->getPhrases());
+        $this->assertSame($expectedPhrase, $protectionEval->getExplanation());
     }
 
     /**
@@ -109,7 +109,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         $protectionEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $protectionEval->getResult());
-        $this->assertSame($expectedPhrase, $protectionEval->getPhrases());
+        $this->assertSame($expectedPhrase, $protectionEval->getExplanation());
     }
 
     /**
@@ -138,7 +138,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         $protectionEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $protectionEval->getResult());
-        $this->assertSame($expectedPhrase, $protectionEval->getPhrases());
+        $this->assertSame($expectedPhrase, $protectionEval->getExplanation());
     }
 
     /**
@@ -175,6 +175,6 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         $protectionEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $protectionEval->getResult());
-        $this->assertSame($expectedPhrase, $protectionEval->getPhrases());
+        $this->assertSame($expectedPhrase, $protectionEval->getExplanation());
     }
 }
