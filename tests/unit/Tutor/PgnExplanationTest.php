@@ -16,7 +16,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
     {
         $expected = [
             "Black has a kind of space advantage.",
-            "The pawn on c5 is unprotected.",
+            "White has a tiny protection advantage.",
         ];
 
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
@@ -37,7 +37,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
             "White is just controlling the center.",
             "White has a total space advantage.",
             "The white pieces are timidly approaching the other side's king.",
-            "The bishop on e6 is unprotected.",
+            "Black has a significant protection advantage.",
         ];
 
         $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
@@ -57,7 +57,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
             "White is just controlling the center.",
             "White has a total space advantage.",
             "The white pieces are timidly approaching the other side's king.",
-            "The bishop on e6 is unprotected.",
+            "Black has a significant protection advantage.",
             "Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black.",
         ];
 
