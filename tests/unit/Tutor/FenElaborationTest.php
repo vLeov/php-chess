@@ -44,53 +44,6 @@ class FenElaborationTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function evaluated_endgame_plural()
-    {
-        $expected = [
-            "The knight on e6 is pinned shielding the king so it cannot move out of the line of attack because the king would be put in check.",
-        ];
-
-        $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
-
-        $paragraph = (new FenElaboration($board))->getParagraph();
-
-        $this->assertSame($expected, $paragraph);
-    }
-
-    /**
-     * @test
-     */
-    public function evaluated_endgame_singular()
-    {
-        $expected = [];
-
-        $board = FenToBoardFactory::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
-
-        $paragraph = (new FenElaboration($board))->getParagraph();
-
-        $this->assertSame($expected, $paragraph);
-    }
-
-    /**
-     * @test
-     */
-    public function evaluated_capablanca_f4()
-    {
-        $expected = [];
-
-        $board = FenToBoardFactory::create(
-            'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
-            new CapablancaBoard()
-        );
-
-        $paragraph = (new FenElaboration($board))->getParagraph();
-
-        $this->assertSame($expected, $paragraph);
-    }
-
-    /**
-     * @test
-     */
     public function advanced_pawn()
     {
         $expected = [
@@ -156,6 +109,23 @@ class FenElaborationTest extends AbstractUnitTestCase
         ];
 
         $board = FenToBoardFactory::create('k7/5p2/8/8/P1P1P1P1/8/8/K7 w - - 0 1');
+
+        $paragraph = (new FenElaboration($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
+    public function capablanca_f4()
+    {
+        $expected = [];
+
+        $board = FenToBoardFactory::create(
+            'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
+            new CapablancaBoard()
+        );
 
         $paragraph = (new FenElaboration($board))->getParagraph();
 

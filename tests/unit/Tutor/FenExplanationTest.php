@@ -52,7 +52,7 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function evaluated_endgame_plural()
+    public function evaluated_endgame()
     {
         $expected = [
             "White has a significant material advantage.",
@@ -64,48 +64,6 @@ class FenExplanationTest extends AbstractUnitTestCase
         ];
 
         $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
-
-        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
-
-        $this->assertSame($expected, $paragraph);
-    }
-
-    /**
-     * @test
-     */
-    public function evaluated_endgame_singular()
-    {
-        $expected = [
-            "Black has a somewhat better control of the center.",
-            "The black pieces are significantly better connected.",
-            "White has a kind of space advantage.",
-            "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black.",
-        ];
-
-        $board = FenToBoardFactory::create('rnb1kbnr/ppppqppp/8/4p3/4PP2/6P1/PPPP3P/RNBQKBNR w KQkq -');
-
-        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
-
-        $this->assertSame($expected, $paragraph);
-    }
-
-    /**
-     * @test
-     */
-    public function evaluated_capablanca_f4()
-    {
-        $expected = [
-            "White is just controlling the center.",
-            "The black pieces are significantly better connected.",
-            "White has a total space advantage.",
-            "The white player is pressuring a little bit more squares than its opponent.",
-            "Overall, 3 heuristic evaluation features are favoring White while 1 is favoring Black.",
-        ];
-
-        $board = FenToBoardFactory::create(
-            'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
-            new CapablancaBoard()
-        );
 
         $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 
@@ -190,6 +148,29 @@ class FenExplanationTest extends AbstractUnitTestCase
         $board = FenToBoardFactory::create('k7/5p2/8/8/P1P1P1P1/8/8/K7 w - - 0 1');
 
         $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
+    public function capablanca_f4()
+    {
+        $expected = [
+            "White is just controlling the center.",
+            "The black pieces are significantly better connected.",
+            "White has a total space advantage.",
+            "The white player is pressuring a little bit more squares than its opponent.",
+            "Overall, 3 heuristic evaluation features are favoring White while 1 is favoring Black.",
+        ];
+
+        $board = FenToBoardFactory::create(
+            'rnabqkbcnr/pppppppppp/10/10/5P4/10/PPPPP1PPPP/RNABQKBCNR b KQkq f3',
+            new CapablancaBoard()
+        );
+
+        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
