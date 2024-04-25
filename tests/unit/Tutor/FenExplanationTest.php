@@ -117,12 +117,12 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function passed_pawn()
+    public function advanced_pawn()
     {
         $expected = [
             "Black has a tiny material advantage.",
             "The black pieces are slightly better connected.",
-            "Black has a tiny passed pawn advantage.",
+            "Black has a tiny advanced pawn advantage.",
             "The black king has the diagonal opposition preventing the advance of the other king.",
         ];
 

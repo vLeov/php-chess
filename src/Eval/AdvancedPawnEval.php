@@ -29,37 +29,37 @@ class AdvancedPawnEval extends AbstractEval implements DiscreteEvalInterface
         Color::W => [
             [
                 'diff' => 4,
-                'meaning' => "White has a decisive passed pawn advantage.",
+                'meaning' => "White has a decisive advanced pawn advantage.",
             ],
             [
                 'diff' => 3,
-                'meaning' => "White has a significant passed pawn advantage.",
+                'meaning' => "White has a significant advanced pawn advantage.",
             ],
             [
                 'diff' => 2,
-                'meaning' => "White has some passed pawn advantage.",
+                'meaning' => "White has some advanced pawn advantage.",
             ],
             [
                 'diff' => 1,
-                'meaning' => "White has a tiny passed pawn advantage.",
+                'meaning' => "White has a tiny advanced pawn advantage.",
             ],
         ],
         Color::B => [
             [
                 'diff' => -4,
-                'meaning' => "Black has a decisive passed pawn advantage.",
+                'meaning' => "Black has a decisive advanced pawn advantage.",
             ],
             [
                 'diff' => -3,
-                'meaning' => "Black has a significant passed pawn advantage.",
+                'meaning' => "Black has a significant advanced pawn advantage.",
             ],
             [
                 'diff' => -2,
-                'meaning' => "Black has some passed pawn advantage.",
+                'meaning' => "Black has some advanced pawn advantage.",
             ],
             [
                 'diff' => -1,
-                'meaning' => "Black has a tiny passed pawn advantage.",
+                'meaning' => "Black has a tiny advanced pawn advantage.",
             ],
         ],
     ];
