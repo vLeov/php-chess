@@ -27,7 +27,7 @@ class PressureEval extends AbstractEval implements DiscreteEvalInterface
     private object $sqCount;
 
     /**
-     * Human-like phrases.
+     * Human-like explanation.
      *
      * @var array
      */
@@ -123,7 +123,7 @@ class PressureEval extends AbstractEval implements DiscreteEvalInterface
         $result[Color::B] = count($result[Color::B]);
 
         if ($sentence = $this->sentence($result)) {
-            $this->phrases[] = $sentence;
+            $this->explanation[] = $sentence;
         }
     }
 }

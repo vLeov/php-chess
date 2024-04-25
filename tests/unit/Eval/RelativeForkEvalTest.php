@@ -48,7 +48,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
         $relativeForkEval = new RelativeForkEval($board);
 
         $this->assertSame($expectedResult, $relativeForkEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeForkEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeForkEval->getElaboration());
     }
 
     /**
@@ -216,7 +216,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
         $relativeForkEval = new RelativeForkEval($board);
 
         $this->assertSame($expectedResult, $relativeForkEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeForkEval->getPhrases());
+        $this->assertSame($expectedPhrase, $relativeForkEval->getElaboration());
     }
 
     /**

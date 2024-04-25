@@ -24,17 +24,17 @@ class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
                 if ($nextPiece = $this->board->getPieceBySq($file.$ranks->next)) {
                     if ($nextPiece->getId() === Piece::P && $nextPiece->getColor() === $color) {
                         $this->result[$color] += 1;
-                        $this->explain($nextPiece);
+                        $this->elaborate($nextPiece);
                     }
                 }
             }
         }
     }
 
-    private function explain(AbstractPiece $piece): void
+    private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("$phrase is doubled.");
+        $this->elaboration[] = ucfirst("$phrase is doubled.");
     }
 }

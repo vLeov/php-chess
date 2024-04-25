@@ -33,7 +33,7 @@ class AttackEval extends AbstractEval
                                 $id = $item->getId();
                                 if ($id !== Piece::K && self::$value[Piece::P] < self::$value[$id]) {
                                     $this->result[$piece->getColor()] += self::$value[$id] - self::$value[Piece::P];
-                                    $this->explain($piece, $item);
+                                    $this->elaborate($piece, $item);
                                 }
                             }
                         }
@@ -46,7 +46,7 @@ class AttackEval extends AbstractEval
                                 $id = $item->getId();
                                 if ($id !== Piece::K && self::$value[$piece->getId()] < self::$value[$id]) {
                                     $this->result[$piece->getColor()] += self::$value[$id] - self::$value[$piece->getId()];
-                                    $this->explain($piece, $item);
+                                    $this->elaborate($piece, $item);
                                 }
                             }
                         }
@@ -56,11 +56,11 @@ class AttackEval extends AbstractEval
         }
     }
 
-    private function explain(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
+    private function elaborate(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
     {
         $attacking = PiecePhrase::create($attackingPiece);
         $attacked = PiecePhrase::create($attackedPiece);
 
-        $this->phrases[] = ucfirst("{$attacking} is attacking {$attacked}.");
+        $this->elaboration[] = ucfirst("{$attacking} is attacking {$attacked}.");
     }
 }

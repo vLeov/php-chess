@@ -25,18 +25,18 @@ class AbsoluteSkewerEval extends AbstractEval
                 if ($diffPieces = $this->diffPieces($attackedPieces, $newAttackedPieces)) {
                     if (self::$value[$piece->getId()] < self::$value[current($diffPieces)->getId()]) {
                         $this->result[$piece->getColor()] = 1;
-                        $this->explain($piece, $king);
+                        $this->elaborate($piece, $king);
                     }
                 }
             }
         }
     }
 
-    private function explain(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
+    private function elaborate(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
     {
         $attacking = PiecePhrase::create($attackingPiece);
         $attacked = PiecePhrase::create($attackedPiece);
 
-        $this->phrases[] = ucfirst("when $attacked will be moved, a piece that is more valuable than $attacking may well be exposed to attack.");
+        $this->elaboration[] = ucfirst("when $attacked will be moved, a piece that is more valuable than $attacking may well be exposed to attack.");
     }
 }

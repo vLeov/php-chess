@@ -366,6 +366,6 @@ class KnightOutpostEvalTest extends AbstractUnitTestCase
         $knightOutpostEval = new KnightOutpostEval($board);
 
         $this->assertSame($expectedResult, $knightOutpostEval->getResult());
-        $this->assertSame($expectedPhrase, $knightOutpostEval->getPhrases());
+        $this->assertSame($expectedPhrase, $knightOutpostEval->getElaboration());
     }
 }

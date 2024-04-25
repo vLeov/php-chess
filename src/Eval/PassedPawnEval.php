@@ -134,7 +134,7 @@ class PassedPawnEval extends AbstractEval implements DiscreteEvalInterface
         $result[Color::B] = count($result[Color::B]);
 
         if ($sentence = $this->sentence($result)) {
-            $this->phrases[] = $sentence;
+            $this->explanation[] = $sentence;
         }
     }
 

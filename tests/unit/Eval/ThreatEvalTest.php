@@ -24,7 +24,7 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $threatEval = new ThreatEval($board);
 
         $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedPhrase, $threatEval->getPhrases());
+        $this->assertSame($expectedPhrase, $threatEval->getElaboration());
     }
 
     /**
@@ -45,7 +45,7 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $threatEval = new ThreatEval($board);
 
         $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedPhrase, $threatEval->getPhrases());
+        $this->assertSame($expectedPhrase, $threatEval->getElaboration());
     }
 
     /**
@@ -66,6 +66,6 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $threatEval = new ThreatEval($board);
 
         $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedPhrase, $threatEval->getPhrases());
+        $this->assertSame($expectedPhrase, $threatEval->getElaboration());
     }
 }

@@ -28,18 +28,18 @@ class DiscoveredCheckEval extends AbstractEval
                 foreach ($diffPieces as $diffPiece) {
                     if ($diffPiece->getColor() === $movingPiece->getColor()) {
                         $this->result[$movingPiece->getColor()] += self::$value[$movingPiece->getId()];
-                        $this->explain($movingPiece);
+                        $this->elaborate($movingPiece);
                     }
                 }
             }
         }
     }
 
-    private function explain(AbstractPiece $piece): void
+    private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);
         $sentence = ColorPhrase::sentence($piece->oppColor());
 
-        $this->phrases[] = ucfirst("The $sentence king can be put in check as long as $phrase moves out of the way.");
+        $this->elaboration[] = ucfirst("The $sentence king can be put in check as long as $phrase moves out of the way.");
     }
 }

@@ -27,16 +27,16 @@ class RelativePinEval extends AbstractEval
                 $attackEvalDiff = $newAttackEval[$piece->oppColor()] - $attackEval[$piece->oppColor()];
                 if ($attackEvalDiff > 0) {
                     $this->result[$piece->oppColor()] += round($attackEvalDiff, 2);
-                    $this->explain($piece);
+                    $this->elaborate($piece);
                 }
             }
         }
     }
 
-    private function explain(AbstractPiece $piece): void
+    private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("$phrase is pinned shielding a piece that is more valuable than the attacking piece.");
+        $this->elaboration[] = ucfirst("$phrase is pinned shielding a piece that is more valuable than the attacking piece.");
     }
 }

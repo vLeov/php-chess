@@ -50,7 +50,7 @@ class DiagonalOppositionEval extends AbstractEval implements TernaryEvalInterfac
     private function explain(array $result): void
     {
         if ($sentence = $this->sentence($result)) {
-            $this->phrases[] = $sentence;
+            $this->explanation[] = $sentence;
         }
     }
 }

@@ -95,7 +95,7 @@ class ProtectionEval extends AbstractEval implements DiscreteEvalInterface
     private function explain(array $result): void
     {
         if ($sentence = $this->sentence($result)) {
-            $this->phrases[] = $sentence;
+            $this->explanation[] = $sentence;
         }
     }
 
@@ -108,7 +108,7 @@ class ProtectionEval extends AbstractEval implements DiscreteEvalInterface
     {
         $phrase = PiecePhrase::create($piece);
         $phrase = ucfirst("$phrase is unprotected.");
-        if (!in_array($phrase, $this->phrases)) {
+        if (!in_array($phrase, $this->explanation)) {
             $this->elaboration[] = $phrase;
         }
     }

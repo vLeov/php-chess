@@ -108,7 +108,7 @@ class IsolatedPawnEval extends AbstractEval implements DiscreteEvalInterface, In
         $result[Color::B] = count($result[Color::B]);
 
         if ($sentence = $this->sentence($result)) {
-            $this->phrases[] = $sentence;
+            $this->explanation[] = $sentence;
         }
     }
 

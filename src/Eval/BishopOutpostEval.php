@@ -23,17 +23,17 @@ class BishopOutpostEval extends AbstractEval
                 if ($piece = $this->board->getPieceBySq($sq)) {
                     if ($piece->getColor() === $key && $piece->getId() === Piece::B) {
                         $this->result[$key] += 1;
-                        $this->explain($piece);
+                        $this->elaborate($piece);
                     }
                 }
             }
         }
     }
 
-    private function explain(AbstractPiece $piece): void
+    private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("$phrase is nicely placed on an outpost.");
+        $this->elaboration[] = ucfirst("$phrase is nicely placed on an outpost.");
     }
 }

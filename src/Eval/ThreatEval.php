@@ -23,7 +23,7 @@ class ThreatEval extends AbstractEval
                 $valueAttacking = $this->valueAttacking($piece->attackingPieces());
                 if (($valueDefending + self::$value[$piece->getId()]) >= $valueAttacking) {
                     $this->result[$piece->oppColor()] += $diff;
-                    $this->explain($piece);
+                    $this->elaborate($piece);
                 }
             }
         }
@@ -51,10 +51,10 @@ class ThreatEval extends AbstractEval
         return array_sum($values);
     }
 
-    private function explain(AbstractPiece $piece): void
+    private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = ucfirst("$phrase is being threatened and may be lost if not defended properly.");
+        $this->elaboration[] = ucfirst("$phrase is being threatened and may be lost if not defended properly.");
     }
 }

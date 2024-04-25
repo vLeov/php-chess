@@ -91,7 +91,7 @@ class KingSafetyEval extends AbstractEval implements DiscreteEvalInterface, Inve
     private function explain(array $result): void
     {
         if ($sentence = $this->sentence($result)) {
-            $this->phrases[] = $sentence;
+            $this->explanation[] = $sentence;
         }
     }
 }

@@ -24,7 +24,7 @@ class RelativeForkEval extends AbstractEval
                         $attackedPieceValue = self::$value[$attackedPiece->getId()];
                         if ($pieceValue < $attackedPieceValue) {
                             $this->result[$piece->getColor()] += $attackedPieceValue;
-                            $this->explain($attackedPiece);
+                            $this->elaborate($attackedPiece);
                         }
                     }
                 }
@@ -32,10 +32,10 @@ class RelativeForkEval extends AbstractEval
         }
     }
 
-    private function explain(AbstractPiece $piece): void
+    private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->phrases[] = "Relative fork attack on {$phrase}.";
+        $this->elaboration[] = "Relative fork attack on {$phrase}.";
     }
 }
