@@ -44,7 +44,8 @@ class DefenseEval extends AbstractEval
     /**
      * Elaborate on the result.
      *
-     * @param array $result
+     * @param \Chess\Piece\AbstractPiece $piece
+     * @param array $diffPhrases
      */
     private function elaborate(AbstractPiece $piece, array $diffPhrases): void
     {

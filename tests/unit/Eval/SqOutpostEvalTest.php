@@ -107,7 +107,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         $sqOutpostEval = new SqOutpostEval($board);
 
         $this->assertSame($expectedResult, $sqOutpostEval->getResult());
-        $this->assertSame($expectedPhrase, $sqOutpostEval->getPhrases());
+        $this->assertSame($expectedPhrase, $sqOutpostEval->getElaboration());
     }
 
     /**
@@ -133,7 +133,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         $sqOutpostEval = new SqOutpostEval($board);
 
         $this->assertSame($expectedResult, $sqOutpostEval->getResult());
-        $this->assertSame($expectedPhrase, $sqOutpostEval->getPhrases());
+        $this->assertSame($expectedPhrase, $sqOutpostEval->getElaboration());
     }
 
     public function wAdvancingData()
@@ -436,6 +436,6 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         $sqOutpostEval = new SqOutpostEval($board);
 
         $this->assertSame($expectedResult, $sqOutpostEval->getResult());
-        $this->assertSame($expectedPhrase, $sqOutpostEval->getPhrases());
+        $this->assertSame($expectedPhrase, $sqOutpostEval->getElaboration());
     }
 }
