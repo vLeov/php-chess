@@ -78,6 +78,7 @@ class FenExplanationTest extends AbstractUnitTestCase
         $expected = [
             "Black has a tiny material advantage.",
             "The black pieces are slightly better connected.",
+            "White has a tiny space advantage.",
             "Black has a tiny passed pawn advantage.",
             "Black has a tiny advanced pawn advantage.",
             "Black has a tiny far advanced pawn advantage.",
@@ -99,6 +100,7 @@ class FenExplanationTest extends AbstractUnitTestCase
         $expected = [
             "Black has a tiny material advantage.",
             "The black pieces are slightly better connected.",
+            "White has a tiny space advantage.",
             "Black has a tiny passed pawn advantage.",
             "Black has a tiny advanced pawn advantage.",
             "Black has a tiny far advanced pawn advantage.",
