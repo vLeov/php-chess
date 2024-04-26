@@ -11,7 +11,7 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class LanPlay extends AbstractPlay
+class LanPlay extends AbstractPlay implements ValidationInterface
 {
     /**
      * Moves.
