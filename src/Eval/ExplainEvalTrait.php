@@ -82,6 +82,10 @@ trait ExplainEvalTrait
      */
     protected function meanings(): array
     {
+        if (is_a($this, InverseEvalInterface::class)) {
+            $this->subject = array_reverse($this->subject);
+        }
+
         $diff = $this->range[0];
 
         foreach ($this->observation as $key => $val) {

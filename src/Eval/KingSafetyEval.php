@@ -30,8 +30,8 @@ class KingSafetyEval extends AbstractEval implements
         $this->range = [1, 4];
 
         $this->subject =  [
-            'The black pieces',
             'The white pieces',
+            'The black pieces',
         ];
 
         $this->observation = [
