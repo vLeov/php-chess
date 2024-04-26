@@ -31,50 +31,6 @@ class PressureEval extends AbstractEval implements
     private object $sqCount;
 
     /**
-     * Human-like explanation.
-     *
-     * @var array
-     */
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "The white player is utterly pressuring more squares than its opponent.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "The white player is really pressuring more squares than its opponent.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "The white player is somewhat pressuring more squares than its opponent.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "The white player is pressuring a little bit more squares than its opponent.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "The black player is utterly pressuring more squares than its opponent.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "The black player is really pressuring more squares than its opponent.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "The black player is somewhat pressuring more squares than its opponent.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "The black player is pressuring a little bit more squares than its opponent.",
-            ],
-        ],
-    ];
-
-    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
@@ -88,6 +44,20 @@ class PressureEval extends AbstractEval implements
         $this->result = [
             Color::W => [],
             Color::B => [],
+        ];
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'The white player',
+            'The black player',
+        ];
+
+        $this->observation = [
+            "is pressuring a little bit more squares than its opponent",
+            "is somewhat pressuring more squares than its opponent",
+            "is really pressuring more squares than its opponent",
+            "is utterly pressuring more squares than its opponent",
         ];
 
         foreach ($pieces = $this->board->getPieces() as $piece) {
