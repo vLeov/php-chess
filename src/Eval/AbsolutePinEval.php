@@ -29,8 +29,8 @@ class AbsolutePinEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a tiny absolute pin advantage",
-            "has a kind of absolute pin advantage",
+            "has a small absolute pin advantage",
+            "has some absolute pin advantage",
             "has a significant absolute pin advantage",
             "has a total absolute pin advantage",
         ];

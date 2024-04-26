@@ -40,7 +40,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
         ];
 
         $this->observation = [
-            "has a tiny space advantage",
+            "has a small space advantage",
             "has a kind of space advantage",
             "has a significant space advantage",
             "has a total space advantage",

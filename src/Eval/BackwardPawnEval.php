@@ -37,7 +37,7 @@ class BackwardPawnEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a tiny backward pawn advantage",
+            "has a small backward pawn advantage",
             "has some backward pawn advantage",
             "has a significant backward pawn advantage",
             "has a decisive backward pawn advantage",

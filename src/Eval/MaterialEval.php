@@ -30,7 +30,7 @@ class MaterialEval extends AbstractEval implements ExplainEvalInterface
         ];
 
         $this->observation = [
-            "has a tiny material advantage",
+            "has a small material advantage",
             "has some material advantage",
             "has a significant material advantage",
             "has a decisive material advantage",

@@ -34,7 +34,7 @@ class IsolatedPawnEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a tiny isolated pawn advantage",
+            "has a small isolated pawn advantage",
             "has some isolated pawn advantage",
             "has a significant isolated pawn advantage",
             "has a decisive isolated pawn advantage",

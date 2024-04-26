@@ -39,7 +39,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "White has a significant control of the center.",
             "The white pieces are somewhat better connected.",
             "The white player is pressuring a little bit more squares than its opponent.",
-            "White has a kind of absolute pin advantage.",
+            "White has some absolute pin advantage.",
             "White has the bishop pair.",
             "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black.",
         ];
@@ -57,13 +57,13 @@ class FenExplanationTest extends AbstractUnitTestCase
     public function advanced_pawn()
     {
         $expected = [
-            "Black has a tiny material advantage.",
+            "Black has a small material advantage.",
             "The black pieces are slightly better connected.",
-            "White has a tiny space advantage.",
-            "Black has a tiny passed pawn advantage.",
-            "Black has a tiny advanced pawn advantage.",
-            "Black has a tiny far advanced pawn advantage.",
-            "White has a tiny isolated pawn advantage.",
+            "White has a small space advantage.",
+            "Black has a small passed pawn advantage.",
+            "Black has a small advanced pawn advantage.",
+            "Black has a small far advanced pawn advantage.",
+            "White has a small isolated pawn advantage.",
         ];
 
         $board = FenToBoardFactory::create('8/8/8/8/8/8/7p/K6k b - - 0 1');
@@ -79,13 +79,13 @@ class FenExplanationTest extends AbstractUnitTestCase
     public function far_advanced_pawn()
     {
         $expected = [
-            "Black has a tiny material advantage.",
+            "Black has a small material advantage.",
             "The black pieces are slightly better connected.",
-            "White has a tiny space advantage.",
-            "Black has a tiny passed pawn advantage.",
-            "Black has a tiny advanced pawn advantage.",
-            "Black has a tiny far advanced pawn advantage.",
-            "White has a tiny isolated pawn advantage.",
+            "White has a small space advantage.",
+            "Black has a small passed pawn advantage.",
+            "Black has a small advanced pawn advantage.",
+            "Black has a small far advanced pawn advantage.",
+            "White has a small isolated pawn advantage.",
         ];
 
         $board = FenToBoardFactory::create('8/8/8/8/8/8/7p/K6k b - - 0 1');
@@ -101,10 +101,10 @@ class FenExplanationTest extends AbstractUnitTestCase
     public function backward_pawn()
     {
         $expected = [
-            "White has a tiny material advantage.",
-            "White is just controlling the center.",
-            "White has a tiny space advantage.",
-            "White has a tiny passed pawn advantage.",
+            "White has a small material advantage.",
+            "White is totally controlling the center.",
+            "White has a small space advantage.",
+            "White has a small passed pawn advantage.",
             "Black has some backward pawn advantage.",
         ];
 
@@ -122,8 +122,8 @@ class FenExplanationTest extends AbstractUnitTestCase
     {
         $expected = [
             "White has a significant material advantage.",
-            "White is just controlling the center.",
-            "White has a tiny space advantage.",
+            "White is totally controlling the center.",
+            "White has a small space advantage.",
             "White has some passed pawn advantage.",
             "Black has a significant isolated pawn advantage.",
         ];
@@ -141,7 +141,7 @@ class FenExplanationTest extends AbstractUnitTestCase
     public function capablanca_f4()
     {
         $expected = [
-            "White is just controlling the center.",
+            "White is totally controlling the center.",
             "The black pieces are significantly better connected.",
             "White has a total space advantage.",
             "The white player is pressuring a little bit more squares than its opponent.",

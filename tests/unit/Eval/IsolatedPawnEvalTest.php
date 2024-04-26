@@ -100,7 +100,7 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black has a tiny isolated pawn advantage.",
+            "Black has a small isolated pawn advantage.",
         ];
 
         $position = [

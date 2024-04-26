@@ -19,7 +19,7 @@ class AdvancedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has a tiny advanced pawn advantage.",
+            "White has a small advanced pawn advantage.",
         ];
 
         $board = FenToBoardFactory::create('8/1p6/1P1K4/pk6/8/8/5B2/8 b - - 3 56');
@@ -41,7 +41,7 @@ class AdvancedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black has a tiny advanced pawn advantage.",
+            "Black has a small advanced pawn advantage.",
         ];
 
         $board = FenToBoardFactory::create('8/8/4P3/4K3/8/2p2k2/4p3/8 w - - 0 1');

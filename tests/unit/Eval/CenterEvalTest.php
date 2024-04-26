@@ -64,7 +64,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White is just controlling the center.",
+            "White is totally controlling the center.",
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');

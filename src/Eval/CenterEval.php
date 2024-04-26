@@ -44,7 +44,7 @@ class CenterEval extends AbstractEval implements ExplainEvalInterface
             "has a slightly better control of the center",
             "has a somewhat better control of the center",
             "has a significant control of the center",
-            "is just controlling the center",
+            "is totally controlling the center",
         ];
 
         $spEval = (new SpaceEval($this->board))->getResult();

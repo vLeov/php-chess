@@ -16,7 +16,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
     {
         $expected = [
             "Black has a kind of space advantage.",
-            "White has a tiny protection advantage.",
+            "White has a small protection advantage.",
         ];
 
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
@@ -34,7 +34,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
     {
         $expected = [
             "White has a decisive material advantage.",
-            "White is just controlling the center.",
+            "White is totally controlling the center.",
             "White has a total space advantage.",
             "The white pieces are timidly approaching the other side's king.",
             "Black has a significant protection advantage.",
@@ -54,7 +54,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
     {
         $expected = [
             "White has a decisive material advantage.",
-            "White is just controlling the center.",
+            "White is totally controlling the center.",
             "White has a total space advantage.",
             "The white pieces are timidly approaching the other side's king.",
             "Black has a significant protection advantage.",

@@ -36,7 +36,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black has a tiny protection advantage.",
+            "Black has a small protection advantage.",
         ];
 
         $board = new Board();
