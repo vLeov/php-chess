@@ -2,6 +2,7 @@
 
 namespace Chess\Tutor;
 
+use Chess\Eval\ElaborateEvalInterface;
 use Chess\Function\StandardFunction;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
@@ -77,8 +78,10 @@ class FenElaboration
     {
         foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
-            if ($phrases = $eval->getElaboration()) {
-                $this->paragraph = [...$this->paragraph, ...$phrases];
+            if (is_a($eval, ElaborateEvalInterface::class)) {
+                if ($phrases = $eval->getElaboration()) {
+                    $this->paragraph = [...$this->paragraph, ...$phrases];
+                }
             }
         }
 
