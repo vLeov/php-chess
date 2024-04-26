@@ -3,7 +3,6 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SqCount;
-use Chess\Tutor\SpaceEvalSentence;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
@@ -24,45 +23,6 @@ class SpaceEval extends AbstractEval implements
 
     private object $sqCount;
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 8,
-                'meaning' => "White has a total space advantage.",
-            ],
-            [
-                'diff' => 5,
-                'meaning' => "White has a significant space advantage.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a kind of space advantage.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "White has a tiny space advantage.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -8,
-                'meaning' => "Black has a total space advantage.",
-            ],
-            [
-                'diff' => -5,
-                'meaning' => "Black has a significant space advantage.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a kind of space advantage.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "Black has a tiny space advantage.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -72,6 +32,15 @@ class SpaceEval extends AbstractEval implements
         $this->result = [
             Color::W => [],
             Color::B => [],
+        ];
+
+        $this->range = [1, 9];
+
+        $this->observation = [
+            "has a tiny space advantage.",
+            "has a kind of space advantage.",
+            "has a significant space advantage.",
+            "has a total space advantage.",
         ];
 
         foreach ($pieces = $this->board->getPieces() as $piece) {
