@@ -14,24 +14,20 @@ class DiagonalOppositionEval extends AbstractEval implements
 
     const NAME = 'Diagonal opposition';
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 1,
-                'meaning' => "The white king has the diagonal opposition preventing the advance of the other king.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -1,
-                'meaning' => "The black king has the diagonal opposition preventing the advance of the other king.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1];
+
+        $this->subject = [
+            'The white king',
+            'The black king',
+        ];
+
+        $this->observation = [
+            "has the diagonal opposition preventing the advance of the other king",
+        ];
 
         $wKingMobility = $this->board->getPiece(Color::W, Piece::K)->getMobility();
         $bKingMobility = $this->board->getPiece(Color::B, Piece::K)->getMobility();
