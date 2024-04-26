@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-trait DiscreteEvalTrait
+trait ExplainEvalTrait
 {
     protected $range;
 

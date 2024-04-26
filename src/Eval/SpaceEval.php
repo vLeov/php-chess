@@ -16,7 +16,7 @@ use Chess\Variant\Classical\Board;
  */
 class SpaceEval extends AbstractEval implements DiscreteEvalInterface
 {
-    use DiscreteEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Space';
 
