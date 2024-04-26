@@ -18,7 +18,6 @@ use Chess\Variant\Classical\PGN\AN\Square;
  * @license MIT
  */
 class BadBishopEval extends AbstractEval implements
-    DiscreteEvalInterface,
     ExplainEvalInterface,
     InverseEvalInterface
 {

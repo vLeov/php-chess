@@ -12,9 +12,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class MaterialEval extends AbstractEval implements
-    DiscreteEvalInterface,
-    ExplainEvalInterface
+class MaterialEval extends AbstractEval implements ExplainEvalInterface
 {
     use ExplainEvalTrait;
 
