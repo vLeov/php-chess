@@ -6,10 +6,10 @@ use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 
-class ThreatEval extends AbstractEval
+class ThreatEval extends AbstractEval implements ElaborateEvalInterface
 {
     use ElaborateEvalTrait;
-    
+
     const NAME = 'Threat';
 
     public function __construct(Board $board)

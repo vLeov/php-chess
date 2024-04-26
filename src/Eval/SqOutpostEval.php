@@ -13,7 +13,7 @@ use Chess\Variant\Classical\Board;
  *
  * @link https://en.wikipedia.org/wiki/Outpost_(chess)
  */
-class SqOutpostEval extends AbstractEval
+class SqOutpostEval extends AbstractEval implements ElaborateEvalInterface
 {
     use ElaborateEvalTrait;
 

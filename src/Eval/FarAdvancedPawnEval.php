@@ -15,7 +15,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class FarAdvancedPawnEval extends AbstractEval
+class FarAdvancedPawnEval extends AbstractEval implements ElaborateEvalInterface
 {
     use ExplainEvalTrait;
 

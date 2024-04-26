@@ -8,10 +8,10 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
-class KnightOutpostEval extends AbstractEval
+class KnightOutpostEval extends AbstractEval implements ElaborateEvalInterface
 {
     use ElaborateEvalTrait;
-    
+
     const NAME = 'Knight outpost';
 
     public function __construct(Board $board)

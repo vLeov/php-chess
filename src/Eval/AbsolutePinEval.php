@@ -7,10 +7,12 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
+class AbsolutePinEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    InverseEvalInterface
 {
     use ElaborateEvalTrait;
-    
+
     const NAME = 'Absolute pin';
 
     public function __construct(Board $board)

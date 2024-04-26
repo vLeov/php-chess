@@ -16,7 +16,9 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class PassedPawnEval extends AbstractEval implements DiscreteEvalInterface
+class PassedPawnEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    DiscreteEvalInterface
 {
     use ExplainEvalTrait;
 

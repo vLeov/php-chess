@@ -8,10 +8,10 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class DiscoveredCheckEval extends AbstractEval
+class DiscoveredCheckEval extends AbstractEval implements ElaborateEvalInterface
 {
     use ElaborateEvalTrait;
-    
+
     const NAME = 'Discovered check';
 
     public function __construct(Board $board)

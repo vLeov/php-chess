@@ -7,10 +7,10 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class AbsoluteSkewerEval extends AbstractEval
+class AbsoluteSkewerEval extends AbstractEval implements ElaborateEvalInterface
 {
     use ElaborateEvalTrait;
-    
+
     const NAME = 'Absolute skewer';
 
     public function __construct(Board $board)
