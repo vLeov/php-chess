@@ -16,6 +16,8 @@ use Chess\Variant\Classical\Board;
  */
 class SpaceEval extends AbstractEval implements DiscreteEvalInterface
 {
+    use DiscreteEvalTrait;
+
     const NAME = 'Space';
 
     private object $sqCount;
