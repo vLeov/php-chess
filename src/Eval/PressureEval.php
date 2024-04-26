@@ -15,10 +15,12 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class PressureEval extends AbstractEval implements DiscreteEvalInterface
+class PressureEval extends AbstractEval implements
+    DiscreteEvalInterface,
+    ExplainEvalInterface
 {
     use ExplainEvalTrait;
-    
+
     const NAME = 'Pressure';
 
     /**

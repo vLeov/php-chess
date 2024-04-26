@@ -12,10 +12,12 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class CenterEval extends AbstractEval implements DiscreteEvalInterface
+class CenterEval extends AbstractEval implements
+    DiscreteEvalInterface,
+    ExplainEvalInterface
 {
     use ExplainEvalTrait;
-    
+
     const NAME = 'Center';
 
     private array $center = [

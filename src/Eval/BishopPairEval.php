@@ -6,10 +6,12 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class BishopPairEval extends AbstractEval implements TernaryEvalInterface
+class BishopPairEval extends AbstractEval implements
+    ExplainEvalInterface,
+    TernaryEvalInterface
 {
     use ExplainEvalTrait;
-    
+
     const NAME = 'Bishop pair';
 
     protected array $phrase = [

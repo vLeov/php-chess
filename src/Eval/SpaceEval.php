@@ -14,7 +14,9 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class SpaceEval extends AbstractEval implements DiscreteEvalInterface
+class SpaceEval extends AbstractEval implements
+    DiscreteEvalInterface,
+    ExplainEvalInterface
 {
     use ExplainEvalTrait;
 

@@ -12,10 +12,12 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class MaterialEval extends AbstractEval implements DiscreteEvalInterface
+class MaterialEval extends AbstractEval implements
+    DiscreteEvalInterface,
+    ExplainEvalInterface
 {
     use ExplainEvalTrait;
-    
+
     const NAME = 'Material';
 
     protected array $phrase = [

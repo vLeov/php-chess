@@ -11,6 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 class BackwardPawnEval extends AbstractEval implements
     DiscreteEvalInterface,
     ElaborateEvalInterface,
+    ExplainEvalInterface,
     InverseEvalInterface
 {
     use ExplainEvalTrait;

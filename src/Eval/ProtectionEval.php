@@ -18,7 +18,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  */
 class ProtectionEval extends AbstractEval implements
     DiscreteEvalInterface,
-    ElaborateEvalInterface
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ExplainEvalTrait;
 

@@ -13,10 +13,12 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class ConnectivityEval extends AbstractEval implements DiscreteEvalInterface
+class ConnectivityEval extends AbstractEval implements
+    DiscreteEvalInterface,
+    ExplainEvalInterface
 {
     use ExplainEvalTrait;
-    
+
     const NAME = 'Connectivity';
 
     private object $sqCount;
