@@ -31,48 +31,23 @@ class CenterEval extends AbstractEval implements
         'a1' => 0, 'b1' => 0, 'c1' => 0, 'd1' => 0, 'e1' => 0, 'f1' => 0, 'g1' => 0, 'h1' => 0,
     ];
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "White is just controlling the center.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a significant control of the center.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "White has a somewhat better control of the center.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "White has a slightly better control of the center.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "Black is just controlling the center.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a significant control of the center.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "Black has a somewhat better control of the center.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "Black has a slightly better control of the center.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a slightly better control of the center",
+            "has a somewhat better control of the center",
+            "has a significant control of the center",
+            "is just controlling the center",
+        ];
 
         $spEval = (new SpaceEval($this->board))->getResult();
 
