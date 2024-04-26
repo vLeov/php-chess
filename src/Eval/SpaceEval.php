@@ -108,16 +108,9 @@ class SpaceEval extends AbstractEval implements
             }
         }
 
-        $this->explain($this->result);
-    }
-
-    private function explain(array $result): void
-    {
-        $result[Color::W] = count($result[Color::W]);
-        $result[Color::B] = count($result[Color::B]);
-
-        if ($sentence = $this->sentence($result)) {
-            $this->explanation[] = $sentence;
-        }
+        $this->explain([
+            Color::W => count($this->result[Color::W]),
+            Color::B => count($this->result[Color::B]),
+        ]);
     }
 }

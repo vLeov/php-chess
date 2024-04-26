@@ -94,18 +94,6 @@ class ProtectionEval extends AbstractEval implements
     }
 
     /**
-     * Explain the result.
-     *
-     * @param array $result
-     */
-    private function explain(array $result): void
-    {
-        if ($sentence = $this->sentence($result)) {
-            $this->explanation[] = $sentence;
-        }
-    }
-
-    /**
      * Elaborate on the result.
      *
      * @param \Chess\Piece\AbstractPiece $piece

@@ -110,11 +110,4 @@ class ConnectivityEval extends AbstractEval implements
             }
         }
     }
-
-    private function explain(array $result): void
-    {
-        if ($sentence = $this->sentence($result)) {
-            $this->explanation[] = $sentence;
-        }
-    }
 }

@@ -93,7 +93,10 @@ class BackwardPawnEval extends AbstractEval implements
             }
         }
 
-        $this->explain($this->result);
+        $this->explain([
+            Color::W => count($this->result[Color::W]),
+            Color::B => count($this->result[Color::B]),
+        ]);
 
         $this->elaborate($this->result);
     }
@@ -124,21 +127,6 @@ class BackwardPawnEval extends AbstractEval implements
         }
 
         return false;
-    }
-
-    /**
-     * Explain the result.
-     *
-     * @param array $result
-     */
-    private function explain(array $result): void
-    {
-        $result[Color::W] = count($result[Color::W]);
-        $result[Color::B] = count($result[Color::B]);
-
-        if ($sentence = $this->sentence($result)) {
-            $this->explanation[] = $sentence;
-        }
     }
 
     /**
