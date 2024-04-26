@@ -27,34 +27,6 @@ class BadBishopEval extends AbstractEval implements
     const NAME = 'Bad bishop';
 
     /**
-     * Phrase.
-     *
-     * @var array
-     */
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 5,
-                'meaning' => "White has a bad bishop because too many of its pawns are blocking it.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a bishop which is not too good because a few of its pawns are blocking it.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -5,
-                'meaning' => "Black has a bad bishop because too many of its pawns are blocking it.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a bishop which is not too good because a few of its pawns are blocking it.",
-            ],
-        ],
-    ];
-
-    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
@@ -62,6 +34,18 @@ class BadBishopEval extends AbstractEval implements
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 5];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            'has a bishop which is not too good because a few of its pawns are blocking it',
+            'has a bad bishop because too many of its pawns are blocking it',
+        ];
 
         $bishopPairEval = (new BishopPairEval($board))->getResult();
 
