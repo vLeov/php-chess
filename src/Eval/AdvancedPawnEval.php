@@ -27,50 +27,6 @@ class AdvancedPawnEval extends AbstractEval implements
     const NAME = 'Advanced pawn';
 
     /**
-     * Phrase.
-     *
-     * @var array
-     */
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "White has a decisive advanced pawn advantage.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a significant advanced pawn advantage.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "White has some advanced pawn advantage.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "White has a tiny advanced pawn advantage.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "Black has a decisive advanced pawn advantage.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a significant advanced pawn advantage.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "Black has some advanced pawn advantage.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "Black has a tiny advanced pawn advantage.",
-            ],
-        ],
-    ];
-
-    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
@@ -82,6 +38,20 @@ class AdvancedPawnEval extends AbstractEval implements
         $this->result = [
             Color::W => [],
             Color::B => [],
+        ];
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a tiny advanced pawn advantage",
+            "has some advanced pawn advantage",
+            "has a significant advanced pawn advantage",
+            "has a decisive advanced pawn advantage",
         ];
 
         foreach ($this->board->getPieces() as $piece) {
