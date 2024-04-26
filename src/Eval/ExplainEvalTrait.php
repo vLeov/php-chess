@@ -97,7 +97,9 @@ trait ExplainEvalTrait
                 'diff' => $diff * -1,
                 'meaning' => "{$this->subject[1]} {$val}."
             ];
-            $diff += intdiv($this->range[1] - $this->range[0], count($this->observation) - 1);
+            isset($this->range[1])
+                ? $diff += intdiv($this->range[1] - $this->range[0], count($this->observation) - 1)
+                : $diff = $this->range[0];
         }
 
         return [

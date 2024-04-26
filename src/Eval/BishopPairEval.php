@@ -14,24 +14,20 @@ class BishopPairEval extends AbstractEval implements
 
     const NAME = 'Bishop pair';
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 1,
-                'meaning' => "White has the bishop pair.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -1,
-                'meaning' => "Black has the bishop pair.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has the bishop pair",
+        ];
 
         $count = [
             Color::W => 0,
