@@ -6,9 +6,12 @@ use Chess\Variant\Classical\PGN\AN\Color;
 
 trait ExplainEvalTrait
 {
-    protected $range;
+    protected array $explanation = [];
 
-    protected $induction;
+    public function getExplanation()
+    {
+        return $this->explanation;
+    }
 
     protected function sentence(array $result): ?string
     {

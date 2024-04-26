@@ -32,16 +32,9 @@ abstract class AbstractEval
         Color::B => 0,
     ];
 
-    protected array $explanation = [];
-
     public function getResult()
     {
         return $this->result;
-    }
-
-    public function getExplanation()
-    {
-        return $this->explanation;
     }
 
     protected function diffPieces(array $array1, array $array2): array

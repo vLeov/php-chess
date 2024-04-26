@@ -24,10 +24,10 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getExplanation());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 
     /**
@@ -45,10 +45,10 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('4qk2/8/4n3/8/8/4R3/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getExplanation());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 
     /**
@@ -68,10 +68,10 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('4q1k1/8/4n3/8/8/4R3/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 
     /**
@@ -89,10 +89,10 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('4qk2/8/2n5/8/B7/8/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 
     /**
@@ -112,10 +112,10 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('4q1k1/8/2n5/8/B7/8/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 
     /**
@@ -135,10 +135,10 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('4r1k1/8/2n5/8/B7/8/8/6K1 w - -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 
     /**
@@ -158,10 +158,10 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 
     /**
@@ -182,9 +182,9 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $board = (new StrToBoard('rn2k1nr/pp1b1ppp/1q6/1N1p4/Q1pP4/4P3/PP1K1PPP/R4BNR w kq -'))
             ->create();
 
-        $relativeSkewerEval = new DefenseEval($board);
+        $defenseEval = new DefenseEval($board);
 
-        $this->assertSame($expectedResult, $relativeSkewerEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeSkewerEval->getElaboration());
+        $this->assertSame($expectedResult, $defenseEval->getResult());
+        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
     }
 }
