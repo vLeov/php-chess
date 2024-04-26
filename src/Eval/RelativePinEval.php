@@ -8,15 +8,32 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class RelativePinEval extends AbstractEval implements ElaborateEvalInterface
+class RelativePinEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Relative pin';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 9];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a small relative pin advantage",
+            "has some relative pin advantage",
+            "has a significant relative pin advantage",
+            "has a total relative pin advantage",
+        ];
 
         $attackEval = (new AttackEval($this->board))->getResult();
 
@@ -33,6 +50,8 @@ class RelativePinEval extends AbstractEval implements ElaborateEvalInterface
                 }
             }
         }
+
+        $this->explain($this->result);
     }
 
     private function elaborate(AbstractPiece $piece): void

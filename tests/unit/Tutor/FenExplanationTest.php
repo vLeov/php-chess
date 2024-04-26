@@ -138,6 +138,26 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function relative_pin()
+    {
+        $expected = [
+            "White is totally controlling the center.",
+            "The black pieces are significantly better connected.",
+            "White has a small space advantage.",
+            "White has some absolute pin advantage.",
+            "Black has a significant relative pin advantage.",
+        ];
+
+        $board = FenToBoardFactory::create('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
     public function capablanca_f4()
     {
         $expected = [
