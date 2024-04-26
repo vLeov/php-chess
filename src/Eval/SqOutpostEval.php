@@ -17,6 +17,8 @@ class SqOutpostEval extends AbstractEval
 {
     const NAME = 'Outpost square';
 
+    use ElaborateEvalTrait;
+
     public function __construct(Board $board)
     {
         $this->board = $board;

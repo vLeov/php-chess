@@ -19,7 +19,9 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 class PassedPawnEval extends AbstractEval implements DiscreteEvalInterface
 {
     use ExplainEvalTrait;
-    
+
+    use ElaborateEvalTrait;
+
     const NAME = 'Passed pawn';
 
     /**

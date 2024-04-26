@@ -12,6 +12,8 @@ class BackwardPawnEval extends AbstractEval implements DiscreteEvalInterface, In
 {
     use ExplainEvalTrait;
 
+    use ElaborateEvalTrait;
+
     const NAME = 'Backward pawn';
 
     /**

@@ -20,6 +20,8 @@ class AdvancedPawnEval extends AbstractEval implements DiscreteEvalInterface
 {
     use ExplainEvalTrait;
 
+    use ElaborateEvalTrait;
+
     const NAME = 'Advanced pawn';
 
     /**
