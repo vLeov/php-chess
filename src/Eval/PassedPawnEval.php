@@ -27,50 +27,6 @@ class PassedPawnEval extends AbstractEval implements
     const NAME = 'Passed pawn';
 
     /**
-     * Phrase.
-     *
-     * @var array
-     */
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "White has a decisive passed pawn advantage.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a significant passed pawn advantage.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "White has some passed pawn advantage.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "White has a tiny passed pawn advantage.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "Black has a decisive passed pawn advantage.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a significant passed pawn advantage.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "Black has some passed pawn advantage.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "Black has a tiny passed pawn advantage.",
-            ],
-        ],
-    ];
-
-    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
@@ -82,6 +38,20 @@ class PassedPawnEval extends AbstractEval implements
         $this->result = [
             Color::W => [],
             Color::B => [],
+        ];
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a tiny passed pawn advantage",
+            "has some passed pawn advantage",
+            "has a significant passed pawn advantage",
+            "has a decisive passed pawn advantage",
         ];
 
         foreach ($this->board->getPieces() as $piece) {
