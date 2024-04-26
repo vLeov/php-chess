@@ -20,48 +20,23 @@ class MaterialEval extends AbstractEval implements
 
     const NAME = 'Material';
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "White has a decisive material advantage.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a significant material advantage.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "White has some material advantage.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "White has a tiny material advantage.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "Black has a decisive material advantage.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a significant material advantage.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "Black has some material advantage.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "Black has a tiny material advantage.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a tiny material advantage",
+            "has some material advantage",
+            "has a significant material advantage",
+            "has a decisive material advantage",
+        ];
 
         foreach ($this->board->getPieces(Color::W) as $piece) {
             if ($piece->getId() !== Piece::K) {
