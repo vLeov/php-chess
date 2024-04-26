@@ -23,48 +23,23 @@ class KingSafetyEval extends AbstractEval implements
 
     const NAME = 'King safety';
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "The white king is in dire straits.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "The black pieces are desperately close to the adversary's king.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "The black pieces are getting worryingly close to the opponent's king.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "The black pieces are timidly approaching the other side's king.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "The black king is in dire straits.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "The white pieces are desperately close to the adversary's king.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "The white pieces are getting worryingly close to the opponent's king.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "The white pieces are timidly approaching the other side's king.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 4];
+
+        $this->subject =  [
+            'The black pieces',
+            'The white pieces',
+        ];
+
+        $this->observation = [
+            "are timidly approaching the other side's king",
+            "are approaching the other side's king",
+            "are getting worryingly close to the adversary's king",
+            "are more than desperately close to the adversary's king",
+        ];
 
         $pressEval = (new PressureEval($this->board))->getResult();
         $spEval = (new SpaceEval($this->board))->getResult();
