@@ -2,6 +2,7 @@
 
 namespace Chess\Tutor;
 
+use Chess\Eval\ExplainEvalInterface;
 use Chess\Function\StandardFunction;
 use Chess\Heuristics\FenHeuristics;
 use Chess\ML\Supervised\Classification\CountLabeller;
@@ -87,8 +88,10 @@ class FenExplanation
     {
         foreach ($this->function->getEval() as $key => $val) {
             $eval = new $key($this->board);
-            if ($phrases = $eval->getExplanation()) {
-                $this->paragraph = [...$this->paragraph, ...$phrases];
+            if (is_a($eval, ExplainEvalInterface::class)) {
+                if ($phrases = $eval->getExplanation()) {
+                    $this->paragraph = [...$this->paragraph, ...$phrases];
+                }
             }
         }
 
