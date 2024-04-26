@@ -10,6 +10,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class RelativePinEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Relative pin';
 
     public function __construct(Board $board)

@@ -10,6 +10,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class DefenseEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Defense';
 
     public function __construct(Board $board)

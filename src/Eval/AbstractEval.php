@@ -34,8 +34,6 @@ abstract class AbstractEval
 
     protected array $explanation = [];
 
-    protected array $elaboration = [];
-
     public function getResult()
     {
         return $this->result;
@@ -44,11 +42,6 @@ abstract class AbstractEval
     public function getExplanation()
     {
         return $this->explanation;
-    }
-
-    public function getElaboration()
-    {
-        return $this->elaboration;
     }
 
     protected function diffPieces(array $array1, array $array2): array

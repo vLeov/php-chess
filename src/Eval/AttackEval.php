@@ -15,6 +15,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  */
 class AttackEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Attack';
 
     public function __construct(Board $board)

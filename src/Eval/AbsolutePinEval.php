@@ -9,6 +9,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class AbsolutePinEval extends AbstractEval implements InverseEvalInterface
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Absolute pin';
 
     public function __construct(Board $board)

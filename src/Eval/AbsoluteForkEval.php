@@ -9,6 +9,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class AbsoluteForkEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+
     const NAME = 'Absolute fork';
 
     public function __construct(Board $board)

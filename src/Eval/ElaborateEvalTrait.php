@@ -6,6 +6,13 @@ use Chess\Variant\Classical\PGN\AN\Color;
 
 trait ElaborateEvalTrait
 {
+    protected array $elaboration = [];
+
+    public function getElaboration()
+    {
+        return $this->elaboration;
+    }
+
     protected function shorten(array $result, string $singular, string $plural): void
     {
         $sqs = [...$result[Color::W], ...$result[Color::B]];

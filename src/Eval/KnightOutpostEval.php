@@ -10,6 +10,8 @@ use Chess\Variant\Classical\Board;
 
 class KnightOutpostEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Knight outpost';
 
     public function __construct(Board $board)

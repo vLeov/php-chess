@@ -10,6 +10,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class DiscoveredCheckEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Discovered check';
 
     public function __construct(Board $board)

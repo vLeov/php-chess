@@ -10,6 +10,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class DoubledPawnEval extends AbstractEval implements InverseEvalInterface
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Doubled pawn';
 
     public function __construct(Board $board)

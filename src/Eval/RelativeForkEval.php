@@ -9,6 +9,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class RelativeForkEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Relative fork';
 
     public function __construct(Board $board)

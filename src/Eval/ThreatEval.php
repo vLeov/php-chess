@@ -8,6 +8,8 @@ use Chess\Variant\Classical\Board;
 
 class ThreatEval extends AbstractEval
 {
+    use ElaborateEvalTrait;
+    
     const NAME = 'Threat';
 
     public function __construct(Board $board)
