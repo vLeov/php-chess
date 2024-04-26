@@ -14,24 +14,20 @@ class DirectOppositionEval extends AbstractEval implements
 
     const NAME = 'Direct opposition';
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 1,
-                'meaning' => "The white king has the direct opposition preventing the advance of the other king.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -1,
-                'meaning' => "The black king has the direct opposition preventing the advance of the other king.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1];
+
+        $this->subject = [
+            'The white king',
+            'The black king',
+        ];
+
+        $this->observation = [
+            "has the direct opposition preventing the advance of the other king",
+        ];
 
         $wKSq = $this->board->getPiece(Color::W, Piece::K)->getSq();
         $bKSq = $this->board->getPiece(Color::B, Piece::K)->getSq();
