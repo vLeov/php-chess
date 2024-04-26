@@ -25,50 +25,6 @@ class FarAdvancedPawnEval extends AbstractEval implements
     const NAME = 'Far-advanced pawn';
 
     /**
-     * Phrase.
-     *
-     * @var array
-     */
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "White has a decisive far advanced pawn advantage.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a significant far advanced pawn advantage.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "White has some far advanced pawn advantage.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "White has a tiny far advanced pawn advantage.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "Black has a decisive far advanced pawn advantage.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a significant far advanced pawn advantage.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "Black has some far advanced pawn advantage.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "Black has a tiny far advanced pawn advantage.",
-            ],
-        ],
-    ];
-
-    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
@@ -80,6 +36,20 @@ class FarAdvancedPawnEval extends AbstractEval implements
         $this->result = [
             Color::W => [],
             Color::B => [],
+        ];
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a tiny far advanced pawn advantage",
+            "has some far advanced pawn advantage",
+            "has a significant far advanced pawn advantage",
+            "has a decisive far advanced pawn advantage",
         ];
 
         foreach ($this->board->getPieces() as $piece) {
