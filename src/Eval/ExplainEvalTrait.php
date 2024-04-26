@@ -7,6 +7,27 @@ use Chess\Variant\Classical\PGN\AN\Color;
 trait ExplainEvalTrait
 {
     /**
+     * Range.
+     *
+     * @var array
+     */
+    protected array $range;
+
+    /**
+     * Subject.
+     *
+     * @var array
+     */
+    protected array $subject;
+
+    /**
+     * Observation.
+     *
+     * @var array
+     */
+    protected array $observation;
+
+    /**
      * Explanation.
      *
      * @var array
@@ -66,11 +87,11 @@ trait ExplainEvalTrait
         foreach ($this->observation as $key => $val) {
             $meanings[Color::W][] = [
                 'diff' => $diff,
-                'meaning' => "White {$val}"
+                'meaning' => "{$this->subject[0]} {$val}."
             ];
             $meanings[Color::B][] = [
                 'diff' => $diff * -1,
-                'meaning' => "Black {$val}"
+                'meaning' => "{$this->subject[1]} {$val}."
             ];
             $diff += intdiv($this->range[1] - $this->range[0], count($this->observation) - 1);
         }
@@ -82,7 +103,7 @@ trait ExplainEvalTrait
     }
 
     /**
-     * Explain the result obtained.
+     * Explains the result obtained.
      *
      * @param array $result
      */

@@ -36,11 +36,16 @@ class SpaceEval extends AbstractEval implements
 
         $this->range = [1, 9];
 
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
         $this->observation = [
-            "has a tiny space advantage.",
-            "has a kind of space advantage.",
-            "has a significant space advantage.",
-            "has a total space advantage.",
+            "has a tiny space advantage",
+            "has a kind of space advantage",
+            "has a significant space advantage",
+            "has a total space advantage",
         ];
 
         foreach ($pieces = $this->board->getPieces() as $piece) {

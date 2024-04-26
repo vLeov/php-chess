@@ -3,7 +3,6 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SqCount;
-use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
@@ -23,83 +22,51 @@ class ConnectivityEval extends AbstractEval implements
 
     private object $sqCount;
 
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "The white pieces are so better connected.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "The white pieces are significantly better connected.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "The white pieces are somewhat better connected.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "The white pieces are slightly better connected.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "The black pieces are so better connected.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "The black pieces are significantly better connected.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "The black pieces are somewhat better connected.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "The black pieces are slightly better connected.",
-            ],
-        ],
-    ];
-
     public function __construct(Board $board)
     {
         $this->board = $board;
+
         $this->sqCount = (new SqCount($board))->count();
 
-        $this->color(Color::W);
-        $this->color(Color::B);
+        $this->range = [1, 4];
 
-        $this->explain($this->result);
-    }
+        $this->subject =  [
+            'The white pieces',
+            'The black pieces',
+        ];
 
-    private function color(string $color): void
-    {
-        foreach ($this->board->getPieces($color) as $piece) {
+        $this->observation = [
+            "are slightly better connected",
+            "are somewhat better connected",
+            "are significantly better connected",
+            "are so better connected",
+        ];
+
+        foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
                 case Piece::K:
-                    $this->result[$color] += count(
+                    $this->result[$piece->getColor()] += count(
                         array_intersect((array) $piece->getMobility(),
-                        $this->sqCount->used->{$color})
+                        $this->sqCount->used->{$piece->getColor()})
                     );
                     break;
                 case Piece::N:
-                    $this->result[$color] += count(
+                    $this->result[$piece->getColor()] += count(
                         array_intersect($piece->getMobility(),
-                        $this->sqCount->used->{$color})
+                        $this->sqCount->used->{$piece->getColor()})
                     );
                     break;
                 case Piece::P:
-                    $this->result[$color] += count(
+                    $this->result[$piece->getColor()] += count(
                         array_intersect($piece->getCaptureSqs(),
-                        $this->sqCount->used->{$color})
+                        $this->sqCount->used->{$piece->getColor()})
                     );
                     break;
                 default:
                     foreach ((array) $piece->getMobility() as $key => $val) {
                         foreach ($val as $sq) {
-                            if (in_array($sq, $this->sqCount->used->{$color})) {
-                                $this->result[$color] += 1;
+                            if (in_array($sq, $this->sqCount->used->{$piece->getColor()})) {
+                                $this->result[$piece->getColor()] += 1;
                                 break;
                             } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
                                 break;
@@ -109,5 +76,7 @@ class ConnectivityEval extends AbstractEval implements
                     break;
             }
         }
+
+        $this->explain($this->result);
     }
 }
