@@ -15,6 +15,8 @@ use Chess\Variant\Classical\Board;
  */
 class ConnectivityEval extends AbstractEval implements DiscreteEvalInterface
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'Connectivity';
 
     private object $sqCount;

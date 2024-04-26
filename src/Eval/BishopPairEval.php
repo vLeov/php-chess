@@ -8,6 +8,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class BishopPairEval extends AbstractEval implements TernaryEvalInterface
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'Bishop pair';
 
     protected array $phrase = [

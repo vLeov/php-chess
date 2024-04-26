@@ -10,6 +10,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class BackwardPawnEval extends AbstractEval implements DiscreteEvalInterface, InverseEvalInterface
 {
+    use ExplainEvalTrait;
+
     const NAME = 'Backward pawn';
 
     /**

@@ -18,6 +18,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  */
 class AdvancedPawnEval extends AbstractEval implements DiscreteEvalInterface
 {
+    use ExplainEvalTrait;
+
     const NAME = 'Advanced pawn';
 
     /**

@@ -8,6 +8,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class DiagonalOppositionEval extends AbstractEval implements TernaryEvalInterface
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'Diagonal opposition';
 
     protected array $phrase = [

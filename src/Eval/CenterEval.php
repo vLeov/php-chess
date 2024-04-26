@@ -14,6 +14,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
  */
 class CenterEval extends AbstractEval implements DiscreteEvalInterface
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'Center';
 
     private array $center = [

@@ -9,6 +9,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class IsolatedPawnEval extends AbstractEval implements DiscreteEvalInterface, InverseEvalInterface
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'Isolated pawn';
 
     /**

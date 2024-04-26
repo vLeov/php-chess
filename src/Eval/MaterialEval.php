@@ -14,6 +14,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  */
 class MaterialEval extends AbstractEval implements DiscreteEvalInterface
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'Material';
 
     protected array $phrase = [

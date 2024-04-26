@@ -16,6 +16,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  */
 class KingSafetyEval extends AbstractEval implements DiscreteEvalInterface, InverseEvalInterface
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'King safety';
 
     protected array $phrase = [

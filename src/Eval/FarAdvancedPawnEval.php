@@ -17,6 +17,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  */
 class FarAdvancedPawnEval extends AbstractEval
 {
+    use ExplainEvalTrait;
+    
     const NAME = 'Far-advanced pawn';
 
     /**
