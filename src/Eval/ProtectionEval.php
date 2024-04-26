@@ -27,50 +27,6 @@ class ProtectionEval extends AbstractEval implements
     const NAME = 'Protection';
 
     /**
-     * Phrase.
-     *
-     * @var array
-     */
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "White has a decisive protection advantage.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "White has a significant protection advantage.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "White has some protection advantage.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "White has a tiny protection advantage.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "Black has a decisive protection advantage.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "Black has a significant protection advantage.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "Black has some protection advantage.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "Black has a tiny protection advantage.",
-            ],
-        ],
-    ];
-
-    /**
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
@@ -78,6 +34,20 @@ class ProtectionEval extends AbstractEval implements
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a tiny protection advantage",
+            "has some protection advantage",
+            "has a significant protection advantage",
+            "has a decisive protection advantage",
+        ];
 
         foreach ($this->board->getPieces() as $piece) {
             foreach ($piece->attackedPieces() as $attackedPiece) {
