@@ -9,15 +9,31 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class AbsolutePinEval extends AbstractEval implements
     ElaborateEvalInterface,
+    ExplainEvalInterface,
     InverseEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Absolute pin';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 9];
+
+        $this->subject = [
+            'Black',
+            'White',
+        ];
+
+        $this->observation = [
+            "has a tiny absolute pin advantage",
+            "has a kind of absolute pin advantage",
+            "has a significant absolute pin advantage",
+            "has a total absolute pin advantage",
+        ];
 
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() !== Piece::K) {
@@ -36,6 +52,8 @@ class AbsolutePinEval extends AbstractEval implements
                 }
             }
         }
+
+        $this->explain($this->result);
     }
 
     private function elaborate(AbstractPiece $piece): void

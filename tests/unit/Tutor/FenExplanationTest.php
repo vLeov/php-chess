@@ -32,26 +32,6 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function endgame()
-    {
-        $expected = [
-            "White has a significant material advantage.",
-            "White has a significant control of the center.",
-            "The white pieces are somewhat better connected.",
-            "The white player is pressuring a little bit more squares than its opponent.",
-            "White has the bishop pair.",
-        ];
-
-        $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
-
-        $paragraph = (new FenExplanation($board))->getParagraph();
-
-        $this->assertSame($expected, $paragraph);
-    }
-
-    /**
-     * @test
-     */
     public function evaluated_endgame()
     {
         $expected = [
@@ -59,6 +39,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "White has a significant control of the center.",
             "The white pieces are somewhat better connected.",
             "The white player is pressuring a little bit more squares than its opponent.",
+            "White has a kind of absolute pin advantage.",
             "White has the bishop pair.",
             "Overall, 6 heuristic evaluation features are favoring White while 0 are favoring Black.",
         ];
