@@ -19,9 +19,8 @@ class FarAdvancedPawnEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
 {
-    use ExplainEvalTrait;
-
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Far-advanced pawn';
 

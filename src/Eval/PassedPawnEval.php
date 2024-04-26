@@ -21,9 +21,8 @@ class PassedPawnEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
 {
-    use ExplainEvalTrait;
-
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Passed pawn';
 

@@ -13,9 +13,8 @@ class IsolatedPawnEval extends AbstractEval implements
     ExplainEvalInterface,
     InverseEvalInterface
 {
-    use ExplainEvalTrait;
-
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Isolated pawn';
 

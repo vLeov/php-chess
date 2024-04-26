@@ -21,9 +21,8 @@ class ProtectionEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
 {
-    use ExplainEvalTrait;
-
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Protection';
 
