@@ -19,50 +19,6 @@ class BackwardPawnEval extends AbstractEval implements
 
     const NAME = 'Backward pawn';
 
-    /**
-     * Phrase.
-     *
-     * @var array
-     */
-    protected array $phrase = [
-        Color::W => [
-            [
-                'diff' => 4,
-                'meaning' => "Black has a decisive backward pawn advantage.",
-            ],
-            [
-                'diff' => 3,
-                'meaning' => "Black has a significant backward pawn advantage.",
-            ],
-            [
-                'diff' => 2,
-                'meaning' => "Black has some backward pawn advantage.",
-            ],
-            [
-                'diff' => 1,
-                'meaning' => "Black has a tiny backward pawn advantage.",
-            ],
-        ],
-        Color::B => [
-            [
-                'diff' => -4,
-                'meaning' => "White has a decisive backward pawn advantage.",
-            ],
-            [
-                'diff' => -3,
-                'meaning' => "White has a significant backward pawn advantage.",
-            ],
-            [
-                'diff' => -2,
-                'meaning' => "White has some backward pawn advantage.",
-            ],
-            [
-                'diff' => -1,
-                'meaning' => "White has a tiny backward pawn advantage.",
-            ],
-        ],
-    ];
-
     private array $isolatedPawnEval;
 
     public function __construct(Board $board)
@@ -72,6 +28,20 @@ class BackwardPawnEval extends AbstractEval implements
         $this->result = [
             Color::W => [],
             Color::B => [],
+        ];
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'Black',
+            'White',
+        ];
+
+        $this->observation = [
+            "has a tiny backward pawn advantage",
+            "has some backward pawn advantage",
+            "has a significant backward pawn advantage",
+            "has a decisive backward pawn advantage",
         ];
 
         $this->isolatedPawnEval = (new IsolatedPawnEval($board))->getResult();
