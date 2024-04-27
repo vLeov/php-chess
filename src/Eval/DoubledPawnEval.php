@@ -10,15 +10,31 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class DoubledPawnEval extends AbstractEval implements
     ElaborateEvalInterface,
+    ExplainEvalInterface,
     InverseEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Doubled pawn';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'Black',
+            'White',
+        ];
+
+        $this->observation = [
+            "has a small doubled pawn advantage",
+            "has some doubled pawn advantage",
+            "has a significant doubled pawn advantage",
+            "has a decisive doubled pawn advantage",
+        ];
 
         foreach ($this->board->getPieces() as $piece) {
             $color = $piece->getColor();
@@ -33,6 +49,8 @@ class DoubledPawnEval extends AbstractEval implements
                 }
             }
         }
+
+        $this->explain($this->result);
     }
 
     private function elaborate(AbstractPiece $piece): void

@@ -269,6 +269,30 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function doubled_pawn()
+    {
+        $expected = [
+            "White is totally controlling the center.",
+            "The black pieces are slightly better connected.",
+            "White has some space advantage.",
+            "Black has a small protection advantage.",
+            "White has a small doubled pawn advantage.",
+            "White has a small isolated pawn advantage.",
+            "White has a small backward pawn advantage.",
+            "White has a significant relative pin advantage.",
+            "White has a small outpost advantage.",
+        ];
+
+        $board = FenToBoardFactory::create('1r1q1rk1/p1p2pbp/2pp1np1/6B1/4P3/2NQ4/PPP2PPP/3R1RK1 w - -');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
     public function capablanca_f4()
     {
         $expected = [
