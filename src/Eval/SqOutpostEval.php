@@ -13,9 +13,12 @@ use Chess\Variant\Classical\Board;
  *
  * @link https://en.wikipedia.org/wiki/Outpost_(chess)
  */
-class SqOutpostEval extends AbstractEval implements ElaborateEvalInterface
+class SqOutpostEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Outpost square';
 
@@ -26,6 +29,20 @@ class SqOutpostEval extends AbstractEval implements ElaborateEvalInterface
         $this->result = [
             Color::W => [],
             Color::B => [],
+        ];
+
+        $this->range = [1, 4];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a small outpost advantage",
+            "has some outpost advantage",
+            "has a significant outpost advantage",
+            "has a total outpost advantage",
         ];
 
         foreach ($this->board->getPieces() as $piece) {
@@ -56,6 +73,11 @@ class SqOutpostEval extends AbstractEval implements ElaborateEvalInterface
 
         $this->result[Color::W] = array_unique($this->result[Color::W]);
         $this->result[Color::B] = array_unique($this->result[Color::B]);
+
+        $this->explain([
+            Color::W => count($this->result[Color::W]),
+            Color::B => count($this->result[Color::B]),
+        ]);
 
         $this->elaborate($this->result);
     }

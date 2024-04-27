@@ -106,6 +106,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "White has a small space advantage.",
             "White has a small passed pawn advantage.",
             "Black has some backward pawn advantage.",
+            "White has some outpost advantage.",
         ];
 
         $board = FenToBoardFactory::create('k7/7p/6p1/5p2/1PP5/P2P4/8/7K w - - 0 1');
@@ -126,6 +127,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "White has a small space advantage.",
             "White has some passed pawn advantage.",
             "Black has a significant isolated pawn advantage.",
+            "White has some outpost advantage.",
         ];
 
         $board = FenToBoardFactory::create('k7/5p2/8/8/P1P1P1P1/8/8/K7 w - - 0 1');
@@ -192,11 +194,30 @@ class FenExplanationTest extends AbstractUnitTestCase
             "The black pieces are approaching the other side's king.",
             "White has some isolated pawn advantage.",
             "Black has a small backward pawn advantage.",
+            "White has some outpost advantage.",
             "Black has a bad bishop because too many of its pawns are blocking it.",
             "The black king has the direct opposition preventing the advance of the other king.",
         ];
 
         $board = FenToBoardFactory::create('8/5b2/p2k4/1p1p1p1p/1P1K1P1P/2P1PB2/8/8 w - - 0 1');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
+    public function square_outpost()
+    {
+        $expected = [
+            "Black is totally controlling the center.",
+            "Black has a small space advantage.",
+            "Black has a small outpost advantage.",
+        ];
+
+        $board = FenToBoardFactory::create('5k2/7K/8/2p5/P7/8/8/8 w - -');
 
         $paragraph = (new FenExplanation($board))->getParagraph();
 
