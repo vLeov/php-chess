@@ -8,15 +8,32 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class DiscoveredCheckEval extends AbstractEval implements ElaborateEvalInterface
+class DiscoveredCheckEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Discovered check';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 9];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a small discovered check advantage",
+            "has some discovered check advantage",
+            "has a significant discovered check advantage",
+            "has a total discovered check advantage",
+        ];
 
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() !== Piece::K) {
@@ -35,6 +52,8 @@ class DiscoveredCheckEval extends AbstractEval implements ElaborateEvalInterface
                 }
             }
         }
+
+        $this->explain($this->result);
     }
 
     private function elaborate(AbstractPiece $piece): void

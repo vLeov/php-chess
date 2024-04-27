@@ -249,6 +249,26 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function discovered_check()
+    {
+        $expected = [
+            "Black has a decisive material advantage.",
+            "Black is totally controlling the center.",
+            "The black pieces are slightly better connected.",
+            "Black has a total space advantage.",
+            "Black has some discovered check advantage.",
+        ];
+
+        $board = FenToBoardFactory::create('2r5/2n5/5k2/8/8/2K5/8/8 w - - 0 1');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
     public function capablanca_f4()
     {
         $expected = [
