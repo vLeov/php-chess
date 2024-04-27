@@ -15,7 +15,7 @@ class PgnExplanationTest extends AbstractUnitTestCase
     public function A08()
     {
         $expected = [
-            "Black has a kind of space advantage.",
+            "Black has some space advantage.",
             "White has a small protection advantage.",
         ];
 
