@@ -15,7 +15,7 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class RavPlay extends AbstractPlay implements ValidationInterface
+class RavPlay extends AbstractPlay
 {
     /**
      * RAV movetext.

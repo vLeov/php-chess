@@ -13,7 +13,7 @@ use Chess\Variant\Classical\PGN\Move;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class SanPlay extends AbstractPlay implements ValidationInterface
+class SanPlay extends AbstractPlay
 {
     /**
      * SAN movetext.
