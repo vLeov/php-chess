@@ -8,15 +8,32 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class DefenseEval extends AbstractEval implements ElaborateEvalInterface
+class DefenseEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Defense';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 9];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a small defense advantage",
+            "has some defense advantage",
+            "has a significant defense advantage",
+            "has a total defense advantage",
+        ];
 
         $protectionEval = new ProtectionEval($this->board);
 
@@ -41,6 +58,8 @@ class DefenseEval extends AbstractEval implements ElaborateEvalInterface
                 }
             }
         }
+
+        $this->explain($this->result);
     }
 
     /**

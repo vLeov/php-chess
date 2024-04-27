@@ -227,6 +227,28 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function defense()
+    {
+        $expected = [
+            "Black has a decisive material advantage.",
+            "White has a significant control of the center.",
+            "The black pieces are somewhat better connected.",
+            "Black has a significant space advantage.",
+            "The white player is pressuring a little bit more squares than its opponent.",
+            "White has a total defense advantage.",
+            "White has some relative pin advantage.",
+        ];
+
+        $board = FenToBoardFactory::create('4q1k1/8/4n3/8/8/4R3/8/6K1 w - -');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
     public function capablanca_f4()
     {
         $expected = [
