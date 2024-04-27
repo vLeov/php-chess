@@ -13,15 +13,32 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class AttackEval extends AbstractEval implements ElaborateEvalInterface
+class AttackEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Attack';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 5];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a small attack advantage",
+            "has some attack advantage",
+            "has a significant attack advantage",
+            "has a total attack advantage",
+        ];
 
         foreach ($this->board->getPieces() as $piece) {
             switch ($piece->getId()) {
@@ -56,6 +73,8 @@ class AttackEval extends AbstractEval implements ElaborateEvalInterface
                     break;
             }
         }
+
+        $this->explain($this->result);
     }
 
     private function elaborate(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void

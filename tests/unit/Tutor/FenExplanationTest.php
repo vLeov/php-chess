@@ -158,6 +158,30 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function attack()
+    {
+        $expected = [
+            "White has a small material advantage.",
+            "White is totally controlling the center.",
+            "The black pieces are so better connected.",
+            "White has a small space advantage.",
+            "The white player is really pressuring more squares than its opponent.",
+            "The white pieces are approaching the other side's king.",
+            "Black has a decisive protection advantage.",
+            "Black has some attack advantage.",
+            "White has a bishop which is not too good because a few of its pawns are blocking it.",
+        ];
+
+        $board = FenToBoardFactory::create('r1bqkbnr/1ppp1ppp/p1n5/1B2N3/4P3/8/PPPP1PPP/RNBQK2R b KQkq -');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
     public function capablanca_f4()
     {
         $expected = [
