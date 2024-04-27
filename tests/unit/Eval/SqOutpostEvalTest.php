@@ -98,7 +98,11 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             'b' => [],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a small outpost advantage."
+        ];
+
+        $expectedElaboration = [
             "b4 is an outpost square.",
         ];
 
@@ -107,7 +111,8 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         $sqOutpostEval = new SqOutpostEval($board);
 
         $this->assertSame($expectedResult, $sqOutpostEval->getResult());
-        $this->assertSame($expectedPhrase, $sqOutpostEval->getElaboration());
+        $this->assertSame($expectedExplanation, $sqOutpostEval->getExplanation());
+        $this->assertSame($expectedElaboration, $sqOutpostEval->getElaboration());
     }
 
     /**
@@ -124,7 +129,11 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             ],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has a small outpost advantage."
+        ];
+
+        $expectedElaboration = [
             "b5, b4 and d4 are outpost squares.",
         ];
 
@@ -133,7 +142,8 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         $sqOutpostEval = new SqOutpostEval($board);
 
         $this->assertSame($expectedResult, $sqOutpostEval->getResult());
-        $this->assertSame($expectedPhrase, $sqOutpostEval->getElaboration());
+        $this->assertSame($expectedExplanation, $sqOutpostEval->getExplanation());
+        $this->assertSame($expectedElaboration, $sqOutpostEval->getElaboration());
     }
 
     public function wAdvancingData()
@@ -427,7 +437,9 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
             ],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [];
+
+        $expectedElaboration = [
             "d5 and d4 are outpost squares.",
         ];
 
@@ -436,6 +448,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         $sqOutpostEval = new SqOutpostEval($board);
 
         $this->assertSame($expectedResult, $sqOutpostEval->getResult());
-        $this->assertSame($expectedPhrase, $sqOutpostEval->getElaboration());
+        $this->assertSame($expectedExplanation, $sqOutpostEval->getExplanation());
+        $this->assertSame($expectedElaboration, $sqOutpostEval->getElaboration());
     }
 }

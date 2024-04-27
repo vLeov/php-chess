@@ -18,7 +18,11 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
             'b' => 1,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has a small discovered check advantage.",
+        ];
+
+        $expectedElaboration = [
             "The White king can be put in check as long as the pawn on e5 moves out of the way.",
         ];
 
@@ -28,7 +32,8 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
         $discoveredCheckEval = new DiscoveredCheckEval($board);
 
         $this->assertSame($expectedResult, $discoveredCheckEval->getResult());
-        $this->assertSame($expectedPhrase, $discoveredCheckEval->getElaboration());
+        $this->assertSame($expectedExplanation, $discoveredCheckEval->getExplanation());
+        $this->assertSame($expectedElaboration, $discoveredCheckEval->getElaboration());
     }
 
     /**
@@ -41,7 +46,11 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
             'b' => 3.2,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has some discovered check advantage.",
+        ];
+
+        $expectedElaboration = [
             "The White king can be put in check as long as the knight on c7 moves out of the way.",
         ];
 
@@ -51,7 +60,8 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
         $discoveredCheckEval = new DiscoveredCheckEval($board);
 
         $this->assertSame($expectedResult, $discoveredCheckEval->getResult());
-        $this->assertSame($expectedPhrase, $discoveredCheckEval->getElaboration());
+        $this->assertSame($expectedExplanation, $discoveredCheckEval->getExplanation());
+        $this->assertSame($expectedElaboration, $discoveredCheckEval->getElaboration());
     }
 
     /**
@@ -64,7 +74,11 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
             'b' => 8.3,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has a total discovered check advantage.",
+        ];
+
+        $expectedElaboration = [
             "The White king can be put in check as long as the knight on c7 moves out of the way.",
             "The White king can be put in check as long as the rook on f6 moves out of the way.",
         ];
@@ -75,6 +89,7 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
         $discoveredCheckEval = new DiscoveredCheckEval($board);
 
         $this->assertSame($expectedResult, $discoveredCheckEval->getResult());
-        $this->assertSame($expectedPhrase, $discoveredCheckEval->getElaboration());
+        $this->assertSame($expectedExplanation, $discoveredCheckEval->getExplanation());
+        $this->assertSame($expectedElaboration, $discoveredCheckEval->getElaboration());
     }
 }

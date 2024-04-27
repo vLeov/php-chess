@@ -19,7 +19,9 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [];
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
 
         $board = (new StrToBoard('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -'))
             ->create();
@@ -27,7 +29,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 
     /**
@@ -40,7 +43,9 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [];
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
 
         $board = (new StrToBoard('4qk2/8/4n3/8/8/4R3/8/6K1 w - -'))
             ->create();
@@ -48,7 +53,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 
     /**
@@ -61,7 +67,11 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a total defense advantage."
+        ];
+
+        $expectedElaboration = [
             "If the knight on e6 moved, these pieces may well be exposed to attack: The rook on e3, Black's queen on e8.",
         ];
 
@@ -71,7 +81,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 
     /**
@@ -84,7 +95,9 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [];
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
 
         $board = (new StrToBoard('4qk2/8/2n5/8/B7/8/8/6K1 w - -'))
             ->create();
@@ -92,7 +105,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 
     /**
@@ -105,7 +119,11 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a total defense advantage."
+        ];
+
+        $expectedElaboration = [
             "If the knight on c6 moved, these pieces may well be exposed to attack: The bishop on a4, Black's queen on e8.",
         ];
 
@@ -115,7 +133,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 
     /**
@@ -128,7 +147,11 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a small defense advantage."
+        ];
+
+        $expectedElaboration = [
             "If the knight on c6 moved, the rook on e8 may well be exposed to attack.",
         ];
 
@@ -138,7 +161,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 
     /**
@@ -151,7 +175,11 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a small defense advantage."
+        ];
+
+        $expectedElaboration = [
             "If the knight on c6 moved, the pawn on e5 may well be exposed to attack.",
         ];
 
@@ -161,7 +189,8 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 
     /**
@@ -174,7 +203,11 @@ class DefenseEvalTest extends AbstractUnitTestCase
             'b' => 9.8,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has some defense advantage."
+        ];
+
+        $expectedElaboration = [
             "If the pawn on a7 moved, these pieces may well be exposed to attack: White's queen on a4, the rook on a8.",
             "If the knight on b5 moved, these pieces may well be exposed to attack: White's queen on a4, the pawn on b2.",
         ];
@@ -185,6 +218,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         $defenseEval = new DefenseEval($board);
 
         $this->assertSame($expectedResult, $defenseEval->getResult());
-        $this->assertSame($expectedPhrase, $defenseEval->getElaboration());
+        $this->assertSame($expectedExplanation, $defenseEval->getExplanation());
+        $this->assertSame($expectedElaboration, $defenseEval->getElaboration());
     }
 }

@@ -31,7 +31,11 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has a small doubled pawn advantage.",
+        ];
+
+        $expectedElaboration = [
             "The pawn on b3 is doubled.",
         ];
 
@@ -52,7 +56,8 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         $doubledPawnEval = new DoubledPawnEval($board);
 
         $this->assertSame($expectedResult, $doubledPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $doubledPawnEval->getElaboration());
+        $this->assertSame($expectedExplanation, $doubledPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $doubledPawnEval->getElaboration());
     }
 
     /**
@@ -65,7 +70,11 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
             'b' => 1,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a small doubled pawn advantage.",
+        ];
+
+        $expectedElaboration = [
             "The pawn on c6 is doubled.",
         ];
 
@@ -86,6 +95,7 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         $doubledPawnEval = new DoubledPawnEval($board);
 
         $this->assertSame($expectedResult, $doubledPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $doubledPawnEval->getElaboration());
+        $this->assertSame($expectedExplanation, $doubledPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $doubledPawnEval->getElaboration());
     }
 }
