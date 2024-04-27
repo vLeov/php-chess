@@ -37,7 +37,11 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a significant relative fork advantage.",
+        ];
+
+        $expectedElaboration = [
             "Relative fork attack on the bishop on f6.",
             "Relative fork attack on the knight on h6.",
         ];
@@ -48,7 +52,8 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
         $relativeForkEval = new RelativeForkEval($board);
 
         $this->assertSame($expectedResult, $relativeForkEval->getResult());
-        $this->assertSame($expectedPhrase, $relativeForkEval->getElaboration());
+        $this->assertSame($expectedExplanation, $relativeForkEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativeForkEval->getElaboration());
     }
 
     /**

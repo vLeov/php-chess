@@ -7,15 +7,32 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class RelativeForkEval extends AbstractEval implements ElaborateEvalInterface
+class RelativeForkEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Relative fork';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 9];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a small relative fork advantage",
+            "has some relative fork advantage",
+            "has a significant relative fork advantage",
+            "has a total relative fork advantage",
+        ];
 
         foreach ($this->board->getPieces() as $piece) {
             if (!$piece->isAttackingKing()) {
@@ -32,6 +49,8 @@ class RelativeForkEval extends AbstractEval implements ElaborateEvalInterface
                 }
             }
         }
+
+        $this->explain($this->result);
     }
 
     private function elaborate(AbstractPiece $piece): void
