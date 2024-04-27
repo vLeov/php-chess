@@ -37,7 +37,11 @@ class RelativePinEvalTest extends AbstractUnitTestCase
             'b' => 5.47,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has a significant relative pin advantage.",
+        ];
+
+        $expectedElaboration = [
             "The knight on f3 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
@@ -47,7 +51,8 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         $relativePinEval = new RelativePinEval($board);
 
         $this->assertSame($expectedResult, $relativePinEval->getResult());
-        $this->assertSame($expectedPhrase, $relativePinEval->getElaboration());
+        $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
     }
 
     /**
@@ -60,7 +65,11 @@ class RelativePinEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has some relative pin advantage.",
+        ];
+
+        $expectedElaboration = [
             "The knight on e6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
@@ -70,7 +79,8 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         $relativePinEval = new RelativePinEval($board);
 
         $this->assertSame($expectedResult, $relativePinEval->getResult());
-        $this->assertSame($expectedPhrase, $relativePinEval->getElaboration());
+        $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
     }
 
     /**
@@ -83,7 +93,11 @@ class RelativePinEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a significant relative pin advantage.",
+        ];
+
+        $expectedElaboration = [
             "The knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
@@ -93,7 +107,8 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         $relativePinEval = new RelativePinEval($board);
 
         $this->assertSame($expectedResult, $relativePinEval->getResult());
-        $this->assertSame($expectedPhrase, $relativePinEval->getElaboration());
+        $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
     }
 
     /**
@@ -106,7 +121,11 @@ class RelativePinEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a small relative pin advantage.",
+        ];
+
+        $expectedElaboration = [
             "The knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
@@ -116,7 +135,8 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         $relativePinEval = new RelativePinEval($board);
 
         $this->assertSame($expectedResult, $relativePinEval->getResult());
-        $this->assertSame($expectedPhrase, $relativePinEval->getElaboration());
+        $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
     }
 
     /**
@@ -129,7 +149,11 @@ class RelativePinEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a small relative pin advantage.",
+        ];
+
+        $expectedElaboration = [
             "The knight on c6 is pinned shielding a piece that is more valuable than the attacking piece.",
         ];
 
@@ -139,6 +163,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         $relativePinEval = new RelativePinEval($board);
 
         $this->assertSame($expectedResult, $relativePinEval->getResult());
-        $this->assertSame($expectedPhrase, $relativePinEval->getElaboration());
+        $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
     }
 }
