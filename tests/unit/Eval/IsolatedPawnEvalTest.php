@@ -33,8 +33,12 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
             'b' => ['a7', 'd5'],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White has some isolated pawn advantage.",
+        ];
+
+        $expectedElaboration = [
+            "a7 and d5 are isolated pawns.",
         ];
 
         $position = [
@@ -54,7 +58,8 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
         $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $isolatedPawnEval->getExplanation());
+        $this->assertSame($expectedExplanation, $isolatedPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $isolatedPawnEval->getElaboration());
     }
 
     /**
@@ -67,7 +72,11 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
             'b' => ['d5'],
         ];
 
-        $expectedPhrase = [];
+        $expectedExplanation = [];
+
+        $expectedElaboration = [
+            "h2 and d5 are isolated pawns.",
+        ];
 
         $position = [
             7 => [ ' . ', ' r ', ' . ', ' . ', ' . ', ' . ', ' k ', ' . ' ],
@@ -86,7 +95,8 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
         $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $isolatedPawnEval->getExplanation());
+        $this->assertSame($expectedExplanation, $isolatedPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $isolatedPawnEval->getElaboration());
     }
 
     /**
@@ -99,8 +109,12 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
             'b' => ['a7'],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has a small isolated pawn advantage.",
+        ];
+
+        $expectedElaboration = [
+            "a2, c2 and a7 are isolated pawns.",
         ];
 
         $position = [
@@ -120,7 +134,8 @@ class IsolatedPawnEvalTest extends AbstractUnitTestCase
         $isolatedPawnEval = new IsolatedPawnEval($board);
 
         $this->assertSame($expectedResult, $isolatedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $isolatedPawnEval->getExplanation());
+        $this->assertSame($expectedExplanation, $isolatedPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $isolatedPawnEval->getElaboration());
     }
 
     /**

@@ -18,8 +18,12 @@ class AdvancedPawnEvalTest extends AbstractUnitTestCase
             'b' => [],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White has a small advanced pawn advantage.",
+        ];
+
+        $expectedElaboration = [
+            "b6 is an advanced pawn.",
         ];
 
         $board = FenToBoardFactory::create('8/1p6/1P1K4/pk6/8/8/5B2/8 b - - 3 56');
@@ -27,7 +31,8 @@ class AdvancedPawnEvalTest extends AbstractUnitTestCase
         $advancedPawnEval = new AdvancedPawnEval($board);
 
         $this->assertSame($expectedResult, $advancedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $advancedPawnEval->getExplanation());
+        $this->assertSame($expectedExplanation, $advancedPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $advancedPawnEval->getElaboration());
     }
 
     /**
@@ -40,8 +45,12 @@ class AdvancedPawnEvalTest extends AbstractUnitTestCase
             'b' => ['c3', 'e2'],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has a small advanced pawn advantage.",
+        ];
+
+        $expectedElaboration = [
+            "e6, c3 and e2 are advanced pawns.",
         ];
 
         $board = FenToBoardFactory::create('8/8/4P3/4K3/8/2p2k2/4p3/8 w - - 0 1');
@@ -49,6 +58,7 @@ class AdvancedPawnEvalTest extends AbstractUnitTestCase
         $advancedPawnEval = new AdvancedPawnEval($board);
 
         $this->assertSame($expectedResult, $advancedPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $advancedPawnEval->getExplanation());
+        $this->assertSame($expectedExplanation, $advancedPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $advancedPawnEval->getElaboration());
     }
 }

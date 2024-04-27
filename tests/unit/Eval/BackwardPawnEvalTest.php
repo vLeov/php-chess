@@ -32,8 +32,12 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
             'b' => [],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has some backward pawn advantage.",
+        ];
+
+        $expectedElaboration = [
+            "e4 and b3 are backward pawns.",
         ];
 
         $position = [
@@ -53,7 +57,8 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         $backwardPawnEval = new BackwardPawnEval($board);
 
         $this->assertSame($expectedResult, $backwardPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $backwardPawnEval->getExplanation());
+        $this->assertSame($expectedExplanation, $backwardPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backwardPawnEval->getElaboration());
     }
 
     /**
@@ -66,8 +71,12 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
             'b' => [],
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has some backward pawn advantage.",
+        ];
+
+        $expectedElaboration = [
+            "d4 and e4 are backward pawns.",
         ];
 
         $position = [
@@ -87,6 +96,7 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         $backwardPawnEval = new BackwardPawnEval($board);
 
         $this->assertSame($expectedResult, $backwardPawnEval->getResult());
-        $this->assertSame($expectedPhrase, $backwardPawnEval->getExplanation());
+        $this->assertSame($expectedExplanation, $backwardPawnEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backwardPawnEval->getElaboration());
     }
 }
