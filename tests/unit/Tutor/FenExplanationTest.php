@@ -182,6 +182,30 @@ class FenExplanationTest extends AbstractUnitTestCase
     /**
      * @test
      */
+    public function bad_bishop()
+    {
+        $expected = [
+            "White is totally controlling the center.",
+            "The white pieces are somewhat better connected.",
+            "Black has a small space advantage.",
+            "The white player is really pressuring more squares than its opponent.",
+            "The black pieces are approaching the other side's king.",
+            "White has some isolated pawn advantage.",
+            "Black has a small backward pawn advantage.",
+            "Black has a bad bishop because too many of its pawns are blocking it.",
+            "The black king has the direct opposition preventing the advance of the other king.",
+        ];
+
+        $board = FenToBoardFactory::create('8/5b2/p2k4/1p1p1p1p/1P1K1P1P/2P1PB2/8/8 w - - 0 1');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
+
+    /**
+     * @test
+     */
     public function capablanca_f4()
     {
         $expected = [
