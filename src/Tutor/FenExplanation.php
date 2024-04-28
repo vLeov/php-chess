@@ -43,10 +43,16 @@ class FenExplanation
     public function __construct(ClassicalBoard $board)
     {
         $this->board = $board;
-
         $this->function = new StandardFunction();
 
-        $this->explain();
+        foreach ($this->function->getEval() as $key => $val) {
+            $eval = new $key($this->board);
+            if (is_a($eval, ExplainEvalInterface::class)) {
+                if ($phrases = $eval->getExplanation()) {
+                    $this->paragraph = [...$this->paragraph, ...$phrases];
+                }
+            }
+        }
     }
 
     /**
@@ -67,24 +73,5 @@ class FenExplanation
     public function getParagraph(): array
     {
         return $this->paragraph;
-    }
-
-    /**
-     * Calculates the paragraph.
-     *
-     * @return \Chess\Tutor\FenExplanation
-     */
-    private function explain(): FenExplanation
-    {
-        foreach ($this->function->getEval() as $key => $val) {
-            $eval = new $key($this->board);
-            if (is_a($eval, ExplainEvalInterface::class)) {
-                if ($phrases = $eval->getExplanation()) {
-                    $this->paragraph = [...$this->paragraph, ...$phrases];
-                }
-            }
-        }
-
-        return $this;
     }
 }

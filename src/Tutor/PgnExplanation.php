@@ -36,7 +36,15 @@ class PgnExplanation
     {
         $this->fenExplanation = new FenExplanation($board);
 
-        $this->explain($pgn);
+        $board = $this->fenExplanation->getBoard();
+        $board->play($board->getTurn(), $pgn);
+        $fenParagraph = new FenExplanation($board);
+
+        foreach ($fenParagraph->getParagraph() as $key => $val) {
+            if (!in_array($val, $this->fenExplanation->getParagraph())) {
+                $this->paragraph[] = $val;
+            }
+        }
     }
 
     /**
@@ -47,25 +55,5 @@ class PgnExplanation
     public function getParagraph(): array
     {
         return $this->paragraph;
-    }
-
-    /**
-     * Calculates the paragraph.
-     *
-     * @param string $pgn
-     * @return \Chess\Tutor\PgnExplanation
-     */
-    private function explain(string $pgn): PgnExplanation
-    {
-        $board = $this->fenExplanation->getBoard();
-        $board->play($board->getTurn(), $pgn);
-        $fenParagraph = new FenExplanation($board);
-        foreach ($fenParagraph->getParagraph() as $key => $val) {
-            if (!in_array($val, $this->fenExplanation->getParagraph())) {
-                $this->paragraph[] = $val;
-            }
-        }
-
-        return $this;
     }
 }

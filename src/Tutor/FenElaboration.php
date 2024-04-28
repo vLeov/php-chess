@@ -43,10 +43,16 @@ class FenElaboration
     public function __construct(ClassicalBoard $board)
     {
         $this->board = $board;
-
         $this->function = new StandardFunction();
 
-        $this->elaborate();
+        foreach ($this->function->getEval() as $key => $val) {
+            $eval = new $key($this->board);
+            if (is_a($eval, ElaborateEvalInterface::class)) {
+                if ($phrases = $eval->getElaboration()) {
+                    $this->paragraph = [...$this->paragraph, ...$phrases];
+                }
+            }
+        }
     }
 
     /**
@@ -67,24 +73,5 @@ class FenElaboration
     public function getParagraph(): array
     {
         return $this->paragraph;
-    }
-
-    /**
-     * Calculates the paragraph.
-     *
-     * @return \Chess\Tutor\FenElaboration
-     */
-    private function elaborate(): FenElaboration
-    {
-        foreach ($this->function->getEval() as $key => $val) {
-            $eval = new $key($this->board);
-            if (is_a($eval, ElaborateEvalInterface::class)) {
-                if ($phrases = $eval->getElaboration()) {
-                    $this->paragraph = [...$this->paragraph, ...$phrases];
-                }
-            }
-        }
-
-        return $this;
     }
 }
