@@ -68,7 +68,11 @@ class AttackEvalTest extends AbstractUnitTestCase
             'b' => 2.33,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has some attack advantage.",
+        ];
+
+        $expectedElaboration = [
             "The pawn on a6 is attacking the bishop on b5.",
         ];
 
@@ -84,7 +88,8 @@ class AttackEvalTest extends AbstractUnitTestCase
         $attackEval = new AttackEval($board);
 
         $this->assertSame($expectedResult, $attackEval->getResult());
-        $this->assertSame($expectedPhrase, $attackEval->getElaboration());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -97,7 +102,11 @@ class AttackEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has some attack advantage.",
+        ];
+
+        $expectedElaboration = [
             "The pawn on d3 is attacking the knight on e4.",
         ];
 
@@ -113,7 +122,8 @@ class AttackEvalTest extends AbstractUnitTestCase
         $attackEval = new AttackEval($board);
 
         $this->assertSame($expectedResult, $attackEval->getResult());
-        $this->assertSame($expectedPhrase, $attackEval->getElaboration());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -126,7 +136,11 @@ class AttackEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has some attack advantage.",
+        ];
+
+        $expectedElaboration = [
             "The pawn on e5 is attacking the knight on f6.",
         ];
 
@@ -138,6 +152,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         $attackEval = new AttackEval($board);
 
         $this->assertSame($expectedResult, $attackEval->getResult());
-        $this->assertSame($expectedPhrase, $attackEval->getElaboration());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 }

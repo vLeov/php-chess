@@ -18,7 +18,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
             'b' => 5,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has a bad bishop because too many of its pawns are blocking it.",
         ];
 
@@ -27,7 +27,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
+        $this->assertSame($expectedExplanation, $badBishopEval->getExplanation());
     }
 
     /**
@@ -40,7 +40,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
             'b' => 4,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White has a bishop which is not too good because a few of its pawns are blocking it.",
         ];
 
@@ -49,7 +49,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
+        $this->assertSame($expectedExplanation, $badBishopEval->getExplanation());
     }
 
     /**
@@ -62,7 +62,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
             'b' => 5,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has a bishop which is not too good because a few of its pawns are blocking it.",
         ];
 
@@ -71,7 +71,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
+        $this->assertSame($expectedExplanation, $badBishopEval->getExplanation());
     }
 
     /**
@@ -84,7 +84,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
             'b' => 6,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has a bad bishop because too many of its pawns are blocking it.",
         ];
 
@@ -93,7 +93,7 @@ class BadBishopEvalTest extends AbstractUnitTestCase
         $badBishopEval = new BadBishopEval($board);
 
         $this->assertSame($expectedResult, $badBishopEval->getResult());
-        $this->assertSame($expectedPhrase, $badBishopEval->getExplanation());
+        $this->assertSame($expectedExplanation, $badBishopEval->getExplanation());
     }
 
     /**
