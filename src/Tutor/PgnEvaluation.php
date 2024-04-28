@@ -13,13 +13,6 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 class PgnEvaluation
 {
     /**
-     * FEN evaluation.
-     *
-     * @var \Chess\Tutor\FenEvaluation
-     */
-    private FenEvaluation $fenEvaluation;
-
-    /**
      * Paragraph.
      *
      * @var array
@@ -35,14 +28,12 @@ class PgnEvaluation
      */
     public function __construct(string $pgn, ClassicalBoard $board)
     {
-        $this->fenEvaluation = new FenEvaluation($board);
-
-        $board = $this->fenEvaluation->getBoard();
-        $board->play($board->getTurn(), $pgn);
         $fenEvaluation = new FenEvaluation($board);
+        $board = $fenEvaluation->getBoard();
+        $board->play($board->getTurn(), $pgn);
 
-        foreach ($fenEvaluation->getParagraph() as $key => $val) {
-            if (!in_array($val, $this->fenEvaluation->getParagraph())) {
+        foreach ((new FenEvaluation($board))->getParagraph() as $key => $val) {
+            if (!in_array($val, $fenEvaluation->getParagraph())) {
                 $this->paragraph[] = $val;
             }
         }

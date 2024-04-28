@@ -15,20 +15,6 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 class FenExplanation
 {
     /**
-     * Chess board.
-     *
-     * @var \Chess\Variant\Classical\Board
-     */
-    private ClassicalBoard $board;
-
-    /**
-     * Evaluation function.
-     *
-     * @var \Chess\Function\StandardFunction
-     */
-    private StandardFunction $function;
-
-    /**
      * Paragraph.
      *
      * @var array
@@ -42,27 +28,14 @@ class FenExplanation
      */
     public function __construct(ClassicalBoard $board)
     {
-        $this->board = $board;
-        $this->function = new StandardFunction();
-
-        foreach ($this->function->getEval() as $key => $val) {
-            $eval = new $key($this->board);
+        foreach ((new StandardFunction())->getEval() as $key => $val) {
+            $eval = new $key($board);
             if (is_a($eval, ExplainEvalInterface::class)) {
                 if ($phrases = $eval->getExplanation()) {
                     $this->paragraph = [...$this->paragraph, ...$phrases];
                 }
             }
         }
-    }
-
-    /**
-     * Returns the board.
-     *
-     * @return \Chess\Variant\Classical\Board
-     */
-    public function getBoard(): ClassicalBoard
-    {
-        return $this->board;
     }
 
     /**
