@@ -6,15 +6,32 @@ use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 
-class ThreatEval extends AbstractEval implements ElaborateEvalInterface
+class ThreatEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
     use ElaborateEvalTrait;
+    use ExplainEvalTrait;
 
     const NAME = 'Threat';
 
     public function __construct(Board $board)
     {
         $this->board = $board;
+
+        $this->range = [1, 5];
+
+        $this->subject = [
+            'White',
+            'Black',
+        ];
+
+        $this->observation = [
+            "has a small threat advantage",
+            "has some threat advantage",
+            "has a significant threat advantage",
+            "has a total threat advantage",
+        ];
 
         foreach ($this->board->getPieces() as $piece) {
             $countAttacking = count($piece->attackingPieces());
@@ -29,6 +46,8 @@ class ThreatEval extends AbstractEval implements ElaborateEvalInterface
                 }
             }
         }
+
+        $this->explain($this->result);
     }
 
     private function valueDefending(array $pieces)

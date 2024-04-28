@@ -18,13 +18,16 @@ class ThreatEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [];
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
 
         $board = (new StrToBoard('r1bqkbnr/5ppp/p1npp3/1p6/2B1P3/2N2N2/PP2QPPP/R1B2RK1 w kq b6'))->create();
         $threatEval = new ThreatEval($board);
 
         $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedPhrase, $threatEval->getElaboration());
+        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
     }
 
     /**
@@ -37,7 +40,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "White has a small threat advantage.",
+        ];
+
+        $expectedElaboration = [
             "The knight on b5 is being threatened and may be lost if not defended properly.",
         ];
 
@@ -45,7 +52,8 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $threatEval = new ThreatEval($board);
 
         $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedPhrase, $threatEval->getElaboration());
+        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
     }
 
     /**
@@ -58,7 +66,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
             'b' => 1,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
+            "Black has a small threat advantage.",
+        ];
+
+        $expectedElaboration = [
             "The pawn on d4 is being threatened and may be lost if not defended properly.",
         ];
 
@@ -66,6 +78,7 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $threatEval = new ThreatEval($board);
 
         $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedPhrase, $threatEval->getElaboration());
+        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
     }
 }
