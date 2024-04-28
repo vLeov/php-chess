@@ -46,7 +46,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             new CapablancaBoard()
         );
 
-        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
+        $paragraph = (new FenExplanation($board))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }

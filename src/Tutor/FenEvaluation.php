@@ -33,7 +33,6 @@ class FenEvaluation
      * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
-     * @param bool $isEvaluated
      */
     public function __construct(ClassicalBoard $board)
     {
