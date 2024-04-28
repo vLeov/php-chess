@@ -58,7 +58,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_rook_pinned_knight_shielded_queen()
+    public function pinning_rook_pinned_knight_shielded_queen()
     {
         $expectedResult = [
             'w' => 3.7,
@@ -86,7 +86,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_bishop_pinned_knight_shielded_queen()
+    public function pinning_bishop_pinned_knight_shielded_queen()
     {
         $expectedResult = [
             'w' => 5.47,
@@ -114,7 +114,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_bishop_pinned_knight_shielded_rook()
+    public function pinning_bishop_pinned_knight_shielded_rook()
     {
         $expectedResult = [
             'w' => 1.77,
@@ -142,7 +142,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function pinnig_bishop_pinned_knight_shielded_rook_and_attacked_rook()
+    public function pinning_bishop_pinned_knight_shielded_rook_and_attacked_rook()
     {
         $expectedResult = [
             'w' => 1.77,
