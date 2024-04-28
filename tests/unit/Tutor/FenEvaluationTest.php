@@ -4,11 +4,11 @@ namespace Chess\Tests\Unit\Tutor;
 
 use Chess\FenToBoardFactory;
 use Chess\Play\SanPlay;
-use Chess\Tutor\FenExplanation;
+use Chess\Tutor\FenEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 
-class FenExplanationTest extends AbstractUnitTestCase
+class FenEvaluationTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -19,12 +19,13 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Black has a significant control of the center.",
             "The white pieces are so better connected.",
             "Black has a significant space advantage.",
+            "Overall, 1 heuristic evaluation feature is favoring White while 2 are favoring Black.",
         ];
 
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
         $board = (new SanPlay($A08))->validate()->getBoard();
 
-        $paragraph = (new FenExplanation($board))->getParagraph();
+        $paragraph = (new FenEvaluation($board))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
@@ -39,6 +40,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "The black pieces are significantly better connected.",
             "White has a total space advantage.",
             "The white player is pressuring a little bit more squares than its opponent.",
+            "Overall, 3 heuristic evaluation features are favoring White while 1 is favoring Black.",
         ];
 
         $board = FenToBoardFactory::create(
@@ -46,7 +48,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             new CapablancaBoard()
         );
 
-        $paragraph = (new FenExplanation($board, $isEvaluated = true))->getParagraph();
+        $paragraph = (new FenEvaluation($board))->getParagraph();
 
         $this->assertSame($expected, $paragraph);
     }
