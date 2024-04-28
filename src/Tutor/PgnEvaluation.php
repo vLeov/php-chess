@@ -10,16 +10,8 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class PgnEvaluation
+class PgnEvaluation extends AbstractParagraph
 {
-    /**
-     * Paragraph.
-     *
-     * @var array
-     */
-    private array $paragraph = [];
-
-
     /**
      * Constructor.
      *
@@ -28,24 +20,16 @@ class PgnEvaluation
      */
     public function __construct(string $pgn, ClassicalBoard $board)
     {
-        $fenEvaluation = new FenEvaluation($board);
-        $board = $fenEvaluation->getBoard();
-        $board->play($board->getTurn(), $pgn);
+        $this->board = $board;
 
-        foreach ((new FenEvaluation($board))->getParagraph() as $key => $val) {
+        $fenEvaluation = new FenEvaluation($this->board);
+        $this->board = $fenEvaluation->getBoard();
+        $this->board->play($board->getTurn(), $pgn);
+
+        foreach ((new FenEvaluation($this->board))->getParagraph() as $key => $val) {
             if (!in_array($val, $fenEvaluation->getParagraph())) {
                 $this->paragraph[] = $val;
             }
         }
-    }
-
-    /**
-     * Returns the paragraph.
-     *
-     * @return array
-     */
-    public function getParagraph(): array
-    {
-        return $this->paragraph;
     }
 }

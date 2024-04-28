@@ -12,15 +12,8 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class FenElaboration
+class FenElaboration extends AbstractParagraph
 {
-    /**
-     * Paragraph.
-     *
-     * @var array
-     */
-    private array $paragraph = [];
-
     /**
      * Constructor.
      *
@@ -28,23 +21,15 @@ class FenElaboration
      */
     public function __construct(ClassicalBoard $board)
     {
+        $this->board = $board;
+
         foreach ((new StandardFunction())->getEval() as $key => $val) {
-            $eval = new $key($board);
+            $eval = new $key($this->board);
             if (is_a($eval, ElaborateEvalInterface::class)) {
                 if ($phrases = $eval->getElaboration()) {
                     $this->paragraph = [...$this->paragraph, ...$phrases];
                 }
             }
         }
-    }
-
-    /**
-     * Returns the paragraph.
-     *
-     * @return array
-     */
-    public function getParagraph(): array
-    {
-        return $this->paragraph;
     }
 }

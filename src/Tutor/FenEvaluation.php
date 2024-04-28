@@ -13,22 +13,8 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class FenEvaluation
+class FenEvaluation extends AbstractParagraph
 {
-    /**
-     * Chess board.
-     *
-     * @var \Chess\Variant\Classical\Board
-     */
-    private ClassicalBoard $board;
-
-    /**
-     * Paragraph.
-     *
-     * @var array
-     */
-    private array $paragraph = [];
-
     /**
      * Constructor.
      *
@@ -43,26 +29,6 @@ class FenEvaluation
             ...(new FenElaboration($this->board))->getParagraph(),
             ...$this->evaluate(),
         ];
-    }
-
-    /**
-     * Returns the board.
-     *
-     * @return \Chess\Variant\Classical\Board
-     */
-    public function getBoard(): ClassicalBoard
-    {
-        return $this->board;
-    }
-
-    /**
-     * Returns the paragraph.
-     *
-     * @return array
-     */
-    public function getParagraph(): array
-    {
-        return $this->paragraph;
     }
 
     /**
