@@ -9,6 +9,7 @@
     </php>
     <testsuites>
         <testsuite name="unit">
+            <directory>tests/unit/Computer</directory>
             <directory>tests/unit/Eval</directory>
             <directory>tests/unit/Heuristics</directory>
             <directory>tests/unit/Media</directory>
@@ -19,7 +20,6 @@
             <directory>tests/unit/Tutor</directory>
             <directory>tests/unit/Variant</directory>
             <file>tests/unit/FenToBoardFactoryTest.php</file>
-            <file>tests/unit/GrandmasterTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
