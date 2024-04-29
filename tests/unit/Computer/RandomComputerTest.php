@@ -43,4 +43,20 @@ class RandomComputerTest extends AbstractUnitTestCase
 
         $this->assertSame(null, $randomComputer->move($board));
     }
+
+    /**
+     * @test
+     */
+    public function game()
+    {
+        $board = new Board();
+        $randomComputer = new RandomComputer();
+
+        for ($i = 0; $i < 30; $i++) {
+            $move = $randomComputer->move($board);
+            $board->play($board->getTurn(), $move->pgn);
+        }
+
+        $this->assertNotEmpty($board->getMovetext());
+    }
 }
