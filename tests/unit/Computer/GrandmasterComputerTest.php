@@ -1,14 +1,14 @@
 <?php
 
-namespace Chess\Tests\Unit;
+namespace Chess\Tests\Unit\Computer;
 
-use Chess\Grandmaster;
+use Chess\Computer\GrandmasterComputer;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
-class GrandmasterTest extends AbstractUnitTestCase
+class GrandmasterComputerTest extends AbstractUnitTestCase
 {
-    const FILEPATH = __DIR__.'/../data/json/players.json';
+    const FILEPATH = __DIR__.'/../../data/json/players.json';
 
     /**
      * @test
@@ -17,7 +17,7 @@ class GrandmasterTest extends AbstractUnitTestCase
     {
         $board = new ClassicalBoard();
 
-        $move = (new Grandmaster(self::FILEPATH))->move($board);
+        $move = (new GrandmasterComputer(self::FILEPATH))->move($board);
 
         $this->assertNotEmpty($move);
     }
@@ -31,7 +31,7 @@ class GrandmasterTest extends AbstractUnitTestCase
 
         $board->play('w', 'e4');
 
-        $move = (new Grandmaster(self::FILEPATH))->move($board);
+        $move = (new GrandmasterComputer(self::FILEPATH))->move($board);
 
         $this->assertNotEmpty($move);
     }

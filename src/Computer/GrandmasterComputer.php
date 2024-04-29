@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess;
+namespace Chess\Computer;
 
 use Chess\Variant\Classical\Board;
 
 /**
- * Grandmaster
+ * GrandmasterComputer
  *
  * Figures out the next move to be made based on the JSON file that is passed to
  * its constructor. Typically this file would contain games by titled FIDE
@@ -14,7 +14,7 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class Grandmaster
+class GrandmasterComputer extends AbstractComputer
 {
     /**
      * Chess games.
@@ -48,7 +48,7 @@ class Grandmaster
         $movetext = $board->getMovetext();
         if ($found = $this->find($movetext)) {
             return (object) [
-                'move' => $this->next($found[0]['movetext'], $movetext),
+                'pgn' => $this->next($found[0]['movetext'], $movetext),
                 'game' => $found[0],
             ];
         }
