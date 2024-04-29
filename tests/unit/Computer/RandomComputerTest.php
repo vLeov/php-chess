@@ -15,9 +15,9 @@ class RandomComputerTest extends AbstractUnitTestCase
     public function start()
     {
         $board = new Board();
-        $randomComputer = new RandomComputer();
+        $move = (new RandomComputer())->move($board);
 
-        $this->assertNotEmpty($randomComputer->move($board));
+        $this->assertNotEmpty($move);
     }
 
     /**
@@ -27,9 +27,9 @@ class RandomComputerTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $randomComputer = new RandomComputer();
+        $move = (new RandomComputer())->move($board);
 
-        $this->assertNotEmpty($randomComputer->move($board));
+        $this->assertNotEmpty($move);
     }
 
     /**
@@ -39,9 +39,9 @@ class RandomComputerTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 Qxf7#';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $randomComputer = new RandomComputer();
+        $move = (new RandomComputer())->move($board);
 
-        $this->assertSame(null, $randomComputer->move($board));
+        $this->assertSame(null, $move);
     }
 
     /**
@@ -50,7 +50,6 @@ class RandomComputerTest extends AbstractUnitTestCase
     public function game()
     {
         $board = new Board();
-
         for ($i = 0; $i < 50; $i++) {
             if ($move = (new RandomComputer())->move($board)) {
                 $board->play($board->getTurn(), $move->pgn);
