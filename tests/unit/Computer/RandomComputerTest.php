@@ -50,11 +50,11 @@ class RandomComputerTest extends AbstractUnitTestCase
     public function game()
     {
         $board = new Board();
-        $randomComputer = new RandomComputer();
 
-        for ($i = 0; $i < 30; $i++) {
-            $move = $randomComputer->move($board);
-            $board->play($board->getTurn(), $move->pgn);
+        for ($i = 0; $i < 50; $i++) {
+            if ($move = (new RandomComputer())->move($board)) {
+                $board->play($board->getTurn(), $move->pgn);
+            }
         }
 
         $this->assertNotEmpty($board->getMovetext());

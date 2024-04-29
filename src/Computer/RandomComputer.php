@@ -20,8 +20,10 @@ class RandomComputer extends AbstractComputer
      */
     public function move(Board $board): ?object
     {
+        $clone = unserialize(serialize($board));
+
         $legal = [];
-        foreach ($board->getPieces($board->getTurn()) as $piece) {
+        foreach ($clone->getPieces($clone->getTurn()) as $piece) {
             if ($sqs = $piece->sqs()) {
                 $legal[$piece->getSq()] = $sqs;
             }
@@ -33,8 +35,8 @@ class RandomComputer extends AbstractComputer
 
         $lan = "{$from}{$to}";
 
-        if ($board->playLan($board->getTurn(), $lan)) {
-            $last = array_slice($board->getHistory(), -1)[0];
+        if ($clone->playLan($clone->getTurn(), $lan)) {
+            $last = array_slice($clone->getHistory(), -1)[0];
             return (object) [
                 'pgn' => $last->move->pgn,
                 'lan' => $lan,
