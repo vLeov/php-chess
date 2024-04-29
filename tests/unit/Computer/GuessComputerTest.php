@@ -15,9 +15,9 @@ class GuessComputerTest extends AbstractUnitTestCase
     public function start()
     {
         $board = new Board();
-        $guessComputer = new GuessComputer();
+        $move = (new GuessComputer())->move($board);
 
-        $this->assertNotEmpty($guessComputer->move($board));
+        $this->assertNotEmpty($move);
     }
 
     /**
@@ -27,9 +27,9 @@ class GuessComputerTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $guessComputer = new GuessComputer();
+        $move = (new GuessComputer())->move($board);
 
-        $this->assertNotEmpty($guessComputer->move($board));
+        $this->assertNotEmpty($move);
     }
 
     /**
@@ -39,9 +39,9 @@ class GuessComputerTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 Qxf7#';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $guessComputer = new GuessComputer();
+        $move = (new GuessComputer())->move($board);
 
-        $this->assertSame(null, $guessComputer->move($board));
+        $this->assertSame(null, $move);
     }
 
     /**
