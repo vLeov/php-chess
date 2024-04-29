@@ -10,8 +10,15 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class RandomMove extends AbstractMove
+class RandomMove
 {
+    /**
+     * Chess board.
+     *
+     * @var \Chess\Variant\Classical\Board
+     */
+    protected Board $board;
+
     /**
      * Constructor.
      *

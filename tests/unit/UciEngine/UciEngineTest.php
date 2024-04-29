@@ -115,7 +115,7 @@ class UciEngineTest extends AbstractUnitTestCase
             ->setOption('Skill Level', $skillLevel + rand(0, $skillLevelOffset));
 
         $board = new Board();
-        $move = (new GrandmasterMove(self::FILEPATH, $board))->move();
+        $move = (new GrandmasterMove(self::FILEPATH))->move($board);
 
         do {
             $limit = (new Limit())->setDepth($depth + rand(0, $depthOffset));

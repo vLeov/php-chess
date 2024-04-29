@@ -14,7 +14,7 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class GrandmasterMove extends AbstractMove
+class GrandmasterMove
 {
     /**
      * Chess games.
@@ -27,27 +27,25 @@ class GrandmasterMove extends AbstractMove
      * Constructor.
      *
      * @param string $filepath
-     * @param \Chess\Variant\Classical\Board $board
      */
-    public function __construct(string $filepath, Board $board)
+    public function __construct(string $filepath)
     {
         $contents = file_get_contents($filepath);
 
         $this->items = new \RecursiveIteratorIterator(
             new \RecursiveArrayIterator(json_decode($contents, true)),
             \RecursiveIteratorIterator::SELF_FIRST);
-
-        $this->board = $board;
     }
 
     /**
      * Returns a chess move.
      *
+     * @param \Chess\Variant\Classical\Board $board
      * @return null|object
      */
-    public function move(): ?object
+    public function move(Board $board): ?object
     {
-        $movetext = $this->board->getMovetext();
+        $movetext = $board->getMovetext();
         if ($found = $this->find($movetext)) {
             return (object) [
                 'pgn' => $this->next($found[0]['movetext'], $movetext),

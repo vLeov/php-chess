@@ -16,7 +16,7 @@ class GrandmasterMoveTest extends AbstractUnitTestCase
     public function w_move()
     {
         $board = new Board();
-        $move = (new GrandmasterMove(self::FILEPATH, $board))->move();
+        $move = (new GrandmasterMove(self::FILEPATH))->move($board);
 
         $this->assertNotEmpty($move);
     }
@@ -28,7 +28,7 @@ class GrandmasterMoveTest extends AbstractUnitTestCase
     {
         $board = new Board();
         $board->play('w', 'e4');
-        $move = (new GrandmasterMove(self::FILEPATH, $board))->move();
+        $move = (new GrandmasterMove(self::FILEPATH))->move($board);
 
         $this->assertNotEmpty($move);
     }
