@@ -43,4 +43,19 @@ class GuessComputerTest extends AbstractUnitTestCase
 
         $this->assertSame(null, $guessComputer->move($board));
     }
+
+    /**
+     * @test
+     */
+    public function game()
+    {
+        $board = new Board();
+        for ($i = 0; $i < 4; $i++) {
+            if ($move = (new GuessComputer())->move($board)) {
+                $board->play($board->getTurn(), $move->pgn);
+            }
+        }
+
+        $this->assertNotEmpty($board->getMovetext());
+    }
 }
