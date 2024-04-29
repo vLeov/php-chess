@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\UciEngine;
 
-use Chess\Computer\GrandmasterComputer;
+use Chess\Computer\GrandmasterMove;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
@@ -115,7 +115,7 @@ class UciEngineTest extends AbstractUnitTestCase
             ->setOption('Skill Level', $skillLevel + rand(0, $skillLevelOffset));
 
         $board = new Board();
-        $move = (new GrandmasterComputer(self::FILEPATH))->move($board);
+        $move = (new GrandmasterMove(self::FILEPATH))->move($board);
 
         do {
             $limit = (new Limit())->setDepth($depth + rand(0, $depthOffset));

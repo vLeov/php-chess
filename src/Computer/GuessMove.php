@@ -8,12 +8,12 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
- * GuessComputer
+ * GuessMove
  *
  * @author Jordi Bassagaña
  * @license MIT
  */
-class GuessComputer extends AbstractComputer
+class GuessMove extends AbstractMove
 {
     /**
      * Returns a chess move.

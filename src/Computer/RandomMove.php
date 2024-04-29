@@ -5,12 +5,12 @@ namespace Chess\Computer;
 use Chess\Variant\Classical\Board;
 
 /**
- * RandomComputer
+ * RandomMove
  *
  * @author Jordi Bassagaña
  * @license MIT
  */
-class RandomComputer extends AbstractComputer
+class RandomMove extends AbstractMove
 {
     /**
      * Returns a chess move.

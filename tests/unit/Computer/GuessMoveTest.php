@@ -2,12 +2,12 @@
 
 namespace Chess\Tests\Unit\Computer;
 
-use Chess\Computer\RandomComputer;
+use Chess\Computer\GuessMove;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 
-class RandomComputerTest extends AbstractUnitTestCase
+class GuessMoveTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class RandomComputerTest extends AbstractUnitTestCase
     public function start()
     {
         $board = new Board();
-        $move = (new RandomComputer())->move($board);
+        $move = (new GuessMove())->move($board);
 
         $this->assertNotEmpty($move);
     }
@@ -27,7 +27,7 @@ class RandomComputerTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $move = (new RandomComputer())->move($board);
+        $move = (new GuessMove())->move($board);
 
         $this->assertNotEmpty($move);
     }
@@ -39,7 +39,7 @@ class RandomComputerTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 Qxf7#';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $move = (new RandomComputer())->move($board);
+        $move = (new GuessMove())->move($board);
 
         $this->assertSame(null, $move);
     }
@@ -50,8 +50,8 @@ class RandomComputerTest extends AbstractUnitTestCase
     public function game()
     {
         $board = new Board();
-        for ($i = 0; $i < 50; $i++) {
-            if ($move = (new RandomComputer())->move($board)) {
+        for ($i = 0; $i < 4; $i++) {
+            if ($move = (new GuessMove())->move($board)) {
                 $board->play($board->getTurn(), $move->pgn);
             }
         }

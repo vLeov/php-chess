@@ -2,11 +2,11 @@
 
 namespace Chess\Tests\Unit\Computer;
 
-use Chess\Computer\GrandmasterComputer;
+use Chess\Computer\GrandmasterMove;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
-class GrandmasterComputerTest extends AbstractUnitTestCase
+class GrandmasterMoveTest extends AbstractUnitTestCase
 {
     const FILEPATH = __DIR__.'/../../data/json/players.json';
 
@@ -17,7 +17,7 @@ class GrandmasterComputerTest extends AbstractUnitTestCase
     {
         $board = new ClassicalBoard();
 
-        $move = (new GrandmasterComputer(self::FILEPATH))->move($board);
+        $move = (new GrandmasterMove(self::FILEPATH))->move($board);
 
         $this->assertNotEmpty($move);
     }
@@ -31,7 +31,7 @@ class GrandmasterComputerTest extends AbstractUnitTestCase
 
         $board->play('w', 'e4');
 
-        $move = (new GrandmasterComputer(self::FILEPATH))->move($board);
+        $move = (new GrandmasterMove(self::FILEPATH))->move($board);
 
         $this->assertNotEmpty($move);
     }

@@ -5,12 +5,12 @@ namespace Chess\Computer;
 use Chess\Variant\Classical\Board;
 
 /**
- * AbstractComputer
+ * AbstractMove
  *
  * @author Jordi Bassagaña
  * @license MIT
  */
-abstract class AbstractComputer
+abstract class AbstractMove
 {
     /**
      * Returns a chess move.

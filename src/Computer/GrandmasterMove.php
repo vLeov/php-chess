@@ -5,7 +5,7 @@ namespace Chess\Computer;
 use Chess\Variant\Classical\Board;
 
 /**
- * GrandmasterComputer
+ * GrandmasterMove
  *
  * Figures out the next move to be made based on the JSON file that is passed to
  * its constructor. Typically this file would contain games by titled FIDE
@@ -14,7 +14,7 @@ use Chess\Variant\Classical\Board;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class GrandmasterComputer extends AbstractComputer
+class GrandmasterMove extends AbstractMove
 {
     /**
      * Chess games.
