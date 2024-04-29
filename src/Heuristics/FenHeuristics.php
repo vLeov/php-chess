@@ -4,7 +4,7 @@ namespace Chess\Heuristics;
 
 use Chess\Eval\InverseEvalInterface;
 use Chess\Function\StandardFunction;
-use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
@@ -23,7 +23,7 @@ class FenHeuristics
      *
      * @var \Chess\Variant\Classical\Board
      */
-    protected ClassicalBoard $board;
+    protected Board $board;
 
     /**
      * The evaluation function.
@@ -51,7 +51,7 @@ class FenHeuristics
      *
      * @param \Chess\Variant\Classical\Board $board
      */
-    public function __construct(ClassicalBoard $board)
+    public function __construct(Board $board)
     {
         $this->board = $board;
 

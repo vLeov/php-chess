@@ -4,7 +4,7 @@ namespace Chess\Tutor;
 
 use Chess\Eval\ExplainEvalInterface;
 use Chess\Function\StandardFunction;
-use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\Board;
 
 /**
  * FenExplanation
@@ -19,7 +19,7 @@ class FenExplanation extends AbstractParagraph
      *
      * @param \Chess\Variant\Classical\Board $board
      */
-    public function __construct(ClassicalBoard $board)
+    public function __construct(Board $board)
     {
         $this->board = $board;
 

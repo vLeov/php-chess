@@ -7,7 +7,7 @@ use Chess\Exception\PlayException;
 use Chess\Movetext\RavMovetext;
 use Chess\Movetext\SanMovetext;
 use Chess\Play\SanPlay;
-use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\Board;
 
 /**
  * Recursive Annotation Variation.
@@ -35,12 +35,12 @@ class RavPlay extends AbstractPlay
      * Constructor.
      *
      * @param string $movetext
-     * @param ClassicalBoard $board
+     * @param Board $board
      */
-    public function __construct(string $movetext, ClassicalBoard $board = null)
+    public function __construct(string $movetext, Board $board = null)
     {
-        $this->initialBoard = $board ?? new ClassicalBoard();
-        $this->board = unserialize(serialize($board)) ?? new ClassicalBoard();
+        $this->initialBoard = $board ?? new Board();
+        $this->board = unserialize(serialize($board)) ?? new Board();
         $this->fen = [$this->board->toFen()];
         $this->ravMovetext = new RavMovetext($this->board->getMove(), $movetext);
 

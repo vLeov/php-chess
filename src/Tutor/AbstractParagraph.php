@@ -2,7 +2,7 @@
 
 namespace Chess\Tutor;
 
-use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\Board;
 
 /**
  * AbstractParagraph
@@ -17,7 +17,7 @@ abstract class AbstractParagraph
      *
      * @var \Chess\Variant\Classical\Board
      */
-    protected ClassicalBoard $board;
+    protected Board $board;
 
     /**
      * Paragraph.
@@ -32,7 +32,7 @@ abstract class AbstractParagraph
      *
      * @return \Chess\Variant\Classical\Board
      */
-    public function getBoard(): ClassicalBoard
+    public function getBoard(): Board
     {
         return $this->board;
     }

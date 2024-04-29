@@ -5,7 +5,7 @@ namespace Chess\Tutor;
 use Chess\Heuristics\FenHeuristics;
 use Chess\ML\Supervised\Classification\CountLabeller;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\Board;
 
 /**
  * FenEvaluation
@@ -20,7 +20,7 @@ class FenEvaluation extends AbstractParagraph
      *
      * @param \Chess\Variant\Classical\Board $board
      */
-    public function __construct(ClassicalBoard $board)
+    public function __construct(Board $board)
     {
         $this->board = $board;
 

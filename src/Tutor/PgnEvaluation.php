@@ -2,7 +2,7 @@
 
 namespace Chess\Tutor;
 
-use Chess\Variant\Classical\Board as ClassicalBoard;
+use Chess\Variant\Classical\Board;
 
 /**
  * PgnEvaluation
@@ -18,7 +18,7 @@ class PgnEvaluation extends AbstractParagraph
      * @param string $pgn
      * @param \Chess\Variant\Classical\Board $board
      */
-    public function __construct(string $pgn, ClassicalBoard $board)
+    public function __construct(string $pgn, Board $board)
     {
         $this->board = $board;
 
