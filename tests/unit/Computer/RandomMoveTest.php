@@ -15,7 +15,7 @@ class RandomMoveTest extends AbstractUnitTestCase
     public function start()
     {
         $board = new Board();
-        $move = (new RandomMove())->move($board);
+        $move = (new RandomMove($board))->move();
 
         $this->assertNotEmpty($move);
     }
@@ -27,7 +27,7 @@ class RandomMoveTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $move = (new RandomMove())->move($board);
+        $move = (new RandomMove($board))->move();
 
         $this->assertNotEmpty($move);
     }
@@ -39,7 +39,7 @@ class RandomMoveTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 Qxf7#';
         $board = (new SanPlay($movetext))->validate()->getBoard();
-        $move = (new RandomMove())->move($board);
+        $move = (new RandomMove($board))->move();
 
         $this->assertSame(null, $move);
     }
@@ -51,7 +51,7 @@ class RandomMoveTest extends AbstractUnitTestCase
     {
         $board = new Board();
         for ($i = 0; $i < 50; $i++) {
-            if ($move = (new RandomMove())->move($board)) {
+            if ($move = (new RandomMove($board))->move()) {
                 $board->play($board->getTurn(), $move->pgn);
             }
         }

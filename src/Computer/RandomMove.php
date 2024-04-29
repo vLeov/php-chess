@@ -13,17 +13,24 @@ use Chess\Variant\Classical\Board;
 class RandomMove extends AbstractMove
 {
     /**
-     * Returns a chess move.
+     * Constructor.
      *
      * @param \Chess\Variant\Classical\Board $board
+     */
+    public function __construct(Board $board)
+    {
+        $this->board = unserialize(serialize($board));
+    }
+
+    /**
+     * Returns a chess move.
+     *
      * @return null|object
      */
-    public function move(Board $board): ?object
+    public function move(): ?object
     {
-        $clone = unserialize(serialize($board));
-
         $legal = [];
-        foreach ($clone->getPieces($clone->getTurn()) as $piece) {
+        foreach ($this->board->getPieces($this->board->getTurn()) as $piece) {
             if ($sqs = $piece->sqs()) {
                 $legal[$piece->getSq()] = $sqs;
             }
@@ -35,8 +42,8 @@ class RandomMove extends AbstractMove
 
         $lan = "{$from}{$to}";
 
-        if ($clone->playLan($clone->getTurn(), $lan)) {
-            $last = array_slice($clone->getHistory(), -1)[0];
+        if ($this->board->playLan($this->board->getTurn(), $lan)) {
+            $last = array_slice($this->board->getHistory(), -1)[0];
             return (object) [
                 'pgn' => $last->move->pgn,
                 'lan' => $lan,

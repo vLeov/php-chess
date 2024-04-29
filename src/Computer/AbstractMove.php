@@ -13,10 +13,16 @@ use Chess\Variant\Classical\Board;
 abstract class AbstractMove
 {
     /**
+     * Chess board.
+     *
+     * @var \Chess\Variant\Classical\Board
+     */
+    protected Board $board;
+
+    /**
      * Returns a chess move.
      *
-     * @param \Chess\Variant\Classical\Board $board
      * @return null|object
      */
-    abstract public function move(Board $board): ?object;
+    abstract public function move(): ?object;
 }
