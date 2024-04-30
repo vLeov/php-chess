@@ -46,9 +46,8 @@ class FarAdvancedPawnEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small far advanced pawn advantage",
-            "has some far advanced pawn advantage",
-            "has a significant far advanced pawn advantage",
+            "has a slight far advanced pawn advantage",
+            "has a moderate far advanced pawn advantage",
             "has a decisive far advanced pawn advantage",
         ];
 

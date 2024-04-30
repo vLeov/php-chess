@@ -47,7 +47,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has some space advantage.",
+            "White has a slight space advantage.",
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
@@ -77,7 +77,7 @@ class SpaceEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has a significant space advantage.",
+            "White has a moderate space advantage.",
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');

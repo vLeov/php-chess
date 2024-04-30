@@ -35,9 +35,8 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
 
         $this->observation = [
             "are slightly better connected",
-            "are somewhat better connected",
             "are significantly better connected",
-            "are so better connected",
+            "are totally better connected",
         ];
 
         foreach ($this->board->getPieces() as $piece) {

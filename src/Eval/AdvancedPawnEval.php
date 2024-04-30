@@ -47,9 +47,8 @@ class AdvancedPawnEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small advanced pawn advantage",
-            "has some advanced pawn advantage",
-            "has a significant advanced pawn advantage",
+            "has a slight advanced pawn advantage",
+            "has a moderate advanced pawn advantage",
             "has a decisive advanced pawn advantage",
         ];
 

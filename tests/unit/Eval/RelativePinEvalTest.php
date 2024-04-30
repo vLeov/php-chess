@@ -38,7 +38,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a significant relative pin advantage.",
+            "Black has a moderate relative pin advantage.",
         ];
 
         $expectedElaboration = [
@@ -66,7 +66,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has some relative pin advantage.",
+            "White has a slight relative pin advantage.",
         ];
 
         $expectedElaboration = [
@@ -94,7 +94,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a significant relative pin advantage.",
+            "White has a moderate relative pin advantage.",
         ];
 
         $expectedElaboration = [
@@ -122,7 +122,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a small relative pin advantage.",
+            "White has a slight relative pin advantage.",
         ];
 
         $expectedElaboration = [
@@ -150,7 +150,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a small relative pin advantage.",
+            "White has a slight relative pin advantage.",
         ];
 
         $expectedElaboration = [

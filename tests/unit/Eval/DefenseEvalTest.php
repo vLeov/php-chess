@@ -68,7 +68,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a total defense advantage."
+            "White has a moderate defense advantage."
         ];
 
         $expectedElaboration = [
@@ -120,7 +120,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a total defense advantage."
+            "White has a moderate defense advantage."
         ];
 
         $expectedElaboration = [
@@ -148,7 +148,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a small defense advantage."
+            "White has a slight defense advantage."
         ];
 
         $expectedElaboration = [
@@ -176,7 +176,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a small defense advantage."
+            "White has a slight defense advantage."
         ];
 
         $expectedElaboration = [
@@ -204,7 +204,7 @@ class DefenseEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has some defense advantage."
+            "Black has a slight defense advantage."
         ];
 
         $expectedElaboration = [

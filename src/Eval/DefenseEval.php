@@ -29,9 +29,8 @@ class DefenseEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small defense advantage",
-            "has some defense advantage",
-            "has a significant defense advantage",
+            "has a slight defense advantage",
+            "has a moderate defense advantage",
             "has a total defense advantage",
         ];
 

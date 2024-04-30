@@ -99,7 +99,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a small outpost advantage."
+            "White has a slight outpost advantage."
         ];
 
         $expectedElaboration = [
@@ -130,7 +130,7 @@ class SqOutpostEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a small outpost advantage."
+            "Black has a slight outpost advantage."
         ];
 
         $expectedElaboration = [

@@ -16,9 +16,9 @@ class FenExplanationTest extends AbstractUnitTestCase
     public function A08()
     {
         $expected = [
-            "Black has a significant control of the center.",
-            "The white pieces are so better connected.",
-            "Black has a significant space advantage.",
+            "Black has a slightly better control of the center.",
+            "The white pieces are totally better connected.",
+            "Black has a moderate space advantage.",
         ];
 
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
@@ -36,7 +36,7 @@ class FenExplanationTest extends AbstractUnitTestCase
     {
         $expected = [
             "White is totally controlling the center.",
-            "The black pieces are significantly better connected.",
+            "The black pieces are totally better connected.",
             "White has a total space advantage.",
             "The white player is pressuring a little bit more squares than its opponent.",
         ];

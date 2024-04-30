@@ -15,8 +15,8 @@ class PgnEvaluationTest extends AbstractUnitTestCase
     public function A08()
     {
         $expected = [
-            "Black has some space advantage.",
-            "White has a small protection advantage.",
+            "Black has a slight space advantage.",
+            "White has a slight protection advantage.",
             "The pawn on c5 is unprotected.",
             "Overall, 2 heuristic evaluation features are favoring White while 2 are favoring Black.",
         ];
@@ -35,11 +35,10 @@ class PgnEvaluationTest extends AbstractUnitTestCase
     public function endgame()
     {
         $expected = [
-            "White has a decisive material advantage.",
             "White is totally controlling the center.",
             "White has a total space advantage.",
             "The white pieces are timidly approaching the other side's king.",
-            "Black has a significant protection advantage.",
+            "Black has a decisive protection advantage.",
             "The bishop on e6 is unprotected.",
             "Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black.",
         ];

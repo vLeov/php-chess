@@ -30,9 +30,8 @@ class DoubledPawnEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small doubled pawn advantage",
-            "has some doubled pawn advantage",
-            "has a significant doubled pawn advantage",
+            "has a slight doubled pawn advantage",
+            "has a moderate doubled pawn advantage",
             "has a decisive doubled pawn advantage",
         ];
 

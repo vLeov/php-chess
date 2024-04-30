@@ -19,7 +19,7 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a small discovered check advantage.",
+            "Black has a slight discovered check advantage.",
         ];
 
         $expectedElaboration = [
@@ -47,7 +47,7 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has some discovered check advantage.",
+            "Black has a slight discovered check advantage.",
         ];
 
         $expectedElaboration = [
@@ -75,7 +75,7 @@ class DiscoveredCheckEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a total discovered check advantage.",
+            "Black has a moderate discovered check advantage.",
         ];
 
         $expectedElaboration = [

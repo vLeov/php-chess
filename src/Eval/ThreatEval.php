@@ -27,9 +27,8 @@ class ThreatEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small threat advantage",
-            "has some threat advantage",
-            "has a significant threat advantage",
+            "has a slight threat advantage",
+            "has a moderate threat advantage",
             "has a total threat advantage",
         ];
 

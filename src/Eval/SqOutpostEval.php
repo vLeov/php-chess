@@ -39,9 +39,8 @@ class SqOutpostEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small outpost advantage",
-            "has some outpost advantage",
-            "has a significant outpost advantage",
+            "has a slight outpost advantage",
+            "has a moderate outpost advantage",
             "has a total outpost advantage",
         ];
 

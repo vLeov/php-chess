@@ -41,7 +41,7 @@ class ThreatEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a small threat advantage.",
+            "White has a slight threat advantage.",
         ];
 
         $expectedElaboration = [
@@ -67,7 +67,7 @@ class ThreatEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a small threat advantage.",
+            "Black has a slight threat advantage.",
         ];
 
         $expectedElaboration = [

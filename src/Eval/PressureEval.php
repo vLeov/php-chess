@@ -53,8 +53,7 @@ class PressureEval extends AbstractEval implements ExplainEvalInterface
 
         $this->observation = [
             "is pressuring a little bit more squares than its opponent",
-            "is somewhat pressuring more squares than its opponent",
-            "is really pressuring more squares than its opponent",
+            "is significantly pressuring more squares than its opponent",
             "is utterly pressuring more squares than its opponent",
         ];
 

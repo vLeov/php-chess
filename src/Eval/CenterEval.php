@@ -33,7 +33,7 @@ class CenterEval extends AbstractEval implements ExplainEvalInterface
     {
         $this->board = $board;
 
-        $this->range = [1, 4];
+        $this->range = [1, 9];
 
         $this->subject = [
             'White',
@@ -42,8 +42,7 @@ class CenterEval extends AbstractEval implements ExplainEvalInterface
 
         $this->observation = [
             "has a slightly better control of the center",
-            "has a somewhat better control of the center",
-            "has a significant control of the center",
+            "has a moderate control of the center",
             "is totally controlling the center",
         ];
 

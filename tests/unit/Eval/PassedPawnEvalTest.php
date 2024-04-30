@@ -33,7 +33,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black has a small passed pawn advantage.",
+            "Black has a slight passed pawn advantage.",
         ];
 
         $position = [
@@ -67,7 +67,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has a small passed pawn advantage.",
+            "White has a slight passed pawn advantage.",
         ];
 
         $position = [
@@ -101,7 +101,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black has some passed pawn advantage.",
+            "Black has a moderate passed pawn advantage.",
         ];
 
         $board = FenToBoardFactory::create('8/2k5/4p3/1nb2p2/2K5/8/6B1/8 w - -');
@@ -123,7 +123,7 @@ class PassedPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has a small passed pawn advantage.",
+            "White has a slight passed pawn advantage.",
         ];
 
         $board = FenToBoardFactory::create('8/8/8/5k2/P7/4K3/8/8 w - - 0 1');

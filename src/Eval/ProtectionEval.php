@@ -42,9 +42,8 @@ class ProtectionEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small protection advantage",
-            "has some protection advantage",
-            "has a significant protection advantage",
+            "has a slight protection advantage",
+            "has a moderate protection advantage",
             "has a decisive protection advantage",
         ];
 

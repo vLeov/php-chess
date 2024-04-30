@@ -28,9 +28,8 @@ class RelativeForkEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small relative fork advantage",
-            "has some relative fork advantage",
-            "has a significant relative fork advantage",
+            "has a slight relative fork advantage",
+            "has a moderate relative fork advantage",
             "has a total relative fork advantage",
         ];
 

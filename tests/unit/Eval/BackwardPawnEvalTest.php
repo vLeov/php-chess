@@ -33,7 +33,7 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has some backward pawn advantage.",
+            "Black has a moderate backward pawn advantage.",
         ];
 
         $expectedElaboration = [
@@ -72,7 +72,7 @@ class BackwardPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has some backward pawn advantage.",
+            "Black has a moderate backward pawn advantage.",
         ];
 
         $expectedElaboration = [

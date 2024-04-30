@@ -29,9 +29,8 @@ class DiscoveredCheckEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "has a small discovered check advantage",
-            "has some discovered check advantage",
-            "has a significant discovered check advantage",
+            "has a slight discovered check advantage",
+            "has a moderate discovered check advantage",
             "has a total discovered check advantage",
         ];
 

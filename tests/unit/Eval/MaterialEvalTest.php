@@ -36,7 +36,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White has a small material advantage.",
+            "White has a slight material advantage.",
         ];
 
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
@@ -75,7 +75,7 @@ class MaterialEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "Black has a small material advantage.",
+            "Black has a slight material advantage.",
         ];
 
         $C00 = file_get_contents(self::DATA_FOLDER.'/sample/C00.pgn');

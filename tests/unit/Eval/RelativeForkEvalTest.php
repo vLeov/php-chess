@@ -38,7 +38,7 @@ class RelativeForkEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a significant relative fork advantage.",
+            "White has a moderate relative fork advantage.",
         ];
 
         $expectedElaboration = [
