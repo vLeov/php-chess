@@ -2,6 +2,8 @@
 
 namespace Chess\Tests\Unit\Variant\Classical;
 
+use Chess\FenToBoardFactory;
+use Chess\Computer\RandomMove;
 use Chess\Movetext\SanMovetext;
 use Chess\Piece\B;
 use Chess\Piece\K;
@@ -2930,5 +2932,49 @@ class BoardTest extends AbstractUnitTestCase
         ];
 
         $this->assertEquals($expected, $board->legal('e1'));
+    }
+
+    /**
+     * @test
+     */
+    public function is_fifty_move_draw_C68()
+    {
+        $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
+
+        $board = (new SanPlay($C68))->validate()->getBoard();
+
+        $this->assertFalse($board->isFiftyMoveDraw());
+    }
+
+    /**
+     * @test
+     */
+    public function is_fifty_move_draw_endgame_49_moves()
+    {
+        $board = FenToBoardFactory::create('7k/8/8/8/8/8/8/K7 w - - 0 1');
+
+        for ($i = 0; $i < 99; $i++) {
+            if ($move = (new RandomMove($board))->move()) {
+                $board->play($board->getTurn(), $move->pgn);
+            }
+        }
+
+        $this->assertFalse($board->isFiftyMoveDraw());
+    }
+
+    /**
+     * @test
+     */
+    public function is_fifty_move_draw_endgame_50_moves()
+    {
+        $board = FenToBoardFactory::create('7k/8/8/8/8/8/8/K7 w - - 0 1');
+
+        for ($i = 0; $i < 100; $i++) {
+            if ($move = (new RandomMove($board))->move()) {
+                $board->play($board->getTurn(), $move->pgn);
+            }
+        }
+
+        $this->assertTrue($board->isFiftyMoveDraw());
     }
 }
