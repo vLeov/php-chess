@@ -27,8 +27,8 @@ class GoodPgnEvaluationTest extends AbstractUnitTestCase
 
         $limit = (new Limit())->setDepth(12);
         $stockfish = new UciEngine('/usr/games/stockfish');
-        $A08 = file_get_contents(self::DATA_FOLDER.'/sample/D07.pgn');
-        $board = (new SanPlay($A08))->validate()->getBoard();
+        $D07 = file_get_contents(self::DATA_FOLDER.'/sample/D07.pgn');
+        $board = (new SanPlay($D07))->validate()->getBoard();
 
         $goodPgnEvaluation = new GoodPgnEvaluation($limit, $stockfish, $board);
 
