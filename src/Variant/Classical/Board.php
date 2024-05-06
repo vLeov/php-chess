@@ -719,59 +719,59 @@ class Board extends \SplObjectStorage
      */
     public function playLan(string $color, string $lan): bool
     {
-       $sqs = $this->move->explodeSqs($lan);
-       if (isset($sqs[0]) && isset($sqs[1])) {
-           if ($color === $this->getTurn() && $piece = $this->getPieceBySq($sqs[0])) {
-               if ($piece->getId() === Piece::K) {
-                   if (
-                       $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
-                       $piece->sqCastleShort() &&
-                       $this->play($color, Castle::SHORT)
-                   ) {
-                       return $this->addSymbol();
-                   } elseif (
-                       $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
-                       $piece->sqCastleLong() &&
-                       $this->play($color, Castle::LONG)
-                   ) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, Piece::K.'x'.$sqs[1])) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, Piece::K.$sqs[1])) {
-                       return $this->addSymbol();
-                   }
-               } elseif ($piece->getId() === Piece::P) {
-                   strlen($lan) === 5
-                       ? $promotion = '='.mb_strtoupper(substr($lan, -1))
-                       : $promotion = '';
-                   if ($this->play($color, $piece->getSqFile()."x$sqs[1]".$promotion)) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, $sqs[1].$promotion)) {
-                       return $this->addSymbol();
-                   }
-               } else {
-                   if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, $piece->getId().$sqs[1])) {
-                       return $this->addSymbol();
-                   }  elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
-                       return $this->addSymbol();
-                   } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
-                       return $this->addSymbol();
-                   }
-               }
-           }
-       }
+        $sqs = $this->move->explodeSqs($lan);
+        if (isset($sqs[0]) && isset($sqs[1])) {
+            if ($color === $this->getTurn() && $piece = $this->getPieceBySq($sqs[0])) {
+                if ($piece->getId() === Piece::K) {
+                    if (
+                        $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
+                        $piece->sqCastleShort() &&
+                        $this->play($color, Castle::SHORT)
+                    ) {
+                        return $this->addSymbol();
+                    } elseif (
+                        $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
+                        $piece->sqCastleLong() &&
+                        $this->play($color, Castle::LONG)
+                    ) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, Piece::K.'x'.$sqs[1])) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, Piece::K.$sqs[1])) {
+                        return $this->addSymbol();
+                    }
+                } elseif ($piece->getId() === Piece::P) {
+                    strlen($lan) === 5
+                        ? $promotion = '='.mb_strtoupper(substr($lan, -1))
+                        : $promotion = '';
+                    if ($this->play($color, $piece->getSqFile()."x$sqs[1]".$promotion)) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, $sqs[1].$promotion)) {
+                        return $this->addSymbol();
+                    }
+                } else {
+                    if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, $piece->getId().$sqs[1])) {
+                        return $this->addSymbol();
+                    }  elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
+                        return $this->addSymbol();
+                    } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
+                        return $this->addSymbol();
+                    }
+                }
+            }
+        }
 
-       return false;
+        return false;
     }
 
     /**
