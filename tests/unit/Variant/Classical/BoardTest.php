@@ -2413,14 +2413,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $board = $board->undo();
 
-        $expected = (object) [
-            'color' => 'w',
-            'id' => 'K',
-            'fen' => (object) [
-                'f1' => 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1K1R b kq -',
-                'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/4P3/5N2/PPPPBPPP/RNBQ1RK1 b kq -',
-            ],
-        ];
+        $expected = ['f1', 'g1'];
 
         $this->assertEquals($expected, $board->legal('e1'));
     }
@@ -2548,15 +2541,7 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('w', 'Bc4');
         $board->play('b', 'Be7');
 
-        $expected = (object) [
-            'color' => 'w',
-            'id' => 'K',
-            'fen' => (object) [
-                'e2' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPPKPPP/RNBQ3R b kq -',
-                'f1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1K1R b kq -',
-                'g1' => 'rnbqk2r/ppppbppp/5n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq -',
-            ],
-        ];
+        $expected = ['e2', 'f1', 'g1'];
 
         $this->assertEquals($expected, $board->legal('e1'));
     }
@@ -2823,14 +2808,7 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('w', 'h5');
         $board->play('b', 'g5');
 
-        $expected = (object) [
-            'color' => 'w',
-            'id' => 'P',
-            'fen' => (object) [
-                'h6' => 'rnbqkbnr/1ppppp1p/7P/p5p1/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
-                'g6' => 'rnbqkbnr/1ppppp1p/6P1/p7/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
-            ],
-        ];
+        $expected = ['h6', 'g6'];
 
         $this->assertEquals($expected, $board->legal('h5'));
     }
@@ -2856,6 +2834,8 @@ class BoardTest extends AbstractUnitTestCase
             ],
         ];
 
+        $expected = ['h6', 'g6'];
+
         $this->assertEquals($expected, $board->legal('h5'));
     }
 
@@ -2866,11 +2846,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $expected = (object) [
-            'color' => 'w',
-            'id' => 'R',
-            'fen' => (object) [],
-        ];
+        $expected = [];
 
         $this->assertEquals($expected, $board->legal('a1'));
     }
@@ -2882,14 +2858,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $expected = (object) [
-            'color' => 'w',
-            'id' => 'P',
-            'fen' => (object) [
-                'e3' => 'rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQKBNR b KQkq -',
-                'e4' => 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3',
-            ],
-        ];
+        $expected = ['e3', 'e4'];
 
         $this->assertEquals($expected, $board->legal('e2'));
     }
@@ -2903,14 +2872,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $board->playLan('w', 'e2e4');
 
-        $expected = (object) [
-            'color' => 'b',
-            'id' => 'P',
-            'fen' => (object) [
-                'e6' => 'rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq -',
-                'e5' => 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6',
-            ],
-        ];
+        $expected = ['e6', 'e5'];
 
         $this->assertEquals($expected, $board->legal('e7'));
     }
@@ -2922,14 +2884,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = (new SanPlay('1.f4 e5 2.e4 a6 3.Bc4 a5 4.Nh3 Qh4+'))->validate()->getBoard();
 
-        $expected = (object) [
-            'color' => 'w',
-            'id' => 'K',
-            'fen' => (object) [
-                'e2' => 'rnb1kbnr/1ppp1ppp/8/p3p3/2B1PP1q/7N/PPPPK1PP/RNBQ3R b kq -',
-                'f1' => 'rnb1kbnr/1ppp1ppp/8/p3p3/2B1PP1q/7N/PPPP2PP/RNBQ1K1R b kq -',
-            ],
-        ];
+        $expected = ['e2', 'f1'];
 
         $this->assertEquals($expected, $board->legal('e1'));
     }

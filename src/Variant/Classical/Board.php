@@ -1092,29 +1092,14 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Returns the legal FEN positions of a piece.
+     * Returns the legal squares of a piece.
      *
      * @param string $sq
-     * @return object|null
+     * @return array
      */
-     public function legal(string $sq): ?object
+     public function legal(string $sq): array
      {
-         if ($piece = $this->getPieceBySq($sq)) {
-            $fen = [];
-            foreach ($piece->sqs() as $sq) {
-                if ($res = $piece->fen($piece->getColor(), $sq)) {
-                    $fen[$sq] = $res;
-                }
-            }
-
-            return (object) [
-                'color' => $piece->getColor(),
-                'id' => $piece->getId(),
-                'fen' => (object) $fen,
-            ];
-         }
-
-         return null;
+         return array_values($this->getPieceBySq($sq)->sqs());
      }
 
     /**
