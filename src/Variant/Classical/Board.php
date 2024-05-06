@@ -728,50 +728,68 @@ class Board extends \SplObjectStorage
                         $piece->sqCastleShort() &&
                         $this->play($color, Castle::SHORT)
                     ) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif (
                         $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
                         $piece->sqCastleLong() &&
                         $this->play($color, Castle::LONG)
                     ) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, Piece::K.'x'.$sqs[1])) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, Piece::K.$sqs[1])) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     }
                 } elseif ($piece->getId() === Piece::P) {
                     strlen($lan) === 5
                         ? $promotion = '='.mb_strtoupper(substr($lan, -1))
                         : $promotion = '';
                     if ($this->play($color, $piece->getSqFile()."x$sqs[1]".$promotion)) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, $sqs[1].$promotion)) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     }
                 } else {
                     if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, $piece->getId().$sqs[1])) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     }  elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
-                        return $this->addSymbol();
+                        return $this->afterPlayLan();
                     }
                 }
             }
         }
 
         return false;
+    }
+
+    /**
+     * Adds a PGN symbol to the last history element.
+     *
+     * @return bool
+     */
+    private function afterPlayLan(): bool
+    {
+        $end = $this->getHistory()[count($this->getHistory()) - 1];
+        if ($this->isMate()) {
+            $end->move->pgn .= '#';
+        } elseif ($this->isCheck()) {
+            $end->move->pgn .= '+';
+        }
+        $this->getHistory()[count($this->getHistory()) - 1] = $end;
+
+        return true;
     }
 
     /**
@@ -1022,24 +1040,6 @@ class Board extends \SplObjectStorage
     public function isMate(): bool
     {
         return $this->isTrapped() && $this->isCheck();
-    }
-
-    /**
-     * Adds a PGN symbol to the last history element.
-     *
-     * @return bool
-     */
-    private function addSymbol(): bool
-    {
-        $end = $this->getHistory()[count($this->getHistory()) - 1];
-        if ($this->isMate()) {
-            $end->move->pgn .= '#';
-        } elseif ($this->isCheck()) {
-            $end->move->pgn .= '+';
-        }
-        $this->getHistory()[count($this->getHistory()) - 1] = $end;
-
-        return true;
     }
 
     /**
