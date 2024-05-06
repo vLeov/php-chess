@@ -632,8 +632,10 @@ class Board extends \SplObjectStorage
     {
         $ambiguous = [];
         foreach ($this->pickPiece($move) as $piece) {
-            if (!$this->isPinned($piece) && in_array($move->sq->next, $piece->sqs())) {
-                $ambiguous[] = $move->sq->next;
+            if (in_array($move->sq->next, $piece->sqs())) {
+                if (!$this->isPinned($piece)) {
+                    $ambiguous[] = $move->sq->next;
+                }
             }
         }
 
@@ -675,13 +677,15 @@ class Board extends \SplObjectStorage
     protected function isLegalMove(object $move): bool
     {
         foreach ($pieces = $this->pickPiece($move) as $piece) {
-            if ($piece->isMovable() && !$this->isPinned($piece)) {
-                if ($piece->getMove()->type === $this->move->case(Move::CASTLE_SHORT)) {
-                    return $this->castle($piece, RType::CASTLE_SHORT);
-                } elseif ($piece->getMove()->type === $this->move->case(Move::CASTLE_LONG)) {
-                    return $this->castle($piece, RType::CASTLE_LONG);
-                } else {
-                    return $this->move($piece);
+            if ($piece->isMovable()) {
+                if (!$this->isPinned($piece)) {
+                    if ($piece->getMove()->type === $this->move->case(Move::CASTLE_SHORT)) {
+                        return $this->castle($piece, RType::CASTLE_SHORT);
+                    } elseif ($piece->getMove()->type === $this->move->case(Move::CASTLE_LONG)) {
+                        return $this->castle($piece, RType::CASTLE_LONG);
+                    } else {
+                        return $this->move($piece);
+                    }
                 }
             }
         }
