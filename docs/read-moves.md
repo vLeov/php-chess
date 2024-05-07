@@ -241,9 +241,9 @@ R  N  B  Q  K  B  .  R
 
 ## Recursive Annotation Variation (RAV)
 
-✨ RAV stands for Recursive Annotation Variation. This format is especially useful to write and read tutorials about openings, notable games, chess studies and so on.
+✨ RAV stands for Recursive Annotation Variation. It is an extension of the Standard Algebaric Notation (SAN) format that allows to annotate chess variations. This format is especially useful for tutorials, notable games, chess studies and so on.
 
-RAV is an extension of the Standard Algebaric Notation (SAN) format and allows to annotate chess variations. After all, a RAV movetext is still a SAN movetext with support for comments. Comments are enclosed in curly brackets. Variations are enclosed in parentheses which can be nested recursively as many times as required with the trait that the previous move may need to be undone in order to play a certain variation.
+Comments are enclosed in curly brackets. Variations are enclosed in parentheses which can be nested recursively as many times as required with the trait that the previous move may need to be undone in order to play a variation.
 
 The example below describes how to play the Open Sicilian.
 
@@ -251,14 +251,12 @@ The example below describes how to play the Open Sicilian.
 
 Sicilian Defense. (2023, July 2). In Wikipedia. [https://en.wikipedia.org/wiki/Sicilian_Defence](https://en.wikipedia.org/wiki/Sicilian_Defence)
 
-Then all you need is a RAV reader.
-
 ![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/main/docs/read-moves_01.png)
-Figure 1. The response received from PHP Chess can be displayed as an HTML table.
+Figure 1. The Open Sicilian explained with the help of comments and variations.
 
-The RAV reader shown in Figure 1 displays the variation levels in different shades of gray. It is a 2D scrollable HTML table where the main line is shown in a white background color. The deeper the level, the darker the background color is displayed.
+The RAV reader in Figure 1 displays the variation levels in different shades of gray. It is a 2D scrollable HTML table where the main line is shown in a white background color. The deeper the level, the darker the background color.
 
-Similarly as with Chess\Play\SanPlay and Chess\Play\LanPlay, [Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext. The most important method in this class is the `getFen()` method. This method retrieves the FEN history of a RAV movetext to be displayed for reading purposes as shown in Figure 1.
+[Chess\Play\RavPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/RavPlayTest.php) allows to play a RAV movetext.
 
 ```php
 use Chess\Play\RavPlay;
@@ -302,7 +300,7 @@ Array
 )
 ```
 
-Let's give this a try. Add some comments and get the FEN history.
+The `getFen()` method retrieves the FEN history as an unidimensional array that can be easily consumed by a frontend UI as shown in Figure 1. The movetext will also pass the validation if adding comments and NAGs.
 
 ```php
 use Chess\Play\RavPlay;
@@ -323,8 +321,6 @@ $fen = $ravPlay->getFen();
 
 print_r($fen);
 ```
-
-Cool! The result obtained is exactly the same as in the previous example.
 
 ```text
 Array
@@ -348,13 +344,13 @@ Array
 )
 ```
 
-In both cases the `validate()` method will throw a Chess\Exception\PlayException if the RAV movetext is not valid. This is how to obtain the validated movetext.
+This is how to obtain the validated movetext.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->getMovetext();
 ```
 
-You may want to remove tabs and spaces from a valid RAV movetext with the help of the `filtered()` method.
+The `filtered()` method is to remove tabs and spaces.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->filtered();
@@ -366,7 +362,7 @@ echo $movetext;
 1.e4 c5 {enters the Sicilian Defense, the most popular and best-scoring response to White's first move.} (2.Nf3 {is played in about 80% of Master-level games after which there are three main options for Black.} (2...Nc6) (2...e6) (2...d6 {is Black's most common move.} 3.d4 {lines are collectively known as the Open Sicilian.} cxd4 4.Nxd4 Nf6 5.Nc3 {allows Black choose between four major variations: the Najdorf, Dragon, Classical and Scheveningen.} (5...a6 {is played in the Najdorf variation.}) (5...g6 {is played in the Dragon variation.}) (5...Nc6 {is played in the Classical variation.}) (5...e6 {is played in the Scheveningen variation.})))
 ```
 
-Comments are removed by passing the false value to the first argument of the `filtered()` method.
+Comments and NAGs can be removed by passing the `false` value to the first and second arguments of the `filtered()` method.
 
 ```php
 $movetext = $ravPlay->getRavMovetext()->filtered($comments = false);
@@ -378,7 +374,7 @@ echo $movetext;
 1.e4 c5 (2.Nf3 (2...Nc6) (2...e6) (2...d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 (5...a6) (5...g6) (5...Nc6) (5...e6)))
 ```
 
-RAV files can also be loaded from a particular FEN position as opposed to the start position.
+And finally, as opposed to the start position, a RAV movetext can also be loaded from a particular FEN position if passing a chess board object to the constructor of the class. As you can see in the example below, [Chess\FenToBoardFactory](https://github.com/chesslablab/php-chess/blob/main/tests/unit/FenToBoardFactoryTest.php) is used for this purpose.
 
 ```php
 use Chess\FenToBoardFactory;
