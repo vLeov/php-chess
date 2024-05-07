@@ -1,5 +1,32 @@
 # Play Chess
 
+## Play Randomly
+
+✨ Sometimes you want to play a random game of chess.
+
+You could loop 50 times and play a move by instantiating the [Chess\Computer\RandomMove](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Computer/RandomMoveTest.php) class like in the example below.
+
+```php
+use Chess\Computer\RandomMove;
+use Chess\Variant\Classical\Board;
+
+$board = new Board();
+
+for ($i = 0; $i < 50; $i++) {
+    if ($move = (new RandomMove($board))->move()) {
+        $board->play($board->getTurn(), $move->pgn);
+    }
+}
+
+echo $board->getMovetext();
+```
+
+```text
+1.c4 g6 2.Nf3 Nf6 3.d4 c5 4.Nfd2 Rg8 5.Qa4 Rg7 6.a3 Qc7 7.Kd1 g5 8.h3 Kd8 9.f3 Nc6 10.f4 a6 11.Qxc6 Rg6 12.e3 Bg7 13.Nb3 h6 14.a4 e6 15.g3 Ne4 16.Ke2 g4 17.N3d2 e5 18.Qe6 Bf6 19.Kd1 h5 20.Na3 Bh8 21.dxe5 a5 22.b4 Nxg3 23.Nf3 Qd6+ 24.exd6 Rb8
+```
+
+The result obtained is a 24 move game since a move is considered to be completed after both players have played a turn.
+
 ## Play Like a Grandmaster
 
 ✨ The [players.json](https://github.com/chesslablab/chess-server/blob/main/data/players.json) file in the [Chess Server](https://github.com/chesslablab/chess-server) contains thousands of games by titled FIDE players. This file can be generated with the command line tools available in the [Chess Data](https://github.com/chesslablab/chess-data) repo.
@@ -49,7 +76,7 @@ PHP Chess provides the [Chess\UciEngine\UciEngine](https://github.com/chesslabla
 sudo apt-get install stockfish
 ```
 
-Then, you're set up to play chess against the computer as described in the following example.
+Then, you are set up to play chess against the computer as described in the following example.
 
 ```php
 use Chess\UciEngine\UciEngine;
