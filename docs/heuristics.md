@@ -77,25 +77,26 @@ Array
             [6] => Protection
             [7] => Threat
             [8] => Attack
-            [9] => Doubled pawn
-            [10] => Passed pawn
-            [11] => Advanced pawn
-            [12] => Far-advanced pawn
-            [13] => Isolated pawn
-            [14] => Backward pawn
-            [15] => Defense
-            [16] => Absolute skewer
-            [17] => Absolute pin
-            [18] => Relative pin
-            [19] => Absolute fork
-            [20] => Relative fork
-            [21] => Outpost square
-            [22] => Knight outpost
-            [23] => Bishop outpost
-            [24] => Bishop pair
-            [25] => Bad bishop
-            [26] => Diagonal opposition
-            [27] => Direct opposition
+            [9] => Discovered check
+            [10] => Doubled pawn
+            [11] => Passed pawn
+            [12] => Advanced pawn
+            [13] => Far-advanced pawn
+            [14] => Isolated pawn
+            [15] => Backward pawn
+            [16] => Defense
+            [17] => Absolute skewer
+            [18] => Absolute pin
+            [19] => Relative pin
+            [20] => Absolute fork
+            [21] => Relative fork
+            [22] => Outpost square
+            [23] => Knight outpost
+            [24] => Bishop outpost
+            [25] => Bishop pair
+            [26] => Bad bishop
+            [27] => Diagonal opposition
+            [28] => Direct opposition
         )
 
     [balance] => Array
@@ -128,6 +129,7 @@ Array
             [25] => 0
             [26] => 0
             [27] => 0
+            [28] => 0
         )
 
 )
