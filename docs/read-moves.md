@@ -4,18 +4,17 @@
 
 ✨ Portable Game Notation is a human-readable text format that allows chess players to read and write chess games.
 
-Multiple variants are supported with the default one being classical chess.
+As discussed in [Getting Started](https://php-chess.docs.chesslablab.org/getting-started/), PGN is convenient for when reading chess games annotated by humans, for example, those ones available in online databases or published in chess websites.
 
-| Variant | Chessboard |
-| ------- | ---------- |
-| Capablanca | [Chess\Variant\Capablanca\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Capablanca/BoardTest.php) |
-| Capablanca-Fischer | [Chess\Variant\CapablancaFischer\Board](https://github.com/chesslablab/php-chess/blob/main/src/Variant/CapablancaFischer/Board.php) |
-| Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Chess960/BoardTest.php) |
-| Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Classical/BoardTest.php) |
+> 1.e4 e5 2.Nf3 Nf6 3.d4 Nxe4 4.Bd3 d5 5.Nxe5 Nd7 6.Nxd7 Bxd7 7.Nd2 Nxd2 8.Bxd2 Bd6 9.O-O h5 10.Qe1+ Kf8 11.Bb4 Qe7 12.Bxd6 Qxd6 13.Qd2 Re8 14.Rae1 Rh6 15.Qg5 c6 16.Rxe8+ Bxe8 17.Re1 Qf6 18.Qe3 Bd7 19.h3 h4 20.c4 dxc4 21.Bxc4 b5 22.Qa3+ Kg8 23.Qxa7 Qd8 24.Bb3 Rd6 25.Re4 Be6 26.Bxe6 Rxe6 27.Rxe6 fxe6 28.Qc5 Qa5 29.Qxc6 Qe1+ 30.Kh2 Qxf2 31.Qxe6+ Kh7 32.Qe4+ Kg8 33.b3 Qxa2 34.Qe8+ Kh7 35.Qxb5 Qf2 36.Qe5 Qb2 37.Qe4+ Kg8 38.Qd3 Qf2 39.Qc3 Qf4+ 40.Kg1 Kh7 41.Qd3+ g6 42.Qd1 Qe3+ 43.Kh1 g5 44.d5 g4 45.hxg4 h3 46.Qf3 1–0
 
-There is no such thing as a chess opening in either Capablanca chess or Chess960. Those two variants were originally conceived to minimize memorization so when it comes to chess openings, it is assumed that we're in the realms of classical chess.
+World Chess Championship 2021. (2023, July 3). In Wikipedia. [https://en.wikipedia.org/wiki/World_Chess_Championship_2021](https://en.wikipedia.org/wiki/World_Chess_Championship_2021)
 
-Let's now have a look at B54 which is the ECO code for "Sicilian Defense: Modern Variations, Main Line".
+As you may probably know, a chess opening is the group of initial moves of a chess game. This definition applies to classical chess, however, there is no such thing as a chess opening in either Capablanca chess or Chess960. Those two variants were originally conceived to minimize memorization, so when it comes to chess openings it is assumed that we're in the realms of classical chess.
+
+Having said all that, let's now look at B54 which is the ECO code for "Sicilian Defense: Modern Variations, Main Line".
+
+> ECO, which stands for Encyclopaedia of Chess Openings, is a standard classification system for chess openings.
 
 ```php
 use Chess\Variant\Classical\Board;
@@ -43,13 +42,7 @@ P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
 
-As discussed in [Getting Started](https://php-chess.docs.chesslablab.org/getting-started/), the PGN format is convenient for when reading chess games annotated by humans, for example, those ones available in online databases or published in chess websites.
-
-> 1.e4 e5 2.Nf3 Nf6 3.d4 Nxe4 4.Bd3 d5 5.Nxe5 Nd7 6.Nxd7 Bxd7 7.Nd2 Nxd2 8.Bxd2 Bd6 9.O-O h5 10.Qe1+ Kf8 11.Bb4 Qe7 12.Bxd6 Qxd6 13.Qd2 Re8 14.Rae1 Rh6 15.Qg5 c6 16.Rxe8+ Bxe8 17.Re1 Qf6 18.Qe3 Bd7 19.h3 h4 20.c4 dxc4 21.Bxc4 b5 22.Qa3+ Kg8 23.Qxa7 Qd8 24.Bb3 Rd6 25.Re4 Be6 26.Bxe6 Rxe6 27.Rxe6 fxe6 28.Qc5 Qa5 29.Qxc6 Qe1+ 30.Kh2 Qxf2 31.Qxe6+ Kh7 32.Qe4+ Kg8 33.b3 Qxa2 34.Qe8+ Kh7 35.Qxb5 Qf2 36.Qe5 Qb2 37.Qe4+ Kg8 38.Qd3 Qf2 39.Qc3 Qf4+ 40.Kg1 Kh7 41.Qd3+ g6 42.Qd1 Qe3+ 43.Kh1 g5 44.d5 g4 45.hxg4 h3 46.Qf3 1–0
-
-World Chess Championship 2021. (2023, July 3). In Wikipedia. [https://en.wikipedia.org/wiki/World_Chess_Championship_2021](https://en.wikipedia.org/wiki/World_Chess_Championship_2021)
-
-So far so good, but if you're new to chess you may well play a wrong move in the Sicilian Defense: 4...Na6.
+The `play()` method in the [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Classical/BoardTest.php) class allows to make moves in PGN format. So far so good, but if you're new to chess you may well play a wrong move in the Sicilian Defense: 4...Na6.
 
 ```php
 $board->play('b', 'Na6');
@@ -68,7 +61,7 @@ P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
 
-No worries! We've all been there. The `undo()` method comes to the rescue to fix mistakes like this one.
+No worries! The `undo()` method comes to the rescue to take back a move.
 
 ```php
 $board = $board->undo();
@@ -81,7 +74,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Now, what if you want to play a bunch of PGN moves at once instead of one by one as in the previous example? This is a common use case, and [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/SanPlayTest.php) allows to easily do so. As it name implies, this class is intended to play a Standard Algebaric Notation (SAN) movetext. The `validate()` method will throw a Chess\Exception\PlayException if the movetext is not valid.
+As you can see in the code snippet above, the `getMovetext()` method is used to obtain the moves played in the game using Standard Algebraic Notation. Let's continue practicing chess openings. Now, what if you want to play a bunch of moves at once instead of one by one as in the previous example? [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/SanPlayTest.php) allows to easily do so.
 
 ```php
 use Chess\Play\SanPlay;
@@ -106,7 +99,7 @@ P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
 
-The game can be continued from this position — remember, almost everything in PHP Chess is done using a chessboard object.
+Please note that the `validate()` method will throw an exception if the movetext is not valid. Once the `$board` object is successfully created, the game can be continued from that particular position.
 
 ```php
 $board->play('w', 'Bb5+');
@@ -116,16 +109,22 @@ echo $board->toAsciiString();
 
 ```text
 r  n  b  q  k  b  .  r
- p  p  .  .  p  p  p  p
- .  .  .  p  .  n  .  .
- .  B  .  .  .  .  .  .
- .  .  .  N  P  .  .  .
- .  .  .  .  .  .  .  .
- P  P  P  .  .  P  P  P
- R  N  B  Q  K  .  .  R
+p  p  .  .  p  p  p  p
+.  .  .  p  .  n  .  .
+.  B  .  .  .  .  .  .
+.  .  .  N  P  .  .  .
+.  .  .  .  .  .  .  .
+P  P  P  .  .  P  P  P
+R  N  B  Q  K  .  .  R
 ```
 
-Every time a move is made, the state of the board changes and now the white king is in check.
+Every time a move is made, the state of the board changes.
+
+[Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Classical/BoardTest.php) provides you with plenty of methods to interact with a chess board object. It is a quite common use case to query the board state. As discussed in the [Home](https://php-chess.docs.chesslablab.org/) section, you may want to check out the corresponding tests for further details on how to use it.
+
+> The unit tests are the best documentation. They contain hundreds of real examples on how to use the PHP Chess library.
+
+The `isCheck()` method will confirm that the white king is in check after 5.Bb5+ while `isMate()` will confirm that it has not been mated.
 
 ```php
 var_dump($board->isCheck());
@@ -135,8 +134,6 @@ var_dump($board->isCheck());
 bool(true)
 ```
 
-Of course the king is not mated in this position.
-
 ```php
 var_dump($board->isMate());
 ```
@@ -145,7 +142,7 @@ var_dump($board->isMate());
 bool(false)
 ```
 
-Also it is not stalemated.
+Similarly, you may want to know if the current position is a draw. The `isStalemate()` method is to find out if the current position is a stalemate while `isFivefoldRepetition()` will confirm if the game is drawn because of a fivefold repetition.
 
 ```php
 var_dump($board->isStalemate());
@@ -155,8 +152,6 @@ var_dump($board->isStalemate());
 bool(false)
 ```
 
-And it is not a fivefold repetition yet.
-
 ```php
 var_dump($board->isFivefoldRepetition());
 ```
@@ -165,9 +160,7 @@ var_dump($board->isFivefoldRepetition());
 bool(false)
 ```
 
-Otherwise the game would end.
-
-[Numeric Annotation Glyphs](https://en.wikipedia.org/wiki/Numeric_Annotation_Glyphs) (NAGs) can optionally be used in SAN movetexts, so this is how you'd typically validate a SAN movetext using NAGs for further processing. Remember, the `validate()` method will throw a Chess\Exception\PlayException if the movetext is not valid.
+Text comments in curly brackets can optionally be used in SAN movetexts as well as [Numeric Annotation Glyphs](https://en.wikipedia.org/wiki/Numeric_Annotation_Glyphs). The example below shows how [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/SanPlayTest.php) is used to validate a SAN movetext that contains NAGs. Remember, the `validate()` method will throw an exception if the movetext is not valid.
 
 ```php
 use Chess\Play\SanPlay;
@@ -183,7 +176,7 @@ echo $sanPlay->getSanMovetext()->filtered();
 1.e4 c5 2.Nf3 $1 d6 3.d4 cxd4 4.Nxd4 $48 Nf6 $113
 ```
 
-NAGs can be removed by passing the false value to the second argument of the `filtered()` method.
+Comments and NAGs can be removed by passing the `false` value to the first and second arguments of the `filtered()` method.
 
 ```php
 echo $sanPlay->getSanMovetext()->filtered($comments = true, $nags = false);
@@ -197,9 +190,7 @@ echo $sanPlay->getSanMovetext()->filtered($comments = true, $nags = false);
 
 ## Long Algebraic Notation (LAN)
 
-✨ Computers and graphical user interfaces (GUI) often prefer an easy-to-use, machine-readable format called Long Algebraic Notation.
-
-Remember, if reading the main line of the Sicilian Defense from a JavaScript application, you may want to use the LAN format rather than the PGN format. Chances are that the JavaScript chessboard will be using the LAN format for move generation.
+✨ The UCI protocol enables chess engines to communicate with user interfaces (UI) using Long Algebraic Notation (LAN) for moves.
 
 ```php
 use Chess\Variant\Classical\Board;
@@ -221,7 +212,7 @@ echo $board->getMovetext();
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-Also [Chess\Play\LanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/LanPlayTest.php) allows to easily play a bunch of LAN moves at once instead of one by one. As it name implies, this class is intended to play a LAN movetext.
+[Chess\Play\LanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/LanPlayTest.php) allows to play a bunch of LAN moves at once instead of one by one.
 
 ```php
 use Chess\Play\LanPlay;
@@ -246,7 +237,7 @@ P  P  P  .  .  P  P  P
 R  N  B  Q  K  B  .  R
 ```
 
-🎉 And, it's easy! The UCI protocol enables chess engines to communicate with user interfaces using LAN for moves.
+🎉 And, it's easy!
 
 ## Recursive Annotation Variation (RAV)
 
