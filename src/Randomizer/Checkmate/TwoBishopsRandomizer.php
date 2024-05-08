@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Variant\Classical\Randomizer\Checkmate;
+namespace Chess\Randomizer\Checkmate;
 
+use Chess\Randomizer\Randomizer;
 use Chess\Variant\Classical\PGN\AN\Square;
-use Chess\Variant\Classical\Randomizer\Randomizer;
 
 class TwoBishopsRandomizer extends Randomizer
 {

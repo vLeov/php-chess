@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Classical\Randomizer;
+namespace Chess\Randomizer;
 
 use Chess\Piece\K;
 use Chess\Piece\RType;
@@ -12,7 +12,7 @@ use Chess\Variant\Classical\Rule\CastlingRule;
 /**
  * Randomizer.
  *
- * Creates a \Chess\Variant\Classical\Board object with random pieces.
+ * Creates a chess board object with random pieces.
  *
  * @author Jordi Bassagaña
  * @license MIT

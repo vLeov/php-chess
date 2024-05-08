@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\Tests\Unit\Variant\Classical\Randomizer\Checkmate;
+namespace Chess\Tests\Unit\Randomizer\Checkmate;
 
-use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Randomizer\Checkmate\TwoBishopsRandomizer;
 use Chess\Tests\AbstractUnitTestCase;
-use Chess\Variant\Classical\Randomizer\Checkmate\TwoBishopsRandomizer;
+use Chess\Variant\Classical\PGN\AN\Color;
 
 class TwoBishopsRandomizerTest extends AbstractUnitTestCase
 {

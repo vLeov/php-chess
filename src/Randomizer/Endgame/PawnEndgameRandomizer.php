@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Variant\Classical\Randomizer\Endgame;
+namespace Chess\Randomizer\Endgame;
 
+use Chess\Randomizer\Randomizer;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Randomizer\Randomizer;
 
 class PawnEndgameRandomizer extends Randomizer
 {
