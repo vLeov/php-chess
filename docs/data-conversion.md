@@ -4,9 +4,7 @@
 
 ✨ FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings.
 
-At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoardFactory](https://github.com/chesslablab/php-chess/blob/main/tests/unit/FenToBoardFactoryTest.php) class according to the variants supported. As discussed in the [Home](https://php-chess.docs.chesslablab.org/) section, you may want to check out the self-explanatory tests for this class to learn more about it.
-
-> The unit tests are the best documentation. They contain hundreds of real examples on how to use the PHP Chess library.
+At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoardFactory](https://github.com/chesslablab/php-chess/blob/main/tests/unit/FenToBoardFactoryTest.php) class according to the variants supported.
 
 ```php
 use Chess\FenToBoardFactory;
@@ -23,7 +21,9 @@ echo $board->toFen();
 r1bqkb1r/pp2pppp/2np1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq -
 ```
 
-When a single parameter is passed in the form of a FEN string into the factory create method, it will be assumed that you want to create a classical chess board object. In this example the game history contains two moves only.
+When a single parameter is passed in the form of a FEN string into the factory create method, it will be assumed that you want to create a classical chess board object. As discussed in the [Home](https://php-chess.docs.chesslablab.org/) section, you may want to check out the self-explanatory tests for this class to learn more about it. The unit tests are the best documentation. They contain hundreds of real examples on how to use the PHP Chess library.
+
+In this example the game history contains two moves only.
 
 ```php
 var_dump($board->getHistory());
