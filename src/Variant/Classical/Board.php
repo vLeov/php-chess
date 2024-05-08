@@ -14,7 +14,6 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Castle;
@@ -31,98 +30,11 @@ use Chess\Variant\Classical\Rule\CastlingRule;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class Board extends \SplObjectStorage
+class Board extends AbstractPgnParser
 {
     use BoardObserverPieceTrait;
 
     const VARIANT = 'classical';
-
-    /**
-     * Current player's turn.
-     *
-     * @var string
-     */
-    private string $turn = '';
-
-    /**
-     * Captured pieces.
-     *
-     * @var array
-     */
-    private array $captures = [
-        Color::W => [],
-        Color::B => [],
-    ];
-
-    /**
-     * History.
-     *
-     * @var array
-     */
-    private array $history = [];
-
-    /**
-     * Castling rule.
-     *
-     * @var array
-     */
-    protected array $castlingRule = [];
-
-    /**
-     * Castling ability.
-     *
-     * @var string
-     */
-    protected string $castlingAbility = '';
-
-    /**
-     * Start FEN position.
-     *
-     * @var string
-     */
-    protected string $startFen = '';
-
-    /**
-     * Size.
-     *
-     * @var array
-     */
-    protected array $size;
-
-    /**
-     * Squares.
-     *
-     * @var array
-     */
-    protected array $sqs = [];
-
-    /**
-     * Move.
-     *
-     * @var \Chess\Variant\Classical\PGN\Move
-     */
-    protected Move $move;
-
-    /**
-     * Observers.
-     *
-     * @var array
-     */
-    private array $observers;
-
-    /**
-     * Space evaluation.
-     *
-     * @var object
-     */
-    private object $spaceEval;
-
-    /**
-     * Count squares.
-     *
-     * @var object
-     */
-    private object $sqCount;
 
     /**
      * Constructor.
@@ -311,33 +223,6 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Adds a new element to the captured pieces.
-     *
-     * @param string $color
-     * @param object $capture
-     * @return \Chess\Variant\Classical\Board
-     */
-    private function pushCapture(string $color, object $capture): Board
-    {
-        $this->captures[$color][] = $capture;
-
-        return $this;
-    }
-
-    /**
-     * Removes an element from the captured pieces.
-     *
-     * @param string $color
-     * @return \Chess\Variant\Classical\Board
-     */
-    private function popCapture(string $color): Board
-    {
-        array_pop($this->captures[$color]);
-
-        return $this;
-    }
-
-    /**
      * Returns the history.
      *
      * @return array|null
@@ -409,35 +294,6 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Adds a new element to the history.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Variant\Classical\Board
-     */
-    protected function pushHistory(AbstractPiece $piece): Board
-    {
-        $this->history[] = (object) [
-            'castlingAbility' => $this->castlingAbility,
-            'sq' => $piece->getSq(),
-            'move' => $piece->getMove(),
-        ];
-
-        return $this;
-    }
-
-    /**
-     * Removes an element from the history.
-     *
-     * @return \Chess\Variant\Classical\Board
-     */
-    protected function popHistory(): Board
-    {
-        array_pop($this->history);
-
-        return $this;
-    }
-
-    /**
      * Returns the first piece on the board matching the search criteria.
      *
      * @param string $color
@@ -504,196 +360,6 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Picks a piece to be moved.
-     *
-     * @param object $move
-     * @return array
-     */
-    private function pickPiece(object $move): array
-    {
-        $pieces = [];
-        foreach ($this->getPieces($move->color) as $piece) {
-            if ($piece->getId() === $move->id) {
-                if (strstr($piece->getSq(), $move->sq->current)) {
-                    $pieces[] = $piece->setMove($move);
-                }
-            }
-        }
-
-        return $pieces;
-    }
-
-    /**
-     * Captures a piece.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Variant\Classical\Board
-     */
-    private function capture(AbstractPiece $piece): Board
-    {
-        if (
-            $piece->getId() === Piece::P &&
-            $piece->getEnPassantSq() &&
-            !$this->getPieceBySq($piece->getMove()->sq->next)
-        ) {
-            if ($captured = $piece->enPassantPawn()) {
-                $capturedData = (object) [
-                    'id' => $captured->getId(),
-                    'sq' => $captured->getSq(),
-                ];
-            }
-        } elseif ($captured = $this->getPieceBySq($piece->getMove()->sq->next)) {
-            $capturedData = (object) [
-                'id' => $captured->getId(),
-                'sq' => $captured->getSq(),
-            ];
-        }
-        if ($captured) {
-            $capturingData = (object) [
-                'id' => $piece->getId(),
-                'sq' => $piece->getSq(),
-            ];
-            $piece->getId() !== Piece::R ?: $capturingData->type = $piece->getType();
-            $captured->getId() !== Piece::R ?: $capturedData->type = $captured->getType();
-            $capture = (object) [
-                'capturing' => $capturingData,
-                'captured' => $capturedData,
-            ];
-            $this->pushCapture($piece->getColor(), $capture);
-            $this->detach($captured);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Promotes a pawn.
-     *
-     * @param \Chess\Piece\P $pawn
-     * @return \Chess\Variant\Classical\Board
-     */
-    private function promote(P $pawn): Board
-    {
-        $this->detach($this->getPieceBySq($pawn->getMove()->sq->next));
-        if ($pawn->getMove()->newId === Piece::N) {
-            $this->attach(new N(
-                $pawn->getColor(),
-                $pawn->getMove()->sq->next,
-                $this->size
-            ));
-        } elseif ($pawn->getMove()->newId === Piece::B) {
-            $this->attach(new B(
-                $pawn->getColor(),
-                $pawn->getMove()->sq->next,
-                $this->size
-            ));
-        } elseif ($pawn->getMove()->newId === Piece::R) {
-            $this->attach(new R(
-                $pawn->getColor(),
-                $pawn->getMove()->sq->next,
-                $this->size,
-                RType::PROMOTED
-            ));
-        } else {
-            $this->attach(new Q(
-                $pawn->getColor(),
-                $pawn->getMove()->sq->next,
-                $this->size
-            ));
-        }
-
-        return $this;
-    }
-
-    /**
-     * Checks out if a move is syntactically valid.
-     *
-     * @param object $move
-     * @return bool true if the move is valid; otherwise false
-     */
-    protected function isValidMove(object $move): bool
-    {
-        if ($this->isAmbiguousCapture($move)) {
-            return false;
-        } elseif ($this->isAmbiguousMove($move)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Checks out if a move is ambiguous.
-     *
-     * @param object $move
-     * @return bool true if the move is not ambiguous; otherwise false
-     */
-    protected function isAmbiguousMove(object $move): bool
-    {
-        $ambiguous = [];
-        foreach ($this->pickPiece($move) as $piece) {
-            if (in_array($move->sq->next, $piece->sqs())) {
-                if (!$this->isPinned($piece)) {
-                    $ambiguous[] = $move->sq->next;
-                }
-            }
-        }
-
-        return count($ambiguous) > 1;
-    }
-
-    /**
-     * Checks out if a capture is ambiguous.
-     *
-     * @param object $move
-     * @return bool true if the capture is ambiguous; otherwise false
-     */
-    protected function isAmbiguousCapture(object $move): bool
-    {
-        if ($move->isCapture) {
-            if ($move->id === Piece::P) {
-                $enPassant = $this->history
-                    ? $this->enPassant()
-                    : explode(' ', $this->startFen)[3];
-                if (!$this->getPieceBySq($move->sq->next) && $enPassant !== $move->sq->next) {
-                    return true;
-                }
-            } else {
-                if (!$this->getPieceBySq($move->sq->next)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Checks out if a chess move is legal.
-     *
-     * @param object $move
-     * @return bool true if the move is legal; otherwise false
-     */
-    protected function isLegalMove(object $move): bool
-    {
-        foreach ($pieces = $this->pickPiece($move) as $piece) {
-            if ($piece->isMovable()) {
-                if (!$this->isPinned($piece)) {
-                    if ($piece->getMove()->type === $this->move->case(Move::CASTLE_SHORT)) {
-                        return $this->castle($piece, RType::CASTLE_SHORT);
-                    } elseif ($piece->getMove()->type === $this->move->case(Move::CASTLE_LONG)) {
-                        return $this->castle($piece, RType::CASTLE_LONG);
-                    } else {
-                        return $this->move($piece);
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Makes a move in PGN format.
      *
      * @param string $color
@@ -711,7 +377,7 @@ class Board extends \SplObjectStorage
     }
 
     /**
-     * Makes a move in long algebraic notation.
+     * Makes a move in LAN format.
      *
      * @param string $color
      * @param string $lan
@@ -779,7 +445,7 @@ class Board extends \SplObjectStorage
      *
      * @return bool
      */
-    private function afterPlayLan(): bool
+    protected function afterPlayLan(): bool
     {
         $end = $this->getHistory()[count($this->getHistory()) - 1];
         if ($this->isMate()) {
@@ -788,130 +454,6 @@ class Board extends \SplObjectStorage
             $end->move->pgn .= '+';
         }
         $this->getHistory()[count($this->getHistory()) - 1] = $end;
-
-        return true;
-    }
-
-    /**
-     * Castles the king.
-     *
-     * @param \Chess\Piece\K $king
-     * @param string $rookType
-     * @return bool true if the castle move can be made; otherwise false
-     */
-    private function castle(K $king, string $rookType): bool
-    {
-        if ($rook = $king->getCastleRook($rookType)) {
-            $this->detach($this->getPieceBySq($king->getSq()));
-            $this->attach(
-                new K(
-                    $king->getColor(),
-                    $this->castlingRule[$king->getColor()][Piece::K][rtrim($king->getMove()->pgn, '+')]['sq']['next'],
-                    $this->size
-                )
-             );
-            $this->detach($rook);
-            $this->attach(
-                new R(
-                    $rook->getColor(),
-                    $this->castlingRule[$king->getColor()][Piece::R][rtrim($king->getMove()->pgn, '+')]['sq']['next'],
-                    $this->size,
-                    $rook->getType()
-                )
-            );
-            $this->castlingAbility = CastlingAbility::castle($this->castlingAbility, $this->turn);
-            $this->pushHistory($king)->refresh();
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Updates the castle property.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece The moved piece
-     * @return \Chess\Variant\Classical\Board
-     */
-    private function updateCastle(AbstractPiece $piece): Board
-    {
-        if (CastlingAbility::can($this->castlingAbility, $this->turn)) {
-            if ($piece->getId() === Piece::K) {
-                $this->castlingAbility = CastlingAbility::remove(
-                    $this->castlingAbility,
-                    $this->turn,
-                    [Piece::K, Piece::Q]
-                );
-            } elseif ($piece->getId() === Piece::R) {
-                if ($piece->getType() === RType::CASTLE_SHORT) {
-                    $this->castlingAbility = CastlingAbility::remove(
-                        $this->castlingAbility,
-                        $this->turn,
-                        [Piece::K]
-                    );
-                } elseif ($piece->getType() === RType::CASTLE_LONG) {
-                    $this->castlingAbility = CastlingAbility::remove(
-                        $this->castlingAbility,
-                        $this->turn,
-                        [Piece::Q]
-                    );
-                }
-            }
-        }
-        $oppColor = Color::opp($this->turn);
-        if (CastlingAbility::can($this->castlingAbility, $oppColor)) {
-            if ($piece->getMove()->isCapture) {
-                if ($piece->getMove()->sq->next ===
-                    $this->castlingRule[$oppColor][Piece::R][Castle::SHORT]['sq']['current']
-                ) {
-                    $this->castlingAbility = CastlingAbility::remove(
-                        $this->castlingAbility,
-                        $oppColor,
-                        [Piece::K]
-                    );
-                } elseif (
-                    $piece->getMove()->sq->next ===
-                    $this->castlingRule[$oppColor][Piece::R][Castle::LONG]['sq']['current']
-                ) {
-                    $this->castlingAbility = CastlingAbility::remove(
-                        $this->castlingAbility,
-                        $oppColor,
-                        [Piece::Q]
-                    );
-                }
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Moves a piece.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @return bool true if the move can be made; otherwise false
-     */
-    private function move(AbstractPiece $piece): bool
-    {
-        if ($piece->getMove()->isCapture) {
-            $this->capture($piece);
-        }
-        if ($toDetach = $this->getPieceBySq($piece->getSq())) {
-            $this->detach($toDetach);
-        }
-        $class = "\\Chess\\Piece\\{$piece->getId()}";
-        $this->attach(new $class(
-            $piece->getColor(),
-            $piece->getMove()->sq->next,
-            $this->size,
-            $piece->getId() === Piece::R ? $piece->getType() : null
-        ));
-        if ($piece->getId() === Piece::P) {
-            if ($piece->isPromoted()) {
-                $this->promote($piece);
-            }
-        }
-        $this->updateCastle($piece)->pushHistory($piece)->refresh();
 
         return true;
     }
@@ -951,73 +493,6 @@ class Board extends \SplObjectStorage
         if ($this->history) {
             $this->history[count($this->history) - 1]->fen = $this->toFen();
         }
-    }
-
-    /**
-     * Checks out if a piece is pinned.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @return bool true if the piece is pinned; otherwise false
-     */
-    private function isPinned(AbstractPiece $piece): bool
-    {
-        $clone = unserialize(serialize($this));
-        if (
-            $piece->getMove()->type === $clone->move->case(Move::CASTLE_SHORT) &&
-            $clone->castle($piece, RType::CASTLE_SHORT)
-        ) {
-            $king = $clone->getPiece($piece->getColor(), Piece::K);
-        } elseif (
-            $piece->getMove()->type === $clone->move->case(Move::CASTLE_LONG) &&
-            $clone->castle($piece, RType::CASTLE_LONG)
-        ) {
-            $king = $clone->getPiece($piece->getColor(), Piece::K);
-        } else {
-            $clone->move($piece);
-            $king = $clone->getPiece($piece->getColor(), Piece::K);
-        }
-
-        return !empty($king->attackingPieces());
-    }
-
-    /**
-     * Checks out whether the current player is trapped.
-     *
-     * @return bool
-     */
-    private function isTrapped(): bool
-    {
-        $escape = 0;
-        foreach ($this->getPieces($this->turn) as $piece) {
-            foreach ($piece->sqs() as $sq) {
-                if ($piece->getId() === Piece::K) {
-                    if ($sq === $piece->sqCastleShort()) {
-                        $move = $this->move->toObj($this->turn, Castle::SHORT, $this->castlingRule);
-                    } elseif ($sq === $piece->sqCastleLong()) {
-                        $move = $this->move->toObj($this->turn, CASTLE::LONG, $this->castlingRule);
-                    } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
-                        $move = $this->move->toObj($this->turn, Piece::K."x$sq", $this->castlingRule);
-                    } elseif (!in_array($sq, $this->spaceEval->{$piece->oppColor()})) {
-                        $move = $this->move->toObj($this->turn, Piece::K.$sq, $this->castlingRule);
-                    }
-                } elseif ($piece->getId() === Piece::P) {
-                    if (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
-                        $move = $this->move->toObj($this->turn, $piece->getSqFile()."x$sq", $this->castlingRule);
-                    } else {
-                        $move = $this->move->toObj($this->turn, $sq, $this->castlingRule);
-                    }
-                } else {
-                    if (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
-                        $move = $this->move->toObj($this->turn, $piece->getId()."x$sq", $this->castlingRule);
-                    } else {
-                        $move = $this->move->toObj($this->turn, $piece->getId().$sq, $this->castlingRule);
-                    }
-                }
-                $escape += (int) !$this->isPinned($piece->setMove($move));
-            }
-        }
-
-        return $escape === 0;
     }
 
     /**
