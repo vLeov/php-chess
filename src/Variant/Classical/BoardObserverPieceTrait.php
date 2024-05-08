@@ -2,8 +2,6 @@
 
 namespace Chess\Variant\Classical;
 
-use Chess\Piece\AbstractPiece;
-
 trait BoardObserverPieceTrait
 {
     public function notifyPieces(): void
