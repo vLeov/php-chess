@@ -4,7 +4,9 @@
 
 ✨ FEN stands for Forsyth-Edwards Notation and is the standard way for describing chess positions using text strings.
 
-At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoardFactory](https://github.com/chesslablab/php-chess/blob/main/src/FenToBoardFactory.php) class according to the variants supported.
+At some point you'll definitely want to convert a FEN string into a chessboard object for further processing, and this can be done with the [Chess\FenToBoardFactory](https://github.com/chesslablab/php-chess/blob/main/tests/unit/FenToBoardFactoryTest.php) class according to the variants supported. As discussed in the [Home](https://php-chess.docs.chesslablab.org/) section, you may want to check out the self-explanatory tests for this class to learn more about it.
+
+> The unit tests are the best documentation. They contain hundreds of real examples on how to use the PHP Chess library.
 
 ```php
 use Chess\FenToBoardFactory;
