@@ -16,6 +16,16 @@ use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
+/**
+ * AbstractPgnParser
+ *
+ * The root class in the hierarchy of chess boards defines the getter and the
+ * setter methods, in addition to implementing the internal methods required to
+ * convert a PGN move in text format into a data structure. 
+ *
+ * @author Jordi Bassagaña
+ * @license MIT
+ */
 class AbstractPgnParser extends \SplObjectStorage
 {
     /**

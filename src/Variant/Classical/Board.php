@@ -223,7 +223,7 @@ class Board extends AbstractPgnParser
      *
      * @param string $color
      * @param string $pgn
-     * @return bool true if the move can be made; otherwise false
+     * @return bool
      */
     public function play(string $color, string $pgn): bool
     {
@@ -240,7 +240,7 @@ class Board extends AbstractPgnParser
      *
      * @param string $color
      * @param string $lan
-     * @return bool true if the move can be made; otherwise false
+     * @return bool
      */
     public function playLan(string $color, string $lan): bool
     {
