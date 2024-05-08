@@ -7,7 +7,6 @@ use Chess\Piece\RType;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * Randomizer.
@@ -19,30 +18,12 @@ use Chess\Variant\Classical\Rule\CastlingRule;
  */
 class Randomizer
 {
-    const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-
-    const RANKS = ['1', '2', '3', '4', '5', '6', '7', '8'];
-
     /**
      * Chess board.
      *
      * @var \Chess\Variant\Classical\Board
      */
     protected Board $board;
-
-    /**
-     * Castling rule.
-     *
-     * @var array
-     */
-    protected array $castlingRule;
-
-    /**
-     * The items to be added.
-     *
-     * @var array
-     */
-    protected array $items = [];
 
     /**
      * Constructor.
@@ -52,13 +33,9 @@ class Randomizer
      */
     public function __construct(string $turn, array $items = [])
     {
-        $this->castlingRule = (new CastlingRule())->getRule();
-
-        $this->items = $items;
-
+        $this->board = new Board();
         do {
-            $pieces = $this->kings();
-            $pieces = $this->rand($items, $pieces);
+            $pieces = $this->rand($items, $this->kings());
             $board = new Board($pieces);
         } while ($this->isAttackingKing($board));
 
@@ -66,7 +43,7 @@ class Randomizer
     }
 
     /**
-     * Returns the Chess\Board object.
+     * Returns the board.
      *
      * @return \Chess\Variant\Classical\Board
      */
@@ -82,16 +59,10 @@ class Randomizer
      */
     protected function sq(): string
     {
-        $files = self::FILES;
-        $ranks = self::RANKS;
+        $sqs = $this->board->getSqs();
+        shuffle($sqs);
 
-        shuffle($files);
-        shuffle($ranks);
-
-        $file = $files[0];
-        $rank = $ranks[0];
-
-        return $file . $rank;
+        return $sqs[0];
     }
 
     /**
@@ -109,7 +80,7 @@ class Randomizer
     }
 
     /**
-     * Creates a Chess\Board object with two randomly placed kings.
+     * Creates a board with two randomly placed kings.
      *
      * @return array
      */
@@ -129,8 +100,8 @@ class Randomizer
         );
 
         $pieces = [
-            new K(Color::W, $wSq, $this->castlingRule),
-            new K(Color::B, $bSq, $this->castlingRule),
+            new K(Color::W, $wSq, $this->board->getCastlingRule()),
+            new K(Color::B, $bSq, $this->board->getCastlingRule()),
         ];
 
         $this->board = new Board($pieces);
