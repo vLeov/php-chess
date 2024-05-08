@@ -97,166 +97,25 @@ class Board extends AbstractPgnParser
     }
 
     /**
-     * Returns the current turn.
-     *
-     * @return string
+     * Refreshes the state of the board.
      */
-    public function getTurn(): string
+    public function refresh(): void
     {
-        return $this->turn;
-    }
+        $this->turn = Color::opp($this->turn);
 
-    /**
-     * Sets the current turn.
-     *
-     * @param string $color
-     * @return \Chess\Variant\Classical\Board
-     */
-    public function setTurn(string $color): Board
-    {
-        $this->turn = Color::validate($color);
+        $this->sqCount = (new SqCount($this))->count();
 
-        return $this;
-    }
+        $this->detachPieces()
+            ->attachPieces()
+            ->notifyPieces();
 
-    /**
-     * Returns the square evaluation.
-     *
-     * @return object
-     */
-    public function getSqCount(): object
-    {
-        return $this->sqCount;
-    }
+        $this->spaceEval = (object) (new SpaceEval($this))->getResult();
 
-    /**
-     * Returns the space evaluation.
-     *
-     * @return object
-     */
-    public function getSpaceEval(): object
-    {
-        return $this->spaceEval;
-    }
+        $this->notifyPieces();
 
-    /**
-     * Returns the castling rule.
-     *
-     * @return array
-     */
-    public function getCastlingRule(): array
-    {
-        return $this->castlingRule;
-    }
-
-    /**
-     * Returns the castling ability.
-     *
-     * @return string
-     */
-    public function getCastlingAbility(): string
-    {
-        return $this->castlingAbility;
-    }
-
-    /**
-     * Returns the start FEN.
-     *
-     * @return string
-     */
-    public function getStartFen(): string
-    {
-        return $this->startFen;
-    }
-
-    /**
-     * Sets the start FEN.
-     *
-     * @param string $fen
-     * @return \Chess\Variant\Classical\Board
-     */
-    public function setStartFen(string $fen): Board
-    {
-        $this->startFen = $fen;
-
-        return $this;
-    }
-
-    /**
-     * Returns the size.
-     *
-     * @return array
-     */
-    public function getSize(): array
-    {
-        return $this->size;
-    }
-
-    /**
-     * Returns the squares.
-     *
-     * @return array
-     */
-    public function getSqs(): array
-    {
-        return $this->sqs;
-    }
-
-    /**
-     * Returns the move.
-     *
-     * @return \Chess\Variant\Classical\PGN\Move
-     */
-    public function getMove(): Move
-    {
-        return $this->move;
-    }
-
-    /**
-     * Returns the pieces captured by both players.
-     *
-     * @return array|null
-     */
-    public function getCaptures(): ?array
-    {
-        return $this->captures;
-    }
-
-    /**
-     * Returns the history.
-     *
-     * @return array|null
-     */
-    public function getHistory(): ?array
-    {
-        return $this->history;
-    }
-
-    /**
-     * Returns the en passant square.
-     *
-     * @return string
-     */
-    public function enPassant(): string
-    {
         if ($this->history) {
-            $last = array_slice($this->history, -1)[0];
-            if ($last->move->id === Piece::P) {
-                $prevFile = intval(substr($last->sq, 1));
-                $nextFile = intval(substr($last->move->sq->next, 1));
-                if ($last->move->color === Color::W) {
-                    if ($nextFile - $prevFile === 2) {
-                        $rank = $prevFile + 1;
-                        return $last->move->sq->current.$rank;
-                    }
-                } elseif ($prevFile - $nextFile === 2) {
-                    $rank = $prevFile - 1;
-                    return $last->move->sq->current.$rank;
-                }
-            }
+            $this->history[count($this->history) - 1]->fen = $this->toFen();
         }
-
-        return '-';
     }
 
     /**
@@ -474,28 +333,6 @@ class Board extends AbstractPgnParser
     }
 
     /**
-     * Refreshes the state of the board.
-     */
-    public function refresh(): void
-    {
-        $this->turn = Color::opp($this->turn);
-
-        $this->sqCount = (new SqCount($this))->count();
-
-        $this->detachPieces()
-            ->attachPieces()
-            ->notifyPieces();
-
-        $this->spaceEval = (object) (new SpaceEval($this))->getResult();
-
-        $this->notifyPieces();
-
-        if ($this->history) {
-            $this->history[count($this->history) - 1]->fen = $this->toFen();
-        }
-    }
-
-    /**
      * Checks out whether the current player is in check.
      *
      * @return bool
@@ -579,6 +416,33 @@ class Board extends AbstractPgnParser
      public function legal(string $sq): array
      {
          return array_values($this->getPieceBySq($sq)->sqs());
+     }
+
+     /**
+      * Returns the en passant square.
+      *
+      * @return string
+      */
+     public function enPassant(): string
+     {
+         if ($this->history) {
+             $last = array_slice($this->history, -1)[0];
+             if ($last->move->id === Piece::P) {
+                 $prevFile = intval(substr($last->sq, 1));
+                 $nextFile = intval(substr($last->move->sq->next, 1));
+                 if ($last->move->color === Color::W) {
+                     if ($nextFile - $prevFile === 2) {
+                         $rank = $prevFile + 1;
+                         return $last->move->sq->current.$rank;
+                     }
+                 } elseif ($prevFile - $nextFile === 2) {
+                     $rank = $prevFile - 1;
+                     return $last->move->sq->current.$rank;
+                 }
+             }
+         }
+
+         return '-';
      }
 
     /**

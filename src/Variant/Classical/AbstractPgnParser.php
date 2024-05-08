@@ -85,13 +85,6 @@ class AbstractPgnParser extends \SplObjectStorage
     protected Move $move;
 
     /**
-     * Observers.
-     *
-     * @var array
-     */
-    protected array $observers;
-
-    /**
      * Space evaluation.
      *
      * @var object
@@ -104,6 +97,142 @@ class AbstractPgnParser extends \SplObjectStorage
      * @var object
      */
     protected object $sqCount;
+
+    /**
+     * Returns the current turn.
+     *
+     * @return string
+     */
+    public function getTurn(): string
+    {
+        return $this->turn;
+    }
+
+    /**
+     * Sets the current turn.
+     *
+     * @param string $color
+     * @return \Chess\Variant\Classical\Board
+     */
+    public function setTurn(string $color): Board
+    {
+        $this->turn = Color::validate($color);
+
+        return $this;
+    }
+
+    /**
+     * Returns the pieces captured by both players.
+     *
+     * @return array|null
+     */
+    public function getCaptures(): ?array
+    {
+        return $this->captures;
+    }
+
+    /**
+     * Returns the history.
+     *
+     * @return array|null
+     */
+    public function getHistory(): ?array
+    {
+        return $this->history;
+    }
+
+    /**
+     * Returns the castling rule.
+     *
+     * @return array
+     */
+    public function getCastlingRule(): array
+    {
+        return $this->castlingRule;
+    }
+
+    /**
+     * Returns the castling ability.
+     *
+     * @return string
+     */
+    public function getCastlingAbility(): string
+    {
+        return $this->castlingAbility;
+    }
+
+    /**
+     * Returns the start FEN.
+     *
+     * @return string
+     */
+    public function getStartFen(): string
+    {
+        return $this->startFen;
+    }
+
+    /**
+     * Sets the start FEN.
+     *
+     * @param string $fen
+     * @return \Chess\Variant\Classical\Board
+     */
+    public function setStartFen(string $fen): Board
+    {
+        $this->startFen = $fen;
+
+        return $this;
+    }
+
+    /**
+     * Returns the size.
+     *
+     * @return array
+     */
+    public function getSize(): array
+    {
+        return $this->size;
+    }
+
+    /**
+     * Returns the squares.
+     *
+     * @return array
+     */
+    public function getSqs(): array
+    {
+        return $this->sqs;
+    }
+
+    /**
+     * Returns the move.
+     *
+     * @return \Chess\Variant\Classical\PGN\Move
+     */
+    public function getMove(): Move
+    {
+        return $this->move;
+    }
+
+    /**
+     * Returns the space evaluation.
+     *
+     * @return object
+     */
+    public function getSpaceEval(): object
+    {
+        return $this->spaceEval;
+    }
+
+    /**
+     * Returns the square evaluation.
+     *
+     * @return object
+     */
+    public function getSqCount(): object
+    {
+        return $this->sqCount;
+    }
 
     /**
      * Picks a piece from the board.

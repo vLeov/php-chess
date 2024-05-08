@@ -4,6 +4,13 @@ namespace Chess\Variant\Classical;
 
 trait BoardObserverPieceTrait
 {
+    /**
+     * Observers.
+     *
+     * @var array
+     */
+    protected array $observers;
+    
     public function notifyPieces(): void
     {
         foreach ($this->observers as $piece) {
