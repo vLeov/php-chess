@@ -127,25 +127,20 @@ class Board extends AbstractPgnParser
     {
         $movetext = '';
         if (isset($this->history[0]->move)) {
-            if ($this->history[0]->move->color === Color::W) {
-                $movetext = "1.{$this->history[0]->move->pgn}";
-            } else {
-                $movetext = '1' . Move::ELLIPSIS . "{$this->history[0]->move->pgn} ";
-            }
+            $movetext .= $this->history[0]->move->color === Color::W
+                ? "1.{$this->history[0]->move->pgn}"
+                : '1' . Move::ELLIPSIS . "{$this->history[0]->move->pgn} ";
         }
+
         for ($i = 1; $i < count($this->history); $i++) {
             if ($this->history[0]->move->color === Color::W) {
-                if ($i % 2 === 0) {
-                    $movetext .= ($i / 2 + 1) . ".{$this->history[$i]->move->pgn}";
-                } else {
-                    $movetext .= " {$this->history[$i]->move->pgn} ";
-                }
+                $movetext .= $i % 2 === 0
+                    ? ($i / 2 + 1) . ".{$this->history[$i]->move->pgn}"
+                    : " {$this->history[$i]->move->pgn} ";
             } else {
-                if ($i % 2 === 0) {
-                    $movetext .= " {$this->history[$i]->move->pgn} ";
-                } else {
-                    $movetext .= (ceil($i / 2) + 1) . ".{$this->history[$i]->move->pgn}";
-                }
+                $movetext .= $i % 2 === 0
+                    ? " {$this->history[$i]->move->pgn} "
+                    : (ceil($i / 2) + 1) . ".{$this->history[$i]->move->pgn}";
             }
         }
 
@@ -459,8 +454,7 @@ class Board extends AbstractPgnParser
         }
 
         foreach ($this->getPieces() as $piece) {
-            $sq = $piece->getSq();
-            list($file, $rank) = AsciiArray::fromAlgebraicToIndex($sq);
+            list($file, $rank) = AsciiArray::fromAlgebraicToIndex($piece->getSq());
             if ($flip) {
                 $diff = $this->size['files'] - $this->size['ranks'];
                 $file = $this->size['files'] - 1 - $file - $diff;
