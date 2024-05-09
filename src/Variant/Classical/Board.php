@@ -126,21 +126,21 @@ class Board extends AbstractPgnParser
     public function getMovetext(): string
     {
         $movetext = '';
-        if (isset($this->history[0]->move)) {
-            $movetext .= $this->history[0]->move->color === Color::W
-                ? "1.{$this->history[0]->move->pgn}"
-                : '1' . Move::ELLIPSIS . "{$this->history[0]->move->pgn} ";
-        }
-
-        for ($i = 1; $i < count($this->history); $i++) {
-            if ($this->history[0]->move->color === Color::W) {
-                $movetext .= $i % 2 === 0
-                    ? ($i / 2 + 1) . ".{$this->history[$i]->move->pgn}"
-                    : " {$this->history[$i]->move->pgn} ";
+        foreach ($this->history as $key => $val) {
+            if ($key === 0) {
+                $movetext .= $val->move->color === Color::W
+                    ? "1.{$val->move->pgn}"
+                    : '1' . Move::ELLIPSIS . "{$val->move->pgn} ";
             } else {
-                $movetext .= $i % 2 === 0
-                    ? " {$this->history[$i]->move->pgn} "
-                    : (ceil($i / 2) + 1) . ".{$this->history[$i]->move->pgn}";
+                if ($this->history[0]->move->color === Color::W) {
+                    $movetext .= $key % 2 === 0
+                        ? ($key / 2 + 1) . ".{$val->move->pgn}"
+                        : " {$val->move->pgn} ";
+                } else {
+                    $movetext .= $key % 2 === 0
+                        ? " {$val->move->pgn} "
+                        : (ceil($key / 2) + 1) . ".{$val->move->pgn}";
+                }
             }
         }
 
