@@ -21,7 +21,7 @@ echo $board->toFen();
 r1bqkb1r/pp2pppp/2np1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq -
 ```
 
-When a single parameter is passed in the form of a FEN string into the factory create method, it will be assumed that you want to create a classical chess board object. As discussed in the [Home](https://php-chess.docs.chesslablab.org/) section, you may want to check out the self-explanatory tests for this class to learn more about it. The unit tests are the best documentation. They contain hundreds of real examples on how to use the PHP Chess library.
+When a single parameter is passed in the form of a FEN string into the factory create method, it will be assumed that you want to create a classical chess board object. As discussed in the [Home](https://chesslablab.github.io/php-chess/) section, you may want to check out the self-explanatory tests for this class to learn more about it. The unit tests are the best documentation. They contain hundreds of real examples on how to use the PHP Chess library.
 
 In this example the game history contains two moves only.
 

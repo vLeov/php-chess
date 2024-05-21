@@ -10,7 +10,7 @@ A chess library for PHP.
 
 ### Documentation
 
-Read the latest docs [here](https://php-chess.docs.chesslablab.org/).
+Read the latest docs [here](https://chesslablab.github.io/php-chess/).
 
 ### License
 
