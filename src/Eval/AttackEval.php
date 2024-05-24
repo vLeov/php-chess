@@ -22,7 +22,7 @@ class AttackEval extends AbstractEval implements
     use ElaborateEvalTrait;
     use ExplainEvalTrait;
 
-    const NAME = 'Threat';
+    const NAME = 'Attack';
 
     /**
      * Constructor.

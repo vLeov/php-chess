@@ -20,7 +20,6 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Pressure',
             'King safety',
             'Protection',
-            'Threat',
             'Attack',
             'Discovered check',
             'Doubled pawn',
