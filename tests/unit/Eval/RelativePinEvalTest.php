@@ -34,7 +34,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     {
         $expectedResult = [
             'w' => 0,
-            'b' => 5.47,
+            'b' => 5.6,
         ];
 
         $expectedExplanation = [
@@ -61,12 +61,12 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     public function pinning_rook_pinned_knight_shielded_queen()
     {
         $expectedResult = [
-            'w' => 3.7,
+            'w' => 5.6,
             'b' => 0,
         ];
 
         $expectedExplanation = [
-            "White has a slight relative pin advantage.",
+            "White has a moderate relative pin advantage.",
         ];
 
         $expectedElaboration = [
@@ -89,7 +89,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     public function pinning_bishop_pinned_knight_shielded_queen()
     {
         $expectedResult = [
-            'w' => 5.47,
+            'w' => 5.6,
             'b' => 0,
         ];
 
@@ -117,7 +117,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     public function pinning_bishop_pinned_knight_shielded_rook()
     {
         $expectedResult = [
-            'w' => 1.77,
+            'w' => 1.9,
             'b' => 0,
         ];
 
@@ -145,7 +145,7 @@ class RelativePinEvalTest extends AbstractUnitTestCase
     public function pinning_bishop_pinned_knight_shielded_rook_and_attacked_rook()
     {
         $expectedResult = [
-            'w' => 1.77,
+            'w' => 1.9,
             'b' => 0,
         ];
 

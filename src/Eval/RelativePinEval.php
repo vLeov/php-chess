@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Eval\AttackEval;
+use Chess\Eval\PressureEval;
 use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
@@ -34,18 +34,23 @@ class RelativePinEval extends AbstractEval implements
             "has a total relative pin advantage",
         ];
 
-        $attackEval = (new AttackEval($this->board))->getResult();
+        $pressureEval = (new PressureEval($this->board))->getResult();
 
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() !== Piece::K && $piece->getId() !== Piece::Q) {
-                $clone = unserialize(serialize($this->board));
-                $clone->detach($clone->getPieceBySq($piece->getSq()));
-                $clone->refresh();
-                $newAttackEval = (new AttackEval($clone))->getResult();
-                $attackEvalDiff = $newAttackEval[$piece->oppColor()] - $attackEval[$piece->oppColor()];
-                if ($attackEvalDiff > 0) {
-                    $this->result[$piece->oppColor()] += round($attackEvalDiff, 2);
-                    $this->elaborate($piece);
+                if (!$piece->isPinned()) {
+                    $clone = unserialize(serialize($this->board));
+                    $clone->detach($clone->getPieceBySq($piece->getSq()));
+                    $clone->refresh();
+                    $newPressureEval = (new PressureEval($clone))->getResult();
+                    $arrayDiff = array_diff($newPressureEval[$piece->oppColor()] , $pressureEval[$piece->oppColor()]);
+                    foreach ($arrayDiff as $sq) {
+                        $diff = self::$value[$clone->getPieceBySq($sq)->getId()] - self::$value[$piece->getId()];
+                        if ($diff > 0) {
+                            $this->result[$piece->oppColor()] += round($diff, 2);
+                            $this->elaborate($piece);
+                        }
+                    }
                 }
             }
         }
