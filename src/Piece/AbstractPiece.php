@@ -147,12 +147,16 @@ abstract class AbstractPiece
      *
      * @return array|null
      */
-    public function defendingPieces(): ?array
+    public function defendingPieces($pinned = true): ?array
     {
         $defendingPieces = [];
         foreach ($this->board->getPieces($this->color) as $piece) {
             if (in_array($this->sq, $piece->defendedSqs())) {
-                $defendingPieces[] = $piece;
+                if ($pinned) {
+                    $defendingPieces[] = $piece;
+                } else {
+                    !$piece->isPinned() ? $defendingPieces[] = $piece : null;
+                }
             }
         }
 

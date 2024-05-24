@@ -287,13 +287,17 @@ class AttackEvalTest extends AbstractUnitTestCase
     public function c62_ruy_lopez_steinitz_defense_center_gambit_Bg4()
     {
         $expectedResult = [
-            'w' => 0,
+            'w' => 1,
             'b' => 0,
         ];
 
-        $expectedExplanation = [];
+        $expectedExplanation = [
+            "White has a slight threat advantage.",
+        ];
 
-        $expectedElaboration = [];
+        $expectedElaboration = [
+            "The e5-square is under threat of being attacked.",
+        ];
 
         $board = (new StrToBoard('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -'))
             ->create();
