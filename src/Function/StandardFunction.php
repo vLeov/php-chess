@@ -6,7 +6,6 @@ use Chess\Eval\AbsoluteForkEval;
 use Chess\Eval\AbsolutePinEval;
 use Chess\Eval\AbsoluteSkewerEval;
 use Chess\Eval\AdvancedPawnEval;
-use Chess\Eval\AttackEval;
 use Chess\Eval\BackwardPawnEval;
 use Chess\Eval\BadBishopEval;
 use Chess\Eval\BishopOutpostEval;
@@ -49,7 +48,7 @@ class StandardFunction
      * @var array
      */
     protected $eval = [
-        MaterialEval::class => 16,
+        MaterialEval::class => 19,
         CenterEval::class => 3,
         ConnectivityEval::class => 3,
         SpaceEval::class => 3,
@@ -57,7 +56,6 @@ class StandardFunction
         KingSafetyEval::class => 3,
         ProtectionEval::class => 3,
         ThreatEval::class => 3,
-        AttackEval::class => 3,
         DiscoveredCheckEval::class => 3,
         DoubledPawnEval::class => 3,
         PassedPawnEval::class => 3,
