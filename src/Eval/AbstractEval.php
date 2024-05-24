@@ -36,25 +36,4 @@ abstract class AbstractEval
     {
         return $this->result;
     }
-
-    protected function diffPieces(array $array1, array $array2): array
-    {
-        $diff = [];
-
-        $a = array_map(function($elem) {
-            return $elem->getSq();
-        }, $array1);
-
-        $b = array_map(function($elem) {
-            return $elem->getSq();
-        }, $array2);
-
-        foreach ($b as $sq) {
-            if (!in_array($sq, $a)) {
-                $diff[] = $this->board->getPieceBySq($sq);
-            }
-        }
-
-        return $diff;
-    }
 }

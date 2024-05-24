@@ -42,7 +42,7 @@ class DiscoveredCheckEval extends AbstractEval implements
                 $clone->refresh();
                 $checkingPieces = $this->board->checkingPieces();
                 $newCheckingPieces = $clone->checkingPieces();
-                $diffPieces = $this->diffPieces($checkingPieces, $newCheckingPieces);
+                $diffPieces = $this->board->diffPieces($checkingPieces, $newCheckingPieces);
                 foreach ($diffPieces as $diffPiece) {
                     if ($diffPiece->getColor() === $movingPiece->getColor()) {
                         $this->result[$movingPiece->getColor()] += self::$value[$movingPiece->getId()];
