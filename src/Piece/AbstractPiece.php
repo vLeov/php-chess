@@ -276,7 +276,12 @@ abstract class AbstractPiece
         return false;
     }
 
-    protected function isValidSq(string $sq)
+    /**
+     * Returns true if the square is valid.
+     *
+     * @return boolean
+     */
+    protected function isValidSq(string $sq): bool
     {
         if ($this->size === ClassicalSquare::SIZE) {
             return ClassicalSquare::validate($sq);
