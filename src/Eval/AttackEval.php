@@ -55,18 +55,18 @@ class AttackEval extends AbstractEval implements
                         Color::W => 0,
                         Color::B => 0,
                     ];
-                    $attackingPiece = current($piece->attackingPieces());
-                    while ($attackingPiece) {
+                    $nonPinnedAttackingPiece = current($piece->nonPinnedAttackingPieces());
+                    while ($nonPinnedAttackingPiece) {
                         $capturedPiece = $clone->getPieceBySq($piece->getSq());
-                        if ($clone->playLan($clone->getTurn(), $attackingPiece->getSq() . $piece->getSq())) {
-                            $threat[$attackingPiece->getColor()] += self::$value[$capturedPiece->getId()];
+                        if ($clone->playLan($clone->getTurn(), $nonPinnedAttackingPiece->getSq() . $piece->getSq())) {
+                            $threat[$nonPinnedAttackingPiece->getColor()] += self::$value[$capturedPiece->getId()];
                             if ($defendingPiece = current($piece->defendingPieces())) {
                                 $capturedPiece = $clone->getPieceBySq($piece->getSq());
                                 if ($clone->playLan($clone->getTurn(), $defendingPiece->getSq() . $piece->getSq())) {
                                     $threat[$defendingPiece->getColor()] += self::$value[$capturedPiece->getId()];
                                 }
                             }
-                            $attackingPiece = current($clone->getPieceBySq($piece->getSq())->attackingPieces());
+                            $nonPinnedAttackingPiece = current($clone->getPieceBySq($piece->getSq())->nonPinnedAttackingPieces());
                         }
                     }
                     $diff = $threat[Color::W] - $threat[Color::B];

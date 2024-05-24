@@ -138,6 +138,23 @@ abstract class AbstractPiece
     }
 
     /**
+     * Returns the opponent's non-pinned pieces that attack this piece.
+     *
+     * @return array|null
+     */
+    public function nonPinnedAttackingPieces(): ?array
+    {
+        $nonPinnedAttackingPieces = [];
+        foreach ($this->attackingPieces() as $piece) {
+            if (!$piece->isPinned()) {
+                $nonPinnedAttackingPieces[] = $piece;
+            }
+        }
+
+        return $nonPinnedAttackingPieces;
+    }
+
+    /**
      * Returns the pieces that are defending this piece.
      *
      * @return array|null

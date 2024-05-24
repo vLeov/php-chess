@@ -280,4 +280,28 @@ class AttackEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedExplanation, $attackEval->getExplanation());
         $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
+
+    /**
+     * @test
+     */
+    public function c62_ruy_lopez_steinitz_defense_center_gambit_Bg4()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
+
+        $board = (new StrToBoard('r2qkbnr/ppp2ppp/2np4/1B2p3/3PP1b1/5N2/PPP2PPP/RNBQK2R w KQkq -'))
+            ->create();
+
+        $attackEval = new AttackEval($board);
+
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
+    }
 }
