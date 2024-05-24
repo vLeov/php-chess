@@ -123,35 +123,23 @@ abstract class AbstractPiece
     /**
      * Returns the opponent's pieces that attack this piece.
      *
+     * @param bool $pinned
      * @return array|null
      */
-    public function attackingPieces(): ?array
+    public function attackingPieces($pinned = true): ?array
     {
         $attackingPieces = [];
         foreach ($this->board->getPieces($this->oppColor()) as $piece) {
             if (in_array($this->sq, $piece->sqs())) {
-                $attackingPieces[] = $piece;
+                if ($pinned) {
+                    $attackingPieces[] = $piece;
+                } else {
+                    !$piece->isPinned() ? $attackingPieces[] = $piece : null;
+                }
             }
         }
 
         return $attackingPieces;
-    }
-
-    /**
-     * Returns the opponent's non-pinned pieces that attack this piece.
-     *
-     * @return array|null
-     */
-    public function nonPinnedAttackingPieces(): ?array
-    {
-        $nonPinnedAttackingPieces = [];
-        foreach ($this->attackingPieces() as $piece) {
-            if (!$piece->isPinned()) {
-                $nonPinnedAttackingPieces[] = $piece;
-            }
-        }
-
-        return $nonPinnedAttackingPieces;
     }
 
     /**
