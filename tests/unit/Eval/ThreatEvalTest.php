@@ -3,11 +3,29 @@
 namespace Chess\Tests\Unit\Eval;
 
 use Chess\Eval\ThreatEval;
-use Chess\Variant\Classical\FEN\StrToBoard;
+use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\FEN\StrToBoard;
 
 class ThreatEvalTest extends AbstractUnitTestCase
 {
+    /**
+     * @test
+     */
+    public function start()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $board = new Board();
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
+    }
+
     /**
      * @test
      */
@@ -54,6 +72,40 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedResult, $threatEval->getResult());
         $this->assertSame($expectedExplanation, $threatEval->getExplanation());
         $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function B25()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
+        $board = (new SanPlay($B25))->validate()->getBoard();
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
+    }
+
+    /**
+     * @test
+     */
+    public function B56()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
+        $board = (new SanPlay($B56))->validate()->getBoard();
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
     }
 
     /**
@@ -127,5 +179,105 @@ class ThreatEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expectedResult, $threatEval->getResult());
         $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e5_Nf3_Nc6_Bb5_a6_Nxe5()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 6.53,
+        ];
+
+        $expectedExplanation = [
+            "Black has a total threat advantage.",
+        ];
+
+        $expectedElaboration = [
+            "The b5-square is under threat of being attacked.",
+            "The e5-square is under threat of being attacked.",
+        ];
+
+        $board = new Board();
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nc6');
+        $board->play('w', 'Bb5');
+        $board->play('b', 'a6');
+        $board->play('w', 'Nxe5');
+
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function e4_e5_Nf3_Nf6_a3_Nxe4_d3()
+    {
+        $expectedResult = [
+            'w' => 4.2,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [
+            "White has a moderate threat advantage.",
+        ];
+
+        $expectedElaboration = [
+            "The e5-square is under threat of being attacked.",
+            "The e4-square is under threat of being attacked.",
+        ];
+
+        $board = new Board();
+        $board->play('w', 'e4');
+        $board->play('b', 'e5');
+        $board->play('w', 'Nf3');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'a3');
+        $board->play('b', 'Nxe4');
+        $board->play('w', 'd3');
+
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function e4_Nf6_e5()
+    {
+        $expectedResult = [
+            'w' => 2.2,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [
+            "White has a slight threat advantage.",
+        ];
+
+        $expectedElaboration = [
+            "The f6-square is under threat of being attacked.",
+        ];
+
+        $board = new Board();
+        $board->play('w', 'e4');
+        $board->play('b', 'Nf6');
+        $board->play('w', 'e5');
+
+        $threatEval = new ThreatEval($board);
+
+        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
     }
 }
