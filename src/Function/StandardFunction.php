@@ -6,6 +6,7 @@ use Chess\Eval\AbsoluteForkEval;
 use Chess\Eval\AbsolutePinEval;
 use Chess\Eval\AbsoluteSkewerEval;
 use Chess\Eval\AdvancedPawnEval;
+use Chess\Eval\AttackEval;
 use Chess\Eval\BackwardPawnEval;
 use Chess\Eval\BadBishopEval;
 use Chess\Eval\BishopOutpostEval;
@@ -30,7 +31,6 @@ use Chess\Eval\RelativeForkEval;
 use Chess\Eval\RelativePinEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqOutpostEval;
-use Chess\Eval\ThreatEval;
 
 /**
  * StandardFunction
@@ -55,7 +55,7 @@ class StandardFunction
         PressureEval::class => 3,
         KingSafetyEval::class => 3,
         ProtectionEval::class => 3,
-        ThreatEval::class => 3,
+        AttackEval::class => 3,
         DiscoveredCheckEval::class => 3,
         DoubledPawnEval::class => 3,
         PassedPawnEval::class => 3,
