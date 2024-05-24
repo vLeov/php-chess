@@ -212,4 +212,14 @@ class K extends AbstractPiece
 
         return null;
     }
+
+    /**
+     * Returns false.
+     *
+     * @return boolean
+     */
+    public function isPinned(): bool
+    {
+        return false;
+    }
 }

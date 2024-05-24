@@ -286,4 +286,27 @@ abstract class AbstractPiece
 
         return false;
     }
+
+    /**
+     * Returns true if the piece is pinned.
+     *
+     * @return boolean
+     */
+    public function isPinned(): bool
+    {
+        $clone = unserialize(serialize($this->board));
+        $piece = $clone->getPieceBySq($this->getSq());
+        $clone->detach($piece);
+        $clone->refresh();
+        $checkingPieces = $this->board->checkingPieces();
+        $newCheckingPieces = $clone->checkingPieces();
+        $diffPieces = $this->board->diffPieces($checkingPieces, $newCheckingPieces);
+        foreach ($diffPieces as $diffPiece) {
+            if ($diffPiece->getColor() !== $piece->getColor()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
