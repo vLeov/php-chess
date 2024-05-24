@@ -3,9 +3,18 @@
 namespace Chess\Eval;
 
 use Chess\Piece\AbstractPiece;
-use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 
+/**
+ * Threat evaluation.
+ *
+ * Total piece value obtained from the squares under threat of being attacked.
+ *
+ * @author Jordi Bassagaña
+ * @license MIT
+ */
 class ThreatEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -15,11 +24,16 @@ class ThreatEval extends AbstractEval implements
 
     const NAME = 'Threat';
 
+    /**
+     * Constructor.
+     *
+     * @param \Chess\Variant\Classical\Board $board
+     */
     public function __construct(Board $board)
     {
         $this->board = $board;
 
-        $this->range = [1, 5];
+        $this->range = [0.8, 5];
 
         $this->subject = [
             'White',
@@ -32,16 +46,41 @@ class ThreatEval extends AbstractEval implements
             "has a total threat advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
-            $countAttacking = count($piece->attackingPieces());
-            $countDefending = count($piece->defendingPieces());
-            $diff = $countAttacking - $countDefending;
-            if ($diff > 0 && $countDefending > 0) {
-                $valueDefending = $this->valueDefending($piece->defendingPieces());
-                $valueAttacking = $this->valueAttacking($piece->attackingPieces());
-                if (($valueDefending + self::$value[$piece->getId()]) >= $valueAttacking) {
-                    $this->result[$piece->oppColor()] += $diff;
-                    $this->elaborate($piece);
+        if (!$this->board->isMate()) {
+            foreach ($this->board->getPieces() as $piece) {
+                if ($piece->getId() !== Piece::K) {
+                    $clone = unserialize(serialize($this->board));
+                    $clone->setTurn($piece->oppColor());
+                    $threat = [
+                        Color::W => 0,
+                        Color::B => 0,
+                    ];
+                    $attackingPiece = current($piece->attackingPieces());
+                    while ($attackingPiece) {
+                        $capturedPiece = $clone->getPieceBySq($piece->getSq());
+                        if ($clone->playLan($clone->getTurn(), $attackingPiece->getSq() . $piece->getSq())) {
+                            $threat[$attackingPiece->getColor()] += self::$value[$capturedPiece->getId()];
+                            if ($defendingPiece = current($piece->defendingPieces())) {
+                                $capturedPiece = $clone->getPieceBySq($piece->getSq());
+                                if ($clone->playLan($clone->getTurn(), $defendingPiece->getSq() . $piece->getSq())) {
+                                    $threat[$defendingPiece->getColor()] += self::$value[$capturedPiece->getId()];
+                                }
+                            }
+                            $attackingPiece = current($clone->getPieceBySq($piece->getSq())->attackingPieces());
+                        }
+                    }
+                    $diff = $threat[Color::W] - $threat[Color::B];
+                    if ($piece->oppColor() === Color::W) {
+                        if ($diff > 0) {
+                            $this->result[Color::W] += $diff;
+                            $this->elaborate($piece);
+                        }
+                    } else {
+                        if ($diff < 0) {
+                            $this->result[Color::B] += abs($diff);
+                            $this->elaborate($piece);
+                        }
+                    }
                 }
             }
         }
@@ -49,32 +88,13 @@ class ThreatEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
-    private function valueDefending(array $pieces)
-    {
-        $sum = 0;
-        foreach ($pieces as $piece) {
-            $sum += self::$value[$piece->getId()];
-        }
-
-        return $sum;
-    }
-
-    private function valueAttacking(array $pieces)
-    {
-        $values = [];
-        foreach ($pieces as $piece) {
-            $values[] = self::$value[$piece->getId()];
-        }
-        sort($values);
-        array_pop($values);
-
-        return array_sum($values);
-    }
-
+    /**
+     * Elaborate on the result.
+     *
+     * @param \Chess\Piece\AbstractPiece $piece
+     */
     private function elaborate(AbstractPiece $piece): void
     {
-        $phrase = PiecePhrase::create($piece);
-
-        $this->elaboration[] = ucfirst("$phrase is being threatened and may be lost if not defended properly.");
+        $this->elaboration[] = "The {$piece->getSq()}-square is under threat of being attacked.";
     }
 }
