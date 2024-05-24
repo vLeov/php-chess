@@ -8,14 +8,14 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 /**
- * Threat evaluation.
+ * Attack evaluation.
  *
  * Total piece value obtained from the squares under threat of being attacked.
  *
  * @author Jordi Bassagaña
  * @license MIT
  */
-class ThreatEval extends AbstractEval implements
+class AttackEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
 {

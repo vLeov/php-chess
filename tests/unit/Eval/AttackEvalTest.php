@@ -2,13 +2,13 @@
 
 namespace Chess\Tests\Unit\Eval;
 
-use Chess\Eval\ThreatEval;
+use Chess\Eval\AttackEval;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\FEN\StrToBoard;
 
-class ThreatEvalTest extends AbstractUnitTestCase
+class AttackEvalTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -21,9 +21,9 @@ class ThreatEvalTest extends AbstractUnitTestCase
         ];
 
         $board = new Board();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedResult, $attackEval->getResult());
     }
 
     /**
@@ -45,11 +45,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new StrToBoard('r1bqkbnr/5ppp/p1npp3/1p6/2B1P3/2N2N2/PP2QPPP/R1B2RK1 w kq b6'))->create();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
-        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -67,11 +67,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $expectedElaboration = [];
 
         $board = (new StrToBoard('r1bqkbnr/5ppp/p1npp3/1p6/4P3/1BN2N2/PP2QPPP/R1B2RK1 b kq -'))->create();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
-        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -86,9 +86,9 @@ class ThreatEvalTest extends AbstractUnitTestCase
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
         $board = (new SanPlay($B25))->validate()->getBoard();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedResult, $attackEval->getResult());
     }
 
     /**
@@ -103,9 +103,9 @@ class ThreatEvalTest extends AbstractUnitTestCase
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
         $board = (new SanPlay($B56))->validate()->getBoard();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
+        $this->assertSame($expectedResult, $attackEval->getResult());
     }
 
     /**
@@ -127,11 +127,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new StrToBoard('r1bqkbnr/5ppp/p1npp3/1n6/2B1P3/2N2N2/PP2QPPP/R1B2RK1 w kq b6'))->create();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
-        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -153,11 +153,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new StrToBoard('6k1/6p1/2n2b2/8/3P4/5N2/2K5/8 w - -'))->create();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
-        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -175,10 +175,10 @@ class ThreatEvalTest extends AbstractUnitTestCase
         ];
 
         $board = (new StrToBoard('2r3k1/8/8/2q5/8/8/2N5/1K6 w - -'))->create();
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
     }
 
     /**
@@ -209,11 +209,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $board->play('b', 'a6');
         $board->play('w', 'Nxe5');
 
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
-        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -244,11 +244,11 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $board->play('b', 'Nxe4');
         $board->play('w', 'd3');
 
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
-        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 
     /**
@@ -274,10 +274,10 @@ class ThreatEvalTest extends AbstractUnitTestCase
         $board->play('b', 'Nf6');
         $board->play('w', 'e5');
 
-        $threatEval = new ThreatEval($board);
+        $attackEval = new AttackEval($board);
 
-        $this->assertSame($expectedResult, $threatEval->getResult());
-        $this->assertSame($expectedExplanation, $threatEval->getExplanation());
-        $this->assertSame($expectedElaboration, $threatEval->getElaboration());
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
 }
