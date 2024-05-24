@@ -42,7 +42,6 @@ Listed below are the chess heuristics implemented in PHP Chess.
 | Relative pin | [Chess\Eval\RelativePinEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/RelativePinEvalTest.php) |
 | Space | [Chess\Eval\SpaceEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/SpaceEvalTest.php) |
 | Square outpost | [Chess\Eval\SqOutpostEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/SqOutpostEvalTest.php) |
-| Threat | [Chess\Eval\ThreatEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/ThreatEvalTest.php) |
 
 The evaluation features are used in two heuristics classes: [Chess\Heuristics\FenHeuristics](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Heuristics/FenHeuristicsTest.php) and [Chess\Heuristics\SanHeuristics](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Heuristics/SanHeuristicsTest.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
 
@@ -75,28 +74,27 @@ Array
             [4] => Pressure
             [5] => King safety
             [6] => Protection
-            [7] => Threat
-            [8] => Attack
-            [9] => Discovered check
-            [10] => Doubled pawn
-            [11] => Passed pawn
-            [12] => Advanced pawn
-            [13] => Far-advanced pawn
-            [14] => Isolated pawn
-            [15] => Backward pawn
-            [16] => Defense
-            [17] => Absolute skewer
-            [18] => Absolute pin
-            [19] => Relative pin
-            [20] => Absolute fork
-            [21] => Relative fork
-            [22] => Outpost square
-            [23] => Knight outpost
-            [24] => Bishop outpost
-            [25] => Bishop pair
-            [26] => Bad bishop
-            [27] => Diagonal opposition
-            [28] => Direct opposition
+            [7] => Attack
+            [8] => Discovered check
+            [9] => Doubled pawn
+            [10] => Passed pawn
+            [11] => Advanced pawn
+            [12] => Far-advanced pawn
+            [13] => Isolated pawn
+            [14] => Backward pawn
+            [15] => Defense
+            [16] => Absolute skewer
+            [17] => Absolute pin
+            [18] => Relative pin
+            [19] => Absolute fork
+            [20] => Relative fork
+            [21] => Outpost square
+            [22] => Knight outpost
+            [23] => Bishop outpost
+            [24] => Bishop pair
+            [25] => Bad bishop
+            [26] => Diagonal opposition
+            [27] => Direct opposition
         )
 
     [balance] => Array
@@ -129,7 +127,6 @@ Array
             [25] => 0
             [26] => 0
             [27] => 0
-            [28] => 0
         )
 
 )
