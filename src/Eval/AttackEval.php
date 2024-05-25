@@ -10,7 +10,9 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 /**
  * Attack evaluation.
  *
- * Total piece value obtained from the squares under threat of being attacked.
+ * Piece value obtained from the squares under threat of being attacked. A
+ * sequence of moves will be played to determine if a capture results in a gain
+ * of material.
  *
  * @author Jordi Bassagaña
  * @license MIT
