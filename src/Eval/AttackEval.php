@@ -46,12 +46,16 @@ class AttackEval extends AbstractEval implements
             "has a total threat advantage",
         ];
 
-        if (!$this->board->isCheck() && !$this->board->isMate()) {
+        if (
+            !$this->board->isCheck() &&
+            !$this->board->isMate() &&
+            !$this->board->isStalemate()
+        ) {
             foreach ($this->board->getPieces() as $piece) {
                 if ($piece->getId() !== Piece::K) {
                     $clone = unserialize(serialize($this->board));
                     $clone->setTurn($piece->oppColor());
-                    $threat = [
+                    $attack = [
                         Color::W => 0,
                         Color::B => 0,
                     ];
@@ -59,17 +63,17 @@ class AttackEval extends AbstractEval implements
                     while ($attackingPiece) {
                         $capturedPiece = $clone->getPieceBySq($piece->getSq());
                         if ($clone->playLan($clone->getTurn(), $attackingPiece->getSq() . $piece->getSq())) {
-                            $threat[$attackingPiece->getColor()] += self::$value[$capturedPiece->getId()];
+                            $attack[$attackingPiece->getColor()] += self::$value[$capturedPiece->getId()];
                             if ($defendingPiece = current($piece->defendingPieces($pinned = false))) {
                                 $capturedPiece = $clone->getPieceBySq($piece->getSq());
                                 if ($clone->playLan($clone->getTurn(), $defendingPiece->getSq() . $piece->getSq())) {
-                                    $threat[$defendingPiece->getColor()] += self::$value[$capturedPiece->getId()];
+                                    $attack[$defendingPiece->getColor()] += self::$value[$capturedPiece->getId()];
                                 }
                             }
                             $attackingPiece = current($clone->getPieceBySq($piece->getSq())->attackingPieces($pinned = false));
                         }
                     }
-                    $diff = $threat[Color::W] - $threat[Color::B];
+                    $diff = $attack[Color::W] - $attack[Color::B];
                     if ($piece->oppColor() === Color::W) {
                         if ($diff > 0) {
                             $this->result[Color::W] += $diff;
