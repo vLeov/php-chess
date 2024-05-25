@@ -308,4 +308,28 @@ class AttackEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedExplanation, $attackEval->getExplanation());
         $this->assertSame($expectedElaboration, $attackEval->getElaboration());
     }
+
+    /**
+     * @test
+     */
+    public function g3_in_check()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
+
+        $board = (new StrToBoard('8/p4pk1/6b1/3P1PQ1/8/P1q3K1/2p3B1/8 w - -'))
+            ->create();
+
+        $attackEval = new AttackEval($board);
+
+        $this->assertSame($expectedResult, $attackEval->getResult());
+        $this->assertSame($expectedExplanation, $attackEval->getExplanation());
+        $this->assertSame($expectedElaboration, $attackEval->getElaboration());
+    }
 }

@@ -50,4 +50,29 @@ class FenExplanationTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $paragraph);
     }
+
+    /**
+     * @test
+     */
+    public function g3_in_check()
+    {
+        $expected = [
+            "Black is totally controlling the center.",
+            "The black pieces are significantly better connected.",
+            "Black has a moderate space advantage.",
+            "The black player is pressuring a little bit more squares than its opponent.",
+            "The white pieces are approaching the other side's king.",
+            "Black has a slight protection advantage.",
+            "White has a slight advanced pawn advantage.",
+            "Black has a slight far advanced pawn advantage.",
+            "White has a slight absolute pin advantage.",
+            "White has a slight outpost advantage.",
+        ];
+
+        $board = FenToBoardFactory::create('8/p4pk1/6b1/3P1PQ1/8/P1q3K1/2p3B1/8 w - -');
+
+        $paragraph = (new FenExplanation($board))->getParagraph();
+
+        $this->assertSame($expected, $paragraph);
+    }
 }

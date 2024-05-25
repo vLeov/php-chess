@@ -41,10 +41,8 @@ class PgnEvaluationTest extends AbstractUnitTestCase
             "White has a total space advantage.",
             "The white pieces are timidly approaching the other side's king.",
             "Black has a decisive protection advantage.",
-            "Black has a moderate threat advantage.",
             "The bishop on e6 is unprotected.",
-            "The e6-square is under threat of being attacked.",
-            "Overall, 6 heuristic evaluation features are favoring White while 2 are favoring Black.",
+            "Overall, 6 heuristic evaluation features are favoring White while 1 is favoring Black.",
         ];
 
         $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');

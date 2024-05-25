@@ -46,7 +46,7 @@ class AttackEval extends AbstractEval implements
             "has a total threat advantage",
         ];
 
-        if (!$this->board->isMate()) {
+        if (!$this->board->isCheck() && !$this->board->isMate()) {
             foreach ($this->board->getPieces() as $piece) {
                 if ($piece->getId() !== Piece::K) {
                     $clone = unserialize(serialize($this->board));
