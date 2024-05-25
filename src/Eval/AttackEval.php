@@ -11,8 +11,8 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * Attack evaluation.
  *
  * Piece value obtained from the squares under threat of being attacked. A
- * sequence of moves will be played to determine if a capture results in a gain
- * of material.
+ * sequence of moves will be played in a cloned chess board to determine if a
+ * capture can result in a gain of material.
  *
  * @author Jordi Bassagaña
  * @license MIT
