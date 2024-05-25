@@ -70,10 +70,8 @@ class ProtectionEval extends AbstractEval implements
     {
         $phrase = PiecePhrase::create($piece);
         $phrase = ucfirst("$phrase is unprotected.");
-        if (!in_array($phrase, $this->explanation)) {
+        if (!in_array($phrase, $this->elaboration)) {
             $this->elaboration[] = $phrase;
         }
-
-        $this->elaboration = array_unique($this->elaboration);
     }
 }
