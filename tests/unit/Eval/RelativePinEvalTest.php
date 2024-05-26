@@ -190,4 +190,52 @@ class RelativePinEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
         $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
     }
+
+    /**
+     * @test
+     */
+    public function b5_knight()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
+
+        $board = (new StrToBoard('rrb3k1/3qn1bp/3p4/1NpP4/P7/1PN1Bp1P/R2Q1P1K/1R6 w - -'))
+            ->create();
+
+        $relativePinEval = new RelativePinEval($board);
+
+        $this->assertSame($expectedResult, $relativePinEval->getResult());
+        $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function f5_pawn()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
+
+        $board = (new StrToBoard('8/7p/1pnnk3/3N1p2/2K2P2/P2B3P/8/8 w - -'))
+            ->create();
+
+        $relativePinEval = new RelativePinEval($board);
+
+        $this->assertSame($expectedResult, $relativePinEval->getResult());
+        $this->assertSame($expectedExplanation, $relativePinEval->getExplanation());
+        $this->assertSame($expectedElaboration, $relativePinEval->getElaboration());
+    }
 }
