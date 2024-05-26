@@ -37,7 +37,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a slight threat advantage.",
+            "Black has a slight attack advantage.",
         ];
 
         $expectedElaboration = [
@@ -119,7 +119,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a slight threat advantage.",
+            "White has a slight attack advantage.",
         ];
 
         $expectedElaboration = [
@@ -145,7 +145,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a slight threat advantage.",
+            "Black has a slight attack advantage.",
         ];
 
         $expectedElaboration = [
@@ -171,7 +171,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a moderate threat advantage.",
+            "Black has a moderate attack advantage.",
         ];
 
         $board = (new StrToBoard('2r3k1/8/8/2q5/8/8/2N5/1K6 w - -'))->create();
@@ -192,7 +192,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a total threat advantage.",
+            "Black has a total attack advantage.",
         ];
 
         $expectedElaboration = [
@@ -227,7 +227,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a moderate threat advantage.",
+            "White has a moderate attack advantage.",
         ];
 
         $expectedElaboration = [
@@ -262,7 +262,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a slight threat advantage.",
+            "White has a slight attack advantage.",
         ];
 
         $expectedElaboration = [
@@ -292,7 +292,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White has a slight threat advantage.",
+            "White has a slight attack advantage.",
         ];
 
         $expectedElaboration = [

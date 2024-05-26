@@ -17,7 +17,7 @@ class PgnEvaluationTest extends AbstractUnitTestCase
         $expected = [
             "Black has a slight space advantage.",
             "White has a slight protection advantage.",
-            "White has a slight threat advantage.",
+            "White has a slight attack advantage.",
             "The pawn on c5 is unprotected.",
             "The c5-square is under threat of being attacked.",
             "Overall, 3 heuristic evaluation features are favoring White while 2 are favoring Black.",
