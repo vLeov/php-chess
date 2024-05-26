@@ -8,6 +8,16 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
+/**
+ * Relative pin evaluation.
+ *
+ * Pieces are removed from a cloned chess board to determine if they are pinned
+ * relatively. If so, when removed from the board, the attacking piece will be
+ * pressuring a new square containing a more valuable piece.
+ *
+ * @author Jordi Bassagaña
+ * @license MIT
+ */
 class RelativePinEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -17,11 +27,16 @@ class RelativePinEval extends AbstractEval implements
 
     const NAME = 'Relative pin';
 
+    /**
+     * Constructor.
+     *
+     * @param \Chess\Variant\Classical\Board $board
+     */
     public function __construct(Board $board)
     {
         $this->board = $board;
 
-        $this->range = [1, 9];
+        $this->range = [1, 6.8];
 
         $this->subject = [
             'White',
@@ -39,16 +54,27 @@ class RelativePinEval extends AbstractEval implements
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->getId() !== Piece::K && $piece->getId() !== Piece::Q) {
                 if (!$piece->isPinned()) {
+                    $attackingPieces = $piece->attackingPieces($pinned = false);
                     $clone = unserialize(serialize($this->board));
                     $clone->detach($clone->getPieceBySq($piece->getSq()));
                     $clone->refresh();
                     $newPressureEval = (new PressureEval($clone))->getResult();
-                    $arrayDiff = array_diff($newPressureEval[$piece->oppColor()] , $pressureEval[$piece->oppColor()]);
+                    $arrayDiff = array_diff(
+                        $newPressureEval[$piece->oppColor()],
+                        $pressureEval[$piece->oppColor()]
+                    );
                     foreach ($arrayDiff as $sq) {
-                        $diff = self::$value[$clone->getPieceBySq($sq)->getId()] - self::$value[$piece->getId()];
-                        if ($diff > 0) {
-                            $this->result[$piece->oppColor()] += round($diff, 2);
-                            $this->elaborate($piece);
+                        foreach ($clone->getPieceBySq($sq)->attackingPieces($pinned = false) as $newAttackingPiece) {
+                            foreach ($attackingPieces as $attackingPiece) {
+                                if ($newAttackingPiece->getSq() === $attackingPiece->getSq()) {
+                                    $valDiff = abs(self::$value[$attackingPiece->getId()] -
+                                        self::$value[$clone->getPieceBySq($sq)->getId()]);
+                                    if ($valDiff > 0) {
+                                        $this->result[$piece->oppColor()] += round($valDiff, 2);
+                                        $this->elaborate($piece);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -58,6 +84,11 @@ class RelativePinEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
+    /**
+     * Elaborate on the result.
+     *
+     * @param \Chess\Piece\AbstractPiece $piece
+     */
     private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);
