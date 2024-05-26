@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Exception\PlayException;
 use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
@@ -73,6 +74,8 @@ class AttackEval extends AbstractEval implements
                                 }
                             }
                             $attackingPiece = current($clone->getPieceBySq($piece->getSq())->attackingPieces($pinned = false));
+                        } else {
+                            throw new PlayException();
                         }
                     }
                     $diff = $attack[Color::W] - $attack[Color::B];
