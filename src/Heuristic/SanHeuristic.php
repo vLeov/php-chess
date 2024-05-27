@@ -3,6 +3,7 @@
 namespace Chess\Heuristic;
 
 use Chess\EvalFactory;
+use Chess\Eval\AbstractEval;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
@@ -70,38 +71,52 @@ class SanHeuristic extends SanPlay
      */
     protected function calc(): SanHeuristic
     {
+        $this->result[] = $this->item(EvalFactory::create($this->name, $this->board));
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
                 if ($this->board->play($this->board->getTurn(), $val)) {
-                    $eval = EvalFactory::create($this->name, $this->board);
-                    $result = $eval->getResult();
-                    if (is_array($result[Color::W])) {
-                        if ($eval instanceof InverseEvalInterface) {
-                            $this->result[] = [
-                                Color::W => count($result[Color::B]),
-                                Color::B => count($result[Color::W]),
-                            ];
-                        } else {
-                            $this->result[] = [
-                                Color::W => count($result[Color::W]),
-                                Color::B => count($result[Color::B]),
-                            ];
-                        }
-                    } else {
-                        if ($eval instanceof InverseEvalInterface) {
-                            $this->result[] = [
-                                Color::W => $result[Color::B],
-                                Color::B => $result[Color::W],
-                            ];
-                        } else {
-                            $this->result[] = $result;
-                        }
-                    }
+                    $this->result[] = $this->item(EvalFactory::create($this->name, $this->board));
                 }
             }
         }
 
         return $this;
+    }
+
+    /**
+     * Returns an item.
+     *
+     * @param \Chess\Eval\AbstractEval
+     * @return array
+     */
+    protected function item(AbstractEval $eval): array
+    {
+        $result = $eval->getResult();
+
+        if (is_array($result[Color::W])) {
+            if ($eval instanceof InverseEvalInterface) {
+                $item = [
+                    Color::W => count($result[Color::B]),
+                    Color::B => count($result[Color::W]),
+                ];
+            } else {
+                $item = [
+                    Color::W => count($result[Color::W]),
+                    Color::B => count($result[Color::B]),
+                ];
+            }
+        } else {
+            if ($eval instanceof InverseEvalInterface) {
+                $item = [
+                    Color::W => $result[Color::B],
+                    Color::B => $result[Color::W],
+                ];
+            } else {
+                $item = $result;
+            }
+        }
+
+        return $item;
     }
 
     /**
