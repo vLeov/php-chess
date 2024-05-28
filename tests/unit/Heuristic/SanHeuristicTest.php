@@ -20,7 +20,7 @@ class SanHeuristicTest extends AbstractUnitTestCase
 
         $balance = (new SanHeuristic($name, $movetext))->getBalance();
 
-        $expected = [ 0.0, 8.0, 2.0, 4.0, -11.0 ];
+        $expected = [ 0, 1.0, 0.25, 0.50, -1.0 ];
 
         $this->assertSame($expected, $balance);
     }
@@ -40,7 +40,7 @@ class SanHeuristicTest extends AbstractUnitTestCase
 
         $balance = (new SanHeuristic($name, $board->getMovetext()))->getBalance();
 
-        $expected = [ 0.0, 8.0 ];
+        $expected = [ 0, 1.0 ];
 
         $this->assertSame($expected, $balance);
     }
