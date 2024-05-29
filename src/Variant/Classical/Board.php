@@ -579,22 +579,8 @@ class Board extends AbstractPgnParser
      */
      public function diffPieces(array $array1, array $array2): array
      {
-         $diff = [];
-
-         $a = array_map(function($elem) {
-             return $elem->getSq();
-         }, $array1);
-
-         $b = array_map(function($elem) {
-             return $elem->getSq();
-         }, $array2);
-
-         foreach ($b as $sq) {
-             if (!in_array($sq, $a)) {
-                 $diff[] = $this->getPieceBySq($sq);
-             }
-         }
-
-         return $diff;
+        return array_udiff($array2, $array1, function ($b, $a) {
+            return $a->getSq() <=> $b->getSq();
+        });
      }
 }
