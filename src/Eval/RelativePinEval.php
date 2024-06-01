@@ -57,7 +57,7 @@ class RelativePinEval extends AbstractEval implements
                 $piece->getId() !== Piece::Q &&
                 !$piece->isPinned()
             ) {
-                $attackingPieces = $piece->attackingPieces($pinned = false);
+                $attackingPieces = $piece->attackingPieces();
                 $clone = unserialize(serialize($this->board));
                 $clone->detach($clone->getPieceBySq($piece->getSq()));
                 $clone->refresh();
@@ -67,7 +67,7 @@ class RelativePinEval extends AbstractEval implements
                     $pressureEval[$piece->oppColor()]
                 );
                 foreach ($arrayDiff as $sq) {
-                    foreach ($clone->getPieceBySq($sq)->attackingPieces($pinned = false) as $newAttackingPiece) {
+                    foreach ($clone->getPieceBySq($sq)->attackingPieces() as $newAttackingPiece) {
                         foreach ($attackingPieces as $attackingPiece) {
                             if ($newAttackingPiece->getSq() === $attackingPiece->getSq()) {
                                 $valDiff = self::$value[$attackingPiece->getId()] -
