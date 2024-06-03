@@ -42,6 +42,8 @@ use Chess\Eval\SqOutpostEval;
  */
 class StandardFunction
 {
+    const NAME = 'Standard';
+
     /**
      * The evaluation features.
      *
