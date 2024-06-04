@@ -37,17 +37,21 @@ class CheckmateInOneEval extends AbstractEval implements ExplainEvalInterface
             "could checkmate in one move",
         ];
 
-        $cloneA = unserialize(serialize($this->board));
-        $cloneA->setTurn(Color::opp($this->board->getTurn()));
-        foreach ($cloneA->getPieces(Color::opp($this->board->getTurn())) as $piece) {
-            foreach ($piece->sqs() as $sq) {
-                $cloneB = unserialize(serialize($cloneA));
-                if ($cloneB->playLan($cloneB->getTurn(), $piece->getSq() . $sq)) {
-                    if ($cloneB->isMate()) {
-                        $this->result[$piece->getColor()] = 1;
+        try {
+            $cloneA = unserialize(serialize($this->board));
+            $cloneA->setTurn(Color::opp($this->board->getTurn()));
+            foreach ($cloneA->getPieces(Color::opp($this->board->getTurn())) as $piece) {
+                foreach ($piece->sqs() as $sq) {
+                    $cloneB = unserialize(serialize($cloneA));
+                    if ($cloneB->playLan($cloneB->getTurn(), $piece->getSq() . $sq)) {
+                        if ($cloneB->isMate()) {
+                            $this->result[$piece->getColor()] = 1;
+                        }
                     }
                 }
             }
+        } catch (\Exception $e) {
+            // prevents the program from stopping if a checkmated position is evaluated
         }
 
         $this->explain($this->result);

@@ -5,6 +5,7 @@ namespace Chess\Variant\Classical;
 use Chess\FenToBoardFactory;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqCount;
+use Chess\Exception\BoardException;
 use Chess\Piece\AbstractPiece;
 use Chess\Piece\AsciiArray;
 use Chess\Piece\B;
@@ -336,7 +337,11 @@ class Board extends AbstractPgnParser
     {
         $king = $this->getPiece($this->turn, Piece::K);
 
-        return !empty($king->attackingPieces());
+        if ($king) {
+            return !empty($king->attackingPieces());
+        }
+
+        throw new BoardException();
     }
 
     /**

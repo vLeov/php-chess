@@ -41,6 +41,7 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Bad bishop',
             'Diagonal opposition',
             'Direct opposition',
+            'Checkmate in one',
         ];
 
         $this->assertSame($expected, (new StandardFunction())->names());

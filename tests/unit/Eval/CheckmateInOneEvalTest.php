@@ -74,12 +74,21 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function checkmated_throws_exception()
+    public function rook_checkmated()
     {
-        $this->expectException(\Chess\Exception\BoardException::class);
+        $expectedResult = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
+        $expectedPhrase = [
+            "Black could checkmate in one move.",
+        ];
 
         $board = (new StrToBoard('1k6/8/8/8/8/8/5PPP/1r5K w - -'))->create();
-
         $checkmateInOneEval = new CheckmateInOneEval($board);
+
+        $this->assertSame($expectedResult, $checkmateInOneEval->getResult());
+        $this->assertSame($expectedPhrase, $checkmateInOneEval->getExplanation());
     }
 }

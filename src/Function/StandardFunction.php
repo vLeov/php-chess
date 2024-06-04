@@ -12,6 +12,7 @@ use Chess\Eval\BadBishopEval;
 use Chess\Eval\BishopOutpostEval;
 use Chess\Eval\BishopPairEval;
 use Chess\Eval\CenterEval;
+use Chess\Eval\CheckmateInOneEval;
 use Chess\Eval\ConnectivityEval;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\DiagonalOppositionEval;
@@ -50,7 +51,7 @@ class StandardFunction
      * @var array
      */
     protected $eval = [
-        MaterialEval::class => 19,
+        MaterialEval::class => 16,
         CenterEval::class => 3,
         ConnectivityEval::class => 3,
         SpaceEval::class => 3,
@@ -78,6 +79,7 @@ class StandardFunction
         BadBishopEval::class => 3,
         DiagonalOppositionEval::class => 3,
         DirectOppositionEval::class => 3,
+        CheckmateInOneEval::class => 3,
     ];
 
     /**
