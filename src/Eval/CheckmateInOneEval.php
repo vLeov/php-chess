@@ -3,6 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Piece\AbstractPiece;
+use Chess\Tutor\ColorPhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
@@ -16,12 +17,20 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class CheckmateInOneEval extends AbstractEval implements ExplainEvalInterface
+class CheckmateInOneEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
+    use ElaborateEvalTrait;
     use ExplainEvalTrait;
 
     const NAME = 'Checkmate in one';
 
+    /**
+     * Constructor.
+     *
+     * @param \Chess\Variant\Classical\Board $board
+     */
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -46,14 +55,34 @@ class CheckmateInOneEval extends AbstractEval implements ExplainEvalInterface
                     if ($cloneB->playLan($cloneB->getTurn(), $piece->getSq() . $sq)) {
                         if ($cloneB->isMate()) {
                             $this->result[$piece->getColor()] = 1;
+                            $this->elaborate($piece, $cloneB->getHistory());
                         }
                     }
                 }
             }
         } catch (\Exception $e) {
             // prevents the program from stopping if a checkmated position is evaluated
+            $this->result = [
+                Color::W => 0,
+                Color::B => 0,
+            ];
+
+            $this->elaboration = [];
         }
 
         $this->explain($this->result);
+    }
+
+    /**
+     * Elaborate on the result.
+     *
+     * @param \Chess\Piece\AbstractPiece $piece
+     * @param array $history
+     */
+    private function elaborate(AbstractPiece $piece, array $history): void
+    {
+        $end = end($history);
+
+        $this->elaboration[] = ColorPhrase::sentence($piece->getColor()) . " threatens to play {$end->move->pgn}";
     }
 }

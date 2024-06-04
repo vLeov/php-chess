@@ -19,14 +19,17 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [];
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
         $board = (new SanPlay($B25))->validate()->getBoard();
         $checkmateInOneEval = new CheckmateInOneEval($board);
 
         $this->assertSame($expectedResult, $checkmateInOneEval->getResult());
-        $this->assertSame($expectedPhrase, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedExplanation, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedElaboration, $checkmateInOneEval->getElaboration());
     }
 
     /**
@@ -39,15 +42,20 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White could checkmate in one move.",
+        ];
+
+        $expectedElaboration = [
+            "White threatens to play Qxf7#",
         ];
 
         $board = (new StrToBoard('r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq -'))->create();
         $checkmateInOneEval = new CheckmateInOneEval($board);
 
         $this->assertSame($expectedResult, $checkmateInOneEval->getResult());
-        $this->assertSame($expectedPhrase, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedExplanation, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedElaboration, $checkmateInOneEval->getElaboration());
     }
 
     /**
@@ -60,15 +68,20 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
             'b' => 0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White could checkmate in one move.",
+        ];
+
+        $expectedElaboration = [
+            "White threatens to play Nf7#",
         ];
 
         $board = (new StrToBoard('7k/8/5NKN/8/8/8/8/4q3 b - -'))->create();
         $checkmateInOneEval = new CheckmateInOneEval($board);
 
         $this->assertSame($expectedResult, $checkmateInOneEval->getResult());
-        $this->assertSame($expectedPhrase, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedExplanation, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedElaboration, $checkmateInOneEval->getElaboration());
     }
 
     /**
@@ -78,17 +91,18 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
     {
         $expectedResult = [
             'w' => 0,
-            'b' => 1,
+            'b' => 0,
         ];
 
-        $expectedPhrase = [
-            "Black could checkmate in one move.",
-        ];
+        $expectedExplanation = [];
+
+        $expectedElaboration = [];
 
         $board = (new StrToBoard('1k6/8/8/8/8/8/5PPP/1r5K w - -'))->create();
         $checkmateInOneEval = new CheckmateInOneEval($board);
 
         $this->assertSame($expectedResult, $checkmateInOneEval->getResult());
-        $this->assertSame($expectedPhrase, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedExplanation, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedElaboration, $checkmateInOneEval->getElaboration());
     }
 }
