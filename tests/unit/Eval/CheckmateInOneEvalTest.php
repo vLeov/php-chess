@@ -40,7 +40,7 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White can checkmate in one move.",
+            "White could checkmate in one move.",
         ];
 
         $board = (new StrToBoard('r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq -'))->create();
@@ -61,7 +61,7 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedPhrase = [
-            "White can checkmate in one move.",
+            "White could checkmate in one move.",
         ];
 
         $board = (new StrToBoard('7k/8/5NKN/8/8/8/8/4q3 b - -'))->create();

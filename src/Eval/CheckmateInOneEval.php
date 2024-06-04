@@ -34,7 +34,7 @@ class CheckmateInOneEval extends AbstractEval implements ExplainEvalInterface
         ];
 
         $this->observation = [
-            "can checkmate in one move",
+            "could checkmate in one move",
         ];
 
         $cloneA = unserialize(serialize($this->board));
