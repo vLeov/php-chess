@@ -19,7 +19,7 @@ class CenterEvalTest extends AbstractUnitTestCase
             'b' => 33.0,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "Black has a slightly better control of the center.",
         ];
 
@@ -28,7 +28,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());
-        $this->assertSame($expectedPhrase, $centerEval->getExplanation());
+        $this->assertSame($expectedExplanation, $centerEval->getExplanation());
     }
 
     /**
@@ -41,7 +41,7 @@ class CenterEvalTest extends AbstractUnitTestCase
             'b' => 34.73,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White has a slightly better control of the center.",
         ];
 
@@ -50,7 +50,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());
-        $this->assertSame($expectedPhrase, $centerEval->getExplanation());
+        $this->assertSame($expectedExplanation, $centerEval->getExplanation());
     }
 
     /**
@@ -63,7 +63,7 @@ class CenterEvalTest extends AbstractUnitTestCase
             'b' => 36.8,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White is totally controlling the center.",
         ];
 
@@ -72,7 +72,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());
-        $this->assertSame($expectedPhrase, $centerEval->getExplanation());
+        $this->assertSame($expectedExplanation, $centerEval->getExplanation());
     }
 
     /**
@@ -85,7 +85,7 @@ class CenterEvalTest extends AbstractUnitTestCase
             'b' => 34.73,
         ];
 
-        $expectedPhrase = [
+        $expectedExplanation = [
             "White has a slightly better control of the center.",
         ];
 
@@ -94,6 +94,6 @@ class CenterEvalTest extends AbstractUnitTestCase
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());
-        $this->assertSame($expectedPhrase, $centerEval->getExplanation());
+        $this->assertSame($expectedExplanation, $centerEval->getExplanation());
     }
 }
