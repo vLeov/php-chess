@@ -2,6 +2,7 @@
 
 namespace Chess\Piece;
 
+use Chess\Exception\UnknownNotationException;
 use Chess\Piece\AbstractPiece;
 use Chess\Piece\RType;
 use Chess\Variant\Classical\FEN\Field\CastlingAbility;
@@ -17,16 +18,6 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 class K extends AbstractPiece
 {
     /**
-     * @var \Chess\Piece\R
-     */
-    private R $rook;
-
-    /**
-     * @var \Chess\Piece\B
-     */
-    private B $bishop;
-
-    /**
      * Constructor.
      *
      * @param string $color
@@ -37,8 +28,16 @@ class K extends AbstractPiece
     {
         parent::__construct($color, $sq, $size, Piece::K);
 
-        $this->rook = new R($color, $sq, $size, RType::SLIDER);
-        $this->bishop = new B($color, $sq, $size);
+        $this->mobility = (object)[
+            'up' => [],
+            'down' => [],
+            'left' => [],
+            'right' => [],
+            'upLeft' => [],
+            'upRight' => [],
+            'downLeft' => [],
+            'downRight' => [],
+        ];
 
         $this->mobility();
     }
@@ -50,16 +49,85 @@ class K extends AbstractPiece
      */
     protected function mobility(): AbstractPiece
     {
-        $mobility =  [
-            ... (array) $this->rook->getMobility(),
-            ... (array) $this->bishop->getMobility()
-        ];
-
-        foreach($mobility as $key => $val) {
-            $mobility[$key] = $val[0] ?? null;
+        try {
+            $file = $this->sq[0];
+            $rank = $this->getSqRank() + 1;
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->up = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->up);
         }
 
-        $this->mobility = (object) array_filter(array_unique($mobility));
+        try {
+            $file = $this->sq[0];
+            $rank = $this->getSqRank() - 1;
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->down = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->down);
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = $this->getSqRank();
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->left = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->left);
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = $this->getSqRank();
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->right = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->right);
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = $this->getSqRank() + 1;
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->upLeft = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->upLeft);
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = $this->getSqRank() + 1;
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->upRight = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->upRight);
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) - 1);
+            $rank = $this->getSqRank() - 1;
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->downLeft = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->downLeft);
+        }
+
+        try {
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = $this->getSqRank() - 1;
+            if ($this->isValidSq($file . $rank)) {
+                $this->mobility->downRight = $file . $rank;
+            }
+        } catch (UnknownNotationException $e) {
+            unset($this->mobility->downRight);
+        }
 
         return $this;
     }
