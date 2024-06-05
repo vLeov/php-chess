@@ -47,7 +47,7 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "White threatens to play Qxf7# delivering checkmate.",
+            "White threatens to play Qxf7# delivering checkmate in one move.",
         ];
 
         $board = (new StrToBoard('r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq -'))->create();
@@ -73,7 +73,7 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "White threatens to play Nf7# delivering checkmate.",
+            "White threatens to play Nf7# delivering checkmate in one move.",
         ];
 
         $board = (new StrToBoard('7k/8/5NKN/8/8/8/8/4q3 b - -'))->create();
@@ -99,7 +99,7 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "Black threatens to play Kb7# delivering checkmate.",
+            "Black threatens to play Kb7# delivering checkmate in one move.",
         ];
 
         $board = (new StrToBoard('1k6/8/8/8/8/8/5PPP/1r5K w - -'))->create();
