@@ -60,7 +60,7 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
                     );
                     break;
                 default:
-                    foreach ((array) $piece->getMobility() as $key => $val) {
+                    foreach ($piece->getMobility() as $key => $val) {
                         foreach ($val as $sq) {
                             if (in_array($sq, $this->sqCount->used->{$piece->getColor()})) {
                                 $this->result[$piece->getColor()] += 1;

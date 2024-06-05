@@ -23,7 +23,7 @@ class BTest extends AbstractUnitTestCase
     public function mobility_a2()
     {
         $bishop = new B('w', 'a2', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'upLeft' => [],
             'upRight' => ['b3', 'c4', 'd5', 'e6', 'f7', 'g8'],
             'downLeft' => [],
@@ -39,7 +39,7 @@ class BTest extends AbstractUnitTestCase
     public function mobility_d5()
     {
         $bishop = new B('w', 'd5', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'upLeft' => ['c6', 'b7', 'a8'],
             'upRight' => ['e6', 'f7', 'g8'],
             'downLeft' => ['c4', 'b3', 'a2'],
@@ -55,7 +55,7 @@ class BTest extends AbstractUnitTestCase
     public function mobility_a8()
     {
         $bishop = new B('w', 'a8', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'upLeft' => [],
             'upRight' => [],
             'downLeft' => [],

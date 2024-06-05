@@ -52,9 +52,9 @@ class A extends AbstractPiece
      */
     protected function mobility(): AbstractPiece
     {
-        $this->mobility = (object) [
-            ... (array) $this->bishop->getMobility(),
-            'knight' => (array) $this->knight->getMobility()
+        $this->mobility = [
+            ...$this->bishop->getMobility(),
+            'knight' => $this->knight->getMobility(),
         ];
 
         return $this;

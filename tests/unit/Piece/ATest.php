@@ -24,7 +24,7 @@ class ATest extends AbstractUnitTestCase
     {
         $archbishop = new A('w', 'a1', self::$size);
 
-        $mobility = (object) [
+        $mobility = [
             'upLeft' => [],
             'upRight' => ['b2', 'c3', 'd4', 'e5', 'f6', 'g7', 'h8'],
             'downLeft' => [],
@@ -42,7 +42,7 @@ class ATest extends AbstractUnitTestCase
     {
         $archbishop = new A('w', 'e4', self::$size);
 
-        $mobility = (object) [
+        $mobility = [
             'upLeft' => ['d5', 'c6', 'b7', 'a8'],
             'upRight' => ['f5', 'g6', 'h7', 'i8'],
             'downLeft' => ['d3', 'c2', 'b1'],
@@ -61,7 +61,7 @@ class ATest extends AbstractUnitTestCase
     {
         $archbishop = new A('w', 'd4', self::$size);
 
-        $mobility = (object) [
+        $mobility = [
             'upLeft' => ['c5', 'b6', 'a7'],
             'upRight' => ['e5', 'f6', 'g7', 'h8'],
             'downLeft' => ['c3', 'b2', 'a1'],

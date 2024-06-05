@@ -24,7 +24,7 @@ class QTest extends AbstractUnitTestCase
     public function mobility_a2()
     {
         $queen = new Q('w', 'a2', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'up' => ['a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => ['a1'],
             'left' => [],
@@ -44,7 +44,7 @@ class QTest extends AbstractUnitTestCase
     public function mobility_d5()
     {
         $queen = new Q('w', 'd5', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'up' => ['d6', 'd7', 'd8'],
             'down' => ['d4', 'd3', 'd2', 'd1'],
             'left' => ['c5', 'b5', 'a5'],

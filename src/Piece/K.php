@@ -186,7 +186,7 @@ class K extends AbstractPiece
     protected function sqsCaptures(): ?array
     {
         $sqsCaptures = [];
-        foreach ((array)$this->mobility as $sq) {
+        foreach ($this->mobility as $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
                 if ($this->oppColor() === $piece->getColor()) {
                     if (empty($piece->defendingPieces())) {

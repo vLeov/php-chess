@@ -39,7 +39,7 @@ class R extends Slider
 
         $this->type = $type;
 
-        $this->mobility = (object)[
+        $this->mobility = [
             'up' => [],
             'down' => [],
             'left' => [],
@@ -70,7 +70,7 @@ class R extends Slider
             $file = $this->sq[0];
             $rank = $this->getSqRank() + 1;
             while ($this->isValidSq($file . $rank)) {
-                $this->mobility->up[] = $file . $rank;
+                $this->mobility['up'][] = $file . $rank;
                 $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
@@ -80,7 +80,7 @@ class R extends Slider
             $file = $this->sq[0];
             $rank = $this->getSqRank() - 1;
             while ($this->isValidSq($file . $rank)) {
-                $this->mobility->down[] = $file . $rank;
+                $this->mobility['down'][] = $file . $rank;
                 $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
@@ -90,7 +90,7 @@ class R extends Slider
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->getSqRank();
             while ($this->isValidSq($file . $rank)) {
-                $this->mobility->left[] = $file . $rank;
+                $this->mobility['left'][] = $file . $rank;
                 $file = chr(ord($file) - 1);
             }
         } catch (UnknownNotationException $e) {
@@ -100,7 +100,7 @@ class R extends Slider
             $file = chr(ord($this->sq[0]) + 1);
             $rank = $this->getSqRank();
             while ($this->isValidSq($file . $rank)) {
-                $this->mobility->right[] = $file . $rank;
+                $this->mobility['right'][] = $file . $rank;
                 $file = chr(ord($file) + 1);
             }
         } catch (UnknownNotationException $e) {

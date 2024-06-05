@@ -47,9 +47,9 @@ abstract class AbstractPiece
     /**
      * The piece's mobility.
      *
-     * @var object|array
+     * @var array
      */
-    protected array|object $mobility;
+    protected array $mobility;
 
     /**
      * The piece's next move.

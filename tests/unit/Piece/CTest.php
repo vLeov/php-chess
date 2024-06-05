@@ -23,7 +23,7 @@ class CTest extends AbstractUnitTestCase
     public function mobility_a1()
     {
         $chancellor = new C('w', 'a1', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'up' => ['a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => [],
             'left' => [],
@@ -40,7 +40,7 @@ class CTest extends AbstractUnitTestCase
     public function mobility_e4()
     {
         $chancellor = new C('w', 'e4', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'up' => ['e5', 'e6', 'e7', 'e8'],
             'down' => ['e3', 'e2', 'e1'],
             'left' => ['d4', 'c4', 'b4', 'a4'],
@@ -57,7 +57,7 @@ class CTest extends AbstractUnitTestCase
     public function mobility_d4()
     {
         $chancellor = new C('w', 'd4', self::$size);
-        $mobility = (object) [
+        $mobility = [
             'up' => ['d5', 'd6', 'd7', 'd8'],
             'down' => ['d3', 'd2', 'd1'],
             'left' => ['c4', 'b4', 'a4'],
