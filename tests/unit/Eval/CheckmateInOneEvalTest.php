@@ -109,4 +109,30 @@ class CheckmateInOneEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedExplanation, $checkmateInOneEval->getExplanation());
         $this->assertSame($expectedElaboration, $checkmateInOneEval->getElaboration());
     }
+
+    /**
+     * @test
+     */
+    public function fool_chechmate_a6()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
+        $expectedExplanation = [
+            "Black could checkmate in one move.",
+        ];
+
+        $expectedElaboration = [
+            "Black threatens to play Qh4# delivering checkmate in one move.",
+        ];
+
+        $board = (new StrToBoard('rnbqkbnr/1ppp1ppp/p7/4p3/6P1/5P2/PPPPP2P/RNBQKBNR w KQkq -'))->create();
+        $checkmateInOneEval = new CheckmateInOneEval($board);
+
+        $this->assertSame($expectedResult, $checkmateInOneEval->getResult());
+        $this->assertSame($expectedExplanation, $checkmateInOneEval->getExplanation());
+        $this->assertSame($expectedElaboration, $checkmateInOneEval->getElaboration());
+    }
 }
