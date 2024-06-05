@@ -8,23 +8,19 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
- * Checkmate in one evaluation.
- *
- * The turn is set to the opposite color in a cloned chess board. Then, all
- * legal moves are played in a clone of this cloned chess board to determine if
- * a checkmate can be delivered.
+ * Checkmate in half a move.
  *
  * @author Jordi Bassagaña
  * @license MIT
  */
-class CheckmateInOneEval extends AbstractEval implements
+class CheckmateInPlyEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
 {
     use ElaborateEvalTrait;
     use ExplainEvalTrait;
 
-    const NAME = 'Checkmate in one';
+    const NAME = 'Checkmate in a ply';
 
     /**
      * Constructor.
@@ -43,20 +39,18 @@ class CheckmateInOneEval extends AbstractEval implements
         ];
 
         $this->observation = [
-            "could checkmate in one move",
+            "could checkmate in half a move",
         ];
 
         try {
-            $cloneA = unserialize(serialize($this->board));
-            $cloneA->setTurn(Color::opp($this->board->getTurn()));
-            foreach ($cloneA->getPieces(Color::opp($this->board->getTurn())) as $piece) {
+            foreach ($this->board->getPieces($this->board->getTurn()) as $piece) {
                 foreach ($piece->sqs() as $sq) {
-                    $cloneB = unserialize(serialize($cloneA));
-                    if ($cloneB->playLan($cloneB->getTurn(), $piece->getSq() . $sq)) {
-                        if ($cloneB->isMate()) {
+                    $clone = unserialize(serialize($this->board));
+                    if ($clone->playLan($clone->getTurn(), $piece->getSq() . $sq)) {
+                        if ($clone->isMate()) {
                             $this->result[$piece->getColor()] = 1;
                             $this->explain($this->result);
-                            $this->elaborate($piece, $cloneB->getHistory());
+                            $this->elaborate($piece, $clone->getHistory());
                             break 2;
                         }
                     }
