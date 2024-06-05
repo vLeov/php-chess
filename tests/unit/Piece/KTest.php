@@ -88,13 +88,8 @@ class KTest extends AbstractUnitTestCase
     public function mobility_w_a2()
     {
         $king = new K('w', 'a2', self::$size);
-        $mobility = (object) [
-            'up' => 'a3',
-            'down' => 'a1',
-            'right' => 'b2',
-            'upRight' => 'b3',
-            'downRight' => 'b1'
-        ];
+        $mobility = ['a3', 'a1', 'b2', 'b3', 'b1'];
+
         $this->assertEquals($mobility, $king->getMobility());
     }
 
@@ -104,16 +99,8 @@ class KTest extends AbstractUnitTestCase
     public function mobility_w_d5()
     {
         $king = new K('w', 'd5', self::$size);
-        $mobility = (object) [
-            'up' => 'd6',
-            'down' => 'd4',
-            'left' => 'c5',
-            'right' => 'e5',
-            'upLeft' => 'c6',
-            'upRight' => 'e6',
-            'downLeft' => 'c4',
-            'downRight' => 'e4'
-        ];
+        $mobility = ['d6', 'd4', 'c5', 'e5', 'c6', 'e6', 'c4', 'e4'];
+
         $this->assertEquals($mobility, $king->getMobility());
     }
 
@@ -123,14 +110,7 @@ class KTest extends AbstractUnitTestCase
     public function mobility_w_f1()
     {
         $king = new K('w', 'f1', self::$size);
-
-        $mobility = (object) [
-            'up' => 'f2',
-            'left' => 'e1',
-            'right' => 'g1',
-            'upLeft' => 'e2',
-            'upRight' => 'g2',
-        ];
+        $mobility = ['f2', 'e1', 'g1', 'e2', 'g2'];
 
         $this->assertEquals($mobility, $king->getMobility());
     }
@@ -141,14 +121,7 @@ class KTest extends AbstractUnitTestCase
     public function mobility_b_f8()
     {
         $king = new K('b', 'f8', self::$size);
-
-        $mobility = (object) [
-            'down' => 'f7',
-            'left' => 'e8',
-            'right' => 'g8',
-            'downLeft' => 'e7',
-            'downRight' => 'g7',
-        ];
+        $mobility = ['f7', 'e8', 'g8', 'e7', 'g7'];
 
         $this->assertEquals($mobility, $king->getMobility());
     }
@@ -179,13 +152,7 @@ class KTest extends AbstractUnitTestCase
             'ranks' => 8,
         ]);
 
-        $mobility = (object) [
-            'up' => 'f2',
-            'left' => 'e1',
-            'right' => 'g1',
-            'upLeft' => 'e2',
-            'upRight' => 'g2',
-        ];
+        $mobility = ['f2', 'e1', 'g1', 'e2', 'g2'];
 
         $this->assertEquals($mobility, $king->getMobility());
     }

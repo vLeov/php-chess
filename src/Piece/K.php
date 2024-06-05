@@ -28,16 +28,7 @@ class K extends AbstractPiece
     {
         parent::__construct($color, $sq, $size, Piece::K);
 
-        $this->mobility = (object)[
-            'up' => [],
-            'down' => [],
-            'left' => [],
-            'right' => [],
-            'upLeft' => [],
-            'upRight' => [],
-            'downLeft' => [],
-            'downRight' => [],
-        ];
+        $this->mobility = [];
 
         $this->mobility();
     }
@@ -53,80 +44,72 @@ class K extends AbstractPiece
             $file = $this->sq[0];
             $rank = $this->getSqRank() + 1;
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->up = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->up);
         }
 
         try {
             $file = $this->sq[0];
             $rank = $this->getSqRank() - 1;
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->down = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->down);
         }
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->getSqRank();
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->left = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->left);
         }
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = $this->getSqRank();
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->right = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->right);
         }
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->getSqRank() + 1;
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->upLeft = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->upLeft);
         }
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = $this->getSqRank() + 1;
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->upRight = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->upRight);
         }
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->getSqRank() - 1;
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->downLeft = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->downLeft);
         }
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = $this->getSqRank() - 1;
             if ($this->isValidSq($file . $rank)) {
-                $this->mobility->downRight = $file . $rank;
+                $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
-            unset($this->mobility->downRight);
         }
 
         return $this;

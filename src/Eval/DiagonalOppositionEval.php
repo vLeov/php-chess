@@ -29,8 +29,8 @@ class DiagonalOppositionEval extends AbstractEval implements ExplainEvalInterfac
         $wKingMobility = $this->board->getPiece(Color::W, Piece::K)->getMobility();
         $bKingMobility = $this->board->getPiece(Color::B, Piece::K)->getMobility();
 
-        $wKingMobilityArr = array_values((array) $wKingMobility);
-        $bKingMobilityArr = array_values((array) $bKingMobility);
+        $wKingMobilityArr = array_values($wKingMobility);
+        $bKingMobilityArr = array_values($bKingMobility);
 
         $intersect = array_intersect($wKingMobilityArr, $bKingMobilityArr);
 
