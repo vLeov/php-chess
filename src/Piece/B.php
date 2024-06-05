@@ -45,51 +45,47 @@ class B extends Slider
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->getSqRank() + 1;
-            while ($this->isValidSq($file.$rank)) {
+            while ($this->isValidSq($file . $rank)) {
                 $this->mobility->upLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
                 $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
-
         }
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = $this->getSqRank() + 1;
-            while ($this->isValidSq($file.$rank)) {
+            while ($this->isValidSq($file . $rank)) {
                 $this->mobility->upRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);
                 $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
-
         }
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->getSqRank() - 1;
-            while ($this->isValidSq($file.$rank))
+            while ($this->isValidSq($file . $rank))
             {
                 $this->mobility->downLeft[] = $file . $rank;
                 $file = chr(ord($file) - 1);
                 $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
-
         }
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = $this->getSqRank() - 1;
-            while ($this->isValidSq($file.$rank))
+            while ($this->isValidSq($file . $rank))
             {
                 $this->mobility->downRight[] = $file . $rank;
                 $file = chr(ord($file) + 1);
                 $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
-
         }
 
         return $this;

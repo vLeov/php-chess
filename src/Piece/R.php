@@ -66,52 +66,44 @@ class R extends Slider
      */
     protected function mobility(): AbstractPiece
     {
-        // up
         try {
             $file = $this->sq[0];
             $rank = $this->getSqRank() + 1;
-            while ($this->isValidSq($file.$rank)) {
+            while ($this->isValidSq($file . $rank)) {
                 $this->mobility->up[] = $file . $rank;
                 $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
-
         }
 
-        // down
         try {
             $file = $this->sq[0];
             $rank = $this->getSqRank() - 1;
-            while ($this->isValidSq($file.$rank)) {
+            while ($this->isValidSq($file . $rank)) {
                 $this->mobility->down[] = $file . $rank;
                 $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
-
         }
 
-        // left
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->getSqRank();
-            while ($this->isValidSq($file.$rank)) {
+            while ($this->isValidSq($file . $rank)) {
                 $this->mobility->left[] = $file . $rank;
                 $file = chr(ord($file) - 1);
             }
         } catch (UnknownNotationException $e) {
-
         }
 
-        // right
         try {
             $file = chr(ord($this->sq[0]) + 1);
             $rank = $this->getSqRank();
-            while ($this->isValidSq($file.$rank)) {
+            while ($this->isValidSq($file . $rank)) {
                 $this->mobility->right[] = $file . $rank;
                 $file = chr(ord($file) + 1);
             }
         } catch (UnknownNotationException $e) {
-
         }
 
         return $this;
