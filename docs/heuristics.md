@@ -43,7 +43,7 @@ Listed below are the chess heuristics implemented in PHP Chess.
 | Space | [Chess\Eval\SpaceEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/SpaceEvalTest.php) |
 | Square outpost | [Chess\Eval\SqOutpostEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/SqOutpostEvalTest.php) |
 
-The evaluation features are used in two heuristics classes: [Chess\FenHeuristics](https://github.com/chesslablab/php-chess/blob/main/src/FenHeuristics.php) and [Chess\SanHeuristic](https://github.com/chesslablab/php-chess/blob/main/src/SanHeuristic.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
+The evaluation features are used in two heuristics classes: [Chess\FenHeuristics](https://github.com/chesslablab/php-chess/blob/main/tests/unit/FenHeuristicsTest.php) and [Chess\SanHeuristic](https://github.com/chesslablab/php-chess/blob/main/tests/unit/SanHeuristicTest.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
 
 ```php
 use Chess\FenHeuristics;
