@@ -43,12 +43,12 @@ Listed below are the chess heuristics implemented in PHP Chess.
 | Space | [Chess\Eval\SpaceEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/SpaceEvalTest.php) |
 | Square outpost | [Chess\Eval\SqOutpostEval](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Eval/SqOutpostEvalTest.php) |
 
-The evaluation features are used in two heuristics classes: [Chess\Heuristics\FenHeuristics](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Heuristics/FenHeuristicsTest.php) and [Chess\Heuristics\SanHeuristics](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Heuristics/SanHeuristicsTest.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
+The evaluation features are used in two heuristics classes: [Chess\FenHeuristics](https://github.com/chesslablab/php-chess/blob/main/src/FenHeuristics.php) and [Chess\SanHeuristic](https://github.com/chesslablab/php-chess/blob/main/src/SanHeuristic.php). The former allows to transform a FEN position to numbers while the latter transforms an entire chess game in SAN format to numbers.
 
 ```php
+use Chess\FenHeuristics;
 use Chess\FenToBoardFactory;
-use Chess\Function\StandardFunction;
-use Chess\Heuristics\FenHeuristics;
+use Chess\StandardFunction;
 
 $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
 
@@ -135,21 +135,26 @@ Array
 A chess game can be plotted in terms of balance. +1 is the best possible evaluation for White and -1 the best possible evaluation for Black. Both forces being set to 0 means they're balanced.
 
 ```php
-use Chess\Function\StandardFunction;
-use Chess\Heuristics\SanHeuristics;
+use Chess\SanHeuristic;
 
-$movetext = '1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3';
+$name = 'Space';
 
-$result = [
-    'names' => (new StandardFunction())->names(),
-    'balance' => (new SanHeuristics($movetext))->getBalance(),
-];
+$movetext = '1.e4 d5 2.exd5 Qxd5';
 
-print_r($result);
+$balance = (new SanHeuristic($name, $movetext))->getBalance();
+
+print_r($balance);
 ```
 
-![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/main/docs/heuristics_01.png)
+```txt
+Array
+(
+    [0] => 0
+    [1] => 1
+    [2] => 0.25
+    [3] => 0.5
+    [4] => -1
+)
+```
 
-Figure 1. Heuristics of `1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.Nc3`
-
-🎉 There it is! Chess positions converted to numbers can be processed with machine learning techniques.
+🎉 Chess positions and games can now be plotted on charts and processed with machine learning techniques.
