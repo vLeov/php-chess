@@ -26,7 +26,7 @@ class RandomMove
      */
     public function __construct(Board $board)
     {
-        $this->board = unserialize(serialize($board));
+        $this->board = $board->clone();
     }
 
     /**
@@ -37,9 +37,9 @@ class RandomMove
     public function move(): ?object
     {
         $legal = [];
-        foreach ($this->board->getPieces($this->board->getTurn()) as $piece) {
+        foreach ($this->board->getPieces($this->board->turn) as $piece) {
             if ($sqs = $piece->sqs()) {
-                $legal[$piece->getSq()] = $sqs;
+                $legal[$piece->sq] = $sqs;
             }
         }
 
@@ -49,10 +49,10 @@ class RandomMove
 
         $lan = "{$from}{$to}";
 
-        if ($this->board->playLan($this->board->getTurn(), $lan)) {
-            $last = array_slice($this->board->getHistory(), -1)[0];
+        if ($this->board->playLan($this->board->turn, $lan)) {
+            $last = array_slice($this->board->history, -1)[0];
             return (object) [
-                'pgn' => $last->move->pgn,
+                'pgn' => $last['move']['pgn'],
                 'lan' => $lan,
             ];
         }

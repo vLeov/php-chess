@@ -5,17 +5,15 @@ namespace Chess\Tests\Unit\Piece;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Piece\R;
 use Chess\Piece\RType;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 class RTest extends AbstractUnitTestCase
 {
-    static private $size;
+    static private $square;
 
     public static function setUpBeforeClass(): void
     {
-        self::$size = [
-            'files' => 8,
-            'ranks' => 8,
-        ];
+        self::$square = new Square();
     }
 
     /**
@@ -23,7 +21,7 @@ class RTest extends AbstractUnitTestCase
      */
     public function mobility_a2()
     {
-        $rook = new R('w', 'a2', self::$size, RType::PROMOTED);
+        $rook = new R('w', 'a2', self::$square, RType::PROMOTED);
         $mobility = [
             'up' => ['a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => ['a1'],
@@ -31,7 +29,7 @@ class RTest extends AbstractUnitTestCase
             'right' => ['b2', 'c2', 'd2', 'e2', 'f2', 'g2', 'h2']
         ];
 
-        $this->assertEquals($mobility, $rook->getMobility());
+        $this->assertEquals($mobility, $rook->mobility);
     }
 
     /**
@@ -39,7 +37,7 @@ class RTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $rook = new R('w', 'd5', self::$size, RType::PROMOTED);
+        $rook = new R('w', 'd5', self::$square, RType::PROMOTED);
         $mobility = [
             'up' => ['d6', 'd7', 'd8'],
             'down' => ['d4', 'd3', 'd2', 'd1'],
@@ -47,6 +45,6 @@ class RTest extends AbstractUnitTestCase
             'right' => ['e5', 'f5', 'g5', 'h5']
         ];
 
-        $this->assertEquals($mobility, $rook->getMobility());
+        $this->assertEquals($mobility, $rook->mobility);
     }
 }

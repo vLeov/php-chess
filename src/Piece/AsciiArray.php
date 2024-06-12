@@ -3,8 +3,9 @@
 namespace Chess\Piece;
 
 use Chess\Piece\PieceArray;
-use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * Ascii array.
@@ -22,11 +23,11 @@ class AsciiArray
     protected array $array;
 
     /**
-     * Size.
+     * Square.
      *
-     * @var array
+     * @var \Chess\Variant\Classical\PGN\Square
      */
-    private array $size;
+    protected Square $square;
 
     /**
      * Castling rule.
@@ -39,13 +40,13 @@ class AsciiArray
      * Constructor.
      *
      * @param array $array
-     * @param array $size
+     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
      * @param array $castlingRule
      */
-    public function __construct(array $array, array $size, array $castlingRule)
+    public function __construct(array $array, Square $square, array $castlingRule)
     {
         $this->array = $array;
-        $this->size = $size;
+        $this->square = $square;
         $this->castlingRule = $castlingRule;
     }
 
@@ -73,15 +74,16 @@ class AsciiArray
 
         $pieces = (new PieceArray(
             $this->array,
-            $board->getSize(),
-            $board->getCastlingRule()
+            $board->square,
+            $board->castlingRule
         ))->getArray();
 
         if (!$castlingAbility) {
-            $castlingAbility = CastlingAbility::START;
+            $castlingAbility = CastlingRule::START;
         }
 
-        $newBoard = (new $className($pieces, $castlingAbility))->setTurn($turn);
+        $newBoard = new $className($pieces, $castlingAbility);
+        $newBoard->turn = $turn;
 
         return $newBoard;
     }
@@ -106,16 +108,16 @@ class AsciiArray
 
         $pieces = (new PieceArray(
             $this->array,
-            $board->getSize(),
-            $board->getCastlingRule()
+            $board->square,
+            $board->castlingRule
         ))->getArray();
 
         if (!$castlingAbility) {
-            $castlingAbility = CastlingAbility::START;
+            $castlingAbility = CastlingRule::START;
         }
 
-        $newBoard = (new $className($startPos, $pieces, $castlingAbility))
-            ->setTurn($turn);
+        $newBoard = new $className($startPos, $pieces, $castlingAbility);
+        $newBoard->turn = $turn;
 
         return $newBoard;
     }

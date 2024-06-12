@@ -40,30 +40,30 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
         ];
 
         foreach ($this->board->getPieces() as $piece) {
-            switch ($piece->getId()) {
+            switch ($piece->id) {
                 case Piece::K:
-                    $this->result[$piece->getColor()] += count(
-                        array_intersect($piece->getMobility(),
-                        $this->sqCount->used->{$piece->getColor()})
+                    $this->result[$piece->color] += count(
+                        array_intersect($piece->mobility,
+                        $this->sqCount->used->{$piece->color})
                     );
                     break;
                 case Piece::N:
-                    $this->result[$piece->getColor()] += count(
-                        array_intersect($piece->getMobility(),
-                        $this->sqCount->used->{$piece->getColor()})
+                    $this->result[$piece->color] += count(
+                        array_intersect($piece->mobility,
+                        $this->sqCount->used->{$piece->color})
                     );
                     break;
                 case Piece::P:
-                    $this->result[$piece->getColor()] += count(
+                    $this->result[$piece->color] += count(
                         array_intersect($piece->getCaptureSqs(),
-                        $this->sqCount->used->{$piece->getColor()})
+                        $this->sqCount->used->{$piece->color})
                     );
                     break;
                 default:
-                    foreach ($piece->getMobility() as $key => $val) {
+                    foreach ($piece->mobility as $key => $val) {
                         foreach ($val as $sq) {
-                            if (in_array($sq, $this->sqCount->used->{$piece->getColor()})) {
-                                $this->result[$piece->getColor()] += 1;
+                            if (in_array($sq, $this->sqCount->used->{$piece->color})) {
+                                $this->result[$piece->color] += 1;
                                 break;
                             } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
                                 break;

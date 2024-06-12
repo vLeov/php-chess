@@ -2,6 +2,8 @@
 
 namespace Chess\Piece;
 
+use Chess\Variant\Classical\PGN\AN\Square;
+
 /**
  * Class that represents a bishop, a rook or a queen.
  *
@@ -15,12 +17,12 @@ abstract class Slider extends AbstractPiece
      *
      * @param string $color
      * @param string $sq
-     * @param array $size
+     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
      * @param string $id
      */
-    public function __construct(string $color, string $sq, array $size, string $id)
+    public function __construct(string $color, string $sq, Square $square, string $id)
     {
-        parent::__construct($color, $sq, $size, $id);
+        parent::__construct($color, $sq, $square, $id);
     }
 
     /**
@@ -33,9 +35,9 @@ abstract class Slider extends AbstractPiece
         $sqs = [];
         foreach ($this->mobility as $key => $val) {
             foreach ($val as $sq) {
-                if (in_array($sq, $this->board->getSqCount()->free)) {
+                if (in_array($sq, $this->board->sqCount->free)) {
                     $sqs[] = $sq;
-                } elseif (in_array($sq, $this->board->getSqCount()->used->{$this->oppColor()})) {
+                } elseif (in_array($sq, $this->board->sqCount->used->{$this->oppColor()})) {
                     $sqs[] = $sq;
                     break 1;
                 } else {
@@ -57,10 +59,10 @@ abstract class Slider extends AbstractPiece
         $sqs = [];
         foreach ($this->mobility as $key => $val) {
             foreach ($val as $sq) {
-                if (in_array($sq, $this->board->getSqCount()->used->{$this->getColor()})) {
+                if (in_array($sq, $this->board->sqCount->used->{$this->color})) {
                     $sqs[] = $sq;
                     break 1;
-                } elseif (in_array($sq, $this->board->getSqCount()->used->{$this->oppColor()})) {
+                } elseif (in_array($sq, $this->board->sqCount->used->{$this->oppColor()})) {
                     break 1;
                 }
             }

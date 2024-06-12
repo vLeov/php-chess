@@ -33,8 +33,8 @@ class BishopPairEval extends AbstractEval implements ExplainEvalInterface
         ];
 
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() === Piece::B) {
-                $count[$piece->getColor()] += 1;
+            if ($piece->id === Piece::B) {
+                $count[$piece->color] += 1;
             }
         }
 

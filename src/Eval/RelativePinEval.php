@@ -53,13 +53,13 @@ class RelativePinEval extends AbstractEval implements
 
         foreach ($this->board->getPieces() as $piece) {
             if (
-                $piece->getId() !== Piece::K &&
-                $piece->getId() !== Piece::Q &&
+                $piece->id !== Piece::K &&
+                $piece->id !== Piece::Q &&
                 !$piece->isPinned()
             ) {
                 $attackingPieces = $piece->attackingPieces();
-                $clone = unserialize(serialize($this->board));
-                $clone->detach($clone->getPieceBySq($piece->getSq()));
+                $clone = $this->board->clone();
+                $clone->detach($clone->getPieceBySq($piece->sq));
                 $clone->refresh();
                 $newPressureEval = (new PressureEval($clone))->getResult();
                 $arrayDiff = array_diff(
@@ -69,9 +69,9 @@ class RelativePinEval extends AbstractEval implements
                 foreach ($arrayDiff as $sq) {
                     foreach ($clone->getPieceBySq($sq)->attackingPieces() as $newAttackingPiece) {
                         foreach ($attackingPieces as $attackingPiece) {
-                            if ($newAttackingPiece->getSq() === $attackingPiece->getSq()) {
-                                $valDiff = self::$value[$attackingPiece->getId()] -
-                                    self::$value[$clone->getPieceBySq($sq)->getId()];
+                            if ($newAttackingPiece->sq === $attackingPiece->sq) {
+                                $valDiff = self::$value[$attackingPiece->id] -
+                                    self::$value[$clone->getPieceBySq($sq)->id];
                                 if ($valDiff < 0) {
                                     $this->result[$piece->oppColor()] += abs(round($valDiff, 2));
                                     $this->elaborate($piece);

@@ -4,8 +4,8 @@ namespace Chess\Variant\Chess960;
 
 use Chess\Variant\RandomBoardInterface;
 use Chess\Variant\Classical\Board as ClassicalBoard;
-use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Chess960\StartPieces;
 use Chess\Variant\Chess960\Rule\CastlingRule;
@@ -39,14 +39,14 @@ final class Board extends ClassicalBoard implements RandomBoardInterface
         array $pieces = null,
         string $castlingAbility = '-'
     ) {
-        $this->size = Square::SIZE;
-        $this->sqs = Square::all();
+        $this->color = new Color();
         $this->startPos = $startPos ?? (new StartPosition())->getDefault();
-        $this->castlingRule =  (new CastlingRule($this->startPos))->getRule();
+        $this->castlingRule = new CastlingRule($this->startPos);
+        $this->square = new Square();
         $this->move = new Move();
         if (!$pieces) {
             $pieces = (new StartPieces($this->startPos, $this->castlingRule))->create();
-            $this->castlingAbility = CastlingAbility::START;
+            $this->castlingAbility = CastlingRule::START;
         } else {
             $this->castlingAbility = $castlingAbility;
         }

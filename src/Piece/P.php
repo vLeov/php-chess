@@ -6,6 +6,7 @@ use Chess\Exception\UnknownNotationException;
 use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 /**
  * Pawn.
@@ -18,7 +19,7 @@ class P extends AbstractPiece
     /**
      * @var object
      */
-    private object $ranks;
+    private array $ranks;
 
     /**
      * @var array
@@ -35,22 +36,22 @@ class P extends AbstractPiece
      *
      * @param string $color
      * @param string $sq
-     * @param array $size
+     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
      */
-    public function __construct(string $color, string $sq, array $size)
+    public function __construct(string $color, string $sq, Square $square)
     {
-        parent::__construct($color, $sq, $size, Piece::P);
+        parent::__construct($color, $sq, $square, Piece::P);
 
         if ($this->color === Color::W) {
-            $this->ranks = (object) [
+            $this->ranks = [
                 'start' => 2,
-                'next' => $this->getSqRank() + 1,
-                'end' => $this->size['ranks'],
+                'next' => $this->rank() + 1,
+                'end' => $this->square::SIZE['ranks'],
             ];
         } elseif ($this->color === Color::B) {
-            $this->ranks = (object) [
-                'start' => $this->size['ranks'] - 1,
-                'next' => $this->getSqRank() - 1,
+            $this->ranks = [
+                'start' => $this->square::SIZE['ranks'] - 1,
+                'next' => $this->rank() - 1,
                 'end' => 1,
             ];
         }
@@ -71,28 +72,28 @@ class P extends AbstractPiece
     {
         // next rank
         try {
-            if ($this->isValidSq($this->getSqFile().$this->ranks->next)) {
-                $this->mobility[] = $this->getSqFile() . $this->ranks->next;
+            if ($this->square->validate($this->file() . $this->ranks['next'])) {
+                $this->mobility[] = $this->file() . $this->ranks['next'];
             }
         } catch (UnknownNotationException $e) {
 
         }
 
         // two square advance
-        if ($this->getSqRank() === 2 && $this->ranks->start == 2) {
-            $this->mobility[] = $this->getSqFile() . ($this->ranks->start + 2);
+        if ($this->rank() === 2 && $this->ranks['start'] == 2) {
+            $this->mobility[] = $this->file() . ($this->ranks['start'] + 2);
         } elseif (
-            $this->getSqRank() === $this->size['ranks'] - 1 &&
-            $this->ranks->start == $this->size['ranks'] - 1
+            $this->rank() === $this->square::SIZE['ranks'] - 1 &&
+            $this->ranks['start'] == $this->square::SIZE['ranks'] - 1
         ) {
-            $this->mobility[] = $this->getSqFile() . ($this->ranks->start - 2);
+            $this->mobility[] = $this->file() . ($this->ranks['start'] - 2);
         }
 
         // capture square
         try {
-            $file = chr(ord($this->getSqFile()) - 1);
-            if ($this->isValidSq($file.$this->ranks->next)) {
-                $this->captureSqs[] = $file . $this->ranks->next;
+            $file = chr(ord($this->file()) - 1);
+            if ($this->square->validate($file . $this->ranks['next'])) {
+                $this->captureSqs[] = $file . $this->ranks['next'];
             }
         } catch (UnknownNotationException $e) {
 
@@ -100,9 +101,9 @@ class P extends AbstractPiece
 
         // capture square
         try {
-            $file = chr(ord($this->getSqFile()) + 1);
-            if ($this->isValidSq($file.$this->ranks->next)) {
-                $this->captureSqs[] = $file . $this->ranks->next;
+            $file = chr(ord($this->file()) + 1);
+            if ($this->square->validate($file . $this->ranks['next'])) {
+                $this->captureSqs[] = $file . $this->ranks['next'];
             }
         } catch (UnknownNotationException $e) {
 
@@ -122,7 +123,7 @@ class P extends AbstractPiece
 
         // mobility squares
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->getSqCount()->free)) {
+            if (in_array($sq, $this->board->sqCount->free)) {
                 $sqs[] = $sq;
             } else {
                 break;
@@ -131,26 +132,26 @@ class P extends AbstractPiece
 
         // capture squares
         foreach ($this->captureSqs as $sq) {
-            if (in_array($sq, $this->board->getSqCount()->used->{$this->oppColor()})) {
+            if (in_array($sq, $this->board->sqCount->used->{$this->oppColor()})) {
                 $sqs[] = $sq;
             }
         }
 
         // en passant square
-        $history = $this->board->getHistory();
+        $history = $this->board->history;
         $end = end($history);
-        if ($end && $end->move->id === Piece::P && $end->move->color === $this->oppColor()) {
+        if ($end && $end['move']['id'] === Piece::P && $end['move']['color'] === $this->oppColor()) {
            if ($this->color === Color::W) {
-               if ($this->getSqRank() === $this->size['ranks'] - 3) {
-                   $captureSq = $end->move->sq->next[0] . ($this->getSqRank() + 1);
+               if ($this->rank() === $this->square::SIZE['ranks'] - 3) {
+                   $captureSq = $end['move']['sq']['next'][0] . ($this->rank() + 1);
                    if (in_array($captureSq, $this->captureSqs)) {
                         $this->enPassantSq = $captureSq;
                         $sqs[] = $captureSq;
                    }
                }
            } elseif ($this->color === Color::B) {
-               if ($this->getSqRank() === 4) {
-                   $captureSq = $end->move->sq->next[0] . ($this->getSqRank() - 1);
+               if ($this->rank() === 4) {
+                   $captureSq = $end['move']['sq']['next'][0] . ($this->rank() - 1);
                    if (in_array($captureSq, $this->captureSqs)) {
                        $this->enPassantSq = $captureSq;
                        $sqs[] = $captureSq;
@@ -173,7 +174,7 @@ class P extends AbstractPiece
     {
         $sqs = [];
         foreach($this->captureSqs as $sq) {
-            if (in_array($sq, $this->board->getSqCount()->used->{$this->getColor()})) {
+            if (in_array($sq, $this->board->sqCount->used->{$this->color})) {
                 $sqs[] = $sq;
             }
         }
@@ -184,9 +185,9 @@ class P extends AbstractPiece
     /**
      * Gets the pawn's rank info.
      *
-     * @return object
+     * @return array
      */
-    public function getRanks(): object
+    public function getRanks(): array
     {
         return $this->ranks;
     }
@@ -231,9 +232,9 @@ class P extends AbstractPiece
      */
     public function isPromoted(): bool
     {
-        $rank = (int) substr($this->getMove()->sq->next, 1);
+        $rank = (int) substr($this->move['sq']['next'], 1);
 
-        return isset($this->move->newId) && $rank === $this->ranks->end;
+        return isset($this->move['newId']) && $rank === $this->ranks['end'];
     }
 
     /**
@@ -245,8 +246,8 @@ class P extends AbstractPiece
     {
         if ($this->enPassantSq) {
             $rank = (int) substr($this->enPassantSq, 1);
-            $this->getColor() === Color::W ? $rank-- : $rank++;
-            return $this->board->getPieceBySq($this->enPassantSq[0].$rank);
+            $this->color === Color::W ? $rank-- : $rank++;
+            return $this->board->getPieceBySq($this->enPassantSq[0] . $rank);
         }
 
         return null;

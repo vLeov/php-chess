@@ -5,17 +5,15 @@ namespace Chess\Tests\Unit\Piece;
 use Chess\Piece\Q;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 class QTest extends AbstractUnitTestCase
 {
-    static private $size;
+    static private $square;
 
     public static function setUpBeforeClass(): void
     {
-        self::$size = [
-            'files' => 8,
-            'ranks' => 8,
-        ];
+        self::$square = new Square();
     }
 
     /**
@@ -23,7 +21,7 @@ class QTest extends AbstractUnitTestCase
      */
     public function mobility_a2()
     {
-        $queen = new Q('w', 'a2', self::$size);
+        $queen = new Q('w', 'a2', self::$square);
         $mobility = [
             'up' => ['a3', 'a4', 'a5', 'a6', 'a7', 'a8'],
             'down' => ['a1'],
@@ -35,7 +33,7 @@ class QTest extends AbstractUnitTestCase
             'downRight' => ['b1']
         ];
 
-        $this->assertEquals($mobility, $queen->getMobility());
+        $this->assertEquals($mobility, $queen->mobility);
     }
 
     /**
@@ -43,7 +41,7 @@ class QTest extends AbstractUnitTestCase
      */
     public function mobility_d5()
     {
-        $queen = new Q('w', 'd5', self::$size);
+        $queen = new Q('w', 'd5', self::$square);
         $mobility = [
             'up' => ['d6', 'd7', 'd8'],
             'down' => ['d4', 'd3', 'd2', 'd1'],
@@ -55,7 +53,7 @@ class QTest extends AbstractUnitTestCase
             'downRight' => ['e4', 'f3', 'g2', 'h1']
         ];
 
-        $this->assertEquals($mobility, $queen->getMobility());
+        $this->assertEquals($mobility, $queen->mobility);
     }
 
     /**

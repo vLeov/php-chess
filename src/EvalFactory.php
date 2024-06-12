@@ -2,7 +2,6 @@
 
 namespace Chess;
 
-use Chess\Function\StandardFunction;
 use Chess\Variant\Classical\Board;
 
 /**
@@ -22,8 +21,8 @@ class EvalFactory
     public static function create(string $name, Board $board)
     {
         $function = new StandardFunction();
-        foreach ($function->getEval() as $key => $val) {
-            $class = new \ReflectionClass($key);
+        foreach ($function->getEval() as $val) {
+            $class = new \ReflectionClass($val);
             if ($name === $class->getConstant('NAME')) {
                 return $class->newInstanceArgs([$board]);
             }

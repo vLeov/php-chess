@@ -40,9 +40,9 @@ class IsolatedPawnEval extends AbstractEval implements
         ];
 
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() === Piece::P) {
+            if ($piece->id === Piece::P) {
                 if ($this->isIsolatedPawn($piece)) {
-                    $this->result[$piece->getColor()][] = $piece->getSq();
+                    $this->result[$piece->color][] = $piece->sq;
                 }
             }
         }
@@ -57,16 +57,16 @@ class IsolatedPawnEval extends AbstractEval implements
 
     private function isIsolatedPawn(P $pawn): int
     {
-        $left = chr(ord($pawn->getSq()) - 1);
-        $right = chr(ord($pawn->getSq()) + 1);
-        for ($i = 2; $i < $this->board->getSize()['ranks']; $i++) {
+        $left = chr(ord($pawn->sq) - 1);
+        $right = chr(ord($pawn->sq) + 1);
+        for ($i = 2; $i < $this->board->square::SIZE['ranks']; $i++) {
             if ($piece = $this->board->getPieceBySq($left.$i)) {
-                if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()) {
+                if ($piece->id === Piece::P && $piece->color === $pawn->color) {
                     return false;
                 }
             }
             if ($piece = $this->board->getPieceBySq($right.$i)) {
-                if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()) {
+                if ($piece->id === Piece::P && $piece->color === $pawn->color) {
                     return false;
                 }
             }

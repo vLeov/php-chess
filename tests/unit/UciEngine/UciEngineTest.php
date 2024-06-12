@@ -73,8 +73,8 @@ class UciEngineTest extends AbstractUnitTestCase
 
         preg_match_all('/'.Square::REGEX.'/', $analysis['bestmove'], $matches);
 
-        $this->assertIsString(Square::validate($matches[0][0]));
-        $this->assertIsString(Square::validate($matches[0][1]));
+        $this->assertIsString($board->square->validate($matches[0][0]));
+        $this->assertIsString($board->square->validate($matches[0][1]));
     }
 
     /**
@@ -96,8 +96,8 @@ class UciEngineTest extends AbstractUnitTestCase
 
         preg_match_all('/'.Square::REGEX.'/', $analysis['bestmove'], $matches);
 
-        $this->assertIsString(Square::validate($matches[0][0]));
-        $this->assertIsString(Square::validate($matches[0][1]));
+        $this->assertIsString($board->square->validate($matches[0][0]));
+        $this->assertIsString($board->square->validate($matches[0][1]));
     }
 
     /**
@@ -122,11 +122,11 @@ class UciEngineTest extends AbstractUnitTestCase
             $analysis = $stockfish
                 ->setOption('Skill Level', $skillLevel + rand(0, $skillLevelOffset))
                 ->analysis($board, $limit);
-            $this->assertTrue($board->playLan($board->getTurn(), $analysis['bestmove']));
+            $this->assertTrue($board->playLan($board->turn, $analysis['bestmove']));
         } while (
             !$board->isMate() &&
             !$board->isStalemate() &&
-            count($board->getHistory()) < 250
+            count($board->history) < 250
         );
     }
 }

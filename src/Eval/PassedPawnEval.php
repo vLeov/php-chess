@@ -53,8 +53,8 @@ class PassedPawnEval extends AbstractEval implements
         ];
 
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() === Piece::P && $this->isPassedPawn($piece)) {
-                $this->result[$piece->getColor()][] = $piece->getSq();
+            if ($piece->id === Piece::P && $this->isPassedPawn($piece)) {
+                $this->result[$piece->color][] = $piece->sq;
             }
         }
 
@@ -74,22 +74,22 @@ class PassedPawnEval extends AbstractEval implements
      */
     private function isPassedPawn(P $pawn): bool
     {
-        $leftFile = chr(ord($pawn->getSqFile()) - 1);
-        $rightFile = chr(ord($pawn->getSqFile()) + 1);
+        $leftFile = chr(ord($pawn->file()) - 1);
+        $rightFile = chr(ord($pawn->file()) + 1);
 
-        foreach ([$leftFile, $pawn->getSqFile(), $rightFile] as $file) {
-            if ($pawn->getColor() === Color::W) {
-                for ($i = $pawn->getSqRank() + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
+        foreach ([$leftFile, $pawn->file(), $rightFile] as $file) {
+            if ($pawn->color === Color::W) {
+                for ($i = $pawn->rank() + 1; $i <= $this->board->square::SIZE['ranks'] - 1; $i++) {
                     if ($piece = $this->board->getPieceBySq($file.$i)) {
-                        if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
+                        if ($piece->id === Piece::P && $piece->color !== $pawn->color) {
                             return false;
                         }
                     }
                 }
             } else {
-                for ($i = $pawn->getSqRank() - 1; $i >= 2; $i--) {
+                for ($i = $pawn->rank() - 1; $i >= 2; $i--) {
                     if ($piece = $this->board->getPieceBySq($file.$i)) {
-                        if ($piece->getId() === Piece::P && $piece->getColor() !== $pawn->getColor()) {
+                        if ($piece->id === Piece::P && $piece->color !== $pawn->color) {
                             return false;
                         }
                     }

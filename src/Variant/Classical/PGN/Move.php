@@ -9,6 +9,7 @@ use Chess\Variant\Classical\PGN\AN\Check;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * Move.
@@ -121,57 +122,58 @@ class Move extends AbstractNotation
     /**
      * Returns an object for further processing.
      *
-     * @param string $color
+     * @param string $str
      * @param string $pgn
-     * @param array $castlingRule
-     * @return object
+     * @param \Chess\Variant\Classical\Rule\CastlingRule $castlingRule
+     * @param \Chess\Variant\Classical\PGN\AN\Color $color
+     * @return array
      * @throws \Chess\Exception\UnknownNotationException
      */
-    public function toObj(string $color, string $pgn, array $castlingRule): object
+    public function toArray(string $str, string $pgn, CastlingRule $castlingRule, Color $color): array
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
         if (preg_match('/^' . static::KING . '$/', $pgn)) {
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
                 'type' => static::KING,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => (object) [
+                'sq' => [
                     'current' => '',
                     'next' => $this->extractSqs($pgn),
                 ],
             ];
         } elseif (preg_match('/^' . static::CASTLE_SHORT . '$/', $pgn)) {
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
                 'type' => static::CASTLE_SHORT,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => (object) $castlingRule[$color][Piece::K][Castle::SHORT]['sq'],
+                'sq' => $castlingRule->getRule()[$str][Piece::K][Castle::SHORT]['sq'],
             ];
         } elseif (preg_match('/^' . static::CASTLE_LONG . '$/', $pgn)) {
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
                 'type' => static::CASTLE_LONG,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => (object) $castlingRule[$color][Piece::K][Castle::LONG]['sq'],
+                'sq' => $castlingRule->getRule()[$str][Piece::K][Castle::LONG]['sq'],
             ];
         } elseif (preg_match('/^' . static::KING_CAPTURES . '$/', $pgn)) {
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
                 'type' => static::KING_CAPTURES,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => (object) [
+                'sq' => [
                     'current' => '',
                     'next' => $this->extractSqs($pgn),
                 ],
@@ -180,28 +182,28 @@ class Move extends AbstractNotation
             $sqs = $this->extractSqs($pgn);
             $next = substr($sqs, -2);
             $current = str_replace($next, '', $sqs);
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
                 'type' => static::PIECE,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => mb_substr($pgn, 0, 1),
-                'sq' => (object) [
+                'sq' => [
                     'current' => $current,
                     'next' => $next,
                 ],
             ];
         } elseif (preg_match('/^' . static::PIECE_CAPTURES . '$/', $pgn)) {
             $arr = explode('x', $pgn);
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
                 'type' => static::PIECE_CAPTURES,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => mb_substr($pgn, 0, 1),
-                'sq' => (object) [
+                'sq' => [
                     'current' => $this->extractSqs($arr[0]),
                     'next' => $this->extractSqs($arr[1]),
                 ],
@@ -210,88 +212,88 @@ class Move extends AbstractNotation
             $sqs = $this->extractSqs($pgn);
             $next = substr($sqs, -2);
             $current = str_replace($next, '', $sqs);
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
                 'type' => static::KNIGHT,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::N,
-                'sq' => (object) [
+                'sq' => [
                     'current' => $current,
                     'next' => $next,
                 ],
             ];
         } elseif (preg_match('/^' . static::KNIGHT_CAPTURES . '$/', $pgn)) {
             $arr = explode('x', $pgn);
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
                 'type' => static::KNIGHT_CAPTURES,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::N,
-                'sq' => (object) [
+                'sq' => [
                     'current' => $this->extractSqs($arr[0]),
                     'next' => $this->extractSqs($arr[1]),
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN_PROMOTES . '$/', $pgn)) {
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
                 'type' => static::PAWN_PROMOTES,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::P,
                 'newId' => $isCheck
                     ? mb_substr($pgn, -2, -1)
                     : mb_substr($pgn, -1),
-                'sq' => (object) [
+                'sq' => [
                     'current' => '',
                     'next' => $this->extractSqs($pgn),
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN_CAPTURES_AND_PROMOTES . '$/', $pgn)) {
             $arr = explode('x', $pgn);
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
                 'type' => static::PAWN_CAPTURES_AND_PROMOTES,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::P,
                 'newId' => $isCheck
                     ? mb_substr($pgn, -2, -1)
                     : mb_substr($pgn, -1),
-                'sq' => (object) [
+                'sq' => [
                     'current' => '',
                     'next' => $this->extractSqs($arr[1]),
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN . '$/', $pgn)) {
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => false,
                 'isCheck' => $isCheck,
                 'type' => static::PAWN,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::P,
-                'sq' => (object) [
+                'sq' => [
                     'current' => mb_substr($pgn, 0, 1),
                     'next' => $this->extractSqs($pgn),
                 ],
             ];
         } elseif (preg_match('/^' . static::PAWN_CAPTURES . '$/', $pgn)) {
             $arr = explode('x', $pgn);
-            return (object) [
+            return [
                 'pgn' => $pgn,
                 'isCapture' => true,
                 'isCheck' => $isCheck,
                 'type' => static::PAWN_CAPTURES,
-                'color' => Color::validate($color),
+                'color' => $color->validate($str),
                 'id' => Piece::P,
-                'sq' => (object) [
+                'sq' => [
                     'current' => mb_substr($pgn, 0, 1),
                     'next' => $this->extractSqs($arr[1]),
                 ],

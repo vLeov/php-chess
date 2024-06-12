@@ -35,16 +35,16 @@ class DiscoveredCheckEval extends AbstractEval implements
         ];
 
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() !== Piece::K) {
+            if ($piece->id !== Piece::K) {
                 $king = $this->board->getPiece($piece->oppColor(), Piece::K);
-                $clone = unserialize(serialize($this->board));
-                $clone->detach($clone->getPieceBySq($piece->getSq()));
+                $clone = $this->board->clone();
+                $clone->detach($clone->getPieceBySq($piece->sq));
                 $clone->refresh();
                 $newKing = $clone->getPiece($piece->oppColor(), Piece::K);
                 $diffPieces = $this->board->diffPieces($king->attackingPieces(), $newKing->attackingPieces());
                 foreach ($diffPieces as $diffPiece) {
-                    if ($diffPiece->getColor() === $piece->getColor()) {
-                        $this->result[$piece->getColor()] += self::$value[$piece->getId()];
+                    if ($diffPiece->color === $piece->color) {
+                        $this->result[$piece->color] += self::$value[$piece->id];
                         $this->elaborate($piece);
                     }
                 }

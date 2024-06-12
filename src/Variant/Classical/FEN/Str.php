@@ -3,10 +3,10 @@
 namespace Chess\Variant\Classical\FEN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Variant\Classical\FEN\Field\CastlingAbility;
-use Chess\Variant\Classical\FEN\Field\EnPassantTargetSquare;
 use Chess\Variant\Classical\FEN\Field\PiecePlacement;
-use Chess\Variant\Classical\FEN\Field\SideToMove;
+use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
  * FEN string.
@@ -36,10 +36,15 @@ class Str
             throw new UnknownNotationException();
         }
 
-        PiecePlacement::validate($fields[0]);
-        SideToMove::validate($fields[1]);
-        CastlingAbility::validate($fields[2]);
-        EnPassantTargetSquare::validate($fields[3]);
+        (new PiecePlacement())->validate($fields[0]);
+
+        (new Color())->validate($fields[1]);
+
+        (new CastlingRule())->validate($fields[2]);
+
+        if ('-' !== $fields[3]) {
+            (new Square())->validate($fields[3]);
+        }
 
         return $string;
     }

@@ -50,7 +50,7 @@ class SqCount
      */
     private function free(): array
     {
-        return array_diff($this->board->getSqs(), [...$this->used->{Color::W}, ...$this->used->{Color::B}]);
+        return array_diff($this->board->square->all(), [...$this->used->{Color::W}, ...$this->used->{Color::B}]);
     }
 
     /**
@@ -66,7 +66,7 @@ class SqCount
         ];
 
         foreach ($this->board->getPieces() as $piece) {
-            $used[$piece->getColor()][] = $piece->getSq();
+            $used[$piece->color][] = $piece->sq;
         }
 
         return (object) $used;

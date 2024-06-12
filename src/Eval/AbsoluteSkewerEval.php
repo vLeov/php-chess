@@ -19,14 +19,14 @@ class AbsoluteSkewerEval extends AbstractEval implements ElaborateEvalInterface
 
         foreach ($this->board->getPieces() as $piece) {
             if ($piece->isAttackingKing()) {
-                $king = $this->board->getPiece($this->board->getTurn(), Piece::K);
-                $clone = unserialize(serialize($this->board));
-                $clone->playLan($clone->getTurn(), $king->getSq().current($king->sqs()));
+                $king = $this->board->getPiece($this->board->turn, Piece::K);
+                $clone = $this->board->clone();
+                $clone->playLan($clone->turn, $king->sq.current($king->sqs()));
                 $attackedPieces = $piece->attackedPieces();
-                $newAttackedPieces = $clone->getPieceBySq($piece->getSq())->attackedPieces();
+                $newAttackedPieces = $clone->getPieceBySq($piece->sq)->attackedPieces();
                 if ($diffPieces = $this->board->diffPieces($attackedPieces, $newAttackedPieces)) {
-                    if (self::$value[$piece->getId()] < self::$value[current($diffPieces)->getId()]) {
-                        $this->result[$piece->getColor()] = 1;
+                    if (self::$value[$piece->id] < self::$value[current($diffPieces)->id]) {
+                        $this->result[$piece->color] = 1;
                         $this->elaborate($piece, $king);
                     }
                 }

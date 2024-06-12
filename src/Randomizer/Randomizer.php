@@ -39,7 +39,9 @@ class Randomizer
             $board = new Board($pieces);
         } while ($this->isAttackingKing($board));
 
-        $this->board = $board->setTurn($turn);
+        $board->turn = $turn;
+
+        $this->board = $board;
     }
 
     /**
@@ -59,7 +61,7 @@ class Randomizer
      */
     protected function sq(): string
     {
-        $sqs = $this->board->getSqs();
+        $sqs = $this->board->square->all();
         shuffle($sqs);
 
         return $sqs[0];
@@ -100,8 +102,8 @@ class Randomizer
         );
 
         $pieces = [
-            new K(Color::W, $wSq, $this->board->getCastlingRule()),
-            new K(Color::B, $bSq, $this->board->getCastlingRule()),
+            new K(Color::W, $wSq, $this->board->square),
+            new K(Color::B, $bSq, $this->board->square),
         ];
 
         $this->board = new Board($pieces);
@@ -118,7 +120,7 @@ class Randomizer
      */
     protected function rand(array $items, array $pieces): array
     {
-        $freeSqs = $this->board->getSqCount()->free;
+        $freeSqs = $this->board->sqCount->free;
         foreach ($items as $color => $ids) {
             foreach ($ids as $id) {
                 $arrayRand = array_rand($freeSqs, 1);
@@ -127,7 +129,7 @@ class Randomizer
                 $pieces[] = new $className(
                     $color,
                     $sq,
-                    $this->board->getSize(),
+                    $this->board->square,
                     $id !== Piece::R ?: RType::PROMOTED
                 );
                 unset($freeSqs[$arrayRand]);

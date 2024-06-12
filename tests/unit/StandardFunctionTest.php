@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit;
 
-use Chess\Function\StandardFunction;
+use Chess\StandardFunction;
 use Chess\Tests\AbstractUnitTestCase;
 
 class StandardFunctionTest extends AbstractUnitTestCase
@@ -20,7 +20,6 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Pressure',
             'King safety',
             'Protection',
-            'Attack',
             'Discovered check',
             'Doubled pawn',
             'Passed pawn',
@@ -41,8 +40,7 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Bad bishop',
             'Diagonal opposition',
             'Direct opposition',
-            'Checkmate in a ply',
-            'Checkmate in one',
+            'Attack',
         ];
 
         $this->assertSame($expected, (new StandardFunction())->names());

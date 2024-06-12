@@ -46,20 +46,20 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
         ];
 
         foreach ($pieces = $this->board->getPieces() as $piece) {
-            if ($piece->getId() === Piece::K) {
-                $this->result[$piece->getColor()] = array_unique(
+            if ($piece->id === Piece::K) {
+                $this->result[$piece->color] = array_unique(
                     [
-                        ...$this->result[$piece->getColor()],
+                        ...$this->result[$piece->color],
                         ...array_intersect(
-                            $piece->getMobility(),
+                            $piece->mobility,
                             $this->sqCount->free
                         )
                     ]
                 );
-            } elseif ($piece->getId() === Piece::P) {
-                $this->result[$piece->getColor()] = array_unique(
+            } elseif ($piece->id === Piece::P) {
+                $this->result[$piece->color] = array_unique(
                     [
-                        ...$this->result[$piece->getColor()],
+                        ...$this->result[$piece->color],
                         ...array_intersect(
                             $piece->getCaptureSqs(),
                             $this->sqCount->free
@@ -67,9 +67,9 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
                     ]
                 );
             } else {
-                $this->result[$piece->getColor()] = array_unique(
+                $this->result[$piece->color] = array_unique(
                     [
-                        ...$this->result[$piece->getColor()],
+                        ...$this->result[$piece->color],
                         ...array_diff(
                             $piece->sqs(),
                             $this->sqCount->used->{$piece->oppColor()}

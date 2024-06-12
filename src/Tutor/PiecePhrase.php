@@ -84,10 +84,10 @@ class PiecePhrase
     {
         foreach (self::$phrase as $item) {
             if (
-                $item['id'] === $piece->getId() &&
-                $item['color'] === $piece->getColor()
+                $item['id'] === $piece->id &&
+                $item['color'] === $piece->color
             ) {
-                return "{$item['meaning']} on {$piece->getSq()}";
+                return "{$item['meaning']} on {$piece->sq}";
             }
         }
 

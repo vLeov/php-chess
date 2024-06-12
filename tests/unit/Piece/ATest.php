@@ -2,19 +2,17 @@
 
 namespace Chess\Tests\Unit\Piece;
 
-use Chess\Tests\AbstractUnitTestCase;
 use Chess\Piece\A;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Capablanca\PGN\AN\Square;
 
 class ATest extends AbstractUnitTestCase
 {
-    static private $size;
+    static private $square;
 
     public static function setUpBeforeClass(): void
     {
-        self::$size = [
-            'files' => 10,
-            'ranks' => 8,
-        ];
+        self::$square = new Square();
     }
 
     /**
@@ -22,7 +20,7 @@ class ATest extends AbstractUnitTestCase
      */
     public function mobility_a1()
     {
-        $archbishop = new A('w', 'a1', self::$size);
+        $archbishop = new A('w', 'a1', self::$square);
 
         $mobility = [
             'upLeft' => [],
@@ -32,7 +30,7 @@ class ATest extends AbstractUnitTestCase
             'knight' => ['c2', 'b3']
         ];
 
-        $this->assertEquals($mobility, $archbishop->getMobility());
+        $this->assertEquals($mobility, $archbishop->mobility);
     }
 
     /**
@@ -40,7 +38,7 @@ class ATest extends AbstractUnitTestCase
      */
     public function mobility_e4()
     {
-        $archbishop = new A('w', 'e4', self::$size);
+        $archbishop = new A('w', 'e4', self::$square);
 
         $mobility = [
             'upLeft' => ['d5', 'c6', 'b7', 'a8'],
@@ -50,7 +48,7 @@ class ATest extends AbstractUnitTestCase
             'knight' => ['d6', 'c5', 'c3', 'd2', 'f2', 'g3', 'g5', 'f6']
         ];
 
-        $this->assertEquals($mobility, $archbishop->getMobility());
+        $this->assertEquals($mobility, $archbishop->mobility);
 
     }
 
@@ -59,7 +57,7 @@ class ATest extends AbstractUnitTestCase
      */
     public function mobility_d4()
     {
-        $archbishop = new A('w', 'd4', self::$size);
+        $archbishop = new A('w', 'd4', self::$square);
 
         $mobility = [
             'upLeft' => ['c5', 'b6', 'a7'],
@@ -69,7 +67,7 @@ class ATest extends AbstractUnitTestCase
             'knight' => ['c6', 'b5', 'b3', 'c2', 'e2', 'f3', 'f5', 'e6']
         ];
 
-        $this->assertEquals($mobility, $archbishop->getMobility());
+        $this->assertEquals($mobility, $archbishop->mobility);
 
     }
 }

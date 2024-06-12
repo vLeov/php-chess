@@ -5,6 +5,7 @@ namespace Chess\Piece;
 use Chess\Exception\UnknownNotationException;
 use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 /**
  * Knight.
@@ -19,11 +20,11 @@ class N extends AbstractPiece
      *
      * @param string $color
      * @param string $sq
-     * @param array $size
+     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
      */
-    public function __construct(string $color, string $sq, array $size)
+    public function __construct(string $color, string $sq, Square $square)
     {
-        parent::__construct($color, $sq, $size, Piece::N);
+        parent::__construct($color, $sq, $square, Piece::N);
 
         $this->mobility = [];
 
@@ -39,8 +40,8 @@ class N extends AbstractPiece
     {
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = $this->getSqRank() + 2;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() + 2;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -48,8 +49,8 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 2);
-            $rank = $this->getSqRank() + 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() + 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -57,8 +58,8 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 2);
-            $rank = $this->getSqRank() - 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() - 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -66,8 +67,8 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = $this->getSqRank() - 2;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() - 2;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -75,8 +76,8 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = $this->getSqRank() - 2;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() - 2;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -84,8 +85,8 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 2);
-            $rank = $this->getSqRank() - 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() - 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -93,8 +94,8 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 2);
-            $rank = $this->getSqRank() + 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() + 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -102,8 +103,8 @@ class N extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = $this->getSqRank() + 2;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() + 2;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -121,9 +122,9 @@ class N extends AbstractPiece
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->getSqCount()->free)) {
+            if (in_array($sq, $this->board->sqCount->free)) {
                 $sqs[] = $sq;
-            } elseif (in_array($sq, $this->board->getSqCount()->used->{$this->oppColor()})) {
+            } elseif (in_array($sq, $this->board->sqCount->used->{$this->oppColor()})) {
                 $sqs[] = $sq;
             }
         }
@@ -140,7 +141,7 @@ class N extends AbstractPiece
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->getSqCount()->used->{$this->getColor()})) {
+            if (in_array($sq, $this->board->sqCount->used->{$this->color})) {
                 $sqs[] = $sq;
             }
         }

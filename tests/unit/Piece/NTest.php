@@ -4,17 +4,15 @@ namespace Chess\Tests\Unit\Piece;
 
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Piece\N;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 class NTest extends AbstractUnitTestCase
 {
-    static private $size;
+    static private $square;
 
     public static function setUpBeforeClass(): void
     {
-        self::$size = [
-            'files' => 8,
-            'ranks' => 8,
-        ];
+        self::$square = new Square();
     }
 
     /**
@@ -22,7 +20,7 @@ class NTest extends AbstractUnitTestCase
      */
     public function mobility_d4()
     {
-        $knight = new N('w', 'd4', self::$size);
+        $knight = new N('w', 'd4', self::$square);
         $mobility = [
             'c6',
             'b5',
@@ -34,7 +32,7 @@ class NTest extends AbstractUnitTestCase
             'e6'
         ];
 
-        $this->assertSame($mobility, $knight->getMobility());
+        $this->assertSame($mobility, $knight->mobility);
     }
 
     /**
@@ -42,13 +40,13 @@ class NTest extends AbstractUnitTestCase
      */
     public function mobility_h1()
     {
-        $knight = new N('w', 'h1', self::$size);
+        $knight = new N('w', 'h1', self::$square);
         $mobility = [
             'g3',
             'f2'
         ];
 
-        $this->assertSame($mobility, $knight->getMobility());
+        $this->assertSame($mobility, $knight->mobility);
     }
 
     /**
@@ -56,13 +54,13 @@ class NTest extends AbstractUnitTestCase
      */
     public function mobility_b1()
     {
-        $knight = new N('w', 'b1', self::$size);
+        $knight = new N('w', 'b1', self::$square);
         $mobility = [
             'a3',
             'd2',
             'c3'
         ];
 
-        $this->assertSame($mobility, $knight->getMobility());
+        $this->assertSame($mobility, $knight->mobility);
     }
 }

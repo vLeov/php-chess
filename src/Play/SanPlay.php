@@ -30,10 +30,15 @@ class SanPlay extends AbstractPlay
      */
     public function __construct(string $movetext, Board $board = null)
     {
-        $this->initialBoard = $board ?? new Board();
-        $this->board = unserialize(serialize($board)) ?? new Board();
+        if ($board) {
+            $this->initialBoard = $board;
+            $this->board = $board->clone();
+        } else {
+            $this->initialBoard = new Board();
+            $this->board = new Board();
+        }
         $this->fen = [$this->board->toFen()];
-        $this->sanMovetext = new SanMovetext($this->board->getMove(), $movetext);
+        $this->sanMovetext = new SanMovetext($this->board->move, $movetext);
         $this->sanMovetext->validate();
     }
 
@@ -59,7 +64,7 @@ class SanPlay extends AbstractPlay
     {
         foreach ($this->sanMovetext->getMoves() as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
-                if (!$this->board->play($this->board->getTurn(), $val)) {
+                if (!$this->board->play($this->board->turn, $val)) {
                     throw new PlayException();
                 }
                 $this->fen[] = $this->board->toFen();

@@ -15,7 +15,6 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
-use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
@@ -47,44 +46,44 @@ class Board extends AbstractPgnParser
         array $pieces = null,
         string $castlingAbility = '-'
     ) {
-        $this->size = Square::SIZE;
-        $this->sqs = Square::all();
-        $this->castlingAbility = CastlingAbility::START;
-        $this->castlingRule = (new CastlingRule())->getRule();
+        $this->color = new Color();
+        $this->castlingRule = new CastlingRule();
+        $this->square = new Square();
         $this->move = new Move();
+        $this->castlingAbility = CastlingRule::START;
         if (!$pieces) {
-            $this->attach(new R(Color::W, 'a1', $this->size, RType::CASTLE_LONG));
-            $this->attach(new N(Color::W, 'b1', $this->size));
-            $this->attach(new B(Color::W, 'c1', $this->size));
-            $this->attach(new Q(Color::W, 'd1', $this->size));
-            $this->attach(new K(Color::W, 'e1', $this->size));
-            $this->attach(new B(Color::W, 'f1', $this->size));
-            $this->attach(new N(Color::W, 'g1', $this->size));
-            $this->attach(new R(Color::W, 'h1', $this->size, RType::CASTLE_SHORT));
-            $this->attach(new P(Color::W, 'a2', $this->size));
-            $this->attach(new P(Color::W, 'b2', $this->size));
-            $this->attach(new P(Color::W, 'c2', $this->size));
-            $this->attach(new P(Color::W, 'd2', $this->size));
-            $this->attach(new P(Color::W, 'e2', $this->size));
-            $this->attach(new P(Color::W, 'f2', $this->size));
-            $this->attach(new P(Color::W, 'g2', $this->size));
-            $this->attach(new P(Color::W, 'h2', $this->size));
-            $this->attach(new R(Color::B, 'a8', $this->size, RType::CASTLE_LONG));
-            $this->attach(new N(Color::B, 'b8', $this->size));
-            $this->attach(new B(Color::B, 'c8', $this->size));
-            $this->attach(new Q(Color::B, 'd8', $this->size));
-            $this->attach(new K(Color::B, 'e8', $this->size));
-            $this->attach(new B(Color::B, 'f8', $this->size));
-            $this->attach(new N(Color::B, 'g8', $this->size));
-            $this->attach(new R(Color::B, 'h8', $this->size, RType::CASTLE_SHORT));
-            $this->attach(new P(Color::B, 'a7', $this->size));
-            $this->attach(new P(Color::B, 'b7', $this->size));
-            $this->attach(new P(Color::B, 'c7', $this->size));
-            $this->attach(new P(Color::B, 'd7', $this->size));
-            $this->attach(new P(Color::B, 'e7', $this->size));
-            $this->attach(new P(Color::B, 'f7', $this->size));
-            $this->attach(new P(Color::B, 'g7', $this->size));
-            $this->attach(new P(Color::B, 'h7', $this->size));
+            $this->attach(new R(Color::W, 'a1', $this->square, RType::CASTLE_LONG));
+            $this->attach(new N(Color::W, 'b1', $this->square));
+            $this->attach(new B(Color::W, 'c1', $this->square));
+            $this->attach(new Q(Color::W, 'd1', $this->square));
+            $this->attach(new K(Color::W, 'e1', $this->square));
+            $this->attach(new B(Color::W, 'f1', $this->square));
+            $this->attach(new N(Color::W, 'g1', $this->square));
+            $this->attach(new R(Color::W, 'h1', $this->square, RType::CASTLE_SHORT));
+            $this->attach(new P(Color::W, 'a2', $this->square));
+            $this->attach(new P(Color::W, 'b2', $this->square));
+            $this->attach(new P(Color::W, 'c2', $this->square));
+            $this->attach(new P(Color::W, 'd2', $this->square));
+            $this->attach(new P(Color::W, 'e2', $this->square));
+            $this->attach(new P(Color::W, 'f2', $this->square));
+            $this->attach(new P(Color::W, 'g2', $this->square));
+            $this->attach(new P(Color::W, 'h2', $this->square));
+            $this->attach(new R(Color::B, 'a8', $this->square, RType::CASTLE_LONG));
+            $this->attach(new N(Color::B, 'b8', $this->square));
+            $this->attach(new B(Color::B, 'c8', $this->square));
+            $this->attach(new Q(Color::B, 'd8', $this->square));
+            $this->attach(new K(Color::B, 'e8', $this->square));
+            $this->attach(new B(Color::B, 'f8', $this->square));
+            $this->attach(new N(Color::B, 'g8', $this->square));
+            $this->attach(new R(Color::B, 'h8', $this->square, RType::CASTLE_SHORT));
+            $this->attach(new P(Color::B, 'a7', $this->square));
+            $this->attach(new P(Color::B, 'b7', $this->square));
+            $this->attach(new P(Color::B, 'c7', $this->square));
+            $this->attach(new P(Color::B, 'd7', $this->square));
+            $this->attach(new P(Color::B, 'e7', $this->square));
+            $this->attach(new P(Color::B, 'f7', $this->square));
+            $this->attach(new P(Color::B, 'g7', $this->square));
+            $this->attach(new P(Color::B, 'h7', $this->square));
         } else {
             foreach ($pieces as $piece) {
                 $this->attach($piece);
@@ -102,7 +101,7 @@ class Board extends AbstractPgnParser
      */
     public function refresh(): void
     {
-        $this->turn = Color::opp($this->turn);
+        $this->turn = $this->color->opp($this->turn);
 
         $this->sqCount = (new SqCount($this))->count();
 
@@ -115,7 +114,7 @@ class Board extends AbstractPgnParser
         $this->notifyPieces();
 
         if ($this->history) {
-            $this->history[count($this->history) - 1]->fen = $this->toFen();
+            $this->history[count($this->history) - 1]['fen'] = $this->toFen();
         }
     }
 
@@ -129,18 +128,18 @@ class Board extends AbstractPgnParser
         $movetext = '';
         foreach ($this->history as $key => $val) {
             if ($key === 0) {
-                $movetext .= $val->move->color === Color::W
-                    ? "1.{$val->move->pgn}"
-                    : '1' . Move::ELLIPSIS . "{$val->move->pgn} ";
+                $movetext .= $val['move']['color'] === Color::W
+                    ? "1.{$val['move']['pgn']}"
+                    : '1' . Move::ELLIPSIS . "{$val['move']['pgn']} ";
             } else {
-                if ($this->history[0]->move->color === Color::W) {
+                if ($this->history[0]['move']['color'] === Color::W) {
                     $movetext .= $key % 2 === 0
-                        ? ($key / 2 + 1) . ".{$val->move->pgn}"
-                        : " {$val->move->pgn} ";
+                        ? ($key / 2 + 1) . ".{$val['move']['pgn']}"
+                        : " {$val['move']['pgn']} ";
                 } else {
                     $movetext .= $key % 2 === 0
-                        ? " {$val->move->pgn} "
-                        : (ceil($key / 2) + 1) . ".{$val->move->pgn}";
+                        ? " {$val['move']['pgn']} "
+                        : (ceil($key / 2) + 1) . ".{$val['move']['pgn']}";
                 }
             }
         }
@@ -160,7 +159,7 @@ class Board extends AbstractPgnParser
         $this->rewind();
         while ($this->valid()) {
             $piece = $this->current();
-            if ($piece->getColor() === $color && $piece->getId() === $id) {
+            if ($piece->color === $color && $piece->id === $id) {
                 return $piece;
             }
             $this->next();
@@ -182,7 +181,7 @@ class Board extends AbstractPgnParser
         while ($this->valid()) {
             $piece = $this->current();
             if ($color) {
-                if ($piece->getColor() === $color) {
+                if ($piece->color === $color) {
                     $pieces[] = $piece;
                 }
             } else {
@@ -205,7 +204,7 @@ class Board extends AbstractPgnParser
         $this->rewind();
         while ($this->valid()) {
             $piece = $this->current();
-            if ($piece->getSq() === $sq) {
+            if ($piece->sq === $sq) {
                 return $piece;
             }
             $this->next();
@@ -223,7 +222,7 @@ class Board extends AbstractPgnParser
      */
     public function play(string $color, string $pgn): bool
     {
-        $move = $this->move->toObj($color, $pgn, $this->castlingRule);
+        $move = $this->move->toArray($color, $pgn, $this->castlingRule, $this->color);
         if ($this->isValidMove($move)) {
             return $this->isLegalMove($move);
         }
@@ -242,50 +241,50 @@ class Board extends AbstractPgnParser
     {
         $sqs = $this->move->explodeSqs($lan);
         if (isset($sqs[0]) && isset($sqs[1])) {
-            if ($color === $this->getTurn() && $piece = $this->getPieceBySq($sqs[0])) {
-                if ($piece->getId() === Piece::K) {
+            if ($color === $this->turn && $piece = $this->getPieceBySq($sqs[0])) {
+                if ($piece->id === Piece::K) {
                     if (
-                        $this->castlingRule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
+                        $this->castlingRule->getRule()[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
                         $piece->sqCastleShort() &&
                         $this->play($color, Castle::SHORT)
                     ) {
                         return $this->afterPlayLan();
                     } elseif (
-                        $this->castlingRule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
+                        $this->castlingRule->getRule()[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
                         $piece->sqCastleLong() &&
                         $this->play($color, Castle::LONG)
                     ) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, Piece::K.'x'.$sqs[1])) {
+                    } elseif ($this->play($color, Piece::K . 'x' . $sqs[1])) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, Piece::K.$sqs[1])) {
+                    } elseif ($this->play($color, Piece::K . $sqs[1])) {
                         return $this->afterPlayLan();
                     }
-                } elseif ($piece->getId() === Piece::P) {
+                } elseif ($piece->id === Piece::P) {
                     strlen($lan) === 5
-                        ? $promotion = '='.mb_strtoupper(substr($lan, -1))
+                        ? $promotion = '=' . mb_strtoupper(substr($lan, -1))
                         : $promotion = '';
-                    if ($this->play($color, $piece->getSqFile()."x$sqs[1]".$promotion)) {
+                    if ($this->play($color, $piece->file() . "x$sqs[1]" . $promotion)) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, $sqs[1].$promotion)) {
+                    } elseif ($this->play($color, $sqs[1] . $promotion)) {
                         return $this->afterPlayLan();
                     }
                 } else {
-                    if ($this->play($color, "{$piece->getId()}x$sqs[1]")) {
+                    if ($this->play($color, "{$piece->id}x$sqs[1]")) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqFile()}x$sqs[1]")) {
+                    } elseif ($this->play($color, "{$piece->id}{$piece->file()}x$sqs[1]")) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, "{$piece->getId()}{$piece->getSqRank()}x$sqs[1]")) {
+                    } elseif ($this->play($color, "{$piece->id}{$piece->rank()}x$sqs[1]")) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, $piece->getId().$sqs[1])) {
+                    } elseif ($this->play($color, $piece->id . $sqs[1])) {
                         return $this->afterPlayLan();
-                    }  elseif ($this->play($color, $piece->getId().$piece->getSqFile().$sqs[1])) {
+                    }  elseif ($this->play($color, $piece->id . $piece->file() . $sqs[1])) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, $piece->getId().$piece->getSqRank().$sqs[1])) {
+                    } elseif ($this->play($color, $piece->id . $piece->rank() . $sqs[1])) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, "{$piece->getId()}{$piece->getSq()}x$sqs[1]")) {
+                    } elseif ($this->play($color, "{$piece->id}{$piece->sq}x$sqs[1]")) {
                         return $this->afterPlayLan();
-                    } elseif ($this->play($color, $piece->getId().$piece->getSq().$sqs[1])) {
+                    } elseif ($this->play($color, $piece->id . $piece->sq . $sqs[1])) {
                         return $this->afterPlayLan();
                     }
                 }
@@ -302,13 +301,11 @@ class Board extends AbstractPgnParser
      */
     protected function afterPlayLan(): bool
     {
-        $end = $this->getHistory()[count($this->getHistory()) - 1];
         if ($this->isMate()) {
-            $end->move->pgn .= '#';
+            $this->history[count($this->history) - 1]['move']['pgn'] .= '#';
         } elseif ($this->isCheck()) {
-            $end->move->pgn .= '+';
+            $this->history[count($this->history) - 1]['move']['pgn'] .= '+';
         }
-        $this->getHistory()[count($this->getHistory()) - 1] = $end;
 
         return true;
     }
@@ -320,9 +317,9 @@ class Board extends AbstractPgnParser
      */
     public function undo(): Board
     {
-        $board = FenToBoardFactory::create($this->getStartFen(), $this);
-        foreach ($this->popHistory()->getHistory() as $key => $val) {
-            $board->play($val->move->color, $val->move->pgn);
+        $board = FenToBoardFactory::create($this->startFen, $this);
+        foreach ($this->popHistory()->history as $key => $val) {
+            $board->play($val['move']['color'], $val['move']['pgn']);
         }
 
         return $board;
@@ -391,7 +388,7 @@ class Board extends AbstractPgnParser
     {
         return count($this->history) >= 100;
 
-        foreach (array_reverse($this->getHistory()) as $key => $value) {
+        foreach (array_reverse($this->history) as $key => $value) {
             if ($key < 100) {
                 if ($value->move->isCapture) {
                     return  false;
@@ -419,17 +416,17 @@ class Board extends AbstractPgnParser
             return true;
         } elseif ($count === 3) {
             foreach ($this->getPieces() as $piece) {
-                if ($piece->getId() === Piece::N) {
+                if ($piece->id === Piece::N) {
                     return true;
-                } elseif ($piece->getId() === Piece::B) {
+                } elseif ($piece->id === Piece::B) {
                     return true;
                 }
             }
         } elseif ($count === 4) {
             $colors = '';
             foreach ($this->getPieces() as $piece) {
-                if ($piece->getId() === Piece::B) {
-                    $colors .= Square::color($piece->getSq());
+                if ($piece->id === Piece::B) {
+                    $colors .= $this->square->color($piece->sq);
                 }
             }
             return $colors === Color::W . Color::W || $colors === Color::B . Color::B;
@@ -444,37 +441,37 @@ class Board extends AbstractPgnParser
      * @param string $sq
      * @return array
      */
-     public function legal(string $sq): array
-     {
-         return array_values($this->getPieceBySq($sq)->sqs());
-     }
+    public function legal(string $sq): array
+    {
+        return array_values($this->getPieceBySq($sq)->sqs());
+    }
 
-     /**
-      * Returns the en passant square.
-      *
-      * @return string
-      */
-     public function enPassant(): string
-     {
-         if ($this->history) {
-             $last = array_slice($this->history, -1)[0];
-             if ($last->move->id === Piece::P) {
-                 $prevFile = intval(substr($last->sq, 1));
-                 $nextFile = intval(substr($last->move->sq->next, 1));
-                 if ($last->move->color === Color::W) {
-                     if ($nextFile - $prevFile === 2) {
-                         $rank = $prevFile + 1;
-                         return $last->move->sq->current.$rank;
-                     }
-                 } elseif ($prevFile - $nextFile === 2) {
-                     $rank = $prevFile - 1;
-                     return $last->move->sq->current.$rank;
-                 }
-             }
-         }
+    /**
+     * Returns the en passant square.
+     *
+     * @return string
+     */
+    public function enPassant(): string
+    {
+        if ($this->history) {
+            $last = array_slice($this->history, -1)[0];
+            if ($last['move']['id'] === Piece::P) {
+                $prevFile = intval(substr($last['sq'], 1));
+                $nextFile = intval(substr($last['move']['sq']['next'], 1));
+                if ($last['move']['color'] === Color::W) {
+                    if ($nextFile - $prevFile === 2) {
+                        $rank = $prevFile + 1;
+                        return $last['move']['sq']['current'] . $rank;
+                    }
+                } elseif ($prevFile - $nextFile === 2) {
+                    $rank = $prevFile - 1;
+                    return $last['move']['sq']['current'] . $rank;
+                }
+            }
+        }
 
-         return '-';
-     }
+        return '-';
+    }
 
     /**
      * Returns an ASCII array representing this chessboard object.
@@ -485,20 +482,20 @@ class Board extends AbstractPgnParser
     public function toAsciiArray(bool $flip = false): array
     {
         $array = [];
-        for ($i = $this->size['ranks'] - 1; $i >= 0; $i--) {
-            $array[$i] = array_fill(0, $this->size['files'], ' . ');
+        for ($i = $this->square::SIZE['ranks'] - 1; $i >= 0; $i--) {
+            $array[$i] = array_fill(0, $this->square::SIZE['files'], ' . ');
         }
 
         foreach ($this->getPieces() as $piece) {
-            list($file, $rank) = AsciiArray::fromAlgebraicToIndex($piece->getSq());
+            list($file, $rank) = AsciiArray::fromAlgebraicToIndex($piece->sq);
             if ($flip) {
-                $diff = $this->size['files'] - $this->size['ranks'];
-                $file = $this->size['files'] - 1 - $file - $diff;
-                $rank = $this->size['ranks'] - 1 - $rank + $diff;
+                $diff = $this->square::SIZE['files'] - $this->square::SIZE['ranks'];
+                $file = $this->square::SIZE['files'] - 1 - $file - $diff;
+                $rank = $this->square::SIZE['ranks'] - 1 - $rank + $diff;
             }
-            $piece->getColor() === Color::W
-                ? $array[$file][$rank] = ' ' . $piece->getId() . ' '
-                : $array[$file][$rank] = ' ' . strtolower($piece->getId()) . ' ';
+            $piece->color === Color::W
+                ? $array[$file][$rank] = ' ' . $piece->id . ' '
+                : $array[$file][$rank] = ' ' . strtolower($piece->id) . ' ';
         }
 
         return $array;
@@ -533,7 +530,7 @@ class Board extends AbstractPgnParser
     {
         $string = '';
         $array = $this->toAsciiArray();
-        for ($i = $this->getSize()['ranks'] - 1; $i >= 0; $i--) {
+        for ($i = $this->square::SIZE['ranks'] - 1; $i >= 0; $i--) {
             $string .= str_replace(' ', '', implode('', $array[$i]));
             if ($i != 0) {
                 $string .= '/';
@@ -545,7 +542,7 @@ class Board extends AbstractPgnParser
         $n = 1;
         for ($i = 0; $i < count($strSplit); $i++) {
             if ($strSplit[$i] === '.') {
-                if (isset($strSplit[$i+1]) && $strSplit[$i+1] === '.') {
+                if (isset($strSplit[$i + 1]) && $strSplit[$i + 1] === '.') {
                     $n++;
                 } else {
                     $filtered .= $n;
@@ -557,7 +554,7 @@ class Board extends AbstractPgnParser
             }
         }
 
-        return "{$filtered} {$this->getTurn()} {$this->getCastlingAbility()} {$this->enPassant()}";
+        return "{$filtered} {$this->turn} {$this->castlingAbility} {$this->enPassant()}";
     }
 
     /**
@@ -565,10 +562,24 @@ class Board extends AbstractPgnParser
      *
      * @return array
      */
-     public function diffPieces(array $array1, array $array2): array
-     {
+    public function diffPieces(array $array1, array $array2): array
+    {
         return array_udiff($array2, $array1, function ($b, $a) {
-            return $a->getSq() <=> $b->getSq();
+            return $a->sq <=> $b->sq;
         });
-     }
+    }
+
+    /**
+     * Clones the board.
+     *
+     * @return \Chess\Variant\Classical\Board
+     */
+    public function clone(): Board
+    {
+        $board = FenToBoardFactory::create($this->toFen(), $this);
+        $board->captures = $this->captures;
+        $board->history = $this->history;
+
+        return $board;
+    }
 }

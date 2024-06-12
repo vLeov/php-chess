@@ -4,26 +4,25 @@ namespace Chess\Tests\Unit\Piece;
 
 use Chess\Piece\K;
 use Chess\Play\SanPlay;
+use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Capablanca\PGN\AN\Square as CapablancaSquare;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\Classical\PGN\AN\Square as ClassicalSquare;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 class KTest extends AbstractUnitTestCase
 {
     static private $castlingRule;
 
-    static private $size;
+    static private $square;
 
     public static function setUpBeforeClass(): void
     {
         self::$castlingRule = (new CastlingRule())->getRule();
 
-        self::$size = [
-            'files' => 8,
-            'ranks' => 8,
-        ];
+        self::$square = new ClassicalSquare();
     }
 
     /**
@@ -87,10 +86,10 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_w_a2()
     {
-        $king = new K('w', 'a2', self::$size);
+        $king = new K('w', 'a2', self::$square);
         $mobility = ['a3', 'a1', 'b2', 'b3', 'b1'];
 
-        $this->assertEquals($mobility, $king->getMobility());
+        $this->assertEquals($mobility, $king->mobility);
     }
 
     /**
@@ -98,10 +97,10 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_w_d5()
     {
-        $king = new K('w', 'd5', self::$size);
+        $king = new K('w', 'd5', self::$square);
         $mobility = ['d6', 'd4', 'c5', 'e5', 'c6', 'e6', 'c4', 'e4'];
 
-        $this->assertEquals($mobility, $king->getMobility());
+        $this->assertEquals($mobility, $king->mobility);
     }
 
     /**
@@ -109,10 +108,10 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_w_f1()
     {
-        $king = new K('w', 'f1', self::$size);
+        $king = new K('w', 'f1', self::$square);
         $mobility = ['f2', 'e1', 'g1', 'e2', 'g2'];
 
-        $this->assertEquals($mobility, $king->getMobility());
+        $this->assertEquals($mobility, $king->mobility);
     }
 
     /**
@@ -120,10 +119,10 @@ class KTest extends AbstractUnitTestCase
      */
     public function mobility_b_f8()
     {
-        $king = new K('b', 'f8', self::$size);
+        $king = new K('b', 'f8', self::$square);
         $mobility = ['f7', 'e8', 'g8', 'e7', 'g7'];
 
-        $this->assertEquals($mobility, $king->getMobility());
+        $this->assertEquals($mobility, $king->mobility);
     }
 
     /**
@@ -145,15 +144,12 @@ class KTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function mobility_w_f1_size_10_10()
+    public function capablanca_mobility_w_f1()
     {
-        $king = new K('w', 'f1', [
-            'files' => 10,
-            'ranks' => 8,
-        ]);
+        $king = new K('w', 'f1', new CapablancaSquare());
 
         $mobility = ['f2', 'e1', 'g1', 'e2', 'g2'];
 
-        $this->assertEquals($mobility, $king->getMobility());
+        $this->assertEquals($mobility, $king->mobility);
     }
 }

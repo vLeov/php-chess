@@ -50,12 +50,12 @@ class GoodPgnEvaluation extends AbstractParagraph
 
         $analysis = $uciEngine->analysis($this->board, $limit);
 
-        $clone = unserialize(serialize($this->board));
-        $clone->playLan($clone->getTurn(), $analysis['bestmove']);
+        $clone = $this->board->clone();
+        $clone->playLan($clone->turn, $analysis['bestmove']);
 
-        $last = array_slice($clone->getHistory(), -1)[0];
+        $last = array_slice($clone->history, -1)[0];
 
-        $this->pgn = $last->move->pgn;
+        $this->pgn = $last['move']['pgn'];
 
         $this->paragraph = (new PgnEvaluation($this->pgn, $this->board))->getParagraph();
     }

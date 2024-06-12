@@ -22,12 +22,12 @@ class StrToBoard extends ClassicalFenStrToBoard
 {
     public function __construct(string $string)
     {
-        $this->size = Square::SIZE;
+        $this->square = new Square();
         $this->fenStr = new Str();
         $this->string = $this->fenStr->validate($string);
         $this->fields = array_filter(explode(' ', $this->string));
         $this->castlingAbility = $this->fields[2];
-        $this->castlingRule = (new CastlingRule())->getRule();
+        $this->castlingRule = new CastlingRule();
     }
 
     public function create(): Board
@@ -35,13 +35,12 @@ class StrToBoard extends ClassicalFenStrToBoard
         try {
             $pieces = (new PieceArray(
                 $this->fenStr->toAsciiArray($this->fields[0]),
-                $this->size,
+                $this->square,
                 $this->castlingRule
             ))->getArray();
-            $board = (new Board(
-                $pieces,
-                $this->castlingAbility
-            ))->setTurn($this->fields[1])->setStartFen($this->string);
+            $board = new Board($pieces, $this->castlingAbility);
+            $board->turn = $this->fields[1];
+            $board->startFen = $this->string;
         } catch (\Throwable $e) {
             throw new UnknownNotationException();
         }

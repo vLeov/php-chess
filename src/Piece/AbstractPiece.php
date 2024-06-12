@@ -2,10 +2,9 @@
 
 namespace Chess\Piece;
 
-use Chess\Variant\Capablanca\PGN\AN\Square as CapablancaSquare;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\PGN\AN\Square as ClassicalSquare;
+use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Board;
 
 /**
@@ -16,76 +15,70 @@ use Chess\Variant\Classical\Board;
  */
 abstract class AbstractPiece
 {
-    use PieceObserverBoardTrait;
-
     /**
      * The piece's color in PGN format.
      *
      * @var string
      */
-    protected string $color;
+    public string $color;
 
     /**
-     * The piece's square.
+     * The piece's square string.
      *
      * @var string
      */
-    protected string $sq;
+    public string $sq;
 
     /**
-     * @var array
+     * The piece's square object.
+     *
+     * @var \Chess\Variant\Classical\PGN\AN\Square
      */
-    protected array $size;
+    public Square $square;
 
     /**
      * The piece's id in PGN format.
      *
      * @var string
      */
-    protected string $id;
+    public string $id;
 
     /**
      * The piece's mobility.
      *
      * @var array
      */
-    protected array $mobility;
+    public array $mobility;
 
     /**
      * The piece's next move.
      *
-     * @var object
+     * @var array
      */
-    protected object $move;
+    public array $move;
 
     /**
      * The chessboard.
      *
      * @var \Chess\Variant\Classical\Board
      */
-    protected Board $board;
+    public Board $board;
 
     /**
      * Constructor.
      *
      * @param string $color
      * @param string $sq
+     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
      * @param string $id
      */
-    public function __construct(string $color, string $sq, array $size, string $id)
+    public function __construct(string $color, string $sq, Square $square, string $id)
     {
         $this->color = $color;
         $this->sq = $sq;
-        $this->size = $size;
+        $this->square = $square;
         $this->id = $id;
     }
-
-    /**
-     * Calculates the piece's mobility.
-     *
-     * @return \Chess\Piece\AbstractPiece
-     */
-    abstract protected function mobility(): AbstractPiece;
 
     /**
      * Returns the piece's legal moves.
@@ -102,6 +95,36 @@ abstract class AbstractPiece
     abstract public function defendedSqs(): ?array;
 
     /**
+     * Gets the piece's file.
+     *
+     * @return string
+     */
+    public function file(): string
+    {
+        return $this->sq[0];
+    }
+
+    /**
+     * Gets the piece's rank.
+     *
+     * @return int
+     */
+    public function rank(): int
+    {
+        return (int) substr($this->sq, 1);
+    }
+
+    /**
+     * Gets the piece's opposite color.
+     *
+     * @return string
+     */
+    public function oppColor(): string
+    {
+        return $this->board->color->opp($this->color);
+    }
+
+    /**
      * Returns the opponent's pieces that are being attacked by this piece.
      *
      * @return array|null
@@ -111,7 +134,7 @@ abstract class AbstractPiece
         $attackedPieces = [];
         foreach ($sqs = $this->sqs() as $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
-                if ($piece->getColor() === $this->oppColor()) {
+                if ($piece->color === $this->oppColor()) {
                     $attackedPieces[] = $piece;
                 }
             }
@@ -162,104 +185,12 @@ abstract class AbstractPiece
     public function isAttackingKing(): bool
     {
         foreach ($this->attackedPieces() as $piece) {
-            if ($piece->getId() === Piece::K) {
+            if ($piece->id === Piece::K) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    /**
-     * Gets the piece's color.
-     *
-     * @return string
-     */
-    public function getColor(): string
-    {
-        return $this->color;
-    }
-
-    /**
-     * Gets the piece's id.
-     *
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * Gets the piece's square.
-     *
-     * @return string
-     */
-    public function getSq(): string
-    {
-        return $this->sq;
-    }
-
-    /**
-     * Gets the piece's file.
-     *
-     * @return string
-     */
-    public function getSqFile(): string
-    {
-        return $this->sq[0];
-    }
-
-    /**
-     * Gets the piece's rank.
-     *
-     * @return int
-     */
-    public function getSqRank(): int
-    {
-        return (int) substr($this->sq, 1);
-    }
-
-    /**
-     * Gets the piece's mobility.
-     *
-     * @return array|object
-     */
-    public function getMobility(): array|object
-    {
-        return $this->mobility;
-    }
-
-    /**
-     * Gets the piece's move.
-     *
-     * @return object
-     */
-    public function getMove(): object
-    {
-        return $this->move;
-    }
-
-    /**
-     * Sets the piece's next move.
-     *
-     * @param object $move
-     */
-    public function setMove(object $move): AbstractPiece
-    {
-        $this->move = $move;
-
-        return $this;
-    }
-
-    /**
-     * Gets the piece's opposite color.
-     *
-     * @return string
-     */
-    public function oppColor(): string
-    {
-        return Color::opp($this->color);
     }
 
     /**
@@ -270,23 +201,7 @@ abstract class AbstractPiece
     public function isMovable(): bool
     {
         if ($this->move) {
-            return in_array($this->move->sq->next, $this->sqs());
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns true if the square is valid.
-     *
-     * @return boolean
-     */
-    protected function isValidSq(string $sq): bool
-    {
-        if ($this->size === ClassicalSquare::SIZE) {
-            return ClassicalSquare::validate($sq);
-        } elseif ($this->size === CapablancaSquare::SIZE) {
-            return CapablancaSquare::validate($sq);
+            return in_array($this->move['sq']['next'], $this->sqs());
         }
 
         return false;
@@ -297,16 +212,17 @@ abstract class AbstractPiece
      *
      * @return boolean
      */
+
     public function isPinned(): bool
     {
-        $king = $this->board->getPiece($this->getColor(), Piece::K);
-        $clone = unserialize(serialize($this->board));
-        $clone->detach($clone->getPieceBySq($this->getSq()));
+        $king = $this->board->getPiece($this->color, Piece::K);
+        $clone = $this->board->clone();
+        $clone->detach($clone->getPieceBySq($this->sq));
         $clone->refresh();
-        $newKing = $clone->getPiece($this->getColor(), Piece::K);
+        $newKing = $clone->getPiece($this->color, Piece::K);
         $diffPieces = $this->board->diffPieces($king->attackingPieces(), $newKing->attackingPieces());
         foreach ($diffPieces as $diffPiece) {
-            if ($diffPiece->getColor() !== $king->getColor()) {
+            if ($diffPiece->color !== $king->color) {
                 return true;
             }
         }

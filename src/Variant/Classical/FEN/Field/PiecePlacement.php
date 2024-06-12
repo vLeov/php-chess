@@ -3,7 +3,6 @@
 namespace Chess\Variant\Classical\FEN\Field;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Variant\Classical\FEN\ValidationInterface;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 /**
@@ -12,7 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class PiecePlacement implements ValidationInterface
+class PiecePlacement
 {
     /**
      * String validation.
@@ -21,14 +20,14 @@ class PiecePlacement implements ValidationInterface
      * @return string if the value is valid
      * @throws UnknownNotationException
      */
-    public static function validate(string $value): string
+    public function validate(string $value): string
     {
         $fields = explode('/', $value);
 
         if (
-            self::eightFields($fields) &&
-            self::twoKings($fields) &&
-            self::validChars($fields)
+            $this->eightFields($fields) &&
+            $this->twoKings($fields) &&
+            $this->validChars($fields)
         ) {
             return $value;
         }
@@ -42,7 +41,7 @@ class PiecePlacement implements ValidationInterface
      * @param array $fields
      * @return bool
      */
-    protected static function eightFields(array $fields)
+    protected function eightFields(array $fields)
     {
         return count($fields) === 8;
     }
@@ -53,7 +52,7 @@ class PiecePlacement implements ValidationInterface
      * @param array $fields
      * @return bool
      */
-    protected static function twoKings(array $fields)
+    protected function twoKings(array $fields)
     {
         $result = [
             Color::W => 0,
@@ -80,7 +79,7 @@ class PiecePlacement implements ValidationInterface
      * @param array $fields
      * @return bool
      */
-    protected static function validChars(array $fields)
+    protected function validChars(array $fields)
     {
         foreach ($fields as $field) {
             if (!preg_match("#^[rnbqkpRNBQKP1-8]+$#", $field)) {
@@ -98,7 +97,7 @@ class PiecePlacement implements ValidationInterface
      * @param string $char
      * @return int
      */
-    public static function charPos(string $rank, string $char)
+    public function charPos(string $rank, string $char)
     {
         $str = '';
         $split = str_split($rank);

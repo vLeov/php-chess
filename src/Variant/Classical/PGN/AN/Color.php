@@ -4,7 +4,6 @@ namespace Chess\Variant\Classical\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AbstractNotation;
-use Chess\Variant\Classical\PGN\ValidationInterface;
 
 /**
  * Color.
@@ -12,7 +11,7 @@ use Chess\Variant\Classical\PGN\ValidationInterface;
  * @author Jordi Bassagaña
  * @license MIT
  */
-class Color extends AbstractNotation implements ValidationInterface
+class Color extends AbstractNotation
 {
     const W = 'w';
     const B = 'b';
@@ -24,7 +23,7 @@ class Color extends AbstractNotation implements ValidationInterface
      * @return string if the value is valid
      * @throws UnknownNotationException
      */
-    public static function validate(string $value): string
+    public function validate(string $value): string
     {
         if (!in_array($value, self::values())) {
             throw new UnknownNotationException();
@@ -39,7 +38,7 @@ class Color extends AbstractNotation implements ValidationInterface
      * @param string $color
      * @return string
      */
-    public static function opp(string $color): string
+    public function opp(string $color): string
     {
         if ($color === self::W) {
             return self::B;

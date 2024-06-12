@@ -39,10 +39,15 @@ class RavPlay extends AbstractPlay
      */
     public function __construct(string $movetext, Board $board = null)
     {
-        $this->initialBoard = $board ?? new Board();
-        $this->board = unserialize(serialize($board)) ?? new Board();
+        if ($board) {
+            $this->initialBoard = $board;
+            $this->board = $board->clone();
+        } else {
+            $this->initialBoard = new Board();
+            $this->board = new Board();
+        }
         $this->fen = [$this->board->toFen()];
-        $this->ravMovetext = new RavMovetext($this->board->getMove(), $movetext);
+        $this->ravMovetext = new RavMovetext($this->board->move, $movetext);
 
         $this->ravMovetext->validate();
     }
@@ -73,7 +78,7 @@ class RavPlay extends AbstractPlay
         ))->getMoves();
 
         foreach ($moves as $key => $val) {
-            if (!$this->board->play($this->board->getTurn(), $val)) {
+            if (!$this->board->play($this->board->turn, $val)) {
                 throw new PlayException();
             }
         }

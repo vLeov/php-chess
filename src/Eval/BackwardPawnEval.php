@@ -45,18 +45,18 @@ class BackwardPawnEval extends AbstractEval implements
         $this->isolatedPawnEval = (new IsolatedPawnEval($board))->getResult();
 
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->getId() === Piece::P) {
-                $left = chr(ord($piece->getSq()) - 1);
-                $right = chr(ord($piece->getSq()) + 1);
+            if ($piece->id === Piece::P) {
+                $left = chr(ord($piece->sq) - 1);
+                $right = chr(ord($piece->sq) + 1);
                 if (
                     !$this->isDefensible($piece, $left) &&
                     !$this->isDefensible($piece, $right) &&
-                    !in_array($piece->getSq(), [
+                    !in_array($piece->sq, [
                         ...$this->isolatedPawnEval[Color::W],
                         ...$this->isolatedPawnEval[Color::B]
                     ])
                 ) {
-                    $this->result[$piece->getColor()][] = $piece->getSq();
+                    $this->result[$piece->color][] = $piece->sq;
                 }
             }
         }
@@ -71,22 +71,22 @@ class BackwardPawnEval extends AbstractEval implements
 
     private function isDefensible(AbstractPiece $pawn, string $file): bool
     {
-        if ($pawn->getSqRank() == 2 || $pawn->getSqRank() == $this->board->getSize()['ranks'] - 1) {
+        if ($pawn->rank() == 2 || $pawn->rank() == $this->board->square::SIZE['ranks'] - 1) {
             return true;
         }
 
-        if ($pawn->getColor() === Color::W) {
-            for ($i = $pawn->getSqRank() - 1; $i >= 2; $i--) {
+        if ($pawn->color === Color::W) {
+            for ($i = $pawn->rank() - 1; $i >= 2; $i--) {
                 if ($piece = $this->board->getPieceBySq($file.$i)) {
-                    if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()) {
+                    if ($piece->id === Piece::P && $piece->color === $pawn->color) {
                         return true;
                     }
                 }
             }
         } else {
-            for ($i = $pawn->getSqRank() + 1; $i <= $this->board->getSize()['ranks'] - 1; $i++) {
+            for ($i = $pawn->rank() + 1; $i <= $this->board->square::SIZE['ranks'] - 1; $i++) {
                 if ($piece = $this->board->getPieceBySq($file.$i)) {
-                    if ($piece->getId() === Piece::P && $piece->getColor() === $pawn->getColor()
+                    if ($piece->id === Piece::P && $piece->color === $pawn->color
                     ) {
                         return true;
                     }

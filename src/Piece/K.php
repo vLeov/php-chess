@@ -5,9 +5,9 @@ namespace Chess\Piece;
 use Chess\Exception\UnknownNotationException;
 use Chess\Piece\AbstractPiece;
 use Chess\Piece\RType;
-use Chess\Variant\Classical\FEN\Field\CastlingAbility;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\PGN\AN\Square;
 
 /**
  * King.
@@ -22,11 +22,11 @@ class K extends AbstractPiece
      *
      * @param string $color
      * @param string $sq
-     * @param array $size
+     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
      */
-    public function __construct(string $color, string $sq, array $size)
+    public function __construct(string $color, string $sq, Square $square)
     {
-        parent::__construct($color, $sq, $size, Piece::K);
+        parent::__construct($color, $sq, $square, Piece::K);
 
         $this->mobility = [];
 
@@ -42,8 +42,8 @@ class K extends AbstractPiece
     {
         try {
             $file = $this->sq[0];
-            $rank = $this->getSqRank() + 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() + 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -51,8 +51,8 @@ class K extends AbstractPiece
 
         try {
             $file = $this->sq[0];
-            $rank = $this->getSqRank() - 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() - 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -60,8 +60,8 @@ class K extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = $this->getSqRank();
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank();
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -69,8 +69,8 @@ class K extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = $this->getSqRank();
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank();
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -78,8 +78,8 @@ class K extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = $this->getSqRank() + 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() + 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -87,8 +87,8 @@ class K extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = $this->getSqRank() + 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() + 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -96,8 +96,8 @@ class K extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = $this->getSqRank() - 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() - 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -105,8 +105,8 @@ class K extends AbstractPiece
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = $this->getSqRank() - 1;
-            if ($this->isValidSq($file . $rank)) {
+            $rank = $this->rank() - 1;
+            if ($this->square->validate($file . $rank)) {
                 $this->mobility[] = $file . $rank;
             }
         } catch (UnknownNotationException $e) {
@@ -141,7 +141,7 @@ class K extends AbstractPiece
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->getSqCount()->used->{$this->getColor()})) {
+            if (in_array($sq, $this->board->sqCount->used->{$this->color})) {
                 $sqs[] = $sq;
             }
         }
@@ -151,13 +151,13 @@ class K extends AbstractPiece
 
     public function sqCastleLong(): ?string
     {
-        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::K][Castle::LONG];
+        $rule = $this->board->castlingRule->getRule()[$this->color][Piece::K][Castle::LONG];
 
-        if (CastlingAbility::long($this->board->getCastlingAbility(), $this->getColor())) {
+        if ($this->board->castlingRule->long($this->board->castlingAbility, $this->color)) {
             if (
-                ($this->board->getTurn() === $this->getColor() && !$this->board->isCheck()) &&
-                !array_diff($rule['free'], $this->board->getSqCount()->free) &&
-                empty(array_intersect($rule['attack'], $this->board->getSpaceEval()->{$this->oppColor()}))
+                ($this->board->turn === $this->color && !$this->board->isCheck()) &&
+                !array_diff($rule['free'], $this->board->sqCount->free) &&
+                empty(array_intersect($rule['attack'], $this->board->spaceEval->{$this->oppColor()}))
             ) {
                 return $rule['sq']['next'];
             }
@@ -168,13 +168,13 @@ class K extends AbstractPiece
 
     public function sqCastleShort(): ?string
     {
-        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::K][Castle::SHORT];
+        $rule = $this->board->castlingRule->getRule()[$this->color][Piece::K][Castle::SHORT];
 
-        if (CastlingAbility::short($this->board->getCastlingAbility(), $this->getColor())) {
+        if ($this->board->castlingRule->short($this->board->castlingAbility, $this->color)) {
             if (
-                ($this->board->getTurn() === $this->getColor() && !$this->board->isCheck()) &&
-                !array_diff($rule['free'], $this->board->getSqCount()->free) &&
-                empty(array_intersect($rule['attack'], $this->board->getSpaceEval()->{$this->oppColor()}))
+                ($this->board->turn === $this->color && !$this->board->isCheck()) &&
+                !array_diff($rule['free'], $this->board->sqCount->free) &&
+                empty(array_intersect($rule['attack'], $this->board->spaceEval->{$this->oppColor()}))
             ) {
                 return $rule['sq']['next'];
             }
@@ -188,7 +188,7 @@ class K extends AbstractPiece
         $sqsCaptures = [];
         foreach ($this->mobility as $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
-                if ($this->oppColor() === $piece->getColor()) {
+                if ($this->oppColor() === $piece->color) {
                     if (empty($piece->defendingPieces())) {
                         $sqsCaptures[] = $sq;
                     }
@@ -202,9 +202,9 @@ class K extends AbstractPiece
 
     protected function sqsKing(): ?array
     {
-        $sqsKing = array_intersect((array)$this->mobility, $this->board->getSqCount()->free);
+        $sqsKing = array_intersect((array)$this->mobility, $this->board->sqCount->free);
 
-        return array_diff($sqsKing, $this->board->getSpaceEval()->{$this->oppColor()});
+        return array_diff($sqsKing, $this->board->spaceEval->{$this->oppColor()});
     }
 
     /**
@@ -215,16 +215,16 @@ class K extends AbstractPiece
      */
     public function getCastleRook(string $type): ?R
     {
-        $rule = $this->board->getCastlingRule()[$this->getColor()][Piece::R][$type];
+        $rule = $this->board->castlingRule->getRule()[$this->color][Piece::R][$type];
         if ($type === RType::CASTLE_LONG && $this->sqCastleLong()) {
             if ($piece = $this->board->getPieceBySq($rule['sq']['current'])) {
-                if ($piece->getId() === Piece::R) {
+                if ($piece->id === Piece::R) {
                     return $piece;
                 }
             }
         } elseif ($type === RType::CASTLE_SHORT && $this->sqCastleShort()) {
             if ($piece = $this->board->getPieceBySq($rule['sq']['current'])) {
-                if ($piece->getId() === Piece::R) {
+                if ($piece->id === Piece::R) {
                     return $piece;
                 }
             }
