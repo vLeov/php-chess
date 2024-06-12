@@ -27,7 +27,7 @@ class FenHeuristics
     /**
      * The evaluation function.
      *
-     * @var \Chess\Function\StandardFunction
+     * @var \Chess\StandardFunction
      */
     protected StandardFunction $function;
 
