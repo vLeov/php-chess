@@ -10,14 +10,6 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
-/**
- * StrToBoard
- *
- * Converts a FEN string to a chessboard object.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class StrToBoard
 {
     protected Square $square;

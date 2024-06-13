@@ -2,12 +2,6 @@
 
 namespace Chess\Variant\Classical\PGN;
 
-/**
- * Abstract notation.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 abstract class AbstractNotation
 {
     public function values(): array

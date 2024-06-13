@@ -4,12 +4,6 @@ namespace Chess\Variant\Classical\PGN;
 
 use Chess\Exception\UnknownNotationException;
 
-/**
- * Tag.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Tag extends AbstractNotation
 {
     // STR (Seven Tag Roster)
@@ -79,13 +73,6 @@ class Tag extends AbstractNotation
     const WHITE_RD = 'WhiteRD';
     const BLACK_RD = 'BlackRD';
 
-    /**
-     * Validation.
-     *
-     * @param string $tag
-     * @return object if the tag is valid
-     * @throws UnknownNotationException
-     */
     public function validate(string $tag): object
     {
         $isValid = false;
@@ -110,11 +97,6 @@ class Tag extends AbstractNotation
         return $result;
     }
 
-    /**
-     * Basic mandatory tags expected to be found in a game.
-     *
-     * @return array
-     */
     public function mandatory(): array
     {
         return [
@@ -127,11 +109,6 @@ class Tag extends AbstractNotation
         ];
     }
 
-    /**
-     * Tags to be loaded into the database.
-     *
-     * @return array
-     */
     public function loadable(): array
     {
         return [

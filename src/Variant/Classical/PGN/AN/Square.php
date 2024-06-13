@@ -6,12 +6,6 @@ use Chess\Piece\AsciiArray;
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AbstractNotation;
 
-/**
- * Square.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Square extends AbstractNotation
 {
     const REGEX = '[a-h]{1}[1-8]{1}';
@@ -23,13 +17,6 @@ class Square extends AbstractNotation
 
     const EXTRACT = '/[^a-h0-9 "\']/';
 
-    /**
-     * Validate.
-     *
-     * @param string $value
-     * @return string if the value is valid
-     * @throws UnknownNotationException
-     */
     public function validate(string $value): string
     {
         if (!preg_match('/^' . static::REGEX . '$/', $value)) {
@@ -39,12 +26,6 @@ class Square extends AbstractNotation
         return $value;
     }
 
-    /**
-     * Returns the square's color.
-     *
-     * @param string $sq
-     * @return string
-     */
      public function color(string $sq): string
      {
         $file = $sq[0];
@@ -63,11 +44,6 @@ class Square extends AbstractNotation
         return Color::W;
      }
 
-     /**
-      * Returns all squares.
-      *
-      * @return array
-      */
      public function all(): array
      {
          $all = [];

@@ -4,12 +4,6 @@ namespace Chess\Variant\Classical\PGN\AN;
 
 use Chess\Variant\Classical\PGN\AbstractNotation;
 
-/**
- * Termination.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Termination extends AbstractNotation
 {
     const WHITE_WINS = '1-0';

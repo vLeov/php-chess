@@ -8,21 +8,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
-/**
- * FEN string.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Str
 {
-    /**
-     * String validation.
-     *
-     * @param string $string
-     * @return string if the value is valid
-     * @throws \Chess\Exception\UnknownNotationException
-     */
     public function validate(string $string): string
     {
         $fields = explode(' ', $string);
@@ -49,12 +36,6 @@ class Str
         return $string;
     }
 
-    /**
-     * Returns an ASCII array.
-     *
-     * @param string $string
-     * @return array
-     */
     public function toAsciiArray(string $string): array
     {
         $array = [];

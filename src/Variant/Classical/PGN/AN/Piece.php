@@ -4,12 +4,6 @@ namespace Chess\Variant\Classical\PGN\AN;
 
 use Chess\Variant\Classical\PGN\AbstractNotation;
 
-/**
- * Piece.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Piece extends AbstractNotation
 {
     const B = 'B';

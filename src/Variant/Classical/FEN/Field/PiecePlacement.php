@@ -5,21 +5,8 @@ namespace Chess\Variant\Classical\FEN\Field;
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Color;
 
-/**
- * Piece placement.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class PiecePlacement
 {
-    /**
-     * String validation.
-     *
-     * @param string $value
-     * @return string if the value is valid
-     * @throws UnknownNotationException
-     */
     public function validate(string $value): string
     {
         $fields = explode('/', $value);
@@ -35,23 +22,11 @@ class PiecePlacement
         throw new UnknownNotationException();
     }
 
-    /**
-     * Checks out that there are exactly eight fields.
-     *
-     * @param array $fields
-     * @return bool
-     */
     protected function eightFields(array $fields)
     {
         return count($fields) === 8;
     }
 
-    /**
-     * Checks out that there are exactly two kings.
-     *
-     * @param array $fields
-     * @return bool
-     */
     protected function twoKings(array $fields)
     {
         $result = [
@@ -73,12 +48,6 @@ class PiecePlacement
         return $result[Color::W] === 1 && $result[Color::B] === 1;
     }
 
-    /**
-     * Checks out that the pieces are valid.
-     *
-     * @param array $fields
-     * @return bool
-     */
     protected function validChars(array $fields)
     {
         foreach ($fields as $field) {
@@ -90,13 +59,6 @@ class PiecePlacement
         return true;
     }
 
-    /**
-     * Returns the piece position in the given rank.
-     *
-     * @param string $rank
-     * @param string $char
-     * @return int
-     */
     public function charPos(string $rank, string $char)
     {
         $str = '';

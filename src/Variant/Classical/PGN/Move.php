@@ -11,12 +11,6 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
-/**
- * Move.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Move extends AbstractNotation
 {
     const CASTLE_SHORT = Castle::SHORT . Check::REGEX;
@@ -33,22 +27,11 @@ class Move extends AbstractNotation
     const PIECE = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}' . Square::REGEX . Check::REGEX;
     const PIECE_CAPTURES = '[BRQ]{1}[a-h]{0,1}[1-8]{0,1}x' . Square::REGEX . Check::REGEX;
 
-    /**
-     * Returns the constants.
-     *
-     * @return array
-     */
     public function cases(): array
     {
         return (new \ReflectionClass(__CLASS__))->getConstants();
     }
 
-    /**
-     * Returns the given constant.
-     *
-     * @param string $case
-     * @return string
-     */
     public function case(string $case): string
     {
         $key = array_search($case, $this->cases());
@@ -56,23 +39,11 @@ class Move extends AbstractNotation
         return $this->cases()[$key];
     }
 
-    /**
-     * Extract squares from a string.
-     *
-     * @param string $string
-     * @return string if the value is valid
-     */
     public function extractSqs(string $string): string
     {
         return preg_replace(Square::EXTRACT, '', $string);
     }
 
-    /**
-     * Explode squares from a string.
-     *
-     * @param string $string
-     * @return array
-     */
     public function explodeSqs(string $string): array
     {
         preg_match_all('/'.Square::REGEX.'/', $string, $matches);
@@ -80,13 +51,6 @@ class Move extends AbstractNotation
         return $matches[0];
     }
 
-    /**
-     * Validate.
-     *
-     * @param string $value
-     * @return string if the value is valid
-     * @throws \Chess\Exception\UnknownNotationException
-     */
     public function validate(string $value): string
     {
         switch (true) {
@@ -119,16 +83,6 @@ class Move extends AbstractNotation
         throw new UnknownNotationException();
     }
 
-    /**
-     * Returns an object for further processing.
-     *
-     * @param string $str
-     * @param string $pgn
-     * @param \Chess\Variant\Classical\Rule\CastlingRule $castlingRule
-     * @param \Chess\Variant\Classical\PGN\AN\Color $color
-     * @return array
-     * @throws \Chess\Exception\UnknownNotationException
-     */
     public function toArray(string $str, string $pgn, CastlingRule $castlingRule, Color $color): array
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
