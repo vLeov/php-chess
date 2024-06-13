@@ -16,7 +16,7 @@ class SanPlayTest extends AbstractUnitTestCase
         $movetext = '1.e4 e5';
         $board = (new SanPlay($movetext))->validate()->getBoard();
 
-        $this->assertSame($movetext, $board->getMovetext());
+        $this->assertSame($movetext, $board->movetext());
     }
 
     /**
@@ -52,7 +52,7 @@ class SanPlayTest extends AbstractUnitTestCase
         $board = (new SanPlay($movetext, $board))->validate()->getBoard();
         $expected = '1...Nc6 2.Bc4';
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 
     /**
@@ -78,7 +78,7 @@ class SanPlayTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($movetext))->validate()->getBoard();
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 
     /**
@@ -92,7 +92,7 @@ class SanPlayTest extends AbstractUnitTestCase
 
         $sanPlay = (new SanPlay($movetext))->validate();
 
-        $this->assertSame($expected, $sanPlay->getBoard()->getMovetext());
+        $this->assertSame($expected, $sanPlay->getBoard()->movetext());
     }
 
     /**
@@ -106,6 +106,6 @@ class SanPlayTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($movetext))->validate()->getBoard();
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 }

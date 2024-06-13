@@ -21,7 +21,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($A00))->validate()->getBoard();
 
-        $balance = (new SanHeuristic($name, $board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
 
         $label = (new GeometricSumLabeller())->label($balance);
 
@@ -41,7 +41,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($movetext))->validate()->getBoard();
 
-        $balance = (new SanHeuristic($name, $board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
 
         $label = (new GeometricSumLabeller())->label($balance);
 
@@ -61,7 +61,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($A59))->validate()->getBoard();
 
-        $balance = (new SanHeuristic($name, $board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
 
         $label = (new GeometricSumLabeller())->label($balance);
 

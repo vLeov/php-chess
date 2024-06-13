@@ -2739,7 +2739,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $expected = '1.e4 f5 2.Qh5+';
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 
     /**

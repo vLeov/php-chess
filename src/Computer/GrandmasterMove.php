@@ -19,7 +19,7 @@ class GrandmasterMove
 
     public function move(Board $board): ?object
     {
-        $movetext = $board->getMovetext();
+        $movetext = $board->movetext();
         if ($found = $this->find($movetext)) {
             return (object) [
                 'pgn' => $this->next($found[0]['movetext'], $movetext),

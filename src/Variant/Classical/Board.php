@@ -98,7 +98,7 @@ class Board extends AbstractPgnParser
         }
     }
 
-    public function getMovetext(): string
+    public function movetext(): string
     {
         $movetext = '';
         foreach ($this->history as $key => $val) {

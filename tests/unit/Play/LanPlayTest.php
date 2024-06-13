@@ -40,7 +40,7 @@ class LanPlayTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5';
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 
     /**
@@ -54,7 +54,7 @@ class LanPlayTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5';
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 
     /**
@@ -68,7 +68,7 @@ class LanPlayTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5 2.Nf3';
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 
     /**
@@ -82,6 +82,6 @@ class LanPlayTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5 2.Nf3';
 
-        $this->assertSame($expected, $board->getMovetext());
+        $this->assertSame($expected, $board->movetext());
     }
 }

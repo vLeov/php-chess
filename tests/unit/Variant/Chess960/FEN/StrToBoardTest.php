@@ -265,7 +265,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...d5';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -285,6 +285,6 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...d5 2.Nd3';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 }

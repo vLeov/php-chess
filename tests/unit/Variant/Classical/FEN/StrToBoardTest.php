@@ -558,7 +558,7 @@ class StrToBoardTest extends AbstractUnitTestCase
         ];
 
         $this->assertSame($expected, $array);
-        $this->assertSame('1...Rfxc8', $board->getMovetext());
+        $this->assertSame('1...Rfxc8', $board->movetext());
     }
 
     /**
@@ -648,7 +648,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1.Nce7';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -663,7 +663,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1.Nge7';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -678,7 +678,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1.Ncxe7';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -693,7 +693,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1.Ngxe7';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -708,7 +708,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1.R1xe4';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -723,7 +723,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1.R8xe4';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -739,7 +739,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...Bg7 2.e4';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -754,7 +754,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...O-O';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -770,7 +770,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...O-O 2.Nf3';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -787,7 +787,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...O-O 2.Nf3 d5';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -805,7 +805,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...O-O 2.Nf3 d5 3.cxd5';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**
@@ -820,7 +820,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $expected = '1...c6';
 
-        $this->assertEquals($expected, $board->getMovetext());
+        $this->assertEquals($expected, $board->movetext());
     }
 
     /**

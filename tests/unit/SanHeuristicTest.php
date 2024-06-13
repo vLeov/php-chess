@@ -38,7 +38,7 @@ class SanHeuristicTest extends AbstractUnitTestCase
         $board->playLan('b', 'f8g7');
         $board->playLan('w', 'e2e4');
 
-        $balance = (new SanHeuristic($name, $board->getMovetext()))->getBalance();
+        $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
 
         $expected = [ 0, 1.0 ];
 

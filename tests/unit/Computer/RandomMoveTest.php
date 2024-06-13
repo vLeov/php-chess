@@ -56,6 +56,6 @@ class RandomMoveTest extends AbstractUnitTestCase
             }
         }
 
-        $this->assertNotEmpty($board->getMovetext());
+        $this->assertNotEmpty($board->movetext());
     }
 }
