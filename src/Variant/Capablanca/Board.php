@@ -21,10 +21,7 @@ class Board extends ClassicalBoard
 {
     const VARIANT = 'capablanca';
 
-    public function __construct(
-        array $pieces = null,
-        string $castlingAbility = '-'
-    ) {
+    public function __construct(array $pieces = null, string $castlingAbility = '-') {
         $this->color = new Color();
         $this->castlingRule = new CastlingRule();
         $this->square = new Square();
