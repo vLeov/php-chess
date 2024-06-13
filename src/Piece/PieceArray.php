@@ -8,42 +8,14 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
-/**
- * Piece array.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class PieceArray
 {
-    /**
-     * Array.
-     *
-     * @var array
-     */
     protected array $array;
 
-    /**
-     * Square.
-     *
-     * @var \Chess\Variant\Classical\PGN\Square
-     */
     protected Square $square;
 
-    /**
-     * Castling rule.
-     *
-     * @var \Chess\Variant\Classical\Rule\CastlingRule
-     */
-     private CastlingRule $castlingRule;
+    private CastlingRule $castlingRule;
 
-    /**
-     * Constructor.
-     *
-     * @param array $array
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     * @param array $castlingRule
-     */
     public function __construct(array $array, Square $square, CastlingRule $castlingRule)
     {
         $this->square = $square;
@@ -68,23 +40,11 @@ class PieceArray
         return $this;
     }
 
-    /**
-     * Returns the array.
-     *
-     * @return array
-     */
-     public function getArray(): array
-     {
-         return $this->array;
-     }
+    public function getArray(): array
+    {
+        return $this->array;
+    }
 
-    /**
-     * Pushes an element into the array.
-     *
-     * @param string $color
-     * @param string $id
-     * @param string $sq
-     */
     private function push(string $color, string $id, string $sq): void
     {
         if ($id === Piece::R) {

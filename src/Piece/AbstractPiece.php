@@ -7,71 +7,22 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Board;
 
-/**
- * AbstractPiece
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 abstract class AbstractPiece
 {
-    /**
-     * The piece's color in PGN format.
-     *
-     * @var string
-     */
     public string $color;
 
-    /**
-     * The piece's square string.
-     *
-     * @var string
-     */
     public string $sq;
 
-    /**
-     * The piece's square object.
-     *
-     * @var \Chess\Variant\Classical\PGN\AN\Square
-     */
     public Square $square;
 
-    /**
-     * The piece's id in PGN format.
-     *
-     * @var string
-     */
     public string $id;
 
-    /**
-     * The piece's mobility.
-     *
-     * @var array
-     */
     public array $mobility;
 
-    /**
-     * The piece's next move.
-     *
-     * @var array
-     */
     public array $move;
 
-    /**
-     * The chessboard.
-     *
-     * @var \Chess\Variant\Classical\Board
-     */
     public Board $board;
 
-    /**
-     * Constructor.
-     *
-     * @param string $color
-     * @param string $sq
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     * @param string $id
-     */
     public function __construct(string $color, string $sq, Square $square, string $id)
     {
         $this->color = $color;
@@ -80,55 +31,25 @@ abstract class AbstractPiece
         $this->id = $id;
     }
 
-    /**
-     * Returns the piece's legal moves.
-     *
-     * @return array
-     */
     abstract public function sqs(): array;
 
-    /**
-     * Returns the squares defended by the piece.
-     *
-     * @return array|null
-     */
     abstract public function defendedSqs(): ?array;
 
-    /**
-     * Gets the piece's file.
-     *
-     * @return string
-     */
     public function file(): string
     {
         return $this->sq[0];
     }
 
-    /**
-     * Gets the piece's rank.
-     *
-     * @return int
-     */
     public function rank(): int
     {
         return (int) substr($this->sq, 1);
     }
 
-    /**
-     * Gets the piece's opposite color.
-     *
-     * @return string
-     */
     public function oppColor(): string
     {
         return $this->board->color->opp($this->color);
     }
 
-    /**
-     * Returns the opponent's pieces that are being attacked by this piece.
-     *
-     * @return array|null
-     */
     public function attackedPieces(): ?array
     {
         $attackedPieces = [];
@@ -143,11 +64,6 @@ abstract class AbstractPiece
         return $attackedPieces;
     }
 
-    /**
-     * Returns the opponent's pieces that attack this piece.
-     *
-     * @return array|null
-     */
     public function attackingPieces(): ?array
     {
         $attackingPieces = [];
@@ -160,11 +76,6 @@ abstract class AbstractPiece
         return $attackingPieces;
     }
 
-    /**
-     * Returns the pieces that are defending this piece.
-     *
-     * @return array|null
-     */
     public function defendingPieces(): ?array
     {
         $defendingPieces = [];
@@ -177,11 +88,6 @@ abstract class AbstractPiece
         return $defendingPieces;
     }
 
-    /**
-     * Checks out if the opponent's king is attacked by the piece.
-     *
-     * @return bool
-     */
     public function isAttackingKing(): bool
     {
         foreach ($this->attackedPieces() as $piece) {
@@ -193,11 +99,6 @@ abstract class AbstractPiece
         return false;
     }
 
-    /**
-     * Checks whether or not the piece can be moved.
-     *
-     * @return boolean
-     */
     public function isMovable(): bool
     {
         if ($this->move) {
@@ -206,12 +107,6 @@ abstract class AbstractPiece
 
         return false;
     }
-
-    /**
-     * Returns true if the piece is pinned.
-     *
-     * @return boolean
-     */
 
     public function isPinned(): bool
     {

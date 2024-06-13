@@ -10,14 +10,6 @@ use Chess\Variant\Capablanca\FEN\Str;
 use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
-/**
- * StrToBoard
- *
- * Converts a FEN string to a chessboard object.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class StrToBoard extends ClassicalFenStrToBoard
 {
     private array $startPos;

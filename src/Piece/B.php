@@ -7,21 +7,8 @@ use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-/**
- * Bishop.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class B extends Slider
 {
-    /**
-     * Constructor.
-     *
-     * @param string $color
-     * @param string $sq
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     */
     public function __construct(string $color, string $sq, Square $square)
     {
         parent::__construct($color, $sq, $square, Piece::B);
@@ -36,11 +23,6 @@ class B extends Slider
         $this->mobility();
     }
 
-    /**
-     * Calculates the piece's mobility.
-     *
-     * @return \Chess\Piece\AbstractPiece
-     */
     protected function mobility(): AbstractPiece
     {
         try {

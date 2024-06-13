@@ -7,32 +7,14 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
-/**
- * Pressure evaluation.
- *
- * Squares being threatened.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class PressureEval extends AbstractEval implements ExplainEvalInterface
 {
     use ExplainEvalTrait;
 
     const NAME = 'Pressure';
 
-    /**
-     * Count squares.
-     *
-     * @var object
-     */
     private object $sqCount;
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;

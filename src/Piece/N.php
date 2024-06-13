@@ -7,21 +7,8 @@ use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-/**
- * Knight.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class N extends AbstractPiece
 {
-    /**
-     * Constructor.
-     *
-     * @param string $color
-     * @param string $sq
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     */
     public function __construct(string $color, string $sq, Square $square)
     {
         parent::__construct($color, $sq, $square, Piece::N);
@@ -31,11 +18,6 @@ class N extends AbstractPiece
         $this->mobility();
     }
 
-    /**
-     * Calculates the piece's mobility.
-     *
-     * @return \Chess\Piece\AbstractPiece
-     */
     protected function mobility(): AbstractPiece
     {
         try {
@@ -113,11 +95,6 @@ class N extends AbstractPiece
         return $this;
     }
 
-    /**
-     * Returns the piece's legal moves.
-     *
-     * @return array
-     */
     public function sqs(): array
     {
         $sqs = [];
@@ -132,11 +109,6 @@ class N extends AbstractPiece
         return $sqs;
     }
 
-    /**
-     * Returns the squares defended by the piece.
-     *
-     * @return array|null
-     */
     public function defendedSqs(): ?array
     {
         $sqs = [];

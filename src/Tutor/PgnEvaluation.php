@@ -4,20 +4,8 @@ namespace Chess\Tutor;
 
 use Chess\Variant\Classical\Board;
 
-/**
- * PgnEvaluation
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class PgnEvaluation extends AbstractParagraph
 {
-    /**
-     * Constructor.
-     *
-     * @param string $pgn
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(string $pgn, Board $board)
     {
         $this->board = $board;

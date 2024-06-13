@@ -7,42 +7,14 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
-/**
- * Ascii array.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class AsciiArray
 {
-    /**
-     * Array.
-     *
-     * @var array
-     */
     protected array $array;
 
-    /**
-     * Square.
-     *
-     * @var \Chess\Variant\Classical\PGN\Square
-     */
     protected Square $square;
 
-    /**
-     * Castling rule.
-     *
-     * @var array
-     */
-     private array $castlingRule;
+    private array $castlingRule;
 
-    /**
-     * Constructor.
-     *
-     * @param array $array
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     * @param array $castlingRule
-     */
     public function __construct(array $array, Square $square, array $castlingRule)
     {
         $this->array = $array;
@@ -50,24 +22,11 @@ class AsciiArray
         $this->castlingRule = $castlingRule;
     }
 
-    /**
-     * Returns the array.
-     *
-     * @return array
-     */
-     public function getArray(): array
-     {
-         return $this->array;
-     }
+    public function getArray(): array
+    {
+        return $this->array;
+    }
 
-    /**
-     * Returns a \Chess\Variant\Classical\Board object.
-     *
-     * @param string $className
-     * @param string $turn
-     * @param string $castlingAbility
-     * @return \Chess\Variant\Classical\Board
-     */
     public function toClassicalBoard(string $className, string $turn, string $castlingAbility = null): Board
     {
         $board = new $className();
@@ -88,15 +47,6 @@ class AsciiArray
         return $newBoard;
     }
 
-    /**
-     * Returns a \Chess\Variant\Chess960\Board object.
-     *
-     * @param string $className
-     * @param string $turn
-     * @param string $castlingAbility
-     * @param string $startPos
-     * @return \Chess\Variant\Chess960\Board
-     */
     public function toChess960Board(
         string $className,
         string $turn,
@@ -122,13 +72,6 @@ class AsciiArray
         return $newBoard;
     }
 
-    /**
-     * Sets an element in the array using algebraic notation to identify the square.
-     *
-     * @param string $elem
-     * @param string $sq
-     * @return \Chess\Piece\AsciiArray
-     */
     public function setElem(string $elem, string $sq): AsciiArray
     {
         $index = self::fromAlgebraicToIndex($sq);
@@ -137,12 +80,6 @@ class AsciiArray
         return $this;
     }
 
-    /**
-     * Returns the array indexes of the given square.
-     *
-     * @param string $sq
-     * @return array
-     */
     public static function fromAlgebraicToIndex(string $sq): array
     {
         $j = ord($sq[0]) - 97;
@@ -154,13 +91,6 @@ class AsciiArray
         ];
     }
 
-    /**
-     * Returns a square given the indexes of an array.
-     *
-     * @param int $i
-     * @param int $j
-     * @return string
-     */
     public static function fromIndexToAlgebraic(int $i, int $j): string
     {
         $file = chr(97 + $i);

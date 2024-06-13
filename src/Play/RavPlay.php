@@ -9,12 +9,6 @@ use Chess\Movetext\SanMovetext;
 use Chess\Play\SanPlay;
 use Chess\Variant\Classical\Board;
 
-/**
- * Recursive Annotation Variation.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class RavPlay extends AbstractPlay
 {
     /**

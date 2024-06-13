@@ -7,27 +7,10 @@ use Chess\Movetext\SanMovetext;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
 
-/**
- * Standard Algebraic Notation.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class SanPlay extends AbstractPlay
 {
-    /**
-     * SAN movetext.
-     *
-     * @var array
-     */
     protected SanMovetext $sanMovetext;
 
-    /**
-     * Constructor.
-     *
-     * @param string $movetext
-     * @param Board $board
-     */
     public function __construct(string $movetext, Board $board = null)
     {
         if ($board) {
@@ -42,24 +25,11 @@ class SanPlay extends AbstractPlay
         $this->sanMovetext->validate();
     }
 
-    /**
-     * Returns the SAN movetext.
-     *
-     * @return SanMovetext
-     */
     public function getSanMovetext(): SanMovetext
     {
         return $this->sanMovetext;
     }
 
-    /**
-     * Semantically validated movetext.
-     *
-     * Makes the moves in a SAN movetext.
-     *
-     * @throws \Chess\Exception\PlayException
-     * @return \Chess\Play\SanPlay
-     */
     public function validate(): SanPlay
     {
         foreach ($this->sanMovetext->getMoves() as $key => $val) {

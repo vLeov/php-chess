@@ -5,18 +5,8 @@ namespace Chess\Tutor;
 use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
 
-/**
- * Human-like phrase.
- *
- * @license MIT
- */
 class PiecePhrase
 {
-    /**
-     * Array of phrases.
-     *
-     * @var array
-     */
     public static $phrase = [
         [
             'id' => "B",

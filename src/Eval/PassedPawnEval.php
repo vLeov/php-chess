@@ -7,15 +7,6 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * PassedPawnEval
- *
- * A pawn is passed if it has no opposing pawns on either the same file or
- * adjacent files.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class PassedPawnEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -25,11 +16,6 @@ class PassedPawnEval extends AbstractEval implements
 
     const NAME = 'Passed pawn';
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -53,7 +39,7 @@ class PassedPawnEval extends AbstractEval implements
         ];
 
         foreach ($this->board->getPieces() as $piece) {
-            if ($piece->id === Piece::P && $this->isPassedPawn($piece)) {
+            if ($piece->id === Piece::P && $this->isPassed($piece)) {
                 $this->result[$piece->color][] = $piece->sq;
             }
         }
@@ -66,13 +52,7 @@ class PassedPawnEval extends AbstractEval implements
         $this->elaborate($this->result);
     }
 
-    /**
-     * Finds out if a pawn is passed.
-     *
-     * @param \Chess\Piece\P $pawn
-     * @return bool
-     */
-    private function isPassedPawn(P $pawn): bool
+    private function isPassed(P $pawn): bool
     {
         $leftFile = chr(ord($pawn->file()) - 1);
         $rightFile = chr(ord($pawn->file()) + 1);
@@ -100,11 +80,6 @@ class PassedPawnEval extends AbstractEval implements
         return true;
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param array $result
-     */
     private function elaborate(array $result): void
     {
         $singular = mb_strtolower('a ' . self::NAME);

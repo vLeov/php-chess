@@ -4,45 +4,19 @@ namespace Chess\Computer;
 
 use Chess\Variant\Classical\Board;
 
-/**
- * GrandmasterMove
- *
- * Figures out the next move to be made based on the JSON file that is passed to
- * its constructor. Typically this file would contain games by titled FIDE
- * players.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class GrandmasterMove
 {
-    /**
-     * Chess games.
-     *
-     * @var \RecursiveIteratorIterator
-     */
-    private \RecursiveIteratorIterator $items;
+    private \RecursiveIteratorIterator $games;
 
-    /**
-     * Constructor.
-     *
-     * @param string $filepath
-     */
     public function __construct(string $filepath)
     {
         $contents = file_get_contents($filepath);
 
-        $this->items = new \RecursiveIteratorIterator(
+        $this->games = new \RecursiveIteratorIterator(
             new \RecursiveArrayIterator(json_decode($contents, true)),
             \RecursiveIteratorIterator::SELF_FIRST);
     }
 
-    /**
-     * Returns a chess move.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     * @return null|object
-     */
     public function move(Board $board): ?object
     {
         $movetext = $board->getMovetext();
@@ -56,19 +30,13 @@ class GrandmasterMove
         return null;
     }
 
-    /**
-     * Finds a chess game by movetext.
-     *
-     * @param string $movetext
-     * @return array
-     */
     protected function find(string $movetext): array
     {
         $found = [];
-        foreach ($this->items as $item) {
-            if (isset($item['movetext'])) {
-                if (str_starts_with($item['movetext'], $movetext)) {
-                    $found[] = $item;
+        foreach ($this->games as $val) {
+            if (isset($val['movetext'])) {
+                if (str_starts_with($val['movetext'], $movetext)) {
+                    $found[] = $val;
                 }
             }
         }
@@ -77,13 +45,6 @@ class GrandmasterMove
         return $found;
     }
 
-    /**
-     * Finds out the next move to be made.
-     *
-     * @param string $haystack
-     * @param string $needle
-     * @return string
-     */
     protected function next(string $haystack, string $needle): string
     {
         $moves = array_filter(explode(' ', str_replace($needle, '', $haystack)));

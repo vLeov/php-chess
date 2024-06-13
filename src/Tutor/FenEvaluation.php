@@ -7,19 +7,8 @@ use Chess\ML\Supervised\Classification\CountLabeller;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
-/**
- * FenEvaluation
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class FenEvaluation extends AbstractParagraph
 {
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -31,11 +20,6 @@ class FenEvaluation extends AbstractParagraph
         ];
     }
 
-    /**
-     * Returns the position evaluation.
-     *
-     * @return array
-     */
     private function evaluate(): array
     {
         $balance = (new FenHeuristics($this->board))->getBalance();
@@ -47,12 +31,6 @@ class FenEvaluation extends AbstractParagraph
         ];
     }
 
-    /**
-     * Decline the noun.
-     *
-     * @param int $total     *
-     * @return string
-     */
     private function noun(int $total): string
     {
         $noun = $total === 1
@@ -62,12 +40,6 @@ class FenEvaluation extends AbstractParagraph
         return $noun;
     }
 
-    /**
-     * Decline the verb.
-     *
-     * @param int $total     *
-     * @return string
-     */
     private function verb(int $total)
     {
         $verb = $total === 1 ? 'is' : 'are';

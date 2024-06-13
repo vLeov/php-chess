@@ -6,74 +6,29 @@ use Chess\Eval\InverseEvalInterface;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
-/**
- * FenHeuristics
- *
- * FenHeuristics transforms a FEN position to numbers for further processing
- * with ML techniques.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class FenHeuristics
 {
-    /**
-     * Chess board.
-     *
-     * @var \Chess\Variant\Classical\Board
-     */
     protected Board $board;
 
-    /**
-     * The evaluation function.
-     *
-     * @var \Chess\StandardFunction
-     */
     protected StandardFunction $function;
 
-    /**
-     * The result.
-     *
-     * @var array
-     */
     protected array $result;
 
-    /**
-     * The balance.
-     *
-     * @var array
-     */
     protected array $balance = [];
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;
-
         $this->function = new StandardFunction();
 
         $this->calc()->balance();
     }
 
-    /**
-     * Returns the balance.
-     *
-     * @return array
-     */
     public function getBalance(): array
     {
         return $this->balance;
     }
 
-    /**
-     * Calculates the result.
-     *
-     * @return FenHeuristics
-     */
     protected function calc(): FenHeuristics
     {
         foreach ($this->function->getEval() as $val) {
@@ -109,11 +64,6 @@ class FenHeuristics
         return $this;
     }
 
-    /**
-     * Calculates the balance.
-     *
-     * @return FenHeuristics
-     */
     protected function balance(): FenHeuristics
     {
         foreach ($this->result[Color::W] as $key => $val) {

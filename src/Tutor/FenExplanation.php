@@ -6,19 +6,8 @@ use Chess\StandardFunction;
 use Chess\Eval\ExplainEvalInterface;
 use Chess\Variant\Classical\Board;
 
-/**
- * FenExplanation
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class FenExplanation extends AbstractParagraph
 {
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;

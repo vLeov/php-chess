@@ -10,30 +10,12 @@ use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Chess960\StartPieces;
 use Chess\Variant\Chess960\Rule\CastlingRule;
 
-/**
- * Board
- *
- * Fischer Random chessboard representation.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
-final class Board extends ClassicalBoard implements RandomBoardInterface
+class Board extends ClassicalBoard implements RandomBoardInterface
 {
     const VARIANT = '960';
 
-    /**
-     * Start position.
-     *
-     * @var array
-     */
-     private array $startPos;
+    private array $startPos;
 
-    /**
-     * Constructor.
-     *
-     * @param array $startPos
-     */
     public function __construct(
         array $startPos = null,
         array $pieces = null,
@@ -59,11 +41,6 @@ final class Board extends ClassicalBoard implements RandomBoardInterface
         $this->startFen = $this->toFen();
     }
 
-    /**
-     * Returns the start position.
-     *
-     * @return array
-     */
     public function getStartPos(): array
     {
         return $this->startPos;

@@ -7,16 +7,6 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * Attack evaluation.
- *
- * Piece value obtained from the squares under threat of being attacked. A
- * sequence of moves will be played in a cloned chess board to determine if a
- * capture can result in a gain of material.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class AttackEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -26,11 +16,6 @@ class AttackEval extends AbstractEval implements
 
     const NAME = 'Attack';
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -94,11 +79,6 @@ class AttackEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     */
     private function elaborate(AbstractPiece $piece): void
     {
         $this->elaboration[] = "The {$piece->sq}-square is under threat of being attacked.";

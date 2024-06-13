@@ -9,21 +9,8 @@ use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-/**
- * King.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class K extends AbstractPiece
 {
-    /**
-     * Constructor.
-     *
-     * @param string $color
-     * @param string $sq
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     */
     public function __construct(string $color, string $sq, Square $square)
     {
         parent::__construct($color, $sq, $square, Piece::K);
@@ -33,11 +20,6 @@ class K extends AbstractPiece
         $this->mobility();
     }
 
-    /**
-     * Calculates the piece's mobility.
-     *
-     * @return \Chess\Piece\AbstractPiece
-     */
     protected function mobility(): AbstractPiece
     {
         try {
@@ -115,11 +97,6 @@ class K extends AbstractPiece
         return $this;
     }
 
-    /**
-     * Returns the piece's legal moves.
-     *
-     * @return array
-     */
     public function sqs(): array
     {
         $sqs = [
@@ -132,11 +109,6 @@ class K extends AbstractPiece
         return array_filter(array_unique($sqs));
     }
 
-    /**
-     * Returns the squares defended by the piece.
-     *
-     * @return array|null
-     */
     public function defendedSqs(): ?array
     {
         $sqs = [];
@@ -207,12 +179,6 @@ class K extends AbstractPiece
         return array_diff($sqsKing, $this->board->spaceEval->{$this->oppColor()});
     }
 
-    /**
-     * Returns the castle rook.
-     *
-     * @param string $type
-     * @return R|null \Chess\Piece\R|null
-     */
     public function getCastleRook(string $type): ?R
     {
         $rule = $this->board->castlingRule->getRule()[$this->color][Piece::R][$type];
@@ -233,11 +199,6 @@ class K extends AbstractPiece
         return null;
     }
 
-    /**
-     * Returns false.
-     *
-     * @return boolean
-     */
     public function isPinned(): bool
     {
         return false;

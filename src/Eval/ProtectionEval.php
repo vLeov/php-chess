@@ -8,14 +8,6 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * Protection evaluation.
- *
- * Total piece value obtained from the squares that are not being defended.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class ProtectionEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -25,11 +17,6 @@ class ProtectionEval extends AbstractEval implements
 
     const NAME = 'Protection';
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -61,11 +48,6 @@ class ProtectionEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     */
     private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);

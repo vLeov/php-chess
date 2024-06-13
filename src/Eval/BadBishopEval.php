@@ -8,14 +8,6 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * BadBishopEval
- *
- * A bad bishop is a bishop that is blocked by its own pawns.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class BadBishopEval extends AbstractEval implements
     ExplainEvalInterface,
     InverseEvalInterface
@@ -24,11 +16,6 @@ class BadBishopEval extends AbstractEval implements
 
     const NAME = 'Bad bishop';
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -61,13 +48,6 @@ class BadBishopEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
-    /**
-     * Counts the number of pawns blocking a bishop.
-     *
-     * @param \Chess\Piece\AbstractPiece $bishop
-     * @param string $sqColor
-     * @return int
-     */
     private function countBlockingPawns(AbstractPiece $bishop, string $sqColor): int
     {
         $count = 0;

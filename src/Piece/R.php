@@ -7,27 +7,10 @@ use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-/**
- * Rook.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class R extends Slider
 {
-    /**
-     * @var string
-     */
     private string $type;
 
-    /**
-     * Constructor.
-     *
-     * @param string $color
-     * @param string $sq
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     * @param string $type
-     */
     public function __construct(string $color, string $sq, Square $square, string $type)
     {
         parent::__construct($color, $sq, $square, Piece::R);
@@ -44,21 +27,11 @@ class R extends Slider
         $this->mobility();
     }
 
-    /**
-     * Returns the rook's type.
-     *
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * Calculates the piece's mobility.
-     *
-     * @return \Chess\Piece\AbstractPiece
-     */
     protected function mobility(): AbstractPiece
     {
         try {

@@ -2,18 +2,8 @@
 
 namespace Chess\Movetext;
 
-/**
- * Numeric Annotation Glyphs.
- *
- * @license MIT
- */
 class NagMovetext
 {
-    /**
-     * Array of NAGs.
-     *
-     * @var array
-     */
     public static $glyphs = [
         [
             'nag' => '$0',
@@ -643,12 +633,6 @@ class NagMovetext
         ],
     ];
 
-    /**
-     * Returns a glyph.
-     *
-     * @param string $nag
-     * @return array
-     */
     public static function glyph(string $nag): ?array
     {
         foreach (self::$glyphs as $glyph) {

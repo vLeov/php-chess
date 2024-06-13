@@ -22,26 +22,12 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
-/**
- * Board
- *
- * Chess board representation to play classical chess.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Board extends AbstractPgnParser
 {
     use BoardObserverPieceTrait;
 
     const VARIANT = 'classical';
 
-    /**
-     * Constructor.
-     *
-     * @param array $pieces
-     * @param string $castlingAbility
-     */
     public function __construct(
         array $pieces = null,
         string $castlingAbility = '-'
@@ -96,9 +82,6 @@ class Board extends AbstractPgnParser
         $this->startFen = $this->toFen();
     }
 
-    /**
-     * Refreshes the state of the board.
-     */
     public function refresh(): void
     {
         $this->turn = $this->color->opp($this->turn);
@@ -118,11 +101,6 @@ class Board extends AbstractPgnParser
         }
     }
 
-    /**
-     * Returns the movetext.
-     *
-     * @return string
-     */
     public function getMovetext(): string
     {
         $movetext = '';
@@ -147,13 +125,6 @@ class Board extends AbstractPgnParser
         return trim($movetext);
     }
 
-    /**
-     * Returns the first piece on the board matching the search criteria.
-     *
-     * @param string $color
-     * @param string $id
-     * @return AbstractPiece|null \Chess\Piece\AbstractPiece|null
-     */
     public function getPiece(string $color, string $id): ?AbstractPiece
     {
         $this->rewind();
@@ -168,12 +139,6 @@ class Board extends AbstractPgnParser
         return null;
     }
 
-    /**
-     * Returns an array of pieces.
-     *
-     * @param string $color
-     * @return array
-     */
     public function getPieces(string $color = ''): array
     {
         $pieces = [];
@@ -193,12 +158,6 @@ class Board extends AbstractPgnParser
         return $pieces;
     }
 
-    /**
-     * Returns a piece by its position on the board.
-     *
-     * @param string $sq
-     * @return AbstractPiece|null \Chess\Piece\AbstractPiece|null
-     */
     public function getPieceBySq(string $sq): ?AbstractPiece
     {
         $this->rewind();
@@ -213,13 +172,6 @@ class Board extends AbstractPgnParser
         return null;
     }
 
-    /**
-     * Makes a move in PGN format.
-     *
-     * @param string $color
-     * @param string $pgn
-     * @return bool
-     */
     public function play(string $color, string $pgn): bool
     {
         $move = $this->move->toArray($color, $pgn, $this->castlingRule, $this->color);
@@ -230,13 +182,6 @@ class Board extends AbstractPgnParser
         return false;
     }
 
-    /**
-     * Makes a move in LAN format.
-     *
-     * @param string $color
-     * @param string $lan
-     * @return bool
-     */
     public function playLan(string $color, string $lan): bool
     {
         $sqs = $this->move->explodeSqs($lan);
@@ -294,11 +239,6 @@ class Board extends AbstractPgnParser
         return false;
     }
 
-    /**
-     * Adds a PGN symbol to the last history element.
-     *
-     * @return bool
-     */
     protected function afterPlayLan(): bool
     {
         if ($this->isMate()) {
@@ -310,11 +250,6 @@ class Board extends AbstractPgnParser
         return true;
     }
 
-    /**
-     * Undoes the last move.
-     *
-     * @return \Chess\Variant\Classical\Board
-     */
     public function undo(): Board
     {
         $board = FenToBoardFactory::create($this->startFen, $this);
@@ -325,11 +260,6 @@ class Board extends AbstractPgnParser
         return $board;
     }
 
-    /**
-     * Checks out whether the current player is in check.
-     *
-     * @return bool
-     */
     public function isCheck(): bool
     {
         $king = $this->getPiece($this->turn, Piece::K);
@@ -341,31 +271,16 @@ class Board extends AbstractPgnParser
         throw new BoardException();
     }
 
-    /**
-     * Checks out whether the current player is checkmated.
-     *
-     * @return bool
-     */
     public function isMate(): bool
     {
         return $this->isTrapped() && $this->isCheck();
     }
 
-    /**
-     * Checks out whether the current player is stalemated.
-     *
-     * @return bool
-     */
     public function isStalemate(): bool
     {
         return $this->isTrapped() && !$this->isCheck();
     }
 
-    /**
-     * Checks out whether the same position occurs five times.
-     *
-     * @return bool
-     */
     public function isFivefoldRepetition(): bool
     {
         $count = array_count_values(array_column($this->history, 'fen'));
@@ -378,12 +293,6 @@ class Board extends AbstractPgnParser
         return false;
     }
 
-    /**
-     * Checks out if no capture has been made and no pawn has been moved in the
-     * last fifty moves.
-     *
-     * @return bool
-     */
     public function isFiftyMoveDraw(): bool
     {
         return count($this->history) >= 100;
@@ -404,11 +313,6 @@ class Board extends AbstractPgnParser
         return true;
     }
 
-    /**
-     * Returns true if no sequence of legal moves can lead to checkmate.
-     *
-     * @return bool
-     */
     public function isDeadPositionDraw(): bool
     {
         $count = count($this->getPieces());
@@ -435,22 +339,11 @@ class Board extends AbstractPgnParser
         return false;
     }
 
-    /**
-     * Returns the legal squares of a piece.
-     *
-     * @param string $sq
-     * @return array
-     */
     public function legal(string $sq): array
     {
         return array_values($this->getPieceBySq($sq)->sqs());
     }
 
-    /**
-     * Returns the en passant square.
-     *
-     * @return string
-     */
     public function enPassant(): string
     {
         if ($this->history) {
@@ -473,19 +366,12 @@ class Board extends AbstractPgnParser
         return '-';
     }
 
-    /**
-     * Returns an ASCII array representing this chessboard object.
-     *
-     * @param bool $flip
-     * @return array
-     */
     public function toAsciiArray(bool $flip = false): array
     {
         $array = [];
         for ($i = $this->square::SIZE['ranks'] - 1; $i >= 0; $i--) {
             $array[$i] = array_fill(0, $this->square::SIZE['files'], ' . ');
         }
-
         foreach ($this->getPieces() as $piece) {
             list($file, $rank) = AsciiArray::fromAlgebraicToIndex($piece->sq);
             if ($flip) {
@@ -501,12 +387,6 @@ class Board extends AbstractPgnParser
         return $array;
     }
 
-    /**
-     * Returns an ASCII string representing this Chess\Board object.
-     *
-     * @param bool $flip
-     * @return string
-     */
     public function toAsciiString(bool $flip = false): string
     {
         $ascii = '';
@@ -521,11 +401,6 @@ class Board extends AbstractPgnParser
         return $ascii;
     }
 
-    /**
-     * Returns a FEN representing this chessboard object.
-     *
-     * @return string
-     */
     public function toFen(): string
     {
         $string = '';
@@ -557,11 +432,6 @@ class Board extends AbstractPgnParser
         return "{$filtered} {$this->turn} {$this->castlingAbility} {$this->enPassant()}";
     }
 
-    /**
-     * Returns the difference between two arrays of pieces.
-     *
-     * @return array
-     */
     public function diffPieces(array $array1, array $array2): array
     {
         return array_udiff($array2, $array1, function ($b, $a) {
@@ -569,11 +439,6 @@ class Board extends AbstractPgnParser
         });
     }
 
-    /**
-     * Clones the board.
-     *
-     * @return \Chess\Variant\Classical\Board
-     */
     public function clone(): Board
     {
         $board = FenToBoardFactory::create($this->toFen(), $this);

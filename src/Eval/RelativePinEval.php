@@ -8,16 +8,6 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * Relative pin evaluation.
- *
- * Pieces are removed from a cloned chess board to determine if they are pinned
- * relatively. If so, when removed from the board, the attacking piece will be
- * pressuring a new square containing a more valuable piece.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class RelativePinEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -27,11 +17,6 @@ class RelativePinEval extends AbstractEval implements
 
     const NAME = 'Relative pin';
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
     public function __construct(Board $board)
     {
         $this->board = $board;
@@ -86,11 +71,6 @@ class RelativePinEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     */
     private function elaborate(AbstractPiece $piece): void
     {
         $phrase = PiecePhrase::create($piece);

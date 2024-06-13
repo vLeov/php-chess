@@ -5,12 +5,6 @@ namespace Chess\Eval;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
-/**
- * Square count.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class SqCount
 {
     const TYPE_FREE      = 'free';
@@ -30,11 +24,6 @@ class SqCount
         $this->free = $this->free();
     }
 
-    /**
-     * Count squares.
-     *
-     * @return object
-     */
     public function count(): object
     {
         return (object) [
@@ -43,21 +32,11 @@ class SqCount
         ];
     }
 
-    /**
-     * Free squares.
-     *
-     * @return array
-     */
     private function free(): array
     {
         return array_diff($this->board->square->all(), [...$this->used->{Color::W}, ...$this->used->{Color::B}]);
     }
 
-    /**
-     * Squares used by both players.
-     *
-     * @return object
-     */
     private function used(): object
     {
         $used = [

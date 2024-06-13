@@ -6,12 +6,6 @@ use Chess\Eval\SpaceEval;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 
-/**
- * Center.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class CenterEval extends AbstractEval implements ExplainEvalInterface
 {
     use ExplainEvalTrait;

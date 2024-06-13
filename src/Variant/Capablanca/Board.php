@@ -17,24 +17,10 @@ use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 
-/**
- * Board
- *
- * Chess board representation to play Capablanca chess on a 10×8 board.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class Board extends ClassicalBoard
 {
     const VARIANT = 'capablanca';
 
-    /**
-     * Constructor.
-     *
-     * @param array $pieces
-     * @param string $castlingAbility
-     */
     public function __construct(
         array $pieces = null,
         string $castlingAbility = '-'

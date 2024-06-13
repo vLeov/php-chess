@@ -9,42 +9,14 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Color;
 
-/**
- * SanHeuristic
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class SanHeuristic extends SanPlay
 {
-    /**
-     * The name of the evaluation feature.
-     *
-     * @var string
-     */
     protected string $name;
 
-    /**
-     * The result.
-     *
-     * @var array
-     */
     protected array $result;
 
-    /**
-     * The balance.
-     *
-     * @var array
-     */
     protected array $balance = [];
 
-    /**
-     * Constructor.
-     *
-     * @param string $name
-     * @param string $movetext
-     * @param \Chess\Variant\Classical\Board|null $board
-     */
     public function __construct(string $name, string $movetext = '', Board $board = null)
     {
         parent::__construct($movetext, $board);
@@ -54,21 +26,11 @@ class SanHeuristic extends SanPlay
         $this->calc()->balance()->normalize(-1, 1);
     }
 
-    /**
-     * Returns the balance.
-     *
-     * @return array
-     */
     public function getBalance(): array
     {
         return $this->balance;
     }
 
-    /**
-     * Calculates the result.
-     *
-     * @return \Chess\SanHeuristic
-     */
     protected function calc(): SanHeuristic
     {
         $this->result[] = $this->item(EvalFactory::create($this->name, $this->board));
@@ -83,12 +45,6 @@ class SanHeuristic extends SanPlay
         return $this;
     }
 
-    /**
-     * Returns an item.
-     *
-     * @param \Chess\Eval\AbstractEval
-     * @return array
-     */
     protected function item(AbstractEval $eval): array
     {
         $result = $eval->getResult();
@@ -119,11 +75,6 @@ class SanHeuristic extends SanPlay
         return $item;
     }
 
-    /**
-     * Calculates the balance.
-     *
-     * @return SanHeuristic
-     */
     protected function balance(): SanHeuristic
     {
         foreach ($this->result as $key => $val) {
@@ -134,13 +85,6 @@ class SanHeuristic extends SanPlay
         return $this;
     }
 
-    /**
-     * Normalizes the balance.
-     *
-     * @param int $newMin
-     * @param int $newMax
-     * @return \Chess\Heuristic\SanHeuristic
-     */
     protected function normalize(int $newMin, int $newMax): SanHeuristic
     {
         $normd = [];

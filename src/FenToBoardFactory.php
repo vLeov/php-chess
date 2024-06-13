@@ -11,24 +11,12 @@ use Chess\Variant\Chess960\FEN\StrToBoard as Chess960FenStrToBoard;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
-/**
- * Factory of chess board objects.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class FenToBoardFactory
 {
-    /**
-     * Creates a chessboard object.
-     *
-     * @param string $fen
-     * @param \Chess\Variant\Classical\Board|null $board
-     */
     public static function create(string $fen, ClassicalBoard $board = null)
     {
         $board ??= new ClassicalBoard();
-        
+
         if (is_a($board, CapablancaBoard::class)) {
             return (new CapablancaFenStrToBoard($fen))->create();
         } elseif (is_a($board, CapablancaFischerBoard::class)) {

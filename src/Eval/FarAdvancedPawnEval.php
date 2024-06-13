@@ -8,12 +8,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 /**
- * FarAdvancedPawnEval
- *
  * A pawn is far advanced if it is threatening to promote.
- *
- * @author Jordi Bassagaña
- * @license MIT
  */
 class FarAdvancedPawnEval extends AbstractEval implements
     ElaborateEvalInterface,

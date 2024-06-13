@@ -32,21 +32,8 @@ use Chess\Eval\RelativePinEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqOutpostEval;
 
-/**
- * StandardFunction
- *
- * Standard evaluation function.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class StandardFunction
 {
-    /**
-     * The evaluation features.
-     *
-     * @var array
-     */
     protected array $eval = [
         MaterialEval::class,
         CenterEval::class,
@@ -78,21 +65,11 @@ class StandardFunction
         AttackEval::class,
     ];
 
-    /**
-     * Returns the evaluation features.
-     *
-     * @return array
-     */
     public function getEval(): array
     {
         return $this->eval;
     }
 
-    /**
-     * Returns the evaluation names.
-     *
-     * @return array
-     */
     public function names(): array
     {
         foreach ($this->eval as $val) {

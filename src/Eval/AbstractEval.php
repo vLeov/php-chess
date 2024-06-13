@@ -6,12 +6,6 @@ use Chess\Variant\Capablanca\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\Board;
 
-/**
- * Abstract evaluation.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 abstract class AbstractEval
 {
     protected static $value = [

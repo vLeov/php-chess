@@ -4,18 +4,8 @@ namespace Chess\Tutor;
 
 use Chess\Variant\Classical\PGN\AN\Color;
 
-/**
- * Human-like phrase.
- *
- * @license MIT
- */
 class ColorPhrase
 {
-    /**
-     * Array of phrases.
-     *
-     * @var array
-     */
     public static $phrase = [
         [
             'color' => "w",

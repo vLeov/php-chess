@@ -8,36 +8,14 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-/**
- * Pawn.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class P extends AbstractPiece
 {
-    /**
-     * @var object
-     */
     private array $ranks;
 
-    /**
-     * @var array
-     */
     private array $captureSqs;
 
-    /**
-     * @var string
-     */
     private string $enPassantSq = '';
 
-    /**
-     * Constructor.
-     *
-     * @param string $color
-     * @param string $sq
-     * @param Square \Chess\Variant\Classical\PGN\AN\Square $square
-     */
     public function __construct(string $color, string $sq, Square $square)
     {
         parent::__construct($color, $sq, $square, Piece::P);
@@ -63,11 +41,6 @@ class P extends AbstractPiece
         $this->mobility();
     }
 
-    /**
-     * Calculates the piece's mobility.
-     *
-     * @return \Chess\Piece\AbstractPiece
-     */
     protected function mobility(): AbstractPiece
     {
         // next rank
@@ -112,11 +85,6 @@ class P extends AbstractPiece
         return $this;
     }
 
-    /**
-     * Returns the piece's legal moves.
-     *
-     * @return array
-     */
     public function sqs(): array
     {
         $sqs = [];
@@ -165,11 +133,6 @@ class P extends AbstractPiece
         return array_filter(array_unique($sqs));
     }
 
-    /**
-     * Returns the squares defended by the piece.
-     *
-     * @return array|null
-     */
     public function defendedSqs(): ?array
     {
         $sqs = [];
@@ -182,42 +145,21 @@ class P extends AbstractPiece
         return $sqs;
     }
 
-    /**
-     * Gets the pawn's rank info.
-     *
-     * @return array
-     */
     public function getRanks(): array
     {
         return $this->ranks;
     }
 
-    /**
-     * Gets the capture squares.
-     *
-     * @return array
-     */
     public function getCaptureSqs(): array
     {
         return $this->captureSqs;
     }
 
-    /**
-     * Gets the en passant square.
-     *
-     * @return string
-     */
     public function getEnPassantSq(): ?string
     {
         return $this->enPassantSq;
     }
 
-    /**
-     * Sets the en passant square.
-     *
-     * @param string $sq
-     * @return \Chess\Piece\P
-     */
     public function setEnPassantSq(string $sq): P
     {
         $this->enPassantSq = $sq;
@@ -225,11 +167,6 @@ class P extends AbstractPiece
         return $this;
     }
 
-    /**
-     * Checks whether the pawn is promoted.
-     *
-     * @return boolean
-     */
     public function isPromoted(): bool
     {
         $rank = (int) substr($this->move['sq']['next'], 1);
@@ -237,11 +174,6 @@ class P extends AbstractPiece
         return isset($this->move['newId']) && $rank === $this->ranks['end'];
     }
 
-    /**
-     * Returns the en passant pawn.
-     *
-     * @return \Chess\Piece\P|null
-     */
     public function enPassantPawn(): ?P
     {
         if ($this->enPassantSq) {

@@ -5,11 +5,6 @@ namespace Chess\Movetext;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Color;
 
-/**
- * Standard Algebraic Notation.
- *
- * @license MIT
- */
 class SanMovetext extends AbstractMovetext
 {
     /**

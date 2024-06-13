@@ -8,11 +8,6 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
-/**
- * SqOutpostEval
- *
- * @link https://en.wikipedia.org/wiki/Outpost_(chess)
- */
 class SqOutpostEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -106,11 +101,6 @@ class SqOutpostEval extends AbstractEval implements
         return false;
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param array $result
-     */
     private function elaborate(array $result): void
     {
         $singular = mb_strtolower('an ' . self::NAME);

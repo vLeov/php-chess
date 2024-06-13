@@ -6,12 +6,6 @@ use Chess\Eval\SqCount;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
-/**
- * Connectivity.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
 {
     use ExplainEvalTrait;

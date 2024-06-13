@@ -75,11 +75,6 @@ class IsolatedPawnEval extends AbstractEval implements
         return true;
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param array $result
-     */
     private function elaborate(array $result): void
     {
         $singular = mb_strtolower('an ' . self::NAME);

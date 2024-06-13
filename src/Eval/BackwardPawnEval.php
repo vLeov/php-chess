@@ -97,11 +97,6 @@ class BackwardPawnEval extends AbstractEval implements
         return false;
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param array $result
-     */
     private function elaborate(array $result): void
     {
         $singular = mb_strtolower('a ' . self::NAME);

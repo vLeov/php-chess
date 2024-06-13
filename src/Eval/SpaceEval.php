@@ -7,12 +7,6 @@ use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Board;
 
-/**
- * Space evaluation.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class SpaceEval extends AbstractEval implements ExplainEvalInterface
 {
     use ExplainEvalTrait;

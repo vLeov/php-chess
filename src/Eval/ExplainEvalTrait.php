@@ -6,50 +6,19 @@ use Chess\Variant\Classical\PGN\AN\Color;
 
 trait ExplainEvalTrait
 {
-    /**
-     * Range.
-     *
-     * @var array
-     */
     protected array $range;
 
-    /**
-     * Subject.
-     *
-     * @var array
-     */
     protected array $subject;
 
-    /**
-     * Observation.
-     *
-     * @var array
-     */
     protected array $observation;
 
-    /**
-     * Explanation.
-     *
-     * @var array
-     */
     protected array $explanation = [];
 
-    /**
-     * Returns the explanation of the evaluation.
-     *
-     * @return array
-     */
     public function getExplanation(): array
     {
         return $this->explanation;
     }
 
-    /**
-     * Returns the meaning of the result.
-     *
-     * @param array $result
-     * @return string|null
-     */
     protected function meaning(array $result): ?string
     {
         $meanings = $this->meanings();
@@ -75,11 +44,6 @@ trait ExplainEvalTrait
         return null;
     }
 
-    /**
-     * Returns an array of meanings based on a difference value.
-     *
-     * @return array
-     */
     protected function meanings(): array
     {
         $diff = $this->range[0];
@@ -104,11 +68,6 @@ trait ExplainEvalTrait
         ];
     }
 
-    /**
-     * Explains the result obtained.
-     *
-     * @param array $result
-     */
     protected function explain(array $result): void
     {
         if ($meaning = $this->meaning($result)) {

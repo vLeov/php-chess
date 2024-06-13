@@ -4,11 +4,6 @@ namespace Chess\Movetext;
 
 use Chess\Variant\Classical\PGN\Move;
 
-/**
- * Recursive Annotation Variation.
- *
- * @license MIT
- */
 class RavMovetext extends AbstractMovetext
 {
     /**

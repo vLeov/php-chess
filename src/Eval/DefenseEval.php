@@ -61,12 +61,6 @@ class DefenseEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @param array $diffPhrases
-     */
     private function elaborate(AbstractPiece $piece, array $diffPhrases): void
     {
         $phrase = PiecePhrase::create($piece);

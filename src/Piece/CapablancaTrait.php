@@ -4,11 +4,6 @@ namespace Chess\Piece;
 
 trait CapablancaTrait
 {
-    /**
-     * Returns the piece's legal moves.
-     *
-     * @return array
-     */
     public function sqs(): array
     {
         $sqs = [];
@@ -41,11 +36,6 @@ trait CapablancaTrait
         return $sqs;
     }
 
-    /**
-     * Returns the squares defended by the piece.
-     *
-     * @return array|null
-     */
     public function defendedSqs(): ?array
     {
         $sqs = [];

@@ -6,12 +6,6 @@ use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * Material.
- *
- * @author Jordi Bassagaña
- * @license MIT
- */
 class MaterialEval extends AbstractEval implements ExplainEvalInterface
 {
     use ExplainEvalTrait;
