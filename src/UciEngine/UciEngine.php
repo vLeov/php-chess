@@ -85,7 +85,7 @@ class UciEngine
      *
      * @param string $name
      * @param string $value
-     * @return \Chess\UciEngine\Stockfish
+     * @return \Chess\UciEngine\UciEngine
      */
     public function setOption(string $name, string $value): UciEngine
     {
