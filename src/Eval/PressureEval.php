@@ -60,7 +60,7 @@ class PressureEval extends AbstractEval implements ExplainEvalInterface
                 $this->result[$piece->color] = [
                     ...$this->result[$piece->color],
                     ...array_intersect(
-                        $piece->sqs(),
+                        $piece->legalSqs(),
                         $this->sqCount->used->{$piece->oppColor()}
                     )
                 ];

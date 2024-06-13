@@ -178,7 +178,7 @@ class AbstractPgnParser extends \SplObjectStorage
     {
         $ambiguous = [];
         foreach ($this->pickPiece($move) as $piece) {
-            if (in_array($move['sq']['next'], $piece->sqs())) {
+            if (in_array($move['sq']['next'], $piece->legalSqs())) {
                 if (!$this->isPinned($piece)) {
                     $ambiguous[] = $move['sq']['next'];
                 }
@@ -442,7 +442,7 @@ class AbstractPgnParser extends \SplObjectStorage
     {
         $escape = 0;
         foreach ($this->getPieces($this->turn) as $piece) {
-            foreach ($piece->sqs() as $sq) {
+            foreach ($piece->legalSqs() as $sq) {
                 if ($piece->id === Piece::K) {
                     if ($sq === $piece->sqCastleShort()) {
                         $move = $this->move->toArray($this->turn, Castle::SHORT, $this->castlingRule, $this->color);

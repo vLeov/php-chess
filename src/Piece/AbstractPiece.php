@@ -31,7 +31,7 @@ abstract class AbstractPiece
         $this->id = $id;
     }
 
-    abstract public function sqs(): array;
+    abstract public function legalSqs(): array;
 
     abstract public function defendedSqs(): ?array;
 
@@ -53,7 +53,7 @@ abstract class AbstractPiece
     public function attackedPieces(): ?array
     {
         $attackedPieces = [];
-        foreach ($sqs = $this->sqs() as $sq) {
+        foreach ($sqs = $this->legalSqs() as $sq) {
             if ($piece = $this->board->getPieceBySq($sq)) {
                 if ($piece->color === $this->oppColor()) {
                     $attackedPieces[] = $piece;
@@ -68,7 +68,7 @@ abstract class AbstractPiece
     {
         $attackingPieces = [];
         foreach ($this->board->getPieces($this->oppColor()) as $piece) {
-            if (in_array($this->sq, $piece->sqs())) {
+            if (in_array($this->sq, $piece->legalSqs())) {
                 $attackingPieces[] = $piece;
             }
         }
@@ -102,7 +102,7 @@ abstract class AbstractPiece
     public function isMovable(): bool
     {
         if ($this->move) {
-            return in_array($this->move['sq']['next'], $this->sqs());
+            return in_array($this->move['sq']['next'], $this->legalSqs());
         }
 
         return false;

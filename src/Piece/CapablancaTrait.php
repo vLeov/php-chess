@@ -4,7 +4,7 @@ namespace Chess\Piece;
 
 trait CapablancaTrait
 {
-    public function sqs(): array
+    public function legalSqs(): array
     {
         $sqs = [];
         foreach ($this->mobility as $key => $val) {

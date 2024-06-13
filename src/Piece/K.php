@@ -97,7 +97,7 @@ class K extends AbstractPiece
         return $this;
     }
 
-    public function sqs(): array
+    public function legalSqs(): array
     {
         $sqs = [
             ...$this->sqsKing(),

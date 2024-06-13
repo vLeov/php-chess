@@ -65,7 +65,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
                     [
                         ...$this->result[$piece->color],
                         ...array_diff(
-                            $piece->sqs(),
+                            $piece->legalSqs(),
                             $this->sqCount->used->{$piece->oppColor()}
                         )
                     ]

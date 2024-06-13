@@ -21,7 +21,7 @@ class AbsoluteSkewerEval extends AbstractEval implements ElaborateEvalInterface
             if ($piece->isAttackingKing()) {
                 $king = $this->board->getPiece($this->board->turn, Piece::K);
                 $clone = $this->board->clone();
-                $clone->playLan($clone->turn, $king->sq.current($king->sqs()));
+                $clone->playLan($clone->turn, $king->sq.current($king->legalSqs()));
                 $attackedPieces = $piece->attackedPieces();
                 $newAttackedPieces = $clone->getPieceBySq($piece->sq)->attackedPieces();
                 if ($diffPieces = $this->board->diffPieces($attackedPieces, $newAttackedPieces)) {

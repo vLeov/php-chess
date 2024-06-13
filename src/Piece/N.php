@@ -95,7 +95,7 @@ class N extends AbstractPiece
         return $this;
     }
 
-    public function sqs(): array
+    public function legalSqs(): array
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {

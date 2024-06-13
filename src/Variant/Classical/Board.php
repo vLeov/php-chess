@@ -338,7 +338,7 @@ class Board extends AbstractPgnParser
 
     public function legal(string $sq): array
     {
-        return array_values($this->getPieceBySq($sq)->sqs());
+        return array_values($this->getPieceBySq($sq)->legalSqs());
     }
 
     public function enPassant(): string

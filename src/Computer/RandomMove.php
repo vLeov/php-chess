@@ -17,7 +17,7 @@ class RandomMove
     {
         $legal = [];
         foreach ($this->board->getPieces($this->board->turn) as $piece) {
-            if ($sqs = $piece->sqs()) {
+            if ($sqs = $piece->legalSqs()) {
                 $legal[$piece->sq] = $sqs;
             }
         }

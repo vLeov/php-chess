@@ -69,6 +69,6 @@ class QTest extends AbstractUnitTestCase
 
         $expected = [ 'd2', 'd3', 'd4', 'e1', 'c2', 'b3' ];
 
-        $this->assertSame($expected, $queen->sqs());
+        $this->assertSame($expected, $queen->legalSqs());
     }
 }

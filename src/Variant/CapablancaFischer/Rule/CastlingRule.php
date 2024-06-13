@@ -22,6 +22,6 @@ class CastlingRule extends CapablancaCastlingRule
 
         $this->rule = (new CapablancaCastlingRule())->getRule();
 
-        $this->sq()->sqs();
+        $this->sq()->legalSqs();
     }
 }
