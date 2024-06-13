@@ -14,20 +14,13 @@ class C extends AbstractPiece
 {
     use CapablancaTrait;
 
-    private R $rook;
-
-    private N $knight;
-
     public function __construct(string $color, string $sq, Square $square)
     {
         parent::__construct($color, $sq, $square, Piece::C);
 
-        $this->rook = new R($color, $sq, $square, RType::SLIDER);
-        $this->knight = new N($color, $sq, $square);
-
         $this->mobility = [
-            ...$this->rook->mobility,
-            'knight' => $this->knight->mobility,
+            ...(new R($color, $sq, $square, RType::SLIDER))->mobility,
+            'knight' => (new N($color, $sq, $square))->mobility,
         ];
     }
 }

@@ -13,20 +13,13 @@ class A extends AbstractPiece
 {
     use CapablancaTrait;
 
-    private B $bishop;
-
-    private N $knight;
-
     public function __construct(string $color, string $sq, Square $square)
     {
         parent::__construct($color, $sq, $square, Piece::A);
 
-        $this->bishop = new B($color, $sq, $square);
-        $this->knight = new N($color, $sq, $square);
-
         $this->mobility = [
-            ...$this->bishop->mobility,
-            'knight' => $this->knight->mobility,
+            ...(new B($color, $sq, $square))->mobility,
+            'knight' => (new N($color, $sq, $square))->mobility,
         ];
     }
 }

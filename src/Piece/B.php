@@ -3,7 +3,6 @@
 namespace Chess\Piece;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 

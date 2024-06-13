@@ -3,13 +3,12 @@
 namespace Chess\Piece;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Piece\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
 class R extends Slider
 {
-    private string $type;
+    public string $type;
 
     public function __construct(string $color, string $sq, Square $square, string $type)
     {
@@ -63,10 +62,5 @@ class R extends Slider
             }
         } catch (UnknownNotationException $e) {
         }
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
     }
 }

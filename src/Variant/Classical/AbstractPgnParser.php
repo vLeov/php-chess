@@ -232,7 +232,7 @@ class AbstractPgnParser extends \SplObjectStorage
             $piece->color,
             $piece->move['sq']['next'],
             $this->square,
-            $piece->id === Piece::R ? $piece->getType() : null
+            $piece->id === Piece::R ? $piece->type : null
         ));
         if ($piece->id === Piece::P) {
             if ($piece->isPromoted()) {
@@ -268,7 +268,7 @@ class AbstractPgnParser extends \SplObjectStorage
                     $rook->color,
                     $this->castlingRule->getRule()[$king->color][Piece::R][rtrim($king->move['pgn'], '+')]['sq']['next'],
                     $this->square,
-                    $rook->getType()
+                    $rook->type
                 )
             );
             $this->castlingAbility = $this->castlingRule->castle($this->castlingAbility, $this->turn);
@@ -295,13 +295,13 @@ class AbstractPgnParser extends \SplObjectStorage
                     [Piece::K, Piece::Q]
                 );
             } elseif ($piece->id === Piece::R) {
-                if ($piece->getType() === RType::CASTLE_SHORT) {
+                if ($piece->type === RType::CASTLE_SHORT) {
                     $this->castlingAbility = $this->castlingRule->remove(
                         $this->castlingAbility,
                         $this->turn,
                         [Piece::K]
                     );
-                } elseif ($piece->getType() === RType::CASTLE_LONG) {
+                } elseif ($piece->type === RType::CASTLE_LONG) {
                     $this->castlingAbility = $this->castlingRule->remove(
                         $this->castlingAbility,
                         $this->turn,
@@ -367,8 +367,8 @@ class AbstractPgnParser extends \SplObjectStorage
                 'id' => $piece->id,
                 'sq' => $piece->sq,
             ];
-            $piece->id !== Piece::R ?: $capturingData->type = $piece->getType();
-            $captured->id !== Piece::R ?: $capturedData->type = $captured->getType();
+            $piece->id !== Piece::R ?: $capturingData->type = $piece->type;
+            $captured->id !== Piece::R ?: $capturedData->type = $captured->type;
             $capture = (object) [
                 'capturing' => $capturingData,
                 'captured' => $capturedData,
