@@ -19,14 +19,8 @@ use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 /**
- * AbstractPgnParser
- *
- * The root class in the hierarchy of chess boards defines the getter and the
- * setter methods, which are public methods, in addition to implementing the
- * internal methods required to convert PGN moves into a data structure.
- *
- * @author Jordi Bassagaña
- * @license MIT
+ * The root class in the hierarchy of chess boards implements the internal methods
+ * required to convert PGN moves into a data structure.
  */
 class AbstractPgnParser extends \SplObjectStorage
 {
