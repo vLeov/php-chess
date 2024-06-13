@@ -65,14 +65,14 @@ No worries! The `undo()` method comes to the rescue to take back a move.
 $board = $board->undo();
 $board->play('b', 'Nf6');
 
-echo $board->getMovetext();
+echo $board->movetext();
 ```
 
 ```text
 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6
 ```
 
-The `getMovetext()` method is used to obtain the moves played in the game using Standard Algebraic Notation. Let's continue practicing chess openings. Now, what if you want to play a bunch of moves at once instead of one by one as in the previous example? [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/SanPlayTest.php) allows to easily do so.
+The `movetext()` method is used to obtain the moves played in the game using Standard Algebraic Notation. Let's continue practicing chess openings. Now, what if you want to play a bunch of moves at once instead of one by one as in the previous example? [Chess\Play\SanPlay](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Play/SanPlayTest.php) allows to easily do so.
 
 ```php
 use Chess\Play\SanPlay;
@@ -201,7 +201,7 @@ $board->playLan('b', 'c5d4');
 $board->playLan('w', 'f3d4');
 $board->playLan('b', 'g8f6');
 
-echo $board->getMovetext();
+echo $board->movetext();
 ```
 
 ```text

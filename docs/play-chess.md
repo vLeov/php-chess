@@ -18,7 +18,7 @@ for ($i = 0; $i < 50; $i++) {
     }
 }
 
-echo $board->getMovetext();
+echo $board->movetext();
 ```
 
 ```text
@@ -92,7 +92,7 @@ $analysis = $stockfish->analysis($board, $limit);
 
 $board->playLan('b', $analysis['bestmove']);
 
-echo $board->getMovetext();
+echo $board->movetext();
 ```
 
 ```text
@@ -114,7 +114,7 @@ $analysis = $stockfish->analysis($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
 
-echo $board->getMovetext();
+echo $board->movetext();
 ```
 
 ```text
@@ -142,7 +142,7 @@ $analysis = $stockfish->analysis($board, $limit);
 
 $board->playLan('w', $analysis['bestmove']);
 
-echo $board->getMovetext();
+echo $board->movetext();
 ```
 
 ```text
