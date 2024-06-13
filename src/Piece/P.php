@@ -10,11 +10,11 @@ use Chess\Variant\Classical\PGN\AN\Square;
 
 class P extends AbstractPiece
 {
-    private array $ranks;
+    public array $ranks;
 
-    private array $captureSqs;
+    public array $captureSqs;
 
-    private string $enPassantSq = '';
+    public string $enPassantSq = '';
 
     public function __construct(string $color, string $sq, Square $square)
     {
@@ -136,28 +136,6 @@ class P extends AbstractPiece
         }
 
         return $sqs;
-    }
-
-    public function getRanks(): array
-    {
-        return $this->ranks;
-    }
-
-    public function getCaptureSqs(): array
-    {
-        return $this->captureSqs;
-    }
-
-    public function getEnPassantSq(): ?string
-    {
-        return $this->enPassantSq;
-    }
-
-    public function setEnPassantSq(string $sq): P
-    {
-        $this->enPassantSq = $sq;
-
-        return $this;
     }
 
     public function isPromoted(): bool

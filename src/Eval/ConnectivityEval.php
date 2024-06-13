@@ -49,7 +49,7 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
                     break;
                 case Piece::P:
                     $this->result[$piece->color] += count(
-                        array_intersect($piece->getCaptureSqs(),
+                        array_intersect($piece->captureSqs,
                         $this->sqCount->used->{$piece->color})
                     );
                     break;

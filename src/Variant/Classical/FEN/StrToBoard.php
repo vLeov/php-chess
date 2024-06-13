@@ -65,8 +65,8 @@ class StrToBoard
         if ($this->fields[3] !== '-') {
             foreach ($pieces = $board->getPieces($this->fields[1]) as $piece) {
                 if ($piece->id === Piece::P) {
-                    if (in_array($this->fields[3], $piece->getCaptureSqs())) {
-                        $piece->setEnPassantSq($this->fields[3]);
+                    if (in_array($this->fields[3], $piece->captureSqs)) {
+                        $piece->enPassantSq = $this->fields[3];
                     }
                 }
             }

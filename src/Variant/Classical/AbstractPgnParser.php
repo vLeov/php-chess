@@ -347,7 +347,7 @@ class AbstractPgnParser extends \SplObjectStorage
     {
         if (
             $piece->id === Piece::P &&
-            $piece->getEnPassantSq() &&
+            $piece->enPassantSq &&
             !$this->getPieceBySq($piece->move['sq']['next'])
         ) {
             if ($captured = $piece->enPassantPawn()) {

@@ -55,7 +55,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
                     [
                         ...$this->result[$piece->color],
                         ...array_intersect(
-                            $piece->getCaptureSqs(),
+                            $piece->captureSqs,
                             $this->sqCount->free
                         )
                     ]
