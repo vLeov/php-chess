@@ -8,7 +8,7 @@ trait ElaborateEvalTrait
 {
     protected array $elaboration = [];
 
-    public function getElaboration()
+    public function getElaboration(): array
     {
         return $this->elaboration;
     }

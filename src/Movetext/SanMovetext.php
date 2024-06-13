@@ -10,7 +10,7 @@ class SanMovetext extends AbstractMovetext
     /**
      * Metadata.
      *
-     * @var array
+     * @var object
      */
     protected object $metadata;
 

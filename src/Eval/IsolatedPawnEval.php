@@ -41,7 +41,7 @@ class IsolatedPawnEval extends AbstractEval implements
 
         foreach ($this->board->pieces() as $piece) {
             if ($piece->id === Piece::P) {
-                if ($this->isIsolatedPawn($piece)) {
+                if ($this->isIsolated($piece)) {
                     $this->result[$piece->color][] = $piece->sq;
                 }
             }
@@ -55,7 +55,7 @@ class IsolatedPawnEval extends AbstractEval implements
         $this->elaborate($this->result);
     }
 
-    private function isIsolatedPawn(P $pawn): int
+    private function isIsolated(P $pawn): bool
     {
         $left = chr(ord($pawn->sq) - 1);
         $right = chr(ord($pawn->sq) + 1);

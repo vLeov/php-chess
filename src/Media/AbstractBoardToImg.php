@@ -35,7 +35,7 @@ class AbstractBoardToImg
 
     public function output(string $filepath, string $filename = ''): string
     {
-        $filename ? $filename = $filename.$this->ext : $filename = uniqid().$this->ext;
+        $filename ? $filename = $filename . $this->ext : $filename = uniqid() . $this->ext;
         $this->chessboard($filepath)->save("{$filepath}/{$filename}");
 
         return $filename;

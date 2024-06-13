@@ -136,8 +136,8 @@ class RavMovetext extends AbstractMovetext
     /**
      * Finds out if an element is immediately preceding another one.
      *
-     * @param string $previous
-     * @param string $current
+     * @param SanMovetext $previous
+     * @param SanMovetext $current
      * @return bool
      */
     public function isPrevious(SanMovetext $previous, SanMovetext $current): bool

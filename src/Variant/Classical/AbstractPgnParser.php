@@ -79,7 +79,7 @@ class AbstractPgnParser extends \SplObjectStorage
     /**
      * Square.
      *
-     * @var \Chess\Variant\Classical\PGN\Square
+     * @var \Chess\Variant\Classical\PGN\AN\Square
      */
     public Square $square;
 
@@ -283,9 +283,9 @@ class AbstractPgnParser extends \SplObjectStorage
      * Updates the castle property.
      *
      * @param \Chess\Piece\AbstractPiece $piece The moved piece
-     * @return \Chess\Variant\Classical\Board
+     * @return \Chess\Variant\Classical\AbstractPgnParser
      */
-    protected function updateCastle(AbstractPiece $piece): Board
+    protected function updateCastle(AbstractPiece $piece): AbstractPgnParser
     {
         if ($this->castlingRule->can($this->castlingAbility, $this->turn)) {
             if ($piece->id === Piece::K) {
@@ -341,9 +341,9 @@ class AbstractPgnParser extends \SplObjectStorage
      * Captures a piece.
      *
      * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Variant\Classical\Board
+     * @return \Chess\Variant\Classical\AbstractPgnParser
      */
-    protected function capture(AbstractPiece $piece): Board
+    protected function capture(AbstractPiece $piece): AbstractPgnParser
     {
         if (
             $piece->id === Piece::P &&
@@ -385,9 +385,9 @@ class AbstractPgnParser extends \SplObjectStorage
      *
      * @param string $color
      * @param object $capture
-     * @return \Chess\Variant\Classical\Board
+     * @return \Chess\Variant\Classical\AbstractPgnParser
      */
-    protected function pushCapture(string $color, object $capture): Board
+    protected function pushCapture(string $color, object $capture): AbstractPgnParser
     {
         $this->captures[$color][] = $capture;
 
@@ -398,9 +398,9 @@ class AbstractPgnParser extends \SplObjectStorage
      * Promotes a pawn.
      *
      * @param \Chess\Piece\P $pawn
-     * @return \Chess\Variant\Classical\Board
+     * @return \Chess\Variant\Classical\AbstractPgnParser
      */
-    protected function promote(P $pawn): Board
+    protected function promote(P $pawn): AbstractPgnParser
     {
         $this->detach($this->pieceBySq($pawn->move['sq']['next']));
         if ($pawn->move['newId'] === Piece::N) {
@@ -509,9 +509,9 @@ class AbstractPgnParser extends \SplObjectStorage
      * Adds a new element to the history.
      *
      * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Variant\Classical\Board
+     * @return \Chess\Variant\Classical\AbstractPgnParser
      */
-    protected function pushHistory(AbstractPiece $piece): Board
+    protected function pushHistory(AbstractPiece $piece): AbstractPgnParser
     {
         $this->history[] = [
             'castlingAbility' => $this->castlingAbility,
@@ -525,9 +525,9 @@ class AbstractPgnParser extends \SplObjectStorage
     /**
      * Removes an element from the history.
      *
-     * @return \Chess\Variant\Classical\Board
+     * @return \Chess\Variant\Classical\AbstractPgnParser
      */
-    protected function popHistory(): Board
+    protected function popHistory(): AbstractPgnParser
     {
         array_pop($this->history);
 

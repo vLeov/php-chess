@@ -14,7 +14,7 @@ class RavPlay extends AbstractPlay
     /**
      * RAV movetext.
      *
-     * @var array
+     * @var RavMovetext
      */
     protected RavMovetext $ravMovetext;
 

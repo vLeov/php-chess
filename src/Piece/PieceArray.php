@@ -36,8 +36,6 @@ class PieceArray
                 $file = chr(ord($file) + 1);
             }
         }
-
-        return $this;
     }
 
     public function getArray(): array

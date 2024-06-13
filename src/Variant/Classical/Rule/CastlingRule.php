@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\Classical\Rule;
 
+use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;

@@ -46,6 +46,11 @@ trait ExplainEvalTrait
 
     protected function meanings(): array
     {
+        $meanings = [
+            Color::W => [],
+            Color::B => [],
+        ];
+
         $diff = $this->range[0];
 
         foreach ($this->observation as $key => $val) {

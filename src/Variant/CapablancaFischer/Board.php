@@ -27,7 +27,7 @@ class Board extends ClassicalBoard implements RandomBoardInterface
         $this->square = new Square();
         $this->move = new Move();
         if (!$pieces) {
-            $pieces = (new StartPieces($this->startPos, $this->castlingRule))->create();
+            $pieces = (new StartPieces($this->startPos))->create();
             $this->castlingAbility = CastlingRule::START;
         } else {
             $this->castlingAbility = $castlingAbility;
