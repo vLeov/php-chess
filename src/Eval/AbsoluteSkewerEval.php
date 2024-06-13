@@ -23,7 +23,7 @@ class AbsoluteSkewerEval extends AbstractEval implements ElaborateEvalInterface
                 $clone = $this->board->clone();
                 $clone->playLan($clone->turn, $king->sq.current($king->legalSqs()));
                 $attackedPieces = $piece->attackedPieces();
-                $newAttackedPieces = $clone->getPieceBySq($piece->sq)->attackedPieces();
+                $newAttackedPieces = $clone->pieceBySq($piece->sq)->attackedPieces();
                 if ($diffPieces = $this->board->diffPieces($attackedPieces, $newAttackedPieces)) {
                     if (self::$value[$piece->id] < self::$value[current($diffPieces)->id]) {
                         $this->result[$piece->color] = 1;

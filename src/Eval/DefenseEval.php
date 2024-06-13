@@ -41,7 +41,7 @@ class DefenseEval extends AbstractEval implements
                 if (!empty($piece->attackingPieces())) {
                     $diffPhrases = [];
                     $clone = $this->board->clone();
-                    $clone->detach($clone->getPieceBySq($piece->sq));
+                    $clone->detach($clone->pieceBySq($piece->sq));
                     $clone->refresh();
                     $newProtectionEval = new ProtectionEval($clone);
                     $diffResult = $newProtectionEval->getResult()[$piece->oppColor()] - $protectionEval->getResult()[$piece->oppColor()];

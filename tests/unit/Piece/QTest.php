@@ -65,7 +65,7 @@ class QTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($A74))->validate()->getBoard();
 
-        $queen = $board->getPieceBySq('d1');
+        $queen = $board->pieceBySq('d1');
 
         $expected = [ 'd2', 'd3', 'd4', 'e1', 'c2', 'b3' ];
 

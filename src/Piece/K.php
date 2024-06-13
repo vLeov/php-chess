@@ -152,7 +152,7 @@ class K extends AbstractPiece
     {
         $sqsCaptures = [];
         foreach ($this->mobility as $sq) {
-            if ($piece = $this->board->getPieceBySq($sq)) {
+            if ($piece = $this->board->pieceBySq($sq)) {
                 if ($this->oppColor() === $piece->color) {
                     if (empty($piece->defendingPieces())) {
                         $sqsCaptures[] = $sq;
@@ -176,13 +176,13 @@ class K extends AbstractPiece
     {
         $rule = $this->board->castlingRule->getRule()[$this->color][Piece::R][$type];
         if ($type === RType::CASTLE_LONG && $this->sqCastleLong()) {
-            if ($piece = $this->board->getPieceBySq($rule['sq']['current'])) {
+            if ($piece = $this->board->pieceBySq($rule['sq']['current'])) {
                 if ($piece->id === Piece::R) {
                     return $piece;
                 }
             }
         } elseif ($type === RType::CASTLE_SHORT && $this->sqCastleShort()) {
-            if ($piece = $this->board->getPieceBySq($rule['sq']['current'])) {
+            if ($piece = $this->board->pieceBySq($rule['sq']['current'])) {
                 if ($piece->id === Piece::R) {
                     return $piece;
                 }

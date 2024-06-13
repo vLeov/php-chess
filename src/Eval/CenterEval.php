@@ -43,7 +43,7 @@ class CenterEval extends AbstractEval implements ExplainEvalInterface
         $spEval = (new SpaceEval($this->board))->getResult();
 
         foreach ($this->center as $sq => $val) {
-            if ($piece = $this->board->getPieceBySq($sq)) {
+            if ($piece = $this->board->pieceBySq($sq)) {
                 $this->result[$piece->color] += self::$value[$piece->id] * $val;
             }
             if (in_array($sq, $spEval[Color::W])) {

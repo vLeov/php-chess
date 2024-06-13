@@ -54,7 +54,7 @@ abstract class AbstractPiece
     {
         $attackedPieces = [];
         foreach ($sqs = $this->legalSqs() as $sq) {
-            if ($piece = $this->board->getPieceBySq($sq)) {
+            if ($piece = $this->board->pieceBySq($sq)) {
                 if ($piece->color === $this->oppColor()) {
                     $attackedPieces[] = $piece;
                 }
@@ -112,7 +112,7 @@ abstract class AbstractPiece
     {
         $king = $this->board->getPiece($this->color, Piece::K);
         $clone = $this->board->clone();
-        $clone->detach($clone->getPieceBySq($this->sq));
+        $clone->detach($clone->pieceBySq($this->sq));
         $clone->refresh();
         $newKing = $clone->getPiece($this->color, Piece::K);
         $diffPieces = $this->board->diffPieces($king->attackingPieces(), $newKing->attackingPieces());

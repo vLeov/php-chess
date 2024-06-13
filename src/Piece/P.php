@@ -150,7 +150,7 @@ class P extends AbstractPiece
         if ($this->enPassantSq) {
             $rank = (int) substr($this->enPassantSq, 1);
             $this->color === Color::W ? $rank-- : $rank++;
-            return $this->board->getPieceBySq($this->enPassantSq[0] . $rank);
+            return $this->board->pieceBySq($this->enPassantSq[0] . $rank);
         }
 
         return null;

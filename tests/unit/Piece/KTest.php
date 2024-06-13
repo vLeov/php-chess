@@ -134,7 +134,7 @@ class KTest extends AbstractUnitTestCase
 
         $board = (new SanPlay($A59))->validate()->getBoard();
 
-        $king = $board->getPieceBySq('f1');
+        $king = $board->pieceBySq('f1');
 
         $expected = [ 'e1', 'e2', 'g2' ];
 

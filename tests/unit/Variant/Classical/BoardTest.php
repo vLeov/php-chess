@@ -1768,7 +1768,7 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('b', 'O-O'));
         $this->assertTrue($board->play('w', 'Bd3'));
         $this->assertTrue($board->play('b', 'f5'));
-        $pawn_e5 = $board->getPieceBySq('e5');
+        $pawn_e5 = $board->pieceBySq('e5');
         $pawn_e5->legalSqs(); // this creates the en passant property
         $this->assertSame('f6', $pawn_e5->enPassantSq);
         $this->assertTrue($board->play('w', 'exf6'));
@@ -1896,7 +1896,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $board->playLan('w', 'h7h8n');
 
-        $this->assertEquals('N', $board->getPieceBySq('h8')->id);
+        $this->assertEquals('N', $board->pieceBySq('h8')->id);
     }
 
     /**
@@ -1946,7 +1946,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $board->playLan('w', 'h7h8r');
 
-        $this->assertEquals('R', $board->getPieceBySq('h8')->id);
+        $this->assertEquals('R', $board->pieceBySq('h8')->id);
     }
 
     /**
@@ -1996,7 +1996,7 @@ class BoardTest extends AbstractUnitTestCase
 
         $board->playLan('w', 'h7h8b');
 
-        $this->assertEquals('B', $board->getPieceBySq('h8')->id);
+        $this->assertEquals('B', $board->pieceBySq('h8')->id);
     }
 
     /**
@@ -2422,7 +2422,7 @@ class BoardTest extends AbstractUnitTestCase
         $board->play('w', 'Bc4');
         $board->play('b', 'Be7');
 
-        $king = $board->getPieceBySq('e1');
+        $king = $board->pieceBySq('e1');
 
         $expected = [
             'e2',

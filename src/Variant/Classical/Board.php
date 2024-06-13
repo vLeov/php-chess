@@ -155,7 +155,7 @@ class Board extends AbstractPgnParser
         return $pieces;
     }
 
-    public function getPieceBySq(string $sq): ?AbstractPiece
+    public function pieceBySq(string $sq): ?AbstractPiece
     {
         $this->rewind();
         while ($this->valid()) {
@@ -183,7 +183,7 @@ class Board extends AbstractPgnParser
     {
         $sqs = $this->move->explodeSqs($lan);
         if (isset($sqs[0]) && isset($sqs[1])) {
-            if ($color === $this->turn && $piece = $this->getPieceBySq($sqs[0])) {
+            if ($color === $this->turn && $piece = $this->pieceBySq($sqs[0])) {
                 if ($piece->id === Piece::K) {
                     if (
                         $this->castlingRule->getRule()[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
@@ -338,7 +338,7 @@ class Board extends AbstractPgnParser
 
     public function legal(string $sq): array
     {
-        return array_values($this->getPieceBySq($sq)->legalSqs());
+        return array_values($this->pieceBySq($sq)->legalSqs());
     }
 
     public function enPassant(): string
