@@ -15,11 +15,6 @@ class N extends AbstractPiece
 
         $this->mobility = [];
 
-        $this->mobility();
-    }
-
-    protected function mobility(): AbstractPiece
-    {
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->rank() + 2;
@@ -91,8 +86,6 @@ class N extends AbstractPiece
             }
         } catch (UnknownNotationException $e) {
         }
-
-        return $this;
     }
 
     public function legalSqs(): array

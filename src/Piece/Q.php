@@ -19,16 +19,9 @@ class Q extends Slider
         $this->rook = new R($color, $sq, $square, RType::SLIDER);
         $this->bishop = new B($color, $sq, $square);
 
-        $this->mobility();
-    }
-
-    protected function mobility(): AbstractPiece
-    {
         $this->mobility = [
             ...$this->rook->mobility,
             ...$this->bishop->mobility,
         ];
-
-        return $this;
     }
 }

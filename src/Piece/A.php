@@ -24,16 +24,9 @@ class A extends AbstractPiece
         $this->bishop = new B($color, $sq, $square);
         $this->knight = new N($color, $sq, $square);
 
-        $this->mobility();
-    }
-
-    protected function mobility(): AbstractPiece
-    {
         $this->mobility = [
             ...$this->bishop->mobility,
             'knight' => $this->knight->mobility,
         ];
-
-        return $this;
     }
 }

@@ -25,16 +25,9 @@ class C extends AbstractPiece
         $this->rook = new R($color, $sq, $square, RType::SLIDER);
         $this->knight = new N($color, $sq, $square);
 
-        $this->mobility();
-    }
-
-    protected function mobility(): AbstractPiece
-    {
         $this->mobility = [
             ...$this->rook->mobility,
             'knight' => $this->knight->mobility,
         ];
-
-        return $this;
     }
 }

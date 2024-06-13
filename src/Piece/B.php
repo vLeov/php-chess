@@ -20,11 +20,6 @@ class B extends Slider
             'downRight' => []
         ];
 
-        $this->mobility();
-    }
-
-    protected function mobility(): AbstractPiece
-    {
         try {
             $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->rank() + 1;
@@ -68,7 +63,5 @@ class B extends Slider
             }
         } catch (UnknownNotationException $e) {
         }
-
-        return $this;
     }
 }

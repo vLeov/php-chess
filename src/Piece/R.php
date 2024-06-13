@@ -24,16 +24,6 @@ class R extends Slider
             'right' => []
         ];
 
-        $this->mobility();
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    protected function mobility(): AbstractPiece
-    {
         try {
             $file = $this->sq[0];
             $rank = $this->rank() + 1;
@@ -73,7 +63,10 @@ class R extends Slider
             }
         } catch (UnknownNotationException $e) {
         }
+    }
 
-        return $this;
+    public function getType(): string
+    {
+        return $this->type;
     }
 }
