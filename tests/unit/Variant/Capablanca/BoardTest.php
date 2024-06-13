@@ -9,7 +9,7 @@ class BoardTest extends AbstractUnitTestCase
 {
     /*
     |--------------------------------------------------------------------------
-    | getPieces()
+    | pieces()
     |--------------------------------------------------------------------------
     |
     | Gets all pieces.
@@ -23,7 +23,7 @@ class BoardTest extends AbstractUnitTestCase
     {
         $board = new Board();
 
-        $this->assertSame(40, count($board->getPieces()));
+        $this->assertSame(40, count($board->pieces()));
     }
 
     /*

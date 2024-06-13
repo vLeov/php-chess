@@ -38,7 +38,7 @@ class PassedPawnEval extends AbstractEval implements
             "has a decisive passed pawn advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->id === Piece::P && $this->isPassed($piece)) {
                 $this->result[$piece->color][] = $piece->sq;
             }

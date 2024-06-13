@@ -33,7 +33,7 @@ class AbsolutePinEval extends AbstractEval implements
             "has a total absolute pin advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->isPinned()) {
                 $this->result[$piece->color] += self::$value[$piece->id];
                 $this->elaborate($piece);

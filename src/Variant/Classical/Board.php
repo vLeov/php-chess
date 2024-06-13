@@ -136,7 +136,7 @@ class Board extends AbstractPgnParser
         return null;
     }
 
-    public function getPieces(string $color = ''): array
+    public function pieces(string $color = ''): array
     {
         $pieces = [];
         $this->rewind();
@@ -312,11 +312,11 @@ class Board extends AbstractPgnParser
 
     public function isDeadPositionDraw(): bool
     {
-        $count = count($this->getPieces());
+        $count = count($this->pieces());
         if ($count === 2) {
             return true;
         } elseif ($count === 3) {
-            foreach ($this->getPieces() as $piece) {
+            foreach ($this->pieces() as $piece) {
                 if ($piece->id === Piece::N) {
                     return true;
                 } elseif ($piece->id === Piece::B) {
@@ -325,7 +325,7 @@ class Board extends AbstractPgnParser
             }
         } elseif ($count === 4) {
             $colors = '';
-            foreach ($this->getPieces() as $piece) {
+            foreach ($this->pieces() as $piece) {
                 if ($piece->id === Piece::B) {
                     $colors .= $this->square->color($piece->sq);
                 }
@@ -369,7 +369,7 @@ class Board extends AbstractPgnParser
         for ($i = $this->square::SIZE['ranks'] - 1; $i >= 0; $i--) {
             $array[$i] = array_fill(0, $this->square::SIZE['files'], ' . ');
         }
-        foreach ($this->getPieces() as $piece) {
+        foreach ($this->pieces() as $piece) {
             list($file, $rank) = AsciiArray::fromAlgebraicToIndex($piece->sq);
             if ($flip) {
                 $diff = $this->square::SIZE['files'] - $this->square::SIZE['ranks'];

@@ -44,7 +44,7 @@ class SqCount
             Color::B => [],
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             $used[$piece->color][] = $piece->sq;
         }
 

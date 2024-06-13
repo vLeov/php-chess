@@ -39,7 +39,7 @@ class SqOutpostEval extends AbstractEval implements
             "has a total outpost advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->id === Piece::P) {
                 $captureSqs = $piece->captureSqs;
                 if ($piece->ranks['end'] !== (int) substr($captureSqs[0], 1)) {

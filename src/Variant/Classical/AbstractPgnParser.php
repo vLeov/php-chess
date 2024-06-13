@@ -113,7 +113,7 @@ class AbstractPgnParser extends \SplObjectStorage
     protected function pickPiece(array $move): array
     {
         $pieces = [];
-        foreach ($this->getPieces($move['color']) as $piece) {
+        foreach ($this->pieces($move['color']) as $piece) {
             if ($piece->id === $move['id']) {
                 if (strstr($piece->sq, $move['sq']['current'])) {
                     $piece->move = $move;
@@ -441,7 +441,7 @@ class AbstractPgnParser extends \SplObjectStorage
     protected function isTrapped(): bool
     {
         $escape = 0;
-        foreach ($this->getPieces($this->turn) as $piece) {
+        foreach ($this->pieces($this->turn) as $piece) {
             foreach ($piece->legalSqs() as $sq) {
                 if ($piece->id === Piece::K) {
                     if ($sq === $piece->sqCastleShort()) {

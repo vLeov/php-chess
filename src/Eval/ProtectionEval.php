@@ -34,7 +34,7 @@ class ProtectionEval extends AbstractEval implements
             "has a decisive protection advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             foreach ($piece->attackedPieces() as $attackedPiece) {
                 if ($attackedPiece->id !== Piece::K) {
                     if (empty($attackedPiece->defendingPieces())) {

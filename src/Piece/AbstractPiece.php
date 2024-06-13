@@ -67,7 +67,7 @@ abstract class AbstractPiece
     public function attackingPieces(): ?array
     {
         $attackingPieces = [];
-        foreach ($this->board->getPieces($this->oppColor()) as $piece) {
+        foreach ($this->board->pieces($this->oppColor()) as $piece) {
             if (in_array($this->sq, $piece->legalSqs())) {
                 $attackingPieces[] = $piece;
             }
@@ -79,7 +79,7 @@ abstract class AbstractPiece
     public function defendingPieces(): ?array
     {
         $defendingPieces = [];
-        foreach ($this->board->getPieces($this->color) as $piece) {
+        foreach ($this->board->pieces($this->color) as $piece) {
             if (in_array($this->sq, $piece->defendedSqs())) {
                 $defendingPieces[] = $piece;
             }

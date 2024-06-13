@@ -29,13 +29,13 @@ class MaterialEval extends AbstractEval implements ExplainEvalInterface
             "has a decisive material advantage",
         ];
 
-        foreach ($this->board->getPieces(Color::W) as $piece) {
+        foreach ($this->board->pieces(Color::W) as $piece) {
             if ($piece->id !== Piece::K) {
                 $this->result[Color::W] += self::$value[$piece->id];
             }
         }
 
-        foreach ($this->board->getPieces(Color::B) as $piece) {
+        foreach ($this->board->pieces(Color::B) as $piece) {
             if ($piece->id !== Piece::K) {
                 $this->result[Color::B] += self::$value[$piece->id];
             }

@@ -95,7 +95,7 @@ class Randomizer
 
     protected function isAttackingKing(Board $board): bool
     {
-        foreach ($board->getPieces() as $piece) {
+        foreach ($board->pieces() as $piece) {
             if ($piece->isAttackingKing()) {
                 return true;
             }

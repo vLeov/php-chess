@@ -39,7 +39,7 @@ class PressureEval extends AbstractEval implements ExplainEvalInterface
             "is utterly pressuring more squares than its opponent",
         ];
 
-        foreach ($pieces = $this->board->getPieces() as $piece) {
+        foreach ($pieces = $this->board->pieces() as $piece) {
             if ($piece->id === Piece::K) {
                 $this->result[$piece->color] = [
                     ...$this->result[$piece->color],

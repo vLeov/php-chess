@@ -16,7 +16,7 @@ class RandomMove
     public function move(): ?object
     {
         $legal = [];
-        foreach ($this->board->getPieces($this->board->turn) as $piece) {
+        foreach ($this->board->pieces($this->board->turn) as $piece) {
             if ($sqs = $piece->legalSqs()) {
                 $legal[$piece->sq] = $sqs;
             }

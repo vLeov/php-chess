@@ -39,7 +39,7 @@ class IsolatedPawnEval extends AbstractEval implements
             "has a decisive isolated pawn advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->id === Piece::P) {
                 if ($this->isIsolatedPawn($piece)) {
                     $this->result[$piece->color][] = $piece->sq;

@@ -46,7 +46,7 @@ class FarAdvancedPawnEval extends AbstractEval implements
             "has a decisive far advanced pawn advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->id === Piece::P && $this->isFarAdvancedPawn($piece)) {
                 $this->result[$piece->color][] = $piece->sq;
             }

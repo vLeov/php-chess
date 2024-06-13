@@ -39,7 +39,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
             "has a total space advantage",
         ];
 
-        foreach ($pieces = $this->board->getPieces() as $piece) {
+        foreach ($pieces = $this->board->pieces() as $piece) {
             if ($piece->id === Piece::K) {
                 $this->result[$piece->color] = array_unique(
                     [

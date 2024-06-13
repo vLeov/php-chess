@@ -35,7 +35,7 @@ class DoubledPawnEval extends AbstractEval implements
             "has a decisive doubled pawn advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             $color = $piece->color;
             if ($piece->id === Piece::P) {
                 $file = $piece->file();

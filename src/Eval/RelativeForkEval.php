@@ -33,7 +33,7 @@ class RelativeForkEval extends AbstractEval implements
             "has a total relative fork advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if (!$piece->isAttackingKing()) {
                 $attackedPieces = $piece->attackedPieces();
                 if (count($attackedPieces) >= 2) {

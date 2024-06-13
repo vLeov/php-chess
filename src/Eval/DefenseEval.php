@@ -36,7 +36,7 @@ class DefenseEval extends AbstractEval implements
 
         $protectionEval = new ProtectionEval($this->board);
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->id !== Piece::K) {
                 if (!empty($piece->attackingPieces())) {
                     $diffPhrases = [];

@@ -34,7 +34,7 @@ class DiscoveredCheckEval extends AbstractEval implements
             "has a total discovered check advantage",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->id !== Piece::K) {
                 $king = $this->board->getPiece($piece->oppColor(), Piece::K);
                 $clone = $this->board->clone();

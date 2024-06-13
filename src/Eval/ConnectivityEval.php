@@ -33,7 +33,7 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
             "are totally better connected",
         ];
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             switch ($piece->id) {
                 case Piece::K:
                     $this->result[$piece->color] += count(

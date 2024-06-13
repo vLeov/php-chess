@@ -36,7 +36,7 @@ class RelativePinEval extends AbstractEval implements
 
         $pressureEval = (new PressureEval($this->board))->getResult();
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if (
                 $piece->id !== Piece::K &&
                 $piece->id !== Piece::Q &&

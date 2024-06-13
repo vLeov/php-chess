@@ -38,7 +38,7 @@ class AttackEval extends AbstractEval implements
             !$this->board->isMate() &&
             !$this->board->isStalemate()
         ) {
-            foreach ($this->board->getPieces() as $piece) {
+            foreach ($this->board->pieces() as $piece) {
                 if ($piece->id !== Piece::K) {
                     $clone = $this->board->clone();
                     $clone->turn = $piece->oppColor();

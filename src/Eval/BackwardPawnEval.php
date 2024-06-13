@@ -44,7 +44,7 @@ class BackwardPawnEval extends AbstractEval implements
 
         $this->isolatedPawnEval = (new IsolatedPawnEval($board))->getResult();
 
-        foreach ($this->board->getPieces() as $piece) {
+        foreach ($this->board->pieces() as $piece) {
             if ($piece->id === Piece::P) {
                 $left = chr(ord($piece->sq) - 1);
                 $right = chr(ord($piece->sq) + 1);
