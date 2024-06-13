@@ -122,7 +122,7 @@ class Board extends AbstractPgnParser
         return trim($movetext);
     }
 
-    public function getPiece(string $color, string $id): ?AbstractPiece
+    public function piece(string $color, string $id): ?AbstractPiece
     {
         $this->rewind();
         while ($this->valid()) {
@@ -259,7 +259,7 @@ class Board extends AbstractPgnParser
 
     public function isCheck(): bool
     {
-        $king = $this->getPiece($this->turn, Piece::K);
+        $king = $this->piece($this->turn, Piece::K);
 
         if ($king) {
             return !empty($king->attackingPieces());

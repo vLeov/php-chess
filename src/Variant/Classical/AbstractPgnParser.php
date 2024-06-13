@@ -487,15 +487,15 @@ class AbstractPgnParser extends \SplObjectStorage
             $piece->move['type'] === $clone->move->case(Move::CASTLE_SHORT) &&
             $clone->castle($piece, RType::CASTLE_SHORT)
         ) {
-            $king = $clone->getPiece($piece->color, Piece::K);
+            $king = $clone->piece($piece->color, Piece::K);
         } elseif (
             $piece->move['type'] === $clone->move->case(Move::CASTLE_LONG) &&
             $clone->castle($piece, RType::CASTLE_LONG)
         ) {
-            $king = $clone->getPiece($piece->color, Piece::K);
+            $king = $clone->piece($piece->color, Piece::K);
         } else {
             $clone->move($piece);
-            $king = $clone->getPiece($piece->color, Piece::K);
+            $king = $clone->piece($piece->color, Piece::K);
         }
 
         if ($king) {

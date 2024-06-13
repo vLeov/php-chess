@@ -45,7 +45,7 @@ class KingSafetyEval extends AbstractEval implements
 
     private function color(string $color, array $pressEval, array $spEval): void
     {
-        $king = $this->board->getPiece($color, Piece::K);
+        $king = $this->board->piece($color, Piece::K);
         foreach ($king->mobility as $sq) {
             if ($piece = $this->board->pieceBySq($sq)) {
                 if ($piece->color === $king->oppColor()) {
