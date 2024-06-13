@@ -289,20 +289,20 @@ class AbstractPgnParser extends \SplObjectStorage
     {
         if ($this->castlingRule->can($this->castlingAbility, $this->turn)) {
             if ($piece->id === Piece::K) {
-                $this->castlingAbility = $this->castlingRule->remove(
+                $this->castlingAbility = $this->castlingRule->update(
                     $this->castlingAbility,
                     $this->turn,
                     [Piece::K, Piece::Q]
                 );
             } elseif ($piece->id === Piece::R) {
                 if ($piece->type === RType::CASTLE_SHORT) {
-                    $this->castlingAbility = $this->castlingRule->remove(
+                    $this->castlingAbility = $this->castlingRule->update(
                         $this->castlingAbility,
                         $this->turn,
                         [Piece::K]
                     );
                 } elseif ($piece->type === RType::CASTLE_LONG) {
-                    $this->castlingAbility = $this->castlingRule->remove(
+                    $this->castlingAbility = $this->castlingRule->update(
                         $this->castlingAbility,
                         $this->turn,
                         [Piece::Q]
@@ -316,7 +316,7 @@ class AbstractPgnParser extends \SplObjectStorage
                 if ($piece->move['sq']['next'] ===
                     $this->castlingRule->getRule()[$oppColor][Piece::R][Castle::SHORT]['sq']['current']
                 ) {
-                    $this->castlingAbility = $this->castlingRule->remove(
+                    $this->castlingAbility = $this->castlingRule->update(
                         $this->castlingAbility,
                         $oppColor,
                         [Piece::K]
@@ -325,7 +325,7 @@ class AbstractPgnParser extends \SplObjectStorage
                     $piece->move['sq']['next'] ===
                     $this->castlingRule->getRule()[$oppColor][Piece::R][Castle::LONG]['sq']['current']
                 ) {
-                    $this->castlingAbility = $this->castlingRule->remove(
+                    $this->castlingAbility = $this->castlingRule->update(
                         $this->castlingAbility,
                         $oppColor,
                         [Piece::Q]

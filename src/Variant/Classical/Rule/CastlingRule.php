@@ -88,13 +88,6 @@ class CastlingRule
         return $this->rule;
     }
 
-    /**
-     * String validation.
-     *
-     * @param string $value
-     * @return string if the value is valid
-     * @throws UnknownNotationException
-     */
     public function validate(string $value): string
     {
         if ($value === self::NEITHER) {
@@ -106,15 +99,7 @@ class CastlingRule
         throw new UnknownNotationException();
     }
 
-    /**
-     * Removes the given castling ability.
-     *
-     * @param string $castlingAbility
-     * @param string $color
-     * @param array $ids
-     * @return string
-     */
-    public function remove(string $castlingAbility, string $color, array $ids): string
+    public function update(string $castlingAbility, string $color, array $ids): string
     {
         if ($color === Color::B) {
             $ids = array_map('mb_strtolower', $ids);
@@ -127,16 +112,9 @@ class CastlingRule
         return $castlingAbility;
     }
 
-    /**
-     * Castles the king.
-     *
-     * @param string $castlingAbility
-     * @param string $color
-     * @return string
-     */
     public function castle(string $castlingAbility, string $color): string
     {
-        $castlingAbility = self::remove(
+        $castlingAbility = $this->update(
             $castlingAbility,
             $color,
             [ Piece::K, Piece::Q ],
@@ -145,50 +123,22 @@ class CastlingRule
         return $castlingAbility;
     }
 
-    /**
-     * Finds out if a long castling move can be made.
-     *
-     * @param string $castlingAbility
-     * @param string $color
-     * @return string
-     */
     public function long(string $castlingAbility, string $color): string
     {
-        $id = Piece::Q;
-        if ($color === Color::B) {
-            $id = mb_strtolower($id);
-        }
+        $id = $color === Color::W ? Piece::Q : mb_strtolower(Piece::Q);
 
         return strpbrk($castlingAbility, $id);
     }
 
-    /**
-     * Finds out if a short castling move can be made.
-     *
-     * @param string $castlingAbility
-     * @param string $color
-     * @return string
-     */
     public function short(string $castlingAbility, string $color)
     {
-        $id = Piece::K;
-        if ($color === Color::B) {
-            $id = mb_strtolower($id);
-        }
+        $id = $color === Color::W ? Piece::K : mb_strtolower(Piece::K);
 
         return strpbrk($castlingAbility, $id);
     }
 
-    /**
-     * Finds out if a castling move can be made.
-     *
-     * @param string $castlingAbility
-     * @param string $color
-     * @return bool
-     */
     public function can(string $castlingAbility, string $color)
     {
-        return self::long($castlingAbility, $color) ||
-            self::short($castlingAbility, $color);
+        return $this->long($castlingAbility, $color) || $this->short($castlingAbility, $color);
     }
 }
