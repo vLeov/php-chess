@@ -186,13 +186,13 @@ class Board extends AbstractPgnParser
             if ($color === $this->turn && $piece = $this->pieceBySq($sqs[0])) {
                 if ($piece->id === Piece::K) {
                     if (
-                        $this->castlingRule->getRule()[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
+                        $this->castlingRule->rule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
                         $piece->sqCastleShort() &&
                         $this->play($color, Castle::SHORT)
                     ) {
                         return $this->afterPlayLan();
                     } elseif (
-                        $this->castlingRule->getRule()[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
+                        $this->castlingRule->rule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
                         $piece->sqCastleLong() &&
                         $this->play($color, Castle::LONG)
                     ) {

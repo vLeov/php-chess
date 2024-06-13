@@ -20,7 +20,7 @@ class KTest extends AbstractUnitTestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$castlingRule = (new CastlingRule())->getRule();
+        self::$castlingRule = (new CastlingRule())->rule;
 
         self::$square = new ClassicalSquare();
     }

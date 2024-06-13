@@ -17,7 +17,7 @@ class AsciiArrayTest extends AbstractUnitTestCase
     {
         self::$square = new Square();
 
-        self::$castlingRule = (new CastlingRule())->getRule();
+        self::$castlingRule = (new CastlingRule())->rule;
     }
 
     /*

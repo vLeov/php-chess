@@ -258,7 +258,7 @@ class AbstractPgnParser extends \SplObjectStorage
             $this->attach(
                 new K(
                     $king->color,
-                    $this->castlingRule->getRule()[$king->color][Piece::K][rtrim($king->move['pgn'], '+')]['sq']['next'],
+                    $this->castlingRule->rule[$king->color][Piece::K][rtrim($king->move['pgn'], '+')]['sq']['next'],
                     $this->square
                 )
              );
@@ -266,7 +266,7 @@ class AbstractPgnParser extends \SplObjectStorage
             $this->attach(
                 new R(
                     $rook->color,
-                    $this->castlingRule->getRule()[$king->color][Piece::R][rtrim($king->move['pgn'], '+')]['sq']['next'],
+                    $this->castlingRule->rule[$king->color][Piece::R][rtrim($king->move['pgn'], '+')]['sq']['next'],
                     $this->square,
                     $rook->type
                 )
@@ -314,7 +314,7 @@ class AbstractPgnParser extends \SplObjectStorage
         if ($this->castlingRule->can($this->castlingAbility, $oppColor)) {
             if ($piece->move['isCapture']) {
                 if ($piece->move['sq']['next'] ===
-                    $this->castlingRule->getRule()[$oppColor][Piece::R][Castle::SHORT]['sq']['current']
+                    $this->castlingRule->rule[$oppColor][Piece::R][Castle::SHORT]['sq']['current']
                 ) {
                     $this->castlingAbility = $this->castlingRule->update(
                         $this->castlingAbility,
@@ -323,7 +323,7 @@ class AbstractPgnParser extends \SplObjectStorage
                     );
                 } elseif (
                     $piece->move['sq']['next'] ===
-                    $this->castlingRule->getRule()[$oppColor][Piece::R][Castle::LONG]['sq']['current']
+                    $this->castlingRule->rule[$oppColor][Piece::R][Castle::LONG]['sq']['current']
                 ) {
                     $this->castlingAbility = $this->castlingRule->update(
                         $this->castlingAbility,

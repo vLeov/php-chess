@@ -107,7 +107,7 @@ class Move extends AbstractNotation
                 'type' => static::CASTLE_SHORT,
                 'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => $castlingRule->getRule()[$str][Piece::K][Castle::SHORT]['sq'],
+                'sq' => $castlingRule->rule[$str][Piece::K][Castle::SHORT]['sq'],
             ];
         } elseif (preg_match('/^' . static::CASTLE_LONG . '$/', $pgn)) {
             return [
@@ -117,7 +117,7 @@ class Move extends AbstractNotation
                 'type' => static::CASTLE_LONG,
                 'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => $castlingRule->getRule()[$str][Piece::K][Castle::LONG]['sq'],
+                'sq' => $castlingRule->rule[$str][Piece::K][Castle::LONG]['sq'],
             ];
         } elseif (preg_match('/^' . static::KING_CAPTURES . '$/', $pgn)) {
             return [

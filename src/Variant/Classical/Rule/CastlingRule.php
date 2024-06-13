@@ -13,7 +13,7 @@ class CastlingRule
 
     const NEITHER = '-';
 
-    protected array $rule = [
+    public array $rule = [
         Color::W => [
             Piece::K => [
                 Castle::SHORT => [
@@ -83,11 +83,6 @@ class CastlingRule
             ],
         ],
     ];
-
-    public function getRule(): array
-    {
-        return $this->rule;
-    }
 
     public function validate(string $value): string
     {

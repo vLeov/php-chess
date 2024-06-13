@@ -9,7 +9,7 @@ use Chess\Variant\Classical\Rule\CastlingRule as ClassicalCastlingRule;
 
 class CastlingRule extends ClassicalCastlingRule
 {
-    protected array $rule = [
+    public array $rule = [
         Color::W => [
             Piece::K => [
                 Castle::SHORT => [

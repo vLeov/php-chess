@@ -20,7 +20,7 @@ class CastlingRule extends CapablancaCastlingRule
 
         $this->size = Square::SIZE;
 
-        $this->rule = (new CapablancaCastlingRule())->getRule();
+        $this->rule = (new CapablancaCastlingRule())->rule;
 
         $this->sq()->legalSqs();
     }

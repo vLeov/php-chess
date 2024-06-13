@@ -121,7 +121,7 @@ class BoardTest extends AbstractUnitTestCase
             ],
         ];
 
-        $this->assertEquals($expected, $castlingRule->getRule($startPos));
+        $this->assertEquals($expected, $castlingRule->rule);
     }
 
     /*

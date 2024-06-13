@@ -302,7 +302,7 @@ class MoveTest extends AbstractUnitTestCase
             'type' => self::$move->case(MOVE::CASTLE_SHORT),
             'color' => 'w',
             'id' => 'K',
-            'sq' => self::$castlingRule->getRule()['w'][Piece::K][Castle::SHORT]['sq']
+            'sq' => self::$castlingRule->rule['w'][Piece::K][Castle::SHORT]['sq']
         ];
 
         $this->assertEquals(self::$move->toArray('w', $move, self::$castlingRule, self::$color), $expected);
@@ -321,7 +321,7 @@ class MoveTest extends AbstractUnitTestCase
             'type' => self::$move->case(MOVE::CASTLE_LONG),
             'color' => 'w',
             'id' => 'K',
-            'sq' => self::$castlingRule->getRule()['w'][Piece::K][Castle::LONG]['sq']
+            'sq' => self::$castlingRule->rule['w'][Piece::K][Castle::LONG]['sq']
         ];
 
         $this->assertEquals(self::$move->toArray('w', $move, self::$castlingRule, self::$color), $expected);
