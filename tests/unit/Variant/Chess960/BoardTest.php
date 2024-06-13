@@ -11,19 +11,10 @@ use Chess\Variant\Chess960\StartPosition;
 
 class BoardTest extends AbstractUnitTestCase
 {
-    /*
-    |--------------------------------------------------------------------------
-    | pieces()
-    |--------------------------------------------------------------------------
-    |
-    | Gets all pieces.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_pieces()
+    public function pieces()
     {
         $startPos = (new StartPosition())->create();
         $board = new Board($startPos);
@@ -32,19 +23,10 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertSame(32, count($pieces));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | getCastlingRule()
-    |--------------------------------------------------------------------------
-    |
-    | Returns the castling rule.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_castling_rule_RBBKRQNN()
+    public function castling_rule_RBBKRQNN()
     {
         $startPos = ['R', 'B', 'B', 'K', 'R', 'Q', 'N', 'N'];
 
@@ -127,7 +109,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_castling_rule_QRBKRBNN()
+    public function castling_rule_QRBKRBNN()
     {
         $startPos = ['Q', 'R', 'B', 'K', 'R', 'B', 'N', 'N'];
 
@@ -210,7 +192,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_castling_rule_BQNRKBRN()
+    public function castling_rule_BQNRKBRN()
     {
         $startPos = ['B', 'Q', 'N', 'R', 'K', 'B', 'R', 'N'];
 
@@ -289,15 +271,6 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $castlingRule->rule);
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | validate()
-    |--------------------------------------------------------------------------
-    |
-    | Legal moves return true.
-    |
-    */
 
     /**
      * @test

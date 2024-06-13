@@ -59,7 +59,7 @@ class QTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_sqs_A74()
+    public function legal_sqs_A74()
     {
         $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
 

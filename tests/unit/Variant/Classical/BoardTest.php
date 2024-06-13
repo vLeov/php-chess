@@ -31,15 +31,6 @@ class BoardTest extends AbstractUnitTestCase
         self::$square = new Square();
     }
 
-    /*
-    |---------------------------------------------------------------------------
-    | Play sample games.
-    |---------------------------------------------------------------------------
-    |
-    | Plays the sample games that are found in the tests/data/pgn folder.
-    |
-    */
-
     /**
      * @test
      */
@@ -61,19 +52,10 @@ class BoardTest extends AbstractUnitTestCase
         }
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | getCaptures()
-    |--------------------------------------------------------------------------
-    |
-    | The captured pieces.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_captures_in_C68()
+    public function captures_in_C68()
     {
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
 
@@ -149,19 +131,10 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertEquals($expected, $board->captures);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | getCastle()
-    |--------------------------------------------------------------------------
-    |
-    | Gets the castle status.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_castle_in_C67()
+    public function castling_ability_in_C67()
     {
         $C67 = file_get_contents(self::DATA_FOLDER.'/sample/C67.pgn');
 
@@ -172,19 +145,10 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertSame($expected, $board->castlingAbility);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | getHistory()
-    |--------------------------------------------------------------------------
-    |
-    | The history of the game.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_history_in_D06()
+    public function history_in_D06()
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
         $D06 = str_replace("\n", "", $D06);
@@ -268,7 +232,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_history_in_C60()
+    public function history_in_C60()
     {
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
         $C60 = str_replace("\n", "", $C60);
@@ -386,7 +350,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_history_in_C11()
+    public function history_in_C11()
     {
         $C11 = file_get_contents(self::DATA_FOLDER.'/sample/C11.pgn');
         $C11 = str_replace("\n", "", $C11);
@@ -501,19 +465,10 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertEquals($expected, $board->history);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | pieces()
-    |--------------------------------------------------------------------------
-    |
-    | Gets the pieces by color.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_pieces_in_A59()
+    public function pieces_in_A59()
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
@@ -526,7 +481,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_pieces_in_A74()
+    public function pieces_in_A74()
     {
         $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
 
@@ -539,7 +494,7 @@ class BoardTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_pieces_in_B56()
+    public function pieces_in_B56()
     {
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
 
@@ -548,15 +503,6 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertSame(15, count($board->pieces(Color::W)));
         $this->assertSame(15, count($board->pieces(Color::B)));
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | validate()
-    |--------------------------------------------------------------------------
-    |
-    | Invalid moves throw an exception.
-    |
-    */
 
     /**
      * @test
@@ -597,15 +543,6 @@ class BoardTest extends AbstractUnitTestCase
 
         (new Board())->play('w', 'Nw3');
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | validate()
-    |--------------------------------------------------------------------------
-    |
-    | Illegal moves return false.
-    |
-    */
 
     /**
      * @test
@@ -1226,15 +1163,6 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('w', 'Nf3'));
         $this->assertFalse($board->play('b', 'O-O'));
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | validate()
-    |--------------------------------------------------------------------------
-    |
-    | Legal moves return true.
-    |
-    */
 
     /**
      * @test
@@ -2160,15 +2088,6 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->isStalemate());
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | toArray()
-    |--------------------------------------------------------------------------
-    |
-    | Returns an ASCII array representing a Chess\Variant\Classical\Board object.
-    |
-    */
-
     /**
      * @test
      */
@@ -2260,15 +2179,6 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | undo()
-    |--------------------------------------------------------------------------
-    |
-    | Undoes the last move.
-    |
-    */
 
     /**
      * @test
@@ -2502,13 +2412,6 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $board->legal('e1'));
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | playLan()
-    |--------------------------------------------------------------------------
-    |
-    */
 
     /**
      * @test

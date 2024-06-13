@@ -7,15 +7,6 @@ use Chess\Variant\Capablanca\Board;
 
 class BoardTest extends AbstractUnitTestCase
 {
-    /*
-    |--------------------------------------------------------------------------
-    | pieces()
-    |--------------------------------------------------------------------------
-    |
-    | Gets all pieces.
-    |
-    */
-
     /**
      * @test
      */
@@ -25,15 +16,6 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame(40, count($board->pieces()));
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | validate()
-    |--------------------------------------------------------------------------
-    |
-    | Legal moves return true.
-    |
-    */
 
     /**
      * @test
@@ -169,13 +151,6 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | playLan()
-    |--------------------------------------------------------------------------
-    |
-    */
 
     /**
      * @test

@@ -11,19 +11,10 @@ use Chess\Variant\CapablancaFischer\StartPosition;
 
 class BoardTest extends AbstractUnitTestCase
 {
-    /*
-    |--------------------------------------------------------------------------
-    | pieces()
-    |--------------------------------------------------------------------------
-    |
-    | Gets all pieces.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_pieces()
+    public function pieces()
     {
         $startPos = (new StartPosition())->create();
         $board = new Board($startPos);
@@ -32,19 +23,10 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertSame(40, count($pieces));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | getCastlingRule()
-    |--------------------------------------------------------------------------
-    |
-    | Returns the castling rule.
-    |
-    */
-
     /**
      * @test
      */
-    public function get_castling_rule_ARBBKRQNNC()
+    public function castling_rule_ARBBKRQNNC()
     {
         $startPos = ['A', 'R', 'B', 'B', 'K', 'R', 'Q', 'N', 'N', 'C'];
 
@@ -123,15 +105,6 @@ class BoardTest extends AbstractUnitTestCase
 
         $this->assertEquals($expected, $castlingRule->rule);
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | play()
-    |--------------------------------------------------------------------------
-    |
-    | Legal moves return true.
-    |
-    */
 
     /**
      * @test

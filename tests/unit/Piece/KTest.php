@@ -128,7 +128,7 @@ class KTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function get_sqs_A59()
+    public function legal_sqs_A59()
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 

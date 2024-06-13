@@ -20,15 +20,6 @@ class AsciiArrayTest extends AbstractUnitTestCase
         self::$castlingRule = (new CastlingRule())->rule;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | setElem()
-    |--------------------------------------------------------------------------
-    |
-    | Sets a piece in a specific square in the given ASCII array.
-    |
-    */
-
     /**
      * @test
      */
@@ -63,15 +54,6 @@ class AsciiArrayTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $array);
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | toBoard()
-    |--------------------------------------------------------------------------
-    |
-    | Returns a Chess\Variant\Classical\Board object from an ASCII array.
-    |
-    */
 
     /**
      * @test
@@ -160,15 +142,6 @@ class AsciiArrayTest extends AbstractUnitTestCase
 
         $this->assertSame($expected, $board->toAsciiArray());
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | fromIndexToAlgebraic()
-    |--------------------------------------------------------------------------
-    |
-    | Returns a square given the indexes of an array.
-    |
-    */
 
     /**
      * @test
