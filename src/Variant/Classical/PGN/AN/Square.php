@@ -49,7 +49,7 @@ class Square extends AbstractNotation
          $all = [];
          for ($i = 0; $i < static::SIZE['files']; $i++) {
              for ($j = 0; $j < static::SIZE['ranks']; $j++) {
-                 $all[] = AsciiArray::fromIndexToAlgebraic($i, $j);
+                 $all[] = AsciiArray::toAlgebraic($i, $j);
              }
          }
 

@@ -148,7 +148,7 @@ class AsciiArrayTest extends AbstractUnitTestCase
      */
     public function from_index_to_algebraic_0_0()
     {
-        $this->assertSame('a1', AsciiArray::fromIndexToAlgebraic(0, 0));
+        $this->assertSame('a1', AsciiArray::toAlgebraic(0, 0));
     }
 
     /**
@@ -156,7 +156,7 @@ class AsciiArrayTest extends AbstractUnitTestCase
      */
     public function from_index_to_algebraic_0_7()
     {
-        $this->assertSame('a8', AsciiArray::fromIndexToAlgebraic(0, 7));
+        $this->assertSame('a8', AsciiArray::toAlgebraic(0, 7));
     }
 
     /**
@@ -164,6 +164,6 @@ class AsciiArrayTest extends AbstractUnitTestCase
      */
     public function from_index_to_algebraic_0_8()
     {
-        $this->assertSame('a9', AsciiArray::fromIndexToAlgebraic(0, 8));
+        $this->assertSame('a9', AsciiArray::toAlgebraic(0, 8));
     }
 }

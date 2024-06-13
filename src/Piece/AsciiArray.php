@@ -74,13 +74,13 @@ class AsciiArray
 
     public function setElem(string $elem, string $sq): AsciiArray
     {
-        $index = self::fromAlgebraicToIndex($sq);
+        $index = self::toIndex($sq);
         $this->array[$index[0]][$index[1]] = $elem;
 
         return $this;
     }
 
-    public static function fromAlgebraicToIndex(string $sq): array
+    public static function toIndex(string $sq): array
     {
         $j = ord($sq[0]) - 97;
         $i = intval(ltrim($sq, $sq[0])) - 1;
@@ -91,7 +91,7 @@ class AsciiArray
         ];
     }
 
-    public static function fromIndexToAlgebraic(int $i, int $j): string
+    public static function toAlgebraic(int $i, int $j): string
     {
         $file = chr(97 + $i);
         $rank = $j + 1;
