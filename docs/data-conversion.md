@@ -26,19 +26,19 @@ When a single parameter is passed in the form of a FEN string into the factory c
 In this example the game history contains two moves only.
 
 ```php
-var_dump($board->getHistory());
+var_dump($board->history);
 ```
 
 ```text
 array(2) {
   [0]=>
-  object(stdClass)#323 (4) {
+  array(4) {
     ["castlingAbility"]=>
     string(4) "KQkq"
     ["sq"]=>
     string(2) "b1"
     ["move"]=>
-    object(stdClass)#2 (7) {
+    array(7) {
       ["pgn"]=>
       string(3) "Nc3"
       ["isCapture"]=>
@@ -52,7 +52,7 @@ array(2) {
       ["id"]=>
       string(1) "N"
       ["sq"]=>
-      object(stdClass)#3 (2) {
+      array(2) {
         ["current"]=>
         string(0) ""
         ["next"]=>
@@ -63,13 +63,13 @@ array(2) {
     string(59) "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b KQkq -"
   }
   [1]=>
-  object(stdClass)#581 (4) {
+  array(4) {
     ["castlingAbility"]=>
     string(4) "KQkq"
     ["sq"]=>
     string(2) "b8"
     ["move"]=>
-    object(stdClass)#82 (7) {
+    array(7) {
       ["pgn"]=>
       string(3) "Nc6"
       ["isCapture"]=>
@@ -83,7 +83,7 @@ array(2) {
       ["id"]=>
       string(1) "N"
       ["sq"]=>
-      object(stdClass)#59 (2) {
+      array(2) {
         ["current"]=>
         string(0) ""
         ["next"]=>
@@ -96,10 +96,10 @@ array(2) {
 }
 ```
 
-The initial FEN string is always accessible through the `getStartFen()` method.
+The initial FEN string is always accessible.
 
 ```php
-echo $board->getStartFen();
+echo $board->startFen;
 ```
 
 ```text
@@ -120,7 +120,7 @@ use Chess\Media\BoardToPng;
 
 $board = FenToBoardFactory::create('1rbq1rk1/p1b1nppp/1p2p3/8/1B1pN3/P2B4/1P3PPP/2RQ1R1K w - - bm Nf6+');
 
-$filename = (new BoardToPng($board, $flip = true))->output();
+$filename = (new BoardToPng($board, $flip = true))->output(__DIR__);
 ```
 
 ![Figure 1](https://raw.githubusercontent.com/chesslablab/php-chess/main/docs/data-conversion_01.png)
@@ -141,11 +141,7 @@ $movetext = '1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7';
 
 $board = new Board();
 
-$filename = (new BoardToMp4(
-    $movetext,
-    $board,
-    $flip = false
-))->output(__DIR__.'/../../storage/tmp');
+$filename = (new BoardToMp4($movetext, $board, $flip = false))->output(__DIR__);
 ```
 
 🎉 That's it!

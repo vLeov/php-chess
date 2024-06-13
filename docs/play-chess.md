@@ -14,7 +14,7 @@ $board = new Board();
 
 for ($i = 0; $i < 50; $i++) {
     if ($move = (new RandomMove($board))->move()) {
-        $board->play($board->getTurn(), $move->pgn);
+        $board->play($board->turn, $move->pgn);
     }
 }
 
@@ -22,7 +22,7 @@ echo $board->movetext();
 ```
 
 ```text
-1.c4 g6 2.Nf3 Nf6 3.d4 c5 4.Nfd2 Rg8 5.Qa4 Rg7 6.a3 Qc7 7.Kd1 g5 8.h3 Kd8 9.f3 Nc6 10.f4 a6 11.Qxc6 Rg6 12.e3 Bg7 13.Nb3 h6 14.a4 e6 15.g3 Ne4 16.Ke2 g4 17.N3d2 e5 18.Qe6 Bf6 19.Kd1 h5 20.Na3 Bh8 21.dxe5 a5 22.b4 Nxg3 23.Nf3 Qd6+ 24.exd6 Rb8
+1.e4 Nc6 2.Qf3 g6 3.b3 Rb8 4.Bb5 Nh6 5.Ke2 Na5 6.c3 Ng4 7.d3 h6 8.h4 Ra8 9.Kd1 b6 10.Ba4 h5 11.b4 Rh7 12.Bc2 Rh8 13.Ke1 a6 14.Kd1 Nb3 15.d4 Na5 16.g3 c6 17.Ne2 Ne5 18.Nf4 d6 19.Nxg6 Kd7 20.b5 Qe8 21.Na3 e6 22.Bd3 Rb8 23.dxe5 dxe5 24.Bb2 Rg8 25.Qg4 Ra8
 ```
 
 The result obtained is a 24 move game since a move is considered to be completed after both players have played a turn.
@@ -40,7 +40,7 @@ use Chess\Variant\Classical\Board;
 $board = new Board();
 $board->play('w', 'e4');
 
-$gmMove = (new GrandmasterMove(__DIR__.'/../data/players.json'))->move($board);
+$gmMove = (new GrandmasterMove(__DIR__.'/../data/json/players.json'))->move($board);
 
 print_r($gmMove);
 ```

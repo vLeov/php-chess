@@ -49,7 +49,7 @@ echo $text;
 ```
 
 ```text
-Black has a slight space advantage. White has a slight protection advantage. The pawn on c5 is unprotected. Overall, 2 heuristic evaluation features are favoring White while 2 are favoring Black.
+Black has a slight space advantage. White has a slight protection advantage. White has a slight attack advantage. The pawn on c5 is unprotected. The c5-square is under threat of being attacked. Overall, 3 heuristic evaluation features are favoring White while 2 are favoring Black.
 ```
 
 The resulting text may sound a little robotic but it can be easily rephrased by the AI of your choice to make it sound more human-like.
@@ -61,6 +61,11 @@ The resulting text may sound a little robotic but it can be easily rephrased by 
 With the help of an UCI engine [Chess\Tutor\GoodPgnEvaluation](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Tutor/GoodPgnEvaluationTest.php) can explain the why of a good move.
 
 ```php
+use Chess\Play\SanPlay;
+use Chess\Tutor\GoodPgnEvaluation;
+use Chess\UciEngine\UciEngine;
+use Chess\UciEngine\Details\Limit;
+
 $movetext = '1.d4 d5 2.c4 Nc6 3.cxd5 Qxd5 4.e3 e5 5.Nc3 Bb4 6.Bd2 Bxc3 7.Bxc3 exd4 8.Ne2';
 
 $limit = (new Limit())->setDepth(12);
@@ -78,7 +83,7 @@ echo $paragraph . PHP_EOL;
 
 ```text
 Bg4
-The black player is pressuring a little bit more squares than its opponent. The black pieces are timidly approaching the other side's king. Black has a moderate relative pin advantage. The knight on e2 is pinned shielding a piece that is more valuable than the attacking piece. Overall, 4 heuristic evaluation features are favoring White while 9 are favoring Black.
+The black player is pressuring a little bit more squares than its opponent. The black pieces are timidly approaching the other side's king. Black has a total relative pin advantage. The knight on e2 is pinned shielding a piece that is more valuable than the attacking piece. Overall, 4 heuristic evaluation features are favoring White while 8 are favoring Black.
 ```
 
 🎉 Let's do this!
