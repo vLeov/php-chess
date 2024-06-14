@@ -167,7 +167,7 @@ class K extends AbstractPiece
 
     protected function sqsKing(): ?array
     {
-        $sqsKing = array_intersect((array)$this->mobility, $this->board->sqCount->free);
+        $sqsKing = array_intersect($this->mobility, $this->board->sqCount->free);
 
         return array_diff($sqsKing, $this->board->spaceEval->{$this->oppColor()});
     }
