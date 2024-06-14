@@ -7,7 +7,7 @@ use Chess\Tests\AbstractUnitTestCase;
 
 class TagTest extends AbstractUnitTestCase
 {
-    static private $tag;
+    static private Tag $tag;
 
     public static function setUpBeforeClass(): void
     {
