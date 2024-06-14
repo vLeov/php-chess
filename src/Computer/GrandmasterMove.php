@@ -17,11 +17,11 @@ class GrandmasterMove
             \RecursiveIteratorIterator::SELF_FIRST);
     }
 
-    public function move(Board $board): ?object
+    public function move(Board $board): ?array
     {
         $movetext = $board->movetext();
         if ($found = $this->find($movetext)) {
-            return (object) [
+            return [
                 'pgn' => $this->next($found[0]['movetext'], $movetext),
                 'game' => $found[0],
             ];

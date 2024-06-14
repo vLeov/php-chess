@@ -13,7 +13,7 @@ class RandomMove
         $this->board = $board->clone();
     }
 
-    public function move(): ?object
+    public function move(): ?array
     {
         $legal = [];
         foreach ($this->board->pieces($this->board->turn) as $piece) {
@@ -30,7 +30,7 @@ class RandomMove
 
         if ($this->board->playLan($this->board->turn, $lan)) {
             $last = array_slice($this->board->history, -1)[0];
-            return (object) [
+            return [
                 'pgn' => $last['move']['pgn'],
                 'lan' => $lan,
             ];

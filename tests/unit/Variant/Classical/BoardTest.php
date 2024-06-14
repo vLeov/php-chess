@@ -2761,7 +2761,7 @@ class BoardTest extends AbstractUnitTestCase
 
         for ($i = 0; $i < 99; $i++) {
             if ($move = (new RandomMove($board))->move()) {
-                $board->play($board->turn, $move->pgn);
+                $board->play($board->turn, $move['pgn']);
             }
         }
 
@@ -2777,7 +2777,7 @@ class BoardTest extends AbstractUnitTestCase
 
         for ($i = 0; $i < 100; $i++) {
             if ($move = (new RandomMove($board))->move()) {
-                $board->play($board->turn, $move->pgn);
+                $board->play($board->turn, $move['pgn']);
             }
         }
 
