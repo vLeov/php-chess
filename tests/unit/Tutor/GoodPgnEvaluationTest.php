@@ -33,7 +33,7 @@ class GoodPgnEvaluationTest extends AbstractUnitTestCase
 
         $goodPgnEvaluation = new GoodPgnEvaluation($limit, $stockfish, $board);
 
-        $this->assertSame($expectedPgn, $goodPgnEvaluation->getPgn());
+        $this->assertSame($expectedPgn, $goodPgnEvaluation->pgn);
         $this->assertSame($expectedParagraph, $goodPgnEvaluation->paragraph);
     }
 }
