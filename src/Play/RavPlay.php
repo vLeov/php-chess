@@ -17,7 +17,7 @@ class RavPlay extends AbstractPlay
      *
      * @var RavMovetext
      */
-    protected RavMovetext $ravMovetext;
+    public RavMovetext $ravMovetext;
 
     /**
      * Resume the variations.
@@ -45,16 +45,6 @@ class RavPlay extends AbstractPlay
         $this->ravMovetext = new RavMovetext($this->board->move, $movetext);
 
         $this->ravMovetext->validate();
-    }
-
-    /**
-     * Returns the RAV movetext.
-     *
-     * @return RavMovetext
-     */
-    public function getRavMovetext(): RavMovetext
-    {
-        return $this->ravMovetext;
     }
 
     /**
@@ -91,19 +81,19 @@ class RavPlay extends AbstractPlay
     protected function fen(): RavPlay
     {
         $sanPlay = (new SanPlay(
-            $this->getRavMovetext()->breakdown[0],
+            $this->ravMovetext->breakdown[0],
             $this->initialBoard
         ))->validate();
         $this->fen = $sanPlay->fen;
         $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->board;
-        for ($i = 1; $i < count($this->getRavMovetext()->breakdown); $i++) {
+        for ($i = 1; $i < count($this->ravMovetext->breakdown); $i++) {
             $sanMovetext = new SanMovetext(
                 $this->ravMovetext->move,
-                $this->getRavMovetext()->breakdown[$i]
+                $this->ravMovetext->breakdown[$i]
             );
             foreach ($this->resume as $key => $val) {
                 $sanMovetextKey = new SanMovetext($this->ravMovetext->move, $key);
-                if ($this->getRavMovetext()->isPrevious($sanMovetextKey, $sanMovetext)) {
+                if ($this->ravMovetext->isPrevious($sanMovetextKey, $sanMovetext)) {
                     if (
                         $this->isUndo($sanMovetextKey->metadata['lastMove'], $sanMovetext->metadata['firstMove'])
                     ) {
@@ -115,7 +105,7 @@ class RavPlay extends AbstractPlay
                     }
                 }
             }
-            $sanPlay = (new SanPlay($this->getRavMovetext()->breakdown[$i], $board))
+            $sanPlay = (new SanPlay($this->ravMovetext->breakdown[$i], $board))
                 ->validate();
             $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->board;
             $fen = $sanPlay->fen;
