@@ -39,7 +39,7 @@ use Chess\Tutor\PgnEvaluation;
 
 $movetext = '1.Nf3 d5 2.g3 c5';
 
-$board = (new SanPlay($movetext))->validate()->getBoard();
+$board = (new SanPlay($movetext))->validate()->board;
 
 $paragraph = (new PgnEvaluation('d4', $board))->getParagraph();
 
@@ -70,7 +70,7 @@ $movetext = '1.d4 d5 2.c4 Nc6 3.cxd5 Qxd5 4.e3 e5 5.Nc3 Bb4 6.Bd2 Bxc3 7.Bxc3 ex
 
 $limit = (new Limit())->setDepth(12);
 $stockfish = new UciEngine('/usr/games/stockfish');
-$board = (new SanPlay($movetext))->validate()->getBoard();
+$board = (new SanPlay($movetext))->validate()->board;
 
 $goodPgnEvaluation = new GoodPgnEvaluation($limit, $stockfish, $board);
 

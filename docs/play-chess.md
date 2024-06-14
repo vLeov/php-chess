@@ -132,9 +132,7 @@ use Chess\UciEngine\Details\Limit;
 
 $movetext = '1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6 6.e4 g6 7.Nf3 Bg7';
 
-$board = (new SanPlay($movetext))
-    ->validate()
-    ->getBoard();
+$board = (new SanPlay($movetext))->validate()->board;
 
 $limit = (new Limit())->setDepth(12);
 $stockfish = (new UciEngine('/usr/games/stockfish'))->setOption('Skill Level', 20);

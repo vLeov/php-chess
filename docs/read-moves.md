@@ -79,9 +79,7 @@ use Chess\Play\SanPlay;
 
 $movetext = '1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6';
 
-$board = (new SanPlay($movetext))
-    ->validate()
-    ->getBoard();
+$board = (new SanPlay($movetext))->validate()->board;
 
 echo $board->toAsciiString();
 ```
@@ -215,9 +213,7 @@ use Chess\Play\LanPlay;
 
 $movetext = '1.e2e4 c7c5 2.g1f3 d7d6 3.d2d4 c5d4 4.f3d4 g8f6';
 
-$board = (new LanPlay($movetext))
-    ->validate()
-    ->getBoard();
+$board = (new LanPlay($movetext))->validate()->board;
 
 echo $board->toAsciiString();
 ```
@@ -269,9 +265,7 @@ $movetext = "1.e4 c5
 
 $ravPlay = (new RavPlay($movetext))->validate();
 
-$fen = $ravPlay->getFen();
-
-print_r($fen);
+print_r($ravPlay->fen);
 ```
 
 ```text
@@ -296,7 +290,9 @@ Array
 )
 ```
 
-The `getFen()` method retrieves the FEN history as an unidimensional array that can be easily consumed by a frontend UI as shown in Figure 1. The movetext will also pass the validation if adding comments and NAGs.
+The FEN history is retrieved as an unidimensional array so it can be easily consumed by a frontend UI as shown in Figure 1.
+
+The movetext will also pass the validation if adding comments and NAGs.
 
 ```php
 use Chess\Play\RavPlay;
@@ -313,9 +309,7 @@ $movetext = "1.e4 c5 {enters the Sicilian Defense.}
 
 $ravPlay = (new RavPlay($movetext))->validate();
 
-$fen = $ravPlay->getFen();
-
-print_r($fen);
+print_r($ravPlay->fen);
 ```
 
 ```text
@@ -386,9 +380,7 @@ $board = FenToBoardFactory::create('7k/8/8/8/8/8/8/R6K w - -');
 
 $ravPlay = (new RavPlay($movetext, $board))->validate();
 
-$fen = $ravPlay->getFen();
-
-print_r($fen);
+print_r($ravPlay->fen);
 ```
 
 ```text
