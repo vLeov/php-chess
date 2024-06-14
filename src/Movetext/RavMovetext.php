@@ -11,14 +11,14 @@ class RavMovetext extends AbstractMovetext
      *
      * @var \Chess\Movetext\SanMovetext
      */
-    private SanMovetext $sanMovetext;
+    protected SanMovetext $sanMovetext;
 
     /**
      * RAV breakdown.
      *
      * @var array
      */
-    protected array $breakdown;
+    public array $breakdown;
 
     /**
      * Constructor.
@@ -33,16 +33,6 @@ class RavMovetext extends AbstractMovetext
         $this->sanMovetext = new SanMovetext($move, $movetext);
 
         $this->breakdown();
-    }
-
-    /**
-     * Returns the breakdown of the variations.
-     *
-     * @return array
-     */
-    public function getBreakdown(): array
-    {
-        return $this->breakdown;
     }
 
     /**
@@ -145,11 +135,11 @@ class RavMovetext extends AbstractMovetext
         foreach ($this->lines() as $line) {
             foreach ($line as $key => $val) {
                 if (
-                    str_ends_with(current($val), $previous->getMetadata()['lastMove']) &&
-                    str_starts_with(key($val), $current->getMetadata()['firstMove'])
+                    str_ends_with(current($val), $previous->metadata['lastMove']) &&
+                    str_starts_with(key($val), $current->metadata['firstMove'])
                 ) {
                     return true;
-                } elseif (str_contains(key($val), "{$previous->getMetadata()['lastMove']} {$current->getMetadata()['firstMove']}")) {
+                } elseif (str_contains(key($val), "{$previous->metadata['lastMove']} {$current->metadata['firstMove']}")) {
                     return true;
                 }
 

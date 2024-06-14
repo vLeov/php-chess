@@ -53,7 +53,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = [ 'd4', 'Nf6', 'Nf3', 'e6', 'c4', 'Bb4+', 'Nbd2', 'O-O', 'a3', 'Be7', 'e4', 'd6', 'Bd3', 'c5' ];
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMoves());
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->moves);
     }
 
     /**
@@ -69,7 +69,7 @@ class SanMovetextTest extends AbstractUnitTestCase
             'lastMove' => '11.Nd5',
         ];
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata());
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata);
     }
 
     /**
@@ -81,7 +81,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '1.e4';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['firstMove']);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata['firstMove']);
     }
 
     /**
@@ -93,7 +93,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '11.Nd5';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['lastMove']);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata['lastMove']);
     }
 
     /**
@@ -105,7 +105,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '3.Bb5 Nf6';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['lastMove']);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata['lastMove']);
     }
 
     /**
@@ -117,7 +117,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '3...Kb4';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['firstMove']);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata['firstMove']);
     }
 
     /**
@@ -133,7 +133,7 @@ class SanMovetextTest extends AbstractUnitTestCase
             'lastMove' => '13.g4 Nxg4',
         ];
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata());
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata);
     }
 
     /**
@@ -149,7 +149,7 @@ class SanMovetextTest extends AbstractUnitTestCase
             'lastMove' => '6...Kb8',
         ];
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata());
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata);
     }
 
     /**
@@ -165,7 +165,7 @@ class SanMovetextTest extends AbstractUnitTestCase
             'lastMove' => '3.Rh5',
         ];
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata());
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->metadata);
     }
 
     /**
@@ -261,16 +261,7 @@ class SanMovetextTest extends AbstractUnitTestCase
             'dxe4',
         ];
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMoves());
-    }
-
-    /**
-     * @dataProvider sequenceData
-     * @test
-     */
-    public function sequence($movetext, $expected)
-    {
-        $this->assertSame($expected, (new SanMovetext(self::$move, $movetext))->sequence());
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->moves);
     }
 
     /**
@@ -438,47 +429,6 @@ class SanMovetextTest extends AbstractUnitTestCase
             [ self::$validData[0], self::$validData[0] . ' 0–1' ],
             [ self::$validData[1], self::$validData[1] . ' 1/2–1/2' ],
             [ self::$validData[2], self::$validData[2] . ' ½–½' ],
-        ];
-    }
-
-    public function sequenceData()
-    {
-        return [
-            [
-                '1.d4 Nf6 2.Nf3 e6 3.c4', [
-                    '1.d4 Nf6',
-                    '1.d4 Nf6 2.Nf3 e6',
-                ],
-            ],
-            [
-                '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+', [
-                    '1.d4 Nf6',
-                    '1.d4 Nf6 2.Nf3 e6',
-                    '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+',
-                ],
-            ],
-            [
-                '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5', [
-                    '1.d4 Nf6',
-                    '1.d4 Nf6 2.Nf3 e6',
-                    '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+',
-                    '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O',
-                    '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7',
-                    '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6',
-                    '1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+ 4.Nbd2 O-O 5.a3 Be7 6.e4 d6 7.Bd3 c5',
-                ],
-            ],
-            [
-                '1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3 dxe5 5.Nxe5 c6 6.Be2 Bf5 7.c3 Nd7', [
-                    '1.e4 Nf6',
-                    '1.e4 Nf6 2.e5 Nd5',
-                    '1.e4 Nf6 2.e5 Nd5 3.d4 d6',
-                    '1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3 dxe5',
-                    '1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3 dxe5 5.Nxe5 c6',
-                    '1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3 dxe5 5.Nxe5 c6 6.Be2 Bf5',
-                    '1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3 dxe5 5.Nxe5 c6 6.Be2 Bf5 7.c3 Nd7',
-                ],
-            ],
         ];
     }
 }

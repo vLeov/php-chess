@@ -44,7 +44,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = (new RavPlay($movetext))->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -70,7 +70,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = new RavPlay($movetext);
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -98,7 +98,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = new RavPlay($movetext);
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -124,7 +124,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = new RavPlay($movetext);
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -150,7 +150,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = new RavPlay($movetext);
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -337,7 +337,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = (new RavPlay($movetext))->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getMovetext());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->movetext);
     }
 
     /**
@@ -385,7 +385,7 @@ class RavPlayTest extends AbstractUnitTestCase
         $board = (new StrToBoard($fen))->create();
         $ravPlay = new RavPlay($movetext, $board);
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -540,7 +540,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = (new RavPlay($movetext))->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -1101,7 +1101,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = (new RavPlay($movetext))->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -1210,7 +1210,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = (new RavPlay($movetext))->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -1238,7 +1238,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = (new RavPlay($movetext))->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**
@@ -1268,7 +1268,7 @@ class RavPlayTest extends AbstractUnitTestCase
 
         $ravPlay = (new RavPlay($movetext))->validate();
 
-        $this->assertSame($expected, $ravPlay->getRavMovetext()->getBreakdown());
+        $this->assertSame($expected, $ravPlay->getRavMovetext()->breakdown);
     }
 
     /**

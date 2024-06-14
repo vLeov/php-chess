@@ -45,7 +45,7 @@ class BoardTest extends AbstractUnitTestCase
             if ($san->validate()) {
                 $board = (new StrToBoard('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -'))
                     ->create();
-                foreach ($san->getMoves() as $key => $val) {
+                foreach ($san->moves as $key => $val) {
                     $this->assertTrue($board->play($board->turn, $val));
                 }
             }

@@ -35,7 +35,7 @@ class SanHeuristic extends SanPlay
     protected function calc(): SanHeuristic
     {
         $this->result[] = $this->item(EvalFactory::create($this->name, $this->board));
-        foreach ($this->sanMovetext->getMoves() as $key => $val) {
+        foreach ($this->sanMovetext->moves as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
                 if ($this->board->play($this->board->turn, $val)) {
                     $this->result[] = $this->item(EvalFactory::create($this->name, $this->board));

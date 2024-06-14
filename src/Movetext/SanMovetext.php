@@ -7,19 +7,8 @@ use Chess\Variant\Classical\PGN\AN\Color;
 
 class SanMovetext extends AbstractMovetext
 {
-    /**
-     * Metadata.
-     *
-     * @var array
-     */
-    protected array $metadata;
+    public array $metadata;
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\PGN\Move $move
-     * @param string $movetext
-     */
     public function __construct(Move $move, string $movetext)
     {
         parent::__construct($move, $movetext);
@@ -31,21 +20,6 @@ class SanMovetext extends AbstractMovetext
         ];
     }
 
-    /**
-     * Returns the metadata.
-     *
-     * @return array
-     */
-    public function getMetadata(): array
-    {
-        return $this->metadata;
-    }
-
-    /**
-     * Before inserting elements into the array of moves.
-     *
-     * @return \Chess\Movetext\SanMovetext
-     */
     protected function beforeInsert(): SanMovetext
     {
         $str = preg_replace('(\{.*?\})', '', $this->filtered());
@@ -56,11 +30,6 @@ class SanMovetext extends AbstractMovetext
         return $this;
     }
 
-    /**
-     * Insert elements into the array of moves for further validation.
-     *
-     * @see \Chess\Play\SanPlay
-     */
     protected function insert(): void
     {
         foreach (explode(' ', $this->validated) as $key => $val) {
@@ -92,11 +61,6 @@ class SanMovetext extends AbstractMovetext
         $this->moves = array_values(array_filter($this->moves));
     }
 
-    /**
-     * Returns the current turn.
-     *
-     * @return string
-     */
     protected function turn(): string
     {
         $exploded = explode(' ', $this->validated);
@@ -110,11 +74,6 @@ class SanMovetext extends AbstractMovetext
         return Color::W;
     }
 
-    /**
-     * Returns the first move.
-     *
-     * @return string
-     */
     protected function firstMove(): string
     {
         $exploded = explode(' ', $this->validated);
@@ -122,11 +81,6 @@ class SanMovetext extends AbstractMovetext
         return $exploded[0];
     }
 
-    /**
-     * Returns the last move.
-     *
-     * @return string
-     */
     protected function lastMove(): string
     {
         $exploded = explode(' ', $this->validated);
@@ -139,12 +93,6 @@ class SanMovetext extends AbstractMovetext
         return $last;
     }
 
-    /**
-     * Syntactically validated movetext.
-     *
-     * @throws \Chess\Exception\UnknownNotationException
-     * @return string
-     */
     public function validate(): string
     {
         foreach ($this->moves as $move) {
@@ -156,48 +104,11 @@ class SanMovetext extends AbstractMovetext
         return $this->validated;
     }
 
-    /**
-     * Filtered movetext.
-     *
-     * @param bool $comments
-     * @param bool $nags
-     * @return string
-     */
     public function filtered($comments = true, $nags = true): string
     {
         $str = parent::filtered($comments, $nags);
         $str = preg_replace('/\(([^()]|(?R))*\)/', '', $str);
 
         return trim($str);
-    }
-
-    /**
-     * Returns an array representing the movetext as a sequence of moves.
-     *
-     * e.g. 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+
-     *
-     * Array
-     * (
-     *     [0] => 1.d4 Nf6
-     *     [1] => 1.d4 Nf6 2.Nf3 e6
-     *     [2] => 1.d4 Nf6 2.Nf3 e6 3.c4 Bb4+
-     * )
-     *
-     * @return array
-     */
-    public function sequence(): array
-    {
-        $n = floor(count($this->moves) / 2);
-        $sequence = [];
-        for ($i = 0; $i < $n; $i++) {
-            $j = 2 * $i;
-            if (isset($this->moves[$j+1])) {
-                $item = end($sequence) . ' ' .  $i + 1 .
-                ".{$this->moves[$j]} {$this->moves[$j+1]}";
-                $sequence[] = trim($item);
-            }
-        }
-
-        return $sequence;
     }
 }

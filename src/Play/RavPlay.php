@@ -68,9 +68,9 @@ class RavPlay extends AbstractPlay
     public function validate(): RavPlay
     {
         $moves = (new SanMovetext(
-            $this->ravMovetext->getMove(),
+            $this->ravMovetext->move,
             $this->ravMovetext->main()
-        ))->getMoves();
+        ))->moves;
 
         foreach ($moves as $key => $val) {
             if (!$this->board->play($this->board->turn, $val)) {
@@ -91,21 +91,21 @@ class RavPlay extends AbstractPlay
     protected function fen(): RavPlay
     {
         $sanPlay = (new SanPlay(
-            $this->getRavMovetext()->getBreakdown()[0],
+            $this->getRavMovetext()->breakdown[0],
             $this->initialBoard
         ))->validate();
         $this->fen = $sanPlay->getFen();
         $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->getBoard();
-        for ($i = 1; $i < count($this->getRavMovetext()->getBreakdown()); $i++) {
+        for ($i = 1; $i < count($this->getRavMovetext()->breakdown); $i++) {
             $sanMovetext = new SanMovetext(
-                $this->ravMovetext->getMove(),
-                $this->getRavMovetext()->getBreakdown()[$i]
+                $this->ravMovetext->move,
+                $this->getRavMovetext()->breakdown[$i]
             );
             foreach ($this->resume as $key => $val) {
-                $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
+                $sanMovetextKey = new SanMovetext($this->ravMovetext->move, $key);
                 if ($this->getRavMovetext()->isPrevious($sanMovetextKey, $sanMovetext)) {
                     if (
-                        $this->isUndo($sanMovetextKey->getMetadata()['lastMove'], $sanMovetext->getMetadata()['firstMove'])
+                        $this->isUndo($sanMovetextKey->metadata['lastMove'], $sanMovetext->metadata['firstMove'])
                     ) {
                         $clone = unserialize(serialize($val));
                         $undo = $clone->undo();
@@ -115,7 +115,7 @@ class RavPlay extends AbstractPlay
                     }
                 }
             }
-            $sanPlay = (new SanPlay($this->getRavMovetext()->getBreakdown()[$i], $board))
+            $sanPlay = (new SanPlay($this->getRavMovetext()->breakdown[$i], $board))
                 ->validate();
             $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->getBoard();
             $fen = $sanPlay->getFen();
@@ -138,9 +138,9 @@ class RavPlay extends AbstractPlay
      */
     protected function isUndo(string $previous, string $current)
     {
-        $previous = new SanMovetext($this->ravMovetext->getMove(), $previous);
-        $current = new SanMovetext($this->ravMovetext->getMove(), $current);
-        if ($previous->getMetadata()['turn'] === $current->getMetadata()['turn']) {
+        $previous = new SanMovetext($this->ravMovetext->move, $previous);
+        $current = new SanMovetext($this->ravMovetext->move, $current);
+        if ($previous->metadata['turn'] === $current->metadata['turn']) {
             return true;
         }
 

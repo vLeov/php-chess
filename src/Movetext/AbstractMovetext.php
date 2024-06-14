@@ -7,13 +7,13 @@ use Chess\Variant\Classical\PGN\AN\Termination;
 
 abstract class AbstractMovetext
 {
-    protected Move $move;
+    public Move $move;
 
-    protected string $movetext;
+    public string $movetext;
 
-    protected array $moves;
+    public array $moves;
 
-    protected string $validated;
+    public string $validated;
 
     public function __construct(Move $move, string $movetext)
     {
@@ -22,21 +22,6 @@ abstract class AbstractMovetext
         $this->moves = [];
 
         $this->beforeInsert()->insert();
-    }
-
-    public function getMove(): Move
-    {
-        return $this->move;
-    }
-
-    public function getMovetext(): string
-    {
-        return $this->movetext;
-    }
-
-    public function getMoves(): array
-    {
-        return $this->moves;
     }
 
     public function filtered($comments = true, $nags = true): string

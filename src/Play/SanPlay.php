@@ -33,7 +33,7 @@ class SanPlay extends AbstractPlay
 
     public function validate(): SanPlay
     {
-        foreach ($this->sanMovetext->getMoves() as $key => $val) {
+        foreach ($this->sanMovetext->moves as $key => $val) {
             if ($val !== Move::ELLIPSIS) {
                 if (!$this->board->play($this->board->turn, $val)) {
                     throw new PlayException();
