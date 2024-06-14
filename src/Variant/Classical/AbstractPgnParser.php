@@ -22,7 +22,7 @@ use Chess\Variant\Classical\Rule\CastlingRule;
  * The root class in the hierarchy of chess boards implements the internal methods
  * required to convert PGN moves into a data structure.
  */
-class AbstractPgnParser extends \SplObjectStorage
+abstract class AbstractPgnParser extends \SplObjectStorage
 {
     /**
      * Current player's turn.
@@ -351,25 +351,25 @@ class AbstractPgnParser extends \SplObjectStorage
             !$this->pieceBySq($piece->move['sq']['next'])
         ) {
             if ($captured = $piece->enPassantPawn()) {
-                $capturedData = (object) [
+                $capturedData = [
                     'id' => $captured->id,
                     'sq' => $captured->sq,
                 ];
             }
         } elseif ($captured = $this->pieceBySq($piece->move['sq']['next'])) {
-            $capturedData = (object) [
+            $capturedData = [
                 'id' => $captured->id,
                 'sq' => $captured->sq,
             ];
         }
         if ($captured) {
-            $capturingData = (object) [
+            $capturingData = [
                 'id' => $piece->id,
                 'sq' => $piece->sq,
             ];
-            $piece->id !== Piece::R ?: $capturingData->type = $piece->type;
-            $captured->id !== Piece::R ?: $capturedData->type = $captured->type;
-            $this->captures[$piece->color][] = (object) [
+            $piece->id !== Piece::R ?: $capturingData['type'] = $piece->type;
+            $captured->id !== Piece::R ?: $capturedData['type'] = $captured->type;
+            $this->captures[$piece->color][] = [
                 'capturing' => $capturingData,
                 'captured' => $capturedData,
             ];

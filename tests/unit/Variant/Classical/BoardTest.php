@@ -63,64 +63,64 @@ class BoardTest extends AbstractUnitTestCase
 
         $expected = [
             'w' => [
-                (object) [
-                    'capturing' => (object) [
+                [
+                    'capturing' => [
                         'id' => 'B',
                         'sq' => 'b5',
                     ],
-                    'captured' => (object) [
+                    'captured' => [
                         'id' => 'N',
                         'sq' => 'c6',
                     ],
                 ],
-                (object) [
-                    'capturing' => (object) [
+                [
+                    'capturing' => [
                         'id' => 'Q',
                         'sq' => 'd1',
                     ],
-                    'captured' => (object) [
+                    'captured' => [
                         'id' => 'P',
                         'sq' => 'd4',
                     ],
                 ],
-                (object) [
-                    'capturing' => (object) [
+                [
+                    'capturing' => [
                         'id' => 'N',
                         'sq' => 'f3',
                     ],
-                    'captured' => (object) [
+                    'captured' => [
                         'id' => 'Q',
                         'sq' => 'd4',
                     ],
                 ],
             ],
             'b' => [
-                (object) [
-                    'capturing' => (object) [
+                [
+                    'capturing' => [
                         'id' => 'P',
                         'sq' => 'd7',
                     ],
-                    'captured' => (object) [
+                    'captured' => [
                         'id' => 'B',
                         'sq' => 'c6',
                     ],
                 ],
-                (object) [
-                    'capturing' => (object) [
+                [
+                    'capturing' => [
                         'id' => 'P',
                         'sq' => 'e5',
                     ],
-                    'captured' => (object) [
+                    'captured' => [
                         'id' => 'P',
                         'sq' => 'd4',
                     ],
                 ],
-                (object) [
-                    'capturing' => (object) [
+                [
+                    'capturing' => [
                         'id' => 'Q',
                         'sq' => 'd8',
                     ],
-                    'captured' => (object) [
+                    'captured' => [
                         'id' => 'Q',
                         'sq' => 'd4',
                     ],
