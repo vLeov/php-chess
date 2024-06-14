@@ -63,7 +63,7 @@ class SanMovetextTest extends AbstractUnitTestCase
     {
         $movetext = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5';
 
-        $expected = (object) [
+        $expected = [
             'turn' => 'b',
             'firstMove' => '1.e4',
             'lastMove' => '11.Nd5',
@@ -81,7 +81,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '1.e4';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()->firstMove);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['firstMove']);
     }
 
     /**
@@ -93,7 +93,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '11.Nd5';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()->lastMove);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['lastMove']);
     }
 
     /**
@@ -105,7 +105,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '3.Bb5 Nf6';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()->lastMove);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['lastMove']);
     }
 
     /**
@@ -117,7 +117,7 @@ class SanMovetextTest extends AbstractUnitTestCase
 
         $expected = '3...Kb4';
 
-        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()->firstMove);
+        $this->assertEquals($expected, (new SanMovetext(self::$move, $movetext))->getMetadata()['firstMove']);
     }
 
     /**
@@ -127,7 +127,7 @@ class SanMovetextTest extends AbstractUnitTestCase
     {
         $movetext = '12...a5 13.g4 Nxg4';
 
-        $expected = (object) [
+        $expected = [
             'turn' => 'w',
             'firstMove' => '12...a5',
             'lastMove' => '13.g4 Nxg4',
@@ -143,7 +143,7 @@ class SanMovetextTest extends AbstractUnitTestCase
     {
         $movetext = '6...Kb8';
 
-        $expected = (object) [
+        $expected = [
             'turn' => 'w',
             'firstMove' => '6...Kb8',
             'lastMove' => '6...Kb8',
@@ -159,7 +159,7 @@ class SanMovetextTest extends AbstractUnitTestCase
     {
         $movetext = '3.Rh5';
 
-        $expected = (object) [
+        $expected = [
             'turn' => 'b',
             'firstMove' => '3.Rh5',
             'lastMove' => '3.Rh5',

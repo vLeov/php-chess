@@ -145,11 +145,11 @@ class RavMovetext extends AbstractMovetext
         foreach ($this->lines() as $line) {
             foreach ($line as $key => $val) {
                 if (
-                    str_ends_with(current($val), $previous->getMetadata()->lastMove) &&
-                    str_starts_with(key($val), $current->getMetadata()->firstMove)
+                    str_ends_with(current($val), $previous->getMetadata()['lastMove']) &&
+                    str_starts_with(key($val), $current->getMetadata()['firstMove'])
                 ) {
                     return true;
-                } elseif (str_contains(key($val), "{$previous->getMetadata()->lastMove} {$current->getMetadata()->firstMove}")) {
+                } elseif (str_contains(key($val), "{$previous->getMetadata()['lastMove']} {$current->getMetadata()['firstMove']}")) {
                     return true;
                 }
 

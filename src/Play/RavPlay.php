@@ -105,7 +105,7 @@ class RavPlay extends AbstractPlay
                 $sanMovetextKey = new SanMovetext($this->ravMovetext->getMove(), $key);
                 if ($this->getRavMovetext()->isPrevious($sanMovetextKey, $sanMovetext)) {
                     if (
-                        $this->isUndo($sanMovetextKey->getMetadata()->lastMove, $sanMovetext->getMetadata()->firstMove)
+                        $this->isUndo($sanMovetextKey->getMetadata()['lastMove'], $sanMovetext->getMetadata()['firstMove'])
                     ) {
                         $clone = unserialize(serialize($val));
                         $undo = $clone->undo();
@@ -140,7 +140,7 @@ class RavPlay extends AbstractPlay
     {
         $previous = new SanMovetext($this->ravMovetext->getMove(), $previous);
         $current = new SanMovetext($this->ravMovetext->getMove(), $current);
-        if ($previous->getMetadata()->turn === $current->getMetadata()->turn) {
+        if ($previous->getMetadata()['turn'] === $current->getMetadata()['turn']) {
             return true;
         }
 
