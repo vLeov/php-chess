@@ -369,27 +369,12 @@ class AbstractPgnParser extends \SplObjectStorage
             ];
             $piece->id !== Piece::R ?: $capturingData->type = $piece->type;
             $captured->id !== Piece::R ?: $capturedData->type = $captured->type;
-            $capture = (object) [
+            $this->captures[$piece->color][] = (object) [
                 'capturing' => $capturingData,
                 'captured' => $capturedData,
             ];
-            $this->pushCapture($piece->color, $capture);
             $this->detach($captured);
         }
-
-        return $this;
-    }
-
-    /**
-     * Adds a new element to the captured pieces.
-     *
-     * @param string $color
-     * @param object $capture
-     * @return \Chess\Variant\Classical\AbstractPgnParser
-     */
-    protected function pushCapture(string $color, object $capture): AbstractPgnParser
-    {
-        $this->captures[$color][] = $capture;
 
         return $this;
     }
