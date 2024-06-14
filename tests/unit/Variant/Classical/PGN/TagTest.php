@@ -31,8 +31,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[Event "Vladimir Dvorkovich Cup"]');
 
-        $this->assertSame('Event', $tag->name);
-        $this->assertSame('Vladimir Dvorkovich Cup', $tag->value);
+        $this->assertSame('Event', $tag['name']);
+        $this->assertSame('Vladimir Dvorkovich Cup', $tag['value']);
     }
 
     /**
@@ -42,8 +42,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[Site "Saint Louis USA"]');
 
-        $this->assertSame('Site', $tag->name);
-        $this->assertSame('Saint Louis USA', $tag->value);
+        $this->assertSame('Site', $tag['name']);
+        $this->assertSame('Saint Louis USA', $tag['value']);
     }
 
     /**
@@ -53,8 +53,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[Date "2018.05.10"]');
 
-        $this->assertSame('Date', $tag->name);
-        $this->assertSame('2018.05.10', $tag->value);
+        $this->assertSame('Date', $tag['name']);
+        $this->assertSame('2018.05.10', $tag['value']);
     }
 
     /**
@@ -64,8 +64,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[Round "9.6"]');
 
-        $this->assertSame('Round', $tag->name);
-        $this->assertSame('9.6', $tag->value);
+        $this->assertSame('Round', $tag['name']);
+        $this->assertSame('9.6', $tag['value']);
     }
 
     /**
@@ -75,8 +75,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[White "Kantor, Gergely"]');
 
-        $this->assertSame('White', $tag->name);
-        $this->assertSame('Kantor, Gergely', $tag->value);
+        $this->assertSame('White', $tag['name']);
+        $this->assertSame('Kantor, Gergely', $tag['value']);
     }
 
     /**
@@ -86,8 +86,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[Black "Gelfand, Boris"]');
 
-        $this->assertSame('Black', $tag->name);
-        $this->assertSame('Gelfand, Boris', $tag->value);
+        $this->assertSame('Black', $tag['name']);
+        $this->assertSame('Gelfand, Boris', $tag['value']);
     }
 
     /**
@@ -97,8 +97,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[Result "1/2-1/2"]');
 
-        $this->assertSame('Result', $tag->name);
-        $this->assertSame('1/2-1/2', $tag->value);
+        $this->assertSame('Result', $tag['name']);
+        $this->assertSame('1/2-1/2', $tag['value']);
     }
 
     /**
@@ -108,8 +108,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[WhiteElo "2579"]');
 
-        $this->assertSame('WhiteElo', $tag->name);
-        $this->assertSame('2579', $tag->value);
+        $this->assertSame('WhiteElo', $tag['name']);
+        $this->assertSame('2579', $tag['value']);
     }
 
     /**
@@ -119,8 +119,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[BlackElo "2474"]');
 
-        $this->assertSame('BlackElo', $tag->name);
-        $this->assertSame('2474', $tag->value);
+        $this->assertSame('BlackElo', $tag['name']);
+        $this->assertSame('2474', $tag['value']);
     }
 
     /**
@@ -130,8 +130,8 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[ECO "D35"]');
 
-        $this->assertSame('ECO', $tag->name);
-        $this->assertSame('D35', $tag->value);
+        $this->assertSame('ECO', $tag['name']);
+        $this->assertSame('D35', $tag['value']);
     }
 
     /**
@@ -141,7 +141,7 @@ class TagTest extends AbstractUnitTestCase
     {
         $tag = self::$tag->validate('[EventDate "2017.12.17"]');
 
-        $this->assertSame('EventDate', $tag->name);
-        $this->assertSame('2017.12.17', $tag->value);
+        $this->assertSame('EventDate', $tag['name']);
+        $this->assertSame('2017.12.17', $tag['value']);
     }
 }

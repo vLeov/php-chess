@@ -73,7 +73,7 @@ class Tag extends AbstractNotation
     const WHITE_RD = 'WhiteRD';
     const BLACK_RD = 'BlackRD';
 
-    public function validate(string $tag): object
+    public function validate(string $tag): array
     {
         $isValid = false;
 
@@ -89,12 +89,10 @@ class Tag extends AbstractNotation
 
         $exploded = explode(' "', $tag);
 
-        $result = (object) [
+        return [
             'name' => substr($exploded[0], 1),
             'value' => substr($exploded[1], 0, -2),
         ];
-
-        return $result;
     }
 
     public function mandatory(): array
