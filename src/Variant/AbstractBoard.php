@@ -95,9 +95,9 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Space evaluation.
      *
-     * @var object
+     * @var array
      */
-    public object $spaceEval;
+    public array $spaceEval;
 
     /**
      * Count squares.
@@ -437,7 +437,7 @@ abstract class AbstractBoard extends \SplObjectStorage
                         $move = $this->move->toArray($this->turn, CASTLE::LONG, $this->castlingRule, $this->color);
                     } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
                         $move = $this->move->toArray($this->turn, Piece::K."x$sq", $this->castlingRule, $this->color);
-                    } elseif (!in_array($sq, $this->spaceEval->{$piece->oppColor()})) {
+                    } elseif (!in_array($sq, $this->spaceEval[$piece->oppColor()])) {
                         $move = $this->move->toArray($this->turn, Piece::K.$sq, $this->castlingRule, $this->color);
                     }
                 } elseif ($piece->id === Piece::P) {
@@ -531,7 +531,7 @@ abstract class AbstractBoard extends \SplObjectStorage
             ->attachPieces()
             ->notifyPieces();
 
-        $this->spaceEval = (object) (new SpaceEval($this))->getResult();
+        $this->spaceEval = (new SpaceEval($this))->getResult();
 
         $this->notifyPieces();
 

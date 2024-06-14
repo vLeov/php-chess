@@ -122,7 +122,7 @@ class K extends AbstractPiece
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
                 !array_diff($rule['free'], $this->board->sqCount->free) &&
-                empty(array_intersect($rule['attack'], $this->board->spaceEval->{$this->oppColor()}))
+                empty(array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()]))
             ) {
                 return $rule['sq']['next'];
             }
@@ -139,7 +139,7 @@ class K extends AbstractPiece
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
                 !array_diff($rule['free'], $this->board->sqCount->free) &&
-                empty(array_intersect($rule['attack'], $this->board->spaceEval->{$this->oppColor()}))
+                empty(array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()]))
             ) {
                 return $rule['sq']['next'];
             }
@@ -169,7 +169,7 @@ class K extends AbstractPiece
     {
         $sqsKing = array_intersect($this->mobility, $this->board->sqCount->free);
 
-        return array_diff($sqsKing, $this->board->spaceEval->{$this->oppColor()});
+        return array_diff($sqsKing, $this->board->spaceEval[$this->oppColor()]);
     }
 
     public function getCastleRook(string $type): ?R
