@@ -2685,15 +2685,6 @@ class BoardTest extends AbstractUnitTestCase
         $board->playLan('w', 'h4h5');
         $board->playLan('b', 'g7g5');
 
-        $expected = (object) [
-            'color' => 'w',
-            'id' => 'P',
-            'fen' => (object) [
-                'h6' => 'rnbqkbnr/1ppppp1p/7P/p5p1/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
-                'g6' => 'rnbqkbnr/1ppppp1p/6P1/p7/8/8/PPPPPPP1/RNBQKBNR b KQkq -',
-            ],
-        ];
-
         $expected = ['h6', 'g6'];
 
         $this->assertEquals($expected, $board->legal('h5'));
