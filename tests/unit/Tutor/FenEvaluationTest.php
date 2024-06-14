@@ -25,7 +25,7 @@ class FenEvaluationTest extends AbstractUnitTestCase
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
         $board = (new SanPlay($A08))->validate()->board;
 
-        $paragraph = (new FenEvaluation($board))->getParagraph();
+        $paragraph = (new FenEvaluation($board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }
@@ -48,7 +48,7 @@ class FenEvaluationTest extends AbstractUnitTestCase
             new CapablancaBoard()
         );
 
-        $paragraph = (new FenEvaluation($board))->getParagraph();
+        $paragraph = (new FenEvaluation($board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }

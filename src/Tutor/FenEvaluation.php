@@ -14,8 +14,8 @@ class FenEvaluation extends AbstractParagraph
         $this->board = $board;
 
         $this->paragraph = [
-            ...(new FenExplanation($this->board))->getParagraph(),
-            ...(new FenElaboration($this->board))->getParagraph(),
+            ...(new FenExplanation($this->board))->paragraph,
+            ...(new FenElaboration($this->board))->paragraph,
             ...$this->evaluate(),
         ];
     }

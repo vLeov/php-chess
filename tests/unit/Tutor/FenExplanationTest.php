@@ -24,7 +24,7 @@ class FenExplanationTest extends AbstractUnitTestCase
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
         $board = (new SanPlay($A08))->validate()->board;
 
-        $paragraph = (new FenExplanation($board))->getParagraph();
+        $paragraph = (new FenExplanation($board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }
@@ -46,7 +46,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             new CapablancaBoard()
         );
 
-        $paragraph = (new FenExplanation($board))->getParagraph();
+        $paragraph = (new FenExplanation($board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }
@@ -71,7 +71,7 @@ class FenExplanationTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create('8/p4pk1/6b1/3P1PQ1/8/P1q3K1/2p3B1/8 w - -');
 
-        $paragraph = (new FenExplanation($board))->getParagraph();
+        $paragraph = (new FenExplanation($board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }

@@ -29,7 +29,7 @@ class GoodPgnEvaluation extends AbstractParagraph
 
         $this->pgn = $last['move']['pgn'];
 
-        $this->paragraph = (new PgnEvaluation($this->pgn, $this->board))->getParagraph();
+        $this->paragraph = (new PgnEvaluation($this->pgn, $this->board))->paragraph;
     }
 
     public function getLimit(): Limit
