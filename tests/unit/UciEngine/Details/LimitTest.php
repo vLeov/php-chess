@@ -15,15 +15,15 @@ class LimitTest extends AbstractUnitTestCase
         $limit = new Limit();
 
         $this->assertTrue(is_a($limit, Limit::class));
-        $this->assertSame(null, $limit->getMovetime());
-        $this->assertSame(null, $limit->getDepth());
-        $this->assertSame(null, $limit->getNodes());
-        $this->assertSame(null, $limit->getMate());
-        $this->assertSame(null, $limit->getWtime());
-        $this->assertSame(null, $limit->getBtime());
-        $this->assertSame(null, $limit->getWinc());
-        $this->assertSame(null, $limit->getBinc());
-        $this->assertSame(null, $limit->getMovestogo());
+        $this->assertSame(null, $limit->movetime);
+        $this->assertSame(null, $limit->depth);
+        $this->assertSame(null, $limit->nodes);
+        $this->assertSame(null, $limit->mate);
+        $this->assertSame(null, $limit->wtime);
+        $this->assertSame(null, $limit->btime);
+        $this->assertSame(null, $limit->winc);
+        $this->assertSame(null, $limit->binc);
+        $this->assertSame(null, $limit->movestogo);
     }
 
     /**
@@ -31,8 +31,9 @@ class LimitTest extends AbstractUnitTestCase
      */
     public function time_3000()
     {
-        $limit = (new Limit())->setMovetime(3000);
+        $limit = new Limit();
+        $limit->movetime = 3000;
 
-        $this->assertSame(3000, $limit->getMovetime());
+        $this->assertSame(3000, $limit->movetime);
     }
 }

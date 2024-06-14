@@ -67,7 +67,8 @@ class UciEngineTest extends AbstractUnitTestCase
         $board = new Board();
         $board->play('w', 'e4');
 
-        $limit = (new Limit())->setMovetime(3000);
+        $limit = new Limit();
+        $limit->movetime = 3000;
         $stockfish = new UciEngine('/usr/games/stockfish');
         $analysis = $stockfish->analysis($board, $limit);
 
@@ -85,7 +86,8 @@ class UciEngineTest extends AbstractUnitTestCase
         $board = new Board();
         $board->play('w', 'e4');
 
-        $limit = (new Limit())->setDepth(8);
+        $limit = new Limit();
+        $limit->depth = 8;
 
         $stockfish = (new UciEngine('/usr/games/stockfish'))
             ->setOption('Skill Level', '20')
@@ -118,7 +120,8 @@ class UciEngineTest extends AbstractUnitTestCase
         $move = (new GrandmasterMove(self::FILEPATH))->move($board);
 
         do {
-            $limit = (new Limit())->setDepth($depth + rand(0, $depthOffset));
+            $limit = new Limit();
+            $limit->depth = $depth + rand(0, $depthOffset);
             $analysis = $stockfish
                 ->setOption('Skill Level', $skillLevel + rand(0, $skillLevelOffset))
                 ->analysis($board, $limit);

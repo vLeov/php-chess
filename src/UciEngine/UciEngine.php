@@ -157,40 +157,40 @@ class UciEngine
     {
         $command = 'go';
 
-        if ($limit->getMovetime() !== null) {
-            $command .= ' movetime ' . $limit->getMovetime();
+        if ($limit->movetime !== null) {
+            $command .= ' movetime ' . $limit->movetime;
         }
 
-        if ($limit->getDepth() !== null) {
-            $command .= ' depth ' . $limit->getDepth();
+        if ($limit->depth !== null) {
+            $command .= ' depth ' . $limit->depth;
         }
 
-        if ($limit->getNodes() !== null) {
-            $command .= ' nodes ' . $limit->getNodes();
+        if ($limit->nodes !== null) {
+            $command .= ' nodes ' . $limit->nodes;
         }
 
-        if ($limit->getMate() !== null) {
-            $command .= ' mate ' . $limit->getMate();
+        if ($limit->mate !== null) {
+            $command .= ' mate ' . $limit->mate;
         }
 
-        if ($limit->getWtime() !== null) {
-            $command .= ' wtime ' . $limit->getWtime();
+        if ($limit->wtime !== null) {
+            $command .= ' wtime ' . $limit->wtime;
         }
 
-        if ($limit->getBtime() !== null) {
-            $command .= ' btime ' . $limit->getBtime();
+        if ($limit->btime !== null) {
+            $command .= ' btime ' . $limit->btime;
         }
 
-        if ($limit->getWinc() !== null) {
-            $command .= ' winc ' . $limit->getWinc();
+        if ($limit->winc !== null) {
+            $command .= ' winc ' . $limit->winc;
         }
 
-        if ($limit->getBinc() !== null) {
-            $command .= ' binc ' . $limit->getBinc();
+        if ($limit->binc !== null) {
+            $command .= ' binc ' . $limit->binc;
         }
 
-        if ($limit->getMovestogo() !== null) {
-            $command .= ' movestogo ' . $limit->getMovestogo();
+        if ($limit->movestogo !== null) {
+            $command .= ' movestogo ' . $limit->movestogo;
         }
 
         return $command;

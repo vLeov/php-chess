@@ -25,7 +25,8 @@ class GoodPgnEvaluationTest extends AbstractUnitTestCase
             "Overall, 4 heuristic evaluation features are favoring White while 8 are favoring Black.",
         ];
 
-        $limit = (new Limit())->setDepth(12);
+        $limit = new Limit();
+        $limit->depth = 12;
         $stockfish = new UciEngine('/usr/games/stockfish');
         $D07 = file_get_contents(self::DATA_FOLDER.'/sample/D07.pgn');
         $board = (new SanPlay($D07))->validate()->board;
