@@ -15,7 +15,7 @@ class RandomizerTest extends AbstractUnitTestCase
     {
         $turn = Color::W;
 
-        $board = (new Randomizer($turn))->getBoard();
+        $board = (new Randomizer($turn))->board;
 
         $this->assertNotEmpty($board->toFen());
     }
@@ -31,7 +31,7 @@ class RandomizerTest extends AbstractUnitTestCase
             Color::W => ['N', 'B', 'R'],
         ];
 
-        $board = (new Randomizer($turn, $items))->getBoard();
+        $board = (new Randomizer($turn, $items))->board;
 
         $this->assertNotEmpty($board->toFen());
     }
@@ -47,7 +47,7 @@ class RandomizerTest extends AbstractUnitTestCase
             Color::B => ['N', 'B', 'R'],
         ];
 
-        $board = (new Randomizer($turn, $items))->getBoard();
+        $board = (new Randomizer($turn, $items))->board;
 
         $this->assertNotEmpty($board->toFen());
     }

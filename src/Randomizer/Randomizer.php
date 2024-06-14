@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
 
 class Randomizer
 {
-    protected Board $board;
+    public Board $board;
 
     public function __construct(string $turn, array $items = [])
     {
@@ -23,11 +23,6 @@ class Randomizer
         $board->turn = $turn;
 
         $this->board = $board;
-    }
-
-    public function getBoard(): Board
-    {
-        return $this->board;
     }
 
     protected function sq(): string

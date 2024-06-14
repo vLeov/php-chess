@@ -13,7 +13,7 @@ class TwoBishopsRandomizerTest extends AbstractUnitTestCase
      */
     public function w_get_board()
     {
-        $board = (new TwoBishopsRandomizer($turn = Color::W))->getBoard();
+        $board = (new TwoBishopsRandomizer($turn = Color::W))->board;
 
         $this->assertNotEmpty($board->toFen());
     }
@@ -23,7 +23,7 @@ class TwoBishopsRandomizerTest extends AbstractUnitTestCase
      */
     public function b_get_board()
     {
-        $board = (new TwoBishopsRandomizer($turn = Color::B))->getBoard();
+        $board = (new TwoBishopsRandomizer($turn = Color::B))->board;
 
         $this->assertNotEmpty($board->toFen());
     }

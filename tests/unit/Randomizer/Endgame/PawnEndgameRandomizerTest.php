@@ -13,7 +13,7 @@ class PawnEndgameRandomizerTest extends AbstractUnitTestCase
      */
     public function w_get_board()
     {
-        $board = (new PawnEndgameRandomizer($turn = Color::W))->getBoard();
+        $board = (new PawnEndgameRandomizer($turn = Color::W))->board;
 
         $this->assertNotEmpty($board->toFen());
     }
@@ -23,7 +23,7 @@ class PawnEndgameRandomizerTest extends AbstractUnitTestCase
      */
     public function b_get_board()
     {
-        $board = (new PawnEndgameRandomizer($turn = Color::B))->getBoard();
+        $board = (new PawnEndgameRandomizer($turn = Color::B))->board;
 
         $this->assertNotEmpty($board->toFen());
     }

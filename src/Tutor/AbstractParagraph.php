@@ -6,14 +6,9 @@ use Chess\Variant\Classical\Board;
 
 abstract class AbstractParagraph
 {
-    protected Board $board;
+    public Board $board;
 
-    protected array $paragraph = [];
-
-    public function getBoard(): Board
-    {
-        return $this->board;
-    }
+    public array $paragraph = [];
 
     public function getParagraph(): array
     {
