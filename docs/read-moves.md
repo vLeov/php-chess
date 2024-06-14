@@ -163,7 +163,7 @@ $movetext = '1.e4 c5 2.Nf3 $1 d6 3.d4 cxd4 4.Nxd4 $48 Nf6 $113';
 
 $sanPlay = (new SanPlay($movetext))->validate();
 
-echo $sanPlay->getSanMovetext()->filtered();
+echo $sanPlay->sanMovetext->filtered();
 ```
 
 ```text
@@ -173,7 +173,7 @@ echo $sanPlay->getSanMovetext()->filtered();
 Comments and NAGs can be removed by passing the `false` value to the first and second arguments of the `filtered()` method.
 
 ```php
-echo $sanPlay->getSanMovetext()->filtered($comments = true, $nags = false);
+echo $sanPlay->sanMovetext->filtered($comments = true, $nags = false);
 ```
 
 ```text
@@ -337,13 +337,13 @@ Array
 This is how to obtain the validated movetext.
 
 ```php
-$movetext = $ravPlay->getRavMovetext()->getMovetext();
+$movetext = $ravPlay->ravMovetext->movetext;
 ```
 
 The `filtered()` method is to remove tabs and spaces.
 
 ```php
-$movetext = $ravPlay->getRavMovetext()->filtered();
+$movetext = $ravPlay->ravMovetext->filtered();
 
 echo $movetext;
 ```
@@ -355,7 +355,7 @@ echo $movetext;
 Comments and NAGs can be removed by passing the `false` value to the first and second arguments of the `filtered()` method.
 
 ```php
-$movetext = $ravPlay->getRavMovetext()->filtered($comments = false);
+$movetext = $ravPlay->ravMovetext->filtered($comments = false);
 
 echo $movetext;
 ```

@@ -12,7 +12,7 @@ use Chess\Tutor\FenEvaluation;
 
 $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
-$paragraph = (new FenEvaluation($board))->getParagraph();
+$paragraph = (new FenEvaluation($board))->paragraph;
 
 $text = implode(' ', $paragraph);
 
@@ -37,11 +37,13 @@ A heuristic evaluation is a quick numerical estimate of a chess position that su
 use Chess\Play\SanPlay;
 use Chess\Tutor\PgnEvaluation;
 
+$pgn = 'd4';
+
 $movetext = '1.Nf3 d5 2.g3 c5';
 
 $board = (new SanPlay($movetext))->validate()->board;
 
-$paragraph = (new PgnEvaluation('d4', $board))->getParagraph();
+$paragraph = (new PgnEvaluation($pgn, $board))->paragraph;
 
 $text = implode(' ', $paragraph);
 
@@ -68,14 +70,15 @@ use Chess\UciEngine\Details\Limit;
 
 $movetext = '1.d4 d5 2.c4 Nc6 3.cxd5 Qxd5 4.e3 e5 5.Nc3 Bb4 6.Bd2 Bxc3 7.Bxc3 exd4 8.Ne2';
 
-$limit = (new Limit())->setDepth(12);
+$limit = new Limit();
+$limit->depth = 12;
 $stockfish = new UciEngine('/usr/games/stockfish');
 $board = (new SanPlay($movetext))->validate()->board;
 
 $goodPgnEvaluation = new GoodPgnEvaluation($limit, $stockfish, $board);
 
-$pgn = $goodPgnEvaluation->getPgn();
-$paragraph = implode(' ', $goodPgnEvaluation->getParagraph());
+$pgn = $goodPgnEvaluation->pgn;
+$paragraph = implode(' ', $goodPgnEvaluation->paragraph);
 
 echo $pgn . PHP_EOL;
 echo $paragraph . PHP_EOL;
