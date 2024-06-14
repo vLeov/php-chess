@@ -64,7 +64,7 @@ class SanPlayTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5 {foo} 2.Nf3 {bar} Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 {foobar}';
 
-        $this->assertSame($expected, (new SanPlay($movetext))->getSanMovetext()->filtered());
+        $this->assertSame($expected, (new SanPlay($movetext))->sanMovetext->filtered());
     }
 
     /**

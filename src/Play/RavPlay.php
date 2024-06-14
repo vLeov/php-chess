@@ -84,7 +84,7 @@ class RavPlay extends AbstractPlay
             $this->initialBoard
         ))->validate();
         $this->fen = $sanPlay->fen;
-        $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->board;
+        $this->resume[$sanPlay->sanMovetext->filtered(false, false)] = $sanPlay->board;
         for ($i = 1; $i < count($this->ravMovetext->breakdown); $i++) {
             $sanMovetext = new SanMovetext(
                 $this->ravMovetext->move,
@@ -106,7 +106,7 @@ class RavPlay extends AbstractPlay
             }
             $sanPlay = (new SanPlay($this->ravMovetext->breakdown[$i], $board))
                 ->validate();
-            $this->resume[$sanPlay->getSanMovetext()->filtered(false, false)] = $sanPlay->board;
+            $this->resume[$sanPlay->sanMovetext->filtered(false, false)] = $sanPlay->board;
             $fen = $sanPlay->fen;
             array_shift($fen);
             $this->fen = [

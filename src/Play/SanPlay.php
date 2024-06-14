@@ -10,7 +10,7 @@ use Chess\Variant\Classical\PGN\Move;
 
 class SanPlay extends AbstractPlay
 {
-    protected SanMovetext $sanMovetext;
+    public SanMovetext $sanMovetext;
 
     public function __construct(string $movetext, AbstractBoard $board = null)
     {
@@ -24,11 +24,6 @@ class SanPlay extends AbstractPlay
         $this->fen = [$this->board->toFen()];
         $this->sanMovetext = new SanMovetext($this->board->move, $movetext);
         $this->sanMovetext->validate();
-    }
-
-    public function getSanMovetext(): SanMovetext
-    {
-        return $this->sanMovetext;
     }
 
     public function validate(): SanPlay
