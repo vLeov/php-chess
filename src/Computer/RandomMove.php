@@ -2,13 +2,13 @@
 
 namespace Chess\Computer;
 
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 
 class RandomMove
 {
-    protected Board $board;
+    protected AbstractBoard $board;
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board->clone();
     }

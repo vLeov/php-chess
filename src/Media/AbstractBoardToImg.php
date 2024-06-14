@@ -2,7 +2,7 @@
 
 namespace Chess\Media;
 
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 
@@ -10,7 +10,7 @@ class AbstractBoardToImg
 {
     const FILEPATH = __DIR__ . '/../../img';
 
-    protected Board $board;
+    protected AbstractBoard $board;
 
     protected bool $flip;
 
@@ -18,7 +18,7 @@ class AbstractBoardToImg
 
     protected Imagine $imagine;
 
-    public function __construct(Board $board, bool $flip = false, $size = 480)
+    public function __construct(AbstractBoard $board, bool $flip = false, $size = 480)
     {
         $this->board = $board;
         $this->flip = $flip;
@@ -26,7 +26,7 @@ class AbstractBoardToImg
         $this->imagine = new Imagine();
     }
 
-    public function setBoard(Board $board): AbstractBoardToImg
+    public function setBoard(AbstractBoard $board): AbstractBoardToImg
     {
         $this->board = $board;
 

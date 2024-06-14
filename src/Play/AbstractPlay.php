@@ -2,17 +2,17 @@
 
 namespace Chess\Play;
 
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 
 abstract class AbstractPlay
 {
-    protected Board $initialBoard;
+    protected AbstractBoard $initialBoard;
 
-    protected Board $board;
+    protected AbstractBoard $board;
 
     protected array $fen;
 
-    public function getBoard(): Board
+    public function getBoard(): AbstractBoard
     {
         return $this->board;
     }

@@ -7,6 +7,7 @@ use Chess\Exception\PlayException;
 use Chess\Movetext\RavMovetext;
 use Chess\Movetext\SanMovetext;
 use Chess\Play\SanPlay;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\Board;
 
 class RavPlay extends AbstractPlay
@@ -31,7 +32,7 @@ class RavPlay extends AbstractPlay
      * @param string $movetext
      * @param Board $board
      */
-    public function __construct(string $movetext, Board $board = null)
+    public function __construct(string $movetext, AbstractBoard $board = null)
     {
         if ($board) {
             $this->initialBoard = $board;

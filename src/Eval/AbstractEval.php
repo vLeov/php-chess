@@ -2,9 +2,9 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Capablanca\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Board;
 
 abstract class AbstractEval
 {
@@ -19,7 +19,7 @@ abstract class AbstractEval
         Piece::R => 5.1,
     ];
 
-    protected Board $board;
+    protected AbstractBoard $board;
 
     protected array $result = [
         Color::W => 0,

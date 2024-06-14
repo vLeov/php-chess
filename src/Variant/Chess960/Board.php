@@ -2,6 +2,7 @@
 
 namespace Chess\Variant\Chess960;
 
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\RandomBoardInterface;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\PGN\Move;
@@ -10,7 +11,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Chess960\StartPieces;
 use Chess\Variant\Chess960\Rule\CastlingRule;
 
-class Board extends ClassicalBoard implements RandomBoardInterface
+class Board extends AbstractBoard implements RandomBoardInterface
 {
     const VARIANT = '960';
 

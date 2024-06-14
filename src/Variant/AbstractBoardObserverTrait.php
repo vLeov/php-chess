@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Variant\Classical;
+namespace Chess\Variant;
 
-trait BoardObserverPieceTrait
+trait AbstractBoardObserverTrait
 {
     protected array $observers;
 

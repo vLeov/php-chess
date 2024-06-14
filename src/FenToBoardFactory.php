@@ -2,6 +2,7 @@
 
 namespace Chess;
 
+use Chess\Variant\AbstractBoard;;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Capablanca\FEN\StrToBoard as CapablancaFenStrToBoard;
 use Chess\Variant\CapablancaFischer\Board as CapablancaFischerBoard;
@@ -13,7 +14,7 @@ use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 
 class FenToBoardFactory
 {
-    public static function create(string $fen, ClassicalBoard $board = null)
+    public static function create(string $fen, AbstractBoard $board = null)
     {
         $board ??= new ClassicalBoard();
 

@@ -2,10 +2,10 @@
 
 namespace Chess\Piece;
 
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
-use Chess\Variant\Classical\Board;
 
 abstract class AbstractPiece
 {
@@ -21,7 +21,7 @@ abstract class AbstractPiece
 
     public array $move;
 
-    public Board $board;
+    public AbstractBoard $board;
 
     public function __construct(string $color, string $sq, Square $square, string $id)
     {

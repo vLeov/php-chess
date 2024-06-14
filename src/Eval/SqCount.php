@@ -2,21 +2,21 @@
 
 namespace Chess\Eval;
 
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Board;
 
 class SqCount
 {
     const TYPE_FREE      = 'free';
     const TYPE_USED      = 'used';
 
-    private Board $board;
+    private AbstractBoard $board;
 
     private $used = [];
 
     private $free = [];
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

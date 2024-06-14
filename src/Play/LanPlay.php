@@ -3,13 +3,14 @@
 namespace Chess\Play;
 
 use Chess\Exception\PlayException;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\Board;
 
 class LanPlay extends AbstractPlay
 {
     protected array $moves;
 
-    public function __construct(string $movetext, Board $board = null)
+    public function __construct(string $movetext, AbstractBoard $board = null)
     {
         $this->initialBoard = $board ?? new Board();
         $this->board = $board ?? new Board();

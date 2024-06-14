@@ -4,6 +4,7 @@ namespace Chess\Play;
 
 use Chess\Exception\PlayException;
 use Chess\Movetext\SanMovetext;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\Move;
 
@@ -11,7 +12,7 @@ class SanPlay extends AbstractPlay
 {
     protected SanMovetext $sanMovetext;
 
-    public function __construct(string $movetext, Board $board = null)
+    public function __construct(string $movetext, AbstractBoard $board = null)
     {
         if ($board) {
             $this->initialBoard = $board;

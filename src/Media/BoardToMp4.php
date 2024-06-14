@@ -4,7 +4,7 @@ namespace Chess\Media;
 
 use Chess\Exception\MediaException;
 use Chess\Movetext\SanMovetext;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 
 class BoardToMp4
 {
@@ -14,11 +14,11 @@ class BoardToMp4
 
     protected SanMovetext $sanMovetext;
 
-    protected Board $board;
+    protected AbstractBoard $board;
 
     protected bool $flip;
 
-    public function __construct(string $movetext, Board $board, bool $flip = false)
+    public function __construct(string $movetext, AbstractBoard $board, bool $flip = false)
     {
         $this->sanMovetext = new SanMovetext($board->move, $movetext);
         if (!$this->sanMovetext->validate()) {
