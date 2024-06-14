@@ -9,7 +9,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
 
 class PiecePhraseTest extends AbstractUnitTestCase
 {
-    static private $square;
+    static private Square $square;
 
     public static function setUpBeforeClass(): void
     {

@@ -8,7 +8,7 @@ use Chess\Tests\AbstractUnitTestCase;
 
 class SquareTest extends AbstractUnitTestCase
 {
-    static private $square;
+    static private Square $square;
 
     public static function setUpBeforeClass(): void
     {

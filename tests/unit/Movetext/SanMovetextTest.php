@@ -8,7 +8,7 @@ use Chess\Variant\Classical\PGN\Move;
 
 class SanMovetextTest extends AbstractUnitTestCase
 {
-    static private $move;
+    static private Move $move;
 
     public static function setUpBeforeClass(): void
     {

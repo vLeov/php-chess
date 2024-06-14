@@ -9,7 +9,7 @@ use Chess\Variant\Classical\PGN\AN\Square;
 
 class QTest extends AbstractUnitTestCase
 {
-    static private $square;
+    static private Square $square;
 
     public static function setUpBeforeClass(): void
     {

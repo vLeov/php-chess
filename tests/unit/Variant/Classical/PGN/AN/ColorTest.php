@@ -7,7 +7,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 
 class ColorTest extends AbstractUnitTestCase
 {
-    static private $color;
+    static private Color $color;
 
     public static function setUpBeforeClass(): void
     {

@@ -12,9 +12,9 @@ use Chess\Variant\Classical\Rule\CastlingRule;
 
 class MoveTest extends AbstractUnitTestCase
 {
-    static private $color;
-    static private $castlingRule;
-    static private $move;
+    static private Color $color;
+    static private CastlingRule $castlingRule;
+    static private Move $move;
 
     public static function setUpBeforeClass(): void
     {

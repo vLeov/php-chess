@@ -8,7 +8,7 @@ use Chess\Tests\AbstractUnitTestCase;
 
 class StrTest extends AbstractUnitTestCase
 {
-    static private $fenStr;
+    static private Str $fenStr;
 
     public static function setUpBeforeClass(): void
     {

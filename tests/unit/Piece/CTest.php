@@ -8,7 +8,7 @@ use Chess\Variant\Capablanca\PGN\AN\Square;
 
 class CTest extends AbstractUnitTestCase
 {
-    static private $square;
+    static private Square $square;
 
     public static function setUpBeforeClass(): void
     {

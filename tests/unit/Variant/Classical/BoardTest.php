@@ -24,7 +24,7 @@ use Chess\Variant\Classical\Rule\CastlingRule;
 
 class BoardTest extends AbstractUnitTestCase
 {
-    static private $square;
+    static private Square $square;
 
     public static function setUpBeforeClass(): void
     {
