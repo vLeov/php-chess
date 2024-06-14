@@ -28,6 +28,6 @@ class SqCountTest extends AbstractUnitTestCase
             'h3', 'h4', 'h5', 'h6',
         ];
 
-        $this->assertEqualsCanonicalizing($expected, $sqCount->free);
+        $this->assertEqualsCanonicalizing($expected, $sqCount['free']);
     }
 }

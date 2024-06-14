@@ -13,7 +13,7 @@ class PressureEval extends AbstractEval implements ExplainEvalInterface
 
     const NAME = 'Pressure';
 
-    private object $sqCount;
+    private array $sqCount;
 
     public function __construct(Board $board)
     {
@@ -45,7 +45,7 @@ class PressureEval extends AbstractEval implements ExplainEvalInterface
                     ...$this->result[$piece->color],
                     ...array_intersect(
                         $piece->mobility,
-                        $this->sqCount->used->{$piece->oppColor()}
+                        $this->sqCount['used'][$piece->oppColor()]
                     )
                 ];
             } elseif ($piece->id === Piece::P) {
@@ -53,7 +53,7 @@ class PressureEval extends AbstractEval implements ExplainEvalInterface
                     ...$this->result[$piece->color],
                     ...array_intersect(
                         $piece->captureSqs,
-                        $this->sqCount->used->{$piece->oppColor()}
+                        $this->sqCount['used'][$piece->oppColor()]
                     )
                 ];
             } else {
@@ -61,7 +61,7 @@ class PressureEval extends AbstractEval implements ExplainEvalInterface
                     ...$this->result[$piece->color],
                     ...array_intersect(
                         $piece->legalSqs(),
-                        $this->sqCount->used->{$piece->oppColor()}
+                        $this->sqCount['used'][$piece->oppColor()]
                     )
                 ];
             }

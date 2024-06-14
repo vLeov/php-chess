@@ -13,7 +13,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
 
     const NAME = 'Space';
 
-    private object $sqCount;
+    private array $sqCount;
 
     public function __construct(AbstractBoard $board)
     {
@@ -46,7 +46,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
                         ...$this->result[$piece->color],
                         ...array_intersect(
                             $piece->mobility,
-                            $this->sqCount->free
+                            $this->sqCount['free']
                         )
                     ]
                 );
@@ -56,7 +56,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
                         ...$this->result[$piece->color],
                         ...array_intersect(
                             $piece->captureSqs,
-                            $this->sqCount->free
+                            $this->sqCount['free']
                         )
                     ]
                 );
@@ -66,7 +66,7 @@ class SpaceEval extends AbstractEval implements ExplainEvalInterface
                         ...$this->result[$piece->color],
                         ...array_diff(
                             $piece->legalSqs(),
-                            $this->sqCount->used->{$piece->oppColor()}
+                            $this->sqCount['used'][$piece->oppColor()]
                         )
                     ]
                 );

@@ -24,9 +24,9 @@ class SqCount
         $this->free = $this->free();
     }
 
-    public function count(): object
+    public function count(): array
     {
-        return (object) [
+        return [
             self::TYPE_FREE => $this->free,
             self::TYPE_USED => $this->used,
         ];
@@ -34,10 +34,10 @@ class SqCount
 
     private function free(): array
     {
-        return array_diff($this->board->square->all(), [...$this->used->{Color::W}, ...$this->used->{Color::B}]);
+        return array_diff($this->board->square->all(), [...$this->used[Color::W], ...$this->used[Color::B]]);
     }
 
-    private function used(): object
+    private function used(): array
     {
         $used = [
             Color::W => [],
@@ -48,6 +48,6 @@ class SqCount
             $used[$piece->color][] = $piece->sq;
         }
 
-        return (object) $used;
+        return $used;
     }
 }

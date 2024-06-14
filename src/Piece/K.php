@@ -106,7 +106,7 @@ class K extends AbstractPiece
     {
         $sqs = [];
         foreach ($this->mobility as $sq) {
-            if (in_array($sq, $this->board->sqCount->used->{$this->color})) {
+            if (in_array($sq, $this->board->sqCount['used'][$this->color])) {
                 $sqs[] = $sq;
             }
         }
@@ -121,7 +121,7 @@ class K extends AbstractPiece
         if ($this->board->castlingRule->long($this->board->castlingAbility, $this->color)) {
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
-                !array_diff($rule['free'], $this->board->sqCount->free) &&
+                !array_diff($rule['free'], $this->board->sqCount['free']) &&
                 empty(array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()]))
             ) {
                 return $rule['sq']['next'];
@@ -138,7 +138,7 @@ class K extends AbstractPiece
         if ($this->board->castlingRule->short($this->board->castlingAbility, $this->color)) {
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
-                !array_diff($rule['free'], $this->board->sqCount->free) &&
+                !array_diff($rule['free'], $this->board->sqCount['free']) &&
                 empty(array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()]))
             ) {
                 return $rule['sq']['next'];
@@ -167,7 +167,7 @@ class K extends AbstractPiece
 
     protected function sqsKing(): ?array
     {
-        $sqsKing = array_intersect($this->mobility, $this->board->sqCount->free);
+        $sqsKing = array_intersect($this->mobility, $this->board->sqCount['free']);
 
         return array_diff($sqsKing, $this->board->spaceEval[$this->oppColor()]);
     }

@@ -12,7 +12,7 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
 
     const NAME = 'Connectivity';
 
-    private object $sqCount;
+    private array $sqCount;
 
     public function __construct(Board $board)
     {
@@ -38,28 +38,28 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
                 case Piece::K:
                     $this->result[$piece->color] += count(
                         array_intersect($piece->mobility,
-                        $this->sqCount->used->{$piece->color})
+                        $this->sqCount['used'][$piece->color])
                     );
                     break;
                 case Piece::N:
                     $this->result[$piece->color] += count(
                         array_intersect($piece->mobility,
-                        $this->sqCount->used->{$piece->color})
+                        $this->sqCount['used'][$piece->color])
                     );
                     break;
                 case Piece::P:
                     $this->result[$piece->color] += count(
                         array_intersect($piece->captureSqs,
-                        $this->sqCount->used->{$piece->color})
+                        $this->sqCount['used'][$piece->color])
                     );
                     break;
                 default:
                     foreach ($piece->mobility as $key => $val) {
                         foreach ($val as $sq) {
-                            if (in_array($sq, $this->sqCount->used->{$piece->color})) {
+                            if (in_array($sq, $this->sqCount['used'][$piece->color])) {
                                 $this->result[$piece->color] += 1;
                                 break;
-                            } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
+                            } elseif (in_array($sq, $this->sqCount['used'][$piece->oppColor()])) {
                                 break;
                             }
                         }

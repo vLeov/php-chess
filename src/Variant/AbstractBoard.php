@@ -102,9 +102,9 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Count squares.
      *
-     * @var object
+     * @var array
      */
-    public object $sqCount;
+    public array $sqCount;
 
     /**
      * Picks a piece from the board.
@@ -435,19 +435,19 @@ abstract class AbstractBoard extends \SplObjectStorage
                         $move = $this->move->toArray($this->turn, Castle::SHORT, $this->castlingRule, $this->color);
                     } elseif ($sq === $piece->sqCastleLong()) {
                         $move = $this->move->toArray($this->turn, CASTLE::LONG, $this->castlingRule, $this->color);
-                    } elseif (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
+                    } elseif (in_array($sq, $this->sqCount['used'][$piece->oppColor()])) {
                         $move = $this->move->toArray($this->turn, Piece::K."x$sq", $this->castlingRule, $this->color);
                     } elseif (!in_array($sq, $this->spaceEval[$piece->oppColor()])) {
                         $move = $this->move->toArray($this->turn, Piece::K.$sq, $this->castlingRule, $this->color);
                     }
                 } elseif ($piece->id === Piece::P) {
-                    if (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
+                    if (in_array($sq, $this->sqCount['used'][$piece->oppColor()])) {
                         $move = $this->move->toArray($this->turn, $piece->file()."x$sq", $this->castlingRule, $this->color);
                     } else {
                         $move = $this->move->toArray($this->turn, $sq, $this->castlingRule, $this->color);
                     }
                 } else {
-                    if (in_array($sq, $this->sqCount->used->{$piece->oppColor()})) {
+                    if (in_array($sq, $this->sqCount['used'][$piece->oppColor()])) {
                         $move = $this->move->toArray($this->turn, $piece->id."x$sq", $this->castlingRule, $this->color);
                     } else {
                         $move = $this->move->toArray($this->turn, $piece->id.$sq, $this->castlingRule, $this->color);
