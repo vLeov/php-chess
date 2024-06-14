@@ -91,7 +91,7 @@ class BoardToJpgTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->validate()->getBoard();
+        $board = (new SanPlay($A59))->validate()->board;
 
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
@@ -108,7 +108,7 @@ class BoardToJpgTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->validate()->getBoard();
+        $board = (new SanPlay($A59))->validate()->board;
 
         $filename = (new BoardToJpg($board, $flip = true))->output(self::OUTPUT_FOLDER);
 
@@ -125,7 +125,7 @@ class BoardToJpgTest extends AbstractUnitTestCase
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 
-        $board = (new SanPlay($D06))->validate()->getBoard();
+        $board = (new SanPlay($D06))->validate()->board;
 
         $filename = (new BoardToJpg($board))->output(self::OUTPUT_FOLDER);
 
@@ -142,7 +142,7 @@ class BoardToJpgTest extends AbstractUnitTestCase
     {
         $D06 = file_get_contents(self::DATA_FOLDER.'/sample/D06.pgn');
 
-        $board = (new SanPlay($D06))->validate()->getBoard();
+        $board = (new SanPlay($D06))->validate()->board;
 
         $filename = (new BoardToJpg($board, $flip = true))->output(self::OUTPUT_FOLDER);
 

@@ -65,7 +65,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-        $board = (new SanPlay($B56))->validate()->getBoard();
+        $board = (new SanPlay($B56))->validate()->board;
         $protectionEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $protectionEval->getResult());
@@ -82,7 +82,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-        $board = (new SanPlay($B25))->validate()->getBoard();
+        $board = (new SanPlay($B25))->validate()->board;
         $protectionEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $protectionEval->getResult());
@@ -169,7 +169,7 @@ class ProtectionEvalTest extends AbstractUnitTestCase
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/D07.pgn');
-        $board = (new SanPlay($B56))->validate()->getBoard();
+        $board = (new SanPlay($B56))->validate()->board;
         $protectionEval = new ProtectionEval($board);
 
         $this->assertSame($expectedResult, $protectionEval->getResult());

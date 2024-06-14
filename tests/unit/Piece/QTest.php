@@ -63,7 +63,7 @@ class QTest extends AbstractUnitTestCase
     {
         $A74 = file_get_contents(self::DATA_FOLDER.'/sample/A74.pgn');
 
-        $board = (new SanPlay($A74))->validate()->getBoard();
+        $board = (new SanPlay($A74))->validate()->board;
 
         $queen = $board->pieceBySq('d1');
 

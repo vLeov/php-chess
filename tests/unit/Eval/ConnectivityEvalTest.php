@@ -40,7 +40,7 @@ class ConnectivityEvalTest extends AbstractUnitTestCase
         ];
 
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
-        $board = (new SanPlay($C60))->validate()->getBoard();
+        $board = (new SanPlay($C60))->validate()->board;
         $connectivityEval = new ConnectivityEval($board);
 
         $this->assertSame($expectedResult, $connectivityEval->getResult());

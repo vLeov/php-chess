@@ -8,19 +8,9 @@ abstract class AbstractPlay
 {
     protected AbstractBoard $initialBoard;
 
-    protected AbstractBoard $board;
+    public AbstractBoard $board;
 
-    protected array $fen;
-
-    public function getBoard(): AbstractBoard
-    {
-        return $this->board;
-    }
-
-    public function getFen(): array
-    {
-        return $this->fen;
-    }
+    public array $fen;
 
     abstract public function validate(): AbstractPlay;
 }

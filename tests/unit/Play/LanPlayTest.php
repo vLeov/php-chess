@@ -15,7 +15,7 @@ class LanPlayTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\PlayException::class);
 
         $movetext = 'foo';
-        $board = (new LanPlay($movetext))->validate()->getBoard();
+        $board = (new LanPlay($movetext))->validate()->board;
     }
 
     /**
@@ -26,7 +26,7 @@ class LanPlayTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\PlayException::class);
 
         $movetext = 'e2e4 e2e4';
-        $board = (new LanPlay($movetext))->validate()->getBoard();
+        $board = (new LanPlay($movetext))->validate()->board;
     }
 
     /**
@@ -36,7 +36,7 @@ class LanPlayTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4 e7e5';
 
-        $board = (new LanPlay($movetext))->validate()->getBoard();
+        $board = (new LanPlay($movetext))->validate()->board;
 
         $expected = '1.e4 e5';
 
@@ -50,7 +50,7 @@ class LanPlayTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4  e7e5';
 
-        $board = (new LanPlay($movetext))->validate()->getBoard();
+        $board = (new LanPlay($movetext))->validate()->board;
 
         $expected = '1.e4 e5';
 
@@ -64,7 +64,7 @@ class LanPlayTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4 e7e5 g1f3';
 
-        $board = (new LanPlay($movetext))->validate()->getBoard();
+        $board = (new LanPlay($movetext))->validate()->board;
 
         $expected = '1.e4 e5 2.Nf3';
 
@@ -78,7 +78,7 @@ class LanPlayTest extends AbstractUnitTestCase
     {
         $movetext = 'e2e4 e7e5   g1f3';
 
-        $board = (new LanPlay($movetext))->validate()->getBoard();
+        $board = (new LanPlay($movetext))->validate()->board;
 
         $expected = '1.e4 e5 2.Nf3';
 

@@ -14,7 +14,7 @@ class SanPlayTest extends AbstractUnitTestCase
     public function e4_e5()
     {
         $movetext = '1.e4 e5';
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
 
         $this->assertSame($movetext, $board->movetext());
     }
@@ -27,7 +27,7 @@ class SanPlayTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\UnknownNotationException::class);
 
         $movetext = 'foo';
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
     }
 
     /**
@@ -38,7 +38,7 @@ class SanPlayTest extends AbstractUnitTestCase
         $this->expectException(\Chess\Exception\PlayException::class);
 
         $movetext = '1.e4 e4';
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
     }
 
     /**
@@ -49,7 +49,7 @@ class SanPlayTest extends AbstractUnitTestCase
         $fen = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq -';
         $board = (new ClassicalFenStrToBoard($fen))->create();
         $movetext = '2...Nc6 3.Bc4';
-        $board = (new SanPlay($movetext, $board))->validate()->getBoard();
+        $board = (new SanPlay($movetext, $board))->validate()->board;
         $expected = '1...Nc6 2.Bc4';
 
         $this->assertSame($expected, $board->movetext());
@@ -76,7 +76,7 @@ class SanPlayTest extends AbstractUnitTestCase
 
         $expected = '1.e4 c6 2.Nc3 d5 3.Nf3 dxe4';
 
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
 
         $this->assertSame($expected, $board->movetext());
     }
@@ -92,7 +92,7 @@ class SanPlayTest extends AbstractUnitTestCase
 
         $sanPlay = (new SanPlay($movetext))->validate();
 
-        $this->assertSame($expected, $sanPlay->getBoard()->movetext());
+        $this->assertSame($expected, $sanPlay->board->movetext());
     }
 
     /**
@@ -104,7 +104,7 @@ class SanPlayTest extends AbstractUnitTestCase
 
         $expected = '1.e4 e5 2.Nf3 Nc6 3.Bb5 Nf6 4.Nc3 Be7 5.d3 d6 6.Be3 Bd7 7.Qd2 a6 8.Ba4 b5 9.Bb3 O-O 10.O-O-O b4 11.Nd5 Nxd5 12.Bxd5 Rb8 13.h4 h6 14.Rdg1 a5 15.g4 g5 16.h5';
 
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
 
         $this->assertSame($expected, $board->movetext());
     }

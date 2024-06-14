@@ -24,7 +24,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         ];
 
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
-        $board = (new SanPlay($A08))->validate()->getBoard();
+        $board = (new SanPlay($A08))->validate()->board;
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());
@@ -46,7 +46,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-        $board = (new SanPlay($B25))->validate()->getBoard();
+        $board = (new SanPlay($B25))->validate()->board;
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());
@@ -68,7 +68,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-        $board = (new SanPlay($B56))->validate()->getBoard();
+        $board = (new SanPlay($B56))->validate()->board;
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());
@@ -90,7 +90,7 @@ class CenterEvalTest extends AbstractUnitTestCase
         ];
 
         $C60 = file_get_contents(self::DATA_FOLDER.'/sample/C60.pgn');
-        $board = (new SanPlay($C60))->validate()->getBoard();
+        $board = (new SanPlay($C60))->validate()->board;
         $centerEval = new CenterEval($board);
 
         $this->assertSame($expectedResult, $centerEval->getResult());

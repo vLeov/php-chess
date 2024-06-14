@@ -85,7 +85,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-        $board = (new SanPlay($B25))->validate()->getBoard();
+        $board = (new SanPlay($B25))->validate()->board;
         $attackEval = new AttackEval($board);
 
         $this->assertSame($expectedResult, $attackEval->getResult());
@@ -102,7 +102,7 @@ class AttackEvalTest extends AbstractUnitTestCase
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-        $board = (new SanPlay($B56))->validate()->getBoard();
+        $board = (new SanPlay($B56))->validate()->board;
         $attackEval = new AttackEval($board);
 
         $this->assertSame($expectedResult, $attackEval->getResult());

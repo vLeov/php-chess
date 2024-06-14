@@ -18,7 +18,7 @@ class FenElaborationTest extends AbstractUnitTestCase
         $expected = [];
 
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
-        $board = (new SanPlay($A08))->validate()->getBoard();
+        $board = (new SanPlay($A08))->validate()->board;
 
         $paragraph = (new FenElaboration($board))->getParagraph();
 

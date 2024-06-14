@@ -20,7 +20,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-        $board = (new SanPlay($B25))->validate()->getBoard();
+        $board = (new SanPlay($B25))->validate()->board;
         $result = (new BishopPairEval($board))->getResult();
 
         $this->assertSame($expected, $result);
@@ -41,7 +41,7 @@ class BishopPairEvalTest extends AbstractUnitTestCase
         ];
 
         $C68 = file_get_contents(self::DATA_FOLDER.'/sample/C68.pgn');
-        $board = (new SanPlay($C68))->validate()->getBoard();
+        $board = (new SanPlay($C68))->validate()->board;
         $bishopPairEval = new BishopPairEval($board);
 
         $this->assertSame($expectedResult, $bishopPairEval->getResult());

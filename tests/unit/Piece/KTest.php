@@ -132,7 +132,7 @@ class KTest extends AbstractUnitTestCase
     {
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->validate()->getBoard();
+        $board = (new SanPlay($A59))->validate()->board;
 
         $king = $board->pieceBySq('f1');
 

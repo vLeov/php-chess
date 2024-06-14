@@ -19,7 +19,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $A00 = file_get_contents(self::DATA_FOLDER.'/sample/A00.pgn');
 
-        $board = (new SanPlay($A00))->validate()->getBoard();
+        $board = (new SanPlay($A00))->validate()->board;
 
         $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
 
@@ -39,7 +39,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $movetext = file_get_contents(self::DATA_FOLDER.'/sample/scholar_checkmate.pgn');
 
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
 
         $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
 
@@ -59,7 +59,7 @@ class GeometricSumLabellerTest extends AbstractUnitTestCase
 
         $A59 = file_get_contents(self::DATA_FOLDER.'/sample/A59.pgn');
 
-        $board = (new SanPlay($A59))->validate()->getBoard();
+        $board = (new SanPlay($A59))->validate()->board;
 
         $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
 

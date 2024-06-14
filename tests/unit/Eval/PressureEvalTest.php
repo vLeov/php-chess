@@ -39,7 +39,7 @@ class PressureEvalTest extends AbstractUnitTestCase
         ];
 
         $B25 = file_get_contents(self::DATA_FOLDER.'/sample/B25.pgn');
-        $board = (new SanPlay($B25))->validate()->getBoard();
+        $board = (new SanPlay($B25))->validate()->board;
         $pressureEval = new PressureEval($board);
 
         $this->assertEqualsCanonicalizing($expectedResult, $pressureEval->getResult());
@@ -61,7 +61,7 @@ class PressureEvalTest extends AbstractUnitTestCase
         ];
 
         $B56 = file_get_contents(self::DATA_FOLDER.'/sample/B56.pgn');
-        $board = (new SanPlay($B56))->validate()->getBoard();
+        $board = (new SanPlay($B56))->validate()->board;
         $pressureEval = new PressureEval($board);
 
         $this->assertEqualsCanonicalizing($expectedResult, $pressureEval->getResult());
@@ -79,7 +79,7 @@ class PressureEvalTest extends AbstractUnitTestCase
         ];
 
         $C67 = file_get_contents(self::DATA_FOLDER.'/sample/C67.pgn');
-        $board = (new SanPlay($C67))->validate()->getBoard();
+        $board = (new SanPlay($C67))->validate()->board;
         $result = (new PressureEval($board))->getResult();
 
         $this->assertEqualsCanonicalizing($expected['w'], $result['w']);

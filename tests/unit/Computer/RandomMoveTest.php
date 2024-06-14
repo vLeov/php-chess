@@ -26,7 +26,7 @@ class RandomMoveTest extends AbstractUnitTestCase
     public function scholars_mate_4_w()
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6';
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
         $move = (new RandomMove($board))->move();
 
         $this->assertNotEmpty($move);
@@ -38,7 +38,7 @@ class RandomMoveTest extends AbstractUnitTestCase
     public function scholars_mate_4_b()
     {
         $movetext = '1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6 Qxf7#';
-        $board = (new SanPlay($movetext))->validate()->getBoard();
+        $board = (new SanPlay($movetext))->validate()->board;
         $move = (new RandomMove($board))->move();
 
         $this->assertSame(null, $move);
