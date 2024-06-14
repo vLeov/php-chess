@@ -2,7 +2,6 @@
 
 namespace Chess;
 
-use Chess\EvalFactory;
 use Chess\Eval\AbstractEval;
 use Chess\Eval\InverseEvalInterface;
 use Chess\Play\SanPlay;

@@ -6,7 +6,6 @@ use Chess\FenToBoardFactory;
 use Chess\Exception\PlayException;
 use Chess\Movetext\RavMovetext;
 use Chess\Movetext\SanMovetext;
-use Chess\Play\SanPlay;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\Board;
 
