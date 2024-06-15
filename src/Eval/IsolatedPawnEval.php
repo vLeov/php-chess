@@ -3,7 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Piece\P;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -17,7 +17,7 @@ class IsolatedPawnEval extends AbstractEval implements
 
     const NAME = 'Isolated pawn';
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

@@ -3,13 +3,10 @@
 namespace Chess\Eval;
 
 use Chess\Piece\P;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-/**
- * A pawn is far advanced if it is threatening to promote.
- */
 class FarAdvancedPawnEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -19,12 +16,7 @@ class FarAdvancedPawnEval extends AbstractEval implements
 
     const NAME = 'Far-advanced pawn';
 
-    /**
-     * Constructor.
-     *
-     * @param \Chess\Variant\Classical\Board $board
-     */
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 
@@ -47,7 +39,7 @@ class FarAdvancedPawnEval extends AbstractEval implements
         ];
 
         foreach ($this->board->pieces() as $piece) {
-            if ($piece->id === Piece::P && $this->isFarAdvancedPawn($piece)) {
+            if ($piece->id === Piece::P && $this->isFarAdvanced($piece)) {
                 $this->result[$piece->color][] = $piece->sq;
             }
         }
@@ -60,13 +52,7 @@ class FarAdvancedPawnEval extends AbstractEval implements
         $this->elaborate($this->result);
     }
 
-    /**
-     * Finds out if a pawn is far advanced.
-     *
-     * @param \Chess\Piece\P $pawn
-     * @return bool
-     */
-    private function isFarAdvancedPawn(P $pawn): bool
+    private function isFarAdvanced(P $pawn): bool
     {
         if ($pawn->color === Color::W) {
             if ($pawn->rank() >= 6) {
@@ -81,11 +67,6 @@ class FarAdvancedPawnEval extends AbstractEval implements
         return false;
     }
 
-    /**
-     * Elaborate on the result.
-     *
-     * @param array $result
-     */
     private function elaborate(array $result): void
     {
         $singular = $plural = 'threatening to promote';

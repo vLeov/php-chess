@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -12,7 +12,7 @@ class DiagonalOppositionEval extends AbstractEval implements ExplainEvalInterfac
 
     const NAME = 'Diagonal opposition';
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

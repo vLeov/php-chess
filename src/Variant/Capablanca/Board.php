@@ -11,13 +11,13 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
 use Chess\Variant\Capablanca\PGN\Move;
 use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Board as ClassicalBoard;
 
-class Board extends ClassicalBoard
+class Board extends AbstractBoard
 {
     const VARIANT = 'capablanca';
 

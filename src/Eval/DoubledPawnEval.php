@@ -4,7 +4,7 @@ namespace Chess\Eval;
 
 use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -18,7 +18,7 @@ class DoubledPawnEval extends AbstractEval implements
 
     const NAME = 'Doubled pawn';
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

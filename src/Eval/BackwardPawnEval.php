@@ -4,7 +4,7 @@ namespace Chess\Eval;
 
 use Chess\Eval\IsolatedPawnEval;
 use Chess\Piece\AbstractPiece;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -20,7 +20,7 @@ class BackwardPawnEval extends AbstractEval implements
 
     private array $isolatedPawnEval;
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

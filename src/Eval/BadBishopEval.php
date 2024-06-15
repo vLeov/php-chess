@@ -4,7 +4,7 @@ namespace Chess\Eval;
 
 use Chess\Eval\BishopPairEval;
 use Chess\Piece\AbstractPiece;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -16,7 +16,7 @@ class BadBishopEval extends AbstractEval implements
 
     const NAME = 'Bad bishop';
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

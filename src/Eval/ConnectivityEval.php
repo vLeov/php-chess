@@ -3,8 +3,8 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SqCount;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
 {
@@ -14,7 +14,7 @@ class ConnectivityEval extends AbstractEval implements ExplainEvalInterface
 
     private array $sqCount;
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

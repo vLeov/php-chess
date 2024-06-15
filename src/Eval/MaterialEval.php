@@ -2,7 +2,7 @@
 
 namespace Chess\Eval;
 
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
@@ -12,7 +12,7 @@ class MaterialEval extends AbstractEval implements ExplainEvalInterface
 
     const NAME = 'Material';
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

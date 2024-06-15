@@ -4,12 +4,12 @@ namespace Chess\Tutor;
 
 use Chess\FenHeuristics;
 use Chess\ML\Supervised\Classification\CountLabeller;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
-use Chess\Variant\Classical\Board;
 
 class FenEvaluation extends AbstractParagraph
 {
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

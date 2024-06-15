@@ -2,15 +2,15 @@
 
 namespace Chess\Variant\CapablancaFischer;
 
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\RandomBoardInterface;
 use Chess\Variant\Capablanca\PGN\Move;
 use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\CapablancaFischer\StartPieces;
 use Chess\Variant\CapablancaFischer\Rule\CastlingRule;
-use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
-class Board extends ClassicalBoard implements RandomBoardInterface
+class Board extends AbstractBoard implements RandomBoardInterface
 {
     const VARIANT = 'capablanca-fischer';
 

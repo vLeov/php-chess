@@ -3,7 +3,7 @@
 namespace Chess\Eval;
 
 use Chess\Eval\SpaceEval;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 class CenterEval extends AbstractEval implements ExplainEvalInterface
@@ -23,7 +23,7 @@ class CenterEval extends AbstractEval implements ExplainEvalInterface
         'a1' => 0, 'b1' => 0, 'c1' => 0, 'd1' => 0, 'e1' => 0, 'f1' => 0, 'g1' => 0, 'h1' => 0,
     ];
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

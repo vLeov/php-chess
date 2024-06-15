@@ -4,11 +4,11 @@ namespace Chess\Tutor;
 
 use Chess\StandardFunction;
 use Chess\Eval\ElaborateEvalInterface;
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 
 class FenElaboration extends AbstractParagraph
 {
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 

@@ -2,11 +2,11 @@
 
 namespace Chess\Tutor;
 
-use Chess\Variant\Classical\Board;
+use Chess\Variant\AbstractBoard;
 
 abstract class AbstractParagraph
 {
-    public Board $board;
+    public AbstractBoard $board;
 
     public array $paragraph = [];
 }

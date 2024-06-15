@@ -4,9 +4,9 @@ namespace Chess\Eval;
 
 use Chess\Piece\P;
 use Chess\Tutor\PiecePhrase;
+use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\Board;
 
 class SqOutpostEval extends AbstractEval implements
     ElaborateEvalInterface,
@@ -17,7 +17,7 @@ class SqOutpostEval extends AbstractEval implements
 
     const NAME = 'Outpost square';
 
-    public function __construct(Board $board)
+    public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
 
