@@ -46,12 +46,12 @@ class AttackEval extends AbstractEval implements
                         Color::W => 0,
                         Color::B => 0,
                     ];
-                    $attackingPieces = $piece->attackingPieces();
+                    $attacking = $piece->attacking();
                     $defendingPieces = $piece->defendingPieces();
-                    foreach ($attackingPieces as $attackingPiece) {
+                    foreach ($attacking as $attacking) {
                         $capturedPiece = $clone->pieceBySq($piece->sq);
-                        if ($clone->playLan($clone->turn, $attackingPiece->sq . $piece->sq)) {
-                            $attack[$attackingPiece->color] += self::$value[$capturedPiece->id];
+                        if ($clone->playLan($clone->turn, $attacking->sq . $piece->sq)) {
+                            $attack[$attacking->color] += self::$value[$capturedPiece->id];
                             foreach ($defendingPieces as $defendingPiece) {
                                 $capturedPiece = $clone->pieceBySq($piece->sq);
                                 if ($clone->playLan($clone->turn, $defendingPiece->sq . $piece->sq)) {

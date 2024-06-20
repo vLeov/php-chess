@@ -34,9 +34,9 @@ class AbsoluteSkewerEval extends AbstractEval implements ElaborateEvalInterface
         }
     }
 
-    private function elaborate(AbstractPiece $attackingPiece, AbstractPiece $attacked): void
+    private function elaborate(AbstractPiece $attacking, AbstractPiece $attacked): void
     {
-        $attacking = PiecePhrase::create($attackingPiece);
+        $attacking = PiecePhrase::create($attacking);
         $attacked = PiecePhrase::create($attacked);
 
         $this->elaboration[] = ucfirst("when $attacked will be moved, a piece that is more valuable than $attacking may well be exposed to attack.");

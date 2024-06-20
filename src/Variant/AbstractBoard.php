@@ -486,7 +486,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         }
 
         if ($king) {
-            return !empty($king->attackingPieces());
+            return !empty($king->attacking());
         }
 
         throw new BoardException();
@@ -704,7 +704,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         $king = $this->piece($this->turn, Piece::K);
 
         if ($king) {
-            return !empty($king->attackingPieces());
+            return !empty($king->attacking());
         }
 
         throw new BoardException();

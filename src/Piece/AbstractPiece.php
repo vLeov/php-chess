@@ -64,16 +64,16 @@ abstract class AbstractPiece
         return $attacked;
     }
 
-    public function attackingPieces(): ?array
+    public function attacking(): ?array
     {
-        $attackingPieces = [];
+        $attacking = [];
         foreach ($this->board->pieces($this->oppColor()) as $piece) {
             if (in_array($this->sq, $piece->legalSqs())) {
-                $attackingPieces[] = $piece;
+                $attacking[] = $piece;
             }
         }
 
-        return $attackingPieces;
+        return $attacking;
     }
 
     public function defendingPieces(): ?array
@@ -115,7 +115,7 @@ abstract class AbstractPiece
         $clone->detach($clone->pieceBySq($this->sq));
         $clone->refresh();
         $newKing = $clone->piece($this->color, Piece::K);
-        $diffPieces = $this->board->diffPieces($king->attackingPieces(), $newKing->attackingPieces());
+        $diffPieces = $this->board->diffPieces($king->attacking(), $newKing->attacking());
         foreach ($diffPieces as $diffPiece) {
             if ($diffPiece->color !== $king->color) {
                 return true;
