@@ -46,8 +46,7 @@ class RelativePinEval extends AbstractEval implements
                 $clone->detach($clone->pieceBySq($piece->sq));
                 $clone->refresh();
                 $newPressureEval = (new PressureEval($clone))->getResult();
-                $arrayDiff = array_diff($newPressureEval[$piece->oppColor()], $pressureEval[$piece->oppColor()]);
-                foreach ($arrayDiff as $sq) {
+                foreach (array_diff($newPressureEval[$piece->oppColor()], $pressureEval[$piece->oppColor()]) as $sq) {
                     foreach ($clone->pieceBySq($sq)->attacking() as $newAttacking) {
                         foreach ($piece->attacking() as $attacking) {
                             if ($newAttacking->sq === $attacking->sq) {
