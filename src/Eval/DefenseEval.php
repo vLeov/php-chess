@@ -44,7 +44,8 @@ class DefenseEval extends AbstractEval implements
                     $clone->detach($clone->pieceBySq($piece->sq));
                     $clone->refresh();
                     $newProtectionEval = new ProtectionEval($clone);
-                    $diffResult = $newProtectionEval->getResult()[$piece->oppColor()] - $protectionEval->getResult()[$piece->oppColor()];
+                    $diffResult = $newProtectionEval->getResult()[$piece->oppColor()]
+                        - $protectionEval->getResult()[$piece->oppColor()];
                     if ($diffResult > 0) {
                         foreach ($newProtectionEval->getElaboration() as $key => $val) {
                             if (!in_array($val, $protectionEval->getElaboration())) {
