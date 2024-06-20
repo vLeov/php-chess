@@ -37,7 +37,7 @@ class ProtectionEval extends AbstractEval implements
         foreach ($this->board->pieces() as $piece) {
             foreach ($piece->attacked() as $attacked) {
                 if ($attacked->id !== Piece::K) {
-                    if (empty($attacked->defendingPieces())) {
+                    if (empty($attacked->defending())) {
                         $this->result[$attacked->oppColor()] += self::$value[$attacked->id];
                         $this->elaborate($attacked);
                     }

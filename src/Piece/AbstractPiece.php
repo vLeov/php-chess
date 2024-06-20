@@ -76,16 +76,16 @@ abstract class AbstractPiece
         return $attacking;
     }
 
-    public function defendingPieces(): ?array
+    public function defending(): ?array
     {
-        $defendingPieces = [];
+        $defending = [];
         foreach ($this->board->pieces($this->color) as $piece) {
             if (in_array($this->sq, $piece->defendedSqs())) {
-                $defendingPieces[] = $piece;
+                $defending[] = $piece;
             }
         }
 
-        return $defendingPieces;
+        return $defending;
     }
 
     public function isAttackingKing(): bool

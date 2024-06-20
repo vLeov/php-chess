@@ -154,7 +154,7 @@ class K extends AbstractPiece
         foreach ($this->mobility as $sq) {
             if ($piece = $this->board->pieceBySq($sq)) {
                 if ($this->oppColor() === $piece->color) {
-                    if (empty($piece->defendingPieces())) {
+                    if (empty($piece->defending())) {
                         $sqsCaptures[] = $sq;
                     }
                 }
