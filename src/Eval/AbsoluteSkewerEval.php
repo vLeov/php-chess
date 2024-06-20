@@ -22,9 +22,9 @@ class AbsoluteSkewerEval extends AbstractEval implements ElaborateEvalInterface
                 $king = $this->board->piece($this->board->turn, Piece::K);
                 $clone = $this->board->clone();
                 $clone->playLan($clone->turn, $king->sq.current($king->legalSqs()));
-                $attackedPieces = $piece->attackedPieces();
-                $newAttackedPieces = $clone->pieceBySq($piece->sq)->attackedPieces();
-                if ($diffPieces = $this->board->diffPieces($attackedPieces, $newAttackedPieces)) {
+                $attacked = $piece->attacked();
+                $newAttacked = $clone->pieceBySq($piece->sq)->attacked();
+                if ($diffPieces = $this->board->diffPieces($attacked, $newAttacked)) {
                     if (self::$value[$piece->id] < self::$value[current($diffPieces)->id]) {
                         $this->result[$piece->color] = 1;
                         $this->elaborate($piece, $king);
@@ -34,10 +34,10 @@ class AbsoluteSkewerEval extends AbstractEval implements ElaborateEvalInterface
         }
     }
 
-    private function elaborate(AbstractPiece $attackingPiece, AbstractPiece $attackedPiece): void
+    private function elaborate(AbstractPiece $attackingPiece, AbstractPiece $attacked): void
     {
         $attacking = PiecePhrase::create($attackingPiece);
-        $attacked = PiecePhrase::create($attackedPiece);
+        $attacked = PiecePhrase::create($attacked);
 
         $this->elaboration[] = ucfirst("when $attacked will be moved, a piece that is more valuable than $attacking may well be exposed to attack.");
     }

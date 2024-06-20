@@ -35,14 +35,14 @@ class RelativeForkEval extends AbstractEval implements
 
         foreach ($this->board->pieces() as $piece) {
             if (!$piece->isAttackingKing()) {
-                $attackedPieces = $piece->attackedPieces();
-                if (count($attackedPieces) >= 2) {
+                $attacked = $piece->attacked();
+                if (count($attacked) >= 2) {
                     $pieceValue = self::$value[$piece->id];
-                    foreach ($attackedPieces as $attackedPiece) {
-                        $attackedPieceValue = self::$value[$attackedPiece->id];
-                        if ($pieceValue < $attackedPieceValue) {
-                            $this->result[$piece->color] += $attackedPieceValue;
-                            $this->elaborate($attackedPiece);
+                    foreach ($attacked as $attacked) {
+                        $attackedValue = self::$value[$attacked->id];
+                        if ($pieceValue < $attackedValue) {
+                            $this->result[$piece->color] += $attackedValue;
+                            $this->elaborate($attacked);
                         }
                     }
                 }

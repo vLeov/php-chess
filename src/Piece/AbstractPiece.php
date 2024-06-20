@@ -50,18 +50,18 @@ abstract class AbstractPiece
         return $this->board->color->opp($this->color);
     }
 
-    public function attackedPieces(): ?array
+    public function attacked(): ?array
     {
-        $attackedPieces = [];
+        $attacked = [];
         foreach ($sqs = $this->legalSqs() as $sq) {
             if ($piece = $this->board->pieceBySq($sq)) {
                 if ($piece->color === $this->oppColor()) {
-                    $attackedPieces[] = $piece;
+                    $attacked[] = $piece;
                 }
             }
         }
 
-        return $attackedPieces;
+        return $attacked;
     }
 
     public function attackingPieces(): ?array
@@ -90,7 +90,7 @@ abstract class AbstractPiece
 
     public function isAttackingKing(): bool
     {
-        foreach ($this->attackedPieces() as $piece) {
+        foreach ($this->attacked() as $piece) {
             if ($piece->id === Piece::K) {
                 return true;
             }
