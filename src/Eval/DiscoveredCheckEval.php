@@ -41,8 +41,7 @@ class DiscoveredCheckEval extends AbstractEval implements
                 $clone->detach($clone->pieceBySq($piece->sq));
                 $clone->refresh();
                 $newKing = $clone->piece($piece->oppColor(), Piece::K);
-                $diffPieces = $this->board->diffPieces($king->attacking(), $newKing->attacking());
-                foreach ($diffPieces as $diffPiece) {
+                foreach ($this->board->diffPieces($king->attacking(), $newKing->attacking()) as $diffPiece) {
                     if ($diffPiece->color === $piece->color) {
                         $this->result[$piece->color] += self::$value[$piece->id];
                         $this->elaborate($piece);

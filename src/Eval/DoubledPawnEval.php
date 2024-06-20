@@ -36,13 +36,10 @@ class DoubledPawnEval extends AbstractEval implements
         ];
 
         foreach ($this->board->pieces() as $piece) {
-            $color = $piece->color;
             if ($piece->id === Piece::P) {
-                $file = $piece->file();
-                $ranks = $piece->ranks;
-                if ($nextPiece = $this->board->pieceBySq($file . $ranks['next'])) {
-                    if ($nextPiece->id === Piece::P && $nextPiece->color === $color) {
-                        $this->result[$color] += 1;
+                if ($nextPiece = $this->board->pieceBySq($piece->file() . $piece->ranks['next'])) {
+                    if ($nextPiece->id === Piece::P && $nextPiece->color === $piece->color) {
+                        $this->result[$piece->color] += 1;
                         $this->elaborate($nextPiece);
                     }
                 }
