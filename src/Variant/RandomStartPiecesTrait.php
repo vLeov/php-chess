@@ -4,11 +4,14 @@ namespace Chess\Variant;
 
 use Chess\Piece\P;
 use Chess\Piece\RType;
+use Chess\Piece\VariantType;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 trait RandomStartPiecesTrait
 {
+    protected string $variant;
+
     protected array $startPos;
 
     protected array $startPieces = [];
@@ -20,17 +23,17 @@ trait RandomStartPiecesTrait
         foreach ($this->startPos as $key => $val) {
             $wSq = chr(97 + $key) . '1';
             $bSq = chr(97 + $key) . $this->square::SIZE['ranks'];
-            $className = "\\Chess\\Piece\\{$val}";
+            $class = VariantType::getClass($this->variant, $val);
             if ($val !== Piece::R) {
-                $this->startPieces[] =  new $className(Color::W, $wSq, $this->square);
-                $this->startPieces[] =  new $className(Color::B, $bSq, $this->square);
+                $this->startPieces[] =  new $class(Color::W, $wSq, $this->square);
+                $this->startPieces[] =  new $class(Color::B, $bSq, $this->square);
             } elseif (!$longCastlingRook) {
-                $this->startPieces[] =  new $className(Color::W, $wSq, $this->square, RType::CASTLE_LONG);
-                $this->startPieces[] =  new $className(Color::B, $bSq, $this->square, RType::CASTLE_LONG);
+                $this->startPieces[] =  new $class(Color::W, $wSq, $this->square, RType::CASTLE_LONG);
+                $this->startPieces[] =  new $class(Color::B, $bSq, $this->square, RType::CASTLE_LONG);
                 $longCastlingRook = $this->startPos[$key];
             } else {
-                $this->startPieces[] =  new $className(Color::W, $wSq, $this->square, RType::CASTLE_SHORT);
-                $this->startPieces[] =  new $className(Color::B, $bSq, $this->square, RType::CASTLE_SHORT);
+                $this->startPieces[] =  new $class(Color::W, $wSq, $this->square, RType::CASTLE_SHORT);
+                $this->startPieces[] =  new $class(Color::B, $bSq, $this->square, RType::CASTLE_SHORT);
             }
         }
 

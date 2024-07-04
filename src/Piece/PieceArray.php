@@ -2,6 +2,7 @@
 
 namespace Chess\Piece;
 
+use Chess\Piece\VariantType;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -10,17 +11,21 @@ use Chess\Variant\Classical\Rule\CastlingRule;
 
 class PieceArray
 {
-    protected array $array;
+    private array $array;
 
-    protected Square $square;
+    private Square $square;
 
     private CastlingRule $castlingRule;
 
-    public function __construct(array $array, Square $square, CastlingRule $castlingRule)
+    private string $variant;
+
+    public function __construct(array $array, Square $square, CastlingRule $castlingRule, string $variant)
     {
         $this->square = $square;
 
         $this->castlingRule = $castlingRule;
+
+        $this->variant = $variant;
 
         foreach ($array as $i => $row) {
             $file = 'a';
@@ -70,8 +75,8 @@ class PieceArray
                 $this->array[] = new R($color, $sq, $this->square, RType::PROMOTED);
             }
         } else {
-            $className = "\\Chess\\Piece\\$id";
-            $this->array[] = new $className($color, $sq, $this->square);
+            $class = VariantType::getClass($this->variant, $id);
+            $this->array[] = new $class($color, $sq, $this->square);
         }
     }
 }

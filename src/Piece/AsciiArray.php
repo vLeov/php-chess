@@ -27,34 +27,35 @@ class AsciiArray
         return $this->array;
     }
 
-    public function toClassicalBoard(string $className, string $turn, string $castlingAbility = null): Board
+    public function toClassicalBoard(string $class, string $turn, string $castlingAbility = null): Board
     {
-        $board = new $className();
+        $board = new $class();
 
         $pieces = (new PieceArray(
             $this->array,
             $board->square,
-            $board->castlingRule
+            $board->castlingRule,
+            $board->variant
         ))->getArray();
 
         if (!$castlingAbility) {
             $castlingAbility = CastlingRule::START;
         }
 
-        $newBoard = new $className($pieces, $castlingAbility);
+        $newBoard = new $class($pieces, $castlingAbility);
         $newBoard->turn = $turn;
 
         return $newBoard;
     }
 
     public function toChess960Board(
-        string $className,
+        string $class,
         string $turn,
         string $castlingAbility = null,
         array $startPos
     ): Board
     {
-        $board = new $className();
+        $board = new $class();
 
         $pieces = (new PieceArray(
             $this->array,
@@ -66,7 +67,7 @@ class AsciiArray
             $castlingAbility = CastlingRule::START;
         }
 
-        $newBoard = new $className($startPos, $pieces, $castlingAbility);
+        $newBoard = new $class($startPos, $pieces, $castlingAbility);
         $newBoard->turn = $turn;
 
         return $newBoard;

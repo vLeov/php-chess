@@ -15,6 +15,7 @@ use Chess\Piece\P;
 use Chess\Piece\Q;
 use Chess\Piece\R;
 use Chess\Piece\RType;
+use Chess\Piece\VariantType;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
@@ -70,6 +71,13 @@ abstract class AbstractBoard extends \SplObjectStorage
      * @var string
      */
     public string $castlingAbility = '';
+
+    /**
+     * Piece variant.
+     *
+     * @var string
+     */
+    public string $variant = '';
 
     /**
      * Start FEN position.
@@ -229,7 +237,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         if ($toDetach = $this->pieceBySq($piece->sq)) {
             $this->detach($toDetach);
         }
-        $class = "\\Chess\\Piece\\{$piece->id}";
+        $class = VariantType::getClass($this->variant, $piece->id);
         $this->attach(new $class(
             $piece->color,
             $piece->move['sq']['next'],
