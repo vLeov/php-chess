@@ -5,7 +5,7 @@ namespace Chess\Piece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-class Q extends Slider
+class Q extends AbstractSlider
 {
     public function __construct(string $color, string $sq, Square $square)
     {

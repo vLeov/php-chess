@@ -6,7 +6,7 @@ use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-class R extends Slider
+class R extends AbstractSlider
 {
     public string $type;
 

@@ -6,7 +6,7 @@ use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-class B extends Slider
+class B extends AbstractSlider
 {
     public function __construct(string $color, string $sq, Square $square)
     {
