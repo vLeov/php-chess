@@ -20,7 +20,7 @@ use Chess\Variant\Classical\PGN\AN\Color;
 
 class Board extends AbstractBoard
 {
-    const VARIANT = 'capablanca';
+    const VARIANT = VariantType::CAPABLANCA;
 
     public function __construct(array $pieces = null, string $castlingAbility = '-') {
         $this->color = new Color();

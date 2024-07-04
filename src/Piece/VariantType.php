@@ -4,12 +4,14 @@ namespace Chess\Piece;
 
 class VariantType
 {
-    const CAPABLANCA = 'Capablanca';
-    const CLASSICAL = 'Classical';
+    const CAPABLANCA = 'capablanca';
+
+    const CLASSICAL = 'classical';
 
     public static function getClass(string $variant, string $name)
     {
-        $class = "\\Chess\\Piece\\{$variant}\\{$name}";
+        $namespace = ucfirst($variant);
+        $class = "\\Chess\\Piece\\{$namespace}\\{$name}";
         if (class_exists($class)) {
             return $class;
         }
