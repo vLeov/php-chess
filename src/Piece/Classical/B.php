@@ -1,64 +1,65 @@
 <?php
 
-namespace Chess\Piece;
+namespace Chess\Piece\Classical;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\Piece\AbstractSlider;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 
-class R extends AbstractSlider
+class B extends AbstractSlider
 {
-    public string $type;
-
-    public function __construct(string $color, string $sq, Square $square, string $type)
+    public function __construct(string $color, string $sq, Square $square)
     {
-        parent::__construct($color, $sq, $square, Piece::R);
-
-        $this->type = $type;
+        parent::__construct($color, $sq, $square, Piece::B);
 
         $this->mobility = [
-            'up' => [],
-            'down' => [],
-            'left' => [],
-            'right' => []
+            'upLeft' => [],
+            'upRight' => [],
+            'downLeft' => [],
+            'downRight' => []
         ];
 
         try {
-            $file = $this->sq[0];
+            $file = chr(ord($this->sq[0]) - 1);
             $rank = $this->rank() + 1;
             while ($this->square->validate($file . $rank)) {
-                $this->mobility['up'][] = $file . $rank;
+                $this->mobility['upLeft'][] = $file . $rank;
+                $file = chr(ord($file) - 1);
                 $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
         }
 
         try {
-            $file = $this->sq[0];
-            $rank = $this->rank() - 1;
+            $file = chr(ord($this->sq[0]) + 1);
+            $rank = $this->rank() + 1;
             while ($this->square->validate($file . $rank)) {
-                $this->mobility['down'][] = $file . $rank;
-                $rank = (int)$rank - 1;
+                $this->mobility['upRight'][]  = $file . $rank;
+                $file = chr(ord($file) + 1);
+                $rank = (int)$rank + 1;
             }
         } catch (UnknownNotationException $e) {
         }
 
         try {
             $file = chr(ord($this->sq[0]) - 1);
-            $rank = $this->rank();
+            $rank = $this->rank() - 1;
             while ($this->square->validate($file . $rank)) {
-                $this->mobility['left'][] = $file . $rank;
+                $this->mobility['downLeft'][] = $file . $rank;
                 $file = chr(ord($file) - 1);
+                $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
         }
 
         try {
             $file = chr(ord($this->sq[0]) + 1);
-            $rank = $this->rank();
+            $rank = $this->rank() - 1;
             while ($this->square->validate($file . $rank)) {
-                $this->mobility['right'][] = $file . $rank;
+                $this->mobility['downRight'][] = $file . $rank;
                 $file = chr(ord($file) + 1);
+                $rank = (int)$rank - 1;
             }
         } catch (UnknownNotationException $e) {
         }
