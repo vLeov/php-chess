@@ -77,7 +77,7 @@ abstract class AbstractBoard extends \SplObjectStorage
      *
      * @var string
      */
-    public string $variant = '';
+    public string $pieceVariant = '';
 
     /**
      * Start FEN position.
@@ -237,7 +237,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         if ($toDetach = $this->pieceBySq($piece->sq)) {
             $this->detach($toDetach);
         }
-        $class = VariantType::getClass($this->variant, $piece->id);
+        $class = VariantType::getClass($this->pieceVariant, $piece->id);
         $this->attach(new $class(
             $piece->color,
             $piece->move['sq']['next'],

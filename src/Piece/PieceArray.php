@@ -18,15 +18,15 @@ class PieceArray
 
     private CastlingRule $castlingRule;
 
-    private string $variant;
+    private string $pieceVariant;
 
-    public function __construct(array $array, Square $square, CastlingRule $castlingRule, string $variant)
+    public function __construct(array $array, Square $square, CastlingRule $castlingRule, string $pieceVariant)
     {
         $this->square = $square;
 
         $this->castlingRule = $castlingRule;
 
-        $this->variant = $variant;
+        $this->pieceVariant = $pieceVariant;
 
         foreach ($array as $i => $row) {
             $file = 'a';
@@ -76,7 +76,7 @@ class PieceArray
                 $this->array[] = new R($color, $sq, $this->square, RType::PROMOTED);
             }
         } else {
-            $class = VariantType::getClass($this->variant, $id);
+            $class = VariantType::getClass($this->pieceVariant, $id);
             $this->array[] = new $class($color, $sq, $this->square);
         }
     }

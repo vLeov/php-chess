@@ -8,9 +8,9 @@ class VariantType
 
     const CLASSICAL = 'classical';
 
-    public static function getClass(string $variant, string $name)
+    public static function getClass(string $pieceVariant, string $name)
     {
-        $namespace = ucfirst($variant);
+        $namespace = ucfirst($pieceVariant);
         $class = "\\Chess\\Piece\\{$namespace}\\{$name}";
         if (class_exists($class)) {
             return $class;

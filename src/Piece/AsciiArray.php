@@ -35,7 +35,7 @@ class AsciiArray
             $this->array,
             $board->square,
             $board->castlingRule,
-            $board->variant
+            $board->pieceVariant
         ))->getArray();
 
         if (!$castlingAbility) {
