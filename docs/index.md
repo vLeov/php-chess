@@ -44,6 +44,7 @@ Multiple variants are supported with the default one being classical chess.
 | Capablanca-Fischer | [Chess\Variant\CapablancaFischer\Board](https://github.com/chesslablab/php-chess/blob/main/src/Variant/CapablancaFischer/Board.php) |
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Classical/BoardTest.php) |
+| Dunsany | [Chess\Variant\Dunsany\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Dunsany/BoardTest.php) |
 
 ## UCI Engines
 
