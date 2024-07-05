@@ -6,21 +6,17 @@ use Chess\FenToBoardFactory;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqCount;
 use Chess\Exception\BoardException;
-use Chess\Piece\AbstractPiece;
-use Chess\Piece\AsciiArray;
-use Chess\Piece\RType;
-use Chess\Piece\VariantType;
-use Chess\Piece\Classical\B;
-use Chess\Piece\Classical\K;
-use Chess\Piece\Classical\N;
-use Chess\Piece\Classical\P;
-use Chess\Piece\Classical\Q;
-use Chess\Piece\Classical\R;
-use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Piece\B;
+use Chess\Variant\Classical\Piece\K;
+use Chess\Variant\Classical\Piece\N;
+use Chess\Variant\Classical\Piece\P;
+use Chess\Variant\Classical\Piece\Q;
+use Chess\Variant\Classical\Piece\R;
+use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 abstract class AbstractBoard extends \SplObjectStorage

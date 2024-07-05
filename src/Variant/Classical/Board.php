@@ -2,18 +2,18 @@
 
 namespace Chess\Variant\Classical;
 
-use Chess\Piece\RType;
-use Chess\Piece\VariantType;
-use Chess\Piece\Classical\B;
-use Chess\Piece\Classical\K;
-use Chess\Piece\Classical\N;
-use Chess\Piece\Classical\P;
-use Chess\Piece\Classical\Q;
-use Chess\Piece\Classical\R;
 use Chess\Variant\AbstractBoard;
+use Chess\Variant\RType;
+use Chess\Variant\VariantType;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Piece\B;
+use Chess\Variant\Classical\Piece\K;
+use Chess\Variant\Classical\Piece\N;
+use Chess\Variant\Classical\Piece\P;
+use Chess\Variant\Classical\Piece\Q;
+use Chess\Variant\Classical\Piece\R;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 class Board extends AbstractBoard

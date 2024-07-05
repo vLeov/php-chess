@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Tutor;
 
-use Chess\Piece\Classical\N;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Piece\N;
 
 class PiecePhraseTest extends AbstractUnitTestCase
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Chess\Tests\Unit\Piece\Classical;
+namespace Chess\Tests\Unit\Variant\Classical\Piece;
 
-use Chess\Piece\RType;
-use Chess\Piece\Classical\R;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\RType;
 use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\Piece\R;
 
 class RTest extends AbstractUnitTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Piece\Capablanca;
+namespace Chess\Variant\Capablanca\Piece;
 
 trait CapablancaTrait
 {

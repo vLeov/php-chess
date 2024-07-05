@@ -3,9 +3,9 @@
 namespace Chess\Tests\Unit\Eval;
 
 use Chess\Eval\BackwardPawnEval;
-use Chess\Piece\AsciiArray;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\AsciiArray;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 

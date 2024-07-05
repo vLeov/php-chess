@@ -1,10 +1,10 @@
 <?php
 
-namespace Chess\Piece\Classical;
+namespace Chess\Variant\Classical\Piece;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Piece\AbstractPiece;
-use Chess\Piece\RType;
+use Chess\Variant\AbstractPiece;
+use Chess\Variant\RType;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;

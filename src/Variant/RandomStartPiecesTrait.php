@@ -2,11 +2,11 @@
 
 namespace Chess\Variant;
 
-use Chess\Piece\RType;
-use Chess\Piece\VariantType;
-use Chess\Piece\Classical\P;
+use Chess\Variant\RType;
+use Chess\Variant\VariantType;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\Piece\P;
 
 trait RandomStartPiecesTrait
 {

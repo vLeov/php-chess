@@ -4,8 +4,8 @@ namespace Chess\Tests\Unit\Eval;
 
 use Chess\FenToBoardFactory;
 use Chess\Eval\IsolatedPawnEval;
-use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\AsciiArray;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;

@@ -5,21 +5,21 @@ namespace Chess\Tests\Unit\Variant\Classical;
 use Chess\FenToBoardFactory;
 use Chess\Computer\RandomMove;
 use Chess\Movetext\SanMovetext;
-use Chess\Piece\RType;
-use Chess\Piece\Classical\B;
-use Chess\Piece\Classical\K;
-use Chess\Piece\Classical\N;
-use Chess\Piece\Classical\P;
-use Chess\Piece\Classical\Q;
-use Chess\Piece\Classical\R;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\RType;
 use Chess\Variant\Classical\FEN\StrToBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\Board;
+use Chess\Variant\Classical\Piece\B;
+use Chess\Variant\Classical\Piece\K;
+use Chess\Variant\Classical\Piece\N;
+use Chess\Variant\Classical\Piece\P;
+use Chess\Variant\Classical\Piece\Q;
+use Chess\Variant\Classical\Piece\R;
 use Chess\Variant\Classical\Rule\CastlingRule;
 
 class BoardTest extends AbstractUnitTestCase

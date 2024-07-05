@@ -3,9 +3,9 @@
 namespace Chess\Variant\Capablanca\FEN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Piece\PieceArray;
-use Chess\Piece\VariantType;
 use Chess\Variant\AbstractBoard;
+use Chess\Variant\PieceArray;
+use Chess\Variant\VariantType;
 use Chess\Variant\Capablanca\Board;
 use Chess\Variant\Capablanca\FEN\Str;
 use Chess\Variant\Capablanca\PGN\AN\Square;

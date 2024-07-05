@@ -1,8 +1,7 @@
 <?php
 
-namespace Chess\Piece;
+namespace Chess\Variant;
 
-use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;

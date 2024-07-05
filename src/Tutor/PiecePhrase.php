@@ -2,7 +2,7 @@
 
 namespace Chess\Tutor;
 
-use Chess\Piece\AbstractPiece;
+use Chess\Variant\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 class PiecePhrase

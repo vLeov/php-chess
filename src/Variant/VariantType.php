@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Piece;
+namespace Chess\Variant;
 
 class VariantType
 {
@@ -11,11 +11,11 @@ class VariantType
     public static function getClass(string $pieceVariant, string $name)
     {
         $namespace = ucfirst($pieceVariant);
-        $class = "\\Chess\\Piece\\{$namespace}\\{$name}";
+        $class = "\\Chess\\Variant\\{$namespace}\\Piece\\{$name}";
         if (class_exists($class)) {
             return $class;
         }
 
-        return "\\Chess\\Piece\\Classical\\{$name}";
+        return "\\Chess\\Variant\\Classical\\Piece\\{$name}";
     }
 }

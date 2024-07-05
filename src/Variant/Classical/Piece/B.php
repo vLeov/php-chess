@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Piece\Classical;
+namespace Chess\Variant\Classical\Piece;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Piece\AbstractSlider;
+use Chess\Variant\AbstractSlider;
 use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\PGN\AN\Square;
 

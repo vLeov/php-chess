@@ -2,20 +2,20 @@
 
 namespace Chess\Variant\Capablanca;
 
-use Chess\Piece\RType;
-use Chess\Piece\VariantType;
-use Chess\Piece\Capablanca\A;
-use Chess\Piece\Capablanca\C;
-use Chess\Piece\Classical\B;
-use Chess\Piece\Classical\K;
-use Chess\Piece\Classical\N;
-use Chess\Piece\Classical\P;
-use Chess\Piece\Classical\Q;
-use Chess\Piece\Classical\R;
 use Chess\Variant\AbstractBoard;
+use Chess\Variant\RType;
+use Chess\Variant\VariantType;
+use Chess\Variant\Capablanca\Piece\A;
+use Chess\Variant\Capablanca\Piece\C;
 use Chess\Variant\Capablanca\Rule\CastlingRule;
 use Chess\Variant\Capablanca\PGN\Move;
 use Chess\Variant\Capablanca\PGN\AN\Square;
+use Chess\Variant\Classical\Piece\B;
+use Chess\Variant\Classical\Piece\K;
+use Chess\Variant\Classical\Piece\N;
+use Chess\Variant\Classical\Piece\P;
+use Chess\Variant\Classical\Piece\Q;
+use Chess\Variant\Classical\Piece\R;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 class Board extends AbstractBoard

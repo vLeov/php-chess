@@ -2,11 +2,11 @@
 
 namespace Chess\Eval;
 
-use Chess\Piece\P;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\Piece\P;
 
 class SqOutpostEval extends AbstractEval implements
     ElaborateEvalInterface,

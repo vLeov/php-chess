@@ -2,9 +2,9 @@
 
 namespace Chess\Variant\CapablancaFischer;
 
-use Chess\Piece\VariantType;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\RandomBoardInterface;
+use Chess\Variant\VariantType;
 use Chess\Variant\Capablanca\PGN\Move;
 use Chess\Variant\Capablanca\PGN\AN\Square;
 use Chess\Variant\CapablancaFischer\StartPieces;

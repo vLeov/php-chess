@@ -1,8 +1,7 @@
 <?php
 
-namespace Chess\Piece;
+namespace Chess\Variant;
 
-use Chess\Piece\PieceArray;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;

@@ -2,8 +2,8 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\Piece\VariantType;
 use Chess\Variant\RandomStartPiecesTrait;
+use Chess\Variant\VariantType;
 use Chess\Variant\Classical\PGN\AN\Square;
 
 class StartPieces

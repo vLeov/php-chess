@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Tests\Unit\Piece;
+namespace Chess\Tests\Unit\Variant;
 
-use Chess\Piece\AsciiArray;
 use Chess\Tests\AbstractUnitTestCase;
+use Chess\Variant\AsciiArray;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;
 

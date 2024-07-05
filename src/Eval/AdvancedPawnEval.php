@@ -2,10 +2,10 @@
 
 namespace Chess\Eval;
 
-use Chess\Piece\Classical\P;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
+use Chess\Variant\Classical\Piece\P;
 
 class AdvancedPawnEval extends AbstractEval implements
     ElaborateEvalInterface,

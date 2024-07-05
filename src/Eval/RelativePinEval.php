@@ -3,9 +3,9 @@
 namespace Chess\Eval;
 
 use Chess\Eval\PressureEval;
-use Chess\Piece\AbstractPiece;
 use Chess\Tutor\PiecePhrase;
 use Chess\Variant\AbstractBoard;
+use Chess\Variant\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
 class RelativePinEval extends AbstractEval implements

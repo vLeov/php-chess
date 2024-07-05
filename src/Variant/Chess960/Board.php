@@ -2,9 +2,9 @@
 
 namespace Chess\Variant\Chess960;
 
-use Chess\Piece\VariantType;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\RandomBoardInterface;
+use Chess\Variant\VariantType;
 use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Color;

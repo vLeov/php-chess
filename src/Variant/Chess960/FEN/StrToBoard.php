@@ -3,9 +3,9 @@
 namespace Chess\Variant\Chess960\FEN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Piece\PieceArray;
-use Chess\Piece\VariantType;
 use Chess\Variant\AbstractBoard;
+use Chess\Variant\PieceArray;
+use Chess\Variant\VariantType;
 use Chess\Variant\Chess960\Board;
 use Chess\Variant\Chess960\Rule\CastlingRule;
 use Chess\Variant\Classical\FEN\Str;

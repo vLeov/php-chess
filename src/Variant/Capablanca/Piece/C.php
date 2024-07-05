@@ -1,13 +1,13 @@
 <?php
 
-namespace Chess\Piece\Capablanca;
+namespace Chess\Variant\Capablanca\Piece;
 
-use Chess\Piece\AbstractPiece;
-use Chess\Piece\RType;
-use Chess\Piece\Classical\N;
-use Chess\Piece\Classical\R;
+use Chess\Variant\AbstractPiece;
+use Chess\Variant\RType;
 use Chess\Variant\Capablanca\PGN\AN\Piece;
 use Chess\Variant\Capablanca\PGN\AN\Square;
+use Chess\Variant\Classical\Piece\N;
+use Chess\Variant\Classical\Piece\R;
 
 class C extends AbstractPiece
 {
