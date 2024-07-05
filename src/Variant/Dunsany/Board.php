@@ -94,7 +94,7 @@ class Board extends AbstractBoard
     public function isCheck(): bool
     {
         if ($this->turn === Color::B) {
-            parent::isCheck($piece);
+            parent::isCheck();
         }
 
         return false;

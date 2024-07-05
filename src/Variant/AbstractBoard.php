@@ -222,7 +222,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Makes a move.
      *
-     * @param \Chess\Piece\AbstractPiece $piece
+     * @param \Chess\Variant\AbstractPiece $piece
      * @return bool
      */
     protected function move(AbstractPiece $piece): bool
@@ -253,7 +253,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Castles the king.
      *
-     * @param \Chess\Piece\Classical\K $king
+     * @param \Chess\Variant\Classical\Piece\K $king
      * @param string $rookType
      * @return bool
      */
@@ -288,8 +288,8 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Updates the castle property.
      *
-     * @param \Chess\Piece\AbstractPiece $piece The moved piece
-     * @return \Chess\Variant\Classical\AbstractBoard
+     * @param \Chess\Variant\AbstractPiece $piece
+     * @return \Chess\Variant\AbstractBoard
      */
     protected function updateCastle(AbstractPiece $piece): AbstractBoard
     {
@@ -346,8 +346,8 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Captures a piece.
      *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Variant\Classical\AbstractBoard
+     * @param \Chess\Variant\AbstractPiece $piece
+     * @return \Chess\Variant\AbstractBoard
      */
     protected function capture(AbstractPiece $piece): AbstractBoard
     {
@@ -388,8 +388,8 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Promotes a pawn.
      *
-     * @param \Chess\Piece\Classical\P $pawn
-     * @return \Chess\Variant\Classical\AbstractBoard
+     * @param \Chess\Variant\Classical\Piece\P $pawn
+     * @return \Chess\Variant\AbstractBoard
      */
     protected function promote(P $pawn): AbstractBoard
     {
@@ -468,7 +468,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Returns true if the piece is pinned.
      *
-     * @param \Chess\Piece\AbstractPiece $piece
+     * @param \Chess\Variant\AbstractPiece $piece
      * @return bool
      */
     protected function isPinned(AbstractPiece $piece): bool
@@ -499,8 +499,8 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Adds a new element to the history.
      *
-     * @param \Chess\Piece\AbstractPiece $piece
-     * @return \Chess\Variant\Classical\AbstractBoard
+     * @param \Chess\Variant\AbstractPiece $piece
+     * @return \Chess\Variant\AbstractBoard
      */
     protected function pushHistory(AbstractPiece $piece): AbstractBoard
     {
@@ -516,7 +516,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Removes an element from the history.
      *
-     * @return \Chess\Variant\Classical\AbstractBoard
+     * @return \Chess\Variant\AbstractBoard
      */
     protected function popHistory(): AbstractBoard
     {
