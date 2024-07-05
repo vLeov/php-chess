@@ -5,7 +5,6 @@ namespace Chess\Variant;
 use Chess\FenToBoardFactory;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqCount;
-use Chess\Exception\BoardException;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
@@ -711,7 +710,7 @@ abstract class AbstractBoard extends \SplObjectStorage
             return !empty($king->attacking());
         }
 
-        throw new BoardException();
+        return false;
     }
 
     public function isMate(): bool
