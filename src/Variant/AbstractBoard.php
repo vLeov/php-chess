@@ -783,7 +783,16 @@ abstract class AbstractBoard extends \SplObjectStorage
 
     public function legal(string $sq): array
     {
-        return array_values($this->pieceBySq($sq)->legalSqs());
+        $legal = [];
+        if ($piece = $this->pieceBySq($sq)) {
+            foreach ($piece->legalSqs() as $legalSq) {
+                if ($this->clone()->playLan($this->turn, "{$sq}{$legalSq}")) {
+                    $legal[] = $legalSq;
+                }
+            }
+        }
+
+        return $legal;
     }
 
     public function enPassant(): string
