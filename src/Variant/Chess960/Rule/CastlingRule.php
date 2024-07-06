@@ -22,6 +22,6 @@ class CastlingRule extends ClassicalCastlingRule
 
         $this->rule = (new ClassicalCastlingRule())->rule;
 
-        $this->sq()->legalSqs();
+        $this->sq()->moveSqs();
     }
 }

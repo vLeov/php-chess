@@ -301,7 +301,7 @@ class StrToBoardTest extends AbstractUnitTestCase
             0 => [ ' R ', ' N ', ' B ', ' Q ', ' K ', ' B ', ' N ', ' R ' ],
         ];
 
-        $legalMoves = $board->pieceBySq('e5')->legalSqs();
+        $legalMoves = $board->pieceBySq('e5')->moveSqs();
 
         $this->assertSame($expected, $array);
         $this->assertSame($legalMoves, ['e6' , 'f6']);
@@ -405,7 +405,7 @@ class StrToBoardTest extends AbstractUnitTestCase
 
         $board->play('w', 'Qg4');
 
-        $legalMoves = $board->pieceBySq('a7')->legalSqs();
+        $legalMoves = $board->pieceBySq('a7')->moveSqs();
 
         $expected = ['a6', 'a5'];
 
@@ -420,7 +420,7 @@ class StrToBoardTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/5k2/8/8/2K1p3/3r4/8/8 w - - 0 1'))
             ->create();
 
-        $legalMoves = $board->pieceBySq('c4')->legalSqs();
+        $legalMoves = $board->pieceBySq('c4')->moveSqs();
 
         $expected = ['c5', 'b4', 'b5'];
 
@@ -435,7 +435,7 @@ class StrToBoardTest extends AbstractUnitTestCase
         $board = (new StrToBoard('8/5k2/8/8/2K5/3rp3/8/8 w - - 0 1'))
             ->create();
 
-        $legalMoves = $board->pieceBySq('c4')->legalSqs();
+        $legalMoves = $board->pieceBySq('c4')->moveSqs();
 
         $expected = ['c5', 'b4', 'b5', 'd3'];
 
@@ -450,7 +450,7 @@ class StrToBoardTest extends AbstractUnitTestCase
         $board = (new StrToBoard('7k/8/8/8/8/8/2K5/r7 w - - 0 1'))
             ->create();
 
-        $legalMoves = $board->pieceBySq('c2')->legalSqs();
+        $legalMoves = $board->pieceBySq('c2')->moveSqs();
 
         $expected = ['c3', 'b2', 'd2', 'b3', 'd3'];
 

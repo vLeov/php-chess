@@ -183,7 +183,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     {
         $ambiguous = [];
         foreach ($this->pickPiece($move) as $piece) {
-            if (in_array($move['sq']['next'], $piece->legalSqs())) {
+            if (in_array($move['sq']['next'], $piece->moveSqs())) {
                 if (!$this->isPinned($piece)) {
                     $ambiguous[] = $move['sq']['next'];
                 }
@@ -432,7 +432,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     {
         $escape = 0;
         foreach ($this->pieces($this->turn) as $piece) {
-            foreach ($piece->legalSqs() as $sq) {
+            foreach ($piece->moveSqs() as $sq) {
                 if ($piece->id === Piece::K) {
                     if ($sq === $piece->sqCastleShort()) {
                         $move = $this->move->toArray($this->turn, Castle::SHORT, $this->castlingRule, $this->color);
@@ -785,17 +785,17 @@ abstract class AbstractBoard extends \SplObjectStorage
     {
         $legal = [];
         if ($piece = $this->pieceBySq($sq)) {
-            foreach ($piece->legalSqs() as $legalSq) {
+            foreach ($piece->moveSqs() as $moveSq) {
                 $clone = $this->clone();
                 if ($piece->id === Piece::K || $piece->id === Piece::P) {
-                    if ($clone->playLan($this->turn, "$sq$legalSq")) {
-                        $legal[] = $legalSq;
+                    if ($clone->playLan($this->turn, "$sq$moveSq")) {
+                        $legal[] = $moveSq;
                     }
                 } else {
-                    if ($clone->play($this->turn, "{$piece->id}{$sq}{$legalSq}")) {
-                        $legal[] = $legalSq;
-                    } elseif ($clone->play($this->turn, "{$piece->id}{$sq}x{$legalSq}")) {
-                        $legal[] = $legalSq;
+                    if ($clone->play($this->turn, "{$piece->id}{$sq}{$moveSq}")) {
+                        $legal[] = $moveSq;
+                    } elseif ($clone->play($this->turn, "{$piece->id}{$sq}x{$moveSq}")) {
+                        $legal[] = $moveSq;
                     }
                 }
             }

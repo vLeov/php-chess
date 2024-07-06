@@ -78,7 +78,7 @@ class P extends AbstractPiece
         }
     }
 
-    public function legalSqs(): array
+    public function moveSqs(): array
     {
         $sqs = [];
 

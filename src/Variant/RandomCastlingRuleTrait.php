@@ -40,7 +40,7 @@ trait RandomCastlingRuleTrait
         return $this;
     }
 
-    protected function legalSqs()
+    protected function moveSqs()
     {
         $kPath = $this->path(
             $this->rule[Color::W][Piece::K][Castle::SHORT]['sq']['current'],

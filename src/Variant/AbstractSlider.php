@@ -11,7 +11,7 @@ abstract class AbstractSlider extends AbstractPiece
         parent::__construct($color, $sq, $square, $id);
     }
 
-    public function legalSqs(): array
+    public function moveSqs(): array
     {
         $sqs = [];
         foreach ($this->mobility as $key => $val) {
