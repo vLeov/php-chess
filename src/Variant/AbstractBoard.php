@@ -665,7 +665,7 @@ abstract class AbstractBoard extends \SplObjectStorage
                         return $this->afterPlayLan();
                     } elseif ($this->play($color, $piece->id . $sqs[1])) {
                         return $this->afterPlayLan();
-                    }  elseif ($this->play($color, $piece->id . $piece->file() . $sqs[1])) {
+                    } elseif ($this->play($color, $piece->id . $piece->file() . $sqs[1])) {
                         return $this->afterPlayLan();
                     } elseif ($this->play($color, $piece->id . $piece->rank() . $sqs[1])) {
                         return $this->afterPlayLan();
@@ -786,8 +786,17 @@ abstract class AbstractBoard extends \SplObjectStorage
         $legal = [];
         if ($piece = $this->pieceBySq($sq)) {
             foreach ($piece->legalSqs() as $legalSq) {
-                if ($this->clone()->playLan($this->turn, "{$sq}{$legalSq}")) {
-                    $legal[] = $legalSq;
+                $clone = $this->clone();
+                if ($piece->id === Piece::K || $piece->id === Piece::P) {
+                    if ($clone->playLan($this->turn, "$sq$legalSq")) {
+                        $legal[] = $legalSq;
+                    }
+                } else {
+                    if ($clone->play($this->turn, "{$piece->id}{$sq}{$legalSq}")) {
+                        $legal[] = $legalSq;
+                    } elseif ($clone->play($this->turn, "{$piece->id}{$sq}x{$legalSq}")) {
+                        $legal[] = $legalSq;
+                    }
                 }
             }
         }
