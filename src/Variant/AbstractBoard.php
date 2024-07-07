@@ -473,23 +473,10 @@ abstract class AbstractBoard extends \SplObjectStorage
     protected function isPinned(AbstractPiece $piece): bool
     {
         $clone = $this->clone();
-        if (
-            $piece->move['type'] === $clone->move->case(Move::CASTLE_SHORT) &&
-            $clone->castle($piece, RType::CASTLE_SHORT)
-        ) {
-            $king = $clone->piece($piece->color, Piece::K);
-        } elseif (
-            $piece->move['type'] === $clone->move->case(Move::CASTLE_LONG) &&
-            $clone->castle($piece, RType::CASTLE_LONG)
-        ) {
-            $king = $clone->piece($piece->color, Piece::K);
-        } else {
-            $clone->move($piece);
-            $king = $clone->piece($piece->color, Piece::K);
-        }
-
-        if ($king) {
-            return !empty($king->attacking());
+        if ($clone->move($piece)) {
+            if ($king = $clone->piece($piece->color, Piece::K)) {
+                return !empty($king->attacking());
+            }
         }
 
         return false;
