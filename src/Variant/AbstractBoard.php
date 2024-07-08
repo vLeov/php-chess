@@ -511,6 +511,23 @@ abstract class AbstractBoard extends \SplObjectStorage
         return $this;
     }
 
+    protected function lanToPgn(string $color, string $lan): string
+    {
+        $pgn = '';
+        $sqs = $this->move->explodeSqs($lan);
+        if (isset($sqs[0]) && isset($sqs[1])) {
+            $a = $this->pieceBySq($sqs[0]);
+            $b = $this->pieceBySq($sqs[1]);
+            if ($a->id === Piece::P) {
+                $pgn = $b ? "{$a->file()}x{$b->sq}" : $pgn = $sqs[1];
+            } else {
+                $pgn = $b ? "{$a->id}x{$b->sq}" : "{$a->id}{$sqs[1]}";
+            }
+        }
+
+        return $pgn;
+    }
+
     public function refresh(): void
     {
         $this->turn = $this->color->opp($this->turn);
