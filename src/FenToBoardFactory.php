@@ -13,6 +13,8 @@ use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\FEN\StrToBoard as ClassicalFenStrToBoard;
 use Chess\Variant\Dunsany\Board as DunsanyBoard;
 use Chess\Variant\Dunsany\FEN\StrToBoard as DunsanyFenStrToBoard;
+use Chess\Variant\RacingKings\Board as RacingKingsBoard;
+use Chess\Variant\RacingKings\FEN\StrToBoard as RacingKingsStrToBoard;
 
 class FenToBoardFactory
 {
@@ -30,6 +32,8 @@ class FenToBoardFactory
             return (new Chess960FenStrToBoard($fen, $startPos))->create();
         } elseif (is_a($board, DunsanyBoard::class)) {
             return (new DunsanyFenStrToBoard($fen))->create();
+        } elseif (is_a($board, RacingKingsBoard::class)) {
+            return (new RacingKingsStrToBoard($fen))->create();
         }
 
         return (new ClassicalFenStrToBoard($fen))->create();
