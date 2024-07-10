@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\Variant\Dunsany;
 
+use Chess\FenToBoardFactory;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Dunsany\Board;
 
@@ -96,6 +97,130 @@ class BoardTest extends AbstractUnitTestCase
             0 => [ ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ', ' P ' ],
         ];
 
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function b_wins()
+    {
+        $board = FenToBoardFactory::create(
+            '5k2/2r5/8/8/2P5/8/8/8 b - -',
+            new Board()
+        );
+
+        $expected = [
+            7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' k ', ' . ', ' . ' ],
+            6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' r ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame('b', $board->turn);
+        $this->assertFalse($board->isStalemate());
+        $this->assertTrue($board->play('b', 'Rxc4'));
+        $this->assertSame('w', $board->turn);
+        $this->assertFalse($board->isStalemate());
+        $this->assertFalse($board->isMate());
+        $this->assertTrue($board->isWon());
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function w_wins()
+    {
+        $board = FenToBoardFactory::create(
+            '7k/3R4/8/8/8/8/8/R7 w - -',
+            new Board()
+        );
+
+        $expected = [
+            7 => [ ' R ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' k ' ],
+            6 => [ ' . ', ' . ', ' . ', ' R ', ' . ', ' . ', ' . ', ' . ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame('w', $board->turn);
+        $this->assertFalse($board->isStalemate());
+        $this->assertTrue($board->play('w', 'Ra8'));
+        $this->assertSame('b', $board->turn);
+        $this->assertFalse($board->isStalemate());
+        $this->assertTrue($board->isMate());
+        $this->assertTrue($board->isWon());
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function b_stalemates()
+    {
+        $board = FenToBoardFactory::create(
+            'r7/3k3P/8/8/8/8/8/8 b - -',
+            new Board()
+        );
+
+        $expected = [
+            7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' r ' ],
+            6 => [ ' . ', ' . ', ' . ', ' k ', ' . ', ' . ', ' . ', ' P ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame('b', $board->turn);
+        $this->assertFalse($board->isStalemate());
+        $this->assertTrue($board->play('b', 'Rh8'));
+        $this->assertSame('w', $board->turn);
+        $this->assertTrue($board->isStalemate());
+        $this->assertFalse($board->isMate());
+        $this->assertFalse($board->isWon());
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function w_stalemates()
+    {
+        $board = FenToBoardFactory::create(
+            '7k/7P/8/7P/8/8/8/8 w - -',
+            new Board()
+        );
+
+        $expected = [
+            7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' k ' ],
+            6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' P ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' P ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame('w', $board->turn);
+        $this->assertFalse($board->isStalemate());
+        $this->assertTrue($board->play('w', 'h6'));
+        $this->assertSame('b', $board->turn);
+        $this->assertTrue($board->isStalemate());
+        $this->assertFalse($board->isMate());
+        $this->assertFalse($board->isWon());
         $this->assertSame($expected, $board->toAsciiArray());
     }
 }
