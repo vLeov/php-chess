@@ -19,7 +19,7 @@ class C extends AbstractPiece
 
         $this->mobility = [
             ...(new R($color, $sq, $square, RType::R))->mobility,
-            'knight' => (new N($color, $sq, $square))->mobility,
+            Piece::N => (new N($color, $sq, $square))->mobility,
         ];
     }
 }

@@ -2,13 +2,15 @@
 
 namespace Chess\Variant\Capablanca\Piece;
 
+use Chess\Variant\Capablanca\PGN\AN\Piece;
+
 trait CapablancaTrait
 {
     public function moveSqs(): array
     {
         $sqs = [];
         foreach ($this->mobility as $key => $val) {
-            if ($key !== 'knight') {
+            if ($key !== Piece::N) {
                 foreach ($val as $sq) {
                     if (
                         !in_array($sq, $this->board->sqCount['used'][$this->color]) &&
@@ -40,7 +42,7 @@ trait CapablancaTrait
     {
         $sqs = [];
         foreach ($this->mobility as $key => $val) {
-            if ($key !== 'knight') {
+            if ($key !== Piece::N) {
                 foreach ($val as $sq) {
                     if (in_array($sq, $this->board->sqCount['used'][$this->color])) {
                         $sqs[] = $sq;
