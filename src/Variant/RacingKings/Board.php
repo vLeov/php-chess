@@ -2,12 +2,15 @@
 
 namespace Chess\Variant\RacingKings;
 
+use Chess\FenToBoardFactory;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\RType;
 use Chess\Variant\VariantType;
+use Chess\Variant\Classical\Board as ClassicalBoard;
 use Chess\Variant\Classical\PGN\Move;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Square;
+use Chess\Variant\Classical\PGN\AN\Piece;
 use Chess\Variant\Classical\Piece\B;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Piece\N;
@@ -57,11 +60,38 @@ class Board extends AbstractBoard
 
     public function play(string $color, string $pgn): bool
     {
-        $clone = $this->clone();
-        if ($clone->play($color, $pgn)) {
-            if (!$clone->isCheck()) {
+        $board = FenToBoardFactory::create($this->toFen(), new ClassicalBoard());
+        if ($board->play($color, $pgn)) {
+            if (!$board->isCheck()) {
                 return parent::play($color, $pgn);
             }
+        }
+
+        return false;
+    }
+
+    public function isWon(): bool
+    {
+        $wKing = $this->piece(Color::W, Piece::K);
+        $bKing = $this->piece(Color::B, Piece::K);
+        $wWins = $wKing->rank() === $this->square::SIZE['ranks'] &&
+            $bKing->rank() !== $this->square::SIZE['ranks'];
+        $bWins = $wKing->rank() !== $this->square::SIZE['ranks'] &&
+            $bKing->rank() === $this->square::SIZE['ranks'];
+        if ($this->turn === Color::W) {
+            return $wWins || $bWins;
+        }
+
+        return false;
+    }
+
+    public function isDraw(): bool
+    {
+        $wKing = $this->piece(Color::W, Piece::K);
+        $bKing = $this->piece(Color::B, Piece::K);
+        if ($this->turn === Color::W) {
+            return $wKing->rank() === $this->square::SIZE['ranks'] &&
+                $bKing->rank() === $this->square::SIZE['ranks'];
         }
 
         return false;

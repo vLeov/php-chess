@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\Variant\RacingKings;
 
+use Chess\FenToBoardFactory;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\RacingKings\Board;
 
@@ -105,6 +106,95 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertTrue($board->play('w', 'Rg8'));
         $this->assertTrue($board->play('b', 'Nxf2'));
         $this->assertFalse($board->play('w', 'Qd5'));
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function w_wins()
+    {
+        $board = FenToBoardFactory::create(
+            '8/1K4k1/8/8/8/8/8/8 w - - 0 1',
+            new Board()
+        );
+
+        $expected = [
+            7 => [ ' . ', ' K ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' k ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame('w', $board->turn);
+        $this->assertTrue($board->play('w', 'Kb8'));
+        $this->assertFalse($board->isWon());
+        $this->assertTrue($board->play('b', 'Kh7'));
+        $this->assertTrue($board->isWon());
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function b_wins()
+    {
+        $board = FenToBoardFactory::create(
+            '8/1K4k1/8/8/8/8/8/8 w - - 0 1',
+            new Board()
+        );
+
+        $expected = [
+            7 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' k ' ],
+            6 => [ ' K ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame('w', $board->turn);
+        $this->assertTrue($board->play('w', 'Ka7'));
+        $this->assertFalse($board->isWon());
+        $this->assertTrue($board->play('b', 'Kh8'));
+        $this->assertTrue($board->isWon());
+        $this->assertFalse($board->isDraw());
+        $this->assertSame($expected, $board->toAsciiArray());
+    }
+
+    /**
+     * @test
+     */
+    public function draw()
+    {
+        $board = FenToBoardFactory::create(
+            '8/1K4k1/8/8/8/8/8/8 w - - 0 1',
+            new Board()
+        );
+
+        $expected = [
+            7 => [ ' . ', ' K ', ' . ', ' . ', ' . ', ' . ', ' k ', ' . ' ],
+            6 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            5 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            4 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            3 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            2 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            1 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+            0 => [ ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ', ' . ' ],
+        ];
+
+        $this->assertSame('w', $board->turn);
+        $this->assertTrue($board->play('w', 'Kb8'));
+        $this->assertFalse($board->isWon());
+        $this->assertTrue($board->play('b', 'Kg8'));
+        $this->assertFalse($board->isWon());
+        $this->assertTrue($board->isDraw());
         $this->assertSame($expected, $board->toAsciiArray());
     }
 }
