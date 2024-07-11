@@ -18,7 +18,7 @@ class C extends AbstractPiece
         parent::__construct($color, $sq, $square, Piece::C);
 
         $this->mobility = [
-            ...(new R($color, $sq, $square, RType::SLIDER))->mobility,
+            ...(new R($color, $sq, $square, RType::R))->mobility,
             'knight' => (new N($color, $sq, $square))->mobility,
         ];
     }

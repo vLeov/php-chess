@@ -80,7 +80,7 @@ class Randomizer
                     $color,
                     $sq,
                     $this->board->square,
-                    $id !== Piece::R ?: RType::PROMOTED
+                    $id !== Piece::R ?: RType::R
                 );
                 unset($freeSqs[$arrayRand]);
             }

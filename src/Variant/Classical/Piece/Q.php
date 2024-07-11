@@ -14,7 +14,7 @@ class Q extends AbstractSlider
         parent::__construct($color, $sq, $square, Piece::Q);
 
         $this->mobility = [
-            ...(new R($color, $sq, $square, RType::SLIDER))->mobility,
+            ...(new R($color, $sq, $square, RType::R))->mobility,
             ...(new B($color, $sq, $square))->mobility,
         ];
     }

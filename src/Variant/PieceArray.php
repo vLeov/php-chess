@@ -72,7 +72,7 @@ class PieceArray
             ) {
                 $this->array[] = new R($color, $sq, $this->square, RType::CASTLE_SHORT);
             } else { // it doesn't matter which RType is assigned
-                $this->array[] = new R($color, $sq, $this->square, RType::PROMOTED);
+                $this->array[] = new R($color, $sq, $this->square, RType::R);
             }
         } else {
             $class = VariantType::getClass($this->pieceVariant, $id);

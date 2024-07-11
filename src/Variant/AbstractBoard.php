@@ -410,7 +410,7 @@ abstract class AbstractBoard extends \SplObjectStorage
                 $pawn->color,
                 $pawn->move['sq']['next'],
                 $this->square,
-                RType::PROMOTED
+                RType::R
             ));
         } else {
             $this->attach(new Q(
