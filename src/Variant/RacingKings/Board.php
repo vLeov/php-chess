@@ -50,7 +50,6 @@ class Board extends AbstractBoard
             foreach ($pieces as $piece) {
                 $this->attach($piece);
             }
-            $this->castlingAbility = $castlingAbility;
         }
 
         $this->refresh();
