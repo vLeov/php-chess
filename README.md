@@ -14,7 +14,7 @@ Read the latest docs [here](https://chesslablab.github.io/php-chess/).
 
 ### License
 
-The PHP Chess library is open-sourced software licensed under the MIT license.
+PHP Chess is open-sourced software licensed under the MIT license.
 
 ### Contributions
 
