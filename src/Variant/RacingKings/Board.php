@@ -22,9 +22,8 @@ class Board extends AbstractBoard
 {
     const VARIANT = 'racing-kings';
 
-    public function __construct(array $pieces = null, string $castlingAbility = '-') {
+    public function __construct(array $pieces = null) {
         $this->color = new Color();
-        $this->castlingRule = new CastlingRule();
         $this->square = new Square();
         $this->move = new Move();
         $this->castlingAbility = CastlingRule::NEITHER;

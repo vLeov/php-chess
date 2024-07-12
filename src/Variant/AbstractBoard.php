@@ -58,7 +58,7 @@ abstract class AbstractBoard extends \SplObjectStorage
      *
      * @var \Chess\Variant\Classical\Rule\CastlingRule
      */
-    public CastlingRule $castlingRule;
+    public ?CastlingRule $castlingRule = null;
 
     /**
      * Castling ability.
@@ -292,7 +292,7 @@ abstract class AbstractBoard extends \SplObjectStorage
      */
     protected function updateCastle(AbstractPiece $piece): AbstractBoard
     {
-        if ($this->castlingRule->can($this->castlingAbility, $this->turn)) {
+        if ($this->castlingRule?->can($this->castlingAbility, $this->turn)) {
             if ($piece->id === Piece::K) {
                 $this->castlingAbility = $this->castlingRule->update(
                     $this->castlingAbility,
@@ -316,7 +316,7 @@ abstract class AbstractBoard extends \SplObjectStorage
             }
         }
         $oppColor = $this->color->opp($this->turn);
-        if ($this->castlingRule->can($this->castlingAbility, $oppColor)) {
+        if ($this->castlingRule?->can($this->castlingAbility, $oppColor)) {
             if ($piece->move['isCapture']) {
                 if ($piece->move['sq']['next'] ===
                     $this->castlingRule->rule[$oppColor][Piece::R][Castle::SHORT]['sq']['current']

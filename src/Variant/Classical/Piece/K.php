@@ -116,9 +116,9 @@ class K extends AbstractPiece
 
     public function sqCastleLong(): ?string
     {
-        $rule = $this->board->castlingRule->rule[$this->color][Piece::K][Castle::LONG];
+        $rule = $this->board->castlingRule?->rule[$this->color][Piece::K][Castle::LONG];
 
-        if ($this->board->castlingRule->long($this->board->castlingAbility, $this->color)) {
+        if ($this->board->castlingRule?->long($this->board->castlingAbility, $this->color)) {
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
                 !array_diff($rule['free'], $this->board->sqCount['free']) &&
@@ -133,9 +133,9 @@ class K extends AbstractPiece
 
     public function sqCastleShort(): ?string
     {
-        $rule = $this->board->castlingRule->rule[$this->color][Piece::K][Castle::SHORT];
+        $rule = $this->board->castlingRule?->rule[$this->color][Piece::K][Castle::SHORT];
 
-        if ($this->board->castlingRule->short($this->board->castlingAbility, $this->color)) {
+        if ($this->board->castlingRule?->short($this->board->castlingAbility, $this->color)) {
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
                 !array_diff($rule['free'], $this->board->sqCount['free']) &&

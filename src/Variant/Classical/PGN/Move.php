@@ -83,7 +83,7 @@ class Move extends AbstractNotation
         throw new UnknownNotationException();
     }
 
-    public function toArray(string $str, string $pgn, CastlingRule $castlingRule, Color $color): array
+    public function toArray(string $str, string $pgn, CastlingRule $castlingRule = null, Color $color): array
     {
         $isCheck = substr($pgn, -1) === '+' || substr($pgn, -1) === '#';
         if (preg_match('/^' . static::KING . '$/', $pgn)) {
@@ -107,7 +107,7 @@ class Move extends AbstractNotation
                 'type' => static::CASTLE_SHORT,
                 'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => $castlingRule->rule[$str][Piece::K][Castle::SHORT]['sq'],
+                'sq' => $castlingRule?->rule[$str][Piece::K][Castle::SHORT]['sq'],
             ];
         } elseif (preg_match('/^' . static::CASTLE_LONG . '$/', $pgn)) {
             return [
@@ -117,7 +117,7 @@ class Move extends AbstractNotation
                 'type' => static::CASTLE_LONG,
                 'color' => $color->validate($str),
                 'id' => Piece::K,
-                'sq' => $castlingRule->rule[$str][Piece::K][Castle::LONG]['sq'],
+                'sq' => $castlingRule?->rule[$str][Piece::K][Castle::LONG]['sq'],
             ];
         } elseif (preg_match('/^' . static::KING_CAPTURES . '$/', $pgn)) {
             return [
