@@ -907,6 +907,16 @@ abstract class AbstractBoard extends \SplObjectStorage
         });
     }
 
+    public function doesDraw(): bool
+    {
+        return false;
+    }
+
+    public function doesWin(): bool
+    {
+        return false;
+    }
+
     public function clone(): AbstractBoard
     {
         $board = FenToBoardFactory::create($this->toFen(), $this);
@@ -914,10 +924,5 @@ abstract class AbstractBoard extends \SplObjectStorage
         $board->history = $this->history;
 
         return $board;
-    }
-
-    public function doesDraw(): bool
-    {
-        return false;
     }
 }

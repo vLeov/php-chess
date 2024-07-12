@@ -109,7 +109,7 @@ class Board extends AbstractBoard
         return empty($legal);
     }
 
-    public function doesWin()
+    public function doesWin(): bool
     {
         return $this->isMate() xor empty($this->pieces(Color::W));
     }
