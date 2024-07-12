@@ -528,12 +528,12 @@ abstract class AbstractBoard extends \SplObjectStorage
             if ($a) {
                 if ($a->id === Piece::K) {
                     if (
-                        $this->castlingRule->rule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
+                        $this->castlingRule?->rule[$color][Piece::K][Castle::SHORT]['sq']['next'] === $sqs[1] &&
                         $a->sqCastleShort()
                     ) {
                         $pgn[] = Castle::SHORT;
                     } elseif (
-                        $this->castlingRule->rule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
+                        $this->castlingRule?->rule[$color][Piece::K][Castle::LONG]['sq']['next'] === $sqs[1] &&
                         $a->sqCastleLong()
                     ) {
                         $pgn[] = Castle::LONG;
