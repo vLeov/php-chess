@@ -164,7 +164,7 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertFalse($board->doesWin());
         $this->assertTrue($board->play('b', 'Kh8'));
         $this->assertTrue($board->doesWin());
-        $this->assertFalse($board->isDraw());
+        $this->assertFalse($board->doesDraw());
         $this->assertSame($expected, $board->toAsciiArray());
     }
 
@@ -194,7 +194,7 @@ class BoardTest extends AbstractUnitTestCase
         $this->assertFalse($board->doesWin());
         $this->assertTrue($board->play('b', 'Kg8'));
         $this->assertFalse($board->doesWin());
-        $this->assertTrue($board->isDraw());
+        $this->assertTrue($board->doesDraw());
         $this->assertSame($expected, $board->toAsciiArray());
     }
 }

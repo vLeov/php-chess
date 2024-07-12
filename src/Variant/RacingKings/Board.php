@@ -85,7 +85,7 @@ class Board extends AbstractBoard
         return false;
     }
 
-    public function isDraw(): bool
+    public function doesDraw(): bool
     {
         $wKing = $this->piece(Color::W, Piece::K);
         $bKing = $this->piece(Color::B, Piece::K);
