@@ -915,4 +915,9 @@ abstract class AbstractBoard extends \SplObjectStorage
 
         return $board;
     }
+
+    public function doesDraw(): bool
+    {
+        return false;
+    }
 }
