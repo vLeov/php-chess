@@ -90,15 +90,10 @@ class Board extends AbstractBoard
         $this->startFen = $this->toFen();
     }
 
-    public function isWon()
-    {
-        return $this->isMate() xor empty($this->pieces(Color::W));
-    }
-
     public function isStalemate(): bool
     {
         if (Color::W === $this->turn) {
-            return $this->isTrapped() && !$this->isCheck() && !$this->isWon();
+            return $this->isTrapped() && !$this->isCheck() && !$this->doesWin();
         }
 
         $legal = [];
@@ -112,5 +107,10 @@ class Board extends AbstractBoard
         }
 
         return empty($legal);
+    }
+
+    public function doesWin()
+    {
+        return $this->isMate() xor empty($this->pieces(Color::W));
     }
 }
