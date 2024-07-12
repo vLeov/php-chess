@@ -78,7 +78,7 @@ class Board extends AbstractBoard
         $bWins = $wKing->rank() !== $this->square::SIZE['ranks'] &&
             $bKing->rank() === $this->square::SIZE['ranks'];
         if ($this->turn === Color::W) {
-            return $wWins || $bWins;
+            return $wWins xor $bWins;
         }
 
         return false;
