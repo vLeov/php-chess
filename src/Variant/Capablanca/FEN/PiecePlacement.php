@@ -1,9 +1,9 @@
 <?php
 
-namespace Chess\Variant\Capablanca\FEN\Field;
+namespace Chess\Variant\Capablanca\FEN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Variant\Classical\FEN\Field\PiecePlacement as ClassicalFenPiecePlacement;
+use Chess\Variant\Classical\FEN\PiecePlacement as ClassicalFenPiecePlacement;
 
 class PiecePlacement extends ClassicalFenPiecePlacement
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Media\FEN\Field;
+namespace Chess\Media\FEN;
 
 use Chess\Media\PGN\AN\JpgToPiece;
 

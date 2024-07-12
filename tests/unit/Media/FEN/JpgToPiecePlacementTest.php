@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Tests\Unit\Media\FEN\Field;
+namespace Chess\Tests\Unit\Media\FEN;
 
-use Chess\Media\FEN\Field\JpgToPiecePlacement;
+use Chess\Media\FEN\JpgToPiecePlacement;
 use Chess\Tests\AbstractUnitTestCase;
 
 class JpgToPiecePlacementTest extends AbstractUnitTestCase

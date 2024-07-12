@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Variant\Dunsany\FEN\Field;
+namespace Chess\Variant\Dunsany\FEN;
 
-use Chess\Variant\Classical\FEN\Field\PiecePlacement as ClassicalPiecePlacement;
+use Chess\Variant\Classical\FEN\PiecePlacement as ClassicalPiecePlacement;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 class PiecePlacement extends ClassicalPiecePlacement

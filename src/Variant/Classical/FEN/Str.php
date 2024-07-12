@@ -3,7 +3,7 @@
 namespace Chess\Variant\Classical\FEN;
 
 use Chess\Exception\UnknownNotationException;
-use Chess\Variant\Classical\FEN\Field\PiecePlacement;
+use Chess\Variant\Classical\FEN\PiecePlacement;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Rule\CastlingRule;

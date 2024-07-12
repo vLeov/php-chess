@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Variant\RacingKings\FEN\Field;
+namespace Chess\Variant\RacingKings\FEN;
 
-use Chess\Variant\Classical\FEN\Field\PiecePlacement as ClassicalPiecePlacement;
+use Chess\Variant\Classical\FEN\PiecePlacement as ClassicalPiecePlacement;
 
 class PiecePlacement extends ClassicalPiecePlacement
 {

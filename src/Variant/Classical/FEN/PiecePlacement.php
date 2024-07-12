@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess\Variant\Classical\FEN\Field;
+namespace Chess\Variant\Classical\FEN;
 
 use Chess\Exception\UnknownNotationException;
 use Chess\Variant\Classical\PGN\AN\Color;
