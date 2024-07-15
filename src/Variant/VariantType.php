@@ -10,6 +10,8 @@ class VariantType
 
     const DUNSANY = 'dunsany';
 
+    const RACING_KINGS = 'racing-kings';
+
     public static function getClass(string $pieceVariant, string $name)
     {
         $namespace = ucfirst($pieceVariant);
