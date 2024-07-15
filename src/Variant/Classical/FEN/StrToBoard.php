@@ -22,9 +22,9 @@ class StrToBoard
 
     protected array $fields;
 
-    protected string $castlingAbility;
+    protected string $castlingAbility = '-';
 
-    protected CastlingRule $castlingRule;
+    protected ?CastlingRule $castlingRule = null;
 
     protected string $pieceVariant;
 
