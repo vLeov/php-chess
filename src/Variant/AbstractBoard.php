@@ -853,7 +853,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         return $array;
     }
 
-    public function toAsciiString(bool $flip = false): string
+    public function toString(bool $flip = false): string
     {
         $ascii = '';
         $array = $this->toArray($flip);
