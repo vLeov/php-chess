@@ -78,7 +78,7 @@ abstract class AbstractBoard extends \SplObjectStorage
      *
      * @var string
      */
-    public string $castlingAbility = '';
+    public string $castlingAbility = '-';
 
     /**
      * Piece variant.
