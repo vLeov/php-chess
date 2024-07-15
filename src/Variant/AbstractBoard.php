@@ -16,7 +16,6 @@ use Chess\Variant\Classical\Piece\P;
 use Chess\Variant\Classical\Piece\Q;
 use Chess\Variant\Classical\Piece\R;
 use Chess\Variant\Classical\PGN\Move;
-use Chess\Variant\Classical\Rule\CastlingRule;
 
 abstract class AbstractBoard extends \SplObjectStorage
 {
@@ -49,16 +48,30 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Color.
      *
-     * @var \Chess\Variant\Classical\PGN\AN\Color
+     * @var \Chess\Variant\AbstractNotation
      */
-    public Color $color;
+    public AbstractNotation $color;
 
     /**
      * Castling rule.
      *
-     * @var \Chess\Variant\Classical\Rule\CastlingRule
+     * @var \Chess\Variant\AbstractNotation
      */
-    public ?CastlingRule $castlingRule = null;
+    public ?AbstractNotation $castlingRule = null;
+
+    /**
+     * Square.
+     *
+     * @var \Chess\Variant\AbstractNotation
+     */
+    public AbstractNotation $square;
+
+    /**
+     * Move.
+     *
+     * @var \Chess\Variant\AbstractNotation
+     */
+    public AbstractNotation $move;
 
     /**
      * Castling ability.
@@ -80,20 +93,6 @@ abstract class AbstractBoard extends \SplObjectStorage
      * @var string
      */
     public string $startFen = '';
-
-    /**
-     * Square.
-     *
-     * @var \Chess\Variant\AbstractNotation
-     */
-    public AbstractNotation $square;
-
-    /**
-     * Move.
-     *
-     * @var \Chess\Variant\AbstractNotation
-     */
-    public AbstractNotation $move;
 
     /**
      * Space evaluation.
