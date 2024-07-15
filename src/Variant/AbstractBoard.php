@@ -832,7 +832,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         return '-';
     }
 
-    public function toAsciiArray(bool $flip = false): array
+    public function toArray(bool $flip = false): array
     {
         $array = [];
         for ($i = $this->square::SIZE['ranks'] - 1; $i >= 0; $i--) {
@@ -856,7 +856,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     public function toAsciiString(bool $flip = false): string
     {
         $ascii = '';
-        $array = $this->toAsciiArray($flip);
+        $array = $this->toArray($flip);
         foreach ($array as $i => $rank) {
             foreach ($rank as $j => $file) {
                 $ascii .= $array[$i][$j];
@@ -870,7 +870,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     public function toFen(): string
     {
         $string = '';
-        $array = $this->toAsciiArray();
+        $array = $this->toArray();
         for ($i = $this->square::SIZE['ranks'] - 1; $i >= 0; $i--) {
             $string .= str_replace(' ', '', implode('', $array[$i]));
             if ($i != 0) {
