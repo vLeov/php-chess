@@ -38,6 +38,7 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $board = FenToBoardFactory::create('8/4p3/p2p4/2pP4/2P1P3/1P4k1/1P1K4/8 w - -');
+
         $doubledPawnEval = new DoubledPawnEval($board);
 
         $this->assertSame($expectedResult, $doubledPawnEval->getResult());
@@ -64,6 +65,7 @@ class DoubledPawnEvalTest extends AbstractUnitTestCase
         ];
 
         $board = FenToBoardFactory::create('1r1q1rk1/p1p2pbp/2pp1np1/6B1/4P3/2NQ4/PPP2PPP/3R1RK1 w - -');
+        
         $doubledPawnEval = new DoubledPawnEval($board);
 
         $this->assertSame($expectedResult, $doubledPawnEval->getResult());
