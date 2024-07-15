@@ -5,7 +5,6 @@ namespace Chess\Variant;
 use Chess\FenToBoardFactory;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqCount;
-use Chess\Variant\AbstractNotation;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
