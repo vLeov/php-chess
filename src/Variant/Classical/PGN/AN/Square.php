@@ -3,8 +3,8 @@
 namespace Chess\Variant\Classical\PGN\AN;
 
 use Chess\Exception\UnknownNotationException;
+use Chess\Variant\AbstractNotation;
 use Chess\Variant\AsciiArray;
-use Chess\Variant\Classical\PGN\AbstractNotation;
 
 class Square extends AbstractNotation
 {

@@ -5,10 +5,10 @@ namespace Chess\Variant;
 use Chess\FenToBoardFactory;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqCount;
+use Chess\Variant\AbstractNotation;
 use Chess\Variant\Classical\PGN\AN\Castle;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
-use Chess\Variant\Classical\PGN\AN\Square;
 use Chess\Variant\Classical\Piece\B;
 use Chess\Variant\Classical\Piece\K;
 use Chess\Variant\Classical\Piece\N;
@@ -84,16 +84,16 @@ abstract class AbstractBoard extends \SplObjectStorage
     /**
      * Square.
      *
-     * @var \Chess\Variant\Classical\PGN\AN\Square
+     * @var \Chess\Variant\AbstractNotation
      */
-    public Square $square;
+    public AbstractNotation $square;
 
     /**
      * Move.
      *
-     * @var \Chess\Variant\Classical\PGN\Move
+     * @var \Chess\Variant\AbstractNotation
      */
-    public Move $move;
+    public AbstractNotation $move;
 
     /**
      * Space evaluation.
