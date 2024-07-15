@@ -19,9 +19,7 @@ class StrToBoard extends ClassicalFenStrToBoard
         $this->square = new Square();
         $this->fenStr = new Str();
         $this->string = $this->fenStr->validate($string);
-        $this->string = $string;
         $this->fields = array_filter(explode(' ', $this->string));
-        $this->castlingAbility = $this->fields[2];
         $this->castlingAbility = '-';
         $this->castlingRule = new CastlingRule();
         $this->pieceVariant = VariantType::CLASSICAL;
