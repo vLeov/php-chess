@@ -4,7 +4,6 @@ namespace Chess\Variant;
 
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\PGN\AN\Square;
-use Chess\Variant\Classical\Rule\CastlingRule;
 
 class AsciiArray
 {
@@ -24,53 +23,6 @@ class AsciiArray
     public function getArray(): array
     {
         return $this->array;
-    }
-
-    public function toClassicalBoard(string $class, string $turn, string $castlingAbility = null): Board
-    {
-        $board = new $class();
-
-        $pieces = (new PieceArray(
-            $this->array,
-            $board->square,
-            $board->castlingRule,
-            $board->pieceVariant
-        ))->getArray();
-
-        if (!$castlingAbility) {
-            $castlingAbility = CastlingRule::START;
-        }
-
-        $newBoard = new $class($pieces, $castlingAbility);
-        $newBoard->turn = $turn;
-
-        return $newBoard;
-    }
-
-    public function toChess960Board(
-        string $class,
-        string $turn,
-        string $castlingAbility = null,
-        array $startPos
-    ): Board
-    {
-        $board = new $class();
-
-        $pieces = (new PieceArray(
-            $this->array,
-            $board->square,
-            $board->castlingRule,
-            $board->pieceVariant
-        ))->getArray();
-
-        if (!$castlingAbility) {
-            $castlingAbility = CastlingRule::START;
-        }
-
-        $newBoard = new $class($startPos, $pieces, $castlingAbility);
-        $newBoard->turn = $turn;
-
-        return $newBoard;
     }
 
     public function setElem(string $elem, string $sq): AsciiArray
