@@ -10,6 +10,8 @@ class VariantType
 
     const DUNSANY = 'dunsany';
 
+    const LOSING = 'losing';
+
     const RACING_KINGS = 'racing-kings';
 
     public static function getClass(string $pieceVariant, string $name)
