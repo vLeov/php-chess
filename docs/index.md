@@ -45,6 +45,7 @@ Multiple variants are supported with the default one being classical chess.
 | Chess960 | [Chess\Variant\Chess960\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Chess960/BoardTest.php) |
 | Classical | [Chess\Variant\Classical\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Classical/BoardTest.php) |
 | Dunsany | [Chess\Variant\Dunsany\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Dunsany/BoardTest.php) |
+| Losing Chess | [Chess\Variant\Losing\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/Losing/BoardTest.php) |
 | RacingKings | [Chess\Variant\RacingKings\Board](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Variant/RacingKings/BoardTest.php) |
 
 ## UCI Engines
