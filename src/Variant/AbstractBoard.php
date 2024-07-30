@@ -920,6 +920,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         $board = FenToBoardFactory::create($this->toFen(), $this);
         $board->captures = $this->captures;
         $board->history = $this->history;
+        $board->startFen = $this->startFen;
 
         return $board;
     }

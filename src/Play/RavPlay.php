@@ -93,19 +93,12 @@ class RavPlay extends AbstractPlay
             foreach ($this->resume as $key => $val) {
                 $sanMovetextKey = new SanMovetext($this->ravMovetext->move, $key);
                 if ($this->ravMovetext->isPrevious($sanMovetextKey, $sanMovetext)) {
-                    if (
-                        $this->isUndo($sanMovetextKey->metadata['lastMove'], $sanMovetext->metadata['firstMove'])
-                    ) {
-                        $clone = unserialize(serialize($val));
-                        $undo = $clone->undo();
-                        $board = FenToBoardFactory::create($undo->toFen(), $this->initialBoard);
-                    } else {
-                        $board = FenToBoardFactory::create($val->toFen(), $this->initialBoard);
-                    }
+                    $board = $this->isUndo($sanMovetextKey->metadata['lastMove'], $sanMovetext->metadata['firstMove'])
+                        ? FenToBoardFactory::create($val->clone()->undo()->toFen(), $this->initialBoard)
+                        : FenToBoardFactory::create($val->toFen(), $this->initialBoard);
                 }
             }
-            $sanPlay = (new SanPlay($this->ravMovetext->breakdown[$i], $board))
-                ->validate();
+            $sanPlay = (new SanPlay($this->ravMovetext->breakdown[$i], $board))->validate();
             $this->resume[$sanPlay->sanMovetext->filtered(false, false)] = $sanPlay->board;
             $fen = $sanPlay->fen;
             array_shift($fen);
@@ -125,7 +118,7 @@ class RavPlay extends AbstractPlay
      * @param string $current
      * @return bool
      */
-    protected function isUndo(string $previous, string $current)
+    protected function isUndo(string $previous, string $current): bool
     {
         $previous = new SanMovetext($this->ravMovetext->move, $previous);
         $current = new SanMovetext($this->ravMovetext->move, $current);
