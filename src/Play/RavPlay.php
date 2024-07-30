@@ -47,8 +47,6 @@ class RavPlay extends AbstractPlay
     }
 
     /**
-     * Semantically validated movetext.
-     *
      * Makes the moves in the main variation of a RAV movetext.
      *
      * @throws \Chess\Exception\PlayException
@@ -122,10 +120,7 @@ class RavPlay extends AbstractPlay
     {
         $previous = new SanMovetext($this->ravMovetext->move, $previous);
         $current = new SanMovetext($this->ravMovetext->move, $current);
-        if ($previous->metadata['turn'] === $current->metadata['turn']) {
-            return true;
-        }
 
-        return false;
+        return $previous->metadata['turn'] === $current->metadata['turn'];
     }
 }
