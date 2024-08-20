@@ -49,58 +49,58 @@ class FanMovetext extends AbstractMovetext
         return $this->toFan($filtered);
     }
 
-    private function toFan(string $move): string
+    private function toFan(string $movetext): string
     {
-        $move = $this->replace('R', '♖', $move);
-        $move = $this->replace('N', '♘', $move);
-        $move = $this->replace('B', '♗', $move);
-        $move = $this->replace('Q', '♕', $move);
-        $move = $this->replace('K', '♔', $move);
+        $movetext = $this->replace('R', '♖', $movetext);
+        $movetext = $this->replace('N', '♘', $movetext);
+        $movetext = $this->replace('B', '♗', $movetext);
+        $movetext = $this->replace('Q', '♕', $movetext);
+        $movetext = $this->replace('K', '♔', $movetext);
 
-        return $move;
+        return $movetext;
     }
 
-    private function toSan(string $move): string
+    private function toSan(string $movetext): string
     {
-        $move = str_replace('♖', 'R', $move);
-        $move = str_replace('♘', 'N', $move);
-        $move = str_replace('♗', 'B', $move);
-        $move = str_replace('♕', 'Q', $move);
-        $move = str_replace('♔', 'K', $move);
+        $movetext = str_replace('♖', 'R', $movetext);
+        $movetext = str_replace('♘', 'N', $movetext);
+        $movetext = str_replace('♗', 'B', $movetext);
+        $movetext = str_replace('♕', 'Q', $movetext);
+        $movetext = str_replace('♔', 'K', $movetext);
 
-        return $move;
+        return $movetext;
     }
 
-    private function replace($letter, $unicode, $move): string
+    private function replace($letter, $unicode, $movetext): string
     {
-        preg_match_all('/' . Move::KING . '/', $move, $matches);
-        $move = $this->move($letter, $unicode, $matches, $move);
+        preg_match_all('/' . Move::KING . '/', $movetext, $matches);
+        $movetext = $this->move($letter, $unicode, $matches, $movetext);
 
-        preg_match_all('/' . Move::KING_CAPTURES . '/', $move, $matches);
-        $move = $this->move($letter, $unicode, $matches, $move);
+        preg_match_all('/' . Move::KING_CAPTURES . '/', $movetext, $matches);
+        $movetext = $this->move($letter, $unicode, $matches, $movetext);
 
-        preg_match_all('/' . Move::KNIGHT . '/', $move, $matches);
-        $move = $this->move($letter, $unicode, $matches, $move);
+        preg_match_all('/' . Move::KNIGHT . '/', $movetext, $matches);
+        $movetext = $this->move($letter, $unicode, $matches, $movetext);
 
-        preg_match_all('/' . Move::KNIGHT_CAPTURES . '/', $move, $matches);
-        $move = $this->move($letter, $unicode, $matches, $move);
+        preg_match_all('/' . Move::KNIGHT_CAPTURES . '/', $movetext, $matches);
+        $movetext = $this->move($letter, $unicode, $matches, $movetext);
 
-        preg_match_all('/' . Move::PIECE . '/', $move, $matches);
-        $move = $this->move($letter, $unicode, $matches, $move);
+        preg_match_all('/' . Move::PIECE . '/', $movetext, $matches);
+        $movetext = $this->move($letter, $unicode, $matches, $movetext);
 
-        preg_match_all('/' . Move::PIECE_CAPTURES . '/', $move, $matches);
-        $move = $this->move($letter, $unicode, $matches, $move);
+        preg_match_all('/' . Move::PIECE_CAPTURES . '/', $movetext, $matches);
+        $movetext = $this->move($letter, $unicode, $matches, $movetext);
 
-        return $move;
+        return $movetext;
     }
 
-    private function move($letter, $unicode, $matches, $move)
+    private function move($letter, $unicode, $matches, $movetext)
     {
         foreach ($matches[0] as $match) {
             $replaced = str_replace($letter, $unicode, $match);
-            $move = str_replace($match, $replaced, $move);
+            $movetext = str_replace($match, $replaced, $movetext);
         }
 
-        return $move;
+        return $movetext;
     }
 }
