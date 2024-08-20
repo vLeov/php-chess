@@ -4,31 +4,62 @@ namespace Chess\Movetext;
 
 use Chess\Variant\Classical\PGN\Move;
 
-class FanMovetext extends SanMovetext
+class FanMovetext extends AbstractMovetext
 {
-    /**
-     * Converts a chess move notation to figurine notation
-     *
-     * @param string $move The chess move in standard notation (e.g., "Nf4").
-     * @return string The chess move in figurine notation (e.g., "♘f4").
-     */
+    public array $metadata;
+
+    public SanMovetext $sanMovetext;
+
+    public function __construct(Move $move, string $movetext)
+    {
+        $this->sanMovetext = new SanMovetext($move, $this->toSan($movetext));
+        $this->move = $this->sanMovetext->move;
+        $this->movetext = $this->sanMovetext->movetext;
+        $this->moves = array_map(function($move) {
+            return $this->toFan($move);
+        }, $this->sanMovetext->moves);
+
+        $this->metadata = [
+            'firstMove' => $this->toFan($this->sanMovetext->metadata['firstMove']),
+            'lastMove' => $this->toFan($this->sanMovetext->metadata['lastMove']),
+            'turn' => $this->sanMovetext->metadata['turn'],
+        ];
+    }
+
+    protected function beforeInsert(): FanMovetext
+    {
+        return $this;
+    }
+
+    protected function insert(): void
+    {
+    }
+
+    public function validate(): string
+    {
+        $this->sanMovetext->validate();
+
+        return $this->toFan($this->sanMovetext->validated);
+    }
+
+    public function filtered($comments = true, $nags = true): string
+    {
+        $filtered = $this->sanMovetext->filtered($comments, $nags);
+
+        return $this->toFan($filtered);
+    }
+
     private function toFan(string $move): string
     {
-        $move = str_replace('R', '♖', $move);
-        $move = str_replace('N', '♘', $move);
-        $move = str_replace('B', '♗', $move);
-        $move = str_replace('Q', '♕', $move);
-        $move = str_replace('K', '♔', $move);
+        $move = $this->replace('R', '♖', $move);
+        $move = $this->replace('N', '♘', $move);
+        $move = $this->replace('B', '♗', $move);
+        $move = $this->replace('Q', '♕', $move);
+        $move = $this->replace('K', '♔', $move);
 
         return $move;
     }
 
-    /**
-     * Converts a figurine move notation to standard notation
-     *
-     * @param string $move The chess move in figurine notation (e.g., "♘f4").
-     * @return string The chess move in standard notation (e.g., "Nf4").
-     */
     private function toSan(string $move): string
     {
         $move = str_replace('♖', 'R', $move);
@@ -40,40 +71,36 @@ class FanMovetext extends SanMovetext
         return $move;
     }
 
-    protected function insert(): void
+    private function replace($letter, $unicode, $move): string
     {
-        foreach (explode(' ', $this->validated) as $key => $val) {
-            $move = $val;
-            if (!NagMovetext::glyph($val)) {
-                if (preg_match('/^[1-9][0-9]*\.\.\.(.*)$/', $val)) {
-                    $exploded = explode(Move::ELLIPSIS, $val);
-                    $this->moves[] = Move::ELLIPSIS;
-                    $move = $exploded[1];
-                } elseif (preg_match('/^[1-9][0-9]*\.(.*)$/', $val)) {
-                    $move = explode('.', $val)[1];
-                }
+        preg_match_all('/' . Move::KING . '/', $move, $matches);
+        $move = $this->move($letter, $unicode, $matches, $move);
 
-                $fanMove = $this->toFan($move);
+        preg_match_all('/' . Move::KING_CAPTURES . '/', $move, $matches);
+        $move = $this->move($letter, $unicode, $matches, $move);
 
-                $val = str_replace($move, $fanMove, $val);
-                $this->movetext = str_replace($move, $fanMove, $this->movetext);
+        preg_match_all('/' . Move::KNIGHT . '/', $move, $matches);
+        $move = $this->move($letter, $unicode, $matches, $move);
 
-                $this->moves[] = $fanMove;
-                $this->sanMoves[] = $this->toSan($fanMove);
-            }
-        }
+        preg_match_all('/' . Move::KNIGHT_CAPTURES . '/', $move, $matches);
+        $move = $this->move($letter, $unicode, $matches, $move);
 
-        $this->moves = array_values(array_filter($this->moves));
+        preg_match_all('/' . Move::PIECE . '/', $move, $matches);
+        $move = $this->move($letter, $unicode, $matches, $move);
+
+        preg_match_all('/' . Move::PIECE_CAPTURES . '/', $move, $matches);
+        $move = $this->move($letter, $unicode, $matches, $move);
+
+        return $move;
     }
 
-    public function validate(): string
+    private function move($letter, $unicode, $matches, $move)
     {
-        foreach ($this->sanMoves as $move) {
-            if ($move !== Move::ELLIPSIS) {
-                $this->move->validate($move);
-            }
+        foreach ($matches[0] as $match) {
+            $replaced = str_replace($letter, $unicode, $match);
+            $move = str_replace($match, $replaced, $move);
         }
 
-        return $this->validated;
+        return $move;
     }
 }
