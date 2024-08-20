@@ -28,7 +28,6 @@ class FanMovetext extends AbstractMovetext
 
     protected function beforeInsert(): FanMovetext
     {
-        return $this;
     }
 
     protected function insert(): void
@@ -75,19 +74,14 @@ class FanMovetext extends AbstractMovetext
     {
         preg_match_all('/' . Move::KING . '/', $movetext, $matches);
         $this->move($letter, $unicode, $matches, $movetext);
-
         preg_match_all('/' . Move::KING_CAPTURES . '/', $movetext, $matches);
         $this->move($letter, $unicode, $matches, $movetext);
-
         preg_match_all('/' . Move::KNIGHT . '/', $movetext, $matches);
         $this->move($letter, $unicode, $matches, $movetext);
-
         preg_match_all('/' . Move::KNIGHT_CAPTURES . '/', $movetext, $matches);
         $this->move($letter, $unicode, $matches, $movetext);
-
         preg_match_all('/' . Move::PIECE . '/', $movetext, $matches);
         $this->move($letter, $unicode, $matches, $movetext);
-
         preg_match_all('/' . Move::PIECE_CAPTURES . '/', $movetext, $matches);
         $this->move($letter, $unicode, $matches, $movetext);
     }
