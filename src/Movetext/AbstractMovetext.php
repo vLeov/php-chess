@@ -53,7 +53,7 @@ abstract class AbstractMovetext
         $str = preg_replace('/\s\./', '.', $str);
         // remove space after dots only in the text outside brackets
         preg_match_all('/[^{}]*(?=(?:[^}]*{[^{]*})*[^{}]*$)/', $str, $matches);
-        foreach (array_filter($matches[0]) as $match) {
+        foreach ($matches[0] as $match) {
             $replaced = preg_replace('/\.\s/', '.', $match);
             $str = str_replace($match, $replaced, $str);
         }

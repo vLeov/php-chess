@@ -159,7 +159,7 @@ class RavMovetext extends AbstractMovetext
         $str = $this->filtered();
         // escape parentheses enclosed in curly brackets
         preg_match_all('/{(.*?)}/', $str, $matches);
-        foreach (array_filter($matches[0]) as $match) {
+        foreach ($matches[0] as $match) {
             $replaced = str_replace('(', '<--', $match);
             $replaced = str_replace(')', '-->', $replaced);
             $str = str_replace($match, $replaced, $str);
