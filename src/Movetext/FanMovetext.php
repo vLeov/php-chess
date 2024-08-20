@@ -3,6 +3,7 @@
 namespace Chess\Movetext;
 
 use Chess\Variant\Classical\PGN\Move;
+use Chess\Variant\Classical\PGN\AN\Piece;
 
 class FanMovetext extends AbstractMovetext
 {
@@ -50,39 +51,39 @@ class FanMovetext extends AbstractMovetext
 
     private function toFan(string &$movetext): string
     {
-        $this->replace('R', '♖', $movetext);
-        $this->replace('N', '♘', $movetext);
-        $this->replace('B', '♗', $movetext);
-        $this->replace('Q', '♕', $movetext);
-        $this->replace('K', '♔', $movetext);
+        $this->replace(Piece::R, '♖', $movetext);
+        $this->replace(Piece::N, '♘', $movetext);
+        $this->replace(Piece::B, '♗', $movetext);
+        $this->replace(Piece::Q, '♕', $movetext);
+        $this->replace(Piece::K, '♔', $movetext);
 
         return $movetext;
     }
 
     private function toSan(string $movetext): string
     {
-        $movetext = str_replace('♖', 'R', $movetext);
-        $movetext = str_replace('♘', 'N', $movetext);
-        $movetext = str_replace('♗', 'B', $movetext);
-        $movetext = str_replace('♕', 'Q', $movetext);
-        $movetext = str_replace('♔', 'K', $movetext);
+        $movetext = str_replace('♖', Piece::R, $movetext);
+        $movetext = str_replace('♘', Piece::N, $movetext);
+        $movetext = str_replace('♗', Piece::B, $movetext);
+        $movetext = str_replace('♕', Piece::Q, $movetext);
+        $movetext = str_replace('♔', Piece::K, $movetext);
 
         return $movetext;
     }
 
     private function replace($letter, $unicode, &$movetext): void
     {
-        preg_match_all('/' . Move::KING . '/', $movetext, $matches);
-        $this->move($letter, $unicode, $matches, $movetext);
-        preg_match_all('/' . Move::KING_CAPTURES . '/', $movetext, $matches);
-        $this->move($letter, $unicode, $matches, $movetext);
-        preg_match_all('/' . Move::KNIGHT . '/', $movetext, $matches);
-        $this->move($letter, $unicode, $matches, $movetext);
-        preg_match_all('/' . Move::KNIGHT_CAPTURES . '/', $movetext, $matches);
-        $this->move($letter, $unicode, $matches, $movetext);
-        preg_match_all('/' . Move::PIECE . '/', $movetext, $matches);
-        $this->move($letter, $unicode, $matches, $movetext);
-        preg_match_all('/' . Move::PIECE_CAPTURES . '/', $movetext, $matches);
+        if ($letter === Piece::K) {
+            preg_match_all('/' . Move::KING . '/', $movetext, $a);
+            preg_match_all('/' . Move::KING_CAPTURES . '/', $movetext, $b);
+        } elseif ($letter === Piece::N) {
+            preg_match_all('/' . Move::KNIGHT . '/', $movetext, $a);
+            preg_match_all('/' . Move::KNIGHT_CAPTURES . '/', $movetext, $b);
+        } else {
+            preg_match_all('/' . Move::PIECE . '/', $movetext, $a);
+            preg_match_all('/' . Move::PIECE_CAPTURES . '/', $movetext, $b);
+        }
+        $matches = [...$a[0], ...$b[0]];
         $this->move($letter, $unicode, $matches, $movetext);
     }
 
@@ -91,6 +92,6 @@ class FanMovetext extends AbstractMovetext
         array_map(function($match) use ($letter, $unicode, &$movetext) {
             $replaced = str_replace($letter, $unicode, $match);
             $movetext = str_replace($match, $replaced, $movetext);
-        }, $matches[0]);
+        }, $matches);
     }
 }
