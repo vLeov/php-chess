@@ -42,12 +42,6 @@ class OverloadingEval extends AbstractEval implements ExplainEvalInterface
         }
     }
 
-    /**
-     * @param AbstractPiece $piece
-     * @return bool
-     * A piece is considered overloaded if it is defending more than one square and at least one of those squares
-     * is under attack by an opponent's piece.
-     */
     private function isPieceOverloaded(AbstractPiece $piece):bool
     {
         $defendedSquares = $piece->defendedSqs();
