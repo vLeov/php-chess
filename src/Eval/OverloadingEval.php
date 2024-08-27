@@ -49,7 +49,7 @@ class OverloadingEval extends AbstractEval implements
                     foreach ($defended as $val) {
                         $countAttacking += count($val->attacking()) > 0;
                     }
-                    if ($countDefended >= $countAttacking) {
+                    if ($countAttacking >= 2) {
                         $this->result[$piece->color][] = $piece->sq;
                         $this->elaborate($piece);
                     }
