@@ -40,12 +40,8 @@ class OverloadingEval extends AbstractEval implements
             "has a total overloading advantage",
         ];
 
-        $wKSq = $this->board->piece(Color::W, Piece::K)->sq;
-        $bKSq = $this->board->piece(Color::B, Piece::K)->sq;
-
         foreach ($this->board->pieces() as $piece) {
-            $defendedSqs = array_diff($piece->defendedSqs(), [$wKSq, $bKSq]);
-            if (count($defendedSqs) > 1) {
+            if (count($piece->defended()) > 1) {
                 $this->result[$piece->color][] = $piece->sq;
                 $this->elaborate($piece);
             }

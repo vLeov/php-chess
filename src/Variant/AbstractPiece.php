@@ -75,6 +75,20 @@ abstract class AbstractPiece
         return $attacking;
     }
 
+    public function defended(): ?array
+    {
+        $defended = [];
+        foreach ($this->defendedSqs() as $sq) {
+            if ($piece = $this->board->pieceBySq($sq)) {
+                if ($piece->id !== Piece::K) {
+                    $defended[] = $piece;
+                }
+            }
+        }
+
+        return $defended;
+    }
+
     public function defending(): ?array
     {
         $defending = [];
