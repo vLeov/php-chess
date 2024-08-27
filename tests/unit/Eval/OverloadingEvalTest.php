@@ -15,8 +15,8 @@ class OverloadingEvalTest extends AbstractUnitTestCase
     public function kaufman_09()
     {
         $expectedResult = [
-            'w' => ['d2', 'a1', 'e1', 'h1'],
-            'b' => ['a8', 'h8', 'b7', 'c7', 'c4'],
+            'w' => ['d2', 'e1'],
+            'b' => ['b7', 'c7', 'c4'],
         ];
 
         $expectedExplanation = [

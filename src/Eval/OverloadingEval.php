@@ -4,6 +4,7 @@ namespace Chess\Eval;
 
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 
 class OverloadingEval extends AbstractEval implements ExplainEvalInterface
 {
@@ -33,8 +34,12 @@ class OverloadingEval extends AbstractEval implements ExplainEvalInterface
             "has a total overloading advantage",
         ];
 
+        $wKSq = $this->board->piece(Color::W, Piece::K)->sq;
+        $bKSq = $this->board->piece(Color::B, Piece::K)->sq;
+
         foreach ($this->board->pieces() as $piece) {
-            if (count($piece->defendedSqs()) > 1) {
+            $defendedSqs = array_diff($piece->defendedSqs(), [$wKSq, $bKSq]);
+            if (count($defendedSqs) > 1) {
                 $this->result[$piece->color][] = $piece->sq;
             }
         }
