@@ -20,11 +20,15 @@ class OverloadingEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black has a slight overloading advantage.",
+            "White has a slight overloading advantage.",
         ];
 
         $expectedElaboration = [
-            "a7 and d5 are isolated pawns.",
+            "The bishop on b7 is overloaded defending more than one piece.",
+            "The knight on c7 is overloaded defending more than one piece.",
+            "Black's queen on c4 is overloaded defending more than one piece.",
+            "White's queen on d2 is overloaded defending more than one piece.",
+            "White's king on e1 is overloaded defending more than one piece.",
         ];
 
         $board = FenToBoardFactory::create('r3k2r/pbn2ppp/8/1P1pP3/P1qP4/5B2/3Q1PPP/R3K2R w KQkq -');
@@ -33,5 +37,6 @@ class OverloadingEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expectedResult, $overloadingEval->getResult());
         $this->assertSame($expectedExplanation, $overloadingEval->getExplanation());
+        $this->assertSame($expectedElaboration, $overloadingEval->getElaboration());
     }
 }

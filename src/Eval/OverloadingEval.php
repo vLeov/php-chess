@@ -2,12 +2,18 @@
 
 namespace Chess\Eval;
 
+use Chess\Tutor\PiecePhrase;
 use Chess\Variant\AbstractBoard;
+use Chess\Variant\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
-class OverloadingEval extends AbstractEval implements ExplainEvalInterface
+class OverloadingEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface,
+    InverseEvalInterface
 {
+    use ElaborateEvalTrait;
     use ExplainEvalTrait;
 
     const NAME = 'Overloading';
@@ -24,8 +30,8 @@ class OverloadingEval extends AbstractEval implements ExplainEvalInterface
         $this->range = [1, 4];
 
         $this->subject = [
-            'White',
             'Black',
+            'White',
         ];
 
         $this->observation = [
@@ -41,6 +47,7 @@ class OverloadingEval extends AbstractEval implements ExplainEvalInterface
             $defendedSqs = array_diff($piece->defendedSqs(), [$wKSq, $bKSq]);
             if (count($defendedSqs) > 1) {
                 $this->result[$piece->color][] = $piece->sq;
+                $this->elaborate($piece);
             }
         }
 
@@ -48,5 +55,12 @@ class OverloadingEval extends AbstractEval implements ExplainEvalInterface
             Color::W => count($this->result[Color::W]),
             Color::B => count($this->result[Color::B]),
         ]);
+    }
+
+    private function elaborate(AbstractPiece $piece): void
+    {
+        $phrase = PiecePhrase::create($piece);
+
+        $this->elaboration[] = ucfirst("$phrase is overloaded defending more than one piece.");
     }
 }
