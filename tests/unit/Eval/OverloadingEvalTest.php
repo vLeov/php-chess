@@ -9,29 +9,29 @@ use Chess\Variant\Classical\Board;
 
 class OverloadingEvalTest extends AbstractUnitTestCase
 {
-    public function test_start()
+    /**
+     * @test
+     */
+    public function kaufman_09()
     {
-        $expected = [
-            'w' => 0,
-            'b' => 0,
+        $expectedResult = [
+            'w' => ['d2', 'a1', 'e1', 'h1'],
+            'b' => ['a8', 'h8', 'b7', 'c7', 'c4'],
         ];
 
-        $result = (new OverloadingEval(new Board()))->getResult();
-
-        $this->assertSame($expected, $result);
-    }
-
-    public function test_both_sides_have_one_overloaded_piece()
-    {
-        $expected = [
-            'w' => 1,
-            'b' => 1,
+        $expectedExplanation = [
+            "Black has a slight overloading advantage.",
         ];
 
-        $board = FenToBoardFactory::create('6k1/1p5p/p2p4/P2nrb2/1P1N4/2P2B2/5K2/4R3 w KQkq - 0 1');
+        $expectedElaboration = [
+            "a7 and d5 are isolated pawns.",
+        ];
+
+        $board = FenToBoardFactory::create('r3k2r/pbn2ppp/8/1P1pP3/P1qP4/5B2/3Q1PPP/R3K2R w KQkq -');
+
         $overloadingEval = new OverloadingEval($board);
-        $this->assertSame($expected, $overloadingEval->getResult());
+
+        $this->assertSame($expectedResult, $overloadingEval->getResult());
+        $this->assertSame($expectedExplanation, $overloadingEval->getExplanation());
     }
 }
-
-

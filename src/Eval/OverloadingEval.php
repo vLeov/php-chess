@@ -3,7 +3,6 @@
 namespace Chess\Eval;
 
 use Chess\Variant\AbstractBoard;
-use Chess\Variant\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 class OverloadingEval extends AbstractEval implements ExplainEvalInterface
@@ -16,7 +15,12 @@ class OverloadingEval extends AbstractEval implements ExplainEvalInterface
     {
         $this->board = $board;
 
-        $this->range = [1, 5];
+        $this->result = [
+            Color::W => [],
+            Color::B => [],
+        ];
+
+        $this->range = [1, 4];
 
         $this->subject = [
             'White',
@@ -24,37 +28,20 @@ class OverloadingEval extends AbstractEval implements ExplainEvalInterface
         ];
 
         $this->observation = [
-            "has an overloaded piece",
-            "has multiple overloaded pieces",
+            "has a slight overloading advantage",
+            "has a moderate overloading advantage",
+            "has a total overloading advantage",
         ];
 
-        $this->evaluate(Color::W);
-        $this->evaluate(Color::B);
-        $this->explain($this->result);
-    }
-
-    private function evaluate(string $color): void
-    {
-        foreach ($this->board->pieces($color) as $piece) {
-            if ($this->isPieceOverloaded($piece)) {
-                $this->result[$color] += 1;
+        foreach ($this->board->pieces() as $piece) {
+            if (count($piece->defendedSqs()) > 1) {
+                $this->result[$piece->color][] = $piece->sq;
             }
         }
-    }
 
-    private function isPieceOverloaded(AbstractPiece $piece):bool
-    {
-        $defendedSquares = $piece->defendedSqs();
-        $opponentPieces = $this->board->pieces($piece->oppColor());
-        $oppMoves = [];
-        foreach ($opponentPieces as $oppPiece) {
-            if(is_array($oppPiece->moveSqs()) && !empty($oppPiece->moveSqs())){
-                $oppMoves = array_merge($oppMoves, $oppPiece->moveSqs());
-            }
-        }
-        if(count($defendedSquares) > 1 && in_array($piece->sq,$oppMoves)){
-            return true;
-        }
-        return false;
+        $this->explain([
+            Color::W => count($this->result[Color::W]),
+            Color::B => count($this->result[Color::B]),
+        ]);
     }
 }
