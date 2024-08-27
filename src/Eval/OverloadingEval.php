@@ -6,6 +6,7 @@ use Chess\Tutor\PiecePhrase;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
+use Chess\Variant\Classical\PGN\AN\Piece;
 
 class OverloadingEval extends AbstractEval implements
     ElaborateEvalInterface,
@@ -40,16 +41,18 @@ class OverloadingEval extends AbstractEval implements
         ];
 
         foreach ($this->board->pieces() as $piece) {
-            $defended = $piece->defended();
-            $countDefended = count($defended);
-            $countAttacking = 0;
-            if ($countDefended > 1) {
-                foreach ($defended as $val) {
-                    $countAttacking += count($val->attacking()) > 0;
-                }
-                if ($countAttacking === $countDefended) {
-                    $this->result[$piece->color][] = $piece->sq;
-                    $this->elaborate($piece);
+            if ($piece->id !== Piece::K) {
+                $defended = $piece->defended();
+                $countDefended = count($defended);
+                $countAttacking = 0;
+                if ($countDefended > 1) {
+                    foreach ($defended as $val) {
+                        $countAttacking += count($val->attacking()) > 0;
+                    }
+                    if ($countDefended >= $countAttacking) {
+                        $this->result[$piece->color][] = $piece->sq;
+                        $this->elaborate($piece);
+                    }
                 }
             }
         }
