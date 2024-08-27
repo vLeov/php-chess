@@ -12,11 +12,11 @@ class OverloadingEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function kaufman_09()
+    public function f7_pawn()
     {
         $expectedResult = [
-            'w' => ['d2', 'e1'],
-            'b' => ['b7', 'c7', 'c4'],
+            'w' => [],
+            'b' => ['f7'],
         ];
 
         $expectedExplanation = [
@@ -24,14 +24,10 @@ class OverloadingEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "The bishop on b7 is overloaded defending more than one piece.",
-            "The knight on c7 is overloaded defending more than one piece.",
-            "Black's queen on c4 is overloaded defending more than one piece.",
-            "White's queen on d2 is overloaded defending more than one piece.",
-            "White's king on e1 is overloaded defending more than one piece.",
+            "The pawn on f7 is overloaded defending more than one piece at the same time.",
         ];
 
-        $board = FenToBoardFactory::create('r3k2r/pbn2ppp/8/1P1pP3/P1qP4/5B2/3Q1PPP/R3K2R w KQkq -');
+        $board = FenToBoardFactory::create('6k1/5pp1/4b1n1/8/8/3BR3/5PPP/6K1 w - -');
 
         $overloadingEval = new OverloadingEval($board);
 
