@@ -13,9 +13,7 @@ class FenEvaluation extends AbstractParagraph
     public function __construct(AbstractFunction $function, AbstractBoard $board)
     {
         $this->function = $function;
-
         $this->board = $board;
-
         $this->paragraph = [
             ...(new FenExplanation($this->function, $this->board))->paragraph,
             ...(new FenElaboration($this->function, $this->board))->paragraph,

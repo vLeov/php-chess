@@ -11,7 +11,6 @@ class FenExplanation extends AbstractParagraph
     public function __construct(AbstractFunction $function, AbstractBoard $board)
     {
         $this->function = $function;
-
         $this->board = $board;
 
         foreach ($this->function->getEval() as $val) {

@@ -25,7 +25,6 @@ class SanHeuristic extends SanPlay
         parent::__construct($movetext, $board);
 
         $this->function = $function;
-
         $this->name = $name;
 
         $this->calc()->balance()->normalize(-1, 1);
