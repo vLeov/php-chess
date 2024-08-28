@@ -47,7 +47,9 @@ class OverloadingEval extends AbstractEval implements
                 $countAttacking = 0;
                 if ($countDefended > 1) {
                     foreach ($defended as $val) {
-                        $countAttacking += count($val->attacking()) > 0;
+                        if (count($val->attacking()) >= count($val->defending())) {
+                            $countAttacking += 1;
+                        }
                     }
                     if ($countAttacking >= 2) {
                         $this->result[$piece->color][] = $piece->sq;

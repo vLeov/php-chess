@@ -12,7 +12,57 @@ class OverloadingEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function f7_pawn()
+    public function c4_knight()
+    {
+        $expectedResult = [
+            'w' => [],
+            'b' => [],
+        ];
+
+        $expectedExplanation = [
+        ];
+
+        $expectedElaboration = [
+        ];
+
+        $board = FenToBoardFactory::create('3b3k/8/1R1B2r1/8/2N5/8/8/K7 w - -');
+
+        $overloadingEval = new OverloadingEval($board);
+
+        $this->assertSame($expectedResult, $overloadingEval->getResult());
+        $this->assertSame($expectedExplanation, $overloadingEval->getExplanation());
+        $this->assertSame($expectedElaboration, $overloadingEval->getElaboration());
+    }
+    
+    /**
+     * @test
+     */
+    public function d2_queen()
+    {
+        $expectedResult = [
+            'w' => [],
+            'b' => [],
+        ];
+
+        $expectedExplanation = [
+        ];
+
+        $expectedElaboration = [
+        ];
+
+        $board = FenToBoardFactory::create('r5k1/1pp3bp/2np2p1/p4qN1/2P2Pn1/1PN1R1P1/P2Q2KP/5R2 w - -');
+
+        $overloadingEval = new OverloadingEval($board);
+
+        $this->assertSame($expectedResult, $overloadingEval->getResult());
+        $this->assertSame($expectedExplanation, $overloadingEval->getExplanation());
+        $this->assertSame($expectedElaboration, $overloadingEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function overloaded_f7_pawn()
     {
         $expectedResult = [
             'w' => [],
@@ -39,7 +89,7 @@ class OverloadingEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function g7_rook()
+    public function overloaded_g7_rook()
     {
         $expectedResult = [
             'w' => [],
@@ -66,10 +116,10 @@ class OverloadingEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function d2_queen()
+    public function overloaded_c4_knight_defending_pawn_and_bishop()
     {
         $expectedResult = [
-            'w' => ['d2'],
+            'w' => ['c4'],
             'b' => [],
         ];
 
@@ -78,10 +128,37 @@ class OverloadingEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "White's queen on d2 is overloaded defending more than one piece at the same time.",
+            "The knight on c4 is overloaded defending more than one piece at the same time.",
         ];
 
-        $board = FenToBoardFactory::create('r5k1/1pp3bp/2np2p1/p4qN1/2P2Pn1/1PN1R1P1/P2Q2KP/5R2 w - -');
+        $board = FenToBoardFactory::create('3b3k/8/1P1B2r1/8/2N5/8/8/K7 w - -');
+
+        $overloadingEval = new OverloadingEval($board);
+
+        $this->assertSame($expectedResult, $overloadingEval->getResult());
+        $this->assertSame($expectedExplanation, $overloadingEval->getExplanation());
+        $this->assertSame($expectedElaboration, $overloadingEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function overloaded_c4_knight_defending_rook_and_bishop()
+    {
+        $expectedResult = [
+            'w' => ['c4'],
+            'b' => [],
+        ];
+
+        $expectedExplanation = [
+            "Black has a slight overloading advantage.",
+        ];
+
+        $expectedElaboration = [
+            "The knight on c4 is overloaded defending more than one piece at the same time.",
+        ];
+
+        $board = FenToBoardFactory::create('3b3k/8/1R1B2r1/8/2N5/3r4/8/K7 w - -');
 
         $overloadingEval = new OverloadingEval($board);
 
