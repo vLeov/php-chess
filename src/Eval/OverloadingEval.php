@@ -69,6 +69,6 @@ class OverloadingEval extends AbstractEval implements
     {
         $phrase = PiecePhrase::create($piece);
 
-        $this->elaboration[] = ucfirst("$phrase is overloaded defending more than one piece at the same time.");
+        $this->elaboration[] = ucfirst("$phrase is overloaded with defensive tasks.");
     }
 }

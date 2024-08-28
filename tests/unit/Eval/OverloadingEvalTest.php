@@ -74,7 +74,7 @@ class OverloadingEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "The pawn on f7 is overloaded defending more than one piece at the same time.",
+            "The pawn on f7 is overloaded with defensive tasks.",
         ];
 
         $board = FenToBoardFactory::create('6k1/5pp1/4b1n1/8/8/3BR3/5PPP/6K1 w - -');
@@ -101,7 +101,7 @@ class OverloadingEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "The rook on g7 is overloaded defending more than one piece at the same time.",
+            "The rook on g7 is overloaded with defensive tasks.",
         ];
 
         $board = FenToBoardFactory::create('6k1/r5r1/1p3pbp/2p5/7P/2P2P1B/1P6/R5RK w - -');
@@ -128,7 +128,7 @@ class OverloadingEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "The knight on c4 is overloaded defending more than one piece at the same time.",
+            "The knight on c4 is overloaded with defensive tasks.",
         ];
 
         $board = FenToBoardFactory::create('3b3k/8/1P1B2r1/8/2N5/8/8/K7 w - -');
@@ -155,7 +155,7 @@ class OverloadingEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedElaboration = [
-            "The knight on c4 is overloaded defending more than one piece at the same time.",
+            "The knight on c4 is overloaded with defensive tasks.",
         ];
 
         $board = FenToBoardFactory::create('3b3k/8/1R1B2r1/8/2N5/3r4/8/K7 w - -');
