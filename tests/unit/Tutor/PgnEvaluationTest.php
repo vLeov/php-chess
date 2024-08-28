@@ -3,18 +3,18 @@
 namespace Chess\Tests\Unit\Tutor;
 
 use Chess\FenToBoardFactory;
-use Chess\Function\StandardFunction;
+use Chess\Function\CompleteFunction;
 use Chess\Play\SanPlay;
 use Chess\Tutor\PgnEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
 
 class PgnEvaluationTest extends AbstractUnitTestCase
 {
-    static private StandardFunction $function;
+    static private CompleteFunction $function;
 
     public static function setUpBeforeClass(): void
     {
-        self::$function = new StandardFunction();
+        self::$function = new CompleteFunction();
     }
 
     /**

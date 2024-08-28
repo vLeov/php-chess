@@ -3,17 +3,17 @@
 namespace Chess\Tests\Unit;
 
 use Chess\EvalFactory;
-use Chess\Function\StandardFunction;
+use Chess\Function\CompleteFunction;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\FEN\StrToBoard;
 
 class EvalFactoryTest extends AbstractUnitTestCase
 {
-    static private StandardFunction $function;
+    static private CompleteFunction $function;
 
     public static function setUpBeforeClass(): void
     {
-        self::$function = new StandardFunction();
+        self::$function = new CompleteFunction();
     }
 
     /**

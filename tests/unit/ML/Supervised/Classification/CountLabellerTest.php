@@ -4,17 +4,17 @@ namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
 use Chess\FenHeuristics;
 use Chess\FenToBoardFactory;
-use Chess\Function\StandardFunction;
+use Chess\Function\CompleteFunction;
 use Chess\ML\Supervised\Classification\CountLabeller;
 use Chess\Tests\AbstractUnitTestCase;
 
 class CountLabellerTest extends AbstractUnitTestCase
 {
-    static private StandardFunction $function;
+    static private CompleteFunction $function;
 
     public static function setUpBeforeClass(): void
     {
-        self::$function = new StandardFunction();
+        self::$function = new CompleteFunction();
     }
 
     /**

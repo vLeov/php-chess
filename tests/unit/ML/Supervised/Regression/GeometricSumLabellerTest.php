@@ -3,7 +3,7 @@
 namespace Chess\Tests\Unit\ML\Supervised\Regression;
 
 use Chess\SanHeuristic;
-use Chess\Function\StandardFunction;
+use Chess\Function\CompleteFunction;
 use Chess\ML\Supervised\Regression\GeometricSumLabeller;
 use Chess\Play\SanPlay;
 use Chess\Tests\AbstractUnitTestCase;
@@ -11,11 +11,11 @@ use Chess\Variant\Classical\Board;
 
 class GeometricSumLabellerTest extends AbstractUnitTestCase
 {
-    static private StandardFunction $function;
+    static private CompleteFunction $function;
 
     public static function setUpBeforeClass(): void
     {
-        self::$function = new StandardFunction();
+        self::$function = new CompleteFunction();
     }
 
     /**

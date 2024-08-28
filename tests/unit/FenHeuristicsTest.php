@@ -4,17 +4,17 @@ namespace Chess\Tests\Unit;
 
 use Chess\FenHeuristics;
 use Chess\FenToBoardFactory;
-use Chess\Function\StandardFunction;
+use Chess\Function\CompleteFunction;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 
 class FenHeuristicsTest extends AbstractUnitTestCase
 {
-    static private StandardFunction $function;
+    static private CompleteFunction $function;
 
     public static function setUpBeforeClass(): void
     {
-        self::$function = new StandardFunction();
+        self::$function = new CompleteFunction();
     }
 
     /**

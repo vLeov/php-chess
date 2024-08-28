@@ -2,7 +2,7 @@
 
 namespace Chess\Tests\Unit\Tutor;
 
-use Chess\Function\StandardFunction;
+use Chess\Function\CompleteFunction;
 use Chess\Play\SanPlay;
 use Chess\Tutor\GoodPgnEvaluation;
 use Chess\Tests\AbstractUnitTestCase;
@@ -11,11 +11,11 @@ use Chess\UciEngine\Details\Limit;
 
 class GoodPgnEvaluationTest extends AbstractUnitTestCase
 {
-    static private StandardFunction $function;
+    static private CompleteFunction $function;
 
     public static function setUpBeforeClass(): void
     {
-        self::$function = new StandardFunction();
+        self::$function = new CompleteFunction();
     }
 
     /**

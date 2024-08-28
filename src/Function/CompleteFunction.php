@@ -33,7 +33,7 @@ use Chess\Eval\RelativePinEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqOutpostEval;
 
-class StandardFunction extends AbstractFunction
+class CompleteFunction extends AbstractFunction
 {
     protected array $eval = [
         MaterialEval::class,

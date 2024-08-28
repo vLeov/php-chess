@@ -2,10 +2,10 @@
 
 namespace Chess\Tests\Unit\Function;
 
-use Chess\Function\StandardFunction;
+use Chess\Function\CompleteFunction;
 use Chess\Tests\AbstractUnitTestCase;
 
-class StandardFunctionTest extends AbstractUnitTestCase
+class CompleteFunctionTest extends AbstractUnitTestCase
 {
     /**
      * @test
@@ -44,6 +44,6 @@ class StandardFunctionTest extends AbstractUnitTestCase
             'Overloading',
         ];
 
-        $this->assertSame($expected, (new StandardFunction())->names());
+        $this->assertSame($expected, (new CompleteFunction())->names());
     }
 }
