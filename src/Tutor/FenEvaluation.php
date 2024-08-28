@@ -3,14 +3,17 @@
 namespace Chess\Tutor;
 
 use Chess\FenHeuristics;
+use Chess\Function\AbstractFunction;
 use Chess\ML\Supervised\Classification\CountLabeller;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 class FenEvaluation extends AbstractParagraph
 {
-    public function __construct(AbstractBoard $board)
+    public function __construct(AbstractFunction $function, AbstractBoard $board)
     {
+        $this->function = $function;
+
         $this->board = $board;
 
         $this->paragraph = [

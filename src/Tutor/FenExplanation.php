@@ -8,8 +8,6 @@ use Chess\Variant\AbstractBoard;
 
 class FenExplanation extends AbstractParagraph
 {
-    protected AbstractFunction $function;
-
     public function __construct(AbstractFunction $function, AbstractBoard $board)
     {
         $this->function = $function;
