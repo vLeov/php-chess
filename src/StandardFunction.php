@@ -33,7 +33,7 @@ use Chess\Eval\RelativePinEval;
 use Chess\Eval\SpaceEval;
 use Chess\Eval\SqOutpostEval;
 
-class StandardFunction
+class StandardFunction extends AbstractFunction
 {
     protected array $eval = [
         MaterialEval::class,
@@ -66,18 +66,4 @@ class StandardFunction
         AttackEval::class,
         OverloadingEval::class,
     ];
-
-    public function getEval(): array
-    {
-        return $this->eval;
-    }
-
-    public function names(): array
-    {
-        foreach ($this->eval as $val) {
-            $names[] = (new \ReflectionClass($val))->getConstant('NAME');
-        }
-
-        return $names;
-    }
 }
