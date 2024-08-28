@@ -1,8 +1,8 @@
 <?php
 
-namespace Chess\Tests\Unit;
+namespace Chess\Tests\Unit\Function;
 
-use Chess\StandardFunction;
+use Chess\Function\StandardFunction;
 use Chess\Tests\AbstractUnitTestCase;
 
 class StandardFunctionTest extends AbstractUnitTestCase

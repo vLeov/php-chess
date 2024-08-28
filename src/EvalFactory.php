@@ -2,6 +2,7 @@
 
 namespace Chess;
 
+use Chess\Function\StandardFunction;
 use Chess\Variant\Classical\Board;
 
 class EvalFactory

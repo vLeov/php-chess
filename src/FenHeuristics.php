@@ -3,6 +3,7 @@
 namespace Chess;
 
 use Chess\Eval\InverseEvalInterface;
+use Chess\Function\StandardFunction;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chess;
+namespace Chess\Function;
 
 use Chess\Eval\AbsoluteForkEval;
 use Chess\Eval\AbsolutePinEval;
