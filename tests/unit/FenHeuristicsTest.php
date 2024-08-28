@@ -4,11 +4,19 @@ namespace Chess\Tests\Unit;
 
 use Chess\FenHeuristics;
 use Chess\FenToBoardFactory;
+use Chess\Function\StandardFunction;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Capablanca\Board as CapablancaBoard;
 
 class FenHeuristicsTest extends AbstractUnitTestCase
 {
+    static private StandardFunction $function;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$function = new StandardFunction();
+    }
+
     /**
      * @test
      */
@@ -18,7 +26,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $expected = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
@@ -34,7 +42,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $expected = [ 0.0, 12.0, -4.0, 8.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ];
 
@@ -50,7 +58,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $expected = [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ];
 
@@ -66,7 +74,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $expected = [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ];
 
@@ -82,7 +90,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $expected = [ 1.0, 9.0, -1.0, 4.0, -3.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, -5.1, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, -1.0 ];
 
@@ -98,7 +106,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $expected = [ 1.0, 5.66, -12.0, 2.0, 3.0, 4.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 1.0 ];
 
@@ -114,7 +122,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen, new CapablancaBoard());
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $expected = [ 0.0, 12.0, -3.0, 9.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ];
 

@@ -4,11 +4,19 @@ namespace Chess\Tests\Unit\ML\Supervised\Classification;
 
 use Chess\FenHeuristics;
 use Chess\FenToBoardFactory;
+use Chess\Function\StandardFunction;
 use Chess\ML\Supervised\Classification\CountLabeller;
 use Chess\Tests\AbstractUnitTestCase;
 
 class CountLabellerTest extends AbstractUnitTestCase
 {
+    static private StandardFunction $function;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$function = new StandardFunction();
+    }
+
     /**
      * @test
      */
@@ -18,7 +26,7 @@ class CountLabellerTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $label = (new CountLabeller())->label($balance);
 
@@ -39,7 +47,7 @@ class CountLabellerTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $label = (new CountLabeller())->label($balance);
 
@@ -60,7 +68,7 @@ class CountLabellerTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $label = (new CountLabeller())->label($balance);
 
@@ -81,7 +89,7 @@ class CountLabellerTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $label = (new CountLabeller())->label($balance);
 
@@ -102,7 +110,7 @@ class CountLabellerTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $label = (new CountLabeller())->label($balance);
 
@@ -123,7 +131,7 @@ class CountLabellerTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create($fen);
 
-        $balance = (new FenHeuristics($board))->getBalance();
+        $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
         $label = (new CountLabeller())->label($balance);
 

@@ -3,24 +3,24 @@
 namespace Chess;
 
 use Chess\Eval\InverseEvalInterface;
-use Chess\Function\StandardFunction;
+use Chess\Function\AbstractFunction;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\Classical\PGN\AN\Color;
 
 class FenHeuristics
 {
-    protected AbstractBoard $board;
+    protected AbstractFunction $function;
 
-    protected StandardFunction $function;
+    protected AbstractBoard $board;
 
     protected array $result;
 
     protected array $balance = [];
 
-    public function __construct(AbstractBoard $board)
+    public function __construct(AbstractFunction $function, AbstractBoard $board)
     {
+        $this->function = $function;
         $this->board = $board;
-        $this->function = new StandardFunction();
 
         $this->calc()->balance();
     }
