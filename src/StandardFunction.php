@@ -24,6 +24,7 @@ use Chess\Eval\IsolatedPawnEval;
 use Chess\Eval\KingSafetyEval;
 use Chess\Eval\KnightOutpostEval;
 use Chess\Eval\MaterialEval;
+use Chess\Eval\OverloadingEval;
 use Chess\Eval\PassedPawnEval;
 use Chess\Eval\PressureEval;
 use Chess\Eval\ProtectionEval;
@@ -63,6 +64,7 @@ class StandardFunction
         DiagonalOppositionEval::class,
         DirectOppositionEval::class,
         AttackEval::class,
+        OverloadingEval::class,
     ];
 
     public function getEval(): array

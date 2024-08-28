@@ -21,8 +21,10 @@ class GoodPgnEvaluationTest extends AbstractUnitTestCase
             "The black player is pressuring a little bit more squares than its opponent.",
             "The black pieces are timidly approaching the other side's king.",
             "Black has a total relative pin advantage.",
+            "Black has a slight overloading advantage.",
             "The knight on e2 is pinned shielding a piece that is more valuable than the attacking piece.",
-            "Overall, 4 heuristic evaluation features are favoring White while 8 are favoring Black.",
+            "The bishop on f1 is overloaded defending more than one piece at the same time.",
+            "Overall, 4 heuristic evaluation features are favoring White while 9 are favoring Black.",
         ];
 
         $limit = new Limit();
