@@ -3,12 +3,20 @@
 namespace Chess\Tests\Unit;
 
 use Chess\SanHeuristic;
+use Chess\Function\StandardFunction;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\Classical\Board;
 use Chess\Variant\Classical\FEN\StrToBoard;
 
 class SanHeuristicTest extends AbstractUnitTestCase
 {
+    static private StandardFunction $function;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$function = new StandardFunction();
+    }
+
     /**
      * @test
      */
@@ -18,7 +26,7 @@ class SanHeuristicTest extends AbstractUnitTestCase
 
         $movetext = '1.e4 d5 2.exd5 Qxd5';
 
-        $balance = (new SanHeuristic($name, $movetext))->getBalance();
+        $balance = (new SanHeuristic(self::$function, $name, $movetext))->getBalance();
 
         $expected = [ 0, 1.0, 0.25, 0.50, -1.0 ];
 
@@ -38,7 +46,7 @@ class SanHeuristicTest extends AbstractUnitTestCase
         $board->playLan('b', 'f8g7');
         $board->playLan('w', 'e2e4');
 
-        $balance = (new SanHeuristic($name, $board->movetext()))->getBalance();
+        $balance = (new SanHeuristic(self::$function, $name, $board->movetext()))->getBalance();
 
         $expected = [ 0, 1.0 ];
 
