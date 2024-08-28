@@ -17,15 +17,15 @@ class FenEvaluation extends AbstractParagraph
         $this->board = $board;
 
         $this->paragraph = [
-            ...(new FenExplanation($this->board))->paragraph,
-            ...(new FenElaboration($this->board))->paragraph,
+            ...(new FenExplanation($this->function, $this->board))->paragraph,
+            ...(new FenElaboration($this->function, $this->board))->paragraph,
             ...$this->evaluate(),
         ];
     }
 
     private function evaluate(): array
     {
-        $balance = (new FenHeuristics($this->board))->getBalance();
+        $balance = (new FenHeuristics($this->function, $this->board))->getBalance();
         $label = (new CountLabeller())->label($balance);
         $evaluation = "Overall, {$label[Color::W]} {$this->noun($label[Color::W])} {$this->verb($label[Color::W])} favoring White while {$label[Color::B]} {$this->verb($label[Color::B])} favoring Black.";
 

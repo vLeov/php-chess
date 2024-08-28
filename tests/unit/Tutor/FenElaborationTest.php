@@ -10,6 +10,13 @@ use Chess\Variant\Capablanca\Board as CapablancaBoard;
 
 class FenElaborationTest extends AbstractUnitTestCase
 {
+    static private StandardFunction $function;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$function = new StandardFunction();
+    }
+
     /**
      * @test
      */
@@ -20,7 +27,7 @@ class FenElaborationTest extends AbstractUnitTestCase
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
         $board = (new SanPlay($A08))->validate()->board;
 
-        $paragraph = (new FenElaboration($board))->paragraph;
+        $paragraph = (new FenElaboration(self::$function, $board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }
@@ -36,7 +43,7 @@ class FenElaborationTest extends AbstractUnitTestCase
 
         $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
-        $paragraph = (new FenElaboration($board))->paragraph;
+        $paragraph = (new FenElaboration(self::$function, $board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }
@@ -53,7 +60,7 @@ class FenElaborationTest extends AbstractUnitTestCase
             new CapablancaBoard()
         );
 
-        $paragraph = (new FenElaboration($board))->paragraph;
+        $paragraph = (new FenElaboration(self::$function, $board))->paragraph;
 
         $this->assertSame($expected, $paragraph);
     }

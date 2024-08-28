@@ -3,16 +3,18 @@
 namespace Chess\Tutor;
 
 use Chess\Eval\ElaborateEvalInterface;
-use Chess\Function\StandardFunction;
+use Chess\Function\AbstractFunction;
 use Chess\Variant\AbstractBoard;
 
 class FenElaboration extends AbstractParagraph
 {
-    public function __construct(AbstractBoard $board)
+    public function __construct(AbstractFunction $function, AbstractBoard $board)
     {
+        $this->function = $function;
+
         $this->board = $board;
 
-        foreach ((new StandardFunction())->getEval() as $val) {
+        foreach ($this->function->getEval() as $val) {
             $eval = new $val($this->board);
             if (is_a($eval, ElaborateEvalInterface::class)) {
                 if ($phrases = $eval->getElaboration()) {
