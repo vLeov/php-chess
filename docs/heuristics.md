@@ -48,15 +48,17 @@ The evaluation features are used in two heuristics classes: [Chess\FenHeuristics
 ```php
 use Chess\FenHeuristics;
 use Chess\FenToBoardFactory;
-use Chess\StandardFunction;
+use Chess\Function\CompleteFunction;
+
+$function = new CompleteFunction();
 
 $fen = 'rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -';
 
 $board = FenToBoardFactory::create($fen);
 
 $result = [
-    'names' => (new StandardFunction())->names(),
-    'balance' => (new FenHeuristics($board))->getBalance(),
+    'names' => $function->names(),
+    'balance' => (new FenHeuristics($function, $board))->getBalance(),
 ];
 
 print_r($result);
@@ -95,6 +97,7 @@ Array
             [25] => Diagonal opposition
             [26] => Direct opposition
             [27] => Attack
+            [28] => Overloading
         )
 
     [balance] => Array
@@ -127,6 +130,7 @@ Array
             [25] => 0
             [26] => 0
             [27] => 0
+            [28] => 0
         )
 
 )
@@ -136,12 +140,15 @@ A chess game can be plotted in terms of balance. +1 is the best possible evaluat
 
 ```php
 use Chess\SanHeuristic;
+use Chess\Function\CompleteFunction;
+
+$function = new CompleteFunction();
 
 $name = 'Space';
 
 $movetext = '1.e4 d5 2.exd5 Qxd5';
 
-$balance = (new SanHeuristic($name, $movetext))->getBalance();
+$balance = (new SanHeuristic($function, $name, $movetext))->getBalance();
 
 print_r($balance);
 ```

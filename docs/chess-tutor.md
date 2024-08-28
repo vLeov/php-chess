@@ -8,11 +8,14 @@
 
 ```php
 use Chess\FenToBoardFactory;
+use Chess\Function\CompleteFunction;
 use Chess\Tutor\FenEvaluation;
+
+$function = new CompleteFunction();
 
 $board = FenToBoardFactory::create('8/5k2/4n3/8/8/1BK5/1B6/8 w - - 0 1');
 
-$paragraph = (new FenEvaluation($board))->paragraph;
+$paragraph = (new FenEvaluation($function, $board))->paragraph;
 
 $text = implode(' ', $paragraph);
 
@@ -34,16 +37,18 @@ A heuristic evaluation is a quick numerical estimate of a chess position that su
 [Chess\Tutor\PgnEvaluation](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Tutor/PgnEvaluationTest.php) explains how a particular move changes the position.
 
 ```php
+use Chess\Function\CompleteFunction;
 use Chess\Play\SanPlay;
 use Chess\Tutor\PgnEvaluation;
 
 $pgn = 'd4';
 
-$movetext = '1.Nf3 d5 2.g3 c5';
+$function = new CompleteFunction();
 
+$movetext = '1.Nf3 d5 2.g3 c5';
 $board = (new SanPlay($movetext))->validate()->board;
 
-$paragraph = (new PgnEvaluation($pgn, $board))->paragraph;
+$paragraph = (new PgnEvaluation($pgn, $function, $board))->paragraph;
 
 $text = implode(' ', $paragraph);
 
@@ -63,19 +68,23 @@ The resulting text may sound a little robotic but it can be easily rephrased by 
 With the help of an UCI engine [Chess\Tutor\GoodPgnEvaluation](https://github.com/chesslablab/php-chess/blob/main/tests/unit/Tutor/GoodPgnEvaluationTest.php) can explain the why of a good move.
 
 ```php
+use Chess\Function\CompleteFunction;
 use Chess\Play\SanPlay;
 use Chess\Tutor\GoodPgnEvaluation;
 use Chess\UciEngine\UciEngine;
 use Chess\UciEngine\Details\Limit;
 
-$movetext = '1.d4 d5 2.c4 Nc6 3.cxd5 Qxd5 4.e3 e5 5.Nc3 Bb4 6.Bd2 Bxc3 7.Bxc3 exd4 8.Ne2';
-
 $limit = new Limit();
 $limit->depth = 12;
+
 $stockfish = new UciEngine('/usr/games/stockfish');
+
+$function = new CompleteFunction();
+
+$movetext = '1.d4 d5 2.c4 Nc6 3.cxd5 Qxd5 4.e3 e5 5.Nc3 Bb4 6.Bd2 Bxc3 7.Bxc3 exd4 8.Ne2';
 $board = (new SanPlay($movetext))->validate()->board;
 
-$goodPgnEvaluation = new GoodPgnEvaluation($limit, $stockfish, $board);
+$goodPgnEvaluation = new GoodPgnEvaluation($limit, $stockfish, $function, $board);
 
 $pgn = $goodPgnEvaluation->pgn;
 $paragraph = implode(' ', $goodPgnEvaluation->paragraph);
@@ -86,7 +95,7 @@ echo $paragraph . PHP_EOL;
 
 ```text
 Bg4
-The black player is pressuring a little bit more squares than its opponent. The black pieces are timidly approaching the other side's king. Black has a total relative pin advantage. The knight on e2 is pinned shielding a piece that is more valuable than the attacking piece. Overall, 4 heuristic evaluation features are favoring White while 8 are favoring Black.
+The black player is pressuring a little bit more squares than its opponent. The black pieces are timidly approaching the other side's king. Black has a total relative pin advantage. Black has a slight overloading advantage. The knight on e2 is pinned shielding a piece that is more valuable than the attacking piece. The bishop on f1 is overloaded defending more than one piece at the same time. Overall, 4 heuristic evaluation features are favoring White while 9 are favoring Black.
 ```
 
 🎉 Let's do this!
