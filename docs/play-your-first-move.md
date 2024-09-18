@@ -1,4 +1,4 @@
-# Getting Started
+# Play Your First Move
 
 ✨ Some familiarity with chess terms and concepts is required but if you're new to chess this tutorial will guide you through how to easily create amazing apps with PHP Chess. Happy coding and learning!
 
