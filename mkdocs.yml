@@ -1,7 +1,7 @@
 site_name: PHP Chess
 site_url: https://chesslablab.github.io/php-chess/
 theme:
-  name: readthedocs
+  name: mkdocs
 nav:
   - Home: index.md
   - Installation: installation.md
