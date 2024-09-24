@@ -27,6 +27,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "Black has a slightly better control of the center.",
             "The white pieces are totally better connected.",
             "Black has a moderate space advantage.",
+            "The black player has a back-rank checkmate advantage.",
         ];
 
         $A08 = file_get_contents(self::DATA_FOLDER.'/sample/A08.pgn');
@@ -47,6 +48,7 @@ class FenExplanationTest extends AbstractUnitTestCase
             "The black pieces are totally better connected.",
             "White has a total space advantage.",
             "The white player is pressuring a little bit more squares than its opponent.",
+            "The white player has a back-rank checkmate advantage.",
         ];
 
         $board = FenToBoardFactory::create(
