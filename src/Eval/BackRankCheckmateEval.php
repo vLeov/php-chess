@@ -35,12 +35,12 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
         $this->range = [1];
 
         $this->subject = [
-            'The white player',
-            'The black player',
+            'Black',
+            'White',
         ];
 
         $this->observation = [
-            "has a back-rank checkmate advantage",
+            "should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats",
         ];
 
         $wKing = $this->board->piece(Color::W, Piece::K);

@@ -19,7 +19,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "The white player has a back-rank checkmate advantage.",
+            "Black should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats.",
         ];
 
         $board = FenToBoardFactory::create('R5k1/5ppp/4p3/1r6/6P1/3R1P2/4P1P1/4K3 b KQkq - 0 1');
@@ -40,7 +40,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "The black player has a back-rank checkmate advantage.",
+            "White should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats.",
         ];
 
         $board = FenToBoardFactory::create('3r4/k7/8/8/8/8/5PPP/6K1 w - -');
@@ -61,7 +61,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "The white player has a back-rank checkmate advantage.",
+            "Black should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats.",
         ];
 
         $board = FenToBoardFactory::create('4k3/3ppp2/8/8/8/8/6K1/7R b - -');
