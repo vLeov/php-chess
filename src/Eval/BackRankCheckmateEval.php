@@ -86,7 +86,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
      */
     private function isBlocked(AbstractPiece $king): bool
     {
-        if ($this->isOnCorner($king)) {
+        if ($this->isOnBackRankCorner($king)) {
             return $this->countBlockingPawns($king) === 2;
         }
 
@@ -99,7 +99,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
      * @param \Chess\Variant\AbstractPiece $king
      * @return bool
      */
-    private function isOnCorner(AbstractPiece $king): bool
+    private function isOnBackRankCorner(AbstractPiece $king): bool
     {
         if ($king->color === Color::W) {
             return
@@ -152,6 +152,34 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
     {
         foreach ($this->board->pieces($king->oppColor()) as $piece) {
             if ($piece->id === Piece::R || $piece->id === Piece::Q) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns true if there is a back-rank threat.
+     *
+     * @param \Chess\Variant\AbstractPiece $king
+     * @return bool
+     */
+    private function isThreat(AbstractPiece $king): bool
+    {
+        $escape = 0;
+        foreach ($king->moveSqs() as $sq) {
+            $escape += (int) $this->isDefendableSq($sq);
+        }
+
+        return $escape === count($king->MoveSqs());
+    }
+
+    private function isDefendableSq(string $sq)
+    {
+        $clone = $this->board->clone();
+        foreach ($clone->pieces($clone->turn) as $piece) {
+            if (in_array($sq, $piece->moveSqs())) {
                 return true;
             }
         }
