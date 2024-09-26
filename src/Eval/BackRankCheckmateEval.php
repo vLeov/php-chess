@@ -198,6 +198,6 @@ class BackRankCheckmateEval extends AbstractEval implements
     {
         $phrase = PiecePhrase::create($king);
 
-        $this->elaboration[] = "One of the pawns in front of {$phrase} should be moved as long as there is a need to be guarded against back-rank threats.";
+        $this->elaboration[] = "{$phrase} may soon need to be guarded against back-rank threats.";
     }
 }
