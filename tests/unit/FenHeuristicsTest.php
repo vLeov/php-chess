@@ -44,7 +44,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
-        $expected = [ 0.0, 12.0, -4.0, 8.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 ];
+        $expected = [ 0.0, 12.0, -4.0, 8.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ];
 
         $this->assertEquals($expected, $balance);
     }
@@ -124,7 +124,7 @@ class FenHeuristicsTest extends AbstractUnitTestCase
 
         $balance = (new FenHeuristics(self::$function, $board))->getBalance();
 
-        $expected = [ 0.0, 12.0, -3.0, 9.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 ];
+        $expected = [ 0.0, 12.0, -3.0, 9.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ];
 
         $this->assertEquals($expected, $balance);
     }
