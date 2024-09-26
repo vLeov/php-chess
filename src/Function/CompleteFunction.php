@@ -7,7 +7,7 @@ use Chess\Eval\AbsolutePinEval;
 use Chess\Eval\AbsoluteSkewerEval;
 use Chess\Eval\AdvancedPawnEval;
 use Chess\Eval\AttackEval;
-use Chess\Eval\BackRankCheckmateEval;
+use Chess\Eval\BackRankThreatEval;
 use Chess\Eval\BackwardPawnEval;
 use Chess\Eval\BadBishopEval;
 use Chess\Eval\BishopOutpostEval;
@@ -66,6 +66,6 @@ class CompleteFunction extends AbstractFunction
         DirectOppositionEval::class,
         AttackEval::class,
         OverloadingEval::class,
-        BackRankCheckmateEval::class,
+        BackRankThreatEval::class,
     ];
 }

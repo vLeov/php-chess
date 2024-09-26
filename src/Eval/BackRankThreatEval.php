@@ -15,7 +15,7 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * opponent's back rank. The mated king is unable to move up the board because
  * it is blocked by friendly pawns on the second rank.
  */
-class BackRankCheckmateEval extends AbstractEval implements
+class BackRankThreatEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
 {
@@ -27,7 +27,7 @@ class BackRankCheckmateEval extends AbstractEval implements
      *
      * @var string
      */
-    const NAME = 'Back-rank checkmate';
+    const NAME = 'Back-rank threat';
 
     /**
      * @param \Chess\Variant\AbstractBoard $board
