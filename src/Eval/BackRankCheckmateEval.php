@@ -101,27 +101,12 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
      */
     private function isOnBackRankCornerSq(AbstractPiece $king): bool
     {
+        $corner = $this->board->square->corner();
         if ($king->color === Color::W) {
-            return
-                $king->sq === $this->board->square->toAlgebraic(
-                    0,
-                    0
-                ) ||
-                $king->sq === $this->board->square->toAlgebraic(
-                    $this->board->square::SIZE['files'] - 1,
-                    0
-                );
+            return $king->sq === $corner[0] || $king->sq === $corner[1];
         }
 
-        return
-            $king->sq === $this->board->square->toAlgebraic(
-                0,
-                $this->board->square::SIZE['ranks'] - 1
-            ) ||
-            $king->sq === $this->board->square->toAlgebraic(
-                $this->board->square::SIZE['files'] - 1,
-                $this->board->square::SIZE['ranks'] - 1
-            );
+        return $king->sq === $corner[2] || $king->sq === $corner[3];
     }
 
     /**
