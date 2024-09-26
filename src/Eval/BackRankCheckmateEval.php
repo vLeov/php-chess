@@ -157,14 +157,20 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
         $escape = 1;
         foreach ($king->moveSqs() as $sq) {
             if (!in_array($sq, $this->board->square->corner())) {
-                $escape *= (int) $this->isDefendableSq($sq);
+                $escape *= (int) $this->isDefendedSq($sq);
             }
         }
 
         return (bool) !$escape;
     }
 
-    private function isDefendableSq(string $sq)
+    /**
+     * Returns true if the square is being defended.
+     *
+     * @param string $sq
+     * @return bool
+     */
+    private function isDefendedSq(string $sq): bool
     {
         $clone = $this->board->clone();
         foreach ($clone->pieces($clone->turn) as $piece) {
