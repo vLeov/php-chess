@@ -22,7 +22,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
             "Black should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats.",
         ];
 
-        $board = FenToBoardFactory::create('R5k1/5ppp/4p3/1r6/6P1/3R1P2/4P1P1/4K3 b KQkq - 0 1');
+        $board = FenToBoardFactory::create('6k1/R4ppp/4p3/1r6/6P1/3R1P2/4P1P1/4K3 b KQkq -');
         $backRankEval = new BackRankCheckmateEval($board);
 
         $this->assertSame($expectedResult, $backRankEval->getResult());
