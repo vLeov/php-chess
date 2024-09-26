@@ -19,7 +19,11 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats.",
+            "White has a back-rank checkmate advantage.",
+        ];
+
+        $expectedElaboration = [
+            "One of the pawns in front of Black's king on g8 should be moved as long as there is a need to be guarded against back-rank threats.",
         ];
 
         $board = FenToBoardFactory::create('6k1/R4ppp/4p3/1r6/6P1/3R1P2/4P1P1/4K3 b KQkq -');
@@ -27,6 +31,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expectedResult, $backRankEval->getResult());
         $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
     }
 
     /**
@@ -40,7 +45,11 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "White should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats.",
+            "Black has a back-rank checkmate advantage.",
+        ];
+
+        $expectedElaboration = [
+            "One of the pawns in front of White's king on g1 should be moved as long as there is a need to be guarded against back-rank threats.",
         ];
 
         $board = FenToBoardFactory::create('3r4/k7/8/8/8/8/5PPP/6K1 w - -');
@@ -48,6 +57,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expectedResult, $backRankEval->getResult());
         $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
     }
 
     /**
@@ -61,7 +71,11 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         ];
 
         $expectedExplanation = [
-            "Black should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats.",
+            "White has a back-rank checkmate advantage.",
+        ];
+
+        $expectedElaboration = [
+            "One of the pawns in front of Black's king on e8 should be moved as long as there is a need to be guarded against back-rank threats.",
         ];
 
         $board = FenToBoardFactory::create('4k3/3ppp2/8/8/8/8/6K1/7R b - -');
@@ -69,6 +83,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
 
         $this->assertSame($expectedResult, $backRankEval->getResult());
         $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
     }
 
     /**
@@ -84,11 +99,17 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         $expectedExplanation = [
         ];
 
+        $expectedElaboration = [
+            "One of the pawns in front of Black's king on e8 should be moved as long as there is a need to be guarded against back-rank threats.",
+            "One of the pawns in front of White's king on b1 should be moved as long as there is a need to be guarded against back-rank threats.",
+        ];
+
         $board = FenToBoardFactory::create('4k3/3ppp2/8/8/6q1/8/PPP4R/1K6 w - -');
         $backRankEval = new BackRankCheckmateEval($board);
 
         $this->assertSame($expectedResult, $backRankEval->getResult());
         $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
     }
 
     /**
@@ -104,10 +125,14 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         $expectedExplanation = [
         ];
 
+        $expectedElaboration = [
+        ];
+
         $board = FenToBoardFactory::create('4k3/3ppp2/8/8/8/8/6K1/7N b - -');
         $backRankEval = new BackRankCheckmateEval($board);
 
         $this->assertSame($expectedResult, $backRankEval->getResult());
         $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
     }
 }

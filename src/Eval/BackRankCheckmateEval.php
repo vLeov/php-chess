@@ -2,6 +2,7 @@
 
 namespace Chess\Eval;
 
+use Chess\Tutor\PiecePhrase;
 use Chess\Variant\AbstractBoard;
 use Chess\Variant\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Color;
@@ -14,8 +15,11 @@ use Chess\Variant\Classical\PGN\AN\Piece;
  * opponent's back rank. The mated king is unable to move up the board because
  * it is blocked by friendly pawns on the second rank.
  */
-class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
+class BackRankCheckmateEval extends AbstractEval implements
+    ElaborateEvalInterface,
+    ExplainEvalInterface
 {
+    use ElaborateEvalTrait;
     use ExplainEvalTrait;
 
     /**
@@ -35,12 +39,12 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
         $this->range = [1];
 
         $this->subject = [
-            'Black',
             'White',
+            'Black',
         ];
 
         $this->observation = [
-            "should move one of the pawns in front of the king as long as there is a need to be guarded against back-rank threats",
+            "has a back-rank checkmate advantage",
         ];
 
         $wKing = $this->board->piece(Color::W, Piece::K);
@@ -52,6 +56,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
             $this->isThreatened($bKing)
         ) {
             $this->result[Color::W] = 1;
+            $this->elaborate($bKing);
         }
 
         if ($this->isOnBackRank($wKing) &&
@@ -60,6 +65,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
             $this->isThreatened($wKing)
         ) {
             $this->result[Color::B] = 1;
+            $this->elaborate($wKing);
         }
 
         $this->explain($this->result);
@@ -180,5 +186,17 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
         }
 
         return false;
+    }
+
+    /**
+     * Elaborate on the evaluation.
+     *
+     * @param \Chess\Variant\AbstractPiece $king
+     */
+    private function elaborate(AbstractPiece $king): void
+    {
+        $phrase = PiecePhrase::create($king);
+
+        $this->elaboration[] = "One of the pawns in front of {$phrase} should be moved as long as there is a need to be guarded against back-rank threats.";
     }
 }
