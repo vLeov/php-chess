@@ -86,7 +86,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
      */
     private function isBlocked(AbstractPiece $king): bool
     {
-        if ($this->isOnBackRankCorner($king)) {
+        if ($this->isOnBackRankCornerSq($king)) {
             return $this->countBlockingPawns($king) === 2;
         }
 
@@ -99,7 +99,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
      * @param \Chess\Variant\AbstractPiece $king
      * @return bool
      */
-    private function isOnBackRankCorner(AbstractPiece $king): bool
+    private function isOnBackRankCornerSq(AbstractPiece $king): bool
     {
         if ($king->color === Color::W) {
             return
