@@ -115,7 +115,7 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
     /**
      * @test
      */
-    public function no_checkmate()
+    public function is_not_deliverable()
     {
         $expectedResult = [
             'w' => 0,
@@ -229,6 +229,30 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         ];
 
         $board = FenToBoardFactory::create('4r3/4k3/8/8/B7/8/3PPP2/4K3 b - -');
+        $backRankEval = new BackRankCheckmateEval($board);
+
+        $this->assertSame($expectedResult, $backRankEval->getResult());
+        $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function guarded_king()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [
+        ];
+
+        $expectedElaboration = [
+        ];
+
+        $board = FenToBoardFactory::create('4r3/4k3/8/8/B7/6N1/3PPP2/4K3 b - -');
         $backRankEval = new BackRankCheckmateEval($board);
 
         $this->assertSame($expectedResult, $backRankEval->getResult());
