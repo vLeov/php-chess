@@ -164,9 +164,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
     {
         $clone = $this->board->clone();
         foreach ($clone->pieces($clone->turn) as $piece) {
-            if (in_array($sq, $piece->moveSqs())) {
-                return true;
-            }
+            return in_array($sq, $piece->moveSqs());
         }
 
         return false;
