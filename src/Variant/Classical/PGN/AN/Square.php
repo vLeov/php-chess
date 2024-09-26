@@ -55,6 +55,16 @@ class Square extends AbstractNotation
          return $all;
      }
 
+     public function corner(): array
+     {
+        return [
+            $this->toAlgebraic(0, 0),
+            $this->toAlgebraic(static::SIZE['files'] - 1, 0),
+            $this->toAlgebraic(0, static::SIZE['ranks'] - 1),
+            $this->toAlgebraic(static::SIZE['files'] - 1, static::SIZE['ranks'] - 1),
+        ];
+     }
+
      public function toIndex(string $sq): array
      {
          $j = ord($sq[0]) - 97;
