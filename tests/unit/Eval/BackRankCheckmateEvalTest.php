@@ -135,4 +135,52 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
         $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
     }
+
+    /**
+     * @test
+     */
+    public function A40()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [
+        ];
+
+        $expectedElaboration = [
+        ];
+
+        $board = FenToBoardFactory::create('rnbqk2r/ppppppbp/5np1/8/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq -');
+        $backRankEval = new BackRankCheckmateEval($board);
+
+        $this->assertSame($expectedResult, $backRankEval->getResult());
+        $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
+    }
+
+    /**
+     * @test
+     */
+    public function e4()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 0,
+        ];
+
+        $expectedExplanation = [
+        ];
+
+        $expectedElaboration = [
+        ];
+
+        $board = FenToBoardFactory::create('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -');
+        $backRankEval = new BackRankCheckmateEval($board);
+
+        $this->assertSame($expectedResult, $backRankEval->getResult());
+        $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
+    }
 }

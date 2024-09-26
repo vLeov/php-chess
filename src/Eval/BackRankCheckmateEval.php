@@ -153,35 +153,36 @@ class BackRankCheckmateEval extends AbstractEval implements
     }
 
     /**
-     * Returns true if there is a back-rank threat.
+     * Returns true if the king is being threatened.
      *
      * @param \Chess\Variant\AbstractPiece $king
      * @return bool
      */
     private function isThreatened(AbstractPiece $king): bool
     {
-        $escape = 1;
+        $isSafe = 1;
         foreach ($king->moveSqs() as $sq) {
             if (!in_array($sq, $this->board->square->corner())) {
-                $escape *= (int) $this->isDefendedSq($sq);
+                $isSafe *= (int) $this->isDefendedSq($king, $sq);
             }
         }
 
-        return (bool) !$escape;
+        return $isSafe !== 1;
     }
 
     /**
-     * Returns true if the square is being defended.
+     * Returns true if the square adjacent to the king is defended.
      *
      * @param string $sq
      * @return bool
      */
-    private function isDefendedSq(string $sq): bool
+    private function isDefendedSq($king, string $sq): bool
     {
-        $clone = $this->board->clone();
-        foreach ($clone->pieces($clone->turn) as $piece) {
-            if (in_array($sq, $piece->defendedSqs())) {
-                return true;
+        foreach ($this->board->pieces($king->color) as $piece) {
+            if ($piece->id !== Piece::K) {
+                if (in_array($sq, $piece->moveSqs())) {
+                    return true;
+                }
             }
         }
 
