@@ -209,4 +209,30 @@ class BackRankCheckmateEvalTest extends AbstractUnitTestCase
         $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
         $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
     }
+
+    /**
+     * @test
+     */
+    public function h1_checkmate()
+    {
+        $expectedResult = [
+            'w' => 0,
+            'b' => 1,
+        ];
+
+        $expectedExplanation = [
+            "Black has a back-rank checkmate advantage.",
+        ];
+
+        $expectedElaboration = [
+            "One of the pawns in front of White's king on e1 should be moved as long as there is a need to be guarded against back-rank threats.",
+        ];
+
+        $board = FenToBoardFactory::create('4r3/4k3/8/8/B7/8/3PPP2/4K3 b - -');
+        $backRankEval = new BackRankCheckmateEval($board);
+
+        $this->assertSame($expectedResult, $backRankEval->getResult());
+        $this->assertSame($expectedExplanation, $backRankEval->getExplanation());
+        $this->assertSame($expectedElaboration, $backRankEval->getElaboration());
+    }
 }
