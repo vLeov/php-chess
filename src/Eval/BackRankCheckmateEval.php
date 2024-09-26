@@ -48,14 +48,16 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
 
         if ($this->isOnBackRank($bKing) &&
             $this->isBlocked($bKing) &&
-            $this->isDeliverable($bKing)
+            $this->isDeliverable($bKing) &&
+            $this->isThreatened($bKing)
         ) {
             $this->result[Color::W] = 1;
         }
 
         if ($this->isOnBackRank($wKing) &&
             $this->isBlocked($wKing) &&
-            $this->isDeliverable($wKing)
+            $this->isDeliverable($wKing) &&
+            $this->isThreatened($wKing)
         ) {
             $this->result[Color::B] = 1;
         }
@@ -154,7 +156,9 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
     {
         $escape = 0;
         foreach ($king->moveSqs() as $sq) {
-            $escape += (int) $this->isDefendableSq($sq);
+            if (!in_array($sq, $this->board->square->corner())) {
+                $escape += (int) $this->isDefendableSq($sq);
+            }
         }
 
         return $escape === count($king->MoveSqs());
