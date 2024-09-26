@@ -165,7 +165,7 @@ class BackRankCheckmateEval extends AbstractEval implements ExplainEvalInterface
      * @param \Chess\Variant\AbstractPiece $king
      * @return bool
      */
-    private function isThreat(AbstractPiece $king): bool
+    private function isThreatened(AbstractPiece $king): bool
     {
         $escape = 0;
         foreach ($king->moveSqs() as $sq) {
