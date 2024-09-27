@@ -227,9 +227,7 @@ abstract class AbstractBoard extends \SplObjectStorage
         if ($piece->move['isCapture']) {
             $this->capture($piece);
         }
-        if ($toDetach = $this->pieceBySq($piece->sq)) {
-            $this->detach($toDetach);
-        }
+        $this->detach($this->pieceBySq($piece->sq));
         $class = VariantType::getClass($this->pieceVariant, $piece->id);
         $this->attach(new $class(
             $piece->color,
