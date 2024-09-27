@@ -43,6 +43,7 @@ class CompleteFunctionTest extends AbstractUnitTestCase
             'Attack',
             'Overloading',
             'Back-rank threat',
+            'Checkability',
         ];
 
         $this->assertSame($expected, (new CompleteFunction())->names());

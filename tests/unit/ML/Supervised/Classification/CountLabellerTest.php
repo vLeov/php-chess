@@ -115,7 +115,7 @@ class CountLabellerTest extends AbstractUnitTestCase
         $label = (new CountLabeller())->label($balance);
 
         $expected = [
-            'w' => 6,
+            'w' => 7,
             'b' => 4,
         ];
 
@@ -136,7 +136,7 @@ class CountLabellerTest extends AbstractUnitTestCase
         $label = (new CountLabeller())->label($balance);
 
         $expected = [
-            'w' => 6,
+            'w' => 7,
             'b' => 3,
         ];
 
