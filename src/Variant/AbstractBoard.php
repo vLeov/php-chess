@@ -470,9 +470,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     {
         $clone = $this->clone();
         if ($clone->move($piece)) {
-            if ($king = $clone->piece($piece->color, Piece::K)) {
-                return !empty($king->attacking());
-            }
+            return !empty($clone->piece($piece->color, Piece::K)?->attacking());
         }
 
         return false;
