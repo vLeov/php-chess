@@ -123,18 +123,13 @@ abstract class AbstractPiece
 
     public function isPinned(): bool
     {
-        $king = $this->board->piece($this->color, Piece::K);
-        $clone = $this->board->clone();
-        $clone->detach($clone->pieceBySq($this->sq));
-        $clone->refresh();
-        $newKing = $clone->piece($this->color, Piece::K);
-        $diffPieces = $this->board->diffPieces($king->attacking(), $newKing->attacking());
-        foreach ($diffPieces as $diffPiece) {
-            if ($diffPiece->color !== $king->color) {
-                return true;
-            }
-        }
+        $before = $this->board->piece($this->color, Piece::K)->attacking();
+        $this->board->detach($this);
+        $this->board->refresh();
+        $after = $this->board->piece($this->color, Piece::K)->attacking();
+        $this->board->attach($this);
+        $this->board->refresh();
 
-        return false;
+        return !empty($this->board->diffPieces($before, $after));
     }
 }
