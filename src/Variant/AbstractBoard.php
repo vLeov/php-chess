@@ -722,7 +722,20 @@ abstract class AbstractBoard extends \SplObjectStorage
 
     public function isStalemate(): bool
     {
-        return $this->isTrapped() && !$this->isCheck();
+        if (!$this->piece($this->turn, Piece::K)->attacking()) {
+            $moveSqs = [];
+            foreach ($this->pieces($this->turn) as $piece) {
+                if (!$piece->isPinned()) {
+                    $moveSqs = [
+                        ...$moveSqs,
+                        ...$piece->moveSqs(),
+                    ];
+                }
+            }
+            return $moveSqs === [];
+        }
+
+        return false;
     }
 
     public function isFivefoldRepetition(): bool

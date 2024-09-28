@@ -107,6 +107,19 @@ class Board extends AbstractBoard
         return false;
     }
 
+    public function isStalemate(): bool
+    {
+        $moveSqs = [];
+        foreach ($this->pieces($this->turn) as $piece) {
+            $moveSqs = [
+                ...$moveSqs,
+                ...$piece->moveSqs(),
+            ];
+        }
+
+        return $moveSqs === [];
+    }
+
     public function doesWin(): bool
     {
         return count($this->pieces($this->turn)) === 0 || $this->isStalemate();
