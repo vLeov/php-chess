@@ -92,25 +92,22 @@ class Board extends AbstractBoard
 
     public function isStalemate(): bool
     {
-        if (Color::W === $this->turn) {
-            return $this->isTrapped() && !$this->isCheck() && !$this->doesWin();
+        if (!$this->doesWin()) {
+            $moveSqs = [];
+            foreach ($this->pieces($this->turn) as $piece) {
+                $moveSqs = [
+                    ...$moveSqs,
+                    ...$piece->moveSqs(),
+                ];
+            }
+            return $moveSqs === [];
         }
 
-        $legal = [];
-        $clone = $this->clone();
-        $clone->turn = Color::W;
-        foreach ($clone->pieces(Color::W) as $piece) {
-            $legal = [
-                ...$legal,
-                ...$clone->legal($piece->sq),
-            ];
-        }
-
-        return empty($legal);
+        return false;
     }
 
     public function doesWin(): bool
     {
-        return $this->isMate() xor empty($this->pieces(Color::W));
+        return $this->isMate() xor $this->pieces(Color::W) === [];
     }
 }
