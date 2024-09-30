@@ -102,7 +102,7 @@ class CastlingRule extends AbstractNotation
             $ids = array_map('mb_strtolower', $ids);
         }
         $castlingAbility = str_replace($ids, '', $castlingAbility);
-        if (empty($castlingAbility)) {
+        if (!$castlingAbility) {
             $castlingAbility = self::NEITHER;
         }
 

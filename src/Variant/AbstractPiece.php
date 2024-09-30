@@ -130,7 +130,7 @@ abstract class AbstractPiece
         $this->board->attach($this);
         $this->board->refresh();
 
-        return !empty($this->board->diffPieces($before, $after));
+        return $this->board->diffPieces($before, $after) !== [];
     }
 
     public function lineOfAttack()

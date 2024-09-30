@@ -122,7 +122,7 @@ class K extends AbstractPiece
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
                 !array_diff($rule['free'], $this->board->sqCount['free']) &&
-                empty(array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()]))
+                !array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()])
             ) {
                 return $rule['sq']['next'];
             }
@@ -139,7 +139,7 @@ class K extends AbstractPiece
             if (
                 ($this->board->turn === $this->color && !$this->board->isCheck()) &&
                 !array_diff($rule['free'], $this->board->sqCount['free']) &&
-                empty(array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()]))
+                !array_intersect($rule['attack'], $this->board->spaceEval[$this->oppColor()])
             ) {
                 return $rule['sq']['next'];
             }
@@ -154,7 +154,7 @@ class K extends AbstractPiece
         foreach ($this->mobility as $sq) {
             if ($piece = $this->board->pieceBySq($sq)) {
                 if ($this->oppColor() === $piece->color) {
-                    if (empty($piece->defending())) {
+                    if (!$piece->defending()) {
                         $sqsCaptures[] = $sq;
                     }
                 }

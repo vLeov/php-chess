@@ -38,7 +38,7 @@ class DefenseEval extends AbstractEval implements
 
         foreach ($this->board->pieces() as $piece) {
             if ($piece->id !== Piece::K) {
-                if (!empty($piece->attacking())) {
+                if ($piece->attacking()) {
                     $diffPhrases = [];
                     $clone = $this->board->clone();
                     $clone->detach($clone->pieceBySq($piece->sq));

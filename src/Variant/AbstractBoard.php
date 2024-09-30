@@ -668,7 +668,7 @@ abstract class AbstractBoard extends \SplObjectStorage
     public function isCheck(): bool
     {
         if ($king = $this->piece($this->turn, Piece::K)) {
-            return !empty($king->attacking());
+            return $king->attacking() !== [];
         }
 
         return false;
