@@ -2,6 +2,7 @@
 
 namespace Chess\Tests\Unit\Variant\Classical\Piece;
 
+use Chess\FenToBoardFactory;
 use Chess\Tests\AbstractUnitTestCase;
 use Chess\Variant\RType;
 use Chess\Variant\Classical\PGN\AN\Square;
@@ -46,5 +47,73 @@ class RTest extends AbstractUnitTestCase
         ];
 
         $this->assertEquals($mobility, $rook->mobility);
+    }
+
+    /**
+     * @test
+     */
+    public function line_of_attack_b7()
+    {
+        $board = FenToBoardFactory::create('4K3/1R6/8/8/8/8/1k6/8 b - -');
+
+        $expected = [
+            'b3',
+            'b4',
+            'b5',
+            'b6',
+        ];
+
+        $this->assertEquals($expected, $board->pieceBySq('b7')->lineOfAttack());
+    }
+
+    /**
+     * @test
+     */
+    public function line_of_attack_c2()
+    {
+        $board = FenToBoardFactory::create('4K3/2k5/8/8/8/8/2R5/8 b - -');
+
+        $expected = [
+            'c6',
+            'c5',
+            'c4',
+            'c3',
+        ];
+
+        $this->assertEquals($expected, $board->pieceBySq('c2')->lineOfAttack());
+    }
+
+    /**
+     * @test
+     */
+    public function line_of_attack_a4()
+    {
+        $board = FenToBoardFactory::create('7k/8/8/8/r4K2/8/8/8 w - -');
+
+        $expected = [
+            'e4',
+            'd4',
+            'c4',
+            'b4',
+        ];
+
+        $this->assertEquals($expected, $board->pieceBySq('a4')->lineOfAttack());
+    }
+
+    /**
+     * @test
+     */
+    public function line_of_attack_f5()
+    {
+        $board = FenToBoardFactory::create('7k/8/8/K4r2/8/8/8/8 w - -');
+
+        $expected = [
+            'b5',
+            'c5',
+            'd5',
+            'e5',
+        ];
+
+        $this->assertEquals($expected, $board->pieceBySq('f5')->lineOfAttack());
     }
 }
