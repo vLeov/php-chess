@@ -420,47 +420,6 @@ abstract class AbstractBoard extends \SplObjectStorage
     }
 
     /**
-     * Returns true if the current player is trapped.
-     *
-     * @return bool
-     */
-    protected function isTrapped(): bool
-    {
-        $escape = 0;
-        foreach ($this->pieces($this->turn) as $piece) {
-            foreach ($piece->moveSqs() as $sq) {
-                if ($piece->id === Piece::K) {
-                    if ($sq === $piece->sqCastleShort()) {
-                        $move = $this->move->toArray($this->turn, Castle::SHORT, $this->castlingRule, $this->color);
-                    } elseif ($sq === $piece->sqCastleLong()) {
-                        $move = $this->move->toArray($this->turn, CASTLE::LONG, $this->castlingRule, $this->color);
-                    } elseif (in_array($sq, $this->sqCount['used'][$piece->oppColor()])) {
-                        $move = $this->move->toArray($this->turn, Piece::K."x$sq", $this->castlingRule, $this->color);
-                    } elseif (!in_array($sq, $this->spaceEval[$piece->oppColor()])) {
-                        $move = $this->move->toArray($this->turn, Piece::K.$sq, $this->castlingRule, $this->color);
-                    }
-                } elseif ($piece->id === Piece::P) {
-                    if (in_array($sq, $this->sqCount['used'][$piece->oppColor()])) {
-                        $move = $this->move->toArray($this->turn, $piece->file()."x$sq", $this->castlingRule, $this->color);
-                    } else {
-                        $move = $this->move->toArray($this->turn, $sq, $this->castlingRule, $this->color);
-                    }
-                } else {
-                    if (in_array($sq, $this->sqCount['used'][$piece->oppColor()])) {
-                        $move = $this->move->toArray($this->turn, $piece->id."x$sq", $this->castlingRule, $this->color);
-                    } else {
-                        $move = $this->move->toArray($this->turn, $piece->id.$sq, $this->castlingRule, $this->color);
-                    }
-                }
-                $piece->move = $move;
-                $escape += (int) !$this->isPinned($piece);
-            }
-        }
-
-        return $escape === 0;
-    }
-
-    /**
      * Returns true if the piece is pinned.
      *
      * @param \Chess\Variant\AbstractPiece $piece
@@ -717,7 +676,33 @@ abstract class AbstractBoard extends \SplObjectStorage
 
     public function isMate(): bool
     {
-        return $this->isTrapped() && $this->isCheck();
+        if ($king = $this->piece($this->turn, Piece::K)) {
+            if ($attacking = $king->attacking()) {
+                if (count($attacking) === 1) {
+                    foreach ($attacking[0]->attacking() as $attackingAttacking) {
+                        if (!$attackingAttacking->isPinned()) {
+                            return false;
+                        }
+                    }
+                    $moveSqs = [];
+                    foreach ($this->pieces($this->turn) as $piece) {
+                        if (!$piece->isPinned()) {
+                            $moveSqs = [
+                                ...$moveSqs,
+                                ...$piece->moveSqs(),
+                            ];
+                        }
+                    }
+                    $lineOfAttack = $attacking[0]->lineOfAttack();
+                    return $king->moveSqs() === [] &&
+                        array_intersect($lineOfAttack, $moveSqs) === [];
+                } elseif (count($attacking) > 1) {
+                    return $king->moveSqs() === [];
+                }
+            }
+        }
+
+        return false;
     }
 
     public function isStalemate(): bool
