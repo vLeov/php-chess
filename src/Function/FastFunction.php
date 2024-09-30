@@ -12,7 +12,6 @@ use Chess\Eval\BadBishopEval;
 use Chess\Eval\BishopOutpostEval;
 use Chess\Eval\BishopPairEval;
 use Chess\Eval\CenterEval;
-use Chess\Eval\CheckabilityEval;
 use Chess\Eval\ConnectivityEval;
 use Chess\Eval\DefenseEval;
 use Chess\Eval\DiagonalOppositionEval;
@@ -66,6 +65,5 @@ class FastFunction extends AbstractFunction
         DirectOppositionEval::class,
         OverloadingEval::class,
         BackRankThreatEval::class,
-        CheckabilityEval::class,
     ];
 }

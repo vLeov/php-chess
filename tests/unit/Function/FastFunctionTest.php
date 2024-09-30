@@ -42,7 +42,6 @@ class FastFunctionTest extends AbstractUnitTestCase
             'Direct opposition',
             'Overloading',
             'Back-rank threat',
-            'Checkability',
         ];
 
         $this->assertSame($expected, (new FastFunction())->names());
