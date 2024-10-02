@@ -8,6 +8,13 @@ use Chess\Variant\AbstractBoard;
 use Chess\Variant\AbstractPiece;
 use Chess\Variant\Classical\PGN\AN\Piece;
 
+/*
+ * Defense Evaluation
+ *
+ * This heuristic evaluates the defensive strength of each side by analyzing
+ * how the removal of attacking pieces would affect the opponent's protection.
+ * A higher score indicates a stronger defensive position.
+ */
 class DefenseEval extends AbstractEval implements
     ElaborateEvalInterface,
     ExplainEvalInterface
@@ -15,8 +22,16 @@ class DefenseEval extends AbstractEval implements
     use ElaborateEvalTrait;
     use ExplainEvalTrait;
 
+    /*
+     * The name of the heuristic.
+     *
+     * @var string
+     */
     const NAME = 'Defense';
 
+    /**
+     * @param \Chess\Variant\AbstractBoard $board
+     */
     public function __construct(AbstractBoard $board)
     {
         $this->board = $board;
@@ -62,6 +77,12 @@ class DefenseEval extends AbstractEval implements
         $this->explain($this->result);
     }
 
+    /*
+     * Elaborate on the evaluation.
+     *
+     * @param \Chess\Variant\AbstractPiece $piece
+     * @param array $diffPhrases
+     */
     private function elaborate(AbstractPiece $piece, array $diffPhrases): void
     {
         $phrase = PiecePhrase::create($piece);
